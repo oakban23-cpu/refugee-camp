@@ -247,6 +247,23 @@ function fpsTick(now){if(!FQ.last){FQ.last=now;return}const dt=now-FQ.last;FQ.la
 function setGQ(q){GQ=q;LOWQ=q==='low';FQ.bad=0;try{localStorage.setItem('refugee_gq',q)}catch(e){}applyQ()}
 const GSP={};function glowSpr(c){if(GSP[c])return GSP[c];const s=document.createElement('canvas');s.width=s.height=64;const x=s.getContext('2d'),gr=x.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba('+c+',1)');gr.addColorStop(1,'rgba('+c+',0)');x.fillStyle=gr;x.fillRect(0,0,64,64);return GSP[c]=s}
 function glowAt(x,y,r,c,a){if(r<=0||a<=0)return;const ga=g.globalAlpha;g.globalAlpha=ga*Math.min(1,a);g.drawImage(glowSpr(c),x-r,y-r,r*2,r*2);g.globalAlpha=ga}
+/* ---------- เล่นได้ทีละแท็บ (กันเซฟทับ/ปั๊มของ) ---------- */
+const TAB={id:Math.random().toString(36).slice(2,10),own:false,bc:null};
+function tabBlock(kind,onTake){let el=document.getElementById('tabblk');if(!el){el=document.createElement('div');el.id='tabblk';el.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(10,8,7,.96);display:flex;align-items:center;justify-content:center;padding:20px;font-family:system-ui,sans-serif';document.body.appendChild(el)}
+  el.innerHTML='<div style="max-width:320px;text-align:center;color:#f0e6d2;background:#1e1814;border:1px solid #c99a3b;border-radius:16px;padding:22px 18px"><div style="font-size:40px">🏕️</div><h2 style="margin:8px 0 6px;font-size:18px;color:#ffd98a">'+(kind?'ย้ายไปเล่นในแท็บอื่นแล้ว':'เกมเปิดอยู่ในอีกแท็บหนึ่ง')+'</h2><p style="font-size:13px;line-height:1.6;opacity:.85;margin:0 0 16px">เล่นได้ทีละ 1 แท็บต่อเบราว์เซอร์ เพื่อไม่ให้เซฟตัวละครทับกันหรือของหาย'+(kind?'':'<br>ถ้าปิดแท็บเดิม แท็บนี้จะเข้าเกมให้อัตโนมัติ')+'</p>'+(onTake?'<button id="tabtake" style="font-size:15px;padding:10px 18px;border-radius:12px;border:1px solid #6fd06a;background:#2f6a2a;color:#fff;font-weight:bold;cursor:pointer">เล่นที่แท็บนี้แทน</button>':'<small style="opacity:.6">กำลังปิดเกมในแท็บนี้…</small>')+'</div>';
+  const b=document.getElementById('tabtake');if(b)b.onclick=()=>{b.disabled=true;b.textContent='กำลังย้ายมาแท็บนี้…';onTake()}}
+function tabUnblock(){const el=document.getElementById('tabblk');if(el)el.remove()}
+const TABOK=new Promise(res=>{let bc=null;try{bc=new BroadcastChannel('refugee_tab_v1')}catch(e){}TAB.bc=bc;if(!bc){TAB.own=true;res();return}
+  let seen=false,waitTake=null,poll=null;const go=()=>{if(TAB.own)return;TAB.own=true;clearInterval(poll);tabUnblock();res()};
+  const ping=()=>{seen=false;bc.postMessage({t:'ping',id:TAB.id})};
+  bc.onmessage=async e=>{const m=e.data||{};
+    if(m.t==='ping'&&TAB.own)bc.postMessage({t:'pong',to:m.id});
+    else if(m.t==='pong'&&m.to===TAB.id)seen=true;
+    else if(m.t==='take'&&TAB.own&&m.id!==TAB.id){TAB.own=false;tabBlock(1);try{for(let i=0;i<40&&inflight;i++)await new Promise(r=>setTimeout(r,100));lastJ='';await writeSave()}catch(_){}try{saveMode='off'}catch(_){}bc.postMessage({t:'rel',to:m.id});setTimeout(()=>location.reload(),400)}
+    else if(m.t==='rel'&&m.to===TAB.id&&waitTake)waitTake()};
+  ping();setTimeout(()=>{if(!seen){go();return}
+    tabBlock(0,()=>{clearInterval(poll);waitTake=go;bc.postMessage({t:'take',id:TAB.id});setTimeout(go,4000)});
+    poll=setInterval(()=>{if(waitTake)return;ping();setTimeout(()=>{if(!seen&&!waitTake)go()},500)},2500)},450)});
 const GH=400;
 const CL={
  melee:{n:'ดาบอสูรคลั่ง',c:'#c2352b',hp:140,sp:135,rg:52,dmg:18,cd:.5,melee:1,s:['วังวนดาบ','พุ่งฟัน'],cds:[6,5],mp:60,mr:2.5,mc:[25,20],d:'ตีประชิดดุดัน หมุนดาบรอบตัว และพุ่งฟันเป็นเส้นตรง'},
@@ -750,7 +767,7 @@ function status(){const e=$('st');if(!e)return;
   else if(room.ok===false)e.textContent='กำลังเชื่อมต่อเซิร์ฟเวอร์...';
   else e.textContent='ออนไลน์ ในแมพนี้ '+plCount()+' คน'}
 setInterval(status,1500);
-(async()=>{
+(async()=>{await TABOK;
   try{room=window.claude&&await claude.use('room')}catch(e){room=null}
   status();if(!room)return;
   room.onPeers(ch=>{const o={};ch.peers.forEach(p=>{const r=p.presence;if(!r||!r.uid||r.uid===uid||!r.cls||(r.mp||1)!==curMap)return;const old=others[r.uid];
@@ -4135,7 +4152,7 @@ ov.addEventListener('click',e=>{
   if(t.dataset.buy)buy(t.dataset.buy,+t.dataset.q);
   if(t.id==='again'){reset();if(room)emitM('reset',{})}
 });
-makeGuards();intro();initSave();requestAnimationFrame(loop);
+makeGuards();intro();TABOK.then(initSave);requestAnimationFrame(loop);
 </script>
 </body>
 </html>
