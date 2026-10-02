@@ -1709,12 +1709,12 @@ setInterval(status,1500);
   room.on('dgo',m=>{m=U(m);if(!m.sameTab&&isHost())dgStart()});
   room.on('dinv',m=>{m=U(m);if(m.sameTab||!m.data||isDg())return;const id=m.data.id|0,tr=Math.floor(id/10000);if(!DT[tr])return;dInv={id,tr,n:cleanName(m.data.n)||'ผู้เล่น',until:Date.now()+30000};sfx('quest')});
   room.on('xp',m=>{m=U(m);if(!m.sameTab&&Array.isArray(m.data))m.data.forEach(([x,y,v,gd,pz,gl,bs,tt])=>{gainXP(x,y,v);qKill(x,y,tt|0,bs);if(bs)bossLoot(x,y);else dropLoot(x,y,gd||0,pz||0,gl||0)})});
-  setInterval(()=>{if(me.cls)room.presence({uid,x:Math.round(me.x),y:Math.round(me.y),hp:Math.round(me.hp),mh:me.mh,cls:me.cls,n:myName,lv:me.lv,sl:me.stealth>0?1:0,mp:curMap,hd:lkc(me.eq&&me.eq.h),bt:lkc(me.eq&&me.eq.b),wp:lkc(me.eq&&me.eq.w),pt:me.pet|0,im:summR()?IMPS.length:0,wu:(me.eq&&me.eq.w&&me.eq.w.u)|0,ar:lkc(me.eq&&me.eq.a),tt:me.title||'',c2:c2v(),at:me.atkN|0,mt:me.riding?me.mt|0:0})},200);
+  setInterval(()=>{if(me.cls)room.presence(window.lastPres={uid,x:Math.round(me.x),y:Math.round(me.y),hp:Math.round(me.hp),mh:me.mh,cls:me.cls,n:myName,lv:me.lv,sl:me.stealth>0?1:0,mp:curMap,hd:lkc(me.eq&&me.eq.h),bt:lkc(me.eq&&me.eq.b),wp:lkc(me.eq&&me.eq.w),pt:me.pet|0,im:summR()?IMPS.length:0,wu:(me.eq&&me.eq.w&&me.eq.w.u)|0,ar:lkc(me.eq&&me.eq.a),tt:me.title||'',c2:c2v(),at:me.atkN|0,mt:me.riding?me.mt|0:0,aw:document.hidden?1:0})},200);
   setInterval(()=>{
     if(hitBuf.length)emitM('hit',hitBuf.splice(0,60));
-    if(isHost()&&run){
-      const near=room.hostUid?null:[me,...Object.values(others)];
-      emitM('world',{m:(near?mons.filter(m=>m.t===3||(m.t===4||near.some(p=>Math.abs(p.x-m.x)<600&&Math.abs(p.y-m.y)<600))):mons).map(m=>[m.id,Math.round(m.x),Math.round(m.y),Math.round(m.hp),m.t,m.L,m.p].concat(m.t>=3?[Math.round(m.mh),m.inv?1:0]:[]).concat([m.akN|0])),g:guards.map(q=>[Math.round(q.x),Math.round(q.y),Math.round(q.hp)]),c:Math.round(camp),w:wave,o:over?1:0,dg:isDg()?{ph:dg.ph,w:dg.w,tl:Math.round(dg.tl),nx:Math.round(dg.nx*10)/10,why:dg.why||'',tw:isTw()?dg.tw:undefined}:0});
+    if(isHost()&&run&&!document.hidden){
+      const near=[me,...(room.allPlayers?room.allPlayers.map(([u,x,y])=>({x,y})):Object.values(others))];
+      emitM('world',{m:mons.filter(m=>m.t===3||m.t===4||near.some(p=>Math.abs(p.x-m.x)<560&&Math.abs(p.y-m.y)<560)).map(m=>[m.id,Math.round(m.x),Math.round(m.y),Math.round(m.hp),m.t,m.L,m.p].concat(m.t>=3?[Math.round(m.mh),m.inv?1:0]:[]).concat([m.akN|0,m.nest|0])),g:guards.map(q=>[Math.round(q.x),Math.round(q.y),Math.round(q.hp)]),c:Math.round(camp),w:wave,o:over?1:0,dg:isDg()?{ph:dg.ph,w:dg.w,tl:Math.round(dg.tl),nx:Math.round(dg.nx*10)/10,why:dg.why||'',tw:isTw()?dg.tw:undefined}:0});
       if(dmgOut.length)emitM('dmg',dmgOut.splice(0,40));
       if(xpOut.length)emitM('xp',xpOut.splice(0,30));
     }
@@ -1723,7 +1723,7 @@ setInterval(status,1500);
 function applyWorld(d){
   const old={};mons.forEach(m=>old[m.id]=m);
   d.m.forEach(e=>{if(e[0]>mid)mid=e[0]});
-  mons=d.m.map(e=>{const [id,x,y,hp,t,L,p]=e,BB=t>=3,mhb=BB?e[7]:0,inv=BB?e[8]:0,ak=e[BB?9:7]|0;const m=old[id]||{id,x,y,tg:null,tt:0,ac:0,akN:ak};if((m.akN|0)!==ak){m.akN=ak;m.akT=performance.now()}if(m.hp!==undefined&&hp<m.hp)m.hitT=performance.now();m.tx=x;m.ty=y;m.hp=hp;m.t=t;m.L=L||1;m.p=p||0;m.mh=mhb||mhp(t,m.L);m.inv=inv?1:0;return m});
+  mons=d.m.map(e=>{const [id,x,y,hp,t,L,p]=e,BB=t>=3,mhb=BB?e[7]:0,inv=BB?e[8]:0,ak=e[BB?9:7]|0,ns=e[BB?10:8]|0;const m=old[id]||{id,x,y,tg:null,tt:0,ac:0,akN:ak};if((m.akN|0)!==ak){m.akN=ak;m.akT=performance.now()}if(m.hp!==undefined&&hp<m.hp)m.hitT=performance.now();m.tx=x;m.ty=y;m.hp=hp;m.t=t;m.L=L||1;m.p=p||0;m.mh=mhb||mhp(t,m.L);m.inv=inv?1:0;if(ns)m.nest=ns;return m});
   d.g.forEach(([x,y,hp],i)=>{const q=guards[i];if(q){q.tx=x;q.ty=y;q.hp=hp;q.dead=hp<=0?1:0}});
   camp=d.c;wave=d.w;if(d.o&&!over)gameOver();
   if(d.dg&&isDg()&&typeof d.dg==='object'){const was=dg.ph,dg0tw=dg.tw;dg={ph:String(d.dg.ph),w:d.dg.w|0,tl:+d.dg.tl||0,nx:+d.dg.nx||0,why:String(d.dg.why||'').slice(0,40)};if(dg.ph!=='lobby')SR=0;
@@ -4981,7 +4981,7 @@ async function deleteChar(c){
   delArm=null;intro();
 }
 setInterval(writeSave,5000);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)writeSave()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)writeSave();try{if(room&&room.presence&&window.lastPres){window.lastPres.aw=document.hidden?1:0;room.presence(window.lastPres)}}catch(e){}});
 window.addEventListener('pagehide',()=>{writeSave()});
 
 /* ---------- screens ---------- */
