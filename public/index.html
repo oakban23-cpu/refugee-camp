@@ -773,7 +773,7 @@ function stNext(){if(!SD.on)return;if(SD.typ){clearInterval(SD.typ);SD.typ=null;
   if(SD.i===SD.q.length-1&&SD.choice)return;SD.i++;if(SD.i>=SD.q.length)stClose();else stLine()}
 function stClose(){clearInterval(SD.typ);SD.typ=null;SD.on=false;const d=$('sdlg');if(d){d.hidden=true;d.classList.remove('chs')}$('scine').classList.remove('on');const f=SD.done;SD.done=null;SD.choice=null;if(f)f()}
 function stCalm(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on)return false;if(typeof tutI!=='undefined'&&tutI>=0)return false;return!mons.some(m=>Math.hypot(m.x-me.x,m.y-me.y)<320)}
-function stGive(rw){if(!rw)return'';const p=[];for(const k in rw){const v=rw[k];if(k==='g'){me.gold+=v}else if(k==='twc'){me.twc=(me.twc||0)+v}else if(k==='hp'||k==='mp'){me.inv[k]=Math.min(20,(me.inv[k]|0)+v)}else{me.inv[k]=Math.min(999,(me.inv[k]|0)+v)}p.push('+'+v.toLocaleString()+' '+STRW[k])}
+function stGive(rw){if(!rw)return'';const p=[];for(const k in rw){const v=rw[k];if(k==='g'){me.gold+=v}else if(k==='twc'){me.twc=(me.twc||0)+v}else if(k==='hp'||k==='mp'){me.inv[k]=Math.min(POTMAX,(me.inv[k]|0)+v)}else{me.inv[k]=Math.min(999,(me.inv[k]|0)+v)}p.push('+'+v.toLocaleString()+' '+STRW[k])}
   sfx('coin');return p.join(' · ')}
 function stDone(){const st=stCur();if(!st)return;const q=me.sty;q.a=2;
   const fin=()=>{const r=stGive(st.rw);if(r){dn.push({x:me.x,y:me.y-50,v:'📜 '+r,t:2.2});sysMsg('📜 เนื้อเรื่อง: '+st.tx+' สำเร็จ · '+r)}
@@ -988,7 +988,7 @@ function loginReward(day){const L=me.lv;return[{g:100+L*20},{hp:3},{g:200+L*40},
 const lrText=r=>[r.g?'💰 '+r.g+' ทอง':'',r.hp?potImg('hp',18,'pi')+' ยา HP x'+r.hp:'',r.mp?potImg('mp',18,'pi')+' ยา MP x'+r.mp:'',r.box?'🎁 หีบมหากาพย์':''].filter(Boolean).join('<br>');
 function giveGear(rm){const it=genItem(me.lv<30?Math.min(8,1+Math.floor(me.lv/4)):Math.min(ILMAX,8+Math.floor((me.lv-30)/7)),null,undefined,rm);if(me.bag.length<MAXBAG)me.bag.push(it);else drops.push({x:me.x,y:me.y+14,k:'e',L:it.L,rm,t:60});return it}
 function claimLogin(){if(!loginReady())return;const d=loginDay(),r=loginReward(d);me.ls.cl=dayKey();let m='รับรางวัลล็อกอินวันที่ '+d+' แล้ว';
-  if(r.g)me.gold+=r.g;if(r.hp)me.inv.hp=Math.min(20,me.inv.hp+r.hp);if(r.mp)me.inv.mp=Math.min(20,me.inv.mp+r.mp);if(r.box){const it=giveGear(r.box);m+=' · '+itemName(it)}
+  if(r.g)me.gold+=r.g;if(r.hp)me.inv.hp=Math.min(POTMAX,me.inv.hp+r.hp);if(r.mp)me.inv.mp=Math.min(POTMAX,me.inv.mp+r.mp);if(r.box){const it=giveGear(r.box);m+=' · '+itemName(it)}
   sfx('quest');burst(me.x,me.y-10,['#ffe08a','#ffffff'],24,120,.8,{glow:1,g:-30});eventUI(m)}
 function dqProg(t,v){if(!me.cls)return;ensureDaily();me.dq.q.forEach(q=>{if(q.t===t&&q.h<q.n){q.h=Math.min(q.n,q.h+v);if(q.h>=q.n){sfx('quest');dn.push({x:me.x,y:me.y-58,v:'✔ เควสรายวันสำเร็จ!',t:1.6})}}})}
 function dqClaim(i){ensureDaily();const q=me.dq.q[i];if(!q||q.cl||q.h<q.n)return;q.cl=1;me.stt.dq++;me.gold+=q.g;gainXP(me.x,me.y,q.xp);sfx('coin');eventUI('รับรางวัล '+q.g+' ทอง · '+q.xp+' EXP')}
@@ -1217,8 +1217,8 @@ function eventUI(msg){if(!me.cls)return;ov.dataset.k='ev';ensureDaily();loginChe
 
 /* ---------- ของใช้ & วัตถุดิบ (ไม่ใช่อุปกรณ์) ---------- */
 const GOODS=[
- {k:'hp',n:'ยาฟื้นเลือด',ic:()=>potImg('hp',30,'pi'),max:20,d:'ฟื้นเลือดทันที · กดปุ่มยาแดงเพื่อใช้ · พกได้สูงสุด 20'},
- {k:'mp',n:'ยาฟื้นมานา',ic:()=>potImg('mp',30,'pi'),max:20,d:'ฟื้นมานาทันที · กดปุ่มยาฟ้าเพื่อใช้ · พกได้สูงสุด 20'},
+ {k:'hp',n:'ยาฟื้นเลือด',ic:()=>potImg('hp',30,'pi'),max:999,d:'ฟื้นเลือดทันที · กดปุ่มยาแดงเพื่อใช้ · พกได้สูงสุด 999'},
+ {k:'mp',n:'ยาฟื้นมานา',ic:()=>potImg('mp',30,'pi'),max:999,d:'ฟื้นมานาทันที · กดปุ่มยาฟ้าเพื่อใช้ · พกได้สูงสุด 999'},
  {k:'ps',n:'หินกันแตก',ic:()=>'🛡️',max:99,d:'ใช้ตอนตีบวก +6 ขึ้นไป ถ้าล้มเหลวอุปกรณ์จะไม่แตก'},
  {k:'s1',n:'หินตีบวกขั้นแรก',ic:()=>stoneIc(1),max:999,d:'ใช้ตีบวก +6 ถึง +10 (เกรดมหากาพย์ขึ้นไป) · ดรอปจากมอน Lv20+ และบอส · ซื้อได้ที่ช่างตีบวก'},
  {k:'s2',n:'หินตีบวกขั้นสอง',ic:()=>stoneIc(2),max:999,d:'ใช้ตีบวก +11 ถึง +20 (เกรดตำนานขึ้นไป) · ได้จากบอสแมพ หอคอย เรด และร้านหอคอย'},
@@ -1362,7 +1362,7 @@ function twEnterUI(msg){if(!me.cls)return;ov.dataset.k='tw';ov.hidden=false;cons
   h+='<div class="card"><div class="cap">เข้าร่วมห้องเพื่อน</div><div class="nrow" style="margin:0"><input id="twcode" maxlength="5" inputmode="numeric" placeholder="รหัส 5 หลัก เช่น 50345" autocomplete="off"><button id="twjoin" class="pri" style="padding:8px 14px">เข้าร่วม</button></div></div>';
   h+='<div class="card hint">ประเภทชั้น: ล้างมอน · เอาตัวรอด 45 วิ · ล่าหัวหน้า 👑 · ทุก 5 ชั้นเป็นชั้นพัก (ฟื้นเต็ม + เหรียญ) · ทุก 10 ชั้นเป็นชั้นบอส<br>ตั้งแต่ชั้น 21 มีคำสาปสุ่ม ยิ่งสูงยิ่งซ้อน: '+TWA.map(a=>a[0]+' '+a[1]).join(' · ')+'<br>ผ่านชั้นได้เหรียญหอคอยไปแลกของที่ผู้เฝ้าหอคอย</div>';
   ov.innerHTML='<div class="pn" data-pn="tw">'+h+'</div>'}
-const TWS=[['@hp','ยาฟื้นเลือด x5',2,()=>{me.inv.hp=Math.min(20,me.inv.hp+5)}],['@mp','ยาฟื้นมานา x5',2,()=>{me.inv.mp=Math.min(20,me.inv.mp+5)}],
+const TWS=[['@hp','ยาฟื้นเลือด x5',2,()=>{me.inv.hp=Math.min(POTMAX,me.inv.hp+5)}],['@mp','ยาฟื้นมานา x5',2,()=>{me.inv.mp=Math.min(POTMAX,me.inv.mp+5)}],
   ['@ps','หินกันแตก x1 (ตีบวก +6 ขึ้นไปพลาดแล้วไม่ลดระดับ)',20,()=>{me.inv.ps=Math.min(99,(me.inv.ps|0)+1)}],['💎','หินตีบวกขั้นสอง x1',80,()=>{me.inv.s2=Math.min(999,(me.inv.s2|0)+1)}],['📦','หีบอุปกรณ์หายาก',12,()=>giveGear(2)],['🎁','หีบอุปกรณ์มหากาพย์',35,()=>giveGear(3)],['👑','หีบอุปกรณ์ตำนาน',120,()=>giveGear(4)]];
 function twShopUI(msg){if(!me.cls)return;ov.dataset.k='tws';ov.hidden=false;
   let h=hdr('🪙','ผู้เฝ้าหอคอย','เหรียญหอคอย '+(me.twc||0)+' · หินกันแตก '+(me.inv.ps|0)+' ก้อน');if(msg)h+='<div class="note">'+msg+'</div>';
@@ -2566,7 +2566,7 @@ function pickup(dt){
     else if(q<22){d.t=0;
       if(d.k==='s'){const k='s'+d.v;me.inv[k]=Math.min(999,(me.inv[k]|0)+1);sfx('item');spark(d.x,d.y,['#9ad8ff','#c080ff','#ff9ad0'][d.v-1],8,70,.4);dn.push({x:me.x,y:me.y-40,v:'+1 '+GDM[k].n,t:1.1})}
       if(d.k==='g'){const gv=Math.round(d.v*(1+petV('gd')));sfx('coin');spark(d.x,d.y,'#ffd84a',6,60,.4);me.gold+=gv;dqProg('gold',gv);dn.push({x:me.x,y:me.y-40,v:'+'+gv+' ทอง',t:.8})}
-      else if(me.inv[d.k]<20){sfx('item');spark(d.x,d.y,d.k==='hp'?'#ff6a5a':'#6aa0ff',6,60,.4);me.inv[d.k]++;dn.push({x:me.x,y:me.y-40,v:'+ยา '+(d.k==='hp'?'HP':'MP'),t:.8})}
+      else if(me.inv[d.k]<POTMAX){sfx('item');spark(d.x,d.y,d.k==='hp'?'#ff6a5a':'#6aa0ff',6,60,.4);me.inv[d.k]++;dn.push({x:me.x,y:me.y-40,v:'+ยา '+(d.k==='hp'?'HP':'MP'),t:.8})}
     }
   });
   drops=drops.filter(d=>d.t>0);
@@ -2579,9 +2579,9 @@ function usePot(k){
 }
 function shopUI(msg){
   const stock=stk(),N=NPC();if((shopTab==='awk'||shopTab==='set')&&curMap!==6)shopTab='pot';ov.dataset.k=shopTab==='q'?'shopq':'';
-  let h=hdr('🛒',N.n,'ทอง '+me.gold+' · ยา HP '+me.inv.hp+' / MP '+me.inv.mp+' (สูงสุด 20)')+tabsH([['pot','🧪 ยา'],['gear','⚔️ อุปกรณ์'],['q','📜 เควส'+(qDone()?' ❗':'')]].concat(curMap===6?[['set','🔱 ชุดเซ็ต'],['awk','🌟 ตื่นรู้'+(me.lv>=AWLV&&!me.cls2&&me.cq&&(me.cq.s===0||me.cq.s===3||me.cq.s===4)?' ❗':'')]]:[]),shopTab,'shop');if(msg&&shopTab!=='awk'&&shopTab!=='set')h+='<div class="note">'+msg+'</div>';
+  let h=hdr('🛒',N.n,'ทอง '+me.gold+' · ยา HP '+me.inv.hp+' / MP '+me.inv.mp+' (สูงสุด '+POTMAX+')')+tabsH([['pot','🧪 ยา'],['gear','⚔️ อุปกรณ์'],['q','📜 เควส'+(qDone()?' ❗':'')]].concat(curMap===6?[['set','🔱 ชุดเซ็ต'],['awk','🌟 ตื่นรู้'+(me.lv>=AWLV&&!me.cls2&&me.cq&&(me.cq.s===0||me.cq.s===3||me.cq.s===4)?' ❗':'')]]:[]),shopTab,'shop');if(msg&&shopTab!=='awk'&&shopTab!=='set')h+='<div class="note">'+msg+'</div>';
   if(shopTab==='pot'){
-    h+=SHOP.map(i=>'<div class="card"><div class="mrow"><span class="ico">'+potImg(i.k,30,'pi')+'</span><div class="nm"><b>'+i.n+'</b><small>'+i.d+'</small><small>ราคา '+i.p+' ทอง · มี '+me.inv[i.k]+'/20</small></div></div><div class="bt" style="display:flex;gap:6px"><button class="pri" style="flex:1;padding:9px" data-buy="'+i.k+'" data-q="1"'+(me.gold>=i.p&&me.inv[i.k]<20?'':' disabled')+'>ซื้อ 1 · '+i.p+'</button><button class="pri" style="flex:1;padding:9px" data-buy="'+i.k+'" data-q="5"'+(me.gold>=i.p*5&&me.inv[i.k]<=15?'':' disabled')+'>ซื้อ 5 · '+i.p*5+'</button></div></div>').join('');
+    h+=SHOP.map(i=>'<div class="card"><div class="mrow"><span class="ico">'+potImg(i.k,30,'pi')+'</span><div class="nm"><b>'+i.n+'</b><small>'+i.d+'</small><small>ราคา '+i.p+' ทอง · มี '+me.inv[i.k]+'/'+POTMAX+'</small></div></div><div class="bt" style="display:flex;gap:6px"><button class="pri" style="flex:1;padding:9px" data-buy="'+i.k+'" data-q="1"'+(me.gold>=i.p&&me.inv[i.k]<POTMAX?'':' disabled')+'>ซื้อ 1 · '+i.p+'</button>'+[10,100].map(q=>'<button class="pri" style="flex:1;padding:9px" data-buy="'+i.k+'" data-q="'+q+'"'+(me.gold>=i.p*q&&me.inv[i.k]+q<=POTMAX?'':' disabled')+'>ซื้อ '+q+' · '+(i.p*q).toLocaleString()+'</button>').join('')+'</div></div>').join('');
   }else if(shopTab==='gear'){
     h+='<div class="card"><div class="cap">สินค้า (ราคาแสดงเมื่อเลือก)</div><div class="grid g5">'+stock.map((it,i)=>it?cellH(it,'data-sp="'+i+'"',shopSel===i,it.sl,(()=>{const d=gCmp(it).dir;return d>0?UP:d<0?DN:'<span style="opacity:.6">＝</span>'})()):'<button class="cell" disabled style="opacity:.3;font-size:11px;border-color:#dcc9a0">ขายแล้ว</button>').join('')+'</div></div>';
     const it=stock[shopSel];h+=it?detH(it,'shop','',sellPrice(it)*3,shopSel):'<div class="card hint">แตะสินค้าเพื่อดูรายละเอียด<br>'+UP+' ดีกว่าที่ใส่อยู่ · '+DN+' แย่กว่า</div>';
@@ -2589,7 +2589,7 @@ function shopUI(msg){
   ov.innerHTML='<div class="pn" data-pn="shop">'+h+'</div>';
 }
 function openShop(){if(me.cls&&run){ov.hidden=false;ov.dataset.k='';shopUI()}}
-function buy(k,q){sfx('coin');const i=SHOP.find(x=>x.k===k);if(!i||me.gold<i.p*q||me.inv[k]+q>20)return;me.gold-=i.p*q;me.inv[k]+=q;shopUI()}
+function buy(k,q){sfx('coin');const i=SHOP.find(x=>x.k===k);if(!i||me.gold<i.p*q||me.inv[k]+q>POTMAX)return;me.gold-=i.p*q;me.inv[k]+=q;shopUI()}
 $('ph').onclick=()=>usePot('hp');$('pm').onclick=()=>usePot('mp');$('npcb').onclick=()=>{if(stNpcClick())return;if(npcSel===4){stIdle();return}if(npcSel===3){ov.hidden=false;smSel=null;smithUI()}else if(npcSel===2){ov.hidden=false;if(curMap===5)darkUI();else mountUI('',true)}else if(curMap===5)twShopUI();else openShop()};var npcSel=1;$('twb').onclick=()=>twEnterUI();$('gtb').onclick=useGate;
 
 /* ---------- gear ---------- */
@@ -2725,7 +2725,7 @@ function drawHelm(x,y,r){
   else{f('#e0b030',-9,-19,18,4);[-9,-4,1,6].forEach(a=>f('#e0b030',a,-27,3,9));f('#c2352b',-1,-22,3,3);f('#c2352b',-7,-21,2,2);f('#c2352b',5,-21,2,2)}
 }
 /* ---------- เสียง + เอฟเฟกต์ภาพ ---------- */
-let AC=null,muted=false,sfxT={},parts=[],shk=0,fxLast=performance.now();
+var POTMAX=999;let AC=null,muted=false,sfxT={},parts=[],shk=0,fxLast=performance.now();
 try{muted=localStorage.getItem('refugee_mute')==='1'}catch(e){}
 function acx(){if(AC===null){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){AC=false}}return AC}
 function unlockAudio(){const a=acx();if(a&&a.state==='suspended')a.resume().catch(()=>{})}
@@ -4229,7 +4229,7 @@ const PT_N=PETS.length-1,PBK={gd:'ทองที่เก็บได้',xp:'E
 const petV=k=>{const P=me.pet&&PETS[me.pet];return P&&P.b[k]||0};
 const petBuffTxt=P=>Object.keys(P.b).map(k=>PBK[k]+' +'+Math.round(P.b[k]*100)+'%').join(' · ');
 let PT=null;const PET_R=200;
-function petCanFetch(d){if(d.pf||d.t<=0)return false;if(d.k==='e')return me.bag.length<MAXBAG;if(d.k==='hp'||d.k==='mp')return(me.inv[d.k]|0)<20;return true}
+function petCanFetch(d){if(d.pf||d.t<=0)return false;if(d.k==='e')return me.bag.length<MAXBAG;if(d.k==='hp'||d.k==='mp')return(me.inv[d.k]|0)<POTMAX;return true}
 function petTick(dt){if(!me.cls||!me.pet||!PETS[me.pet]){PT=null;return}
   const pfx=Math.cos(me.face)<0?-1:1;if(!PT||Math.hypot(PT.x-me.x,PT.y-me.y)>520)PT={x:me.x-pfx*20,y:me.y+6,fx:pfx,mv:0,tg:null,ct:0};
   if(PT.tg&&(PT.tg.t<=0||PT.tg.pf||drops.indexOf(PT.tg)<0))PT.tg=null;
@@ -4896,7 +4896,7 @@ function cleanChar(c){
   if(!c||typeof c!=='object')return null;
   const n=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,Math.floor(v))):d;
   const o={lv:n(c.lv,1,LMAX,1),xp:n(c.xp,0,1e7,0),gold:n(c.gold,0,1e7,0),tr:{},ab:{str:0,vit:0,int:0,agi:0,luk:0},inv:{hp:0,mp:0,ps:0},eq:{},bag:[]};
-  if(c.inv&&typeof c.inv==='object'){o.inv.hp=n(c.inv.hp,0,20,0);o.inv.mp=n(c.inv.mp,0,20,0);o.inv.ps=n(c.inv.ps,0,99,0);o.inv.s1=n(c.inv.s1,0,999,0);o.inv.s2=n(c.inv.s2,0,999,0);o.inv.s3=n(c.inv.s3,0,999,0)}
+  if(c.inv&&typeof c.inv==='object'){o.inv.hp=n(c.inv.hp,0,POTMAX,0);o.inv.mp=n(c.inv.mp,0,POTMAX,0);o.inv.ps=n(c.inv.ps,0,99,0);o.inv.s1=n(c.inv.s1,0,999,0);o.inv.s2=n(c.inv.s2,0,999,0);o.inv.s3=n(c.inv.s3,0,999,0)}
   {const m=c.mat&&typeof c.mat==='object'?c.mat:{};o.mat={sc:n(m.sc,0,9999,0),hr:n(m.hr,0,999,0)}}
   o.cls2=c.cls2&&o.lv>=AWLV?1:0;{const u=c.brU&&typeof c.brU==='object'?c.brU:{};o.brU={};if(o.cls2){if(u[1])o.brU[1]=1;if(u[2])o.brU[2]=1;if(!o.brU[1]&&!o.brU[2])o.brU[1]=1}o.br=c.br===2&&o.brU[2]?2:1;const k=c.dk&&typeof c.dk==='object'?c.dk:{};o.dk={s:o.brU[2]?5:n(k.s,0,4,0),n:n(k.n,0,100,0)}}{const q=c.cq&&typeof c.cq==='object'?c.cq:{};o.cq={s:o.brU[1]?5:n(q.s,0,4,0),n:n(q.n,0,1000,0)}}
   o.twc=n(c.twc,0,1e7,0);o.twCp=n(c.twCp,1,9991,1);if((o.twCp-1)%10)o.twCp=1;o.twBest=n(c.twBest,0,99999,0);if(o.twCp>o.twBest+1)o.twCp=Math.max(1,Math.floor(o.twBest/10)*10+1);
