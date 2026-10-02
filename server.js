@@ -36,11 +36,18 @@ function send(c,str,droppable){if(c.dead||!c.sock.writable)return;
 function kill(c){if(c.dead)return;c.dead=true;clients.delete(c);if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);try{c.sock.destroy()}catch(e){}}
 const num=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,v)):d;
 function cleanPresence(p){return{uid:String(p.uid||'').slice(0,12),x:num(p.x,0,20000,0),y:num(p.y,0,20000,0),hp:num(p.hp,0,1e6,0),mh:num(p.mh,1,1e6,1),
-  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,79,0),bt:num(p.bt|0,0,17,0),wp:num(p.wp|0,0,79,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,17,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,9,0)}}
+  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,79,0),bt:num(p.bt|0,0,17,0),wp:num(p.wp|0,0,79,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,17,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),aw:p.aw?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,9,0)}}
 const inMap=mp=>{const a=[];for(const c of clients)if(c.p&&c.p.mp===mp)a.push(c);return a};
-function recompute(){hostByMap={};countByMap={};
-  for(const c of clients){if(!c.p||!c.uid)continue;const mp=c.p.mp;countByMap[mp]=(countByMap[mp]||0)+1;
-    const h=hostByMap[mp];if(!h||c.uid<h.uid)hostByMap[mp]=c}}
+/* เลือก host ต่อแมพ: คงคนเดิมไว้ถ้ายังใช้ได้ · ข้ามคนที่พับจอ/ไม่ส่ง world · เลือกคนที่อยู่ในแมพนานสุด */
+function okHost(c,now){return c.p&&!c.dead&&!c.p.aw&&!(c.badUntil>now)}
+function recompute(){const now=Date.now(),prev=hostByMap,byMap={};hostByMap={};countByMap={};
+  for(const c of clients){if(!c.p||!c.uid)continue;const mp=c.p.mp;countByMap[mp]=(countByMap[mp]||0)+1;(byMap[mp]=byMap[mp]||[]).push(c)}
+  for(const mp in byMap){const L=byMap[mp],h0=prev[mp];
+    if(h0&&h0.p&&h0.p.mp==mp&&h0.hostSince&&now-h0.hostSince>3000&&now-(h0.lastW||0)>2500)h0.badUntil=now+15000;
+    let h=null;if(h0&&L.includes(h0)&&okHost(h0,now))h=h0;
+    else{const ok=L.filter(c=>okHost(c,now));const P=ok.length?ok:L;P.sort((a,b)=>(a.mapSince||0)-(b.mapSince||0)||(a.uid<b.uid?-1:1));h=P[0]}
+    if(h!==h0||!h.hostSince){h.hostSince=now;h.lastW=now}hostByMap[mp]=h}
+  for(const c of clients)if(c.hostSince&&!Object.values(hostByMap).includes(c))c.hostSince=0}
 const d2=(ax,ay,bx,by)=>{const dx=ax-bx,dy=ay-by;return dx*dx+dy*dy};
 function tickPeers(){
   recompute();
@@ -79,7 +86,7 @@ function onEmit(c,m){
   if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,key==='wb'?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='hit'){if(host&&host!==c&&Array.isArray(d))send(host,wrap(d.slice(0,80)));return}
   if(k==='world'){
-    if(host!==c||!d||!Array.isArray(d.m)||d.m.length>3000)return;
+    if(host!==c||!d||!Array.isArray(d.m)||d.m.length>3000)return;c.lastW=Date.now();
     const dgs=d.dg&&typeof d.dg==='object'?{ph:String(d.dg.ph).slice(0,6),w:d.dg.w|0,tl:+d.dg.tl||0,nx:+d.dg.nx||0,why:String(d.dg.why||'').slice(0,40)}:0;
     if(dgs&&d.dg.tw&&typeof d.dg.tw==='object'){const t=d.dg.tw;dgs.tw={f:num(t.f|0,1,9999,1),ft:String(t.ft||'').slice(0,8),k:+t.k||0,kn:+t.kn||0,af:Array.isArray(t.af)?t.af.slice(0,3).map(x=>num(x|0,0,4,0)):[],ch:t.ch|0}}
     for(const o of inMap(mp)){if(o===c)continue;const ox=o.p.x,oy=o.p.y,rows=[];
@@ -104,7 +111,7 @@ function onMsg(c,raw){
   if(m.t==='presence'&&m.p&&typeof m.p==='object'){
     const p=cleanPresence(m.p);if(!p.uid)return;
     if(c.uid!==p.uid){if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);c.uid=p.uid;byUid.set(p.uid,c)}
-    c.p=p}
+    if(!c.p||c.p.mp!==p.mp)c.mapSince=Date.now();c.p=p}
   else if(m.t==='emit')onEmit(c,m);
 }
 function parse(c){
