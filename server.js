@@ -1,24 +1,38 @@
 // เซิร์ฟเวอร์กลางของเกม: เสิร์ฟหน้าเกม + ส่งต่อข้อความ (ไม่มีลอจิกเกมในนี้)
 // รองรับผู้เล่นจำนวนมากด้วยการส่งเฉพาะข้อมูลที่อยู่ใกล้ผู้เล่นแต่ละคน ไม่ต้องติดตั้งไลบรารีเพิ่ม
-const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto');
+const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto'),zlib=require('zlib');
 const PORT=process.env.PORT||3000, MAX=Number(process.env.MAX_PLAYERS||120), MAXMSG=256*1024;
 const R_PEER=650, R_WORLD=480, R_XP=420, R_FX=520, MAXPEERS=40, BUFCAP=1<<20;
 const page=path.join(__dirname,'public','index.html');
 const server=http.createServer((req,res)=>{
   if(req.url==='/health'){res.writeHead(200);return res.end('ok')}
   if(req.url==='/stats'){res.writeHead(200,{'Content-Type':'application/json'});return res.end(JSON.stringify(stats()))}
-  fs.readFile(page,(e,d)=>{if(e){res.writeHead(500);return res.end('missing index.html')}
-    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache'});res.end(d)});
+  const P=getPage();if(!P){res.writeHead(500);return res.end('missing index.html')}
+  if(req.headers['if-none-match']===P.etag){res.writeHead(304,{'ETag':P.etag,'Cache-Control':'no-cache'});return res.end()}
+  const ae=String(req.headers['accept-encoding']||''),h={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache','ETag':P.etag,'Vary':'Accept-Encoding'};
+  let body=P.raw;if(/\bbr\b/.test(ae)){body=P.br;h['Content-Encoding']='br'}else if(/\bgzip\b/.test(ae)){body=P.gz;h['Content-Encoding']='gzip'}
+  h['Content-Length']=body.length;bytesOut+=body.length;res.writeHead(200,h);res.end(body);
 });
+/* หน้าเกมบีบอัดไว้ล่วงหน้า (br/gzip) + ETag ให้เบราว์เซอร์ใช้ของเดิมถ้าไม่เปลี่ยน */
+let PG=null;
+function getPage(){try{const st=fs.statSync(page);if(PG&&PG.mt===st.mtimeMs)return PG;const raw=fs.readFileSync(page);
+  PG={mt:st.mtimeMs,raw,gz:zlib.gzipSync(raw,{level:9}),br:zlib.brotliCompressSync(raw,{params:{[zlib.constants.BROTLI_PARAM_QUALITY]:10,[zlib.constants.BROTLI_PARAM_SIZE_HINT]:raw.length}}),etag:'"'+crypto.createHash('sha1').update(raw).digest('base64').slice(0,16)+'"'};
+  console.log('page '+raw.length+' → gzip '+PG.gz.length+' · br '+PG.br.length);return PG}catch(e){return PG}}
+getPage();
 const clients=new Set(),byUid=new Map();let nextId=1,hostByMap={},countByMap={},bytesOut=0,msgsOut=0;
-function frame(op,buf){const n=buf.length;let h;
-  if(n<126)h=Buffer.from([0x80|op,n]);
-  else if(n<65536){h=Buffer.alloc(4);h[0]=0x80|op;h[1]=126;h.writeUInt16BE(n,2)}
-  else{h=Buffer.alloc(10);h[0]=0x80|op;h[1]=127;h.writeBigUInt64BE(BigInt(n),2)}
+function frame(op,buf,z){const n=buf.length,b0=0x80|op|(z?0x40:0);let h;
+  if(n<126)h=Buffer.from([b0,n]);
+  else if(n<65536){h=Buffer.alloc(4);h[0]=b0;h[1]=126;h.writeUInt16BE(n,2)}
+  else{h=Buffer.alloc(10);h[0]=b0;h[1]=127;h.writeBigUInt64BE(BigInt(n),2)}
   return Buffer.concat([h,buf])}
+/* บีบอัดข้อความ websocket (permessage-deflate) · ข้อความเดียวกันที่ส่งหลายคนบีบครั้งเดียว */
+const ZMIN=96,TAIL=Buffer.from([0,0,255,255]);let zLastS=null,zLastB=null;
+function zmsg(str){if(str===zLastS)return zLastB;let b=zlib.deflateRawSync(Buffer.from(str),{level:6,finishFlush:zlib.constants.Z_SYNC_FLUSH});
+  if(b.length>=4&&b.subarray(b.length-4).equals(TAIL))b=b.subarray(0,b.length-4);zLastS=str;zLastB=b;return b}
 function send(c,str,droppable){if(c.dead||!c.sock.writable)return;
   if(droppable&&c.sock.writableLength>BUFCAP)return; // ผู้รับช้า ข้ามข้อมูลที่ทดแทนได้
-  const b=frame(1,Buffer.from(str));bytesOut+=b.length;msgsOut++;c.sock.write(b)}
+  let b;if(c.z&&str.length>=ZMIN){try{b=frame(1,zmsg(str),1)}catch(e){b=null}}if(!b)b=frame(1,Buffer.from(str));
+  bytesOut+=b.length;msgsOut++;c.sock.write(b)}
 function kill(c){if(c.dead)return;c.dead=true;clients.delete(c);if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);try{c.sock.destroy()}catch(e){}}
 const num=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,v)):d;
 function cleanPresence(p){return{uid:String(p.uid||'').slice(0,12),x:num(p.x,0,20000,0),y:num(p.y,0,20000,0),hp:num(p.hp,0,1e6,0),mh:num(p.mh,1,1e6,1),
@@ -95,7 +109,7 @@ function onMsg(c,raw){
 }
 function parse(c){
   for(;;){const b=c.buf;if(b.length<2)return;
-    const op=b[0]&15,masked=b[1]&128;let len=b[1]&127,off=2;
+    const op=b[0]&15,masked=b[1]&128,rsv=b[0]&0x40;let len=b[1]&127,off=2;
     if(len===126){if(b.length<4)return;len=b.readUInt16BE(2);off=4}
     else if(len===127){if(b.length<10)return;len=Number(b.readBigUInt64BE(2));off=10}
     if(len>MAXMSG||!masked)return kill(c);
@@ -106,16 +120,17 @@ function parse(c){
     if(op===8){try{c.sock.write(frame(8,Buffer.alloc(0)))}catch(e){}return kill(c)}
     if(op===9)c.sock.write(frame(10,data));
     else if(op===10)c.alive=true;
-    else if(op===1)onMsg(c,data.toString('utf8'));
+    else if(op===1){let txt;if(rsv){if(!c.z)return kill(c);try{txt=zlib.inflateRawSync(Buffer.concat([data,TAIL]),{maxOutputLength:MAXMSG,finishFlush:zlib.constants.Z_SYNC_FLUSH}).toString('utf8')}catch(e){return kill(c)}}else txt=data.toString('utf8');onMsg(c,txt)}
     if(c.dead)return}
 }
 server.on('upgrade',(req,sock)=>{
   const key=req.headers['sec-websocket-key'];
   if(req.url!=='/ws'||!key||clients.size>=MAX){sock.end('HTTP/1.1 503 Service Unavailable\r\n\r\n');return}
   const acc=crypto.createHash('sha1').update(key+'258EAFA5-E914-47DA-95CA-C5AB0DC85B11').digest('base64');
-  sock.write('HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: '+acc+'\r\n\r\n');
+  const z=/permessage-deflate/i.test(String(req.headers['sec-websocket-extensions']||''));
+  sock.write('HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: '+acc+(z?'\r\nSec-WebSocket-Extensions: permessage-deflate; server_no_context_takeover; client_no_context_takeover':'')+'\r\n\r\n');
   sock.setNoDelay(true);
-  const c={sock,id:nextId++,uid:null,p:null,known:new Map(),last:0,n:0,buf:Buffer.alloc(0),alive:true,dead:false};clients.add(c);
+  const c={sock,z,id:nextId++,uid:null,p:null,known:new Map(),last:0,n:0,buf:Buffer.alloc(0),alive:true,dead:false};clients.add(c);
   sock.on('data',d=>{c.buf=Buffer.concat([c.buf,d]);parse(c)});
   sock.on('close',()=>kill(c));sock.on('error',()=>kill(c));
 });
