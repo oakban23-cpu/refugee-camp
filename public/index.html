@@ -95,7 +95,9 @@ button:disabled{opacity:.4}
 #sk #s0::after,#sk #s1::after,#sk #s2::after,#sk #s3::after,#sk #s4::after{content:'';position:absolute;inset:0;border-radius:inherit;background:conic-gradient(rgba(0,0,0,.6) calc(var(--cd,0)*360deg),transparent 0);pointer-events:none}
 #sk .lkd .ski{filter:grayscale(1) brightness(.7)}.skr{display:flex;align-items:center;gap:10px}.skr img{flex:none;background:#2a1a14;border-radius:10px;padding:4px;border:1px solid #6a4a2a}
 #clog{width:58%}
-#cbar{left:64px}
+#topb{position:absolute;left:calc(8px + 4.5em + 14px);top:8px;z-index:1;display:flex;gap:6px}#topb[hidden]{display:none}#topb button{padding:6px 8px;font-size:12.5px;background:rgba(20,16,15,.8);white-space:nowrap}#topb i{display:none;width:8px;height:8px;border-radius:50%;background:var(--blood);margin-left:5px;vertical-align:middle}#topb .al i{display:inline-block}
+#clog{top:auto;justify-content:flex-end;max-height:120px;overflow:hidden}
+#cbar{left:8px;right:8px;top:46px}
 #npcb,#gtb,#twb{top:70%;left:50%;transform:translateX(-50%);max-width:240px;font-size:13px;text-align:center;white-space:normal;z-index:2}
 
 /* ===== ธีมหน้าต่างเมนู (กระดาษครีม) ===== */
@@ -157,13 +159,14 @@ button:disabled{opacity:.4}
   <div id="stage">
     <canvas id="c" width="360" height="520" aria-label="สนามรบ"></canvas>
     <button id="mn" aria-expanded="false">เมนู<i></i></button>
-    <div id="mnp" hidden><button id="tb">สกิล</button><button id="gb">อุปกรณ์</button><button id="pb">ปาร์ตี้</button><button id="qb">เควส</button><button id="dgm">ดันเจี้ยน</button><button id="evm">กิจกรรม</button><button id="mtm">สัตว์ขี่</button><button id="ptm">🐾 สัตว์เลี้ยง</button><button id="gqb">⚙️ กราฟิก</button><button id="aum">🤖 ออโต้สกิล</button><button id="cb">แชท</button><button id="gmb" hidden>🛠 ทดสอบ (GM)</button><small id="mni"></small></div>
+    <div id="mnp" hidden><button id="tb">สกิล</button><button id="gb">อุปกรณ์</button><button id="pb">ปาร์ตี้</button><button id="qb">เควส</button><button id="dgm">ดันเจี้ยน</button><button id="evm" hidden>กิจกรรม</button><button id="mtm">สัตว์ขี่</button><button id="ptm">🐾 สัตว์เลี้ยง</button><button id="gqb">⚙️ กราฟิก</button><button id="aum">🤖 ออโต้สกิล</button><button id="cb" hidden>แชท</button><button id="gmb" hidden>🛠 ทดสอบ (GM)</button><small id="mni"></small></div>
     <div id="sk"><button id="s2" hidden></button><button id="tg">เปลี่ยนเป้า</button><button id="pm"></button><button id="s1"></button><button id="ph"></button><button id="s0"></button><button id="s3"></button><button id="s4" hidden></button><button id="mtb" hidden aria-label="ขี่สัตว์">🐎</button><button id="atb" hidden aria-label="ออโต้สกิล">AUTO</button></div>
     <div id="tut" hidden><div id="tutt"></div><button id="tutx">ข้าม</button></div>
     <div id="aud"><button id="sb" aria-label="เสียงเอฟเฟกต์">🔊</button><button id="mub" aria-label="เพลงประกอบ">🎵</button></div>
     <button id="dgb" hidden></button><button id="dinvb" hidden></button><div id="ptyhud" hidden></div><div id="plpop" hidden></div><div id="ptq" hidden><span id="ptqt"></span><button id="ptqa" class="pri">เข้าร่วม</button><button id="ptqd">ไม่รับ</button></div><div id="trq" hidden><span id="trqt"></span><button id="trqa" class="pri">เปิดดู</button><button id="trqd">ไม่รับ</button></div>
     <button id="npcb">คุยกับพ่อค้ายา</button>
     <button id="gtb">ผ่านประตู</button><button id="twb">🗼 เข้าหอคอยวิญญาณ</button>
+    <div id="topb"><button id="evt">📅 กิจกรรม<i></i></button><button id="cht">💬 แชท<i></i></button></div>
     <div id="clog" aria-live="polite"></div>
     <div id="cbar" hidden><input id="cin" maxlength="80" placeholder="พิมพ์ข้อความ แล้วกด Enter" autocomplete="off"><button id="csend">ส่ง</button></div>
     <div id="ov"></div>
@@ -238,7 +241,7 @@ const dprFor=()=>GQ==='high'?DPR0:LOWQ?Math.min(DPR0,1.5):Math.min(DPR0,2);
 function applyQ(){DPR=dprFor();cv.width=W*DPR;cv.height=H*DPR}
 function fitStage(){try{const vh=(window.visualViewport?visualViewport.height:innerHeight),top=cv.getBoundingClientRect().top+(window.scrollY||0),wpx=cv.clientWidth||360,avail=vh-top-10;
   const nh=Math.max(520,Math.min(900,Math.round(W*avail/wpx)));if(nh!==H){H=nh;if(typeof JB!=='undefined')JB.y=H-84;applyQ()}}catch(e){}audPos()}
-function audPos(){const a=document.getElementById('aud');if(a)a.style.top='calc('+(93/H*100).toFixed(3)+'% + 1px)';const p=document.getElementById('ptyhud');if(p)p.style.top=(126/H*100).toFixed(3)+'%'}
+function audPos(){const a=document.getElementById('aud');if(a)a.style.top='calc('+(93/H*100).toFixed(3)+'% + 1px)';const p=document.getElementById('ptyhud');if(p)p.style.top=(126/H*100).toFixed(3)+'%';const cl=document.getElementById('clog');if(cl){cl.style.bottom=((175+8)/H*100).toFixed(3)+'%';cl.style.maxHeight=(120/H*100).toFixed(3)+'%'}}
 applyQ();addEventListener('resize',()=>setTimeout(fitStage,60));addEventListener('orientationchange',()=>setTimeout(fitStage,300));if(window.visualViewport)visualViewport.addEventListener('resize',()=>setTimeout(fitStage,60));setTimeout(fitStage,0);setTimeout(fitStage,500);
 {const P2=CanvasRenderingContext2D.prototype,d=Object.getOwnPropertyDescriptor(P2,'shadowBlur');if(d&&d.set)Object.defineProperty(P2,'shadowBlur',{set(v){d.set.call(this,LOWQ?0:v)},get(){return d.get.call(this)},configurable:true})}
 const FQ={n:0,acc:0,last:0,bad:0};
@@ -1117,7 +1120,7 @@ function applyWorld(d){
 let partyOpen=false,lastChat=0;
 function renderLog(){const el=$('clog');if(!el)return;const now=Date.now();chatLog=chatLog.filter(l=>now-l.at<15000).slice(-5);el.textContent='';
   chatLog.forEach(l=>{const d=document.createElement('div');if(l.sys){d.className='sy';d.textContent=l.t}else{const b=document.createElement('b');b.textContent=l.n+': ';d.appendChild(b);d.appendChild(document.createTextNode(l.t))}el.appendChild(d)})}
-function addChat(n,t,u){chatLog.push({n,t,at:Date.now()});if(u)says[u]={t,ttl:6};renderLog()}
+let chUnread=0;function addChat(n,t,u){chatLog.push({n,t,at:Date.now()});if(u&&u!==uid)chUnread=1;if(u)says[u]={t,ttl:6};renderLog()}
 function sysMsg(t){chatLog.push({sys:1,t,at:Date.now()});renderLog()}
 setInterval(renderLog,1000);
 function sendChat(){const inp=$('cin');const t=inp.value.replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!t)return;
@@ -1125,7 +1128,7 @@ function sendChat(){const inp=$('cin');const t=inp.value.replace(/[\u0000-\u001f
   const now=Date.now();if(now-lastChat<700)return;lastChat=now;inp.value='';
   addChat(myName,t,uid);if(room)room.emit('chat',{u:uid,n:myName,t})}
 function toggleChat(force){const bar=$('cbar');const on=force!==undefined?force:bar.hidden;bar.hidden=!on;if(on)$('cin').focus();else $('cin').blur()}
-$('cb').onclick=()=>toggleChat();
+$('cb').onclick=()=>toggleChat();$('cht').onclick=()=>{chUnread=0;toggleChat()};$('evt').onclick=()=>{if(me.cls&&run){ov.hidden=false;eventUI()}};
 $('csend').onclick=()=>{sendChat();$('cin').focus()};
 $('cin').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();sendChat()}else if(e.key==='Escape')toggleChat(false)});
 /* ---------- ระบบปาร์ตี้ (เชิญ/เข้าร่วม ข้ามแมพได้) + ป็อปอัพแตะตัวผู้เล่น ---------- */
@@ -4244,7 +4247,7 @@ function loop(t){fpsTick(t);
     
     {const u=me.lv>=ULV;if($('s2').hidden===u)$('s2').hidden=!u}{const u4=!!me.cls2;if($('s4').hidden===u4)$('s4').hidden=!u4}[0,1,2,3,4].forEach(k=>{if(k===2&&me.lv<ULV)return;if(k===4&&!me.cls2)return;const lk=k===3&&me.lv<SK3LV,e=$('s'+k),cd=me.sk[k]>0,st=cd?Math.ceil(me.sk[k])+' วิ':C.mc[k]+' MP',ht=lk?skImg(me.cls,3,24)+'<small>🔒'+SK3LV+'</small>':k===2?skImg(me.cls,2,32)+'<small>'+st+'</small>':skImg(me.cls,k,k===0?30:k===4?28:27)+'<small>'+st+'</small>';
       if(e.dataset.h!==ht){e.dataset.h=ht;e.innerHTML=ht;e.title=k===2?ultOf()[0]:C.s[k]}e.classList.toggle('lkd',lk);const cf=lk||!cd?0:Math.max(0,Math.min(1,me.sk[k]/cdOf(k))),cs=String(Math.round(cf*100)/100);if(e.style.getPropertyValue('--cd')!==cs)e.style.setProperty('--cd',cs);e.style.opacity=lk?.5:me.mp>=C.mc[k]&&!cd?1:.55});
-    {const lt=lockId!=null&&mons.some(m=>m.id===lockId),ht=lt?'🎯<small>ล็อก</small>':'🎯<small>เป้า</small>';if($('tg').dataset.h!==ht){$('tg').dataset.h=ht;$('tg').innerHTML=ht;$('tg').title='เปลี่ยนเป้า'}}const pp=pts()+spts();$('mn').classList.toggle('al',pp>0||evReady()||qDone());$('tb').textContent='สกิล'+(pp>0?' ('+pp+')':'');$('gb').textContent='อุปกรณ์'+(me.bag.length?' ('+me.bag.length+')':'');
+    {const lt=lockId!=null&&mons.some(m=>m.id===lockId),ht=lt?'🎯<small>ล็อก</small>':'🎯<small>เป้า</small>';if($('tg').dataset.h!==ht){$('tg').dataset.h=ht;$('tg').innerHTML=ht;$('tg').title='เปลี่ยนเป้า'}}const pp=pts()+spts();$('mn').classList.toggle('al',pp>0||qDone());{const e=$('evt'),c=$('cht');if(e)e.classList.toggle('al',!!evReady());if(c)c.classList.toggle('al',!!chUnread&&$('cbar').hidden);const tb=$('topb'),sh=!!(me.cls&&run);if(tb&&tb.hidden===sh)tb.hidden=!sh}$('tb').textContent='สกิล'+(pp>0?' ('+pp+')':'');$('gb').textContent='อุปกรณ์'+(me.bag.length?' ('+me.bag.length+')':'');
     if(pp!==lastPts){lastPts=pp;if(ov.querySelector('[data-pn=char]'))treeUI()}
   }
   {const b=$('dgb'),on=me.cls&&run&&ov.hidden&&isDg()&&dg.ph!=='run'&&dg.ph!=='boss';if(b.hidden===!!on)b.hidden=!on;if(on){const tx=isTw()?(dg.ph==='lobby'?'▶ เริ่มปีนหอคอย ชั้น '+twF()+' ('+plCount()+' คน)':dg.ph==='clear'?'⏫ ขึ้นชั้น '+(twF()+1)+' เลย ('+Math.max(0,Math.ceil(dg.nx))+')':'🚪 ออกจากหอคอย'):isWB()?(dg.ph==='lobby'?'▶ เริ่มท้าทาย 60 วินาที':'🔁 ท้าทายอีกครั้ง'):isTrial()?'🚪 ออกจากลานทดสอบ':dg.ph==='lobby'?'▶ เริ่มดันเจี้ยน ('+plCount()+' คน)':'🚪 ออกจากดันเจี้ยน';if(b.textContent!==tx)b.textContent=tx}
