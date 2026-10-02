@@ -35,9 +35,10 @@ function tickPeers(){
     for(const o of clients){if(o===c||!o.p||o.p.mp!==mp)continue;const dd=d2(c.p.x,c.p.y,o.p.x,o.p.y);if(dd<R_PEER*R_PEER)cand.push([dd,o])}
     if(cand.length>MAXPEERS){cand.sort((a,b)=>a[0]-b[0]);cand.length=MAXPEERS}
     const rows=[],info=[],seen=new Map();
-    for(const [,o] of cand){const p=o.p;rows.push([p.uid,Math.round(p.x),Math.round(p.y),Math.round(p.hp),p.sl]);
-      const key=p.n+'|'+p.cls+'|'+p.lv+'|'+p.mh+'|'+p.mp+'|'+p.hd+'|'+p.bt+'|'+p.tt;seen.set(p.uid,key);
-      if(c.known.get(p.uid)!==key)info.push([p.uid,p.n,p.cls,p.lv,p.mh,p.mp,p.hd,p.bt,p.tt])}
+    for(const [,o] of cand){const p=o.p;rows.push([p.uid,Math.round(p.x),Math.round(p.y),Math.round(p.hp),p.sl,p.at|0]);
+      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt];
+      const key=p.n+'|'+p.cls+'|'+p.lv+'|'+p.mh+'|'+p.mp+'|'+p.hd+'|'+p.bt+'|'+p.tt+'|'+ex.join(',');seen.set(p.uid,key);
+      if(c.known.get(p.uid)!==key)info.push([p.uid,p.n,p.cls,p.lv,p.mh,p.mp,p.hd,p.bt,p.tt,ex])}
     c.known=seen;
     const m={t:'peers',rows,info,host:hostByMap[mp]?hostByMap[mp].uid:'',n:countByMap[mp]||1};
     if(hostByMap[mp]===c){m.all=[];for(const o of clients){if(o===c||!o.p||o.p.mp!==mp)continue;m.all.push([o.p.uid,Math.round(o.p.x),Math.round(o.p.y),(o.p.hp<=0||o.p.sl)?1:0])}}
