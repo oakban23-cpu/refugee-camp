@@ -36,7 +36,7 @@ function send(c,str,droppable){if(c.dead||!c.sock.writable)return;
 function kill(c){if(c.dead)return;c.dead=true;clients.delete(c);if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);try{c.sock.destroy()}catch(e){}}
 const num=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,v)):d;
 function cleanPresence(p){return{uid:String(p.uid||'').slice(0,12),x:num(p.x,0,20000,0),y:num(p.y,0,20000,0),hp:num(p.hp,0,1e6,0),mh:num(p.mh,1,1e6,1),
-  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,79,0),bt:num(p.bt|0,0,17,0),wp:num(p.wp|0,0,79,0),wu:num(p.wu|0,0,30,0),ar:num(p.ar|0,0,17,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:p.c2?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,9,0)}}
+  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,79,0),bt:num(p.bt|0,0,17,0),wp:num(p.wp|0,0,79,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,17,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,9,0)}}
 const inMap=mp=>{const a=[];for(const c of clients)if(c.p&&c.p.mp===mp)a.push(c);return a};
 function recompute(){hostByMap={};countByMap={};
   for(const c of clients){if(!c.p||!c.uid)continue;const mp=c.p.mp;countByMap[mp]=(countByMap[mp]||0)+1;
@@ -50,7 +50,7 @@ function tickPeers(){
     if(cand.length>MAXPEERS){cand.sort((a,b)=>a[0]-b[0]);cand.length=MAXPEERS}
     const rows=[],info=[],seen=new Map();
     for(const [,o] of cand){const p=o.p;rows.push([p.uid,Math.round(p.x),Math.round(p.y),Math.round(p.hp),p.sl,p.at|0]);
-      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt];
+      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt,p.im];
       const key=p.n+'|'+p.cls+'|'+p.lv+'|'+p.mh+'|'+p.mp+'|'+p.hd+'|'+p.bt+'|'+p.tt+'|'+ex.join(',');seen.set(p.uid,key);
       if(c.known.get(p.uid)!==key)info.push([p.uid,p.n,p.cls,p.lv,p.mh,p.mp,p.hd,p.bt,p.tt,ex])}
     c.known=seen;
@@ -91,7 +91,7 @@ function onEmit(c,m){
     for(const [o,arr] of by)send(o,wrap(arr));return}
   if(k==='xp'){if(!Array.isArray(d))return;
     for(const o of inMap(mp)){if(o===c)continue;const arr=d.filter(e=>Array.isArray(e)&&d2(e[0],e[1],o.p.x,o.p.y)<R_XP*R_XP);if(arr.length)send(o,wrap(arr))}return}
-  if(k==='fx'){if(!d||typeof d!=='object')return;if(d.k==='tb'&&c!==host)return;const s=wrap(d),all=d.k==='msg'||d.k==='tb',hostOnly=d.k==='taunt'||d.k==='fog'||d.k==='frost'||d.k==='pin'||d.k==='tstop'||d.k==='mtrapx'||d.k==='rift';
+  if(k==='fx'){if(!d||typeof d!=='object')return;if(d.k==='tb'&&c!==host)return;const s=wrap(d),all=d.k==='msg'||d.k==='tb',hostOnly=d.k==='taunt'||d.k==='fog'||d.k==='frost'||d.k==='pin'||d.k==='tstop'||d.k==='mtrapx'||d.k==='rift'||d.k==='stun';
     for(const o of inMap(mp)){if(o===c)continue;
       if(all||(hostOnly&&o===host)||d2(d.x,d.y,o.p.x,o.p.y)<R_FX*R_FX)send(o,s)}return}
   if(k==='reset'||k==='dinv'){const s=wrap(d);for(const o of inMap(mp))if(o!==c)send(o,s);return}
