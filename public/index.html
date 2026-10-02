@@ -212,9 +212,9 @@ window.claude={use:async n=>{
     w.onopen=()=>{R.ok=true;if(st.pres)w.send(JSON.stringify({t:'presence',p:st.pres}))};
     w.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(x){return}
       if(m.t==='peers'){
-        (m.info||[]).forEach(([u,n,c,l,mh,mp,hd,bt,tt])=>{st.info[u]={n,cls:c,lv:l,mh,mp,hd,bt,tt}});
+        (m.info||[]).forEach(([u,n,c,l,mh,mp,hd,bt,tt,ex])=>{ex=Array.isArray(ex)?ex:[];st.info[u]={n,cls:c,lv:l,mh,mp,hd,bt,tt,wp:ex[0]|0,ar:ex[1]|0,c2:ex[2]|0,mt:ex[3]|0,wu:ex[4]|0,pt:ex[5]|0}});
         R.hostUid=m.host||'';R.count=m.n||0;R.allPlayers=m.all||null;
-        const peers=m.rows.map(([u,x,y,hp,sl])=>{const i=st.info[u]||{};return{presence:{uid:u,x,y,hp,sl,n:i.n,cls:i.cls,lv:i.lv,mh:i.mh,mp:i.mp,hd:i.hd,bt:i.bt,tt:i.tt}}});
+        const peers=m.rows.map(([u,x,y,hp,sl,at])=>{const i=st.info[u]||{};return{presence:{uid:u,x,y,hp,sl,at:at|0,n:i.n,cls:i.cls,lv:i.lv,mh:i.mh,mp:i.mp,hd:i.hd,bt:i.bt,tt:i.tt,wp:i.wp,ar:i.ar,c2:i.c2,mt:i.mt,wu:i.wu,pt:i.pt}}});
         st.cb&&st.cb({peers})}
       else if(m.t==='emit'&&H[m.k])H[m.k].forEach(f=>f({data:m.d,sameTab:false,from:m.from}))};
     w.onclose=()=>{R.ok=false;R.hostUid='';R.count=0;R.allPlayers=null;st.cb&&st.cb({peers:[]});setTimeout(conn,2000)};
