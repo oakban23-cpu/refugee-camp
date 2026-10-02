@@ -70,10 +70,10 @@ function onEmit(c,m){
   if(!c.p||!pl||typeof pl!=='object')return;
   const mp=c.p.mp,d=pl.d,host=hostByMap[mp];
   const wrap=x=>JSON.stringify({t:'emit',k,d:{mp,d:x},from:c.id});
-  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-467]|d[1-37]|tw)$/.test(key))return;const t=+d.t;if(!(t>=5&&t<36000))return;
-    const row={n:String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,12)||'ผู้เล่น',c:String(d.cls||'').slice(0,8),l:num(d.lv|0,1,99,1),t:Math.round(t*10)/10,p:num(d.pc|0,1,99,1),u:c.uid||'',at:Date.now()};
-    const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>r.u===row.u&&r.c===row.c);if(i>=0){if(arr[i].t<=row.t)return;arr.splice(i,1)}
-    arr.push(row);arr.sort((a,b)=>a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
+  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-467]|d[1-37]|tw|wb)$/.test(key))return;const hi=key==='wb',t=+d.t;if(hi?!(t>=1&&t<1e12):!(t>=5&&t<36000))return;
+    const row={n:String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,12)||'ผู้เล่น',c:String(d.cls||'').slice(0,8),l:num(d.lv|0,1,99,1),t:hi?Math.round(t):Math.round(t*10)/10,p:num(d.pc|0,1,99,1),u:c.uid||'',at:Date.now()};
+    const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>r.u===row.u&&r.c===row.c);if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
+    arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
