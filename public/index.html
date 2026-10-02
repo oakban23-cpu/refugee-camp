@@ -369,7 +369,7 @@ const SKI2B={melee:ic('<path d="M9 30V3" stroke="#c8a060" stroke-width="2.4"/><p
  archer:ic('<path d="M7 14a6 6 0 0 1 6-6a7 7 0 0 1 13 2a5 5 0 0 1 0 10H8a4 4 0 0 1-1-6z" fill="#4a5a6a" stroke="#c8ffe8" stroke-width="1.2"/><path d="M17 18l-4 6h4l-3 6 8-8h-4l3-4z" fill="#fff36a"/>')};
 /* ---------- สกิล 4 / อัลติเมต สายทมิฬ ---------- */
 function skill4B(P,cost){if(SK4X[me.cls])return SK4X[me.cls](P,cost);const c=me.cls;let t=pickTarget(c==='archer'?320:200);if(c==='archer'&&!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return}
-  const a=t?Math.atan2(t.y-me.y,t.x-me.x):me.face;me.face=a;me.sk[4]=cdOf(4);me.mp-=cost;sfx('skill');dqProg('skill',1);
+  const a=t?Math.atan2(t.y-me.y,t.x-me.x):me.face;me.face=a;me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
   if(c==='melee'){const st=me.rg2|0,mul=1+.15*st;me.rg2=0;fx({k:'bash',r:150,a:Math.round(a*100)/100,len:st});fx({k:'stun',r:150,a:Math.round(a*100)/100,dur:1.5});fx({k:'taunt',r:160,dur:4});shk=Math.max(shk,.3);
     mons.forEach(m=>{const dx=m.x-me.x,dy=m.y-me.y,d=Math.hypot(dx,dy);if(d>150+MT[m.t].r)return;let da=Math.atan2(dy,dx)-a;da=Math.atan2(Math.sin(da),Math.cos(da));if(Math.abs(da)<1.1||d<30)addHit(m,pd()*3.2*P*mul,0,1,'melee')});
     if(st)dn.push({x:me.x,y:me.y-56,v:'แค้น ×'+st+' → ดาเมจ +'+Math.round(st*15)+'%',t:1.4})}
@@ -518,10 +518,10 @@ function drawImps(){const t=performance.now()/1000;if(summR()&&me.down<=0)IMPS.f
   Object.values(others).forEach(o=>{const n=Math.min(3,o.im|0);if(!n||o.hp<=0||o.sl>0)return;for(let i=0;i<n;i++){const p=impPos(o.x,o.y,i,t);drawImp(p.x,p.y,t,i)}})}
 /* ---------- สกิล 4 ---------- */
 const SK4X={
- sup:(P,cost)=>{const t=pickTarget(300);const x=t?t.x:me.x+Math.cos(me.face)*80,y=t?t.y:me.y+Math.sin(me.face)*80;me.sk[4]=cdOf(4);me.mp-=cost;sfx('skill');dqProg('skill',1);fx({k:'seal',x:Math.round(x),y:Math.round(y),r:110,dur:6,v:Math.round(pd()*2.2*P)})},
+ sup:(P,cost)=>{const t=pickTarget(300);const x=t?t.x:me.x+Math.cos(me.face)*80,y=t?t.y:me.y+Math.sin(me.face)*80;me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);fx({k:'seal',x:Math.round(x),y:Math.round(y),r:110,dur:6,v:Math.round(pd()*2.2*P)})},
  assn:(P,cost)=>{const t=pickTarget(260);const a=t?Math.atan2(t.y-me.y,t.x-me.x):me.face,L=180,sx=me.x,sy=me.y;me.face=a;me.sk[4]=cdOf(4);me.mp-=cost;sfx('slash');dqProg('skill',1);dash(a,L,pd()*2.2*P);comboHit();
    fx({k:'bdash',x:Math.round(me.x),y:Math.round(me.y),sx:Math.round(sx),sy:Math.round(sy),r:30});fx({k:'bstrm',x:Math.round(me.x),y:Math.round(me.y),sx:Math.round(sx),sy:Math.round(sy),r:50,dur:3,v:Math.round(pd()*.5*P)})},
- mage:(P,cost)=>{const t=pickTarget(300);const x=t?t.x:me.x+Math.cos(me.face)*70,y=t?t.y:me.y+Math.sin(me.face)*70;me.sk[4]=cdOf(4);me.mp-=cost;sfx('skill');dqProg('skill',1);fx({k:'golem',x:Math.round(x),y:Math.round(y),r:100,dur:8,v:Math.round(pd()*1.3*P)});shk=Math.max(shk,.2)}};
+ mage:(P,cost)=>{const t=pickTarget(300);const x=t?t.x:me.x+Math.cos(me.face)*70,y=t?t.y:me.y+Math.sin(me.face)*70;me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);fx({k:'golem',x:Math.round(x),y:Math.round(y),r:100,dur:8,v:Math.round(pd()*1.3*P)});shk=Math.max(shk,.2)}};
 const ULTX={
  sup:(t,P)=>{fx({k:'bell',r:170,dur:6,v:Math.round(pd()*.9*P)});ultWin=performance.now()+6500},
  assn:(t,P)=>{me.bst=4;me.bstP=P;fx({k:'bstorm',r:80,u:uid});ultWin=performance.now()+4500},
@@ -862,9 +862,98 @@ function lbResync(){if(lbResynced||gmUsed||!me.cls||!lbData||!(room&&room.url))r
     const mine=rows.some(r=>r[0]===myName&&r[1]===me.cls&&(hi?+r[3]>=v:+r[3]<=v));const full=rows.length>=(hi?30:10),worst=rows.length?+rows[rows.length-1][3]:0;
     if(mine||(full&&(hi?v<=worst:v>=worst)))return;try{emitM('lbs',{k,t:v,n:myName,cls:me.cls,lv:me.lv,pc:1})}catch(e){}});
   setTimeout(()=>{lbAt=0;lbFetch(true)},1500)}
+
+/* ===== เสียงสกิลเฉพาะตัว (Web Audio synth) ===== */
+let SAB=null,SVOL=1;const SKB={'melee.0':1.8,'melee.s4b':1.3,'archer.0':2,'archer.1':1.3,'archer.s4':1.8,'archer.s4b':2,'sup.0':1.5,'sup.1':1.4,'sup.s4':1.8,'sup.s4b':1.6,'assn.s4':3,'assn.0':.8,'mage.s4':1.6};
+function abus(){const a=acx();if(!a)return null;if(SAB&&SAB.a===a)return SAB;try{
+  const comp=a.createDynamicsCompressor();comp.threshold.value=-10;comp.knee.value=6;comp.ratio.value=5;comp.attack.value=.003;comp.release.value=.2;
+  const mg=a.createGain();mg.gain.value=.95;comp.connect(mg);mg.connect(a.destination);
+  const cv=a.createConvolver(),L=Math.floor(a.sampleRate*1.8),ir=a.createBuffer(2,L,a.sampleRate);for(let ch=0;ch<2;ch++){const d=ir.getChannelData(ch);for(let i=0;i<L;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/L,2.6)}cv.buffer=ir;
+  const wet=a.createGain();wet.gain.value=.32;cv.connect(wet);wet.connect(comp);
+  const nb=a.createBuffer(1,a.sampleRate*2,a.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+  SAB={a,in:comp,rv:cv,nb}}catch(e){SAB={a,in:a.destination,rv:null,nb:null}}return SAB}
+function aOut(node,rv,pan){const B=abus();if(!B)return;let n=node;if(pan&&B.a.createStereoPanner){const p=B.a.createStereoPanner();p.pan.value=Math.max(-1,Math.min(1,pan));n.connect(p);n=p}n.connect(B.in);if(rv&&B.rv){const s=B.a.createGain();s.gain.value=rv;n.connect(s);s.connect(B.rv)}}
+const aOk=()=>{const a=acx();return a&&a.state==='running'?a:null};
+/* oscillator: o={dl,at,lp,q,rv,pan,vib,vr,det} */
+function sO(type,f0,f1,d,v,o){const a=aOk();if(!a)return;o=o||{};const t=a.currentTime+(o.dl||0),os=a.createOscillator(),gn=a.createGain();os.type=type;os.frequency.setValueAtTime(f0,t);if(f1&&f1!==f0)os.frequency.exponentialRampToValueAtTime(Math.max(15,f1),t+d*(o.fr||1));if(o.det)os.detune.value=o.det;
+  if(o.vib){const l=a.createOscillator(),lg=a.createGain();l.frequency.value=o.vr||6;lg.gain.value=o.vib;l.connect(lg);lg.connect(os.frequency);l.start(t);l.stop(t+d+.05)}
+  const at=o.at||.006;v*=SVOL;gn.gain.setValueAtTime(.0001,t);gn.gain.exponentialRampToValueAtTime(v,t+at);gn.gain.exponentialRampToValueAtTime(.0001,t+d);
+  let n=os;if(o.lp){const f=a.createBiquadFilter();f.type=o.ft||'lowpass';f.frequency.value=o.lp;f.Q.value=o.q||1;os.connect(f);n=f}n.connect(gn);aOut(gn,o.rv,o.pan);os.start(t);os.stop(t+d+.05)}
+/* noise ผ่านฟิลเตอร์ที่กวาดความถี่ได้ */
+function sN(d,v,o){const a=aOk(),B=abus();if(!a||!B||!B.nb)return;o=o||{};const t=a.currentTime+(o.dl||0),src=a.createBufferSource();src.buffer=B.nb;src.loop=true;src.playbackRate.value=o.pr||1;
+  const f=a.createBiquadFilter();f.type=o.ft||'bandpass';f.Q.value=o.q||1;f.frequency.setValueAtTime(o.f0||1200,t);if(o.f1)f.frequency.exponentialRampToValueAtTime(o.f1,t+d);
+  v*=SVOL;const gn=a.createGain(),at=o.at||.005;gn.gain.setValueAtTime(.0001,t);gn.gain.exponentialRampToValueAtTime(v,t+at);if(o.hold)gn.gain.setValueAtTime(v,t+at+o.hold);gn.gain.exponentialRampToValueAtTime(.0001,t+d);
+  src.connect(f);f.connect(gn);aOut(gn,o.rv,o.pan);src.start(t,Math.random()*1.5);src.stop(t+d+.05)}
+/* บล็อกเสียงสำเร็จรูป */
+const sBoom=(f0,d,v,dl,rv)=>{sO('sine',f0,28,d,v,{dl,rv:rv||.25});sN(d*.6,v*.55,{ft:'lowpass',f0:420,f1:80,dl,rv:.2})};
+const sWhoosh=(d,v,f0,f1,dl,pan)=>sN(d,v,{f0,f1,q:2.2,at:d*.45,dl,pan,rv:.15});
+const sCrack=(v,dl,f)=>sN(.07,v,{ft:'highpass',f0:f||2400,dl,rv:.2});
+const sMetal=(f,d,v,dl,pan)=>{[[1,1],[2.76,.5],[5.4,.28],[8.93,.15]].forEach(([m,g])=>sO('sine',f*m,f*m*.995,d*(1-m*.05),v*g,{dl,rv:.35,pan}))};
+const sShim=(base,d,v,dl,n)=>{for(let i=0;i<(n||6);i++){const f=base*(1+Math.random()*1.5);sO('sine',f,f*1.01,d*.6,v*(.5+Math.random()*.5),{dl:(dl||0)+i*d/(n||6)*.7,rv:.5,pan:Math.random()*1.4-.7})}};
+const sChord=(fs,d,v,type,dl,at,lp)=>fs.forEach((f,i)=>{sO(type||'sawtooth',f,f,d,v,{dl,at:at||.15,lp:lp||1400,rv:.45,det:(i%2?7:-7)});sO(type||'sawtooth',f,f,d,v*.7,{dl,at:at||.15,lp:lp||1400,rv:.45,det:(i%2?-12:12)})});
+const sZap=(f,d,v,dl)=>{sO('square',f,f*.5,d,v,{dl,vib:f*.6,vr:45,lp:3500,rv:.2});sN(d,v*.6,{ft:'highpass',f0:3000,dl})};
+const sTwang=(v,dl)=>{sO('triangle',190,140,.22,v,{dl,rv:.15});sO('sawtooth',380,300,.12,v*.4,{dl,lp:1800})};
+const sArrow=(v,dl,pan)=>sN(.28,v,{f0:5200,f1:1600,q:6,at:.04,dl,pan,rv:.2});
+const sShing=(v,dl,pan)=>{sN(.12,v,{ft:'highpass',f0:5000,at:.01,dl,pan,rv:.25});sO('sine',3200,2900,.18,v*.35,{dl,pan,rv:.4})};
+const sChoir=(fs,d,v,dl)=>fs.forEach((f,i)=>{sO('sawtooth',f,f,d,v,{dl,at:d*.35,lp:900+i*200,q:4,ft:'bandpass',vib:f*.012,vr:5+i*.4,rv:.6,det:i*3})});
+const sGrowl=(f,d,v,dl)=>{sO('sawtooth',f,f*.7,d,v,{dl,at:.05,lp:700,q:6,ft:'bandpass',vib:f*.25,vr:28,rv:.3});sO('square',f/2,f*.35,d,v*.5,{dl,at:.05,lp:300})};
+const sBell=(f,d,v,dl)=>{[[1,1],[2.01,.6],[2.76,.45],[4.07,.25],[.5,.5]].forEach(([m,g])=>sO('sine',f*m,f*m,d*(m>2?.6:1),v*g,{dl,at:.003,rv:.6}))};
+const sRumble=(d,v,dl)=>sN(d,v,{ft:'lowpass',f0:260,f1:90,at:.05,dl,rv:.3,pr:.5});
+const sArp=(fs,step,d,v,type,dl)=>fs.forEach((f,i)=>sO(type||'triangle',f,f,d,v,{dl:(dl||0)+i*step,rv:.5,pan:(i/(fs.length-1||1))*1.2-.6}));
+/* ดีไซน์เสียงแต่ละสกิล: [คลาส][ช่อง] — u=อัลติ ปกติ, u2=อัลติ สายแสง, ub=อัลติ สายทมิฬ, s4=สกิล4 สายแสง, s4b=สายทมิฬ */
+const SKS={
+ melee:{
+  0:()=>{sWhoosh(.22,.32,500,2200,0,-.6);sWhoosh(.22,.32,700,2600,.16,.6);sMetal(620,.5,.07,.1)},
+  1:()=>{sWhoosh(.18,.3,400,3000);sCrack(.35,.15,1800);sBoom(140,.3,.35,.15);sMetal(480,.4,.06,.16)},
+  3:()=>{sGrowl(110,.7,.22);sBoom(90,.5,.4,.05);sN(.8,.18,{ft:'lowpass',f0:900,f1:300,at:.1,rv:.3})},
+  s4:()=>{sGrowl(85,.9,.26);sO('sawtooth',160,90,.8,.12,{lp:620,q:5,ft:'bandpass',vib:20,vr:9,rv:.4});[0,.32].forEach(d=>sBoom(70,.25,.4,.4+d))},
+  s4b:()=>{sMetal(260,.8,.16);sBoom(110,.4,.5,.01);sCrack(.3,0,1500);sRumble(.6,.2,.05)},
+  u:()=>{sWhoosh(.35,.32,300,3500);sCrack(.5,.33,1200);sBoom(70,1,.6,.33);sRumble(1.4,.35,.38);for(let i=0;i<6;i++)sN(.08,.15,{ft:'bandpass',f0:600+Math.random()*900,q:3,dl:.5+i*.11,pan:Math.random()*1.6-.8})},
+  u2:()=>{SKS.melee.u();sGrowl(70,1.2,.18,.3);sChoir([110,131,165],1.4,.05,.35)},
+  ub:()=>{sMetal(150,1.6,.18);[0,.3,.6].forEach(d=>sBoom(65,.35,.45,d+.05));sChoir([98,147,196],1.8,.06,.2)}},
+ archer:{
+  0:()=>{sTwang(.28);for(let i=0;i<7;i++)sArrow(.12,.12+i*.07,Math.random()*1.6-.8);for(let i=0;i<5;i++)sN(.06,.18,{ft:'lowpass',f0:500,dl:.55+i*.06})},
+  1:()=>{sWhoosh(.2,.3,600,2600);sO('sine',300,600,.12,.1);sBoom(160,.18,.2,.2)},
+  3:()=>{sTwang(.34);sArrow(.25,.06);sO('sine',900,300,.4,.08,{dl:.05,rv:.4});sMetal(200,.35,.15,.32);sBoom(120,.2,.3,.32)},
+  s4:()=>{sO('square',1800,1800,.03,.08);sO('square',1200,1200,.03,.08,{dl:.06});sShim(1400,.9,.07,.1,8);sO('sine',660,990,.7,.06,{at:.2,rv:.6,dl:.08})},
+  s4b:()=>{sN(1.3,.28,{f0:300,f1:1400,q:3,at:.3,rv:.35});sN(1.3,.18,{f0:900,f1:400,q:5,at:.4,rv:.35,pan:.5});sO('sine',220,440,1.1,.06,{at:.4,vib:40,vr:3,rv:.5})},
+  u:()=>{sO('sawtooth',120,900,.45,.14,{at:.4,lp:2400,rv:.2});sTwang(.4,.45);sN(.55,.4,{f0:4000,f1:600,q:1.5,at:.03,dl:.45,rv:.3});sCrack(.5,.47,3000);sShim(1800,.8,.05,.55,8)},
+  u2:()=>{SKS.archer.u();for(let i=0;i<12;i++){const f=2400+Math.random()*3600;sO('sine',f,f*.98,.25,.05,{dl:.6+i*.03,rv:.5,pan:Math.random()*2-1})}},
+  ub:()=>{sN(1.6,.25,{f0:400,f1:1600,q:2.5,at:.4,rv:.35});sCrack(.6,.35,1200);sRumble(1.8,.45,.38);sZap(1400,.35,.15,.36);sCrack(.4,1.0,1600);sRumble(1,.3,1.0)}},
+ sup:{
+  0:()=>{sArp([523,659,784,1047,1319],.07,.6,.09,'triangle');sShim(1600,.8,.05,.2)},
+  1:()=>{sChoir([262,330,392,523],1.1,.05);sBell(784,1.2,.1,.05)},
+  3:()=>{sO('sine',2400,500,.4,.13,{rv:.5});sO('triangle',1800,400,.4,.07,{rv:.5,det:10});sBoom(150,.4,.35,.38);sBell(660,1,.12,.38);sShim(2000,.6,.04,.4)},
+  s4:()=>{sChoir([294,370,440,587],1.4,.05);sO('sine',440,880,1.1,.07,{at:.6,rv:.6});sShim(1700,1.2,.05,.3,10)},
+  s4b:()=>{sChoir([233,247,311,330],1.3,.05);sN(1.2,.12,{f0:2500,f1:1200,q:8,at:.3,rv:.5});sO('sine',180,120,1.2,.12,{at:.2,vib:6,vr:4,rv:.4})},
+  u:()=>{sChoir([262,330,392,523,659],2,.05);[523,659,784,1047].forEach((f,i)=>sBell(f,1.4,.08,.2+i*.15));sShim(2200,1.6,.06,.4,14);sBoom(110,.6,.25,.2)},
+  u2:()=>{SKS.sup.u();sChoir([131,196,262],2.2,.06,.1);sO('sine',1047,2093,1.4,.06,{at:.8,rv:.7,dl:.3})},
+  ub:()=>{[0,.65].forEach(d=>sBell(110,2.2,.28,d));sChoir([110,117,165],2.2,.05,.1);sN(1.6,.1,{f0:1800,f1:900,q:6,at:.5,rv:.6,dl:.2})}},
+ assn:{
+  0:()=>{sN(.25,.3,{f0:300,f1:3000,q:2,at:.22,rv:.2});sShing(.25,.24,.4)},
+  1:()=>{sN(1,.18,{ft:'highpass',f0:3500,f1:2200,at:.08,rv:.3});for(let i=0;i<8;i++){const f=160+Math.random()*220;sO('sine',f,f*1.8,.07,.08,{dl:.15+i*.09,rv:.2})}},
+  3:()=>{sO('sine',880,830,.6,.07,{vib:30,vr:7,rv:.6,at:.1});sCrack(.4,.12,2000);sShing(.3,.12);sO('sawtooth',90,50,.4,.12,{dl:.12,lp:400})},
+  s4:()=>{sN(.4,.25,{f0:400,f1:2400,q:3,at:.3,rv:.4,pan:-.6});sN(.4,.22,{f0:420,f1:2600,q:3,at:.3,rv:.4,pan:.6,dl:.05});sO('sine',520,260,.5,.06,{vib:25,vr:9,rv:.5})},
+  s4b:()=>{sWhoosh(.18,.32,600,3600);sShing(.32,.12);sShing(.25,.2,.5)},
+  u:()=>{for(let i=0;i<9;i++)sShing(.2,i*.09,(i%2?.7:-.7));sWhoosh(.9,.18,300,2600);sBoom(80,.6,.45,.9);sCrack(.45,.9,1600)},
+  u2:()=>{SKS.assn.u();sO('sine',70,45,1.6,.18,{at:.4,rv:.5});sChoir([147,156],1.4,.04,.1)},
+  ub:()=>{for(let i=0;i<16;i++)sShing(.15,i*.085,Math.sin(i*1.3)*.8);sN(1.5,.2,{f0:500,f1:2500,q:1.5,at:.3,hold:.6,rv:.3});sBoom(90,.5,.4,1.4)}},
+ mage:{
+  0:()=>{sN(.3,.25,{f0:400,f1:1800,q:1.2,at:.2,rv:.2});sBoom(80,.6,.5,.25);sN(.7,.25,{ft:'lowpass',f0:2500,f1:300,dl:.25,rv:.35});for(let i=0;i<6;i++)sCrack(.08,.35+Math.random()*.5,3000)},
+  1:()=>{for(let i=0;i<10;i++){const f=2200+Math.random()*2800;sO('sine',f,f,.18,.06,{dl:i*.035,rv:.5,pan:Math.random()*1.6-.8})}sCrack(.4,.32,2600);sN(.5,.15,{ft:'highpass',f0:5000,dl:.32,rv:.4})},
+  3:()=>{sZap(900,.25,.2);sZap(1300,.2,.16,.12);sZap(700,.22,.16,.24);sCrack(.45,0,2000);sCrack(.35,.13,2400);sRumble(.5,.15,.05)},
+  s4:()=>{sN(.5,.22,{f0:3000,f1:200,q:2,at:.4,rv:.6});for(let i=0;i<6;i++)sO('square',2400,2400,.02,.05,{dl:.1+i*.13,rv:.4});sO('sine',600,150,1.1,.1,{vib:60,vr:3,rv:.6,at:.2})},
+  s4b:()=>{sRumble(.7,.4);sN(.6,.2,{ft:'lowpass',f0:600,f1:200,pr:.3,at:.1});sBoom(55,.5,.55,.45);sGrowl(80,.5,.12,.1)},
+  u:()=>{for(let i=0;i<4;i++){sO('sine',2600,300,.7,.06,{dl:i*.18,rv:.3,pan:i%2?.5:-.5});sBoom(60,.7,.5,.65+i*.18);sN(.5,.2,{ft:'lowpass',f0:1800,f1:200,dl:.65+i*.18,rv:.4})}sRumble(1.6,.3,.7)},
+  u2:()=>{SKS.mage.u();sO('sine',880,110,1.6,.1,{at:.05,rv:.7,vib:15,vr:2});sBell(220,1.6,.12,.05)},
+  ub:()=>{sChord([65,78,98,104],1.8,.06,'sawtooth',0,.3,600);sN(1.6,.3,{ft:'lowpass',f0:1500,f1:300,at:.4,rv:.4});sGrowl(60,1.4,.2,.3);sBoom(45,.9,.55,.5)}}};
+let SKK=0;
+function skSfx(k){if(muted)return;k=k===undefined?SKK:k;const c=SKS[me.cls];if(!c)return sfx('skill');let id=k;
+  if(k===2)id=me.cls2?(BR2()?'ub':'u2'):'u';else if(k===4)id=BR2()?'s4b':'s4';
+  const f=c[id]||c[k];if(!f)return sfx(k===2?'ult':'skill');SVOL=.6*(SKB[me.cls+'.'+(c[id]?id:k)]||1);try{abus();f()}catch(e){}SVOL=1}
 function skill4(P,cost){if(BR2()&&SK4B[me.cls])return skill4B(P,cost);const c=me.cls;let t=null;
   if(c==='archer'||c==='mage'){t=pickTarget(c==='archer'?320:300);if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return}me.face=Math.atan2(t.y-me.y,t.x-me.x)}
-  me.sk[4]=cdOf(4);me.mp-=cost;sfx('skill');dqProg('skill',1);
+  me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
   if(c==='melee'){fx({k:'roar',r:150});fx({k:'taunt',r:150,dur:4});mons.forEach(m=>{if(dist(m,me)<150)addHit(m,pd()*3*P,0,1,'melee')});me.shv=Math.max(me.shv||0,Math.round(me.mh*.2*P));me.shield=5;shk=Math.max(shk,.25)}
   else if(c==='archer'){const x=Math.round(t.x),y=Math.round(t.y);fx({k:'mtrap',x,y,r:100});pend.push({t:.6,f:()=>{fx({k:'mtrapx',x,y,r:100,dur:2.5});mons.forEach(m=>{if(Math.hypot(m.x-x,m.y-y)<100)addHit(m,pd()*3.5*P,0,1,'pin')})}})}
   else if(c==='sup'){fx({k:'sanct',r:130,dur:6,v:Math.round(pd()*.9*P)})}
@@ -2280,7 +2369,7 @@ const TWLB=36000,twLbFloor=t=>TWLB-t;
 function twLbCheck(f){const best=me.pb.tw?twLbFloor(me.pb.tw):0;if(f>best&&f>=5)lbSubmit('tw',TWLB-f)}
 function skill3(P,cost){const c=me.cls;let t=null;
   if(c!=='melee'){t=pickTarget(c==='archer'?320:c==='mage'?300:c==='sup'?280:260);if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return}me.face=Math.atan2(t.y-me.y,t.x-me.x)}
-  me.sk[3]=cdOf(3);me.mp-=cost;sfx('skill');dqProg('skill',1);
+  me.sk[3]=cdOf(3);me.mp-=cost;skSfx();dqProg('skill',1);
   if(c==='melee'){me.rage=6;me.rgP=P;fx({k:'rage',r:60})}
   else if(c==='archer'){fx({k:'pin',x:Math.round(t.x),y:Math.round(t.y),r:110,id:t.id,dur:2,sx:Math.round(me.x),sy:Math.round(me.y-6)});addHit(t,pd()*3.2*P,0,1,'pin')}
   else if(c==='mage'){const pts=[[Math.round(me.x),Math.round(me.y-12)]],hit=new Set();let cur=t;
@@ -2299,7 +2388,7 @@ function ultSkill(P,cost){const c=me.cls;
   let t=null,ts=null;
   if(c==='mage'||c==='archer'||c==='melee'){t=pickTarget(c==='mage'?320:c==='archer'?360:260);if(!t&&c!=='melee'){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return}}
   if(c==='assn'){ts=mons.filter(m=>dist(m,me)<240).sort((a,b)=>dist(a,me)-dist(b,me)).slice(0,6);if(!ts.length){dn.push({x:me.x,y:me.y-40,v:'ไม่มีศัตรูรอบตัว',t:.8});return}}
-  me.sk[2]=cdOf(2);me.mp-=cost;sfx('ult');me.stt.ult++;dqProg('ult',1);ultSum.v=0;ultSum.sv=0;ultSum.n=0;ultSum.t=0;ultWin=performance.now()+1000*(c==='assn'?.3+ts.length*.14+1.2:c==='mage'?1.9:.6);if(me.cls2){if(BR2()&&ULT2B[c])ult2B(c,t,P);else ult2(c,t,ts,P);return}
+  me.sk[2]=cdOf(2);me.mp-=cost;skSfx(2);me.stt.ult++;dqProg('ult',1);ultSum.v=0;ultSum.sv=0;ultSum.n=0;ultSum.t=0;ultWin=performance.now()+1000*(c==='assn'?.3+ts.length*.14+1.2:c==='mage'?1.9:.6);if(me.cls2){if(BR2()&&ULT2B[c])ult2B(c,t,P);else ult2(c,t,ts,P);return}
   if(c==='melee'){const a=t?Math.atan2(t.y-me.y,t.x-me.x):me.face,L=230;me.face=a;fx({k:'quake',r:60,a,len:L});
     const hit=new Set();for(let i=1;i<=8;i++){const q={x:me.x+Math.cos(a)*L*i/8,y:me.y+Math.sin(a)*L*i/8};mons.forEach(m=>{if(!hit.has(m)&&dist(m,q)<50){hit.add(m);addHit(m,pd()*6*P,0,2,'melee')}})}}
   else if(c==='archer'){const a=Math.atan2(t.y-me.y,t.x-me.x),L=380;me.face=a;fx({k:'beam',r:40,a,len:L});
@@ -2313,7 +2402,7 @@ function ultSkill(P,cost){const c=me.cls;
       me.x=cl(m.x-Math.cos(a)*22,12,WW-12);me.y=cl(m.y-Math.sin(a)*22,12,WH-12);me.face=a;fx({k:'shadow',x:Math.round(m.x),y:Math.round(m.y),r:40,len:1});addHit(m,pd()*2.8*P,0,2,'assn');if(i===ts.length-1)me.stealth=3}}))}
 }
 function useSkill(k){if(me.riding)dismount();const b=me.sk[k]||0,free=!!(br1()&&me.cls==='mage'&&me.freeC);useSkill0(k,free);if(me.sk[k]>b){me.atkT=performance.now();me.atkN=((me.atkN|0)+1)%100}afterCast(k,b,free)}
-function useSkill0(k,free){
+function useSkill0(k,free){SKK=k;
   if(!run||me.down>0||me.sk[k]>0)return;
   if(k===2&&me.lv<ULV)return;
   if(k===4&&!me.cls2)return;
@@ -2323,11 +2412,10 @@ function useSkill0(k,free){
   if(k===2){ultSkill(P,cost);return}
   if(k===3){skill3(P,cost);return}
   if(k===4){skill4(P,cost);return}
-  sfx('skill');
   if(c==='assn'&&!k&&!pickTarget(260))return;
-  if(c==='mage'&&!k){const t=pickTarget(300);if(!t)return;me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);fx({k:'fire',x:t.x,y:t.y,r:95});mons.forEach(m=>{if(dist(m,t)<95)addHit(m,pd()*3.4*P,0,1,'mage')});return}
-  if(c==='archer'&&!k){const t=pickTarget(260);if(!t)return;me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);fx({k:'arrows',x:t.x,y:t.y,r:90});mons.forEach(m=>{if(dist(m,t)<90)addHit(m,pd()*3.6*P,0,1,'archer')});return}
-  me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);
+  if(c==='mage'&&!k){const t=pickTarget(300);if(!t)return;me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(0);fx({k:'fire',x:t.x,y:t.y,r:95});mons.forEach(m=>{if(dist(m,t)<95)addHit(m,pd()*3.4*P,0,1,'mage')});return}
+  if(c==='archer'&&!k){const t=pickTarget(260);if(!t)return;me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(0);fx({k:'arrows',x:t.x,y:t.y,r:90});mons.forEach(m=>{if(dist(m,t)<90)addHit(m,pd()*3.6*P,0,1,'archer')});return}
+  me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(k);
   if(c==='mage'&&k){fx({k:'frost',r:150,dur:3.5*P});mons.forEach(m=>{if(dist(m,me)<150)addHit(m,pd()*1.6*P,0,1,'frost')})}
   if(c==='melee'){if(!k){fx({k:'whirl',r:85});mons.forEach(m=>{if(dist(m,me)<85)addHit(m,pd()*2.5*P,0,1,'melee')})}else{fx({k:'dash',r:30,a:me.face,len:120});dash(me.face,120,pd()*2*P)}}
   if(c==='archer'&&k){const t=nearestMon(400);fx({k:'leap',r:30});dash(t?Math.atan2(me.y-t.y,me.x-t.x):me.face+Math.PI,110,0)}
@@ -2649,8 +2737,8 @@ function noise(d,v,lp,dl){const a=acx();if(!a||a.state!=='running')return;
   const n=Math.floor(a.sampleRate*d),b=a.createBuffer(1,n,a.sampleRate),c=b.getChannelData(0);for(let i=0;i<n;i++)c[i]=(Math.random()*2-1)*(1-i/n);
   const t=a.currentTime+(dl||0),src=a.createBufferSource(),f=a.createBiquadFilter(),gn=a.createGain();f.type='lowpass';f.frequency.value=lp||3000;gn.gain.value=v||.15;src.buffer=b;src.connect(f);f.connect(gn);gn.connect(a.destination);src.start(t)}
 const SFXD={
-  slash:()=>{noise(.09,.16,2600);tone(300,.08,'triangle',.08,120)},
-  bow:()=>{tone(700,.09,'triangle',.11,220);noise(.05,.05,5000)},
+  slash:()=>{SVOL=1.6;sWhoosh(.11,.2,900,3200);SVOL=1;noise(.07,.12,2600);tone(300,.07,'triangle',.06,120)},
+  bow:()=>{SVOL=1.6;sTwang(.13);sArrow(.08,.02);SVOL=1},
   magic:()=>{tone(500,.13,'sine',.12,1100);tone(760,.1,'triangle',.05,1500)},
   hit:()=>{noise(.06,.13,1200);tone(140,.06,'square',.06,70)},
   skill:()=>{tone(220,.22,'sawtooth',.08,660);tone(440,.2,'sine',.09,880)},
