@@ -1632,14 +1632,9 @@ function drawBoss10(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf){const fy=-14+Math.sin
   if(cf>0){eye(-4,hh,2.4,1.4,'#ff5a8a');eye(4,hh,2.4,1.4,'#ff5a8a')}
   g.fillStyle=W?'#fff':'#c89a8a';g.fillRect(-2,hh+6,4,1.2)}
 /* ประตูตะวันออกของนครหลวง → ทุ่งรอยแยกนภา */
-function cityEastGate(t){const gx=CX+CITY.R,gy=CY,O='#1e1a18';if(!inView(gx,gy,200))return;
-  g.save();g.globalCompositeOperation='lighter';glowAt(gx+40,gy-20,110,'170,120,255',.16+.05*Math.sin(t*1.5));g.restore();
-  for(const s of[-1,1]){const y=gy+s*80;g.fillStyle='rgba(0,0,0,.3)';g.fillRect(gx-26,y+4,60,10);g.fillStyle='#8a8278';g.fillRect(gx-24,y-96,48,100);g.strokeStyle=O;g.lineWidth=1.2;g.strokeRect(gx-24,y-96,48,100);
-    g.fillStyle='#9a9286';for(let k=0;k<4;k++)g.fillRect(gx-23+k*12,y-104,8,8);g.fillStyle='#6a6258';g.fillRect(gx+10,y-96,14,100);
-    g.fillStyle='#4a3a8a';g.fillRect(gx-10,y-84,20,44);g.fillStyle='#ffd84a';g.font='bold 12px system-ui';g.textAlign='center';g.fillText('✦',gx,y-58);
-    g.fillStyle='#ffd88a';g.fillRect(gx-4,y-30,8,10);glowAt(gx,y-26,14,'255,210,130',.25)}
-  g.fillStyle='#2a2440';g.fillRect(gx-18,gy-158,36,16);g.strokeStyle='#e8c060';g.lineWidth=1.4;g.strokeRect(gx-18,gy-158,36,16);
-  g.fillStyle='rgba(30,20,50,.82)';const tw=118;g.fillRect(gx-tw/2+30,gy-140,tw,18);g.strokeStyle='#b8a8ff';g.strokeRect(gx-tw/2+30,gy-140,tw,18);g.fillStyle='#e8e0ff';g.font='bold 10px system-ui';g.textAlign='center';g.fillText('↗ ทุ่งรอยแยกนภา · Lv 58+',gx+30,gy-127)}
+function cityEastGate(t){const gx=CX+CITY.R,gy=CY;if(!inView(gx,gy,220))return;
+  g.save();g.globalCompositeOperation='lighter';glowAt(gx+60,gy-10,120,'170,120,255',.16+.05*Math.sin(t*1.5));g.restore();
+  g.fillStyle='rgba(30,20,50,.85)';const tw=130;g.beginPath();g.roundRect(gx+40-tw/2,gy-150,tw,20,5);g.fill();g.strokeStyle='#b8a8ff';g.lineWidth=1.4;g.stroke();g.fillStyle='#e8e0ff';g.font='bold 10px system-ui';g.textAlign='center';g.fillText('↗ ทุ่งรอยแยกนภา · Lv 58+',gx+40,gy-136)}
 
 /* ===== แมพ 9: นครหลวงอัสตรา · ฉากใหม่ (พื้นแคช + วัตถุเรียงลึก + บรรยากาศ) ===== */
 const CG={c:null,s:1},CGARD=[[1300,1405,190,112],[1712,1405,150,112],[1290,1722,200,170],[1708,1722,150,150]];
@@ -1835,6 +1830,8 @@ function citySprites(){const L=[],A=(y,x0,y0,x1,y1,d,big)=>L.push({y,x0,y0,x1,y1
   [[1392,1840],[1372,1760],[1760,1700]].forEach(([x,y])=>A(y,x-18,y-20,x+18,y+4,()=>cBench(x,y)));A(1730,1700,1690,1772,1734,()=>cBoard(1730,1730));
   [[1520,1460],[1680,1460],[1520,1760],[1680,1760],[1450,1540],[1750,1540],[1450,1665],[1750,1665],[1540,2000],[1660,2000],[1540,2150],[1660,2150]].forEach(([x,y],i)=>A(y,x-10,y-56,x+10,y+4,t=>cLamp2(x,y,t,i)));
   for(const s of[-1,1])A(1340,1600+s*85-20,1280,1600+s*85+20,1342,t=>{const x=1600+s*85,y=1340;g.fillStyle='#9a968e';g.fillRect(x-12,y-14,24,14);g.fillStyle='#b4b0a8';g.fillRect(x-14,y-18,28,5);g.fillStyle='#c8c4bc';g.beginPath();g.ellipse(x,y-30,10,12,0,0,7);g.fill();g.beginPath();g.arc(x+s*5,y-44,7,0,7);g.fill();g.strokeStyle='#5a5650';g.lineWidth=1;g.stroke();g.fillStyle='#b4b0a8';g.beginPath();g.arc(x+s*2,y-46,8,3.4,6.0);g.fill()},1);
+  for(let i=0;i<8;i++){const a=i/8*6.283+Math.PI/8,x=CX+Math.cos(a)*(CITY.R+8),y=CY+Math.sin(a)*(CITY.R+8);A(y,x-44,y-220,x+44,y+14,t=>cWallTower(x,y,t,i),1)}
+  for(const s of[-1,1]){const x=CX+CITY.R+8,y=CY+s*86;A(y,x-44,y-220,x+44,y+14,t=>cWallTower(x,y,t,7+s),1)}
   return L}
 /* นกพิราบ */
 const CPIG=[...Array(12)].map((_,i)=>({hx:1600+Math.cos(i*2.4)*(110+(i%3)*30),hy:1600+80+Math.sin(i*2.4)*(50+(i%3)*14),x:0,y:0,f:0,k:i}));CPIG.forEach(p=>{p.x=p.hx;p.y=p.hy});
@@ -1860,16 +1857,7 @@ function drawCity(){if(curMap!==9)return;const t=performance.now()/1000,O='#1e1a
     if(sw>0&&sh>0)g.drawImage(CG.c,sx*S,sy*S,sw*S,sh*S,ox+sx,CY-R0-20+sy,sw,sh)}
   /* เงาเมฆเคลื่อน */
   if(inView(CX,CY,CITY.R)){g.save();g.beginPath();g.arc(CX,CY,CITY.R,0,7);g.clip();for(let i=0;i<4;i++){const cx=CX-900+((t*14+i*520)%1800),cy=CY-500+i*300+Math.sin(t*.1+i)*60;if(!inView(cx,cy,260))continue;const cg=g.createRadialGradient(cx,cy,10,cx,cy,220);cg.addColorStop(0,'rgba(20,30,50,.13)');cg.addColorStop(1,'rgba(20,30,50,0)');g.fillStyle=cg;g.beginPath();g.ellipse(cx,cy,240,140,0,0,7);g.fill()}g.restore()}
-  /* กำแพงเมือง */
-  for(let i=0;i<72;i++){const a=i/72*6.283;if(Math.abs(a-Math.PI/2)<.1||a<.1||a>6.183)continue;const x=CX+Math.cos(a)*(CITY.R+10),y=CY+Math.sin(a)*(CITY.R+10);if(!inView(x,y,60))continue;
-    g.fillStyle=i%2?'#8e867a':'#857d70';g.fillRect(x-36,y-34,72,38);g.fillStyle='rgba(0,0,0,.12)';g.fillRect(x-36,y-8,72,12);g.strokeStyle='rgba(60,52,44,.35)';g.lineWidth=1;for(let k=1;k<4;k++){g.beginPath();g.moveTo(x-36,y-34+k*10);g.lineTo(x+36,y-34+k*10);g.stroke()}
-    g.strokeStyle=O;g.strokeRect(x-36,y-34,72,38);g.fillStyle='#a49c8e';g.fillRect(x-38,y-38,76,6);for(let k=0;k<4;k++){g.fillStyle='#9a9286';g.fillRect(x-35+k*18,y-46,11,9);g.strokeRect(x-35+k*18,y-46,11,9)}
-    if(i%5===0){g.fillStyle='#4a7a34';for(let k=0;k<6;k++){g.beginPath();g.arc(x-20+k*5+Math.sin(k)*4,y-28+k*4,4,0,7);g.fill()}}}
-  for(let i=0;i<8;i++){const a=i/8*6.283+Math.PI/8;const x=CX+Math.cos(a)*(CITY.R+10),y=CY+Math.sin(a)*(CITY.R+10);if(!inView(x,y,120))continue;
-    g.fillStyle='rgba(0,0,0,.25)';g.beginPath();g.ellipse(x+6,y+6,30,8,0,0,7);g.fill();g.fillStyle='#8a8278';g.fillRect(x-26,y-78,52,84);const gr=g.createLinearGradient(x-26,0,x+26,0);gr.addColorStop(0,'rgba(255,255,255,.15)');gr.addColorStop(1,'rgba(0,0,0,.25)');g.fillStyle=gr;g.fillRect(x-26,y-78,52,84);
-    g.strokeStyle=O;g.strokeRect(x-26,y-78,52,84);g.fillStyle='#9a9286';g.fillRect(x-30,y-84,60,8);g.strokeRect(x-30,y-84,60,8);
-    g.fillStyle='#2a5aa8';g.beginPath();g.moveTo(x-32,y-84);g.quadraticCurveTo(x-10,y-100,x,y-124);g.quadraticCurveTo(x+10,y-100,x+32,y-84);g.closePath();g.fill();g.stroke();cBanner(x,y-122,'#c0392b',t,i);cWin(x,y-56,1)}
-  cityEastGate(t);{const gx=CX,gy=CY+CITY.R;if(inView(gx,gy,150))for(const s of[-1,1]){const x=gx+s*86;g.fillStyle='#8a8278';g.fillRect(x-28,gy-92,56,100);g.strokeStyle=O;g.strokeRect(x-28,gy-92,56,100);g.fillStyle='#9a9286';for(let k=0;k<4;k++)g.fillRect(x-26+k*14,gy-100,9,8);g.fillStyle='#1a3a78';g.fillRect(x-12,gy-80,24,46);g.fillStyle='#ffd84a';g.font='bold 14px system-ui';g.textAlign='center';g.fillText('✦',x,gy-52)}}
+  if(!CW.c)cityWallBuild();cwDraw(-1e9,CY);cityEastGate(t);
   cPigeons(t,dt);
   /* วัตถุ + ชาวเมือง + NPC เรียงตามความลึก */
   const list=CSPR.filter(s=>s.x1>cam.x-20&&s.x0<cam.x+W+20&&s.y1>cam.y-20&&s.y0<cam.y+H+20);
@@ -1888,8 +1876,65 @@ function drawCity(){if(curMap!==9)return;const t=performance.now()/1000,O='#1e1a
   for(const s of list){if(s.y>py+2){CFRONT.push(s);continue}g.save();s.d(t);g.restore()}}
 /* ชั้นหน้า: วัตถุที่อยู่ "หน้า" ผู้เล่น (วาดหลังตัวละคร) */
 function drawCityFront(){if(curMap!==9)return;const t=performance.now()/1000;
+  if(CW.c){g.save();if(me.y>CY+CITY.R-120)g.globalAlpha=.6;cwDraw(CY,1e9);g.restore();cSouthGate(t)}
   for(const s of CFRONT){g.save();if(s.big&&me.x>s.x0+6&&me.x<s.x1-6&&me.y-40>s.y0&&me.y<s.y)g.globalAlpha=.45;s.d(t);g.restore()}
   cBunting(t)}
+
+/* ===== กำแพงเมืองหลวง: กำแพงวงแหวนต่อเนื่อง มีความสูง ทางเดินบนกำแพง ใบเสมา หอคอยกลม ===== */
+const CW={c:null,ri:CITY.R-6,ro:CITY.R+22,H:58,pad:70};
+function cityWallBuild(){const ri=CW.ri,ro=CW.ro,Hh=CW.H,pad=CW.pad,N=(ro+pad)*2,cv=document.createElement('canvas');cv.width=N;cv.height=N+Hh;const x=cv.getContext('2d'),rnd=rng(4242);
+  CW.c=cv;CW.ox=CX-ro-pad;CW.oy=CY-ro-pad-Hh;x.translate(-CW.ox,-CW.oy);
+  const SEG=[[.095,Math.PI/2-.1],[Math.PI/2+.1,Math.PI*2-.095]];
+  const ring=(r1,r2,dy,dx)=>{x.beginPath();SEG.forEach(([a0,a1])=>{x.moveTo(CX+(dx||0)+Math.cos(a0)*r2,CY+dy+Math.sin(a0)*r2);x.arc(CX+(dx||0),CY+dy,r2,a0,a1);x.arc(CX+(dx||0),CY+dy,r1,a1,a0,true);x.closePath()})};
+  const inSeg=a=>{a=(a+Math.PI*4)%(Math.PI*2);return SEG.some(([a0,a1])=>a>=a0&&a<=a1)};
+  /* เงาทอดที่พื้น */
+  ring(ri-4,ro+16,10,8);x.fillStyle='rgba(10,8,4,.28)';x.fill();
+  /* ผนัง: กวาดวงแหวนขึ้นทีละชั้น */
+  for(let k=0;k<=Hh;k+=1.5){const q=k/Hh;ring(ri,ro,-k);x.fillStyle='rgb('+(80+50*q|0)+','+(74+47*q|0)+','+(64+42*q|0)+')';x.fill()}
+  /* แนวก้อนหิน */
+  x.lineWidth=1;const face=(r,from,to)=>{for(let k=7,row=0;k<Hh;k+=7,row++){x.strokeStyle='rgba(50,44,36,.38)';x.beginPath();let on=false;for(let a=from;a<=to;a+=.004){if(!inSeg(a)){on=false;continue}const px=CX+Math.cos(a)*r,py=CY-k+Math.sin(a)*r;if(!on){x.moveTo(px,py);on=true}else x.lineTo(px,py)}x.stroke();
+      x.strokeStyle='rgba(50,44,36,.3)';const st=16/r;for(let a=from+(row%2?st/2:0);a<=to;a+=st){if(!inSeg(a))continue;const px=CX+Math.cos(a)*r,py=CY-k+Math.sin(a)*r;x.beginPath();x.moveTo(px,py);x.lineTo(px,py-7);x.stroke()}
+      for(let a=from;a<=to;a+=st*1.7){if(!inSeg(a)||rnd()<.6)continue;const px=CX+Math.cos(a)*r,py=CY-k+Math.sin(a)*r;x.fillStyle=rnd()<.5?'rgba(255,250,235,.07)':'rgba(30,26,20,.1)';x.fillRect(px-6,py-6,12,5)}}};
+  face(ro,.01,Math.PI-.01);face(ri,Math.PI+.01,Math.PI*2-.01);
+  /* เงาตีนกำแพง + ตะไคร่ */
+  for(let a=0;a<Math.PI*2;a+=.012){if(!inSeg(a))continue;const r=Math.sin(a)>0?ro:ri,px=CX+Math.cos(a)*r,py=CY+Math.sin(a)*r;x.fillStyle='rgba(30,40,20,.16)';x.fillRect(px-3,py-6,6,6);
+    if(rnd()<.08){x.fillStyle=rnd()<.5?'#4a6a34':'#5a7a3a';for(let i=0;i<5;i++){x.beginPath();x.arc(px+rnd()*10-5,py-2-rnd()*16*rnd(),2+rnd()*2.5,0,7);x.fill()}}}
+  /* ช่องธนู (ผนังด้านนอกฝั่งใต้) */
+  for(let a=.2;a<Math.PI-.2;a+=58/ro){if(!inSeg(a))continue;const px=CX+Math.cos(a)*ro,py=CY+Math.sin(a)*ro;x.fillStyle='#2a241e';x.fillRect(px-1.6,py-Hh+12,3.2,15);x.fillRect(px-4,py-Hh+17,8,2.4)}
+  /* ธงแขวนผนังด้านใน (ฝั่งเหนือ มองจากในเมือง) */
+  for(let a=Math.PI+.25;a<Math.PI*2-.2;a+=.3){if(!inSeg(a))continue;const px=CX+Math.cos(a)*ri,py=CY+Math.sin(a)*ri-Hh+2;x.fillStyle='#8a1e1e';x.beginPath();x.moveTo(px-7,py);x.lineTo(px+7,py);x.lineTo(px+7,py+26);x.lineTo(px,py+21);x.lineTo(px-7,py+26);x.closePath();x.fill();
+    x.fillStyle='#e0b040';x.fillRect(px-7,py,14,2.5);x.font='bold 9px system-ui';x.textAlign='center';x.fillText('✦',px,py+15);x.fillStyle='#3a2a1a';x.fillRect(px-8,py-1.5,16,2)}
+  /* ทางเดินบนกำแพง */
+  ring(ri,ro,-Hh);x.fillStyle='#bcb2a0';x.fill();
+  x.strokeStyle='rgba(70,62,50,.35)';x.lineWidth=1;for(let a=0;a<Math.PI*2;a+=26/ro){if(!inSeg(a))continue;x.beginPath();x.moveTo(CX+Math.cos(a)*ri,CY-Hh+Math.sin(a)*ri);x.lineTo(CX+Math.cos(a)*(ro-5),CY-Hh+Math.sin(a)*(ro-5));x.stroke()}
+  x.beginPath();SEG.forEach(([a0,a1])=>{x.moveTo(CX+Math.cos(a0)*(ri+11),CY-Hh+Math.sin(a0)*(ri+11));x.arc(CX,CY-Hh,ri+11,a0,a1)});x.stroke();
+  ring(ri,ro,-Hh);x.strokeStyle='#3a332a';x.lineWidth=1.4;x.stroke();
+  /* เชิงเทินด้านในเตี้ย ๆ */
+  x.beginPath();SEG.forEach(([a0,a1])=>{x.moveTo(CX+Math.cos(a0)*ri,CY-Hh+Math.sin(a0)*ri);x.arc(CX,CY-Hh,ri,a0,a1)});x.strokeStyle='#8a8172';x.lineWidth=4;x.stroke();
+  /* ใบเสมาริมนอก */
+  const step=17/ro;for(let a=0,i=0;a<Math.PI*2;a+=step,i++){if(i%2||!inSeg(a))continue;const px=CX+Math.cos(a)*(ro-5),py=CY-Hh+Math.sin(a)*(ro-5);
+    x.fillStyle='#7e7566';x.fillRect(px-7,py-12,14,13);x.fillStyle='#c4baa6';x.fillRect(px-7,py-16,14,5);x.strokeStyle='#3a332a';x.lineWidth=1;x.strokeRect(px-7,py-16,14,17)}
+  /* หัวกำแพงตรงช่องประตู (สันหิน) */
+  SEG.forEach(([a0,a1])=>[a0,a1].forEach(a=>{const r1=ri,r2=ro;x.fillStyle='#776f62';x.beginPath();x.moveTo(CX+Math.cos(a)*r1,CY+Math.sin(a)*r1);x.lineTo(CX+Math.cos(a)*r2,CY+Math.sin(a)*r2);x.lineTo(CX+Math.cos(a)*r2,CY-Hh+Math.sin(a)*r2);x.lineTo(CX+Math.cos(a)*r1,CY-Hh+Math.sin(a)*r1);x.closePath();x.fill();x.strokeStyle='#3a332a';x.stroke()}))}
+/* หอคอยกลมบนกำแพง */
+function cWallTower(x,y,t,i){const O='#2a241e',r=30,h=CW.H+64,top=y-h;
+  g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x+8,y+8,r+6,10,0,0,7);g.fill();
+  const gr=g.createLinearGradient(x-r,0,x+r,0);gr.addColorStop(0,'#9a9284');gr.addColorStop(.35,'#b0a898');gr.addColorStop(1,'#6a6256');g.fillStyle=gr;g.fillRect(x-r,top,r*2,h);g.beginPath();g.ellipse(x,y,r,9,0,0,Math.PI);g.fill();
+  g.strokeStyle='rgba(50,44,36,.35)';g.lineWidth=1;for(let k=8,row=0;k<h;k+=8,row++){g.beginPath();g.ellipse(x,y-k,r,9,0,0,Math.PI);g.stroke();for(let j=-2;j<=2;j++){const px=x+Math.sin((j+(row%2?.5:0))*.6)*r;g.beginPath();g.moveTo(px,y-k+8);g.lineTo(px,y-k+1);g.stroke()}}
+  g.strokeStyle=O;g.lineWidth=1.3;g.beginPath();g.moveTo(x-r,top);g.lineTo(x-r,y);g.ellipse(x,y,r,9,0,Math.PI,0,true);g.lineTo(x+r,top);g.stroke();
+  cWin(x,top+26,1);g.fillStyle='#2a241e';g.fillRect(x-1.6,top+56,3.2,13);
+  g.fillStyle='#a49a8a';g.beginPath();g.ellipse(x,top,r+6,11,0,0,7);g.fill();g.stroke();
+  for(let j=0;j<7;j++){const a=Math.PI+j/6*Math.PI,px=x+Math.cos(a)*(r+3),py=top+Math.sin(a)*10;g.fillStyle='#b8ae9c';g.fillRect(px-4,py-10,8,10);g.strokeStyle=O;g.lineWidth=1;g.strokeRect(px-4,py-10,8,10)}
+  const cw=r+8,ct=top-6,col='#2a5aa8';g.fillStyle=col;g.beginPath();g.moveTo(x-cw,ct);g.quadraticCurveTo(x-cw*.3,ct-cw*.6,x,ct-cw*1.8);g.quadraticCurveTo(x+cw*.3,ct-cw*.6,x+cw,ct);g.quadraticCurveTo(x,ct+8,x-cw,ct);g.closePath();g.fill();
+  g.save();g.clip();g.strokeStyle='#1e4282';g.lineWidth=1;for(let yy=ct-cw*1.7;yy<ct+6;yy+=6){g.beginPath();for(let xx=x-cw;xx<x+cw;xx+=8)g.arc(xx,yy,4,0,Math.PI);g.stroke()}const sg=g.createLinearGradient(x-cw,0,x+cw,0);sg.addColorStop(0,'rgba(255,255,255,.2)');sg.addColorStop(1,'rgba(0,0,0,.32)');g.fillStyle=sg;g.fillRect(x-cw,ct-cw*2,cw*2,cw*2+10);g.restore();
+  g.strokeStyle=O;g.lineWidth=1.3;g.beginPath();g.moveTo(x-cw,ct);g.quadraticCurveTo(x-cw*.3,ct-cw*.6,x,ct-cw*1.8);g.quadraticCurveTo(x+cw*.3,ct-cw*.6,x+cw,ct);g.stroke();
+  g.fillStyle='#ffd84a';g.beginPath();g.arc(x,ct-cw*1.8-2,2.6,0,7);g.fill();cBanner(x,ct-cw*1.8-2,'#c0392b',t,i)}
+/* ประตูใต้: หอคู่ + ซุ้มโค้ง */
+function cSouthGate(t){const gx=CX,gy=CY+CITY.R+8,O='#2a241e';if(!inView(gx,gy-60,190))return;
+  g.fillStyle='#8a8172';g.fillRect(gx-70,gy-CW.H-40,140,22);g.strokeStyle=O;g.lineWidth=1.3;g.strokeRect(gx-70,gy-CW.H-40,140,22);for(let k=0;k<7;k++){g.fillStyle='#b8ae9c';g.fillRect(gx-68+k*20,gy-CW.H-50,11,10);g.strokeRect(gx-68+k*20,gy-CW.H-50,11,10)}
+  g.fillStyle='#e8c060';g.font='bold 11px serif';g.textAlign='center';g.fillText('✦ ASTRA ✦',gx,gy-CW.H-24);
+  for(const s of[-1,1])cWallTower(gx+s*92,gy,t,s+5)}
+function cwDraw(ya,yb){const x0=Math.max(cam.x,CW.ox),x1=Math.min(cam.x+W,CW.ox+CW.c.width),y0=Math.max(cam.y,CW.oy,ya),y1=Math.min(cam.y+H,CW.oy+CW.c.height,yb);if(x1>x0&&y1>y0)g.drawImage(CW.c,x0-CW.ox,y0-CW.oy,x1-x0,y1-y0,x0,y0,x1-x0,y1-y0)}
 function skill4(P,cost){if(BR2()&&SK4B[me.cls])return skill4B(P,cost);const c=me.cls;let t=null;
   if(c==='archer'||c==='mage'){t=pickTarget(c==='archer'?320:300);if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return}me.face=Math.atan2(t.y-me.y,t.x-me.x)}
   me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
