@@ -1953,6 +1953,25 @@ async function chSwGo(){if(chSwBusy||!me.cls)return;const bad=chSwBad();if(bad)r
   chSwBusy=false;run=false;me.cls=null;me.down=0;joy=null;mons.forEach(m=>{if(m.tg===uid)m.tg=null});
   try{$('mnp').hidden=true;$('mn').setAttribute('aria-expanded','false')}catch(e){}
   ov.dataset.k='';ov.hidden=false;intro();try{window.scrollTo(0,0);ov.scrollTop=0}catch(e){}}
+
+/* ===== ฉายาให้สเตตัส: ขาว (แต้มสเตตัส) · ทอง (สเตตัส %) · ชมพู (สเตตัสพิเศษ) — ฉายาทุกอันที่ปลดล็อกแล้วให้พลังถาวร ===== */
+const TTB={k100:{gr:'w',b:{str:3}},b1:{gr:'w',b:{vit:3}},dg1:{gr:'w',b:{int:3}},tw10:{gr:'w',b:{agi:3}},st7:{gr:'w',b:{luk:4}},
+  dq30:{gr:'w',b:{vit:5}},el100:{gr:'w',b:{str:5}},ult100:{gr:'w',b:{int:5}},b2:{gr:'w',b:{agi:5}},b3:{gr:'w',b:{luk:5}},lv30:{gr:'w',b:{all:2}},
+  k1000:{gr:'g',b:{str:.05}},tw50:{gr:'g',b:{agi:.06}},b4:{gr:'g',b:{vit:.06}},rich:{gr:'g',b:{luk:.06}},bx50:{gr:'g',b:{vit:.08}},up10:{gr:'g',b:{str:.08}},
+  leg:{gr:'g',b:{luk:.08}},stL:{gr:'g',b:{int:.08}},stD:{gr:'g',b:{str:.08}},awk:{gr:'g',b:{all:.04}},set5:{gr:'g',b:{all:.05}},lv60:{gr:'g',b:{all:.06}},
+  k5000:{gr:'p',b:{cr:.02}},dg3:{gr:'p',b:{as:.04}},raid1:{gr:'p',b:{red:.03}},raid10:{gr:'p',b:{ls:.02}},b6:{gr:'p',b:{hp:.05}},tw100:{gr:'p',b:{mp:.08}},
+  mvp1:{gr:'p',b:{hp:.04}},tw150:{gr:'p',b:{as:.05,cr:.02}},mvp10:{gr:'p',b:{cr:.03,ls:.01}},wb1:{gr:'p',b:{hp:.06,red:.03}},wb2:{gr:'p',b:{as:.05}},wb3:{gr:'p',b:{cr:.03}}};
+const TGC={w:['ขาว','#f4f4f4','#7a7a80','#ececf0'],g:['ทอง','#ffd84a','#a87208','#fff3c4'],p:['ชมพู','#ff8ad8','#c0398a','#ffe0f4']},TSN={str:'STR',vit:'VIT',int:'INT',agi:'AGI',luk:'LUK',all:'ทุกสเตตัส',cr:'โอกาสคริ',as:'ความเร็วโจมตี',ls:'ดูดเลือด',red:'ลดดาเมจที่ได้รับ',hp:'เลือดสูงสุด',mp:'มานาสูงสุด'};
+const ttGr=id=>(TTB[id]&&TTB[id].gr)||'w';
+const ttTxt=id=>{const T=TTB[id];if(!T)return'';return Object.keys(T.b).map(k=>TSN[k]+' +'+(T.gr==='w'?T.b[k]:Math.round(T.b[k]*1000)/10+'%')).join(' · ')};
+let TTBC={k:'',v:{f:{},p:{},s:{}}};
+function ttAgg(){const k=(me.cls||'')+':'+Object.keys(me.ach||{}).filter(i=>me.ach[i]).join(',');if(TTBC.k===k)return TTBC.v;const r={f:{},p:{},s:{}};
+  if(me.cls)for(const id in TTB){if(!me.ach||!me.ach[id])continue;const T=TTB[id],bk=T.gr==='w'?r.f:T.gr==='g'?r.p:r.s;for(const q in T.b)(q==='all'?['str','vit','int','agi','luk']:[q]).forEach(z=>{bk[z]=(bk[z]||0)+T.b[q]})}
+  TTBC={k,v:r};return r}
+const abV=id=>{const r=ttAgg();return Math.floor(((me.ab&&me.ab[id]||0)+(r.f[id]||0))*(1+(r.p[id]||0)))};
+const titleM=k=>ttAgg().s[k]||0;
+function ttSumTxt(){const r=ttAgg(),o=[];['str','vit','int','agi','luk'].forEach(k=>{if(r.f[k])o.push(TSN[k]+' +'+r.f[k])});['str','vit','int','agi','luk'].forEach(k=>{if(r.p[k])o.push(TSN[k]+' +'+Math.round(r.p[k]*1000)/10+'%')});
+  Object.keys(r.s).forEach(k=>o.push(TSN[k]+' +'+Math.round(r.s[k]*1000)/10+'%'));return o}
 function skill4(P,cost){if(BR2()&&SK4B[me.cls])return skill4B(P,cost);const c=me.cls;let t=null;
   if(c==='archer'||c==='mage'){t=pickTarget(c==='archer'?320:300);if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return}me.face=Math.atan2(t.y-me.y,t.x-me.x)}
   me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
@@ -2008,8 +2027,8 @@ const ACH=[['k100','นักล่ามือใหม่','กำจัดม
 const ACHM=Object.fromEntries(ACH.map(a=>[a[0],a])),TTC=['#f0e0b0','#ffd84a','#ffb030'];
 function achCheck(){if(!me.cls||!run)return;const S=me.stt,its=[...Object.values(me.eq).filter(Boolean),...me.bag];if(its.some(i=>i.r>=4))S.leg=1;if(its.some(i=>(i.u|0)>=10))S.up10=1;
   ACH.forEach(a=>{if(me.ach[a[0]]||a[3](S)<a[4])return;me.ach[a[0]]=1;me.gold+=[200,800,2000][a[5]];if(!me.title)me.title=a[0];
-    banner={s:'🏅 ปลดล็อกฉายา «'+a[1]+'» · +'+[200,800,2000][a[5]]+' ทอง',t:5};sfx('lvl');burst(me.x,me.y-20,['#ffd84a','#ffffff','#ffb030'],30,150,1,{glow:1,g:-40})})}
-setInterval(achCheck,1000);
+    banner={s:'🏅 ปลดล็อกฉายา«'+a[1]+'» · '+(TTB[a[0]]?ttTxt(a[0]):'+'+[200,800,2000][a[5]]+' ทอง'),t:6};sysMsg('🏅 ฉายา«'+a[1]+'» ['+TGC[ttGr(a[0])][0]+'] · '+ttTxt(a[0])+' · +'+[200,800,2000][a[5]]+' ทอง');setTimeout(()=>{try{recalc()}catch(e){}},0);sfx('lvl');burst(me.x,me.y-20,['#ffd84a','#ffffff','#ffb030'],30,150,1,{glow:1,g:-40})})}
+setInterval(achCheck,1000);let ttLastK='';setInterval(()=>{if(!me.cls)return;ttAgg();const k0=ttLastK;ttLastK=TTBC.k;if(k0&&TTBC.k!==k0){const f=me.hp/(me.mh||1);try{recalc()}catch(e){}me.hp=Math.min(me.mh,Math.round(me.mh*f))}},1000);
 /* ---------- บอสโลก: ลานวัดดาเมจ 60 วินาที (ห้องเดี่ยวต่อผู้เล่น) ---------- */
 const WBP={x:1500,y:1765},WBN='อสูรยักษ์โลกันตร์',WBTM=60;
 const WBT=[['wb1','ผู้สยบอสูรยักษ์','อันดับ 1 ดาเมจบอสโลก',()=>0,1,3],['wb2','ขุนพลสะท้านพิภพ','อันดับ 2 ดาเมจบอสโลก',()=>0,1,3],['wb3','หมัดเหล็กไหล','อันดับ 3 ดาเมจบอสโลก',()=>0,1,3]];
@@ -2208,8 +2227,11 @@ function eventUI(msg){if(!me.cls)return;ov.dataset.k='ev';ensureDaily();loginChe
       [1,2,3,4,5,6,7].map(d=>{const got=d<cd||(d===cd&&!rd),now=d===cd;return'<div class="lday'+(now?' now':'')+(got?' got':'')+'"><b>วันที่ '+d+'</b><small>'+lrText(loginReward(d))+'</small>'+(got?'<i>✓</i>':'')+'</div>'}).join('')+
       '</div><div class="bt" style="margin-top:10px"><button class="pri" data-lgc="1"'+(rd?'':' disabled')+'>'+(rd?'รับรางวัลวันที่ '+cd:'รับแล้ววันนี้ · มาใหม่พรุ่งนี้')+'</button></div></div>'}
   else if(evTab==='ac'){const un=[...WBT,...ACH].filter(a=>me.ach[a[0]]);
-    h+='<div class="card"><div class="cap">ฉายาที่แสดงเหนือชื่อ</div><div class="tabs" style="flex-wrap:wrap">'+'<button class="tab sm'+(!me.title?' on':'')+'" data-ttl="">ไม่ใช้ฉายา</button>'+un.map(a=>'<button class="tab sm'+(me.title===a[0]?' on':'')+'" data-ttl="'+a[0]+'">«'+a[1]+'»</button>').join('')+'</div>'+(un.length?'':'<small>ยังไม่มีฉายา ปลดล็อกได้จากความสำเร็จด้านล่าง</small>')+'</div>';
-    h+='<div class="card">'+ACH.map(a=>{const v=Math.min(a[4],a[3](me.stt)),ok=!!me.ach[a[0]];return'<div class="sr" style="opacity:'+(ok?1:.8)+'"><div class="ico">'+(ok?'🏅':'🔒')+'</div><div class="nm"><b style="color:'+(ok?['#8a6a20','#b07a10','#c05a00'][a[5]]:'inherit')+'">«'+a[1]+'»</b><small>'+a[2]+' · '+(ok?'สำเร็จแล้ว':v.toLocaleString()+' / '+a[4].toLocaleString())+'</small></div></div>'}).join('<hr>')+'</div>'}
+    h+='<div class="card"><div class="cap">ฉายาที่แสดงเหนือชื่อ</div><div class="tabs" style="flex-wrap:wrap">'+'<button class="tab sm'+(!me.title?' on':'')+'" data-ttl="">ไม่ใช้ฉายา</button>'+un.map(a=>{const G=TGC[ttGr(a[0])];return'<button class="tab sm'+(me.title===a[0]?' on':'')+'" data-ttl="'+a[0]+'" style="border-left:4px solid '+G[2]+'">«'+a[1]+'»</button>'}).join('')+'</div>'+(un.length?'':'<small>ยังไม่มีฉายา ปลดล็อกได้จากความสำเร็จด้านล่าง</small>')+'</div>';
+    {const sm=ttSumTxt();h+='<div class="card"><div class="cap">✨ พลังรวมจากฉายา</div><small style="display:block;opacity:.8;margin-bottom:4px">ฉายาทุกอันที่ปลดล็อกแล้วให้พลังถาวร (ไม่ต้องสวม) · <span style="background:#ececf0;color:#55555c;padding:0 5px;border-radius:4px;font-weight:700">ขาว</span> เพิ่มแต้มสเตตัส · <span style="background:#fff3c4;color:#a87208;padding:0 5px;border-radius:4px;font-weight:700">ทอง</span> เพิ่มสเตตัสเป็น % · <span style="background:#ffe0f4;color:#c0398a;padding:0 5px;border-radius:4px;font-weight:700">ชมพู</span> สเตตัสพิเศษ</small><b style="color:#2e8a3a">'+(sm.length?sm.join(' · '):'ยังไม่มี')+'</b></div>'}
+    const grp=G=>[...ACH,...WBT].filter(a=>ttGr(a[0])===G);
+    ['w','g','p'].forEach(G=>{const C=TGC[G],L=grp(G),nOk=L.filter(a=>me.ach[a[0]]).length;h+='<div class="card" style="border-left:5px solid '+C[2]+'"><div class="cap" style="color:'+C[2]+'">ฉายาสี'+C[0]+' · '+({w:'ง่าย · เพิ่มแต้มสเตตัส',g:'ปานกลาง · เพิ่มสเตตัสเป็น %',p:'ยาก · สเตตัสพิเศษ'}[G])+' ('+nOk+'/'+L.length+')</div>'+L.map(a=>{const ok=!!me.ach[a[0]],wb=WBT.includes(a),v=wb?0:Math.min(a[4],a[3](me.stt));
+      return'<div class="sr" style="opacity:'+(ok?1:.78)+'"><div class="ico">'+(ok?'🏅':'🔒')+'</div><div class="nm"><b><span style="background:'+C[3]+';color:'+C[2]+';padding:0 6px;border-radius:5px">«'+a[1]+'»</span></b><small style="color:'+C[2]+';font-weight:700">'+ttTxt(a[0])+'</small><small>'+a[2]+' · '+(ok?(wb?'ครองอยู่ตอนนี้':'สำเร็จแล้ว'):wb?'ฉายาย้ายตามอันดับ':v.toLocaleString()+' / '+a[4].toLocaleString())+'</small></div></div>'}).join('<hr>')+'</div>'})}
   else if(evTab==='mv'){h+=mvTabH()}
   else{lbFetch();h+='<div class="tabs" style="flex-wrap:wrap">'+LBK.map(k=>'<button class="tab sm'+(lbSel===k?' on':'')+'" data-lbk="'+k+'">'+esc(bkName(k))+'</button>').join('')+'</div>';
     const rows=lbData&&lbData[lbSel]||[],mode=lbDb?'อันดับรวมของทุกคนที่เล่นลิงก์นี้':(room&&room.url)?'อันดับรวมในเซิร์ฟเวอร์นี้':'ออฟไลน์: แสดงเฉพาะสถิติของคุณ';
@@ -3227,8 +3249,8 @@ const AB=[['str','พลังโจมตี (STR)','ดาเมจทุก�
  ['luk','โชค (LUK)','โอกาสติดคริติคอล +0.5% ต่อแต้ม (ทั้งตีปกติและสกิล) · ทุก 10 แต้ม ดาเมจคริติคอลอีก +10% (พื้นฐาน x2)',{cr:.005}]];
 const abSum=ab=>Object.values(ab).reduce((a,b)=>a+b,0);
 const spts=()=>(me.lv-1)*3-abSum(me.ab);
-function A(k){let t=0;AB.forEach(([id,,,e])=>{if(e[k])t+=(me.ab[id]||0)*e[k]});if(k==='dm'&&(me.cls==='mage'||me.cls==='sup'))t+=(me.ab.int||0)*.02;if(k==='as')t+=Math.floor((me.ab.agi||0)/10)*.03;if(k==='dm')t+=Math.floor((me.ab.str||0)/10)*.03;if(k==='hp')t+=Math.floor((me.ab.vit||0)/10)*.04;if(/^s[0-4]p$/.test(k))t+=Math.floor((me.ab.int||0)/10)*.03;if(k==='cdm')t+=Math.floor((me.ab.luk||0)/10)*.1;return t}
-function M(k){if(!me.cls)return 0;let t=0;nodes().forEach(n=>{if(n.k===k)t+=(me.tr[n.id]||0)*n.v});if(me.rage>0){if(k==='as')t+=.4*(me.rgP||1);else if(k==='ls')t+=.1}const bl=br1()&&me.cls==='melee'&&me.hp<me.mh*.4;if(me.cls2){if(k==='hp')t+=.1;else if(k==='dm')t+=.12+(bl?.3:0)}if(k==='dm'&&me.stillT>=.4&&(me.cls==='archer'||me.cls==='mage'))t+=.2;const rv=t+G(k)+A(k)+setB(k)+petV(k)+cardM(k)+brM(k)+blM(k);return bl&&k==='ls'?rv*2:rv}
+function A(k){let t=0;AB.forEach(([id,,,e])=>{if(e[k])t+=abV(id)*e[k]});if(k==='dm'&&(me.cls==='mage'||me.cls==='sup'))t+=abV('int')*.02;if(k==='as')t+=Math.floor(abV('agi')/10)*.03;if(k==='dm')t+=Math.floor(abV('str')/10)*.03;if(k==='hp')t+=Math.floor(abV('vit')/10)*.04;if(/^s[0-4]p$/.test(k))t+=Math.floor(abV('int')/10)*.03;if(k==='cdm')t+=Math.floor(abV('luk')/10)*.1;return t}
+function M(k){if(!me.cls)return 0;let t=0;nodes().forEach(n=>{if(n.k===k)t+=(me.tr[n.id]||0)*n.v});if(me.rage>0){if(k==='as')t+=.4*(me.rgP||1);else if(k==='ls')t+=.1}const bl=br1()&&me.cls==='melee'&&me.hp<me.mh*.4;if(me.cls2){if(k==='hp')t+=.1;else if(k==='dm')t+=.12+(bl?.3:0)}if(k==='dm'&&me.stillT>=.4&&(me.cls==='archer'||me.cls==='mage'))t+=.2;const rv=t+G(k)+A(k)+setB(k)+petV(k)+cardM(k)+titleM(k)+brM(k)+blM(k);return bl&&k==='ls'?rv*2:rv}
 const pts=()=>me.lv-1-Object.values(me.tr).reduce((a,b)=>a+b,0);
 const maxHp=()=>Math.round(CL[me.cls].hp*(1+.1*(me.lv-1))*(1+M('hp')));
 const cdOf=k=>Math.max(1,(CL[me.cls].cds[k]-M('s'+k+'cd'))*(1-blCD()));
@@ -3462,7 +3484,7 @@ function treeUI(){
   if(charTab==='ab'){
     h+='<div class="sum"><div>❤️ HP<b>'+me.mh+'</b></div><div>💧 MP<b>'+me.mm+'</b></div><div>⚔️ โจมตี<b>'+Math.round(pd())+'</b></div><div>🎯 คริติคอล<b>'+Math.round((M('cr')+(C.cr||0))*1000)/10+'%</b></div><div>💥 ดาเมจคริ<b>x'+(Math.round((2+M('cdm'))*100)/100)+'</b></div><div>👟 ความเร็ว<b>'+Math.round(C.sp*(1+M('sp')))+'</b></div><div>⚡ ตี/วินาที<b>'+(Math.round((1+M('as'))/C.cd*100)/100)+'</b></div></div>';
     h+='<div class="card">'+AB.map(([id,nm,d])=>{const m=nm.match(/^(.*?) \((.*)\)$/)||[0,nm,''];
-      return'<div class="sr"><div class="ico">'+(ABI[id]||'•')+'</div><div class="nm"><b>'+m[2]+' '+m[1]+'</b><small>'+d+(1?(()=>{const v=me.ab[id]||0,b=Math.floor(v/10),nx=10-v%10;return'<br><span style="color:#b0661a;font-weight:600">โบนัสตอนนี้: '+({str:'+'+(b*3)+'% ดาเมจ',vit:'+'+(b*4)+'% เลือดสูงสุด',int:'+'+(b*3)+'% พลังทุกสกิล',agi:'+'+(b*3)+'% ความเร็วโจมตี',luk:'+'+(b*10)+'% ดาเมจคริ'}[id])+' · อีก '+nx+' แต้มถึงขั้นถัดไป</span>'})():'')+'</small></div><div class="vl">'+(me.ab[id]||0)+'</div><button class="rb" data-ab="'+id+'" data-q="1"'+(spts()>0?'':' disabled')+'>+1</button><button class="rb" data-ab="'+id+'" data-q="5"'+(spts()>=5?'':' disabled')+'>+5</button></div>'}).join('<hr>')+'</div>';
+      return'<div class="sr"><div class="ico">'+(ABI[id]||'•')+'</div><div class="nm"><b>'+m[2]+' '+m[1]+'</b><small>'+d+(1?(()=>{const v=abV(id),b=Math.floor(v/10),nx=10-v%10;return'<br><span style="color:#b0661a;font-weight:600">โบนัสตอนนี้: '+({str:'+'+(b*3)+'% ดาเมจ',vit:'+'+(b*4)+'% เลือดสูงสุด',int:'+'+(b*3)+'% พลังทุกสกิล',agi:'+'+(b*3)+'% ความเร็วโจมตี',luk:'+'+(b*10)+'% ดาเมจคริ'}[id])+' · อีก '+nx+' แต้มถึงขั้นถัดไป</span>'})():'')+'</small></div><div class="vl">'+(me.ab[id]||0)+(abV(id)>(me.ab[id]||0)?'<small style="display:block;font-size:10px;color:#b0661a">+'+(abV(id)-(me.ab[id]||0))+' ฉายา</small>':'')+'</div><button class="rb" data-ab="'+id+'" data-q="1"'+(spts()>0?'':' disabled')+'>+1</button><button class="rb" data-ab="'+id+'" data-q="5"'+(spts()>=5?'':' disabled')+'>+5</button></div>'}).join('<hr>')+'</div>';
     h+='<div class="card" style="flex-direction:row;align-items:center;justify-content:space-between"><div><small>แต้มสเตตัสที่เหลือ (ได้ 3 แต้มต่อเลเวล)</small><b style="font-size:24px;display:block">'+spts()+'</b></div><button id="abreset">🔄 รีเซ็ต</button></div>';
   }else{
     h+='<div class="card" style="flex-direction:row;align-items:center;justify-content:space-between"><div><small>แต้มสกิลที่เหลือ (ได้ 1 แต้มต่อเลเวล)</small><b style="font-size:24px;display:block">'+pts()+'</b></div><button id="trreset">🔄 รีเซ็ต</button></div>';
@@ -4975,7 +4997,7 @@ function drawP(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){
   g.restore();if(MTD)y-=17;
   g.globalAlpha=1;g.fillStyle='#000';g.fillRect(x-16,y-36,32,4);g.fillStyle='#6fd06a';g.fillRect(x-16,y-36,32*Math.max(0,hp/mh),4);
   g.font='11px system-ui';g.textAlign='center';g.fillStyle=lk&&lk.pty?'#7fe0ff':'#d9cfc0';g.fillText((lk&&lk.pty?'👥':'')+name,x,y-40);
-  const A=tt&&ACHM[tt];if(A){const t2='«'+A[1]+'»';g.font='bold 10px system-ui';g.lineWidth=3;g.strokeStyle='rgba(10,6,4,.8)';g.strokeText(t2,x,y-53);if(A[5]>=2){g.shadowColor=A[5]===3?'#ff5ad0':'#ffb030';g.shadowBlur=6}g.fillStyle=TTC[A[5]];g.fillText(t2,x,y-53);g.shadowBlur=0;g.lineWidth=1}
+  const A=tt&&ACHM[tt];if(A){const t2='«'+A[1]+'»';g.font='bold 10px system-ui';g.lineWidth=3;g.strokeStyle='rgba(10,6,4,.8)';g.strokeText(t2,x,y-53);{const G=ttGr(A[0]);if(G!=='w'){g.shadowColor=G==='p'?'#ff5ad0':'#ffb030';g.shadowBlur=G==='p'?8:6}g.fillStyle=TGC[G][1]}g.fillText(t2,x,y-53);g.shadowBlur=0;g.lineWidth=1}
 }
 function drawGate(){MAPS[curMap].gates.forEach(G=>drawOneGate(G))}
 function drawOneGate(G){const t=performance.now()/400,x=G.x,y=G.y;
