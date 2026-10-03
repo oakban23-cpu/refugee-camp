@@ -7,6 +7,7 @@ const page=path.join(__dirname,'public','index.html');
 const server=http.createServer((req,res)=>{
   if(req.url==='/health'){res.writeHead(200);return res.end('ok')}
   if(req.url==='/stats'){res.writeHead(200,{'Content-Type':'application/json'});return res.end(JSON.stringify(stats()))}
+  {const m=/^\/([a-z0-9_-]+\.(jpg|jpeg|png|webp))(\?.*)?$/i.exec(req.url);if(m){const f=path.join(__dirname,'public',m[1]);return fs.readFile(f,(e,b)=>{if(e){res.writeHead(404);return res.end()}res.writeHead(200,{'Content-Type':'image/'+(m[2].toLowerCase()==='jpg'?'jpeg':m[2].toLowerCase()),'Cache-Control':'public, max-age=604800','Content-Length':b.length});bytesOut+=b.length;res.end(b)})}}
   const P=getPage();if(!P){res.writeHead(500);return res.end('missing index.html')}
   if(req.headers['if-none-match']===P.etag){res.writeHead(304,{'ETag':P.etag,'Cache-Control':'no-cache'});return res.end()}
   const ae=String(req.headers['accept-encoding']||''),h={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache','ETag':P.etag,'Vary':'Accept-Encoding'};
