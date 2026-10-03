@@ -2,9 +2,9 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<title>ค่ายผู้อพยพ</title>
+<title>REFUGEE · ค่ายผู้อพยพ</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:dark;--ink:#14100f;--ash:#2a2320;--bone:#d9cfc0;--blood:#c2352b;--brass:#c99a3b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 :root:not([data-theme="light"]){color-scheme:dark}
@@ -13,7 +13,29 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html,body{height:100%;margin:0;background:var(--ink);color:var(--bone);font-family:system-ui,-apple-system,"Noto Sans Thai",sans-serif}
 *{box-sizing:inherit}
 #app{max-width:420px;margin:0 auto;height:100%;display:flex;flex-direction:column;padding:8px}
-.f{font-family:"Pirata One",Georgia,serif;letter-spacing:.03em}
+.f{font-family:"Pirata One",Georgia,serif;letter-spacing:.03em}#ttl{position:fixed;inset:0;z-index:99;background:#05040a;display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;transition:opacity .7s ease;-webkit-user-select:none;user-select:none}
+#ttl.out{opacity:0;pointer-events:none}#ttl .bgb{position:absolute;inset:-40px;background:#1a1020 url(cover.jpg) center/cover;filter:blur(24px) brightness(.45);transform:scale(1.1)}
+#ttl .fr{position:relative;height:100%;width:min(100vw,calc(100vh*.5625));overflow:hidden;box-shadow:0 0 60px rgba(0,0,0,.8)}
+#ttl .bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 35%,#3a2a5a,#0a0612 70%);background-image:url(cover.jpg),radial-gradient(ellipse at 50% 35%,#3a2a5a,#0a0612 70%);background-size:cover;background-position:center;animation:ttlz 22s ease-in-out infinite alternate;transform-origin:50% 60%}
+@keyframes ttlz{from{transform:scale(1)}to{transform:scale(1.09) translateY(-1.5%)}}
+#ttl .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,4,14,.78) 0%,rgba(6,4,14,.25) 22%,rgba(0,0,0,0) 40%,rgba(0,0,0,0) 62%,rgba(8,4,2,.55) 82%,rgba(5,3,2,.92) 100%)}
+#ttl .emb i{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:#ffcf6a;box-shadow:0 0 8px 2px rgba(255,170,60,.8);opacity:0;animation:ttle linear infinite}
+@keyframes ttle{0%{transform:translate(0,0);opacity:0}10%{opacity:.95}100%{transform:translate(var(--dx),-105vh);opacity:0}}
+#ttl .lg{position:absolute;left:0;right:0;top:5.5%;text-align:center;animation:ttlin 1.4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes ttlin{from{opacity:0;transform:translateY(-18px) scale(1.08);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+#ttl .lg .t{position:relative;display:inline-block;font-family:"Cinzel Decorative","Cinzel","Pirata One",Georgia,serif;font-weight:900;font-size:min(15vw,calc(100vh*.085));letter-spacing:.06em;line-height:1;
+ background:linear-gradient(180deg,#fff6d0 0%,#ffd76a 38%,#c8861e 62%,#ffe9a8 78%,#a8651a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+ filter:drop-shadow(0 3px 0 #3a1a04) drop-shadow(0 0 14px rgba(255,120,40,.55)) drop-shadow(0 0 30px rgba(170,60,255,.35))}
+#ttl .lg .t::after{content:'REFUGEE';position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.95) 50%,transparent 65%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ttlsh 4.5s ease-in-out infinite 1.2s}
+@keyframes ttlsh{0%{background-position:150% 0}45%,100%{background-position:-60% 0}}
+#ttl .lg .s{margin-top:8px;font-family:"Cinzel",Georgia,serif;font-weight:800;color:#f3dca0;font-size:min(4.2vw,calc(100vh*.024));letter-spacing:.32em;text-shadow:0 2px 6px #000,0 0 12px rgba(255,150,60,.5)}
+#ttl .lg .s b{font-family:system-ui,sans-serif;letter-spacing:.12em;font-weight:800}
+#ttl .lg .ln{width:62%;height:2px;margin:10px auto 0;background:linear-gradient(90deg,transparent,#ffcf6a,transparent)}
+#ttl .go{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);padding:14px 30px;border-radius:40px;border:2px solid #ffd77a;background:linear-gradient(180deg,rgba(120,40,20,.85),rgba(50,14,8,.9));color:#fff2c8;font-weight:800;font-size:17px;letter-spacing:.06em;white-space:nowrap;box-shadow:0 0 22px rgba(255,170,60,.55),inset 0 1px 0 rgba(255,230,170,.4);animation:ttlb 1.6s ease-in-out infinite;pointer-events:none}
+@keyframes ttlb{50%{box-shadow:0 0 36px rgba(255,190,80,.95),inset 0 1px 0 rgba(255,230,170,.4);transform:translateX(-50%) scale(1.05)}}
+#ttl .ver{position:absolute;left:0;right:0;bottom:3%;text-align:center;color:rgba(255,235,200,.7);font-size:11px;letter-spacing:.2em;text-shadow:0 1px 3px #000}
+h1.ttlh{font-family:"Cinzel Decorative","Cinzel",Georgia,serif;letter-spacing:.06em;background:linear-gradient(180deg,#ffe9a8,#c8861e);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.05}h1.ttlh small{display:block;font-family:system-ui,sans-serif;font-size:14px;letter-spacing:.04em;margin-top:4px;color:#c99a3b;-webkit-text-fill-color:#c99a3b}
+
 #hud{display:flex;align-items:center;gap:8px;padding:4px 2px 8px}#lvb{font-size:28px;color:var(--brass);min-width:70px}#bars{flex:1;display:flex;flex-direction:column;gap:3px}.bar{position:relative;height:15px;background:#000;border:1px solid var(--ash)}.bar i{position:absolute;left:0;top:0;bottom:0;width:0;transition:width .12s}.bar span{position:relative;display:block;text-align:center;font-size:11px;line-height:15px;color:#fff;text-shadow:0 0 2px #000}#pl{font-size:12px;text-align:right;white-space:nowrap;line-height:1.4}#sk small{font-size:11px;opacity:.9}
 #stage{position:relative}
 canvas{display:block;width:100%;height:auto;background:#1f2740;border:1px solid var(--ash);touch-action:none}
@@ -164,6 +186,10 @@ button:disabled{opacity:.4}
 </style>
 </head>
 <body>
+<div id="ttl"><div class="bgb"></div><div class="fr"><div class="bg"></div><div class="sh"></div><div class="emb"></div>
+<div class="lg"><div class="t">REFUGEE</div><div class="ln"></div><div class="s"><b>ค่ายผู้อพยพ</b> · ONLINE RPG</div></div>
+<div class="go">⚔️ แตะเพื่อเริ่มผจญภัย</div><div class="ver">REFUGEE ONLINE · 2026</div></div></div>
+
 <div id="app">
   <div id="hud"><div id="lvb" class="f">Lv 1</div><div id="bars"><div class="bar"><i id="bhp" style="background:#c2352b"></i><span id="thp"></span></div><div class="bar"><i id="bmp" style="background:#3b7bd6"></i><span id="tmp"></span></div><div class="bar"><i id="bxp" style="background:#8a6a1f"></i><span id="txp"></span></div></div><div id="pl"></div></div>
   <div id="stage">
@@ -5267,7 +5293,7 @@ function pick(c){setTimeout(()=>{try{autoLoad();huntLoad()}catch(e){}},0);
   ensureDaily();loginCheck();if(!isNew&&loginReady())setTimeout(()=>{if(run&&ov.hidden&&me.cls){evTab='li';ov.hidden=false;eventUI()}},900);
 }
 function intro(){
-  ov.innerHTML='<h1 class="f">ค่ายผู้อพยพ</h1>'+
+  ov.innerHTML='<h1 class="f ttlh">REFUGEE<small>ค่ายผู้อพยพ</small></h1>'+
    '<p>มอนสเตอร์ทยอยบุกเข้ามาที่ค่ายกลางแมพ อัศวินยามคอยกันไม่ให้เข้าเขตปลอดภัย ค่ายนี้ไม่มีวันพัง เป็นจุดเริ่มต้นและที่ฟื้นตัวของทุกคน ออกไปล่ากลุ่มมอนสเตอร์นอกค่ายเพื่อเก็บเลเวล ยิ่งไกลจากค่ายยิ่งแรง ลากนิ้วเพื่อเดิน ตัวละครโจมตีเอง กดปุ่มแดงใช้สกิล ราชาหมอกพิษอยู่ทางขวาบนของแมพ ต้องรวมทีมไปล่า</p>'+
    '<p id="st"></p><p id="sv">'+(saveMode==='wait'?'กำลังโหลดข้อมูลบันทึก...':'สถานะบันทึก: '+saveState)+'</p><p>เลือกอาชีพของคุณ</p>'+
    Object.keys(CL).map(k=>{
@@ -5364,6 +5390,12 @@ ov.addEventListener('click',e=>{
   if(t.id==='again'){reset();if(room)emitM('reset',{})}
 });
 makeGuards();intro();TABOK.then(initSave);requestAnimationFrame(loop);
+/* ===== หน้าปกเกม REFUGEE ===== */
+(function(){const T=document.getElementById('ttl');if(!T)return;const E=T.querySelector('.emb');
+  for(let i=0;i<26;i++){const e=document.createElement('i');e.style.left=(Math.random()*100)+'%';e.style.setProperty('--dx',(Math.random()*80-40)+'px');e.style.animationDuration=(6+Math.random()*7)+'s';e.style.animationDelay=(-Math.random()*12)+'s';const s=2+Math.random()*3.5;e.style.width=e.style.height=s+'px';if(Math.random()<.3){e.style.background='#d8a8ff';e.style.boxShadow='0 0 8px 2px rgba(180,110,255,.8)'}E.appendChild(e)}
+  let done=false;const go=()=>{if(done)return;done=true;try{unlockAudio();sfx('gate')}catch(e){}T.classList.add('out');setTimeout(()=>T.remove(),800)};
+  T.addEventListener('pointerup',go);addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go()})})();
+
 </script>
 </body>
 </html>
