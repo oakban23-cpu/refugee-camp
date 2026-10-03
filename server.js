@@ -78,7 +78,7 @@ function onEmit(c,m){
   if(!c.p||!pl||typeof pl!=='object')return;
   const mp=c.p.mp,d=pl.d,host=hostByMap[mp];
   const wrap=x=>JSON.stringify({t:'emit',k,d:{mp,d:x},from:c.id});
-  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|d[1-37]|tw|wb|pv)$/.test(key))return;const hi=key==='wb'||key==='pv',t=+d.t;if(hi?!(t>=1&&t<1e12):!(t>=5&&t<36000))return;
+  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv)$/.test(key))return;const hi=key==='wb'||key==='pv',t=+d.t;if(hi?!(t>=1&&t<1e12):!(t>=5&&t<36000))return;
     const row={n:String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,12)||'ผู้เล่น',c:String(d.cls||'').slice(0,8),l:num(d.lv|0,1,99,1),t:hi?Math.round(t):Math.round(t*10)/10,p:num(d.pc|0,1,99,1),u:c.uid||'',at:Date.now()};
     const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>r.u===row.u&&r.c===row.c);if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
     arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
@@ -121,7 +121,7 @@ function onEmit(c,m){
   if(k==='dgo'){if(host&&host!==c)send(host,wrap({}));return}
 }
 /* ===== บอส MVP: เซิร์ฟเวอร์เป็นคนจับเวลาเกิด/ตาย และนับดาเมจหาผู้ได้ MVP ===== */
-const MVDEF={8:60},MVF=path.join(__dirname,'mvp.json');let MV={},mvDirty=false;
+const MVDEF={8:60,10:60},MVF=path.join(__dirname,'mvp.json');let MV={},mvDirty=false;
 {let j={};try{j=JSON.parse(fs.readFileSync(MVF,'utf8'))||{}}catch(e){}const now=Date.now();
   for(const k in MVDEF){const o=j[k]||{};MV[k]={next:Math.max(+o.next||0,now+(60+Math.random()*240)*1000),k:o.k|0,last:o.last||null,alive:0,id:0,dm:{},ask:0,empty:0}}}
 setInterval(()=>{if(!mvDirty)return;mvDirty=false;const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}fs.writeFile(MVF,JSON.stringify(o),()=>{})},15000);
