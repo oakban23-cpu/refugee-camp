@@ -78,11 +78,18 @@ function onEmit(c,m){
   if(!c.p||!pl||typeof pl!=='object')return;
   const mp=c.p.mp,d=pl.d,host=hostByMap[mp];
   const wrap=x=>JSON.stringify({t:'emit',k,d:{mp,d:x},from:c.id});
-  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|d[1-37]|tw|wb)$/.test(key))return;const hi=key==='wb',t=+d.t;if(hi?!(t>=1&&t<1e12):!(t>=5&&t<36000))return;
+  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|d[1-37]|tw|wb|pv)$/.test(key))return;const hi=key==='wb'||key==='pv',t=+d.t;if(hi?!(t>=1&&t<1e12):!(t>=5&&t<36000))return;
     const row={n:String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,12)||'ผู้เล่น',c:String(d.cls||'').slice(0,8),l:num(d.lv|0,1,99,1),t:hi?Math.round(t):Math.round(t*10)/10,p:num(d.pc|0,1,99,1),u:c.uid||'',at:Date.now()};
     const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>r.u===row.u&&r.c===row.c);if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
     arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
+  if(k==='pvc'||k==='pva'||k==='pvn'||k==='pvh'||k==='pvd'||k==='pvt'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||'';send(o,wrap(d))}return}
+  if(k==='mkq'){const u=c.uid;mkReply(c,'mkr',{L:MK.L.slice(-150).map(x=>({id:x.id,k:x.k,d:x.d,p:x.p,n:x.n,me:x.u===u?1:0})),sale:Math.floor(MK.sales[u]||0),ret:(MK.ret[u]||[]).length});return}
+  if(k==='mkl'){const u=c.uid;if(!u||!d||typeof d!=='object')return;const p=Math.floor(+d.p||0),ok=mkOk(d.k,d.d)&&p>=1&&p<=1e9&&MK.L.filter(x=>x.u===u).length<8;
+    if(ok){MK.L.push({id:MK.n++,u,n:c.p.n,k:d.k,d:d.d,p,at:Date.now()});mkDirty=true}mkReply(c,'mka',{t:String(d.t||'').slice(0,12),ok:ok?1:0});return}
+  if(k==='mkb'){const u=c.uid,i=MK.L.findIndex(x=>x.id===+(d&&d.id));if(i<0||MK.L[i].u===u){mkReply(c,'mkg',{ok:0});return}const x=MK.L.splice(i,1)[0];MK.sales[x.u]=(MK.sales[x.u]||0)+Math.floor(x.p*.95);mkDirty=true;mkReply(c,'mkg',{ok:1,k:x.k,d:x.d,p:x.p});const s=byUid.get(x.u);if(s)mkReply(s,'mks',{n:c.p.n,p:x.p});return}
+  if(k==='mkx'){const u=c.uid,i=MK.L.findIndex(x=>x.id===+(d&&d.id)&&x.u===u);if(i<0)return;const x=MK.L.splice(i,1)[0];mkDirty=true;mkReply(c,'mkg',{ok:1,back:1,k:x.k,d:x.d,p:0});return}
+  if(k==='mkc'){const u=c.uid;if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
   if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,key==='wb'?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='mvq'){send(c,JSON.stringify({t:'emit',k:'mvr',d:{mp,d:mvTable()},from:0}));return}
@@ -124,6 +131,12 @@ setInterval(()=>{const now=Date.now();for(const k in MV){const v=MV[k],mp=+k;
   if(v.alive){if(!(countByMap[mp]>0)){if(!v.empty)v.empty=now;else if(now-v.empty>90000){v.alive=0;v.id=0;v.next=now;v.empty=0}}else v.empty=0;continue}
   if(now<v.next)continue;const h=hostByMap[mp];if(!h)continue;if(v.ask&&now-v.ask<8000)continue;v.ask=now;
   send(h,JSON.stringify({t:'emit',k:'mvsp',d:{mp,d:{}},from:0}))}},2000);
+/* ===== ตลาดกลาง: เก็บรายการขาย เงินที่ขายได้ และของที่หมดเวลา ===== */
+const MKF=path.join(__dirname,'market.json');let MK={n:1,L:[],sales:{},ret:{}},mkDirty=false;
+try{const j=JSON.parse(fs.readFileSync(MKF,'utf8'));if(j&&Array.isArray(j.L))MK=Object.assign(MK,j)}catch(e){}
+setInterval(()=>{const now=Date.now();MK.L=MK.L.filter(x=>{if(now-x.at>48*3600e3){(MK.ret[x.u]=MK.ret[x.u]||[]).push({k:x.k,d:x.d});mkDirty=true;return false}return true});if(!mkDirty)return;mkDirty=false;fs.writeFile(MKF,JSON.stringify(MK),()=>{})},15000);
+function mkOk(k,d){if(k==='it')return!!d&&typeof d==='object'&&typeof d.sl==='string'&&d.sl.length<3&&!!d.st&&typeof d.st==='object'&&JSON.stringify(d).length<700;if(k==='cd')return typeof d==='string'&&/^[a-z]{2,5}$/.test(d);if(k==='st')return!!d&&typeof d==='object'&&/^(hp|mp|ps|s1|s2|s3|twc|sc|hr)$/.test(d.k)&&(d.n|0)>=1&&(d.n|0)<=999;return false}
+function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
