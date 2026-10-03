@@ -195,7 +195,7 @@ button:disabled{opacity:.4}
   <div id="stage">
     <canvas id="c" width="360" height="520" aria-label="สนามรบ"></canvas>
     <button id="mn" aria-expanded="false">เมนู<i></i></button>
-    <div id="mnp" hidden><button id="tb">สกิล</button><button id="gb">อุปกรณ์</button><button id="pb">ปาร์ตี้</button><button id="qb">เควส</button><button id="dgm">ดันเจี้ยน</button><button id="evm" hidden>กิจกรรม</button><button id="mtm">สัตว์ขี่</button><button id="ptm">🐾 สัตว์เลี้ยง</button><button id="cdm">🃏 การ์ด</button><button id="gqb">⚙️ กราฟิก</button><button id="aum">🤖 ออโต้สกิล</button><button id="cb" hidden>แชท</button><button id="gmb" hidden>🛠 ทดสอบ (GM)</button><small id="mni"></small></div>
+    <div id="mnp" hidden><button id="tb">สกิล</button><button id="gb">อุปกรณ์</button><button id="pb">ปาร์ตี้</button><button id="qb">เควส</button><button id="dgm">ดันเจี้ยน</button><button id="evm" hidden>กิจกรรม</button><button id="mtm">สัตว์ขี่</button><button id="ptm">🐾 สัตว์เลี้ยง</button><button id="cdm">🃏 การ์ด</button><button id="gqb">⚙️ กราฟิก</button><button id="aum">🤖 ออโต้สกิล</button><button id="cb" hidden>แชท</button><button id="gmb" hidden>🛠 ทดสอบ (GM)</button><button id="chm">👤 เปลี่ยนตัวละคร</button><small id="mni"></small></div>
     <div id="sk"><button id="s2" hidden></button><button id="tg">เปลี่ยนเป้า</button><button id="pm"></button><button id="s1"></button><button id="ph"></button><button id="s0"></button><button id="s3"></button><button id="s4" hidden></button><button id="mtb" hidden aria-label="ขี่สัตว์">🐎</button><button id="atb" hidden aria-label="ออโต้สกิล">AUTO</button><button id="ahb" hidden aria-label="บอทล่ามอนสเตอร์">🤖<small>ล่า</small></button></div>
     <div id="tut" hidden><div id="tutt"></div><button id="tutx">ข้าม</button></div>
     <div id="aud"><button id="sb" aria-label="เสียงเอฟเฟกต์">🔊</button><button id="mub" aria-label="เพลงประกอบ">🎵</button></div>
@@ -1935,6 +1935,24 @@ function cSouthGate(t){const gx=CX,gy=CY+CITY.R+8,O='#2a241e';if(!inView(gx,gy-6
   g.fillStyle='#e8c060';g.font='bold 11px serif';g.textAlign='center';g.fillText('✦ ASTRA ✦',gx,gy-CW.H-24);
   for(const s of[-1,1])cWallTower(gx+s*92,gy,t,s+5)}
 function cwDraw(ya,yb){const x0=Math.max(cam.x,CW.ox),x1=Math.min(cam.x+W,CW.ox+CW.c.width),y0=Math.max(cam.y,CW.oy,ya),y1=Math.min(cam.y+H,CW.oy+CW.c.height,yb);if(x1>x0&&y1>y0)g.drawImage(CW.c,x0-CW.ox,y0-CW.oy,x1-x0,y1-y0,x0,y0,x1-x0,y1-y0)}
+
+/* ===== เปลี่ยนตัวละคร (กลับหน้าเลือกอาชีพ) ===== */
+let chSwBusy=false;
+const chSwBad=()=>isDg()||isArena()||(typeof PV!=='undefined'&&PV&&PV.ph&&PV.ph!=='end')?'ออกจากดันเจี้ยน / หอคอย / ลานประลองก่อน แล้วค่อยเปลี่ยนตัวละคร':me.down>0?'รอให้ฟื้นก่อน แล้วค่อยเปลี่ยนตัวละคร':'';
+function chSwUI(msg){if(!me.cls)return;ov.dataset.k='chsw';ov.hidden=false;const bad=chSwBad(),others=Object.keys(CL).filter(k=>k!==me.cls);
+  let h=hdr('👤','เปลี่ยนตัวละคร',clsName()+' · Lv '+me.lv);if(msg||bad)h+='<div class="note">'+(msg||bad)+'</div>';
+  h+='<div class="card"><p style="margin:0 0 8px">กลับไปหน้าเลือกอาชีพเพื่อเล่นตัวละครอื่น</p><small style="display:block;opacity:.8">✅ ระบบจะบันทึกความคืบหน้าของตัวละครนี้ก่อนออก · ทอง ไอเทม และเควสอยู่ครบ<br>👥 ถ้าอยู่ในปาร์ตี้จะออกจากปาร์ตี้ให้อัตโนมัติ<br>🤖 บอทล่ามอนสเตอร์จะถูกปิด</small></div>';
+  h+='<div class="card"><div class="cap">ตัวละครอื่นของคุณ</div>'+others.map(k=>{const sv=saves.chars[k];return'<div class="sr"><div class="nm"><b>'+CL[k].n+'</b><small>'+(sv?'Lv '+sv.lv+' · ทอง '+(sv.gold|0).toLocaleString():'ยังไม่ได้สร้าง')+'</small></div></div>'}).join('<hr>')+'</div>';
+  h+='<div class="row" style="gap:8px;margin-top:6px"><button class="pri" style="flex:1" data-chsw="go"'+(bad||chSwBusy?' disabled':'')+'>'+(chSwBusy?'กำลังบันทึก...':'บันทึกแล้วเปลี่ยนตัวละคร')+'</button><button style="flex:0 0 90px" data-chsw="no">ยกเลิก</button></div>';
+  ov.innerHTML='<div class="pn" data-pn="chsw">'+h+'</div>'}
+async function chSwGo(){if(chSwBusy||!me.cls)return;const bad=chSwBad();if(bad)return chSwUI(bad);chSwBusy=true;chSwUI();
+  try{if(SD.on)stClose()}catch(e){}try{if(typeof PTY!=='undefined'&&PTY)ptLeave(1)}catch(e){}try{if(HB.on){HB.on=false;huntSave();huntBtn()}}catch(e){}try{if(me.riding)mountToggle()}catch(e){}
+  for(let i=0;i<40&&inflight;i++)await new Promise(r=>setTimeout(r,100));
+  lastJ='';try{await writeSave()}catch(e){}
+  try{if(curMap!==1)enterMap(1)}catch(e){}
+  chSwBusy=false;run=false;me.cls=null;me.down=0;joy=null;mons.forEach(m=>{if(m.tg===uid)m.tg=null});
+  try{$('mnp').hidden=true;$('mn').setAttribute('aria-expanded','false')}catch(e){}
+  ov.dataset.k='';ov.hidden=false;intro();try{window.scrollTo(0,0);ov.scrollTop=0}catch(e){}}
 function skill4(P,cost){if(BR2()&&SK4B[me.cls])return skill4B(P,cost);const c=me.cls;let t=null;
   if(c==='archer'||c==='mage'){t=pickTarget(c==='archer'?320:300);if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return}me.face=Math.atan2(t.y-me.y,t.x-me.x)}
   me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
@@ -2817,7 +2835,7 @@ function partyUI(msg){partyOpen=true;ov.dataset.k='party';
 function saveName(){const n=cleanName($('nin').value);if(!n){partyUI('ชื่อว่างไม่ได้');return}myName=n;try{localStorage.setItem('refugee_name',n)}catch(e){}partyUI('เปลี่ยนชื่อเป็น '+n+' แล้ว')}
 $('pb').onclick=()=>{if(me.cls&&run){ov.hidden=false;partyUI()}};
 $('dgm').onclick=()=>{if(me.cls&&run){ov.hidden=false;dungeonUI()}};
-$('evm').onclick=()=>{if(me.cls&&run){ov.hidden=false;eventUI()}};$('mtm').onclick=()=>{if(me.cls&&run){ov.hidden=false;mountUI('',false)}};$('ptm').onclick=()=>{if(me.cls&&run){ov.hidden=false;petUI()}};$('cdm').onclick=()=>{if(me.cls&&run){ov.hidden=false;cardUI()}};$('mtb').onclick=()=>mountToggle();$('ahb').onclick=()=>huntToggle();$('aum').onclick=()=>{if(me.cls&&run)autoUI()};{const b=$('atb');let lp=null,long=0;b.addEventListener('pointerdown',()=>{long=0;lp=setTimeout(()=>{long=1;autoUI()},500)});const end=()=>{clearTimeout(lp)};b.addEventListener('pointerup',end);b.addEventListener('pointerleave',end);b.onclick=()=>{if(long){long=0;return}autoToggle()};b.oncontextmenu=e=>{e.preventDefault()}}$('gqb').onclick=()=>{const nx={auto:'high',high:'low',low:'auto'}[GQ]||'auto';setGQ(nx);gqLabel();sysMsg('⚙️ กราฟิก: '+GQN[nx])};const GQN={auto:'อัตโนมัติ',high:'สูง (คมชัดสุด)',low:'ประหยัด (ลื่นสุด)'};function gqLabel(){$('gqb').textContent='⚙️ กราฟิก: '+GQN[GQ].split(' ')[0]+(GQ==='auto'&&LOWQ?' (ประหยัด)':'')}gqLabel();
+$('evm').onclick=()=>{if(me.cls&&run){ov.hidden=false;eventUI()}};$('mtm').onclick=()=>{if(me.cls&&run){ov.hidden=false;mountUI('',false)}};$('ptm').onclick=()=>{if(me.cls&&run){ov.hidden=false;petUI()}};$('cdm').onclick=()=>{if(me.cls&&run){ov.hidden=false;cardUI()}};$('chm').onclick=()=>{if(me.cls&&run)chSwUI()};$('mtb').onclick=()=>mountToggle();$('ahb').onclick=()=>huntToggle();$('aum').onclick=()=>{if(me.cls&&run)autoUI()};{const b=$('atb');let lp=null,long=0;b.addEventListener('pointerdown',()=>{long=0;lp=setTimeout(()=>{long=1;autoUI()},500)});const end=()=>{clearTimeout(lp)};b.addEventListener('pointerup',end);b.addEventListener('pointerleave',end);b.onclick=()=>{if(long){long=0;return}autoToggle()};b.oncontextmenu=e=>{e.preventDefault()}}$('gqb').onclick=()=>{const nx={auto:'high',high:'low',low:'auto'}[GQ]||'auto';setGQ(nx);gqLabel();sysMsg('⚙️ กราฟิก: '+GQN[nx])};const GQN={auto:'อัตโนมัติ',high:'สูง (คมชัดสุด)',low:'ประหยัด (ลื่นสุด)'};function gqLabel(){$('gqb').textContent='⚙️ กราฟิก: '+GQN[GQ].split(' ')[0]+(GQ==='auto'&&LOWQ?' (ประหยัด)':'')}gqLabel();
 $('gmb').onclick=()=>{if(me.cls&&run)gmUI()};
 $('dgb').onclick=()=>{if(!isDg())return;if(isWB()){if(dg.ph==='lobby'||dg.ph==='win')wbStart();return}if(dg.ph==='lobby'||(isTw()&&dg.ph==='clear'))dgReqStart();else if(dg.ph==='win'||dg.ph==='fail')dgLeave()};
 $('dinvb').onclick=()=>{if(dInv)dgJoin(dInv.id)};
@@ -6061,7 +6079,7 @@ ov.addEventListener('click',e=>{
   if(t.dataset.ab&&me.cls)allocAb(t.dataset.ab,+t.dataset.q||1);
   if(t.dataset.ask!==undefined&&me.cls){const k=+t.dataset.ask;AUTO.sel[k]=AUTO.sel[k]?0:1;autoSave();autoUI()}if(t.dataset.ason&&me.cls){autoToggle();autoUI()}
   if(t.dataset.smi&&me.cls){smSel=t.dataset.smi;smithUI()}if(t.dataset.smu&&me.cls)smithUp();if(t.dataset.smp&&me.cls){smProt=!smProt;smithUI()}if(t.dataset.smb&&me.cls)smithBuy(+t.dataset.smb);
-  if(t.dataset.mtb&&me.cls)mountBuy(+t.dataset.mtb);if(t.dataset.dk&&me.cls)darkAct(t.dataset.dk);if(t.dataset.st&&me.cls)stAct(t.dataset.st);if(t.dataset.mkf&&me.cls)mkAct('f',t.dataset.mkf);if(t.dataset.mks&&me.cls)mkAct('s',t.dataset.mks);if(t.dataset.mkb&&me.cls)mkAct('b',t.dataset.mkb);if(t.dataset.mkx&&me.cls)mkAct('x',t.dataset.mkx);if(t.dataset.mkc&&me.cls)mkAct('c');if(t.dataset.pvc&&me.cls)pvChallenge(t.dataset.pvc);if(t.dataset.msm&&me.cls)msmAct(t.dataset.msm);if(t.dataset.rare&&me.cls)rareBuy(t.dataset.rare);if(t.dataset.cde&&me.cls)cardAct('e',t.dataset.cde);if(t.dataset.cdu!==undefined&&me.cls)cardAct('u',t.dataset.cdu);if(t.dataset.pts&&me.cls)petSel(+t.dataset.pts);if(t.dataset.ptu&&me.cls)petSel(0);if(t.dataset.ptb&&me.cls)petBuy(+t.dataset.ptb);if(t.dataset.mts&&me.cls)mountSel(+t.dataset.mts);
+  if(t.dataset.mtb&&me.cls)mountBuy(+t.dataset.mtb);if(t.dataset.dk&&me.cls)darkAct(t.dataset.dk);if(t.dataset.st&&me.cls)stAct(t.dataset.st);if(t.dataset.mkf&&me.cls)mkAct('f',t.dataset.mkf);if(t.dataset.mks&&me.cls)mkAct('s',t.dataset.mks);if(t.dataset.mkb&&me.cls)mkAct('b',t.dataset.mkb);if(t.dataset.mkx&&me.cls)mkAct('x',t.dataset.mkx);if(t.dataset.mkc&&me.cls)mkAct('c');if(t.dataset.pvc&&me.cls)pvChallenge(t.dataset.pvc);if(t.dataset.msm&&me.cls)msmAct(t.dataset.msm);if(t.dataset.rare&&me.cls)rareBuy(t.dataset.rare);if(t.dataset.chsw&&me.cls){if(t.dataset.chsw==='go')chSwGo();else ov.hidden=true}if(t.dataset.cde&&me.cls)cardAct('e',t.dataset.cde);if(t.dataset.cdu!==undefined&&me.cls)cardAct('u',t.dataset.cdu);if(t.dataset.pts&&me.cls)petSel(+t.dataset.pts);if(t.dataset.ptu&&me.cls)petSel(0);if(t.dataset.ptb&&me.cls)petBuy(+t.dataset.ptb);if(t.dataset.mts&&me.cls)mountSel(+t.dataset.mts);
   if(t.id==='trclose'||t.id==='shopclose'||t.id==='gearclose')ov.hidden=true;
   if(t.id==='partyclose'){partyOpen=false;ov.hidden=true}
   if(t.id==='nsave')saveName();
