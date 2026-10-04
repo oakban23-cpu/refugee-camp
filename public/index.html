@@ -5560,7 +5560,7 @@ function drawBoots(x,y,r,ph){
 }
 /* ---------- รูปลักษณ์อุปกรณ์บนตัวละคร ---------- */
 /* โค้ดรูปลักษณ์: 0 ไม่มี · 1-5 ระดับธรรมดา→ตำนาน · 6-7 ชุดเซ็ต · +10 = ตีบวก +7 ขึ้นไป (เรืองแสง) */
-const lkc=it=>!it?0:(it.ss?5+it.ss:it.r+1)+((it.u|0)>=7?10:0)+(it.sl==='h'&&!it.ss?hStyle(it)*20:0)+(it.sl==='w'&&!it.ss?wStyle(it)*20:0),lkB=c=>(c|0)%10,lkG=c=>(c|0)%20>=10;
+const lkc=it=>!it?0:(it.ss?(it.ss>=3?5:5+it.ss):it.r+1)+((it.u|0)>=7||it.ss>=3?10:0)+(it.sl==='h'&&!it.ss?hStyle(it)*20:0)+(it.sl==='w'&&!it.ss?wStyle(it)*20:0),lkB=c=>{const b=(c|0)%10;return b>7?5:b},lkG=c=>(c|0)%20>=10;
 const TPAL={1:{m:'#8a8f96',e:'#c9ced4',h:'#6a4526',gd:'#7a5a3a',gem:null,gl:null},2:{m:'#b8c2cc',e:'#f2f6fa',h:'#3a2a20',gd:'#9aa4ae',gem:'#6fd06a',gl:null},
  3:{m:'#9cc8f0',e:'#f4faff',h:'#24365a',gd:'#5a8ac8',gem:'#4aa8ff',gl:'90,170,255'},4:{m:'#b890f0',e:'#f6ecff',h:'#3a2058',gd:'#8a50d0',gem:'#e070ff',gl:'190,120,255'},
  5:{m:'#ffd86a',e:'#fffbe0',h:'#7a4a10',gd:'#e8a820',gem:'#ff5a3a',gl:'255,200,80'},6:{m:'#2ad0c0',e:'#e0fffb',h:'#0e4a50',gd:'#e07a6a',gem:'#8ffff0',gl:'60,230,210'},
