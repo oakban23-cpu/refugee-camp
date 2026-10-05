@@ -764,7 +764,7 @@ function drawTwClimb(){if(!TWCL)return;const D=1.9,k=(performance.now()-TWCL.t0)
 
 /* ===== auto-hunt bot ===== */
 let HB={on:false,ax:0,ay:0,map:-1,man:0,tid:null,bd:1e9,st:0,bl:{},mode:''};
-const huntKey=()=>'refugee_hunt_'+(me.cls||'x');
+const huntKey=()=>'refugee_hunt_'+(me.slot||me.cls||'x');
 function huntLoad(){try{HB.on=localStorage.getItem(huntKey())==='1'}catch(e){HB.on=false}if(HB.on)huntAnchor();huntBtn()}
 function huntSave(){try{localStorage.setItem(huntKey(),HB.on?'1':'0')}catch(e){}}
 function huntBtn(){const b=$('ahb');if(!b)return;b.classList.toggle('on',HB.on);b.innerHTML=HB.on?'🤖<small>ล่า·เปิด</small>':'🤖<small>ล่า·ปิด</small>'}
@@ -2102,10 +2102,10 @@ function cwDraw(ya,yb){const x0=Math.max(cam.x,CW.ox),x1=Math.min(cam.x+W,CW.ox+
 /* ===== เปลี่ยนตัวละคร (กลับหน้าเลือกอาชีพ) ===== */
 let chSwBusy=false;
 const chSwBad=()=>isDg()||isArena()||(typeof PV!=='undefined'&&PV&&PV.ph&&PV.ph!=='end')?'ออกจากดันเจี้ยน / หอคอย / ลานประลองก่อน แล้วค่อยเปลี่ยนตัวละคร':me.down>0?'รอให้ฟื้นก่อน แล้วค่อยเปลี่ยนตัวละคร':'';
-function chSwUI(msg){if(!me.cls)return;ov.dataset.k='chsw';ov.hidden=false;const bad=chSwBad(),others=Object.keys(CL).filter(k=>k!==me.cls);
+function chSwUI(msg){if(!me.cls)return;ov.dataset.k='chsw';ov.hidden=false;const bad=chSwBad(),others=slotKeys().filter(k=>k!==me.slot);
   let h=hdr('👤','เปลี่ยนตัวละคร',clsName()+' · Lv '+me.lv);if(msg||bad)h+='<div class="note">'+(msg||bad)+'</div>';
   h+='<div class="card"><p style="margin:0 0 8px">กลับไปหน้าเลือกอาชีพเพื่อเล่นตัวละครอื่น</p><small style="display:block;opacity:.8">✅ ระบบจะบันทึกความคืบหน้าของตัวละครนี้ก่อนออก · ทอง ไอเทม และเควสอยู่ครบ<br>👥 ถ้าอยู่ในปาร์ตี้จะออกจากปาร์ตี้ให้อัตโนมัติ<br>🤖 บอทล่ามอนสเตอร์จะถูกปิด</small></div>';
-  h+='<div class="card"><div class="cap">ตัวละครอื่นของคุณ</div>'+others.map(k=>{const sv=saves.chars[k];return'<div class="sr"><div class="nm"><b>'+CL[k].n+'</b><small>'+(sv?'Lv '+sv.lv+' · ทอง '+(sv.gold|0).toLocaleString():'ยังไม่ได้สร้าง')+'</small></div></div>'}).join('<hr>')+'</div>';
+  h+='<div class="card"><div class="cap">ตัวละครอื่นของคุณ</div>'+(others.length?others.map(k=>{const sv=saves.chars[k];return'<div class="sr"><div class="nm"><b>'+CL[scls(k)].n+'</b><small>Lv '+sv.lv+' · ทอง '+(sv.gold|0).toLocaleString()+'</small></div></div>'}).join('<hr>'):'<small style="opacity:.7">ยังไม่มีตัวละครอื่น · สร้างเพิ่มได้ที่หน้าเลือกตัวละคร (สูงสุด '+CS_MAX+' ตัว อาชีพซ้ำกันได้)</small>')+'</div>';
   h+='<div class="row" style="gap:8px;margin-top:6px"><button class="pri" style="flex:1" data-chsw="go"'+(bad||chSwBusy?' disabled':'')+'>'+(chSwBusy?'กำลังบันทึก...':'บันทึกแล้วเปลี่ยนตัวละคร')+'</button><button style="flex:0 0 90px" data-chsw="no">ยกเลิก</button></div>';
   ov.innerHTML='<div class="pn" data-pn="chsw">'+h+'</div>'}
 async function chSwGo(){if(chSwBusy||!me.cls)return;const bad=chSwBad();if(bad)return chSwUI(bad);chSwBusy=true;chSwUI();
@@ -3514,7 +3514,12 @@ const R4=Math.random;
 function proImpact(sc){try{abus();sBoom(55,.6+sc*.2,Math.min(.5,.2+sc*.12),0,.5);sCrack(.12,0,2000)}catch(e){}}
 
 /* ===== หน้าเลือกตัวละคร v2 · เวทีโชว์ตัวละคร ===== */
-let csSel='',csRAF=0;const _csPt={};
+let csSel='',csRAF=0,csMode='',csPick='',csName='';
+ov.addEventListener('input',e=>{if(e.target&&e.target.id==='csni'){csName=e.target.value;const m=$('csnm');if(m){const n=cleanName(csName);m.textContent=n?'ชื่อที่จะใช้: '+n:'ตั้งชื่อได้สูงสุด 12 ตัวอักษร';m.style.color=''}const s=document.querySelector('.cs-nm .cs-pn');if(s)s.textContent=cleanName(csName)||'ตัวละครใหม่'}});
+ov.addEventListener('keydown',e=>{if(e.target&&e.target.id==='csni'&&e.key==='Enter'){e.preventDefault();const b=document.querySelector('.cs-go[data-new]');if(b)b.click()}});
+const CS_MAX=8,scls=k=>{const s=saves.chars[k];return s&&CL[s.cls]?s.cls:CL[k]?k:'melee'};
+function newSlotKey(c){if(!saves.chars[c])return c;for(let i=1;i<99;i++)if(!saves.chars['c'+i]&&me.slot!=='c'+i)return'c'+i;return'c'+(Date.now()%1e6)}
+function slotKeys(){const o=k=>{const i=CS_ORD.indexOf(scls(k));return i<0?9:i};return Object.keys(saves.chars).sort((a,b)=>o(a)-o(b)||((saves.chars[b].lv|0)-(saves.chars[a].lv|0))||(a<b?-1:1))}const _csPt={};
 const CS_ORD=['melee','archer','mage','assn','sup'],CS_SL=['w','a','h','b','c'];
 (function(){const css=`
 #ov:has(>.csw){padding:0;gap:0;background:#0b0910;-webkit-backdrop-filter:none;backdrop-filter:none}
@@ -3561,6 +3566,9 @@ const CS_ORD=['melee','archer','mage','assn','sup'],CS_SL=['w','a','h','b','c'];
 .cs-cls img{width:100%;max-width:58px;aspect-ratio:6/7;display:block;pointer-events:none}
 .cs-cls small{font-size:10px;font-weight:700;line-height:1.2;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;pointer-events:none}
 .cs-cls em{position:absolute;top:4px;right:4px;font-style:normal;font-size:9.5px;font-weight:800;padding:1px 5px;border-radius:999px;background:#e7b75a;color:#20180c;pointer-events:none}
+.csw .cs-cls button.cs-emp{border-style:dashed;border-color:rgba(255,236,205,.22);background:rgba(23,20,27,.45);justify-content:center;min-height:86px;color:#a69c8c}.cs-emp b{font-size:26px;font-weight:300;line-height:1;color:#e7b75a;pointer-events:none}.csw .cs-cls button.cs-emp.on{border-style:dashed;color:#ffe2a0}.csw .cs-back{color:#cfc5b4;background:rgba(255,244,225,.06);border-color:rgba(255,236,205,.18)}
+.cs-cls.cs-sl{grid-template-columns:repeat(4,1fr)}.cs-sl img{max-width:64px}
+.cs-namebox{display:flex;flex-direction:column;gap:5px;background:rgba(23,20,27,.82);border:1px solid rgba(231,183,90,.35);border-radius:16px;padding:10px 12px}.cs-namebox label{font-size:12px;font-weight:700;color:#e7b75a;letter-spacing:.04em}.csw .cs-namebox input{font-size:17px;font-weight:700;padding:10px 12px;border-radius:12px;width:100%;box-sizing:border-box}.csw .cs-namebox input:focus{outline:2px solid #e7b75a;outline-offset:1px}.cs-namebox small{font-size:11px;color:#a69c8c}
 .cs-cls em.n{background:rgba(255,255,255,.12);color:#a69c8c}
 .csw details{background:rgba(23,20,27,.7);border:1px solid rgba(255,236,205,.1);border-radius:14px;padding:10px 12px;font-size:13px}
 .csw details summary{cursor:pointer;color:#e7b75a;font-weight:700}
@@ -3582,7 +3590,7 @@ function csPortrait(k,sv){const L=csLook(sv),c2=csC2(k,sv),key=k+c2+L.w+'.'+L.a+
   return _csPt[key]=cv.toDataURL()}
 function csDraw(cv){const dpr=Math.min(2.5,window.devicePixelRatio||1),Wc=cv.clientWidth||360,Hc=cv.clientHeight||290;
   if(cv.width!==Math.round(Wc*dpr)||cv.height!==Math.round(Hc*dpr)){cv.width=Math.round(Wc*dpr);cv.height=Math.round(Hc*dpr)}
-  const x=cv.getContext('2d'),k=csSel,C=CL[k],sv=saves.chars[k],L=csLook(sv),c2=csC2(k,sv),t=performance.now()/1000,col=C.c,W=Wc,H=Hc,cx=W/2,fy=H*.8;
+  const EMP=csMode==='empty'||(csMode==='new'?!CL[csPick]:!saves.chars[csSel]),x=cv.getContext('2d'),k=csMode==='new'?csPick:EMP?'melee':scls(csSel),C=EMP?{c:'#8a7aa8'}:CL[k],sv=csMode===''?saves.chars[csSel]:null,L=csLook(sv),c2=csC2(k,sv),t=performance.now()/1000,col=C.c,W=Wc,H=Hc,cx=W/2,fy=H*.8;
   x.setTransform(dpr,0,0,dpr,0,0);
   /* ฟ้า */
   let gr=x.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#140e22');gr.addColorStop(.6,'#1c1420');gr.addColorStop(1,'#0c0808');x.fillStyle=gr;x.fillRect(0,0,W,H);
@@ -3604,38 +3612,55 @@ function csDraw(cv){const dpr=Math.min(2.5,window.devicePixelRatio||1),Wc=cv.cli
   const S=Math.min(3.4,H*.44/40),cyc=t%4.2,ak=cyc>3.6&&cyc<3.95?(cyc-3.6)/.35:0;
   x.fillStyle='rgba(0,0,0,.45)';x.beginPath();x.ellipse(cx,fy+2,15*S*.75,4*S*.75,0,0,7);x.fill();
   if(L.wu>=7||L.w%20>=10||L.a%20>=10){x.save();x.globalCompositeOperation='lighter';const hc=L.a%10===8||L.w%10===8?'255,214,120':'255,190,90';gr=x.createRadialGradient(cx,fy-12*S,4,cx,fy-12*S,26*S);gr.addColorStop(0,'rgba('+hc+','+(.22+.08*Math.sin(t*3))+')');gr.addColorStop(1,'rgba('+hc+',0)');x.fillStyle=gr;x.fillRect(cx-30*S,fy-40*S,60*S,46*S);x.restore()}
-  const g0=g;try{g=x;x.save();x.translate(cx,fy-13*S*.0);x.scale(S,S);x.translate(0,-15);drawChar(0,0,k,1,0,L.h,t,L.b,L.w,L.a,c2,ak);x.restore()}catch(e){x.restore()}finally{g=g0}
+  if(EMP){x.save();x.translate(cx,fy);const bob=Math.sin(t*1.6)*3;x.globalAlpha=.32+.1*Math.sin(t*2);x.setLineDash([5,5]);x.lineDashOffset=-t*10;x.strokeStyle='#d8c8f0';x.lineWidth=1.6;x.beginPath();x.ellipse(0,-13*S+bob,9*S,15*S,0,0,7);x.stroke();x.setLineDash([]);x.globalAlpha=.75;x.fillStyle='#ece3d3';x.font='300 '+Math.round(13*S)+'px system-ui';x.textAlign='center';x.textBaseline='middle';x.fillText('+',0,-13*S+bob);x.restore()}
+  else{  const g0=g;try{g=x;x.save();x.translate(cx,fy-13*S*.0);x.scale(S,S);x.translate(0,-15);drawChar(0,0,k,1,0,L.h,t,L.b,L.w,L.a,c2,ak);x.restore()}catch(e){x.restore()}finally{g=g0}}
   /* ประกายไฟลอย */
   x.save();x.globalCompositeOperation='lighter';for(let i=0;i<26;i++){const sp=.05+(i%5)*.018,q=(t*sp+i*.137)%1,px=(i*97.3%W)+Math.sin(t*.8+i)*12,py=H-q*H*1.05,a=Math.sin(q*Math.PI);x.fillStyle=i%3?'rgba(255,190,110,'+(.7*a)+')':col;x.globalAlpha=i%3?1:.8*a;x.beginPath();x.arc(px,py,.8+(i%3)*.7,0,7);x.fill()}x.restore();
   /* ขอบมืด */
   gr=x.createRadialGradient(cx,H*.55,H*.35,cx,H*.55,W*.85);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.55)');x.fillStyle=gr;x.fillRect(0,0,W,H);
   gr=x.createLinearGradient(0,0,0,90);gr.addColorStop(0,'rgba(8,6,12,.75)');gr.addColorStop(1,'rgba(8,6,12,0)');x.fillStyle=gr;x.fillRect(0,0,W,90);
   gr=x.createLinearGradient(0,H-60,0,H);gr.addColorStop(0,'rgba(8,6,12,0)');gr.addColorStop(1,'rgba(8,6,12,.7)');x.fillStyle=gr;x.fillRect(0,H-60,W,60)}
-function csLoop(){const cv=document.getElementById('csv');if(!cv||!cv.isConnected||ov.hidden||false){csRAF=0;return}try{csDraw(cv)}catch(e){}csRAF=requestAnimationFrame(csLoop)}
-function intro(){
-  const ks=CS_ORD.filter(k=>CL[k]).concat(Object.keys(CL).filter(k=>!CS_ORD.includes(k)));
-  if(!CL[csSel])csSel=CL[saves.last]&&saves.chars[saves.last]?saves.last:(ks.find(k=>saves.chars[k])||ks[0]);
-  const k=csSel,C=CL[k],sv=saves.chars[k],wait=saveMode==='wait',c2=csC2(k,sv),sub=c2===2?CL2B[k]&&CL2B[k].n:c2===1?CL2[k]&&CL2[k].n:'';
-  const tt=sv&&sv.title&&ACHM[sv.title]?ACHM[sv.title][1]:'';
-  const bar=(lab,v,m)=>'<span>'+lab+'</span><i><b style="width:'+Math.round(Math.max(.08,Math.min(1,v/m))*100)+'%;background:linear-gradient(90deg,'+C.c+'aa,'+C.c+')"></b></i>';
-  const eq=CS_SL.map(s=>{const it=sv&&sv.eq&&sv.eq[s];if(!it)return'<div class="e0">'+(SI[s]||'')+'</div>';const rc=it.ss?'#ffd84a':RC[it.r]||RC[0];let ic=SI[s]||'';
+let csLast=0,csIv=0,csErr='';
+function csTick(){const cv=document.getElementById('csv');if(!cv||!cv.isConnected||ov.hidden)return false;csLast=performance.now();try{csDraw(cv)}catch(e){if(!csErr){csErr=String(e&&e.message||e).slice(0,80);try{console.error('csDraw',e);const s=document.getElementById('sv');if(s)s.textContent+=' · ⚠ '+csErr}catch(_){}}}return true}
+function csLoop(){if(!csTick()){csRAF=0;return}csRAF=requestAnimationFrame(csLoop)}
+function csKick(){csTick();if(!csRAF)csRAF=requestAnimationFrame(csLoop);if(!csIv)csIv=setInterval(()=>{if(performance.now()-csLast<200)return;if(!csTick()){clearInterval(csIv);csIv=0}},60)}
+function intro(){try{introRaw()}catch(e){console.error('intro',e);try{ov.hidden=false;ov.insertAdjacentHTML('beforeend','<p style="color:#e0645a;font-size:12px;padding:0 14px">⚠ หน้าเลือกตัวละครผิดพลาด: '+String(e&&e.message||e).replace(/</g,'&lt;').slice(0,120)+'</p>')}catch(_){}}}
+function introRaw(){
+  const ks=CS_ORD.filter(k=>CL[k]).concat(Object.keys(CL).filter(k=>!CS_ORD.includes(k))),wait=saveMode==='wait';
+  const have=wait?[]:slotKeys(),freeN=Math.max(0,CS_MAX-have.length),free=freeN?ks:[];
+  if(csMode==='new'&&!freeN)csMode='';
+  if(csMode==='empty'&&have.length&&!freeN)csMode='';
+  if(csMode===''&&!have.includes(csSel)){if(have.length)csSel=have.includes(saves.last)?saves.last:have[0];else csMode='empty'}
+  if(csMode==='new'&&!CL[csPick])csPick=ks[0];
+  const head='<div class="cs-top"><div class="cs-lg">REFUGEE<small>ค่ายผู้อพยพ</small></div><div class="cs-net"><p id="st"></p><p id="sv">'+(wait?'กำลังโหลดข้อมูลบันทึก...':'บันทึก: '+saveState)+'</p></div></div>';
+  const slots='<div class="cs-h">ตัวละครของคุณ <span style="opacity:.6">'+have.length+'/'+CS_MAX+'</span></div><div class="cs-cls cs-sl">'+
+    have.map(q=>{const s2=saves.chars[q],c=scls(q);return'<button data-cs="'+q+'" class="'+(csMode===''&&q===csSel?'on':'')+'" style="--cc:'+CL[c].c+'" aria-label="'+CL[c].n+'"><img alt="" src="'+csPortrait(c,s2)+'"><small>'+esc(s2.nm||CL[c].n)+'</small><em>Lv'+s2.lv+'</em></button>'}).join('')+
+    Array.from({length:freeN}).map((q,i)=>'<button class="cs-emp'+(csMode!==''&&i===0?' on':'')+'" data-csn="1" style="--cc:#e7b75a" aria-label="ช่องว่าง สร้างตัวละครใหม่"'+(wait?' disabled':'')+'><b>＋</b><small>ช่องว่าง</small></button>').join('')+'</div>';
+  const how='<details><summary>📖 วิธีเล่น</summary><p>มอนสเตอร์ทยอยบุกเข้ามาที่ค่ายกลางแมพ อัศวินยามคอยกันไม่ให้เข้าเขตปลอดภัย ค่ายนี้ไม่มีวันพัง เป็นจุดเริ่มต้นและที่ฟื้นตัวของทุกคน ออกไปล่ากลุ่มมอนสเตอร์นอกค่ายเพื่อเก็บเลเวล ยิ่งไกลจากค่ายยิ่งแรง ลากนิ้วเพื่อเดิน ตัวละครโจมตีเอง กดปุ่มแดงใช้สกิล ราชาหมอกพิษอยู่ทางขวาบนของแมพ ต้องรวมทีมไปล่า</p></details>';
+  const info=(k)=>{const C=CL[k],bar=(lab,v,m)=>'<span>'+lab+'</span><i><b style="width:'+Math.round(Math.max(.08,Math.min(1,v/m))*100)+'%;background:linear-gradient(90deg,'+C.c+'aa,'+C.c+')"></b></i>';
+    return'<p class="cs-d">'+C.d+'</p><div class="cs-sk">'+(C.s||[]).slice(0,3).map(s=>'<span>✧ '+s+'</span>').join('')+'</div><div class="cs-st">'+bar('พลังชีวิต',C.hp,140)+bar('พลังโจมตี',C.dmg,18)+bar('ระยะโจมตี',C.rg,260)+bar('ความเร็ว',C.sp,150)+'</div>'};
+  let body='';
+  if(csMode==='empty'){
+    body='<div class="cs-stage"><canvas id="csv"></canvas><div class="cs-cap"><div class="cs-nm" style="color:#fff">ช่องว่าง<small style="color:#a69c8c">'+(wait?'กำลังโหลดข้อมูลบันทึก...':'ยังไม่มีตัวละครในช่องนี้')+'</small></div></div></div>'+
+      slots+'<div class="cs-act"><button class="cs-go" data-csn="1"'+(wait?' disabled':'')+'>＋ สร้างตัวละครใหม่</button></div>';
+  }else if(csMode==='new'){const k=csPick,C=CL[k];
+    body='<div class="cs-stage"><canvas id="csv"></canvas><div class="cs-cap"><div class="cs-nm" style="color:#fff"><span class="cs-pn">'+esc(cleanName(csName)||'ตัวละครใหม่')+'</span><small style="color:#9fe0a2">✦ '+C.n+' · Lv 1</small></div></div></div>'+
+      '<div class="cs-h">เลือกอาชีพ <span style="opacity:.6">· อาชีพซ้ำกันได้</span></div><div class="cs-cls">'+ks.map(q=>{const n=have.filter(s=>scls(s)===q).length;return'<button data-cp="'+q+'" class="'+(q===k?'on':'')+'" style="--cc:'+CL[q].c+'" aria-label="'+CL[q].n+'"><img alt="" src="'+csPortrait(q,null)+'"><small>'+CL[q].n+'</small>'+(n?'<em class="n">มี '+n+'</em>':'')+'</button>'}).join('')+'</div>'+
+      '<div class="cs-namebox"><label for="csni">ชื่อตัวละคร</label><input id="csni" maxlength="12" autocomplete="off" enterkeyhint="done" placeholder="ตั้งชื่อตัวละคร…" value="'+esc(csName).replace(/"/g,'&quot;')+'"><small id="csnm">'+(cleanName(csName)?'ชื่อที่จะใช้: '+esc(cleanName(csName)):'ตั้งชื่อได้สูงสุด 12 ตัวอักษร')+'</small></div>'+
+      '<div class="cs-act"><button class="cs-go" data-new="1" data-c="'+k+'"'+(wait?' disabled':'')+'>✦ สร้างตัวละคร</button><button class="cs-del cs-back" data-csb="1">ย้อนกลับ</button></div>'+
+      '<div class="cs-card">'+info(k)+'</div>';
+  }else{const k=scls(csSel),C=CL[k],sv=saves.chars[csSel],c2=csC2(k,sv),sub=c2===2?CL2B[k]&&CL2B[k].n:c2===1?CL2[k]&&CL2[k].n:'',tt=sv.title&&ACHM[sv.title]?ACHM[sv.title][1]:'';
+    const eq=CS_SL.map(s=>{const it=sv.eq&&sv.eq[s];if(!it)return'<div class="e0">'+(SI[s]||'')+'</div>';const rc=it.ss?'#ffd84a':RC[it.r]||RC[0];let ic=SI[s]||'';
       try{if(s==='h')ic='<img src="'+helmIcon(it)+'" alt="">'}catch(e){}
       return'<div style="border-color:'+rc+';box-shadow:inset 0 0 12px '+rc+'44">'+ic+(it.u?'<u>+'+it.u+'</u>':'')+'</div>'}).join('');
+    body='<div class="cs-stage"><canvas id="csv"></canvas><div class="cs-cap"><div class="cs-nm" style="color:#fff">'+esc(sv.nm||C.n)+(sv.nm?'<small style="color:'+C.c+';filter:brightness(1.6)">'+(sub?'✦ '+sub:C.n)+'</small>':(sub?'<small style="color:'+C.c+';filter:brightness(1.5)">✦ '+sub+'</small>':'<small style="color:#a69c8c">อาชีพขั้นต้น</small>'))+(tt?'<span class="cs-ttl">«'+tt+'»</span>':'')+'</div>'+
+      '<div class="cs-lv"><span>LEVEL</span><b>'+sv.lv+'</b></div></div>'+
+      '<div class="cs-chips"><span class="cs-chip gd">🪙 '+(sv.gold|0).toLocaleString()+'</span>'+(saves.last===csSel?'<span class="cs-chip">⏱ เล่นล่าสุด</span>':'')+'</div></div>'+
+      slots+'<div class="cs-act"><button class="cs-go" data-c="'+k+'" data-slot="'+csSel+'">▶ เล่นต่อ</button><button class="cs-del'+(delArm===csSel?' arm':'')+'" data-del="'+csSel+'">'+(delArm===csSel?'ยืนยันลบ?':'ลบเซฟ')+'</button></div>'+
+      '<div class="cs-card">'+info(k)+'<div class="cs-eq">'+eq+'</div></div>';
+  }
   ov.dataset.k='';
-  ov.innerHTML='<div class="csw">'+
-   '<div class="cs-top"><div class="cs-lg">REFUGEE<small>ค่ายผู้อพยพ</small></div><div class="cs-net"><p id="st"></p><p id="sv">'+(wait?'กำลังโหลดข้อมูลบันทึก...':'บันทึก: '+saveState)+'</p></div></div>'+
-   '<div class="cs-stage"><canvas id="csv"></canvas><div class="cs-cap"><div class="cs-nm" style="color:#fff">'+C.n+(sub?'<small style="color:'+C.c+';filter:brightness(1.5)">✦ '+sub+'</small>':'<small style="color:#a69c8c">อาชีพขั้นต้น</small>')+(tt?'<span class="cs-ttl">«'+tt+'»</span>':'')+'</div>'+
-     (sv?'<div class="cs-lv"><span>LEVEL</span><b>'+sv.lv+'</b></div>':'')+'</div>'+
-     '<div class="cs-chips">'+(sv?'<span class="cs-chip gd">🪙 '+(sv.gold|0).toLocaleString()+'</span>'+(saves.last===k?'<span class="cs-chip">⏱ เล่นล่าสุด</span>':''):'<span class="cs-chip nw">✦ ยังไม่มีตัวละคร</span>')+'</div></div>'+
-   '<div class="cs-h">เลือกอาชีพ</div><div class="cs-cls">'+ks.map(q=>{const s2=saves.chars[q];return'<button data-cs="'+q+'" class="'+(q===k?'on':'')+'" style="--cc:'+CL[q].c+'" aria-label="'+CL[q].n+'"><img alt="" src="'+csPortrait(q,s2)+'"><small>'+CL[q].n+'</small>'+(s2?'<em>Lv'+s2.lv+'</em>':'<em class="n">ใหม่</em>')+'</button>'}).join('')+'</div>'+
-   '<div class="cs-act"><button class="cs-go" data-c="'+k+'"'+(wait?' disabled':'')+'>'+(sv?'▶ เล่นต่อ':'✦ เริ่มผจญภัย')+'</button>'+
-     (sv?'<button class="cs-del'+(delArm===k?' arm':'')+'" data-del="'+k+'"'+(wait?' disabled':'')+'>'+(delArm===k?'ยืนยันลบ?':'ลบเซฟ')+'</button>':'')+'</div>'+
-   '<div class="cs-card"><p class="cs-d">'+C.d+'</p>'+
-     '<div class="cs-sk">'+(C.s||[]).slice(0,3).map(s=>'<span>✧ '+s+'</span>').join('')+'</div>'+
-     '<div class="cs-st">'+bar('พลังชีวิต',C.hp,140)+bar('พลังโจมตี',C.dmg,18)+bar('ระยะโจมตี',C.rg,260)+bar('ความเร็ว',C.sp,150)+'</div>'+
-     (sv?'<div class="cs-eq">'+eq+'</div>':'')+'</div>'+
-   '<details><summary>📖 วิธีเล่น</summary><p>มอนสเตอร์ทยอยบุกเข้ามาที่ค่ายกลางแมพ อัศวินยามคอยกันไม่ให้เข้าเขตปลอดภัย ค่ายนี้ไม่มีวันพัง เป็นจุดเริ่มต้นและที่ฟื้นตัวของทุกคน ออกไปล่ากลุ่มมอนสเตอร์นอกค่ายเพื่อเก็บเลเวล ยิ่งไกลจากค่ายยิ่งแรง ลากนิ้วเพื่อเดิน ตัวละครโจมตีเอง กดปุ่มแดงใช้สกิล ราชาหมอกพิษอยู่ทางขวาบนของแมพ ต้องรวมทีมไปล่า</p></details>'+
-   '</div>';
+  ov.innerHTML='<div class="csw">'+head+body+how+'</div>';
   const w=ov.querySelector('.csw');
   if(!/^https?:$/.test(location.protocol)){let cur='';try{cur=localStorage.getItem('refugee_server')||''}catch(e){}
     w.insertAdjacentHTML('beforeend','<div id="srvbox" style="padding:10px 12px"><b>เล่นกับเพื่อน (เปิดจากไฟล์)</b><p style="font-size:12.5px;margin:6px 0;color:#cfc5b4">ใส่ที่อยู่เซิร์ฟเวอร์ที่โฮสต์ให้ เช่น xxxx.trycloudflare.com แล้วกดเชื่อมต่อ ทุกคนต้องใส่ที่อยู่เดียวกัน</p><input id="srvi" value="'+cur.replace(/[^\w.:\/-]/g,'')+'" placeholder="xxxx.trycloudflare.com" style="width:100%;box-sizing:border-box;padding:8px"><div class="row" style="margin-top:6px"><button id="srvb">เชื่อมต่อ</button></div></div>')}
@@ -3643,7 +3668,7 @@ function intro(){
    '<p style="font-size:12.5px">กด "สร้างรหัสสำรอง" แล้วคัดลอกเก็บไว้ ตอนเปิดลิงก์ใหม่ให้วางรหัสแล้วกด "นำเข้า"</p>'+
    '<textarea id="bkt" rows="4" style="width:100%;box-sizing:border-box;font-size:12px;padding:8px" placeholder="รหัสเซฟ"></textarea>'+
    '<div class="row" style="margin-top:6px"><button id="bkx">สร้างรหัสสำรอง</button><button id="bkc">คัดลอก</button><button id="bki">นำเข้า</button></div><p id="bkm" style="font-size:12.5px"></p></details>');
-  status();if(!csRAF)csRAF=requestAnimationFrame(csLoop);
+  status();csKick();
 }
 
 function skill4(P,cost){if(BR2()&&SK4B[me.cls])return skill4B(P,cost);const c=me.cls;let t=null;
@@ -4526,9 +4551,9 @@ function partyList(){const el=$('plist');if(!el){partyOpen=false;return}
   else if(plCount()>Object.keys(others).length+1)h+='<p style="opacity:.6;padding-top:8px">ในแมพนี้มี '+plCount()+' คน แสดงเฉพาะคนที่อยู่ใกล้ ๆ</p>';
   el.innerHTML=h}
 function partyUI(msg){partyOpen=true;ov.dataset.k='party';
-  ov.innerHTML='<div class="pn" data-pn="party">'+hdr('👥','ปาร์ตี้','ผู้เล่นในแมพเดียวกันเป็นทีมเดียวกัน มอนสเตอร์และบอสร่วมกัน (แต่ละแมพแยกกัน แชทคุยกันได้ทุกแมพ)')+ptCard()+'<div class="card"><div class="cap">ผู้เล่นในแมพนี้</div><div id="plist"></div></div><div class="card"><div class="cap">ชื่อของคุณ</div><div class="nrow" style="margin:0"><input id="nin" maxlength="12" value="'+esc(myName)+'" autocomplete="off"><button id="nsave" class="pri" style="padding:8px 14px">บันทึก</button></div>'+(msg?'<div class="note">'+msg+'</div>':'')+'</div></div>';
+  ov.innerHTML='<div class="pn" data-pn="party">'+hdr('👥','ปาร์ตี้','ผู้เล่นในแมพเดียวกันเป็นทีมเดียวกัน มอนสเตอร์และบอสร่วมกัน (แต่ละแมพแยกกัน แชทคุยกันได้ทุกแมพ)')+ptCard()+'<div class="card"><div class="cap">ผู้เล่นในแมพนี้</div><div id="plist"></div></div>'+(msg?'<div class="note">'+msg+'</div>':'')+'</div>';
   partyList()}
-function saveName(){const n=cleanName($('nin').value);if(!n){partyUI('ชื่อว่างไม่ได้');return}myName=n;try{localStorage.setItem('refugee_name',n)}catch(e){}partyUI('เปลี่ยนชื่อเป็น '+n+' แล้ว')}
+function saveName(){const n=cleanName($('nin').value);if(!n){partyUI('ชื่อว่างไม่ได้');return}myName=n;if(me.cls)me.nm=n;try{localStorage.setItem('refugee_name',n)}catch(e){}partyUI('เปลี่ยนชื่อเป็น '+n+' แล้ว')}
 $('pb').onclick=()=>{if(me.cls&&run){ov.hidden=false;partyUI()}};
 $('dgm').onclick=()=>{if(me.cls&&run){ov.hidden=false;dungeonUI()}};
 $('evm').onclick=()=>{if(me.cls&&run){ov.hidden=false;eventUI()}};$('mtm').onclick=()=>{if(me.cls&&run){ov.hidden=false;mountUI('',false)}};$('ptm').onclick=()=>{if(me.cls&&run){ov.hidden=false;petUI()}};$('cdm').onclick=()=>{if(me.cls&&run){ov.hidden=false;cardUI()}};$('chm').onclick=()=>{if(me.cls&&run)chSwUI()};$('mtb').onclick=()=>mountToggle();$('ahb').onclick=()=>huntToggle();$('aum').onclick=()=>{if(me.cls&&run)autoUI()};{const b=$('atb');let lp=null,long=0;b.addEventListener('pointerdown',()=>{long=0;lp=setTimeout(()=>{long=1;autoUI()},500)});const end=()=>{clearTimeout(lp)};b.addEventListener('pointerup',end);b.addEventListener('pointerleave',end);b.onclick=()=>{if(long){long=0;return}autoToggle()};b.oncontextmenu=e=>{e.preventDefault()}}$('gqb').onclick=()=>{const nx={auto:'high',high:'low',low:'auto'}[GQ]||'auto';setGQ(nx);gqLabel();sysMsg('⚙️ กราฟิก: '+GQN[nx])};const GQN={auto:'อัตโนมัติ',high:'สูง (คมชัดสุด)',low:'ประหยัด (ลื่นสุด)'};function gqLabel(){$('gqb').textContent='⚙️ กราฟิก: '+GQN[GQ].split(' ')[0]+(GQ==='auto'&&LOWQ?' (ประหยัด)':'')}gqLabel();
@@ -6949,7 +6974,7 @@ function campCollide(){if(isWB())wbCollide();if(curMap!==1){campLM=0;return}CAMP
   campLX=me.x;campLY=me.y;campLM=1}
 /* ---------- ออโต้สกิล ---------- */
 let AUTO={on:false,sel:{},t:0};
-const autoKey=()=>'refugee_auto_'+(me.cls||'x');
+const autoKey=()=>'refugee_auto_'+(me.slot||me.cls||'x');
 function autoLoad(){try{const d=JSON.parse(localStorage.getItem(autoKey())||'null');AUTO.sel=d&&d.sel?d.sel:{0:1,1:1,2:1,3:1,4:1};AUTO.on=!!(d&&d.on)}catch(e){AUTO.sel={0:1,1:1,2:1,3:1,4:1}}autoBtn()}
 function autoSave(){try{localStorage.setItem(autoKey(),JSON.stringify({on:AUTO.on,sel:AUTO.sel}))}catch(e){}}
 const skName=k=>{const C=CL[me.cls];return k===2?ultOf()[0]:k===4?(SK4[me.cls]||['สกิลที่ 4'])[0]:(C.s[k]||'สกิล '+(k+1))};
@@ -7714,13 +7739,14 @@ function cleanChar(c){
   o.ach={};if(c.ach&&typeof c.ach==='object')Object.keys(c.ach).forEach(k=>{if(ACHM[k])o.ach[k]=1});
   o.title=typeof c.title==='string'&&o.ach[c.title]?c.title:'';
   o.mts=Array.isArray(c.mts)?[...new Set(c.mts.map(v=>v|0).filter(v=>v>=1&&v<=MT_N))]:[];o.mt=o.mts.includes(c.mt|0)?c.mt|0:(o.mts[0]||0);{const y=c.sty&&typeof c.sty==='object'?c.sty:{};o.sty={s:n(y.s,0,STY.length,0),n:n(y.n,0,999,0),a:n(y.a,0,1,0),e:n(y.e,0,2,0)}}{const cc=c.cards&&typeof c.cards==='object'?c.cards:{};o.cards={};CIDS.forEach(id=>{const v=n(cc[id],0,999,0);if(v)o.cards[id]=v});const okc=id=>typeof id==='string'&&CARDS[id]&&o.cards[id]>0;const cs=Array.isArray(c.cslot)?c.cslot:[];o.cslot=[0,1].map(i=>okc(cs[i])&&!CARDS[cs[i]].mvp?cs[i]:'');if(o.cslot[0]&&o.cslot[0]===o.cslot[1])o.cslot[1]='';o.cmv=okc(c.cmv)&&CARDS[c.cmv].mvp?c.cmv:''}{const v=c.pvp&&typeof c.pvp==='object'?c.pvp:{};o.pvp={w:n(v.w,0,1e6,0),l:n(v.l,0,1e6,0)}}{const r=c.rs;if(r&&typeof r==='object'&&typeof r.d==='string'){o.rs={d:r.d.slice(0,20),b:{}};if(r.b&&typeof r.b==='object')Object.keys(r.b).slice(0,12).forEach(k=>{if(/^[a-z0-9]{1,4}$/.test(k))o.rs.b[k]=n(r.b[k],0,99,0)})}}o.pets=Array.isArray(c.pets)?[...new Set(c.pets.map(v=>v|0).filter(v=>v>=1&&v<=PT_N))]:[];o.pet=o.pets.includes(c.pet|0)?c.pet|0:0;
+  o.nm=cleanName(c.nm);
   o.pb={};if(c.pb&&typeof c.pb==='object')Object.keys(c.pb).forEach(k=>{const v=+c.pb[k];if(LBK.includes(k)&&v>=1&&v<(k==='wb'?1e12:1e5))o.pb[k]=Math.round(v*10)/10});
   return o;
 }
 function cleanSaves(d){
   const o={v:1,chars:{},last:null};
-  if(d&&typeof d==='object'&&d.chars&&typeof d.chars==='object')Object.keys(CL).forEach(k=>{const c=cleanChar(d.chars[k]);if(c)o.chars[k]=c});
-  if(d&&CL[d.last]&&o.chars[d.last])o.last=d.last;
+  if(d&&typeof d==='object'&&d.chars&&typeof d.chars==='object')Object.keys(d.chars).filter(k=>/^[a-z0-9]{1,12}$/.test(k)).slice(0,CS_MAX+4).forEach(k=>{const r=d.chars[k],cls=r&&CL[r.cls]?r.cls:CL[k]?k:null;if(!cls)return;const c=cleanChar(r);if(c){c.cls=cls;o.chars[k]=c}});
+  if(d&&typeof d.last==='string'&&o.chars[d.last])o.last=d.last;
   return o;
 }
 function applySave(c){
@@ -7733,7 +7759,7 @@ function applySave(c){
   me.ab=Object.assign({str:0,vit:0,int:0,agi:0,luk:0},c.ab||{});if(spts()<0)me.ab={str:0,vit:0,int:0,agi:0,luk:0};
   me.mh=maxHp();me.hp=me.mh;me.mm=maxMp();me.mp=me.mm;
 }
-function snap(){return{lv:me.lv,xp:me.xp,gold:me.gold,tr:me.tr,ab:me.ab,inv:me.inv,eq:me.eq,bag:me.bag,qs:me.qs,dq:me.dq,ls:me.ls,stt:me.stt,ach:me.ach,title:me.title,pb:me.pb,cls2:me.cls2?1:0,br:me.br===2?2:1,brU:me.brU||{},dk:me.dk||{s:0,n:0},cq:me.cq||{s:0,n:0},mat:me.mat||{sc:0,hr:0},twc:me.twc|0,twCp:me.twCp||1,twBest:me.twBest|0,mts:me.mts||[],mt:me.mt|0,pets:me.pets||[],pet:me.pet|0,cards:me.cards||{},cslot:me.cslot||['',''],cmv:me.cmv||'',rs:me.rs||null,pvp:me.pvp||{w:0,l:0},sty:me.sty||{s:0,n:0,a:0,e:0}}}
+function snap(){return{nm:me.nm||'',lv:me.lv,xp:me.xp,gold:me.gold,tr:me.tr,ab:me.ab,inv:me.inv,eq:me.eq,bag:me.bag,qs:me.qs,dq:me.dq,ls:me.ls,stt:me.stt,ach:me.ach,title:me.title,pb:me.pb,cls2:me.cls2?1:0,br:me.br===2?2:1,brU:me.brU||{},dk:me.dk||{s:0,n:0},cq:me.cq||{s:0,n:0},mat:me.mat||{sc:0,hr:0},twc:me.twc|0,twCp:me.twCp||1,twBest:me.twBest|0,mts:me.mts||[],mt:me.mt|0,pets:me.pets||[],pet:me.pet|0,cards:me.cards||{},cslot:me.cslot||['',''],cmv:me.cmv||'',rs:me.rs||null,pvp:me.pvp||{w:0,l:0},sty:me.sty||{s:0,n:0,a:0,e:0}}}
 function setSaveState(x){saveState=x}
 function withTimeout(p,ms){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r({code:'timeout'}),ms))])}
 function lsRead(){try{return JSON.parse(localStorage.getItem(LSK)||'null')}catch(e){return null}}
@@ -7741,20 +7767,22 @@ function lsWrite(d){try{localStorage.setItem(LSK,JSON.stringify(d));return true}
 async function initSave(){
   let db=null,uidDb=null;
   try{
-    const user=window.claude&&await claude.use('user');
-    uidDb=user?await user.id():null;
-    db=window.claude&&await claude.use('db');
+    const user=window.claude&&await withTimeout(claude.use('user'),6000);
+    uidDb=user?await withTimeout(user.id(),6000):null;
+    db=window.claude&&await withTimeout(claude.use('db'),6000);
   }catch(e){db=null}
   try{
     if(db&&uidDb){
       saveDoc=db.doc('data/users/'+uidDb+'/profile');lbDb=db;lbUid=uidDb;try{const ms=await withTimeout(db.doc('lb/'+uidDb).get(),6000);if(ms.exists)lbMine={b:Object.assign({},(ms.data()||{}).b||{})}}catch(e){}
       const snapD=await withTimeout(saveDoc.get(),8000);
+      if(saveMode!=='wait')return;
       saves=cleanSaves(snapD.exists?snapD.data():null);
       saveMode='db';
     }else{
       saves=cleanSaves(lsRead());saveMode='local';
     }
   }catch(e){
+    if(saveMode!=='wait')return;
     saveMode='off';saveDoc=null;
   }
   setSaveState(saveMode==='db'?'บันทึกออนไลน์':saveMode==='local'?'บันทึกในเบราว์เซอร์นี้':'ไม่ได้บันทึก');
@@ -7763,7 +7791,7 @@ async function initSave(){
 async function writeSave(){
   if(inflight||!me.cls||saveMode==='wait'||saveMode==='off')return;
   const j=JSON.stringify(snap());if(j===lastJ)return;
-  const next={v:1,chars:Object.assign({},saves.chars),last:me.cls};next.chars[me.cls]=cleanChar(JSON.parse(j));
+  const next={v:1,chars:Object.assign({},saves.chars),last:me.slot||me.cls};{const cc=cleanChar(JSON.parse(j));cc.cls=me.cls;next.chars[me.slot||me.cls]=cc}
   inflight=true;
   try{
     if(saveMode==='db')await saveDoc.set(next);
@@ -7786,10 +7814,12 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)writeSave()
 window.addEventListener('pagehide',()=>{writeSave()});
 
 /* ---------- screens ---------- */
-function pick(c){setTimeout(()=>{try{autoLoad();huntLoad()}catch(e){}},0);
-  if(saveMode==='wait')return;
+function pick(c,slot,nm){if(saveMode==='wait')return;
+  if(slot&&saves.chars[slot])c=scls(slot);else slot=newSlotKey(c);if(!CL[c])return;me.slot=slot;csMode='';csSel=slot;delArm=null;
+  setTimeout(()=>{try{autoLoad();huntLoad()}catch(e){}},0);
   const C=CL[c];me.cls=c;me.mh=C.hp;me.hp=C.hp;me.lv=1;me.xp=0;me.tr={};me.ab={str:0,vit:0,int:0,agi:0,luk:0};me.gold=40;me.inv={hp:2,mp:1,ps:0};me.twc=0;me.twCp=1;me.twBest=0;me.cls2=0;me.cq={s:0,n:0};me.mts=[];me.mt=0;me.pets=[];me.pet=0;PT=null;me.cards={};me.cslot=['',''];me.cmv='';CARDB={};me.rs=null;me.pvp={w:0,l:0};me.sty={s:0,n:0,a:0,e:0};me.br=1;me.brU={};me.dk={s:0,n:0};me.rg2=0;me.riding=0;me.mat={sc:0,hr:0};me.mcnt=0;me.freeC=0;me.eq={w:null,a:null,c:null,h:null,b:null};me.bag=[];me.qs=[];me.mm=C.mp;me.mp=C.mp;me.x=CX;me.y=CY+60;me.sk=[0,0,0,0,0];me.rage=0;me.clone=null;me.mark=null;pend=[];me.dq=null;me.ls={last:'',st:0,cl:''};me.stt=newStt();me.ach={};me.title='';me.pb={};bf=null;
-  const isNew=!saves.chars[c];if(saves.chars[c])applySave(saves.chars[c]);
+  const isNew=!saves.chars[slot];if(!isNew)applySave(saves.chars[slot]);
+  me.nm=cleanName(isNew?nm:saves.chars[slot].nm)||cleanName(myName)||'ผู้เล่น';myName=me.nm;
   lastJ=JSON.stringify(snap());
   ov.hidden=true;run=true;last=performance.now();makeGuards();
   if(isNew){try{prologueStart(()=>{try{tutStart()}catch(e){}})}catch(e){tutStart()}}
@@ -7805,7 +7835,7 @@ async function importSave(txt){
     const ks=Object.keys(d.chars);if(!ks.length){m.textContent='ไม่พบเซฟในรหัสนี้';return}
     if(saveMode==='wait'||saveMode==='off'){m.textContent='ตอนนี้บันทึกไม่ได้';return}
     const next={v:1,chars:Object.assign({},saves.chars),last:d.last||saves.last};
-    ks.forEach(k=>{const o=next.chars[k];if(!o||d.chars[k].lv>=o.lv)next.chars[k]=d.chars[k]});
+    ks.forEach(k=>{const r=d.chars[k],o=next.chars[k];if(o&&o.cls!==r.cls){let i=1;while(next.chars['c'+i])i++;next.chars['c'+i]=r;return}if(!o||r.lv>=o.lv)next.chars[k]=r});
     if(saveMode==='db')await saveDoc.set(next);else lsWrite(next);
     saves=next;delArm=null;intro();
     const b=$('bk');if(b)b.open=true;$('bkm').textContent='นำเข้าแล้ว '+ks.length+' ตัวละคร (ตัวที่เลเวลสูงกว่าจะถูกเก็บไว้)';
@@ -7817,8 +7847,11 @@ function gameOver(){
 }
 ov.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t)return;sfx('click');
-  if(t.dataset.cs){csSel=t.dataset.cs;delArm=null;intro();return}
-  if(t.dataset.c)pick(t.dataset.c);
+  if(t.dataset.cs){csSel=t.dataset.cs;csMode='';delArm=null;intro();return}
+  if(t.dataset.csn){csMode='new';delArm=null;csName='';intro();setTimeout(()=>{const i=$('csni');if(i)try{i.focus({preventScroll:true})}catch(e){}},50);return}
+  if(t.dataset.cp){csPick=t.dataset.cp;intro();return}
+  if(t.dataset.csb){csMode='';intro();return}
+  if(t.dataset.c){if(t.dataset.new){const n=cleanName(csName);if(!n){const m=$('csnm');if(m){m.textContent='กรุณาตั้งชื่อตัวละครก่อน';m.style.color='#e0645a'}const i=$('csni');if(i)i.focus();return}pick(t.dataset.c,'',n)}else pick(t.dataset.c,t.dataset.slot)}
   if(t.id==='srvb'){try{localStorage.setItem('refugee_server',$('srvi').value.trim())}catch(e){}location.reload();return}
   if(t.id==='bkx'){$('bkt').value='RFG1:'+b64e(JSON.stringify(saves));$('bkm').textContent='สร้างรหัสแล้ว กดคัดลอกเก็บไว้';$('bkt').select()}
   if(t.id==='bkc'){const x=$('bkt');x.select();try{navigator.clipboard.writeText(x.value).then(()=>{$('bkm').textContent='คัดลอกแล้ว'},()=>{document.execCommand('copy');$('bkm').textContent='คัดลอกแล้ว'})}catch(e){try{document.execCommand('copy');$('bkm').textContent='คัดลอกแล้ว'}catch(_){}}}
@@ -7876,7 +7909,7 @@ ov.addEventListener('click',e=>{
   if(t.dataset.buy)buy(t.dataset.buy,+t.dataset.q);
   if(t.id==='again'){reset();if(room)emitM('reset',{})}
 });
-makeGuards();intro();TABOK.then(initSave);requestAnimationFrame(loop);
+makeGuards();intro();TABOK.then(initSave);setTimeout(()=>{if(saveMode!=='wait'||!TAB.own)return;try{saves=cleanSaves(lsRead())}catch(e){}saveMode='local';setSaveState('บันทึกในเบราว์เซอร์นี้ (ระบบออนไลน์ไม่ตอบ)');if(!me.cls)intro()},20000);requestAnimationFrame(loop);
 /* ===== หน้าปกเกม REFUGEE ===== */
 (function(){const T=document.getElementById('ttl');if(!T)return;const E=T.querySelector('.emb');
   for(let i=0;i<26;i++){const e=document.createElement('i');e.style.left=(Math.random()*100)+'%';e.style.setProperty('--dx',(Math.random()*80-40)+'px');e.style.animationDuration=(6+Math.random()*7)+'s';e.style.animationDelay=(-Math.random()*12)+'s';const s=2+Math.random()*3.5;e.style.width=e.style.height=s+'px';if(Math.random()<.3){e.style.background='#d8a8ff';e.style.boxShadow='0 0 8px 2px rgba(180,110,255,.8)'}E.appendChild(e)}
