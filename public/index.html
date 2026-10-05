@@ -1510,20 +1510,38 @@ const MSM_UP=[[8000,0],[30000,1],[120000,3],[400000,8]];
 const msmReroll=it=>Math.round(2500*(1+it.r)*(1+it.L*.25));
 const msmUpCost=it=>{const c=MSM_UP[it.r];return c?[Math.round(c[0]*(1+it.L*.08)),c[1]]:null};
 function msmUI(msg){if(!me.cls)return;ov.dataset.k='msm';ov.hidden=false;
-  let h=hdr('⚒️','ช่างตีเหล็กหลวง','ทอง '+fmtG(me.gold)+' · หินขั้นสูง '+(me.inv.s3|0));if(msg)h+='<div class="note">'+msg+'</div>';
+  let h=hdr('⚒️','ช่างตีเหล็กหลวง','ทอง '+fmtG(me.gold)+' · หินขั้นสูง '+(me.inv.s3|0));if(msg)h+='<div class="note">'+msg+'</div>';if(MSMP)h+=msmCmpH(MSMP);
   h+='<div class="card hint">ใช้กับอุปกรณ์ที่สวมอยู่ · ค่าตีบวกไม่หาย · 🔁 หลอมใหม่ = สุ่มค่าพลังใหม่ระดับเดิม · ⬆️ ยกระดับ = เลื่อนความหายากขึ้น 1 ขั้น (สูงสุด Relic · Ancient สีแดง = ชุดเซ็ต · Cosmic เร็ว ๆ นี้) และสุ่มค่าพลังใหม่ที่แรงขึ้น</div>';
   h+='<div class="card">'+SLOTS.map(sl=>{const it=me.eq[sl];if(!it)return'<div class="sr"><div class="nm"><b>'+SLN[sl]+'</b><small>ยังไม่ได้สวม</small></div></div>';
     const rr=msmReroll(it),uc=msmUpCost(it);
     return'<div class="sr"><div class="nm">'+itemCard(it)+'</div><div style="display:flex;flex-direction:column;gap:4px;min-width:118px">'+
-      '<button data-msm="r'+sl+'"'+(me.gold>=rr?'':' disabled')+'>🔁 หลอมใหม่<br><small>'+rr.toLocaleString()+' ทอง</small></button>'+
-      (uc?'<button class="pri" data-msm="u'+sl+'"'+(me.gold>=uc[0]&&(me.inv.s3|0)>=uc[1]?'':' disabled')+'>⬆️ เป็น'+RN[it.r+1]+'<br><small>'+uc[0].toLocaleString()+' ทอง'+(uc[1]?' · หิน '+uc[1]:'')+'</small></button>':'<button disabled>ระดับสูงสุด</button>')+'</div></div>'}).join('<hr>')+'</div>';
+      '<button data-msm="r'+sl+'"'+(me.gold>=rr&&!MSMP?'':' disabled')+'>🔁 หลอมใหม่<br><small>'+rr.toLocaleString()+' ทอง</small></button>'+
+      (uc?'<button class="pri" data-msm="u'+sl+'"'+(me.gold>=uc[0]&&(me.inv.s3|0)>=uc[1]&&!MSMP?'':' disabled')+'>⬆️ เป็น'+RN[it.r+1]+'<br><small>'+uc[0].toLocaleString()+' ทอง'+(uc[1]?' · หิน '+uc[1]:'')+'</small></button>':'<button disabled>ระดับสูงสุด</button>')+'</div></div>'}).join('<hr>')+'</div>';
   h+=dawnSetH();ov.innerHTML='<div class="pn" data-pn="msm">'+h+'</div>'}
-function msmAct(a){const sl=a.slice(1),it=me.eq[sl];if(!it)return;let nr=it.r,cost=0,st=0;
+let MSMP=null;/* ผลหลอมใหม่ที่รอเลือก {sl,old,ni} */
+function msmCmpH(P){const o=P.old,n=P.ni,c=gCmp(n),ks=[...new Set([...Object.keys(o.st),...Object.keys(n.st)])];
+  const row=(it,k)=>it.st[k]?stLabel(k,eff(it,k)):'<span style="opacity:.4">—</span>';
+  const tag=v=>'<b style="color:'+RCL[v.r]+'">'+itemName(v)+'</b>';
+  let h='<div class="card msmc"><div class="cap">🔁 ผลการหลอมใหม่ · เลือกค่าที่จะใช้</div><div class="msmg"><div class="msmh">ค่าเดิม</div><div class="msmh">ค่าใหม่ '+c.badge+'</div>';
+  h+='<div class="msmn">'+tag(o)+'</div><div class="msmn">'+tag(n)+'</div>';
+  ks.forEach(k=>{const v1=o.st[k]?eff(o,k):0,v2=n.st[k]?eff(n,k):0,d=v2-v1,ar=Math.abs(d)<1e-9?'<span style="opacity:.5">=</span>':d>0?UP:DN;
+    h+='<div class="msmv">'+row(o,k)+'</div><div class="msmv">'+row(n,k)+' '+ar+(Math.abs(d)>1e-9?' <small>('+(d>0?'+':'-')+gNum(k,Math.abs(d))+gUnit(k)+')</small>':'')+'</div>'});
+  h+='</div><div class="bt" style="margin-top:8px"><button data-msm="o'+P.sl+'">↩️ เก็บค่าเดิม</button><button class="pri" data-msm="k'+P.sl+'">✅ ใช้ค่าใหม่</button></div>'+
+    '<small style="display:block;margin-top:6px;opacity:.7">ค่าตีบวก +'+(o.u|0)+' และการล็อกยังอยู่ทั้งสองแบบ · ต้องเลือกก่อนหลอมชิ้นอื่น</small></div>';
+  return h}
+function msmAct(a){const sl=a.slice(1);
+  if(a[0]==='k'||a[0]==='o'){const P=MSMP;if(!P||P.sl!==sl)return msmUI();MSMP=null;
+    if(a[0]==='k'&&me.eq[sl]===P.old){me.eq[sl]=P.ni;recalc();sfx('equip');return msmUI('✅ ใช้ค่าใหม่แล้ว · '+itemName(P.ni))}
+    sfx('click');return msmUI('↩️ เก็บค่าเดิมไว้ · '+itemName(P.old))}
+  if(MSMP)return msmUI('เลือกผลหลอมใหม่ของชิ้นก่อนหน้าก่อน');
+  const it=me.eq[sl];if(!it)return;let nr=it.r,cost=0,st=0;
   if(a[0]==='r'){cost=msmReroll(it)}else{const uc=msmUpCost(it);if(!uc)return;cost=uc[0];st=uc[1];nr=it.r+1}
   if(me.gold<cost||(me.inv.s3|0)<st)return msmUI('ทองหรือหินไม่พอ');me.gold-=cost;me.inv.s3-=st;
-  const old=it,ni=it.ss&&nr===5&&SETS[it.ss]?makeSetItem(it.ss,sl):genItem(it.L,sl,nr,nr);ni.u=it.u|0;if(it.lk)ni.lk=1;me.eq[sl]=ni;recalc();sfx(a[0]==='u'?'up':'equip');
-  if(nr>=4&&a[0]==='u'){me.stt.leg=1;burst(me.x,me.y-10,nr>=5?['#ff8a8a','#ffffff','#ff3b4a']:['#ffe08a','#ffffff','#ffb030'],nr>=5?70:40,160,1,{glow:1,g:-30})}
-  msmUI((a[0]==='u'?'⬆️ ยกระดับสำเร็จ! ':'🔁 หลอมใหม่แล้ว · ')+itemName(ni)+'<br><small>ใหม่: '+Object.keys(ni.st).map(k=>stLabel(k,eff(ni,k))).join(' · ')+'</small><br><small style="opacity:.65">เดิม: '+Object.keys(old.st).map(k=>stLabel(k,eff(old,k))).join(' · ')+'</small>')}
+  const old=it,ni=it.ss&&nr===5&&SETS[it.ss]?makeSetItem(it.ss,sl):genItem(it.L,sl,nr,nr);ni.u=it.u|0;if(it.lk)ni.lk=1;
+  if(a[0]==='r'){MSMP={sl,old,ni};sfx('up');return msmUI()}
+  me.eq[sl]=ni;recalc();sfx('up');
+  if(nr>=4){me.stt.leg=1;burst(me.x,me.y-10,nr>=5?['#ff8a8a','#ffffff','#ff3b4a']:['#ffe08a','#ffffff','#ffb030'],nr>=5?70:40,160,1,{glow:1,g:-30})}
+  msmUI('⬆️ ยกระดับสำเร็จ! '+itemName(ni)+'<br><small>ใหม่: '+Object.keys(ni.st).map(k=>stLabel(k,eff(ni,k))).join(' · ')+'</small><br><small style="opacity:.65">เดิม: '+Object.keys(old.st).map(k=>stLabel(k,eff(old,k))).join(' · ')+'</small>')}
 /* ---------- ร้านของหายาก: สินค้าหมุนเวียนรายวัน (เหมือนกันทุกคน) ---------- */
 const RARE=[{id:'lg',ic:'👑',n:'อุปกรณ์ Relic (สุ่มชิ้น)',p:250000,lim:1,f:()=>{giveGear(4);return'ได้อุปกรณ์ Relic!'}},
  {id:'cd',ic:'🃏',n:'ซองการ์ดทะเลทราย (สุ่ม 1 ใบ)',p:120000,lim:2,f:()=>{cardGet(['mum','sco','anu'][Math.random()*3|0]);return'เปิดซองการ์ดแล้ว!'}},
@@ -4553,6 +4571,11 @@ function uisMini(MP,WW,draw){const R=40,cx=W-R-8,cy=R+20,sq=R*1.42,mx=cx-sq/2,my
 #stq.min b{margin:0!important;font-size:14px!important;line-height:1}
 #stq.min em{font:800 12px/1 system-ui;font-style:normal;color:#ffe6a8}
 #stq.min.al{animation:stqP 1.4s ease-in-out infinite}@keyframes stqP{50%{box-shadow:0 0 0 2px rgba(255,208,112,.6),0 0 16px rgba(255,200,90,.7)}}
+
+.msmc{border:1.5px solid #e2bc6a!important;box-shadow:0 0 0 1px rgba(226,188,106,.3),0 0 18px rgba(226,188,106,.25)!important}
+.msmg{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;font-size:12.5px;margin-top:6px}
+.msmh{font-weight:800;color:#d8bd84;border-bottom:1px solid rgba(216,176,96,.3);padding-bottom:3px}
+.msmn{font-size:12px;margin-bottom:2px}.msmv{line-height:1.45}
 `;const s=document.createElement('style');s.id='uiskin';s.textContent=css;document.head.appendChild(s);
   const go=()=>{const h=document.getElementById('hud'),bars=document.getElementById('bars');if(!h||!bars){setTimeout(go,200);return}
     if(!document.getElementById('hpor')){const p=document.createElement('div');p.id='hpor';p.innerHTML='<img alt="">';h.prepend(p)}
