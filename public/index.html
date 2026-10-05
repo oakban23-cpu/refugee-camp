@@ -1004,7 +1004,7 @@ function stTxt(){stInit();const q=me.sty,st=STY[q.s];if(!st)return'✅ จบภ
   if(st.k&&q.a===0&&STNPC[st.k]&&STNPC[st.k][0]===curMap&&(!st.lv||me.lv>=st.lv))t='❗ '+t;return t}
 function stHud(){const e=$('stq');if(!e)return;const sh=!!(me.cls&&run);if(!sh){if(!e.hidden)e.hidden=true;return}stInit();const q=me.sty,st=STY[q.s];
   let mn=0;try{mn=localStorage.getItem('refugee_stqmin')==='1'}catch(_){mn=!!window._stqMin}const tx=stTxt(),al=!!(st&&st.k&&q.a===0&&(!st.lv||me.lv>=st.lv)),pg=(String(tx).match(/\d+\s*\/\s*\d+/)||[''])[0];
-  const h=mn?'<b>📜</b><em>'+(al?'❗':pg||'เควส')+'</em>':'<i class="sqx" data-sqx="1" aria-label="ย่อ"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M6.6 1.6 3.2 5l3.4 3.4" fill="none" stroke="#24170a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>📜 '+(st?STCH[st.c]:'รอยผนึกแตก')+'</b><span>'+tx+'</span>';if(e.dataset.h!==h){e.dataset.h=h;e.innerHTML=h}e.classList.toggle('min',mn);if(e.hidden)e.hidden=false;e.classList.toggle('al',!!(st&&st.k&&q.a===0&&(!st.lv||me.lv>=st.lv)))}
+  const h=mn?'<b>📜</b><em>'+(al?'❗':pg||'เควส')+'</em>':'<i class="sqx" data-sqx="1" aria-label="ย่อ"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M6.7 1.7 3.5 5l3.2 3.3" fill="none" stroke="#24170a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>📜 '+(st?STCH[st.c]:'รอยผนึกแตก')+'</b><span>'+tx+'</span>';if(e.dataset.h!==h){e.dataset.h=h;e.innerHTML=h}e.classList.toggle('min',mn);if(e.hidden)e.hidden=false;e.classList.toggle('al',!!(st&&st.k&&q.a===0&&(!st.lv||me.lv>=st.lv)))}
 function stNpcPos(k){const a=STNPC[k];if(!a||a[0]!==curMap)return null;if(a[0]===9){const N=cityNpc(k);return N?{x:N.x,y:N.y+4}:null}if(k==='hd')return{x:HRD.x,y:HRD.y-30};const N=MAPS[curMap][a[1]];return N?{x:N.x,y:N.y+(k==='cmd'?4:0)}:null}
 function drawStMark(){const st=stCur();if(!st||!st.k||me.sty.a!==0||(st.lv&&me.lv<st.lv))return;const p=stNpcPos(st.k);if(!p)return;const t=performance.now()/1000,y=p.y-46+Math.sin(t*4)*3;
   g.save();g.font='bold 22px system-ui';g.textAlign='center';g.lineWidth=4;g.strokeStyle='#2a1a00';g.strokeText('!',p.x,y);g.fillStyle='#ffd84a';g.shadowColor='#ffb020';g.shadowBlur=10;g.fillText('!',p.x,y);g.restore()}
@@ -4421,7 +4421,13 @@ function rxUI(){if(!me.cls)return;ov.dataset.k='rx';ov.hidden=false;const dsc=me
 /* ===== UI สกินแฟนตาซี: กรอบน้ำเงินเข้มขอบทอง (HUD · ปุ่ม · เควส · มินิแมพ · จอย) ===== */
 const UIS={pk:''};
 function uisPortrait(){try{if(!me.cls)return;const sv={eq:me.eq,cls2:me.cls2,br:me.br},L=csLook(sv),k=me.cls+csC2(me.cls,sv)+L.w+'.'+L.a+'.'+L.h+'.'+L.b;
-  if(k===UIS.pk)return;UIS.pk=k;const im=document.querySelector('#hpor img');if(im)im.src=csPortrait(me.cls,sv)}catch(e){}}
+  if(k===UIS.pk)return;UIS.pk=k;const im=document.querySelector('#hpor img');if(!im)return;
+  /* วาดตัวละครเองแล้วครอปที่หัว (ไม่พึ่งรูปหน้าเลือกตัวละคร ซึ่งเพี้ยนเมื่อใส่ชุดใหญ่) */
+  const CW=220,CH=260,cv=document.createElement('canvas');cv.width=CW;cv.height=CH;const g0=g;
+  try{g=cv.getContext('2d');g.setTransform(2.6,0,0,2.6,CW/2,CH*.68);drawChar(0,0,me.cls,1,0,L.h,1.2,L.b,L.w,L.a,csC2(me.cls,sv))}catch(e){}finally{g=g0}
+  const sz=92,o=document.createElement('canvas');o.width=o.height=128;const ox=o.getContext('2d'),hy=CH*.68-2.6*19.7;
+  const rg=ox.createRadialGradient(64,64,6,64,64,70);rg.addColorStop(0,CL[me.cls].c+'55');rg.addColorStop(1,CL[me.cls].c+'00');ox.fillStyle=rg;ox.fillRect(0,0,128,128);
+  ox.drawImage(cv,CW/2-sz/2,hy-sz*.46,sz,sz,0,0,128,128);im.src=o.toDataURL()}catch(e){}}
 /* จอยสติ๊กโลหะ (วาดบน canvas) */
 function uisJoy(cx,cy,kx,ky,act){const R=40;g.save();
   const og=g.createRadialGradient(cx,cy-8,8,cx,cy,R+6);og.addColorStop(0,'rgba(40,48,66,'+(act?.55:.42)+')');og.addColorStop(1,'rgba(10,12,20,'+(act?.7:.55)+')');
@@ -4456,7 +4462,7 @@ function uisMini(MP,WW,draw){const R=40,cx=W-R-8,cy=R+20,sq=R*1.42,mx=cx-sq/2,my
 #hpor{position:absolute;left:-6px;top:50%;transform:translateY(-50%);width:62px;height:62px;border-radius:50%;overflow:hidden;
   background:radial-gradient(circle at 50% 30%,#34446a,#0e1424 75%);border:2.5px solid #e2bc6a;
   box-shadow:0 0 0 2px #2a1a08,0 0 0 3.5px rgba(226,188,106,.55),0 4px 10px rgba(0,0,0,.6),inset 0 -6px 12px rgba(0,0,0,.45)}
-#hpor img{position:absolute;width:112px;height:131px;left:-26px;top:-6px;pointer-events:none}
+#hpor img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 #lvb{font-size:25px!important;color:#f6d690!important;min-width:54px!important;text-shadow:0 2px 0 #3a2408,0 0 10px rgba(246,214,144,.3);letter-spacing:.5px}
 #bars{position:relative;gap:3px!important}
 #bars .bar{border:1px solid rgba(216,176,96,.6)!important;background:rgba(0,0,0,.62)!important;border-radius:999px;box-shadow:inset 0 2px 3px rgba(0,0,0,.6)!important}
@@ -4497,7 +4503,11 @@ function uisMini(MP,WW,draw){const R=40,cx=W-R-8,cy=R+20,sq=R*1.42,mx=cx-sq/2,my
 #sk #ph{background:radial-gradient(circle at 50% 32%,#5a1a20,#260a0e 70%)!important}
 #sk #pm{background:radial-gradient(circle at 50% 32%,#1a2c5a,#0a1228 70%)!important}
 #sk #ph small,#sk #pm small{position:absolute;bottom:3px;right:6px;font-size:10px!important}
-#sk #tg,#sk #atb,#sk #ahb:not(.on),#sk #mtb{background:radial-gradient(circle at 50% 30%,#2a3656,#121a2e 70%)!important}
+#sk #tg,#sk #atb:not(.on),#sk #ahb:not(.on),#sk #mtb{background:radial-gradient(circle at 50% 30%,#2a3656,#121a2e 70%)!important}
+#sk #atb:not(.on),#sk #ahb:not(.on){color:#aab4cc!important;opacity:.92}
+#sk #atb.on{background:radial-gradient(circle at 50% 32%,#4ae08a,#178a48 58%,#0a4a24)!important;border-color:#b8ffd0!important;color:#fff!important;box-shadow:0 0 0 1.5px #0a2414,0 0 14px rgba(80,255,150,.75),0 3px 9px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.3)!important;animation:atbP 1.6s ease-in-out infinite}
+@keyframes atbP{50%{box-shadow:0 0 0 1.5px #0a2414,0 0 22px rgba(80,255,150,.95),0 3px 9px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.3)}}
+#sk #ahb.on{border-color:#ffe0a0!important;box-shadow:0 0 0 1.5px #2a1404,0 0 14px rgba(255,170,60,.75),0 3px 9px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.3)!important}
 #sk .lkd{filter:saturate(.35) brightness(.8)}
 
 /* ===== แผงเมนูทั้งหมด: น้ำเงินเข้มขอบทอง ===== */
@@ -4529,7 +4539,8 @@ function uisMini(MP,WW,draw){const R=40,cx=W-R-8,cy=R+20,sq=R*1.42,mx=cx-sq/2,my
 
 /* กล่องเควส: ย่อ/ขยาย */
 #stq{max-width:178px!important;font-size:11px!important}
-#stq .sqx{position:absolute;top:4px;right:5px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:800 13px/1 system-ui;font-style:normal;color:#24170a;background:linear-gradient(180deg,#ffe29a,#c99a40);box-shadow:0 0 0 1px #1a1208;cursor:pointer}
+#stq .sqx svg{display:block;width:10px;height:10px;margin:0}
+#stq .sqx{position:absolute;top:4px;right:5px;width:18px!important;height:18px!important;margin:0!important;padding:0;box-sizing:border-box;border-radius:50%;display:flex!important;align-items:center;justify-content:center;line-height:0!important;font:800 13px/1 system-ui;font-style:normal;color:#24170a;background:linear-gradient(180deg,#ffe29a,#c99a40);box-shadow:0 0 0 1px #1a1208;cursor:pointer}
 #stq:not(.min)::after{top:auto!important;bottom:5px;transform:none!important;font-size:17px!important}
 #stq:not(.min) b{padding-right:16px}
 #stq.min{padding:5px 10px!important;display:flex;align-items:center;gap:5px;border-radius:999px!important;max-width:none!important}
