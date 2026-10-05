@@ -3584,7 +3584,7 @@ const CS_ORD=['melee','archer','mage','assn','sup'],CS_SL=['w','a','h','b','c'];
 .csw #srvbox b{color:#e7b75a!important}
 .csw textarea,.csw input{border-radius:10px;border:1px solid rgba(255,236,205,.2)!important;background:rgba(0,0,0,.35)!important;color:#ece3d3!important}
 .csw .row{gap:6px}
-body:has(#ov>.csw) #hud{visibility:hidden}
+body:has(#ov:not([hidden])>.csw) #hud{visibility:hidden}
 @media (max-width:360px){.cs-stage canvas{height:250px}.cs-nm{font-size:19px}}
 `;const s=document.createElement('style');s.textContent=css;document.head.appendChild(s)})();
 function csLook(sv){const e=sv&&sv.eq||{};return{w:lkc(e.w),a:lkc(e.a),h:lkc(e.h),b:lkc(e.b),wu:(e.w&&e.w.u)|0}}
