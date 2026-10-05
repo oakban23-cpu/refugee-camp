@@ -3513,6 +3513,139 @@ function proSfx(i){try{abus();const L=[
 const R4=Math.random;
 function proImpact(sc){try{abus();sBoom(55,.6+sc*.2,Math.min(.5,.2+sc*.12),0,.5);sCrack(.12,0,2000)}catch(e){}}
 
+/* ===== หน้าเลือกตัวละคร v2 · เวทีโชว์ตัวละคร ===== */
+let csSel='',csRAF=0;const _csPt={};
+const CS_ORD=['melee','archer','mage','assn','sup'],CS_SL=['w','a','h','b','c'];
+(function(){const css=`
+#ov:has(>.csw){padding:0;gap:0;background:#0b0910;-webkit-backdrop-filter:none;backdrop-filter:none}
+#ov:has(>.csw)::before{content:'';position:fixed;inset:0;background:linear-gradient(180deg,rgba(9,7,13,.7),rgba(9,7,13,.93) 55%,#09070d),url(cover.jpg) center/cover;filter:blur(3px);transform:scale(1.04);z-index:-1;pointer-events:none}
+.csw{position:relative;display:flex;flex-direction:column;gap:12px;padding:14px 14px 22px;max-width:520px;width:100%;margin:0 auto;box-sizing:border-box;color:#ece3d3}
+.cs-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cs-lg{font-family:"Cinzel Decorative","Cinzel",Georgia,serif;font-weight:900;font-size:26px;letter-spacing:.08em;line-height:1;background:linear-gradient(180deg,#ffe9a8,#c8861e);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 6px rgba(0,0,0,.7))}
+.cs-lg small{display:block;font-family:system-ui,sans-serif;font-size:11px;letter-spacing:.3em;margin-top:3px;-webkit-text-fill-color:#c99a3b;color:#c99a3b;font-weight:700}
+.cs-net{display:flex;flex-direction:column;align-items:flex-end;gap:3px;min-width:0}
+.cs-net p{margin:0;font-size:10.5px;line-height:1.3;color:#a69c8c;text-align:right;padding:3px 9px;border-radius:999px;background:rgba(255,244,225,.06);border:1px solid rgba(255,236,205,.1);max-width:220px}
+.cs-stage{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(255,236,205,.14);box-shadow:0 18px 40px rgba(0,0,0,.6),inset 0 0 0 1px rgba(0,0,0,.4);background:#100b16}
+.cs-stage canvas{display:block;width:100%;height:290px}
+.cs-cap{position:absolute;left:0;right:0;top:0;padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}
+.cs-nm{font-size:22px;font-weight:800;line-height:1.15;text-shadow:0 2px 8px #000}
+.cs-nm small{display:block;font-size:12px;font-weight:700;margin-top:3px;letter-spacing:.02em}
+.cs-ttl{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;color:#ffd84a;padding:2px 8px;border-radius:999px;background:rgba(0,0,0,.45);border:1px solid rgba(255,216,74,.35)}
+.cs-lv{text-align:center;min-width:58px;padding:6px 8px;border-radius:14px;background:rgba(10,8,14,.6);border:1px solid rgba(255,236,205,.18);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.cs-lv b{display:block;font-size:24px;line-height:1;color:#ffe2a0;font-weight:800}
+.cs-lv span{font-size:10px;letter-spacing:.2em;color:#a69c8c;font-weight:700}
+.cs-chips{position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:6px;flex-wrap:wrap;pointer-events:none}
+.cs-chip{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(10,8,14,.62);border:1px solid rgba(255,236,205,.16);color:#ece3d3;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.cs-chip.gd{color:#ffd77a}.cs-chip.nw{color:#9fe0a2;border-color:rgba(120,198,124,.4)}
+.cs-card{background:rgba(23,20,27,.82);border:1px solid rgba(255,236,205,.1);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.cs-d{margin:0;font-size:13px;line-height:1.55;color:#cfc5b4}
+.cs-sk{display:flex;gap:6px;flex-wrap:wrap}
+.cs-sk span{font-size:12px;font-weight:700;padding:4px 10px;border-radius:9px;background:rgba(255,244,225,.07);border:1px solid rgba(255,236,205,.1)}
+.cs-st{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;font-size:11.5px;color:#a69c8c;font-weight:600}
+.cs-st i{display:block;height:6px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+.cs-st i b{display:block;height:100%;border-radius:999px}
+.cs-eq{display:flex;gap:6px}
+.cs-eq div{flex:1;aspect-ratio:1;max-width:56px;display:grid;place-items:center;font-size:20px;border-radius:12px;background:rgba(255,244,225,.05);border:1.5px solid rgba(255,236,205,.1);position:relative}
+.cs-eq div.e0{opacity:.35;filter:grayscale(1)}
+.cs-eq div u{position:absolute;right:3px;bottom:1px;font-size:9.5px;font-weight:800;text-decoration:none;color:#ffe2a0;text-shadow:0 1px 2px #000}
+.cs-eq img{width:70%;height:70%}
+.cs-act{display:flex;gap:8px}
+.csw .cs-go{flex:1;padding:15px 18px;border-radius:16px;font-size:17px;font-weight:800;letter-spacing:.03em;color:#20180c;border:0;background:linear-gradient(180deg,#f6d58a,#d99a3a);box-shadow:0 8px 22px rgba(217,154,58,.35),inset 0 1px 0 rgba(255,255,255,.5)}
+.csw .cs-go:disabled{opacity:.45}
+.csw .cs-del{flex:0 0 auto;padding:0 14px;border-radius:16px;font-size:12px;font-weight:700;color:#e8908a;background:rgba(224,100,90,.08);border:1px solid rgba(224,100,90,.3)}
+.csw .cs-del.arm{color:#fff;background:#b8352b;border-color:#e0645a}
+.cs-h{font-size:12px;font-weight:700;color:#a69c8c;letter-spacing:.06em;margin:2px 2px -4px}
+.cs-cls{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.csw .cs-cls button{position:relative;padding:6px 2px 7px;border-radius:14px;background:rgba(23,20,27,.8);border:1.5px solid rgba(255,236,205,.1);display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;color:#cfc5b4}
+.csw .cs-cls button.on{border-color:var(--cc);background:linear-gradient(180deg,color-mix(in srgb,var(--cc) 26%,transparent),rgba(23,20,27,.85));box-shadow:0 0 0 1px var(--cc),0 6px 18px color-mix(in srgb,var(--cc) 35%,transparent);color:#fff}
+.cs-cls img{width:100%;max-width:58px;aspect-ratio:6/7;display:block;pointer-events:none}
+.cs-cls small{font-size:10px;font-weight:700;line-height:1.2;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;pointer-events:none}
+.cs-cls em{position:absolute;top:4px;right:4px;font-style:normal;font-size:9.5px;font-weight:800;padding:1px 5px;border-radius:999px;background:#e7b75a;color:#20180c;pointer-events:none}
+.cs-cls em.n{background:rgba(255,255,255,.12);color:#a69c8c}
+.csw details{background:rgba(23,20,27,.7);border:1px solid rgba(255,236,205,.1);border-radius:14px;padding:10px 12px;font-size:13px}
+.csw details summary{cursor:pointer;color:#e7b75a;font-weight:700}
+.csw details p{color:#cfc5b4;line-height:1.55}
+.csw #srvbox{border:1px solid rgba(255,236,205,.14)!important;border-radius:14px;background:rgba(23,20,27,.7);margin-top:0!important}
+.csw #srvbox b{color:#e7b75a!important}
+.csw textarea,.csw input{border-radius:10px;border:1px solid rgba(255,236,205,.2)!important;background:rgba(0,0,0,.35)!important;color:#ece3d3!important}
+.csw .row{gap:6px}
+body:has(#ov>.csw) #hud{visibility:hidden}
+@media (max-width:360px){.cs-stage canvas{height:250px}.cs-nm{font-size:19px}}
+`;const s=document.createElement('style');s.textContent=css;document.head.appendChild(s)})();
+function csLook(sv){const e=sv&&sv.eq||{};return{w:lkc(e.w),a:lkc(e.a),h:lkc(e.h),b:lkc(e.b),wu:(e.w&&e.w.u)|0}}
+function csC2(k,sv){return sv&&sv.cls2?(sv.br===2&&CL2B[k]?2:1):0}
+function csPortrait(k,sv){const L=csLook(sv),c2=csC2(k,sv),key=k+c2+L.w+'.'+L.a+'.'+L.h+'.'+L.b;if(_csPt[key])return _csPt[key];
+  const cv=document.createElement('canvas');cv.width=120;cv.height=140;const g0=g;
+  try{g=cv.getContext('2d');const x=g;const rg=x.createRadialGradient(60,96,4,60,96,64);rg.addColorStop(0,CL[k].c+'66');rg.addColorStop(1,CL[k].c+'00');x.fillStyle=rg;x.fillRect(0,0,120,140);
+    x.fillStyle='rgba(0,0,0,.35)';x.beginPath();x.ellipse(60,126,30,7,0,0,7);x.fill();
+    x.setTransform(2.9,0,0,2.9,60,82);drawChar(0,0,k,1,0,L.h,1.2,L.b,L.w,L.a,c2)}catch(e){}finally{g=g0}
+  return _csPt[key]=cv.toDataURL()}
+function csDraw(cv){const dpr=Math.min(2.5,window.devicePixelRatio||1),Wc=cv.clientWidth||360,Hc=cv.clientHeight||290;
+  if(cv.width!==Math.round(Wc*dpr)||cv.height!==Math.round(Hc*dpr)){cv.width=Math.round(Wc*dpr);cv.height=Math.round(Hc*dpr)}
+  const x=cv.getContext('2d'),k=csSel,C=CL[k],sv=saves.chars[k],L=csLook(sv),c2=csC2(k,sv),t=performance.now()/1000,col=C.c,W=Wc,H=Hc,cx=W/2,fy=H*.8;
+  x.setTransform(dpr,0,0,dpr,0,0);
+  /* ฟ้า */
+  let gr=x.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#140e22');gr.addColorStop(.6,'#1c1420');gr.addColorStop(1,'#0c0808');x.fillStyle=gr;x.fillRect(0,0,W,H);
+  gr=x.createRadialGradient(cx,fy-40,10,cx,fy-40,W*.7);gr.addColorStop(0,col+'55');gr.addColorStop(.5,col+'14');gr.addColorStop(1,col+'00');x.fillStyle=gr;x.fillRect(0,0,W,H);
+  /* แสงลำจากด้านบน */
+  x.save();x.globalCompositeOperation='lighter';for(let i=0;i<4;i++){const ox=cx+(i-1.5)*46+Math.sin(t*.4+i)*14,a=.05+.03*Math.sin(t*.7+i*2);const lg=x.createLinearGradient(0,0,0,fy);lg.addColorStop(0,'rgba(255,230,180,'+a+')');lg.addColorStop(1,'rgba(255,230,180,0)');x.fillStyle=lg;x.beginPath();x.moveTo(ox-10,0);x.lineTo(ox+14,0);x.lineTo(ox+44,fy);x.lineTo(ox-30,fy);x.closePath();x.fill()}x.restore();
+  /* หินเงาฉากหลัง */
+  x.fillStyle='rgba(6,4,8,.75)';x.beginPath();x.moveTo(0,fy-30);for(let i=0;i<=12;i++){const px=W*i/12,py=fy-38-((i*37)%5)*7-(i%3?0:18);x.lineTo(px,py)}x.lineTo(W,H);x.lineTo(0,H);x.closePath();x.fill();
+  /* แท่นยืน */
+  gr=x.createLinearGradient(0,fy-8,0,fy+40);gr.addColorStop(0,'#3a3240');gr.addColorStop(1,'#120e14');x.fillStyle=gr;x.beginPath();x.ellipse(cx,fy+8,W*.36,30,0,0,7);x.fill();
+  x.fillStyle='#4a4250';x.beginPath();x.ellipse(cx,fy,W*.34,24,0,0,7);x.fill();gr=x.createRadialGradient(cx,fy,4,cx,fy,W*.34);gr.addColorStop(0,'#5a5262');gr.addColorStop(1,'#2a2430');x.fillStyle=gr;x.beginPath();x.ellipse(cx,fy,W*.33,22,0,0,7);x.fill();
+  /* วงเวทหมุน */
+  x.save();x.translate(cx,fy);x.scale(1,.3);x.globalCompositeOperation='lighter';const R=W*.27,pu=.55+.25*Math.sin(t*2);
+  x.strokeStyle=col;x.globalAlpha=pu;x.lineWidth=2.2;x.beginPath();x.arc(0,0,R,0,7);x.stroke();x.lineWidth=1.2;x.beginPath();x.arc(0,0,R*.78,0,7);x.stroke();
+  x.rotate(t*.5);for(let i=0;i<12;i++){x.rotate(Math.PI/6);x.beginPath();x.moveTo(R*.8,0);x.lineTo(R*.96,0);x.stroke();x.fillStyle=col;x.beginPath();x.arc(R*.89,R*.07,1.8,0,7);x.fill()}
+  x.rotate(-t*1.1);x.globalAlpha=pu*.7;x.beginPath();for(let i=0;i<=6;i++){const a=i*Math.PI*2/3*2;i?x.lineTo(Math.cos(a)*R*.74,Math.sin(a)*R*.74):x.moveTo(Math.cos(a)*R*.74,Math.sin(a)*R*.74)}x.stroke();
+  x.globalAlpha=.5;gr=x.createRadialGradient(0,0,0,0,0,R);gr.addColorStop(0,col+'88');gr.addColorStop(1,col+'00');x.fillStyle=gr;x.beginPath();x.arc(0,0,R,0,7);x.fill();x.restore();
+  /* ตัวละคร */
+  const S=Math.min(3.4,H*.44/40),cyc=t%4.2,ak=cyc>3.6&&cyc<3.95?(cyc-3.6)/.35:0;
+  x.fillStyle='rgba(0,0,0,.45)';x.beginPath();x.ellipse(cx,fy+2,15*S*.75,4*S*.75,0,0,7);x.fill();
+  if(L.wu>=7||L.w%20>=10||L.a%20>=10){x.save();x.globalCompositeOperation='lighter';const hc=L.a%10===8||L.w%10===8?'255,214,120':'255,190,90';gr=x.createRadialGradient(cx,fy-12*S,4,cx,fy-12*S,26*S);gr.addColorStop(0,'rgba('+hc+','+(.22+.08*Math.sin(t*3))+')');gr.addColorStop(1,'rgba('+hc+',0)');x.fillStyle=gr;x.fillRect(cx-30*S,fy-40*S,60*S,46*S);x.restore()}
+  const g0=g;try{g=x;x.save();x.translate(cx,fy-13*S*.0);x.scale(S,S);x.translate(0,-15);drawChar(0,0,k,1,0,L.h,t,L.b,L.w,L.a,c2,ak);x.restore()}catch(e){x.restore()}finally{g=g0}
+  /* ประกายไฟลอย */
+  x.save();x.globalCompositeOperation='lighter';for(let i=0;i<26;i++){const sp=.05+(i%5)*.018,q=(t*sp+i*.137)%1,px=(i*97.3%W)+Math.sin(t*.8+i)*12,py=H-q*H*1.05,a=Math.sin(q*Math.PI);x.fillStyle=i%3?'rgba(255,190,110,'+(.7*a)+')':col;x.globalAlpha=i%3?1:.8*a;x.beginPath();x.arc(px,py,.8+(i%3)*.7,0,7);x.fill()}x.restore();
+  /* ขอบมืด */
+  gr=x.createRadialGradient(cx,H*.55,H*.35,cx,H*.55,W*.85);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.55)');x.fillStyle=gr;x.fillRect(0,0,W,H);
+  gr=x.createLinearGradient(0,0,0,90);gr.addColorStop(0,'rgba(8,6,12,.75)');gr.addColorStop(1,'rgba(8,6,12,0)');x.fillStyle=gr;x.fillRect(0,0,W,90);
+  gr=x.createLinearGradient(0,H-60,0,H);gr.addColorStop(0,'rgba(8,6,12,0)');gr.addColorStop(1,'rgba(8,6,12,.7)');x.fillStyle=gr;x.fillRect(0,H-60,W,60)}
+function csLoop(){const cv=document.getElementById('csv');if(!cv||!cv.isConnected||ov.hidden||false){csRAF=0;return}try{csDraw(cv)}catch(e){}csRAF=requestAnimationFrame(csLoop)}
+function intro(){
+  const ks=CS_ORD.filter(k=>CL[k]).concat(Object.keys(CL).filter(k=>!CS_ORD.includes(k)));
+  if(!CL[csSel])csSel=CL[saves.last]&&saves.chars[saves.last]?saves.last:(ks.find(k=>saves.chars[k])||ks[0]);
+  const k=csSel,C=CL[k],sv=saves.chars[k],wait=saveMode==='wait',c2=csC2(k,sv),sub=c2===2?CL2B[k]&&CL2B[k].n:c2===1?CL2[k]&&CL2[k].n:'';
+  const tt=sv&&sv.title&&ACHM[sv.title]?ACHM[sv.title][1]:'';
+  const bar=(lab,v,m)=>'<span>'+lab+'</span><i><b style="width:'+Math.round(Math.max(.08,Math.min(1,v/m))*100)+'%;background:linear-gradient(90deg,'+C.c+'aa,'+C.c+')"></b></i>';
+  const eq=CS_SL.map(s=>{const it=sv&&sv.eq&&sv.eq[s];if(!it)return'<div class="e0">'+(SI[s]||'')+'</div>';const rc=it.ss?'#ffd84a':RC[it.r]||RC[0];let ic=SI[s]||'';
+      try{if(s==='h')ic='<img src="'+helmIcon(it)+'" alt="">'}catch(e){}
+      return'<div style="border-color:'+rc+';box-shadow:inset 0 0 12px '+rc+'44">'+ic+(it.u?'<u>+'+it.u+'</u>':'')+'</div>'}).join('');
+  ov.dataset.k='';
+  ov.innerHTML='<div class="csw">'+
+   '<div class="cs-top"><div class="cs-lg">REFUGEE<small>ค่ายผู้อพยพ</small></div><div class="cs-net"><p id="st"></p><p id="sv">'+(wait?'กำลังโหลดข้อมูลบันทึก...':'บันทึก: '+saveState)+'</p></div></div>'+
+   '<div class="cs-stage"><canvas id="csv"></canvas><div class="cs-cap"><div class="cs-nm" style="color:#fff">'+C.n+(sub?'<small style="color:'+C.c+';filter:brightness(1.5)">✦ '+sub+'</small>':'<small style="color:#a69c8c">อาชีพขั้นต้น</small>')+(tt?'<span class="cs-ttl">«'+tt+'»</span>':'')+'</div>'+
+     (sv?'<div class="cs-lv"><span>LEVEL</span><b>'+sv.lv+'</b></div>':'')+'</div>'+
+     '<div class="cs-chips">'+(sv?'<span class="cs-chip gd">🪙 '+(sv.gold|0).toLocaleString()+'</span>'+(saves.last===k?'<span class="cs-chip">⏱ เล่นล่าสุด</span>':''):'<span class="cs-chip nw">✦ ยังไม่มีตัวละคร</span>')+'</div></div>'+
+   '<div class="cs-h">เลือกอาชีพ</div><div class="cs-cls">'+ks.map(q=>{const s2=saves.chars[q];return'<button data-cs="'+q+'" class="'+(q===k?'on':'')+'" style="--cc:'+CL[q].c+'" aria-label="'+CL[q].n+'"><img alt="" src="'+csPortrait(q,s2)+'"><small>'+CL[q].n+'</small>'+(s2?'<em>Lv'+s2.lv+'</em>':'<em class="n">ใหม่</em>')+'</button>'}).join('')+'</div>'+
+   '<div class="cs-act"><button class="cs-go" data-c="'+k+'"'+(wait?' disabled':'')+'>'+(sv?'▶ เล่นต่อ':'✦ เริ่มผจญภัย')+'</button>'+
+     (sv?'<button class="cs-del'+(delArm===k?' arm':'')+'" data-del="'+k+'"'+(wait?' disabled':'')+'>'+(delArm===k?'ยืนยันลบ?':'ลบเซฟ')+'</button>':'')+'</div>'+
+   '<div class="cs-card"><p class="cs-d">'+C.d+'</p>'+
+     '<div class="cs-sk">'+(C.s||[]).slice(0,3).map(s=>'<span>✧ '+s+'</span>').join('')+'</div>'+
+     '<div class="cs-st">'+bar('พลังชีวิต',C.hp,140)+bar('พลังโจมตี',C.dmg,18)+bar('ระยะโจมตี',C.rg,260)+bar('ความเร็ว',C.sp,150)+'</div>'+
+     (sv?'<div class="cs-eq">'+eq+'</div>':'')+'</div>'+
+   '<details><summary>📖 วิธีเล่น</summary><p>มอนสเตอร์ทยอยบุกเข้ามาที่ค่ายกลางแมพ อัศวินยามคอยกันไม่ให้เข้าเขตปลอดภัย ค่ายนี้ไม่มีวันพัง เป็นจุดเริ่มต้นและที่ฟื้นตัวของทุกคน ออกไปล่ากลุ่มมอนสเตอร์นอกค่ายเพื่อเก็บเลเวล ยิ่งไกลจากค่ายยิ่งแรง ลากนิ้วเพื่อเดิน ตัวละครโจมตีเอง กดปุ่มแดงใช้สกิล ราชาหมอกพิษอยู่ทางขวาบนของแมพ ต้องรวมทีมไปล่า</p></details>'+
+   '</div>';
+  const w=ov.querySelector('.csw');
+  if(!/^https?:$/.test(location.protocol)){let cur='';try{cur=localStorage.getItem('refugee_server')||''}catch(e){}
+    w.insertAdjacentHTML('beforeend','<div id="srvbox" style="padding:10px 12px"><b>เล่นกับเพื่อน (เปิดจากไฟล์)</b><p style="font-size:12.5px;margin:6px 0;color:#cfc5b4">ใส่ที่อยู่เซิร์ฟเวอร์ที่โฮสต์ให้ เช่น xxxx.trycloudflare.com แล้วกดเชื่อมต่อ ทุกคนต้องใส่ที่อยู่เดียวกัน</p><input id="srvi" value="'+cur.replace(/[^\w.:\/-]/g,'')+'" placeholder="xxxx.trycloudflare.com" style="width:100%;box-sizing:border-box;padding:8px"><div class="row" style="margin-top:6px"><button id="srvb">เชื่อมต่อ</button></div></div>')}
+  w.insertAdjacentHTML('beforeend','<details id="bk"><summary>💾 สำรอง / นำเข้าเซฟ (ย้ายเครื่อง ย้ายลิงก์)</summary>'+
+   '<p style="font-size:12.5px">กด "สร้างรหัสสำรอง" แล้วคัดลอกเก็บไว้ ตอนเปิดลิงก์ใหม่ให้วางรหัสแล้วกด "นำเข้า"</p>'+
+   '<textarea id="bkt" rows="4" style="width:100%;box-sizing:border-box;font-size:12px;padding:8px" placeholder="รหัสเซฟ"></textarea>'+
+   '<div class="row" style="margin-top:6px"><button id="bkx">สร้างรหัสสำรอง</button><button id="bkc">คัดลอก</button><button id="bki">นำเข้า</button></div><p id="bkm" style="font-size:12.5px"></p></details>');
+  status();if(!csRAF)csRAF=requestAnimationFrame(csLoop);
+}
+
 function skill4(P,cost){if(BR2()&&SK4B[me.cls])return skill4B(P,cost);const c=me.cls;let t=null;
   if(c==='archer'||c==='mage'){t=pickTarget(c==='archer'?320:300);if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return}me.face=Math.atan2(t.y-me.y,t.x-me.x)}
   me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
@@ -7662,23 +7795,6 @@ function pick(c){setTimeout(()=>{try{autoLoad();huntLoad()}catch(e){}},0);
   if(isNew){try{prologueStart(()=>{try{tutStart()}catch(e){}})}catch(e){tutStart()}}
   ensureDaily();loginCheck();if(!isNew&&loginReady())setTimeout(()=>{if(run&&ov.hidden&&me.cls){evTab='li';ov.hidden=false;eventUI()}},900);
 }
-function intro(){
-  ov.innerHTML='<h1 class="f ttlh">REFUGEE<small>ค่ายผู้อพยพ</small></h1>'+
-   '<p>มอนสเตอร์ทยอยบุกเข้ามาที่ค่ายกลางแมพ อัศวินยามคอยกันไม่ให้เข้าเขตปลอดภัย ค่ายนี้ไม่มีวันพัง เป็นจุดเริ่มต้นและที่ฟื้นตัวของทุกคน ออกไปล่ากลุ่มมอนสเตอร์นอกค่ายเพื่อเก็บเลเวล ยิ่งไกลจากค่ายยิ่งแรง ลากนิ้วเพื่อเดิน ตัวละครโจมตีเอง กดปุ่มแดงใช้สกิล ราชาหมอกพิษอยู่ทางขวาบนของแมพ ต้องรวมทีมไปล่า</p>'+
-   '<p id="st"></p><p id="sv">'+(saveMode==='wait'?'กำลังโหลดข้อมูลบันทึก...':'สถานะบันทึก: '+saveState)+'</p><p>เลือกอาชีพของคุณ</p>'+
-   Object.keys(CL).map(k=>{
-     const sv=saves.chars[k],dis=saveMode==='wait'?' disabled':'';
-     return'<div class="row" style="align-items:stretch"><button class="cls" style="flex:1" data-c="'+k+'"'+dis+'><b>'+CL[k].n+(sv?' &nbsp;<span style="color:#c99a3b">Lv '+sv.lv+' · ทอง '+sv.gold+(saves.last===k?' · เล่นล่าสุด':'')+'</span>':'')+'</b><span>'+(sv?'กดเพื่อเล่นต่อ ':'')+CL[k].d+'</span></button>'+
-       (sv?'<button data-del="'+k+'" style="flex:0 0 72px;font-size:12px;padding:4px">'+(delArm===k?'กดอีกครั้งเพื่อลบ':'ลบเซฟ')+'</button>':'')+'</div>';
-   }).join('');
-  if(!/^https?:$/.test(location.protocol)){let cur='';try{cur=localStorage.getItem('refugee_server')||''}catch(e){}
-    ov.insertAdjacentHTML('beforeend','<div id="srvbox" style="margin-top:12px;border:1px solid #c99a3b;padding:8px"><b style="color:#c99a3b">เล่นกับเพื่อน (เปิดจากไฟล์)</b><p style="font-size:13px;margin:6px 0">ใส่ที่อยู่เซิร์ฟเวอร์ที่โฮสต์ให้ เช่น xxxx.trycloudflare.com แล้วกดเชื่อมต่อ ทุกคนต้องใส่ที่อยู่เดียวกัน</p><input id="srvi" value="'+cur.replace(/[^\w.:\/-]/g,'')+'" placeholder="xxxx.trycloudflare.com" style="width:100%;box-sizing:border-box;padding:8px;background:#120e0d;color:#e8d9b8;border:1px solid #5a4a30"><div class="row" style="margin-top:6px"><button id="srvb">เชื่อมต่อ</button></div></div>')}
-  ov.insertAdjacentHTML('beforeend','<details id="bk" style="margin-top:14px"><summary style="cursor:pointer;color:#c99a3b">สำรอง / นำเข้าเซฟ (ย้ายเครื่อง ย้ายลิงก์)</summary>'+
-   '<p style="font-size:13px">กด "สร้างรหัสสำรอง" แล้วคัดลอกเก็บไว้ ตอนเปิดลิงก์ใหม่ให้วางรหัสแล้วกด "นำเข้า"</p>'+
-   '<textarea id="bkt" rows="4" style="width:100%;box-sizing:border-box;font-size:12px;background:#120e0d;color:#e8d9b8;border:1px solid #5a4a30" placeholder="รหัสเซฟ"></textarea>'+
-   '<div class="row"><button id="bkx">สร้างรหัสสำรอง</button><button id="bkc">คัดลอก</button><button id="bki">นำเข้า</button></div><p id="bkm" style="font-size:13px"></p></details>');
-  status();
-}
 function b64e(s){return btoa(unescape(encodeURIComponent(s)))}
 function b64d(s){return decodeURIComponent(escape(atob(s)))}
 async function importSave(txt){
@@ -7701,6 +7817,7 @@ function gameOver(){
 }
 ov.addEventListener('click',e=>{
   const t=e.target.closest('button');if(!t)return;sfx('click');
+  if(t.dataset.cs){csSel=t.dataset.cs;delArm=null;intro();return}
   if(t.dataset.c)pick(t.dataset.c);
   if(t.id==='srvb'){try{localStorage.setItem('refugee_server',$('srvi').value.trim())}catch(e){}location.reload();return}
   if(t.id==='bkx'){$('bkt').value='RFG1:'+b64e(JSON.stringify(saves));$('bkm').textContent='สร้างรหัสแล้ว กดคัดลอกเก็บไว้';$('bkt').select()}
