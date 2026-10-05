@@ -8078,7 +8078,7 @@ makeGuards();intro();TABOK.then(initSave);setTimeout(()=>{if(saveMode!=='wait'||
 (function(){const T=document.getElementById('ttl');if(!T)return;const E=T.querySelector('.emb');
   for(let i=0;i<26;i++){const e=document.createElement('i');e.style.left=(Math.random()*100)+'%';e.style.setProperty('--dx',(Math.random()*80-40)+'px');e.style.animationDuration=(6+Math.random()*7)+'s';e.style.animationDelay=(-Math.random()*12)+'s';const s=2+Math.random()*3.5;e.style.width=e.style.height=s+'px';if(Math.random()<.3){e.style.background='#d8a8ff';e.style.boxShadow='0 0 8px 2px rgba(180,110,255,.8)'}E.appendChild(e)}
   let done=false;const go=()=>{if(done)return;done=true;try{unlockAudio();sfx('gate')}catch(e){}T.classList.add('out');setTimeout(()=>T.remove(),800)};
-  T.addEventListener('pointerup',go);addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go()})})();
+  T.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();go()});addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go()})})();
 
 </script>
 </body>
