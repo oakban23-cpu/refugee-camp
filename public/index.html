@@ -392,6 +392,7 @@ const TABOK=new Promise(res=>{let bc=null;try{bc=new BroadcastChannel('refugee_t
     tabBlock(0,()=>{clearInterval(poll);waitTake=go;bc.postMessage({t:'take',id:TAB.id});setTimeout(go,4000)});
     poll=setInterval(()=>{if(waitTake)return;ping();setTimeout(()=>{if(!seen&&!waitTake)go()},500)},2500)},450)});
 const GH=400;
+const GMAX=999999999,fmtG=v=>{v=Math.max(0,Math.floor(+v||0));const f=(x,s)=>{const t=x>=100?Math.floor(x):Math.floor(x*10)/10;return(t%1?t.toFixed(1):String(t))+s};return v<1e3?String(v):v<1e6?f(v/1e3,'K'):f(Math.min(v,GMAX)/1e6,'M')};
 const CL={
  melee:{n:'ดาบอสูรคลั่ง',c:'#c2352b',hp:140,sp:135,rg:52,dmg:18,cd:.5,melee:1,s:['วังวนดาบ','พุ่งฟัน'],cds:[6,5],mp:60,mr:2.5,mc:[25,20],d:'ตีประชิดดุดัน หมุนดาบรอบตัว และพุ่งฟันเป็นเส้นตรง'},
  archer:{n:'พรานเงาราตรี',c:'#5b8a72',hp:100,sp:120,rg:260,dmg:16,cd:.6,s:['ห่าธนู','ถอยกระโดด'],cds:[7,5],mp:80,mr:3,mc:[30,15],d:'ยิงธนูระยะไกล ห่าธนูเป็นพื้นที่ และถอยกระโดดหนี'},
@@ -1483,7 +1484,7 @@ const MSM_UP=[[8000,0],[30000,1],[120000,3],[400000,8]];
 const msmReroll=it=>Math.round(2500*(1+it.r)*(1+it.L*.25));
 const msmUpCost=it=>{const c=MSM_UP[it.r];return c?[Math.round(c[0]*(1+it.L*.08)),c[1]]:null};
 function msmUI(msg){if(!me.cls)return;ov.dataset.k='msm';ov.hidden=false;
-  let h=hdr('⚒️','ช่างตีเหล็กหลวง','ทอง '+me.gold.toLocaleString()+' · หินขั้นสูง '+(me.inv.s3|0));if(msg)h+='<div class="note">'+msg+'</div>';
+  let h=hdr('⚒️','ช่างตีเหล็กหลวง','ทอง '+fmtG(me.gold)+' · หินขั้นสูง '+(me.inv.s3|0));if(msg)h+='<div class="note">'+msg+'</div>';
   h+='<div class="card hint">ใช้กับอุปกรณ์ที่สวมอยู่ · ค่าตีบวกไม่หาย · 🔁 หลอมใหม่ = สุ่มค่าพลังใหม่ระดับเดิม · ⬆️ ยกระดับ = เลื่อนความหายากขึ้น 1 ขั้น (สูงสุดตำนาน) และสุ่มค่าพลังใหม่ที่แรงขึ้น</div>';
   h+='<div class="card">'+SLOTS.map(sl=>{const it=me.eq[sl];if(!it)return'<div class="sr"><div class="nm"><b>'+SLN[sl]+'</b><small>ยังไม่ได้สวม</small></div></div>';
     const rr=msmReroll(it),uc=msmUpCost(it);
@@ -1510,7 +1511,7 @@ const RARE=[{id:'lg',ic:'👑',n:'อุปกรณ์ตำนาน (สุ�
 function rareToday(){const R=rng(hseed('rare'+dayKey())),a=RARE.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,5)}
 function rareUI(msg){if(!me.cls)return;ov.dataset.k='rare';ov.hidden=false;const dk=dayKey();if(!me.rs||me.rs.d!==dk)me.rs={d:dk,b:{}};
   const ms=new Date();ms.setHours(24,0,0,0);const left=ms-Date.now();
-  let h=hdr('💜','พ่อค้าของหายาก','ทอง '+me.gold.toLocaleString()+' · ของใหม่ในอีก '+Math.floor(left/36e5)+' ชม. '+Math.floor(left%36e5/6e4)+' นาที');if(msg)h+='<div class="note">'+msg+'</div>';
+  let h=hdr('💜','พ่อค้าของหายาก','ทอง '+fmtG(me.gold)+' · ของใหม่ในอีก '+Math.floor(left/36e5)+' ชม. '+Math.floor(left%36e5/6e4)+' นาที');if(msg)h+='<div class="note">'+msg+'</div>';
   h+='<div class="card">'+rareToday().map(o=>{const b=me.rs.b[o.id]|0,ok=(!o.ok||o.ok())&&b<o.lim&&me.gold>=o.p;
     return'<div class="sr"><div class="ico" style="font-size:24px">'+o.ic+'</div><div class="nm"><b>'+o.n+'</b><small>'+o.p.toLocaleString()+' ทอง · ซื้อแล้ววันนี้ '+b+'/'+o.lim+(o.ok&&!o.ok()?' · มีครบแล้ว':'')+'</small></div><button class="pri" data-rare="'+o.id+'"'+(ok?'':' disabled')+'>ซื้อ</button></div>'}).join('<hr>')+'</div>';
   h+='<div class="card hint">สินค้าสุ่มใหม่ทุกเที่ยงคืน ทุกคนเห็นรายการเดียวกัน · แต่ละชิ้นมีจำนวนจำกัดต่อวัน</div>';
@@ -1526,7 +1527,7 @@ function mkName(k,d){if(k==='it'){const it=cleanItem(d);return it?itemCard(it):'
 function mkGive(k,d,q){if(k==='it'){const it=cleanItem(d);if(it){me.bag.push(it);if(!q)sysMsg('📦 ได้รับ '+itemName(it))}}else if(k==='cd'){if(CARDS[d])cardGet(d,1)}else if(k==='st'&&GDM[d.k])gdSet(d.k,gdGet(d.k)+(d.n|0))}
 function mkFetch(){if(mkOn())try{emitM('mkq',{})}catch(e){}}
 function mktUI(msg){if(!me.cls)return;ov.dataset.k='mkt';ov.hidden=false;
-  let h=hdr('🏪','ตลาดกลางอัสตรา','ทอง '+me.gold.toLocaleString());if(msg)h+='<div class="note">'+msg+'</div>';
+  let h=hdr('🏪','ตลาดกลางอัสตรา','ทอง '+fmtG(me.gold));if(msg)h+='<div class="note">'+msg+'</div>';
   if(!mkOn()){h+='<div class="card hint">ตลาดซื้อขายระหว่างผู้เล่นใช้ได้เมื่อเล่นออนไลน์บนเซิร์ฟเวอร์เท่านั้น</div>';ov.innerHTML='<div class="pn" data-pn="mkt">'+h+'</div>';return}
   h+=tabsH([['buy','🛒 ซื้อ'],['sell','💰 ตั้งขาย'],['mine','📋 ร้านของฉัน'+(MKD&&(MKD.sale>0||MKD.ret>0)?'<i class="dt"></i>':'')]],mkTab,'mk');
   if(!MKD){h+='<div class="card"><small>กำลังโหลดตลาด...</small></div>';mkFetch()}
@@ -2106,7 +2107,7 @@ const chSwBad=()=>isDg()||isArena()||(typeof PV!=='undefined'&&PV&&PV.ph&&PV.ph!
 function chSwUI(msg){if(!me.cls)return;ov.dataset.k='chsw';ov.hidden=false;const bad=chSwBad(),others=slotKeys().filter(k=>k!==me.slot);
   let h=hdr('👤','เปลี่ยนตัวละคร',clsName()+' · Lv '+me.lv);if(msg||bad)h+='<div class="note">'+(msg||bad)+'</div>';
   h+='<div class="card"><p style="margin:0 0 8px">กลับไปหน้าเลือกอาชีพเพื่อเล่นตัวละครอื่น</p><small style="display:block;opacity:.8">✅ ระบบจะบันทึกความคืบหน้าของตัวละครนี้ก่อนออก · ทอง ไอเทม และเควสอยู่ครบ<br>👥 ถ้าอยู่ในปาร์ตี้จะออกจากปาร์ตี้ให้อัตโนมัติ<br>🤖 บอทล่ามอนสเตอร์จะถูกปิด</small></div>';
-  h+='<div class="card"><div class="cap">ตัวละครอื่นของคุณ</div>'+(others.length?others.map(k=>{const sv=saves.chars[k];return'<div class="sr"><div class="nm"><b>'+CL[scls(k)].n+'</b><small>Lv '+sv.lv+' · ทอง '+(sv.gold|0).toLocaleString()+'</small></div></div>'}).join('<hr>'):'<small style="opacity:.7">ยังไม่มีตัวละครอื่น · สร้างเพิ่มได้ที่หน้าเลือกตัวละคร (สูงสุด '+CS_MAX+' ตัว อาชีพซ้ำกันได้)</small>')+'</div>';
+  h+='<div class="card"><div class="cap">ตัวละครอื่นของคุณ</div>'+(others.length?others.map(k=>{const sv=saves.chars[k];return'<div class="sr"><div class="nm"><b>'+CL[scls(k)].n+'</b><small>Lv '+sv.lv+' · ทอง '+fmtG(sv.gold)+'</small></div></div>'}).join('<hr>'):'<small style="opacity:.7">ยังไม่มีตัวละครอื่น · สร้างเพิ่มได้ที่หน้าเลือกตัวละคร (สูงสุด '+CS_MAX+' ตัว อาชีพซ้ำกันได้)</small>')+'</div>';
   h+='<div class="row" style="gap:8px;margin-top:6px"><button class="pri" style="flex:1" data-chsw="go"'+(bad||chSwBusy?' disabled':'')+'>'+(chSwBusy?'กำลังบันทึก...':'บันทึกแล้วเปลี่ยนตัวละคร')+'</button><button style="flex:0 0 90px" data-chsw="no">ยกเลิก</button></div>';
   ov.innerHTML='<div class="pn" data-pn="chsw">'+h+'</div>'}
 async function chSwGo(){if(chSwBusy||!me.cls)return;const bad=chSwBad();if(bad)return chSwUI(bad);chSwBusy=true;chSwUI();
@@ -2288,7 +2289,7 @@ const ECHO_IN=[['nar','แสงจากเศษรัศมีกลืนร
 function echoEnter(){if(!me.cls||me.down>0||ECHO())return;if(typeof PTY!=='undefined'&&PTY)sysMsg('✨ ห้วงความทรงจำเป็นด่านเดี่ยว · เพื่อนในปาร์ตี้จะไม่ตามเข้ามา');
   const id=88000+(Math.random()*999|0);if(!dgMap(id))return;ov.hidden=true;try{sfx('gate')}catch(e){}enterMap(id,{x:CX,y:CY+110});setTimeout(()=>{if(ECHO()&&dg.ph==='lobby')stSay(ECHO_IN,echoStart,{cine:1})},700)}
 function echoStart(){if(!ECHO()||dg.ph!=='lobby')return;const D=DT[9];dg={ph:'boss',w:0,tl:D.tm,nx:0};SR=0;mons=[];teles=[];bossCd=1e9;spawnBoss();fx({k:'msg',s:'✨ เงามืดของอาซาเอลตื่นขึ้น! ตัดโซ่เงาให้ขาดภายใน 5 นาที'});try{sfx('boss')}catch(e){}}
-function echoReward(){if(dgRew)return;dgRew=1;const D=DT[9],rep=!(stCur()&&stCur().g==='echo');me.gold=Math.min(1e7,me.gold+(rep?5000:D.gold));me.inv.s3=Math.min(999,(me.inv.s3|0)+2);gainXP(me.x,me.y,D.exp);
+function echoReward(){if(dgRew)return;dgRew=1;const D=DT[9],rep=!(stCur()&&stCur().g==='echo');me.gold=Math.min(GMAX,me.gold+(rep?5000:D.gold));me.inv.s3=Math.min(999,(me.inv.s3|0)+2);gainXP(me.x,me.y,D.exp);
   const st=stCur(),sto=st&&st.g==='echo';if(sto){me.sty.n=1;me.sty.a=1}else me.instT=Date.now();feGive(sto?4:3,'ห้วงความทรงจำ');
   banner={s:'✨ โซ่เงาขาดสะบั้น! +'+D.gold.toLocaleString()+' ทอง · หินขั้นสูง ×2',t:6};sfx('lvl');burst(me.x,me.y-10,['#fff6c8','#c8b8ff','#ffffff'],60,200,1.2,{glow:1,g:-40});
   setTimeout(()=>{if(ECHO())enterMap(10,{x:420,y:1560})},5500)}
@@ -2316,7 +2317,7 @@ const SIEGE_IN=[['nar','ฟ้าเหนือนครลอยฟ้าม�
 function siegeEnter(){if(!me.cls||me.down>0||SIEGE()||ECHO())return;const id=87000+(Math.random()*999|0);if(!dgMap(id))return;ov.hidden=true;try{sfx('gate')}catch(e){}enterMap(id,{x:CX,y:CY+200});
   setTimeout(()=>{if(SIEGE()&&dg.ph==='lobby')stSay(SIEGE_IN,()=>{if(SIEGE()&&dg.ph==='lobby'){dgStart();banner={s:'⚔️ ศึกป้องกันนครเริ่มแล้ว! ต้านฝูงผลึก 5 ระลอก แล้วล้มทูตแห่งความหิว',t:5}}},{cine:1})},700)}
 function siegeReward(){if(dgRew)return;dgRew=1;const D=DT[10],st=stCur(),story=st&&st.g==='siege';
-  const g=story?D.gold:Math.round(D.gold*.4);me.gold=Math.min(1e7,me.gold+g);me.inv.s3=Math.min(999,(me.inv.s3|0)+(story?3:1));gainXP(me.x,me.y,story?D.exp:Math.round(D.exp*.5));feGive(story?6:3,'ศึกป้องกันนคร');
+  const g=story?D.gold:Math.round(D.gold*.4);me.gold=Math.min(GMAX,me.gold+g);me.inv.s3=Math.min(999,(me.inv.s3|0)+(story?3:1));gainXP(me.x,me.y,story?D.exp:Math.round(D.exp*.5));feGive(story?6:3,'ศึกป้องกันนคร');
   if(story){me.sty.n=1;me.sty.a=1}else me.instT=Date.now();me.stt.siege=(me.stt.siege|0)+1;
   if(Math.random()<.3)drops.push({x:me.x+22,y:me.y+12,k:'e',L:14,rm:4,t:60});else drops.push({x:me.x+22,y:me.y+12,k:'e',L:14,rm:3,t:60});
   banner={s:'🏆 ปกป้องนครลอยฟ้าสำเร็จ! +'+g.toLocaleString()+' ทอง',t:6};sfx('lvl');burst(me.x,me.y-10,['#ffe08a','#ffffff','#ffb0f0'],60,200,1.2,{glow:1,g:-40});
@@ -3661,7 +3662,7 @@ function introRaw(){
       return'<div style="border-color:'+rc+';box-shadow:inset 0 0 12px '+rc+'44">'+ic+(it.u?'<u>+'+it.u+'</u>':'')+'</div>'}).join('');
     body='<div class="cs-stage"><canvas id="csv"></canvas><div class="cs-cap"><div class="cs-nm" style="color:#fff">'+esc(sv.nm||C.n)+(sv.nm?'<small style="color:'+C.c+';filter:brightness(1.6)">'+(sub?'✦ '+sub:C.n)+'</small>':(sub?'<small style="color:'+C.c+';filter:brightness(1.5)">✦ '+sub+'</small>':'<small style="color:#a69c8c">อาชีพขั้นต้น</small>'))+(tt?'<span class="cs-ttl">«'+tt+'»</span>':'')+'</div>'+
       '<div class="cs-lv"><span>LEVEL</span><b>'+sv.lv+'</b></div></div>'+
-      '<div class="cs-chips"><span class="cs-chip gd">🪙 '+(sv.gold|0).toLocaleString()+'</span>'+(saves.last===csSel?'<span class="cs-chip">⏱ เล่นล่าสุด</span>':'')+'</div></div>'+
+      '<div class="cs-chips"><span class="cs-chip gd">🪙 '+fmtG(sv.gold)+'</span>'+(saves.last===csSel?'<span class="cs-chip">⏱ เล่นล่าสุด</span>':'')+'</div></div>'+
       slots+'<div class="cs-act"><button class="cs-go" data-c="'+k+'" data-slot="'+csSel+'">▶ เล่นต่อ</button><button class="cs-del'+(delArm===csSel?' arm':'')+'" data-del="'+csSel+'">'+(delArm===csSel?'ยืนยันลบ?':'ลบเซฟ')+'</button></div>'+
       '<div class="cs-card">'+info(k)+'<div class="cs-eq">'+eq+'</div></div>';
   }
@@ -4557,7 +4558,7 @@ function trTryExec(){if(!tr||!tr.my.cf||!tr.th.cf)return;
   if(tr.th.ca!==tr.b||tr.th.cb!==tr.a){tr.my.cf=0;tr.th.cf=0;tr.my.lk=0;tr.th.lk=0;trPush();tradeUI('ข้อเสนอไม่ตรงกัน ล็อกและยืนยันใหม่อีกครั้ง');return}
   if(tr.my.ix.some((i,k)=>JSON.stringify(me.bag[i])!==tr.snap[k])||tr.my.g>me.gold||tr.th.it.length>MAXBAG-me.bag.length+tr.my.ix.length||GOODS.some(o=>(tr.my.gd[o.k]|0)>gdGet(o.k)||gdGet(o.k)-(tr.my.gd[o.k]|0)+(tr.th.gd[o.k]|0)>o.max)){trCancel('ของในกระเป๋าเปลี่ยนไป');return}
   const w=tr.wn,gi=tr.th.it.length,gg=tr.th.g;[...tr.my.ix].sort((a,b)=>b-a).forEach(i=>me.bag.splice(i,1));me.gold-=tr.my.g;
-  tr.th.it.forEach(it=>me.bag.push(it));me.gold=Math.min(1e7,me.gold+gg);GOODS.forEach(o=>{const d=(tr.th.gd[o.k]|0)-(tr.my.gd[o.k]|0);if(d)gdSet(o.k,gdGet(o.k)+d)});const gdn=gdSum(tr.th.gd);
+  tr.th.it.forEach(it=>me.bag.push(it));me.gold=Math.min(GMAX,me.gold+gg);GOODS.forEach(o=>{const d=(tr.th.gd[o.k]|0)-(tr.my.gd[o.k]|0);if(d)gdSet(o.k,gdGet(o.k)+d)});const gdn=gdSum(tr.th.gd);
   trOut('done',{a:tr.a,b:tr.b});trDone={tid:tr.tid,with:tr.with,a:tr.a,b:tr.b,until:Date.now()+15000};gsel=null;
   sfx('coin');burst(me.x,me.y-10,['#ffe08a','#ffffff','#9cff7a'],20,120,.7,{glow:1,g:-30});trClose('แลกเปลี่ยนกับ '+w+' สำเร็จ');
   banner={s:'🤝 แลกเปลี่ยนสำเร็จ! ได้ '+gi+' ชิ้น'+(gdn?' · ของใช้ '+gdn+' ชิ้น':'')+(gg?' · '+gg.toLocaleString()+' ทอง':''),t:4};try{writeSave()}catch(e){}}
@@ -4568,7 +4569,7 @@ function tradeMsg(d){if(!d||d.to!==uid||typeof d.from!=='string')return;const ti
   if(op==='acc'&&tr.st==='wait'){tr.st='open';tr.wn=cleanName(d.n)||tr.wn;if(ov.hidden||ov.dataset.k==='trade')tradeUI();return}
   if(op==='dec'){trClose(tr.wn+' ไม่รับการแลกเปลี่ยน');return}
   if(op==='cancel'){trClose(tr.wn+' ยกเลิกการแลกเปลี่ยน');return}
-  if(op==='offer'){tr.th.it=(Array.isArray(d.it)?d.it:[]).slice(0,TMAX).map(x=>cleanItem(x)).filter(Boolean);tr.th.g=Math.max(0,Math.min(1e7,Math.floor(+d.g||0)));tr.th.gd=gdClean(d.gd);tr.th.lk=0;tr.th.cf=0;tr.my.lk=0;tr.my.cf=0}
+  if(op==='offer'){tr.th.it=(Array.isArray(d.it)?d.it:[]).slice(0,TMAX).map(x=>cleanItem(x)).filter(Boolean);tr.th.g=Math.max(0,Math.min(GMAX,Math.floor(+d.g||0)));tr.th.gd=gdClean(d.gd);tr.th.lk=0;tr.th.cf=0;tr.my.lk=0;tr.my.cf=0}
   else if(op==='lock'){if(d.h!==trHash(tr.th.it,tr.th.g,tr.th.gd))return;tr.th.lk=d.lk?1:0;tr.th.cf=0;if(!tr.th.lk)tr.my.cf=0}
   else if(op==='conf'||op==='done'){tr.th.cf=1;tr.th.lk=1;tr.th.ca=d.a;tr.th.cb=d.b;tradeUI();trTryExec();return}
   if(!ov.hidden&&ov.dataset.k==='trade')tradeUI()}
@@ -4585,7 +4586,7 @@ function tradeUI(msg){if(!tr)return;ov.dataset.k='trade';ov.hidden=false;
   h+='<div class="card"><div class="cap tcap"><span>'+esc(tr.wn)+' ให้</span>'+(tr.st==='wait'?'<span class="tbg">รอตอบรับ</span>':badge(tr.th.lk,tr.th.cf))+'</div>'+lst(tr.th.it,tr.th.g,tr.th.gd)+'</div>';
   if(tr.st==='open'){const ed=!tr.my.lk;
     h+='<div class="card"><div class="cap">เลือกของจากกระเป๋า (สูงสุด '+TMAX+' ชิ้น)</div>'+(me.bag.length?'<div class="grid g5">'+me.bag.map((it,i)=>cellH(it,(it.lk||!ed?'disabled ':'')+'data-trt="'+i+'"',tr.my.ix.includes(i),it.sl)).join('')+'</div>':'<p style="opacity:.6;font-size:13px">กระเป๋าว่าง</p>')+
-      '<div class="nrow" style="margin:8px 0 0"><input id="trg" type="number" min="0" max="'+me.gold+'" value="'+tr.my.g+'" inputmode="numeric"'+(ed?'':' disabled')+'><button id="trgs" style="padding:8px 12px"'+(ed?'':' disabled')+'>ใส่ทอง</button></div><small>มีทอง '+me.gold.toLocaleString()+' · ของที่ล็อกไว้ในกระเป๋าแลกไม่ได้ · แก้ข้อเสนอเมื่อไหร่ ทั้งสองฝ่ายต้องล็อกใหม่</small></div>';
+      '<div class="nrow" style="margin:8px 0 0"><input id="trg" type="number" min="0" max="'+me.gold+'" value="'+tr.my.g+'" inputmode="numeric"'+(ed?'':' disabled')+'><button id="trgs" style="padding:8px 12px"'+(ed?'':' disabled')+'>ใส่ทอง</button></div><small>มีทอง '+fmtG(me.gold)+' · ของที่ล็อกไว้ในกระเป๋าแลกไม่ได้ · แก้ข้อเสนอเมื่อไหร่ ทั้งสองฝ่ายต้องล็อกใหม่</small></div>';
     h+='<div class="card"><div class="cap">🧺 ใส่ของใช้ & วัตถุดิบ</div>'+GOODS.map(o=>{const have=gdGet(o.k),v=tr.my.gd[o.k]|0,dis=!ed;return'<div class="sr"><div class="ico">'+o.ic()+'</div><div class="nm"><b>'+o.n+'</b><small>มี '+have.toLocaleString()+' · ใส่ <b>'+v.toLocaleString()+'</b></small></div><button class="rb" data-trgd="'+o.k+':-1"'+(dis||!v?' disabled':'')+'>−</button><button class="rb" data-trgd="'+o.k+':1"'+(dis||v>=have?' disabled':'')+'>+1</button><button class="rb" data-trgd="'+o.k+':'+(o.k==='twc'?50:5)+'"'+(dis||v>=have?' disabled':'')+'>+'+(o.k==='twc'?50:5)+'</button></div>'}).join('<hr>')+'</div>';
     h+='<div class="bt"><button data-trl="1">'+(tr.my.lk?'🔓 ปลดล็อก':'🔒 ล็อกข้อเสนอ')+'</button><button class="pri" data-trc="1"'+(tr.my.lk&&tr.th.lk&&!tr.my.cf?'':' disabled')+'>'+(tr.my.cf?'รออีกฝ่ายยืนยัน...':'✔ ยืนยันแลก')+'</button></div>'}
   h+='<div class="bt" style="margin-top:6px"><button data-trx="1">ยกเลิกการแลกเปลี่ยน</button></div>';
@@ -5634,7 +5635,7 @@ function gmSetLv(L){L=Math.max(1,Math.min(LMAX,L|0));me.lv=L;me.xp=0;if(L<AWLV)m
 function gmAct(k){if(!gmOk||!me.cls)return;gmUsed=true;bf=null;const bo=mons.find(m=>m.t===3);let msg='';
   if(k==='dps'){dpsLog=[];dpsT0=performance.now();msg='รีเซ็ตตัววัดแล้ว'}
   else if(k==='lv'){gmSetLv(+$('gmlv').value);msg='ตั้งเป็น Lv '+me.lv}
-  else if(k==='gold'){me.gold=Math.min(1e7,me.gold+100000);msg='+100,000 ทอง'}
+  else if(k==='gold'){me.gold=Math.min(GMAX,me.gold+100000);msg='+100,000 ทอง'}
   else if(k==='pot'){me.inv.hp=20;me.inv.mp=20;msg='ยาเต็มแล้ว'}
   else if(/^st[123p]$/.test(k)){const f=k==='stp'?'ps':'s'+k[2],mx=f==='ps'?99:999;me.inv[f]=Math.min(mx,(me.inv[f]|0)+10);msg='+10 '+(f==='ps'?'หินกันแตก':GDM[f].n)}
   else if(k==='sts'){me.inv.s1=me.inv.s2=me.inv.s3=Math.max(99,me.inv.s1|0,0);['s1','s2','s3'].forEach(f=>me.inv[f]=Math.max(99,me.inv[f]|0));me.inv.ps=99;msg='หินตีบวกทุกขั้น 99+ และหินกันแตก 99'}
@@ -5651,8 +5652,8 @@ function gmAct(k){if(!gmOk||!me.cls)return;gmUsed=true;bf=null;const bo=mons.fin
     if(q==='sc'||q==='hr'||q==='fe'){const mx=q==='hr'?999:9999;me.mat[q]=Math.min(mx,(me.mat[q]|0)+99);msg='+99 '+MATN[q][1]}
     else if(q==='tw'){me.twc=Math.min(1e7,(me.twc|0)+10000);msg='+10,000 เหรียญหอคอย'}
     else if(q==='pot'){me.inv.hp=999;me.inv.mp=999;msg='ยาแดง/ฟ้า 999'}
-    else if(q==='gmax'){me.gold=1e7;msg='ทอง 10,000,000'}
-    else if(q==='all'){me.inv.hp=999;me.inv.mp=999;me.inv.ps=99;me.inv.s1=me.inv.s2=me.inv.s3=999;me.twc=1e7;me.mat.sc=9999;me.mat.hr=999;me.mat.fe=9999;me.gold=1e7;msg='ของใช้ วัตถุดิบ ทอง เต็มทุกอย่างแล้ว'}
+    else if(q==='gmax'){me.gold=GMAX;msg='ทอง '+fmtG(GMAX)}
+    else if(q==='all'){me.inv.hp=999;me.inv.mp=999;me.inv.ps=99;me.inv.s1=me.inv.s2=me.inv.s3=999;me.twc=1e7;me.mat.sc=9999;me.mat.hr=999;me.mat.fe=9999;me.gold=GMAX;msg='ของใช้ วัตถุดิบ ทอง เต็มทุกอย่างแล้ว'}
     else if(q==='cd1'||q==='cd5'){const t=q==='cd5'?5:1;Object.keys(CARDS).forEach(id=>{for(let i=0;i<t;i++)cardGet(id,true)});msg='ได้การ์ดทุกใบ ×'+t+' ('+Object.keys(CARDS).length+' แบบ)'}
     else if(q==='mt'){me.mts=MOUNTS.map((M,i)=>i).filter(i=>i>0);msg='ได้พาหนะครบ '+me.mts.length+' ตัว (เลือกขี่ได้ที่เมนูพาหนะ)'}
     else if(q==='tt'){me.ach=me.ach||{};ACH.forEach(a=>me.ach[a[0]]=1);msg='ปลดฉายาครบ '+ACH.length+' แบบ (ฉายาจากอันดับบอสโลกไม่รวม)'}
@@ -5681,7 +5682,7 @@ function raidMap(id){if(MAPS[id])return MAPS[id];const D=DT[7];
 const MATN={sc:['🐚','เกล็ดห้วงลึก'],hr:['💠','หัวใจห้วงลึก']};
 function raidReward(){if(dgRew)return;dgRew=1;me.inv.s2=Math.min(999,(me.inv.s2|0)+2);const s3=Math.random()<.5;if(s3)me.inv.s3=Math.min(999,(me.inv.s3|0)+1);sysMsg('💎 ได้ หินขั้นสอง x2'+(s3?' · หินขั้นสูง x1':''));if(Math.random()<.1)petGive(6);const D=DT[7];me.stt.raid=(me.stt.raid||0)+1;me.stt.dg++;dqProg('dg',1);
   const sc=4+(Math.random()*4|0),hr=Math.random()<.3?1:0;me.mat=me.mat||{sc:0,hr:0};me.mat.sc=Math.min(9999,me.mat.sc+sc);me.mat.hr=Math.min(999,me.mat.hr+hr);
-  me.gold=Math.min(1e7,me.gold+D.gold);gainXP(me.x,me.y,D.exp);let ex='';
+  me.gold=Math.min(GMAX,me.gold+D.gold);gainXP(me.x,me.y,D.exp);let ex='';
   if(Math.random()<.15&&me.bag.length<MAXBAG){const it=makeSetItem(1+(Math.random()*2|0),SLOTS[Math.random()*SLOTS.length|0]);me.bag.push(it);ex=' · 🔱 '+itemName(it)}
   else if(Math.random()<.35)drops.push({x:me.x+22,y:me.y+12,k:'e',L:IL60,rm:4,t:60});else drops.push({x:me.x+22,y:me.y+12,k:'e',L:IL60,rm:3,t:60});
   banner={s:'🏆 พิชิตเรดห้วงลึก! '+MATN.sc[0]+' +'+sc+(hr?' · '+MATN.hr[0]+' +1':'')+ex,t:7};sfx('lvl');burst(me.x,me.y-10,['#8ff0e8','#ffffff','#ffd84a'],60,200,1.2,{glow:1,g:-40})}
@@ -5699,7 +5700,7 @@ function setProc(m){dawnProc(m);if(setCount(1)<5||me.spB||Math.random()>=.12)ret
   fx({k:'vortex',x:Math.round(m.x),y:Math.round(m.y),r:75});const d=pd()*2.5;mons.forEach(q=>{if(dist(q,m)<75)addHit(q,d,0,1,'bolt')});me.spB=0}
 function setTick(dt){me.s2cd=Math.max(0,(me.s2cd||0)-dt);if(setCount(2)>=5&&me.s2cd<=0&&me.down<=0&&me.hp<me.mh*.5){me.s2cd=15;me.shv=Math.max(me.shv||0,Math.round(me.mh*.25));me.shield=6;me.mp=Math.min(me.mm,me.mp+me.mm*.3);fx({k:'shield',r:40,v:0});dn.push({x:me.x,y:me.y-50,v:'🔱 เกราะผู้พิทักษ์',t:1.2})}}
 function setUI(msg){me.mat=me.mat||{sc:0,hr:0};let h='';if(msg)h+='<div class="note">'+msg+'</div>';
-  h+='<div class="sum"><div>'+MATN.sc[0]+' '+MATN.sc[1]+'<b>'+me.mat.sc+'</b></div><div>'+MATN.hr[0]+' '+MATN.hr[1]+'<b>'+me.mat.hr+'</b></div><div>💰 ทอง<b>'+me.gold.toLocaleString()+'</b></div></div>';
+  h+='<div class="sum"><div>'+MATN.sc[0]+' '+MATN.sc[1]+'<b>'+me.mat.sc+'</b></div><div>'+MATN.hr[0]+' '+MATN.hr[1]+'<b>'+me.mat.hr+'</b></div><div>💰 ทอง<b>'+fmtG(me.gold)+'</b></div></div>';
   h+='<div class="card hint">วัตถุดิบได้จาก <b>เรดห้วงลึก</b> (เมนูดันเจี้ยน · Lv '+RAIDLV+'+) · ชุดเซ็ตเป็นของตำนาน Lv 12 สเตตัสสูงกว่าปกติ 8% และล็อกไว้ให้อัตโนมัติ</div>';
   for(const id in SETS){if(+id>=3)continue;const S=SETS[id];h+='<div class="card"><div class="br" style="color:'+S.c+'">🔱 '+S.n+'</div>'+setHtml(+id)+'<div class="bt" style="flex-wrap:wrap;margin-top:8px">'+SLOTS.map(sl=>{const c=SETCOST(sl),ok=me.mat.sc>=c.sc&&me.mat.hr>=c.hr&&me.gold>=c.g&&me.bag.length<MAXBAG;
     return'<button data-setc="'+id+':'+sl+'"'+(ok?'':' disabled')+'>'+SI[sl]+' '+S.pn[sl]+'<br><small>'+MATN.sc[0]+c.sc+(c.hr?' '+MATN.hr[0]+c.hr:'')+' · '+(c.g/1000)+'k ทอง</small></button>'}).join('')+'</div></div>'}
@@ -5830,7 +5831,7 @@ function bars(){
   if(curMap===9)cityNpcSel();else{let N=NPC(),N2=MAPS[curMap].npc2,N3=MAPS[curMap].npc3,N4=MAPS[curMap].npc4,d1=Math.hypot(me.x-N.x,me.y-N.y),d2=N2?Math.hypot(me.x-N2.x,me.y-N2.y):1e9,d3=N3?Math.hypot(me.x-N3.x,me.y-N3.y):1e9,d4=N4?Math.hypot(me.x-N4.x,me.y-N4.y):1e9;npcSel=d4<d1&&d4<d2&&d4<d3?4:d3<d2&&d3<d1?3:d2<d1?2:1;const NN=npcSel===4?N4:npcSel===3?N3:npcSel===2?N2:N;d1=Math.min(d1,d2,d3,d4);$('npcb').textContent='คุยกับ'+NN.n+((npcSel===1&&qDone())||stWants(stTalkKey())?' ❗':'');$('npcb').style.display=(d1<70&&ov.hidden&&!SD.on)?'block':'none'}
   {const nt=curMap===5&&me.cls&&ov.hidden&&Math.hypot(me.x-TWDOOR.x,me.y-TWDOOR.y)<90;$('twb').style.display=nt?'block':'none'}
   {const G=MAPS[curMap].gates.find(G=>Math.hypot(me.x-G.x,me.y-G.y)<70),near=!!G&&ov.hidden;$('gtb').style.display=near?'block':'none';if(near)$('gtb').textContent='ผ่านประตูไป'+(G.nm||MAPS[G.to].n)+(G.req>1?' (Lv '+G.req+'+)':'')}
-  $('pl').innerHTML='<span style="color:#e0b030">ทอง '+me.gold+'</span><br><small style="opacity:.75">'+plCount()+' คน</small>';
+  $('pl').innerHTML='<span style="color:#e0b030">ทอง '+fmtG(me.gold)+'</span><br><small style="opacity:.75">'+plCount()+' คน</small>';
   $('mni').textContent=MAPS[curMap].n+' · '+saveState;
 }
 
@@ -5923,7 +5924,7 @@ function usePot(k){
 }
 function shopUI(msg){
   const stock=stk(),N=NPC();if((shopTab==='awk'||shopTab==='set')&&curMap!==6)shopTab='pot';ov.dataset.k=shopTab==='q'?'shopq':'';
-  let h=hdr('🛒',N.n,'ทอง '+me.gold+' · ยา HP '+me.inv.hp+' / MP '+me.inv.mp+' (สูงสุด '+POTMAX+')')+tabsH([['pot','🧪 ยา'],['gear','⚔️ อุปกรณ์'],['q','📜 เควส'+(qDone()?' ❗':'')]].concat(curMap===6?[['set','🔱 ชุดเซ็ต'],['awk','🌟 ตื่นรู้'+(me.lv>=AWLV&&!me.cls2&&me.cq&&(me.cq.s===0||me.cq.s===3||me.cq.s===4)?' ❗':'')]]:[]),shopTab,'shop');if(msg&&shopTab!=='awk'&&shopTab!=='set')h+='<div class="note">'+msg+'</div>';
+  let h=hdr('🛒',N.n,'ทอง '+fmtG(me.gold)+' · ยา HP '+me.inv.hp+' / MP '+me.inv.mp+' (สูงสุด '+POTMAX+')')+tabsH([['pot','🧪 ยา'],['gear','⚔️ อุปกรณ์'],['q','📜 เควส'+(qDone()?' ❗':'')]].concat(curMap===6?[['set','🔱 ชุดเซ็ต'],['awk','🌟 ตื่นรู้'+(me.lv>=AWLV&&!me.cls2&&me.cq&&(me.cq.s===0||me.cq.s===3||me.cq.s===4)?' ❗':'')]]:[]),shopTab,'shop');if(msg&&shopTab!=='awk'&&shopTab!=='set')h+='<div class="note">'+msg+'</div>';
   if(shopTab==='pot'){
     h+=SHOP.map(i=>'<div class="card"><div class="mrow"><span class="ico">'+potImg(i.k,30,'pi')+'</span><div class="nm"><b>'+i.n+'</b><small>'+i.d+'</small><small>ราคา '+i.p+' ทอง · มี '+me.inv[i.k]+'/'+POTMAX+'</small></div></div><div class="bt" style="display:flex;gap:6px"><button class="pri" style="flex:1;padding:9px" data-buy="'+i.k+'" data-q="1"'+(me.gold>=i.p&&me.inv[i.k]<POTMAX?'':' disabled')+'>ซื้อ 1 · '+i.p+'</button>'+[10,100].map(q=>'<button class="pri" style="flex:1;padding:9px" data-buy="'+i.k+'" data-q="'+q+'"'+(me.gold>=i.p*q&&me.inv[i.k]+q<=POTMAX?'':' disabled')+'>ซื้อ '+q+' · '+(i.p*q).toLocaleString()+'</button>').join('')+'</div></div>').join('');
   }else if(shopTab==='gear'){
@@ -6032,7 +6033,7 @@ function gearUI(msg){
   let sel=null,mode='',idx=0;
   if(gsel){const [w,k]=gsel.split(':');if(w==='eq'&&me.eq[k]){sel=me.eq[k];mode='eq'}else if(w==='bag'&&me.bag[+k]){sel=me.bag[+k];mode='bag';idx=+k}}
   const list=me.bag.map((it,i)=>({it,i})).filter(o=>gearSel==='all'||o.it.sl===gearSel).sort((a,b)=>SLOTS.indexOf(a.it.sl)-SLOTS.indexOf(b.it.sl)||gScore(b.it)-gScore(a.it));
-  let h=hdr('🎒','อุปกรณ์','ทอง '+me.gold+' · กระเป๋า '+me.bag.length+'/'+MAXBAG)+(msg?'<div class="note">'+msg+'</div>':'');
+  let h=hdr('🎒','อุปกรณ์','ทอง '+fmtG(me.gold)+' · กระเป๋า '+me.bag.length+'/'+MAXBAG)+(msg?'<div class="note">'+msg+'</div>':'');
   h+='<div class="card"><div class="cap">สวมใส่อยู่</div><canvas id="gpv" style="display:block;width:140px;height:130px;margin:0 auto 8px;border-radius:14px;background:radial-gradient(circle at 50% 42%,#4a3e56,#16121a 75%);box-shadow:inset 0 0 0 1px rgba(201,170,110,.5)"></canvas><div class="grid g5">'+SLOTS.map(sl=>'<div class="eqc">'+cellH(me.eq[sl],'data-gp="eq:'+sl+'"',gsel==='eq:'+sl,sl,me.bag.some(x=>x.sl===sl&&gCmp(x).dir>0)?UP:'')+'<small>'+SLN[sl]+'</small></div>').join('')+'</div></div>';
   h+=sel?detH(sel,mode,gsel,0,idx):'<div class="card hint">แตะช่องอุปกรณ์หรือไอเทมในกระเป๋าเพื่อดูรายละเอียด<br>'+UP+' ดีกว่าที่ใส่อยู่ · '+DN+' แย่กว่า · ＝ เท่ากัน</div>';
   h+='<div class="card"><div class="cap" style="display:flex;justify-content:space-between;align-items:center;gap:6px"><span>กระเป๋า</span><button data-autosell="1" style="font-size:11px;padding:4px 8px">🗑️ ขายของด้อยกว่าอัตโนมัติ</button></div><div class="tabs">'+['all',...SLOTS].map(k=>'<button class="tab sm'+(gearSel===k?' on':'')+'" data-gs="'+k+'">'+(k==='all'?'ทั้งหมด':SI[k]+' '+SLN[k])+'</button>').join('')+'</div>';
@@ -7577,7 +7578,7 @@ const upFail=u=>u<5?'—':u<10?'ระดับคงเดิม (เสีย�
 let smSel=null,smProt=true;
 const smGet=k=>{if(!k)return null;const [w,x]=k.split(':');return w==='eq'?me.eq[x]:me.bag[+x]};
 function smithUI(msg){if(!me.cls)return;ov.dataset.k='smith';ov.hidden=false;const inv=me.inv;
-  let h=hdr('🔨','ช่างตีบวก','ทอง '+me.gold.toLocaleString()+' · '+stoneIc(1)+(inv.s1|0)+' '+stoneIc(2)+(inv.s2|0)+' '+stoneIc(3)+(inv.s3|0)+' · 🛡️ '+(inv.ps|0));if(msg)h+='<div class="note">'+msg+'</div>';
+  let h=hdr('🔨','ช่างตีบวก','ทอง '+fmtG(me.gold)+' · '+stoneIc(1)+(inv.s1|0)+' '+stoneIc(2)+(inv.s2|0)+' '+stoneIc(3)+(inv.s3|0)+' · 🛡️ '+(inv.ps|0));if(msg)h+='<div class="note">'+msg+'</div>';
   const it=smGet(smSel);
   if(it){const u=it.u|0,el=upElig(it),need=upNeed(u),cost=upCost(it),rate=upRate(u),have=need?(inv['s'+need]|0):0,ok=!el&&me.gold>=cost&&(!need||have>=1),prot=u>=10&&(inv.ps|0)>0;
     h+='<div class="card"><div class="cap">ไอเทมที่เลือก</div><div class="sr"><div style="flex:0 0 46px">'+cellH(it,'disabled',0,it.sl)+'</div><div class="nm"><b style="color:'+(it.ss?'#ff6ac8':RC[it.r])+'">'+itemName(it)+'</b><small>'+(it.ss?'ชุดเซ็ต (เกรดสีชมพู)':RN[it.r])+'</small></div></div>';
@@ -7754,7 +7755,7 @@ const W0=()=>false;
 const MTI={};function mountIcon(id){if(MTI[id])return MTI[id];const c=document.createElement('canvas');c.width=c.height=96;const cx=c.getContext('2d'),og=g;g=cx;try{g.translate(44,52);g.scale(1.6,1.6);drawMount(id,0,0,1,0,1.3)}finally{g=og}return MTI[id]=c.toDataURL()}
 /* หน้าต่างคอกสัตว์ */
 function mountUI(msg,stable){if(!me.cls)return;if(stable!==undefined)mountUI.st=stable;const st=!!mountUI.st;ov.dataset.k='mount';ov.hidden=false;me.mts=me.mts||[];
-  let h=hdr('🐎',st?'คอกสัตว์ขี่':'สัตว์ขี่ของฉัน','ทอง '+me.gold+' · เหรียญหอคอย '+(me.twc||0)+(me.mat?' · 🐚 '+(me.mat.sc|0)+' · 💠 '+(me.mat.hr|0):''));if(msg)h+='<div class="note">'+msg+'</div>';
+  let h=hdr('🐎',st?'คอกสัตว์ขี่':'สัตว์ขี่ของฉัน','ทอง '+fmtG(me.gold)+' · เหรียญหอคอย '+(me.twc||0)+(me.mat?' · 🐚 '+(me.mat.sc|0)+' · 💠 '+(me.mat.hr|0):''));if(msg)h+='<div class="note">'+msg+'</div>';
   if(!st)h+='<div class="card hint">ซื้อสัตว์ขี่ได้ที่ <b>ผู้ดูแลคอกสัตว์</b> ในค่ายผู้อพยพ (ฝั่งตะวันตก) · ขี่แล้วเดินเร็วขึ้น แต่โจมตีไม่ได้ ใช้สกิลจะลงจากหลังอัตโนมัติ · ขี่ในดันเจี้ยนไม่ได้</div>';
   h+='<div class="card">'+MOUNTS.slice(1).map((M,i)=>{const id=i+1,own=me.mts.includes(id),sel=me.mt===id;
     const cost=[M.g?M.g.toLocaleString()+' ทอง':'',M.tw?M.tw+' เหรียญหอคอย':'',M.sc?'🐚 '+M.sc:'',M.hr?'💠 '+M.hr:''].filter(Boolean).join(' · ');
@@ -8276,7 +8277,7 @@ function advance(now){
 let drawErr=0;
 function loop(t){if(window.PRO_ON){last=t;requestAnimationFrame(loop);return}fpsTick(t);
   if(run&&me.cls){
-    advance(t);
+    advance(t);if(me.gold>GMAX)me.gold=GMAX;
     const C=CL[me.cls];
     bars();
     
@@ -8310,7 +8311,7 @@ let saves={v:1,chars:{},last:null},saveMode='wait',saveDoc=null,saveState='',las
 function cleanChar(c){
   if(!c||typeof c!=='object')return null;
   const n=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,Math.floor(v))):d;
-  const o={lv:n(c.lv,1,LMAX,1),xp:n(c.xp,0,1e7,0),gold:n(c.gold,0,1e7,0),tr:{},ab:{str:0,vit:0,int:0,agi:0,luk:0},inv:{hp:0,mp:0,ps:0},eq:{},bag:[]};
+  const o={lv:n(c.lv,1,LMAX,1),xp:n(c.xp,0,1e7,0),gold:n(c.gold,0,GMAX,0),tr:{},ab:{str:0,vit:0,int:0,agi:0,luk:0},inv:{hp:0,mp:0,ps:0},eq:{},bag:[]};
   if(c.inv&&typeof c.inv==='object'){o.inv.hp=n(c.inv.hp,0,POTMAX,0);o.inv.mp=n(c.inv.mp,0,POTMAX,0);o.inv.ps=n(c.inv.ps,0,99,0);o.inv.s1=n(c.inv.s1,0,999,0);o.inv.s2=n(c.inv.s2,0,999,0);o.inv.s3=n(c.inv.s3,0,999,0)}
   {const m=c.mat&&typeof c.mat==='object'?c.mat:{};o.mat={sc:n(m.sc,0,9999,0),hr:n(m.hr,0,999,0),fe:n(m.fe,0,9999,0)}}
   o.cls2=c.cls2&&o.lv>=AWLV?1:0;{const u=c.brU&&typeof c.brU==='object'?c.brU:{};o.brU={};if(o.cls2){if(u[1])o.brU[1]=1;if(u[2])o.brU[2]=1;if(!o.brU[1]&&!o.brU[2])o.brU[1]=1}o.br=c.br===2&&o.brU[2]?2:1;const k=c.dk&&typeof c.dk==='object'?c.dk:{};o.dk={s:o.brU[2]?5:n(k.s,0,4,0),n:n(k.n,0,100,0)}}{const q=c.cq&&typeof c.cq==='object'?c.cq:{};o.cq={s:o.brU[1]?5:n(q.s,0,4,0),n:n(q.n,0,1000,0)}}
