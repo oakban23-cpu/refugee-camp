@@ -1441,9 +1441,9 @@ function msmUI(msg){if(!me.cls)return;ov.dataset.k='msm';ov.hidden=false;
 function msmAct(a){const sl=a.slice(1),it=me.eq[sl];if(!it)return;let nr=it.r,cost=0,st=0;
   if(a[0]==='r'){cost=msmReroll(it)}else{const uc=msmUpCost(it);if(!uc)return;cost=uc[0];st=uc[1];nr=it.r+1}
   if(me.gold<cost||(me.inv.s3|0)<st)return msmUI('ทองหรือหินไม่พอ');me.gold-=cost;me.inv.s3-=st;
-  const ni=genItem(it.L,sl,nr,nr);ni.u=it.u|0;if(it.lk)ni.lk=1;if(it.ss&&nr===4)ni.ss=it.ss;me.eq[sl]=ni;recalc();sfx(a[0]==='u'?'up':'equip');
+  const old=it,ni=it.ss&&nr===4&&SETS[it.ss]?makeSetItem(it.ss,sl):genItem(it.L,sl,nr,nr);ni.u=it.u|0;if(it.lk)ni.lk=1;me.eq[sl]=ni;recalc();sfx(a[0]==='u'?'up':'equip');
   if(nr>=4&&a[0]==='u'){me.stt.leg=1;burst(me.x,me.y-10,['#ffe08a','#ffffff','#ffb030'],40,160,1,{glow:1,g:-30})}
-  msmUI((a[0]==='u'?'⬆️ ยกระดับสำเร็จ! ':'🔁 หลอมใหม่แล้ว · ')+itemName(ni)+'<br><small>'+Object.keys(ni.st).map(k=>stLabel(k,eff(ni,k))).join(' · ')+'</small>')}
+  msmUI((a[0]==='u'?'⬆️ ยกระดับสำเร็จ! ':'🔁 หลอมใหม่แล้ว · ')+itemName(ni)+'<br><small>ใหม่: '+Object.keys(ni.st).map(k=>stLabel(k,eff(ni,k))).join(' · ')+'</small><br><small style="opacity:.65">เดิม: '+Object.keys(old.st).map(k=>stLabel(k,eff(old,k))).join(' · ')+'</small>')}
 /* ---------- ร้านของหายาก: สินค้าหมุนเวียนรายวัน (เหมือนกันทุกคน) ---------- */
 const RARE=[{id:'lg',ic:'👑',n:'อุปกรณ์ตำนาน (สุ่มชิ้น)',p:250000,lim:1,f:()=>{giveGear(4);return'ได้อุปกรณ์ตำนาน!'}},
  {id:'cd',ic:'🃏',n:'ซองการ์ดทะเลทราย (สุ่ม 1 ใบ)',p:120000,lim:2,f:()=>{cardGet(['mum','sco','anu'][Math.random()*3|0]);return'เปิดซองการ์ดแล้ว!'}},
@@ -5171,6 +5171,7 @@ function genItem(L,sl,rmax,rmin){
   else{const ks=['sp','mp','reg','cr','ls'],B={sp:.03,mp:.08,reg:.8,cr:.03,ls:.015},k1=ks[Math.random()*5|0];st[k1]=r2(B[k1]*s);
     if(r>=2){let k2=ks[Math.random()*5|0];while(k2===k1)k2=ks[Math.random()*5|0];st[k2]=r2(B[k2]*s*.5)}}
   if(r>=4){st.ls=r2(Math.min(GK.ls,(st.ls||0)+.02*(1+.12*(L-1))));st.cr=r2(Math.min(GK.cr,(st.cr||0)+.03*(1+.12*(L-1))))}
+  Object.keys(st).forEach(k=>{st[k]=r2(Math.min(GKI[k]||9,st[k]*(.9+Math.random()*.25)))});
   return{sl,r,L,u:0,st};
 }
 const upMul=u=>1+.1*Math.min(u,10)+.05*Math.max(0,Math.min(u,20)-10)+.04*Math.max(0,u-20);const eff=(it,k)=>it.st[k]*upMul(it.u|0);
