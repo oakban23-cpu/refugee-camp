@@ -1003,7 +1003,8 @@ function stTxt(){stInit();const q=me.sty,st=STY[q.s];if(!st)return'✅ จบภ
   let t=st.tx;if(st.lv&&me.lv<st.lv)t+=' <em>(ต้อง Lv '+st.lv+')</em>';else if((st.g==='kill')&&q.a===1)t+=' <b>'+q.n+'/'+st.n+'</b>';else if(st.g==='tw')t+=' <b>'+Math.min(st.n,me.twBest|0)+'/'+st.n+'</b>';
   if(st.k&&q.a===0&&STNPC[st.k]&&STNPC[st.k][0]===curMap&&(!st.lv||me.lv>=st.lv))t='❗ '+t;return t}
 function stHud(){const e=$('stq');if(!e)return;const sh=!!(me.cls&&run);if(!sh){if(!e.hidden)e.hidden=true;return}stInit();const q=me.sty,st=STY[q.s];
-  const h='<b>📜 '+(st?STCH[st.c]:'รอยผนึกแตก')+'</b><span>'+stTxt()+'</span>';if(e.dataset.h!==h){e.dataset.h=h;e.innerHTML=h}if(e.hidden)e.hidden=false;e.classList.toggle('al',!!(st&&st.k&&q.a===0&&(!st.lv||me.lv>=st.lv)))}
+  let mn=0;try{mn=localStorage.getItem('refugee_stqmin')==='1'}catch(_){mn=!!window._stqMin}const tx=stTxt(),al=!!(st&&st.k&&q.a===0&&(!st.lv||me.lv>=st.lv)),pg=(String(tx).match(/\d+\s*\/\s*\d+/)||[''])[0];
+  const h=mn?'<b>📜</b><em>'+(al?'❗':pg||'เควส')+'</em>':'<i class="sqx" data-sqx="1" aria-label="ย่อ"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M6.6 1.6 3.2 5l3.4 3.4" fill="none" stroke="#24170a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>📜 '+(st?STCH[st.c]:'รอยผนึกแตก')+'</b><span>'+tx+'</span>';if(e.dataset.h!==h){e.dataset.h=h;e.innerHTML=h}e.classList.toggle('min',mn);if(e.hidden)e.hidden=false;e.classList.toggle('al',!!(st&&st.k&&q.a===0&&(!st.lv||me.lv>=st.lv)))}
 function stNpcPos(k){const a=STNPC[k];if(!a||a[0]!==curMap)return null;if(a[0]===9){const N=cityNpc(k);return N?{x:N.x,y:N.y+4}:null}if(k==='hd')return{x:HRD.x,y:HRD.y-30};const N=MAPS[curMap][a[1]];return N?{x:N.x,y:N.y+(k==='cmd'?4:0)}:null}
 function drawStMark(){const st=stCur();if(!st||!st.k||me.sty.a!==0||(st.lv&&me.lv<st.lv))return;const p=stNpcPos(st.k);if(!p)return;const t=performance.now()/1000,y=p.y-46+Math.sin(t*4)*3;
   g.save();g.font='bold 22px system-ui';g.textAlign='center';g.lineWidth=4;g.strokeStyle='#2a1a00';g.strokeText('!',p.x,y);g.fillStyle='#ffd84a';g.shadowColor='#ffb020';g.shadowBlur=10;g.fillText('!',p.x,y);g.restore()}
@@ -1071,7 +1072,7 @@ setInterval(()=>{try{stTick()}catch(e){console.error(e)}},400);
 function stFlash(){const f=$('scfl'),c=$('scine');if(!f)return;c.classList.add('fl');f.classList.remove('go');void f.offsetWidth;f.classList.add('go');clearTimeout(stFlash.t);stFlash.t=setTimeout(()=>c.classList.remove('fl'),1200)}
 function stIdle(){const L=['ค่ายยังปลอดภัย ตราบใดที่พวกเรายังยืนหยัด','ถ้าเจ็บก็พักที่กองไฟก่อน อย่าฝืนตัวเอง','ผู้อพยพเพิ่มขึ้นทุกวัน... เราต้องหาทางซ่อมผนึกให้ได้','ข้าเคยเป็นทหารของอารัณยา ก่อนที่ทุกอย่างจะพังทลาย'];stSay([['cmd',me.sty&&!STY[me.sty.s]?'ขอบใจเจ้า ผู้ถือตรา ค่ายนี้ติดหนี้เจ้าตลอดไป':L[Math.floor(Math.random()*L.length)]]])}
 $('sdlg').addEventListener('click',e=>{const b=e.target.closest('button[data-sdc]');if(b){const c=SD.choice&&SD.choice[+b.dataset.sdc];if(c&&SD.onChoose){const f=SD.onChoose;SD.onChoose=null;f(c[1])}return}stNext()});
-$('stq').addEventListener('click',e=>{e.stopPropagation();storyUI()});
+$('stq').addEventListener('click',e=>{e.stopPropagation();const q=$('stq'),mn=q.classList.contains('min');if(e.target.closest('[data-sqx]')||mn){const v=mn?'0':'1';try{localStorage.setItem('refugee_stqmin',v)}catch(_){}window._stqMin=v==='1';try{sfx('click')}catch(_){}stHud();_bnYt=0;return}storyUI()});
 
 /* ===== อนุสาวรีย์ 3 อันดับบอสโลก (กลางค่าย) ===== */
 const WBS=[{x:1665,y:1404,k:1.32,h:15,m:['#ffd84a','#fff4b0','#b8860b'],md:'🥇'},{x:1633,y:1416,k:1.16,h:10,m:['#dfe6ef','#ffffff','#8a94a4'],md:'🥈'},{x:1697,y:1416,k:1.16,h:10,m:['#e0965a','#ffd2a8','#8a4a1e'],md:'🥉'}];
@@ -4525,6 +4526,17 @@ function uisMini(MP,WW,draw){const R=40,cx=W-R-8,cy=R+20,sq=R*1.42,mx=cx-sq/2,my
 #tut,#plpop{background:linear-gradient(180deg,#1c2542,#0e1426)!important;border:1.5px solid #c09650!important}
 #npcb,#gtb,#twb,#rv{background:linear-gradient(180deg,#ffe29a,#e2b050 55%,#b8862e)!important;color:#24170a!important;border:1.5px solid #8a6420!important;font-weight:800!important;box-shadow:0 0 0 1.5px #1a1208,0 4px 12px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.5)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 #cbar input{background:rgba(10,14,28,.9)!important;border:1.5px solid #c09650!important;color:#ede7d8!important}
+
+/* กล่องเควส: ย่อ/ขยาย */
+#stq{max-width:178px!important;font-size:11px!important}
+#stq .sqx{position:absolute;top:4px;right:5px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:800 13px/1 system-ui;font-style:normal;color:#24170a;background:linear-gradient(180deg,#ffe29a,#c99a40);box-shadow:0 0 0 1px #1a1208;cursor:pointer}
+#stq:not(.min)::after{top:auto!important;bottom:5px;transform:none!important;font-size:17px!important}
+#stq:not(.min) b{padding-right:16px}
+#stq.min{padding:5px 10px!important;display:flex;align-items:center;gap:5px;border-radius:999px!important;max-width:none!important}
+#stq.min::after{display:none}
+#stq.min b{margin:0!important;font-size:14px!important;line-height:1}
+#stq.min em{font:800 12px/1 system-ui;font-style:normal;color:#ffe6a8}
+#stq.min.al{animation:stqP 1.4s ease-in-out infinite}@keyframes stqP{50%{box-shadow:0 0 0 2px rgba(255,208,112,.6),0 0 16px rgba(255,200,90,.7)}}
 `;const s=document.createElement('style');s.id='uiskin';s.textContent=css;document.head.appendChild(s);
   const go=()=>{const h=document.getElementById('hud'),bars=document.getElementById('bars');if(!h||!bars){setTimeout(go,200);return}
     if(!document.getElementById('hpor')){const p=document.createElement('div');p.id='hpor';p.innerHTML='<img alt="">';h.prepend(p)}
