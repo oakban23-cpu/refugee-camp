@@ -814,9 +814,9 @@ function drawHuntMark(g){if(!HB.on||HB.map!==curMap||!me.cls)return;const t=perf
 const SPK={hnt:['ไคล์ นักล่าดาวตก','🏹','#9ad8ff'],aze:['อาซาเอล','🪽','#d8c8ff'],cmd:['ผู้บัญชาการเรนน์','🛡️','#e0b870'],me:['','✋','#8ad0ff'],nar:['บันทึก','📜','#c8b890'],
  b1:['ราชาหมอกพิษ','☠️','#b98af0'],b2:['ราชากระดูกโบราณ','💀','#e0d2a0'],b3:['จอมมารเพลิงนรก','🔥','#ffb070'],b4:['จักรพรรดิน้ำแข็งนิรันดร์','❄️','#cfeaff'],
  b6:['ราชันย์ห้วงลึก','🔱','#8ff0e8'],b7:['ราชาก็อบลินถุงทอง','💰','#ffe9a0'],tw:['ผู้เฝ้าหอคอย','🕯️','#c8a8ff'],hd:['ทูตปีกทมิฬ','🪶','#c090ff'],
- ice:['นักบวชน้ำแข็ง','🧊','#9ad8ff'],stl:['ผู้พิทักษ์ศิลาจารึก','🗿','#5ae0d0'],god:['เสียงใต้ผนึก','👁️','#ffd84a'],qn:['ราชินีเอลิรา','👸','#f0c8ff'],pvp:['ลานประลอง','⚔️','#ff9a6a'],ast:['โหรหลวงไซลัส','🔭','#8ad0ff']};
-const STCH=['บทที่ 1 · หมอกแรก','บทที่ 2 · สนามรบที่ไม่ยอมหลับ','บทที่ 3 · หอคอยร้อยชั้น','บทที่ 4 · กุญแจในกองเพลิง','บทที่ 5 · นักบวชผู้แช่แข็งตนเอง','บทที่ 6 · ความจริงใต้ทะเล','บทสุดท้าย · ยอดหอคอย','ภาค 2 · บทที่ 1 · ฟ้าแตก','ภาค 2 · บทที่ 2 · ทุ่งรอยแยก','ภาค 2 · บทที่ 3 · เศษรัศมี','ภาค 2 · บทที่ 4 · ราตรีแห่งความหิว'];
-const STNPC={hnt:[10,'npc'],qn:[9,'qn'],ast:[9,'ast'],cmd:[1,'npc4'],tw:[5,'npc'],hd:[5,'npc2'],ice:[4,'npc'],stl:[6,'npc']};
+ ice:['นักบวชน้ำแข็ง','🧊','#9ad8ff'],stl:['ผู้พิทักษ์ศิลาจารึก','🗿','#5ae0d0'],god:['เสียงใต้ผนึก','👁️','#ffd84a'],qn:['ราชินีเอลิรา','👸','#f0c8ff'],pvp:['ลานประลอง','⚔️','#ff9a6a'],ast:['โหรหลวงไซลัส','🔭','#8ad0ff'],leo:['ลีออน โหรฝึกหัด','📘','#b8c8ff']};
+const STCH=['บทที่ 1 · หมอกแรก','บทที่ 2 · สนามรบที่ไม่ยอมหลับ','บทที่ 3 · หอคอยร้อยชั้น','บทที่ 4 · กุญแจในกองเพลิง','บทที่ 5 · นักบวชผู้แช่แข็งตนเอง','บทที่ 6 · ความจริงใต้ทะเล','บทสุดท้าย · ยอดหอคอย','ภาค 2 · บทที่ 1 · ฟ้าแตก','ภาค 2 · บทที่ 2 · ทุ่งรอยแยก','ภาค 2 · บทที่ 3 · เศษรัศมี','ภาค 2 · บทที่ 4 · ราตรีแห่งความหิว','ภาค 2 · บทที่ 5 · ข้ามรอยแยก'];
+const STNPC={hnt:[10,'npc'],qn:[9,'qn'],ast:[9,'ast'],cmd:[1,'npc4'],tw:[5,'npc'],hd:[5,'npc2'],ice:[4,'npc'],stl:[6,'npc'],leo:[11,'npc']};
 const STY=[
  {c:0,g:'kill',m:1,n:12,tx:'กำจัดมอนสเตอร์รอบค่าย',
   pre:[['nar','สามร้อยปีก่อน อาณาจักรอารัณยาผนึกเทพองค์หนึ่งไว้ใต้แผ่นดิน ด้วยหอคอยร้อยชั้น และวิญญาณอัศวินร้อยดวง'],['nar','คืนนี้... ผนึกนั้นร้าว'],
@@ -935,7 +935,32 @@ const STY=[
  {c:10,g:'talk',k:'ast',zEnd2:1,tx:'พบโหรหลวงไซลัสหลังศึก',
   pre:[['ast','ข้าวัดดาวทั้งคืน... รอยแยกหดลงจริง ๆ แต่ด้านหลังมัน มีดวงดาวดวงหนึ่งกำลังดับลงทีละน้อย'],['ast','ตำราเรียกมันว่า "ราชินีผู้กลืนดาว" ถ้ามันออกล่าเอง เราต้องพร้อมกว่านี้หลายเท่า'],
    ['ast','ระหว่างนี้ ฝากเจ้าเฝ้าทุ่งรอยแยกและนครไว้ ฝูงผลึกยังจะโผล่ลงมาเป็นระยะ คุยกับราชินีได้ทุกเมื่อถ้าอยากช่วยตั้งรับ'],
-   ['nar','🏅 ปลดล็อกฉายาชมพู «ผู้พิทักษ์นครลอยฟ้า» · เลือดสูงสุด +5% · ลดดาเมจที่ได้รับ +3%'],['nar','— จบภาค 2 บทที่ 4 · ราตรีแห่งความหิว — บทต่อไปเร็ว ๆ นี้']],rw:{g:30000,s3:5}}];
+   ['nar','🏅 ปลดล็อกฉายาชมพู «ผู้พิทักษ์นครลอยฟ้า» · เลือดสูงสุด +5% · ลดดาเมจที่ได้รับ +3%'],['nar','— จบภาค 2 บทที่ 4 · ราตรีแห่งความหิว —']],rw:{g:30000,s3:5}},
+ {c:11,g:'talk',k:'ast',lv:62,tx:'โหรหลวงไซลัสเห็นบางสิ่งหลังรอยแยก',
+  pre:[['ast','ผู้ถือตรา ข้าส่องกล้องผ่านรอยแยกมาสามคืนแล้ว... ด้านหลังมันไม่ใช่ความว่างเปล่า มันคือ "แผ่นดิน"'],['ast','แผ่นดินที่ก่อขึ้นจากซากดาว ดวงดาวที่ถูกกลืนไปตลอดสามร้อยปีถูกสำรอกทิ้งไว้ที่นั่นเป็นกอง ๆ'],
+   ['aze','(เสียงจากขนนก) ...ที่นั่นคือรังของพวกมัน ลูกหลานของราชินีผู้กลืนดาวฟักออกมาจากซากดาวเหล่านั้น'],['aze','ถ้าปล่อยไว้ พวกมันจะล้นออกมาทางรอยแยกอีก... คราวนี้มากกว่าทูตแห่งความหิวเป็นร้อยเท่า'],
+   ['ast','อาซาเอลใช้แสงที่เหลือเปิดทางไว้แล้ว ด้านหลังจุดที่เขาเคยยืนเฝ้า ไปหาไคล์ที่ทุ่งรอยแยก เขารู้ทาง']],rw:{g:4000}},
+ {c:11,g:'talk',k:'hnt',lv:62,tx:'พบไคล์ที่ทุ่งรอยแยก · ประตูข้ามรอยแยก',
+  pre:[['hnt','ผู้ถือตรา! เมื่อคืนแสงทองพุ่งลงมาหน้ารอยแยก แล้วประตูบานหนึ่งก็ปรากฏขึ้นทางตะวันออกสุดของทุ่ง'],['hnt','ลีออน เด็กฝึกงานของโหรไซลัส ดื้อดึงข้ามไปก่อนแล้ว บอกว่าอยากจดชื่อดาวทุกดวงที่หายไป'],
+   ['hnt','ข้าต้องเฝ้ารอยแยกฝั่งนี้ไม่ให้อะไรหลุดออกมา ฝากตามหาเจ้าเด็กนั่นด้วย... และระวังตัว แสงที่นั่นไม่เหมือนที่นี่']],rw:{g:3000}},
+ {c:11,g:'map',m:11,lv:62,tx:'ผ่านประตูทางตะวันออกสุดของทุ่งรอยแยกนภา เข้าสู่ดินแดนหลังรอยแยก',
+  post:[['nar','ไม่มีท้องฟ้า มีแต่ความมืดที่ลึกจนแสงจมหาย และพื้นผลึกสีม่วงที่ยังอุ่นอยู่ใต้ฝ่าเท้า'],['nar','ไกลออกไป ดวงดาวยักษ์ฝังดินอยู่ครึ่งดวง มีรอยกัดแหว่งเหมือนผลไม้ที่ถูกแทะทิ้ง'],['me','(ทุกดวงในนี้... เคยส่องแสงอยู่บนฟ้าของพวกเรา)']]},
+ {c:11,g:'talk',k:'leo',tx:'ตามหาลีออน โหรฝึกหัด ที่จุดพักใกล้ประตู',
+  pre:[['leo','อ๊ะ! ผู้ถือตราจริง ๆ ด้วย! ท่านไคล์ส่งมาตามข้าใช่ไหม... ข้ายังไม่กลับนะ!'],['leo','ดูสมุดนี่สิ ดาวหายไปจากฟ้าคืนละสามดวง และทุกดวงมาโผล่ที่นี่... ถูกกัดกินทั้งหมด'],
+   ['leo','พวกลูกกลืนดาวกับผีเสื้อคราสคอยแทะซากดาวพวกนี้ ยิ่งกินยิ่งแบ่งตัว ถ้าไม่ลดจำนวนลง เราเข้าใกล้รังไม่ได้แน่']]},
+ {c:11,g:'kill',m:11,n:60,lv:62,tx:'กวาดล้างฝูงลูกกลืนดาวในดินแดนหลังรอยแยก',post:[['me','(ทุกตัวที่ล้มลง... มีละอองแสงลอยกลับขึ้นไปข้างบน เหมือนดาวที่ได้กลับบ้าน)']],rw:{g:10000,s3:2}},
+ {c:11,g:'talk',k:'leo',tx:'กลับไปหาลีออน · ความลับของรัง',
+  pre:[['leo','ข้าเห็นแล้ว! ละอองแสงที่ลอยขึ้นตอนพวกมันตาย คือแสงดาวที่ถูกกลืนเข้าไป มันกลับขึ้นฟ้าได้!'],['leo','แต่ดาวดวงใหญ่ ๆ ถูกขังไว้ที่รังทางตะวันออกเฉียงเหนือ ผู้คุมรังชื่อ "โวราธ" มันสวมดาวที่ขโมยมาเป็นมงกุฎ'],
+   ['aze','(เสียงจากขนนก) โวราธ... ผู้เฝ้ารังที่ราชินีไว้ใจที่สุด ถ้ามันล้ม รังจะเปิดโล่ง และราชินีจะเสียตาไปข้างหนึ่ง'],
+   ['god','ดาวในมงกุฎนั้น... มีดวงหนึ่งที่ข้าเคยตั้งชื่อเอง ผู้ถือตรา นำมันกลับคืนฟ้าให้ข้าที',2],['hd','(เสียงปีกดำจากที่ไกล) ...ระวังมงกุฎนั้น ดาวที่ถูกขังนาน ๆ ก็เกลียดทุกคนเหมือนกัน',1],
+   ['leo','รวมทีมไปเถอะ ผู้ถือตรา ข้าจะจดชื่อดาวทุกดวงที่ท่านปล่อยคืนฟ้า!']],rw:{g:3000}},
+ {c:11,g:'boss',m:11,lv:62,tx:'ล้มโวราธ ผู้คุมรังดาว ที่รังทางตะวันออกเฉียงเหนือ (แนะนำปาร์ตี้)',
+  post:[['nar','โวราธกรีดร้องจนพื้นผลึกสั่นสะเทือน มงกุฎดาวทั้งเจ็ดดวงหลุดออกจากหัวของมัน'],['nar','ดาวดวงแล้วดวงเล่าลอยขึ้น ฝ่าความมืดเหนือรังขึ้นไป... เป็นครั้งแรกที่ดินแดนนี้มีแสงดาวส่องลงมา'],
+   ['aze','(แสงทองวาบจากขนนก) ข้ารู้สึกได้... ราชินีผู้กลืนดาวลืมตาเต็มดวงแล้ว มันรู้ว่าใครบุกถึงรังของมัน'],['me','(ดาวดวงสุดท้ายลอยวนรอบตัวข้าครู่หนึ่ง... เหมือนขอบคุณ แล้วจึงลอยขึ้นไป)']],cine:1,rw:{g:20000,s3:4}},
+ {c:11,g:'talk',k:'qn',zEnd3:1,tx:'กลับไปทูลรายงานราชินีเอลิราที่นครลอยฟ้า',
+  pre:[['qn','คืนนี้ทั้งนครออกมายืนดูฟ้า... ดาวที่หายไปกลับมาส่องแสงตั้งเจ็ดดวง ผู้คนร้องไห้กันทั้งเมือง'],['ast','ข้าวัดตำแหน่งแล้ว ทุกดวงกลับเข้าที่เดิมหมด! ลีออนส่งสมุดมาให้ด้วย เขาจดชื่อไว้ครบทุกดวง'],
+   ['qn','แต่ถ้าราชินีของพวกมันตื่นแล้วจริง... สงครามครั้งต่อไปจะไม่ได้เกิดที่รอยแยก มันจะมาถึงประตูบ้านเรา'],['qn','ผู้ถือตรา จากวันนี้เจ้าคือผู้ข้ามรอยแยกคนแรกของอัสตรา พักให้เต็มที่ เมื่อดาวดวงถัดไปดับ เราต้องการเจ้า'],
+   ['nar','🏅 ปลดล็อกฉายาชมพู «ผู้ข้ามรอยแยก» · ดาเมจ +3% · ลดดาเมจที่ได้รับ +2%'],['nar','— จบภาค 2 บทที่ 5 · ข้ามรอยแยก — บทต่อไปเร็ว ๆ นี้']],rw:{g:30000,s3:5}}];
 const STEND={1:[['god','...เข้าใจแล้ว ข้าจะหลับต่อไป'],['nar','แสงจากตราไหลเข้าสู่หอคอย ผนึกกลับมาสมบูรณ์ หมอกทั่วแผ่นดินค่อย ๆ จางหาย'],['cmd','เจ้าทำได้! ค่ายผู้อพยพไม่ต้องหนีอีกต่อไปแล้ว'],['hd','...อีกสามร้อยปี ข้าจะรอ'],['nar','— จบภาค 1 · รอยผนึกแตก — ได้รับฉายา «ผู้ผนึกนิรันดร์»']],
  2:[['god','ขอบใจ... ผู้ถือตรา'],['nar','โซ่ทั้งร้อยแตกสลาย แสงสีทองพุ่งจากยอดหอคอยสู่ท้องฟ้า'],['hd','นายท่าน... ท่านกลับมาแล้ว...'],['god','อย่ากลัวไปเลย จากนี้ข้าจะปกป้องแผ่นดินนี้อีกครั้ง... แต่ศัตรูที่แท้จริงกำลังมา'],['nar','— จบภาค 1 · รอยผนึกแตก — ได้รับฉายา «ผู้ปลดโซ่เทพ»']]};
 const STRW={g:'ทอง',hp:'ยา HP',mp:'ยา MP',s1:'หินตีบวกขั้นแรก',s2:'หินตีบวกขั้นสอง',s3:'หินตีบวกขั้นสูง',twc:'เหรียญหอคอย'};
@@ -971,10 +996,10 @@ function stTick(){if(!me.cls||!run)return;stInit();const q=me.sty,st=STY[q.s];st
   if(!ok)return;if(st.g==='boss'?(me.down>0||SD.on||!ov.hidden):!stCalm())return;stDone()}
 function stKill(t,bs){const q=me.sty,st=stCur();if(!st||q.a!==1||isDg())return;if(st.g==='kill'&&!bs&&t!==3&&curMap===st.m){q.n=Math.min(st.n,q.n+1);stHud()}else if(st.g==='boss'&&bs&&curMap===st.m){q.n=1;stFlash();setTimeout(stTick,900)}}
 function stEvt(k){const q=me.sty,st=stCur();if(st&&q.a===1&&st.g===k){q.n=1;stHud()}}
-function stTalkKey(){const sel=npcSel;if(curMap===9&&typeof sel==='string'){const N=CITY.npcs[+sel.slice(1)];return N?N.k:''}if(curMap===1&&sel===4)return'cmd';if(curMap===10&&sel===1)return'hnt';if(curMap===5)return sel===1?'tw':sel===2?'hd':'';if((curMap===4||curMap===6)&&sel===1)return curMap===4?'ice':'stl';return''}
+function stTalkKey(){const sel=npcSel;if(curMap===9&&typeof sel==='string'){const N=CITY.npcs[+sel.slice(1)];return N?N.k:''}if(curMap===1&&sel===4)return'cmd';if(curMap===10&&sel===1)return'hnt';if(curMap===11&&sel===1)return'leo';if(curMap===5)return sel===1?'tw':sel===2?'hd':'';if((curMap===4||curMap===6)&&sel===1)return curMap===4?'ice':'stl';return''}
 function stWants(k){const st=stCur();return!!(st&&st.k===k&&(me.sty.a===0||((st.g==='echo'||st.g==='siege')&&me.sty.n<1&&!ECHO()&&!SIEGE()))&&(!st.lv||me.lv>=st.lv))}
 function stNpcClick(){const k=stTalkKey();if(k&&!stWants(k)&&me.ach){if(k==='hnt'&&curMap===10&&me.ach.stA)return instRepeat('echo');if(k==='qn'&&curMap===9&&me.ach.stB)return instRepeat('siege')}if(!k||!stWants(k))return false;const st=stCur();if(st.g==='echo'||st.g==='siege'){const again=me.sty.a===1,go=st.g==='echo'?echoEnter:siegeEnter;me.sty.a=1;stSay(again?[[st.k,st.g==='echo'?'รอยแยกยังเปิดอยู่ เศษรัศมียังส่องแสง... พร้อมเมื่อไหร่ก็ก้าวเข้าไป!':'ทหารพร้อมแล้ว พร้อมเมื่อไหร่เราจะตั้งรับกันอีกครั้ง!']]:st.pre,()=>{stHud();setTimeout(go,250)});return true}me.sty.a=1;stSay(st.pre,()=>{if(st.g==='talk')stDone();else stHud()});return true}
-function stTxt(){stInit();const q=me.sty,st=STY[q.s];if(!st)return'✅ จบภาค 2 บทที่ 4 แล้ว · บทต่อไปเร็ว ๆ นี้';
+function stTxt(){stInit();const q=me.sty,st=STY[q.s];if(!st)return'✅ จบภาค 2 บทที่ 5 แล้ว · บทต่อไปเร็ว ๆ นี้';
   let t=st.tx;if(st.lv&&me.lv<st.lv)t+=' <em>(ต้อง Lv '+st.lv+')</em>';else if((st.g==='kill')&&q.a===1)t+=' <b>'+q.n+'/'+st.n+'</b>';else if(st.g==='tw')t+=' <b>'+Math.min(st.n,me.twBest|0)+'/'+st.n+'</b>';
   if(st.k&&q.a===0&&STNPC[st.k]&&STNPC[st.k][0]===curMap&&(!st.lv||me.lv>=st.lv))t='❗ '+t;return t}
 function stHud(){const e=$('stq');if(!e)return;const sh=!!(me.cls&&run);if(!sh){if(!e.hidden)e.hidden=true;return}stInit();const q=me.sty,st=STY[q.s];
@@ -2123,7 +2148,7 @@ async function chSwGo(){if(chSwBusy||!me.cls)return;const bad=chSwBad();if(bad)r
 const TTB={k100:{gr:'w',b:{str:3}},b1:{gr:'w',b:{vit:3}},dg1:{gr:'w',b:{int:3}},tw10:{gr:'w',b:{agi:3}},st7:{gr:'w',b:{luk:4}},
   dq30:{gr:'w',b:{vit:5}},el100:{gr:'w',b:{str:5}},ult100:{gr:'w',b:{int:5}},b2:{gr:'w',b:{agi:5}},b3:{gr:'w',b:{luk:5}},lv30:{gr:'w',b:{all:2}},
   k1000:{gr:'g',b:{str:.05}},tw50:{gr:'g',b:{agi:.06}},b4:{gr:'g',b:{vit:.06}},rich:{gr:'g',b:{luk:.06}},bx50:{gr:'g',b:{vit:.08}},up10:{gr:'g',b:{str:.08}},
-  leg:{gr:'g',b:{luk:.08}},stL:{gr:'g',b:{int:.08}},stD:{gr:'g',b:{str:.08}},awk:{gr:'g',b:{all:.04}},set5:{gr:'g',b:{all:.05}},lv60:{gr:'g',b:{all:.06}},lv70:{gr:'p',b:{hp:.04,cr:.02}},stA:{gr:'p',b:{cr:.02,as:.03,ls:.01}},stB:{gr:'p',b:{hp:.05,red:.03}},
+  leg:{gr:'g',b:{luk:.08}},stL:{gr:'g',b:{int:.08}},stD:{gr:'g',b:{str:.08}},awk:{gr:'g',b:{all:.04}},set5:{gr:'g',b:{all:.05}},lv60:{gr:'g',b:{all:.06}},lv70:{gr:'p',b:{hp:.04,cr:.02}},stA:{gr:'p',b:{cr:.02,as:.03,ls:.01}},stB:{gr:'p',b:{hp:.05,red:.03}},stC:{gr:'p',b:{dm:.03,red:.02}},
   k5000:{gr:'p',b:{cr:.02}},dg3:{gr:'p',b:{as:.04}},raid1:{gr:'p',b:{red:.03}},raid10:{gr:'p',b:{ls:.02}},b6:{gr:'p',b:{hp:.05}},tw100:{gr:'p',b:{mp:.08}},
   mvp1:{gr:'p',b:{hp:.04}},tw150:{gr:'p',b:{as:.05,cr:.02}},mvp10:{gr:'p',b:{cr:.03,ls:.01}},wb1:{gr:'p',b:{hp:.06,red:.03}},wb2:{gr:'p',b:{as:.05}},wb3:{gr:'p',b:{cr:.03}}};
 const TGC={w:['ขาว','#f4f4f4','#7a7a80','#ececf0'],g:['ทอง','#ffd84a','#a87208','#fff3c4'],p:['ชมพู','#ff8ad8','#c0398a','#ffe0f4']},TSN={str:'STR',vit:'VIT',int:'INT',agi:'AGI',luk:'LUK',all:'ทุกสเตตัส',cr:'โอกาสคริ',as:'ความเร็วโจมตี',ls:'ดูดเลือด',red:'ลดดาเมจที่ได้รับ',hp:'เลือดสูงสุด',mp:'มานาสูงสุด'};
@@ -3576,6 +3601,7 @@ const CS_ORD=['melee','archer','mage','assn','sup'],CS_SL=['w','a','h','b','c'];
 .csw .cs-cls button.cs-emp{border-style:dashed;border-color:rgba(255,236,205,.22);background:rgba(23,20,27,.45);justify-content:center;min-height:86px;color:#a69c8c}.cs-emp b{font-size:26px;font-weight:300;line-height:1;color:#e7b75a;pointer-events:none}.csw .cs-cls button.cs-emp.on{border-style:dashed;color:#ffe2a0}.csw .cs-back{color:#cfc5b4;background:rgba(255,244,225,.06);border-color:rgba(255,236,205,.18)}
 .cs-cls.cs-sl{grid-template-columns:repeat(4,1fr)}.cs-sl img{max-width:64px}
 .cs-namebox{display:flex;flex-direction:column;gap:5px;background:rgba(23,20,27,.82);border:1px solid rgba(231,183,90,.35);border-radius:16px;padding:10px 12px}.cs-namebox label{font-size:12px;font-weight:700;color:#e7b75a;letter-spacing:.04em}.csw .cs-namebox input{font-size:17px;font-weight:700;padding:10px 12px;border-radius:12px;width:100%;box-sizing:border-box}.csw .cs-namebox input:focus{outline:2px solid #e7b75a;outline-offset:1px}.cs-namebox small{font-size:11px;color:#a69c8c}
+.pws .pwt{width:100%;border-collapse:collapse;font-size:12.5px;margin:2px 0 8px}.pws .pwt th{font-size:11px;font-weight:600;opacity:.65;text-align:center;padding:2px}.pws .pwt td{text-align:center;padding:4px 2px;border-top:1px solid rgba(255,236,205,.08)}.pws .pwt td:first-child{text-align:left}.pws .pwr{padding:6px 0;border-top:1px solid rgba(255,236,205,.08)}.pws .pwh{display:flex;justify-content:space-between;font-size:13.5px}.pws .pwh b{color:#9fe0a2}.pws small{display:block;font-size:11px;opacity:.75;line-height:1.45;margin-top:2px}.pws em{color:#e7b75a;font-style:normal}
 .cs-cls em.n{background:rgba(255,255,255,.12);color:#a69c8c}
 .csw details{background:rgba(23,20,27,.7);border:1px solid rgba(255,236,205,.1);border-radius:14px;padding:10px 12px;font-size:13px}
 .csw details summary{cursor:pointer;color:#e7b75a;font-weight:700}
@@ -4292,7 +4318,7 @@ const evReady=()=>loginReady()||(me.dq&&me.dq.d===dayKey()&&me.dq.q.some(q=>q.h>
 const ACH=[['k100','นักล่ามือใหม่','กำจัดมอนสเตอร์ 100 ตัว',s=>s.k,100,0],['k1000','เพชฌฆาต','กำจัดมอนสเตอร์ 1,000 ตัว',s=>s.k,1000,1],['k5000','ตำนานนักล่า','กำจัดมอนสเตอร์ 5,000 ตัว',s=>s.k,5000,2],
  ['el100','ผู้ล้มยักษ์','กำจัดมอนตัวแข็ง 100 ตัว',s=>s.el,100,1],['b1','ผู้พิชิตหมอกพิษ','ล้มราชาหมอกพิษ',s=>s.b.m1||0,1,0],['b2','ผู้ทลายกระดูก','ล้มราชากระดูกโบราณ',s=>s.b.m2||0,1,1],
  ['b3','ผู้ดับเพลิงนรก','ล้มจอมมารเพลิงนรก',s=>s.b.m3||0,1,1],['b4','ผู้ละลายน้ำแข็ง','ล้มจักรพรรดิน้ำแข็งนิรันดร์',s=>s.b.m4||0,1,2],['bx50','นักล่าบอส','ล้มบอสรวม 50 ครั้ง',s=>Object.values(s.b).reduce((a,b)=>a+b,0),50,2],
- ['dg1','นักสำรวจสุสาน','พิชิตดันเจี้ยน 1 ครั้ง',s=>s.dg,1,0],['dg3','ราชันสุสาน','พิชิตดันเจี้ยนระดับนรก',s=>s.dg3,1,2],['lv30','ผู้ไร้เทียมทาน','ถึงเลเวล 30',()=>me.lv,30,1],['lv60','ตำนานแห่งค่าย','ถึงเลเวล 60',()=>me.lv,60,2],['lv70','ผู้ก้าวข้ามขีดจำกัด','ถึงเลเวล 70',()=>me.lv,70,2],['stB','ผู้พิทักษ์นครลอยฟ้า','จบภาค 2 บทที่ 4: ปกป้องนครลอยฟ้า',()=>{const i=STY.findIndex(x=>x.zEnd2);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['stA','ผู้ปลดปล่อยเทวทูต','จบภาค 2 บทที่ 3: ปลดปล่อยอาซาเอล',()=>{const i=STY.findIndex(x=>x.zEnd);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['awk','ผู้ตื่นรู้','เปลี่ยนเป็นอาชีพขั้นที่ 2',()=>me.cls2?1:0,1,2],['raid1','ผู้พิชิตห้วงลึก','พิชิตเรดห้วงลึก 1 ครั้ง',s=>s.raid||0,1,2],['raid10','จ้าวแห่งห้วงลึก','พิชิตเรดห้วงลึก 10 ครั้ง',s=>s.raid||0,10,2],['set5','ผู้สวมชุดตำนาน','สวมชุดเซ็ตครบ 5 ชิ้น',()=>Math.max(setCount(1),setCount(2)),5,2],['tw150','ผู้ข้ามขีดจำกัด','ปีนหอคอยถึงชั้น 150',()=>me.twBest||0,150,2],['b6','ผู้สยบห้วงลึก','ล้มราชันย์ห้วงลึก',s=>s.b.m6||0,1,2],
+ ['dg1','นักสำรวจสุสาน','พิชิตดันเจี้ยน 1 ครั้ง',s=>s.dg,1,0],['dg3','ราชันสุสาน','พิชิตดันเจี้ยนระดับนรก',s=>s.dg3,1,2],['lv30','ผู้ไร้เทียมทาน','ถึงเลเวล 30',()=>me.lv,30,1],['lv60','ตำนานแห่งค่าย','ถึงเลเวล 60',()=>me.lv,60,2],['lv70','ผู้ก้าวข้ามขีดจำกัด','ถึงเลเวล 70',()=>me.lv,70,2],['stB','ผู้พิทักษ์นครลอยฟ้า','จบภาค 2 บทที่ 4: ปกป้องนครลอยฟ้า',()=>{const i=STY.findIndex(x=>x.zEnd2);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['stC','ผู้ข้ามรอยแยก','จบภาค 2 บทที่ 5: ข้ามรอยแยกและล้มโวราธ',()=>{const i=STY.findIndex(x=>x.zEnd3);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['stA','ผู้ปลดปล่อยเทวทูต','จบภาค 2 บทที่ 3: ปลดปล่อยอาซาเอล',()=>{const i=STY.findIndex(x=>x.zEnd);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['awk','ผู้ตื่นรู้','เปลี่ยนเป็นอาชีพขั้นที่ 2',()=>me.cls2?1:0,1,2],['raid1','ผู้พิชิตห้วงลึก','พิชิตเรดห้วงลึก 1 ครั้ง',s=>s.raid||0,1,2],['raid10','จ้าวแห่งห้วงลึก','พิชิตเรดห้วงลึก 10 ครั้ง',s=>s.raid||0,10,2],['set5','ผู้สวมชุดตำนาน','สวมชุดเซ็ตครบ 5 ชิ้น',()=>Math.max(setCount(1),setCount(2)),5,2],['tw150','ผู้ข้ามขีดจำกัด','ปีนหอคอยถึงชั้น 150',()=>me.twBest||0,150,2],['b6','ผู้สยบห้วงลึก','ล้มราชันย์ห้วงลึก',s=>s.b.m6||0,1,2],
  ['leg','ผู้ถูกเลือก','ได้อุปกรณ์ระดับตำนาน',s=>s.leg,1,2],['up10','ช่างตีเหล็กในตำนาน','ตีบวกอุปกรณ์ถึง +10',s=>s.up10,1,2],['st7','ผู้ภักดี','ล็อกอินต่อเนื่อง 7 วัน',s=>s.mst||0,7,1],
  ['dq30','ขยันขันแข็ง','รับรางวัลเควสรายวัน 30 ครั้ง',s=>s.dq,30,1],['ult100','ผู้ปลดปล่อยพลัง','ใช้อัลติเมต 100 ครั้ง',s=>s.ult,100,1],['rich','เศรษฐีค่าย','มีทองในกระเป๋า 50,000',()=>me.gold,50000,2],
  ['tw10','ผู้ท้าหอคอย','ปีนหอคอยวิญญาณถึงชั้น 10',()=>me.twBest||0,10,0],['tw50','ผู้ข้ามครึ่งทาง','ปีนหอคอยวิญญาณถึงชั้น 50',()=>me.twBest||0,50,1],['tw100','ผู้พิชิตหอคอย','พิชิตหอคอยวิญญาณครบ 100 ชั้น',()=>me.twBest||0,100,2],['mvp1','ผู้พิชิต MVP','ได้รับรางวัล MVP 1 ครั้ง',s=>s.mvp||0,1,2],['mvp10','ราชันย์ MVP','ได้รับรางวัล MVP 10 ครั้ง',s=>s.mvp||0,10,2],['stL','ผู้ผนึกนิรันดร์','จบเนื้อเรื่องภาค 1: ผนึกเทพไว้อีกครั้ง',()=>me.sty&&me.sty.e===1?1:0,1,2],['stD','ผู้ปลดโซ่เทพ','จบเนื้อเรื่องภาค 1: ปลดปล่อยเทพ',()=>me.sty&&me.sty.e===2?1:0,1,2]];
@@ -5778,12 +5804,26 @@ function nb(n,locked){
   const r=me.tr[n.id]||0,can=!locked&&r<n.max&&pts()>0;
   return'<button class="nd'+(r>=n.max?' mx':can?' cn':(locked&&!r?' lk':''))+'" data-n="'+n.id+'"'+(can?'':' disabled')+'><b>'+n.n+'</b><span class="pp">'+'●'.repeat(r)+'○'.repeat(n.max-r)+'</span><small>'+n.d+'</small></button>';
 }
+function powSum(){if(!me.cls)return'';const C=CL[me.cls],r=ttAgg(),f=v=>Math.round(v*1000)/10;
+  const nd=k=>{let t=0;nodes().forEach(n=>{if(n.k===k)t+=(me.tr[n.id]||0)*n.v});return t},aw=k=>me.cls2?(k==='hp'?.1:k==='dm'?.12:0):0;
+  const SRC=[['สเตตัส',k=>A(k)],['ของสวมใส่',k=>G(k)],['เซ็ต',k=>setB(k)],['ผังสกิล',nd],['ฉายา',k=>titleM(k)],['การ์ด',k=>cardM(k)],['สัตว์เลี้ยง',k=>petV(k)],['ตื่นรู้',aw]];
+  const K=[['dm','⚔️ ดาเมจ'],['hp','❤️ เลือดสูงสุด'],['mp','💧 มานาสูงสุด'],['cr','🎯 โอกาสคริ'],['cdm','💥 ดาเมจคริ'],['as','⚡ ความเร็วโจมตี'],['sp','👟 ความเร็วเดิน'],['ls','🩸 ดูดเลือด'],['red','🛡️ ลดดาเมจที่ได้รับ'],['reg','💚 ฟื้นเลือด/วิ']];
+  let h='<div class="card pws"><div class="cap">📊 สรุปพลังทั้งหมด (รวมทุกแหล่ง)</div>';
+  h+='<table class="pwt"><tr><th></th><th>อัพเอง</th><th>ฉายา</th><th>ฉายา %</th><th>รวม</th></tr>'+['str','vit','int','agi','luk'].map(id=>'<tr><td><b>'+TSN[id]+'</b></td><td>'+(me.ab[id]||0)+'</td><td>'+(r.f[id]?'+'+r.f[id]:'–')+'</td><td>'+(r.p[id]?'+'+f(r.p[id])+'%':'–')+'</td><td><b>'+abV(id)+'</b></td></tr>').join('')+'</table>';
+  h+=K.map(([k,nm])=>{const tot=M(k)+(k==='cr'?(C.cr||0):0),flat=k==='reg';if(Math.abs(tot)<1e-6)return'';const parts=[];let acc=0;
+      if(k==='cr'&&C.cr){parts.push(['อาชีพ',C.cr]);acc+=C.cr}
+      SRC.forEach(([n,fn])=>{let v=0;try{v=fn(k)||0}catch(e){}if(Math.abs(v)>1e-6){parts.push([n,v]);acc+=v}});
+      const oth=tot-acc;if(Math.abs(oth)>.0005)parts.push(['อื่น ๆ',oth]);
+      const fv=v=>flat?(Math.round(v*10)/10):(f(v)+'%'),cap=k==='red'&&tot>.6?' <em>(ใช้ได้สูงสุด 60%)</em>':k==='cr'&&tot>1?' <em>(เกิน 100% ไม่มีผล)</em>':'';
+      return'<div class="pwr"><div class="pwh"><span>'+nm+'</span><b>+'+fv(tot)+'</b></div><small>'+parts.map(([n,v])=>n+' '+(v>=0?'+':'')+fv(v)).join(' · ')+cap+'</small></div>'}).join('');
+  return h+'</div>'}
 function treeUI(){
   const C=CL[me.cls],nx=me.lv>=LMAX?0:need(me.lv),pc=nx?Math.min(100,Math.round(me.xp/nx*100)):100;
   let h=hdr('👤','ตัวละคร',clsName()+' · Lv '+me.lv)+tabsH([['ab','สเตตัส'],['tr','สกิล']],charTab,'char');
   h+='<div class="card"><div style="display:flex;justify-content:space-between;font-size:13px"><b>Lv '+me.lv+'</b><span>'+(nx?me.xp+' / '+nx+' EXP':'MAX')+'</span></div><div class="xpb"><i style="width:'+pc+'%"></i></div></div>';
   if(charTab==='ab'){
     h+='<div class="sum"><div>❤️ HP<b>'+me.mh+'</b></div><div>💧 MP<b>'+me.mm+'</b></div><div>⚔️ โจมตี<b>'+Math.round(pd())+'</b></div><div>🎯 คริติคอล<b>'+Math.round((M('cr')+(C.cr||0))*1000)/10+'%</b></div><div>💥 ดาเมจคริ<b>x'+(Math.round((2+M('cdm'))*100)/100)+'</b></div><div>👟 ความเร็ว<b>'+Math.round(C.sp*(1+M('sp')))+'</b></div><div>⚡ ตี/วินาที<b>'+(Math.round((1+M('as'))/C.cd*100)/100)+'</b></div></div>';
+    h+=powSum();
     h+='<div class="card">'+AB.map(([id,nm,d])=>{const m=nm.match(/^(.*?) \((.*)\)$/)||[0,nm,''];
       return'<div class="sr"><div class="ico">'+(ABI[id]||'•')+'</div><div class="nm"><b>'+m[2]+' '+m[1]+'</b><small>'+d+(1?(()=>{const v=abV(id),b=Math.floor(v/10),nx=10-v%10;return'<br><span style="color:#b0661a;font-weight:600">โบนัสตอนนี้: '+({str:'+'+(b*3)+'% ดาเมจ',vit:'+'+(b*4)+'% เลือดสูงสุด',int:'+'+(b*3)+'% พลังทุกสกิล',agi:'+'+(b*3)+'% ความเร็วโจมตี',luk:'+'+(b*10)+'% ดาเมจคริ'}[id])+' · อีก '+nx+' แต้มถึงขั้นถัดไป</span>'})():'')+'</small></div><div class="vl">'+(me.ab[id]||0)+(abV(id)>(me.ab[id]||0)?'<small style="display:block;font-size:10px;color:#b0661a">+'+(abV(id)-(me.ab[id]||0))+' ฉายา</small>':'')+'</div><button class="rb" data-ab="'+id+'" data-q="1"'+(spts()>0?'':' disabled')+'>+1</button><button class="rb" data-ab="'+id+'" data-q="5"'+(spts()>=5?'':' disabled')+'>+5</button></div>'}).join('<hr>')+'</div>';
     h+='<div class="card" style="flex-direction:row;align-items:center;justify-content:space-between"><div><small>แต้มสเตตัสที่เหลือ (ได้ 3 แต้มต่อเลเวล)</small><b style="font-size:24px;display:block">'+spts()+'</b></div><button id="abreset">🔄 รีเซ็ต</button></div>';
