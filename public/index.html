@@ -1670,7 +1670,7 @@ const mkOn=()=>!!(room&&room.url);
 const MKG=['s3','s2','s1','ps','twc','sc','hr','hp','mp'];
 function mkName(k,d){if(k==='it'){const it=cleanItem(d);return it?itemCard(it):'?'}if(k==='cd')return'🃏 <b>'+(CARDS[d]?CARDS[d].n:'การ์ด')+'</b>';if(k==='st')return'<b>'+(GDM[d.k]?GDM[d.k].n:d.k)+' ×'+(d.n|0)+'</b>';return'?'}
 function mkGive(k,d,q){if(k==='it'){const it=cleanItem(d);if(it){me.bag.push(it);if(!q)sysMsg('📦 ได้รับ '+itemName(it))}}else if(k==='cd'){if(CARDS[d])cardGet(d,1)}else if(k==='st'&&GDM[d.k])gdSet(d.k,gdGet(d.k)+(d.n|0))}
-function mkFetch(){if(mkOn())try{emitM('mkq',{})}catch(e){}}
+function mkFetch(){if(mkOn())try{emitM('mkq',{mid:mkMid()})}catch(e){}}
 function mktUI(msg){if(!me.cls)return;ov.dataset.k='mkt';ov.hidden=false;
   let h=hdr('🏪','ตลาดกลางอัสตรา','ทอง '+fmtG(me.gold));if(msg)h+='<div class="note">'+msg+'</div>';
   if(!mkOn()){h+='<div class="card hint">ตลาดซื้อขายระหว่างผู้เล่นใช้ได้เมื่อเล่นออนไลน์บนเซิร์ฟเวอร์เท่านั้น</div>';ov.innerHTML='<div class="pn" data-pn="mkt">'+h+'</div>';return}
@@ -1697,16 +1697,22 @@ function mkAct(a,v){
     if(k==='it'){const it=me.bag[+x];if(!it||it.lk)return;d=JSON.parse(JSON.stringify(it));me.bag.splice(+x,1)}
     else if(k==='cd'){if(!((me.cards[x]|0)>0))return;me.cards[x]--;if(!me.cards[x]){delete me.cards[x];if(me.cslot)me.cslot=me.cslot.map(c=>c===x?'':c);if(me.cmv===x)me.cmv=''}cardRecalc();recalc();d=x}
     else if(k==='st'){const n=+y;if(gdGet(x)<n)return;gdSet(x,gdGet(x)-n);d={k:x,n}}
-    if(d===null)return;const t=Math.random().toString(36).slice(2,9);MKP[t]={k,d,at:Date.now()};emitM('mkl',{t,k,d,p});sfx('coin');return mktUI('⏳ กำลังวางขาย...')}
-  if(a==='b'){const x=MKD&&MKD.L.find(q=>q.id===+v);if(!x||me.gold<x.p)return;emitM('mkb',{id:x.id});return}
-  if(a==='x'){emitM('mkx',{id:+v});return}
-  if(a==='c'){emitM('mkc',{});return}}
+    if(d===null)return;const t=Math.random().toString(36).slice(2,9);MKP[t]={k,d,at:Date.now()};emitM('mkl',{t,k,d,p,mid:mkMid()});sfx('coin');return mktUI('⏳ กำลังวางขาย...')}
+  if(a==='b'){const x=MKD&&MKD.L.find(q=>q.id===+v);if(!x||me.gold<x.p)return;emitM('mkb',{id:x.id,mid:mkMid()});return}
+  if(a==='x'){emitM('mkx',{id:+v,mid:mkMid()});return}
+  if(a==='c'){emitM('mkc',{mid:mkMid()});return}}
 setInterval(()=>{const now=Date.now();for(const t in MKP)if(now-MKP[t].at>20000){mkGive(MKP[t].k,MKP[t].d,1);delete MKP[t];sysMsg('↩️ วางขายไม่สำเร็จ คืนของแล้ว')}},3000);
+/* ===== ความปลอดภัยตลาด: รหัสผู้ขายถาวรต่อตัวละคร + สำเนาของที่ฝากขายในเซฟ (ได้คืนถ้าเซิร์ฟเวอร์ข้อมูลหาย) ===== */
+function mkMid(){if(!me.mkid||!/^[a-z0-9]{8,16}$/.test(me.mkid))me.mkid=(Math.random().toString(36).slice(2,8)+Math.random().toString(36).slice(2,8)).slice(0,12).padEnd(10,'x');return me.mkid}
+function mkEsc(){if(!Array.isArray(me.mkesc))me.mkesc=[];return me.mkesc}
+function mkReconcile(D){if(!D||!D.ep||!Array.isArray(D.mine))return;const E=mkEsc();if(!E.length)return;let back=0,gold=0;
+  me.mkesc=E.filter(e=>{if(e.ep!==D.ep){if(e.sold>0){me.gold=Math.min(GMAX,me.gold+e.sold);gold+=e.sold}else{mkGive(e.k,e.d,1);back++}return false}return D.mine.includes(e.id)});
+  if(back||gold){sysMsg('🛡️ ข้อมูลตลาดบนเซิร์ฟเวอร์ถูกรีเซ็ต · คืนของที่ฝากขาย '+back+' รายการ'+(gold?' และเงินที่ขายได้ '+gold.toLocaleString()+' ทอง':'')+' ให้แล้ว');try{writeSave()}catch(e){}}}
 function mkHook(){
-  room.on('mkr',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;MKD=D;if(!ov.hidden&&ov.dataset.k==='mkt')mktUI()});
-  room.on('mka',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;const P=MKP[D.t];if(!P)return;delete MKP[D.t];if(!D.ok){mkGive(P.k,P.d,1);if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('วางขายไม่ได้ (เต็ม 8 รายการ หรือข้อมูลผิด) คืนของแล้ว')}else{mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('✅ วางขายแล้ว')}});
-  room.on('mkg',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;if(!D.ok){mkFetch();return mktUI('ของชิ้นนี้ถูกซื้อไปแล้ว')}if(!D.back){me.gold=Math.max(0,me.gold-(D.p|0));sfx('item')}mkGive(D.k,D.d);mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI(D.back?'↩️ ยกเลิกแล้ว ได้ของคืน':'✅ ซื้อสำเร็จ')});
-  room.on('mks',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;sysMsg('💰 '+(D.n||'มีคน')+' ซื้อของของคุณในตลาด '+(D.p|0).toLocaleString()+' ทอง · ไปรับเงินที่นายตลาด');banner={s:'💰 ขายของในตลาดได้แล้ว!',t:4};sfx('coin')});
+  room.on('mkr',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;MKD=D;try{mkReconcile(D)}catch(e){}if(!ov.hidden&&ov.dataset.k==='mkt')mktUI()});
+  room.on('mka',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;const P=MKP[D.t];if(!P)return;delete MKP[D.t];if(D.ok&&D.id&&D.ep){mkEsc().push({id:D.id|0,k:P.k,d:P.d,ep:String(D.ep).slice(0,16),sold:0});if(me.mkesc.length>16)me.mkesc=me.mkesc.slice(-16);try{writeSave()}catch(e){}}if(!D.ok){mkGive(P.k,P.d,1);if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('วางขายไม่ได้ (เต็ม 8 รายการ หรือข้อมูลผิด) คืนของแล้ว')}else{mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('✅ วางขายแล้ว')}});
+  room.on('mkg',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;if(D.back&&D.id)me.mkesc=mkEsc().filter(e=>e.id!==(D.id|0));if(!D.ok){mkFetch();return mktUI('ของชิ้นนี้ถูกซื้อไปแล้ว')}if(!D.back){me.gold=Math.max(0,me.gold-(D.p|0));sfx('item')}mkGive(D.k,D.d);mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI(D.back?'↩️ ยกเลิกแล้ว ได้ของคืน':'✅ ซื้อสำเร็จ')});
+  room.on('mks',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;{const e=mkEsc().find(e=>e.id===(D.id|0));if(e)e.sold=Math.max(0,D.g|0)}sysMsg('💰 '+(D.n||'มีคน')+' ซื้อของของคุณในตลาด '+(D.p|0).toLocaleString()+' ทอง · ไปรับเงินที่นายตลาด');banner={s:'💰 ขายของในตลาดได้แล้ว!',t:4};sfx('coin')});
   room.on('mkc',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;me.gold+=D.g|0;(D.r||[]).forEach(x=>mkGive(x.k,x.d,1));sfx('coin');mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('✅ รับ '+(D.g|0).toLocaleString()+' ทอง'+((D.r||[]).length?' และของคืน '+D.r.length+' รายการ':''))})}
 /* ===== ลานประลอง PvP 1:1 ===== */
 let PV=null,PVPEND=null;const PVS=.07,PVDUR=90;
@@ -6864,7 +6870,7 @@ const GM_ON=false;/* เปลี่ยนเป็น true เพื่อเ�
 (async()=>{if(!GM_ON)return;try{const h=location.hostname;if(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1')gmOk=true;
   else{const u=window.claude&&await claude.use('user');if(u&&await u.isOwner())gmOk=true}}catch(e){}if(gmOk&&$('gmb'))$('gmb').hidden=false})();
 function gmSet(on,quiet){gmOk=!!on;if($('gmb'))$('gmb').hidden=!gmOk;if(!gmOk){gmGod=false;gmMp=false;if(ov.dataset.k==='gm'&&!ov.hidden)ov.hidden=true}try{localStorage.setItem('refugee_gm',gmOk?'1':'0')}catch(e){}if(!quiet)sysMsg(gmOk?'🛠 เปิดโหมด GM แล้ว · เมนู → 🛠 ทดสอบ (GM)':'🛠 ปิดโหมด GM แล้ว')}
-setTimeout(()=>{try{if(localStorage.getItem('refugee_gm')==='1')gmSet(true,1)}catch(e){}},0);
+setTimeout(()=>{try{const h=location.hostname;if(localStorage.getItem('refugee_gm')==='1'&&(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1'))gmSet(true,1)}catch(e){}},0);
 function dpsAdd(d){if(!gmOk)return;const n=performance.now();dpsLog.push([n,d]);if(dpsLog.length>4000)dpsLog=dpsLog.slice(-2000)}
 function dpsText(){const n=performance.now(),l10=dpsLog.filter(x=>n-x[0]<10000),s10=l10.reduce((a,x)=>a+x[1],0),tot=dpsLog.filter(x=>x[0]>=dpsT0).reduce((a,x)=>a+x[1],0),el=Math.max(1,(n-dpsT0)/1000);
   return'DPS 10 วิล่าสุด <b>'+Math.round(s10/10).toLocaleString()+'</b> · เฉลี่ยตั้งแต่รีเซ็ต <b>'+Math.round(tot/el).toLocaleString()+'</b> ('+Math.round(el)+' วิ)'}
@@ -9702,6 +9708,8 @@ function cleanChar(c){
   o.title=typeof c.title==='string'&&o.ach[c.title]?c.title:'';
   o.mts=Array.isArray(c.mts)?[...new Set(c.mts.map(v=>v|0).filter(v=>v>=1&&v<=MT_N))]:[];o.mt=o.mts.includes(c.mt|0)?c.mt|0:(o.mts[0]||0);{const y=c.sty&&typeof c.sty==='object'?c.sty:{};o.sty={s:n(y.s,0,STY.length,0),n:n(y.n,0,999,0),a:n(y.a,0,1,0),e:n(y.e,0,2,0)}}{const cc=c.cards&&typeof c.cards==='object'?c.cards:{};o.cards={};CIDS.forEach(id=>{const v=n(cc[id],0,999,0);if(v)o.cards[id]=v});const okc=id=>typeof id==='string'&&CARDS[id]&&o.cards[id]>0;const cs=Array.isArray(c.cslot)?c.cslot:[];o.cslot=[0,1].map(i=>okc(cs[i])&&!CARDS[cs[i]].mvp?cs[i]:'');if(o.cslot[0]&&o.cslot[0]===o.cslot[1])o.cslot[1]='';o.cmv=okc(c.cmv)&&CARDS[c.cmv].mvp?c.cmv:''}{const v=c.pvp&&typeof c.pvp==='object'?c.pvp:{};o.pvp={w:n(v.w,0,1e6,0),l:n(v.l,0,1e6,0)}}{const r=c.rs;if(r&&typeof r==='object'&&typeof r.d==='string'){o.rs={d:r.d.slice(0,20),b:{}};if(r.b&&typeof r.b==='object')Object.keys(r.b).slice(0,12).forEach(k=>{if(/^[a-z0-9]{1,4}$/.test(k))o.rs.b[k]=n(r.b[k],0,99,0)})}}o.pets=Array.isArray(c.pets)?[...new Set(c.pets.map(v=>v|0).filter(v=>v>=1&&v<=PT_N))]:[];o.pet=o.pets.includes(c.pet|0)?c.pet|0:0;
   {const a=c.asl&&typeof c.asl==='object'?c.asl:{};o.asl={on:a.on?1:0,k:n(a.k,0,4,2)}}
+  o.mkid=typeof c.mkid==='string'&&/^[a-z0-9]{8,16}$/.test(c.mkid)?c.mkid:'';
+  o.mkesc=Array.isArray(c.mkesc)?c.mkesc.slice(-16).map(e=>{if(!e||typeof e!=='object')return null;const k=e.k;let d=null;if(k==='it')d=cleanItem(e.d);else if(k==='cd')d=typeof e.d==='string'&&/^[a-z]{2,5}$/.test(e.d)?e.d:null;else if(k==='st')d=e.d&&typeof e.d==='object'&&GDM[e.d.k]?{k:e.d.k,n:n(e.d.n,1,999,1)}:null;if(!d)return null;return{id:n(e.id,1,1e9,1),k,d,ep:String(e.ep||'').slice(0,16),sold:n(e.sold,0,1e9,0)}}).filter(Boolean):[];
   o.nm=cleanName(c.nm);o.rxd={};if(c.rxd&&typeof c.rxd==='object')Object.keys(c.rxd).forEach(k=>{if(RXD[k])o.rxd[k]=1});o.rxt=n(c.rxt,0,1e7,0);
   o.pb={};if(c.pb&&typeof c.pb==='object')Object.keys(c.pb).forEach(k=>{const v=+c.pb[k];if(LBK.includes(k)&&v>=1&&v<(k==='wb'?1e12:1e5))o.pb[k]=Math.round(v*10)/10});
   return o;
@@ -9714,7 +9722,7 @@ function cleanSaves(d){
 }
 function applySave(c){
   me.rxd=Object.assign({},c.rxd||{});me.rxt=c.rxt|0;
-  me.lv=c.lv;me.xp=c.xp;me.gold=c.gold;me.inv={hp:c.inv.hp,mp:c.inv.mp,ps:c.inv.ps|0,s1:c.inv.s1|0,s2:c.inv.s2|0,s3:c.inv.s3|0};me.twc=c.twc|0;me.twCp=c.twCp||1;me.cls2=c.cls2|0;me.brU=Object.assign({},c.brU||{});if(me.cls2&&!me.brU[1]&&!me.brU[2])me.brU[1]=1;me.br=c.br===2&&me.brU[2]?2:1;me.dk=c.dk||{s:0,n:0};me.rg2=0;me.cq=c.cq||{s:0,n:0};me.mat=c.mat||{sc:0,hr:0};me.mcnt=0;me.freeC=0;me.twBest=c.twBest|0;me.mts=(c.mts||[]).slice();me.pets=(c.pets||[]).filter(i=>PETS[i]);me.cards=Object.assign({},c.cards||{});me.cslot=Array.isArray(c.cslot)?c.cslot.slice(0,2):['',''];while(me.cslot.length<2)me.cslot.push('');me.cmv=c.cmv||'';me.pvp={w:(c.pvp&&c.pvp.w)|0,l:(c.pvp&&c.pvp.l)|0};me.rs=c.rs&&typeof c.rs==='object'?{d:String(c.rs.d||''),b:Object.assign({},c.rs.b||{})}:null;try{cardRecalc()}catch(e){}me.sty=c.sty?{s:c.sty.s|0,n:c.sty.n|0,a:c.sty.a===1?1:0,e:c.sty.e|0}:{s:0,n:0,a:0,e:0};me.pet=me.pets.includes(c.pet)?c.pet:0;PT=null;me.asl=c.asl?{on:c.asl.on?1:0,k:Math.max(0,Math.min(4,c.asl.k|0))}:{on:0,k:2};me.mt=c.mt|0;me.riding=0;
+  me.lv=c.lv;me.xp=c.xp;me.gold=c.gold;me.inv={hp:c.inv.hp,mp:c.inv.mp,ps:c.inv.ps|0,s1:c.inv.s1|0,s2:c.inv.s2|0,s3:c.inv.s3|0};me.twc=c.twc|0;me.twCp=c.twCp||1;me.cls2=c.cls2|0;me.brU=Object.assign({},c.brU||{});if(me.cls2&&!me.brU[1]&&!me.brU[2])me.brU[1]=1;me.br=c.br===2&&me.brU[2]?2:1;me.dk=c.dk||{s:0,n:0};me.rg2=0;me.cq=c.cq||{s:0,n:0};me.mat=c.mat||{sc:0,hr:0};me.mcnt=0;me.freeC=0;me.twBest=c.twBest|0;me.mts=(c.mts||[]).slice();me.pets=(c.pets||[]).filter(i=>PETS[i]);me.cards=Object.assign({},c.cards||{});me.cslot=Array.isArray(c.cslot)?c.cslot.slice(0,2):['',''];while(me.cslot.length<2)me.cslot.push('');me.cmv=c.cmv||'';me.pvp={w:(c.pvp&&c.pvp.w)|0,l:(c.pvp&&c.pvp.l)|0};me.rs=c.rs&&typeof c.rs==='object'?{d:String(c.rs.d||''),b:Object.assign({},c.rs.b||{})}:null;try{cardRecalc()}catch(e){}me.sty=c.sty?{s:c.sty.s|0,n:c.sty.n|0,a:c.sty.a===1?1:0,e:c.sty.e|0}:{s:0,n:0,a:0,e:0};me.pet=me.pets.includes(c.pet)?c.pet:0;PT=null;me.asl=c.asl?{on:c.asl.on?1:0,k:Math.max(0,Math.min(4,c.asl.k|0))}:{on:0,k:2};me.mkid=c.mkid||'';me.mkesc=Array.isArray(c.mkesc)?c.mkesc.slice():[];me.mt=c.mt|0;me.riding=0;
   me.eq={w:null,a:null,c:null,h:null,b:null};SLOTS.forEach(sl=>{if(c.eq&&c.eq[sl])me.eq[sl]=c.eq[sl]});me.bag=(c.bag||[]).slice();me.qs=(c.qs||[]).slice();me.dq=c.dq||null;me.ls=c.ls||{last:'',st:0,cl:''};me.stt=c.stt||newStt();me.ach=c.ach||{};me.title=c.title||'';me.pb=c.pb||{};
   const ok=new Set(nodes().map(n=>n.id));me.tr={};
   nodes().forEach(n=>{const v=c.tr[n.id];if(v)me.tr[n.id]=Math.min(v,n.max)});
@@ -9723,7 +9731,7 @@ function applySave(c){
   me.ab=Object.assign({str:0,vit:0,int:0,agi:0,luk:0},c.ab||{});if(spts()<0)me.ab={str:0,vit:0,int:0,agi:0,luk:0};
   me.mh=maxHp();me.hp=me.mh;me.mm=maxMp();me.mp=me.mm;
 }
-function snap(){return{rxd:me.rxd||{},rxt:me.rxt|0,nm:me.nm||'',lv:me.lv,xp:me.xp,gold:me.gold,tr:me.tr,ab:me.ab,inv:me.inv,eq:me.eq,bag:me.bag,qs:me.qs,dq:me.dq,ls:me.ls,stt:me.stt,ach:me.ach,title:me.title,pb:me.pb,cls2:me.cls2?1:0,br:me.br===2?2:1,brU:me.brU||{},dk:me.dk||{s:0,n:0},cq:me.cq||{s:0,n:0},mat:me.mat||{sc:0,hr:0},twc:me.twc|0,twCp:me.twCp||1,twBest:me.twBest|0,mts:me.mts||[],mt:me.mt|0,pets:me.pets||[],pet:me.pet|0,cards:me.cards||{},cslot:me.cslot||['',''],cmv:me.cmv||'',rs:me.rs||null,pvp:me.pvp||{w:0,l:0},sty:me.sty||{s:0,n:0,a:0,e:0},asl:me.asl||{on:0,k:2}}}
+function snap(){return{rxd:me.rxd||{},rxt:me.rxt|0,nm:me.nm||'',lv:me.lv,xp:me.xp,gold:me.gold,tr:me.tr,ab:me.ab,inv:me.inv,eq:me.eq,bag:me.bag,qs:me.qs,dq:me.dq,ls:me.ls,stt:me.stt,ach:me.ach,title:me.title,pb:me.pb,cls2:me.cls2?1:0,br:me.br===2?2:1,brU:me.brU||{},dk:me.dk||{s:0,n:0},cq:me.cq||{s:0,n:0},mat:me.mat||{sc:0,hr:0},twc:me.twc|0,twCp:me.twCp||1,twBest:me.twBest|0,mts:me.mts||[],mt:me.mt|0,pets:me.pets||[],pet:me.pet|0,cards:me.cards||{},cslot:me.cslot||['',''],cmv:me.cmv||'',rs:me.rs||null,pvp:me.pvp||{w:0,l:0},sty:me.sty||{s:0,n:0,a:0,e:0},asl:me.asl||{on:0,k:2},mkid:me.mkid||'',mkesc:me.mkesc||[]}}
 function setSaveState(x){saveState=x}
 function withTimeout(p,ms){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r({code:'timeout'}),ms))])}
 function lsRead(){try{return JSON.parse(localStorage.getItem(LSK)||'null')}catch(e){return null}}
@@ -9782,7 +9790,7 @@ function pick(c,slot,nm){if(saveMode==='wait')return;
   if(slot&&saves.chars[slot])c=scls(slot);else slot=newSlotKey(c);if(!CL[c])return;me.slot=slot;csMode='';csSel=slot;delArm=null;
   setTimeout(()=>{try{autoLoad();huntLoad()}catch(e){}},0);
   const C=CL[c];me.cls=c;me.mh=C.hp;me.hp=C.hp;me.lv=1;me.xp=0;me.tr={};me.ab={str:0,vit:0,int:0,agi:0,luk:0};me.gold=40;me.inv={hp:2,mp:1,ps:0};me.twc=0;me.twCp=1;me.twBest=0;me.cls2=0;me.cq={s:0,n:0};me.mts=[];me.mt=0;me.pets=[];me.pet=0;PT=null;me.cards={};me.cslot=['',''];me.cmv='';CARDB={};me.rs=null;me.pvp={w:0,l:0};me.sty={s:0,n:0,a:0,e:0};me.rxd={};me.rxt=0;me.br=1;me.brU={};me.dk={s:0,n:0};me.rg2=0;me.riding=0;me.mat={sc:0,hr:0};me.mcnt=0;me.freeC=0;me.eq={w:null,a:null,c:null,h:null,b:null};me.bag=[];me.qs=[];me.mm=C.mp;me.mp=C.mp;me.x=CX;me.y=CY+60;me.sk=[0,0,0,0,0];me.rage=0;me.clone=null;me.mark=null;pend=[];me.dq=null;me.ls={last:'',st:0,cl:''};me.stt=newStt();me.ach={};me.title='';me.pb={};bf=null;
-  const isNew=!saves.chars[slot];if(!isNew)applySave(saves.chars[slot]);else me.asl={on:0,k:2};ASS={n:0,g:0};
+  const isNew=!saves.chars[slot];if(!isNew)applySave(saves.chars[slot]);else{me.asl={on:0,k:2};me.mkid='';me.mkesc=[]}ASS={n:0,g:0};
   me.nm=cleanName(isNew?nm:saves.chars[slot].nm)||cleanName(myName)||'ผู้เล่น';myName=me.nm;
   lastJ=JSON.stringify(snap());
   ov.hidden=true;run=true;last=performance.now();makeGuards();
