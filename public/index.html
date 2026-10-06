@@ -1537,26 +1537,33 @@ function cityTalk(k){if(k==='rare'){ov.hidden=false;rareUI();return}if(k==='msm'
 /* ---------- ช่างตีเหล็กหลวง: หลอมใหม่ / ยกระดับความหายาก ---------- */
 const MSM_UP=[[8000,0],[30000,1],[120000,3],[400000,8]];
 const msmReroll=it=>Math.round(2500*(1+it.r)*(1+it.L*.25));
-/* ล็อกค่าพลังตอนหลอมใหม่ · ค่าที่ล็อกจะคงเดิม สุ่มเฉพาะค่าที่เหลือ */
-const MSML={};const msmLk=sl=>{const L=MSML[sl];return L&&L.it===me.eq[sl]?L.ks.filter(k=>me.eq[sl].st[k]!==undefined):[]};
+/* เป้าหมายของช่างหลวง: ของที่สวม (คีย์ = ช่อง w/a/c/h/b) หรือของในกระเป๋า (คีย์ = #ลำดับ) */
+const msmGet=k=>k&&k[0]==='#'?me.bag[+k.slice(1)]:me.eq[k];
+function msmPut(k,old,ni){if(k[0]==='#'){const i=me.bag.indexOf(old);if(i<0)return false;me.bag[i]=ni;return true}if(me.eq[k]!==old)return false;me.eq[k]=ni;recalc();return true}
+let MSMT='eq';
+/* ล็อกค่าพลังตอนหลอมใหม่ · ค่าที่ล็อกจะคงเดิม สุ่มเฉพาะค่าที่เหลือ (จำตามตัวไอเทม) */
+const MSMLW=new WeakMap();const msmLk=it=>it?(MSMLW.get(it)||[]).filter(k=>it.st[k]!==undefined):[];
 const msmLkCost=(it,n)=>[Math.round(msmReroll(it)*(1+n*1.5)),n];
-function msmLkToggle(sl,k){const it=me.eq[sl];if(!it||it.st[k]===undefined)return;let ks=msmLk(sl);
+function msmLkToggle(key,k){const it=msmGet(key);if(!it||it.st[k]===undefined)return;let ks=msmLk(it);
   if(ks.includes(k))ks=ks.filter(q=>q!==k);else{if(ks.length+1>=Object.keys(it.st).length)return msmUI('ต้องเหลือค่าที่ไม่ล็อกอย่างน้อย 1 ค่า');ks=[...ks,k]}
-  MSML[sl]={it,ks};sfx('click');msmUI()}
-function msmRollLk(it,sl,nr,ks){const mk=()=>it.ss&&nr===5&&SETS[it.ss]?makeSetItem(it.ss,sl):genItem(it.L,sl,nr,nr);let ni=mk();
+  MSMLW.set(it,ks);sfx('click');msmUI()}
+function msmRollLk(it,nr,ks){const sl=it.sl,mk=()=>it.ss&&nr===5&&SETS[it.ss]?makeSetItem(it.ss,sl):genItem(it.L,sl,nr,nr);let ni=mk();
   if(ks.length){for(let i=0;i<300&&!ks.every(k=>ni.st[k]!==undefined);i++)ni=mk();
     const n0=Object.keys(ni.st).length;ks.forEach(k=>ni.st[k]=it.st[k]);
     let ex=Object.keys(ni.st).filter(k=>!ks.includes(k));while(Object.keys(ni.st).length>n0&&ex.length)delete ni.st[ex.pop()]}
   return ni}
 const msmUpCost=it=>{const c=MSM_UP[it.r];return c?[Math.round(c[0]*(1+it.L*.08)),c[1]]:null};
-function msmUI(msg){if(!me.cls)return;ov.dataset.k='msm';ov.hidden=false;
+function msmRowH(key,it,msg){const LK=msmLk(it),[rr,rs]=msmLkCost(it,LK.length),uc=msmUpCost(it);if(MSMP&&MSMP.key===key)return'<div id="msmAt">'+(msg?'<div class="note" style="margin-bottom:6px">'+msg+'</div>':'')+msmCmpH(MSMP)+'</div>';
+  return'<div class="sr msmrow">'+(key[0]==='#'?'<div class="msmtag">🎒 ในกระเป๋า · '+SLN[it.sl]+'</div>':'')+'<div class="nm">'+itemCard(it)+msmRangeH(it,key)+'</div><div class="msmbt">'+
+    '<button data-msm="r'+key+'"'+(me.gold>=rr&&(me.inv.s3|0)>=rs&&!MSMP?'':' disabled')+'>🔁 หลอมใหม่'+(rs?' 🔒'+rs:'')+'<br><small>'+rr.toLocaleString()+' ทอง'+(rs?' · หิน '+rs:'')+'</small></button>'+
+    (uc?'<button class="pri" data-msm="u'+key+'"'+(me.gold>=uc[0]&&(me.inv.s3|0)>=uc[1]&&!MSMP?'':' disabled')+'>⬆️ เป็น'+RN[it.r+1]+'<br><small>'+uc[0].toLocaleString()+' ทอง'+(uc[1]?' · หิน '+uc[1]:'')+'</small></button>':'<button disabled>ระดับสูงสุด</button>')+'</div></div>'}
+function msmUI(msg){if(!me.cls)return;ov.dataset.k='msm';ov.hidden=false;if(MSMP&&MSMP.key[0]==='#')MSMT='bag';else if(MSMP)MSMT='eq';
   let h=hdr('⚒️','ช่างตีเหล็กหลวง','ทอง '+fmtG(me.gold)+' · หินขั้นสูง '+(me.inv.s3|0));if(msg&&!MSMP)h+='<div class="note">'+msg+'</div>';
-  h+='<div class="card hint">ใช้กับอุปกรณ์ที่สวมอยู่ · ค่าตีบวกไม่หาย · 🔁 หลอมใหม่ = สุ่มค่าพลังใหม่ระดับเดิม (แตะ 🔓 เพื่อล็อกค่าที่ชอบ · ค่าที่ล็อกคงเดิม · ล็อกละ +150% ทอง และหินขั้นสูง 1) · ⬆️ ยกระดับ = เลื่อนความหายากขึ้น 1 ขั้น (สูงสุด Relic · Ancient สีแดง = ชุดเซ็ต · Cosmic เร็ว ๆ นี้) และสุ่มค่าพลังใหม่ที่แรงขึ้น</div>';
-  h+='<div class="card">'+SLOTS.map(sl=>{const it=me.eq[sl];if(!it)return'<div class="sr"><div class="nm"><b>'+SLN[sl]+'</b><small>ยังไม่ได้สวม</small></div></div>';
-    const LK=msmLk(sl),[rr,rs]=msmLkCost(it,LK.length),uc=msmUpCost(it);if(MSMP&&MSMP.sl===sl)return'<div id="msmAt">'+(msg?'<div class="note" style="margin-bottom:6px">'+msg+'</div>':'')+msmCmpH(MSMP)+'</div>';
-    return'<div class="sr msmrow"><div class="nm">'+itemCard(it)+msmRangeH(it,sl)+'</div><div class="msmbt">'+
-      '<button data-msm="r'+sl+'"'+(me.gold>=rr&&(me.inv.s3|0)>=rs&&!MSMP?'':' disabled')+'>🔁 หลอมใหม่'+(rs?' 🔒'+rs:'')+'<br><small>'+rr.toLocaleString()+' ทอง'+(rs?' · หิน '+rs:'')+'</small></button>'+
-      (uc?'<button class="pri" data-msm="u'+sl+'"'+(me.gold>=uc[0]&&(me.inv.s3|0)>=uc[1]&&!MSMP?'':' disabled')+'>⬆️ เป็น'+RN[it.r+1]+'<br><small>'+uc[0].toLocaleString()+' ทอง'+(uc[1]?' · หิน '+uc[1]:'')+'</small></button>':'<button disabled>ระดับสูงสุด</button>')+'</div></div>'}).join('<hr>')+'</div>';
+  h+='<div class="card hint">ใช้ได้ทั้งของที่สวมอยู่และของในกระเป๋า · ค่าตีบวกไม่หาย · 🔁 หลอมใหม่ = สุ่มค่าพลังใหม่ระดับเดิม (แตะ 🔓 เพื่อล็อกค่าที่ชอบ · ค่าที่ล็อกคงเดิม · ล็อกละ +150% ทอง และหินขั้นสูง 1) · ⬆️ ยกระดับ = เลื่อนความหายากขึ้น 1 ขั้น (สูงสุด Relic · Ancient สีแดง = ชุดเซ็ต · Cosmic เร็ว ๆ นี้) และสุ่มค่าพลังใหม่ที่แรงขึ้น</div>';
+  h+='<div class="tabs msmtabs"><button class="tab'+(MSMT==='eq'?' on':'')+'" data-msm="Te"'+(MSMP?' disabled':'')+'>🛡️ ที่สวมอยู่</button><button class="tab'+(MSMT==='bag'?' on':'')+'" data-msm="Tb"'+(MSMP?' disabled':'')+'>🎒 ในกระเป๋า ('+me.bag.length+')</button></div>';
+  if(MSMT==='eq')h+='<div class="card">'+SLOTS.map(sl=>{const it=me.eq[sl];if(!it)return'<div class="sr"><div class="nm"><b>'+SLN[sl]+'</b><small>ยังไม่ได้สวม</small></div></div>';return msmRowH(sl,it,msg)}).join('<hr>')+'</div>';
+  else{const L=me.bag.map((it,i)=>[it,i]).filter(([it])=>it&&it.st&&SLOTS.includes(it.sl)).sort((x,y)=>(y[0].r-x[0].r)||(y[0].L-x[0].L)||(SLOTS.indexOf(x[0].sl)-SLOTS.indexOf(y[0].sl)));
+    h+=L.length?'<div class="card"><small style="display:block;opacity:.7;margin-bottom:6px">เรียงจากหายากสุด · ของที่หลอมแล้วยังอยู่ในกระเป๋า สวมได้จากเมนูอุปกรณ์</small>'+L.map(([it,i])=>msmRowH('#'+i,it,msg)).join('<hr>')+'</div>':'<div class="card"><small>ยังไม่มีอุปกรณ์ในกระเป๋า</small></div>'}
   h+=dawnSetH();const sc=[ov.scrollTop,ov.firstElementChild?ov.firstElementChild.scrollTop:0];ov.innerHTML='<div class="pn" data-pn="msm">'+h+'</div>';
   ov.scrollTop=sc[0];if(ov.firstElementChild)ov.firstElementChild.scrollTop=sc[1];
   const at=document.getElementById('msmAt');if(at&&MSMP&&MSMP.fresh){MSMP.fresh=0;const r=at.getBoundingClientRect();if(r.top<60||r.bottom>innerHeight-20)at.scrollIntoView({block:'nearest',behavior:'smooth'})}}
@@ -1565,31 +1572,32 @@ const MSMR={};function msmRange(it){const k=it.sl+'|'+it.r+'|'+it.L+'|'+(it.ss||
   for(let i=0;i<N;i++){let t;try{t=it.ss&&SETS[it.ss]?makeSetItem(it.ss,it.sl):genItem(it.L,it.sl,it.r,it.r)}catch(e){continue}for(const q in t.st){const v=t.st[q],e=o[q]||(o[q]={lo:v,hi:v,n:0});e.lo=Math.min(e.lo,v);e.hi=Math.max(e.hi,v);e.n++}}
   for(const q in o)o[q].p=o[q].n/N;return MSMR[k]=o}
 function msmBar(lo,hi,v,v0){const pct=x=>Math.max(0,Math.min(100,hi>lo?(x-lo)/(hi-lo)*100:100));return'<i class="msb">'+(v0!==undefined?'<b class="o" style="left:'+pct(v0)+'%"></b>':'')+(v!==undefined?'<b class="n" style="left:'+pct(v)+'%"></b>':'')+'</i>'}
-function msmRangeH(it,sl){const R0=msmRange(it),m=upMul(it.u|0),LK=sl?msmLk(sl):[];return'<div class="msr">'+Object.keys(it.st).map(k=>{const r=R0[k];if(!r)return'';return'<span>'+(sl?'<button class="mlk'+(LK.includes(k)?' on':'')+'" data-msm="l'+sl+k+'"'+(MSMP?' disabled':'')+'>'+(LK.includes(k)?'🔒':'🔓')+'</button>':'')+stLabel(k,it.st[k]*m).replace(/[+\d.]+%?(\/วิ)?$/,'').trim()+' <small>ช่วง '+gNum(k,r.lo*m)+'–'+gNum(k,r.hi*m)+gUnit(k)+'</small>'+msmBar(r.lo,r.hi,undefined,it.st[k])+'</span>'}).join('')+'</div>'}
-let MSMP=null;/* ผลหลอมใหม่ที่รอเลือก {sl,old,ni} */
+function msmRangeH(it,sl){const R0=msmRange(it),m=upMul(it.u|0),LK=sl?msmLk(it):[];return'<div class="msr">'+Object.keys(it.st).map(k=>{const r=R0[k];if(!r)return'';return'<span>'+(sl?'<button class="mlk'+(LK.includes(k)?' on':'')+'" data-msm="l'+sl+':'+k+'"'+(MSMP?' disabled':'')+'>'+(LK.includes(k)?'🔒':'🔓')+'</button>':'')+stLabel(k,it.st[k]*m).replace(/[+\d.]+%?(\/วิ)?$/,'').trim()+' <small>ช่วง '+gNum(k,r.lo*m)+'–'+gNum(k,r.hi*m)+gUnit(k)+'</small>'+msmBar(r.lo,r.hi,undefined,it.st[k])+'</span>'}).join('')+'</div>'}
+let MSMP=null;/* ผลหลอมใหม่ที่รอเลือก {key,old,ni} */
 function msmCmpH(P){const o=P.old,n=P.ni,c=gCmp(n),ks=[...new Set([...Object.keys(o.st),...Object.keys(n.st)])];
-  const LK=msmLk(P.sl),row=(it,k)=>it.st[k]?(LK.includes(k)?'🔒 ':'')+stLabel(k,eff(it,k)):'<span style="opacity:.4">—</span>';
+  const LK=msmLk(P.old),row=(it,k)=>it.st[k]?(LK.includes(k)?'🔒 ':'')+stLabel(k,eff(it,k)):'<span style="opacity:.4">—</span>';
   const tag=v=>'<b style="color:'+RCL[v.r]+'">'+itemName(v)+'</b>',RG=msmRange(n),um=upMul(n.u|0);
   let h='<div class="card msmc"><div class="cap">🔁 ผลการหลอมใหม่ · เลือกค่าที่จะใช้</div><div class="msmg"><div class="msmh">ค่าเดิม</div><div class="msmh">ค่าใหม่ '+c.badge+'</div>';
   h+='<div class="msmn">'+tag(o)+'</div><div class="msmn">'+tag(n)+'</div>';
   ks.forEach(k=>{const v1=o.st[k]?eff(o,k):0,v2=n.st[k]?eff(n,k):0,d=v2-v1,ar=Math.abs(d)<1e-9?'<span style="opacity:.5">=</span>':d>0?UP:DN;
     const rg=RG[k],rh=rg?'<div class="msmr">ช่วงที่สุ่มได้ '+gNum(k,rg.lo*um)+'–'+gNum(k,rg.hi*um)+gUnit(k)+(rg.p<.99?' · โอกาสออก '+Math.round(rg.p*100)+'%':'')+msmBar(rg.lo,rg.hi,n.st[k],o.st[k])+'</div>':'';
     h+='<div class="msmv">'+row(o,k)+'</div><div class="msmv">'+row(n,k)+' '+ar+(Math.abs(d)>1e-9?' <small>('+(d>0?'+':'-')+gNum(k,Math.abs(d))+gUnit(k)+')</small>':'')+'</div>'+(rh?'<div class="msmrw">'+rh+'</div>':'')});
-  const [rc,rcs]=msmLkCost(o,LK.length);h+='</div><div class="bt msmb" style="margin-top:8px"><button data-msm="o'+P.sl+'">↩️ เก็บค่าเดิม</button><button class="pri" data-msm="k'+P.sl+'">✅ ใช้ค่าใหม่</button><button data-msm="a'+P.sl+'"'+(me.gold>=rc&&(me.inv.s3|0)>=rcs?'':' disabled')+'>🔁 หลอมอีกครั้ง<br><small>'+rc.toLocaleString()+' ทอง'+(rcs?' · หิน '+rcs:'')+' · ทิ้งค่าใหม่นี้</small></button></div>'+
+  const [rc,rcs]=msmLkCost(o,LK.length);h+='</div><div class="bt msmb" style="margin-top:8px"><button data-msm="o'+P.key+'">↩️ เก็บค่าเดิม</button><button class="pri" data-msm="k'+P.key+'">✅ ใช้ค่าใหม่</button><button data-msm="a'+P.key+'"'+(me.gold>=rc&&(me.inv.s3|0)>=rcs?'':' disabled')+'>🔁 หลอมอีกครั้ง<br><small>'+rc.toLocaleString()+' ทอง'+(rcs?' · หิน '+rcs:'')+' · ทิ้งค่าใหม่นี้</small></button></div>'+
     '<small style="display:block;margin-top:6px;opacity:.7">แถบสี: <b style="color:#9aa3bb">▮</b> ค่าเดิม · <b style="color:#ffd070">▮</b> ค่าใหม่ (ซ้าย = ต่ำสุด · ขวา = สูงสุด) · ค่าตีบวก +'+(o.u|0)+' และการล็อกอยู่ครบทั้งสองแบบ</small></div>';
   return h}
-function msmAct(a){if(a[0]==='l'){if(MSMP)return;return msmLkToggle(a[1],a.slice(2))}const sl=a.slice(1);
-  if(a[0]==='k'||a[0]==='o'){const P=MSMP;if(!P||P.sl!==sl)return msmUI();MSMP=null;
-    if(a[0]==='k'&&me.eq[sl]===P.old){me.eq[sl]=P.ni;if(MSML[sl]&&MSML[sl].it===P.old)MSML[sl].it=P.ni;recalc();sfx('equip');return msmUI('✅ ใช้ค่าใหม่แล้ว · '+itemName(P.ni))}
+function msmAct(a){if(a[0]==='T'){if(MSMP)return;MSMT=a[1]==='b'?'bag':'eq';sfx('click');return msmUI()}
+  if(a[0]==='l'){if(MSMP)return;const c=a.indexOf(':');return msmLkToggle(a.slice(1,c),a.slice(c+1))}const key=a.slice(1);
+  if(a[0]==='k'||a[0]==='o'){const P=MSMP;if(!P||P.key!==key)return msmUI();MSMP=null;
+    if(a[0]==='k'&&msmPut(key,P.old,P.ni)){MSMLW.set(P.ni,msmLk(P.old));sfx('equip');return msmUI('✅ ใช้ค่าใหม่แล้ว · '+itemName(P.ni))}
     sfx('click');return msmUI('↩️ เก็บค่าเดิมไว้ · '+itemName(P.old))}
-  if(a[0]==='a'){if(!MSMP||MSMP.sl!==sl)return msmUI();MSMP=null;a='r'+sl}
+  if(a[0]==='a'){if(!MSMP||MSMP.key!==key)return msmUI();MSMP=null;a='r'+key}
   if(MSMP)return msmUI('เลือกผลหลอมใหม่ของชิ้นก่อนหน้าก่อน');
-  const it=me.eq[sl];if(!it)return;let nr=it.r,cost=0,st=0;
-  const LK=a[0]==='r'?msmLk(sl):[];if(a[0]==='r'){[cost,st]=msmLkCost(it,LK.length)}else{const uc=msmUpCost(it);if(!uc)return;cost=uc[0];st=uc[1];nr=it.r+1}
+  const it=msmGet(key);if(!it||!it.st)return msmUI();let nr=it.r,cost=0,st=0;
+  const LK=a[0]==='r'?msmLk(it):[];if(a[0]==='r'){[cost,st]=msmLkCost(it,LK.length)}else{const uc=msmUpCost(it);if(!uc)return;cost=uc[0];st=uc[1];nr=it.r+1}
   if(me.gold<cost||(me.inv.s3|0)<st)return msmUI('ทองหรือหินไม่พอ');me.gold-=cost;me.inv.s3-=st;
-  const old=it,ni=msmRollLk(it,sl,nr,LK);ni.u=it.u|0;if(it.lk)ni.lk=1;
-  if(a[0]==='r'){MSMP={sl,old,ni,fresh:1};sfx('up');return msmUI()}
-  me.eq[sl]=ni;recalc();sfx('up');
+  const old=it,ni=msmRollLk(it,nr,LK);ni.u=it.u|0;if(it.lk)ni.lk=1;
+  if(a[0]==='r'){MSMP={key,old,ni,fresh:1};sfx('up');return msmUI()}
+  if(!msmPut(key,old,ni)){me.gold+=cost;me.inv.s3+=st;return msmUI('ไม่พบอุปกรณ์ชิ้นนี้แล้ว')}sfx('up');
   if(nr>=4){me.stt.leg=1;burst(me.x,me.y-10,nr>=5?['#ff8a8a','#ffffff','#ff3b4a']:['#ffe08a','#ffffff','#ffb030'],nr>=5?70:40,160,1,{glow:1,g:-30})}
   msmUI('⬆️ ยกระดับสำเร็จ! '+itemName(ni)+'<br><small>ใหม่: '+Object.keys(ni.st).map(k=>stLabel(k,eff(ni,k))).join(' · ')+'</small><br><small style="opacity:.65">เดิม: '+Object.keys(old.st).map(k=>stLabel(k,eff(old,k))).join(' · ')+'</small>')}
 /* ---------- ร้านของหายาก: สินค้าหมุนเวียนรายวัน (เหมือนกันทุกคน) ---------- */
@@ -2143,7 +2151,7 @@ function cBunting(t){[[1520,1460,1680,1460],[1520,1760,1680,1760],[1450,1540,145
 /* เมฆเงา + บรรยากาศ */
 function drawCityScreen(){if(curMap!==9)return;const t=performance.now()/1000;g.save();const DAY=dnState().dk<.15;
   if(DAY){const gr=g.createLinearGradient(0,0,W,H);gr.addColorStop(0,'rgba(255,230,170,.16)');gr.addColorStop(.5,'rgba(255,230,170,0)');gr.addColorStop(1,'rgba(60,40,80,.14)');g.fillStyle=gr;g.fillRect(0,0,W,H);
-  g.globalCompositeOperation='lighter';for(let i=0;i<3;i++){const ox=((t*6+i*230)%(W+400))-200;const lg=g.createLinearGradient(ox,0,ox+120,0);lg.addColorStop(0,'rgba(255,240,200,0)');lg.addColorStop(.5,'rgba(255,240,200,.05)');lg.addColorStop(1,'rgba(255,240,200,0)');g.fillStyle=lg;g.beginPath();g.moveTo(ox,0);g.lineTo(ox+120,0);g.lineTo(ox+120-H*.45,H);g.lineTo(ox-H*.45,H);g.closePath();g.fill()}}
+  g.globalCompositeOperation='lighter';if(!LOWQ)for(let i=0;i<3;i++){const ox=((t*6+i*230)%(W+400))-200;const lg=g.createLinearGradient(ox,0,ox+120,0);lg.addColorStop(0,'rgba(255,240,200,0)');lg.addColorStop(.5,'rgba(255,240,200,.05)');lg.addColorStop(1,'rgba(255,240,200,0)');g.fillStyle=lg;g.beginPath();g.moveTo(ox,0);g.lineTo(ox+120,0);g.lineTo(ox+120-H*.45,H);g.lineTo(ox-H*.45,H);g.closePath();g.fill()}}
   g.globalCompositeOperation='source-over';
   if(DAY&&!LOWQ){for(let i=0;i<3;i++){const px=((i*420+t*(16+i*4)-cam.x*.9)%(W+500)+W+500)%(W+500)-250,py=((i*310+t*(6+i*2)-cam.y*.9)%(H+400)+H+400)%(H+400)-200,gr=g.createRadialGradient(px,py,0,px,py,150);gr.addColorStop(0,'rgba(20,30,60,.13)');gr.addColorStop(1,'rgba(20,30,60,0)');g.fillStyle=gr;g.save();g.translate(px,py);g.scale(1.6,.7);g.translate(-px,-py);g.fillRect(px-150,py-150,300,300);g.restore()}
     for(let f=0;f<2;f++){const ph=(t*.045+f*.5)%1,fx=-60+ph*(W+120),fy=H*(.18+f*.22)+Math.sin(t*.7+f)*18;for(let b=0;b<5;b++){const bx=fx-b*14-(b%2)*6,by=fy+(b%2?8:-4)*(b>0?1:0)+Math.sin(t*3+b)*2,fl=Math.sin(t*14+b*1.3);
@@ -2151,7 +2159,7 @@ function drawCityScreen(){if(curMap!==9)return;const t=performance.now()/1000;g.
   if(!DAY){const dk=Math.min(1,dnState().dk/.42);g.save();
     /* หน้าต่างบ้านเปิดไฟ: แสงอุ่นตามแนวหน้าอาคาร */
     g.globalCompositeOperation='lighter';CITY.rects.forEach(([x1,y1,x2,y2],bi)=>{const n=Math.max(1,Math.round((x2-x1)/55));for(let k=0;k<n;k++){const wx=x1+(x2-x1)*(k+.5)/n-cam.x,wy=y2-24-cam.y;if(wx<-40||wx>W+40||wy<-40||wy>H+40)continue;
-      const fl=.75+.25*Math.sin(t*(1.3+((bi*7+k)%5)*.3)+bi+k);glowAt(wx,wy,22,'255,190,100',.38*dk*fl);g.fillStyle='rgba(255,214,140,'+(.55*dk*fl)+')';g.fillRect(wx-3.5,wy-4.5,7,9)}});
+      const fl=.75+.25*Math.sin(t*(1.3+((bi*7+k)%5)*.3)+bi+k);if(!LOWQ)glowAt(wx,wy,22,'255,190,100',.38*dk*fl);g.fillStyle='rgba(255,214,140,'+(.55*dk*fl)+')';g.fillRect(wx-3.5,wy-4.5,7,9)}});
     /* โคมลอยขึ้นฟ้า */
     const nL=LOWQ?5:12;for(let i=0;i<nL;i++){const q=(t*(.018+(i%4)*.004)+i/nL)%1,px=((i*137.7-cam.x*.35)%(W+60)+W+60)%(W+60)-30+Math.sin(t*.6+i*1.7)*14,py=H+30-q*(H+80),al=Math.min(1,q*5)*Math.min(1,(1-q)*4)*dk,sc=1+(i%3)*.25;
       g.globalCompositeOperation='lighter';glowAt(px,py,16*sc,'255,160,70',.55*al);g.globalCompositeOperation='source-over';g.globalAlpha=al;
@@ -2167,7 +2175,7 @@ function drawCity(){if(curMap!==9)return;const t=performance.now()/1000,O='#1e1a
   {const R0=CITY.R,ox=CX-R0-20,S=CG.s,sx=Math.max(0,cam.x-ox),sy=Math.max(0,cam.y-(CY-R0-20)),sw=Math.min(R0*2+40-sx,W+2),sh=Math.min(R0*2+40-sy,H+2);
     if(sw>0&&sh>0)g.drawImage(CG.c,sx*S,sy*S,sw*S,sh*S,ox+sx,CY-R0-20+sy,sw,sh)}
   /* เงาเมฆเคลื่อน */
-  if(inView(CX,CY,CITY.R)){g.save();g.beginPath();g.arc(CX,CY,CITY.R,0,7);g.clip();for(let i=0;i<4;i++){const cx=CX-900+((t*14+i*520)%1800),cy=CY-500+i*300+Math.sin(t*.1+i)*60;if(!inView(cx,cy,260))continue;const cg=g.createRadialGradient(cx,cy,10,cx,cy,220);cg.addColorStop(0,'rgba(20,30,50,.13)');cg.addColorStop(1,'rgba(20,30,50,0)');g.fillStyle=cg;g.beginPath();g.ellipse(cx,cy,240,140,0,0,7);g.fill()}g.restore()}
+  if(!LOWQ&&inView(CX,CY,CITY.R)){g.save();g.beginPath();g.arc(CX,CY,CITY.R,0,7);g.clip();for(let i=0;i<4;i++){const cx=CX-900+((t*14+i*520)%1800),cy=CY-500+i*300+Math.sin(t*.1+i)*60;if(!inView(cx,cy,260))continue;const cg=g.createRadialGradient(cx,cy,10,cx,cy,220);cg.addColorStop(0,'rgba(20,30,50,.13)');cg.addColorStop(1,'rgba(20,30,50,0)');g.fillStyle=cg;g.beginPath();g.ellipse(cx,cy,240,140,0,0,7);g.fill()}g.restore()}
   if(!CW.c)cityWallBuild();cwDraw(-1e9,CY);cityEastGate(t);
   cPigeons(t,dt);
   /* วัตถุ + ชาวเมือง + NPC เรียงตามความลึก */
@@ -2303,8 +2311,8 @@ function skyIslet(x,y,s,t,wf){const O='#2a2018';g.save();const fy=Math.sin(t*.6+
   cTree(x-22*s,y-2*s,.7*s,t,(x|0)%7);g.restore()}
 function drawCitySky(t){const R0=CITY.R,O='#2a2018';
   {const nk=Math.min(1,dnState().dk/.42);if(nk>0){const gr=g.createLinearGradient(0,cam.y,0,cam.y+H);gr.addColorStop(0,'rgba(10,14,48,'+(.75*nk)+')');gr.addColorStop(1,'rgba(30,40,100,'+(.55*nk)+')');g.fillStyle=gr;g.fillRect(cam.x,cam.y,W,H);
-    const mx=cam.x+W*.8-cam.x*.03%40,my=cam.y+H*.14;g.save();g.globalCompositeOperation='lighter';glowAt(mx,my,90,'190,210,255',.35*nk);g.restore();g.globalAlpha=nk;g.fillStyle='#f4f0dc';g.beginPath();g.arc(mx,my,16,0,7);g.fill();g.fillStyle='rgba(180,180,170,.35)';g.beginPath();g.arc(mx-5,my-3,3.5,0,7);g.arc(mx+5,my+5,2.5,0,7);g.fill();g.globalAlpha=1;
-    for(let i=0;i<50;i++){const sx=cam.x+((i*173.3+cam.x*.0)%W),sy=cam.y+((i*97.7)%H),tw=.3+.7*Math.abs(Math.sin(t*1.3+i*1.7));g.fillStyle='rgba(255,255,235,'+(tw*nk*.8)+')';g.fillRect(sx,sy,i%7?1.2:2,i%7?1.2:2)}}}
+    const mx=cam.x+W*.8-cam.x*.03%40,my=cam.y+H*.14;if(!LOWQ){g.save();g.globalCompositeOperation='lighter';glowAt(mx,my,90,'190,210,255',.35*nk);g.restore()}g.globalAlpha=nk;g.fillStyle='#f4f0dc';g.beginPath();g.arc(mx,my,16,0,7);g.fill();g.fillStyle='rgba(180,180,170,.35)';g.beginPath();g.arc(mx-5,my-3,3.5,0,7);g.arc(mx+5,my+5,2.5,0,7);g.fill();g.globalAlpha=1;
+    for(let i=0;i<(LOWQ?16:50);i++){const sx=cam.x+((i*173.3+cam.x*.0)%W),sy=cam.y+((i*97.7)%H),tw=.3+.7*Math.abs(Math.sin(t*1.3+i*1.7));g.fillStyle='rgba(255,255,235,'+(tw*nk*.8)+')';g.fillRect(sx,sy,i%7?1.2:2,i%7?1.2:2)}}}
   /* เมฆชั้นล่าง (พารัลแลกซ์) */
   skyClouds().forEach(c=>{const x=((c.x+t*c.sp)%3600+3600)%3600-200+cam.x*c.dp,y=c.y+cam.y*c.dp;if(!inView(x,y,140*c.s))return;if(Math.hypot(x-CX,y-CY)<R0-40)return;skyCloud(x,y,c.s,.55+.25*Math.sin(c.k),c.k)});
   SKY.isl.forEach(([x,y,s,wf])=>{if(inView(x,y+60,220*s))skyIslet(x,y,s,t,wf)});
@@ -2471,7 +2479,7 @@ function drawEyeGaze(){if(!EYEG||!EYE())return;const t=performance.now()/1000;g.
   EYEG.pts.forEach((q,i)=>{const gr=g.createRadialGradient(q[0],q[1],8,q[0],q[1],62);gr.addColorStop(0,'rgba(6,2,16,.75)');gr.addColorStop(1,'rgba(20,8,40,.35)');g.fillStyle=gr;g.beginPath();g.arc(q[0],q[1],62,0,7);g.fill();
     g.strokeStyle='rgba(180,140,255,'+(.6+.3*pu)+')';g.lineWidth=2;g.setLineDash([7,6]);g.lineDashOffset=-t*30;g.beginPath();g.arc(q[0],q[1],62,0,7);g.stroke();g.setLineDash([]);
     g.fillStyle='rgba(220,200,255,.85)';g.font='bold 11px system-ui';g.textAlign='center';g.fillText('🌑 เงา',q[0],q[1]+4)});
-  g.globalCompositeOperation='lighter';for(let i=0;i<10;i++){const a=i*.628+t*.4,l=DR*1.1;g.strokeStyle='rgba(255,190,240,'+(.05+.1*k)+')';g.lineWidth=6+10*k;g.beginPath();g.moveTo(EYEG.bx,EYEG.by-40);g.lineTo(EYEG.bx+Math.cos(a)*l,EYEG.by-40+Math.sin(a)*l);g.stroke()}
+  g.globalCompositeOperation='lighter';if(!LOWQ)for(let i=0;i<10;i++){const a=i*.628+t*.4,l=DR*1.1;g.strokeStyle='rgba(255,190,240,'+(.05+.1*k)+')';g.lineWidth=6+10*k;g.beginPath();g.moveTo(EYEG.bx,EYEG.by-40);g.lineTo(EYEG.bx+Math.cos(a)*l,EYEG.by-40+Math.sin(a)*l);g.stroke()}
   g.restore()}
 /* ===== อุปกรณ์ Lv 61–70: ไอเทมระดับ 13–14 + ชุดเทวทูตรุ่งอรุณ ===== */
 const IL60=12,ilCap=()=>(curMap===10||curMap===11||(typeof ECHO==='function'&&ECHO())||(typeof SIEGE==='function'&&SIEGE())||(typeof EYE==='function'&&EYE()))?14:IL60;
@@ -2549,7 +2557,7 @@ function shinyLoot(x,y,L){if(!me.cls||Math.hypot(me.x-x,me.y-y)>420)return;const
 function drawShAura(m){const t=performance.now()/1000,r=MT[m.t].r*1.35;g.save();g.globalCompositeOperation='lighter';
   const hue=(t*90+m.id*37)%360;glowAt(m.x,m.y-r*.5,r*3.2,'255,230,140',.45+.15*Math.sin(t*5+m.id));g.beginPath();for(let i=0;i<8;i++){const a=i*.785+t*.6,l=r*(2.2+.5*Math.sin(t*3+i));g.moveTo(m.x,m.y-r*.5);g.lineTo(m.x+Math.cos(a)*l,m.y-r*.5+Math.sin(a)*l*.6)}g.strokeStyle='rgba(255,240,180,.18)';g.lineWidth=3;g.stroke();
   g.strokeStyle='hsla('+hue+',100%,70%,.75)';g.lineWidth=2;g.beginPath();g.ellipse(m.x,m.y+r*.85,r*1.4,r*.45,0,0,7);g.stroke();
-  for(let i=0;i<6;i++){const q=(t*.7+i/6+m.id*.17)%1,a=i*1.047+t*1.5,px=m.x+Math.cos(a)*r*1.2,py=m.y-r*.4+Math.sin(a)*r*.5-q*30,sz=2.6*(1-q)+.6;
+  for(let i=0;i<(LOWQ?3:6);i++){const q=(t*.7+i/6+m.id*.17)%1,a=i*1.047+t*1.5,px=m.x+Math.cos(a)*r*1.2,py=m.y-r*.4+Math.sin(a)*r*.5-q*30,sz=2.6*(1-q)+.6;
     g.fillStyle='hsla('+((hue+i*60)%360)+',100%,80%,'+(1-q)+')';g.beginPath();g.moveTo(px,py-sz*2);g.lineTo(px+sz*.6,py-sz*.6);g.lineTo(px+sz*2,py);g.lineTo(px+sz*.6,py+sz*.6);g.lineTo(px,py+sz*2);g.lineTo(px-sz*.6,py+sz*.6);g.lineTo(px-sz*2,py);g.lineTo(px-sz*.6,py-sz*.6);g.closePath();g.fill()}
   g.restore()}
 function drawShTag(m,nt){const r=MT[m.t].r*1.35,y=m.y-r*2-16-(nt?12:0);g.save();g.font='bold 10px system-ui';g.textAlign='center';g.lineWidth=3;g.strokeStyle='rgba(40,24,0,.85)';g.strokeText('✨ ไชนี่',m.x,y);
@@ -2571,19 +2579,19 @@ function drawNtTag(m){const r=MT[m.t].r;g.save();g.font='bold 9px system-ui';g.t
 function worldLight(){if(isDg()||isArena()||curMap===1)return;const S=dnState(),t=performance.now()/1000,vx=cam.x,vy=cam.y,w=wxNow();g.save();
   if(S.tint){g.fillStyle='rgba('+S.tint[0]+','+S.tint[1]+')';g.fillRect(vx,vy,W,H)}
   const dk=Math.min(.6,S.dk+(w?.08:0));
-  if(dk>0){if(curMap===9){/* นครยามค่ำ: ย้อมแสงจันทร์น้ำเงิน (multiply) คงคอนทราสต์ครีม-กรมท่า */const q=Math.min(1,dk/.42),c=[Math.round(255-(255-78)*q),Math.round(255-(255-96)*q),Math.round(255-(255-176)*q)];g.globalCompositeOperation='multiply';g.fillStyle='rgb('+c+')';g.fillRect(vx,vy,W,H);g.globalCompositeOperation='source-over';g.fillStyle='rgba(8,12,40,'+(.12*q)+')';g.fillRect(vx,vy,W,H)}else{g.fillStyle='rgba(10,14,40,'+dk+')';g.fillRect(vx,vy,W,H)}
+  if(dk>0){if(curMap===9){/* นครยามค่ำ: ย้อมแสงจันทร์น้ำเงิน (multiply) คงคอนทราสต์ครีม-กรมท่า */const q=Math.min(1,dk/.42),c=[Math.round(255-(255-78)*q),Math.round(255-(255-96)*q),Math.round(255-(255-176)*q)];g.globalCompositeOperation='multiply';g.fillStyle='rgb('+c+')';g.fillRect(vx,vy,W,H);g.globalCompositeOperation='source-over';if(!LOWQ){g.fillStyle='rgba(8,12,40,'+(.12*q)+')';g.fillRect(vx,vy,W,H)}}else{g.fillStyle='rgba(10,14,40,'+dk+')';g.fillRect(vx,vy,W,H)}
     if(S.dk>0){g.globalCompositeOperation='lighter';const k=S.dk/.42,L=(x,y,r,c,a)=>{if(x<vx-r||x>vx+W+r||y<vy-r||y>vy+H+r)return;glowAt(x,y,r,c,a)};
       if(me.cls)L(me.x,me.y-10,120,'255,230,190',.22*k);Object.values(others).forEach(o=>{if(o)L(o.x,o.y-10,80,'255,230,190',.15*k)});
       (MAPS[curMap].gates||[]).forEach(G=>L(G.x,G.y-10,90,G.sky?'255,220,140':'140,190,255',.35*k));
       if(SR>30)L(SX,SY-6,140*(.9+.1*Math.sin(t*11)),'255,150,60',.32*k);
-      if(curMap===9){CLAMPS.forEach(([x,y],i)=>{L(x,y-40,70,'255,180,90',.32*k*(.9+.1*Math.sin(t*9+i)));L(x,y+4,46,'255,200,120',.12*k)});L(1600,1240,140,'255,200,130',.2*k);L(1600,1330,70,'255,190,110',.22*k);L(1980,1200,80,'150,200,255',.26*k);L(1600,1566,110,'120,190,255',.3*k*(.85+.15*Math.sin(t*2)));L(1600,1700,90,'120,190,255',.16*k);L(1950,2100,120,'255,170,90',.14*k);L(1600,2250,110,'255,220,140',.22*k)}
+      if(curMap===9){CLAMPS.forEach(([x,y],i)=>{L(x,y-40,LOWQ?50:70,'255,180,90',.32*k*(.9+.1*Math.sin(t*9+i)));if(!LOWQ)L(x,y+4,46,'255,200,120',.12*k)});if(!LOWQ)L(1600,1240,140,'255,200,130',.2*k);L(1600,1330,70,'255,190,110',.22*k);L(1980,1200,80,'150,200,255',.26*k);L(1600,1566,110,'120,190,255',.3*k*(.85+.15*Math.sin(t*2)));L(1600,1700,90,'120,190,255',.16*k);L(1950,2100,120,'255,170,90',.14*k);L(1600,2250,110,'255,220,140',.22*k)}
       if(curMap===3)for(let i=0;i<10;i++){const x=((i*613)%3000)+100,y=((i*1777)%3000)+100;L(x,y,160,'255,90,30',.18*k)}
       if(curMap===10)L(MAPS[10].boss.x,MAPS[10].boss.y-260,260,'200,120,255',.25*k);
       if(curMap===11){L(MAPS[11].boss.x,MAPS[11].boss.y-40,300,'190,80,255',.28*k);VDF.forEach(f=>{if(f.k==='husk')L(f.x,f.y-f.r*.35,f.r*2.4,'255,190,140',.22*k);else if(f.k==='maw')L(f.x,f.y,f.r*1.6,'180,80,255',.2*k);else if(f.k==='lance')L(f.x,f.y-40,60,'255,220,140',.3*k)})}
       mons.forEach(m=>{if(ntOf(m))L(m.x,m.y-10,40,'170,120,255',.3*k)});
       for(let i=0;i<(LOWQ?6:16);i++){const fx=vx+((i*97.3+t*8)%W),fy=vy+((i*61.1+Math.sin(t*.4+i)*40)%H),pu=.5+.5*Math.sin(t*3+i*1.3);L(fx,fy,6,curMap===4?'170,220,255':'200,255,140',.5*pu*k)}
       g.globalCompositeOperation='source-over';
-      if(curMap===9||curMap===10||curMap===11){for(let i=0;i<40;i++){const sx=vx+((i*137.7)%W),sy=vy+((i*71.3)%(H*.6)),tw=.3+.7*Math.abs(Math.sin(t*1.5+i));g.fillStyle='rgba(255,255,240,'+(tw*k*.7)+')';g.fillRect(sx,sy,1.4,1.4)}}}}
+      if(curMap===9||curMap===10||curMap===11){for(let i=0;i<(LOWQ?14:40);i++){const sx=vx+((i*137.7)%W),sy=vy+((i*71.3)%(H*.6)),tw=.3+.7*Math.abs(Math.sin(t*1.5+i));g.fillStyle='rgba(255,255,240,'+(tw*k*.7)+')';g.fillRect(sx,sy,1.4,1.4)}}}}
   if(!LOWQ&&w===1){g.strokeStyle='rgba(180,200,235,.38)';g.lineWidth=1;g.beginPath();for(let i=0;i<90;i++){const x=vx+((i*53.3+t*60)%W),y=vy+((i*97.1+t*520)%H);g.moveTo(x,y);g.lineTo(x-3,y+11)}g.stroke();
     g.strokeStyle='rgba(200,220,255,.3)';for(let i=0;i<14;i++){const q=(t*1.6+i/14)%1,x=vx+((i*211.3)%W),y=vy+((i*131.7+Math.floor(t*1.6+i/14)*57)%H);g.beginPath();g.ellipse(x,y,2+q*7,1+q*2.5,0,0,7);g.globalAlpha=1-q;g.stroke();g.globalAlpha=1}}
   else if(!LOWQ&&w===2){for(let i=0;i<60;i++){const x=vx+((i*61.7+t*(10+i%5*4))%W)+Math.sin(t*.8+i)*14,y=vy+((i*83.3+t*(30+i%4*10))%H);g.fillStyle='rgba(255,255,255,'+(.55+.3*(i%3)/2)+')';g.beginPath();g.arc(x,y,1+(i%3)*.7,0,7);g.fill()}}
@@ -3048,7 +3056,7 @@ function gxTex(th,MP){const key=th+'|'+MP.bg+'|'+MP.tile;if(GX.tex[key])return G
 function gxChunk(T,key,cx,cy,r){const k=key+'|'+cx+'|'+cy+'|'+r;let c=GX.ch.get(k);if(c){GX.ch.delete(k);GX.ch.set(k,c);return c}
   const CS=GX.CS;c=document.createElement('canvas');c.width=c.height=Math.ceil(CS*r);const x=c.getContext('2d');x.setTransform(r,0,0,r,-cx*CS*r,-cy*CS*r);
   x.fillStyle=T.p;x.fillRect(cx*CS,cy*CS,CS,CS);const L=T.lf,q=20,sx=cx*CS/q,sy=cy*CS/q;x.imageSmoothingEnabled=true;x.drawImage(L,Math.max(0,sx-1),Math.max(0,sy-1),CS/q+2,CS/q+2,Math.max(0,sx-1)*q,Math.max(0,sy-1)*q,(CS/q+2)*q,(CS/q+2)*q);
-  GX.ch.set(k,c);while(GX.ch.size>8)GX.ch.delete(GX.ch.keys().next().value);return c}
+  GX.ch.set(k,c);while(GX.ch.size>24)GX.ch.delete(GX.ch.keys().next().value);return c}
 function gxGround(MP){const th=gxTheme();if(!th)return false;let T;try{T=gxTex(th,MP)}catch(e){return false}
   if(!GX.ch)GX.ch=new Map();GX.CS=384;const CS=GX.CS,M=g.getTransform(),s=M.a,r=Math.min(s,2),key=th+'|'+MP.bg+'|'+MP.tile,ex=Math.round(M.e),ey=Math.round(M.f),dw=CS*s;
   const x0=Math.floor((cam.x-24)/CS),x1=Math.floor((cam.x+W+24)/CS),y0=Math.floor((cam.y-24)/CS),y1=Math.floor((cam.y+H+24)/CS);
@@ -4817,7 +4825,7 @@ function uisMini(MP,WW,draw){const R=40,cx=W-R-8,cy=R+20,sq=R*1.42,mx=cx-sq/2,my
 .msmh{font-weight:800;color:#d8bd84;border-bottom:1px solid rgba(216,176,96,.3);padding-bottom:3px}
 .msmn{font-size:12px;margin-bottom:2px}.msmv{line-height:1.45}
 
-.msr{display:flex;flex-direction:column;gap:2px;margin-top:4px}.msmrow{flex-direction:column!important;align-items:stretch!important;gap:8px}.msmrow .nm{width:100%}.msmbt{display:flex;gap:6px}.msmbt button{flex:1;min-width:0}.msr span .mlk{margin-right:2px}.mlk{min-width:0!important;width:26px;height:22px;padding:0!important;font-size:12px!important;line-height:1;border-radius:6px!important;opacity:.55;flex:none}.mlk.on{opacity:1;background:linear-gradient(#e8c060,#a87a20)!important;border-color:#ffe08a!important;box-shadow:0 0 6px rgba(255,210,100,.6)}.msr span{font-size:11px;opacity:.85;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.msr small{opacity:.75}
+.msr{display:flex;flex-direction:column;gap:2px;margin-top:4px}.msmtabs{display:flex;gap:6px;margin:0 0 8px}.msmtabs .tab{flex:1}.msmtag{font-size:11px;color:#e8c060;opacity:.85}.msmrow{flex-direction:column!important;align-items:stretch!important;gap:8px}.msmrow .nm{width:100%}.msmbt{display:flex;gap:6px}.msmbt button{flex:1;min-width:0}.msr span .mlk{margin-right:2px}.mlk{min-width:0!important;width:26px;height:22px;padding:0!important;font-size:12px!important;line-height:1;border-radius:6px!important;opacity:.55;flex:none}.mlk.on{opacity:1;background:linear-gradient(#e8c060,#a87a20)!important;border-color:#ffe08a!important;box-shadow:0 0 6px rgba(255,210,100,.6)}.msr span{font-size:11px;opacity:.85;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.msr small{opacity:.75}
 .msb{position:relative;display:inline-block;width:64px;height:6px;border-radius:3px;background:linear-gradient(90deg,rgba(255,90,70,.45),rgba(255,210,90,.45),rgba(90,220,120,.55));vertical-align:middle}
 .msb b{position:absolute;top:-3px;width:4px;height:12px;margin-left:-2px;border-radius:2px;box-shadow:0 0 0 1px #0c1122}.msb b.o{background:#9aa3bb}.msb b.n{background:#ffd070;box-shadow:0 0 0 1px #0c1122,0 0 6px rgba(255,208,112,.9)}
 .msmrw{grid-column:1/-1;margin:-1px 0 4px}.msmr{font-size:10.5px;opacity:.8;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.msmr .msb{width:90px}
@@ -7601,7 +7609,7 @@ function drawMonAnim(m,T,hf){const now=performance.now()/1000,r=(MT[m.t]&&MT[m.t
   if(A>0){if(A<.3){const q=A/.3;sx+=.14*q;sy-=.14*q;rot-=.22*q*fd;ox-=3*q*fd}else if(A<.6){const q=(A-.3)/.3;sx-=.12*q;sy+=.16*q;rot+=.3*fd;ox+=r*.75*Math.sin(q*Math.PI*.5)*fd;oy-=2}
     else{const q=(A-.6)/.4;sx+=-.12+.12*q;sy+=.16-.16*q;rot+=.3*fd*(1-q);ox+=r*.75*(1-q)*fd}}
   if(hf>0)ox+=Math.sin(now*90)*hf*3;const gy=m.y+r*.85;g.save();g.translate(m.x+ox,gy+oy);g.rotate(rot);g.scale(sx,sy);g.translate(-m.x,-gy);
-  const NTm=ntOf(m),SHm=shOf(m);if(NTm)drawNtAura(m);if(SHm){drawShAura(m);g.translate(m.x,gy);g.scale(1.35,1.35);g.translate(-m.x,-gy);if(SHF)g.filter='hue-rotate('+((m.id*67)%300+40)+'deg) saturate(1.5) brightness(1.08)'}MON_CUR=m;drawMon(m.x,m.y,m.t,st.ck,m.fx||1,m.sl,hf);MON_CUR=null;if(SHm&&SHF)g.filter='none';g.restore();if(NTm)drawNtTag(m);if(SHm)drawShTag(m,NTm);
+  const NTm=ntOf(m),SHm=shOf(m);if(NTm)drawNtAura(m);if(SHm){drawShAura(m);g.translate(m.x,gy);g.scale(1.35,1.35);g.translate(-m.x,-gy);if(SHF&&!LOWQ)g.filter='hue-rotate('+((m.id*67)%300+40)+'deg) saturate(1.5) brightness(1.08)'}MON_CUR=m;drawMon(m.x,m.y,m.t,st.ck,m.fx||1,m.sl,hf);MON_CUR=null;if(SHm&&SHF&&!LOWQ)g.filter='none';g.restore();if(NTm)drawNtTag(m);if(SHm)drawShTag(m,NTm);
   if(A>.3&&A<.75){const q=(A-.3)/.45,ax=m.x+fd*r*1.5,ay=m.y-r*.2;g.save();g.globalCompositeOperation='lighter';g.strokeStyle='rgba(255,235,200,'+(.7*(1-q))+')';g.lineWidth=2.5;g.beginPath();g.arc(ax-fd*r*.6,ay,r*1.1,fd>0?-1.1+q*.6:Math.PI+1.1-q*.6,fd>0?.4+q*.6:Math.PI-.4-q*.6,fd<0);g.stroke();g.restore()}}
 function drawMon(x,y,t,T,fx,sl,hf){
   if(t!==4&&drawMonT(x,y,t,T,fx,sl,hf,bTheme()))return;
@@ -8686,7 +8694,7 @@ function draw(){
     g.strokeStyle='rgba(232,192,96,.32)';g.lineWidth=2;[140,300,440].forEach(rr=>{g.beginPath();g.arc(0,0,rr,0,7);g.stroke()});
     g.strokeStyle='rgba(232,192,96,.14)';g.lineWidth=1;[134,306].forEach(rr=>{g.beginPath();g.arc(0,0,rr,0,7);g.stroke()});
     g.save();g.rotate(now*.04);g.strokeStyle='rgba(240,200,110,.22)';g.lineWidth=1.6;for(let tr=0;tr<2;tr++){g.beginPath();for(let i=0;i<=3;i++){const b=tr*Math.PI/3+i*2.0944-Math.PI/2;i?g.lineTo(Math.cos(b)*300,Math.sin(b)*300):g.moveTo(Math.cos(b)*300,Math.sin(b)*300)}g.stroke()}
-    g.font='bold 13px serif';g.textAlign='center';g.textBaseline='middle';for(let i=0;i<24;i++){const b=i*.2618;g.save();g.translate(Math.cos(b)*370,Math.sin(b)*370);g.rotate(b+Math.PI/2);g.fillStyle='rgba(240,200,110,'+(.22+.12*Math.sin(now*2+i))+')';g.fillText('ᚠᚢᚦᚨᚱᚲᚷᚹ'[i%8],0,0);g.restore()}g.textBaseline='alphabetic';g.restore();
+    g.font='bold 13px serif';g.textAlign='center';g.textBaseline='middle';if(!LOWQ)for(let i=0;i<24;i++){const b=i*.2618;g.save();g.translate(Math.cos(b)*370,Math.sin(b)*370);g.rotate(b+Math.PI/2);g.fillStyle='rgba(240,200,110,'+(.22+.12*Math.sin(now*2+i))+')';g.fillText('ᚠᚢᚦᚨᚱᚲᚷᚹ'[i%8],0,0);g.restore()}g.textBaseline='alphabetic';g.restore();
     g.save();g.rotate(-now*.07);g.fillStyle='rgba(240,200,110,.3)';for(let i=0;i<8;i++){const b=i*.785;g.save();g.translate(Math.cos(b)*140,Math.sin(b)*140);g.rotate(b);g.beginPath();g.moveTo(0,-6);g.lineTo(4,0);g.lineTo(0,6);g.lineTo(-4,0);g.closePath();g.fill();g.restore()}g.restore();
     {const gg=g.createRadialGradient(0,0,0,0,0,70);gg.addColorStop(0,'rgba(255,220,140,'+(.12+.04*Math.sin(now*1.5))+')');gg.addColorStop(1,'rgba(255,220,140,0)');g.fillStyle=gg;g.beginPath();g.arc(0,0,70,0,7);g.fill()}
     g.restore();
