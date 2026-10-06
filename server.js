@@ -108,12 +108,12 @@ function onEmit(c,m){
     if(k==='mvlost'){if(!V.alive||host!==c)return;V.alive=0;V.id=0;V.next=now;V.ask=0;return}}
   if(k==='hit'){if(host&&host!==c&&Array.isArray(d))send(host,wrap(d.slice(0,80)));return}
   if(k==='world'){
-    if(host!==c||!d||!Array.isArray(d.m)||d.m.length>3000)return;c.lastW=Date.now();
+    if(host!==c||!d||!Array.isArray(d.m)||d.m.length>3000)return;if(d.wm!==undefined&&+d.wm!==+mp)return;c.lastW=Date.now();
     const dgs=d.dg&&typeof d.dg==='object'?{ph:String(d.dg.ph).slice(0,6),w:d.dg.w|0,tl:+d.dg.tl||0,nx:+d.dg.nx||0,why:String(d.dg.why||'').slice(0,40)}:0;
     if(dgs&&d.dg.tw&&typeof d.dg.tw==='object'){const t=d.dg.tw;dgs.tw={f:num(t.f|0,1,9999,1),ft:String(t.ft||'').slice(0,8),k:+t.k||0,kn:+t.kn||0,af:Array.isArray(t.af)?t.af.slice(0,3).map(x=>num(x|0,0,4,0)):[],ch:t.ch|0}}
     for(const o of inMap(mp)){if(o===c)continue;const ox=o.p.x,oy=o.p.y,rows=[];
       for(const r of d.m){if(r[4]===3||r[4]===4||d2(r[1],r[2],ox,oy)<R_WORLD*R_WORLD)rows.push(r)}
-      send(o,JSON.stringify({t:'emit',k,d:{mp,d:{m:rows,g:d.g,c:d.c,w:d.w,o:d.o,dg:dgs}},from:c.id}),true)}
+      send(o,JSON.stringify({t:'emit',k,d:{mp,d:{wm:mp,m:rows,g:d.g,c:d.c,w:d.w,o:d.o,dg:dgs}},from:c.id}),true)}
     return}
   if(k==='dmg'){if(!Array.isArray(d))return;const by=new Map();
     for(const e of d.slice(0,120)){if(!Array.isArray(e))continue;const o=byUid.get(e[0]);if(o&&o.p&&o.p.mp===mp){if(!by.has(o))by.set(o,[]);by.get(o).push(e)}}
@@ -129,7 +129,7 @@ function onEmit(c,m){
 /* ===== บอส MVP: เซิร์ฟเวอร์เป็นคนจับเวลาเกิด/ตาย และนับดาเมจหาผู้ได้ MVP ===== */
 const MVDEF={8:60,10:60,18:60},MVF=path.join(DATA_DIR,'mvp.json');let MV={},mvDirty=false;
 {let j={};try{j=JSON.parse(fs.readFileSync(MVF,'utf8'))||{}}catch(e){}const now=Date.now();
-  for(const k in MVDEF){const o=j[k]||{};MV[k]={next:Math.max(+o.next||0,now+(60+Math.random()*240)*1000),k:o.k|0,last:o.last||null,alive:0,id:0,dm:{},ask:0,empty:0}}}
+  for(const k in MVDEF){const o=j[k]||{};MV[k]={next:process.env.MVP_FAST?now:Math.max(+o.next||0,now+(60+Math.random()*240)*1000),k:o.k|0,last:o.last||null,alive:0,id:0,dm:{},ask:0,empty:0}}}
 setInterval(()=>{if(!mvDirty)return;mvDirty=false;const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wj(MVF,o)},15000);
 function mvAll(o){const s=JSON.stringify({t:'emit',k:'mvn',d:{mp:0,d:o},from:0});for(const c of clients)if(c.p)send(c,s)}
 function mvTable(){const now=Date.now(),o={};for(const k in MV){const v=MV[k];o[k]={in:v.alive?0:Math.max(0,Math.round((v.next-now)/1000)),al:v.alive?1:0,k:v.k,last:v.last,n:countByMap[k]||0}}return o}
