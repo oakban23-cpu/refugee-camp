@@ -1547,19 +1547,20 @@ const msmLkCost=(it,n)=>[Math.round(msmReroll(it)*(1+n*1.5)),n];
 function msmLkToggle(key,k){const it=msmGet(key);if(!it||it.st[k]===undefined)return;let ks=msmLk(it);
   if(ks.includes(k))ks=ks.filter(q=>q!==k);else{if(ks.length+1>=Object.keys(it.st).length)return msmUI('ต้องเหลือค่าที่ไม่ล็อกอย่างน้อย 1 ค่า');ks=[...ks,k]}
   MSMLW.set(it,ks);sfx('click');msmUI()}
-function msmRollLk(it,nr,ks){const sl=it.sl,mk=()=>it.ss&&nr===5&&SETS[it.ss]?makeSetItem(it.ss,sl):genItem(it.L,sl,nr,nr);let ni=mk();
+function msmRollLk(it,nr,ks){const sl=it.sl,mk=()=>it.ss&&nr===6&&SETS[it.ss]?makeCosmicSet(it.ss,sl,it.L):it.ss&&nr===5&&SETS[it.ss]?makeSetItem(it.ss,sl):genItem(it.L,sl,nr,nr);let ni=mk();
   if(ks.length){for(let i=0;i<300&&!ks.every(k=>ni.st[k]!==undefined);i++)ni=mk();
     const n0=Object.keys(ni.st).length;ks.forEach(k=>ni.st[k]=it.st[k]);
     let ex=Object.keys(ni.st).filter(k=>!ks.includes(k));while(Object.keys(ni.st).length>n0&&ex.length)delete ni.st[ex.pop()]}
   return ni}
-const msmUpCost=it=>{const c=MSM_UP[it.r];return c?[Math.round(c[0]*(1+it.L*.08)),c[1]]:null};
+const msmUpCost=it=>{if(it.r===5)return it.ss?[Math.round(1500000*(1+it.L*.08)),15,40]:null;const c=MSM_UP[it.r];return c?[Math.round(c[0]*(1+it.L*.08)),c[1],0]:null};
 function msmRowH(key,it,msg){const LK=msmLk(it),[rr,rs]=msmLkCost(it,LK.length),uc=msmUpCost(it);if(MSMP&&MSMP.key===key)return'<div id="msmAt">'+(msg?'<div class="note" style="margin-bottom:6px">'+msg+'</div>':'')+msmCmpH(MSMP)+'</div>';
   return'<div class="sr msmrow">'+(key[0]==='#'?'<div class="msmtag">🎒 ในกระเป๋า · '+SLN[it.sl]+'</div>':'')+'<div class="nm">'+itemCard(it)+msmRangeH(it,key)+'</div><div class="msmbt">'+
     '<button data-msm="r'+key+'"'+(me.gold>=rr&&(me.inv.s3|0)>=rs&&!MSMP?'':' disabled')+'>🔁 หลอมใหม่'+(rs?' 🔒'+rs:'')+'<br><small>'+rr.toLocaleString()+' ทอง'+(rs?' · หิน '+rs:'')+'</small></button>'+
-    (uc?'<button class="pri" data-msm="u'+key+'"'+(me.gold>=uc[0]&&(me.inv.s3|0)>=uc[1]&&!MSMP?'':' disabled')+'>⬆️ เป็น'+RN[it.r+1]+'<br><small>'+uc[0].toLocaleString()+' ทอง'+(uc[1]?' · หิน '+uc[1]:'')+'</small></button>':'<button disabled>ระดับสูงสุด</button>')+'</div></div>'}
+    (uc?'<button class="pri'+(uc[2]?' cosup':'')+'" data-msm="u'+key+'"'+(me.gold>=uc[0]&&(me.inv.s3|0)>=uc[1]&&((me.mat&&me.mat.ec)|0)>=uc[2]&&!MSMP?'':' disabled')+'>⬆️ เป็น'+RN[it.r+1]+'<br><small>'+uc[0].toLocaleString()+' ทอง'+(uc[1]?' · หิน '+uc[1]:'')+(uc[2]?' · 🌑 '+uc[2]:'')+'</small></button>':'<button disabled>ระดับสูงสุด</button>')+'</div></div>'}
 function msmUI(msg){if(!me.cls)return;ov.dataset.k='msm';ov.hidden=false;if(MSMP&&MSMP.key[0]==='#')MSMT='bag';else if(MSMP)MSMT='eq';
   let h=hdr('⚒️','ช่างตีเหล็กหลวง','ทอง '+fmtG(me.gold)+' · หินขั้นสูง '+(me.inv.s3|0));if(msg&&!MSMP)h+='<div class="note">'+msg+'</div>';
-  h+='<div class="card hint">ใช้ได้ทั้งของที่สวมอยู่และของในกระเป๋า · ค่าตีบวกไม่หาย · 🔁 หลอมใหม่ = สุ่มค่าพลังใหม่ระดับเดิม (แตะ 🔓 เพื่อล็อกค่าที่ชอบ · ค่าที่ล็อกคงเดิม · ล็อกละ +150% ทอง และหินขั้นสูง 1) · ⬆️ ยกระดับ = เลื่อนความหายากขึ้น 1 ขั้น (สูงสุด Relic · Ancient สีแดง = ชุดเซ็ต · Cosmic เร็ว ๆ นี้) และสุ่มค่าพลังใหม่ที่แรงขึ้น</div>';
+  h+='<div class="card hint">ใช้ได้ทั้งของที่สวมอยู่และของในกระเป๋า · ค่าตีบวกไม่หาย · 🔁 หลอมใหม่ = สุ่มค่าพลังใหม่ระดับเดิม (แตะ 🔓 เพื่อล็อกค่าที่ชอบ · ค่าที่ล็อกคงเดิม · ล็อกละ +150% ทอง และหินขั้นสูง 1) · ⬆️ ยกระดับ = เลื่อนความหายากขึ้น 1 ขั้น (สูงสุด Relic · Ancient สีแดง = ชุดเซ็ต) และสุ่มค่าพลังใหม่ที่แรงขึ้น</div>';
+  h+='<div class="card cosmc"><b>🌸 ยกระดับชุดเซ็ต Ancient → Cosmic</b><small>ชุดเซ็ตยังนับโบนัสเซ็ตเหมือนเดิม แต่ค่าพลังแรงขึ้นราว 22% · ใช้ทอง หินขั้นสูง 15 และ 🌑 เศษคราส 40<br>เศษคราสที่มี: <b>'+((me.mat&&me.mat.ec)|0)+'</b> · ได้จากมอนในดินแดนหลังรอยแยก · บอสโวราธ · ด่านห้วงตาราชินี · มอนไชนี่<br>อุปกรณ์ Cosmic แบบไม่ใช่เซ็ตมีโอกาสดรอปตรงจากการล้มเนราซ้ำ (2%) และมอนไชนี่ในทุ่ง/ดินแดนรอยแยก (1%)</small></div>';
   h+='<div class="tabs msmtabs"><button class="tab'+(MSMT==='eq'?' on':'')+'" data-msm="Te"'+(MSMP?' disabled':'')+'>🛡️ ที่สวมอยู่</button><button class="tab'+(MSMT==='bag'?' on':'')+'" data-msm="Tb"'+(MSMP?' disabled':'')+'>🎒 ในกระเป๋า ('+me.bag.length+')</button></div>';
   if(MSMT==='eq')h+='<div class="card">'+SLOTS.map(sl=>{const it=me.eq[sl];if(!it)return'<div class="sr"><div class="nm"><b>'+SLN[sl]+'</b><small>ยังไม่ได้สวม</small></div></div>';return msmRowH(sl,it,msg)}).join('<hr>')+'</div>';
   else{const L=me.bag.map((it,i)=>[it,i]).filter(([it])=>it&&it.st&&SLOTS.includes(it.sl)).sort((x,y)=>(y[0].r-x[0].r)||(y[0].L-x[0].L)||(SLOTS.indexOf(x[0].sl)-SLOTS.indexOf(y[0].sl)));
@@ -1569,7 +1570,7 @@ function msmUI(msg){if(!me.cls)return;ov.dataset.k='msm';ov.hidden=false;if(MSMP
   const at=document.getElementById('msmAt');if(at&&MSMP&&MSMP.fresh){MSMP.fresh=0;const r=at.getBoundingClientRect();if(r.top<60||r.bottom>innerHeight-20)at.scrollIntoView({block:'nearest',behavior:'smooth'})}}
 /* ช่วงค่าพลังที่เป็นไปได้ของชิ้นนี้ (เกรด/เลเวล/ช่องเดียวกัน) · สุ่มจำลอง 400 ครั้งแล้วจำไว้ */
 const MSMR={};function msmRange(it){const k=it.sl+'|'+it.r+'|'+it.L+'|'+(it.ss||0);if(MSMR[k])return MSMR[k];const o={},N=400;
-  for(let i=0;i<N;i++){let t;try{t=it.ss&&SETS[it.ss]?makeSetItem(it.ss,it.sl):genItem(it.L,it.sl,it.r,it.r)}catch(e){continue}for(const q in t.st){const v=t.st[q],e=o[q]||(o[q]={lo:v,hi:v,n:0});e.lo=Math.min(e.lo,v);e.hi=Math.max(e.hi,v);e.n++}}
+  for(let i=0;i<N;i++){let t;try{t=it.ss&&SETS[it.ss]?(it.r===6?makeCosmicSet(it.ss,it.sl,it.L):makeSetItem(it.ss,it.sl)):genItem(it.L,it.sl,it.r,it.r)}catch(e){continue}for(const q in t.st){const v=t.st[q],e=o[q]||(o[q]={lo:v,hi:v,n:0});e.lo=Math.min(e.lo,v);e.hi=Math.max(e.hi,v);e.n++}}
   for(const q in o)o[q].p=o[q].n/N;return MSMR[k]=o}
 function msmBar(lo,hi,v,v0){const pct=x=>Math.max(0,Math.min(100,hi>lo?(x-lo)/(hi-lo)*100:100));return'<i class="msb">'+(v0!==undefined?'<b class="o" style="left:'+pct(v0)+'%"></b>':'')+(v!==undefined?'<b class="n" style="left:'+pct(v)+'%"></b>':'')+'</i>'}
 function msmRangeH(it,sl){const R0=msmRange(it),m=upMul(it.u|0),LK=sl?msmLk(it):[];return'<div class="msr">'+Object.keys(it.st).map(k=>{const r=R0[k];if(!r)return'';return'<span>'+(sl?'<button class="mlk'+(LK.includes(k)?' on':'')+'" data-msm="l'+sl+':'+k+'"'+(MSMP?' disabled':'')+'>'+(LK.includes(k)?'🔒':'🔓')+'</button>':'')+stLabel(k,it.st[k]*m).replace(/[+\d.]+%?(\/วิ)?$/,'').trim()+' <small>ช่วง '+gNum(k,r.lo*m)+'–'+gNum(k,r.hi*m)+gUnit(k)+'</small>'+msmBar(r.lo,r.hi,undefined,it.st[k])+'</span>'}).join('')+'</div>'}
@@ -1593,12 +1594,12 @@ function msmAct(a){if(a[0]==='T'){if(MSMP)return;MSMT=a[1]==='b'?'bag':'eq';sfx(
   if(a[0]==='a'){if(!MSMP||MSMP.key!==key)return msmUI();MSMP=null;a='r'+key}
   if(MSMP)return msmUI('เลือกผลหลอมใหม่ของชิ้นก่อนหน้าก่อน');
   const it=msmGet(key);if(!it||!it.st)return msmUI();let nr=it.r,cost=0,st=0;
-  const LK=a[0]==='r'?msmLk(it):[];if(a[0]==='r'){[cost,st]=msmLkCost(it,LK.length)}else{const uc=msmUpCost(it);if(!uc)return;cost=uc[0];st=uc[1];nr=it.r+1}
-  if(me.gold<cost||(me.inv.s3|0)<st)return msmUI('ทองหรือหินไม่พอ');me.gold-=cost;me.inv.s3-=st;
+  let ec=0;const LK=a[0]==='r'?msmLk(it):[];if(a[0]==='r'){[cost,st]=msmLkCost(it,LK.length)}else{const uc=msmUpCost(it);if(!uc)return;cost=uc[0];st=uc[1];ec=uc[2]|0;nr=it.r+1}
+  me.mat=me.mat||{sc:0,hr:0,fe:0};if(me.gold<cost||(me.inv.s3|0)<st||(me.mat.ec|0)<ec)return msmUI(ec?'ทอง หิน หรือเศษคราสไม่พอ':'ทองหรือหินไม่พอ');me.gold-=cost;me.inv.s3-=st;me.mat.ec=(me.mat.ec|0)-ec;
   const old=it,ni=msmRollLk(it,nr,LK);ni.u=it.u|0;if(it.lk)ni.lk=1;
   if(a[0]==='r'){MSMP={key,old,ni,fresh:1};sfx('up');return msmUI()}
-  if(!msmPut(key,old,ni)){me.gold+=cost;me.inv.s3+=st;return msmUI('ไม่พบอุปกรณ์ชิ้นนี้แล้ว')}sfx('up');
-  if(nr>=4){me.stt.leg=1;burst(me.x,me.y-10,nr>=5?['#ff8a8a','#ffffff','#ff3b4a']:['#ffe08a','#ffffff','#ffb030'],nr>=5?70:40,160,1,{glow:1,g:-30})}
+  if(!msmPut(key,old,ni)){me.gold+=cost;me.inv.s3+=st;me.mat.ec+=ec;return msmUI('ไม่พบอุปกรณ์ชิ้นนี้แล้ว')}sfx('up');
+  if(nr>=4){me.stt.leg=1;burst(me.x,me.y-10,nr>=6?['#ff9ae0','#ffffff','#b0e0ff','#ffe08a']:nr>=5?['#ff8a8a','#ffffff','#ff3b4a']:['#ffe08a','#ffffff','#ffb030'],nr>=6?100:nr>=5?70:40,nr>=6?220:160,1,{glow:1,g:-30})}if(nr>=6){banner={s:'🌸 ยกระดับเป็น Cosmic (ห้วงจักรวาล)! '+itemName(ni),t:7};sysMsg('🌸 '+myName+' ยกระดับ '+itemName(ni)+' เป็นขั้นห้วงจักรวาล!')}
   msmUI('⬆️ ยกระดับสำเร็จ! '+itemName(ni)+'<br><small>ใหม่: '+Object.keys(ni.st).map(k=>stLabel(k,eff(ni,k))).join(' · ')+'</small><br><small style="opacity:.65">เดิม: '+Object.keys(old.st).map(k=>stLabel(k,eff(old,k))).join(' · ')+'</small>')}
 /* ---------- ร้านของหายาก: สินค้าหมุนเวียนรายวัน (เหมือนกันทุกคน) ---------- */
 const RARE=[{id:'lg',ic:'👑',n:'อุปกรณ์ Relic (สุ่มชิ้น)',p:250000,lim:1,f:()=>{giveGear(4);return'ได้อุปกรณ์ Relic!'}},
@@ -2453,7 +2454,7 @@ function echoReward(){if(dgRew)return;dgRew=1;const D=DT[9],rep=!(stCur()&&stCur
   banner={s:'✨ โซ่เงาขาดสะบั้น! +'+D.gold.toLocaleString()+' ทอง · หินขั้นสูง ×2',t:6};sfx('lvl');burst(me.x,me.y-10,['#fff6c8','#c8b8ff','#ffffff'],60,200,1.2,{glow:1,g:-40});
   setTimeout(()=>{if(ECHO())enterMap(10,{x:420,y:1560})},5500)}
 /* ===== ภาค 2 บทที่ 6: ห้วงตาราชินี (ด่านเดี่ยว · บอส เนรา ดวงตาแห่งราชินี) ===== */
-setTimeout(()=>{DT[12]={n:'ห้วงตาราชินี',lv:65,L:48,bL:13,hp:330000,xp:20000,g:6000,dm:9,tn:6,sm:2,rm:4,lg:.55,tm:300,gold:18000,exp:50000}},0);
+setTimeout(()=>{DT[12]={n:'ห้วงตาราชินี',lv:65,L:48,bL:13,hp:700000,xp:20000,g:6000,dm:11,tn:6,sm:2,rm:4,lg:.55,tm:300,gold:18000,exp:50000}},0);
 const EYE=()=>!!(MAPS[curMap]&&MAPS[curMap].eye);let EYEG=null;
 function eyeMap(id){if(MAPS[id])return MAPS[id];const D=DT[12];
   return MAPS[id]={n:'ห้วงตาราชินี',dg:12,eye:1,th:11,bth:13,sx:CX,sy:CY+440,sr:0,seed:97,bg:'#140c24',tile:'#20163a',safe:'#2a1e4a',ring:'#ff9ae0',t1:'#0a0616',t2:'#160e2a',d1:'#2e2050',d2:'#ffb0f0',nests:[],gates:[],qk:1,ql:13,npc:{x:-9999,y:-9999,n:'',L:1},
@@ -2464,15 +2465,15 @@ function eyeEnter(){if(!me.cls||me.down>0||ECHO()||SIEGE()||EYE())return;if(type
   const id=89000+(Math.random()*999|0);if(!dgMap(id))return;ov.hidden=true;EYEG=null;try{sfx('gate')}catch(e){}enterMap(id,{x:CX,y:CY+200});setTimeout(()=>{if(EYE()&&dg.ph==='lobby')stSay(EYE_IN,eyeStart,{cine:1})},700)}
 function eyeStart(){if(!EYE()||dg.ph!=='lobby')return;const D=DT[12];dg={ph:'boss',w:0,tl:D.tm,nx:0};SR=0;mons=[];teles=[];EYEG=null;bossCd=1e9;spawnBoss();fx({k:'msg',s:'👁️ เนราลืมตาแล้ว! ล้มมันให้ได้ภายใน 5 นาที'});try{sfx('boss')}catch(e){}}
 function eyeReward(){if(dgRew)return;dgRew=1;const D=DT[12],st=stCur(),sto=st&&st.g==='eye';me.gold=Math.min(GMAX,me.gold+(sto?D.gold:6000));me.inv.s3=Math.min(999,(me.inv.s3|0)+(sto?3:2));gainXP(me.x,me.y,D.exp);
-  if(sto){me.sty.n=1;me.sty.a=1}else me.instT=Date.now();feGive(sto?5:3,'ห้วงตาราชินี');EYEG=null;
+  if(sto){me.sty.n=1;me.sty.a=1}else me.instT=Date.now();feGive(sto?5:3,'ห้วงตาราชินี');ecGive(sto?8:4+(Math.random()*3|0),'ห้วงตาราชินี');if(!sto&&Math.random()<.02)setTimeout(()=>cosmicDrop('เนรา · ดวงตาแห่งราชินี'),1500);EYEG=null;
   banner={s:'👁️ ดวงตาแห่งราชินีแตกสลาย! +'+(sto?D.gold:6000).toLocaleString()+' ทอง · หินขั้นสูง ×'+(sto?3:2),t:6};sfx('lvl');burst(me.x,me.y-10,['#ffd0f0','#ffe08a','#ffffff'],70,210,1.2,{glow:1,g:-40});
   setTimeout(()=>{if(EYE())enterMap(11,{x:330,y:1590})},5500)}
 /* กลไก "จ้องมอง": แสงสาดทั้งลาน ยกเว้นวงเงา 3 จุด */
 function eyeGaze(m,dt,pl,enr,dm){m.a8=(m.a8===undefined?7:m.a8)-dt;
   if(m.a8<=0&&!EYEG){m.a8=enr?10:14;const pts=[];for(let i=0;i<3;i++){let x,y,k=0;do{const a=Math.random()*6.283,d=140+Math.random()*200;x=Math.round(m.x+Math.cos(a)*d);y=Math.round(m.y+Math.sin(a)*d);k++}while(k<40&&(Math.hypot(x-CX,y-CY)>DR-90||pts.some(q=>Math.hypot(q[0]-x,q[1]-y)<150)));pts.push([x,y])}
     EYEG={t:2.8,d:2.8,pts,bx:m.x,by:m.y};fx({k:'msg',s:'👁️ เนรากำลังจ้องมอง! วิ่งเข้าไปหลบในวงเงา'});try{sfx('boss')}catch(e){}}
-  if(EYEG){EYEG.t-=dt;EYEG.bx=m.x;EYEG.by=m.y;if(EYEG.t<=0){pl.forEach(p=>{if(!EYEG.pts.some(q=>Math.hypot(p.x-q[0],p.y-q[1])<62)){dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(62*dm);fx({k:'bslam',x:Math.round(p.x),y:Math.round(p.y),r:50})}});EYEG={t:-.5,d:.5,pts:EYEG.pts,flash:1,bx:m.x,by:m.y}}}
-  if(EYEG&&EYEG.flash){EYEG.t+=dt;if(EYEG.t>=0)EYEG=null}}
+  if(EYEG&&!EYEG.flash){EYEG.t-=dt;EYEG.bx=m.x;EYEG.by=m.y;if(EYEG.t<=0){pl.forEach(p=>{if(!EYEG.pts.some(q=>Math.hypot(p.x-q[0],p.y-q[1])<62)){dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(62*dm);fx({k:'bslam',x:Math.round(p.x),y:Math.round(p.y),r:50})}});EYEG={t:-.5,d:.5,pts:EYEG.pts,flash:1,bx:m.x,by:m.y}}}
+  else if(EYEG&&EYEG.flash){EYEG.t+=dt;if(EYEG.t>=0)EYEG=null}}
 function drawEyeGaze(){if(!EYEG||!EYE())return;const t=performance.now()/1000;g.save();
   if(EYEG.flash){const a=Math.max(0,-EYEG.t/.5);g.globalCompositeOperation='lighter';g.fillStyle='rgba(255,210,240,'+(.55*a)+')';g.beginPath();g.arc(CX,CY,DR,0,7);EYEG.pts.forEach(q=>{g.moveTo(q[0]+62,q[1]);g.arc(q[0],q[1],62,0,7,true)});g.fill('evenodd');g.restore();return}
   const k=1-EYEG.t/EYEG.d,pu=.5+.5*Math.sin(t*14);g.fillStyle='rgba(255,150,220,'+(.08+.2*k*(.7+.3*pu))+')';g.beginPath();g.arc(CX,CY,DR,0,7);EYEG.pts.forEach(q=>{g.moveTo(q[0]+62,q[1]);g.arc(q[0],q[1],62,0,7,true)});g.fill('evenodd');
@@ -2489,6 +2490,13 @@ const SETCOST3=sl=>sl==='w'?{fe:12,g:80000}:{fe:8,g:50000};
 function dawnProc(m){if(setCount(3)<5||Math.random()>=.1)return;const n=performance.now();if(n<(me.dpT||0))return;me.dpT=n+500;
   ZST.push({k:'star',x:m.x,y:m.y,t:.15,h:.42,e:.95,r:70,d:pd()*1.5});me.hp=Math.min(me.mh,me.hp+me.mh*.02)}
 function feGive(n,why){me.mat=me.mat||{sc:0,hr:0,fe:0};me.mat.fe=Math.min(9999,(me.mat.fe|0)+n);dn.push({x:me.x,y:me.y-58,v:'+'+n+' 🪶',t:1.3,c:'#ffd84a'});if(why)sysMsg('🪶 ได้ขนนกรุ่งอรุณ ×'+n+' · '+why)}
+/* ===== เศษคราส: วัตถุดิบยกระดับชุดเซ็ต Ancient → Cosmic ===== */
+function ecGive(n,why){me.mat=me.mat||{sc:0,hr:0,fe:0};me.mat.ec=Math.min(9999,(me.mat.ec|0)+n);dn.push({x:me.x,y:me.y-70,v:'+'+n+' 🌑',t:1.3,c:'#e0a0ff'});if(why)sysMsg('🌑 ได้เศษคราส ×'+n+' · '+why)}
+function ecRoll(x,y,t,bs){if(curMap!==11||!me.cls||Math.hypot(me.x-x,me.y-y)>420)return;if(bs){ecGive(3,'ร่วมปราบโวราธ');return}if(Math.random()<(t===2?.02:.006))ecGive(1)}
+/* ของ Cosmic ตรงจากแหล่งหายาก (เนรา · ไชนี่ในดินแดนหลังรอยแยก) */
+function cosmicDrop(why){const sl=SLOTS[Math.random()*5|0],it=genItem(14,sl,6,6);if(me.bag.length<MAXBAG)me.bag.push(it);else drops.push({x:me.x,y:me.y+14,k:'e',L:14,rm:6,t:60});
+  me.stt.leg=1;banner={s:'🌸 ได้อุปกรณ์ Cosmic (ห้วงจักรวาล)! '+itemName(it)+(why?' · '+why:''),t:8};sysMsg('🌸 '+myName+' ได้รับ '+itemName(it)+' จาก'+(why||'แหล่งลึกลับ'));sfx('lvl');
+  burst(me.x,me.y-10,['#ff9ae0','#ffffff','#b0e0ff','#ffe08a'],90,220,1.4,{glow:1,g:-50});return it}
 function feRoll(x,y,t,bs){if(curMap!==10||!me.cls||Math.hypot(me.x-x,me.y-y)>420)return;if(bs){feGive(3,'ร่วมปราบอาซาเอล');return}if(Math.random()<(t===2?.06:.025))feGive(1)}
 function dawnSetH(msg){me.mat=me.mat||{sc:0,hr:0,fe:0};const S=SETS[3];if(!S)return'';const fe=me.mat.fe|0;
   return'<div class="card" style="border:2px solid '+S.c+'"><div class="br" style="color:'+S.c+'">🪶 '+S.n+' <small>(อุปกรณ์ Relic Lv 14)</small></div>'+(msg?'<div class="note">'+msg+'</div>':'')+
@@ -2552,7 +2560,7 @@ function shTick(){if(isHost())mons.forEach(m=>{if(!m.shb&&shOf(m)){m.shb=1;m.hp*
   if(SHSEEN.size>300)SHSEEN.clear()}
 function shinyLoot(x,y,L){if(!me.cls||Math.hypot(me.x-x,me.y-y)>420)return;const q=Math.random(),rm=q<.05?4:q<.3?3:2;
   drops.push({x:x-14,y:y+6,k:'e',L:iLv(L||1),rm,t:60});drops.push({x:x+14,y:y+6,k:'s',v:2,t:60});if(Math.random()<.5)drops.push({x,y:y+16,k:'s',v:3,t:60});
-  me.stt.shy=(me.stt.shy|0)+1;banner={s:'✨ ล่ามอนสเตอร์ไชนี่สำเร็จ! ได้ของรางวัลพิเศษ (รวม '+me.stt.shy+' ตัว)',t:5};sfx('lvl');
+  me.stt.shy=(me.stt.shy|0)+1;banner={s:'✨ ล่ามอนสเตอร์ไชนี่สำเร็จ! ได้ของรางวัลพิเศษ (รวม '+me.stt.shy+' ตัว)',t:5};sfx('lvl');if(curMap===10||curMap===11){ecGive(curMap===11?2:1,'มอนไชนี่');if(Math.random()<.01)cosmicDrop('มอนไชนี่')}
   burst(x,y-10,['#fff6a0','#ffffff','#8ae8ff','#ff9ae8'],50,170,1,{glow:1,g:-40})}
 function drawShAura(m){const t=performance.now()/1000,r=MT[m.t].r*1.35;g.save();g.globalCompositeOperation='lighter';
   const hue=(t*90+m.id*37)%360;glowAt(m.x,m.y-r*.5,r*3.2,'255,230,140',.45+.15*Math.sin(t*5+m.id));g.beginPath();for(let i=0;i<8;i++){const a=i*.785+t*.6,l=r*(2.2+.5*Math.sin(t*3+i));g.moveTo(m.x,m.y-r*.5);g.lineTo(m.x+Math.cos(a)*l,m.y-r*.5+Math.sin(a)*l*.6)}g.strokeStyle='rgba(255,240,180,.18)';g.lineWidth=3;g.stroke();
@@ -4825,7 +4833,7 @@ function uisMini(MP,WW,draw){const R=40,cx=W-R-8,cy=R+20,sq=R*1.42,mx=cx-sq/2,my
 .msmh{font-weight:800;color:#d8bd84;border-bottom:1px solid rgba(216,176,96,.3);padding-bottom:3px}
 .msmn{font-size:12px;margin-bottom:2px}.msmv{line-height:1.45}
 
-.msr{display:flex;flex-direction:column;gap:2px;margin-top:4px}.msmtabs{display:flex;gap:6px;margin:0 0 8px}.msmtabs .tab{flex:1}.msmtag{font-size:11px;color:#e8c060;opacity:.85}.msmrow{flex-direction:column!important;align-items:stretch!important;gap:8px}.msmrow .nm{width:100%}.msmbt{display:flex;gap:6px}.msmbt button{flex:1;min-width:0}.msr span .mlk{margin-right:2px}.mlk{min-width:0!important;width:26px;height:22px;padding:0!important;font-size:12px!important;line-height:1;border-radius:6px!important;opacity:.55;flex:none}.mlk.on{opacity:1;background:linear-gradient(#e8c060,#a87a20)!important;border-color:#ffe08a!important;box-shadow:0 0 6px rgba(255,210,100,.6)}.msr span{font-size:11px;opacity:.85;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.msr small{opacity:.75}
+.msr{display:flex;flex-direction:column;gap:2px;margin-top:4px}.cosmc{border:1px solid #e0409a!important;background:linear-gradient(135deg,rgba(224,64,154,.14),rgba(90,120,255,.1))!important}.cosmc b{color:#ff9ae0}.cosmc small{display:block;margin-top:4px;line-height:1.5;opacity:.9}.msmbt .cosup{background:linear-gradient(90deg,#ff7ad9,#b07aff,#7ab8ff)!important;color:#1a0a24!important;border-color:#ffd0f0!important}.msmtabs{display:flex;gap:6px;margin:0 0 8px}.msmtabs .tab{flex:1}.msmtag{font-size:11px;color:#e8c060;opacity:.85}.msmrow{flex-direction:column!important;align-items:stretch!important;gap:8px}.msmrow .nm{width:100%}.msmbt{display:flex;gap:6px}.msmbt button{flex:1;min-width:0}.msr span .mlk{margin-right:2px}.mlk{min-width:0!important;width:26px;height:22px;padding:0!important;font-size:12px!important;line-height:1;border-radius:6px!important;opacity:.55;flex:none}.mlk.on{opacity:1;background:linear-gradient(#e8c060,#a87a20)!important;border-color:#ffe08a!important;box-shadow:0 0 6px rgba(255,210,100,.6)}.msr span{font-size:11px;opacity:.85;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.msr small{opacity:.75}
 .msb{position:relative;display:inline-block;width:64px;height:6px;border-radius:3px;background:linear-gradient(90deg,rgba(255,90,70,.45),rgba(255,210,90,.45),rgba(90,220,120,.55));vertical-align:middle}
 .msb b{position:absolute;top:-3px;width:4px;height:12px;margin-left:-2px;border-radius:2px;box-shadow:0 0 0 1px #0c1122}.msb b.o{background:#9aa3bb}.msb b.n{background:#ffd070;box-shadow:0 0 0 1px #0c1122,0 0 6px rgba(255,208,112,.9)}
 .msmrw{grid-column:1/-1;margin:-1px 0 4px}.msmr{font-size:10.5px;opacity:.8;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.msmr .msb{width:90px}
@@ -5949,6 +5957,7 @@ function drawTBF(top){if(!TBF.length)return;const now=performance.now()/1000,pu=
 function bossAI(m,dt,pl){
   if(m.a1===undefined){m.a1=4;m.a2=9;m.tl=[];m.enr=0;m.hx=BS().x;m.hy=BS().y}
   const B=BS(),dm=B.dm*(m.mvp?MVDM:1);
+  if(EYE()&&(m.inv||m.stun>0)&&EYEG)EYEG=null;
   if(B.dg){if(m.stun>0){m.stun-=dt;m.a1=Math.max(m.a1,1);return}
     const f=m.hp/m.mh;
     if(!m.inv&&((f<.66&&!m.s1)||(f<.33&&!m.s2))){if(!m.s1)m.s1=1;else m.s2=1;m.inv=1;m.pt=5;m.tl=[];const np=Math.max(1,plCount()),L=(isTw()?twL(twF()):DT[MAPS[curMap].dg].L)+3;
@@ -6338,6 +6347,7 @@ const SETS={1:{n:'ชุดราชันห้วงลึก',c:'#1fb8a8',pn:
   2:{n:'ชุดผู้พิทักษ์ห้วงลึก',c:'#4a8ae0',pn:{w:'หอกผู้พิทักษ์ห้วงลึก',a:'เกราะเปลือกผู้พิทักษ์',c:'กำไลหินผู้พิทักษ์',h:'หมวกเปลือกหอยผู้พิทักษ์',b:'รองเท้าหินผู้พิทักษ์'},
     b:[[2,{hp:.1},'เลือดสูงสุด +10%'],[3,{red:.06,reg:6},'ลดดาเมจที่ได้รับ +6% · ฟื้นเลือด 6/วิ'],[5,{},'เลือดต่ำกว่า 50% ได้เกราะ 25% ของเลือดสูงสุดและฟื้นมานา 30% (ทุก 15 วิ)']]}};
 const SETCOST=sl=>sl==='w'?{sc:12,hr:1,g:20000}:{sc:8,hr:0,g:15000};
+function makeCosmicSet(id,sl,L){const it=genItem(L||(id===3?14:IL60),sl,6,6);Object.keys(it.st).forEach(k=>it.st[k]=r2(Math.min(gkCap(k,6),it.st[k]*1.08)));it.ss=id;it.lk=1;it.cz=1;return it}
 function makeSetItem(id,sl){const it=genItem(id===3?14:IL60,sl,5,5);Object.keys(it.st).forEach(k=>it.st[k]=r2(Math.min(GKI[k],it.st[k]*1.08)));it.ss=id;it.lk=1;return it}
 const setCount=id=>SLOTS.reduce((a,sl)=>a+(me.eq&&me.eq[sl]&&me.eq[sl].ss===id?1:0),0);
 function setB(k){let t=0;if(!me.eq)return 0;for(const id in SETS){const n=setCount(+id);if(n<2)continue;SETS[id].b.forEach(([need,st])=>{if(n>=need&&st[k])t+=st[k]})}return t}
@@ -6516,7 +6526,7 @@ const qDone=()=>me.qs&&me.qs.some(q=>q.h>=q.n);
 function qKill(x,y,t,bs){
   if(isTw()&&!bs&&me.cls&&me.down<=0&&Math.hypot(me.x-x,me.y-y)<380){dkKill();blKill()}
   if(!me.cls||me.down>0||curMap===undefined||Math.hypot(me.x-x,me.y-y)>380)return;
-  try{stKill(t,bs)}catch(e){}try{cardRoll(x,y,t,bs)}catch(e){}try{feRoll(x,y,t,bs)}catch(e){}
+  try{stKill(t,bs)}catch(e){}try{cardRoll(x,y,t,bs)}catch(e){}try{feRoll(x,y,t,bs)}catch(e){}try{ecRoll(x,y,t,bs)}catch(e){}
   if(!bs&&t!==3&&t!==4)cqKill(t);
   if(me.stt){me.stt.k++;dqProg('kill',1);if(t===2){me.stt.el++;dqProg('elite',1)}if(bs||t===3){const K=bk();me.stt.b[K]=(me.stt.b[K]||0)+1;dqProg('boss',1)}}
   me.qs.forEach(q=>{if(q.mp!==curMap||q.h>=q.n)return;
@@ -6602,7 +6612,7 @@ const RN=['Basic · พื้นฐาน','Refined · ประณีต','Elit
 const SLN={w:'อาวุธ',a:'เกราะ',c:'เครื่องประดับ',h:'หมวก',b:'รองเท้า'};const SLOTS=['w','a','c','h','b'];
 const GN={w:['อาวุธสนิม','อาวุธเหล็กกล้า','อาวุธเงินวิเศษ','อาวุธเปลวเพลิง'],a:['เสื้อหนังเก่า','เกราะเหล็ก','เกราะเงินวิเศษ','เกราะมังกร'],c:['แหวนทองเหลือง','สร้อยเงิน','เครื่องรางเวท','เครื่องรางเทพ'],h:['หมวกผ้าเก่า','หมวกเหล็ก','หมวกเงินวิเศษ','มงกุฎมังกร'],b:['รองเท้าหนังเก่า','รองเท้าเหล็ก','รองเท้าเงินวิเศษ','รองเท้าลมพายุ']};
 GN.w.push('อาวุธเทพนิรันดร์','อาวุธบรรพกาล','อาวุธห้วงจักรวาล');GN.a.push('เกราะเทพนิรันดร์','เกราะบรรพกาล','เกราะห้วงจักรวาล');GN.c.push('อัญมณีนิรันดร์','อัญมณีบรรพกาล','อัญมณีห้วงจักรวาล');GN.h.push('มงกุฎเทพนิรันดร์','มงกุฎบรรพกาล','มงกุฎห้วงจักรวาล');GN.b.push('รองเท้าเทพนิรันดร์','รองเท้าบรรพกาล','รองเท้าห้วงจักรวาล');
-const GKI={hp:1.17,dm:.78,sp:.65,mp:1.43,red:.22,reg:14.3,cr:.58,as:.39,ls:.22};
+const GKI={hp:1.17,dm:.78,sp:.65,mp:1.43,red:.22,reg:14.3,cr:.58,as:.39,ls:.22},GKX={hp:1,dm:1,mp:1,reg:1,cr:1,as:1},gkCap=(k,r)=>(GKI[k]||9)*(r>=6&&GKX[k]?1.22:1);
 const GK={hp:.5,dm:.36,sp:.25,mp:.7,red:.13,reg:6,cr:.24,as:.18,ls:.12};
 let fullT=-1e9;const stk=()=>stocks[curMap]||(stocks[curMap]=[genItem(NPC().L,'w',1),genItem(NPC().L,'a',1),genItem(NPC().L,'c',1),genItem(NPC().L,'h',1),genItem(NPC().L,'b',1)]);
 const r2=v=>Math.round(v*1000)/1000;
@@ -6619,7 +6629,7 @@ function genItem(L,sl,rmax,rmin){
   else{const ks=['sp','mp','reg','cr','ls'],B={sp:.03,mp:.08,reg:.8,cr:.03,ls:.015},k1=ks[Math.random()*5|0];st[k1]=r2(B[k1]*s);
     if(r>=2){let k2=ks[Math.random()*5|0];while(k2===k1)k2=ks[Math.random()*5|0];st[k2]=r2(B[k2]*s*.5)}}
   if(r>=4){st.ls=r2(Math.max(st.ls||0,Math.min(GK.ls,(st.ls||0)+.02*(1+.12*(L-1)))));st.cr=r2(Math.max(st.cr||0,Math.min(GK.cr,(st.cr||0)+.03*(1+.12*(L-1)))))}
-  Object.keys(st).forEach(k=>{let v=r2(Math.min(GKI[k]||9,st[k]*(.9+Math.random()*.25)));if(Math.abs(v-GK[k])<1e-9)v=r2(v+.001);st[k]=v});
+  Object.keys(st).forEach(k=>{let v=r2(Math.min(gkCap(k,r),st[k]*(.9+Math.random()*.25)));if(Math.abs(v-GK[k])<1e-9)v=r2(v+.001);st[k]=v});
   return{sl,r,L,u:0,st};
 }
 const upMul=u=>1+.1*Math.min(u,10)+.05*Math.max(0,Math.min(u,20)-10)+.04*Math.max(0,u-20);const eff=(it,k)=>it.st[k]*upMul(it.u|0);
@@ -6637,11 +6647,11 @@ function cleanItem(it,sl){
   const o={sl:it.sl,r:n(it.r,0,6,0),L:n(it.L,1,ILMAX,1),u:n(it.u,0,UMAX,0),st:{}};
   if(it.lk)o.lk=1;
   /* ชุดเซ็ต = เกรด Ancient (แดง) · แปลงของเก่า: ตำนานเดิม (r4) และ Cosmic ชั่วคราวของ v177 (r6 ตัวคูณ 6.2) */
-  let cv=1;if((it.ss===1||it.ss===2||it.ss===3)&&o.r>=4){o.ss=it.ss;cv=o.r===4?RMUL[5]/RMUL[4]:o.r===6?RMUL[5]/6.2:1;o.r=5}
-  if(it.st&&typeof it.st==='object')Object.keys(GK).forEach(k=>{const v=it.st[k];if(Number.isFinite(v)&&v>0)o.st[k]=r2(Math.min(v*cv,GKI[k]))});
+  let cv=1;if((it.ss===1||it.ss===2||it.ss===3)&&o.r===6&&it.cz){o.ss=it.ss;o.cz=1}else if((it.ss===1||it.ss===2||it.ss===3)&&o.r>=4){o.ss=it.ss;cv=o.r===4?RMUL[5]/RMUL[4]:o.r===6?RMUL[5]/6.2:1;o.r=5}
+  if(it.st&&typeof it.st==='object')Object.keys(GK).forEach(k=>{const v=it.st[k];if(Number.isFinite(v)&&v>0)o.st[k]=r2(Math.min(v*cv,gkCap(k,o.r)))});
   /* ซ่อมของที่เคยถูกตัดค่าสเตตัสจากบัคเพดานเก่า: ค่าหลักคำนวณย้อนได้จากเลเวลและระดับของไอเทม */
   {const sc=(1+.18*(o.L-1))*RMUL[o.r],EX={b:{sp:.045*sc,hp:.025*sc},a:{hp:.06*sc,red:.015*sc},w:{dm:.04*sc},h:{mp:.05*sc,red:.012*sc}}[o.sl]||{},CB={sp:.03,mp:.08,reg:.8,cr:.03,ls:.015};
-   Object.keys(o.st).forEach(k=>{if(Math.abs(o.st[k]-GK[k])>1e-9)return;let ex=EX[k];if(o.sl==='c'&&CB[k]){const c1=CB[k]*sc,c2=c1*.5;ex=c2>GK[k]?c2:c1}if(ex&&ex>GK[k]+1e-9)o.st[k]=r2(Math.min(ex,GKI[k]))})}
+   Object.keys(o.st).forEach(k=>{if(Math.abs(o.st[k]-GK[k])>1e-9)return;let ex=EX[k];if(o.sl==='c'&&CB[k]){const c1=CB[k]*sc,c2=c1*.5;ex=c2>GK[k]?c2:c1}if(ex&&ex>GK[k]+1e-9)o.st[k]=r2(Math.min(ex,gkCap(k,o.r)))})}
   return Object.keys(o.st).length?o:null;
 }
 function pickGear(d){
@@ -9030,7 +9040,7 @@ function cleanChar(c){
   const n=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,Math.floor(v))):d;
   const o={lv:n(c.lv,1,LMAX,1),xp:n(c.xp,0,1e7,0),gold:n(c.gold,0,GMAX,0),tr:{},ab:{str:0,vit:0,int:0,agi:0,luk:0},inv:{hp:0,mp:0,ps:0},eq:{},bag:[]};
   if(c.inv&&typeof c.inv==='object'){o.inv.hp=n(c.inv.hp,0,POTMAX,0);o.inv.mp=n(c.inv.mp,0,POTMAX,0);o.inv.ps=n(c.inv.ps,0,99,0);o.inv.s1=n(c.inv.s1,0,999,0);o.inv.s2=n(c.inv.s2,0,999,0);o.inv.s3=n(c.inv.s3,0,999,0)}
-  {const m=c.mat&&typeof c.mat==='object'?c.mat:{};o.mat={sc:n(m.sc,0,9999,0),hr:n(m.hr,0,999,0),fe:n(m.fe,0,9999,0)}}
+  {const m=c.mat&&typeof c.mat==='object'?c.mat:{};o.mat={sc:n(m.sc,0,9999,0),hr:n(m.hr,0,999,0),fe:n(m.fe,0,9999,0),ec:n(m.ec,0,9999,0)}}
   o.cls2=c.cls2&&o.lv>=AWLV?1:0;{const u=c.brU&&typeof c.brU==='object'?c.brU:{};o.brU={};if(o.cls2){if(u[1])o.brU[1]=1;if(u[2])o.brU[2]=1;if(!o.brU[1]&&!o.brU[2])o.brU[1]=1}o.br=c.br===2&&o.brU[2]?2:1;const k=c.dk&&typeof c.dk==='object'?c.dk:{};o.dk={s:o.brU[2]?5:n(k.s,0,4,0),n:n(k.n,0,100,0)}}{const q=c.cq&&typeof c.cq==='object'?c.cq:{};o.cq={s:o.brU[1]?5:n(q.s,0,4,0),n:n(q.n,0,1000,0)}}
   o.twc=n(c.twc,0,1e7,0);o.twCp=n(c.twCp,1,9991,1);if((o.twCp-1)%10)o.twCp=1;o.twBest=n(c.twBest,0,99999,0);if(o.twCp>o.twBest+1)o.twCp=Math.max(1,Math.floor(o.twBest/10)*10+1);
   if(c.tr&&typeof c.tr==='object')Object.keys(c.tr).forEach(k=>{const v=n(c.tr[k],0,3,0);if(v>0&&k.length<8)o.tr[k]=v});
