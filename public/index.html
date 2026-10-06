@@ -271,6 +271,13 @@ button:focus-visible{outline:2px solid var(--u-gold);outline-offset:2px}
 #clog div{align-self:flex-start;max-width:100%;padding:2px 9px;border-radius:9px;background:rgba(12,10,16,.5);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);font-size:11.5px;transition:opacity .4s}
 #clog .sy{color:var(--u-gold2,#f3d08a);white-space:normal;opacity:1}
 #clog{max-height:160px}
+#bfb{display:flex;flex-wrap:wrap;gap:4px;max-width:170px;pointer-events:auto;position:relative}#bfb:empty{display:none}
+#bfb .bf{width:28px;height:28px;border-radius:8px;background:rgba(18,14,32,.8);border:1.5px solid var(--c,#d8a84a);display:grid;place-items:center;font-size:15px;line-height:1;position:relative;overflow:hidden;box-shadow:0 0 6px color-mix(in srgb,var(--c,#d8a84a) 45%,transparent);cursor:pointer}
+#bfb .bf i{position:absolute;left:0;bottom:0;height:3px;background:var(--c,#d8a84a)}
+#bfb .bf b{position:absolute;right:1px;bottom:3px;font-size:9px;font-weight:800;color:#fff;text-shadow:0 0 2px #000,0 0 2px #000;font-family:system-ui}
+#bfb .bf.lo{animation:bfbl .5s infinite alternate}@keyframes bfbl{to{opacity:.35}}
+#bfb .bft{position:absolute;left:0;top:calc(100% + 4px);min-width:150px;max-width:210px;padding:6px 9px;border-radius:9px;background:rgba(18,14,32,.94);border:1px solid #d8a84a;color:#f4ead2;font-size:11px;line-height:1.4;z-index:3;pointer-events:none}
+#bfb .bft b{display:block;color:#ffd27a;font-size:12px}
 </style>
 </head>
 <body>
@@ -290,7 +297,7 @@ button:focus-visible{outline:2px solid var(--u-gold);outline-offset:2px}
     <button id="dgb" hidden></button><button id="dinvb" hidden></button><div id="ptyhud" hidden></div><div id="plpop" hidden></div><div id="blpk" hidden></div><div id="ptq" hidden><span id="ptqt"></span><button id="ptqa" class="pri">เข้าร่วม</button><button id="ptqd">ไม่รับ</button></div><div id="trq" hidden><span id="trqt"></span><button id="trqa" class="pri">เปิดดู</button><button id="trqd">ไม่รับ</button></div>
     <button id="npcb">คุยกับพ่อค้ายา</button>
     <button id="gtb">ผ่านประตู</button><button id="twb">🗼 เข้าหอคอยวิญญาณ</button>
-    <div id="topb"><button id="evt" aria-label="กิจกรรม" title="กิจกรรม">📅<i></i></button><button id="cht" aria-label="แชท" title="แชท">💬<i></i></button><div id="stq" hidden></div></div><div id="scine"><i class="t"></i><i class="b"></i><i id="scfl"></i></div><div id="sdlg" hidden><div class="sdp"></div><div class="sdb"><div class="sdn"></div><div class="sdt"></div><div class="sdc"></div></div></div>
+    <div id="topb"><button id="evt" aria-label="กิจกรรม" title="กิจกรรม">📅<i></i></button><button id="cht" aria-label="แชท" title="แชท">💬<i></i></button><div id="stq" hidden></div><div id="bfb"></div></div><div id="scine"><i class="t"></i><i class="b"></i><i id="scfl"></i></div><div id="sdlg" hidden><div class="sdp"></div><div class="sdb"><div class="sdn"></div><div class="sdt"></div><div class="sdc"></div></div></div>
     <div id="clog" aria-live="polite"></div>
     <div id="cbar" hidden><input id="cin" maxlength="80" placeholder="พิมพ์ข้อความ แล้วกด Enter" autocomplete="off"><button id="csend">ส่ง</button></div>
     <div id="ov"></div>
@@ -6696,6 +6703,33 @@ function cycleTarget(){if(!me.cls||!run||me.down>0)return;const rg=CL[me.cls].rg
   const i=l.findIndex(m=>m.id===lockId);
   if(i<0)lockId=(l[1]||l[0]).id;else lockId=l[i+1]?l[i+1].id:null;}
 function nearestMon(rg){let b=null,bd=rg;mons.forEach(m=>{const d=dist(m,me)-bigR(m);if(d<bd){bd=d;b=m}});return b}
+
+/* ===== แถบไอคอนบัฟ: แสดงบัฟที่กำลังทำงาน (แตะเพื่อดูรายละเอียด) ===== */
+const BFX={};let bfbKey='',bfbTip=null,bfbTipT=0;
+function buffList(){if(!me.cls||!run||me.down>0)return[];const L=[],add=(k,ic,n,d,t,col)=>{let mx=0;if(t>0){mx=BFX[k]=Math.max(BFX[k]||0,t)}L.push({k,ic,n,d,t:t||0,mx,col})};
+  if(me.rage>0)add('rage','🔥','คลั่งโลหิต','ความเร็วโจมตี +'+Math.round(40*(me.rgP||1))+'% · ดูดเลือด +10%',me.rage,'#ff6a3a');
+  if(me.atk>0)add('atk','⚔️','ปลุกพลัง','ดาเมจ +'+Math.round(me.atk/20*100)+'% (ค่อย ๆ ลดลง)',me.atk,'#ffb030');
+  if(me.shield>0&&(me.shv|0)>0)add('shd','🛡️','เกราะคุ้มกัน','ดูดซับดาเมจได้อีก '+Math.round(me.shv).toLocaleString(),me.shield,'#8ad0ff');
+  if(me.inv3>0)add('inv','✨','พรศักดิ์สิทธิ์','ไม่ได้รับความเสียหาย',me.inv3,'#fff0a0');
+  if(me.stealth>0)add('stl','👤','ล่องหน','การโจมตีครั้งถัดไปติดคริติคอลแน่นอน',me.stealth,'#b08aff');
+  if(me.taunt>0)add('tnt','📢','ยั่วยุ','มอนสเตอร์รอบตัวหันมาโจมตีคุณ',me.taunt,'#ff8a5a');
+  if(me.bst>0)add('bst','🌪️','พายุใบมีด','ใบมีดหมุนฟันศัตรูรอบตัว',me.bst,'#c0a0ff');
+  if(me.zaT>0){try{const A=zcOf().a;add('za',A[0],A[1],A[4],me.zaT,'rgb('+A[3]+')')}catch(e){}}
+  try{if(me.cls2&&br1()&&me.cls==='melee'&&me.hp<me.mh*.4)add('blood','🩸','โลหิตเดือด','เลือดต่ำกว่า 40%: ดาเมจ +30% · ดูดเลือด x2',0,'#ff3b4a')}catch(e){}
+  if(me.stillT>=.4&&(me.cls==='archer'||me.cls==='mage'))add('still','🎯','ตั้งหลัก','ยืนนิ่ง: ดาเมจ +20%',0,'#7ad0ff');
+  if(me.riding&&MOUNTS[me.mt]){const Mt=MOUNTS[me.mt];add('ride','🐎',Mt.n,'ความเร็ววิ่ง +'+Math.round(Mt.sp*100)+'%'+(Mt.red?' · ลดดาเมจที่ได้รับ '+Math.round(Mt.red*100)+'%':''),0,'#d8a84a')}
+  try{if(blOn()&&me.twBl.length){const B=me.twBl.map(id=>BLM[id]).filter(Boolean);add('twbl','🙏','พรหอคอย ×'+B.length,B.map(b=>b.i+' '+b.n+': '+b.d).join('<br>'),0,'#c8a0ff')}}catch(e){}
+  for(const k in BFX)if(!L.some(o=>o.k===k&&o.t>0))delete BFX[k];
+  return L}
+function bfbRender(){const el=$('bfb');if(!el)return;const L=buffList();
+  const key=L.map(o=>o.k+':'+(o.t>0?Math.ceil(o.t):'')+':'+(o.t>0&&o.mx?Math.round(o.t/o.mx*20):'')+':'+(o.t>0&&o.t<2?1:0)).join('|')+'#'+(bfbTip||'')+(o=>o?o.d:'')(L.find(o=>o.k===bfbTip));
+  if(bfbTip&&(performance.now()>bfbTipT||!L.some(o=>o.k===bfbTip)))bfbTip=null;
+  if(key===bfbKey)return;bfbKey=key;
+  let h=L.map(o=>'<div class="bf'+(o.t>0&&o.t<2?' lo':'')+'" data-bf="'+o.k+'" style="--c:'+o.col+'">'+o.ic+(o.t>0?'<i style="width:'+Math.max(0,Math.min(100,o.t/(o.mx||o.t)*100)).toFixed(0)+'%"></i><b>'+Math.ceil(o.t)+'</b>':'')+'</div>').join('');
+  const T=bfbTip&&L.find(o=>o.k===bfbTip);if(T)h+='<div class="bft"><b>'+T.ic+' '+T.n+'</b>'+T.d+(T.t>0?'<br><span style="opacity:.7">เหลือ '+T.t.toFixed(1)+' วิ</span>':'')+'</div>';
+  el.innerHTML=h}
+setInterval(()=>{try{bfbRender()}catch(e){}},200);
+document.addEventListener('pointerdown',e=>{const b=e.target.closest&&e.target.closest('#bfb .bf');if(b){e.stopPropagation();const k=b.dataset.bf;bfbTip=bfbTip===k?null:k;bfbTipT=performance.now()+3500;bfbKey='';bfbRender()}},true);
 function updateMe(dt){
   try{pvTick(dt)}catch(e){}
   me.cd-=dt;me.sk[0]-=dt;me.sk[1]-=dt;me.sk[2]=(me.sk[2]||0)-dt;me.sk[3]=(me.sk[3]||0)-dt;me.sk[4]=(me.sk[4]||0)-dt;fieldTick(dt);if(me.pull){me.pull.t-=dt;const pd2=Math.hypot(me.pull.x-me.x,me.pull.y-me.y);if(pd2>40&&me.down<=0){me.x+=(me.pull.x-me.x)/pd2*170*dt;me.y+=(me.pull.y-me.y)/pd2*170*dt}if(me.pull.t<=0)me.pull=null}me.rage=Math.max(0,(me.rage||0)-dt);setTick(dt);if(gmMp){me.mp=me.mm;me.sk=[0,0,0,0,0]}me.inv3=Math.max(0,(me.inv3||0)-dt);tickMark(dt);if(pend.length){pend.forEach(q=>q.t-=dt);const due=pend.filter(q=>q.t<=0);pend=pend.filter(q=>q.t>0);due.forEach(q=>{try{q.f()}catch(e){}})}me.stealth=Math.max(0,me.stealth-dt);me.pcd=Math.max(0,me.pcd-dt);me.atk=Math.max(0,me.atk-dt);me.taunt=Math.max(0,me.taunt-dt);me.shield=Math.max(0,me.shield-dt);if(me.shield<=0)me.shv=0;
@@ -7229,7 +7263,7 @@ function cleanItem(it,sl){
 const ASLN=['Basic','Refined','Elite','Mystic','Relic'];let ASS={n:0,g:0};
 function aslGet(){const a=me.asl;return a&&typeof a==='object'?a:(me.asl={on:0,k:2})}
 function aslWeak(it){const A=aslGet();if(!A.on||!it||it.ss||it.lk||it.r>Math.min(4,A.k))return false;const cur=me.eq[it.sl];if(!cur)return false;return gScore(it)<gScore(cur)-.004&&gScoreBase(it)<gScoreBase(cur)-.004}
-function aslSell(it){const p=sellPrice(it);me.gold=Math.min(GMAX,me.gold+p);ASS.n++;ASS.g+=p;sfx('coin');dn.push({x:me.x,y:me.y-40,v:'💰 ขายอัตโนมัติ +'+p.toLocaleString()+' ทอง',t:1.3,c:'#ffd84a'})}
+function aslSell(it){const p=sellPrice(it);me.gold=Math.min(GMAX,me.gold+p);ASS.n++;ASS.g+=p}
 function pickGear(d){
   const full=me.bag.length>=MAXBAG;if(full&&!aslGet().on){if(performance.now()-fullT>2000){fullT=performance.now();dn.push({x:me.x,y:me.y-40,v:'กระเป๋าอุปกรณ์เต็ม',t:.9})}return}
   if(!d.it)d.it=genItem(d.L,null,undefined,d.rm);let it=d.it;
