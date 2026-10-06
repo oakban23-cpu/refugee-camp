@@ -814,8 +814,8 @@ function drawHuntMark(g){if(!HB.on||HB.map!==curMap||!me.cls)return;const t=perf
 const SPK={hnt:['ไคล์ นักล่าดาวตก','🏹','#9ad8ff'],aze:['อาซาเอล','🪽','#d8c8ff'],cmd:['ผู้บัญชาการเรนน์','🛡️','#e0b870'],me:['','✋','#8ad0ff'],nar:['บันทึก','📜','#c8b890'],
  b1:['ราชาหมอกพิษ','☠️','#b98af0'],b2:['ราชากระดูกโบราณ','💀','#e0d2a0'],b3:['จอมมารเพลิงนรก','🔥','#ffb070'],b4:['จักรพรรดิน้ำแข็งนิรันดร์','❄️','#cfeaff'],
  b6:['ราชันย์ห้วงลึก','🔱','#8ff0e8'],b7:['ราชาก็อบลินถุงทอง','💰','#ffe9a0'],tw:['ผู้เฝ้าหอคอย','🕯️','#c8a8ff'],hd:['ทูตปีกทมิฬ','🪶','#c090ff'],
- ice:['นักบวชน้ำแข็ง','🧊','#9ad8ff'],stl:['ผู้พิทักษ์ศิลาจารึก','🗿','#5ae0d0'],god:['เสียงใต้ผนึก','👁️','#ffd84a'],qn:['ราชินีเอลิรา','👸','#f0c8ff'],pvp:['ลานประลอง','⚔️','#ff9a6a'],ast:['โหรหลวงไซลัส','🔭','#8ad0ff'],leo:['ลีออน โหรฝึกหัด','📘','#b8c8ff'],gem:['เมรา ช่างเจียระไนผลึก','💎','#9af0ff'],eye:['เนรา · ดวงตาแห่งราชินี','👁️','#ff9ae0']};
-const STCH=['บทที่ 1 · หมอกแรก','บทที่ 2 · สนามรบที่ไม่ยอมหลับ','บทที่ 3 · หอคอยร้อยชั้น','บทที่ 4 · กุญแจในกองเพลิง','บทที่ 5 · นักบวชผู้แช่แข็งตนเอง','บทที่ 6 · ความจริงใต้ทะเล','บทสุดท้าย · ยอดหอคอย','ภาค 2 · บทที่ 1 · ฟ้าแตก','ภาค 2 · บทที่ 2 · ทุ่งรอยแยก','ภาค 2 · บทที่ 3 · เศษรัศมี','ภาค 2 · บทที่ 4 · ราตรีแห่งความหิว','ภาค 2 · บทที่ 5 · ข้ามรอยแยก','ภาค 2 · บทที่ 6 · ดวงตาแห่งราชินี'];
+ ice:['นักบวชน้ำแข็ง','🧊','#9ad8ff'],stl:['ผู้พิทักษ์ศิลาจารึก','🗿','#5ae0d0'],god:['เสียงใต้ผนึก','👁️','#ffd84a'],qn:['ราชินีเอลิรา','👸','#f0c8ff'],pvp:['ลานประลอง','⚔️','#ff9a6a'],ast:['โหรหลวงไซลัส','🔭','#8ad0ff'],leo:['ลีออน โหรฝึกหัด','📘','#b8c8ff'],gem:['เมรา ช่างเจียระไนผลึก','💎','#9af0ff'],eye:['เนรา · ดวงตาแห่งราชินี','👁️','#ff9ae0'],qnx:['ราชินีผู้กลืนดาว','🌑','#ff7ad9']};
+const STCH=['บทที่ 1 · หมอกแรก','บทที่ 2 · สนามรบที่ไม่ยอมหลับ','บทที่ 3 · หอคอยร้อยชั้น','บทที่ 4 · กุญแจในกองเพลิง','บทที่ 5 · นักบวชผู้แช่แข็งตนเอง','บทที่ 6 · ความจริงใต้ทะเล','บทสุดท้าย · ยอดหอคอย','ภาค 2 · บทที่ 1 · ฟ้าแตก','ภาค 2 · บทที่ 2 · ทุ่งรอยแยก','ภาค 2 · บทที่ 3 · เศษรัศมี','ภาค 2 · บทที่ 4 · ราตรีแห่งความหิว','ภาค 2 · บทที่ 5 · ข้ามรอยแยก','ภาค 2 · บทที่ 6 · ดวงตาแห่งราชินี','ภาค 2 · บทที่ 7 · ราชินีผู้กลืนดาว'];
 const STNPC={hnt:[10,'npc'],qn:[9,'qn'],ast:[9,'ast'],cmd:[1,'npc4'],tw:[5,'npc'],hd:[5,'npc2'],ice:[4,'npc'],stl:[6,'npc'],leo:[11,'npc'],gem:[9,'gem']};
 const STY=[
  {c:0,g:'kill',m:1,n:12,tx:'กำจัดมอนสเตอร์รอบค่าย',
@@ -989,7 +989,34 @@ const STY=[
  {c:12,g:'talk',k:'qn',zEnd4:1,tx:'กลับไปทูลรายงานราชินีเอลิรา',
   pre:[['qn','ดาวเจ็ดดวงกลับมาสว่างแล้ว และหัวใจดาวเต้นแรงขึ้นทันทีที่ดวงตานั้นดับ ทั้งนครเป็นหนี้เจ้าอีกครั้ง ผู้ถือตรา'],['qn','ถ้าราชินีผู้กลืนดาวกำลังมาด้วยตัวเอง... อัสตราจะไม่รอให้มันมาเคาะประตู'],
    ['qn','ข้าจะเรียกประชุมทุกเผ่า ทุกค่าย ทุกนคร ศึกครั้งสุดท้ายของฟ้ากำลังจะเริ่ม และข้าอยากให้เจ้ายืนอยู่แถวหน้า'],
-   ['nar','🏅 ปลดล็อกฉายาชมพู «ผู้ปิดดวงตาราชินี» · ดาเมจ +2% · โอกาสคริ +2% · เลือดสูงสุด +3%'],['nar','— จบภาค 2 บทที่ 6 · ดวงตาแห่งราชินี — บทต่อไปเร็ว ๆ นี้']],rw:{g:30000,s3:5}}];
+   ['nar','🏅 ปลดล็อกฉายาชมพู «ผู้ปิดดวงตาราชินี» · ดาเมจ +2% · โอกาสคริ +2% · เลือดสูงสุด +3%'],['nar','— จบภาค 2 บทที่ 6 · ดวงตาแห่งราชินี —']],rw:{g:30000,s3:5}},
+ {c:13,g:'talk',k:'qn',lv:68,tx:'เข้าเฝ้าราชินีเอลิรา · สภาแห่งฟ้า',
+  pre:[['qn','ผู้ถือตรา ทุกเผ่า ทุกค่าย ตอบรับคำเรียกของอัสตราแล้ว แม้แต่ผู้บัญชาการเรนน์ก็ส่งทหารจากค่ายผู้อพยพขึ้นมา'],['qn','เมราส่งข่าวมาเมื่อเช้า เลนส์ใหม่ของนางเห็นราชินีผู้กลืนดาวชัดแล้ว อีกสามคืนมันจะถึงรอยแยก'],
+   ['ast','ถ้ามันข้ามรอยแยกมาได้ ดาวทุกดวงบนฟ้าของเราจะถูกกลืนภายในฤดูเดียว... เราต้องยันมันไว้ที่ปากรอยแยก'],['qn','ไปหาเมราก่อน นางบอกว่าค้นพบอะไรบางอย่างที่อาจพลิกศึกนี้ได้']],rw:{g:5000}},
+ {c:13,g:'talk',k:'gem',tx:'พบเมรา · จุดอ่อนของราชินี',
+  pre:[['gem','ดูนี่ "เลนส์ดาวคู่" ข้าเจียระไนจากเศษเลนส์เก่ากับเศษคราสที่เจ้าหามา'],['gem','ราชินีตาบอดทั้งสองข้างแล้ว ข้างหนึ่งเสียให้เจ้าในห้วงตา อีกข้างนางควักออกมาเป็นเนราเอง'],
+   ['gem','ตอนนี้นางล่าด้วย "เสียง" เมื่อนางเงียบและเอียงหัวฟัง... ใครขยับแม้แต่ก้าวเดียว จะถูกกลืนทั้งตัว'],['me','(ถ้าอย่างนั้น... เมื่อนางฟัง เราต้องหยุดนิ่ง)'],
+   ['gem','ถูกต้อง และเมื่อนางอ่อนแรงลง นางจะลืมตาที่ไม่มีอยู่จริงอีกครั้ง แสงจะสาดไปทั่ว จำวิธีหลบในเงาจากห้วงตาไว้ให้ดี']],rw:{g:5000}},
+ {c:13,g:'talk',k:'hnt',tx:'ไปหาไคล์ที่ทุ่งรอยแยก · แนวหน้า',
+  pre:[['hnt','ผู้ถือตรา! ฝูงลูกกลืนดาวทะลักออกมาจากรอยแยกตั้งแต่เมื่อคืน เหมือนรู้ว่าแม่ของมันกำลังมา'],['hnt','ทหารของเรนน์ตั้งแนวอยู่ฝั่งตะวันตก แต่ถ้าไม่กวาดฝูงพวกนี้ก่อน เราจะเข้าไม่ถึงปากรอยแยก']],rw:{g:3000}},
+ {c:13,g:'kill',m:10,n:50,lv:68,tx:'เปิดทางสู่ปากรอยแยก · กวาดล้างฝูงมอนในทุ่งรอยแยก',post:[['hnt','ทางเปิดแล้ว! ...ได้ยินไหม เสียงเหมือนดาวทั้งฟ้ากำลังหายใจเข้า']],rw:{g:10000,s3:2}},
+ {c:13,g:'talk',k:'hnt',tx:'กลับไปหาไคล์ · คืนสุดท้ายก่อนศึก',
+  pre:[['nar','ฟ้าเหนือรอยแยกมืดสนิท ไม่มีดาวเหลือแม้แต่ดวงเดียว... แล้วความมืดนั้นก็ "ขยับ"'],['aze','(อาซาเอลปรากฏกลางแสงทอง ปีกทั้งหกกางเต็มที่) ข้ารั้งรอยแยกไว้ได้ไม่นาน ผู้ถือตรา นี่คือศึกที่ข้ารอมาสามร้อยปี'],
+   ['god','ผู้ถือตรา... ข้าจะส่งแสงทั้งหมดที่เหลือให้เจ้า ไปจบมันเสีย',2],['hd','(ทูตปีกทมิฬลงมาเกาะข้างอาซาเอล) ...ครั้งนี้ข้าจะสู้ด้วย อย่าเข้าใจผิด ข้าแค่ไม่อยากให้ฟ้ามืดไปตลอดกาล',1],
+   ['hnt','รวมทีมให้พร้อมแล้วกลับมาบอกข้า เราจะบุกเข้าปากรอยแยกพร้อมกัน']],rw:{g:3000}},
+ {c:13,g:'queen',k:'hnt',lv:68,tx:'คุยกับไคล์ เข้าศึกปิดรอยแยก ล้มราชินีผู้กลืนดาว (แนะนำปาร์ตี้ · เล่นเดี่ยวได้)',
+  pre:[['hnt','ทีมพร้อมแล้วใช่ไหม? เมื่อข้าเป่าแตร ทุกคนบุกเข้าปากรอยแยกพร้อมกัน!'],['hnt','จำคำเมราไว้ — เมื่อนางฟัง จงหยุดนิ่ง เมื่อนางลืมตา จงหลบในเงา']],
+  post:[['nar','ราชินีผู้กลืนดาวกรีดร้องครั้งสุดท้าย ปากที่อกของนางแตกออก ดวงดาวนับพันพรั่งพรูออกมาเหมือนน้ำพุแสง'],['nar','ดาวลอยขึ้นสู่ฟ้าทีละดวง... จนฟ้าเหนือรอยแยกสว่างกว่าที่ใครเคยเห็นมา'],
+   ['aze','(อาซาเอลกางปีกทั้งหกขวางรอยแยก) ถึงเวลาปิดประตูนี้แล้ว... คราวนี้ไม่ใช่ด้วยโซ่ แต่ด้วยแสงของข้าเอง'],['me','(อาซาเอล... เดี๋ยวก่อน!)'],
+   ['aze','อย่าเศร้าไปเลย ผู้ถือตรา ข้าเฝ้าประตูมาสามร้อยปีโดยไม่รู้ว่าเพื่ออะไร วันนี้ข้ารู้แล้ว'],['nar','แสงทองหลอมรวมกับรอยแยก แล้วรอยแยกก็ค่อย ๆ ปิดลง เหลือเพียงขนนกสีทองเส้นเดียวลอยลงมาในมือเจ้า'],
+   ['god','...ทหารผู้ซื่อสัตย์ของข้า เจ้าเป็นอิสระแล้ว',2],['hd','(ทูตปีกทมิฬมองขนนกนั้นนาน) ...ลาก่อน พี่ชาย',1]],cine:1,rw:{g:40000,s3:6}},
+ {c:13,g:'talk',k:'ast',tx:'กลับไปพบโหรหลวงไซลัสที่หอดูดาว',
+  pre:[['ast','ผู้ถือตรา... ข้านับดาวทั้งคืนจนนับไม่ไหว ดาวที่หายไปตลอดสามร้อยปีกลับมาครบทุกดวง'],['ast','ลีออนวิ่งมาที่นี่ทั้งน้ำตา เขาจดชื่อดาวดวงใหม่ไว้ดวงหนึ่ง ดวงที่สว่างที่สุดเหนือรอยแยกเดิม'],
+   ['ast','เขาตั้งชื่อมันว่า "อาซาเอล"... ข้าว่าเหมาะดีนะ'],['gem','(เมราเดินเข้ามา ถือเลนส์ใหม่) ข้าเจียระไนเลนส์นี้ไว้ส่องดาวดวงนั้นโดยเฉพาะ เก็บไว้เถอะ ผู้ถือตรา']],rw:{g:8000}},
+ {c:13,g:'talk',k:'qn',zEnd5:1,tx:'เข้าเฝ้าราชินีเอลิรา · รุ่งอรุณแห่งดวงดาว',
+  pre:[['qn','ทั้งนครกำลังฉลองอยู่ข้างล่าง แต่ข้าอยากขอบใจเจ้าตรงนี้ก่อน ผู้ถือตรา'],['qn','เจ้ามาจากค่ายผู้อพยพที่ไม่มีอะไรเลย แล้วกลายเป็นคนที่คืนดวงดาวให้ทั้งฟ้า'],
+   ['qn','อัสตราจะจารึกชื่อเจ้าไว้ใต้ดาวอาซาเอล ตราบที่นครนี้ยังลอยอยู่'],['qn','...แต่ข้ารู้ว่าเจ้าคงไม่หยุดเดินทางแค่นี้ เมื่อไหร่ที่ฟ้ามีเรื่องผิดปกติอีก อัสตราจะส่งข่าวไปหาเจ้าเป็นคนแรก'],
+   ['nar','🏅 ปลดล็อกฉายาชมพู «ผู้คืนดวงดาว» · ดาเมจ +3% · เลือดสูงสุด +4% · โอกาสคริ +2%'],['nar','— จบภาค 2 · ฟ้าแตก — ขอบคุณที่ร่วมเดินทาง · ภาค 3 เร็ว ๆ นี้']],rw:{g:60000,s3:8}}];
 const STEND={1:[['god','...เข้าใจแล้ว ข้าจะหลับต่อไป'],['nar','แสงจากตราไหลเข้าสู่หอคอย ผนึกกลับมาสมบูรณ์ หมอกทั่วแผ่นดินค่อย ๆ จางหาย'],['cmd','เจ้าทำได้! ค่ายผู้อพยพไม่ต้องหนีอีกต่อไปแล้ว'],['hd','...อีกสามร้อยปี ข้าจะรอ'],['nar','— จบภาค 1 · รอยผนึกแตก — ได้รับฉายา «ผู้ผนึกนิรันดร์»']],
  2:[['god','ขอบใจ... ผู้ถือตรา'],['nar','โซ่ทั้งร้อยแตกสลาย แสงสีทองพุ่งจากยอดหอคอยสู่ท้องฟ้า'],['hd','นายท่าน... ท่านกลับมาแล้ว...'],['god','อย่ากลัวไปเลย จากนี้ข้าจะปกป้องแผ่นดินนี้อีกครั้ง... แต่ศัตรูที่แท้จริงกำลังมา'],['nar','— จบภาค 1 · รอยผนึกแตก — ได้รับฉายา «ผู้ปลดโซ่เทพ»']]};
 const STRW={g:'ทอง',hp:'ยา HP',mp:'ยา MP',s1:'หินตีบวกขั้นแรก',s2:'หินตีบวกขั้นสอง',s3:'หินตีบวกขั้นสูง',twc:'เหรียญหอคอย'};
@@ -1021,14 +1048,14 @@ function stTick(){if(!me.cls||!run)return;stInit();const q=me.sty,st=STY[q.s];st
   if(q.a===0){if(st.k)return;if(st.lv&&me.lv<st.lv)return;if(!st.pre||!st.pre.length){q.a=1;return}if(!stCalm())return;q.a=1;stSay(st.pre,()=>{stHud()});return}
   if(q.a===1&&st.g==='talk'&&!SD.on){q.a=0;stHud();return}
   if(q.a!==1)return;let ok=false;
-  if(st.g==='kill'||st.g==='boss')ok=q.n>=(st.n||1);else if(st.g==='map')ok=curMap===st.m&&(!st.lv||me.lv>=st.lv);else if(st.g==='tw')ok=(me.twBest|0)>=st.n;else if(st.g==='wb')ok=q.n>=1;else if(st.g==='echo'||st.g==='siege'||st.g==='eye')ok=q.n>=1;
-  if(!ok)return;if(st.g==='eye'&&EYE())return;if(st.g==='boss'?(me.down>0||SD.on||!ov.hidden):!stCalm())return;stDone()}
+  if(st.g==='kill'||st.g==='boss')ok=q.n>=(st.n||1);else if(st.g==='map')ok=curMap===st.m&&(!st.lv||me.lv>=st.lv);else if(st.g==='tw')ok=(me.twBest|0)>=st.n;else if(st.g==='wb')ok=q.n>=1;else if(st.g==='echo'||st.g==='siege'||st.g==='eye'||st.g==='queen')ok=q.n>=1;
+  if(!ok)return;if(st.g==='eye'&&EYE())return;if(st.g==='queen'&&QUEEN())return;if(st.g==='boss'?(me.down>0||SD.on||!ov.hidden):!stCalm())return;stDone()}
 function stKill(t,bs){const q=me.sty,st=stCur();if(!st||q.a!==1||isDg())return;if(st.g==='kill'&&!bs&&t!==3&&curMap===st.m){q.n=Math.min(st.n,q.n+1);stHud()}else if(st.g==='boss'&&bs&&curMap===st.m){q.n=1;stFlash();setTimeout(stTick,900)}}
 function stEvt(k){const q=me.sty,st=stCur();if(st&&q.a===1&&st.g===k){q.n=1;stHud()}}
 function stTalkKey(){const sel=npcSel;if(curMap===9&&typeof sel==='string'){const N=CITY.npcs[+sel.slice(1)];return N?N.k:''}if(curMap===1&&sel===4)return'cmd';if(curMap===10&&sel===1)return'hnt';if(curMap===11&&sel===1)return'leo';if(curMap===5)return sel===1?'tw':sel===2?'hd':'';if((curMap===4||curMap===6)&&sel===1)return curMap===4?'ice':'stl';return''}
-function stWants(k){const st=stCur();return!!(st&&st.k===k&&(me.sty.a===0||((st.g==='echo'||st.g==='siege'||st.g==='eye')&&me.sty.n<1&&!ECHO()&&!SIEGE()&&!EYE()))&&(!st.lv||me.lv>=st.lv))}
-function stNpcClick(){const k=stTalkKey();if(k&&!stWants(k)&&me.ach){if(k==='hnt'&&curMap===10&&me.ach.stA)return instRepeat('echo');if(k==='qn'&&curMap===9&&me.ach.stB)return instRepeat('siege');if(k==='leo'&&curMap===11&&me.ach.stE)return instRepeat('eye')}if(!k||!stWants(k))return false;const st=stCur();if(st.g==='echo'||st.g==='siege'||st.g==='eye'){const again=me.sty.a===1,go=st.g==='echo'?echoEnter:st.g==='eye'?eyeEnter:siegeEnter;me.sty.a=1;stSay(again?[[st.k,st.g==='echo'?'รอยแยกยังเปิดอยู่ เศษรัศมียังส่องแสง... พร้อมเมื่อไหร่ก็ก้าวเข้าไป!':st.g==='eye'?'เลนส์ยังส่องทางเข้าห้วงตาได้อยู่... พร้อมเมื่อไหร่ก็มองผ่านมันเลย!':'ทหารพร้อมแล้ว พร้อมเมื่อไหร่เราจะตั้งรับกันอีกครั้ง!']]:st.pre,()=>{stHud();setTimeout(go,250)});return true}me.sty.a=1;stSay(st.pre,()=>{if(st.g==='talk')stDone();else stHud()});return true}
-function stTxt(){stInit();const q=me.sty,st=STY[q.s];if(!st)return'✅ จบภาค 2 บทที่ 6 แล้ว · บทต่อไปเร็ว ๆ นี้';
+function stWants(k){const st=stCur();return!!(st&&st.k===k&&(me.sty.a===0||((st.g==='echo'||st.g==='siege'||st.g==='eye'||st.g==='queen')&&me.sty.n<1&&!ECHO()&&!SIEGE()&&!EYE()&&!QUEEN()))&&(!st.lv||me.lv>=st.lv))}
+function stNpcClick(){const k=stTalkKey();if(k&&!stWants(k)&&me.ach){if(k==='hnt'&&curMap===10&&me.ach.stA&&!me.ach.stF)return instRepeat('echo');if(k==='qn'&&curMap===9&&me.ach.stB)return instRepeat('siege');if(k==='leo'&&curMap===11&&me.ach.stE)return instRepeat('eye');if(k==='hnt'&&curMap===10&&me.ach.stF)return instRepeat('queen')}if(!k||!stWants(k))return false;const st=stCur();if(st.g==='echo'||st.g==='siege'||st.g==='eye'||st.g==='queen'){const again=me.sty.a===1,go=st.g==='echo'?echoEnter:st.g==='eye'?eyeEnter:st.g==='queen'?queenEnter:siegeEnter;me.sty.a=1;stSay(again?[[st.k,st.g==='queen'?'ทีมพร้อมเมื่อไหร่ ข้าจะเป่าแตรอีกครั้ง!':st.g==='echo'?'รอยแยกยังเปิดอยู่ เศษรัศมียังส่องแสง... พร้อมเมื่อไหร่ก็ก้าวเข้าไป!':st.g==='eye'?'เลนส์ยังส่องทางเข้าห้วงตาได้อยู่... พร้อมเมื่อไหร่ก็มองผ่านมันเลย!':'ทหารพร้อมแล้ว พร้อมเมื่อไหร่เราจะตั้งรับกันอีกครั้ง!']]:st.pre,()=>{stHud();setTimeout(go,250)});return true}me.sty.a=1;stSay(st.pre,()=>{if(st.g==='talk')stDone();else stHud()});return true}
+function stTxt(){stInit();const q=me.sty,st=STY[q.s];if(!st)return'✅ จบภาค 2 · ฟ้าแตก แล้ว · ภาค 3 เร็ว ๆ นี้';
   let t=st.tx;if(st.lv&&me.lv<st.lv)t+=' <em>(ต้อง Lv '+st.lv+')</em>';else if((st.g==='kill')&&q.a===1)t+=' <b>'+q.n+'/'+st.n+'</b>';else if(st.g==='tw')t+=' <b>'+Math.min(st.n,me.twBest|0)+'/'+st.n+'</b>';
   if(st.k&&q.a===0&&STNPC[st.k]&&STNPC[st.k][0]===curMap&&(!st.lv||me.lv>=st.lv))t='❗ '+t;return t}
 function stHud(){const e=$('stq');if(!e)return;const sh=!!(me.cls&&run);if(!sh){if(!e.hidden)e.hidden=true;return}stInit();const q=me.sty,st=STY[q.s];
@@ -2280,7 +2307,7 @@ async function chSwGo(){if(chSwBusy||!me.cls)return;const bad=chSwBad();if(bad)r
 const TTB={k100:{gr:'w',b:{str:3}},b1:{gr:'w',b:{vit:3}},dg1:{gr:'w',b:{int:3}},tw10:{gr:'w',b:{agi:3}},st7:{gr:'w',b:{luk:4}},
   dq30:{gr:'w',b:{vit:5}},el100:{gr:'w',b:{str:5}},ult100:{gr:'w',b:{int:5}},b2:{gr:'w',b:{agi:5}},b3:{gr:'w',b:{luk:5}},lv30:{gr:'w',b:{all:2}},
   k1000:{gr:'g',b:{str:.05}},tw50:{gr:'g',b:{agi:.06}},b4:{gr:'g',b:{vit:.06}},rich:{gr:'g',b:{luk:.06}},bx50:{gr:'g',b:{vit:.08}},up10:{gr:'g',b:{str:.08}},
-  leg:{gr:'g',b:{luk:.08}},stL:{gr:'g',b:{int:.08}},stD:{gr:'g',b:{str:.08}},awk:{gr:'g',b:{all:.04}},set5:{gr:'g',b:{all:.05}},lv60:{gr:'g',b:{all:.06}},lv70:{gr:'p',b:{hp:.04,cr:.02}},stA:{gr:'p',b:{cr:.02,as:.03,ls:.01}},stB:{gr:'p',b:{hp:.05,red:.03}},stC:{gr:'p',b:{dm:.03,red:.02}},stE:{gr:'p',b:{dm:.02,cr:.02,hp:.03}},rxAll:{gr:'p',b:{dm:.03,cr:.02}},rxT:{gr:'p',b:{as:.03,hp:.03}},
+  leg:{gr:'g',b:{luk:.08}},stL:{gr:'g',b:{int:.08}},stD:{gr:'g',b:{str:.08}},awk:{gr:'g',b:{all:.04}},set5:{gr:'g',b:{all:.05}},lv60:{gr:'g',b:{all:.06}},lv70:{gr:'p',b:{hp:.04,cr:.02}},stA:{gr:'p',b:{cr:.02,as:.03,ls:.01}},stB:{gr:'p',b:{hp:.05,red:.03}},stC:{gr:'p',b:{dm:.03,red:.02}},stE:{gr:'p',b:{dm:.02,cr:.02,hp:.03}},stF:{gr:'p',b:{dm:.03,hp:.04,cr:.02}},rxAll:{gr:'p',b:{dm:.03,cr:.02}},rxT:{gr:'p',b:{as:.03,hp:.03}},
   k5000:{gr:'p',b:{cr:.02}},dg3:{gr:'p',b:{as:.04}},raid1:{gr:'p',b:{red:.03}},raid10:{gr:'p',b:{ls:.02}},b6:{gr:'p',b:{hp:.05}},tw100:{gr:'p',b:{mp:.08}},
   mvp1:{gr:'p',b:{hp:.04}},tw150:{gr:'p',b:{as:.05,cr:.02}},mvp10:{gr:'p',b:{cr:.03,ls:.01}},wb1:{gr:'p',b:{hp:.06,red:.03}},wb2:{gr:'p',b:{as:.05}},wb3:{gr:'p',b:{cr:.03}}};
 const TGC={w:['ขาว','#f4f4f4','#7a7a80','#ececf0'],g:['ทอง','#ffd84a','#a87208','#fff3c4'],p:['ชมพู','#ff8ad8','#c0398a','#ffe0f4']},TSN={str:'STR',vit:'VIT',int:'INT',agi:'AGI',luk:'LUK',all:'ทุกสเตตัส',cr:'โอกาสคริ',as:'ความเร็วโจมตี',ls:'ดูดเลือด',red:'ลดดาเมจที่ได้รับ',hp:'เลือดสูงสุด',mp:'มานาสูงสุด'};
@@ -2393,7 +2420,7 @@ const ZC={
    p:['🗡️','มีดเงาพิฆาต','ทุก ~6 วิ มีดเงาพุ่งใส่ศัตรูที่ใกล้ที่สุด 3 ตัว ตัวละ 18%',6,1.8,'dag'],
    a:['🌑','ร่างเงามรณะ',{dm:.3,cr:.25,red:.25},'190,110,255','ดาเมจ +30% · คริ +25% · ลดดาเมจ 25%',.15]}};
 const zcOf=()=>ZC[me.cls]||ZC.mage;
-setTimeout(()=>{for(const c in BR)if(ZC[c])BR[c].push([ZC[c].br[0],ZC[c].br[1],61]);DT[9]={n:'ห้วงความทรงจำอาซาเอล',lv:63,L:46,bL:12,hp:260000,xp:15000,g:5000,dm:8,tn:6,sm:2,rm:4,lg:.5,tm:300,gold:15000,exp:40000}},0);
+setTimeout(()=>{for(const c in BR)if(ZC[c])BR[c].push([ZC[c].br[0],ZC[c].br[1],61]);DT[9]={n:'ห้วงความทรงจำอาซาเอล',lv:63,L:46,bL:12,hp:650000,xp:15000,g:5000,dm:8,tn:6,sm:2,rm:4,lg:.5,tm:300,gold:15000,exp:40000}},0);
 function zcBanner(lv){const Z=zcOf();if(lv===61)return{s:'⭐ ปลดสายสกิล "'+Z.br[0]+'" แล้ว! (เมนู → สกิล)',t:5};if(lv===65)return{s:Z.p[0]+' ปลดพลัง "'+Z.p[1]+'" — ทำงานอัตโนมัติ',t:5};if(lv===70)return{s:Z.a[0]+' Lv 70! ปลดพลัง "'+Z.a[1]+'" — เลือดต่ำจะแปลงร่างอัตโนมัติ',t:6};return null}
 let ZST=[];
 const zHit=(x,y,r,d)=>{let n=0;mons.forEach(m=>{if(!m.wb&&Math.hypot(m.x-x,m.y-y)<r+bigR(m)){const cr=Math.random()<crC();addHit(m,d*(cr?crD():1),cr);n++}});return n};
@@ -2474,7 +2501,8 @@ function eyeGaze(m,dt,pl,enr,dm){m.a8=(m.a8===undefined?7:m.a8)-dt;
     EYEG={t:2.8,d:2.8,pts,bx:m.x,by:m.y};fx({k:'msg',s:'👁️ เนรากำลังจ้องมอง! วิ่งเข้าไปหลบในวงเงา'});try{sfx('boss')}catch(e){}}
   if(EYEG&&!EYEG.flash){EYEG.t-=dt;EYEG.bx=m.x;EYEG.by=m.y;if(EYEG.t<=0){pl.forEach(p=>{if(!EYEG.pts.some(q=>Math.hypot(p.x-q[0],p.y-q[1])<62)){dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(62*dm);fx({k:'bslam',x:Math.round(p.x),y:Math.round(p.y),r:50})}});EYEG={t:-.5,d:.5,pts:EYEG.pts,flash:1,bx:m.x,by:m.y}}}
   else if(EYEG&&EYEG.flash){EYEG.t+=dt;if(EYEG.t>=0)EYEG=null}}
-function drawEyeGaze(){if(!EYEG||!EYE())return;const t=performance.now()/1000;g.save();
+function qVisTick(dt){if(QSIL){QSIL.t-=dt;if(!QSIL.p&&QSIL.t<=QSIL.d-.8&&me.cls)QSIL.p=[me.x,me.y];if(QSIL.t<=0)QSIL=null}if(QUEEN()&&EYEG&&EYEG.vis&&!EYEG.flash){EYEG.t-=dt;if(EYEG.t<=0)EYEG={t:-.5,d:.5,pts:EYEG.pts,flash:1,bx:EYEG.bx,by:EYEG.by,vis:1};}else if(QUEEN()&&EYEG&&EYEG.vis&&EYEG.flash){EYEG.t+=dt*.5;if(EYEG.t>=0)EYEG=null}}
+function drawEyeGaze(){if(!EYEG||!(EYE()||QUEEN()))return;const t=performance.now()/1000;g.save();
   if(EYEG.flash){const a=Math.max(0,-EYEG.t/.5);g.globalCompositeOperation='lighter';g.fillStyle='rgba(255,210,240,'+(.55*a)+')';g.beginPath();g.arc(CX,CY,DR,0,7);EYEG.pts.forEach(q=>{g.moveTo(q[0]+62,q[1]);g.arc(q[0],q[1],62,0,7,true)});g.fill('evenodd');g.restore();return}
   const k=1-EYEG.t/EYEG.d,pu=.5+.5*Math.sin(t*14);g.fillStyle='rgba(255,150,220,'+(.08+.2*k*(.7+.3*pu))+')';g.beginPath();g.arc(CX,CY,DR,0,7);EYEG.pts.forEach(q=>{g.moveTo(q[0]+62,q[1]);g.arc(q[0],q[1],62,0,7,true)});g.fill('evenodd');
   EYEG.pts.forEach((q,i)=>{const gr=g.createRadialGradient(q[0],q[1],8,q[0],q[1],62);gr.addColorStop(0,'rgba(6,2,16,.75)');gr.addColorStop(1,'rgba(20,8,40,.35)');g.fillStyle=gr;g.beginPath();g.arc(q[0],q[1],62,0,7);g.fill();
@@ -2482,8 +2510,42 @@ function drawEyeGaze(){if(!EYEG||!EYE())return;const t=performance.now()/1000;g.
     g.fillStyle='rgba(220,200,255,.85)';g.font='bold 11px system-ui';g.textAlign='center';g.fillText('🌑 เงา',q[0],q[1]+4)});
   g.globalCompositeOperation='lighter';if(!LOWQ)for(let i=0;i<10;i++){const a=i*.628+t*.4,l=DR*1.1;g.strokeStyle='rgba(255,190,240,'+(.05+.1*k)+')';g.lineWidth=6+10*k;g.beginPath();g.moveTo(EYEG.bx,EYEG.by-40);g.lineTo(EYEG.bx+Math.cos(a)*l,EYEG.by-40+Math.sin(a)*l);g.stroke()}
   g.restore()}
+/* ===== ภาค 2 บทที่ 7: ศึกปิดรอยแยก (เรดปาร์ตี้ · บอส ราชินีผู้กลืนดาว) ===== */
+setTimeout(()=>{DT[13]={n:'ศึกปิดรอยแยก',lv:68,L:50,bL:14,hp:3500000,xp:60000,g:12000,dm:15,tn:7,sm:3,rm:4,lg:.6,tm:600,gold:40000,exp:120000}},0);
+const QUEEN=()=>!!(MAPS[curMap]&&MAPS[curMap].queen);let QSIL=null;
+function queenMap(id){if(MAPS[id])return MAPS[id];const D=DT[13];
+  return MAPS[id]={n:'ปากรอยแยก · ศึกปิดรอยแยก',dg:13,queen:1,th:11,bth:14,sx:CX,sy:CY+440,sr:80,seed:131,bg:'#100a1e',tile:'#1a1232',safe:'#26193e',ring:'#ff7ad9',t1:'#08051a',t2:'#140c28',d1:'#2a1c4a',d2:'#ffb0f0',nests:[],
+    gates:[{x:CX-140,y:CY+420,to:10,req:1,arr:{x:420,y:1560}}],qk:1,ql:14,npc:{x:-9999,y:-9999,n:'',L:1},
+    boss:{x:CX,y:CY-140,n:'ราชินีผู้กลืนดาว',hp:D.hp,xp:D.xp,L:D.bL,rm:D.rm,lg:D.lg,g:D.g,dm:D.dm,tn:D.tn,sm:D.sm,sL:50,col:'#ff7ad9',bar:'#8a1a6a',ln:'#ffd0f0',rec:'ปาร์ตี้ (เล่นเดี่ยวได้)',pos:'กลางปากรอยแยก',dg:1}}}
+const QUEEN_IN=[['nar','ปากรอยแยกเปิดกว้างเหมือนบาดแผลบนฟ้า ลมหายใจเย็นเฉียบพัดออกมาจากข้างใน'],['qnx','...ข้าได้กลิ่นแสง... กลิ่นของคนที่ขโมยดวงตาข้าไป'],
+  ['qnx','มาเถิด ลูกน้อยแห่งแสง ข้าจะกลืนเจ้าเป็นดาวดวงสุดท้าย'],['nar','💡 เมื่อราชินี "ฟังเสียง" (วงคลื่นเสียงสีชมพู) ให้หยุดนิ่ง · เมื่อนาง "ลืมตา" ให้หลบในวงเงา']];
+function queenEnter(){if(!me.cls||me.down>0||isDg())return;const id=76000+(Math.random()*999|0);if(!dgMap(id))return;
+  if(typeof PTY!=='undefined'&&PTY){const t='👑 เปิดศึกปิดรอยแยก รหัส '+id+' มาบุกปากรอยแยกด้วยกัน!';emitM('dinv',{id,n:myName});addChat(myName,t,uid);if(room)room.emit('chat',{u:uid,n:myName,t})}
+  ov.hidden=true;EYEG=null;QSIL=null;try{sfx('gate')}catch(e){}enterMap(id,{x:CX,y:CY+300});setTimeout(()=>{if(QUEEN()&&dg.ph==='lobby')banner={s:'👑 ปากรอยแยก · รอเพื่อนให้ครบ แล้วกด "เริ่ม"',t:5}},700)}
+function queenStart(){if(!QUEEN()||dg.ph!=='lobby')return;const D=DT[13];stSay(QUEEN_IN,()=>{if(!QUEEN()||dg.ph!=='lobby')return;dg={ph:'boss',w:0,tl:D.tm,nx:0};SR=0;mons=[];teles=[];EYEG=null;QSIL=null;bossCd=1e9;spawnBoss();fx({k:'msg',s:'👑 ราชินีผู้กลืนดาวลงมาแล้ว! ล้มนางให้ได้ภายใน 10 นาที'});try{sfx('boss')}catch(e){}},{cine:1})}
+function queenReward(){if(dgRew)return;dgRew=1;const D=DT[13],st=stCur(),sto=st&&st.g==='queen';EYEG=null;QSIL=null;
+  me.gold=Math.min(GMAX,me.gold+(sto?D.gold:12000));me.inv.s3=Math.min(999,(me.inv.s3|0)+(sto?6:3));gainXP(me.x,me.y,D.exp);feGive(sto?8:4,'ศึกปิดรอยแยก');ecGive(sto?20:8+(Math.random()*5|0),'ศึกปิดรอยแยก');me.stt.dg++;
+  if(sto){me.sty.n=1;me.sty.a=1;setTimeout(()=>cosmicDrop('ราชินีผู้กลืนดาว (ล้มครั้งแรก)'),1500)}else{me.qnT=Date.now();if(Math.random()<.04)setTimeout(()=>cosmicDrop('ราชินีผู้กลืนดาว'),1500)}
+  banner={s:'👑 ราชินีผู้กลืนดาวล่มสลาย! +'+(sto?D.gold:12000).toLocaleString()+' ทอง · หินขั้นสูง ×'+(sto?6:3),t:7};sfx('lvl');burst(me.x,me.y-10,['#ff9ae0','#ffe08a','#ffffff','#9ad8ff'],90,240,1.4,{glow:1,g:-50});
+  setTimeout(()=>{if(QUEEN())enterMap(10,{x:420,y:1560})},9000)}
+/* กลไกราชินี: กลืนแสง (ดึง+วงดูด) · ฟังเสียง (หยุดนิ่ง) เมื่อ <66% · ลืมตา (หลบในเงา 2 วง) เมื่อ <33% */
+function queenAI(m,dt,pl,enr,dm){const f=m.hp/m.mh;
+  m.q1=(m.q1===undefined?9:m.q1)-dt;if(m.q1<=0&&!QSIL&&!EYEG){m.q1=enr?12:16;const x=Math.round(m.x),y=Math.round(m.y);fx({k:'pull',x,y,r:460,dur:1.8});m.tl.push({x,y,r:150,t:1.9,k:'vortex'});fx({k:'tele',x,y,r:150,dur:1.9});fx({k:'msg',s:'🌑 ราชินีอ้าปากกลืนแสง! วิ่งต้านแรงดูดออกจากวง'})}
+  if(f<.66){m.q2=(m.q2===undefined?4:m.q2)-dt;
+    if(m.q2<=0&&!m.qs&&!EYEG){m.q2=enr?11:14;m.qs={t:2.8,rec:null};fx({k:'qsil',x:Math.round(m.x),y:Math.round(m.y),dur:2.8});fx({k:'msg',s:'🤫 ราชินีเอียงหัวฟังเสียง... หยุดนิ่ง! ห้ามขยับ'})}
+    if(m.qs){m.qs.t-=dt;if(!m.qs.rec&&m.qs.t<=2.0){m.qs.rec={};pl.forEach(p=>m.qs.rec[p.u]=[p.x,p.y])}
+      if(m.qs.t<=0){pl.forEach(p=>{const r=m.qs.rec&&m.qs.rec[p.u];if(r&&Math.hypot(p.x-r[0],p.y-r[1])>20){dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(70*dm);fx({k:'bslam',x:Math.round(p.x),y:Math.round(p.y),r:55})}});m.qs=null}}}
+  if(f<.33){m.q3=(m.q3===undefined?3:m.q3)-dt;
+    if(m.q3<=0&&!m.qg&&!m.qs){m.q3=enr?13:16;const pts=[];for(let i=0;i<2;i++){let x,y,k=0;do{const a=Math.random()*6.283,d=150+Math.random()*190;x=Math.round(m.x+Math.cos(a)*d);y=Math.round(m.y+Math.sin(a)*d);k++}while(k<40&&(Math.hypot(x-CX,y-CY)>DR-90||pts.some(q=>Math.hypot(q[0]-x,q[1]-y)<170)));pts.push([x,y])}
+      m.qg={t:2.8,pts};fx({k:'qgz',x:Math.round(m.x),y:Math.round(m.y),pts,dur:2.8});fx({k:'msg',s:'👁️ ราชินีลืมตาที่ไม่มีอยู่จริง! หลบเข้าวงเงา'})}
+    if(m.qg){m.qg.t-=dt;if(m.qg.t<=0){pl.forEach(p=>{if(!m.qg.pts.some(q=>Math.hypot(p.x-q[0],p.y-q[1])<62)){dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(75*dm);fx({k:'bslam',x:Math.round(p.x),y:Math.round(p.y),r:50})}});m.qg=null}}}}
+function drawQSil(){if(!QSIL||!QUEEN())return;const t=performance.now()/1000,k=1-QSIL.t/QSIL.d,B=mons.find(m=>m.t===3),x=B?B.x:QSIL.x,y=(B?B.y:QSIL.y)-60;g.save();g.globalCompositeOperation='lighter';
+  for(let i=0;i<4;i++){const q=((t*.9+i/4)%1);g.strokeStyle='rgba(255,140,220,'+(.55*(1-q))+')';g.lineWidth=3;g.beginPath();g.ellipse(x,y+60,60+q*(DR-60),(60+q*(DR-60))*.6,0,0,7);g.stroke()}g.restore();
+  if(me.cls){const lock=QSIL.t<=QSIL.d-.8,mv=lock&&QSIL.p&&Math.hypot(me.x-QSIL.p[0],me.y-QSIL.p[1])>20;g.save();g.font='bold 13px system-ui';g.textAlign='center';g.lineWidth=4;g.strokeStyle='rgba(30,0,30,.85)';
+    const tx=lock?(mv?'❌ ขยับแล้ว!':'🤫 นิ่งไว้... '+Math.max(0,QSIL.t).toFixed(1)):'🤫 หยุดเดิน!';g.strokeText(tx,me.x,me.y+44);g.fillStyle=mv?'#ff6a6a':'#ffd0f0';g.fillText(tx,me.x,me.y+44);
+    g.strokeStyle=mv?'rgba(255,80,80,.9)':'rgba(255,190,240,.8)';g.lineWidth=2;g.setLineDash([5,5]);g.beginPath();g.ellipse(QSIL.p?QSIL.p[0]:me.x,(QSIL.p?QSIL.p[1]:me.y)+12,20,8,0,0,7);g.stroke();g.setLineDash([]);g.restore()}}
 /* ===== อุปกรณ์ Lv 61–70: ไอเทมระดับ 13–14 + ชุดเทวทูตรุ่งอรุณ ===== */
-const IL60=12,ilCap=()=>(curMap===10||curMap===11||(typeof ECHO==='function'&&ECHO())||(typeof SIEGE==='function'&&SIEGE())||(typeof EYE==='function'&&EYE()))?14:IL60;
+const IL60=12,ilCap=()=>(curMap===10||curMap===11||(typeof ECHO==='function'&&ECHO())||(typeof SIEGE==='function'&&SIEGE())||(typeof EYE==='function'&&EYE())||(typeof QUEEN==='function'&&QUEEN()))?14:IL60;
 setTimeout(()=>{SETS[3]={n:'ชุดเทวทูตรุ่งอรุณ',c:'#e8a820',pn:{w:'หอกแสงรุ่งอรุณ',a:'เกราะขนนกรุ่งอรุณ',c:'รัศมีทองรุ่งอรุณ',h:'มงกุฎเทวทูตรุ่งอรุณ',b:'รองเท้าปีกรุ่งอรุณ'},
   b:[[2,{dm:.1},'ดาเมจ +10%'],[3,{cr:.05,ls:.03,hp:.08},'คริติคอล +5% · ดูดเลือด +3% · เลือดสูงสุด +8%'],[5,{},'ทุกการโจมตีมีโอกาส 10% เรียกหอกแสงรุ่งอรุณลงใส่เป้า ดาเมจ 150% เป็นวง และฟื้นเลือด 2%']]};MATN.fe=['🪶','ขนนกรุ่งอรุณ']},0);
 const SETCOST3=sl=>sl==='w'?{fe:12,g:80000}:{fe:8,g:50000};
@@ -2504,7 +2566,7 @@ function dawnSetH(msg){me.mat=me.mat||{sc:0,hr:0,fe:0};const S=SETS[3];if(!S)ret
     '<div class="bt" style="flex-wrap:wrap;margin-top:8px">'+SLOTS.map(sl=>{const c=SETCOST3(sl),ok=fe>=c.fe&&me.gold>=c.g&&me.bag.length<MAXBAG;return'<button data-setc="3:'+sl+'"'+(ok?'':' disabled')+'>'+SI[sl]+' '+S.pn[sl]+'<br><small>🪶'+c.fe+' · '+(c.g/1000)+'k ทอง</small></button>'}).join('')+'</div></div>'}
 
 /* ===== ภาค 2 บทที่ 4: ศึกป้องกันนครลอยฟ้า (ด่านคลื่นมอน + บอส ทูตแห่งความหิว) ===== */
-setTimeout(()=>{DT[10]={n:'ศึกป้องกันนครลอยฟ้า',lv:65,L:47,bL:13,hp:420000,xp:25000,g:8000,dm:10,tn:7,sm:3,rm:4,lg:.6,tm:420,gold:20000,exp:60000}},0);
+setTimeout(()=>{DT[10]={n:'ศึกป้องกันนครลอยฟ้า',lv:65,L:47,bL:13,hp:650000,xp:25000,g:8000,dm:10,tn:7,sm:3,rm:4,lg:.6,tm:420,gold:20000,exp:60000}},0);
 const SIEGE=()=>!!(MAPS[curMap]&&MAPS[curMap].siege);
 function siegeMap(id){if(MAPS[id])return MAPS[id];const D=DT[10];
   return MAPS[id]={n:'ลานพระราชวังลอยฟ้า · ศึกป้องกันนคร',dg:10,siege:1,th:10,bth:11,sx:CX,sy:CY+440,sr:0,seed:93,bg:'#26304e',tile:'#30406a',safe:'#3a4a7a',ring:'#ffd27a',t1:'#141a30',t2:'#222c4a',d1:'#3a4a7a',d2:'#ffe0a0',nests:[],gates:[],qk:1,ql:13,npc:{x:-9999,y:-9999,n:'',L:1},
@@ -2519,7 +2581,10 @@ function siegeReward(){if(dgRew)return;dgRew=1;const D=DT[10],st=stCur(),story=s
   banner={s:'🏆 ปกป้องนครลอยฟ้าสำเร็จ! +'+g.toLocaleString()+' ทอง',t:6};sfx('lvl');burst(me.x,me.y-10,['#ffe08a','#ffffff','#ffb0f0'],60,200,1.2,{glow:1,g:-40});
   setTimeout(()=>{if(SIEGE())enterMap(9,{x:1600,y:1420})},6500)}
 /* ด่านซ้ำหลังจบเนื้อเรื่อง (คูลดาวน์ 15 นาที) */
-function instRepeat(kind){const left=Math.max(0,(me.instT||0)+15*60000-Date.now());if(kind==='eye'){if(left>0){stSay([['leo','เลนส์ยังร้อนอยู่เลย... อีก '+Math.ceil(left/60000)+' นาทีค่อยกลับมานะ']]);return true}stSay([['leo','เศษคราสที่เหลือยังพอเปิดห้วงตาได้อีก... จะเข้าไปฝึกกับเงาสะท้อนของเนราไหม? (ได้ขนนกรุ่งอรุณ · หินขั้นสูง)']],()=>{},{choice:[['👁️ เข้าห้วงตา',1],['ไว้ก่อน',0]]});SD.onChoose=e=>{stClose();if(e===1)setTimeout(eyeEnter,250)};return true}
+function instRepeat(kind){if(kind==='queen'){const lq=Math.max(0,(me.qnT||0)+30*60000-Date.now()),le=Math.max(0,(me.instT||0)+15*60000-Date.now());
+    stSay([['hnt','รอยแยกปิดแล้ว แต่เศษเงาของราชินียังวนเวียนอยู่ที่ปากรอยแยกเดิม... อยากลงไปไหน?'+(lq>0?' (ศึกปิดรอยแยกพร้อมในอีก '+Math.ceil(lq/60000)+' นาที)':'')+(le>0?' (ห้วงความทรงจำพร้อมในอีก '+Math.ceil(le/60000)+' นาที)':'')]],()=>{},{choice:[['👑 ศึกปิดรอยแยก (ปาร์ตี้)',1],['✨ ห้วงความทรงจำ',2],['ไว้ก่อน',0]]});
+    SD.onChoose=e=>{stClose();if(e===1){if(lq>0)return stSay([['hnt','พักก่อน อีก '+Math.ceil(lq/60000)+' นาทีค่อยกลับมา']]);setTimeout(queenEnter,250)}else if(e===2){if(le>0)return stSay([['hnt','พักก่อน อีก '+Math.ceil(le/60000)+' นาทีค่อยกลับมา']]);setTimeout(echoEnter,250)}};return true}
+  const left=Math.max(0,(me.instT||0)+15*60000-Date.now());if(kind==='eye'){if(left>0){stSay([['leo','เลนส์ยังร้อนอยู่เลย... อีก '+Math.ceil(left/60000)+' นาทีค่อยกลับมานะ']]);return true}stSay([['leo','เศษคราสที่เหลือยังพอเปิดห้วงตาได้อีก... จะเข้าไปฝึกกับเงาสะท้อนของเนราไหม? (ได้ขนนกรุ่งอรุณ · หินขั้นสูง)']],()=>{},{choice:[['👁️ เข้าห้วงตา',1],['ไว้ก่อน',0]]});SD.onChoose=e=>{stClose();if(e===1)setTimeout(eyeEnter,250)};return true}
   if(left>0){stSay([[kind==='echo'?'hnt':'qn','รอพักหายใจสักครู่ก่อน... อีก '+Math.ceil(left/60000)+' นาทีค่อยกลับมา']]);return true}
   stSay([[kind==='echo'?'hnt':'qn',kind==='echo'?'เศษรัศมียังพอเปิดห้วงความทรงจำได้อีก... จะเข้าไปฝึกกับเงามืดของอาซาเอลไหม? (ได้ขนนกรุ่งอรุณ)':'ฝูงผลึกยังโผล่ลงมาเป็นระยะ ช่วยตั้งรับอีกรอบไหม? (ได้ขนนกรุ่งอรุณ)']],()=>{},{choice:[[kind==='echo'?'✨ เข้าห้วงความทรงจำ':'⚔️ เข้าศึกป้องกันนคร',1],['ไว้ก่อน',0]]});
   SD.onChoose=e=>{stClose();if(e===1)setTimeout(kind==='echo'?echoEnter:siegeEnter,250)};return true}
@@ -2941,7 +3006,7 @@ function gxHex(c){if(typeof c!=='string')return[40,40,50];if(c[0]!=='#'){const m
 const gxMix=(a,b,k)=>[0,1,2].map(i=>Math.round(a[i]+(b[i]-a[i])*k)),gxC=(c,a)=>'rgba('+c[0]+','+c[1]+','+c[2]+','+(a===undefined?1:a)+')';
 const gxRgb=c=>GX.rgb[c]||(GX.rgb[c]=gxHex(c).join(','));
 function gxTheme(){try{if(isArena())return 0}catch(e){}const M=MAPS[curMap];if(!M||curMap===9)return 0;
-  if(M.eye)return'void';if(M.echo)return'rift';if(M.siege)return'sky';if(M.dg||isDg())return'dg';return({1:'grass',2:'bone',3:'lava',4:'snow',5:'stone',6:'sunk',7:'mine',8:'sand',10:'rift',11:'void'})[curMap]||'dg'}
+  if(M.eye||M.queen)return'void';if(M.echo)return'rift';if(M.siege)return'sky';if(M.dg||isDg())return'dg';return({1:'grass',2:'bone',3:'lava',4:'snow',5:'stone',6:'sunk',7:'mine',8:'sand',10:'rift',11:'void'})[curMap]||'dg'}
 /* ---------- พื้นผิวกระเบื้องไร้รอยต่อ (256 หน่วย, ความละเอียด 2x) ---------- */
 function gxTex(th,MP){const key=th+'|'+MP.bg+'|'+MP.tile;if(GX.tex[key])return GX.tex[key];
   const S=256,cv2=document.createElement('canvas');cv2.width=cv2.height=S*2;const x=cv2.getContext('2d');x.scale(2,2);x.lineCap='round';x.lineJoin='round';
@@ -3714,7 +3779,7 @@ const MZT={
 for(const k in MZT){const T=MZT[k];T.M=T.mel.replace(/\|/g,' ').split(/\s+/).filter(Boolean)}
 function mzDeg(T,d){const n=T.sc.length,i=d-1,o=Math.floor(i/n);return T.root+T.sc[((i%n)+n)%n]+o*12}
 function mzTheme(){if(window.PRO_ON)return'pro';if(!me.cls||!run)return'';try{if(mons.some(m=>m.t===3&&Math.hypot(m.x-me.x,m.y-me.y)<650))return'boss'}catch(e){}
-  if(isTw()||isDg()&&!ECHO()&&!SIEGE()&&!EYE()||curMap===5)return'tower';if(ECHO()||SIEGE()||EYE()||curMap===10||curMap===11)return'rift';return({1:'camp',2:'bone',3:'hell',4:'ice',6:'sunk',7:'mine',8:'desert',9:'sky'})[curMap]||'camp'}
+  if(isTw()||isDg()&&!ECHO()&&!SIEGE()&&!EYE()&&!QUEEN()||curMap===5)return'tower';if(ECHO()||SIEGE()||EYE()||QUEEN()||curMap===10||curMap===11)return'rift';return({1:'camp',2:'bone',3:'hell',4:'ice',6:'sunk',7:'mine',8:'desert',9:'sky'})[curMap]||'camp'}
 function musTick(){const a=AC;if(!a||a.state!=='running')return;const B=mzBus();if(!B)return;ambTick();
   const want=(!muted&&musOn)?mzTheme():'';let night=false;try{night=!window.PRO_ON&&isNight()&&!isDg()&&FIELDM[curMap]}catch(e){}const key=want+(night?'n':'');
   if(key!==MZ.key){if(!MZ.sw){MZ.sw=a.currentTime+(MZ.key?.85:.02);B.out.gain.cancelScheduledValues(a.currentTime);B.out.gain.setTargetAtTime(0,a.currentTime,.22)}
@@ -4469,9 +4534,45 @@ function drawMon11(t,r,T,E,Pg,Ln,eye,F,W,bob,sw,la,ra){
 
 /* ===== บอสประจำแมพ: โวราธ ผู้คุมรังดาว ===== */
 const BXY=[0,0];
+/* ราชินีผู้กลืนดาว: ร่างสูงลอย ชุดคลุมผลึกมืด · ปีกม่านห้วงดาว 4 ปีก · ปากกลืนดาวกลางอก · มงกุฎดาวดับ · เบ้าตาบอดทั้งสองข้าง · แขนยาวกรงเล็บ */
+function gxBoss14(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf){const fy=-30+Math.sin(T*1.0)*5,O='#0a0414',S=1.25;g.save();g.scale(S,S);
+  if(!W)gbAdd(()=>{glowOrb(0,fy-30,140,'255,90,200',.2);glowOrb(0,fy+6,60,'255,200,140',.22)});
+  /* ปีกม่านห้วงดาว 4 ปีก */
+  for(const s of[-1,1])for(let k=0;k<2;k++){g.save();g.translate(s*14,fy-46+k*22);g.scale(s,1);g.rotate(-.5+k*.55+Math.sin(T*1.6+k)*.1-up*.003);
+    g.beginPath();g.moveTo(0,0);g.bezierCurveTo(30,-60+k*20,90,-70+k*30,110-k*14,-20+k*14);g.quadraticCurveTo(84,-6+k*10,92-k*10,18+k*6);g.quadraticCurveTo(60,8,58,30);g.quadraticCurveTo(34,14,20,22);g.closePath();
+    g.fillStyle=W?'#fff':gbLG(W,0,-50,100,20,['rgba(40,10,70,.94)','rgba(18,4,40,.9)','rgba(120,30,140,.75)']);g.fill();g.strokeStyle=O;g.lineWidth=1.3;g.stroke();
+    if(!W){g.save();g.clip();g.globalCompositeOperation='lighter';for(let i=0;i<16;i++){const px=8+((i*41+k*17)%96),py=-46+((i*29+k*11)%60),tw=.35+.65*Math.abs(Math.sin(T*1.8+i+k));g.fillStyle=i%4?'rgba(255,230,255,'+tw+')':'rgba(255,200,120,'+tw+')';g.fillRect(px,py,1.6,1.6)}g.restore()}
+    g.restore()}
+  /* หางม่านผลึกด้านล่าง (แทนขา) */
+  for(let i=0;i<7;i++){const x0=-24+i*8,ln=40+((i*7)%4)*10,ph=T*1.5+i*.8;g.strokeStyle=W?'#fff':(i%2?'#3a1460':'#5a1e7a');g.lineWidth=7-Math.abs(i-3)*1.2;g.beginPath();g.moveTo(x0,fy+30);
+    g.bezierCurveTo(x0+Math.sin(ph)*8,fy+30+ln*.4,x0-Math.sin(ph+1)*10,fy+30+ln*.75,x0+Math.sin(ph+2)*6,fy+30+ln);g.stroke()}
+  /* ชุดคลุม/ลำตัวผลึก */
+  Pg([-30,fy+34,-34,fy-6,-22,fy-44,-12,fy-56,12,fy-56,22,fy-44,34,fy-6,30,fy+34,0,fy+44],W?'#fff':gbLG(W,-30,fy-56,30,fy+44,['#4a2470','#2a1048','#12061f']),1);
+  if(!W){g.strokeStyle='rgba(255,170,230,.35)';g.lineWidth=1;for(const x of[-18,-6,6,18]){g.beginPath();g.moveTo(x*.7,fy-50);g.lineTo(x,fy+36);g.stroke()}}
+  /* ปากกลืนดาวกลางอก */
+  {const mo=.55+.45*Math.abs(Math.sin(T*1.3))+cf*.4,mh=17*mo,my=fy-6;E(0,my,12,mh,F('#05010c'),1);
+   if(!W){g.save();g.beginPath();g.ellipse(0,my,11,mh-1,0,0,7);g.clip();const sg=g.createRadialGradient(0,my,1,0,my,mh);sg.addColorStop(0,'#fff0c0');sg.addColorStop(.3,'#ff8ad8');sg.addColorStop(.7,'#5a1a8a');sg.addColorStop(1,'#05010c');g.fillStyle=sg;g.fillRect(-12,my-mh,24,mh*2);
+     for(let i=0;i<10;i++){const a=T*2+i*.628,rr=(i%3+1)*3.4;g.fillStyle='rgba(255,255,230,.9)';g.fillRect(Math.cos(a)*rr-.8,my+Math.sin(a)*rr*1.4-.8,1.6,1.6)}g.restore();
+     g.fillStyle='#f4e8ff';for(let i=0;i<7;i++){const yy=my-mh+4+i*(mh*2-8)/6,w=3.4;g.beginPath();g.moveTo(-11+Math.abs(i-3)*.8,yy-2);g.lineTo(-11+Math.abs(i-3)*.8+w,yy);g.lineTo(-11+Math.abs(i-3)*.8,yy+2);g.closePath();g.fill();g.beginPath();g.moveTo(11-Math.abs(i-3)*.8,yy-2);g.lineTo(11-Math.abs(i-3)*.8-w,yy);g.lineTo(11-Math.abs(i-3)*.8,yy+2);g.closePath();g.fill()}}}
+  /* แขนยาวกรงเล็บ */
+  for(const s of[-1,1]){const ra=Math.sin(T*1.4+s)*.18+cf*.5,sx=s*24,sy=fy-40,ex=sx+s*(26+cf*8),ey=sy+24-cf*18,hx=ex+s*Math.cos(ra)*22,hy=ey+18-Math.sin(ra)*16;
+    Ln([sx,sy,ex,ey,hx,hy],F('#2a1048'),6);Ln([sx,sy,ex,ey,hx,hy],F('#5a2a8a'),2.4);for(let k=-1;k<=1;k++)Ln([hx,hy,hx+s*(8+Math.abs(k)*-2),hy+6+k*5],F('#e0c8ff'),1.6);
+    if(!W){for(let i=0;i<3;i++){const a=T*2.4+i*2.09+s,ox=hx+Math.cos(a)*12,oy=hy+Math.sin(a)*7;g.fillStyle=i%2?'#ffe08a':'#ffb0f0';g.beginPath();g.arc(ox,oy,1.8,0,7);g.fill()}}}
+  /* ศีรษะ: หน้ากากเรียบ เบ้าตาบอด */
+  E(0,fy-66,13,15,W?'#fff':'#e8dcf4',1);if(!W){g.fillStyle='rgba(120,90,160,.35)';g.beginPath();g.ellipse(4,fy-62,8,11,0,0,7);g.fill()}
+  E(-5,fy-68,3.6,2.6,F('#1a0626'),0);E(5,fy-68,3.6,2.6,F('#1a0626'),0);
+  if(!W){g.strokeStyle='#ff6ad0';g.lineWidth=1.2;g.beginPath();g.moveTo(-5,fy-70);g.lineTo(-8,fy-76);g.moveTo(-5,fy-66);g.lineTo(-7,fy-58);g.stroke();
+    g.save();g.globalCompositeOperation='lighter';glowAt(-5,fy-68,8,'255,90,200',.6+.3*Math.sin(T*4));g.restore();
+    g.strokeStyle='rgba(30,4,40,.8)';g.lineWidth=1.4;g.beginPath();g.moveTo(5,fy-66);g.quadraticCurveTo(6,fy-60,5,fy-54+Math.sin(T*2)*2);g.stroke()}
+  /* มงกุฎดาวดับ */
+  for(let i=0;i<7;i++){const a=-Math.PI/2+(i-3)*.32,b0x=Math.cos(a)*11,b0y=fy-74+Math.sin(a)*6+6,h=14+(i===3?10:i%2?4:7),tx=Math.cos(a)*(11+h*.4),ty=fy-74-h+Math.abs(i-3)*2;
+    Pg([b0x-2.6,b0y,tx,ty,b0x+2.6,b0y],F('#1a0a2a'),1);if(!W){const tw=.5+.5*Math.sin(T*2+i*1.3);g.save();g.globalCompositeOperation='lighter';glowAt(tx,ty,6,i%2?'255,170,220':'255,220,150',.55*tw);g.restore();g.fillStyle='rgba(255,245,230,'+(.4+.6*tw)+')';g.beginPath();g.arc(tx,ty,1.6,0,7);g.fill()}}
+  /* ผงดาวที่ถูกดูดเข้าปาก */
+  if(!W&&!LOWQ){for(let i=0;i<10;i++){const q=(T*.6+i/10)%1,a=i*2.4,r0=90*(1-q),x=Math.cos(a)*r0,y=fy-6+Math.sin(a)*r0*.6;g.fillStyle='rgba(255,220,250,'+(q*.9)+')';g.fillRect(x-1,y-1,2,2)}}
+  g.restore()}
 /* เนรา · ดวงตาแห่งราชินี: ดวงตายักษ์ลอย · กลีบผลึกเปลือกตา · วงคราสสุริยะ · ม่านแสงห้อย · ดาวมืดโคจร */
 function gxBoss13(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf){const fy=-40+Math.sin(T*1.1)*5,O='#0c0614';
-  if(!W){g.save();g.globalCompositeOperation='lighter';glowOrb(0,fy,130,'255,140,220',.22);glowOrb(0,fy,64,'255,220,150',.28);g.restore()}
+  if(!W)gbAdd(()=>{glowOrb(0,fy,130,'255,140,220',.22);glowOrb(0,fy,64,'255,220,150',.28)});
   /* ม่านแสงห้อยใต้ดวงตา */
   for(let i=0;i<7;i++){const x0=-24+i*8,ln=46+((i*13)%5)*8,ph=T*1.8+i*.9;g.strokeStyle=W?'#fff':(i%2?'rgba(200,110,255,.75)':'rgba(255,140,210,.7)');g.lineWidth=4-Math.abs(i-3)*.4;g.beginPath();g.moveTo(x0,fy+22);
     g.bezierCurveTo(x0+Math.sin(ph)*10,fy+22+ln*.35,x0-Math.sin(ph+1)*12,fy+22+ln*.7,x0+Math.sin(ph+2)*8,fy+22+ln);g.stroke()}
@@ -4940,7 +5041,7 @@ const evReady=()=>loginReady()||(me.dq&&me.dq.d===dayKey()&&me.dq.q.some(q=>q.h>
 const ACH=[['k100','นักล่ามือใหม่','กำจัดมอนสเตอร์ 100 ตัว',s=>s.k,100,0],['k1000','เพชฌฆาต','กำจัดมอนสเตอร์ 1,000 ตัว',s=>s.k,1000,1],['k5000','ตำนานนักล่า','กำจัดมอนสเตอร์ 5,000 ตัว',s=>s.k,5000,2],
  ['el100','ผู้ล้มยักษ์','กำจัดมอนตัวแข็ง 100 ตัว',s=>s.el,100,1],['b1','ผู้พิชิตหมอกพิษ','ล้มราชาหมอกพิษ',s=>s.b.m1||0,1,0],['b2','ผู้ทลายกระดูก','ล้มราชากระดูกโบราณ',s=>s.b.m2||0,1,1],
  ['b3','ผู้ดับเพลิงนรก','ล้มจอมมารเพลิงนรก',s=>s.b.m3||0,1,1],['b4','ผู้ละลายน้ำแข็ง','ล้มจักรพรรดิน้ำแข็งนิรันดร์',s=>s.b.m4||0,1,2],['bx50','นักล่าบอส','ล้มบอสรวม 50 ครั้ง',s=>Object.values(s.b).reduce((a,b)=>a+b,0),50,2],
- ['dg1','นักสำรวจสุสาน','พิชิตดันเจี้ยน 1 ครั้ง',s=>s.dg,1,0],['dg3','ราชันสุสาน','พิชิตดันเจี้ยนระดับนรก',s=>s.dg3,1,2],['lv30','ผู้ไร้เทียมทาน','ถึงเลเวล 30',()=>me.lv,30,1],['lv60','ตำนานแห่งค่าย','ถึงเลเวล 60',()=>me.lv,60,2],['lv70','ผู้ก้าวข้ามขีดจำกัด','ถึงเลเวล 70',()=>me.lv,70,2],['stB','ผู้พิทักษ์นครลอยฟ้า','จบภาค 2 บทที่ 4: ปกป้องนครลอยฟ้า',()=>{const i=STY.findIndex(x=>x.zEnd2);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['rxAll','นักเคมีสนามรบ','ค้นพบปฏิกิริยาธาตุครบทั้ง 11 แบบ',()=>Object.keys(me.rxd||{}).length,11,2],['rxT','คู่หูไร้เทียมทาน','ทำคอมโบทีมกับเพื่อน 500 ครั้ง',()=>me.rxt|0,500,2],['stC','ผู้ข้ามรอยแยก','จบภาค 2 บทที่ 5: ข้ามรอยแยกและล้มโวราธ',()=>{const i=STY.findIndex(x=>x.zEnd3);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['stE','ผู้ปิดดวงตาราชินี','จบภาค 2 บทที่ 6: ล้มเนรา ดวงตาแห่งราชินี',()=>{const i=STY.findIndex(x=>x.zEnd4);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['stA','ผู้ปลดปล่อยเทวทูต','จบภาค 2 บทที่ 3: ปลดปล่อยอาซาเอล',()=>{const i=STY.findIndex(x=>x.zEnd);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['awk','ผู้ตื่นรู้','เปลี่ยนเป็นอาชีพขั้นที่ 2',()=>me.cls2?1:0,1,2],['raid1','ผู้พิชิตห้วงลึก','พิชิตเรดห้วงลึก 1 ครั้ง',s=>s.raid||0,1,2],['raid10','จ้าวแห่งห้วงลึก','พิชิตเรดห้วงลึก 10 ครั้ง',s=>s.raid||0,10,2],['set5','ผู้สวมชุดตำนาน','สวมชุดเซ็ตครบ 5 ชิ้น',()=>Math.max(setCount(1),setCount(2)),5,2],['tw150','ผู้ข้ามขีดจำกัด','ปีนหอคอยถึงชั้น 150',()=>me.twBest||0,150,2],['b6','ผู้สยบห้วงลึก','ล้มราชันย์ห้วงลึก',s=>s.b.m6||0,1,2],
+ ['dg1','นักสำรวจสุสาน','พิชิตดันเจี้ยน 1 ครั้ง',s=>s.dg,1,0],['dg3','ราชันสุสาน','พิชิตดันเจี้ยนระดับนรก',s=>s.dg3,1,2],['lv30','ผู้ไร้เทียมทาน','ถึงเลเวล 30',()=>me.lv,30,1],['lv60','ตำนานแห่งค่าย','ถึงเลเวล 60',()=>me.lv,60,2],['lv70','ผู้ก้าวข้ามขีดจำกัด','ถึงเลเวล 70',()=>me.lv,70,2],['stB','ผู้พิทักษ์นครลอยฟ้า','จบภาค 2 บทที่ 4: ปกป้องนครลอยฟ้า',()=>{const i=STY.findIndex(x=>x.zEnd2);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['rxAll','นักเคมีสนามรบ','ค้นพบปฏิกิริยาธาตุครบทั้ง 11 แบบ',()=>Object.keys(me.rxd||{}).length,11,2],['rxT','คู่หูไร้เทียมทาน','ทำคอมโบทีมกับเพื่อน 500 ครั้ง',()=>me.rxt|0,500,2],['stC','ผู้ข้ามรอยแยก','จบภาค 2 บทที่ 5: ข้ามรอยแยกและล้มโวราธ',()=>{const i=STY.findIndex(x=>x.zEnd3);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['stE','ผู้ปิดดวงตาราชินี','จบภาค 2 บทที่ 6: ล้มเนรา ดวงตาแห่งราชินี',()=>{const i=STY.findIndex(x=>x.zEnd4);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['stF','ผู้คืนดวงดาว','จบภาค 2: ล้มราชินีผู้กลืนดาว และปิดรอยแยก',()=>{const i=STY.findIndex(x=>x.zEnd5);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['stA','ผู้ปลดปล่อยเทวทูต','จบภาค 2 บทที่ 3: ปลดปล่อยอาซาเอล',()=>{const i=STY.findIndex(x=>x.zEnd);return i>=0&&me.sty&&me.sty.s>i?1:0},1,2],['awk','ผู้ตื่นรู้','เปลี่ยนเป็นอาชีพขั้นที่ 2',()=>me.cls2?1:0,1,2],['raid1','ผู้พิชิตห้วงลึก','พิชิตเรดห้วงลึก 1 ครั้ง',s=>s.raid||0,1,2],['raid10','จ้าวแห่งห้วงลึก','พิชิตเรดห้วงลึก 10 ครั้ง',s=>s.raid||0,10,2],['set5','ผู้สวมชุดตำนาน','สวมชุดเซ็ตครบ 5 ชิ้น',()=>Math.max(setCount(1),setCount(2)),5,2],['tw150','ผู้ข้ามขีดจำกัด','ปีนหอคอยถึงชั้น 150',()=>me.twBest||0,150,2],['b6','ผู้สยบห้วงลึก','ล้มราชันย์ห้วงลึก',s=>s.b.m6||0,1,2],
  ['leg','ผู้ถูกเลือก','ได้อุปกรณ์ระดับ Relic',s=>s.leg,1,2],['up10','ช่างตีเหล็กในตำนาน','ตีบวกอุปกรณ์ถึง +10',s=>s.up10,1,2],['st7','ผู้ภักดี','ล็อกอินต่อเนื่อง 7 วัน',s=>s.mst||0,7,1],
  ['dq30','ขยันขันแข็ง','รับรางวัลเควสรายวัน 30 ครั้ง',s=>s.dq,30,1],['ult100','ผู้ปลดปล่อยพลัง','ใช้อัลติเมต 100 ครั้ง',s=>s.ult,100,1],['rich','เศรษฐีค่าย','มีทองในกระเป๋า 50,000',()=>me.gold,50000,2],
  ['tw10','ผู้ท้าหอคอย','ปีนหอคอยวิญญาณถึงชั้น 10',()=>me.twBest||0,10,0],['tw50','ผู้ข้ามครึ่งทาง','ปีนหอคอยวิญญาณถึงชั้น 50',()=>me.twBest||0,50,1],['tw100','ผู้พิชิตหอคอย','พิชิตหอคอยวิญญาณครบ 100 ชั้น',()=>me.twBest||0,100,2],['mvp1','ผู้พิชิต MVP','ได้รับรางวัล MVP 1 ครั้ง',s=>s.mvp||0,1,2],['mvp10','ราชันย์ MVP','ได้รับรางวัล MVP 10 ครั้ง',s=>s.mvp||0,10,2],['stL','ผู้ผนึกนิรันดร์','จบเนื้อเรื่องภาค 1: ผนึกเทพไว้อีกครั้ง',()=>me.sty&&me.sty.e===1?1:0,1,2],['stD','ผู้ปลดโซ่เทพ','จบเนื้อเรื่องภาค 1: ปลดปล่อยเทพ',()=>me.sty&&me.sty.e===2?1:0,1,2]];
@@ -5392,19 +5493,19 @@ const DT=[null,
  null,
  {n:'หอคอยวิญญาณ',lv:10,L:3,bL:5,hp:5000,xp:0,g:0,dm:1,tn:2,sm:1,rm:2,lg:0,tm:180,gold:0,exp:0},
  {n:'ลานทดสอบเงา',lv:50,L:30,bL:12,hp:1,xp:0,g:0,dm:1,tn:1,sm:0,rm:0,lg:0,tm:180,gold:0,exp:0},
- {n:'เรดห้วงลึก',lv:58,L:34,bL:12,hp:900000,xp:40000,g:6000,dm:11,tn:8,sm:3,rm:4,lg:.5,tm:480,gold:8000,exp:60000},
+ {n:'เรดห้วงลึก',lv:58,L:34,bL:12,hp:1600000,xp:40000,g:6000,dm:11,tn:8,sm:3,rm:4,lg:.5,tm:480,gold:8000,exp:60000},
  {n:'ลานบอสโลก',lv:20,L:20,bL:8,hp:1,xp:0,g:0,dm:1,tn:1,sm:0,rm:0,lg:0,tm:60,gold:0,exp:0}];
 const DW=5,DR=500,isDg=()=>curMap>=10000&&curMap<90000;
 let dg={ph:'lobby',w:0,tl:0,nx:0},dgRew=0,dInv=null;
-function dgMap(id){if(MAPS[id])return MAPS[id];if(id>=50000&&id<60000)return twMap(id);if(id>=60000&&id<70000)return trialMap(id);if(id>=70000&&id<80000)return raidMap(id);if(id>=88000&&id<89000)return echoMap(id);if(id>=89000&&id<90000)return eyeMap(id);if(id>=87000&&id<88000)return siegeMap(id);if(id>=80000&&id<90000)return wbMap(id);if(id>=90000&&id<100000)return pvMap(id);const tr=Math.floor(id/10000),D=DT[tr];if(!D||id%10000<1000)return null;
+function dgMap(id){if(MAPS[id])return MAPS[id];if(id>=50000&&id<60000)return twMap(id);if(id>=60000&&id<70000)return trialMap(id);if(id>=76000&&id<77000)return queenMap(id);if(id>=70000&&id<80000)return raidMap(id);if(id>=88000&&id<89000)return echoMap(id);if(id>=89000&&id<90000)return eyeMap(id);if(id>=87000&&id<88000)return siegeMap(id);if(id>=80000&&id<90000)return wbMap(id);if(id>=90000&&id<100000)return pvMap(id);const tr=Math.floor(id/10000),D=DT[tr];if(!D||id%10000<1000)return null;
   return MAPS[id]={n:D.n,dg:tr,sx:CX,sy:CY+440,sr:80,seed:31+tr,bg:'#121628',tile:'#1d2440',safe:'#28325c',ring:'#c9a24a',t1:'#0a0d1a',t2:'#171e38',d1:'#262e50',d2:'#8a9ad0',nests:[],
     gates:[{x:CX-140,y:CY+420,to:1,req:1,arr:{x:CX,y:CY+60}}],qk:1,ql:D.bL,npc:{x:-9999,y:-9999,n:'',L:1},
     boss:{x:CX,y:CY-120,n:'ผู้คุมสุสาน',hp:D.hp,xp:D.xp,L:D.bL,rm:D.rm,lg:D.lg,g:D.g,dm:D.dm,tn:D.tn,sm:D.sm,col:'#6a4a98',bar:'#6a4a9a',ln:'#c8a8ff',rec:'Lv '+D.lv+'+',pos:'กลางลาน',dg:1}}}
 const fmtT=s=>Math.floor(Math.max(0,s)/60)+':'+String(Math.floor(Math.max(0,s)%60)).padStart(2,'0');
-function dgStatusText(){if(EYE())return dg.ph==='boss'?'👁️ ห้วงตาราชินี · ⏱ '+fmtT(dg.tl):dg.ph==='win'?'👁️ ดวงตาแห่งราชินีแตกสลาย!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'👁️ ห้วงตาราชินี';if(SIEGE())return dg.ph==='run'?'⚔️ ศึกป้องกันนคร · ระลอก '+dg.w+'/'+DW+' · ⏱ '+fmtT(dg.tl):dg.ph==='boss'?'⚔️ ทูตแห่งความหิว · ⏱ '+fmtT(dg.tl):dg.ph==='win'?'🏆 ปกป้องนครสำเร็จ!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'⚔️ ลานพระราชวังลอยฟ้า';if(ECHO())return dg.ph==='boss'?'✨ ห้วงความทรงจำ · ⏱ '+fmtT(dg.tl):dg.ph==='win'?'✨ โซ่เงาขาดสะบั้นแล้ว!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'✨ ห้วงความทรงจำของอาซาเอล';if(isWB())return dg.ph==='boss'?'🐉 บอสโลก · ⏱ '+Math.ceil(dg.tl)+' วิ':'🐉 ลานบอสโลก';if(isTw())return twStatusText();if(isRaid()&&dg.ph==='boss')return '🌊 เรดห้วงลึก · ⏱ '+fmtT(dg.tl);if(isTrial())return dg.ph==='win'?'🏆 ชนะเงาของตัวเองแล้ว!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'🪞 ลานทดสอบเงา · ⏱ '+fmtT(dg.tl);if(dg.ph==='lobby')return 'รอเพื่อน · ในห้อง '+plCount()+' คน';if(dg.ph==='run')return 'คลื่น '+Math.max(1,dg.w)+'/'+DW+' · ⏱ '+fmtT(dg.tl)+(dg.nx>0&&dg.nx<3.9&&!mons.length?' · คลื่นถัดไป '+Math.ceil(dg.nx):'');
+function dgStatusText(){if(QUEEN())return dg.ph==='boss'?'👑 ศึกปิดรอยแยก · ⏱ '+fmtT(dg.tl):dg.ph==='win'?'👑 ราชินีผู้กลืนดาวล่มสลาย!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'👑 ปากรอยแยก · รอเพื่อน '+plCount()+' คน';if(EYE())return dg.ph==='boss'?'👁️ ห้วงตาราชินี · ⏱ '+fmtT(dg.tl):dg.ph==='win'?'👁️ ดวงตาแห่งราชินีแตกสลาย!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'👁️ ห้วงตาราชินี';if(SIEGE())return dg.ph==='run'?'⚔️ ศึกป้องกันนคร · ระลอก '+dg.w+'/'+DW+' · ⏱ '+fmtT(dg.tl):dg.ph==='boss'?'⚔️ ทูตแห่งความหิว · ⏱ '+fmtT(dg.tl):dg.ph==='win'?'🏆 ปกป้องนครสำเร็จ!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'⚔️ ลานพระราชวังลอยฟ้า';if(ECHO())return dg.ph==='boss'?'✨ ห้วงความทรงจำ · ⏱ '+fmtT(dg.tl):dg.ph==='win'?'✨ โซ่เงาขาดสะบั้นแล้ว!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'✨ ห้วงความทรงจำของอาซาเอล';if(isWB())return dg.ph==='boss'?'🐉 บอสโลก · ⏱ '+Math.ceil(dg.tl)+' วิ':'🐉 ลานบอสโลก';if(isTw())return twStatusText();if(isRaid()&&dg.ph==='boss')return '🌊 เรดห้วงลึก · ⏱ '+fmtT(dg.tl);if(isTrial())return dg.ph==='win'?'🏆 ชนะเงาของตัวเองแล้ว!':dg.ph==='fail'?'❌ '+(dg.why||'ล้มเหลว'):'🪞 ลานทดสอบเงา · ⏱ '+fmtT(dg.tl);if(dg.ph==='lobby')return 'รอเพื่อน · ในห้อง '+plCount()+' คน';if(dg.ph==='run')return 'คลื่น '+Math.max(1,dg.w)+'/'+DW+' · ⏱ '+fmtT(dg.tl)+(dg.nx>0&&dg.nx<3.9&&!mons.length?' · คลื่นถัดไป '+Math.ceil(dg.nx):'');
   if(dg.ph==='boss')return 'ผู้คุมสุสาน · ⏱ '+fmtT(dg.tl);if(dg.ph==='win')return '🏆 พิชิตดันเจี้ยนแล้ว!';return '❌ ล้มเหลว: '+(dg.why||'')}
-function dgStart(){if(EYE()){eyeStart();return}if(ECHO()){echoStart();return}if(isRaid()){if(dg.ph!=='lobby')return;const D=DT[7];dg={ph:'boss',w:0,tl:D.tm,nx:0};SR=0;mons=[];teles=[];bossCd=1e9;spawnBoss();fx({k:'msg',s:'🌊 เรดห้วงลึกเริ่มแล้ว! ราชันย์ห้วงลึกตื่นขึ้น'});return}if(isTw()){if(dg.ph==='lobby')twStart();else if(dg.ph==='clear')twNext();return}if(!isDg()||dg.ph!=='lobby')return;const D=DT[MAPS[curMap].dg];dg={ph:'run',w:0,tl:D.tm,nx:4};SR=0;mons=[];fx({k:'msg',s:'ดันเจี้ยนเริ่มแล้ว! เตรียมรับคลื่นแรก'})}
-function dgEnd(win,why){if(dg.ph==='win'||dg.ph==='fail')return;dg.ph=win?'win':'fail';if(SIEGE()&&!win)setTimeout(()=>{if(SIEGE()){enterMap(9,{x:1600,y:1420});sysMsg('⚔️ ถอยกลับเข้านคร · คุยกับราชินีเอลิราเพื่อตั้งรับใหม่')}},4500);if(ECHO()&&!win)setTimeout(()=>{if(ECHO()){enterMap(10,{x:420,y:1560});sysMsg('✨ ถูกผลักออกจากห้วงความทรงจำ · คุยกับไคล์เพื่อลองใหม่')}},4500);if(EYE()&&!win){EYEG=null;setTimeout(()=>{if(EYE()){enterMap(11,{x:330,y:1590});sysMsg('👁️ ถูกผลักออกจากห้วงตา · คุยกับลีออนเพื่อลองใหม่')}},4500)}dg.why=why||'';mons=[];teles=[];fx({k:'msg',s:win?'🏆 พิชิตดันเจี้ยนสำเร็จ!':'ภารกิจล้มเหลว: '+why});if(win)dgReward()}
+function dgStart(){if(QUEEN()){queenStart();return}if(EYE()){eyeStart();return}if(ECHO()){echoStart();return}if(isRaid()){if(dg.ph!=='lobby')return;const D=DT[7];dg={ph:'boss',w:0,tl:D.tm,nx:0};SR=0;mons=[];teles=[];bossCd=1e9;spawnBoss();fx({k:'msg',s:'🌊 เรดห้วงลึกเริ่มแล้ว! ราชันย์ห้วงลึกตื่นขึ้น'});return}if(isTw()){if(dg.ph==='lobby')twStart();else if(dg.ph==='clear')twNext();return}if(!isDg()||dg.ph!=='lobby')return;const D=DT[MAPS[curMap].dg];dg={ph:'run',w:0,tl:D.tm,nx:4};SR=0;mons=[];fx({k:'msg',s:'ดันเจี้ยนเริ่มแล้ว! เตรียมรับคลื่นแรก'})}
+function dgEnd(win,why){if(dg.ph==='win'||dg.ph==='fail')return;dg.ph=win?'win':'fail';if(SIEGE()&&!win)setTimeout(()=>{if(SIEGE()){enterMap(9,{x:1600,y:1420});sysMsg('⚔️ ถอยกลับเข้านคร · คุยกับราชินีเอลิราเพื่อตั้งรับใหม่')}},4500);if(ECHO()&&!win)setTimeout(()=>{if(ECHO()){enterMap(10,{x:420,y:1560});sysMsg('✨ ถูกผลักออกจากห้วงความทรงจำ · คุยกับไคล์เพื่อลองใหม่')}},4500);if(QUEEN()&&!win){EYEG=null;QSIL=null;setTimeout(()=>{if(QUEEN()){enterMap(10,{x:420,y:1560});sysMsg('👑 ถอยออกจากปากรอยแยก · คุยกับไคล์เพื่อบุกใหม่')}},4500)}if(EYE()&&!win){EYEG=null;setTimeout(()=>{if(EYE()){enterMap(11,{x:330,y:1590});sysMsg('👁️ ถูกผลักออกจากห้วงตา · คุยกับลีออนเพื่อลองใหม่')}},4500)}dg.why=why||'';mons=[];teles=[];fx({k:'msg',s:win?'🏆 พิชิตดันเจี้ยนสำเร็จ!':'ภารกิจล้มเหลว: '+why});if(win)dgReward()}
 function dgSpawnWave(){const D=DT[MAPS[curMap].dg],np=Math.max(1,plCount()),w=dg.w,n=Math.round((5+w*2)*(.7+.45*np)),PA=[200,245,295,340];
   for(let i=0;i<n;i++){const a=PA[i%4]*Math.PI/180,x=CX+Math.cos(a)*(DR-40)+rnd(-40,40),y=CY+Math.sin(a)*(DR-40)+rnd(-40,40),t=Math.random()<.12+w*.07?2:(Math.random()<.35?1:0),L=D.L+Math.floor(w/2),hp=mhp(t,L)*(1+.25*(np-1));
     mons.push({id:++mid,x,y,tx:x,ty:y,t,L,p:0,hx:x,hy:y,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0})}
@@ -5413,7 +5514,7 @@ function dgSim(dt){if(isTw())return twSim(dt);if(isTrial())return trialSim(dt);i
   dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
   if(dg.ph==='run'){if(mons.length)dg.nx=3.5;else{dg.nx-=dt;if(dg.nx<=0){if(dg.w>=DW){dg.ph='boss';bossCd=1e9;spawnBoss()}else dgSpawnWave()}}}}
-function dgReward(){if(EYE())return eyeReward();if(ECHO())return echoReward();if(SIEGE())return siegeReward();if(isRaid())return raidReward();if(isTw())return twFinal();if(isTrial()){if(dgRew)return;dgRew=1;if(me.cq&&me.cq.s===3)me.cq.s=4;banner={s:'🏆 ชนะเงาของตัวเอง! กลับไปทำพิธีตื่นรู้กับผู้พิทักษ์',t:6};sfx('quest');burst(me.x,me.y-10,['#ffe08a','#ffffff','#c8a8ff'],40,160,1,{glow:1,g:-30});return}if(dgRew)return;dgRew=1;const D=DT[MAPS[curMap].dg];me.stt.dg++;if(MAPS[curMap].dg===3)me.stt.dg3++;dqProg('dg',1);me.gold+=D.gold;gainXP(me.x,me.y,D.exp);drops.push({x:me.x+22,y:me.y+12,k:'e',L:D.bL,rm:D.rm,t:60});
+function dgReward(){if(QUEEN())return queenReward();if(EYE())return eyeReward();if(ECHO())return echoReward();if(SIEGE())return siegeReward();if(isRaid())return raidReward();if(isTw())return twFinal();if(isTrial()){if(dgRew)return;dgRew=1;if(me.cq&&me.cq.s===3)me.cq.s=4;banner={s:'🏆 ชนะเงาของตัวเอง! กลับไปทำพิธีตื่นรู้กับผู้พิทักษ์',t:6};sfx('quest');burst(me.x,me.y-10,['#ffe08a','#ffffff','#c8a8ff'],40,160,1,{glow:1,g:-30});return}if(dgRew)return;dgRew=1;const D=DT[MAPS[curMap].dg];me.stt.dg++;if(MAPS[curMap].dg===3)me.stt.dg3++;dqProg('dg',1);me.gold+=D.gold;gainXP(me.x,me.y,D.exp);drops.push({x:me.x+22,y:me.y+12,k:'e',L:D.bL,rm:D.rm,t:60});
   if(Math.random()<D.lg)drops.push({x:me.x-22,y:me.y+12,k:'e',L:D.bL,rm:4,t:60});
   banner={s:'🏆 พิชิตดันเจี้ยน! +'+D.gold+' ทอง · +'+D.exp+' EXP',t:6};sfx('quest');burst(me.x,me.y-10,['#ffe08a','#ffffff','#c8a8ff'],40,160,1,{glow:1,g:-30})}
 function dgEnter(id){if(!dgMap(id))return false;ov.hidden=true;dInv=null;sfx('gate');enterMap(id,{x:CX+rnd(-40,40),y:CY+440});return true}
@@ -5421,8 +5522,8 @@ function dgCreate(tr){const D=DT[tr];if(!D||me.lv<D.lv||!run||me.down>0)return;c
   emitM('dinv',{id,n:myName});addChat(myName,t,uid);if(room)room.emit('chat',{u:uid,n:myName,t});dgEnter(id)}
 function dgJoin(v){const id=parseInt(String(v).replace(/[^0-9]/g,''),10),tr=Math.floor(id/10000);
   if(!((id>=11000&&id<40000&&id%10000>=1000)||(id>=50000&&id<60000)||(id>=71000&&id<80000))||!DT[tr]){dungeonUI('รหัสห้องไม่ถูกต้อง (ตัวเลข 5 หลัก)');return}
-  if(me.lv<DT[tr].lv){dungeonUI('ดันเจี้ยนนี้ต้องเลเวล '+DT[tr].lv+' ขึ้นไป');return}if(me.down>0||!run)return;dgEnter(id)}
-function dgLeave(){ov.hidden=true;sfx('gate');if(EYE())enterMap(11,{x:330,y:1590});else if(SIEGE())enterMap(9,{x:1600,y:1420});else if(ECHO())enterMap(10,{x:420,y:1560});else if(isWB())enterMap(1,{x:WBP.x,y:WBP.y+70});else if(isTrial()||isRaid())enterMap(6,{x:1640,y:300});else if(isTw())enterMap(5,{x:TWDOOR.x,y:TWDOOR.y+60});else enterMap(1,{x:CX,y:CY+60})}
+  if(me.lv<(id>=76000&&id<77000?68:DT[tr].lv)){dungeonUI('ดันเจี้ยนนี้ต้องเลเวล '+(id>=76000&&id<77000?68:DT[tr].lv)+' ขึ้นไป');return}if(me.down>0||!run)return;dgEnter(id)}
+function dgLeave(){ov.hidden=true;sfx('gate');if(QUEEN())enterMap(10,{x:420,y:1560});else if(EYE())enterMap(11,{x:330,y:1590});else if(SIEGE())enterMap(9,{x:1600,y:1420});else if(ECHO())enterMap(10,{x:420,y:1560});else if(isWB())enterMap(1,{x:WBP.x,y:WBP.y+70});else if(isTrial()||isRaid())enterMap(6,{x:1640,y:300});else if(isTw())enterMap(5,{x:TWDOOR.x,y:TWDOOR.y+60});else enterMap(1,{x:CX,y:CY+60})}
 function dgReqStart(){if(!isDg()||(dg.ph!=='lobby'&&!(isTw()&&dg.ph==='clear')))return;ov.hidden=true;if(isHost())dgStart();else{emitM('dgo',{});dn.push({x:me.x,y:me.y-40,v:'ส่งคำขอเริ่มแล้ว',t:1})}}
 function dungeonUI(msg){ov.dataset.k='dung';const inD=isDg();
   let h=hdr('🏰','ดันเจี้ยนปาร์ตี้',inD?'รหัสห้อง '+curMap:'ลงดันเจี้ยนกับเพื่อน ฝ่า '+DW+' คลื่นแล้วล้มผู้คุมสุสาน');if(msg)h+='<div class="note">'+msg+'</div>';
@@ -5450,7 +5551,7 @@ const MAPS={
  8:{n:'ทะเลทรายสุสานฟาโรห์',sx:2900,sy:1600,sr:150,seed:53,bg:'#8a6a42',tile:'#9a784a',safe:'#a8865a',ring:'#ffd27a',t1:'#4a321a',t2:'#5e4226',d1:'#8a6a40',d2:'#ffcf80',mvpOnly:1,nests:[[2300,700],[1500,500],[2400,2500],[1600,2700],[2000,1250],[2000,1950],[1300,1100],[1300,2100],[2700,1150],[2700,2100]],gates:[{x:3100,y:1600,to:3,req:1,arr:{x:200,y:1600}}],qk:7,ql:12,npc:{x:2944,y:1552,n:'นักโบราณคดีพเนจร',L:12},boss:{x:700,y:1600,n:'ฟาโรห์อมตะ เนเฟอร์ราห์',hp:300000,xp:20000,L:13,rm:4,lg:.7,g:9000,dm:10,tn:7,sm:3,sL:40,col:'#e8c060',bar:'#c89a30',ln:'#fff0b0',rec:'Lv 55+',pos:'หน้ามหาพีระมิดทางตะวันตก'}},
  9:{n:'นครลอยฟ้าอัสตรา',sx:1600,sy:1600,sr:800,seed:61,bg:'#8ec6ee',tile:'#a8d6f4',safe:'#2c3a24',ring:'rgba(0,0,0,0)',t1:'#1a2414',t2:'#2a3622',d1:'#3a4a30',d2:'#8ab070',nests:[],gates:[{x:1600,y:2250,to:1,req:1,sky:1,nm:'ค่ายผู้อพยพ',arr:{x:1720,y:1850}},{x:2492,y:1590,to:10,req:58,nm:'ทุ่งรอยแยกนภา',arr:{x:210,y:1600}}],hub:1,city:1,qk:1,ql:12,npc:{x:-9999,y:-9999,n:'',L:1},boss:{x:-9999,y:-9999,n:'-',hp:1,xp:0,L:1,rm:0,g:0,dm:1,tn:1,sm:0,col:'#6a4a98',bar:'#6a4a9a',ln:'#c8a8ff',rec:'',pos:''}},
  10:{n:'ทุ่งรอยแยกนภา',sx:240,sy:1600,sr:150,seed:71,bg:'#34345e',tile:'#40406e',safe:'#4a4a7c',ring:'#9a8ae8',t1:'#1a1838',t2:'#2c2a54',d1:'#4e4a84',d2:'#b8a8ff',mvpOnly:1,nests:[[900,700],[1600,480],[2300,640],[700,2500],[1500,2720],[2300,2560],[1150,1180],[1150,2020],[1950,1130],[1950,2070]],gates:[{x:100,y:1600,to:9,req:1,arr:{x:2280,y:1600}},{x:3060,y:1600,to:11,req:62,nm:'ดินแดนหลังรอยแยก',arr:{x:250,y:1600}}],qk:9,ql:14,npc:{x:330,y:1530,n:'ไคล์ นักล่าดาวตก',L:14},boss:{x:2650,y:1600,n:'เทวทูตร่วงหล่น อาซาเอล',hp:400000,xp:30000,L:15,rm:4,lg:.8,g:12000,dm:12,tn:8,sm:3,sL:50,col:'#c8b8ff',bar:'#8a6ae8',ln:'#e8e0ff',rec:'Lv 60 (ปาร์ตี้)',pos:'หน้ารอยแยกฟ้าทางตะวันออก'}},
- 11:{n:'ดินแดนหลังรอยแยก',sx:240,sy:1600,sr:150,seed:113,bg:'#221838',tile:'#2c2048',safe:'#382a5a',ring:'#c07aff',t1:'#0c0818',t2:'#140e26',d1:'#3a2a5a',d2:'#e090ff',bth:12,nests:[[700,1250],[1150,1950],[1600,1050],[1250,2700],[2050,2150],[2550,2650],[2750,1950],[850,450],[2950,1250],[1950,650],[2300,3000],[600,3000]],gates:[{x:100,y:1600,to:10,req:1,arr:{x:2960,y:1600}}],qk:10,ql:14,npc:{x:330,y:1520,n:'ลีออน โหรฝึกหัด',L:14},boss:{x:2620,y:760,n:'โวราธ ผู้คุมรังดาว',hp:360000,xp:28000,L:15,rm:4,lg:.75,g:11000,dm:11,tn:8,sm:3,sL:56,col:'#c07aff',bar:'#8a3ad0',ln:'#f0c8ff',rec:'Lv 62+ (ปาร์ตี้)',pos:'ที่รังดาวทางตะวันออกเฉียงเหนือ'}},
+ 11:{n:'ดินแดนหลังรอยแยก',sx:240,sy:1600,sr:150,seed:113,bg:'#221838',tile:'#2c2048',safe:'#382a5a',ring:'#c07aff',t1:'#0c0818',t2:'#140e26',d1:'#3a2a5a',d2:'#e090ff',bth:12,nests:[[700,1250],[1150,1950],[1600,1050],[1250,2700],[2050,2150],[2550,2650],[2750,1950],[850,450],[2950,1250],[1950,650],[2300,3000],[600,3000]],gates:[{x:100,y:1600,to:10,req:1,arr:{x:2960,y:1600}}],qk:10,ql:14,npc:{x:330,y:1520,n:'ลีออน โหรฝึกหัด',L:14},boss:{x:2620,y:760,n:'โวราธ ผู้คุมรังดาว',hp:850000,xp:28000,L:15,rm:4,lg:.75,g:11000,dm:11,tn:8,sm:3,sL:56,col:'#c07aff',bar:'#8a3ad0',ln:'#f0c8ff',rec:'Lv 62+ (ปาร์ตี้)',pos:'ที่รังดาวทางตะวันออกเฉียงเหนือ'}},
  5:{n:'ลานหอคอยวิญญาณ',sx:2300,sy:1640,sr:340,seed:29,bg:'#4a4660',tile:'#5c5876',safe:'#66607e',ring:'#b8a0f0',t1:'#1e1a30',t2:'#3a3458',d1:'#4e4868',d2:'#c8b0ff',nests:[],gates:[{x:3100,y:1600,to:1,req:1,arr:{x:170,y:1600}}],qk:1,ql:5,npc:{x:2460,y:1580,n:'ผู้เฝ้าหอคอย',L:5},npc2:{x:HRD.x,y:HRD.y,n:'ทูตปีกทมิฬ'},hub:1,boss:{x:-9999,y:-9999,n:'-',hp:1,xp:0,L:1,rm:0,g:0,dm:1,tn:1,sm:0,col:'#6a4a98',bar:'#6a4a9a',ln:'#c8a8ff',rec:'',pos:''}}};
 let curMap=1,SX=1600,SY=1600,SR=330,quietUntil=Date.now()+2000;
 function buildTrees(){const M=MAPS[curMap],R=rng(M.seed);trees.length=0;if(M.pvp||M.city)return;if(curMap===11){VDK=-1;buildVoid()}
@@ -5792,6 +5893,8 @@ function handleFx(o){
   if(o.k==='tb'){tbAdd(o);return}
   if(o.k==='tele'||o.k==='bsum'){const bo=mons.find(m=>m.t===3);if(bo)bo.castT=performance.now()}
   if(o.k==='tele'){teles.push({x:o.x,y:o.y,r:o.r,t:o.dur||1.3,d:o.dur||1.3});return}
+  if(o.k==='qsil'){QSIL={t:+o.dur||2.8,d:+o.dur||2.8,x:+o.x,y:+o.y,p:null};return}
+  if(o.k==='qgz'){if(Array.isArray(o.pts))EYEG={t:+o.dur||2.8,d:+o.dur||2.8,pts:o.pts.slice(0,3).map(q=>[+q[0],+q[1]]),bx:+o.x,by:+o.y,vis:1};return}
   {const D=FXD[o.k]||.5;fxs.push({x:o.x,y:o.y,r:o.r,k:o.k,t:D,d:D,a:+o.a||0,len:+o.len||0,s:Math.random()*999,u:typeof o.u==='string'?o.u.slice(0,12):'',pts:Array.isArray(o.pts)?o.pts.slice(0,8).filter(q=>Array.isArray(q)).map(q=>[+q[0]||0,+q[1]||0]):null,sx:+o.sx||0,sy:+o.sy||0});fxBurst(o);try{gxImpact(o)}catch(e){}}
   const near=dist(me,o)<o.r&&me.down<=0;
   if(o.k==='shield'&&near){me.shv=o.v;me.shield=6}
@@ -5957,7 +6060,7 @@ function drawTBF(top){if(!TBF.length)return;const now=performance.now()/1000,pu=
 function bossAI(m,dt,pl){
   if(m.a1===undefined){m.a1=4;m.a2=9;m.tl=[];m.enr=0;m.hx=BS().x;m.hy=BS().y}
   const B=BS(),dm=B.dm*(m.mvp?MVDM:1);
-  if(EYE()&&(m.inv||m.stun>0)&&EYEG)EYEG=null;
+  if(EYE()&&(m.inv||m.stun>0)&&EYEG)EYEG=null;if(QUEEN()&&(m.inv||m.stun>0)){m.qs=null;m.qg=null}
   if(B.dg){if(m.stun>0){m.stun-=dt;m.a1=Math.max(m.a1,1);return}
     const f=m.hp/m.mh;
     if(!m.inv&&((f<.66&&!m.s1)||(f<.33&&!m.s2))){if(!m.s1)m.s1=1;else m.s2=1;m.inv=1;m.pt=5;m.tl=[];const np=Math.max(1,plCount()),L=(isTw()?twL(twF()):DT[MAPS[curMap].dg].L)+3;
@@ -5988,7 +6091,7 @@ function bossAI(m,dt,pl){
     if(B.rd&&m.hp<m.mh*.8){m.a5=(m.a5===undefined?6:m.a5)-dt;if(m.a5<=0&&pl.length){m.a5=enr?9:14;const p=pl[Math.random()*pl.length|0];fx({k:'dmark',x:Math.round(p.x),y:Math.round(p.y),r:120,u:p.u,dur:4});fx({k:'msg',s:'💀 คำสาปห้วงลึกติดตัวผู้เล่น! วิ่งออกห่างเพื่อน'});(m.dms=m.dms||[]).push({u:p.u,t:4})}
       (m.dms||[]).forEach(z=>{z.t-=dt;if(z.t<=0){const q=pl.find(p=>p.u===z.u);if(q){pl.forEach(p=>{if(Math.hypot(p.x-q.x,p.y-q.y)<120)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(45*dm)});fx({k:'vortex',x:Math.round(q.x),y:Math.round(q.y),r:120})}}});if(m.dms)m.dms=m.dms.filter(z=>z.t>0)}
     if(m.fl){m.fl.t-=dt;m.fl.tk-=dt;if(m.fl.tk<=0){m.fl.tk=1;pl.forEach(p=>{if(Math.hypot(p.x-m.hx,p.y-m.hy)<620&&!m.fl.isl.some(q=>Math.hypot(p.x-q[0],p.y-q[1])<58))dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(14*dm)})}if(m.fl.t<=0)m.fl=null}}
-  if(EYE())eyeGaze(m,dt,pl,enr,dm);if((m.mvp&&curMap===10||curMap===11||ECHO()||SIEGE()||EYE())&&!isTw()){m.a7=(m.a7===undefined?5:m.a7)-dt;if(m.a7<=0){m.a7=enr?6:9;pl.forEach(p=>{for(let i=0;i<2;i++){const x=Math.round(p.x+rnd(-70,70)),y=Math.round(p.y+rnd(-70,70));m.tl.push({x,y,r:75,t:1.5,k:'star'});fx({k:'tele',x,y,r:75,dur:1.5})}})}}
+  if(EYE())eyeGaze(m,dt,pl,enr,dm);if(QUEEN())queenAI(m,dt,pl,enr,dm);if((m.mvp&&curMap===10||curMap===11||ECHO()||SIEGE()||EYE()||QUEEN())&&!isTw()){m.a7=(m.a7===undefined?5:m.a7)-dt;if(m.a7<=0){m.a7=enr?6:9;pl.forEach(p=>{for(let i=0;i<2;i++){const x=Math.round(p.x+rnd(-70,70)),y=Math.round(p.y+rnd(-70,70));m.tl.push({x,y,r:75,t:1.5,k:'star'});fx({k:'tele',x,y,r:75,dur:1.5})}})}}
   if(m.mvp&&!isTw()){m.a6=(m.a6===undefined?8:m.a6)-dt;if(m.a6<=0){m.a6=enr?9:13;const x=Math.round(m.x),y=Math.round(m.y);m.tl.push({x,y,r:230,t:1.8,k:'mvn'});fx({k:'tele',x,y,r:230,dur:1.8});fx({k:'msg',s:'👑 '+B.n+' รวมพลังระเบิดสุริยะ! วิ่งออกจากวง'})}}
   m.tl.forEach(z=>{z.t-=dt;if(z.t<=0){const mul=z.k==='mvn'?70:z.k==='star'?42:z.k==='vortex'?60:z.k==='tent'?30:(enr?48:36);pl.forEach(p=>{if(Math.hypot(p.x-z.x,p.y-z.y)<z.r)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(mul*dm)});fx({k:z.k==='mvn'||z.k==='star'?'bslam':(z.k||'bslam'),x:z.x,y:z.y,r:z.r})}});
   m.tl=m.tl.filter(z=>z.t>0);
@@ -6780,8 +6883,8 @@ function setMute(m){muted=m;try{localStorage.setItem('refugee_mute',m?'1':'0')}c
 function spark(x,y,c,n,sp,l){for(let i=0;i<n&&parts.length<260;i++){const a=Math.random()*6.283,v=(.4+Math.random())*(sp||60);parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-(sp||60)*.3,t:l||.4,l:l||.4,c:c||'#ffd84a',r:1.5+Math.random()*1.5})}}
 function burst(x,y,cols,n,sp,l,o){o=o||{};if(o.glow&&n>=12&&!LOWQ&&GX.fl.length<14)GX.fl.push({x,y,r:Math.min(150,sp*.42+24),c:cols[0],s:performance.now()+(o.dl||0)*1000,l:300});if(LOWQ)n=Math.ceil(n*.45);const PM=LOWQ?110:320;for(let i=0;i<n&&parts.length<PM;i++){const a=Math.random()*6.283,v=(.3+Math.random())*sp,rr=(o.rad||0)*Math.sqrt(Math.random());
   parts.push({x:x+Math.cos(a)*rr,y:y+Math.sin(a)*rr,vx:Math.cos(a)*v,vy:Math.sin(a)*v*(o.flat||1)-(o.up||0)*(.5+Math.random()),t:l*(.6+Math.random()*.4),l:l,c:cols[i%cols.length],r:(o.r||2)*(.6+Math.random()*.8),gr:o.g===undefined?120:o.g,gl:o.glow?1:0,dl:o.dl||0})}}
-const bTheme=()=>isTw()?twTheme(twF()):isDg()?(MAPS[curMap]&&MAPS[curMap].th?MAPS[curMap].th:isRaid()?6:5):(curMap>=1&&curMap<=4?curMap:curMap===6?6:curMap===7?7:curMap===8?8:curMap===10?10:curMap===11?11:5),BTR={13:'255,150,220',12:'200,90,255',11:'230,80,210',10:'190,160,255',8:'255,205,120',7:'255,200,80',1:'140,230,110',2:'235,225,200',3:'255,120,50',4:'150,220,255',5:'190,130,255',6:'90,235,220'},
- BTC={13:['#ffd0f0','#e05ab0','#ffffff'],11:['#ffc0f0','#c03aa0','#ffffff'],10:['#e8e0ff','#8a6ae8','#ffffff'],8:['#ffe0a0','#d89a40','#fff4d0'],7:['#ffe07a','#e8a820','#fff6c8'],1:['#b8f08a','#5aa33c','#e0ffc8'],2:['#f0e8d0','#b8ac90','#ffffff'],3:['#ffb040','#ff5a1a','#fff0b0'],4:['#cfeeff','#6ab8f0','#ffffff'],5:['#d8b8ff','#8a50e0','#f4e8ff'],6:['#9ff8f0','#2ab8b0','#ffffff']};
+const bTheme=()=>isTw()?twTheme(twF()):isDg()?(MAPS[curMap]&&MAPS[curMap].th?MAPS[curMap].th:isRaid()?6:5):(curMap>=1&&curMap<=4?curMap:curMap===6?6:curMap===7?7:curMap===8?8:curMap===10?10:curMap===11?11:5),BTR={14:'255,110,210',13:'255,150,220',12:'200,90,255',11:'230,80,210',10:'190,160,255',8:'255,205,120',7:'255,200,80',1:'140,230,110',2:'235,225,200',3:'255,120,50',4:'150,220,255',5:'190,130,255',6:'90,235,220'},
+ BTC={14:['#ffc0ec','#b02a8a','#ffffff'],13:['#ffd0f0','#e05ab0','#ffffff'],11:['#ffc0f0','#c03aa0','#ffffff'],10:['#e8e0ff','#8a6ae8','#ffffff'],8:['#ffe0a0','#d89a40','#fff4d0'],7:['#ffe07a','#e8a820','#fff6c8'],1:['#b8f08a','#5aa33c','#e0ffc8'],2:['#f0e8d0','#b8ac90','#ffffff'],3:['#ffb040','#ff5a1a','#fff0b0'],4:['#cfeeff','#6ab8f0','#ffffff'],5:['#d8b8ff','#8a50e0','#f4e8ff'],6:['#9ff8f0','#2ab8b0','#ffffff']};
 const FXD={curse:.4,seal:6,soulx:.7,bell:6,bdash:.45,bstrm:3,bstorm:4,impshot:.35,golem:8,hellgate:6,bash:.55,stun:.1,fort:6,fortw:.6,torn:3,storm:5,zap:.4,wind:.5,dmark:4,roar:.7,mtrap:.6,mtrapx:2.5,sanct:6,rift:3,riftx:.8,bloodline:3.2,moon:.9,dawn:1.4,tstop:2.4,eclipse:.9,pull:1.6,flood:7.5,tent:.9,vortex:1,rage:.9,pin:2,chain:.5,mark:.6,markx:.8,smite:1,bslam:.85,bsum:1.1,bhit:.32,bnova:.9,quake:.9,beam:.6,holy:1.3,rune:1.6,whirl:.45,dash:.35,arrows:.7,leap:.45,heal:.9,atk:.8,fire:.8,frost:.9,shadow:.45,ring:.5,shield:.6,taunt:.6,swipe:.2,fog:.5};
 function fxBurst(o){const x=o.x,y=o.y,r=o.r||40,mine=o.by===uid;
   if(o.k==='bslam'){const th=bTheme(),C=BTC[th];burst(x,y,C,th===2?16:22,th===3?180:140,.7,{rad:r*.5,g:th===1?-60:th===2?260:th===4?160:-20,up:th===2?90:th===1?40:0,glow:th!==2,r:th===2?2.8:2.2,dl:.02});if(th===1)burst(x,y,['#3a6a2a','#5a8a3a'],8,30,1.2,{rad:r*.6,g:-30,r:6});if(dist(me,o)<r+40)shk=Math.max(shk,.28)}
@@ -7062,7 +7165,7 @@ function mnote(n,t,d,type,v,att){const a=AC,o=a.createOscillator(),gn=a.createGa
 function mkick(t,v){const a=AC,o=a.createOscillator(),gn=a.createGain();o.type='sine';o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(40,t+.14);gn.gain.setValueAtTime(v,t);gn.gain.exponentialRampToValueAtTime(.0001,t+.2);o.connect(gn);gn.connect(musGain);o.start(t);o.stop(t+.25)}
 function musTickOld(){const a=AC;if(!a||a.state!=='running'||muted||!musOn||!me.cls||!run)return;
   if(!musGain){musGain=a.createGain();musGain.gain.value=.6;const lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2600;musGain.connect(lp);lp.connect(a.destination)}
-  const M=MUS[isTw()?twTheme(twF()):ECHO()||SIEGE()||EYE()?10:isRaid()?6:isDg()||curMap===5?5:curMap]||MUS[1],spb=30/M.bpm,boss=mons.some(m=>m.t===3&&Math.hypot(m.x-me.x,m.y-me.y)<650);
+  const M=MUS[isTw()?twTheme(twF()):ECHO()||SIEGE()||EYE()||QUEEN()?10:isRaid()?6:isDg()||curMap===5?5:curMap]||MUS[1],spb=30/M.bpm,boss=mons.some(m=>m.t===3&&Math.hypot(m.x-me.x,m.y-me.y)<650);
   if(musNext<a.currentTime)musNext=a.currentTime+.05;
   while(musNext<a.currentTime+.45){const t=musNext,st=musStep%128,bar=Math.floor(st/8),beat=st%8,cr=M.root+M.ch[bar%4];
     if(beat===0){[0,M.sc[1]<3?M.sc[2]:M.sc[1],7].forEach((iv,i)=>mnote(cr+iv-12+(i?0:0),t,spb*8.5,M.pad,.022,.4))}
@@ -7867,7 +7970,8 @@ function drawBoss(x,y,T,B,hf,cf,er){cf=cf||0;BXY[0]=x;BXY[1]=y;
   if(er){const fl=.6+.4*Math.sin(T*18);g.save();g.globalCompositeOperation='lighter';glowOrb(0,-20,78,'255,40,20',.22*fl);g.restore()}
   if(cf>0){g.save();g.globalCompositeOperation='lighter';glowOrb(0,-24,90,tc,.4*cf);g.strokeStyle='rgba('+tc+','+(.8*cf)+')';g.lineWidth=2;g.beginPath();g.ellipse(0,30,60-cf*14,18-cf*4,0,0,7);g.stroke();g.restore()}
   g.fillStyle='rgba(0,0,0,.38)';g.beginPath();g.ellipse(0,30,44,13,0,0,7);g.fill();
-  if(mp===13){gxBoss13(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf)
+  if(mp===14){gxBoss14(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf)
+  }else if(mp===13){gxBoss13(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf)
   }else if(mp===12){gxBoss12(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf)
   }else if(mp===11){gxBoss11(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf)
   }else if(mp===10){gxBoss10(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf)
@@ -8781,7 +8885,7 @@ function draw(){
     g.globalAlpha=k*.55;g.strokeStyle='#8fd65f';g.lineWidth=1.5;g.setLineDash([4,6]);g.lineDashOffset=-now*12;g.beginPath();g.arc(z.x,z.y,z.r,0,7);g.stroke();g.setLineDash([]);g.globalAlpha=1;g.lineWidth=1});
   if(!isTw()||(dg.tw&&dg.tw.ft==='boss'&&dg.ph==='run'))if(!MAPS[curMap].pvp&&curMap!==9&&curMap!==10){const B=BS();if(MAPS[curMap].dg&&!isRaid()){const nw=performance.now()/1000;g.globalAlpha=.12;g.fillStyle='#1a2450';g.beginPath();g.arc(B.x,B.y,110,0,7);g.fill();g.globalAlpha=.55;g.strokeStyle='#e8c060';g.lineWidth=2;g.stroke();g.globalAlpha=.3;g.setLineDash([8,8]);g.lineDashOffset=-nw*12;g.beginPath();g.arc(B.x,B.y,100,0,7);g.stroke();g.setLineDash([]);g.lineWidth=1;g.globalAlpha=1}else{g.globalAlpha=.25;g.fillStyle=B.bar;g.beginPath();g.arc(B.x,B.y,110,0,7);g.fill();g.globalAlpha=.5;g.strokeStyle=B.ln;g.stroke();g.globalAlpha=1}}
   me.qs.forEach(q=>{if(q.t==='reach'&&q.mp===curMap&&!q.h){const a=.35+.25*Math.sin(performance.now()/300);g.strokeStyle='rgba(255,216,74,'+a+')';g.lineWidth=3;g.beginPath();g.arc(q.x,q.y,110,0,7);g.stroke();g.fillStyle='#ffd84a';g.font='11px system-ui';g.textAlign='center';g.fillText('จุดหมายเควส',q.x,q.y-118);g.lineWidth=1}});
-  drawTBF();drawEyeGaze();{const tc=BTR[bTheme()];teles.forEach(z=>{const k=Math.max(0,Math.min(1,1-z.t/z.d)),now=performance.now()/1000,pu=.5+.5*Math.sin(now*14);
+  drawTBF();drawEyeGaze();drawQSil();{const tc=BTR[bTheme()];teles.forEach(z=>{const k=Math.max(0,Math.min(1,1-z.t/z.d)),now=performance.now()/1000,pu=.5+.5*Math.sin(now*14);
     g.fillStyle='rgba('+tc+','+(.1+pu*.07)+')';g.beginPath();g.arc(z.x,z.y,z.r,0,7);g.fill();
     g.strokeStyle='rgba(255,80,60,'+(.55+pu*.45)+')';g.lineWidth=2.5;g.setLineDash([10,6]);g.lineDashOffset=now*30;g.stroke();g.setLineDash([]);
     g.strokeStyle='rgba('+tc+',.5)';g.lineWidth=1.2;g.beginPath();for(let i=0;i<=5;i++){const b=i*2.513-Math.PI/2+now*.6;i?g.lineTo(z.x+Math.cos(b)*z.r*.75,z.y+Math.sin(b)*z.r*.75):g.moveTo(z.x+Math.cos(b)*z.r*.75,z.y+Math.sin(b)*z.r*.75)}g.stroke();
@@ -8802,9 +8906,9 @@ function draw(){
   {const _ly=gxLayerBegin();mons.forEach(m=>{if(m.pv||m.x<cam.x-60||m.x>cam.x+W+60||m.y<cam.y-80||m.y>cam.y+H+80)return;
     const s=MT[m.t],T=performance.now()/1000+m.id*.37;
     const hf=Math.max(0,1-(performance.now()-(m.hitT||0))/120);if(m.t===3&&!m.wb&&!m.mir&&!isTw())gxBossAmb(m);
-    const G0=g;if(_ly&&!m.wb)g=_ly;try{if(m.wb){drawWorldBoss(m,T,hf);drawWBF(m)}else if(m.mir)drawMirror(m,T,hf);else if(m.t===3){const cf3=Math.max(0,1-(performance.now()-(m.castT||0))/900);drawBossAnim(m,T,hf,cf3,m.hp<m.mh*.3);if(!isTw()){const _k=m.mvp?1.3:1;gxLayerMark(m.x,m.y-45*_k,95*_k,110*_k)}}
+    const G0=g;if(_ly&&!m.wb)g=_ly;try{if(m.wb){drawWorldBoss(m,T,hf);drawWBF(m)}else if(m.mir)drawMirror(m,T,hf);else if(m.t===3){const cf3=Math.max(0,1-(performance.now()-(m.castT||0))/900);drawBossAnim(m,T,hf,cf3,m.hp<m.mh*.3);if(!isTw()){const _k=m.mvp?1.3:QUEEN()?1.9:1;gxLayerMark(m.x,m.y-45*_k,95*_k,110*_k)}}
       else{drawMonAnim(m,T,hf);const _r=s?s.r:12;gxLayerMark(m.x,m.y-_r*.35,_r*1.5+8,_r*1.5+10)}}finally{g=G0}
-    if(!m.wb)gxLayerBox(m.x,m.y-(m.t===3?(isTw()?150:60):(s?s.r:12)*.5),m.t===3?(isTw()?360:200):(s?s.r:12)*2.6+40,m.t===3?(isTw()?320:200):(s?s.r:12)*2.4+40)});gxLayerEnd(_ly)}
+    if(!m.wb){const BIG=m.t===3&&(isTw()||QUEEN());gxLayerBox(m.x,m.y-(m.t===3?(BIG?(QUEEN()?100:150):60):(s?s.r:12)*.5),m.t===3?(BIG?(QUEEN()?520:360):200):(s?s.r:12)*2.6+40,m.t===3?(BIG?(QUEEN()?480:320):200):(s?s.r:12)*2.4+40)}});gxLayerEnd(_ly)}
   mons.forEach(m=>{if(m.wb||m.pv||m.x<cam.x-60||m.x>cam.x+W+60||m.y<cam.y-80||m.y>cam.y+H+80)return;
     const s=MT[m.t],T=performance.now()/1000+m.id*.37,br=m.t===3?(isTw()?178:82):m.t===4?40:s.r;
     if(me.mark&&m.id===me.mark.id){const mk=me.mark,hy=m.y-(m.t===3?(isTw()?200:110):s.r+30),pu=.5+.5*Math.sin(T*8),k=Math.max(0,Math.min(1,mk.t/5));g.save();g.globalCompositeOperation='lighter';
@@ -8991,7 +9095,7 @@ function step(dt){
   }
   Object.values(others).forEach(o=>{const dx=(o.tx-o.x)*.3,dy=(o.ty-o.y)*.3;o.x+=dx;o.y+=dy;walkTick(o,dx,dy)});
   fxs.forEach(f=>f.t-=dt);fxs=fxs.filter(f=>f.t>0);pickup(dt);
-  tbStep(dt);teles.forEach(z=>z.t-=dt);teles=teles.filter(z=>z.t>0);if(banner)banner.t-=dt;
+  tbStep(dt);try{qVisTick(dt)}catch(e){}teles.forEach(z=>z.t-=dt);teles=teles.filter(z=>z.t>0);if(banner)banner.t-=dt;
   dn.forEach(d=>{d.t-=dt;if(d.vx!==undefined){d.x+=d.vx*dt;d.y+=d.vy*dt;d.vy=Math.min(d.vy+300*dt,60);d.vx*=1-dt*1.5}else d.y-=(d.s===2?20:28)*dt});dn=dn.filter(d=>d.t>0);if(ultSum.t>0){ultSum.t-=dt;ultSum.pk=Math.max(0,ultSum.pk-dt*5);ultSum.sv+=(ultSum.v-ultSum.sv)*Math.min(1,dt*14);if(ultSum.v-ultSum.sv<1)ultSum.sv=ultSum.v;if(ultSum.t<=0){ultSum.v=0;ultSum.sv=0;ultSum.n=0}}
   if(flash>0)flash-=dt;
 }
@@ -9015,7 +9119,7 @@ function loop(t){if(window.PRO_ON){last=t;requestAnimationFrame(loop);return}fps
     if(pp!==lastPts){lastPts=pp;if(ov.querySelector('[data-pn=char]'))treeUI()}
   }
   {const b=$('dgb'),on=me.cls&&run&&ov.hidden&&isDg()&&dg.ph!=='run'&&dg.ph!=='boss';if(b.hidden===!!on)b.hidden=!on;if(on){const tx=isTw()?(dg.ph==='lobby'?'▶ เริ่มปีนหอคอย ชั้น '+twF()+' ('+plCount()+' คน)':dg.ph==='clear'?'⏫ ขึ้นชั้น '+(twF()+1)+' เลย ('+Math.max(0,Math.ceil(dg.nx))+')':'🚪 ออกจากหอคอย'):isWB()?(dg.ph==='lobby'?'▶ เริ่มท้าทาย 60 วินาที':'🔁 ท้าทายอีกครั้ง'):isTrial()?'🚪 ออกจากลานทดสอบ':dg.ph==='lobby'?'▶ เริ่มดันเจี้ยน ('+plCount()+' คน)':'🚪 ออกจากดันเจี้ยน';if(b.textContent!==tx)b.textContent=tx}
-   const iv=$('dinvb'),io=!!(dInv&&Date.now()<dInv.until&&!isDg()&&me.cls&&run&&ov.hidden);if(iv.hidden===io)iv.hidden=!io;if(io){const tx='⚔️ '+dInv.n+' ชวนลง'+DT[dInv.tr].n+' (Lv '+DT[dInv.tr].lv+'+) แตะเพื่อเข้าร่วม';if(iv.textContent!==tx)iv.textContent=tx}}
+   const iv=$('dinvb'),io=!!(dInv&&Date.now()<dInv.until&&!isDg()&&me.cls&&run&&ov.hidden);if(iv.hidden===io)iv.hidden=!io;if(io){const qi=dInv.id>=76000&&dInv.id<77000,tx=qi?'👑 '+dInv.n+' ชวนบุกศึกปิดรอยแยก (Lv 68+) แตะเพื่อเข้าร่วม':'⚔️ '+dInv.n+' ชวนลง'+DT[dInv.tr].n+' (Lv '+DT[dInv.tr].lv+'+) แตะเพื่อเข้าร่วม';if(iv.textContent!==tx)iv.textContent=tx}}
   {const q=$('ptq'),on=!!(ptReq&&me.cls&&run&&ov.hidden);if(q.hidden===on)q.hidden=!on;if(on){const tx='👥 '+ptReq.n+' ชวนเข้าปาร์ตี้';if($('ptqt').textContent!==tx)$('ptqt').textContent=tx}}ptHud();plPopPos();
   tradeTick();{const q=$('trq'),on=!!(trReq&&me.cls&&run&&ov.hidden);if(q.hidden===on)q.hidden=!on;if(on){const tx='🤝 '+trReq.n+' ขอแลกเปลี่ยนของ';if($('trqt').textContent!==tx)$('trqt').textContent=tx}}
   tutTick();qTick();{const rc=me.cls&&me.down>0&&ov.hidden,rvb=$('rv');if(rvb.hidden===!!rc){rvb.hidden=!rc}if(rc){const t='ฟื้นตรงนี้ ('+rvCost()+' ทอง)',af=me.gold>=rvCost();if(rvb.textContent!==t)rvb.textContent=t;if(rvb.disabled===af)rvb.disabled=!af}
@@ -9040,7 +9144,7 @@ function cleanChar(c){
   const n=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,Math.floor(v))):d;
   const o={lv:n(c.lv,1,LMAX,1),xp:n(c.xp,0,1e7,0),gold:n(c.gold,0,GMAX,0),tr:{},ab:{str:0,vit:0,int:0,agi:0,luk:0},inv:{hp:0,mp:0,ps:0},eq:{},bag:[]};
   if(c.inv&&typeof c.inv==='object'){o.inv.hp=n(c.inv.hp,0,POTMAX,0);o.inv.mp=n(c.inv.mp,0,POTMAX,0);o.inv.ps=n(c.inv.ps,0,99,0);o.inv.s1=n(c.inv.s1,0,999,0);o.inv.s2=n(c.inv.s2,0,999,0);o.inv.s3=n(c.inv.s3,0,999,0)}
-  {const m=c.mat&&typeof c.mat==='object'?c.mat:{};o.mat={sc:n(m.sc,0,9999,0),hr:n(m.hr,0,999,0),fe:n(m.fe,0,9999,0),ec:n(m.ec,0,9999,0)}}
+  {const m=c.mat&&typeof c.mat==='object'?c.mat:{};o.qnT=n(c.qnT,0,9e15,0);o.mat={sc:n(m.sc,0,9999,0),hr:n(m.hr,0,999,0),fe:n(m.fe,0,9999,0),ec:n(m.ec,0,9999,0)}}
   o.cls2=c.cls2&&o.lv>=AWLV?1:0;{const u=c.brU&&typeof c.brU==='object'?c.brU:{};o.brU={};if(o.cls2){if(u[1])o.brU[1]=1;if(u[2])o.brU[2]=1;if(!o.brU[1]&&!o.brU[2])o.brU[1]=1}o.br=c.br===2&&o.brU[2]?2:1;const k=c.dk&&typeof c.dk==='object'?c.dk:{};o.dk={s:o.brU[2]?5:n(k.s,0,4,0),n:n(k.n,0,100,0)}}{const q=c.cq&&typeof c.cq==='object'?c.cq:{};o.cq={s:o.brU[1]?5:n(q.s,0,4,0),n:n(q.n,0,1000,0)}}
   o.twc=n(c.twc,0,1e7,0);o.twCp=n(c.twCp,1,9991,1);if((o.twCp-1)%10)o.twCp=1;o.twBest=n(c.twBest,0,99999,0);if(o.twCp>o.twBest+1)o.twCp=Math.max(1,Math.floor(o.twBest/10)*10+1);
   if(c.tr&&typeof c.tr==='object')Object.keys(c.tr).forEach(k=>{const v=n(c.tr[k],0,3,0);if(v>0&&k.length<8)o.tr[k]=v});
