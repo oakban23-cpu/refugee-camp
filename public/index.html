@@ -1416,7 +1416,7 @@ function mvRows(){const now=Date.now(),o={};
   if(mvSrv()&&MVT){const el=(now-MVTat)/1000;for(const k in MVDEF){const v=MVT[k]||{};o[k]={in:Math.max(0,(+v.in||0)-el),al:v.al?1:0,k:v.k|0,last:v.last||null,n:v.n|0}}}
   else{const L=mvLocGet();for(const k in MVDEF){const v=L[k];o[k]={in:Math.max(0,(v.next-now)/1000),al:0,k:v.k|0,last:v.last,n:+k===curMap?plCount():0}}}
   if(o[curMap]&&mvBoss())o[curMap].al=1;return o}
-function mvFetch(){if(mvSrv())try{emitM('mvq',{})}catch(e){}}
+function mvFetch(){const n=Date.now();if(n-(mvFetch.t||0)<5000)return;mvFetch.t=n;if(mvSrv())try{emitM('mvq',{})}catch(e){}}
 function mvSpawn(force){if(!me.cls||!isHost()||!MVDEF[curMap]||isDg())return;let b=mvBoss();
   if(!b){const cur=mons.find(m=>m.t===3);if(cur){mons=mons.filter(m=>m!==cur);fx({k:'msg',s:'⚡ '+BS().n+' ถูกพลังมืดกลืนกิน...'})}
     const B=BS(),n=plCount(),hp=Math.round(B.hp*MVHP*(1+.7*(n-1)));
@@ -6227,7 +6227,7 @@ setInterval(status,1500);
   room.on('reset',m=>{m=U(m);if(!m.sameTab)reset()});
   try{mkHook();pvHook()}catch(e){console.error(e)}
   room.on('mvsp',m=>{m=U(m);if(m.sameTab)return;mvSpawn()});
-  room.on('mvr',m=>{const D=m.data&&m.data.d;if(D&&typeof D==='object'&&!m.sameTab){MVT=D;MVTat=Date.now();if(!ov.hidden&&ov.dataset.k==='ev'&&evTab==='mv')eventUI()}});
+  room.on('mvr',m=>{const D=m.data&&m.data.d;if(D&&typeof D==='object'&&!m.sameTab){const sig=JSON.stringify(Object.keys(D).map(k=>{const v=D[k]||{};return[k,v.al?1:0,v.k|0,v.last&&v.last.n||'',(+v.in||0)<=0?1:0]}));const ch=sig!==mvFetch.sig;mvFetch.sig=sig;MVT=D;MVTat=Date.now();if(ch&&!ov.hidden&&ov.dataset.k==='ev'&&evTab==='mv')eventUI()}});
   room.on('mvn',m=>{const D=m.data&&m.data.d;if(D&&typeof D==='object'&&!m.sameTab)mvResult(D)});
   room.on('lbr',m=>{m=U(m);if(m.sameTab||!m.data||typeof m.data!=='object')return;const o={};LBK.forEach(k=>{if(Array.isArray(m.data[k]))o[k]=m.data[k].slice(0,k==='wb'?30:10).filter(r=>Array.isArray(r)&&+r[3]>0)});lbData=o;lbAt=Date.now();wbTitleSync();try{lbResync()}catch(e){}if(!ov.hidden&&ov.dataset.k==='ev'&&evTab==='lb')eventUI()});
   room.on('pty',m=>{if(m.sameTab||!m.data)return;try{ptMsg(m.data.d)}catch(e){}});
