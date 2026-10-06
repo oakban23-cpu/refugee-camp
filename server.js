@@ -34,7 +34,7 @@ function send(c,str,droppable){if(c.dead||!c.sock.writable)return;
   if(droppable&&c.sock.writableLength>BUFCAP)return; // ผู้รับช้า ข้ามข้อมูลที่ทดแทนได้
   let b;if(c.z&&str.length>=ZMIN){try{b=frame(1,zmsg(str),1)}catch(e){b=null}}if(!b)b=frame(1,Buffer.from(str));
   bytesOut+=b.length;msgsOut++;c.sock.write(b)}
-function kill(c){if(c.dead)return;c.dead=true;clients.delete(c);if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);try{c.sock.destroy()}catch(e){}}
+function kill(c){if(c.dead)return;c.dead=true;clients.delete(c);if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);if(c.mid&&byMid.get(c.mid)===c)byMid.delete(c.mid);try{c.sock.destroy()}catch(e){}}
 const num=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,v)):d;
 function cleanPresence(p){return{uid:String(p.uid||'').slice(0,12),x:num(p.x,0,20000,0),y:num(p.y,0,20000,0),hp:num(p.hp,0,1e6,0),mh:num(p.mh,1,1e6,1),
   cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,79,0),bt:num(p.bt|0,0,19,0),wp:num(p.wp|0,0,79,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,19,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),aw:p.aw?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,9,0)}}
@@ -68,10 +68,16 @@ function tickPeers(){
   }
 }
 setInterval(tickPeers,200);
+/* ===== ที่เก็บข้อมูลถาวร: ตั้ง DATA_DIR ให้ชี้ไปดิสก์ถาวร (เช่น Render Disk) · เขียนแบบปลอดภัย (ไฟล์ชั่วคราวแล้วเปลี่ยนชื่อ) ===== */
+const DATA_DIR=process.env.DATA_DIR||__dirname;try{fs.mkdirSync(DATA_DIR,{recursive:true})}catch(e){}
+function wj(f,o,cb){const t=f+'.tmp';fs.writeFile(t,JSON.stringify(o),e=>{if(e){if(cb)cb(e);return}fs.rename(t,f,e2=>{if(cb)cb(e2)})})}
+function wjSync(f,o){try{const t=f+'.tmp';fs.writeFileSync(t,JSON.stringify(o));fs.renameSync(t,f)}catch(e){console.error('save fail',f,e.message)}}
+const byMid=new Map();
+function mkOwner(c,d){const v=d&&typeof d.mid==='string'&&/^[a-z0-9]{8,16}$/.test(d.mid)?'m:'+d.mid:c.uid;if(v&&v!==c.uid){if(c.mid&&c.mid!==v&&byMid.get(c.mid)===c)byMid.delete(c.mid);c.mid=v;byMid.set(v,c)}return v}
 /* ตารางอันดับบอส: เก็บลงไฟล์ leaderboard.json */
-const LBF=path.join(__dirname,'leaderboard.json');let LB={},lbDirty=false;
+const LBF=path.join(DATA_DIR,'leaderboard.json');let LB={},lbDirty=false;
 try{const j=JSON.parse(fs.readFileSync(LBF,'utf8'));if(j&&typeof j==='object')LB=j}catch(e){}
-setInterval(()=>{if(!lbDirty)return;lbDirty=false;fs.writeFile(LBF,JSON.stringify(LB),()=>{})},10000);
+setInterval(()=>{if(!lbDirty)return;lbDirty=false;wj(LBF,LB)},10000);
 function onEmit(c,m){
   const k=m.k,pl=m.d;if(typeof k!=='string'||k.length>12)return;
   if(k==='chat'){const s=JSON.stringify({t:'emit',k,d:pl,from:c.id});for(const o of clients)if(o!==c)send(o,s);return}
@@ -84,12 +90,12 @@ function onEmit(c,m){
     arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='pvc'||k==='pva'||k==='pvn'||k==='pvh'||k==='pvd'||k==='pvt'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||'';send(o,wrap(d))}return}
-  if(k==='mkq'){const u=c.uid;mkReply(c,'mkr',{L:MK.L.slice(-150).map(x=>({id:x.id,k:x.k,d:x.d,p:x.p,n:x.n,me:x.u===u?1:0})),sale:Math.floor(MK.sales[u]||0),ret:(MK.ret[u]||[]).length});return}
-  if(k==='mkl'){const u=c.uid;if(!u||!d||typeof d!=='object')return;const p=Math.floor(+d.p||0),ok=mkOk(d.k,d.d)&&p>=1&&p<=1e9&&MK.L.filter(x=>x.u===u).length<8;
-    if(ok){MK.L.push({id:MK.n++,u,n:c.p.n,k:d.k,d:d.d,p,at:Date.now()});mkDirty=true}mkReply(c,'mka',{t:String(d.t||'').slice(0,12),ok:ok?1:0});return}
-  if(k==='mkb'){const u=c.uid,i=MK.L.findIndex(x=>x.id===+(d&&d.id));if(i<0||MK.L[i].u===u){mkReply(c,'mkg',{ok:0});return}const x=MK.L.splice(i,1)[0];MK.sales[x.u]=(MK.sales[x.u]||0)+Math.floor(x.p*.95);mkDirty=true;mkReply(c,'mkg',{ok:1,k:x.k,d:x.d,p:x.p});const s=byUid.get(x.u);if(s)mkReply(s,'mks',{n:c.p.n,p:x.p});return}
-  if(k==='mkx'){const u=c.uid,i=MK.L.findIndex(x=>x.id===+(d&&d.id)&&x.u===u);if(i<0)return;const x=MK.L.splice(i,1)[0];mkDirty=true;mkReply(c,'mkg',{ok:1,back:1,k:x.k,d:x.d,p:0});return}
-  if(k==='mkc'){const u=c.uid;if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
+  if(k==='mkq'){const u=mkOwner(c,d);mkReply(c,'mkr',{L:MK.L.slice(-150).map(x=>({id:x.id,k:x.k,d:x.d,p:x.p,n:x.n,me:x.u===u?1:0})),sale:Math.floor(MK.sales[u]||0),ret:(MK.ret[u]||[]).length,ep:MK.ep,mine:MK.L.filter(x=>x.u===u).map(x=>x.id)});return}
+  if(k==='mkl'){const u=mkOwner(c,d);if(!u||!d||typeof d!=='object')return;const p=Math.floor(+d.p||0),ok=mkOk(d.k,d.d)&&p>=1&&p<=1e9&&MK.L.filter(x=>x.u===u).length<8;
+    let id=0;if(ok){id=MK.n++;MK.L.push({id,u,n:c.p.n,k:d.k,d:d.d,p,at:Date.now()});mkDirty=true}mkReply(c,'mka',{t:String(d.t||'').slice(0,12),ok:ok?1:0,id,ep:MK.ep});return}
+  if(k==='mkb'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id));if(i<0||MK.L[i].u===u){mkReply(c,'mkg',{ok:0});return}const x=MK.L.splice(i,1)[0];MK.sales[x.u]=(MK.sales[x.u]||0)+Math.floor(x.p*.95);mkDirty=true;mkReply(c,'mkg',{ok:1,k:x.k,d:x.d,p:x.p,id:x.id});const s=byMid.get(x.u)||byUid.get(x.u);if(s)mkReply(s,'mks',{n:c.p.n,p:x.p,id:x.id,g:Math.floor(x.p*.95)});return}
+  if(k==='mkx'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id)&&x.u===u);if(i<0)return;const x=MK.L.splice(i,1)[0];mkDirty=true;mkReply(c,'mkg',{ok:1,back:1,k:x.k,d:x.d,p:0,id:x.id});return}
+  if(k==='mkc'){const u=mkOwner(c,d);if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
   if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,key==='wb'?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='mvq'){send(c,JSON.stringify({t:'emit',k:'mvr',d:{mp,d:mvTable()},from:0}));return}
@@ -121,10 +127,10 @@ function onEmit(c,m){
   if(k==='dgo'){if(host&&host!==c)send(host,wrap({}));return}
 }
 /* ===== บอส MVP: เซิร์ฟเวอร์เป็นคนจับเวลาเกิด/ตาย และนับดาเมจหาผู้ได้ MVP ===== */
-const MVDEF={8:60,10:60,18:60},MVF=path.join(__dirname,'mvp.json');let MV={},mvDirty=false;
+const MVDEF={8:60,10:60,18:60},MVF=path.join(DATA_DIR,'mvp.json');let MV={},mvDirty=false;
 {let j={};try{j=JSON.parse(fs.readFileSync(MVF,'utf8'))||{}}catch(e){}const now=Date.now();
   for(const k in MVDEF){const o=j[k]||{};MV[k]={next:Math.max(+o.next||0,now+(60+Math.random()*240)*1000),k:o.k|0,last:o.last||null,alive:0,id:0,dm:{},ask:0,empty:0}}}
-setInterval(()=>{if(!mvDirty)return;mvDirty=false;const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}fs.writeFile(MVF,JSON.stringify(o),()=>{})},15000);
+setInterval(()=>{if(!mvDirty)return;mvDirty=false;const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wj(MVF,o)},15000);
 function mvAll(o){const s=JSON.stringify({t:'emit',k:'mvn',d:{mp:0,d:o},from:0});for(const c of clients)if(c.p)send(c,s)}
 function mvTable(){const now=Date.now(),o={};for(const k in MV){const v=MV[k];o[k]={in:v.alive?0:Math.max(0,Math.round((v.next-now)/1000)),al:v.alive?1:0,k:v.k,last:v.last,n:countByMap[k]||0}}return o}
 setInterval(()=>{const now=Date.now();for(const k in MV){const v=MV[k],mp=+k;
@@ -132,9 +138,10 @@ setInterval(()=>{const now=Date.now();for(const k in MV){const v=MV[k],mp=+k;
   if(now<v.next)continue;const h=hostByMap[mp];if(!h)continue;if(v.ask&&now-v.ask<8000)continue;v.ask=now;
   send(h,JSON.stringify({t:'emit',k:'mvsp',d:{mp,d:{}},from:0}))}},2000);
 /* ===== ตลาดกลาง: เก็บรายการขาย เงินที่ขายได้ และของที่หมดเวลา ===== */
-const MKF=path.join(__dirname,'market.json');let MK={n:1,L:[],sales:{},ret:{}},mkDirty=false;
+const MKF=path.join(DATA_DIR,'market.json');let MK={n:1,L:[],sales:{},ret:{}},mkDirty=false;
 try{const j=JSON.parse(fs.readFileSync(MKF,'utf8'));if(j&&Array.isArray(j.L))MK=Object.assign(MK,j)}catch(e){}
-setInterval(()=>{const now=Date.now();MK.L=MK.L.filter(x=>{if(now-x.at>48*3600e3){(MK.ret[x.u]=MK.ret[x.u]||[]).push({k:x.k,d:x.d});mkDirty=true;return false}return true});if(!mkDirty)return;mkDirty=false;fs.writeFile(MKF,JSON.stringify(MK),()=>{})},15000);
+if(!MK.ep){MK.ep=crypto.randomBytes(6).toString('hex');mkDirty=true}/* ep เปลี่ยน = ข้อมูลตลาดชุดเดิมหายไป ผู้เล่นจะได้ของที่ฝากขายคืนจากสำเนาในเซฟ */
+setInterval(()=>{const now=Date.now();MK.L=MK.L.filter(x=>{if(now-x.at>48*3600e3){(MK.ret[x.u]=MK.ret[x.u]||[]).push({k:x.k,d:x.d});mkDirty=true;return false}return true});if(!mkDirty)return;mkDirty=false;wj(MKF,MK)},15000);
 function mkOk(k,d){if(k==='it')return!!d&&typeof d==='object'&&typeof d.sl==='string'&&d.sl.length<3&&!!d.st&&typeof d.st==='object'&&JSON.stringify(d).length<700;if(k==='cd')return typeof d==='string'&&/^[a-z]{2,5}$/.test(d);if(k==='st')return!!d&&typeof d==='object'&&/^(hp|mp|ps|s1|s2|s3|twc|sc|hr)$/.test(d.k)&&(d.n|0)>=1&&(d.n|0)<=999;return false}
 function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
 function onMsg(c,raw){
@@ -176,4 +183,6 @@ server.on('upgrade',(req,sock)=>{
 });
 setInterval(()=>{for(const c of [...clients]){if(!c.alive){kill(c);continue}c.alive=false;try{c.sock.write(frame(9,Buffer.alloc(0)))}catch(e){}}},25000);
 function stats(){return{clients:clients.size,countByMap,bytesOut,msgsOut,uptime:Math.round(process.uptime())}}
+function flushAll(){wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
+for(const sig of['SIGTERM','SIGINT'])process.on(sig,()=>{console.log('ปิดเซิร์ฟเวอร์: บันทึกข้อมูล...');flushAll();process.exit(0)});
 server.listen(PORT,()=>console.log('listening on '+PORT+' (สูงสุด '+MAX+' คน)'));
