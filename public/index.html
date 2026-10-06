@@ -5448,10 +5448,13 @@ const GOODS=[
  {k:'s3',n:'หินตีบวกขั้นสูง',ic:()=>stoneIc(3),max:999,d:'ใช้ตีบวก +21 ถึง +30 (เฉพาะชุดเซ็ตสีชมพู) · ได้จากเรดห้วงลึกและบอสหอคอยชั้นสูง'},
  {k:'twc',n:'เหรียญหอคอย',ic:()=>'🪙',max:1e7,d:'ได้จากการปีนหอคอยวิญญาณ · แลกของที่ผู้เฝ้าหอคอย และซื้อกวางวิญญาณ'},
  {k:'sc',n:'เกล็ดห้วงลึก',ic:()=>'🐚',max:9999,d:'วัตถุดิบจากเรดห้วงลึก · ใช้ตีชุดเซ็ตและอาชาเพลิงนรก'},
- {k:'hr',n:'หัวใจห้วงลึก',ic:()=>'💠',max:999,d:'วัตถุดิบหายากจากเรดห้วงลึก · ใช้ตีชุดเซ็ตและอาชาเพลิงนรก'}];
+ {k:'hr',n:'หัวใจห้วงลึก',ic:()=>'💠',max:999,d:'วัตถุดิบหายากจากเรดห้วงลึก · ใช้ตีชุดเซ็ตและอาชาเพลิงนรก'},
+ {k:'fe',n:'ขนนกรุ่งอรุณ',ic:()=>'🪶',max:9999,d:'วัตถุดิบตีชุดเซ็ตรุ่งอรุณ (Ancient Lv 14) ที่ช่างตีเหล็กหลวง · ได้จากมอนในทุ่งรอยแยก (อัศวินดาวตกดรอปบ่อยสุด) · บอส MVP อาซาเอล · ด่านห้วงความทรงจำ · ศึกป้องกันนครลอยฟ้า'},
+ {k:'sf',n:'ขนพายุ',ic:()=>'⚡',max:9999,d:'วัตถุดิบตีชุดวิหคพายุ (Ancient Lv 15) ที่ช่างตีเหล็กหลวง · ได้จากมอนในหมู่เกาะลอยฟ้าตะวันตก (ตัวใหญ่ดรอปบ่อยสุด) · หีบสมบัติซ่อน · บอส MVP เทมเปสต์'},
+ {k:'ec',n:'เศษคราส',ic:()=>'🌑',max:9999,d:'ใช้ยกระดับชุดเซ็ต Ancient → Cosmic ที่ช่างตีเหล็กหลวง (ชิ้นละ 40) · ได้จากมอนในดินแดนหลังรอยแยก · บอสโวราธ · ด่านห้วงตาราชินี · มอนไชนี่'}];
 const GDM={};GOODS.forEach(o=>GDM[o.k]=o);
-function gdGet(k){if(k==='hp'||k==='mp'||k==='ps'||k==='s1'||k==='s2'||k==='s3')return (me.inv&&me.inv[k])|0;if(k==='twc')return me.twc|0;if(k==='sc'||k==='hr')return (me.mat&&me.mat[k])|0;return 0}
-function gdSet(k,v){v=Math.max(0,Math.min(GDM[k].max,Math.floor(v)));if(k==='hp'||k==='mp'||k==='ps'||k==='s1'||k==='s2'||k==='s3')me.inv[k]=v;else if(k==='twc')me.twc=v;else if(k==='sc'||k==='hr'){me.mat=me.mat||{sc:0,hr:0};me.mat[k]=v}}
+function gdGet(k){if(k==='hp'||k==='mp'||k==='ps'||k==='s1'||k==='s2'||k==='s3')return (me.inv&&me.inv[k])|0;if(k==='twc')return me.twc|0;if(k==='sc'||k==='hr'||k==='fe'||k==='sf'||k==='ec')return (me.mat&&me.mat[k])|0;return 0}
+function gdSet(k,v){v=Math.max(0,Math.min(GDM[k].max,Math.floor(v)));if(k==='hp'||k==='mp'||k==='ps'||k==='s1'||k==='s2'||k==='s3')me.inv[k]=v;else if(k==='twc')me.twc=v;else if(k==='sc'||k==='hr'||k==='fe'||k==='sf'||k==='ec'){me.mat=me.mat||{sc:0,hr:0};me.mat[k]=v}}
 const gdClean=o=>{const r={};if(o&&typeof o==='object')GOODS.forEach(g2=>{const v=Math.floor(+o[g2.k]||0);if(v>0)r[g2.k]=Math.min(g2.max,v)});return r};
 const gdSum=o=>Object.values(o||{}).reduce((a,b)=>a+b,0);
 const gdTxt=o=>GOODS.filter(g2=>o&&o[g2.k]).map(g2=>'<div class="sr"><div class="ico">'+g2.ic()+'</div><div class="nm"><b>'+g2.n+' × '+o[g2.k].toLocaleString()+'</b></div></div>').join('');
