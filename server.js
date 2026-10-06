@@ -121,7 +121,7 @@ function onEmit(c,m){
   if(k==='dgo'){if(host&&host!==c)send(host,wrap({}));return}
 }
 /* ===== บอส MVP: เซิร์ฟเวอร์เป็นคนจับเวลาเกิด/ตาย และนับดาเมจหาผู้ได้ MVP ===== */
-const MVDEF={8:60,10:60},MVF=path.join(__dirname,'mvp.json');let MV={},mvDirty=false;
+const MVDEF={8:60,10:60,18:60},MVF=path.join(__dirname,'mvp.json');let MV={},mvDirty=false;
 {let j={};try{j=JSON.parse(fs.readFileSync(MVF,'utf8'))||{}}catch(e){}const now=Date.now();
   for(const k in MVDEF){const o=j[k]||{};MV[k]={next:Math.max(+o.next||0,now+(60+Math.random()*240)*1000),k:o.k|0,last:o.last||null,alive:0,id:0,dm:{},ask:0,empty:0}}}
 setInterval(()=>{if(!mvDirty)return;mvDirty=false;const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}fs.writeFile(MVF,JSON.stringify(o),()=>{})},15000);
