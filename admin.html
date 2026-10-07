@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ผู้ดูแล · ค่ายผู้อพยพ</title>
+<style>
+:root{color-scheme:light;--bg:#f3f2ef;--surface-1:#fcfcfb;--line:#e4e2dc;--grid:#ecebe6;--text-primary:#0b0b0b;--text-secondary:#52514e;--text-muted:#8a8984;--series-1:#2a78d6;--series-1-soft:rgba(42,120,214,.12);--good:#1f8a4c;--warn:#b77900;--crit:#c8322f;--btn:#1d1d1b;--btn-t:#fff}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--bg:#121211;--surface-1:#1a1a19;--line:#2c2c2a;--grid:#262624;--text-primary:#fff;--text-secondary:#c3c2b7;--text-muted:#8d8c84;--series-1:#3987e5;--series-1-soft:rgba(57,135,229,.16);--good:#3fb46f;--warn:#e0a100;--crit:#e66767;--btn:#f2f1ec;--btn-t:#111}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text-primary);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:16px}
+h1{font-size:18px;margin:0}
+h2{font-size:14px;margin:0 0 10px;color:var(--text-secondary);font-weight:600}
+.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.top .sp{flex:1}
+.pill{font-size:12px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--text-secondary);white-space:nowrap}
+.card{background:var(--surface-1);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;min-width:0}
+.grid{display:grid;gap:12px}
+.grid{margin-bottom:12px}.grid>.card{margin-bottom:0}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:760px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g2{grid-template-columns:1fr}}
+.stat .v{font-size:28px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat .l{font-size:12px;color:var(--text-secondary)}
+.stat .s{font-size:12px;color:var(--text-muted)}
+.stat{margin:0}
+button,input{font:inherit}
+button{border:1px solid var(--line);background:var(--surface-1);color:var(--text-primary);border-radius:8px;padding:5px 11px;cursor:pointer}
+button.pri{background:var(--btn);color:var(--btn-t);border-color:var(--btn)}
+button[aria-pressed="true"]{background:var(--text-primary);color:var(--surface-1);border-color:var(--text-primary)}
+input[type=text],input[type=password]{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text-primary)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.chart{position:relative;width:100%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.ax{font-size:11px;fill:var(--text-muted)}
+.tip{position:absolute;pointer-events:none;background:var(--surface-1);border:1px solid var(--line);border-radius:8px;padding:5px 8px;font-size:12px;box-shadow:0 4px 14px rgba(0,0,0,.12);white-space:nowrap;transform:translate(-50%,-110%);display:none;z-index:2}
+.tip b{font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--line);padding:6px 6px}
+td{border-bottom:1px solid var(--grid);padding:6px 6px;font-variant-numeric:tabular-nums}
+td.n,th.n{text-align:right}
+.scroll{overflow-x:auto}
+.muted{color:var(--text-muted)}
+.brk{overflow-wrap:anywhere}
+.sec{font-size:12px;color:var(--text-secondary)}
+.bar{height:8px;border-radius:4px;background:var(--grid);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:4px;background:var(--series-1)}
+.st-good{color:var(--good)}.st-warn{color:var(--warn)}.st-crit{color:var(--crit)}
+.note{border-left:3px solid var(--warn);padding:6px 10px;background:var(--bg);border-radius:6px;font-size:13px;margin-bottom:10px}
+.login{max-width:380px;margin:12vh auto}
+.mrow{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,2fr) 34px;gap:8px;align-items:center;font-size:13px;margin:5px 0}
+.tbl-toggle{font-size:12px;margin-top:6px}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+const MAPN={1:'ค่ายผู้อพยพ',2:'หุบเขากระดูก',3:'ดินแดนเพลิงนรก',4:'วิหารน้ำแข็งนิรันดร์',5:'ลานหอคอยวิญญาณ',6:'ซากนครจมบาดาล',7:'เหมืองทองร้าง',8:'ทะเลทรายสุสานฟาโรห์',9:'นครลอยฟ้าอัสตรา',10:'ทุ่งรอยแยกนภา',11:'ดินแดนหลังรอยแยก',12:'สะพานลมตะวันตก',13:'สวนลอยฟ้าร้าง',14:'หอนาฬิกาเมฆ',15:'ทะเลสาบดาวตก',16:'ป่าผลึกสายฟ้า',17:'หุบเหวลมหวน',18:'ซากวิหารพายุ'};
+const CLN={melee:'ดาบอสูรคลั่ง',archer:'พรานเงาราตรี',sup:'นักสวดปลอบวิญญาณ',assn:'เงาลอบสังหาร',mage:'จอมเวทอาคม'};
+const GDN={hp:'ยาฟื้นเลือด',mp:'ยาฟื้นมานา',ps:'หินกันแตก',s1:'หินตีบวกขั้นแรก',s2:'หินตีบวกขั้นสอง',s3:'หินตีบวกขั้นสูง',twc:'เหรียญหอคอย',sc:'เกล็ดห้วงลึก',hr:'หัวใจห้วงลึก'};
+const LBN={m1:'บอสแมพ 1',m2:'บอสแมพ 2',m3:'บอสแมพ 3',m4:'บอสแมพ 4',m6:'บอสแมพ 6',m7:'บอสแมพ 7',m8:'บอสแมพ 8',m10:'บอสแมพ 10',d1:'ดันเจี้ยน 1',d2:'ดันเจี้ยน 2',d3:'ดันเจี้ยน 3',d7:'เรดห้วงลึก',tw:'หอคอย',wb:'บอสโลก',pv:'PvP'};
+const mapName=id=>{id=+id;if(MAPN[id])return MAPN[id];if(id>=50000&&id<60000)return'หอคอยวิญญาณ';if(id>=10000&&id<90000)return'ดันเจี้ยน';if(id>=90000)return'ลานประลอง PvP';return'แมพ '+id};
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const nf=n=>Number(n||0).toLocaleString('th-TH');
+const dur=s=>{s=Math.max(0,s|0);const d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return d?d+' วัน '+h+' ชม.':h?h+' ชม. '+m+' นาที':m+' นาที'};
+const mb=b=>(b/1048576).toFixed(0)+' MB';
+const tFmt=t=>new Date(t).toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+const dFmt=t=>new Date(t).toLocaleDateString('th-TH',{day:'numeric',month:'short'});
+let KEY='';try{KEY=localStorage.getItem('rf_admin_key')||''}catch(e){}
+let D=null,range='24h',err='',timer=0,showTbl=false,annMsg='';
+const app=document.getElementById('app');
+
+function login(msg){app.innerHTML='<div class="login card"><h1>หน้าผู้ดูแล</h1><p class="sec">ใส่รหัสที่ตั้งไว้ใน ADMIN_KEY บน Render</p>'+(msg?'<div class="note">'+esc(msg)+'</div>':'')+'<form id="lf"><input type="password" id="k" autocomplete="current-password" placeholder="รหัสผู้ดูแล"><div class="row" style="margin-top:10px"><button class="pri" type="submit">เข้าสู่ระบบ</button></div></form></div>';
+  document.getElementById('lf').onsubmit=e=>{e.preventDefault();KEY=document.getElementById('k').value.trim();if(!KEY)return;try{localStorage.setItem('rf_admin_key',KEY)}catch(x){}load()};document.getElementById('k').focus()}
+async function load(){clearTimeout(timer);try{const r=await fetch('/admin/api',{headers:{'x-admin-key':KEY},cache:'no-store'});const j=await r.json().catch(()=>({}));
+    if(r.status===503&&j.err==='nokey')return login('เซิร์ฟเวอร์ยังไม่ได้ตั้งรหัส · ไปที่ Render → Environment → เพิ่ม ADMIN_KEY แล้ว deploy ใหม่');
+    if(r.status===401){try{localStorage.removeItem('rf_admin_key')}catch(x){}return login('รหัสไม่ถูกต้อง')}
+    if(r.status===429)return login('ใส่รหัสผิดหลายครั้ง · รออีก '+Math.ceil((j.wait||600)/60)+' นาที');
+    if(!r.ok)throw new Error('HTTP '+r.status);D=j;err=''}catch(e){err='เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ('+e.message+') · จะลองใหม่อัตโนมัติ'}
+  if(D)render();else if(err)app.innerHTML='<div class="card note">'+esc(err)+'</div>';
+  timer=setTimeout(load,document.hidden?30000:5000)}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&KEY)load()});
+
+/* ---------- charts (single series → no legend; title names it) ---------- */
+function lineChart(el,pts,opt){const W=Math.max(300,el.clientWidth||720),H=W<500?190:220,L=34,R=10,T=12,B=26;if(!pts.length){el.innerHTML='<p class="muted">ยังไม่มีข้อมูล · ระบบเก็บทุก 5 นาที</p>';return}
+  const x0=opt.x0,x1=opt.x1,ym=Math.max(4,...pts.map(p=>p[1])),yMax=Math.ceil(ym*1.1/4)*4,X=t=>L+(t-x0)/(x1-x0)*(W-L-R),Y=v=>T+(1-v/yMax)*(H-T-B);
+  let g='';const ticks=4;for(let i=0;i<=ticks;i++){const v=Math.round(yMax*i/ticks),y=Y(v);g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" stroke="var(--grid)" stroke-width="1"/><text class="ax" x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+v+'</text>'}
+  const nx=W<500?(opt.days?3:4):(opt.days?7:6);for(let i=0;i<=nx;i++){const t=x0+(x1-x0)*i/nx;g+='<text class="ax" x="'+X(t)+'" y="'+(H-6)+'" text-anchor="middle">'+(opt.days?dFmt(t):tFmt(t))+'</text>'}
+  let d='',a='',prev=null;const GAP=opt.gap;pts.forEach(p=>{const x=X(p[0]).toFixed(1),y=Y(p[1]).toFixed(1);d+=(prev&&p[0]-prev<=GAP?'L':'M')+x+' '+y;prev=p[0]});
+  const area='M'+X(pts[0][0])+' '+Y(0)+pts.map(p=>'L'+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)).join('')+'L'+X(pts[pts.length-1][0])+' '+Y(0)+'Z';
+  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(opt.label)+'">'+g+'<path d="'+area+'" fill="var(--series-1-soft)"/><path d="'+d+'" fill="none" stroke="var(--series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><line id="cx" y1="'+T+'" y2="'+(H-B)+'" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="3 3" visibility="hidden"/><circle id="cd" r="4.5" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" visibility="hidden"/><rect x="'+L+'" y="0" width="'+(W-L-R)+'" height="'+H+'" fill="transparent" id="hit"/></svg><div class="tip"></div>';
+  const svg=el.querySelector('svg'),tip=el.querySelector('.tip'),cx=svg.querySelector('#cx'),cd=svg.querySelector('#cd');
+  const mv=e=>{const r=svg.getBoundingClientRect(),sx=(e.clientX-r.left)/r.width*W,t=x0+(sx-L)/(W-L-R)*(x1-x0);let best=pts[0];for(const p of pts)if(Math.abs(p[0]-t)<Math.abs(best[0]-t))best=p;const px=X(best[0]),py=Y(best[1]);
+    cx.setAttribute('x1',px);cx.setAttribute('x2',px);cx.setAttribute('visibility','visible');cd.setAttribute('cx',px);cd.setAttribute('cy',py);cd.setAttribute('visibility','visible');
+    tip.style.display='block';tip.style.left=(px/W*r.width)+'px';tip.style.top=(py/H*r.height)+'px';tip.innerHTML=(opt.days?dFmt(best[0])+' ':'')+tFmt(best[0])+' · <b>'+best[1]+'</b> คน'};
+  const out=()=>{tip.style.display='none';cx.setAttribute('visibility','hidden');cd.setAttribute('visibility','hidden')};
+  svg.addEventListener('pointermove',mv);svg.addEventListener('pointerdown',mv);svg.addEventListener('pointerleave',out)}
+function barChart(el,rows,opt){const W=Math.max(300,el.clientWidth||720),H=W<500?170:200,L=34,R=10,T=12,B=26;const vals=rows.map(r=>r.v==null?0:r.v),ym=Math.max(opt.min||4,...vals),yMax=Math.ceil(ym*1.1/4)*4,n=Math.max(rows.length,opt.slots||0),bw=(W-L-R)/n,Y=v=>T+(1-v/yMax)*(H-T-B);
+  let g='';for(let i=0;i<=4;i++){const v=yMax*i/4,y=Y(v);g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" stroke="var(--grid)"/><text class="ax" x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end">'+v+'</text>'}
+  let b='';rows.forEach((r,i)=>{const x=L+i*bw+1,w=Math.max(2,bw-2),v=r.v==null?0:r.v,y=Y(v),h=Math.max(0,Y(0)-y);
+    if(r.v!=null&&h>0){const rr=Math.min(4,w/2,h);b+='<path d="M'+x+' '+Y(0)+'V'+(y+rr)+'Q'+x+' '+y+' '+(x+rr)+' '+y+'H'+(x+w-rr)+'Q'+(x+w)+' '+y+' '+(x+w)+' '+(y+rr)+'V'+Y(0)+'Z" fill="var(--series-1)" opacity="'+(r.dim?.45:1)+'"/>'}
+    b+='<rect x="'+(L+i*bw)+'" y="'+T+'" width="'+bw+'" height="'+(H-T-B)+'" fill="transparent" data-i="'+i+'"/>';if(r.lab)g+='<text class="ax" x="'+(x+w/2)+'" y="'+(H-6)+'" text-anchor="middle">'+esc(r.lab)+'</text>'});
+  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(opt.label)+'">'+g+b+'</svg><div class="tip"></div>';
+  const svg=el.querySelector('svg'),tip=el.querySelector('.tip');
+  const mv=e=>{const t=e.target.closest('[data-i]');if(!t){tip.style.display='none';return}const i=+t.dataset.i,r=rows[i],sr=svg.getBoundingClientRect(),cxp=(L+i*bw+bw/2)/W*sr.width,cyp=Y(r.v||0)/H*sr.height;tip.style.display='block';tip.style.left=cxp+'px';tip.style.top=cyp+'px';tip.innerHTML=r.tip};
+  svg.addEventListener('pointermove',mv);svg.addEventListener('pointerdown',mv);svg.addEventListener('pointerleave',()=>tip.style.display='none')}
+
+function level(p,w,c){return p>=c?'crit':p>=w?'warn':'good'}
+const LVTXT={good:'ปกติ',warn:'เริ่มสูง',crit:'สูงมาก'},LVIC={good:'●',warn:'▲',crit:'■'};
+function render(){const d=D,s=d.srv,plan=512*1048576,memP=s.rss/plan*100,memL=level(memP,70,85),fullP=d.online/d.max*100,fullL=level(fullP,70,90);
+  const ago=Math.round((Date.now()-d.now)/1000);
+  let h='<div class="top"><h1>ค่ายผู้อพยพ · ผู้ดูแล</h1><span class="pill">อัปเดตทุก 5 วินาที</span><span class="sp"></span><button id="lo">ออกจากระบบ</button></div>';
+  if(err)h+='<div class="note">'+esc(err)+'</div>';
+  if(!s.persist)h+='<div class="note">ยังไม่ได้ตั้ง DATA_DIR · สถิติ ตลาด และอันดับจะหายเมื่อ deploy ใหม่</div>';
+  if(d.today.full)h+='<div class="note">วันนี้มีคนเข้าไม่ได้เพราะเซิร์ฟเวอร์เต็ม '+nf(d.today.full)+' ครั้ง (จำกัด '+d.max+' คน · ปรับได้ที่ MAX_PLAYERS)</div>';
+  h+='<div class="grid g4">'+
+    '<div class="card stat"><div class="l">ออนไลน์ตอนนี้</div><div class="v">'+nf(d.online)+'</div><div class="s">จากที่รับได้ '+d.max+' คน · <span class="st-'+fullL+'">'+LVIC[fullL]+' '+fullP.toFixed(0)+'%</span></div></div>'+
+    '<div class="card stat"><div class="l">สูงสุดวันนี้</div><div class="v">'+nf(d.today.peak)+'</div><div class="s">สูงสุดตลอดกาล '+nf(d.peak.n)+(d.peak.at?' · '+dFmt(d.peak.at):'')+'</div></div>'+
+    '<div class="card stat"><div class="l">ผู้เล่นวันนี้ (ไม่ซ้ำ)</div><div class="v">'+nf(d.today.u)+'</div><div class="s">เข้าเกม '+nf(d.today.sess)+' ครั้ง</div></div>'+
+    '<div class="card stat"><div class="l">เวลาเล่นรวมวันนี้</div><div class="v">'+nf(Math.round(d.today.min/60*10)/10)+'</div><div class="s">ชั่วโมง·คน · เฉลี่ย '+(d.today.u?Math.round(d.today.min/d.today.u):0)+' นาที/คน</div></div></div>';
+  h+='<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:6px"><h2 style="margin:0">จำนวนคนออนไลน์</h2><div class="row"><button data-r="24h" aria-pressed="'+(range==='24h')+'">24 ชั่วโมง</button><button data-r="7d" aria-pressed="'+(range==='7d')+'">7 วัน</button></div></div><div class="chart" id="c1"></div><div class="sec">ค่าสูงสุดในแต่ละช่วง 5 นาที</div></div>';
+  h+='<div class="grid g2"><div class="card"><h2>ช่วงเวลาที่คนเล่น (วันนี้ · เฉลี่ยรายชั่วโมง)</h2><div class="chart" id="c2"></div></div><div class="card"><h2>ผู้เล่นไม่ซ้ำรายวัน (30 วัน)</h2><div class="chart" id="c3"></div><button class="tbl-toggle" id="tt">'+(showTbl?'ซ่อนตาราง':'ดูเป็นตาราง')+'</button>'+(showTbl?'<div class="scroll"><table><thead><tr><th>วันที่</th><th class="n">ไม่ซ้ำ</th><th class="n">สูงสุดพร้อมกัน</th><th class="n">เข้าเกม</th><th class="n">ชม.·คน</th><th class="n">เต็ม</th></tr></thead><tbody>'+d.days.slice().reverse().map(x=>'<tr><td>'+esc(x.d)+'</td><td class="n">'+nf(x.u)+'</td><td class="n">'+nf(x.peak)+'</td><td class="n">'+nf(x.sess)+'</td><td class="n">'+(Math.round(x.min/6)/10)+'</td><td class="n">'+nf(x.full)+'</td></tr>').join('')+'</tbody></table></div>':'')+'</div></div>';
+  const maps=Object.entries(d.byMap||{}).map(([k,v])=>[mapName(k),v]);const mg={};maps.forEach(([k,v])=>mg[k]=(mg[k]||0)+v);const mrows=Object.entries(mg).sort((a,b)=>b[1]-a[1]),mmax=Math.max(1,...mrows.map(r=>r[1]));
+  h+='<div class="grid g2"><div class="card"><h2>อยู่แมพไหนกันบ้าง</h2>'+(mrows.length?mrows.map(([k,v])=>'<div class="mrow"><span>'+esc(k)+'</span><div class="bar"><i style="width:'+(v/mmax*100)+'%"></i></div><b class="n" style="text-align:right">'+v+'</b></div>').join(''):'<p class="muted">ตอนนี้ไม่มีใครออนไลน์</p>')+'</div>';
+  const mk=d.mk;h+='<div class="card"><h2>ตลาดกลาง</h2><div class="grid g2" style="gap:6px"><div class="stat"><div class="l">ของที่วางขาย</div><div class="v" style="font-size:22px">'+nf(mk.n)+'</div><div class="s">ผู้ขาย '+nf(mk.sellers)+' คน</div></div><div class="stat"><div class="l">มูลค่ารวม</div><div class="v" style="font-size:22px">'+nf(mk.val)+'</div><div class="s">ทองรอผู้ขายมารับ '+nf(mk.pend)+' · ของรอคืน '+nf(mk.ret)+'</div></div></div>'+(mk.recent.length?'<div class="scroll" style="margin-top:8px"><table><thead><tr><th>ล่าสุด</th><th>ผู้ขาย</th><th class="n">ราคา</th></tr></thead><tbody>'+mk.recent.map(x=>'<tr><td>'+esc(x.k==='st'?(GDN[x.d&&x.d.k]||(x.d&&x.d.k)||'')+' ×'+((x.d&&x.d.n)||''):x.k==='cd'?'การ์ด '+x.d:(x.d||'อุปกรณ์'))+'</td><td>'+esc(x.n)+'</td><td class="n">'+nf(x.p)+'</td></tr>').join('')+'</tbody></table></div>':'')+'</div></div>';
+  h+='<div class="card"><h2>ผู้เล่นออนไลน์ ('+d.players.length+')</h2>'+(d.players.length?'<div class="scroll"><table><thead><tr><th>ชื่อ</th><th>อาชีพ</th><th class="n">Lv</th><th>แมพ</th><th class="n">ออนไลน์มา</th><th>สถานะ</th></tr></thead><tbody>'+d.players.slice().sort((a,b)=>b.on-a.on).map(p=>'<tr><td>'+esc(p.n||'—')+'</td><td>'+esc(CLN[p.c]||p.c)+'</td><td class="n">'+p.l+'</td><td>'+esc(mapName(p.mp))+'</td><td class="n">'+dur(p.on)+'</td><td>'+[p.host?'คุมมอนสเตอร์':'',p.aw?'พับจอ':'',p.dead?'ตาย':''].filter(Boolean).join(' · ')+'</td></tr>').join('')+'</tbody></table></div>':'<p class="muted">ตอนนี้ไม่มีใครออนไลน์</p>')+'</div>';
+  const mv=Object.entries(d.mvp||{});const lbk=Object.keys(d.lb||{});
+  h+='<div class="grid g2"><div class="card"><h2>บอส MVP</h2><table><tbody>'+mv.map(([k,v])=>'<tr><td>'+esc(mapName(k))+'</td><td>'+(v.al?'<span class="st-warn">▲ เกิดอยู่</span> · มีคน '+v.n:'อีก '+dur(v.in))+'</td><td class="n">ปราบแล้ว '+nf(v.k)+'</td></tr><tr><td colspan="3" class="sec">MVP ล่าสุด: '+(v.last?esc(v.last.n)+' · ดาเมจ '+nf(v.last.d)+' · '+dFmt(v.last.at)+' '+tFmt(v.last.at):'—')+'</td></tr>').join('')+'</tbody></table></div>';
+  h+='<div class="card"><h2>ตารางอันดับ</h2>'+(lbk.length?'<table><tbody>'+lbk.map(k=>'<tr><td>'+esc(LBN[k]||k)+'</td><td class="n">'+nf(d.lb[k].n)+' รายการ</td><td>'+(d.lb[k].top?'อันดับ 1: '+esc(d.lb[k].top.n):'')+'</td></tr>').join('')+'</tbody></table>':'<p class="muted">ยังไม่มีใครติดอันดับ</p>')+'</div></div>';
+  const disk=s.disk,dkP=disk?100-disk.free/disk.total*100:0,dkL=level(dkP,80,92),cpuL=level(s.cpu,60,85);
+  h+='<div class="card"><h2>สุขภาพเซิร์ฟเวอร์</h2><div class="grid g4">'+
+    '<div class="stat"><div class="l">หน่วยความจำ (แผน 512 MB)</div><div class="v" style="font-size:22px">'+mb(s.rss)+'</div><div class="bar" style="margin:6px 0"><i style="width:'+Math.min(100,memP)+'%"></i></div><div class="s st-'+memL+'">'+LVIC[memL]+' '+LVTXT[memL]+' · '+memP.toFixed(0)+'%</div></div>'+
+    '<div class="stat"><div class="l">CPU</div><div class="v" style="font-size:22px">'+s.cpu+'%</div><div class="s st-'+cpuL+'">'+LVIC[cpuL]+' '+LVTXT[cpuL]+'</div></div>'+
+    '<div class="stat"><div class="l">ส่งข้อมูลออก</div><div class="v" style="font-size:22px">'+(s.bw/1024).toFixed(0)+' KB/s</div><div class="s">'+nf(s.msg)+' ข้อความ/วิ</div></div>'+
+    '<div class="stat"><div class="l">ดิสก์ถาวร</div><div class="v" style="font-size:22px">'+(disk?mb(disk.free):'—')+'</div><div class="s'+(disk?' st-'+dkL:'')+'">'+(disk?LVIC[dkL]+' ว่าง '+(100-dkP).toFixed(0)+'% · ':'')+'<span class="brk">'+esc(s.dataDir)+'</span></div></div></div>'+
+    '<div class="sec" style="margin-top:8px">เปิดมาแล้ว '+dur(s.up)+' · Node '+esc(s.node)+' · การเชื่อมต่อ '+d.conn+'</div></div>';
+  h+='<div class="card"><h2>ประกาศถึงผู้เล่นทุกคน</h2><p class="sec" style="margin-top:0">ขึ้นเป็นแถบประกาศกลางจอและในแชทของทุกคนที่ออนไลน์อยู่ · เช่น แจ้งปิดปรับปรุง</p><div class="row"><input type="text" id="an" maxlength="120" placeholder="เช่น อีก 5 นาทีจะปิดปรับปรุงสักครู่ครับ" style="flex:1;min-width:200px"><button class="pri" id="as">ส่งประกาศ</button></div>'+(annMsg?'<p class="sec">'+esc(annMsg)+'</p>':'')+'</div>';
+  h+='<p class="muted" style="font-size:12px">ข้อมูลเมื่อ '+tFmt(d.now)+(ago>15?' · ล่าช้า '+ago+' วิ':'')+'</p>';
+  const keep=document.getElementById('an'),kv=keep?keep.value:'',kf=document.activeElement&&document.activeElement.id==='an';
+  app.innerHTML=h;
+  if(kv){document.getElementById('an').value=kv}if(kf)document.getElementById('an').focus();
+  const now=d.now,span=range==='24h'?864e5:7*864e5,pts=d.samples.filter(p=>p[0]>=now-span);
+  lineChart(document.getElementById('c1'),pts,{x0:now-span,x1:now,days:range==='7d',gap:11*60e3,label:'จำนวนคนออนไลน์'});
+  const hr=new Date(now+7*3600e3).getUTCHours();
+  barChart(document.getElementById('c2'),d.hours.map((v,i)=>({v,lab:i%(document.body.clientWidth<500?6:3)===0?String(i).padStart(2,'0'):'',dim:i>hr,tip:String(i).padStart(2,'0')+':00 · <b>'+(v==null?'ยังไม่มีข้อมูล':v+'</b> คน')})),{label:'คนออนไลน์เฉลี่ยรายชั่วโมง'});
+  barChart(document.getElementById('c3'),d.days.map((x,i,a)=>({v:x.u,lab:(i%5===0||i===a.length-1)?x.d.slice(8)+'/'+x.d.slice(5,7):'',tip:esc(x.d)+' · <b>'+x.u+'</b> คน · สูงสุดพร้อมกัน '+x.peak})),{label:'ผู้เล่นไม่ซ้ำรายวัน',slots:30});
+  app.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{range=b.dataset.r;render()});
+  document.getElementById('tt').onclick=()=>{showTbl=!showTbl;render()};
+  document.getElementById('lo').onclick=()=>{KEY='';try{localStorage.removeItem('rf_admin_key')}catch(e){}clearTimeout(timer);login()};
+  document.getElementById('as').onclick=async()=>{const t=document.getElementById('an').value.trim();if(!t)return;if(!confirm('ส่งประกาศนี้ถึงทุกคนที่ออนไลน์?\n\n'+t))return;
+    try{const r=await fetch('/admin/ann',{method:'POST',headers:{'x-admin-key':KEY,'Content-Type':'application/json'},body:JSON.stringify({t})});const j=await r.json();annMsg=j.ok?'ส่งแล้ว ถึง '+j.n+' คน · '+tFmt(Date.now()):'ส่งไม่สำเร็จ';if(j.ok)document.getElementById('an').value=''}catch(e){annMsg='ส่งไม่สำเร็จ'}render()}}
+if(KEY)load();else login();
+</script>
+</body>
+</html>
