@@ -135,7 +135,7 @@ function render(){const d=D,s=d.srv,plan=512*1048576,memP=s.rss/plan*100,memL=le
     '<div class="stat"><div class="l">CPU</div><div class="v" style="font-size:22px">'+s.cpu+'%</div><div class="s st-'+cpuL+'">'+LVIC[cpuL]+' '+LVTXT[cpuL]+'</div></div>'+
     '<div class="stat"><div class="l">ส่งข้อมูลออก</div><div class="v" style="font-size:22px">'+(s.bw/1024).toFixed(0)+' KB/s</div><div class="s">'+nf(s.msg)+' ข้อความ/วิ</div></div>'+
     '<div class="stat"><div class="l">ดิสก์ถาวร</div><div class="v" style="font-size:22px">'+(disk?mb(disk.free):'—')+'</div><div class="s'+(disk?' st-'+dkL:'')+'">'+(disk?LVIC[dkL]+' ว่าง '+(100-dkP).toFixed(0)+'% · ':'')+'<span class="brk">'+esc(s.dataDir)+'</span></div></div></div>'+
-    '<div class="sec" style="margin-top:8px">เปิดมาแล้ว '+dur(s.up)+' · Node '+esc(s.node)+' · การเชื่อมต่อ '+d.conn+'</div></div>';
+    '<div class="sec" style="margin-top:8px">เปิดมาแล้ว '+dur(s.up)+' · Node '+esc(s.node)+' · ชื่อตัวละครที่จองไว้ '+nf(s.names||0)+' · การเชื่อมต่อ '+d.conn+'</div></div>';
   h+='<div class="card"><h2>ประกาศถึงผู้เล่นทุกคน</h2><p class="sec" style="margin-top:0">ขึ้นเป็นแถบประกาศกลางจอและในแชทของทุกคนที่ออนไลน์อยู่ · เช่น แจ้งปิดปรับปรุง</p><div class="row"><input type="text" id="an" maxlength="120" placeholder="เช่น อีก 5 นาทีจะปิดปรับปรุงสักครู่ครับ" style="flex:1;min-width:200px"><button class="pri" id="as">ส่งประกาศ</button></div>'+(annMsg?'<p class="sec">'+esc(annMsg)+'</p>':'')+'</div>';
   h+='<p class="muted" style="font-size:12px">ข้อมูลเมื่อ '+tFmt(d.now)+(ago>15?' · ล่าช้า '+ago+' วิ':'')+'</p>';
   const keep=document.getElementById('an'),kv=keep?keep.value:'',kf=document.activeElement&&document.activeElement.id==='an';

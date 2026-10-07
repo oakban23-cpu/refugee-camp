@@ -93,6 +93,7 @@ setInterval(()=>{if(!lbDirty)return;lbDirty=false;wj(LBF,LB)},10000);
 function onEmit(c,m){
   const k=m.k,pl=m.d;if(typeof k!=='string'||k.length>12)return;
   if(k==='chat'){const s=JSON.stringify({t:'emit',k,d:pl,from:c.id});for(const o of clients)if(o!==c)send(o,s);return}
+  if(k==='nmq'){nameReq(c,pl&&pl.d);return}
   if(!c.p||!pl||typeof pl!=='object')return;
   const mp=c.p.mp,d=pl.d,host=hostByMap[mp];
   const wrap=x=>JSON.stringify({t:'emit',k,d:{mp,d:x},from:c.id});
@@ -223,7 +224,7 @@ function adminData(){const now=Date.now(),pl=[];
   let disk=null;try{if(fs.statfsSync){const f=fs.statfsSync(DATA_DIR);disk={free:f.bavail*f.bsize,total:f.blocks*f.bsize}}}catch(e){}
   const mem=process.memoryUsage();
   return{now,online:pl.length,conn:clients.size,max:MAX,players:pl,byMap:countByMap,peak:ST.peak,today:{peak:today.peak,u:today.u.length,min:today.min,sess:today.sess,full:today.full|0},hours,days,samples:ST.s,
-    mk,mvp:mvTable(),lb,srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
+    mk,mvp:mvTable(),lb,srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
 function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':'noindex','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer'};
   if(!req.url.startsWith('/admin/api')&&!req.url.startsWith('/admin/ann')){return fs.readFile(path.join(__dirname,'admin.html'),(e,b)=>{if(e){res.writeHead(404,H);return res.end('missing admin.html')}res.writeHead(200,Object.assign({'Content-Type':'text/html; charset=utf-8',"Content-Security-Policy":"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:"},H));res.end(b)})}
   const J=(code,o)=>{res.writeHead(code,Object.assign({'Content-Type':'application/json'},H));res.end(JSON.stringify(o))};
@@ -236,7 +237,26 @@ function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':
   if(req.method!=='POST')return J(405,{err:'post'});
   let body='';req.on('data',d=>{body+=d;if(body.length>2000)req.destroy()});req.on('end',()=>{let t='';try{t=String(JSON.parse(body).t||'')}catch(e){}t=t.replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return J(400,{err:'empty'});
     const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);J(200,{ok:1,n})})}
+/* ===== จองชื่อตัวละคร: หนึ่งชื่อใช้ได้ตัวละครเดียวทั้งเซิร์ฟเวอร์ (ผูกกับรหัสตัวละครถาวร mid) · ไม่ได้ใช้ 90 วันปล่อยคืน ===== */
+const NMF=path.join(DATA_DIR,'names.json'),NM_TTL=90*864e5;let NM={},nmDirty=false;
+try{const j=JSON.parse(fs.readFileSync(NMF,'utf8'));if(j&&typeof j==='object')NM=j}catch(e){}
+setInterval(()=>{if(!nmDirty)return;nmDirty=false;wj(NMF,NM)},15000);
+const nmClean=v=>String(v==null?'':v).replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,12);
+const nmKey=v=>nmClean(v).toLowerCase().normalize('NFC').replace(/[\s​-‏⁠﻿]/g,'');
+const NM_BAD=['gm','admin','ผู้ดูแล','แอดมิน','ระบบ','ประกาศ','📢ประกาศ','ผู้เล่น'];
+function nameReq(c,d){if(!d||typeof d!=='object')return;const t=String(d.t||'').slice(0,12),op=d.op==='chk'?'chk':'claim',n=nmClean(d.n),key=nmKey(n),mid=typeof d.mid==='string'&&/^[a-z0-9]{8,16}$/.test(d.mid)?d.mid:'';
+  const reply=o=>send(c,JSON.stringify({t:'emit',k:'nmr',d:{mp:0,d:Object.assign({t,n},o)},from:0}));
+  const now=Date.now();c.nmN=(c.nmT&&now-c.nmT<60000?c.nmN:0)+1;if(!c.nmT||now-c.nmT>=60000)c.nmT=now;if(c.nmN>20)return reply({ok:0,why:'busy'});
+  if(!key||!mid)return reply({ok:0,why:'bad'});
+  if(NM_BAD.includes(key))return reply({ok:0,why:'reserved'});
+  const cur=NM[key];const free=!cur||cur.mid===mid||now-(cur.at||0)>NM_TTL;
+  if(!free)return reply({ok:0,why:'taken'});
+  if(op==='chk')return reply({ok:1});
+  for(const k in NM)if(k!==key&&NM[k].mid===mid)delete NM[k];
+  NM[key]={n,mid,at:now};nmDirty=true;
+  const ks=Object.keys(NM);if(ks.length>60000){ks.sort((a,b)=>NM[a].at-NM[b].at).slice(0,ks.length-60000).forEach(k=>delete NM[k])}
+  reply({ok:1})}
 function stats(){return{clients:clients.size,countByMap,bytesOut,msgsOut,uptime:Math.round(process.uptime())}}
-function flushAll(){try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
+function flushAll(){try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
 for(const sig of['SIGTERM','SIGINT'])process.on(sig,()=>{console.log('ปิดเซิร์ฟเวอร์: บันทึกข้อมูล...');flushAll();process.exit(0)});
 server.listen(PORT,()=>console.log('listening on '+PORT+' (สูงสุด '+MAX+' คน)'));
