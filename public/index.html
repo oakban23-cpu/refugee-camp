@@ -7620,7 +7620,7 @@ const SETS={1:{n:'ชุดราชันห้วงลึก',c:'#1fb8a8',pn:
     b:[[2,{hp:.1},'เลือดสูงสุด +10%'],[3,{red:.06,reg:6},'ลดดาเมจที่ได้รับ +6% · ฟื้นเลือด 6/วิ'],[5,{},'เลือดต่ำกว่า 50% ได้เกราะ 25% ของเลือดสูงสุดและฟื้นมานา 30% (ทุก 15 วิ)']]}};
 const SETCOST=sl=>sl==='w'?{sc:12,hr:1,g:20000}:{sc:8,hr:0,g:15000};
 function makeCosmicSet(id,sl,L){const it=genItem(L||(id===5?21:id===4?15:id===3?14:IL60),sl,6,6);Object.keys(it.st).forEach(k=>it.st[k]=r2(Math.min(gkCap(k,6,it.L),it.st[k]*1.08)));it.ss=id;it.lk=1;it.cz=1;return it}
-function makeSetItem(id,sl){const it=genItem(id===5?21:id===4?15:id===3?14:IL60,sl,5,5);Object.keys(it.st).forEach(k=>it.st[k]=r2(Math.min(id===5?gkCap(k,5,21):GKI[k],it.st[k]*1.08)));it.ss=id;it.lk=1;return it}
+function makeSetItem(id,sl){const it=genItem(id===5?21:id===4?15:id===3?14:IL60,sl,5,5);Object.keys(it.st).forEach(k=>it.st[k]=r2(Math.min(gkCap(k,5,it.L),it.st[k]*1.08)));it.ss=id;it.lk=1;return it}
 const setCount=id=>SLOTS.reduce((a,sl)=>a+(me.eq&&me.eq[sl]&&me.eq[sl].ss===id?1:0),0);
 function setB(k){let t=0;if(!me.eq)return 0;for(const id in SETS){const n=setCount(+id);if(n<2)continue;SETS[id].b.forEach(([need,st])=>{if(n>=need&&st[k])t+=st[k]})}return t}
 function setHtml(id){const S=SETS[id],n=setCount(id);return'<div style="margin-top:6px;padding:6px 8px;border-radius:8px;background:rgba(31,184,168,.08);border:1px solid '+S.c+'"><b style="color:'+S.c+'">🔱 '+S.n+' ('+n+'/5)</b>'+S.b.map(([need,,t])=>'<div style="font-size:12px;opacity:'+(n>=need?1:.55)+'">'+(n>=need?'✅':'⬜')+' '+need+' ชิ้น: '+t+'</div>').join('')+'</div>'}
@@ -7885,7 +7885,7 @@ const RN=['Basic · พื้นฐาน','Refined · ประณีต','Elit
 const SLN={w:'อาวุธ',a:'เกราะ',c:'เครื่องประดับ',h:'หมวก',b:'รองเท้า'};const SLOTS=['w','a','c','h','b'];
 const GN={w:['อาวุธสนิม','อาวุธเหล็กกล้า','อาวุธเงินวิเศษ','อาวุธเปลวเพลิง'],a:['เสื้อหนังเก่า','เกราะเหล็ก','เกราะเงินวิเศษ','เกราะมังกร'],c:['แหวนทองเหลือง','สร้อยเงิน','เครื่องรางเวท','เครื่องรางเทพ'],h:['หมวกผ้าเก่า','หมวกเหล็ก','หมวกเงินวิเศษ','มงกุฎมังกร'],b:['รองเท้าหนังเก่า','รองเท้าเหล็ก','รองเท้าเงินวิเศษ','รองเท้าลมพายุ']};
 GN.w.push('อาวุธเทพนิรันดร์','อาวุธบรรพกาล','อาวุธห้วงจักรวาล');GN.a.push('เกราะเทพนิรันดร์','เกราะบรรพกาล','เกราะห้วงจักรวาล');GN.c.push('อัญมณีนิรันดร์','อัญมณีบรรพกาล','อัญมณีห้วงจักรวาล');GN.h.push('มงกุฎเทพนิรันดร์','มงกุฎบรรพกาล','มงกุฎห้วงจักรวาล');GN.b.push('รองเท้าเทพนิรันดร์','รองเท้าบรรพกาล','รองเท้าห้วงจักรวาล');
-const GKI={hp:1.17,dm:.78,sp:.65,mp:1.43,red:.22,reg:14.3,cr:.58,as:.39,ls:.22,cdr:.08,mpr:4.5,mcr:.08,spw:.15,hpw:.15},GKX={hp:1,dm:1,mp:1,reg:1,cr:1,as:1},glF=L=>L>15?1+(L-15)*.06:1,gkCap=(k,r,L)=>(GKI[k]||9)*(r>=6&&GKX[k]?1.22:1)*glF(L|0);
+const GKI={hp:1.17,dm:.78,sp:.65,mp:1.43,red:.22,reg:14.3,cr:.58,as:.39,ls:.22,cdr:.08,mpr:4.5,mcr:.08,spw:.15,hpw:.15},GKX={hp:1,dm:1,mp:1,reg:1,cr:1,as:1},glF=L=>L<=12?1:L<=15?1+(L-12)*.04:1.12+(L-15)*.04,gkCap=(k,r,L)=>(GKI[k]||9)*(r>=6&&GKX[k]?1.22:1)*glF(L|0);
 const GK={hp:.5,dm:.36,sp:.25,mp:.7,red:.13,reg:6,cr:.24,as:.18,ls:.12,cdr:.04,mpr:2.2,mcr:.04,spw:.07,hpw:.07};
 /* ออปชั่นสายเวท: เพดานรวมจากอุปกรณ์ · ใช้ได้ทุกอาชีพ แต่สุ่มออกบ่อยเมื่อคนเก็บเป็นจอมเวท/นักสวด */
 const GKT={cdr:.25,mpr:12,mcr:.25,spw:.4,hpw:.4},isCaster=c=>c==='mage'||c==='sup';
