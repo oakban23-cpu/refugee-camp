@@ -1729,14 +1729,22 @@ function rareBuy(id){const o=rareToday().find(x=>x.id===id);if(!o)return;const d
 
 /* ===== ตลาดกลาง: ซื้อขายระหว่างผู้เล่น (ต้องต่อเซิร์ฟเวอร์) ===== */
 let MKD=null,MKP={},mkTab='buy',mkPrice=1000,mkF='all';
-const mkOn=()=>!!(room&&room.url);
+const mkOn=()=>!!(room&&room.url);let MKE='';
+const mkA=()=>typeof ACC!=='undefined'&&ACC?{a:ACC.a,t:ACC.t}:null;
+const mkNeedAcc=()=>typeof srvAcc==='function'&&srvAcc()&&!(typeof ACC!=='undefined'&&ACC);
+const MKWHY={acc:'ต้องล็อกอินบัญชีก่อนใช้ตลาด',own:'ตัวละครนี้เคยใช้ตลาดด้วยบัญชีอื่น ล็อกอินบัญชีเดิมก่อน',ban:'⛔ บัญชีนี้ถูกระงับการซื้อ-ขายในตลาด (ติดต่อผู้ดูแล)',flag:'⚠️ บัญชีของคุณรอผู้ดูแลตรวจสอบความผิดปกติ ซื้อของในตลาดชั่วคราวไม่ได้',gold:'ทองที่บันทึกบนเซิร์ฟเวอร์ไม่พอ',sync:'บันทึกขึ้นเซิร์ฟเวอร์ไม่ทัน ลองกดซื้ออีกครั้ง'};
+async function accSync(){try{await writeSave()}catch(e){}for(let i=0;i<5;i++){let w=0;while(accBusy&&w<40){await new Promise(r=>setTimeout(r,150));w++}accDirty=true;await accPush();if(!accDirty)return true;await new Promise(r=>setTimeout(r,1700))}return false}
+function mkWhy(D){if(D&&D.why==='acc'){try{accLost()}catch(e){}}return D&&MKWHY[D.why]}
 const MKG=['s3','s2','s1','ps','twc','sc','hr','fe','sf','ec','nt','hp','mp'];
 function mkName(k,d){if(k==='it'){const it=cleanItem(d);return it?itemCard(it):'?'}if(k==='cd')return'🃏 <b>'+(CARDS[d]?CARDS[d].n:'การ์ด')+'</b>';if(k==='st')return'<b>'+(GDM[d.k]?GDM[d.k].n:d.k)+' ×'+(d.n|0)+'</b>';return'?'}
 function mkGive(k,d,q){if(k==='it'){const it=cleanItem(d);if(it){me.bag.push(it);if(!q)sysMsg('📦 ได้รับ '+itemName(it))}}else if(k==='cd'){if(CARDS[d])cardGet(d,1)}else if(k==='st'&&GDM[d.k])gdSet(d.k,gdGet(d.k)+(d.n|0))}
-function mkFetch(){if(mkOn())try{emitM('mkq',{mid:mkMid()})}catch(e){}}
-function mktUI(msg){if(!me.cls)return;ov.dataset.k='mkt';ov.hidden=false;
+function mkFetch(){if(mkOn()&&!mkNeedAcc())try{emitM('mkq',{mid:mkMid(),acc:mkA()})}catch(e){}}
+function mktUI(msg){if(!me.cls)return;ov.dataset.k='mkt';ov.hidden=false;if(msg)mktUI.m={t:msg,at:Date.now()};else if(mktUI.m&&Date.now()-mktUI.m.at<4000)msg=mktUI.m.t;
   let h=hdr('🏪','ตลาดกลางอัสตรา','ทอง '+fmtG(me.gold));if(msg)h+='<div class="note">'+msg+'</div>';
   if(!mkOn()){h+='<div class="card hint">ตลาดซื้อขายระหว่างผู้เล่นใช้ได้เมื่อเล่นออนไลน์บนเซิร์ฟเวอร์เท่านั้น</div>';ov.innerHTML='<div class="pn" data-pn="mkt">'+h+'</div>';return}
+  if(mkNeedAcc()){h+='<div class="card hint">🔐 <b>ตลาดกลางต้องล็อกอินบัญชีก่อน</b><br><small>เพื่อกันการโกงทอง และให้ของที่ฝากขายกับเงินที่ขายได้ผูกกับบัญชีของคุณ ไม่หายเมื่อเปลี่ยนเครื่อง</small></div>'+accBox();ov.innerHTML='<div class="pn" data-pn="mkt">'+h+'</div>';return}
+  if(MKE&&!MKD){h+='<div class="card hint">'+(MKWHY[MKE]||'ใช้ตลาดไม่ได้ตอนนี้')+'</div><div class="card"><button data-tab="mk:buy">ลองใหม่</button></div>';ov.innerHTML='<div class="pn" data-pn="mkt">'+h+'</div>';return}
+  if(MKD&&MKD.ban)h+='<div class="card hint">'+MKWHY.ban+'</div>';else if(MKD&&MKD.fl)h+='<div class="card hint">'+MKWHY.flag+'</div>';
   h+=tabsH([['buy','🛒 ซื้อ'],['sell','💰 ตั้งขาย'],['mine','📋 ร้านของฉัน'+(MKD&&(MKD.sale>0||MKD.ret>0)?'<i class="dt"></i>':'')]],mkTab,'mk');
   if(!MKD){h+='<div class="card"><small>กำลังโหลดตลาด...</small></div>';mkFetch()}
   else if(mkTab==='buy'){const F=[['all','ทั้งหมด'],['it','อุปกรณ์'],['cd','การ์ด'],['st','ของใช้']];
@@ -1754,16 +1762,17 @@ function mktUI(msg){if(!me.cls)return;ov.dataset.k='mkt';ov.hidden=false;
     h+='<div class="card"><div class="cap">กำลังวางขาย ('+my.length+'/8)</div>'+(my.length?my.map(x=>'<div class="sr"><div class="nm">'+mkName(x.k,x.d)+'<small>'+x.p.toLocaleString()+' ทอง</small></div><button data-mkx="'+x.id+'">ยกเลิก</button></div>').join('<hr>'):'<small style="opacity:.7">ยังไม่ได้วางขายอะไร</small>')+'</div>'}
   ov.innerHTML='<div class="pn" data-pn="mkt">'+h+'</div>'}
 function mkAct(a,v){
-  if(a==='tab'){mkTab=v;mkFetch();return mktUI()}if(a==='f'){mkF=v;return mktUI()}
+  if(a==='tab'){mkTab=v;MKE='';mkFetch();return mktUI()}if(a==='f'){mkF=v;return mktUI()}
   if(a==='s'){const pe=$('mkpr');const p=Math.floor(+(pe&&pe.value)||0);if(!(p>=1&&p<=1e9))return mktUI('ใส่ราคาให้ถูกต้องก่อน');mkPrice=p;
     const [k,x,y]=v.split(':');let d=null;
     if(k==='it'){const it=me.bag[+x];if(!it||it.lk)return;d=JSON.parse(JSON.stringify(it));me.bag.splice(+x,1)}
     else if(k==='cd'){if(!((me.cards[x]|0)>0))return;me.cards[x]--;if(!me.cards[x]){delete me.cards[x];if(me.cslot)me.cslot=me.cslot.map(c=>c===x?'':c);if(me.cmv===x)me.cmv=''}cardRecalc();recalc();d=x}
     else if(k==='st'){const n=+y;if(gdGet(x)<n)return;gdSet(x,gdGet(x)-n);d={k:x,n}}
-    if(d===null)return;const t=Math.random().toString(36).slice(2,9);MKP[t]={k,d,at:Date.now()};emitM('mkl',{t,k,d,p,mid:mkMid()});sfx('coin');return mktUI('⏳ กำลังวางขาย...')}
-  if(a==='b'){const x=MKD&&MKD.L.find(q=>q.id===+v);if(!x||me.gold<x.p)return;emitM('mkb',{id:x.id,mid:mkMid()});return}
-  if(a==='x'){emitM('mkx',{id:+v,mid:mkMid()});return}
-  if(a==='c'){emitM('mkc',{mid:mkMid()});return}}
+    if(d===null)return;const t=Math.random().toString(36).slice(2,9);MKP[t]={k,d,at:Date.now()};emitM('mkl',{t,k,d,p,mid:mkMid(),acc:mkA()});sfx('coin');return mktUI('⏳ กำลังวางขาย...')}
+  if(a==='b'){const x=MKD&&MKD.L.find(q=>q.id===+v);if(!x||me.gold<x.p||mkAct.busy)return;mkAct.busy=1;mkMid();mktUI('⏳ กำลังตรวจสอบทองกับเซิร์ฟเวอร์...');
+    accSync().then(ok=>{mkAct.busy=0;if(!ok)return mktUI(MKWHY.sync);emitM('mkb',{id:x.id,mid:mkMid(),acc:mkA()})});return}
+  if(a==='x'){emitM('mkx',{id:+v,mid:mkMid(),acc:mkA()});return}
+  if(a==='c'){emitM('mkc',{mid:mkMid(),acc:mkA()});return}}
 setInterval(()=>{const now=Date.now();for(const t in MKP)if(now-MKP[t].at>20000){mkGive(MKP[t].k,MKP[t].d,1);delete MKP[t];sysMsg('↩️ วางขายไม่สำเร็จ คืนของแล้ว')}},3000);
 /* ===== ความปลอดภัยตลาด: รหัสผู้ขายถาวรต่อตัวละคร + สำเนาของที่ฝากขายในเซฟ (ได้คืนถ้าเซิร์ฟเวอร์ข้อมูลหาย) ===== */
 function mkMid(){if(!me.mkid||!/^[a-z0-9]{8,16}$/.test(me.mkid))me.mkid=(Math.random().toString(36).slice(2,8)+Math.random().toString(36).slice(2,8)).slice(0,12).padEnd(10,'x');return me.mkid}
@@ -1772,11 +1781,11 @@ function mkReconcile(D){if(!D||!D.ep||!Array.isArray(D.mine))return;const E=mkEs
   me.mkesc=E.filter(e=>{if(e.ep!==D.ep){if(e.sold>0){me.gold=Math.min(GMAX,me.gold+e.sold);gold+=e.sold}else{mkGive(e.k,e.d,1);back++}return false}return D.mine.includes(e.id)});
   if(back||gold){sysMsg('🛡️ ข้อมูลตลาดบนเซิร์ฟเวอร์ถูกรีเซ็ต · คืนของที่ฝากขาย '+back+' รายการ'+(gold?' และเงินที่ขายได้ '+gold.toLocaleString()+' ทอง':'')+' ให้แล้ว');try{writeSave()}catch(e){}}}
 function mkHook(){
-  room.on('mkr',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;MKD=D;try{mkReconcile(D)}catch(e){}if(!ov.hidden&&ov.dataset.k==='mkt')mktUI()});
-  room.on('mka',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;const P=MKP[D.t];if(!P)return;delete MKP[D.t];if(D.ok&&D.id&&D.ep){mkEsc().push({id:D.id|0,k:P.k,d:P.d,ep:String(D.ep).slice(0,16),sold:0});if(me.mkesc.length>16)me.mkesc=me.mkesc.slice(-16);try{writeSave()}catch(e){}}if(!D.ok){mkGive(P.k,P.d,1);if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('วางขายไม่ได้ (เต็ม 8 รายการ หรือข้อมูลผิด) คืนของแล้ว')}else{mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('✅ วางขายแล้ว')}});
-  room.on('mkg',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;if(D.back&&D.id)me.mkesc=mkEsc().filter(e=>e.id!==(D.id|0));if(!D.ok){mkFetch();return mktUI('ของชิ้นนี้ถูกซื้อไปแล้ว')}if(!D.back){me.gold=Math.max(0,me.gold-(D.p|0));sfx('item')}mkGive(D.k,D.d);mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI(D.back?'↩️ ยกเลิกแล้ว ได้ของคืน':'✅ ซื้อสำเร็จ')});
+  room.on('mkr',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;if(D.err){MKE=D.err;MKD=null;if(D.err==='acc')try{accLost()}catch(e){}if(!ov.hidden&&ov.dataset.k==='mkt')mktUI();return}MKE='';MKD=D;try{mkReconcile(D)}catch(e){}if(!ov.hidden&&ov.dataset.k==='mkt')mktUI()});
+  room.on('mka',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;const P=MKP[D.t];if(!P)return;delete MKP[D.t];if(D.ok&&D.id&&D.ep){mkEsc().push({id:D.id|0,k:P.k,d:P.d,ep:String(D.ep).slice(0,16),sold:0});if(me.mkesc.length>16)me.mkesc=me.mkesc.slice(-16);try{writeSave()}catch(e){}}if(!D.ok){mkGive(P.k,P.d,1);if(!ov.hidden&&ov.dataset.k==='mkt')mktUI((mkWhy(D)||'วางขายไม่ได้ (เต็ม 8 รายการ หรือข้อมูลผิด)')+' · คืนของแล้ว')}else{mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('✅ วางขายแล้ว')}});
+  room.on('mkg',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;if(D.back&&D.id)me.mkesc=mkEsc().filter(e=>e.id!==(D.id|0));if(!D.ok){const w=mkWhy(D);mkFetch();return mktUI(w||'ของชิ้นนี้ถูกซื้อไปแล้ว')}if(!D.back){me.gold=Math.max(0,me.gold-(D.p|0));sfx('item')}mkGive(D.k,D.d);mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI(D.back?'↩️ ยกเลิกแล้ว ได้ของคืน':'✅ ซื้อสำเร็จ')});
   room.on('mks',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;{const e=mkEsc().find(e=>e.id===(D.id|0));if(e)e.sold=Math.max(0,D.g|0)}sysMsg('💰 '+(D.n||'มีคน')+' ซื้อของของคุณในตลาด '+(D.p|0).toLocaleString()+' ทอง · ไปรับเงินที่นายตลาด');banner={s:'💰 ขายของในตลาดได้แล้ว!',t:4};sfx('coin')});
-  room.on('mkc',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;me.gold+=D.g|0;(D.r||[]).forEach(x=>mkGive(x.k,x.d,1));sfx('coin');mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('✅ รับ '+(D.g|0).toLocaleString()+' ทอง'+((D.r||[]).length?' และของคืน '+D.r.length+' รายการ':''))})}
+  room.on('mkc',m=>{const D=m.data&&m.data.d;if(!D||m.sameTab)return;if(D.why){if(!ov.hidden&&ov.dataset.k==='mkt')mktUI(mkWhy(D)||'รับเงินไม่ได้');return}me.gold+=D.g|0;(D.r||[]).forEach(x=>mkGive(x.k,x.d,1));sfx('coin');mkFetch();if(!ov.hidden&&ov.dataset.k==='mkt')mktUI('✅ รับ '+(D.g|0).toLocaleString()+' ทอง'+((D.r||[]).length?' และของคืน '+D.r.length+' รายการ':''))})}
 /* ===== ลานประลอง PvP 1:1 ===== */
 let PV=null,PVPEND=null;const PVS=.07,PVDUR=90;
 const isArena=()=>!!(MAPS[curMap]&&MAPS[curMap].pvp);
@@ -10481,11 +10490,11 @@ async function accLogin(reg){const m=$('acm'),a=String(($('acn')||{}).value||'')
   if(accBusy)return;say(reg?'กำลังสร้างบัญชี...':'กำลังล็อกอิน...');accBusy=true;let r;
   try{r=await withTimeout(accApi(reg?'register':'login',{a,pin}),12000)}catch(e){accBusy=false;return say('ต่อเซิร์ฟเวอร์ไม่ได้ ลองใหม่อีกครั้ง')}
   accBusy=false;
-  if(!r.ok)return say(r.err==='taken'?'ชื่อบัญชีนี้มีคนใช้แล้ว ถ้าเป็นของคุณให้กด "ล็อกอิน"':r.err==='none'?'ไม่พบบัญชีนี้ ถ้ายังไม่มีให้กด "สร้างบัญชีใหม่"':r.err==='pin'&&r.status===401?'รหัส PIN ไม่ถูกต้อง':r.status===429?'ลองผิดหลายครั้งเกินไป รออีก '+Math.ceil((r.wait||900)/60)+' นาที':'ทำรายการไม่สำเร็จ ('+(r.err||r.status)+')');
+  if(!r.ok)return say(r.err==='taken'?'ชื่อบัญชีนี้มีคนใช้แล้ว ถ้าเป็นของคุณให้กด "ล็อกอิน"':r.err==='none'?'ไม่พบบัญชีนี้ ถ้ายังไม่มีให้กด "สร้างบัญชีใหม่"':r.err==='pin'&&r.status===401?'รหัส PIN ไม่ถูกต้อง':r.err==='lock'?'บัญชีนี้ถูกปิดโดยผู้ดูแล':r.status===429?'ลองผิดหลายครั้งเกินไป รออีก '+Math.ceil((r.wait||900)/60)+' นาที':'ทำรายการไม่สำเร็จ ('+(r.err||r.status)+')');
   ACC={a,t:r.t};accStore();accRev=r.rev|0;accMsg='';
   if(reg){accLoaded=true;if(Object.keys(saves.chars).length)await accPush();else setSaveState('บันทึกบนเซิร์ฟเวอร์ ('+a+')')}
   else{const ok=await accLoad();setSaveState(ok?'บันทึกบนเซิร์ฟเวอร์ ('+a+')':'ล็อกอินแล้ว แต่โหลดเซฟไม่ได้ ลองรีเฟรช')}
-  delArm=null;intro()}
+  delArm=null;if(me.cls){if(!ov.hidden&&ov.dataset.k==='mkt'){MKD=null;MKE='';mkFetch();mktUI('✅ ล็อกอินบัญชีแล้ว')}}else intro()}
 async function accLogout(){if(me.cls)return;const m=$('acm');if(Object.keys(saves.chars).length){if(m)m.textContent='กำลังบันทึกขึ้นเซิร์ฟเวอร์ก่อนออก...';accDirty=true;await accPush();if(accDirty){if(m)m.textContent='บันทึกขึ้นเซิร์ฟเวอร์ไม่สำเร็จ จึงยังไม่ออกจากระบบ (กันตัวละครหาย)';return}}
   accApi('logout',{a:ACC.a,t:ACC.t}).catch(()=>{});ACC=null;accStore();accRev=0;saves={v:1,chars:{},last:null};lsWrite(saves);csSel='';delArm=null;setSaveState('บันทึกในเบราว์เซอร์นี้');accMsg='ออกจากระบบแล้ว ตัวละครของบัญชีนั้นอยู่บนเซิร์ฟเวอร์ ล็อกอินใหม่เมื่อไหร่ก็กลับมา';intro()}
 function accBox(){if(!srvAcc()||saveMode==='wait')return'';const S='style="width:100%;box-sizing:border-box;padding:8px;margin-top:6px"';
