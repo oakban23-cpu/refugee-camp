@@ -131,6 +131,16 @@ function lbBind(){const d=D,B=(d.lb||{})[lbSel]||{rows:[]},c=d.lbc||{ban:[]};
   const cs=document.getElementById('lbcs');if(cs)cs.onclick=async()=>{const i=document.getElementById('lbcap'),raw=+(i&&i.value||0);if(!(raw>=0))return alert('ใส่ตัวเลข');let v=raw;if(lbSel==='tw'&&raw)v=TWLB-raw;
     const msg=raw?'ตั้งเพดาน "'+(LBN[lbSel]||lbSel)+'" = '+(lbSel==='tw'?'ชั้น '+raw:raw)+'?\nแถวเดิมที่ผิดเพดานจะถูกลบทันที':'ยกเลิกเพดานของ "'+(LBN[lbSel]||lbSel)+'"?';if(!confirm(msg))return;
     const j=await adminPost('lbcap',{k:lbSel,v});if(i)i.value='';annMsg=j.ok?(raw?'ตั้งเพดานแล้ว · ลบแถวที่เกิน '+(j.removed||0)+' แถว':'ยกเลิกเพดานแล้ว'):'บันทึกไม่สำเร็จ';load()}}
+/* ---------- บัญชีเซฟ ---------- */
+let accQ='';
+function accCard(d){const A=d.acc||{n:0,rows:[]},q=accQ.toLowerCase(),rows=A.rows.filter(r=>!q||r.a.includes(q)).slice(0,60);
+  let h='<div class="card"><h2>🔐 บัญชีเซฟผู้เล่น ('+nf(A.n)+')</h2><p class="sec" style="margin-top:0">ตัวละครของผู้ที่ผูกบัญชีเก็บอยู่ในดิสก์ถาวร (โฟลเดอร์ saves) · ผู้เล่นลืม PIN → กด "ตั้ง PIN ใหม่" แล้วบอกเขา · เซฟเสีย/โดนทับ → "กู้รุ่นก่อน" (สำรองอัตโนมัติทุก ~30 นาที)</p>';
+  h+='<div class="row" style="margin-bottom:8px"><input type="text" id="acq" data-keep="1" placeholder="ค้นหาชื่อบัญชี" style="width:200px"></div>';
+  h+=rows.length?'<div class="scroll"><table><thead><tr><th>บัญชี</th><th class="n">ตัวละคร</th><th class="n">Lv สูงสุด</th><th class="n">ขนาด</th><th>สร้าง</th><th>ใช้ล่าสุด</th><th></th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+esc(r.a)+'</td><td class="n">'+r.n+'</td><td class="n">'+r.lv+'</td><td class="n">'+(r.sz?(r.sz/1024).toFixed(0)+' KB':'—')+'</td><td class="sec">'+dFmt(r.c)+'</td><td class="sec">'+dFmt(r.l)+' '+tFmt(r.l)+'</td><td style="white-space:nowrap"><button data-acp="'+esc(r.a)+'" style="font-size:12px;padding:3px 8px">ตั้ง PIN ใหม่</button> <button data-acb="'+esc(r.a)+'" style="font-size:12px;padding:3px 8px">กู้รุ่นก่อน</button></td></tr>').join('')+'</tbody></table></div>':'<p class="muted">'+(A.n?'ไม่พบชื่อที่ค้นหา':'ยังไม่มีผู้เล่นผูกบัญชี')+'</p>';
+  return h+'</div>'}
+function accBind(){const i=document.getElementById('acq');if(i){i.value=accQ;i.oninput=()=>{accQ=i.value.trim();render();const j=document.getElementById('acq');if(j){j.focus();j.setSelectionRange(j.value.length,j.value.length)}}}
+  app.querySelectorAll('[data-acp]').forEach(b=>b.onclick=async()=>{const a=b.dataset.acp,pin=prompt('ตั้ง PIN ใหม่ให้บัญชี "'+a+'" (4-32 ตัว)\nทุกเครื่องที่ล็อกอินอยู่จะถูกให้ล็อกอินใหม่');if(!pin)return;const j=await adminPost('accpin',{a,pin});alert(j.ok?'ตั้ง PIN ใหม่แล้ว บอกผู้เล่นให้ล็อกอินด้วย PIN: '+pin:'ไม่สำเร็จ: '+(j.err||''));load()});
+  app.querySelectorAll('[data-acb]').forEach(b=>b.onclick=async()=>{const a=b.dataset.acb;if(!confirm('กู้เซฟของ "'+a+'" กลับไปเป็นรุ่นสำรองก่อนหน้า?\n(เซฟปัจจุบันจะถูกแทนที่ · ผู้เล่นควรออกจากเกมก่อน)'))return;const j=await adminPost('accbak',{a});alert(j.ok?'กู้แล้ว ('+j.n+' ตัวละคร) ให้ผู้เล่นรีเฟรชหน้าเกม':'ไม่สำเร็จ: '+(j.err||''));load()})}
 /* ---------- แชทผู้เล่น ---------- */
 const CH={items:[],q:'',more:false,busy:0};
 async function chFetch(more){if(CH.busy)return;CH.busy=1;try{const before=more&&CH.items.length?CH.items[CH.items.length-1].at:'';const r=await fetch('/admin/chat?n=150'+(before?'&before='+before:'')+(CH.q?'&q='+encodeURIComponent(CH.q):''),{headers:{'x-admin-key':KEY},cache:'no-store'});
@@ -178,11 +188,12 @@ function render(){const d=D,s=d.srv,plan=512*1048576,memP=s.rss/plan*100,memL=le
     '<div class="stat"><div class="l">ส่งข้อมูลออก</div><div class="v" style="font-size:22px">'+(s.bw/1024).toFixed(0)+' KB/s</div><div class="s">'+nf(s.msg)+' ข้อความ/วิ</div></div>'+
     '<div class="stat"><div class="l">ดิสก์ถาวร</div><div class="v" style="font-size:22px">'+(disk?mb(disk.free):'—')+'</div><div class="s'+(disk?' st-'+dkL:'')+'">'+(disk?LVIC[dkL]+' ว่าง '+(100-dkP).toFixed(0)+'% · ':'')+'<span class="brk">'+esc(s.dataDir)+'</span></div></div></div>'+
     '<div class="sec" style="margin-top:8px">เปิดมาแล้ว '+dur(s.up)+' · Node '+esc(s.node)+' · ชื่อตัวละครที่จองไว้ '+nf(s.names||0)+' · การเชื่อมต่อ '+d.conn+'</div></div>';
+  h+=accCard(d);
   h+='<div class="card"><h2>ประกาศถึงผู้เล่นทุกคน</h2><p class="sec" style="margin-top:0">ขึ้นเป็นแถบประกาศกลางจอและในแชทของทุกคนที่ออนไลน์อยู่ · เช่น แจ้งปิดปรับปรุง</p><div class="row"><input type="text" id="an" maxlength="120" placeholder="เช่น อีก 5 นาทีจะปิดปรับปรุงสักครู่ครับ" style="flex:1;min-width:200px"><button class="pri" id="as">ส่งประกาศ</button></div>'+(annMsg?'<p class="sec">'+esc(annMsg)+'</p>':'')+'</div>';
   h+='<p class="muted" style="font-size:12px">ข้อมูลเมื่อ '+tFmt(d.now)+(ago>15?' · ล่าช้า '+ago+' วิ':'')+'</p>';
   const kept={},af=document.activeElement&&document.activeElement.id;app.querySelectorAll('input[id]').forEach(i=>{if(i.value)kept[i.id]=i.value});const cb0=document.getElementById('chbox'),chTop=cb0?cb0.scrollTop:0;
   app.innerHTML=h;{const cb=document.getElementById('chbox');if(cb)cb.scrollTop=chTop}
-  for(const id in kept){const i=document.getElementById(id);if(i)i.value=kept[id]}if(af){const i=document.getElementById(af);if(i&&i.tagName==='INPUT')i.focus()}lbBind();chBind();
+  for(const id in kept){const i=document.getElementById(id);if(i)i.value=kept[id]}if(af){const i=document.getElementById(af);if(i&&i.tagName==='INPUT')i.focus()}lbBind();chBind();accBind();
   const now=d.now,span=range==='24h'?864e5:7*864e5,pts=d.samples.filter(p=>p[0]>=now-span);
   lineChart(document.getElementById('c1'),pts,{x0:now-span,x1:now,days:range==='7d',gap:11*60e3,label:'จำนวนคนออนไลน์'});
   const hr=new Date(now+7*3600e3).getUTCHours();

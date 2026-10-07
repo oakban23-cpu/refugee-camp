@@ -7,6 +7,7 @@ const page=path.join(__dirname,'public','index.html');
 const server=http.createServer((req,res)=>{
   if(req.url==='/health'){res.writeHead(200);return res.end('ok')}
   if(req.url==='/admin'||req.url.startsWith('/admin/'))return adminRoute(req,res);
+  if(req.url.startsWith('/api/acc/'))return accRoute(req,res);
   if(req.url==='/stats'){res.writeHead(200,{'Content-Type':'application/json'});return res.end(JSON.stringify(stats()))}
   {const m=/^\/([a-z0-9_-]+\.(jpg|jpeg|png|webp))(\?.*)?$/i.exec(req.url);if(m){const f=path.join(__dirname,'public',m[1]);return fs.readFile(f,(e,b)=>{if(e){res.writeHead(404);return res.end()}res.writeHead(200,{'Content-Type':'image/'+(m[2].toLowerCase()==='jpg'?'jpeg':m[2].toLowerCase()),'Cache-Control':'public, max-age=604800','Content-Length':b.length});bytesOut+=b.length;res.end(b)})}}
   const P=getPage();if(!P){res.writeHead(500);return res.end('missing index.html')}
@@ -227,6 +228,52 @@ setInterval(()=>{const now=Date.now();ST.s.push([now,Math.max(stWin,onlineNow())
 setInterval(()=>{if(!stDirty)return;stDirty=false;wj(STF,ST)},60000);
 let cpuPrev=process.cpuUsage(),cpuAt=Date.now(),cpuPct=0,bwPrev=0,bwRate=0,msgPrev=0,msgRate=0;
 setInterval(()=>{const u=process.cpuUsage(cpuPrev),now=Date.now();cpuPct=(u.user+u.system)/1000/(now-cpuAt)*100;cpuPrev=process.cpuUsage();cpuAt=now;bwRate=(bytesOut-bwPrev)/10;bwPrev=bytesOut;msgRate=(msgsOut-msgPrev)/10;msgPrev=msgsOut},10000);
+
+/* ===== บัญชีเซฟตัวละครบนเซิร์ฟเวอร์: ชื่อบัญชี + PIN · ไฟล์ accounts.json + saves/<ชื่อ>.json (+ .bak รุ่นก่อนหน้า) ===== */
+const ACF=path.join(DATA_DIR,'accounts.json'),SVD=path.join(DATA_DIR,'saves'),SVMAX=1200*1024;try{fs.mkdirSync(SVD,{recursive:true})}catch(e){}
+let ACCS=Object.create(null),accDirty=false;try{Object.assign(ACCS,JSON.parse(fs.readFileSync(ACF,'utf8'))||{})}catch(e){}
+setInterval(()=>{if(accDirty){accDirty=false;wj(ACF,ACCS)}},4000);
+const ACFAIL=new Map(),ACREG=new Map(),ACLAST=new Map();
+const accName=a=>typeof a==='string'&&/^[a-z0-9][a-z0-9_]{2,19}$/.test(a)?a:null;
+const accPinOk=p=>typeof p==='string'&&p.length>=4&&p.length<=32;
+const accHash=(pin,salt)=>crypto.scryptSync(String(pin),salt,32).toString('hex');
+const tkHash=t=>crypto.createHash('sha256').update(String(t)).digest('hex');
+function accNewToken(A){const t=crypto.randomBytes(24).toString('hex');A.tk=(A.tk||[]).concat(tkHash(t)).slice(-6);return t}
+function accAuth(a,t){const A=ACCS[a];if(!A||typeof t!=='string'||t.length!==48)return null;const h=tkHash(t);return(A.tk||[]).includes(h)?A:null}
+const svPath=a=>path.join(SVD,a+'.json');
+function svRead(a){try{return JSON.parse(fs.readFileSync(svPath(a),'utf8'))}catch(e){return null}}
+function svSum(d){let n=0,l=0;try{for(const k in d.chars){n++;l=Math.max(l,d.chars[k].lv|0)}}catch(e){}return{n,l}}
+function accRoute(req,res){const H={'Content-Type':'application/json','Cache-Control':'no-store'};const J=(c,o)=>{res.writeHead(c,H);res.end(JSON.stringify(o))};
+  if(req.method!=='POST')return J(405,{err:'post'});
+  const act=req.url.slice(9).split('?')[0],ip=String(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim(),now=Date.now();
+  let body='',big=false;req.on('data',d=>{body+=d;if(body.length>SVMAX+4096){big=true;req.destroy()}});
+  req.on('end',()=>{if(big)return;let q={};try{q=JSON.parse(body)||{}}catch(e){return J(400,{err:'json'})}
+    const a=accName(String(q.a||'').toLowerCase().trim());if(!a)return J(400,{err:'name'});
+    if(act==='register'||act==='login'){
+      const fk=ip+'|'+a,f=ACFAIL.get(ip),f2=ACFAIL.get(fk);
+      if((f&&f.n>=20&&now-f.t<15*60e3)||(f2&&f2.n>=6&&now-f2.t<15*60e3))return J(429,{err:'locked',wait:Math.ceil((15*60e3-(now-Math.max(f?f.t:0,f2?f2.t:0)))/1000)});
+      if(!accPinOk(q.pin))return J(400,{err:'pin'});
+      if(act==='register'){if(ACCS[a])return J(409,{err:'taken'});
+        const r=ACREG.get(ip);if(r&&r.n>=8&&now-r.t<3600e3)return J(429,{err:'many'});ACREG.set(ip,{n:(r&&now-r.t<3600e3?r.n:0)+1,t:r&&now-r.t<3600e3?r.t:now});if(ACREG.size>2000)ACREG.clear();
+        const salt=crypto.randomBytes(12).toString('hex');const A=ACCS[a]={s:salt,h:accHash(q.pin,salt),c:now,l:now,tk:[]};const t=accNewToken(A);accDirty=true;console.log('สร้างบัญชี: '+a);return J(200,{ok:1,a,t,rev:0})}
+      const A=ACCS[a];let ok=false;if(A){const h=accHash(q.pin,A.s);ok=h.length===A.h.length&&crypto.timingSafeEqual(Buffer.from(h),Buffer.from(A.h))}
+      if(!ok){for(const[k,lim]of[[ip,0],[fk,0]]){const g=ACFAIL.get(k);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACFAIL.set(k,v)}if(ACFAIL.size>5000)ACFAIL.clear();return J(401,{err:A?'pin':'none'})}
+      ACFAIL.delete(fk);A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(a);return J(200,{ok:1,a,t,rev:sv?sv.rev|0:0})}
+    const A=accAuth(a,q.t);if(!A)return J(401,{err:'auth'});
+    if(act==='load'){const sv=svRead(a);A.l=now;accDirty=true;return J(200,{ok:1,rev:sv?sv.rev|0:0,data:sv?sv.data:null,at:sv?sv.at:0})}
+    if(act==='save'){const d=q.data;if(!d||typeof d!=='object'||!d.chars||typeof d.chars!=='object')return J(400,{err:'data'});
+      const lt=ACLAST.get(a)||0;if(now-lt<1500)return J(429,{err:'fast'});
+      const sv=svRead(a),cur=sv?sv.rev|0:0;if((q.r|0)!==cur)return J(409,{err:'rev',rev:cur,data:sv?sv.data:null});ACLAST.set(a,now);if(ACLAST.size>5000)ACLAST.clear();
+      const o={rev:cur+1,at:now,data:d},js=JSON.stringify(o);if(js.length>SVMAX)return J(413,{err:'size'});
+      const f=svPath(a);try{if(sv&&(!fs.existsSync(f+'.bak')||now-fs.statSync(f+'.bak').mtimeMs>30*60e3))fs.copyFileSync(f,f+'.bak')}catch(e){}
+      const tmp=f+'.tmp';fs.writeFile(tmp,js,e=>{if(e)return J(500,{err:'disk'});fs.rename(tmp,f,e2=>{if(e2)return J(500,{err:'disk'});A.l=now;A.sz=js.length;const s=svSum(d);A.n=s.n;A.lv=s.l;accDirty=true;J(200,{ok:1,rev:o.rev})})});return}
+    if(act==='logout'){const h=tkHash(q.t);A.tk=(A.tk||[]).filter(x=>x!==h);accDirty=true;return J(200,{ok:1})}
+    J(404,{err:'act'})})}
+function accAdmin(act,q){const a=accName(String(q.a||'').toLowerCase().trim());if(!a||!ACCS[a])return{err:'ไม่พบบัญชี'};const A=ACCS[a];
+  if(act==='accpin'){if(!accPinOk(String(q.pin||'')))return{err:'PIN ต้อง 4-32 ตัว'};A.s=crypto.randomBytes(12).toString('hex');A.h=accHash(String(q.pin),A.s);A.tk=[];accDirty=true;console.log('รีเซ็ต PIN: '+a);return{ok:1}}
+  if(act==='accbak'){const f=svPath(a);try{const b=JSON.parse(fs.readFileSync(f+'.bak','utf8'));const sv=svRead(a);b.rev=(sv?sv.rev|0:0)+1;b.at=Date.now();fs.writeFileSync(f,JSON.stringify(b));const s=svSum(b.data);A.n=s.n;A.lv=s.l;accDirty=true;return{ok:1,n:s.n}}catch(e){return{err:'ไม่มีไฟล์สำรอง'}}}
+  return{err:'act'}}
+function accTable(){const L=Object.keys(ACCS).map(a=>{const A=ACCS[a];return{a,c:A.c,l:A.l,n:A.n|0,lv:A.lv|0,sz:A.sz|0}}).sort((x,y)=>y.l-x.l);return{n:L.length,rows:L.slice(0,400)}}
 const AFAIL=new Map();
 function adminOk(req){if(!ADMIN_KEY)return false;const k=String(req.headers['x-admin-key']||'');const a=crypto.createHash('sha256').update(k).digest(),b=crypto.createHash('sha256').update(ADMIN_KEY).digest();return crypto.timingSafeEqual(a,b)}
 function adminData(){const now=Date.now(),pl=[];
@@ -241,7 +288,7 @@ function adminData(){const now=Date.now(),pl=[];
   let disk=null;try{if(fs.statfsSync){const f=fs.statfsSync(DATA_DIR);disk={free:f.bavail*f.bsize,total:f.blocks*f.bsize}}}catch(e){}
   const mem=process.memoryUsage();
   return{now,online:pl.length,conn:clients.size,max:MAX,players:pl,byMap:countByMap,peak:ST.peak,today:{peak:today.peak,u:today.u.length,min:today.min,sess:today.sess,full:today.full|0},hours,days,samples:ST.s,
-    mk,mvp:mvTable(),lb,lbc,chat:{n:CHL.length,today:CHL.filter(x=>dayKey(x.at)===dayKey(now)).length},srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
+    mk,mvp:mvTable(),lb,lbc,acc:accTable(),chat:{n:CHL.length,today:CHL.filter(x=>dayKey(x.at)===dayKey(now)).length},srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
 function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':'noindex','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer'};
   if(req.url==='/admin'||req.url==='/admin/'){return fs.readFile(path.join(__dirname,'admin.html'),(e,b)=>{if(e){res.writeHead(404,H);return res.end('missing admin.html')}res.writeHead(200,Object.assign({'Content-Type':'text/html; charset=utf-8',"Content-Security-Policy":"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:"},H));res.end(b)})}
   const J=(code,o)=>{res.writeHead(code,Object.assign({'Content-Type':'application/json'},H));res.end(JSON.stringify(o))};
@@ -258,6 +305,7 @@ function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':
     if(act==='ann'){let t=String(q.t||'').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return J(400,{err:'empty'});
       const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});try{CHL.push({at:Date.now(),n:'📢 ประกาศ (ผู้ดูแล)',t,mp:0,c:'',l:0,a:1});chDirty=true}catch(e){}let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);return J(200,{ok:1,n})}
     if(act==='lbdel'||act==='lbban'||act==='lbcap')return J(200,lbAdmin(act,q));
+    if(act==='accpin'||act==='accbak')return J(200,accAdmin(act,q));
     J(404,{err:'act'})})}
 /* ===== จองชื่อตัวละคร: หนึ่งชื่อใช้ได้ตัวละครเดียวทั้งเซิร์ฟเวอร์ (ผูกกับรหัสตัวละครถาวร mid) · ไม่ได้ใช้ 90 วันปล่อยคืน ===== */
 const NMF=path.join(DATA_DIR,'names.json'),NM_TTL=90*864e5;let NM={},nmDirty=false;
@@ -289,6 +337,6 @@ function chatQuery(q){const n=Math.max(1,Math.min(500,+q.get('n')||150)),before=
   const out=[];for(let i=CHL.length-1;i>=0&&out.length<n;i--){const x=CHL[i];if(x.at>=before)continue;if(s&&!(x.t.toLowerCase().includes(s)||x.n.toLowerCase().includes(s)))continue;out.push(x)}
   return{items:out,total:CHL.length,more:out.length===n}}
 function stats(){return{clients:clients.size,countByMap,bytesOut,msgsOut,uptime:Math.round(process.uptime())}}
-function flushAll(){try{wjSync(CHF,CHL)}catch(e){}try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
+function flushAll(){try{wjSync(ACF,ACCS)}catch(e){}try{wjSync(CHF,CHL)}catch(e){}try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
 for(const sig of['SIGTERM','SIGINT'])process.on(sig,()=>{console.log('ปิดเซิร์ฟเวอร์: บันทึกข้อมูล...');flushAll();process.exit(0)});
 server.listen(PORT,()=>console.log('listening on '+PORT+' (สูงสุด '+MAX+' คน)'));
