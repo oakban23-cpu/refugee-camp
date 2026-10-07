@@ -1412,7 +1412,9 @@ function drawBoss8(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf){const O='#120c0a',fy=-
   for(let i=0;i<3;i++){const a=T*1.4+i*2.094,sx=Math.cos(a)*52,sy=-30+fy+Math.sin(a)*14;if(Math.sin(a)<-.2&&i)continue;g.save();g.translate(sx,sy);g.rotate(a+1.57);E(0,0,5,6.5,F('#1a6a7a'),1);g.strokeStyle=W?'#fff':'#5affd8';g.lineWidth=.8;g.beginPath();g.moveTo(0,-6);g.lineTo(0,6);g.stroke();E(0,-7,3,2.4,F('#e8b830'),1);g.restore()}}
 
 /* ===== ระบบบอส MVP ===== */
-const MVDEF={8:60,10:60,18:60},MVHP=4,MVDM=1.5,MVO=[18,10,8],MVREC={18:'Lv 70+ (ปาร์ตี้)',3:'Lv 35+',4:'Lv 45+',6:'Lv 58+ (ปาร์ตี้)',7:'Lv 42+',8:'Lv 55+ (ปาร์ตี้)',10:'Lv 60 (ปาร์ตี้)'};
+/* v235: บอส MVP เลือดและดาเมจ x20 จากเดิม (เดิม 4 / 1.5) · บอสปกติ (แมพ/ดันเจี้ยน/เรด/หอคอย) x10 · บอสโลกไม่เปลี่ยน */
+/* บอสเนื้อเรื่องภาค 1 (แมพ 1 2 3 4 6 7) เบากว่า: x3 */
+const BOSS_EARLY=[1,2,3,4,6,7],bossX=()=>isWB()?1:(!isDg()&&BOSS_EARLY.includes(curMap))?3:10,MVDEF={8:60,10:60,18:60},MVHP=80,MVDM=30,MVO=[18,10,8],MVREC={18:'Lv 70+ (ปาร์ตี้)',3:'Lv 35+',4:'Lv 45+',6:'Lv 58+ (ปาร์ตี้)',7:'Lv 42+',8:'Lv 55+ (ปาร์ตี้)',10:'Lv 60 (ปาร์ตี้)'};
 let MVT=null,MVTat=0,MVD={id:0,acc:0,tot:0},mvLoc=null,mvLostT=0;
 const mvSrv=()=>!!(room&&room.url);
 const mvBoss=()=>mons.find(m=>m.t===3&&m.mvp);
@@ -6553,7 +6555,7 @@ const cntP=()=>mons.filter(m=>m.p&&!m.mn&&m.t!==3).length;
 const BS=()=>MAPS[curMap].boss;
 let bossCd=6,teles=[],banner=null;
 function spawnBoss(){
-  const b=BS(),n=plCount(),hp=Math.round(b.hp*(1+.7*(n-1)));
+  const b=BS(),n=plCount(),hp=Math.round(b.hp*(1+.7*(n-1))*bossX());
   mons.push({id:++mid,x:b.x,y:b.y,tx:b.x,ty:b.y,t:3,L:b.L,p:1,hx:b.x,hy:b.y,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,a1:4,a2:9,tl:[],enr:0});
   fx({k:'msg',s:b.n+'ปรากฏ'+b.pos+'! แนะนำ '+b.rec});sfx('boss');
 }
@@ -6585,7 +6587,7 @@ function tbMoveMul(){if(!isTw()||!TBF.length&&!me.tbRoot&&!me.tbFrz)return 1;if(
   return TBF.some(it=>it.s==='web'&&it.pp&&Math.hypot(me.x-it.x,me.y-it.y)<it.r)?.45:1}
 function tbReflHit(){if(tbReflCd>0)return;tbReflCd=.25;const d=Math.round(me.mh*.035);hurt(d);dn.push({x:me.x,y:me.y-40,v:'สะท้อน! -'+d,t:.9,c:'#d0a0ff'})}
 /* ฝั่งโฮสต์: คำนวณความเสียหาย */
-function tbHost(dt,pl){if(!TBF.length)return;const bo=tbBoss(),dm=BS().dm*(1+.15*((bo&&bo.cb)|0)),Q=(p,v)=>{dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(v*dm)};
+function tbHost(dt,pl){if(!TBF.length)return;const bo=tbBoss(),dm=BS().dm*bossX()*(1+.15*((bo&&bo.cb)|0)),Q=(p,v)=>{dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(v*dm)};
   TBF.forEach(it=>{const hc=u=>{it.hit[u]=(it.hit[u]||0)-dt;return it.hit[u]<=0};
     if(it.pp&&!it.hd){it.hd=1;
       if(it.s==='web')pl.forEach(p=>{if(Math.hypot(p.x-it.x,p.y-it.y)<it.r)Q(p,18)});
@@ -6603,7 +6605,7 @@ function tbHost(dt,pl){if(!TBF.length)return;const bo=tbBoss(),dm=BS().dm*(1+.15
 /* ท่าของบอสแต่ละตัว (โฮสต์) */
 function twbPre(m,dt,pl,enr){if(!m.dsh)return false;const D=m.dsh;D.t+=dt;if(D.t<0)return true;
   const k=Math.min(1,D.t/.45);m.x=D.x0+(D.x1-D.x0)*k;m.y=D.y0+(D.y1-D.y0)*k;m.fx=D.x1<D.x0?-1:1;
-  pl.forEach(p=>{if(!D.h[p.u]&&Math.hypot(p.x-m.x,p.y-m.y)<70){D.h[p.u]=1;dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(38*BS().dm)}});
+  pl.forEach(p=>{if(!D.h[p.u]&&Math.hypot(p.x-m.x,p.y-m.y)<70){D.h[p.u]=1;dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(38*BS().dm*bossX())}});
   if(k>=1){TB({s:'trail',x:Math.round(D.x0),y:Math.round(D.y0),x2:Math.round(D.x1),y2:Math.round(D.y1),w:0,ac:4.5});m.dsh=null;
     if(D.n>0){const t=pl[Math.random()*pl.length|0];if(t)twbDash(m,t,D.n-1)}}
   return true}
@@ -6676,7 +6678,7 @@ function drawTBF(top){if(!TBF.length)return;const now=performance.now()/1000,pu=
    g.restore()})}
 function bossAI(m,dt,pl){
   if(m.a1===undefined){m.a1=4;m.a2=9;m.tl=[];m.enr=0;m.hx=BS().x;m.hy=BS().y}
-  const B=BS(),dm=B.dm*(m.mvp?MVDM:1);
+  const B=BS(),dm=B.dm*(m.mvp?MVDM:bossX());
   if(EYE()&&(m.inv||m.stun>0)&&EYEG)EYEG=null;if(QUEEN()&&(m.inv||m.stun>0)){m.qs=null;m.qg=null}
   if(B.dg){if(m.stun>0){m.stun-=dt;m.a1=Math.max(m.a1,1);return}
     const f=m.hp/m.mh;
