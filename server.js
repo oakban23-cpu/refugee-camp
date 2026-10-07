@@ -106,7 +106,7 @@ if(lbDedupe()){lbDirty=true;console.log('ตารางอันดับ: ร�
 setInterval(()=>{if(!lbDirty)return;lbDirty=false;wj(LBF,LB)},10000);
 function onEmit(c,m){
   const k=m.k,pl=m.d;if(typeof k!=='string'||k.length>12)return;
-  if(k==='chat'){const s=JSON.stringify({t:'emit',k,d:pl,from:c.id});for(const o of clients)if(o!==c)send(o,s);return}
+  if(k==='chat'){const s=JSON.stringify({t:'emit',k,d:pl,from:c.id});for(const o of clients)if(o!==c)send(o,s);try{chatLog(c,pl)}catch(e){}return}
   if(k==='nmq'){nameReq(c,pl&&pl.d);return}
   if(!c.p||!pl||typeof pl!=='object')return;
   const mp=c.p.mp,d=pl.d,host=hostByMap[mp];
@@ -241,7 +241,7 @@ function adminData(){const now=Date.now(),pl=[];
   let disk=null;try{if(fs.statfsSync){const f=fs.statfsSync(DATA_DIR);disk={free:f.bavail*f.bsize,total:f.blocks*f.bsize}}}catch(e){}
   const mem=process.memoryUsage();
   return{now,online:pl.length,conn:clients.size,max:MAX,players:pl,byMap:countByMap,peak:ST.peak,today:{peak:today.peak,u:today.u.length,min:today.min,sess:today.sess,full:today.full|0},hours,days,samples:ST.s,
-    mk,mvp:mvTable(),lb,lbc,srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
+    mk,mvp:mvTable(),lb,lbc,chat:{n:CHL.length,today:CHL.filter(x=>dayKey(x.at)===dayKey(now)).length},srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
 function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':'noindex','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer'};
   if(req.url==='/admin'||req.url==='/admin/'){return fs.readFile(path.join(__dirname,'admin.html'),(e,b)=>{if(e){res.writeHead(404,H);return res.end('missing admin.html')}res.writeHead(200,Object.assign({'Content-Type':'text/html; charset=utf-8',"Content-Security-Policy":"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:"},H));res.end(b)})}
   const J=(code,o)=>{res.writeHead(code,Object.assign({'Content-Type':'application/json'},H));res.end(JSON.stringify(o))};
@@ -251,11 +251,12 @@ function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':
   if(!adminOk(req)){const g=f&&now-f.t<10*60e3?f:{n:0,t:now};g.n++;g.t=now;AFAIL.set(ip,g);if(AFAIL.size>500)AFAIL.clear();return J(401,{err:'bad'})}
   AFAIL.delete(ip);
   if(req.url.startsWith('/admin/api'))return J(200,adminData());
+  if(req.url.startsWith('/admin/chat'))return J(200,chatQuery(new URL(req.url,'http://x').searchParams));
   if(req.method!=='POST')return J(405,{err:'post'});
   const act=req.url.slice(7).split('?')[0];
   let body='';req.on('data',d=>{body+=d;if(body.length>2000)req.destroy()});req.on('end',()=>{let q={};try{q=JSON.parse(body)||{}}catch(e){}
     if(act==='ann'){let t=String(q.t||'').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return J(400,{err:'empty'});
-      const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);return J(200,{ok:1,n})}
+      const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});try{CHL.push({at:Date.now(),n:'📢 ประกาศ (ผู้ดูแล)',t,mp:0,c:'',l:0,a:1});chDirty=true}catch(e){}let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);return J(200,{ok:1,n})}
     if(act==='lbdel'||act==='lbban'||act==='lbcap')return J(200,lbAdmin(act,q));
     J(404,{err:'act'})})}
 /* ===== จองชื่อตัวละคร: หนึ่งชื่อใช้ได้ตัวละครเดียวทั้งเซิร์ฟเวอร์ (ผูกกับรหัสตัวละครถาวร mid) · ไม่ได้ใช้ 90 วันปล่อยคืน ===== */
@@ -277,7 +278,17 @@ function nameReq(c,d){if(!d||typeof d!=='object')return;const t=String(d.t||'').
   NM[key]={n,mid,at:now};nmDirty=true;
   const ks=Object.keys(NM);if(ks.length>60000){ks.sort((a,b)=>NM[a].at-NM[b].at).slice(0,ks.length-60000).forEach(k=>delete NM[k])}
   reply({ok:1})}
+/* ===== บันทึกแชท: เก็บ 3000 ข้อความล่าสุดลงดิสก์ (chatlog.json) ให้ผู้ดูแลอ่านในหน้า /admin ===== */
+const CHF=path.join(DATA_DIR,'chatlog.json'),CHMAX=3000;let CHL=[],chDirty=false;
+try{const j=JSON.parse(fs.readFileSync(CHF,'utf8'));if(Array.isArray(j))CHL=j.slice(-CHMAX)}catch(e){}
+setInterval(()=>{if(!chDirty)return;chDirty=false;wj(CHF,CHL)},30000);
+function chatLog(c,pl){if(!pl||typeof pl!=='object')return;const t=String(pl.t||'').replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!t)return;
+  const p=c.p||{},n=String(p.n||pl.n||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,12)||'ผู้เล่น';
+  CHL.push({at:Date.now(),n,t,mp:p.mp|0,c:String(p.cls||'').slice(0,8),l:p.lv|0});if(CHL.length>CHMAX)CHL.splice(0,CHL.length-CHMAX);chDirty=true}
+function chatQuery(q){const n=Math.max(1,Math.min(500,+q.get('n')||150)),before=+q.get('before')||Infinity,s=String(q.get('q')||'').trim().toLowerCase().slice(0,40);
+  const out=[];for(let i=CHL.length-1;i>=0&&out.length<n;i--){const x=CHL[i];if(x.at>=before)continue;if(s&&!(x.t.toLowerCase().includes(s)||x.n.toLowerCase().includes(s)))continue;out.push(x)}
+  return{items:out,total:CHL.length,more:out.length===n}}
 function stats(){return{clients:clients.size,countByMap,bytesOut,msgsOut,uptime:Math.round(process.uptime())}}
-function flushAll(){try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
+function flushAll(){try{wjSync(CHF,CHL)}catch(e){}try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
 for(const sig of['SIGTERM','SIGINT'])process.on(sig,()=>{console.log('ปิดเซิร์ฟเวอร์: บันทึกข้อมูล...');flushAll();process.exit(0)});
 server.listen(PORT,()=>console.log('listening on '+PORT+' (สูงสุด '+MAX+' คน)'));

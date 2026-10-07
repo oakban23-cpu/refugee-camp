@@ -81,6 +81,7 @@ async function load(){clearTimeout(timer);try{const r=await fetch('/admin/api',{
     if(r.status===401){try{localStorage.removeItem('rf_admin_key')}catch(x){}return login('รหัสไม่ถูกต้อง')}
     if(r.status===429)return login('ใส่รหัสผิดหลายครั้ง · รออีก '+Math.ceil((j.wait||600)/60)+' นาที');
     if(!r.ok)throw new Error('HTTP '+r.status);D=j;err=''}catch(e){err='เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ('+e.message+') · จะลองใหม่อัตโนมัติ'}
+  if(D&&!CH.q)await chFetch(false);
   if(D)render();else if(err)app.innerHTML='<div class="card note">'+esc(err)+'</div>';
   timer=setTimeout(load,document.hidden?30000:5000)}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&KEY)load()});
@@ -130,6 +131,22 @@ function lbBind(){const d=D,B=(d.lb||{})[lbSel]||{rows:[]},c=d.lbc||{ban:[]};
   const cs=document.getElementById('lbcs');if(cs)cs.onclick=async()=>{const i=document.getElementById('lbcap'),raw=+(i&&i.value||0);if(!(raw>=0))return alert('ใส่ตัวเลข');let v=raw;if(lbSel==='tw'&&raw)v=TWLB-raw;
     const msg=raw?'ตั้งเพดาน "'+(LBN[lbSel]||lbSel)+'" = '+(lbSel==='tw'?'ชั้น '+raw:raw)+'?\nแถวเดิมที่ผิดเพดานจะถูกลบทันที':'ยกเลิกเพดานของ "'+(LBN[lbSel]||lbSel)+'"?';if(!confirm(msg))return;
     const j=await adminPost('lbcap',{k:lbSel,v});if(i)i.value='';annMsg=j.ok?(raw?'ตั้งเพดานแล้ว · ลบแถวที่เกิน '+(j.removed||0)+' แถว':'ยกเลิกเพดานแล้ว'):'บันทึกไม่สำเร็จ';load()}}
+/* ---------- แชทผู้เล่น ---------- */
+const CH={items:[],q:'',more:false,busy:0};
+async function chFetch(more){if(CH.busy)return;CH.busy=1;try{const before=more&&CH.items.length?CH.items[CH.items.length-1].at:'';const r=await fetch('/admin/chat?n=150'+(before?'&before='+before:'')+(CH.q?'&q='+encodeURIComponent(CH.q):''),{headers:{'x-admin-key':KEY},cache:'no-store'});
+  if(r.ok){const j=await r.json();CH.items=more?CH.items.concat(j.items):j.items;CH.more=j.more;CH.total=j.total}}catch(e){}CH.busy=0}
+function chCard(d){const it=CH.items,day=x=>new Date(x).toLocaleDateString('th-TH',{day:'numeric',month:'short'});let last='';
+  let h='<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:8px"><h2 style="margin:0">💬 แชทผู้เล่น <span class="muted" style="font-weight:400">· วันนี้ '+nf(d.chat?d.chat.today:0)+' ข้อความ · เก็บไว้ '+nf(d.chat?d.chat.n:0)+'</span></h2>'+
+    '<div class="row"><input type="text" id="chq" placeholder="ค้นหาข้อความหรือชื่อ" style="width:190px"><button id="chs">ค้นหา</button>'+(CH.q?'<button id="chc">ล้าง</button>':'')+'</div></div>';
+  if(CH.q)h+='<p class="sec" style="margin-top:0">ผลค้นหา «'+esc(CH.q)+'» '+it.length+(CH.more?'+':'')+' ข้อความ</p>';
+  h+='<div id="chbox" style="max-height:420px;overflow-y:auto;border:1px solid var(--grid);border-radius:8px;padding:4px 10px">'+(it.length?it.map(x=>{const dd=day(x.at),sep=dd!==last?(last=dd,'<div class="sec" style="text-align:center;margin:8px 0 4px">— '+dd+' —</div>'):'';
+      return sep+'<div style="padding:5px 0;border-bottom:1px solid var(--grid);font-size:13px'+(x.a?';background:var(--series-1-soft);border-radius:6px;padding-left:6px':'')+'"><span class="muted" style="font-variant-numeric:tabular-nums">'+tFmt(x.at)+'</span> <b>'+esc(x.n)+'</b> <span class="muted" style="font-size:12px">'+(x.a?'':esc(CLN[x.c]||x.c||'')+(x.l?' Lv'+x.l:'')+' · '+esc(mapName(x.mp)))+'</span><div style="margin-top:1px;overflow-wrap:anywhere">'+esc(x.t)+'</div></div>'}).join(''):'<p class="muted">'+(CH.q?'ไม่พบข้อความที่ค้นหา':'ยังไม่มีแชท · ระบบเริ่มเก็บแชทตั้งแต่อัปเวอร์ชันนี้')+'</p>')+
+    (CH.more?'<div style="text-align:center;padding:8px"><button id="chm">โหลดข้อความเก่ากว่านี้</button></div>':'')+'</div></div>';
+  return h}
+function chBind(){const go=async()=>{const i=document.getElementById('chq');CH.q=(i&&i.value||'').trim();await chFetch(false);render()};
+  const s=document.getElementById('chs');if(s)s.onclick=go;const i=document.getElementById('chq');if(i)i.onkeydown=e=>{if(e.key==='Enter')go()};
+  const c=document.getElementById('chc');if(c)c.onclick=async()=>{CH.q='';const i=document.getElementById('chq');if(i)i.value='';await chFetch(false);render()};
+  const m=document.getElementById('chm');if(m)m.onclick=async()=>{await chFetch(true);render()}}
 function level(p,w,c){return p>=c?'crit':p>=w?'warn':'good'}
 const LVTXT={good:'ปกติ',warn:'เริ่มสูง',crit:'สูงมาก'},LVIC={good:'●',warn:'▲',crit:'■'};
 function render(){const d=D,s=d.srv,plan=512*1048576,memP=s.rss/plan*100,memL=level(memP,70,85),fullP=d.online/d.max*100,fullL=level(fullP,70,90);
@@ -144,6 +161,7 @@ function render(){const d=D,s=d.srv,plan=512*1048576,memP=s.rss/plan*100,memL=le
     '<div class="card stat"><div class="l">ผู้เล่นวันนี้ (ไม่ซ้ำ)</div><div class="v">'+nf(d.today.u)+'</div><div class="s">เข้าเกม '+nf(d.today.sess)+' ครั้ง</div></div>'+
     '<div class="card stat"><div class="l">เวลาเล่นรวมวันนี้</div><div class="v">'+nf(Math.round(d.today.min/60*10)/10)+'</div><div class="s">ชั่วโมง·คน · เฉลี่ย '+(d.today.u?Math.round(d.today.min/d.today.u):0)+' นาที/คน</div></div></div>';
   h+='<div class="card"><div class="row" style="justify-content:space-between;margin-bottom:6px"><h2 style="margin:0">จำนวนคนออนไลน์</h2><div class="row"><button data-r="24h" aria-pressed="'+(range==='24h')+'">24 ชั่วโมง</button><button data-r="7d" aria-pressed="'+(range==='7d')+'">7 วัน</button></div></div><div class="chart" id="c1"></div><div class="sec">ค่าสูงสุดในแต่ละช่วง 5 นาที</div></div>';
+  h+=chCard(d);
   h+='<div class="grid g2"><div class="card"><h2>ช่วงเวลาที่คนเล่น (วันนี้ · เฉลี่ยรายชั่วโมง)</h2><div class="chart" id="c2"></div></div><div class="card"><h2>ผู้เล่นไม่ซ้ำรายวัน (30 วัน)</h2><div class="chart" id="c3"></div><button class="tbl-toggle" id="tt">'+(showTbl?'ซ่อนตาราง':'ดูเป็นตาราง')+'</button>'+(showTbl?'<div class="scroll"><table><thead><tr><th>วันที่</th><th class="n">ไม่ซ้ำ</th><th class="n">สูงสุดพร้อมกัน</th><th class="n">เข้าเกม</th><th class="n">ชม.·คน</th><th class="n">เต็ม</th></tr></thead><tbody>'+d.days.slice().reverse().map(x=>'<tr><td>'+esc(x.d)+'</td><td class="n">'+nf(x.u)+'</td><td class="n">'+nf(x.peak)+'</td><td class="n">'+nf(x.sess)+'</td><td class="n">'+(Math.round(x.min/6)/10)+'</td><td class="n">'+nf(x.full)+'</td></tr>').join('')+'</tbody></table></div>':'')+'</div></div>';
   const maps=Object.entries(d.byMap||{}).map(([k,v])=>[mapName(k),v]);const mg={};maps.forEach(([k,v])=>mg[k]=(mg[k]||0)+v);const mrows=Object.entries(mg).sort((a,b)=>b[1]-a[1]),mmax=Math.max(1,...mrows.map(r=>r[1]));
   h+='<div class="grid g2"><div class="card"><h2>อยู่แมพไหนกันบ้าง</h2>'+(mrows.length?mrows.map(([k,v])=>'<div class="mrow"><span>'+esc(k)+'</span><div class="bar"><i style="width:'+(v/mmax*100)+'%"></i></div><b class="n" style="text-align:right">'+v+'</b></div>').join(''):'<p class="muted">ตอนนี้ไม่มีใครออนไลน์</p>')+'</div>';
@@ -162,9 +180,9 @@ function render(){const d=D,s=d.srv,plan=512*1048576,memP=s.rss/plan*100,memL=le
     '<div class="sec" style="margin-top:8px">เปิดมาแล้ว '+dur(s.up)+' · Node '+esc(s.node)+' · ชื่อตัวละครที่จองไว้ '+nf(s.names||0)+' · การเชื่อมต่อ '+d.conn+'</div></div>';
   h+='<div class="card"><h2>ประกาศถึงผู้เล่นทุกคน</h2><p class="sec" style="margin-top:0">ขึ้นเป็นแถบประกาศกลางจอและในแชทของทุกคนที่ออนไลน์อยู่ · เช่น แจ้งปิดปรับปรุง</p><div class="row"><input type="text" id="an" maxlength="120" placeholder="เช่น อีก 5 นาทีจะปิดปรับปรุงสักครู่ครับ" style="flex:1;min-width:200px"><button class="pri" id="as">ส่งประกาศ</button></div>'+(annMsg?'<p class="sec">'+esc(annMsg)+'</p>':'')+'</div>';
   h+='<p class="muted" style="font-size:12px">ข้อมูลเมื่อ '+tFmt(d.now)+(ago>15?' · ล่าช้า '+ago+' วิ':'')+'</p>';
-  const kept={},af=document.activeElement&&document.activeElement.id;app.querySelectorAll('input[id]').forEach(i=>{if(i.value)kept[i.id]=i.value});
-  app.innerHTML=h;
-  for(const id in kept){const i=document.getElementById(id);if(i)i.value=kept[id]}if(af){const i=document.getElementById(af);if(i&&i.tagName==='INPUT')i.focus()}lbBind();
+  const kept={},af=document.activeElement&&document.activeElement.id;app.querySelectorAll('input[id]').forEach(i=>{if(i.value)kept[i.id]=i.value});const cb0=document.getElementById('chbox'),chTop=cb0?cb0.scrollTop:0;
+  app.innerHTML=h;{const cb=document.getElementById('chbox');if(cb)cb.scrollTop=chTop}
+  for(const id in kept){const i=document.getElementById(id);if(i)i.value=kept[id]}if(af){const i=document.getElementById(af);if(i&&i.tagName==='INPUT')i.focus()}lbBind();chBind();
   const now=d.now,span=range==='24h'?864e5:7*864e5,pts=d.samples.filter(p=>p[0]>=now-span);
   lineChart(document.getElementById('c1'),pts,{x0:now-span,x1:now,days:range==='7d',gap:11*60e3,label:'จำนวนคนออนไลน์'});
   const hr=new Date(now+7*3600e3).getUTCHours();
