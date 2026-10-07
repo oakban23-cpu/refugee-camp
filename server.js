@@ -343,8 +343,9 @@ function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':
   const act=req.url.slice(7).split('?')[0];const who=adminWho(req);
   let body='';req.on('data',d=>{body+=d;if(body.length>2000)req.destroy()});req.on('end',()=>{let q={};try{q=JSON.parse(body)||{}}catch(e){}console.log('[ผู้ดูแล #'+who+'] '+act+' '+JSON.stringify(q).replace(/"pin":"[^"]*"/,'"pin":"***"').slice(0,160));
     if(act==='ann'){let t=String(q.t||'').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return J(400,{err:'empty'});
-      const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});try{CHL.push({at:Date.now(),n:'📢 ประกาศ (ผู้ดูแล)',t,mp:0,c:'',l:0,a:1});chDirty=true}catch(e){}let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);return J(200,{ok:1,n})}
+      const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});try{CHL.push({id:++chId,at:Date.now(),n:'📢 ประกาศ (ผู้ดูแล)',t,mp:0,c:'',l:0,a:1});chDirty=true}catch(e){}let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);return J(200,{ok:1,n})}
     if(act==='lbdel'||act==='lbban'||act==='lbcap')return J(200,lbAdmin(act,q));
+    if(act==='chdel'||act==='chdeln'||act==='chclear')return J(200,chAdmin(act,q));
     if(act==='accpin'||act==='accbak'||act==='accmod')return J(200,accAdmin(act,q));
     J(404,{err:'act'})})}
 /* ===== จองชื่อตัวละคร: หนึ่งชื่อใช้ได้ตัวละครเดียวทั้งเซิร์ฟเวอร์ (ผูกกับรหัสตัวละครถาวร mid) · ไม่ได้ใช้ 90 วันปล่อยคืน ===== */
@@ -369,10 +370,17 @@ function nameReq(c,d){if(!d||typeof d!=='object')return;const t=String(d.t||'').
 /* ===== บันทึกแชท: เก็บ 3000 ข้อความล่าสุดลงดิสก์ (chatlog.json) ให้ผู้ดูแลอ่านในหน้า /admin ===== */
 const CHF=path.join(DATA_DIR,'chatlog.json'),CHMAX=3000;let CHL=[],chDirty=false;
 try{const j=JSON.parse(fs.readFileSync(CHF,'utf8'));if(Array.isArray(j))CHL=j.slice(-CHMAX)}catch(e){}
+let chId=CHL.reduce((m,x)=>Math.max(m,x.id|0),0);CHL.forEach(x=>{if(!x.id)x.id=++chId});
+function chAll(d){const s=JSON.stringify({t:'emit',k:'chdel',d:{mp:0,d},from:0});for(const c of clients)if(c.p)send(c,s)}
+function chAdmin(act,q){const n0=CHL.length;
+  if(act==='chdel'){const id=q.id|0,x=CHL.find(x=>x.id===id);if(!x)return{err:'ไม่พบข้อความ'};CHL=CHL.filter(y=>y!==x);chDirty=true;chAll({n:x.n,t:x.t});return{ok:1,n:1}}
+  if(act==='chdeln'){const n=String(q.n||'');if(!n)return{err:'name'};CHL=CHL.filter(y=>y.n!==n);chDirty=true;chAll({n});return{ok:1,n:n0-CHL.length}}
+  if(act==='chclear'){CHL=[];chDirty=true;chAll({all:1});return{ok:1,n:n0}}
+  return{err:'act'}}
 setInterval(()=>{if(!chDirty)return;chDirty=false;wj(CHF,CHL)},30000);
 function chatLog(c,pl){if(!pl||typeof pl!=='object')return;const t=String(pl.t||'').replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!t)return;
   const p=c.p||{},n=String(p.n||pl.n||'').replace(/[\u0000-\u001f<>]/g,'').trim().slice(0,12)||'ผู้เล่น';
-  CHL.push({at:Date.now(),n,t,mp:p.mp|0,c:String(p.cls||'').slice(0,8),l:p.lv|0});if(CHL.length>CHMAX)CHL.splice(0,CHL.length-CHMAX);chDirty=true}
+  CHL.push({id:++chId,at:Date.now(),n,t,mp:p.mp|0,c:String(p.cls||'').slice(0,8),l:p.lv|0});if(CHL.length>CHMAX)CHL.splice(0,CHL.length-CHMAX);chDirty=true}
 function chatQuery(q){const n=Math.max(1,Math.min(500,+q.get('n')||150)),before=+q.get('before')||Infinity,s=String(q.get('q')||'').trim().toLowerCase().slice(0,40);
   const out=[];for(let i=CHL.length-1;i>=0&&out.length<n;i--){const x=CHL[i];if(x.at>=before)continue;if(s&&!(x.t.toLowerCase().includes(s)||x.n.toLowerCase().includes(s)))continue;out.push(x)}
   return{items:out,total:CHL.length,more:out.length===n}}
