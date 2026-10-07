@@ -69,6 +69,10 @@ function tickPeers(){
   }
 }
 setInterval(tickPeers,200);
+/* รายชื่อทุกคนในแมพเดียวกัน (ทุก 2 วิ · ใกล้สุด 80 คน) ให้แลกเปลี่ยน/เชิญปาร์ตี้ได้แม้อยู่ไกลกันในแมพใหญ่ */
+setInterval(()=>{const by={};for(const c of clients){if(!c.p||!c.uid)continue;(by[c.p.mp]=by[c.p.mp]||[]).push(c)}
+  for(const mp in by){const L=by[mp];for(const c of L){let r=L.filter(o=>o!==c);if(!r.length&&!c.rosterN)continue;if(r.length>80){r.sort((a,b)=>d2(a.p.x,a.p.y,c.p.x,c.p.y)-d2(b.p.x,b.p.y,c.p.x,c.p.y));r=r.slice(0,80)}
+    c.rosterN=r.length;send(c,JSON.stringify({t:'roster',mp:+mp,r:r.map(o=>[o.p.uid,o.p.n,o.p.cls,o.p.lv])}),true)}}},2000);
 /* ===== ที่เก็บข้อมูลถาวร: ตั้ง DATA_DIR ให้ชี้ไปดิสก์ถาวร (เช่น Render Disk) · เขียนแบบปลอดภัย (ไฟล์ชั่วคราวแล้วเปลี่ยนชื่อ) ===== */
 const DATA_DIR=process.env.DATA_DIR||__dirname;try{fs.mkdirSync(DATA_DIR,{recursive:true})}catch(e){}
 function wj(f,o,cb){const t=f+'.tmp';fs.writeFile(t,JSON.stringify(o),e=>{if(e){if(cb)cb(e);return}fs.rename(t,f,e2=>{if(cb)cb(e2)})})}
@@ -77,7 +81,14 @@ const byMid=new Map();
 function mkOwner(c,d){const v=d&&typeof d.mid==='string'&&/^[a-z0-9]{8,16}$/.test(d.mid)?'m:'+d.mid:c.uid;if(v&&v!==c.uid){if(c.mid&&c.mid!==v&&byMid.get(c.mid)===c)byMid.delete(c.mid);c.mid=v;byMid.set(v,c)}return v}
 /* ตารางอันดับบอส: เก็บลงไฟล์ leaderboard.json */
 const LBF=path.join(DATA_DIR,'leaderboard.json');let LB={},lbDirty=false;
+/* หนึ่งตัวละคร (ชื่อ+อาชีพ) = หนึ่งแถว เก็บเฉพาะสถิติที่ดีที่สุด */
+const lbId=r=>String(r.n||'').trim().toLowerCase()+'|'+String(r.c||'');
+const lbHi=key=>key==='wb'||key==='pv';
+function lbDedupe(){let ch=false;for(const key in LB){const arr=LB[key];if(!Array.isArray(arr))continue;const hi=lbHi(key),best=new Map();
+  for(const r of arr){const id=lbId(r),o=best.get(id);if(!o||(hi?r.t>o.t:r.t<o.t))best.set(id,r)}
+  const out=[...best.values()].sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(out.length!==arr.length)ch=true;LB[key]=out}return ch}
 try{const j=JSON.parse(fs.readFileSync(LBF,'utf8'));if(j&&typeof j==='object')LB=j}catch(e){}
+if(lbDedupe()){lbDirty=true;console.log('ตารางอันดับ: รวมแถวซ้ำของตัวละครเดียวกันแล้ว')}
 setInterval(()=>{if(!lbDirty)return;lbDirty=false;wj(LBF,LB)},10000);
 function onEmit(c,m){
   const k=m.k,pl=m.d;if(typeof k!=='string'||k.length>12)return;
@@ -87,7 +98,7 @@ function onEmit(c,m){
   const wrap=x=>JSON.stringify({t:'emit',k,d:{mp,d:x},from:c.id});
   if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv)$/.test(key))return;const hi=key==='wb'||key==='pv',t=+d.t;if(hi?!(t>=1&&t<1e12):!(t>=5&&t<36000))return;
     const row={n:String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,12)||'ผู้เล่น',c:String(d.cls||'').slice(0,8),l:num(d.lv|0,1,99,1),t:hi?Math.round(t):Math.round(t*10)/10,p:num(d.pc|0,1,99,1),u:c.uid||'',at:Date.now()};
-    const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>r.u===row.u&&r.c===row.c);if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
+    const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>lbId(r)===lbId(row));if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
     arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='pvc'||k==='pva'||k==='pvn'||k==='pvh'||k==='pvd'||k==='pvt'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||'';send(o,wrap(d))}return}
