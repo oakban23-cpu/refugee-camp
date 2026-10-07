@@ -6813,6 +6813,7 @@ setInterval(status,1500);
   room.on('chat',m=>{const d=m.data;if(m.sameTab||!d||typeof d.t!=='string')return;const t=d.t.replace(/[\u0000-\u001f\u007f]/g,'').slice(0,80);if(!t)return;
     const u=typeof d.u==='string'?d.u:'';const nm=cleanName(d.n)||(others[u]&&others[u].n)||'ผู้เล่น';addChat(nm,t,u)});
   room.on('nmr',m=>{const d=m.data&&m.data.d;if(!d||typeof d.t!=='string'||!nmCb[d.t])return;const f=nmCb[d.t];delete nmCb[d.t];try{f(d)}catch(e){}});
+  room.on('chdel',m=>{const d=m.data&&m.data.d;if(!d||typeof d!=='object')return;const n0=chatLog.length;if(d.all)chatLog=chatLog.filter(l=>l.sys||/^📢/.test(l.n||''));else if(typeof d.n==='string')chatLog=chatLog.filter(l=>l.sys||!(l.n===d.n&&(typeof d.t!=='string'||l.t===d.t)));if(chatLog.length!==n0){logSig='';renderLog()}});
   room.on('ann',m=>{const d=m.data&&m.data.d;if(!d||typeof d.t!=='string')return;const t=d.t.replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return;
     chatLog.push({n:'📢 ประกาศ',t,at:Date.now()+6000});renderLog();banner={s:'📢 '+t,t:7};try{sfx('lvl')}catch(e){}});
   room.on('world',m=>{m=U(m);if(!m.sameTab&&m.data&&!isHost()&&(m.data.wm===undefined||m.data.wm===curMap))applyWorld(m.data)});
