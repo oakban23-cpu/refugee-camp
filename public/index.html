@@ -6240,7 +6240,7 @@ function drawBoss7(T,W,F,E,Pg,Ln,eye,glowOrb,br,sw,up,cf){const O='#120c0a';
   if(!W){g.save();g.globalCompositeOperation='lighter';const tw=Math.max(0,Math.sin(T*3))**6;g.fillStyle='rgba(255,250,200,'+tw+')';g.beginPath();g.arc(0,hy-40,3*tw+.5,0,7);g.fill();g.restore()}
   /* เหรียญหน้า */
   if(!W){g.save();g.globalCompositeOperation='lighter';for(let i=0;i<6;i++){const a=T*1.2+i*1.047,cx=Math.cos(a)*54,cy=-30+Math.sin(a)*16;if(Math.sin(a)>=0){g.fillStyle='rgba(255,220,90,.9)';g.beginPath();g.ellipse(cx,cy,4.4,4.4*Math.abs(Math.cos(T*4+i)),0,0,7);g.fill()}}g.restore()}}
-const emitM=(k,d)=>{if(room)room.emit(k,{mp:curMap,d})};
+const emitM=(k,d)=>{if(k==='lbs'&&typeof NMC!=='undefined'&&NMC.bad)return;if(room)room.emit(k,{mp:curMap,d})};
 const U=m=>({sameTab:m.sameTab||!m.data||m.data.mp!==curMap,data:m.data&&m.data.d});
 let room=null,others={},mons=[],guards=[],bolts=[],fxs=[],dn=[],hitBuf=[],dmgOut=[],dmgQ={};
 const JB={x:70,y:H-84};
@@ -6287,6 +6287,7 @@ setInterval(status,1500);
     others=o;status();if(partyOpen)partyList()});
   room.on('chat',m=>{const d=m.data;if(m.sameTab||!d||typeof d.t!=='string')return;const t=d.t.replace(/[\u0000-\u001f\u007f]/g,'').slice(0,80);if(!t)return;
     const u=typeof d.u==='string'?d.u:'';const nm=cleanName(d.n)||(others[u]&&others[u].n)||'ผู้เล่น';addChat(nm,t,u)});
+  room.on('nmr',m=>{const d=m.data&&m.data.d;if(!d||typeof d.t!=='string'||!nmCb[d.t])return;const f=nmCb[d.t];delete nmCb[d.t];try{f(d)}catch(e){}});
   room.on('ann',m=>{const d=m.data&&m.data.d;if(!d||typeof d.t!=='string')return;const t=d.t.replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return;
     chatLog.push({n:'📢 ประกาศ',t,at:Date.now()+6000});renderLog();banner={s:'📢 '+t,t:7};try{sfx('lvl')}catch(e){}});
   room.on('world',m=>{m=U(m);if(!m.sameTab&&m.data&&!isHost()&&(m.data.wm===undefined||m.data.wm===curMap))applyWorld(m.data)});
@@ -6419,7 +6420,34 @@ function partyList(){const el=$('plist');if(!el){partyOpen=false;return}
 function partyUI(msg){partyOpen=true;ov.dataset.k='party';
   ov.innerHTML='<div class="pn" data-pn="party">'+hdr('👥','ปาร์ตี้','ผู้เล่นในแมพเดียวกันเป็นทีมเดียวกัน มอนสเตอร์และบอสร่วมกัน (แต่ละแมพแยกกัน แชทคุยกันได้ทุกแมพ)')+ptCard()+'<div class="card"><div class="cap">ผู้เล่นในแมพนี้</div><div id="plist"></div></div>'+(msg?'<div class="note">'+msg+'</div>':'')+'</div>';
   partyList()}
-function saveName(){const n=cleanName($('nin').value);if(!n){partyUI('ชื่อว่างไม่ได้');return}myName=n;if(me.cls)me.nm=n;try{localStorage.setItem('refugee_name',n)}catch(e){}partyUI('เปลี่ยนชื่อเป็น '+n+' แล้ว')}
+/* ===== จองชื่อตัวละคร: หนึ่งชื่อใช้ได้ตัวละครเดียวทั้งเซิร์ฟเวอร์ ===== */
+var NMC={done:false,wait:0,bad:false,busy:0,lastF:0},nmCb={},NEWMID='';
+const NMWHY={taken:'ชื่อนี้มีผู้เล่นคนอื่นใช้แล้ว',reserved:'ชื่อนี้สงวนไว้ ใช้ไม่ได้',busy:'ลองบ่อยเกินไป รอสักครู่แล้วลองใหม่',bad:'ชื่อไม่ถูกต้อง'};
+const nmOnline=()=>!!(room&&room.url&&room.ok);
+const newMid=()=>(Math.random().toString(36).slice(2,8)+Math.random().toString(36).slice(2,8)).replace(/[^a-z0-9]/g,'').slice(0,12).padEnd(10,'x');
+function nmSend(op,n,mid,cb){if(!nmOnline()){cb&&cb(null);return}const t=Math.random().toString(36).slice(2,9);nmCb[t]=cb;emitM('nmq',{op,n,mid,t});setTimeout(()=>{if(nmCb[t]){const f=nmCb[t];delete nmCb[t];try{f&&f(null)}catch(e){}}},4000)}
+function nmCreate(c,n){if(NMC.busy)return;const mid=newMid(),msg=(tx,bad)=>{const m=$('csnm');if(m){m.textContent=tx;m.style.color=bad?'#e0645a':''}};
+  if(!nmOnline()){NEWMID=mid;NMC.done=false;pick(c,'',n);return}
+  NMC.busy=1;msg('⏳ กำลังตรวจชื่อ...');
+  nmSend('claim',n,mid,r=>{NMC.busy=0;if(r&&!r.ok){msg('⚠ '+(NMWHY[r.why]||'ใช้ชื่อนี้ไม่ได้')+' · ลองชื่ออื่น',1);const i=$('csni');if(i)i.focus();return}NEWMID=mid;NMC.done=!!r;pick(c,'',n)})}
+function nmForce(msg){if(!me.cls||!run)return;NMC.lastF=Date.now();ov.dataset.k='nmf';ov.hidden=false;
+  ov.innerHTML='<div class="pn" data-pn="nmf">'+hdr('✏️','ตั้งชื่อตัวละครใหม่','ชื่อ «'+esc(me.nm)+'» มีผู้เล่นคนอื่นใช้แล้ว')+(msg?'<div class="note">'+msg+'</div>':'')+
+    '<div class="card"><p style="margin:0 0 8px">ตอนนี้แต่ละชื่อใช้ได้ตัวละครเดียวในเซิร์ฟเวอร์ ช่วยตั้งชื่อใหม่ให้ตัวละครนี้หน่อย · เลเวล ไอเทม และทองอยู่ครบเหมือนเดิม</p>'+
+    '<input id="nmfi" maxlength="12" placeholder="ชื่อใหม่ (ไม่เกิน 12 ตัว)" style="width:100%;padding:10px;border-radius:10px;border:1px solid #c9a24a;background:#0e1430;color:#fff;font-size:15px">'+
+    '<div class="row" style="gap:8px;margin-top:10px"><button class="pri" style="flex:1" data-nmf="go">ใช้ชื่อนี้</button></div>'+
+    '<small style="display:block;margin-top:8px;opacity:.7">ระหว่างยังไม่เปลี่ยนชื่อ สถิติใหม่จะยังไม่ขึ้นตารางอันดับ</small></div></div>';
+  setTimeout(()=>{const i=$('nmfi');if(i)try{i.focus({preventScroll:true})}catch(e){}},60)}
+ov.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-nmf]');if(!b||ov.dataset.k!=='nmf')return;const i=$('nmfi'),n=cleanName(i&&i.value);if(!n)return nmForce('ใส่ชื่อก่อน');
+  if(!nmOnline())return nmForce('ยังเชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ลองใหม่อีกครั้ง');b.disabled=true;b.textContent='⏳ กำลังตรวจชื่อ...';
+  nmSend('claim',n,mkMid(),r=>{if(!r)return nmForce('เซิร์ฟเวอร์ไม่ตอบ ลองใหม่อีกครั้ง');if(!r.ok)return nmForce('⚠ «'+esc(n)+'» '+(NMWHY[r.why]||'ใช้ไม่ได้')+' · ลองชื่ออื่น');
+    myName=n;me.nm=n;try{localStorage.setItem('refugee_name',n)}catch(e){}NMC.bad=false;NMC.done=true;try{writeSave()}catch(e){}ov.hidden=true;sysMsg('✏️ เปลี่ยนชื่อเป็น '+n+' แล้ว');banner={s:'✏️ ชื่อใหม่: '+n,t:3}})});
+setInterval(()=>{if(!me.cls||!run||!nmOnline())return;
+  if(NMC.bad){if(ov.hidden&&Date.now()-NMC.lastF>45000)nmForce();return}
+  if(NMC.done||NMC.wait)return;NMC.wait=1;const n=me.nm,sl=me.slot;nmSend('claim',n,mkMid(),r=>{NMC.wait=0;if(!r||n!==me.nm||sl!==me.slot)return;if(r.ok){NMC.done=true;return}if(r.why==='taken'||r.why==='reserved'){NMC.bad=true;if(ov.hidden)nmForce()}})},3000);
+function saveName(){const n=cleanName($('nin').value);if(!n){partyUI('ชื่อว่างไม่ได้');return}if(n===me.nm){partyUI('ใช้ชื่อนี้อยู่แล้ว');return}
+  const apply=()=>{myName=n;if(me.cls)me.nm=n;try{localStorage.setItem('refugee_name',n)}catch(e){}try{writeSave()}catch(e){}};
+  if(!me.cls||!nmOnline()){apply();NMC.done=false;partyUI('เปลี่ยนชื่อเป็น '+n+' แล้ว');return}
+  partyUI('⏳ กำลังตรวจชื่อ...');nmSend('claim',n,mkMid(),r=>{if(r&&!r.ok){partyUI('⚠ '+(NMWHY[r.why]||'ใช้ชื่อนี้ไม่ได้')+' · ลองชื่ออื่น');return}apply();NMC.done=!!r;NMC.bad=false;partyUI('เปลี่ยนชื่อเป็น '+n+' แล้ว')})}
 $('pb').onclick=()=>{if(me.cls&&run){ov.hidden=false;partyUI()}};
 $('dgm').onclick=()=>{if(me.cls&&run){ov.hidden=false;dungeonUI()}};
 $('evm').onclick=()=>{if(me.cls&&run){ov.hidden=false;eventUI()}};$('mtm').onclick=()=>{if(me.cls&&run){ov.hidden=false;mountUI('',false)}};$('ptm').onclick=()=>{if(me.cls&&run){ov.hidden=false;petUI()}};$('cdm').onclick=()=>{if(me.cls&&run){ov.hidden=false;cardUI()}};$('rxm').onclick=()=>{if(me.cls&&run){ov.hidden=false;rxUI()}};$('chm').onclick=()=>{if(me.cls&&run)chSwUI()};$('mtb').onclick=()=>mountToggle();$('ahb').onclick=()=>huntToggle();$('aum').onclick=()=>{if(me.cls&&run)autoUI()};{const b=$('atb');let lp=null,long=0;b.addEventListener('pointerdown',()=>{long=0;lp=setTimeout(()=>{long=1;autoUI()},500)});const end=()=>{clearTimeout(lp)};b.addEventListener('pointerup',end);b.addEventListener('pointerleave',end);b.onclick=()=>{if(long){long=0;return}autoToggle()};b.oncontextmenu=e=>{e.preventDefault()}}$('hdb').onclick=()=>{HDI.on=!HDI.on;try{localStorage.setItem('refugee_hd',HDI.on?'1':'0')}catch(e){}if(HDI.on)hdLoad();hdLabel();sysMsg('🖼️ ภาพเมืองหลวง HD: '+(HDI.on?(LOWQ?'เปิด (จะแสดงเมื่อไม่ได้อยู่โหมดประหยัด)':'เปิด'):'ปิด · ใช้ภาพเวกเตอร์'))};function hdLabel(){$('hdb').textContent='🖼️ ภาพ HD: '+(HDI.on?'เปิด':'ปิด')}hdLabel();$('gqb').onclick=()=>{const nx={auto:'high',high:'low',low:'auto'}[GQ]||'auto';setGQ(nx);gqLabel();sysMsg('⚙️ กราฟิก: '+GQN[nx])};const GQN={auto:'อัตโนมัติ',high:'สูง (คมชัดสุด)',low:'ประหยัด (ลื่นสุด)'};/* ===== ตัววัดความลื่น: FPS · เวลาต่อเฟรม · เวลาวาด แยกตามแมพ (เก็บในเครื่อง · คัดลอกส่งให้ผู้พัฒนาได้) ===== */
@@ -9897,7 +9925,7 @@ function pick(c,slot,nm){if(saveMode==='wait')return;
   if(slot&&saves.chars[slot])c=scls(slot);else slot=newSlotKey(c);if(!CL[c])return;me.slot=slot;csMode='';csSel=slot;delArm=null;
   setTimeout(()=>{try{autoLoad();huntLoad()}catch(e){}},0);
   const C=CL[c];me.cls=c;me.mh=C.hp;me.hp=C.hp;me.lv=1;me.xp=0;me.tr={};me.ab={str:0,vit:0,int:0,agi:0,luk:0};me.gold=40;me.inv={hp:2,mp:1,ps:0};me.twc=0;me.twCp=1;me.twBest=0;me.cls2=0;me.cq={s:0,n:0};me.mts=[];me.mt=0;me.pets=[];me.pet=0;PT=null;me.cards={};me.cslot=['',''];me.cmv='';CARDB={};me.rs=null;me.pvp={w:0,l:0};me.sty={s:0,n:0,a:0,e:0};me.rxd={};me.rxt=0;me.br=1;me.brU={};me.dk={s:0,n:0};me.rg2=0;me.riding=0;me.mat={sc:0,hr:0};me.mcnt=0;me.freeC=0;me.eq={w:null,a:null,c:null,h:null,b:null};me.bag=[];me.qs=[];me.mm=C.mp;me.mp=C.mp;me.x=CX;me.y=CY+60;me.sk=[0,0,0,0,0];me.rage=0;me.clone=null;me.mark=null;pend=[];me.dq=null;me.ls={last:'',st:0,cl:''};me.stt=newStt();me.ach={};me.title='';me.pb={};bf=null;
-  const isNew=!saves.chars[slot];if(!isNew)applySave(saves.chars[slot]);else{me.asl={on:0,k:2};me.mkid='';me.mkesc=[]}ASS={n:0,g:0};
+  const isNew=!saves.chars[slot];if(!isNew)applySave(saves.chars[slot]);else{me.asl={on:0,k:2};me.mkid=NEWMID||'';me.mkesc=[]}NMC.done=isNew&&!!NEWMID&&NMC.done;NEWMID='';NMC.bad=false;NMC.wait=0;ASS={n:0,g:0};
   me.nm=cleanName(isNew?nm:saves.chars[slot].nm)||cleanName(myName)||'ผู้เล่น';myName=me.nm;
   lastJ=JSON.stringify(snap());
   ov.hidden=true;run=true;last=performance.now();makeGuards();
@@ -9930,7 +9958,7 @@ ov.addEventListener('click',e=>{
   if(t.dataset.csn){csMode='new';delArm=null;csName='';intro();setTimeout(()=>{const i=$('csni');if(i)try{i.focus({preventScroll:true})}catch(e){}},50);return}
   if(t.dataset.cp){csPick=t.dataset.cp;intro();return}
   if(t.dataset.csb){csMode='';intro();return}
-  if(t.dataset.c){if(t.dataset.new){const n=cleanName(csName);if(!n){const m=$('csnm');if(m){m.textContent='กรุณาตั้งชื่อตัวละครก่อน';m.style.color='#e0645a'}const i=$('csni');if(i)i.focus();return}pick(t.dataset.c,'',n)}else pick(t.dataset.c,t.dataset.slot)}
+  if(t.dataset.c){if(t.dataset.new){const n=cleanName(csName);if(!n){const m=$('csnm');if(m){m.textContent='กรุณาตั้งชื่อตัวละครก่อน';m.style.color='#e0645a'}const i=$('csni');if(i)i.focus();return}nmCreate(t.dataset.c,n)}else pick(t.dataset.c,t.dataset.slot)}
   if(t.id==='srvb'){try{localStorage.setItem('refugee_server',$('srvi').value.trim())}catch(e){}location.reload();return}
   if(t.id==='bkx'){$('bkt').value='RFG1:'+b64e(JSON.stringify(saves));$('bkm').textContent='สร้างรหัสแล้ว กดคัดลอกเก็บไว้';$('bkt').select()}
   if(t.id==='bkc'){const x=$('bkt');x.select();try{navigator.clipboard.writeText(x.value).then(()=>{$('bkm').textContent='คัดลอกแล้ว'},()=>{document.execCommand('copy');$('bkm').textContent='คัดลอกแล้ว'})}catch(e){try{document.execCommand('copy');$('bkm').textContent='คัดลอกแล้ว'}catch(_){}}}
