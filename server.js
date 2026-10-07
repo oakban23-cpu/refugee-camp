@@ -122,12 +122,16 @@ function onEmit(c,m){
     arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='pvc'||k==='pva'||k==='pvn'||k==='pvh'||k==='pvd'||k==='pvt'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||'';send(o,wrap(d))}return}
-  if(k==='mkq'){const u=mkOwner(c,d);mkReply(c,'mkr',{L:MK.L.slice(-150).map(x=>({id:x.id,k:x.k,d:x.d,p:x.p,n:x.n,me:x.u===u?1:0})),sale:Math.floor(MK.sales[u]||0),ret:(MK.ret[u]||[]).length,ep:MK.ep,mine:MK.L.filter(x=>x.u===u).map(x=>x.id)});return}
+  if(k==='mkq'||k==='mkl'||k==='mkb'||k==='mkx'||k==='mkc'){const why=mkGate(c,d,k);if(why){const t=String(d&&d.t||'').slice(0,12);
+      if(k==='mkq')mkReply(c,'mkr',{err:why});else if(k==='mkl')mkReply(c,'mka',{t,ok:0,why});else if(k==='mkb')mkReply(c,'mkg',{ok:0,why});else if(k==='mkc')mkReply(c,'mkc',{g:0,r:[],why});return}}
+  if(k==='mkq'){const u=mkOwner(c,d),A=ACCS[c.accA]||{};mkReply(c,'mkr',{L:MK.L.slice(-150).map(x=>({id:x.id,k:x.k,d:x.d,p:x.p,n:x.n,me:x.u===u?1:0})),sale:Math.floor(MK.sales[u]||0),ret:(MK.ret[u]||[]).length,ban:A.mkban?1:0,fl:(A.fo|0)>0?1:0,ep:MK.ep,mine:MK.L.filter(x=>x.u===u).map(x=>x.id)});return}
   if(k==='mkl'){const u=mkOwner(c,d);if(!u||!d||typeof d!=='object')return;const p=Math.floor(+d.p||0),ok=mkOk(d.k,d.d)&&p>=1&&p<=1e9&&MK.L.filter(x=>x.u===u).length<8;
     let id=0;if(ok){id=MK.n++;MK.L.push({id,u,n:c.p.n,k:d.k,d:d.d,p,at:Date.now()});mkDirty=true}mkReply(c,'mka',{t:String(d.t||'').slice(0,12),ok:ok?1:0,id,ep:MK.ep});return}
-  if(k==='mkb'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id));if(i<0||MK.L[i].u===u){mkReply(c,'mkg',{ok:0});return}const x=MK.L.splice(i,1)[0];MK.sales[x.u]=(MK.sales[x.u]||0)+Math.floor(x.p*.95);mkDirty=true;mkReply(c,'mkg',{ok:1,k:x.k,d:x.d,p:x.p,id:x.id});const s=byMid.get(x.u)||byUid.get(x.u);if(s)mkReply(s,'mks',{n:c.p.n,p:x.p,id:x.id,g:Math.floor(x.p*.95)});return}
+  if(k==='mkb'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id));if(i<0||MK.L[i].u===u){mkReply(c,'mkg',{ok:0});return}
+    {const A=ACCS[c.accA],f=svChar(c.accA,d.mid);if(!A||!f){mkReply(c,'mkg',{ok:0,why:'sync'});return}const gold=Math.max(0,+f.ch.gold||0),ex=A.exp&&A.exp[f.k],have=ex?Math.min(gold,ex.g):gold;
+      if(have<MK.L[i].p){mkReply(c,'mkg',{ok:0,why:'gold'});return}A.exp=A.exp||{};A.exp[f.k]={g:have-MK.L[i].p,at:ex?ex.at:Date.now()};accDirty=true}const x=MK.L.splice(i,1)[0];MK.sales[x.u]=(MK.sales[x.u]||0)+Math.floor(x.p*.95);mkDirty=true;mkReply(c,'mkg',{ok:1,k:x.k,d:x.d,p:x.p,id:x.id});const s=byMid.get(x.u)||byUid.get(x.u);if(s)mkReply(s,'mks',{n:c.p.n,p:x.p,id:x.id,g:Math.floor(x.p*.95)});return}
   if(k==='mkx'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id)&&x.u===u);if(i<0)return;const x=MK.L.splice(i,1)[0];mkDirty=true;mkReply(c,'mkg',{ok:1,back:1,k:x.k,d:x.d,p:0,id:x.id});return}
-  if(k==='mkc'){const u=mkOwner(c,d);if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
+  if(k==='mkc'){const u=mkOwner(c,d);if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];if(g>0){const A=ACCS[c.accA],f=svChar(c.accA,d.mid);if(A&&f){A.cr=A.cr||{};A.cr[f.k]=(A.cr[f.k]||0)+g;accDirty=true}}delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
   if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,key==='wb'?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='mvq'){send(c,JSON.stringify({t:'emit',k:'mvr',d:{mp,d:mvTable()},from:0}));return}
@@ -244,7 +248,7 @@ const accPinOk=p=>typeof p==='string'&&p.length>=4&&p.length<=32;
 const accHash=(pin,salt)=>crypto.scryptSync(String(pin),salt,32).toString('hex');
 const tkHash=t=>crypto.createHash('sha256').update(String(t)).digest('hex');
 function accNewToken(A){const t=crypto.randomBytes(24).toString('hex');A.tk=(A.tk||[]).concat(tkHash(t)).slice(-6);return t}
-function accAuth(a,t){const A=ACCS[a];if(!A||typeof t!=='string'||t.length!==48)return null;const h=tkHash(t);return(A.tk||[]).includes(h)?A:null}
+function accAuth(a,t){const A=ACCS[a];if(!A||A.lock||typeof t!=='string'||t.length!==48)return null;const h=tkHash(t);return(A.tk||[]).includes(h)?A:null}
 const svPath=a=>path.join(SVD,a+'.json');
 function svRead(a){try{return JSON.parse(fs.readFileSync(svPath(a),'utf8'))}catch(e){return null}}
 function svSum(d){let n=0,l=0;try{for(const k in d.chars){n++;l=Math.max(l,d.chars[k].lv|0)}}catch(e){}return{n,l}}
@@ -266,22 +270,48 @@ function accRoute(req,res){const H={'Content-Type':'application/json','Cache-Con
         const salt=crypto.randomBytes(12).toString('hex');const A=ACCS[a]={s:salt,h:accHash(q.pin,salt),c:now,l:now,tk:[]};const t=accNewToken(A);accDirty=true;console.log('สร้างบัญชี: '+a);return J(200,{ok:1,a,t,rev:0})}
       const A=ACCS[a];let ok=false;if(A){const h=accHash(q.pin,A.s);ok=h.length===A.h.length&&crypto.timingSafeEqual(Buffer.from(h),Buffer.from(A.h))}
       if(!ok){for(const k of[ip,fk]){const g=ACFAIL.get(k);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACFAIL.set(k,v)}if(ACFAIL.size>5000)ACFAIL.clear();if(A){const g=ACNF.get(a);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACNF.set(a,v);if(ACNF.size>5000)ACNF.clear()}return J(401,{err:A?'pin':'none'})}
-      ACFAIL.delete(fk);ACNF.delete(a);A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(a);return J(200,{ok:1,a,t,rev:sv?sv.rev|0:0})}
+      ACFAIL.delete(fk);ACNF.delete(a);if(A.lock)return J(403,{err:'lock'});A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(a);return J(200,{ok:1,a,t,rev:sv?sv.rev|0:0})}
     const A=accAuth(a,q.t);if(!A)return J(401,{err:'auth'});
     if(act==='load'){const sv=svRead(a);A.l=now;accDirty=true;return J(200,{ok:1,rev:sv?sv.rev|0:0,data:sv?sv.data:null,at:sv?sv.at:0})}
     if(act==='save'){const d=q.data;if(!d||typeof d!=='object'||!d.chars||typeof d.chars!=='object')return J(400,{err:'data'});
       const lt=ACLAST.get(a)||0;if(now-lt<1500)return J(429,{err:'fast'});
       const sv=svRead(a),cur=sv?sv.rev|0:0;if((q.r|0)!==cur)return J(409,{err:'rev',rev:cur,data:sv?sv.data:null});ACLAST.set(a,now);if(ACLAST.size>5000)ACLAST.clear();
       const o={rev:cur+1,at:now,data:d},js=JSON.stringify(o);if(js.length>SVMAX)return J(413,{err:'size'});
+      try{accInspect(a,A,sv,d,now)}catch(e){console.error('inspect',e.message)}
       const f=svPath(a);try{if(sv&&(!fs.existsSync(f+'.bak')||now-fs.statSync(f+'.bak').mtimeMs>30*60e3))fs.copyFileSync(f,f+'.bak')}catch(e){}
       const tmp=f+'.tmp';fs.writeFile(tmp,js,e=>{if(e)return J(500,{err:'disk'});fs.rename(tmp,f,e2=>{if(e2)return J(500,{err:'disk'});A.l=now;A.sz=js.length;const s=svSum(d);A.n=s.n;A.lv=s.l;accDirty=true;J(200,{ok:1,rev:o.rev})})});return}
     if(act==='logout'){const h=tkHash(q.t);A.tk=(A.tk||[]).filter(x=>x!==h);accDirty=true;return J(200,{ok:1})}
     J(404,{err:'act'})})}
+
+/* ===== ตรวจเซฟหาความผิดปกติ (ติดธงให้ผู้ดูแลตรวจ · บัญชีที่มีธงค้างซื้อของในตลาดไม่ได้) ===== */
+const FL_GOLD0=1e6,FL_GOLDM=2e5,FL_NEWG=3e8,FL_WIN=30*60e3;
+function accFlag(a,A,f){A.fl=A.fl||[];f.at=Date.now();A.fl.unshift(f);if(A.fl.length>30)A.fl.length=30;A.fo=(A.fo|0)+1;accDirty=true;console.log('⚑ ธงบัญชี '+a+': '+f.k+' '+(f.n||f.s)+' '+f.v)}
+function accInspect(a,A,sv,d,now){const old=sv&&sv.data&&sv.data.chars||{},mins=sv?Math.max(1,Math.min(180,(now-(sv.at||now))/60000)):1,EX=A.exp||{},CR=A.cr||{};
+  for(const k in d.chars){const c=d.chars[k];if(!c||typeof c!=='object')continue;const o=old[k],g=Math.max(0,+c.gold||0),L=c.lv|0,cr=+CR[k]||0,nm=String(c.nm||'').slice(0,12);
+    if(o&&o.cls===c.cls){A.gb=A.gb||{};let b=A.gb[k];if(!b||b.c!==c.cls||now-b.at>FL_WIN*4){b=A.gb[k]={g:Math.max(0,+o.gold||0),at:sv.at||now,cr:0,c:c.cls}}b.cr+=cr;
+      const bm=Math.max(1,(now-b.at)/60000),gain=g-b.g-b.cr;if(gain>FL_GOLD0+FL_GOLDM*bm){accFlag(a,A,{k:'gold',s:k,n:nm,c:c.cls,v:Math.round(gain),m:Math.round(bm)});b.g=g;b.at=now;b.cr=0}
+      else if(now-b.at>FL_WIN){b.g=Math.min(g,b.g+b.cr+FL_GOLDM*bm);b.at=now;b.cr=0}accDirty=true;
+      const lg=L-(o.lv|0);if(L>=40&&lg>=Math.max(8,mins*1.5))accFlag(a,A,{k:'lv',s:k,n:nm,c:c.cls,v:lg,m:Math.round(mins),L})}
+    else if(g>=FL_NEWG)accFlag(a,A,{k:'new',s:k,n:nm,c:c.cls,v:Math.round(g),L});
+    const ex=EX[k];if(ex){const em=Math.max(1,(now-ex.at)/60000);if(g-cr>ex.g+FL_GOLD0+FL_GOLDM*em)accFlag(a,A,{k:'buy',s:k,n:nm,c:c.cls,v:Math.round(g-ex.g),m:Math.round(em)})}}
+  if(A.exp||A.cr){delete A.exp;delete A.cr;accDirty=true}}
+/* ===== ตลาดต้องล็อกอินบัญชี: รหัสผู้ขายของตัวละคร (mid) ผูกกับบัญชี · ตรวจทองจากเซฟบนเซิร์ฟเวอร์ก่อนซื้อ ===== */
+function mkGate(c,d,k){if(!d||typeof d!=='object'||!d.acc||typeof d.acc!=='object')return'acc';const a=accName(String(d.acc.a||'')),A=a&&accAuth(a,d.acc.t);if(!A)return'acc';
+  const mid=typeof d.mid==='string'&&/^[a-z0-9]{8,16}$/.test(d.mid)?d.mid:'';if(!mid)return'acc';MK.own=MK.own||{};
+  if(MK.own[mid]&&MK.own[mid]!==a)return'own';if(!MK.own[mid]){MK.own[mid]=a;mkDirty=true}
+  c.accA=a;if((k==='mkl'||k==='mkb')&&A.mkban)return'ban';if(k==='mkb'&&(A.fo|0)>0)return'flag';return''}
+function svChar(a,mid){const sv=svRead(a);if(!sv||!sv.data||!sv.data.chars)return null;for(const k in sv.data.chars){const ch=sv.data.chars[k];if(ch&&ch.mkid===mid)return{k,ch}}return null}
 function accAdmin(act,q){const a=accName(String(q.a||'').toLowerCase().trim());if(!a||!ACCS[a])return{err:'ไม่พบบัญชี'};const A=ACCS[a];
   if(act==='accpin'){if(!accPinOk(String(q.pin||'')))return{err:'PIN ต้อง 4-32 ตัว'};A.s=crypto.randomBytes(12).toString('hex');A.h=accHash(String(q.pin),A.s);A.tk=[];accDirty=true;console.log('รีเซ็ต PIN: '+a);return{ok:1}}
   if(act==='accbak'){const f=svPath(a);try{const b=JSON.parse(fs.readFileSync(f+'.bak','utf8'));const sv=svRead(a);b.rev=(sv?sv.rev|0:0)+1;b.at=Date.now();fs.writeFileSync(f,JSON.stringify(b));const s=svSum(b.data);A.n=s.n;A.lv=s.l;accDirty=true;return{ok:1,n:s.n}}catch(e){return{err:'ไม่มีไฟล์สำรอง'}}}
+  if(act==='accmod'){const op=String(q.op||'');
+    if(op==='clear'){A.fo=0;(A.fl||[]).forEach(f=>f.ok=1)}
+    else if(op==='mkban')A.mkban=1;else if(op==='mkunban')delete A.mkban;
+    else if(op==='lock'){A.lock=1;A.tk=[]}else if(op==='unlock')delete A.lock;
+    else if(op==='lban'){const sv=svRead(a);let n=0;if(sv&&sv.data&&sv.data.chars)for(const k in sv.data.chars){const ch=sv.data.chars[k];if(ch&&ch.nm){lbAdmin('lbban',{n:ch.nm,c:ch.cls,on:1});n++}}A.lban=1;accDirty=true;console.log('แบนอันดับจากบัญชี',a,n);return{ok:1,n}}
+    else return{err:'op'};accDirty=true;console.log('จัดการบัญชี',a,op);return{ok:1}}
   return{err:'act'}}
-function accTable(){const L=Object.keys(ACCS).map(a=>{const A=ACCS[a];return{a,c:A.c,l:A.l,n:A.n|0,lv:A.lv|0,sz:A.sz|0}}).sort((x,y)=>y.l-x.l);return{n:L.length,rows:L.slice(0,400)}}
+function accTable(){const L=Object.keys(ACCS).map(a=>{const A=ACCS[a];return{a,c:A.c,l:A.l,n:A.n|0,lv:A.lv|0,sz:A.sz|0,fo:A.fo|0,fl:(A.fl||[]).slice(0,8),mb:A.mkban?1:0,lk:A.lock?1:0,lb:A.lban?1:0}}).sort((x,y)=>(y.fo>0)-(x.fo>0)||y.l-x.l);return{n:L.length,fo:L.filter(r=>r.fo>0).length,rows:L.slice(0,400)}}
 const AFAIL=new Map();let AFALL={t:0,n:0};
 function adminOk(req){if(!ADMIN_KEY)return false;const k=String(req.headers['x-admin-key']||'');const a=crypto.createHash('sha256').update(k).digest(),b=crypto.createHash('sha256').update(ADMIN_KEY).digest();return crypto.timingSafeEqual(a,b)}
 function adminData(){const now=Date.now(),pl=[];
@@ -314,7 +344,7 @@ function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':
     if(act==='ann'){let t=String(q.t||'').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return J(400,{err:'empty'});
       const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});try{CHL.push({at:Date.now(),n:'📢 ประกาศ (ผู้ดูแล)',t,mp:0,c:'',l:0,a:1});chDirty=true}catch(e){}let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);return J(200,{ok:1,n})}
     if(act==='lbdel'||act==='lbban'||act==='lbcap')return J(200,lbAdmin(act,q));
-    if(act==='accpin'||act==='accbak')return J(200,accAdmin(act,q));
+    if(act==='accpin'||act==='accbak'||act==='accmod')return J(200,accAdmin(act,q));
     J(404,{err:'act'})})}
 /* ===== จองชื่อตัวละคร: หนึ่งชื่อใช้ได้ตัวละครเดียวทั้งเซิร์ฟเวอร์ (ผูกกับรหัสตัวละครถาวร mid) · ไม่ได้ใช้ 90 วันปล่อยคืน ===== */
 const NMF=path.join(DATA_DIR,'names.json'),NM_TTL=90*864e5;let NM={},nmDirty=false;
