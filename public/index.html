@@ -328,7 +328,7 @@ function localRoom(H){
     presence:p=>{pres=p;post({t:'pres',p})},
     emit:(k,d)=>post({t:'emit',k,d,from:pres?pres.uid:''})})
 }
-window.claude={use:async n=>{
+window.RFG_SRV=1;window.claude={use:async n=>{
   if(n==='user')return{id:async()=>null};
   if(n!=='room')throw new Error('no '+n);
   const H={},st={ws:null,pres:null,cb:null,info:{}};
@@ -4247,6 +4247,7 @@ function introRaw(){
   const w=ov.querySelector('.csw');
   if(!/^https?:$/.test(location.protocol)){let cur='';try{cur=localStorage.getItem('refugee_server')||''}catch(e){}
     w.insertAdjacentHTML('beforeend','<div id="srvbox" style="padding:10px 12px"><b>เล่นกับเพื่อน (เปิดจากไฟล์)</b><p style="font-size:12.5px;margin:6px 0;color:#cfc5b4">ใส่ที่อยู่เซิร์ฟเวอร์ที่โฮสต์ให้ เช่น xxxx.trycloudflare.com แล้วกดเชื่อมต่อ ทุกคนต้องใส่ที่อยู่เดียวกัน</p><input id="srvi" value="'+cur.replace(/[^\w.:\/-]/g,'')+'" placeholder="xxxx.trycloudflare.com" style="width:100%;box-sizing:border-box;padding:8px"><div class="row" style="margin-top:6px"><button id="srvb">เชื่อมต่อ</button></div></div>')}
+  {const ab=accBox();if(ab)w.insertAdjacentHTML('beforeend',ab)}
   w.insertAdjacentHTML('beforeend','<details id="bk"><summary>💾 สำรอง / นำเข้าเซฟ (ย้ายเครื่อง ย้ายลิงก์)</summary>'+
    '<p style="font-size:12.5px">กด "สร้างรหัสสำรอง" แล้วคัดลอกเก็บไว้ ตอนเปิดลิงก์ใหม่ให้วางรหัสแล้วกด "นำเข้า"</p>'+
    '<textarea id="bkt" rows="4" style="width:100%;box-sizing:border-box;font-size:12px;padding:8px" placeholder="รหัสเซฟ"></textarea>'+
@@ -7623,7 +7624,7 @@ function makeCosmicSet(id,sl,L){const it=genItem(L||(id===5?21:id===4?15:id===3?
 function makeSetItem(id,sl){const it=genItem(id===5?21:id===4?15:id===3?14:IL60,sl,5,5);Object.keys(it.st).forEach(k=>it.st[k]=r2(Math.min(gkCap(k,5,it.L),it.st[k]*1.08)));it.ss=id;it.lk=1;return it}
 const setCount=id=>SLOTS.reduce((a,sl)=>a+(me.eq&&me.eq[sl]&&me.eq[sl].ss===id?1:0),0);
 function setB(k){let t=0;if(!me.eq)return 0;for(const id in SETS){const n=setCount(+id);if(n<2)continue;SETS[id].b.forEach(([need,st])=>{if(n>=need&&st[k])t+=st[k]})}return t}
-function setHtml(id){const S=SETS[id],n=setCount(id);return'<div style="margin-top:6px;padding:6px 8px;border-radius:8px;background:rgba(31,184,168,.08);border:1px solid '+S.c+'"><b style="color:'+S.c+'">🔱 '+S.n+' ('+n+'/5)</b>'+S.b.map(([need,,t])=>'<div style="font-size:12px;opacity:'+(n>=need?1:.55)+'">'+(n>=need?'✅':'⬜')+' '+need+' ชิ้น: '+t+'</div>').join('')+'</div>'}
+function setHtml(id){const S=SETS[id],n=setCount(id);return'<div style="margin-top:6px;padding:6px 8px;border-radius:8px;background:rgba(31,184,168,.08);border:1px solid '+S.c+'"><b style="color:'+S.c+'">🔱 '+S.n+' ('+n+'/5)</b>'+S.b.map(([need,,t])=>'<div style="font-size:12px;opacity:'+(n>=need?1:.55)+'">'+(n>=need?'✅':'⬜')+' '+need+' ชิ้น: '+t+'</div>').join('')+'<div style="font-size:12px;opacity:'+(n>=5?1:.55)+'">'+(n>=5?'✅':'⬜')+' 5 ชิ้น: เพดานค่าสเตตัสรวมจากอุปกรณ์ +20%</div></div>'}
 function setProc(m){dawnProc(m);stormProc(m);shadowProc(m);if(setCount(1)<5||me.spB||Math.random()>=.12)return;const n=performance.now();if(n<(me.spT||0))return;me.spT=n+400;me.spB=1;
   fx({k:'vortex',x:Math.round(m.x),y:Math.round(m.y),r:75});const d=pd()*2.5;mons.forEach(q=>{if(dist(q,m)<75)addHit(q,d,0,1,'bolt')});me.spB=0}
 function setTick(dt){me.s2cd=Math.max(0,(me.s2cd||0)-dt);if(setCount(2)>=5&&me.s2cd<=0&&me.down<=0&&me.hp<me.mh*.5){me.s2cd=15;me.shv=Math.max(me.shv||0,Math.round(me.mh*.25));me.shield=6;me.mp=Math.min(me.mm,me.mp+me.mm*.3);fx({k:'shield',r:40,v:0});dn.push({x:me.x,y:me.y-50,v:'🔱 เกราะผู้พิทักษ์',t:1.2})}}
@@ -7709,7 +7710,7 @@ function nb(n,locked){
 function powSum(){if(!me.cls)return'';const C=CL[me.cls],r=ttAgg(),f=v=>Math.round(v*1000)/10;
   const nd=k=>{let t=0;nodes().forEach(n=>{if(n.k===k)t+=(me.tr[n.id]||0)*n.v});return t},aw=k=>me.cls2?(k==='hp'?.1:k==='dm'?.12:0):0;
   const SRC=[['สเตตัส',k=>A(k)],['ของสวมใส่',k=>G(k)],['เซ็ต',k=>setB(k)],['ผังสกิล',nd],['ฉายา',k=>titleM(k)],['การ์ด',k=>cardM(k)],['สัตว์เลี้ยง',k=>petV(k)],['ตื่นรู้',aw]];
-  const K=[['dm','⚔️ ดาเมจ'],['hp','❤️ เลือดสูงสุด'],['mp','💧 มานาสูงสุด'],['cr','🎯 โอกาสคริ'],['cdm','💥 ดาเมจคริ'],['as','⚡ ความเร็วโจมตี'],['sp','👟 ความเร็วเดิน'],['ls','🩸 ดูดเลือด'],['red','🛡️ ลดดาเมจที่ได้รับ'],['reg','💚 ฟื้นเลือด/วิ'],['cdr','⏳ ลดคูลดาวน์สกิล'],['mpr','💧 ฟื้นมานา/วิ'],['mcr','🔹 ลดมานาที่ใช้ร่าย'],['spw','🔥 พลังเวท (ดาเมจสกิล)'],['hpw','✨ พลังศักดิ์สิทธิ์ (ฮีล/เกราะ)']];
+  const K=[['dm','⚔️ ดาเมจ'],['hp','❤️ เลือดสูงสุด'],['mp','💧 มานาสูงสุด'],['cr','🎯 โอกาสคริ'],['cdm','💥 ดาเมจคริ'],['as','⚡ ความเร็วโจมตี'],['sp','👟 ความเร็วเดิน'],['ls','🩸 ดูดเลือด'],['red','🛡️ ลดดาเมจที่ได้รับ'],['reg','💚 ฟื้นเลือด/วิ'],['cdm','💥 ดาเมจคริติคอล'],['cdr','⏳ ลดคูลดาวน์สกิล'],['mpr','💧 ฟื้นมานา/วิ'],['mcr','🔹 ลดมานาที่ใช้ร่าย'],['spw','🔥 พลังเวท (ดาเมจสกิล)'],['hpw','✨ พลังศักดิ์สิทธิ์ (ฮีล/เกราะ)']];
   let h='<div class="card pws"><div class="cap">📊 สรุปพลังทั้งหมด (รวมทุกแหล่ง)</div>';
   h+='<table class="pwt"><tr><th></th><th>อัพเอง</th><th>ฉายา</th><th>ฉายา %</th><th>รวม</th></tr>'+['str','vit','int','agi','luk'].map(id=>'<tr><td><b>'+TSN[id]+'</b></td><td>'+(me.ab[id]||0)+'</td><td>'+(r.f[id]?'+'+r.f[id]:'–')+'</td><td>'+(r.p[id]?'+'+f(r.p[id])+'%':'–')+'</td><td><b>'+abV(id)+'</b></td></tr>').join('')+'</table>';
   h+=K.map(([k,nm])=>{const tot=M(k)+(k==='cr'?(C.cr||0):0),flat=k==='reg'||k==='mpr';if(Math.abs(tot)<1e-6)return'';const parts=[];let acc=0;
@@ -7885,8 +7886,8 @@ const RN=['Basic · พื้นฐาน','Refined · ประณีต','Elit
 const SLN={w:'อาวุธ',a:'เกราะ',c:'เครื่องประดับ',h:'หมวก',b:'รองเท้า'};const SLOTS=['w','a','c','h','b'];
 const GN={w:['อาวุธสนิม','อาวุธเหล็กกล้า','อาวุธเงินวิเศษ','อาวุธเปลวเพลิง'],a:['เสื้อหนังเก่า','เกราะเหล็ก','เกราะเงินวิเศษ','เกราะมังกร'],c:['แหวนทองเหลือง','สร้อยเงิน','เครื่องรางเวท','เครื่องรางเทพ'],h:['หมวกผ้าเก่า','หมวกเหล็ก','หมวกเงินวิเศษ','มงกุฎมังกร'],b:['รองเท้าหนังเก่า','รองเท้าเหล็ก','รองเท้าเงินวิเศษ','รองเท้าลมพายุ']};
 GN.w.push('อาวุธเทพนิรันดร์','อาวุธบรรพกาล','อาวุธห้วงจักรวาล');GN.a.push('เกราะเทพนิรันดร์','เกราะบรรพกาล','เกราะห้วงจักรวาล');GN.c.push('อัญมณีนิรันดร์','อัญมณีบรรพกาล','อัญมณีห้วงจักรวาล');GN.h.push('มงกุฎเทพนิรันดร์','มงกุฎบรรพกาล','มงกุฎห้วงจักรวาล');GN.b.push('รองเท้าเทพนิรันดร์','รองเท้าบรรพกาล','รองเท้าห้วงจักรวาล');
-const GKI={hp:1.17,dm:.78,sp:.65,mp:1.43,red:.22,reg:14.3,cr:.58,as:.39,ls:.22,cdr:.08,mpr:4.5,mcr:.08,spw:.15,hpw:.15},GKX={hp:1,dm:1,mp:1,reg:1,cr:1,as:1},glF=L=>L<=12?1:L<=15?1+(L-12)*.04:1.12+(L-15)*.04,gkCap=(k,r,L)=>(GKI[k]||9)*(r>=6&&GKX[k]?1.22:1)*glF(L|0);
-const GK={hp:.5,dm:.36,sp:.25,mp:.7,red:.13,reg:6,cr:.24,as:.18,ls:.12,cdr:.04,mpr:2.2,mcr:.04,spw:.07,hpw:.07};
+const GKI={hp:1.17,dm:.78,sp:.65,mp:1.43,red:.22,reg:14.3,cr:.58,as:.39,ls:.22,cdm:.5,cdr:.08,mpr:4.5,mcr:.08,spw:.15,hpw:.15},GKX={hp:1,dm:1,mp:1,reg:1,cr:1,as:1,cdm:1},glF=L=>L<=12?1:L<=15?1+(L-12)*.04:1.12+(L-15)*.04,gkCap=(k,r,L)=>(GKI[k]||9)*(r>=6&&GKX[k]?1.22:1)*glF(L|0);
+const GK={hp:.5,dm:.36,sp:.25,mp:.7,red:.13,reg:6,cr:.24,as:.18,ls:.12,cdm:.22,cdr:.04,mpr:2.2,mcr:.04,spw:.07,hpw:.07};
 /* ออปชั่นสายเวท: เพดานรวมจากอุปกรณ์ · ใช้ได้ทุกอาชีพ แต่สุ่มออกบ่อยเมื่อคนเก็บเป็นจอมเวท/นักสวด */
 const GKT={cdr:.25,mpr:12,mcr:.25,spw:.4,hpw:.4},isCaster=c=>c==='mage'||c==='sup';
 const cdrV=()=>Math.min(.25,Math.max(0,M('cdr'))),mprV=()=>Math.min(12,Math.max(0,M('mpr'))),mcrV=()=>Math.min(.25,Math.max(0,M('mcr')));
@@ -7894,18 +7895,18 @@ const mcOf=k=>{const c=me.cls&&CL[me.cls];return c?Math.round(c.mc[k]*(1-mcrV())
 const HEALSK={sup:{0:1,2:1,4:1}},skPow=k=>(HEALSK[me.cls]&&HEALSK[me.cls][k])?Math.min(.4,M('hpw')):(me.cls==='sup'&&k===1)?0:Math.min(.4,M('spw'));
 let fullT=-1e9;const stk=()=>stocks[curMap]||(stocks[curMap]=[genItem(NPC().L,'w',1),genItem(NPC().L,'a',1),genItem(NPC().L,'c',1),genItem(NPC().L,'h',1),genItem(NPC().L,'b',1)]);
 const r2=v=>Math.round(v*1000)/1000;
-function stLabel(k,v){const p=Math.round(v*1000)/10;return({cdr:'ลดคูลดาวน์สกิล '+p+'%',mpr:'ฟื้นมานา '+(Math.round(v*10)/10)+'/วิ',mcr:'ลดมานาที่ใช้ร่าย '+p+'%',spw:'พลังเวท (ดาเมจสกิล) +'+p+'%',hpw:'พลังศักดิ์สิทธิ์ (ฮีล/เกราะ) +'+p+'%',hp:'เลือด +'+p+'%',dm:'ดาเมจ +'+p+'%',sp:'ความเร็วเดิน +'+p+'%',mp:'MP +'+p+'%',red:'ลดดาเมจที่โดน '+p+'%',reg:'ฟื้นเลือด '+(Math.round(v*10)/10)+'/วิ',cr:'คริติคอล +'+p+'%',as:'ความเร็วโจมตี +'+p+'%',ls:'ดูดเลือด '+p+'%'})[k]}
+function stLabel(k,v){const p=Math.round(v*1000)/10;return({cdm:'ดาเมจคริติคอล +'+p+'%',cdr:'ลดคูลดาวน์สกิล '+p+'%',mpr:'ฟื้นมานา '+(Math.round(v*10)/10)+'/วิ',mcr:'ลดมานาที่ใช้ร่าย '+p+'%',spw:'พลังเวท (ดาเมจสกิล) +'+p+'%',hpw:'พลังศักดิ์สิทธิ์ (ฮีล/เกราะ) +'+p+'%',hp:'เลือด +'+p+'%',dm:'ดาเมจ +'+p+'%',sp:'ความเร็วเดิน +'+p+'%',mp:'MP +'+p+'%',red:'ลดดาเมจที่โดน '+p+'%',reg:'ฟื้นเลือด '+(Math.round(v*10)/10)+'/วิ',cr:'คริติคอล +'+p+'%',as:'ความเร็วโจมตี +'+p+'%',ls:'ดูดเลือด '+p+'%'})[k]}
 const ILMAX=21,iLv=mL=>mL<=19?Math.min(8,mL):Math.min(ilCap(),8+Math.floor((mL-19)/4));
 function genItem(L,sl,rmax,rmin,cls){const CS=isCaster(cls===undefined?me.cls:cls),CP=(cls===undefined?me.cls:cls)==='sup'?'hpw':'spw';
   L=Math.max(1,Math.min(ILMAX,(L|0)||1));sl=sl||SLOTS[Math.random()*SLOTS.length|0];
   const roll=Math.random()*100+(L-1)*4;let r=roll>=98?3:roll>=88?2:roll>=60?1:0;if(rmax!==undefined)r=Math.min(r,rmax);if(rmin!==undefined)r=Math.max(r,rmin);
   const s=(1+.18*(L-1))*RMUL[r],st={};
-  if(sl==='w'){st.dm=r2(.04*s);if(r>=2){if(CS){if(Math.random()<.5)st.cdr=r2(.0035*s*.8);else st[CP]=r2(.006*s*.8)}else st[Math.random()<.5?'as':'cr']=r2(.03*(r-1)*(1+.18*(L-1)))}}
+  if(sl==='w'){st.dm=r2(.04*s);if(r>=2){if(CS){if(Math.random()<.5)st.cdr=r2(.0035*s*.8);else st[CP]=r2(.006*s*.8)}else{const q=Math.random();if(q<.34)st.as=r2(.03*(r-1)*(1+.18*(L-1)));else if(q<.67)st.cr=r2(.03*(r-1)*(1+.18*(L-1)));else st.cdm=r2(.05*(r-1)*(1+.18*(L-1)))}}}
   else if(sl==='h'){st.mp=r2(.05*s);st.red=r2(.012*s);if(r>=2){if(CS)st.mpr=r2(.15*s*.8);else st.cr=r2(.02*(r-1)*(1+.18*(L-1)))}}
   else if(sl==='b'){st.sp=r2(.045*s);if(r>=1)st.hp=r2(.025*s);if(r>=3){if(CS)st.cdr=r2(.0035*s*.7);else st.as=r2(.03*(1+.18*(L-1)))}}
   else if(sl==='a'){st.hp=r2(.06*s);if(r>=1)st.red=r2(.015*s);if(CS&&r>=2)st.mp=r2(.02*s)}
-  else{const ks=CS?['sp','mp','mpr','cdr','mcr']:['sp','mp','reg','cr','ls'],B={sp:.03,mp:.08,reg:.8,cr:.03,ls:.015,mpr:.15,cdr:.0035,mcr:.0035},k1=ks[Math.random()*5|0];st[k1]=r2(B[k1]*s);
-    if(r>=2){let k2=ks[Math.random()*5|0];while(k2===k1)k2=ks[Math.random()*5|0];st[k2]=r2(B[k2]*s*.5)}}
+  else{const ks=CS?['sp','mp','mpr','cdr','mcr']:['sp','mp','reg','cr','ls','cdm'],B={sp:.03,mp:.08,reg:.8,cr:.03,ls:.015,cdm:.045,mpr:.15,cdr:.0035,mcr:.0035},N=ks.length,k1=ks[Math.random()*N|0];st[k1]=r2(B[k1]*s);
+    if(r>=2){let k2=ks[Math.random()*N|0];while(k2===k1)k2=ks[Math.random()*N|0];st[k2]=r2(B[k2]*s*.5)}}
   if(r>=4){if(CS){st.cdr=r2(Math.min(GKI.cdr,(st.cdr||0)+.012*(1+.12*(L-1))));st.mpr=r2(Math.min(GKI.mpr,(st.mpr||0)+.5*(1+.12*(L-1))))}else{st.ls=r2(Math.max(st.ls||0,Math.min(GK.ls,(st.ls||0)+.02*(1+.12*(L-1)))));st.cr=r2(Math.max(st.cr||0,Math.min(GK.cr,(st.cr||0)+.03*(1+.12*(L-1)))))}}
   Object.keys(st).forEach(k=>{let v=r2(Math.min(gkCap(k,r,L),st[k]*(.9+Math.random()*.25)));if(Math.abs(v-GK[k])<1e-9)v=r2(v+.001);st[k]=v});
   return{sl,r,L,u:0,st};
@@ -7921,7 +7922,9 @@ Object.defineProperty(globalThis,'MAXBAG',{get(){return bagCap()},configurable:t
 const upCost=it=>{const u=it.u|0;return Math.round([20,50,110,240,450,650,900][it.r]*(it.ss?1.3:1)*(1+it.L*.3)*(1+u*.3)*(u>=10?1+(u-9)*.2:1)*(1+me.lv*.025))};
 const sellPrice=it=>Math.round([10,25,60,150,320,600,900][it.r]*(1+.5*(it.L-1))*(1+.35*(it.u|0)));
 function itemCard(it){return'<b'+(it.r===6?' class="tc6"':'')+' style="color:'+RC[it.r]+'">'+itemName(it)+'</b> <span style="opacity:.7;font-size:11px">('+RN[it.r]+')</span><br><span style="font-size:12px;opacity:.85">'+Object.keys(it.st).map(k=>stLabel(k,eff(it,k))).join(' · ')+'</span>'}
-function G(k){let t=0,u=0,mL=1;if(me.eq)SLOTS.forEach(s=>{const it=me.eq[s];if(it){if(it.L>mL)mL=it.L;if(it.st[k]){t+=it.st[k];u+=eff(it,k)-it.st[k]}}});return Math.min(t,GKT[k]||(GK[k]||1)*2.6*glF(mL))+u}
+/* ใส่ชุดเซ็ตเดียวกันครบ 5 ชิ้น: เพดานรวมจากอุปกรณ์ +20% (ไม่รวมออปชั่นสายเวทที่มีเพดานตายตัว) */
+const fullSet=()=>{const w=me.eq&&me.eq.w,id=w&&w.ss;return !!id&&SLOTS.every(s=>me.eq[s]&&me.eq[s].ss===id)};
+function G(k){let t=0,u=0,mL=1;if(me.eq)SLOTS.forEach(s=>{const it=me.eq[s];if(it){if(it.L>mL)mL=it.L;if(it.st[k]){t+=it.st[k];u+=eff(it,k)-it.st[k]}}});return Math.min(t,GKT[k]||(GK[k]||1)*2.6*glF(mL)*(fullSet()?1.2:1))+u}
 function recalc(){const o=me.mh,om=me.mm;me.mh=maxHp();me.mm=maxMp();me.hp=Math.max(1,Math.min(me.mh,me.hp+me.mh-o));me.mp=Math.max(0,Math.min(me.mm,me.mp+me.mm-om))}
 function cleanItem(it,sl){
   if(!it||typeof it!=='object'||!SLN[it.sl]||(sl&&it.sl!==sl))return null;
@@ -10440,6 +10443,54 @@ function setSaveState(x){saveState=x}
 function withTimeout(p,ms){return Promise.race([p,new Promise((_,r)=>setTimeout(()=>r({code:'timeout'}),ms))])}
 function lsRead(){try{return JSON.parse(localStorage.getItem(LSK)||'null')}catch(e){return null}}
 function lsWrite(d){try{localStorage.setItem(LSK,JSON.stringify(d));return true}catch(e){return false}}
+
+/* ===== บัญชีเซฟบนเซิร์ฟเวอร์ (เฉพาะตอนเล่นผ่านเว็บเซิร์ฟเวอร์เกม) ===== */
+const ACCK='refugee_acc',srvAcc=()=>!!window.RFG_SRV&&/^https?:$/.test(location.protocol)&&!!location.host;
+let ACC=null,accRev=0,accDirty=false,accBusy=false,accLast=0,accMsg='',accLoaded=false;
+try{const a=JSON.parse(localStorage.getItem(ACCK)||'null');if(a&&typeof a.a==='string'&&typeof a.t==='string')ACC={a:a.a,t:a.t}}catch(e){}
+function accStore(){try{if(ACC)localStorage.setItem(ACCK,JSON.stringify(ACC));else localStorage.removeItem(ACCK)}catch(e){}}
+async function accApi(p,o,keep){const b=JSON.stringify(o);const r=await fetch('/api/acc/'+p,{method:'POST',headers:{'Content-Type':'application/json'},body:b,keepalive:!!keep&&b.length<60000,cache:'no-store'});let j={};try{j=await r.json()}catch(e){}j.status=r.status;return j}
+const chBetter=(x,y)=>x.lv>y.lv||(x.lv===y.lv&&x.xp>=y.xp);
+function accMerge(base,add,keepSlot){const o={v:1,chars:Object.assign({},base.chars),last:base.last||add.last};
+  Object.keys(add.chars).forEach(k=>{const r=add.chars[k],b=o.chars[k];if(!b||k===keepSlot&&b.cls===r.cls){o.chars[k]=r;return}
+    if(b.cls!==r.cls){if(Object.values(o.chars).some(c=>c.cls===r.cls&&c.lv===r.lv&&c.xp===r.xp))return;let i=1;while(o.chars['c'+i])i++;o.chars['c'+i]=r;return}
+    if(chBetter(r,b))o.chars[k]=r});
+  return cleanSaves(o)}
+function accLost(){ACC=null;accStore();accRev=0;accDirty=false;setSaveState('บัญชีหลุด · บันทึกในเบราว์เซอร์นี้ (ล็อกอินใหม่ที่หน้าเลือกตัวละคร)')}
+async function accLoad(){if(!ACC)return false;
+  try{const r=await withTimeout(accApi('load',{a:ACC.a,t:ACC.t}),9000);
+    if(r.status===401){accLost();return false}if(!r.ok)return false;
+    const srv=cleanSaves(r.data),mine=saves;saves=accMerge(srv,mine,me.cls?(me.slot||me.cls):null);accRev=r.rev|0;accLoaded=true;lsWrite(saves);
+    accDirty=JSON.stringify(saves.chars)!==JSON.stringify(srv.chars);if(accDirty)setTimeout(()=>accPush(),300);return true}catch(e){return false}}
+async function accPush(keep,tries){if(!ACC||accBusy||!srvAcc())return;accBusy=true;const snapS=saves;
+  try{const r=await accApi('save',{a:ACC.a,t:ACC.t,r:accRev,data:snapS},keep);
+    if(r.ok){accRev=r.rev|0;accLast=Date.now();if(saves===snapS)accDirty=false;setSaveState('บันทึกบนเซิร์ฟเวอร์ ('+ACC.a+') แล้ว')}
+    else if(r.status===401)accLost();
+    else if(r.status===409&&(tries|0)<2){const srv=cleanSaves(r.data);saves=accMerge(srv,saves,me.cls?(me.slot||me.cls):null);lsWrite(saves);accRev=r.rev|0;accBusy=false;return accPush(keep,(tries|0)+1)}
+    else{accLast=Date.now()-15000;setSaveState('เซิร์ฟเวอร์บันทึกไม่ได้ · เก็บในเครื่องไว้ก่อน')}
+  }catch(e){accLast=Date.now()-15000;setSaveState('ต่อเซิร์ฟเวอร์ไม่ได้ · เก็บในเครื่องไว้ก่อน')}
+  accBusy=false}
+function accKick(force,keep){if(!ACC)return;accDirty=true;if(force||Date.now()-accLast>25000)accPush(keep)}
+async function accLogin(reg){const m=$('acm'),a=String(($('acn')||{}).value||'').toLowerCase().trim(),pin=String(($('acp')||{}).value||'');
+  const say=t=>{accMsg=t;if(m)m.textContent=t};
+  if(!/^[a-z0-9][a-z0-9_]{2,19}$/.test(a))return say('ชื่อบัญชีใช้ a-z 0-9 _ ยาว 3-20 ตัว (ขึ้นต้นด้วยตัวอักษร/ตัวเลข)');
+  if(pin.length<4||pin.length>32)return say('รหัส PIN ต้องยาว 4-32 ตัว');
+  if(saveMode==='wait'||saveMode==='off')return say('รอโหลดข้อมูลบันทึกก่อน');
+  if(accBusy)return;say(reg?'กำลังสร้างบัญชี...':'กำลังล็อกอิน...');accBusy=true;let r;
+  try{r=await withTimeout(accApi(reg?'register':'login',{a,pin}),12000)}catch(e){accBusy=false;return say('ต่อเซิร์ฟเวอร์ไม่ได้ ลองใหม่อีกครั้ง')}
+  accBusy=false;
+  if(!r.ok)return say(r.err==='taken'?'ชื่อบัญชีนี้มีคนใช้แล้ว ถ้าเป็นของคุณให้กด "ล็อกอิน"':r.err==='none'?'ไม่พบบัญชีนี้ ถ้ายังไม่มีให้กด "สร้างบัญชีใหม่"':r.err==='pin'&&r.status===401?'รหัส PIN ไม่ถูกต้อง':r.status===429?'ลองผิดหลายครั้งเกินไป รออีก '+Math.ceil((r.wait||900)/60)+' นาที':'ทำรายการไม่สำเร็จ ('+(r.err||r.status)+')');
+  ACC={a,t:r.t};accStore();accRev=r.rev|0;accMsg='';
+  if(reg){accLoaded=true;if(Object.keys(saves.chars).length)await accPush();else setSaveState('บันทึกบนเซิร์ฟเวอร์ ('+a+')')}
+  else{const ok=await accLoad();setSaveState(ok?'บันทึกบนเซิร์ฟเวอร์ ('+a+')':'ล็อกอินแล้ว แต่โหลดเซฟไม่ได้ ลองรีเฟรช')}
+  delArm=null;intro()}
+async function accLogout(){if(me.cls)return;const m=$('acm');if(Object.keys(saves.chars).length){if(m)m.textContent='กำลังบันทึกขึ้นเซิร์ฟเวอร์ก่อนออก...';accDirty=true;await accPush();if(accDirty){if(m)m.textContent='บันทึกขึ้นเซิร์ฟเวอร์ไม่สำเร็จ จึงยังไม่ออกจากระบบ (กันตัวละครหาย)';return}}
+  accApi('logout',{a:ACC.a,t:ACC.t}).catch(()=>{});ACC=null;accStore();accRev=0;saves={v:1,chars:{},last:null};lsWrite(saves);csSel='';delArm=null;setSaveState('บันทึกในเบราว์เซอร์นี้');accMsg='ออกจากระบบแล้ว ตัวละครของบัญชีนั้นอยู่บนเซิร์ฟเวอร์ ล็อกอินใหม่เมื่อไหร่ก็กลับมา';intro()}
+function accBox(){if(!srvAcc()||saveMode==='wait')return'';const S='style="width:100%;box-sizing:border-box;padding:8px;margin-top:6px"';
+  if(ACC)return'<div id="accbox" style="padding:10px 12px;border:1px solid #4a7a4a;border-radius:10px;background:rgba(40,80,40,.25);margin:8px 0"><b>🔐 บัญชี: '+ACC.a+'</b> <span style="color:#9fe09f;font-size:12.5px">✓ ตัวละครเก็บบนเซิร์ฟเวอร์แล้ว</span><p style="font-size:12px;margin:4px 0;color:#cfc5b4">เปลี่ยนเครื่อง/เบราว์เซอร์ ให้ล็อกอินชื่อบัญชีนี้กับ PIN เดิม ตัวละครจะตามมาด้วย</p>'+(me.cls?'':'<div class="row"><button id="aco">ออกจากระบบ</button></div>')+'<p id="acm" style="font-size:12.5px;margin:4px 0">'+accMsg+'</p></div>';
+  return'<div id="accbox" style="padding:10px 12px;border:1px solid #b08a3a;border-radius:10px;background:rgba(90,60,20,.3);margin:8px 0"><b>🔐 ผูกบัญชี / ล็อกอิน (กันตัวละครหาย)</b><p style="font-size:12px;margin:4px 0;color:#e8c9a0">ตอนนี้ตัวละครเก็บแค่ในเบราว์เซอร์นี้ ถ้าล้างข้อมูลเบราว์เซอร์ เปิดผ่านแอปแชท หรือเปลี่ยนเครื่อง ตัวละครจะหาย · สร้างบัญชีครั้งเดียว ตัวละครในเครื่องนี้จะถูกเก็บขึ้นเซิร์ฟเวอร์ทันที</p>'+
+   '<input id="acn" maxlength="20" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="ชื่อบัญชี (a-z 0-9 _ ยาว 3-20)" '+S+'><input id="acp" type="password" maxlength="32" autocomplete="current-password" placeholder="รหัส PIN (อย่างน้อย 4 ตัว จำไว้ให้ดี)" '+S+'>'+
+   '<div class="row" style="margin-top:6px"><button id="acr">สร้างบัญชีใหม่</button><button id="acl">ล็อกอิน</button></div><p id="acm" style="font-size:12.5px;margin:4px 0">'+accMsg+'</p></div>'}
 async function initSave(){
   let db=null,uidDb=null;
   try{
@@ -10455,13 +10506,13 @@ async function initSave(){
       saves=cleanSaves(snapD.exists?snapD.data():null);
       saveMode='db';
     }else{
-      saves=cleanSaves(lsRead());saveMode='local';
+      saves=cleanSaves(lsRead());if(srvAcc()&&ACC)await accLoad();if(saveMode!=='wait')return;saveMode='local';
     }
   }catch(e){
     if(saveMode!=='wait')return;
     saveMode='off';saveDoc=null;
   }
-  setSaveState(saveMode==='db'?'บันทึกออนไลน์':saveMode==='local'?'บันทึกในเบราว์เซอร์นี้':'ไม่ได้บันทึก');
+  setSaveState(saveMode==='db'?'บันทึกออนไลน์':saveMode==='local'?(ACC&&accLoaded?'บันทึกบนเซิร์ฟเวอร์ ('+ACC.a+')':ACC?'บัญชี '+ACC.a+' · ยังต่อเซิร์ฟเวอร์ไม่ได้ เก็บในเครื่องไว้ก่อน':'บันทึกในเบราว์เซอร์นี้ (ยังไม่ผูกบัญชี)'):'ไม่ได้บันทึก');
   if(!me.cls)intro();
 }
 async function writeSave(){
@@ -10472,7 +10523,7 @@ async function writeSave(){
   try{
     if(saveMode==='db')await saveDoc.set(next);
     else if(!lsWrite(next))throw {code:'ls'};
-    saves=next;lastJ=j;setSaveState(saveMode==='db'?'บันทึกออนไลน์ แล้ว':'บันทึกในเบราว์เซอร์นี้ แล้ว');
+    saves=next;lastJ=j;if(saveMode==='local'&&ACC&&srvAcc())accKick();else setSaveState(saveMode==='db'?'บันทึกออนไลน์ แล้ว':'บันทึกในเบราว์เซอร์นี้ แล้ว');
   }catch(e){
     if(saveMode==='db'&&lsWrite(next)){saves=next;lastJ=j;saveMode='local';setSaveState('ออนไลน์ไม่ได้ บันทึกในเบราว์เซอร์นี้แทน')}
     else{saveMode='off';setSaveState('บันทึกไม่ได้ (ต้องมีสิทธิ์ Can edit)')}
@@ -10483,11 +10534,11 @@ async function deleteChar(c){
   if(saveMode==='wait'||saveMode==='off')return;
   const next={v:1,chars:Object.assign({},saves.chars),last:saves.last===c?null:saves.last};delete next.chars[c];
   try{if(saveMode==='db')await saveDoc.set(next);else lsWrite(next);saves=next}catch(e){}
-  delArm=null;intro();
+  if(saveMode==='local'&&ACC&&srvAcc())accKick(1);delArm=null;intro();
 }
 setInterval(writeSave,5000);
-document.addEventListener('visibilitychange',()=>{if(document.hidden)writeSave();try{if(room&&room.presence&&window.lastPres){window.lastPres.aw=document.hidden?1:0;room.presence(window.lastPres)}}catch(e){}});
-window.addEventListener('pagehide',()=>{writeSave()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){writeSave();setTimeout(()=>{if(accDirty&&ACC)accPush(1)},60)}try{if(room&&room.presence&&window.lastPres){window.lastPres.aw=document.hidden?1:0;room.presence(window.lastPres)}}catch(e){}});
+window.addEventListener('pagehide',()=>{writeSave();setTimeout(()=>{if(accDirty&&ACC)accPush(1)},0)});setInterval(()=>{if(accDirty&&ACC&&!accBusy&&Date.now()-accLast>25000)accPush()},5000);
 
 /* ---------- screens ---------- */
 function pick(c,slot,nm){if(saveMode==='wait')return;
@@ -10513,7 +10564,7 @@ async function importSave(txt){
     const next={v:1,chars:Object.assign({},saves.chars),last:d.last||saves.last};
     ks.forEach(k=>{const r=d.chars[k],o=next.chars[k];if(o&&o.cls!==r.cls){let i=1;while(next.chars['c'+i])i++;next.chars['c'+i]=r;return}if(!o||r.lv>=o.lv)next.chars[k]=r});
     if(saveMode==='db')await saveDoc.set(next);else lsWrite(next);
-    saves=next;delArm=null;intro();
+    saves=next;if(saveMode==='local'&&ACC&&srvAcc())accKick(1);delArm=null;intro();
     const b=$('bk');if(b)b.open=true;$('bkm').textContent='นำเข้าแล้ว '+ks.length+' ตัวละคร (ตัวที่เลเวลสูงกว่าจะถูกเก็บไว้)';
   }catch(e){m.textContent='รหัสไม่ถูกต้อง'}
 }
@@ -10529,6 +10580,8 @@ ov.addEventListener('click',e=>{
   if(t.dataset.csb){csMode='';intro();return}
   if(t.dataset.c){if(t.dataset.new){const n=cleanName(csName);if(!n){const m=$('csnm');if(m){m.textContent='กรุณาตั้งชื่อตัวละครก่อน';m.style.color='#e0645a'}const i=$('csni');if(i)i.focus();return}nmCreate(t.dataset.c,n)}else pick(t.dataset.c,t.dataset.slot)}
   if(t.id==='srvb'){try{localStorage.setItem('refugee_server',$('srvi').value.trim())}catch(e){}location.reload();return}
+  if(t.id==='acr'||t.id==='acl'){accLogin(t.id==='acr');return}
+  if(t.id==='aco'){accLogout();return}
   if(t.id==='bkx'){$('bkt').value='RFG1:'+b64e(JSON.stringify(saves));$('bkm').textContent='สร้างรหัสแล้ว กดคัดลอกเก็บไว้';$('bkt').select()}
   if(t.id==='bkc'){const x=$('bkt');x.select();try{navigator.clipboard.writeText(x.value).then(()=>{$('bkm').textContent='คัดลอกแล้ว'},()=>{document.execCommand('copy');$('bkm').textContent='คัดลอกแล้ว'})}catch(e){try{document.execCommand('copy');$('bkm').textContent='คัดลอกแล้ว'}catch(_){}}}
   if(t.id==='bki')importSave($('bkt').value);
@@ -10585,7 +10638,7 @@ ov.addEventListener('click',e=>{
   if(t.dataset.buy)buy(t.dataset.buy,+t.dataset.q);
   if(t.id==='again'){reset();if(room)emitM('reset',{})}
 });
-makeGuards();intro();TABOK.then(initSave);setTimeout(()=>{if(saveMode!=='wait'||!TAB.own)return;try{saves=cleanSaves(lsRead())}catch(e){}saveMode='local';setSaveState('บันทึกในเบราว์เซอร์นี้ (ระบบออนไลน์ไม่ตอบ)');if(!me.cls)intro()},20000);requestAnimationFrame(loop);
+makeGuards();intro();TABOK.then(initSave);setTimeout(()=>{if(saveMode!=='wait'||!TAB.own)return;try{saves=cleanSaves(lsRead())}catch(e){}saveMode='local';setSaveState('บันทึกในเบราว์เซอร์นี้ (ระบบออนไลน์ไม่ตอบ)');if(!me.cls)intro();if(srvAcc()&&ACC)accLoad().then(ok=>{if(ok)setSaveState('บันทึกบนเซิร์ฟเวอร์ ('+ACC.a+')');if(!me.cls)intro()})},20000);requestAnimationFrame(loop);
 /* ===== หน้าปกเกม REFUGEE ===== */
 (function(){const T=document.getElementById('ttl');if(!T)return;const E=T.querySelector('.emb');
   for(let i=0;i<26;i++){const e=document.createElement('i');e.style.left=(Math.random()*100)+'%';e.style.setProperty('--dx',(Math.random()*80-40)+'px');e.style.animationDuration=(6+Math.random()*7)+'s';e.style.animationDelay=(-Math.random()*12)+'s';const s=2+Math.random()*3.5;e.style.width=e.style.height=s+'px';if(Math.random()<.3){e.style.background='#d8a8ff';e.style.boxShadow='0 0 8px 2px rgba(180,110,255,.8)'}E.appendChild(e)}
