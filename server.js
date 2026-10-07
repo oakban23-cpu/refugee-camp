@@ -105,9 +105,12 @@ function lbDedupe(){let ch=false;for(const key in LB){const arr=LB[key];if(!Arra
 try{const j=JSON.parse(fs.readFileSync(LBF,'utf8'));if(j&&typeof j==='object')LB=j}catch(e){}
 if(lbDedupe()){lbDirty=true;console.log('ตารางอันดับ: รวมแถวซ้ำของตัวละครเดียวกันแล้ว')}
 setInterval(()=>{if(!lbDirty)return;lbDirty=false;wj(LBF,LB)},10000);
+const RSTT={};
 function onEmit(c,m){
   const k=m.k,pl=m.d;if(typeof k!=='string'||k.length>12)return;
-  if(k==='chat'){const s=JSON.stringify({t:'emit',k,d:pl,from:c.id});for(const o of clients)if(o!==c)send(o,s);try{chatLog(c,pl)}catch(e){}return}
+  if(k==='chat'){if(!pl||typeof pl!=='object'||typeof pl.t!=='string')return;const now=Date.now();c.chB=Math.min(5,(c.chB==null?5:c.chB)+(now-(c.chT||now))/1500);c.chT=now;if(c.chB<1)return;c.chB--;
+    const cm={u:c.uid||'',n:String(pl.n||'').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,12),t:pl.t.replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80)};if(!cm.t)return;
+    const s=JSON.stringify({t:'emit',k,d:cm,from:c.id});for(const o of clients)if(o!==c)send(o,s);try{chatLog(c,pl)}catch(e){}return}
   if(k==='nmq'){nameReq(c,pl&&pl.d);return}
   if(!c.p||!pl||typeof pl!=='object')return;
   const mp=c.p.mp,d=pl.d,host=hostByMap[mp];
@@ -144,14 +147,15 @@ function onEmit(c,m){
       for(const r of d.m){if(r[4]===3||r[4]===4||d2(r[1],r[2],ox,oy)<R_WORLD*R_WORLD)rows.push(r)}
       send(o,JSON.stringify({t:'emit',k,d:{mp,d:{wm:mp,m:rows,g:d.g,c:d.c,w:d.w,o:d.o,dg:dgs}},from:c.id}),true)}
     return}
-  if(k==='dmg'){if(!Array.isArray(d))return;const by=new Map();
+  if(k==='dmg'){if(host!==c||!Array.isArray(d))return;const by=new Map();
     for(const e of d.slice(0,120)){if(!Array.isArray(e))continue;const o=byUid.get(e[0]);if(o&&o.p&&o.p.mp===mp){if(!by.has(o))by.set(o,[]);by.get(o).push(e)}}
     for(const [o,arr] of by)send(o,wrap(arr));return}
-  if(k==='xp'){if(!Array.isArray(d))return;
+  if(k==='xp'){if(host!==c||!Array.isArray(d))return;
     for(const o of inMap(mp)){if(o===c)continue;const arr=d.filter(e=>Array.isArray(e)&&d2(e[0],e[1],o.p.x,o.p.y)<R_XP*R_XP);if(arr.length)send(o,wrap(arr))}return}
   if(k==='fx'){if(!d||typeof d!=='object')return;if(d.k==='tb'&&c!==host)return;const s=wrap(d),all=d.k==='msg'||d.k==='tb',hostOnly=d.k==='taunt'||d.k==='fog'||d.k==='frost'||d.k==='pin'||d.k==='tstop'||d.k==='mtrapx'||d.k==='rift'||d.k==='stun';
     for(const o of inMap(mp)){if(o===c)continue;
       if(all||(hostOnly&&o===host)||d2(d.x,d.y,o.p.x,o.p.y)<R_FX*R_FX)send(o,s)}return}
+  if(k==='reset'){const now=Date.now();RSTT[mp]=RSTT[mp]||0;if(now-RSTT[mp]<20000)return;RSTT[mp]=now}
   if(k==='reset'||k==='dinv'){const s=wrap(d);for(const o of inMap(mp))if(o!==c)send(o,s);return}
   if(k==='dgo'){if(host&&host!==c)send(host,wrap({}));return}
 }
@@ -176,12 +180,12 @@ function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
-  const now=Date.now();if(now-c.last>1000){c.last=now;c.n=0}if(++c.n>400)return;
+  const now=Date.now();if(now-c.last>1000){c.last=now;c.n=0}if(++c.n>400)return;c.rx=now;
   if(m.t==='presence'&&m.p&&typeof m.p==='object'){
     const p=cleanPresence(m.p);if(!p.uid)return;
-    if(c.uid!==p.uid){if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);c.uid=p.uid;byUid.set(p.uid,c)}
+    if(c.uid!==p.uid){const o=byUid.get(p.uid);if(o&&o!==c&&!o.dead){if(now-(o.rx||0)<5000)return;kill(o)}if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);c.uid=p.uid;byUid.set(p.uid,c)}
     if(!c.p||c.p.mp!==p.mp)c.mapSince=Date.now();if(!c.p){try{stSeen(p)}catch(e){}}c.p=p}
-  else if(m.t==='emit')onEmit(c,m);
+  else if(m.t==='emit'){try{onEmit(c,m)}catch(e){console.error('emit error',m.k,e.message)}}
 }
 function parse(c){
   for(;;){const b=c.buf;if(b.length<2)return;
@@ -233,7 +237,8 @@ setInterval(()=>{const u=process.cpuUsage(cpuPrev),now=Date.now();cpuPct=(u.user
 const ACF=path.join(DATA_DIR,'accounts.json'),SVD=path.join(DATA_DIR,'saves'),SVMAX=1200*1024;try{fs.mkdirSync(SVD,{recursive:true})}catch(e){}
 let ACCS=Object.create(null),accDirty=false;try{Object.assign(ACCS,JSON.parse(fs.readFileSync(ACF,'utf8'))||{})}catch(e){}
 setInterval(()=>{if(accDirty){accDirty=false;wj(ACF,ACCS)}},4000);
-const ACFAIL=new Map(),ACREG=new Map(),ACLAST=new Map();
+const ACFAIL=new Map(),ACREG=new Map(),ACLAST=new Map(),ACNF=new Map();let ACHASH={t:0,n:0},ACREGG={t:0,n:0};
+function accHashSlot(){const now=Date.now();if(now-ACHASH.t>1000)ACHASH={t:now,n:0};return++ACHASH.n<=8}
 const accName=a=>typeof a==='string'&&/^[a-z0-9][a-z0-9_]{2,19}$/.test(a)?a:null;
 const accPinOk=p=>typeof p==='string'&&p.length>=4&&p.length<=32;
 const accHash=(pin,salt)=>crypto.scryptSync(String(pin),salt,32).toString('hex');
@@ -252,13 +257,16 @@ function accRoute(req,res){const H={'Content-Type':'application/json','Cache-Con
     if(act==='register'||act==='login'){
       const fk=ip+'|'+a,f=ACFAIL.get(ip),f2=ACFAIL.get(fk);
       if((f&&f.n>=20&&now-f.t<15*60e3)||(f2&&f2.n>=6&&now-f2.t<15*60e3))return J(429,{err:'locked',wait:Math.ceil((15*60e3-(now-Math.max(f?f.t:0,f2?f2.t:0)))/1000)});
+      {const nf=ACNF.get(a);if(nf&&nf.n>=10&&now-nf.t<15*60e3)return J(429,{err:'locked',wait:Math.ceil((15*60e3-(now-nf.t))/1000)})}
       if(!accPinOk(q.pin))return J(400,{err:'pin'});
+      if(!accHashSlot())return J(429,{err:'busy',wait:2});
       if(act==='register'){if(ACCS[a])return J(409,{err:'taken'});
         const r=ACREG.get(ip);if(r&&r.n>=8&&now-r.t<3600e3)return J(429,{err:'many'});ACREG.set(ip,{n:(r&&now-r.t<3600e3?r.n:0)+1,t:r&&now-r.t<3600e3?r.t:now});if(ACREG.size>2000)ACREG.clear();
+        if(now-ACREGG.t>3600e3)ACREGG={t:now,n:0};if(++ACREGG.n>150)return J(429,{err:'many'});
         const salt=crypto.randomBytes(12).toString('hex');const A=ACCS[a]={s:salt,h:accHash(q.pin,salt),c:now,l:now,tk:[]};const t=accNewToken(A);accDirty=true;console.log('สร้างบัญชี: '+a);return J(200,{ok:1,a,t,rev:0})}
       const A=ACCS[a];let ok=false;if(A){const h=accHash(q.pin,A.s);ok=h.length===A.h.length&&crypto.timingSafeEqual(Buffer.from(h),Buffer.from(A.h))}
-      if(!ok){for(const[k,lim]of[[ip,0],[fk,0]]){const g=ACFAIL.get(k);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACFAIL.set(k,v)}if(ACFAIL.size>5000)ACFAIL.clear();return J(401,{err:A?'pin':'none'})}
-      ACFAIL.delete(fk);A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(a);return J(200,{ok:1,a,t,rev:sv?sv.rev|0:0})}
+      if(!ok){for(const k of[ip,fk]){const g=ACFAIL.get(k);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACFAIL.set(k,v)}if(ACFAIL.size>5000)ACFAIL.clear();if(A){const g=ACNF.get(a);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACNF.set(a,v);if(ACNF.size>5000)ACNF.clear()}return J(401,{err:A?'pin':'none'})}
+      ACFAIL.delete(fk);ACNF.delete(a);A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(a);return J(200,{ok:1,a,t,rev:sv?sv.rev|0:0})}
     const A=accAuth(a,q.t);if(!A)return J(401,{err:'auth'});
     if(act==='load'){const sv=svRead(a);A.l=now;accDirty=true;return J(200,{ok:1,rev:sv?sv.rev|0:0,data:sv?sv.data:null,at:sv?sv.at:0})}
     if(act==='save'){const d=q.data;if(!d||typeof d!=='object'||!d.chars||typeof d.chars!=='object')return J(400,{err:'data'});
@@ -274,7 +282,7 @@ function accAdmin(act,q){const a=accName(String(q.a||'').toLowerCase().trim());i
   if(act==='accbak'){const f=svPath(a);try{const b=JSON.parse(fs.readFileSync(f+'.bak','utf8'));const sv=svRead(a);b.rev=(sv?sv.rev|0:0)+1;b.at=Date.now();fs.writeFileSync(f,JSON.stringify(b));const s=svSum(b.data);A.n=s.n;A.lv=s.l;accDirty=true;return{ok:1,n:s.n}}catch(e){return{err:'ไม่มีไฟล์สำรอง'}}}
   return{err:'act'}}
 function accTable(){const L=Object.keys(ACCS).map(a=>{const A=ACCS[a];return{a,c:A.c,l:A.l,n:A.n|0,lv:A.lv|0,sz:A.sz|0}}).sort((x,y)=>y.l-x.l);return{n:L.length,rows:L.slice(0,400)}}
-const AFAIL=new Map();
+const AFAIL=new Map();let AFALL={t:0,n:0};
 function adminOk(req){if(!ADMIN_KEY)return false;const k=String(req.headers['x-admin-key']||'');const a=crypto.createHash('sha256').update(k).digest(),b=crypto.createHash('sha256').update(ADMIN_KEY).digest();return crypto.timingSafeEqual(a,b)}
 function adminData(){const now=Date.now(),pl=[];
   for(const c of clients){if(!c.p)continue;const p=c.p;pl.push({n:p.n,c:p.cls,l:p.lv,mp:p.mp,on:Math.round((now-c.since)/1000),inMap:Math.round((now-(c.mapSince||c.since))/1000),aw:p.aw?1:0,dead:p.hp<=0?1:0,host:hostByMap[p.mp]===c?1:0})}
@@ -295,7 +303,8 @@ function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':
   if(!ADMIN_KEY)return J(503,{err:'nokey'});
   const ip=String(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim(),now=Date.now(),f=AFAIL.get(ip);
   if(f&&f.n>=8&&now-f.t<10*60e3)return J(429,{err:'locked',wait:Math.ceil((10*60e3-(now-f.t))/1000)});
-  if(!adminOk(req)){const g=f&&now-f.t<10*60e3?f:{n:0,t:now};g.n++;g.t=now;AFAIL.set(ip,g);if(AFAIL.size>500)AFAIL.clear();return J(401,{err:'bad'})}
+  if(AFALL.n>=40&&now-AFALL.t<10*60e3)return J(429,{err:'locked',wait:Math.ceil((10*60e3-(now-AFALL.t))/1000)});
+  if(!adminOk(req)){const g=f&&now-f.t<10*60e3?f:{n:0,t:now};g.n++;g.t=now;AFAIL.set(ip,g);if(now-AFALL.t>10*60e3)AFALL={t:now,n:0};if(++AFALL.n===40)console.log('⚠️ มีการเดารหัสผู้ดูแลผิดเกิน 40 ครั้ง · ล็อกหน้า admin 10 นาที');if(AFAIL.size>500)AFAIL.clear();return J(401,{err:'bad'})}
   AFAIL.delete(ip);
   if(req.url.startsWith('/admin/api'))return J(200,adminData());
   if(req.url.startsWith('/admin/chat'))return J(200,chatQuery(new URL(req.url,'http://x').searchParams));
@@ -339,4 +348,5 @@ function chatQuery(q){const n=Math.max(1,Math.min(500,+q.get('n')||150)),before=
 function stats(){return{clients:clients.size,countByMap,bytesOut,msgsOut,uptime:Math.round(process.uptime())}}
 function flushAll(){try{wjSync(ACF,ACCS)}catch(e){}try{wjSync(CHF,CHL)}catch(e){}try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
 for(const sig of['SIGTERM','SIGINT'])process.on(sig,()=>{console.log('ปิดเซิร์ฟเวอร์: บันทึกข้อมูล...');flushAll();process.exit(0)});
+process.on('uncaughtException',e=>{console.error('uncaught (เซิร์ฟเวอร์ยังทำงานต่อ):',e&&e.stack||e)});
 server.listen(PORT,()=>console.log('listening on '+PORT+' (สูงสุด '+MAX+' คน)'));
