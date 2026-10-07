@@ -345,6 +345,7 @@ window.claude={use:async n=>{
     st.ws=w;
     w.onopen=()=>{R.ok=true;if(st.pres)w.send(JSON.stringify({t:'presence',p:st.pres}))};
     w.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(x){return}
+      if(m.t==='roster'){if(Array.isArray(m.r))R.roster={mp:m.mp,at:Date.now(),m:new Map(m.r.filter(x=>Array.isArray(x)&&typeof x[0]==='string').map(x=>[x[0],{u:x[0],n:String(x[1]||'ผู้เล่น'),cls:String(x[2]||''),lv:x[3]|0}]))};return}
       if(m.t==='peers'){
         (m.info||[]).forEach(([u,n,c,l,mh,mp,hd,bt,tt,ex])=>{ex=Array.isArray(ex)?ex:[];st.info[u]={n,cls:c,lv:l,mh,mp,hd,bt,tt,wp:ex[0]|0,ar:ex[1]|0,c2:ex[2]|0,mt:ex[3]|0,wu:ex[4]|0,pt:ex[5]|0,im:ex[6]|0}});
         R.hostUid=m.host||'';R.count=m.n||0;R.allPlayers=m.all||null;
@@ -5468,8 +5469,8 @@ const trMyItems=()=>tr?tr.my.ix.map(i=>me.bag[i]).filter(Boolean):[];
 const trOut=(op,o)=>emitM('trade',Object.assign({op,to:tr?tr.with:'',from:uid,tid:tr?tr.tid:''},o||{}));
 function trNew(tid,w,wn,st){tr={tid,with:w,wn,st,my:{ix:[],g:0,gd:{},lk:0,cf:0},th:{it:[],g:0,gd:{},lk:0,cf:0},t0:Date.now()}}
 function trStartReq(to){if(!me.cls||!run||me.down>0)return;if(tr){partyUI('กำลังแลกเปลี่ยนอยู่แล้ว');return}if(Date.now()-trLastReq<3000)return;
-  const o=others[to];if(!o){partyUI('ไม่พบผู้เล่นคนนี้ในแมพ');return}trLastReq=Date.now();trNew(Math.random().toString(36).slice(2,9),to,o.n,'wait');trOut('req',{n:myName});partyOpen=false;tradeUI()}
-function trAccept(){const r=trReq;trReq=null;if(!r||tr||!others[r.from]){if(r)emitM('trade',{op:'dec',to:r.from,from:uid,tid:r.tid});return}trNew(r.tid,r.from,r.n,'open');trOut('acc',{n:myName});ov.hidden=false;tradeUI()}
+  const o=others[to]||rosterGet(to);if(!o){partyUI('ไม่พบผู้เล่นคนนี้ในแมพ');return}trLastReq=Date.now();trNew(Math.random().toString(36).slice(2,9),to,o.n,'wait');trOut('req',{n:myName});partyOpen=false;tradeUI()}
+function trAccept(){const r=trReq;trReq=null;if(!r||tr||!peerKnown(r.from)){if(r)emitM('trade',{op:'dec',to:r.from,from:uid,tid:r.tid});return}trNew(r.tid,r.from,r.n,'open');trOut('acc',{n:myName});ov.hidden=false;tradeUI()}
 function trDecline(){const r=trReq;trReq=null;if(r)emitM('trade',{op:'dec',to:r.from,from:uid,tid:r.tid})}
 function trClose(msg){tr=null;if(ov.dataset.k==='trade'&&!ov.hidden)ov.hidden=true;if(msg)sysMsg(msg)}
 function trCancel(why){if(!tr)return;trOut('cancel');trClose('ยกเลิกการแลกเปลี่ยนกับ '+tr.wn+(why?' ('+why+')':''))}
@@ -5503,8 +5504,8 @@ function tradeMsg(d){if(!d||d.to!==uid||typeof d.from!=='string')return;const ti
   else if(op==='conf'||op==='done'){tr.th.cf=1;tr.th.lk=1;tr.th.ca=d.a;tr.th.cb=d.b;tradeUI();trTryExec();return}
   if(!ov.hidden&&ov.dataset.k==='trade')tradeUI()}
 function tradeTick(){const now=Date.now();
-  if(trReq&&(now>trReq.until||!others[trReq.from]))trReq=null;
-  if(tr){if(!others[tr.with]&&now-tr.t0>3000){trClose('ยกเลิกการแลกเปลี่ยน: '+tr.wn+' ไม่ได้อยู่ในแมพนี้แล้ว');return}
+  if(trReq&&(now>trReq.until||!peerKnown(trReq.from)))trReq=null;
+  if(tr){if(!peerKnown(tr.with)&&now-tr.t0>3000){trClose('ยกเลิกการแลกเปลี่ยน: '+tr.wn+' ไม่ได้อยู่ในแมพนี้แล้ว');return}
     if(tr.st==='wait'&&now-tr.t0>20000){trCancel('ไม่มีการตอบรับ');return}
     if(tr.my.cf&&performance.now()-trResend>1000){trResend=performance.now();trOut('conf',{a:tr.a,b:tr.b})}}}
 function tradeUI(msg){if(!tr)return;ov.dataset.k='trade';ov.hidden=false;
@@ -6259,6 +6260,10 @@ function drawKnight(q){const t=performance.now()/1000+q.x*.01,fx=q.gd===2||(q.gd
 function makeGuards(){guards=[];if(curMap!==1)return;for(let i=0;i<8;i++){const k=i>>1,s=i&1?1:-1,a=k*Math.PI/2,d=CAMP.R+34,x=CX+Math.cos(a)*d-Math.sin(a)*s*30,y=CY+Math.sin(a)*d+Math.cos(a)*s*30;guards.push({px:x,py:y,x,y,hp:GH,dead:0,ac:0,gd:k})}}
 function bh(){return 40+wave*8}
 function hostId(){return(room&&room.hostUid)?room.hostUid:[uid,...Object.keys(others)].sort()[0]}
+/* รายชื่อทุกคนในแมพเดียวกัน (เซิร์ฟเวอร์ส่งทุก 2 วิ) · ใช้แลกเปลี่ยน/เชิญปาร์ตี้ได้แม้ยืนห่างกันในแมพใหญ่ เช่น นครลอยฟ้า */
+function rosterGet(u){const Q=room&&room.roster;if(!Q||Q.mp!==curMap||Date.now()-Q.at>7000)return null;return Q.m.get(u)||null}
+function rosterList(){const Q=room&&room.roster;if(!Q||Q.mp!==curMap||Date.now()-Q.at>7000)return[];return[...Q.m.values()]}
+const peerKnown=u=>!!others[u]||!!rosterGet(u);
 function plCount(){return(room&&room.count)?room.count:1+Object.keys(others).length}
 const isHost=()=>hostId()===uid;
 function moveTo(o,x,y,st,maxR){const dx=x-o.x,dy=y-o.y,d=Math.hypot(dx,dy);if(d>1){const s=Math.min(st,d);o.x+=dx/d*s;o.y+=dy/d*s;if(Math.abs(dx)>1)o.fx=dx<0?-1:1}
@@ -6293,7 +6298,7 @@ setInterval(status,1500);
   room.on('mvsp',m=>{m=U(m);if(m.sameTab)return;mvSpawn()});
   room.on('mvr',m=>{const D=m.data&&m.data.d;if(D&&typeof D==='object'&&!m.sameTab){const sig=JSON.stringify(Object.keys(D).map(k=>{const v=D[k]||{};return[k,v.al?1:0,v.k|0,v.last&&v.last.n||'',(+v.in||0)<=0?1:0]}));const ch=sig!==mvFetch.sig;mvFetch.sig=sig;MVT=D;MVTat=Date.now();if(ch&&!ov.hidden&&ov.dataset.k==='ev'&&evTab==='mv')eventUI()}});
   room.on('mvn',m=>{const D=m.data&&m.data.d;if(D&&typeof D==='object'&&!m.sameTab)mvResult(D)});
-  room.on('lbr',m=>{m=U(m);if(m.sameTab||!m.data||typeof m.data!=='object')return;const o={};LBK.forEach(k=>{if(Array.isArray(m.data[k]))o[k]=m.data[k].slice(0,k==='wb'?30:10).filter(r=>Array.isArray(r)&&+r[3]>0)});lbData=o;lbAt=Date.now();wbTitleSync();try{lbResync()}catch(e){}if(!ov.hidden&&ov.dataset.k==='ev'&&evTab==='lb')eventUI()});
+  room.on('lbr',m=>{m=U(m);if(m.sameTab||!m.data||typeof m.data!=='object')return;const o={};LBK.forEach(k=>{if(Array.isArray(m.data[k])){const seen=new Set();o[k]=m.data[k].filter(r=>{if(!Array.isArray(r)||!(+r[3]>0))return false;const id=String(r[0]||'').trim().toLowerCase()+'|'+r[1];if(seen.has(id))return false;seen.add(id);return true}).slice(0,k==='wb'?30:10)}});lbData=o;lbAt=Date.now();wbTitleSync();try{lbResync()}catch(e){}if(!ov.hidden&&ov.dataset.k==='ev'&&evTab==='lb')eventUI()});
   room.on('pty',m=>{if(m.sameTab||!m.data)return;try{ptMsg(m.data.d)}catch(e){}});
   room.on('trade',m=>{m=U(m);if(!m.sameTab&&m.data)tradeMsg(m.data)});
   room.on('dgo',m=>{m=U(m);if(!m.sameTab&&isHost())dgStart()});
@@ -6345,7 +6350,7 @@ const inPty=u=>!!(PTY&&PTY.mem.some(m=>m.u===u)&&PTY.mem.length>1);
 const ptMe=()=>({u:uid,n:myName,cls:me.cls,lv:me.lv,hp:Math.round(me.hp),mh:me.mh,mp:curMap,s:Date.now()});
 function ptOut(to,op,o){if(room)room.emit('pty',{mp:curMap,d:Object.assign({op,to,from:uid,pid:PTY?PTY.id:ptPid},o||{})})}
 function ptRos(){if(!PTY||PTY.lead!==uid)return;const mem=PTY.mem.map(m=>({u:m.u,n:m.n,cls:m.cls,lv:m.lv}));PTY.mem.forEach(m=>{if(m.u!==uid)ptOut(m.u,'ros',{lead:PTY.lead,mem})})}
-function ptInvite(u){if(!me.cls||!run)return;const o=others[u];if(!o){sysMsg('ไม่พบผู้เล่นคนนี้ในแมพ');return}
+function ptInvite(u){if(!me.cls||!run)return;const o=others[u]||rosterGet(u);if(!o){sysMsg('ไม่พบผู้เล่นคนนี้ในแมพ');return}
   if(inPty(u)){sysMsg(o.n+' อยู่ในปาร์ตี้ของคุณแล้ว');return}
   if(PTY&&PTY.mem.length>1&&PTY.lead!==uid){sysMsg('เฉพาะหัวหน้าปาร์ตี้เท่านั้นที่เชิญได้');return}
   if(PTY&&PTY.mem.length>=PTMAX){sysMsg('ปาร์ตี้เต็มแล้ว ('+PTMAX+' คน)');return}
@@ -6407,8 +6412,9 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 function partyList(){const el=$('plist');if(!el){partyOpen=false;return}
   let h=me.cls?memberRow(myName,me.cls,me.lv,me.hp,me.mh,1):'';
   Object.entries(others).forEach(([u,o])=>{h+=memberRow(o.n,o.cls,o.lv,o.hp,o.mh,0,u)});
-  if(!Object.keys(others).length)h+='<p style="opacity:.6;padding-top:8px">ยังไม่มีเพื่อนในแมพนี้</p>';
-  else if(plCount()>Object.keys(others).length+1)h+='<p style="opacity:.6;padding-top:8px">ในแมพนี้มี '+plCount()+' คน แสดงเฉพาะคนที่อยู่ใกล้ ๆ</p>';
+  const far=rosterList().filter(x=>x.u!==uid&&!others[x.u]);far.forEach(x=>{h+=memberRow(x.n+' · 📍อยู่ไกล',x.cls,x.lv||1,1,1,0,x.u)});
+  if(!Object.keys(others).length&&!far.length)h+='<p style="opacity:.6;padding-top:8px">ยังไม่มีเพื่อนในแมพนี้</p>';
+  else if(plCount()>Object.keys(others).length+far.length+1)h+='<p style="opacity:.6;padding-top:8px">ในแมพนี้มี '+plCount()+' คน แสดงเฉพาะคนที่อยู่ใกล้ ๆ</p>';
   el.innerHTML=h}
 function partyUI(msg){partyOpen=true;ov.dataset.k='party';
   ov.innerHTML='<div class="pn" data-pn="party">'+hdr('👥','ปาร์ตี้','ผู้เล่นในแมพเดียวกันเป็นทีมเดียวกัน มอนสเตอร์และบอสร่วมกัน (แต่ละแมพแยกกัน แชทคุยกันได้ทุกแมพ)')+ptCard()+'<div class="card"><div class="cap">ผู้เล่นในแมพนี้</div><div id="plist"></div></div>'+(msg?'<div class="note">'+msg+'</div>':'')+'</div>';
