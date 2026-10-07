@@ -221,8 +221,8 @@ server.on('upgrade',(req,sock)=>{
 });
 setInterval(()=>{for(const c of [...clients]){if(!c.alive){kill(c);continue}c.alive=false;try{c.sock.write(frame(9,Buffer.alloc(0)))}catch(e){}}},25000);
 /* ===== หน้าผู้ดูแล /admin: สถิติผู้เล่น · ประวัติคนออนไลน์ · ตลาด · บอส · สุขภาพเซิร์ฟเวอร์ · ประกาศถึงทุกคน =====
-   ตั้งรหัสด้วย Environment Variable ADMIN_KEY (ไม่ตั้ง = ปิดหน้านี้) */
-const ADMIN_KEY=String(process.env.ADMIN_KEY||''),STF=path.join(DATA_DIR,'stats.json'),TZ=7*3600e3;
+   ตั้งรหัสด้วย Environment Variable ADMIN_KEY · เพิ่มรหัสผู้ดูแลคนอื่นได้ที่ ADMIN_KEY2, ADMIN_KEY3 (ไม่ตั้งเลย = ปิดหน้านี้) */
+const ADMIN_KEYS=['ADMIN_KEY','ADMIN_KEY2','ADMIN_KEY3'].map(k=>String(process.env[k]||'').trim()).filter(Boolean),ADMIN_KEY=ADMIN_KEYS[0]||'',STF=path.join(DATA_DIR,'stats.json'),TZ=7*3600e3;
 let ST={s:[],days:{},peak:{n:0,at:0}},stWin=0,stDirty=false;
 try{const j=JSON.parse(fs.readFileSync(STF,'utf8'));if(j&&typeof j==='object'){ST.s=Array.isArray(j.s)?j.s:[];ST.days=j.days&&typeof j.days==='object'?j.days:{};ST.peak=j.peak||ST.peak}}catch(e){}
 const dayKey=t=>new Date(t+TZ).toISOString().slice(0,10);
@@ -313,7 +313,8 @@ function accAdmin(act,q){const a=accName(String(q.a||'').toLowerCase().trim());i
   return{err:'act'}}
 function accTable(){const L=Object.keys(ACCS).map(a=>{const A=ACCS[a];return{a,c:A.c,l:A.l,n:A.n|0,lv:A.lv|0,sz:A.sz|0,fo:A.fo|0,fl:(A.fl||[]).slice(0,8),mb:A.mkban?1:0,lk:A.lock?1:0,lb:A.lban?1:0}}).sort((x,y)=>(y.fo>0)-(x.fo>0)||y.l-x.l);return{n:L.length,fo:L.filter(r=>r.fo>0).length,rows:L.slice(0,400)}}
 const AFAIL=new Map();let AFALL={t:0,n:0};
-function adminOk(req){if(!ADMIN_KEY)return false;const k=String(req.headers['x-admin-key']||'');const a=crypto.createHash('sha256').update(k).digest(),b=crypto.createHash('sha256').update(ADMIN_KEY).digest();return crypto.timingSafeEqual(a,b)}
+function adminWho(req){const k=String(req.headers['x-admin-key']||''),a=crypto.createHash('sha256').update(k).digest();let who=0;ADMIN_KEYS.forEach((K,i)=>{const b=crypto.createHash('sha256').update(K).digest();if(crypto.timingSafeEqual(a,b))who=i+1});return who}
+function adminOk(req){return ADMIN_KEYS.length>0&&adminWho(req)>0}
 function adminData(){const now=Date.now(),pl=[];
   for(const c of clients){if(!c.p)continue;const p=c.p;pl.push({n:p.n,c:p.cls,l:p.lv,mp:p.mp,on:Math.round((now-c.since)/1000),inMap:Math.round((now-(c.mapSince||c.since))/1000),aw:p.aw?1:0,dead:p.hp<=0?1:0,host:hostByMap[p.mp]===c?1:0})}
   const days=Object.keys(ST.days).sort().slice(-30).map(k=>{const d=ST.days[k];return{d:k,peak:d.peak|0,u:(d.u||[]).length,min:d.min|0,sess:d.sess|0,full:d.full|0}});
@@ -330,7 +331,7 @@ function adminData(){const now=Date.now(),pl=[];
 function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':'noindex','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer'};
   if(req.url==='/admin'||req.url==='/admin/'){return fs.readFile(path.join(__dirname,'admin.html'),(e,b)=>{if(e){res.writeHead(404,H);return res.end('missing admin.html')}res.writeHead(200,Object.assign({'Content-Type':'text/html; charset=utf-8',"Content-Security-Policy":"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:"},H));res.end(b)})}
   const J=(code,o)=>{res.writeHead(code,Object.assign({'Content-Type':'application/json'},H));res.end(JSON.stringify(o))};
-  if(!ADMIN_KEY)return J(503,{err:'nokey'});
+  if(!ADMIN_KEYS.length)return J(503,{err:'nokey'});
   const ip=String(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim(),now=Date.now(),f=AFAIL.get(ip);
   if(f&&f.n>=8&&now-f.t<10*60e3)return J(429,{err:'locked',wait:Math.ceil((10*60e3-(now-f.t))/1000)});
   if(AFALL.n>=40&&now-AFALL.t<10*60e3)return J(429,{err:'locked',wait:Math.ceil((10*60e3-(now-AFALL.t))/1000)});
@@ -339,8 +340,8 @@ function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':
   if(req.url.startsWith('/admin/api'))return J(200,adminData());
   if(req.url.startsWith('/admin/chat'))return J(200,chatQuery(new URL(req.url,'http://x').searchParams));
   if(req.method!=='POST')return J(405,{err:'post'});
-  const act=req.url.slice(7).split('?')[0];
-  let body='';req.on('data',d=>{body+=d;if(body.length>2000)req.destroy()});req.on('end',()=>{let q={};try{q=JSON.parse(body)||{}}catch(e){}
+  const act=req.url.slice(7).split('?')[0];const who=adminWho(req);
+  let body='';req.on('data',d=>{body+=d;if(body.length>2000)req.destroy()});req.on('end',()=>{let q={};try{q=JSON.parse(body)||{}}catch(e){}console.log('[ผู้ดูแล #'+who+'] '+act+' '+JSON.stringify(q).replace(/"pin":"[^"]*"/,'"pin":"***"').slice(0,160));
     if(act==='ann'){let t=String(q.t||'').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return J(400,{err:'empty'});
       const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});try{CHL.push({at:Date.now(),n:'📢 ประกาศ (ผู้ดูแล)',t,mp:0,c:'',l:0,a:1});chDirty=true}catch(e){}let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);return J(200,{ok:1,n})}
     if(act==='lbdel'||act==='lbban'||act==='lbcap')return J(200,lbAdmin(act,q));
