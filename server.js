@@ -6,7 +6,7 @@ const R_PEER=650, R_WORLD=480, R_XP=420, R_FX=520, MAXPEERS=40, BUFCAP=1<<20;
 const page=path.join(__dirname,'public','index.html');
 const server=http.createServer((req,res)=>{
   if(req.url==='/health'){res.writeHead(200);return res.end('ok')}
-  if(req.url==='/admin'||req.url==='/admin/'||req.url.startsWith('/admin/api')||req.url.startsWith('/admin/ann'))return adminRoute(req,res);
+  if(req.url==='/admin'||req.url.startsWith('/admin/'))return adminRoute(req,res);
   if(req.url==='/stats'){res.writeHead(200,{'Content-Type':'application/json'});return res.end(JSON.stringify(stats()))}
   {const m=/^\/([a-z0-9_-]+\.(jpg|jpeg|png|webp))(\?.*)?$/i.exec(req.url);if(m){const f=path.join(__dirname,'public',m[1]);return fs.readFile(f,(e,b)=>{if(e){res.writeHead(404);return res.end()}res.writeHead(200,{'Content-Type':'image/'+(m[2].toLowerCase()==='jpg'?'jpeg':m[2].toLowerCase()),'Cache-Control':'public, max-age=604800','Content-Length':b.length});bytesOut+=b.length;res.end(b)})}}
   const P=getPage();if(!P){res.writeHead(500);return res.end('missing index.html')}
@@ -84,6 +84,20 @@ const LBF=path.join(DATA_DIR,'leaderboard.json');let LB={},lbDirty=false;
 /* หนึ่งตัวละคร (ชื่อ+อาชีพ) = หนึ่งแถว เก็บเฉพาะสถิติที่ดีที่สุด */
 const lbId=r=>String(r.n||'').trim().toLowerCase()+'|'+String(r.c||'');
 const lbHi=key=>key==='wb'||key==='pv';
+/* ผู้ดูแลคุมตารางอันดับ: แบนชื่อ · ตั้งเพดานสถิติต่อตาราง (ตารางคะแนน=ค่าสูงสุดที่ Lv75 ลดตามเลเวลแบบเส้นตรง · ตารางเวลา=เวลาเร็วสุดที่ยอมรับ) · เก็บสถิติที่ถูกปัดตก */
+const LBCF=path.join(DATA_DIR,'lbcfg.json');let LBC={caps:{},ban:{},rej:[]};
+try{const j=JSON.parse(fs.readFileSync(LBCF,'utf8'));if(j&&typeof j==='object')LBC={caps:j.caps||{},ban:j.ban||{},rej:Array.isArray(j.rej)?j.rej:[]}}catch(e){}
+const lbcSave=()=>wj(LBCF,LBC);
+const lbCapFor=(key,l)=>{const v=+LBC.caps[key]||0;if(!v)return 0;return lbHi(key)?v*Math.min(1,Math.max(.2,l/75)):v};
+function lbBlock(key,row,hi){if(LBC.ban[lbId(row)])return'ban';const cap=lbCapFor(key,row.l);if(cap&&(hi?row.t>cap:row.t<cap))return'cap';return''}
+function lbRej(key,row,why){LBC.rej.unshift({k:key,n:row.n,c:row.c,l:row.l,t:row.t,why,at:Date.now()});if(LBC.rej.length>40)LBC.rej.length=40;lbcSave()}
+function lbAdmin(act,q){const key=String(q.k||''),id=String(q.n||'').trim().toLowerCase()+'|'+String(q.c||'');
+  if(act==='lbdel'){let n=0;for(const k in LB){if(key!=='*'&&k!==key)continue;const b=LB[k].length;LB[k]=LB[k].filter(r=>lbId(r)!==id);n+=b-LB[k].length}lbDirty=true;console.log('ลบแถวอันดับ',key,id,n);return{ok:1,n}}
+  if(act==='lbban'){if(q.on){LBC.ban[id]={n:String(q.n||'').slice(0,12),c:String(q.c||'').slice(0,8),at:Date.now()};for(const k in LB)LB[k]=LB[k].filter(r=>lbId(r)!==id);lbDirty=true}else delete LBC.ban[id];lbcSave();console.log('แบนอันดับ',id,!!q.on);return{ok:1}}
+  if(act==='lbcap'){if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv)$/.test(key))return{ok:0};const v=Math.max(0,+q.v||0);if(v)LBC.caps[key]=v;else delete LBC.caps[key];
+    let n=0;if(v){const hi=lbHi(key),b=(LB[key]||[]).length;LB[key]=(LB[key]||[]).filter(r=>{const c=lbCapFor(key,r.l);return!(c&&(hi?r.t>c:r.t<c))});n=b-LB[key].length;if(n)lbDirty=true}
+    lbcSave();return{ok:1,removed:n}}
+  return{ok:0}}
 function lbDedupe(){let ch=false;for(const key in LB){const arr=LB[key];if(!Array.isArray(arr))continue;const hi=lbHi(key),best=new Map();
   for(const r of arr){const id=lbId(r),o=best.get(id);if(!o||(hi?r.t>o.t:r.t<o.t))best.set(id,r)}
   const out=[...best.values()].sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(out.length!==arr.length)ch=true;LB[key]=out}return ch}
@@ -99,6 +113,7 @@ function onEmit(c,m){
   const wrap=x=>JSON.stringify({t:'emit',k,d:{mp,d:x},from:c.id});
   if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv)$/.test(key))return;const hi=key==='wb'||key==='pv',t=+d.t;if(hi?!(t>=1&&t<1e12):!(t>=5&&t<36000))return;
     const row={n:String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,12)||'ผู้เล่น',c:String(d.cls||'').slice(0,8),l:num(d.lv|0,1,99,1),t:hi?Math.round(t):Math.round(t*10)/10,p:num(d.pc|0,1,99,1),u:c.uid||'',at:Date.now()};
+    {const why=lbBlock(key,row,hi);if(why){lbRej(key,row,why);return}}
     const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>lbId(r)===lbId(row));if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
     arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
@@ -155,7 +170,7 @@ const MKF=path.join(DATA_DIR,'market.json');let MK={n:1,L:[],sales:{},ret:{}},mk
 try{const j=JSON.parse(fs.readFileSync(MKF,'utf8'));if(j&&Array.isArray(j.L))MK=Object.assign(MK,j)}catch(e){}
 if(!MK.ep){MK.ep=crypto.randomBytes(6).toString('hex');mkDirty=true}/* ep เปลี่ยน = ข้อมูลตลาดชุดเดิมหายไป ผู้เล่นจะได้ของที่ฝากขายคืนจากสำเนาในเซฟ */
 setInterval(()=>{const now=Date.now();MK.L=MK.L.filter(x=>{if(now-x.at>48*3600e3){(MK.ret[x.u]=MK.ret[x.u]||[]).push({k:x.k,d:x.d});mkDirty=true;return false}return true});if(!mkDirty)return;mkDirty=false;wj(MKF,MK)},15000);
-function mkOk(k,d){if(k==='it')return!!d&&typeof d==='object'&&typeof d.sl==='string'&&d.sl.length<3&&!!d.st&&typeof d.st==='object'&&JSON.stringify(d).length<700;if(k==='cd')return typeof d==='string'&&/^[a-z]{2,5}$/.test(d);if(k==='st')return!!d&&typeof d==='object'&&/^(hp|mp|ps|s1|s2|s3|twc|sc|hr)$/.test(d.k)&&(d.n|0)>=1&&(d.n|0)<=999;return false}
+function mkOk(k,d){if(k==='it')return!!d&&typeof d==='object'&&typeof d.sl==='string'&&d.sl.length<3&&!!d.st&&typeof d.st==='object'&&JSON.stringify(d).length<700;if(k==='cd')return typeof d==='string'&&/^[a-z]{2,5}$/.test(d);if(k==='st')return!!d&&typeof d==='object'&&/^(hp|mp|ps|s1|s2|s3|twc|sc|hr|fe|sf|ec)$/.test(d.k)&&(d.n|0)>=1&&(d.n|0)<=999;return false}
 function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
@@ -220,13 +235,15 @@ function adminData(){const now=Date.now(),pl=[];
   const today=stDay(),hours=today.hs.map((v,i)=>today.hn[i]?Math.round(v/today.hn[i]*10)/10:null);
   const mk={n:MK.L.length,val:MK.L.reduce((a,x)=>a+(x.p|0),0),sellers:new Set(MK.L.map(x=>x.u)).size,pend:Object.values(MK.sales||{}).reduce((a,v)=>a+Math.floor(v||0),0),ret:Object.values(MK.ret||{}).reduce((a,v)=>a+(Array.isArray(v)?v.length:0),0),
     recent:MK.L.slice(-12).reverse().map(x=>({n:x.n,k:x.k,d:x.k==='st'?x.d:x.k==='cd'?x.d:(x.d&&x.d.n)||'',p:x.p,at:x.at}))};
-  const lb={};for(const k in LB)lb[k]={n:LB[k].length,top:LB[k][0]?{n:LB[k][0].n,t:LB[k][0].t}:null};
+  const lb={};for(const k in LB){const hi=lbHi(k),A=LB[k];lb[k]={n:A.length,top:A[0]?{n:A[0].n,t:A[0].t}:null,hi,cap:+LBC.caps[k]||0,
+    rows:A.map((r,i)=>{const nx=A[i+1];let fl=0;if(nx&&i<5){if(hi?r.t>nx.t*4&&r.t-nx.t>1000:r.t<nx.t*.4)fl=1}return{n:r.n,c:r.c,l:r.l,t:r.t,p:r.p,at:r.at,fl}})}}
+  const lbc={ban:Object.values(LBC.ban),rej:LBC.rej.slice(0,20)};
   let disk=null;try{if(fs.statfsSync){const f=fs.statfsSync(DATA_DIR);disk={free:f.bavail*f.bsize,total:f.blocks*f.bsize}}}catch(e){}
   const mem=process.memoryUsage();
   return{now,online:pl.length,conn:clients.size,max:MAX,players:pl,byMap:countByMap,peak:ST.peak,today:{peak:today.peak,u:today.u.length,min:today.min,sess:today.sess,full:today.full|0},hours,days,samples:ST.s,
-    mk,mvp:mvTable(),lb,srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
+    mk,mvp:mvTable(),lb,lbc,srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
 function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':'noindex','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer'};
-  if(!req.url.startsWith('/admin/api')&&!req.url.startsWith('/admin/ann')){return fs.readFile(path.join(__dirname,'admin.html'),(e,b)=>{if(e){res.writeHead(404,H);return res.end('missing admin.html')}res.writeHead(200,Object.assign({'Content-Type':'text/html; charset=utf-8',"Content-Security-Policy":"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:"},H));res.end(b)})}
+  if(req.url==='/admin'||req.url==='/admin/'){return fs.readFile(path.join(__dirname,'admin.html'),(e,b)=>{if(e){res.writeHead(404,H);return res.end('missing admin.html')}res.writeHead(200,Object.assign({'Content-Type':'text/html; charset=utf-8',"Content-Security-Policy":"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:"},H));res.end(b)})}
   const J=(code,o)=>{res.writeHead(code,Object.assign({'Content-Type':'application/json'},H));res.end(JSON.stringify(o))};
   if(!ADMIN_KEY)return J(503,{err:'nokey'});
   const ip=String(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim(),now=Date.now(),f=AFAIL.get(ip);
@@ -235,8 +252,12 @@ function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':
   AFAIL.delete(ip);
   if(req.url.startsWith('/admin/api'))return J(200,adminData());
   if(req.method!=='POST')return J(405,{err:'post'});
-  let body='';req.on('data',d=>{body+=d;if(body.length>2000)req.destroy()});req.on('end',()=>{let t='';try{t=String(JSON.parse(body).t||'')}catch(e){}t=t.replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return J(400,{err:'empty'});
-    const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);J(200,{ok:1,n})})}
+  const act=req.url.slice(7).split('?')[0];
+  let body='';req.on('data',d=>{body+=d;if(body.length>2000)req.destroy()});req.on('end',()=>{let q={};try{q=JSON.parse(body)||{}}catch(e){}
+    if(act==='ann'){let t=String(q.t||'').replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,120);if(!t)return J(400,{err:'empty'});
+      const s=JSON.stringify({t:'emit',k:'ann',d:{mp:0,d:{t}},from:0});let n=0;for(const c of clients){if(c.p){send(c,s);n++}}console.log('ประกาศ: '+t);return J(200,{ok:1,n})}
+    if(act==='lbdel'||act==='lbban'||act==='lbcap')return J(200,lbAdmin(act,q));
+    J(404,{err:'act'})})}
 /* ===== จองชื่อตัวละคร: หนึ่งชื่อใช้ได้ตัวละครเดียวทั้งเซิร์ฟเวอร์ (ผูกกับรหัสตัวละครถาวร mid) · ไม่ได้ใช้ 90 วันปล่อยคืน ===== */
 const NMF=path.join(DATA_DIR,'names.json'),NM_TTL=90*864e5;let NM={},nmDirty=false;
 try{const j=JSON.parse(fs.readFileSync(NMF,'utf8'));if(j&&typeof j==='object')NM=j}catch(e){}
@@ -257,6 +278,6 @@ function nameReq(c,d){if(!d||typeof d!=='object')return;const t=String(d.t||'').
   const ks=Object.keys(NM);if(ks.length>60000){ks.sort((a,b)=>NM[a].at-NM[b].at).slice(0,ks.length-60000).forEach(k=>delete NM[k])}
   reply({ok:1})}
 function stats(){return{clients:clients.size,countByMap,bytesOut,msgsOut,uptime:Math.round(process.uptime())}}
-function flushAll(){try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
+function flushAll(){try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
 for(const sig of['SIGTERM','SIGINT'])process.on(sig,()=>{console.log('ปิดเซิร์ฟเวอร์: บันทึกข้อมูล...');flushAll();process.exit(0)});
 server.listen(PORT,()=>console.log('listening on '+PORT+' (สูงสุด '+MAX+' คน)'));
