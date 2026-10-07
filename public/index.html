@@ -1712,7 +1712,7 @@ const RARE=[{id:'lg',ic:'👑',n:'อุปกรณ์ Relic (สุ่มช�
  {id:'cd2',ic:'🃏',n:'ซองการ์ดรอยแยก (สุ่ม 1 ใบ)',p:160000,lim:2,f:()=>{cardGet(['shd','hnd','knt'][Math.random()*3|0]);return'เปิดซองการ์ดแล้ว!'}},
  {id:'s3',ic:'💎',n:'หินตีบวกขั้นสูง ×5',p:60000,lim:3,f:()=>{me.inv.s3=Math.min(999,(me.inv.s3|0)+5);return'+5 หินขั้นสูง'}},
  {id:'s2',ic:'🔮',n:'หินตีบวกขั้นสอง ×10',p:30000,lim:3,f:()=>{me.inv.s2=Math.min(999,(me.inv.s2|0)+10);return'+10 หินขั้นสอง'}},
- {id:'ps',ic:'🛡️',n:'หินกันแตก ×3',p:45000,lim:2,f:()=>{me.inv.ps=Math.min(99,(me.inv.ps|0)+3);return'+3 หินกันแตก'}},
+ {id:'ps',ic:'🛡️',n:'หินกันแตก ×3',p:45000,lim:2,f:()=>{me.inv.ps=Math.min(999,(me.inv.ps|0)+3);return'+3 หินกันแตก'}},
  {id:'tw',ic:'🗼',n:'เหรียญหอคอย ×60',p:80000,lim:2,f:()=>{me.twc=(me.twc||0)+60;return'+60 เหรียญหอคอย'}},
  {id:'pt',ic:'🐾',n:'สัตว์เลี้ยงสุ่ม (ตัวที่ยังไม่มี)',p:400000,lim:1,ok:()=>PETS.some((P,i)=>i&&!(me.pets||[]).includes(i)),f:()=>{const L=PETS.map((P,i)=>i).filter(i=>i&&!(me.pets||[]).includes(i));const id=L[Math.random()*L.length|0];petGive(id);return'ได้สัตว์เลี้ยง '+PETS[id].n+'!'}},
  {id:'po',ic:'🧪',n:'ยา HP + MP อย่างละ 200 ขวด',p:9000,lim:5,f:()=>{me.inv.hp=Math.min(POTMAX,me.inv.hp+200);me.inv.mp=Math.min(POTMAX,me.inv.mp+200);return'+200 ยา HP/MP'}}];
@@ -5524,7 +5524,7 @@ function eventUI(msg){if(!me.cls)return;ov.dataset.k='ev';ensureDaily();loginChe
 const GOODS=[
  {k:'hp',n:'ยาฟื้นเลือด',ic:()=>potImg('hp',30,'pi'),max:999,d:'ฟื้นเลือดทันที · กดปุ่มยาแดงเพื่อใช้ · พกได้สูงสุด 999'},
  {k:'mp',n:'ยาฟื้นมานา',ic:()=>potImg('mp',30,'pi'),max:999,d:'ฟื้นมานาทันที · กดปุ่มยาฟ้าเพื่อใช้ · พกได้สูงสุด 999'},
- {k:'ps',n:'หินกันแตก',ic:()=>'🛡️',max:99,d:'ใช้ตอนตีบวก +6 ขึ้นไป ถ้าล้มเหลวอุปกรณ์จะไม่แตก'},
+ {k:'ps',n:'หินกันแตก',ic:()=>'🛡️',max:999,d:'ใช้ตอนตีบวก +6 ขึ้นไป ถ้าล้มเหลวอุปกรณ์จะไม่แตก'},
  {k:'s1',n:'หินตีบวกขั้นแรก',ic:()=>stoneIc(1),max:999,d:'ใช้ตีบวก +6 ถึง +10 (เกรด Mystic ขึ้นไป) · ดรอปจากมอน Lv20+ และบอส · ซื้อได้ที่ช่างตีบวก'},
  {k:'s2',n:'หินตีบวกขั้นสอง',ic:()=>stoneIc(2),max:999,d:'ใช้ตีบวก +11 ถึง +20 (เกรด Relic ขึ้นไป) · ได้จากบอสแมพ หอคอย เรด และร้านหอคอย'},
  {k:'s3',n:'หินตีบวกขั้นสูง',ic:()=>stoneIc(3),max:999,d:'ใช้ตีบวก +21 ถึง +30 (เฉพาะชุดเซ็ตสีชมพู) · ได้จากเรดห้วงลึกและบอสหอคอยชั้นสูง'},
@@ -5672,7 +5672,7 @@ function twEnterUI(msg){if(!me.cls)return;ov.dataset.k='tw';ov.hidden=false;cons
   h+='<div class="card hint">ประเภทชั้น: ล้างมอน · เอาตัวรอด 45 วิ · ล่าหัวหน้า 👑 · ทุก 5 ชั้นเป็นชั้นพัก (ฟื้นเต็ม + เหรียญ) · ทุก 10 ชั้นเป็นชั้นบอส<br>ตั้งแต่ชั้น 21 มีคำสาปสุ่ม ยิ่งสูงยิ่งซ้อน: '+TWA.map(a=>a[0]+' '+a[1]).join(' · ')+'<br>ผ่านชั้นได้เหรียญหอคอยไปแลกของที่ผู้เฝ้าหอคอย</div>';
   ov.innerHTML='<div class="pn" data-pn="tw">'+h+'</div>'}
 const TWS=[['@hp','ยาฟื้นเลือด x5',2,()=>{me.inv.hp=Math.min(POTMAX,me.inv.hp+5)}],['@mp','ยาฟื้นมานา x5',2,()=>{me.inv.mp=Math.min(POTMAX,me.inv.mp+5)}],
-  ['@ps','หินกันแตก x1 (ตีบวก +6 ขึ้นไปพลาดแล้วไม่ลดระดับ)',20,()=>{me.inv.ps=Math.min(99,(me.inv.ps|0)+1)}],['💎','หินตีบวกขั้นสอง x1',80,()=>{me.inv.s2=Math.min(999,(me.inv.s2|0)+1)}],['📦','หีบอุปกรณ์ Elite',12,()=>giveGear(2)],['🎁','หีบอุปกรณ์ Mystic',35,()=>giveGear(3)],['👑','หีบอุปกรณ์ Relic',120,()=>giveGear(4)]];
+  ['@ps','หินกันแตก x1 (ตีบวก +6 ขึ้นไปพลาดแล้วไม่ลดระดับ)',20,()=>{me.inv.ps=Math.min(999,(me.inv.ps|0)+1)}],['💎','หินตีบวกขั้นสอง x1',80,()=>{me.inv.s2=Math.min(999,(me.inv.s2|0)+1)}],['📦','หีบอุปกรณ์ Elite',12,()=>giveGear(2)],['🎁','หีบอุปกรณ์ Mystic',35,()=>giveGear(3)],['👑','หีบอุปกรณ์ Relic',120,()=>giveGear(4)]];
 function twShopUI(msg){if(!me.cls)return;ov.dataset.k='tws';ov.hidden=false;
   let h=hdr('🪙','ผู้เฝ้าหอคอย','เหรียญหอคอย '+(me.twc||0)+' · หินกันแตก '+(me.inv.ps|0)+' ก้อน');if(msg)h+='<div class="note">'+msg+'</div>';
   h+='<div class="card">'+TWS.map((s,i)=>'<div class="sr"><div class="ico">'+(s[0][0]==='@'?potImg(s[0].slice(1),30,'pi'):s[0])+'</div><div class="nm"><b>'+s[1]+'</b><small>'+s[2]+' เหรียญหอคอย</small></div><button class="pri" data-tws="'+i+'"'+((me.twc||0)>=s[2]?'':' disabled')+'>แลก</button></div>').join('<hr>')+'</div>';
@@ -7576,8 +7576,8 @@ function gmAct(k){if(!gmOk||!me.cls)return;gmUsed=true;bf=null;const bo=mons.fin
   else if(k==='lv'){gmSetLv(+$('gmlv').value);msg='ตั้งเป็น Lv '+me.lv}
   else if(k==='gold'){me.gold=Math.min(GMAX,me.gold+100000);msg='+100,000 ทอง'}
   else if(k==='pot'){me.inv.hp=20;me.inv.mp=20;msg='ยาเต็มแล้ว'}
-  else if(/^st[123p]$/.test(k)){const f=k==='stp'?'ps':'s'+k[2],mx=f==='ps'?99:999;me.inv[f]=Math.min(mx,(me.inv[f]|0)+10);msg='+10 '+(f==='ps'?'หินกันแตก':GDM[f].n)}
-  else if(k==='sts'){me.inv.s1=me.inv.s2=me.inv.s3=Math.max(99,me.inv.s1|0,0);['s1','s2','s3'].forEach(f=>me.inv[f]=Math.max(99,me.inv[f]|0));me.inv.ps=99;msg='หินตีบวกทุกขั้น 99+ และหินกันแตก 99'}
+  else if(/^st[123p]$/.test(k)){const f=k==='stp'?'ps':'s'+k[2],mx=999;me.inv[f]=Math.min(mx,(me.inv[f]|0)+10);msg='+10 '+(f==='ps'?'หินกันแตก':GDM[f].n)}
+  else if(k==='sts'){me.inv.s1=me.inv.s2=me.inv.s3=Math.max(99,me.inv.s1|0,0);['s1','s2','s3'].forEach(f=>me.inv[f]=Math.max(99,me.inv[f]|0));me.inv.ps=Math.max(99,me.inv.ps|0);msg='หินตีบวกทุกขั้น 99+ และหินกันแตก 99+'}
   else if(k==='set'){let n=0;SLOTS.forEach(sl=>{if(me.bag.length<MAXBAG){me.bag.push(makeSetItem(1+(Math.random()*2|0),sl));n++}});msg='ได้ชุดเซ็ต '+n+' ชิ้น (ดูในอุปกรณ์)'}
   else if(k==='gear'){let n=0;SLOTS.forEach(sl=>{if(me.bag.length<MAXBAG){me.bag.push(genItem(ILMAX,sl,4,4));n++}});msg='ได้ของ Relic '+n+' ชิ้น (ดูในอุปกรณ์)'}
   else if(k==='god'){gmGod=!gmGod;msg=gmGod?'เปิดอมตะ':'ปิดอมตะ'}
@@ -7592,7 +7592,7 @@ function gmAct(k){if(!gmOk||!me.cls)return;gmUsed=true;bf=null;const bo=mons.fin
     else if(q==='tw'){me.twc=Math.min(1e7,(me.twc|0)+10000);msg='+10,000 เหรียญหอคอย'}
     else if(q==='pot'){me.inv.hp=999;me.inv.mp=999;msg='ยาแดง/ฟ้า 999'}
     else if(q==='gmax'){me.gold=GMAX;msg='ทอง '+fmtG(GMAX)}
-    else if(q==='all'){me.inv.hp=999;me.inv.mp=999;me.inv.ps=99;me.inv.s1=me.inv.s2=me.inv.s3=999;me.twc=1e7;me.mat.sc=9999;me.mat.hr=999;me.mat.fe=9999;me.gold=GMAX;msg='ของใช้ วัตถุดิบ ทอง เต็มทุกอย่างแล้ว'}
+    else if(q==='all'){me.inv.hp=999;me.inv.mp=999;me.inv.ps=999;me.inv.s1=me.inv.s2=me.inv.s3=999;me.twc=1e7;me.mat.sc=9999;me.mat.hr=999;me.mat.fe=9999;me.gold=GMAX;msg='ของใช้ วัตถุดิบ ทอง เต็มทุกอย่างแล้ว'}
     else if(q==='cd1'||q==='cd5'){const t=q==='cd5'?5:1;Object.keys(CARDS).forEach(id=>{for(let i=0;i<t;i++)cardGet(id,true)});msg='ได้การ์ดทุกใบ ×'+t+' ('+Object.keys(CARDS).length+' แบบ)'}
     else if(q==='mt'){me.mts=MOUNTS.map((M,i)=>i).filter(i=>i>0);msg='ได้พาหนะครบ '+me.mts.length+' ตัว (เลือกขี่ได้ที่เมนูพาหนะ)'}
     else if(q==='tt'){me.ach=me.ach||{};ACH.forEach(a=>me.ach[a[0]]=1);msg='ปลดฉายาครบ '+ACH.length+' แบบ (ฉายาจากอันดับบอสโลกไม่รวม)'}
@@ -10408,7 +10408,7 @@ function cleanChar(c){
   if(!c||typeof c!=='object')return null;
   const n=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,Math.floor(v))):d;
   const o={lv:n(c.lv,1,LMAX,1),xp:n(c.xp,0,1e7,0),gold:n(c.gold,0,GMAX,0),tr:{},ab:{str:0,vit:0,int:0,agi:0,luk:0},inv:{hp:0,mp:0,ps:0},eq:{},bag:[]};
-  if(c.inv&&typeof c.inv==='object'){o.inv.hp=n(c.inv.hp,0,POTMAX,0);o.inv.mp=n(c.inv.mp,0,POTMAX,0);o.inv.ps=n(c.inv.ps,0,99,0);o.inv.s1=n(c.inv.s1,0,999,0);o.inv.s2=n(c.inv.s2,0,999,0);o.inv.s3=n(c.inv.s3,0,999,0)}
+  if(c.inv&&typeof c.inv==='object'){o.inv.hp=n(c.inv.hp,0,POTMAX,0);o.inv.mp=n(c.inv.mp,0,POTMAX,0);o.inv.ps=n(c.inv.ps,0,999,0);o.inv.s1=n(c.inv.s1,0,999,0);o.inv.s2=n(c.inv.s2,0,999,0);o.inv.s3=n(c.inv.s3,0,999,0)}
   {const m=c.mat&&typeof c.mat==='object'?c.mat:{};o.qnT=n(c.qnT,0,9e15,0);o.nxT=n(c.nxT,0,9e15,0);o.wch={};if(c.wch&&typeof c.wch==='object')for(const k in c.wch)if(/^w1[2-8][ab]$/.test(k)&&typeof c.wch[k]==='string'&&c.wch[k].length<12)o.wch[k]=c.wch[k];o.mat={sc:n(m.sc,0,9999,0),hr:n(m.hr,0,999,0),fe:n(m.fe,0,9999,0),ec:n(m.ec,0,9999,0),sf:n(m.sf,0,9999,0),nt:n(m.nt,0,9999,0)}}
   o.cls2=c.cls2&&o.lv>=AWLV?1:0;{const u=c.brU&&typeof c.brU==='object'?c.brU:{};o.brU={};if(o.cls2){if(u[1])o.brU[1]=1;if(u[2])o.brU[2]=1;if(!o.brU[1]&&!o.brU[2])o.brU[1]=1}o.br=c.br===2&&o.brU[2]?2:1;const k=c.dk&&typeof c.dk==='object'?c.dk:{};o.dk={s:o.brU[2]?5:n(k.s,0,4,0),n:n(k.n,0,100,0)}}{const q=c.cq&&typeof c.cq==='object'?c.cq:{};o.cq={s:o.brU[1]?5:n(q.s,0,4,0),n:n(q.n,0,1000,0)}}
   o.twc=n(c.twc,0,1e7,0);o.twCp=n(c.twCp,1,9991,1);if((o.twCp-1)%10)o.twCp=1;o.twBest=n(c.twBest,0,99999,0);if(o.twCp>o.twBest+1)o.twCp=Math.max(1,Math.floor(o.twBest/10)*10+1);
