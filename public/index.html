@@ -1674,7 +1674,7 @@ function rareBuy(id){const o=rareToday().find(x=>x.id===id);if(!o)return;const d
 /* ===== ตลาดกลาง: ซื้อขายระหว่างผู้เล่น (ต้องต่อเซิร์ฟเวอร์) ===== */
 let MKD=null,MKP={},mkTab='buy',mkPrice=1000,mkF='all';
 const mkOn=()=>!!(room&&room.url);
-const MKG=['s3','s2','s1','ps','twc','sc','hr','hp','mp'];
+const MKG=['s3','s2','s1','ps','twc','sc','hr','fe','sf','ec','hp','mp'];
 function mkName(k,d){if(k==='it'){const it=cleanItem(d);return it?itemCard(it):'?'}if(k==='cd')return'🃏 <b>'+(CARDS[d]?CARDS[d].n:'การ์ด')+'</b>';if(k==='st')return'<b>'+(GDM[d.k]?GDM[d.k].n:d.k)+' ×'+(d.n|0)+'</b>';return'?'}
 function mkGive(k,d,q){if(k==='it'){const it=cleanItem(d);if(it){me.bag.push(it);if(!q)sysMsg('📦 ได้รับ '+itemName(it))}}else if(k==='cd'){if(CARDS[d])cardGet(d,1)}else if(k==='st'&&GDM[d.k])gdSet(d.k,gdGet(d.k)+(d.n|0))}
 function mkFetch(){if(mkOn())try{emitM('mkq',{mid:mkMid()})}catch(e){}}
