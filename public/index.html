@@ -423,7 +423,7 @@ const GMAX=999999999,fmtG=v=>{v=Math.max(0,Math.floor(+v||0));const f=(x,s)=>{co
 const CL={
  melee:{n:'ดาบอสูรคลั่ง',c:'#c2352b',hp:140,sp:135,rg:52,dmg:18,cd:.5,melee:1,s:['วังวนดาบ','พุ่งฟัน'],cds:[6,5],mp:60,mr:2.5,mc:[25,20],d:'ตีประชิดดุดัน หมุนดาบรอบตัว และพุ่งฟันเป็นเส้นตรง'},
  archer:{n:'พรานเงาราตรี',c:'#5b8a72',hp:100,sp:120,rg:260,dmg:16,cd:.6,s:['ห่าธนู','ถอยกระโดด'],cds:[7,5],mp:80,mr:3,mc:[30,15],d:'ยิงธนูระยะไกล ห่าธนูเป็นพื้นที่ และถอยกระโดดหนี'},
- sup:{n:'นักสวดปลอบวิญญาณ',c:'#c99a3b',hp:110,sp:120,rg:220,dmg:13.2,cd:.7,s:['แสงเยียวยา','บทสวดพลัง'],cds:[8,12],mp:100,mr:4,mc:[30,35],d:'ฮีลเพื่อนรอบตัว และเพิ่มพลังโจมตีให้ทั้งทีม'},
+ sup:{n:'นักสวดปลอบวิญญาณ',c:'#c99a3b',hp:110,sp:120,rg:220,dmg:15.8,cd:.7,s:['แสงเยียวยา','บทสวดพลัง'],cds:[8,12],mp:100,mr:4,mc:[30,35],d:'ฮีลเพื่อนรอบตัว และเพิ่มพลังโจมตีให้ทั้งทีม'},
  assn:{n:'เงาลอบสังหาร',c:'#8a5fd0',hp:110,sp:150,rg:44,dmg:13.5,cd:.45,melee:1,cr:.12,s:['ก้าวเงา','หมอกพิษ'],cds:[7,10],mp:70,mr:3,mc:[25,30],d:'ลอบสังหารความเร็วสูง คริติคอลสูง ก้าวเงาพุ่งแทงเป้าหมายแล้วหายตัว หมอกพิษวางบนพื้น ทำดาเมจเล็กน้อยและทำให้มอนสเตอร์ช้าลง'},
  mage:{n:'จอมเวทอาคม',c:'#49b8d8',hp:104,sp:115,rg:240,dmg:17.6,cd:.7,s:['ลูกไฟระเบิด','ผนึกน้ำแข็ง'],cds:[6,9],mp:120,mr:5.5,mc:[35,30],d:'นักเวทระยะไกล เลือดน้อยแต่มานาเยอะ ลูกไฟระเบิดเป็นวงใส่กลุ่มมอนสเตอร์ ผนึกน้ำแข็งทำให้ศัตรูรอบตัวช้าลงและโดนดาเมจ'}
 };
@@ -437,7 +437,7 @@ const SK3LV=12,SK3={melee:['โทสะอสูร','ปลุกโทสะ 
  archer:['ธนูตรึงเงา','ยิงธนูตรึงเป้าหมายไว้กับที่ 2 วิ (บอสไม่โดนตรึง) และทำให้มอนรอบ ๆ ช้าลง',9,25],
  sup:['ทัณฑ์แห่งแสง','ลำแสงศักดิ์สิทธิ์ผ่าลงเป้าหมายและมอนรอบ ๆ ดาเมจ 30% แปลงเป็นฮีลให้เพื่อนที่เลือดน้อยที่สุด (รวมตัวเอง)',6,25],
  mage:['โซ่สายฟ้า','สายฟ้ากระโดดต่อได้สูงสุด 5 ตัว แรงลดลง 15% ทุกครั้งที่กระโดด',7,35],
- assn:['ตราประทับมรณะ','ประทับตราบนเป้าหมาย 5 วิ แล้วระเบิดเป็นดาเมจ 25% ของดาเมจทั้งหมดที่ใส่เป้านั้นระหว่างติดตรา (มอนรอบ ๆ โดนด้วย)',12,25]};
+ assn:['ตราประทับมรณะ','ประทับตราบนเป้าหมาย 5 วิ แล้วระเบิดเป็นดาเมจ 16% ของดาเมจทั้งหมดที่ใส่เป้านั้นระหว่างติดตรา (มอนรอบ ๆ โดนด้วย)',12,25]};
 Object.keys(SK3).forEach(k=>{CL[k].s[3]=SK3[k][0];CL[k].cds[3]=SK3[k][2];CL[k].mc[3]=SK3[k][3]});
 /* ---------- ไอคอนสกิล ---------- */
 const SKSVG={
@@ -624,7 +624,7 @@ function darkAct(a){const q=me.dk||(me.dk={s:0,n:0});if(!me.cls||!CL2B[me.cls])r
   if((a==='sw2'||a==='sw1')&&hasBr(1)&&hasBr(2)){const n=a==='sw2'?2:1;if(me.br===n)return;if(me.gold<BRCOST){darkUI('ทองไม่พอ ต้องใช้ '+BRCOST.toLocaleString()+' ทอง');return}me.gold-=BRCOST;brSet(n);sfx('lvl');burst(me.x,me.y-10,n===2?['#8a4aff','#1a1022','#e0c8ff']:['#ffe08a','#ffffff','#ffb030'],50,200,1,{glow:1,g:-40});darkUI('สลับเป็น '+clsName()+' แล้ว')}}
 /* ---------- สายทมิฬ: นักสวด / นักฆ่า / จอมเวท ---------- */
 Object.assign(CL2B,{sup:{n:'ผู้ทำนายวิญญาณคำสาป',ps:'คำสาปกัดกร่อน: โจมตีปกติติดคำสาป (สูงสุด 3 ชั้น) ชั้นละมอนรับดาเมจจากทุกคน +6% · ดาเมจตัวเอง +35% แต่ฮีล −30%'},
- assn:{n:'นักระบำใบมีด',ps:'จังหวะใบมีด: ตีต่อเนื่องสะสมคอมโบ (สูงสุด 20) ทุกคอมโบความเร็วโจมตี +2% คริดาเมจ +2% · ทุก 10 คอมโบ ก้าวเงาพร้อมใช้ทันที · หยุดตี 1.5 วิคอมโบหาย'},
+ assn:{n:'นักระบำใบมีด',ps:'จังหวะใบมีด: ตีต่อเนื่องสะสมคอมโบ (สูงสุด 20) ทุกคอมโบความเร็วโจมตี +1.3% คริดาเมจ +1.3% · คอมโบถึง 10 และ 20 ก้าวเงาพร้อมใช้ทันที · หยุดตี 1.5 วิคอมโบหาย'},
  mage:{n:'จอมเวทอสูรอัญเชิญ',ps:'สัญญาอสูร: ทุก 6 วิ อิมป์ไฟออกมาติดตาม (สูงสุด 3 ตัว) ยิงลูกไฟใส่มอนทุก 1 วิ · ดาเมจเวทตัวเอง −15%'}});
 Object.assign(SK4B,{sup:['ตราประทับวิญญาณ','วางตราคำสาปบนพื้น 6 วิ มอนในตราติดคำสาป มอนที่ตายในตราระเบิดวิญญาณใส่มอนรอบ ๆ และฮีลเพื่อน',14,40],
  assn:['ระบำพันใบมีด','หมุนตัวพุ่งทะลุมอน ทิ้งพายุใบมีดค้างตามทาง 3 วิ',10,30],
@@ -646,8 +646,8 @@ const CURSE={};const curseMul=m=>{const c=m&&CURSE[m.id];return c&&Date.now()<c.
 function curseAdd(m,n){const c=CURSE[m.id];const v=Math.min(3,n||((c&&Date.now()<c.until?c.n:0)+1));if(c&&c.n===v&&c.until-Date.now()>4500)return;fx({k:'curse',id:m.id,n:v,x:Math.round(m.x),y:Math.round(m.y-10),r:20})}
 const hexR=()=>BR2()&&me.cls==='sup',dancR=()=>BR2()&&me.cls==='assn',summR=()=>BR2()&&me.cls==='mage';
 /* ---------- คอมโบนักระบำ ---------- */
-function comboHit(){if(!dancR())return;const n=performance.now();me.cbT=n;if(n-(me.cbA||0)<110)return;me.cbA=n;me.combo=Math.min(20,(me.combo|0)+1);if(me.combo%10===0){me.sk[0]=0;dn.push({x:me.x,y:me.y-60,v:'⚡ คอมโบ '+me.combo+'! ก้าวเงาพร้อม',t:1.2})}}
-Object.assign(BRM2,{sup:k=>k==='dm'?.35:0,assn:k=>k==='as'||k==='cdm'?.02*(me.combo|0):0,mage:k=>k==='dm'?-.15:0});
+function comboHit(){if(!dancR())return;const n=performance.now();me.cbT=n;if(n-(me.cbA||0)<110)return;me.cbA=n;const c0=me.combo|0;me.combo=Math.min(20,c0+1);const rs=me.combo!==c0&&me.combo%10===0;if(rs){me.sk[0]=0;dn.push({x:me.x,y:me.y-60,v:'⚡ คอมโบ '+me.combo+'! ก้าวเงาพร้อม',t:1.2})}}
+Object.assign(BRM2,{sup:k=>k==='dm'?.35:0,assn:k=>k==='as'||k==='cdm'?.013*(me.combo|0):0,mage:k=>k==='dm'?-.15:0});
 /* ---------- อิมป์ของจอมเวทอสูร ---------- */
 let IMPS=[];
 function impTick(dt){if(!summR()||me.down>0||!me.cls){if(IMPS.length&&!summR())IMPS=[];return}me.impT=(me.impT||0)+dt;if(me.impT>=6){me.impT=0;if(IMPS.length<3){IMPS.push({cd:1});burst(me.x,me.y-24,['#ff7a2a','#ffd060','#3a0a0a'],12,80,.5,{glow:1})}}
@@ -8521,7 +8521,7 @@ function skill3(P,cost){const c=me.cls;let t=null;
       pend.push({t:.3,f:()=>{fx({k:'heal',x:Math.round(b.x),y:Math.round(b.y),r:36,v:hv,ov:br1()?1:0});dn.push({x:b.x,y:b.y-46,v:'+'+hv+' ฮีล',t:1.1})}})}}
 }
 function tickMark(dt){const mk=me.mark;if(!mk)return;const m=mons.find(z=>z.id===mk.id);if(m){mk.x=m.x;mk.y=m.y}mk.t-=dt;
-  if(mk.t<=0||!m){me.mark=null;const dmg=(pd()*1.2+mk.acc*.25)*mk.P;fx({k:'markx',x:Math.round(mk.x),y:Math.round(mk.y),r:85});sfx('hit');
+  if(mk.t<=0||!m){me.mark=null;const dmg=(pd()*1.2+mk.acc*.16)*mk.P;fx({k:'markx',x:Math.round(mk.x),y:Math.round(mk.y),r:85});sfx('hit');
     mons.forEach(q=>{if(q===m)addHit(q,dmg,0,1,'mark');else if(dist(q,mk)<85)addHit(q,dmg*.4,0,1,'mark')})}}
 function ultSkill(P,cost){const c=me.cls;
   let t=null,ts=null;
@@ -8552,7 +8552,7 @@ function useSkill0(k,free){SKK=k;
   if(k===3){skill3(P,cost);return}
   if(k===4){skill4(P,cost);return}
   if(c==='assn'&&!k&&!pickTarget(260))return;
-  if(c==='mage'&&!k){const t=pickTarget(300);if(!t)return;me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(0);fx({k:'fire',x:t.x,y:t.y,r:95});mons.forEach(m=>{if(dist(m,t)<95)addHit(m,pd()*3.4*P,0,1,'mage')});return}
+  if(c==='mage'&&!k){const t=pickTarget(300);if(!t)return;me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(0);fx({k:'fire',x:t.x,y:t.y,r:95});mons.forEach(m=>{if(dist(m,t)<95)addHit(m,pd()*3.4*P*(m===t?1:.75),0,1,'mage')});return}
   if(c==='archer'&&!k){const t=pickTarget(260);if(!t)return;me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(0);fx({k:'arrows',x:t.x,y:t.y,r:90});mons.forEach(m=>{if(dist(m,t)<90)addHit(m,pd()*3.6*P,0,1,'archer')});return}
   me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(k);
   if(c==='mage'&&k){fx({k:'frost',r:150,dur:3.5*P});mons.forEach(m=>{if(dist(m,me)<150)addHit(m,pd()*1.6*P,0,1,'frost')})}
