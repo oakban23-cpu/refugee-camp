@@ -303,6 +303,17 @@ button:focus-visible{outline:2px solid var(--u-gold);outline-offset:2px}
 
 /* v293: จอกว้าง (คอม/แท็บเล็ตแนวนอน) — ขอบข้างเป็นภาพปกเบลอแทนสีดำล้วน */
 @media (min-aspect-ratio:4/5){html{background:#0e0b0a}body{background:transparent!important}body::before{content:'';position:fixed;inset:-40px;background:url(cover.jpg) center/cover no-repeat;filter:blur(22px) brightness(.32) saturate(1.2);z-index:-1;pointer-events:none}}
+
+/* v295: จอเล็ก (iPhone SE) · แนวนอนบนมือถือ */
+@media (max-width:360px){#hud{gap:4px!important}#lvb{font-size:18px!important;min-width:38px!important;white-space:nowrap}#hpor{width:46px!important;height:46px!important;flex:0 0 46px!important}#pl{min-width:44px!important;font-size:11px!important}#thp,#tmp{font-size:9px!important;letter-spacing:-.2px}}
+@media (max-height:700px),(max-width:350px){#sk{transform:scale(.86);transform-origin:100% 100%}}
+@media (max-height:600px){#sk{transform:scale(.78)}}
+#sk #s1{right:2px!important;bottom:120px!important}
+#sk #s4{right:58px!important;bottom:106px!important}
+#rot{display:none;position:fixed;inset:0;z-index:99;background:rgba(10,8,12,.94);color:#f3e6c8;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;font-family:system-ui;padding:20px}
+#rot .ri{font-size:52px;animation:rotph 1.8s ease-in-out infinite}@keyframes rotph{0%,30%{transform:rotate(-90deg)}60%,100%{transform:rotate(0)}}
+#rot button{margin-top:6px;padding:8px 16px;border-radius:12px;border:1px solid #c9a24a;background:#2a2014;color:#f3e6c8;font-size:13px}
+@media (orientation:landscape) and (max-height:500px) and (pointer:coarse){#rot:not(.x){display:flex}}
 </style>
 </head>
 <body>
@@ -310,7 +321,7 @@ button:focus-visible{outline:2px solid var(--u-gold);outline-offset:2px}
 <div class="lg"><div class="t">REFUGEE</div><div class="ln"></div><div class="s"><b>ค่ายผู้อพยพ</b> · ONLINE RPG</div></div>
 <div class="go">⚔️ แตะเพื่อเริ่มผจญภัย</div><div class="ver">REFUGEE ONLINE · 2026</div></div></div>
 
-<div id="app">
+<div id="rot"><div class="ri">📱</div><b style="font-size:16px">หมุนเครื่องเป็นแนวตั้ง</b><div style="font-size:13px;opacity:.85">เกมนี้ออกแบบมาให้เล่นแนวตั้ง จะเห็นปุ่มและสนามครบกว่า</div><button onclick="this.parentNode.classList.add('x');setTimeout(()=>{try{fitStage()}catch(e){}},50)">เล่นแบบย่อต่อ</button></div><div id="app">
   <div id="hud"><div id="lvb" class="f">Lv 1</div><div id="bars"><div class="bar"><i id="bhp" style="background:#c2352b"></i><span id="thp"></span></div><div class="bar"><i id="bmp" style="background:#3b7bd6"></i><span id="tmp"></span></div><div class="bar"><i id="bxp" style="background:#8a6a1f"></i><span id="txp"></span></div></div><div id="pl"></div></div>
   <div id="stage">
     <canvas id="c" width="360" height="520" aria-label="สนามรบ"></canvas>
@@ -410,7 +421,7 @@ let GQ=(()=>{try{return localStorage.getItem('refugee_gq')||'auto'}catch(e){retu
 const dprFor=()=>GQ==='high'?DPR0:LOWQ?Math.min(DPR0,1.5):Math.min(DPR0,2);
 function applyQ(){DPR=dprFor();cv.width=W*DPR;cv.height=H*DPR}
 function fitStage(){try{const vh=(window.visualViewport?visualViewport.height:innerHeight),top=cv.getBoundingClientRect().top+(window.scrollY||0),wpx=cv.clientWidth||360,avail=vh-top-10;
-  const nh=Math.max(520,Math.min(900,Math.round(W*avail/wpx)));if(nh!==H){H=nh;if(typeof JB!=='undefined')JB.y=H-84;applyQ()}}catch(e){}audPos()}
+  const app=document.getElementById('app'),hd=document.getElementById('hud'),hdr=(hd?hd.offsetHeight:60)+18,raw=Math.round(W*(vh-hdr)/wpx);if(raw<520){const need=hdr+520*wpx/W,sc=Math.max(.45,Math.min(1,vh/need));app.style.transformOrigin='top center';app.style.transform='scale('+sc.toFixed(3)+')';app.style.height=Math.round(vh/sc)+'px'}else if(app.style.transform){app.style.transform='';app.style.height=''}const nh=Math.max(520,Math.min(900,app.style.transform?520:Math.round(W*avail/wpx)));if(nh!==H){H=nh;if(typeof JB!=='undefined')JB.y=H-84;applyQ()}}catch(e){}audPos()}
 function audPos(){const a=document.getElementById('aud');if(a)a.style.top='calc('+(107/H*100).toFixed(3)+'% + 1px)';const p=document.getElementById('ptyhud');if(p)p.style.top=(142/H*100).toFixed(3)+'%';const cl=document.getElementById('clog');if(cl){cl.style.bottom=((175+8)/H*100).toFixed(3)+'%';logFit(cl)}}
 applyQ();addEventListener('resize',()=>setTimeout(fitStage,60));addEventListener('orientationchange',()=>setTimeout(fitStage,300));if(window.visualViewport)visualViewport.addEventListener('resize',()=>setTimeout(fitStage,60));setTimeout(fitStage,0);setTimeout(fitStage,500);
 {const P2=CanvasRenderingContext2D.prototype,d=Object.getOwnPropertyDescriptor(P2,'shadowBlur');if(d&&d.set)Object.defineProperty(P2,'shadowBlur',{set(v){d.set.call(this,LOWQ?0:v)},get(){return d.get.call(this)},configurable:true})}
@@ -8872,7 +8883,7 @@ const maxMp=()=>Math.round(CL[me.cls].mp*(1+.08*(me.lv-1))*(1+M('mp')));
 function bars(){
   const w=(id,a,b)=>{$(id).style.width=Math.max(0,Math.min(100,a/b*100))+'%'};
   w('bhp',me.hp,me.mh);w('bmp',me.mp,me.mm);if(me.lv>=LMAX){const A=astOf();w('bxp',A.n>=AMAX?1:A.x,A.n>=AMAX?1:astNeed(A.n))}else w('bxp',me.xp,need(me.lv));
-  $('thp').textContent='HP '+Math.round(me.hp)+'/'+me.mh;
+  {const nw=($('thp').parentElement.clientWidth||200)<110;$('thp').textContent=(nw?'':'HP ')+Math.round(me.hp)+'/'+me.mh;$('tmp').textContent=(nw?'':'MP ')+Math.round(me.mp)+'/'+me.mm}if(0)
   $('tmp').textContent='MP '+Math.round(me.mp)+'/'+me.mm;
   $('txp').textContent=me.lv>=LMAX?(astOf().n>=AMAX?'★ MAX':'★ '+fmtG(me.ast.x)+'/'+fmtG(astNeed(me.ast.n))):'XP '+me.xp+'/'+need(me.lv);
   $('lvb').textContent='Lv '+me.lv+(me.lv>=LMAX&&me.ast&&me.ast.n?' ★'+me.ast.n:'');
@@ -8925,10 +8936,10 @@ function qRow(q,mode){const done=q.h>=q.n,pc=q.t==='reach'||q.t==='boss'?(done?'
    (mode==='act'?(done?'<button class="pri" data-qc="'+q.id+'" style="padding:8px 10px">รับรางวัล</button>':'<button data-qx="'+q.id+'" style="padding:6px 8px;font-size:11px">ยกเลิก</button>'):'')+'</div></div>'}
 function questHtml(shop){
   let h='<div class="br">เควสของคุณ ('+me.qs.length+'/'+QMAX+')</div>';
-  h+=me.qs.length?me.qs.map(q=>qRow(q,'act')).join(''):'<div class="card hint">ยังไม่มีเควส</div>';
+  h+=me.qs.length?me.qs.map(q=>qRow(q,'act')).join(''):(()=>{const sq=document.getElementById('stq'),st=sq&&!sq.hidden?sq.innerText.trim().replace(/\n+/g,' · '):'';return(st?'<div class="card" style="border-color:#c9a24a"><div class="qr"><div class="ico">📖</div><div class="nm"><b>เนื้อเรื่องที่กำลังทำ</b><small>'+st.replace(/[<>&]/g,'')+'</small></div></div></div>':'')+'<div class="card" style="text-align:center;padding:16px 12px"><div style="font-size:34px;line-height:1.2">🗒️</div><b>ยังไม่มีเควสเสริม</b><div style="font-size:12px;opacity:.85;margin-top:4px;line-height:1.5">ไปคุยกับ <b>พ่อค้า</b> ในค่ายเพื่อรับเควส (รับได้สูงสุด '+QMAX+' เควส)<br>ทำเควสได้ทอง · ค่าประสบการณ์ · บางเควสได้อุปกรณ์ 🎁</div></div>'})();
   if(shop){h+='<div class="br">กระดานเควส</div>'+board().map((q,i)=>'<div class="card"><div class="qr"><div class="ico">'+QI[q.t]+'</div><div class="nm">'+qLine(q)+'<small>🪙'+q.g+' · ✨'+q.xp+' XP'+(q.gr?' · 🎁อุปกรณ์':'')+'</small></div><button class="pri" data-qa="'+i+'" style="padding:8px 10px"'+(me.qs.length>=QMAX?' disabled':'')+'>รับเควส</button></div></div>').join('')+'<div id="qmsg" class="note" style="min-height:0"></div>'}
   return h}
-function questUI(msg){ov.dataset.k='quest';ov.innerHTML='<div class="pn" data-pn="quest">'+hdr('📜','เควส','รับเควสใหม่และรับรางวัลได้ที่พ่อค้า NPC')+(msg?'<div class="note">'+msg+'</div>':'')+questHtml(false)+'</div>'}
+function questUI(msg){if(!me.qs.length&&!msg)msg='';ov.dataset.k='quest';ov.innerHTML='<div class="pn" data-pn="quest">'+hdr('📜','เควส','รับเควสใหม่และรับรางวัลได้ที่พ่อค้า NPC')+(msg?'<div class="note">'+msg+'</div>':'')+questHtml(false)+'</div>'}
 let stocks={};const NPC=()=>MAPS[curMap].npc;
 function enterMap(id,arr){const M=MAPS[id];if(!M)return;if(id!==9){try{CGT.m.clear()}catch(e){}}if(typeof tr!=='undefined'&&tr)trCancel('ย้ายแมพ');curMap=id;SX=M.sx;SY=M.sy;SR=M.sr;buildTrees();try{rxReset()}catch(e){}
   mons=[];bolts=[];zones=[];teles=[];drops=[];fxs=[];dn=[];hitBuf.length=0;dmgOut.length=0;xpOut.length=0;dmgQ={};
