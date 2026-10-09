@@ -2617,7 +2617,7 @@ const TTB={k100:{gr:'w',b:{str:3}},b1:{gr:'w',b:{vit:3}},dg1:{gr:'w',b:{int:3}},
   leg:{gr:'g',b:{luk:.08}},stL:{gr:'g',b:{int:.08}},stD:{gr:'g',b:{str:.08}},awk:{gr:'g',b:{all:.04}},set5:{gr:'g',b:{all:.05}},lv60:{gr:'g',b:{all:.06}},lv70:{gr:'p',b:{hp:.04,cr:.02}},lv75:{gr:'p',b:{dm:.03,hp:.03}},lv85:{gr:'p',b:{dm:.02,cr:.02}},lv99:{gr:'p',b:{dm:.04,hp:.04,cr:.02}},sexp:{gr:'g',b:{hp:.04,red:.02}},stG:{gr:'p',b:{dm:.04,hp:.05,red:.02}},cp12:{gr:'w',b:{vit:5}},cp25:{gr:'g',b:{all:.03}},stH:{gr:'p',b:{dm:.03,hp:.04,red:.02}},stI:{gr:'p',b:{dm:.03,cr:.02,hp:.03}},stJ:{gr:'p',b:{dm:.05,hp:.05,cr:.02}},stK:{gr:'p',b:{hp:.07,red:.04,dm:.03}},set6:{gr:'p',b:{cdm:.05}},rexp:{gr:'g',b:{hp:.03,red:.02}},ast10:{gr:'g',b:{hp:.03}},ast50:{gr:'p',b:{cdm:.04}},ast200:{gr:'p',b:{dm:.03,hp:.03,cr:.02}},wexp:{gr:'g',b:{sp:.04,hp:.03}},stA:{gr:'p',b:{cr:.02,as:.03,ls:.01}},stB:{gr:'p',b:{hp:.05,red:.03}},stC:{gr:'p',b:{dm:.03,red:.02}},stE:{gr:'p',b:{dm:.02,cr:.02,hp:.03}},stF:{gr:'p',b:{dm:.03,hp:.04,cr:.02}},rxAll:{gr:'p',b:{dm:.03,cr:.02}},rxT:{gr:'p',b:{as:.03,hp:.03}},
   k5000:{gr:'p',b:{cr:.02}},dg3:{gr:'p',b:{as:.04}},raid1:{gr:'p',b:{red:.03}},raid10:{gr:'p',b:{ls:.02}},b6:{gr:'p',b:{hp:.05}},tw100:{gr:'p',b:{mp:.08}},
   mvp1:{gr:'p',b:{hp:.04}},tw150:{gr:'p',b:{as:.05,cr:.02}},mvp10:{gr:'p',b:{cr:.03,ls:.01}},wb1:{gr:'p',b:{hp:.06,red:.03}},wb2:{gr:'p',b:{as:.05}},wb3:{gr:'p',b:{cr:.03}}};
-const TGC={w:['ขาว','#f4f4f4','#7a7a80','#ececf0'],g:['ทอง','#ffd84a','#a87208','#fff3c4'],p:['ชมพู','#ff8ad8','#c0398a','#ffe0f4']},TSN={str:'STR',vit:'VIT',int:'INT',agi:'AGI',luk:'LUK',all:'ทุกสเตตัส',cr:'โอกาสคริ',as:'ความเร็วโจมตี',ls:'ดูดเลือด',red:'ลดดาเมจที่ได้รับ',hp:'เลือดสูงสุด',mp:'มานาสูงสุด',dm:'ดาเมจ',sp:'ความเร็วเดิน'};
+const TGC={w:['ขาว','#f4f4f4','#7a7a80','#ececf0'],g:['ทอง','#ffd84a','#a87208','#fff3c4'],p:['ชมพู','#ff8ad8','#c0398a','#ffe0f4']},TSN={fd:'ดาเมจสุดท้าย',cdm:'ดาเมจคริติคอล',str:'STR',vit:'VIT',int:'INT',agi:'AGI',luk:'LUK',all:'ทุกสเตตัส',cr:'โอกาสคริ',as:'ความเร็วโจมตี',ls:'ดูดเลือด',red:'ลดดาเมจที่ได้รับ',hp:'เลือดสูงสุด',mp:'มานาสูงสุด',dm:'ดาเมจ',sp:'ความเร็วเดิน'};
 const ttGr=id=>(TTB[id]&&TTB[id].gr)||'w';
 const ttTxt=id=>{const T=TTB[id];if(!T)return'';return Object.keys(T.b).map(k=>TSN[k]+' +'+(T.gr==='w'?T.b[k]:Math.round(T.b[k]*1000)/10+'%')).join(' · ')};
 let TTBC={k:'',v:{f:{},p:{},s:{}}};
@@ -2874,10 +2874,10 @@ function drawQSil(){if(!QSIL||!QUEEN())return;const t=performance.now()/1000,k=1
 /* ===== อุปกรณ์ Lv 61–70: ไอเทมระดับ 13–14 + ชุดเทวทูตรุ่งอรุณ ===== */
 const IL60=12,WESTM=m=>m>=12&&m<=18,SHADEM=m=>m>=19&&m<=22,ROOTM=m=>m>=23&&m<=26,ilCap=()=>ROOTM(curMap)?21:SHADEM(curMap)?({19:17,20:18,21:19,22:20})[curMap]:WESTM(curMap)?15:(curMap===10||curMap===11||(typeof ECHO==='function'&&ECHO())||(typeof SIEGE==='function'&&SIEGE())||(typeof EYE==='function'&&EYE())||(typeof QUEEN==='function'&&QUEEN()))?14:IL60;
 setTimeout(()=>{SETS[3]={n:'ชุดเทวทูตรุ่งอรุณ',c:'#e8a820',pn:{w:'หอกแสงรุ่งอรุณ',a:'เกราะขนนกรุ่งอรุณ',c:'รัศมีทองรุ่งอรุณ',h:'มงกุฎเทวทูตรุ่งอรุณ',b:'รองเท้าปีกรุ่งอรุณ'},
-  b:[[2,{dm:.1},'ดาเมจ +10%'],[3,{cr:.05,ls:.03,hp:.08},'คริติคอล +5% · ดูดเลือด +3% · เลือดสูงสุด +8%'],[5,{},'ทุกการโจมตีมีโอกาส 10% เรียกหอกแสงรุ่งอรุณลงใส่เป้า ดาเมจ 150% เป็นวง และฟื้นเลือด 2%']]};MATN.fe=['🪶','ขนนกรุ่งอรุณ']},0);
+  b:[[2,{fd:.04},'ดาเมจสุดท้าย +4%'],[3,{cr:.05,ls:.03,hp:.08},'คริติคอล +5% · ดูดเลือด +3% · เลือดสูงสุด +8%'],[5,{},'ทุกการโจมตีมีโอกาส 10% เรียกหอกแสงรุ่งอรุณลงใส่เป้า ดาเมจ 150% เป็นวง และฟื้นเลือด 2%']]};MATN.fe=['🪶','ขนนกรุ่งอรุณ']},0);
 const SETCOST3=sl=>sl==='w'?{fe:12,g:80000}:{fe:8,g:50000};
 setTimeout(()=>{SETS[4]={n:'ชุดวิหคพายุ',c:'#4aa8f0',pn:{w:'ทวนอัสนีวิหคพายุ',a:'เกราะขนพายุ',c:'จี้ตาพายุ',h:'มงกุฎหงอนอัสนี',b:'รองเท้าลมกรด'},
-  b:[[2,{as:.08},'ความเร็วโจมตี +8%'],[3,{cr:.05,sp:.06,hp:.06},'คริติคอล +5% · ความเร็วเดิน +6% · เลือดสูงสุด +6%'],[5,{},'ทุกการโจมตีมีโอกาส 12% ปล่อยสายฟ้าโซ่กระโดด 5 เป้า ดาเมจ 160% ต่อเป้า']]};MATN.sf=['⚡','ขนพายุ']},0);
+  b:[[2,{as:.08},'ความเร็วโจมตี +8%'],[3,{fd:.03,sp:.06,hp:.06},'ดาเมจสุดท้าย +3% · ความเร็วเดิน +6% · เลือดสูงสุด +6%'],[5,{},'ทุกการโจมตีมีโอกาส 12% ปล่อยสายฟ้าโซ่กระโดด 5 เป้า ดาเมจ 160% ต่อเป้า']]};MATN.sf=['⚡','ขนพายุ']},0);
 const SETCOST4=sl=>sl==='w'?{sf:14,g:150000}:{sf:9,g:90000};
 let CHN=[];
 function stormProc(m){if(setCount(4)<5||Math.random()>=.12)return;const n=performance.now();if(n<(me.stT||0))return;me.stT=n+450;
@@ -2975,7 +2975,12 @@ function szOf(m){if(!m||m.t>=3||m.pv||m.wb||m.mn||m.mir||!(curMap>=19&&curMap<=2
   if(m.t===2)return h<70?2.1:h<400?1.5:h<750?1.25:1.05;if(m.t===1)return h<300?.72:h<650?.9:1.1;return h<250?.72:h<550?.9:h<850?1.1:1.35}
 const szHp=s=>s>=2?3:s>=1.4?1.6:s>=1.2?1.25:s<.8?.6:s<.95?.85:1,szDm=s=>s>=2?1.4:s>=1.4?1.15:s<.8?.8:1,mR=m=>MT[m.t].r*szOf(m);
 const SHSEEN=new Set();
-function shTick(){if(isHost())mons.forEach(m=>{if(!m.shb&&shOf(m)){m.shb=1;m.hp*=5;m.mh*=5;m.dmx=(m.dmx||1)*1.4}if(!m.szb){m.szb=1;const z=szOf(m);if(z!==1){m.hp*=szHp(z);m.mh*=szHp(z);m.dmx=(m.dmx||1)*szDm(z)}}});
+/* ภาค 3–4: มอนสนามถึกขึ้น ตีแรงขึ้น (คูณตามแมพ) · รางวัลต่อตัวเพิ่มตาม */
+const LSCAP=.04;
+const TIER={19:[6,6,1.4],20:[7,7,1.5],21:[8,8.5,1.6],22:[9,10,1.7],23:[10,11,1.8],24:[11,12.5,1.9],25:[12,14,2],26:[13,15,2.1]};
+function tierOf(){try{if(isDg())return null}catch(e){}return TIER[curMap]||null}
+const tierH=()=>{const T=tierOf();return T?T[0]:1},tierRw=()=>{const T=tierOf();return T?T[2]:1};
+function shTick(){if(isHost())mons.forEach(m=>{if(!m.tzb&&m.t<3&&!m.pv&&!m.dum&&!m.wb&&!m.bt){m.tzb=1;const T=tierOf();if(T){m.hp*=T[0];m.mh*=T[0];m.dmx=(m.dmx||1)*T[1]}}if(!m.shb&&shOf(m)){m.shb=1;m.hp*=5;m.mh*=5;m.dmx=(m.dmx||1)*1.4}if(!m.szb){m.szb=1;const z=szOf(m);if(z!==1){m.hp*=szHp(z);m.mh*=szHp(z);m.dmx=(m.dmx||1)*szDm(z)}}});
   for(const m of mons)if(shOf(m)&&!SHSEEN.has(m.id)&&Math.hypot(m.x-me.x,m.y-me.y)<520){SHSEEN.add(m.id);banner={s:'✨ มอนสเตอร์ไชนี่ปรากฏตัวใกล้ ๆ! ล่ามันให้ได้ก่อนมันหนี',t:4};sfx('quest');fx({k:'ring',x:m.x,y:m.y,r:60,c:'#ffe08a'})}
   if(SHSEEN.size>300)SHSEEN.clear()}
 function shinyLoot(x,y,L){if(!me.cls||Math.hypot(me.x-x,me.y-y)>420)return;const q=Math.random(),rm=q<.05?4:q<.3?3:2;
@@ -7137,7 +7142,7 @@ function tempestAI(m,dt,pl,enr,dm){const f=m.hp/m.mh;
   if(f<.3){m.w4=(m.w4===undefined?2:m.w4)-dt;if(m.w4<=0&&!m.ey){m.w4=20;const o={x:Math.round(m.x),y:Math.round(m.y),R:220,ph:+(Math.random()*6.28).toFixed(2),sp:.45,dur:9};m.ey=Object.assign({t:0,tk:1.5},o);fx(Object.assign({k:'teye'},o));fx({k:'msg',s:'👁️ ตาพายุ! วิ่งตามวงสงบที่เคลื่อนที่ ไม่งั้นโดนพายุฉีก'})}
     if(m.ey){const e=m.ey;e.t+=dt;e.tk-=dt;const a=e.ph+e.t*e.sp,cx=e.x+Math.cos(a)*e.R,cy=e.y+Math.sin(a)*e.R*.7;if(e.tk<=0){e.tk=.5;pl.forEach(p=>{if(Math.hypot(p.x-cx,p.y-cy)>85)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(9*dm)})}if(e.t>=e.dur)m.ey=null}}}
 /* ===== ห้องบัลลังก์เงา: ด่านเนื้อเรื่องนิกซ์ (เล่นเดี่ยวได้ · ปาร์ตี้ก็ได้) + ท่าเฉพาะของนิกซ์ ===== */
-setTimeout(()=>{DT[14]={n:'ห้องบัลลังก์เงา',lv:94,L:95,bL:19,hp:400000,xp:90000,g:20000,dm:16,tn:8,sm:3,rm:4,lg:.7,tm:600,gold:60000,exp:400000}},0);
+setTimeout(()=>{DT[14]={n:'ห้องบัลลังก์เงา',lv:94,L:95,bL:19,hp:2400000,xp:135000,g:30000,dm:48,tn:8,sm:3,rm:4,lg:.7,tm:600,gold:90000,exp:600000}},0);
 const NYXI=()=>!!(MAPS[curMap]&&MAPS[curMap].nyx),nyxOn=()=>NYXI()||(curMap===22&&!isDg());
 function nyxMap(id){if(MAPS[id])return MAPS[id];const D=DT[14];
   return MAPS[id]={n:'ห้องบัลลังก์เงา',dg:14,nyx:1,th:22,bth:11,sx:CX,sy:CY+440,sr:80,seed:221,bg:'#140c1e',tile:'#1e1430',safe:'#2a1c3e',ring:'#c070ff',t1:'#0a0612',t2:'#180f24',d1:'#2a1e3c',d2:'#e0b0ff',nests:[],
@@ -7156,7 +7161,7 @@ function nyxReward(){if(dgRew)return;dgRew=1;const D=DT[14],st=stCur(),sto=st&&s
   banner={s:'🕸️ นิกซ์ ผู้ทอเงาล้มลง! +'+(sto?D.gold:20000).toLocaleString()+' ทอง · หินขั้นสูง ×'+(sto?8:3),t:7};sfx('lvl');burst(me.x,me.y-10,['#d070ff','#e8c8ff','#ffffff','#7af0e0'],90,240,1.4,{glow:1,g:-50});
   setTimeout(()=>{if(NYXI())enterMap(22,{x:1600,y:420})},9000)}
 /* ===== ภาค 4 · ศึกป้องกันค่าย · คืนรากดำ (ห้อง 74000–74999 · คลื่น 5 ระลอก + ราชันรากดำ) ===== */
-setTimeout(()=>{DT[15]={n:'ศึกป้องกันค่าย · คืนรากดำ',lv:95,L:96,bL:21,hp:520000,xp:100000,g:20000,dm:17,tn:8,sm:3,rm:4,lg:.7,tm:540,gold:80000,exp:600000}},0);
+setTimeout(()=>{DT[15]={n:'ศึกป้องกันค่าย · คืนรากดำ',lv:95,L:96,bL:21,hp:2600000,xp:150000,g:30000,dm:51,tn:8,sm:3,rm:4,lg:.7,tm:540,gold:120000,exp:900000}},0);
 const ROOTI=()=>!!(MAPS[curMap]&&MAPS[curMap].root);
 const rootBack=()=>{const N=MAPS[1]&&MAPS[1].npc4;return N?{x:N.x,y:N.y+60}:{x:CX,y:CY+60}};
 function rootMap(id){if(MAPS[id])return MAPS[id];const D=DT[15];
@@ -7177,7 +7182,7 @@ function rootReward(){if(dgRew)return;dgRew=1;const D=DT[15],st=stCur(),sto=st&&
   banner={s:'🌿 ราชันรากดำล้มลง! ค่ายปลอดภัย +'+gd.toLocaleString()+' ทอง · หินขั้นสูง ×'+(sto?10:4),t:7};sfx('lvl');burst(me.x,me.y-10,['#ffd090','#ffffff','#9ad8ff','#c8a060'],90,240,1.4,{glow:1,g:-50});
   setTimeout(()=>{if(ROOTI())enterMap(1,rootBack())},8000)}
 /* ===== ภาค 4 บทสุดท้าย · ห้องแกนพิภพ: ผู้กลืนราก (ห้อง 73000–73999) ===== */
-setTimeout(()=>{DT[16]={n:'ห้องแกนพิภพ',lv:99,L:106,bL:22,hp:620000,xp:200000,g:30000,dm:20,tn:9,sm:3,rm:4,lg:.8,tm:600,gold:150000,exp:1500000}},0);
+setTimeout(()=>{DT[16]={n:'ห้องแกนพิภพ',lv:99,L:106,bL:22,hp:2480000,xp:300000,g:45000,dm:40,tn:9,sm:3,rm:4,lg:.8,tm:600,gold:225000,exp:2250000}},0);
 const RTEI=()=>!!(MAPS[curMap]&&MAPS[curMap].rte);
 const rteBack=()=>{const N=MAPS[26]&&MAPS[26].npc;return N&&N.x>0?{x:N.x,y:N.y+60}:{x:1600,y:300}};
 function rteMap(id){if(MAPS[id])return MAPS[id];const D=DT[16];
@@ -7328,7 +7333,7 @@ function drawNyxFx(){if(!NFX.length)return;if(!nyxOn()){NFX.length=0;return}cons
   g.restore()}
 /* ===== ชุดผู้ทอเงา (Ancient Lv 21) · ตีที่ช่างตีบวกป้อมประตูเมฆ ด้วยด้ายเงา + เศษคราส ===== */
 setTimeout(()=>{SETS[5]={n:'ชุดผู้ทอเงา',c:'#a050e0',pn:{w:'อาวุธใยเงาราตรี',a:'เสื้อคลุมผู้ทอเงา',c:'แหวนกระสวยเงา',h:'หน้ากากผู้ทอเงา',b:'รองเท้าย่างเงา'},
-  b:[[2,{dm:.12},'ดาเมจ +12%'],[3,{cr:.06,as:.06,hp:.08},'คริติคอล +6% · ความเร็วโจมตี +6% · เลือดสูงสุด +8%'],[5,{sp:.05},'ร่างเงาติดตัว (ภาพติดตาเรืองรุ้ง) · ความเร็วเดิน +5% · ทุกการโจมตีมีโอกาส 20% ให้ร่างเงาฟันซ้ำ ดาเมจ 320%']]};MATN.nt=['🕸️','ด้ายเงา']},0);
+  b:[[2,{fd:.05},'ดาเมจสุดท้าย +5%'],[3,{cr:.06,as:.06,hp:.08},'คริติคอล +6% · ความเร็วโจมตี +6% · เลือดสูงสุด +8%'],[5,{sp:.05},'ร่างเงาติดตัว (ภาพติดตาเรืองรุ้ง) · ความเร็วเดิน +5% · ทุกการโจมตีมีโอกาส 20% ให้ร่างเงาฟันซ้ำ ดาเมจ 320%']]};MATN.nt=['🕸️','ด้ายเงา']},0);
 const SETCOST5=sl=>sl==='w'?{nt:16,ec:30,g:300000}:{nt:10,ec:20,g:200000};
 function ntGive(n,why){me.mat=me.mat||{sc:0,hr:0,fe:0};me.mat.nt=Math.min(9999,(me.mat.nt|0)+n);dn.push({x:me.x,y:me.y-94,v:'+'+n+' 🕸️',t:1.3,c:'#d8a8ff'});if(why)sysMsg('🕸️ ได้ด้ายเงา ×'+n+' · '+why)}
 function ntRoll(x,y,t,bs){if(!SHADEM(curMap)||isDg()||!me.cls||Math.hypot(me.x-x,me.y-y)>420)return;if(bs){if(curMap===22)ntGive(12,'ร่วมปราบนิกซ์ (MVP)');return}const k=curMap>=21?1.6:1;if(Math.random()<(t===2?.02:.006)*k)ntGive(1)}
@@ -7361,7 +7366,7 @@ function swGhost(x,y,u,fx,draw){const now=performance.now()/1000,T=SWT[u]||(SWT[
   g.restore()}
 /* ===== ชุดรากพิภพ (Ancient Lv 22) · ตีที่ช่างตีบวกในค่ายผู้อพยพ ด้วยยางรากทอง + เศษคราส ===== */
 setTimeout(()=>{SETS[6]={n:'ชุดรากพิภพ',c:'#e0a030',pn:{w:'อาวุธแก่นรากทอง',a:'เกราะเปลือกรากพิภพ',c:'แหวนยางอำพัน',h:'มงกุฎรากโบราณ',b:'รองเท้าย่างราก'},
-  b:[[2,{dm:.12},'ดาเมจ +12%'],[3,{cr:.06,hp:.1,red:.04},'คริติคอล +6% · เลือดสูงสุด +10% · ลดดาเมจที่ได้รับ +4%'],[5,{dm:.05,ls:.02},'รากทองล้อมตัว (แสงรากไหลรอบเท้า) · ดาเมจ +5% · ดูดเลือด +2% · ทุก 3 วิ เมื่อโจมตี รากทองแทงขึ้นรอบตัว ดาเมจ 500% และฟื้นเลือด 3%']]}},0);
+  b:[[2,{fd:.05},'ดาเมจสุดท้าย +5%'],[3,{cr:.06,hp:.1,red:.04},'คริติคอล +6% · เลือดสูงสุด +10% · ลดดาเมจที่ได้รับ +4%'],[5,{fd:.03,ls:.02},'รากทองล้อมตัว (แสงรากไหลรอบเท้า) · ดาเมจสุดท้าย +3% · ดูดเลือด +2% · ทุก 3 วิ เมื่อโจมตี รากทองแทงขึ้นรอบตัว ดาเมจ 500% และฟื้นเลือด 3%']]}},0);
 const SETCOST6=sl=>sl==='w'?{rs:20,ec:30,g:400000}:{rs:12,ec:20,g:260000};
 function rootSetH(){me.mat=me.mat||{sc:0,hr:0};const S=SETS[6];if(!S)return'';const rs=me.mat.rs|0,ec=me.mat.ec|0;
   return'<div class="card" style="border:2px solid '+S.c+'"><div class="br" style="color:'+S.c+'">🍯 '+S.n+' <small>(อุปกรณ์ Ancient Lv 22)</small></div>'+
@@ -7663,7 +7668,7 @@ setInterval(status,1500);
 function applyWorld(d){
   const old={};mons.forEach(m=>old[m.id]=m);
   d.m.forEach(e=>{if(e[0]>mid)mid=e[0]});
-  mons=d.m.map(e=>{const [id,x,y,hp,t,L,p]=e,BB=t>=3,mhb=BB?e[7]:0,inv=BB?e[8]:0,ak=e[BB?9:7]|0,ns=e[BB?10:8]|0,mvf=BB?e[11]|0:0,phf=BB?e[12]|0:0;const m=old[id]||{id,x,y,tg:null,tt:0,ac:0,akN:ak};if((m.akN|0)!==ak){m.akN=ak;m.akT=performance.now()}if(m.hp!==undefined&&hp<m.hp)m.hitT=performance.now();m.tx=x;m.ty=y;m.hp=hp;m.t=t;m.L=L||1;m.p=p||0;m.mh=mhb||mhp(t,m.L)*(shOf(m)?5:1)*(ntOf(m)?1.6:1)*szHp(szOf(m));m.inv=inv?1:0;if(ns)m.nest=ns;if(BB){m.mvp=mvf?1:0;m.ph=phf}return m});
+  mons=d.m.map(e=>{const [id,x,y,hp,t,L,p]=e,BB=t>=3,mhb=BB?e[7]:0,inv=BB?e[8]:0,ak=e[BB?9:7]|0,ns=e[BB?10:8]|0,mvf=BB?e[11]|0:0,phf=BB?e[12]|0:0;const m=old[id]||{id,x,y,tg:null,tt:0,ac:0,akN:ak};if((m.akN|0)!==ak){m.akN=ak;m.akT=performance.now()}if(m.hp!==undefined&&hp<m.hp)m.hitT=performance.now();m.tx=x;m.ty=y;m.hp=hp;m.t=t;m.L=L||1;m.p=p||0;m.mh=mhb||mhp(t,m.L)*(shOf(m)?5:1)*(ntOf(m)?1.6:1)*szHp(szOf(m))*tierH();m.inv=inv?1:0;if(ns)m.nest=ns;if(BB){m.mvp=mvf?1:0;m.ph=phf}return m});
   d.g.forEach(([x,y,hp],i)=>{const q=guards[i];if(q){q.tx=x;q.ty=y;q.hp=hp;q.dead=hp<=0?1:0}});
   camp=d.c;wave=d.w;if(d.o&&!over)gameOver();
   if(d.dg&&isDg()&&typeof d.dg==='object'){const was=dg.ph,dg0tw=dg.tw;dg={ph:String(d.dg.ph),w:d.dg.w|0,tl:+d.dg.tl||0,nx:+d.dg.nx||0,why:String(d.dg.why||'').slice(0,40)};if(dg.ph!=='lobby')SR=0;
@@ -7878,7 +7883,7 @@ function handleFx(o){
 }
 function dmgMon(i,d){const m=mons.find(q=>q.id===i);if(m&&!m.inv)m.hp-=d}
 const SKC={melee:'#ff7a50',archer:'#9cff7a',mage:'#ffae3a',frost:'#8fe0ff',assn:'#d49aff',poison:'#a8e070',pin:'#c8ff70',bolt:'#b8ecff',mark:'#ff5ad0',holy:'#ffe680'};let ultSum={v:0,t:0,sv:0,n:0,pk:0},ultWin=0;const h2r=h=>{const n=parseInt(h.slice(1),16);return(n>>16&255)+','+(n>>8&255)+','+(n&255)};
-function addHit(m,d,cr,lv,ck){d*=curseMul(m);if(lv&&ck!=='rx'&&me.cls){if(me.cls==='mage'&&(ck==='mage'||ck==='frost'))d*=1.25;if(lv<3&&me.lv<55)d*=1+.4*Math.min(1,(55-me.lv)/35)}if(hexR()&&!lv&&!m.inv&&m.hp>0)curseAdd(m);if(dancR())comboHit();blHit(m,lv);if(m.t===3&&isTw()&&tbReflOn()){tbReflHit();return}if(lv&&!cr&&ck!=='mark'&&me.cls&&!m.inv&&Math.random()<crC()){cr=1;d*=crD()}if(m.pv){pvHit(m,d,cr);return}if(m.t===3)m.mine=1;if(m.mvp)mvHit(m,d);if(br1()&&me.cls==='assn'&&!m.inv&&m.t!==3&&m.hp>0&&m.hp-d<=0){me.stealth=Math.max(me.stealth,1.5);me.sk[0]=Math.max(0,(me.sk[0]||0)-1)}if(me.mark&&m.id===me.mark.id&&ck!=='mark'&&!m.inv)me.mark.acc+=d;if(m.inv){if(!m.shT||performance.now()-m.shT>350){m.shT=performance.now();dn.push({x:m.x,y:m.y-44,v:'🛡️ โล่',t:.5})}spark(m.x,m.y-10,'#c8a8ff',3,60,.25);return}dpsAdd(d);if(!cr&&m.mh&&d>m.mh*.05)shk=Math.max(shk,Math.min(.13,.03+d/m.mh*.4));if(m.wb)wbAdd(d);setProc(m);sfx(cr?'crit':'hit');m.hitT=performance.now();spark(m.x,m.y-4,'#ffe6a8',5,70,.3);{const kill=m.hp>0&&m.hp-d<=0,bs=m.t===3,nw=performance.now();if(cr){spark(m.x,m.y-10,'#ffd84a',9,150,.38);spark(m.x,m.y-10,'#ffffff',4,90,.25);if(nw-critShT>140){critShT=nw;shk=Math.max(shk,bs?.16:.11)}ZM.cr=nw+170;hitStop(bs?55:40)}if(kill){if(bs){shk=Math.max(shk,.55);hitStop(160);spark(m.x,m.y-16,'#ffd84a',24,240,.7);spark(m.x,m.y-16,'#ffffff',12,180,.5)}else{spark(m.x,m.y-6,'#fff0c8',7,120,.32);if(cr||lv)hitStop(35)}}}if(me.cls)me.hp=Math.min(me.mh,me.hp+d*M('ls'));{const T0=lv===2?1.2:lv===1?.8:lv===3?.55:cr?.9:.6;dn.push({x:m.x+(Math.random()-.5)*(lv?26:12),y:m.y-14-(lv&&lv<3?Math.random()*12:0),v:Math.round(d),t:T0,d0:T0,c:cr?1:0,s:lv||0,col:SKC[ck]||'#ffd84a',vx:lv?undefined:(Math.random()-.5)*(cr?70:55),vy:lv?undefined:(cr?-150:-120)});if(lv===2||performance.now()<ultWin){if(ultSum.t<=0){ultSum.sv=0;ultSum.n=0;ultSum.v=0}ultSum.v+=Math.round(d);ultSum.n=(ultSum.n||0)+1;ultSum.t=2.6;ultSum.pk=1;if(lv===2||!ultSum.col)ultSum.col=SKC[ck]||'#ffd84a'}}if(ck&&lv&&ck!=='rx')try{rxHit(m,d,ck)}catch(e){}{const V=RXV[m.id];if(V&&V.tox>performance.now()&&me.cls)me.hp=Math.min(me.mh,me.hp+d*.05)}if(m.dum)dumHit(m,d,cr);else if(isHost())dmgMon(m.id,d);else hitBuf.push([m.id,Math.round(d)])}
+function addHit(m,d,cr,lv,ck){d*=curseMul(m);if(lv&&ck!=='rx'&&me.cls){if(me.cls==='mage'&&(ck==='mage'||ck==='frost'))d*=1.25;if(lv<3&&me.lv<55)d*=1+.4*Math.min(1,(55-me.lv)/35)}if(hexR()&&!lv&&!m.inv&&m.hp>0)curseAdd(m);if(dancR())comboHit();blHit(m,lv);if(m.t===3&&isTw()&&tbReflOn()){tbReflHit();return}if(lv&&!cr&&ck!=='mark'&&me.cls&&!m.inv&&Math.random()<crC()){cr=1;d*=crD()}if(m.pv){pvHit(m,d,cr);return}if(m.t===3)m.mine=1;if(m.mvp)mvHit(m,d);if(br1()&&me.cls==='assn'&&!m.inv&&m.t!==3&&m.hp>0&&m.hp-d<=0){me.stealth=Math.max(me.stealth,1.5);me.sk[0]=Math.max(0,(me.sk[0]||0)-1)}if(me.mark&&m.id===me.mark.id&&ck!=='mark'&&!m.inv)me.mark.acc+=d;if(m.inv){if(!m.shT||performance.now()-m.shT>350){m.shT=performance.now();dn.push({x:m.x,y:m.y-44,v:'🛡️ โล่',t:.5})}spark(m.x,m.y-10,'#c8a8ff',3,60,.25);return}dpsAdd(d);if(!cr&&m.mh&&d>m.mh*.05)shk=Math.max(shk,Math.min(.13,.03+d/m.mh*.4));if(m.wb)wbAdd(d);setProc(m);sfx(cr?'crit':'hit');m.hitT=performance.now();spark(m.x,m.y-4,'#ffe6a8',5,70,.3);{const kill=m.hp>0&&m.hp-d<=0,bs=m.t===3,nw=performance.now();if(cr){spark(m.x,m.y-10,'#ffd84a',9,150,.38);spark(m.x,m.y-10,'#ffffff',4,90,.25);if(nw-critShT>140){critShT=nw;shk=Math.max(shk,bs?.16:.11)}ZM.cr=nw+170;hitStop(bs?55:40)}if(kill){if(bs){shk=Math.max(shk,.55);hitStop(160);spark(m.x,m.y-16,'#ffd84a',24,240,.7);spark(m.x,m.y-16,'#ffffff',12,180,.5)}else{spark(m.x,m.y-6,'#fff0c8',7,120,.32);if(cr||lv)hitStop(35)}}}if(me.cls){const lb=me.lsB==null?me.mh*LSCAP:me.lsB,h=Math.max(0,Math.min(d*M('ls'),lb));me.lsB=lb-h;me.hp=Math.min(me.mh,me.hp+h)}{const T0=lv===2?1.2:lv===1?.8:lv===3?.55:cr?.9:.6;dn.push({x:m.x+(Math.random()-.5)*(lv?26:12),y:m.y-14-(lv&&lv<3?Math.random()*12:0),v:Math.round(d),t:T0,d0:T0,c:cr?1:0,s:lv||0,col:SKC[ck]||'#ffd84a',vx:lv?undefined:(Math.random()-.5)*(cr?70:55),vy:lv?undefined:(cr?-150:-120)});if(lv===2||performance.now()<ultWin){if(ultSum.t<=0){ultSum.sv=0;ultSum.n=0;ultSum.v=0}ultSum.v+=Math.round(d);ultSum.n=(ultSum.n||0)+1;ultSum.t=2.6;ultSum.pk=1;if(lv===2||!ultSum.col)ultSum.col=SKC[ck]||'#ffd84a'}}if(ck&&lv&&ck!=='rx')try{rxHit(m,d,ck)}catch(e){}{const V=RXV[m.id];if(V&&V.tox>performance.now()&&me.cls)me.hp=Math.min(me.mh,me.hp+d*.05)}if(m.dum)dumHit(m,d,cr);else if(isHost())dmgMon(m.id,d);else hitBuf.push([m.id,Math.round(d)])}
 function hurt(d){if(me.down>0||me.inv3>0||gmGod||SD.on||SKL||SKA)return;mtCd=3;if(BR2()&&me.cls==='melee'){d*=.85;grdHit()}if(me.fortT>0)d*=.6;if(me.riding)d*=1-mtRed();d*=1-Math.min(.6,M('red'));if(me.sanctT>0)d*=.7;if(me.taunt>0)d*=.7;if(me.shv>0){const a=Math.min(me.shv,d);me.shv-=a;d-=a}
   me.hp-=d;flash=.2;if(d>0){sfx('hurt');shk=Math.max(shk,Math.min(.35,.08+d/(me.mh||1)*1.2));spark(me.x,me.y-4,'#ff6a5a',4,60,.3)}if(me.hp<=0){if(isArena()&&pvHurtDead())return;me.hp=0;me.down=8;sfx('die');deathPenalty()}}
 const rvCost=()=>20*me.lv;
@@ -7894,7 +7899,7 @@ function spawnNest(i){const [nx,ny]=MAPS[curMap].nests[i],L=(ROOTM(curMap)?RL0[c
   for(let j=0;j<n;j++){const t=Math.random()<.3?2:(Math.random()<.35?1:0),hp=mhp(t,L),x=nx+rnd(-45,45),y=ny+rnd(-45,45);
     mons.push({id:++mid,x,y,tx:x,ty:y,t,L,p:1,hx:nx,hy:ny,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,nest:i+1})}}
 const mhp=(t,L)=>48*(1+.6*(L-1))*MT[t].hp;
-const LMAX=99,need=lv=>Math.round((lv<30?50+lv*40+(lv>19?(lv-19)*(lv-19)*60:0):7210+(lv-29)*1000+(lv-29)*(lv-29)*15)*(lv>=60?1+(Math.min(lv,75)-59)*.15+Math.max(0,lv-75)*.05:1)),pd=()=>CL[me.cls].dmg*(1+.1*(me.lv-1))*(1+M('dm'))*(me.cls==='mage'?1+.25*Math.max(0,(50-me.lv)/49):1);
+const LMAX=99,need=lv=>Math.round((lv<30?50+lv*40+(lv>19?(lv-19)*(lv-19)*60:0):7210+(lv-29)*1000+(lv-29)*(lv-29)*15)*(lv>=60?1+(Math.min(lv,75)-59)*.15+Math.max(0,lv-75)*.05:1)),pd=()=>CL[me.cls].dmg*(1+.1*(me.lv-1))*(1+M('dm'))*(1+FDv())*(me.cls==='mage'?1+.25*Math.max(0,(50-me.lv)/49):1);
 const cntP=()=>mons.filter(m=>m.p&&!m.mn&&m.t!==3).length;
 /* ---------- boss ---------- */
 const BS=()=>MAPS[curMap].boss;
@@ -8208,7 +8213,7 @@ function simHost(dt){
       if(m.boom){fx({k:'ring',x:m.x,y:m.y,r:70,c:'#ff8a3a'});pl.forEach(p=>{if(Math.hypot(p.x-m.x,p.y-m.y)<70)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round((6+3*m.L)*(m.dmx||1))})}
       const v=m.mn?3:TW?5*m.L*(m.t===2?3:1)*(m.chief?4:1):(m.p||m.fw)?8*m.L*(m.t===2?3:1)*(WESTM(curMap)?1.3:SHADEM(curMap)?2:ROOTM(curMap)?3.5:1):2,gd=m.mn?1:TW?2*m.L+(Math.random()*3|0):(m.p||m.fw)?3*m.L+(Math.random()*4|0):1+(Math.random()*2|0),pz=Math.random()<(m.p?.14:.05)?(Math.random()<.5?1:2):0,gl=Math.random()<(m.p?.05+.015*(m.L||1):.02)?(m.L||1):0;
       const [v2,gd2,gl2]=curMap===7&&!m.mn?mineRew(m,v,gd,gl):[v,gd,gl];if(m.tgb)fx({k:'msg',s:'💰 จับก็อบลินถุงทองได้แล้ว! ทองกระจายเต็มพื้น'});
-      const NK=ntOf(m),SK=shOf(m),SZ=szHp(szOf(m)),v3=Math.round(v2*(NK?2.5:1)*(SK?5:1)*SZ),gd3=Math.round(gd2*(NK?2:1)*(SK?5:1)*Math.max(1,SZ));gainXP(m.x,m.y,v3);qKill(m.x,m.y,m.t,0);dropLoot(m.x,m.y,gd3,pz,gl2);if(SK)shinyLoot(m.x,m.y,m.L);xpOut.push([Math.round(m.x),Math.round(m.y),v3,gd3,pz,gl2,0,m.t,SK?m.L||1:0])});
+      const NK=ntOf(m),SK=shOf(m),SZ=szHp(szOf(m)),v3=Math.round(v2*(NK?2.5:1)*(SK?5:1)*SZ*(m.t<3?tierRw():1)),gd3=Math.round(gd2*(NK?2:1)*(SK?5:1)*Math.max(1,SZ)*(m.t<3?tierRw():1));gainXP(m.x,m.y,v3);qKill(m.x,m.y,m.t,0);dropLoot(m.x,m.y,gd3,pz,gl2);if(SK)shinyLoot(m.x,m.y,m.L);xpOut.push([Math.round(m.x),Math.round(m.y),v3,gd3,pz,gl2,0,m.t,SK?m.L||1:0])});
     mons=mons.filter(m=>m.hp>0);
   }
   Object.entries(dmgQ).forEach(([u,d])=>{if(u===uid)hurt(d);else dmgOut.push([u,d])});
@@ -8264,7 +8269,7 @@ function updateMe(dt){
   trees.forEach(t=>{const dx=me.x-t.x,dy=me.y-t.y,d=Math.hypot(dx,dy)||1;if(d<t.r+9){me.x=t.x+dx/d*(t.r+9);me.y=t.y+dy/d*(t.r+9)}});campCollide();fortCollide();lmCollide();cityCollide();voidCollide();arenaCollide();try{terCollide()}catch(e){}
   me.x=cl(me.x,12,WW-12);me.y=cl(me.y,12,WH-12);
   if(Math.hypot(me.x-SX,me.y-SY)<SR)me.hp=Math.min(me.mh,me.hp+6*dt);
-  me.hp=Math.min(me.mh,me.hp+M('reg')*dt);
+  me.hp=Math.min(me.mh,me.hp+M('reg')*dt);me.lsB=Math.min(me.mh*LSCAP,(me.lsB||0)+me.mh*LSCAP*dt);
   me.mp=Math.min(me.mm,me.mp+(C.mr*(Math.hypot(me.x-SX,me.y-SY)<SR?3:1)+mprV())*dt);
   const rgMove=me.riding||((me.cls==='archer'&&!stormR())||me.cls==='mage')&&joy&&Math.hypot(joy.dx,joy.dy)>6;mountTick(dt);autoTick(dt);petTick(dt);ptTick(dt);{const ab=$('atb'),hb=$('ahb');const sh=!!(me.cls&&run);if(ab&&ab.hidden===sh)ab.hidden=!sh;if(hb&&hb.hidden===sh)hb.hidden=!sh}
   if(me.cd<=0&&!rgMove){const t=pickTarget(C.rg+M('rg'));
@@ -8302,6 +8307,7 @@ const abSum=ab=>Object.values(ab).reduce((a,b)=>a+b,0);
 const spts=()=>(me.lv-1)*3-abSum(me.ab);
 function A(k){let t=0;AB.forEach(([id,,,e])=>{if(e[k])t+=abV(id)*e[k]});if(k==='dm'&&(me.cls==='mage'||me.cls==='sup'))t+=abV('int')*.02;if(k==='as')t+=Math.floor(abV('agi')/10)*.03;if(k==='dm')t+=Math.floor(abV('str')/10)*.03;if(k==='hp')t+=Math.floor(abV('vit')/10)*.04;if(/^s[0-4]p$/.test(k))t+=Math.floor(abV('int')/10)*.03;if(k==='cdm')t+=Math.floor(abV('luk')/10)*.1;return t}
 /* บาลานซ์: คริติคอลสูงสุด 100% ส่วนเกินแปลงเป็นดาเมจคริ 15% · ดูดเลือดสูงสุด 30% (45% ตอนเลือดต่ำของสายโลหิต) */
+function FDv(){if(!me.cls)return 0;return Math.min(.6,Math.max(0,M('fd'))+Math.max(0,crRaw()-1)*.06)}
 const crRaw=()=>me.cls?M('cr')+(CL[me.cls].cr||0):0,crC=()=>Math.min(1,crRaw()),crD=()=>2+M('cdm')+Math.max(0,crRaw()-1)*.15;
 const supSolo=()=>!Object.values(others).some(o=>inPty(o.u)&&Math.hypot(o.x-me.x,o.y-me.y)<450);
 function M(k){if(!me.cls)return 0;let t=0;nodes().forEach(n=>{if(n.k===k)t+=(me.tr[n.id]||0)*n.v});if(me.rage>0){if(k==='as')t+=.4*(me.rgP||1);else if(k==='ls')t+=.1}const bl=br1()&&me.cls==='melee'&&me.hp<me.mh*.4;if(me.cls2){if(k==='hp')t+=.1;else if(k==='dm')t+=.12+(bl?.3:0)}if(k==='dm'&&me.stillT>=.4&&(me.cls==='archer'||me.cls==='mage'))t+=.2;const rv=t+G(k)+A(k)+setB(k)+petV(k)+cardM(k)+titleM(k)+cmpM(k)+starM(k)+astM(k)+brM(k)+blM(k);return k==='ls'?Math.min(bl?.45:.3,bl?rv*2:rv):rv}
@@ -8483,7 +8489,7 @@ function raidReward(){if(dgRew)return;dgRew=1;me.inv.s2=Math.min(999,(me.inv.s2|
   banner={s:'🏆 พิชิตเรดห้วงลึก! '+MATN.sc[0]+' +'+sc+(hr?' · '+MATN.hr[0]+' +1':'')+ex,t:7};sfx('lvl');burst(me.x,me.y-10,['#8ff0e8','#ffffff','#ffd84a'],60,200,1.2,{glow:1,g:-40})}
 /* ชุดเซ็ต */
 const SETS={1:{n:'ชุดราชันห้วงลึก',c:'#1fb8a8',pn:{w:'ตรีศูลราชันห้วงลึก',a:'เกราะเกล็ดราชันห้วงลึก',c:'แหวนไข่มุกราชันห้วงลึก',h:'มงกุฎปะการังราชัน',b:'รองเท้าคลื่นราชัน'},
-    b:[[2,{dm:.08},'ดาเมจ +8%'],[3,{cr:.06,as:.06},'คริติคอล +6% · ความเร็วโจมตี +6%'],[5,{},'ทุกการโจมตีมีโอกาส 12% ระเบิดน้ำวนรอบเป้า ดาเมจ 100% (เกิดได้ทุก 0.75 วิ)']]},
+    b:[[2,{fd:.03},'ดาเมจสุดท้าย +3%'],[3,{cr:.06,as:.06},'คริติคอล +6% · ความเร็วโจมตี +6%'],[5,{},'ทุกการโจมตีมีโอกาส 12% ระเบิดน้ำวนรอบเป้า ดาเมจ 100% (เกิดได้ทุก 0.75 วิ)']]},
   2:{n:'ชุดผู้พิทักษ์ห้วงลึก',c:'#4a8ae0',pn:{w:'หอกผู้พิทักษ์ห้วงลึก',a:'เกราะเปลือกผู้พิทักษ์',c:'กำไลหินผู้พิทักษ์',h:'หมวกเปลือกหอยผู้พิทักษ์',b:'รองเท้าหินผู้พิทักษ์'},
     b:[[2,{hp:.1},'เลือดสูงสุด +10%'],[3,{red:.06,reg:6},'ลดดาเมจที่ได้รับ +6% · ฟื้นเลือด 6/วิ'],[5,{},'เลือดต่ำกว่า 50% ได้เกราะ 25% ของเลือดสูงสุดและฟื้นมานา 30% (ทุก 15 วิ)']]}};
 const SETCOST=sl=>sl==='w'?{sc:12,hr:1,g:20000}:{sc:8,hr:0,g:15000};
@@ -8577,14 +8583,14 @@ function nb(n,locked){
 function powSum(){if(!me.cls)return'';const C=CL[me.cls],r=ttAgg(),f=v=>Math.round(v*1000)/10;
   const nd=k=>{let t=0;nodes().forEach(n=>{if(n.k===k)t+=(me.tr[n.id]||0)*n.v});return t},aw=k=>me.cls2?(k==='hp'?.1:k==='dm'?.12:0):0;
   const SRC=[['สเตตัส',k=>A(k)],['ของสวมใส่',k=>G(k)],['เซ็ต',k=>setB(k)],['ผังสกิล',nd],['ฉายา',k=>titleM(k)],['ค่าย',k=>cmpM(k)],['การ์ด',k=>cardM(k)],['ดาว ★',k=>astM(k)],['สัตว์เลี้ยง',k=>petV(k)],['ตื่นรู้',aw]];
-  const K=[['dm','⚔️ ดาเมจ'],['hp','❤️ เลือดสูงสุด'],['mp','💧 มานาสูงสุด'],['cr','🎯 โอกาสคริ'],['cdm','💥 ดาเมจคริ'],['as','⚡ ความเร็วโจมตี'],['sp','👟 ความเร็วเดิน'],['ls','🩸 ดูดเลือด'],['red','🛡️ ลดดาเมจที่ได้รับ'],['reg','💚 ฟื้นเลือด/วิ'],['cdm','💥 ดาเมจคริติคอล'],['cdr','⏳ ลดคูลดาวน์สกิล'],['mpr','💧 ฟื้นมานา/วิ'],['mcr','🔹 ลดมานาที่ใช้ร่าย'],['spw','🔥 พลังเวท (ดาเมจสกิล)'],['hpw','✨ พลังศักดิ์สิทธิ์ (ฮีล/เกราะ)']];
+  const K=[['dm','⚔️ ดาเมจ'],['fd','🔥 ดาเมจสุดท้าย (คูณท้ายสุด · สูงสุด 60%)'],['hp','❤️ เลือดสูงสุด'],['mp','💧 มานาสูงสุด'],['cr','🎯 โอกาสคริ'],['cdm','💥 ดาเมจคริ'],['as','⚡ ความเร็วโจมตี'],['sp','👟 ความเร็วเดิน'],['ls','🩸 ดูดเลือด'],['red','🛡️ ลดดาเมจที่ได้รับ'],['reg','💚 ฟื้นเลือด/วิ'],['cdr','⏳ ลดคูลดาวน์สกิล'],['mpr','💧 ฟื้นมานา/วิ'],['mcr','🔹 ลดมานาที่ใช้ร่าย'],['spw','🔥 พลังเวท (ดาเมจสกิล)'],['hpw','✨ พลังศักดิ์สิทธิ์ (ฮีล/เกราะ)']];
   let h='<div class="card pws"><div class="cap">📊 สรุปพลังทั้งหมด (รวมทุกแหล่ง)</div>';
   h+='<table class="pwt"><tr><th></th><th>อัพเอง</th><th>ฉายา</th><th>ฉายา %</th><th>รวม</th></tr>'+['str','vit','int','agi','luk'].map(id=>'<tr><td><b>'+TSN[id]+'</b></td><td>'+(me.ab[id]||0)+'</td><td>'+(r.f[id]?'+'+r.f[id]:'–')+'</td><td>'+(r.p[id]?'+'+f(r.p[id])+'%':'–')+'</td><td><b>'+abV(id)+'</b></td></tr>').join('')+'</table>';
   h+=K.map(([k,nm])=>{const tot=M(k)+(k==='cr'?(C.cr||0):0),flat=k==='reg'||k==='mpr';if(Math.abs(tot)<1e-6)return'';const parts=[];let acc=0;
       if(k==='cr'&&C.cr){parts.push(['อาชีพ',C.cr]);acc+=C.cr}
       SRC.forEach(([n,fn])=>{let v=0;try{v=fn(k)||0}catch(e){}if(Math.abs(v)>1e-6){parts.push([n,v]);acc+=v}});
       const lsCap=k==='ls'&&acc>tot+.0005,oth=tot-acc;if(Math.abs(oth)>.0005&&!lsCap)parts.push(['อื่น ๆ',oth]);
-      const fv=v=>flat?(Math.round(v*10)/10):(f(v)+'%'),capN={cdr:.25,mcr:.25,mpr:12,spw:.4,hpw:.4}[k],cap=capN&&tot>capN?' <em>(ใช้ได้สูงสุด '+(k==='mpr'?capN+'/วิ':f(capN)+'%')+')</em>':k==='red'&&tot>.6?' <em>(ใช้ได้สูงสุด 60%)</em>':k==='cr'&&tot>1?' <em>(ใช้ได้สูงสุด 100% · ส่วนเกินเป็นดาเมจคริ +'+f((tot-1)*.15)+'%)</em>':lsCap?' <em>(รวม '+f(acc)+'% · ใช้ได้สูงสุด 30%)</em>':'';
+      const fv=v=>flat?(Math.round(v*10)/10):(f(v)+'%'),capN={cdr:.25,mcr:.25,mpr:12,spw:.4,hpw:.4}[k],cap=capN&&tot>capN?' <em>(ใช้ได้สูงสุด '+(k==='mpr'?capN+'/วิ':f(capN)+'%')+')</em>':k==='red'&&tot>.6?' <em>(ใช้ได้สูงสุด 60%)</em>':k==='cr'&&tot>1?' <em>(ใช้ได้สูงสุด 100% · ส่วนเกินเป็นดาเมจคริ +'+f((tot-1)*.15)+'% และดาเมจสุดท้าย +'+f((tot-1)*.06)+'%)</em>':lsCap?' <em>(รวม '+f(acc)+'% · ใช้ได้สูงสุด 30% · ฟื้นได้ไม่เกิน 4% ของเลือดต่อวินาที)</em>':'';
       return'<div class="pwr"><div class="pwh"><span>'+nm+'</span><b>+'+fv(tot)+'</b></div><small>'+parts.map(([n,v])=>n+' '+(v>=0?'+':'')+fv(v)).join(' · ')+cap+'</small></div>'}).join('');
   return h+'</div>'}
 function treeUI(){
@@ -8593,7 +8599,7 @@ function treeUI(){
   h+='<div class="card"><div style="display:flex;justify-content:space-between;font-size:13px"><b>Lv '+me.lv+'</b><span>'+(nx?me.xp+' / '+nx+' EXP':'MAX')+'</span></div><div class="xpb"><i style="width:'+pc+'%"></i></div></div>';
   if(charTab==='st'){h+=astTab()}
   else if(charTab==='ab'){
-    h+='<div class="sum"><div>❤️ HP<b>'+me.mh+'</b></div><div>💧 MP<b>'+me.mm+'</b></div><div>⚔️ โจมตี<b>'+Math.round(pd())+'</b></div><div>🎯 คริติคอล<b>'+Math.round(crC()*1000)/10+'%</b></div><div>💥 ดาเมจคริ<b>x'+(Math.round(crD()*100)/100)+'</b></div><div>👟 ความเร็ว<b>'+Math.round(C.sp*(1+M('sp')))+'</b></div><div>⚡ ตี/วินาที<b>'+(Math.round((1+M('as'))/C.cd*100)/100)+'</b></div></div>';
+    h+='<div class="sum"><div>❤️ HP<b>'+me.mh+'</b></div><div>💧 MP<b>'+me.mm+'</b></div><div>⚔️ โจมตี<b>'+Math.round(pd())+'</b></div><div>🎯 คริติคอล<b>'+Math.round(crC()*1000)/10+'%</b></div><div>💥 ดาเมจคริ<b>x'+(Math.round(crD()*100)/100)+'</b></div><div>🔥 ดาเมจสุดท้าย<b>+'+Math.round(FDv()*1000)/10+'%</b></div><div>👟 ความเร็ว<b>'+Math.round(C.sp*(1+M('sp')))+'</b></div><div>⚡ ตี/วินาที<b>'+(Math.round((1+M('as'))/C.cd*100)/100)+'</b></div></div>';
     h+=powSum();
     h+='<div class="card">'+AB.map(([id,nm,d])=>{const m=nm.match(/^(.*?) \((.*)\)$/)||[0,nm,''];
       return'<div class="sr"><div class="ico">'+(ABI[id]||'•')+'</div><div class="nm"><b>'+m[2]+' '+m[1]+'</b><small>'+d+(1?(()=>{const v=abV(id),b=Math.floor(v/10),nx=10-v%10;return'<br><span style="color:#b0661a;font-weight:600">โบนัสตอนนี้: '+({str:'+'+(b*3)+'% ดาเมจ',vit:'+'+(b*4)+'% เลือดสูงสุด',int:'+'+(b*3)+'% พลังทุกสกิล',agi:'+'+(b*3)+'% ความเร็วโจมตี',luk:'+'+(b*10)+'% ดาเมจคริ'}[id])+' · อีก '+nx+' แต้มถึงขั้นถัดไป</span>'})():'')+'</small></div><div class="vl">'+(me.ab[id]||0)+(abV(id)>(me.ab[id]||0)?'<small style="display:block;font-size:10px;color:#b0661a">+'+(abV(id)-(me.ab[id]||0))+' ฉายา</small>':'')+'</div><button class="rb" data-ab="'+id+'" data-q="1"'+(spts()>0?'':' disabled')+'>+1</button><button class="rb" data-ab="'+id+'" data-q="5"'+(spts()>=5?'':' disabled')+'>+5</button></div>'}).join('<hr>')+'</div>';
@@ -8755,8 +8761,8 @@ const RN=['Basic · พื้นฐาน','Refined · ประณีต','Elit
 const SLN={w:'อาวุธ',a:'เกราะ',c:'เครื่องประดับ',h:'หมวก',b:'รองเท้า'};const SLOTS=['w','a','c','h','b'];
 const GN={w:['อาวุธสนิม','อาวุธเหล็กกล้า','อาวุธเงินวิเศษ','อาวุธเปลวเพลิง'],a:['เสื้อหนังเก่า','เกราะเหล็ก','เกราะเงินวิเศษ','เกราะมังกร'],c:['แหวนทองเหลือง','สร้อยเงิน','เครื่องรางเวท','เครื่องรางเทพ'],h:['หมวกผ้าเก่า','หมวกเหล็ก','หมวกเงินวิเศษ','มงกุฎมังกร'],b:['รองเท้าหนังเก่า','รองเท้าเหล็ก','รองเท้าเงินวิเศษ','รองเท้าลมพายุ']};
 GN.w.push('อาวุธเทพนิรันดร์','อาวุธบรรพกาล','อาวุธห้วงจักรวาล');GN.a.push('เกราะเทพนิรันดร์','เกราะบรรพกาล','เกราะห้วงจักรวาล');GN.c.push('อัญมณีนิรันดร์','อัญมณีบรรพกาล','อัญมณีห้วงจักรวาล');GN.h.push('มงกุฎเทพนิรันดร์','มงกุฎบรรพกาล','มงกุฎห้วงจักรวาล');GN.b.push('รองเท้าเทพนิรันดร์','รองเท้าบรรพกาล','รองเท้าห้วงจักรวาล');
-const GKI={hp:1.17,dm:.78,sp:.65,mp:1.43,red:.22,reg:14.3,cr:.58,as:.39,ls:.22,cdm:.5,cdr:.08,mpr:4.5,mcr:.08,spw:.15,hpw:.15},GKX={hp:1,dm:1,mp:1,reg:1,cr:1,as:1,cdm:1},glF=L=>L<=12?1:L<=15?1+(L-12)*.04:1.12+(L-15)*.04,gkCap=(k,r,L)=>(GKI[k]||9)*(r>=6&&GKX[k]?1.22:1)*glF(L|0);
-const GK={hp:.5,dm:.36,sp:.25,mp:.7,red:.13,reg:6,cr:.24,as:.18,ls:.12,cdm:.22,cdr:.04,mpr:2.2,mcr:.04,spw:.07,hpw:.07};
+const GKI={fd:.07,hp:1.17,dm:.78,sp:.65,mp:1.43,red:.22,reg:14.3,cr:.58,as:.39,ls:.22,cdm:.5,cdr:.08,mpr:4.5,mcr:.08,spw:.15,hpw:.15},GKX={hp:1,dm:1,mp:1,reg:1,cr:1,as:1,cdm:1},glF=L=>L<=12?1:L<=15?1+(L-12)*.04:1.12+(L-15)*.04,gkCap=(k,r,L)=>(GKI[k]||9)*(r>=6&&GKX[k]?1.22:1)*glF(L|0);
+const GK={fd:.025,hp:.5,dm:.36,sp:.25,mp:.7,red:.13,reg:6,cr:.24,as:.18,ls:.12,cdm:.22,cdr:.04,mpr:2.2,mcr:.04,spw:.07,hpw:.07};
 /* ออปชั่นสายเวท: เพดานรวมจากอุปกรณ์ · ใช้ได้ทุกอาชีพ แต่สุ่มออกบ่อยเมื่อคนเก็บเป็นจอมเวท/นักสวด */
 const GKT={cdr:.25,mpr:12,mcr:.25,spw:.4,hpw:.4},isCaster=c=>c==='mage'||c==='sup';
 const cdrV=()=>Math.min(.25,Math.max(0,M('cdr'))),mprV=()=>Math.min(12,Math.max(0,M('mpr'))),mcrV=()=>Math.min(.25,Math.max(0,M('mcr')));
@@ -8764,8 +8770,10 @@ const mcOf=k=>{const c=me.cls&&CL[me.cls];return c?Math.round(c.mc[k]*(1-mcrV())
 const HEALSK={sup:{0:1,2:1,4:1}},skPow=k=>(HEALSK[me.cls]&&HEALSK[me.cls][k])?Math.min(.4,M('hpw')):(me.cls==='sup'&&k===1)?0:Math.min(.4,M('spw'));
 let fullT=-1e9;const stk=()=>stocks[curMap]||(stocks[curMap]=[genItem(NPC().L,'w',1),genItem(NPC().L,'a',1),genItem(NPC().L,'c',1),genItem(NPC().L,'h',1),genItem(NPC().L,'b',1)]);
 const r2=v=>Math.round(v*1000)/1000;
-function stLabel(k,v){const p=Math.round(v*1000)/10;return({cdm:'ดาเมจคริติคอล +'+p+'%',cdr:'ลดคูลดาวน์สกิล '+p+'%',mpr:'ฟื้นมานา '+(Math.round(v*10)/10)+'/วิ',mcr:'ลดมานาที่ใช้ร่าย '+p+'%',spw:'พลังเวท (ดาเมจสกิล) +'+p+'%',hpw:'พลังศักดิ์สิทธิ์ (ฮีล/เกราะ) +'+p+'%',hp:'เลือด +'+p+'%',dm:'ดาเมจ +'+p+'%',sp:'ความเร็วเดิน +'+p+'%',mp:'MP +'+p+'%',red:'ลดดาเมจที่โดน '+p+'%',reg:'ฟื้นเลือด '+(Math.round(v*10)/10)+'/วิ',cr:'คริติคอล +'+p+'%',as:'ความเร็วโจมตี +'+p+'%',ls:'ดูดเลือด '+p+'%'})[k]}
+function stLabel(k,v){const p=Math.round(v*1000)/10;return({fd:'ดาเมจสุดท้าย +'+p+'%',cdm:'ดาเมจคริติคอล +'+p+'%',cdr:'ลดคูลดาวน์สกิล '+p+'%',mpr:'ฟื้นมานา '+(Math.round(v*10)/10)+'/วิ',mcr:'ลดมานาที่ใช้ร่าย '+p+'%',spw:'พลังเวท (ดาเมจสกิล) +'+p+'%',hpw:'พลังศักดิ์สิทธิ์ (ฮีล/เกราะ) +'+p+'%',hp:'เลือด +'+p+'%',dm:'ดาเมจ +'+p+'%',sp:'ความเร็วเดิน +'+p+'%',mp:'MP +'+p+'%',red:'ลดดาเมจที่โดน '+p+'%',reg:'ฟื้นเลือด '+(Math.round(v*10)/10)+'/วิ',cr:'คริติคอล +'+p+'%',as:'ความเร็วโจมตี +'+p+'%',ls:'ดูดเลือด '+p+'%'})[k]}
 const ILMAX=22,iLv=mL=>mL<=19?Math.min(8,mL):Math.min(ilCap(),8+Math.floor((mL-19)/4));
+/* ดาเมจสุดท้าย (คูณท้ายสุด) ติดมากับอาวุธ/เครื่องประดับ Relic ขึ้นไป · คำนวณจากเกรดและเลเวล จึงเหมือนกันทุกชิ้นในระดับเดียวกัน */
+function fdBase(it){if(!it||it.r<4||(it.sl!=='w'&&it.sl!=='c'))return 0;return r2((it.sl==='w'?1:.7)*(it.r>=6?.03:it.r===5?.022:.015)*glF(it.L|0))}
 function genItem(L,sl,rmax,rmin,cls){const CS=isCaster(cls===undefined?me.cls:cls),CP=(cls===undefined?me.cls:cls)==='sup'?'hpw':'spw';
   L=Math.max(1,Math.min(ILMAX,(L|0)||1));sl=sl||SLOTS[Math.random()*SLOTS.length|0];
   const roll=Math.random()*100+(L-1)*4;let r=roll>=98?3:roll>=88?2:roll>=60?1:0;if(rmax!==undefined)r=Math.min(r,rmax);if(rmin!==undefined)r=Math.max(r,rmin);
@@ -8778,6 +8786,7 @@ function genItem(L,sl,rmax,rmin,cls){const CS=isCaster(cls===undefined?me.cls:cl
     if(r>=2){let k2=ks[Math.random()*N|0];while(k2===k1)k2=ks[Math.random()*N|0];st[k2]=r2(B[k2]*s*.5)}}
   if(r>=4){if(CS){st.cdr=r2(Math.min(GKI.cdr,(st.cdr||0)+.012*(1+.12*(L-1))));st.mpr=r2(Math.min(GKI.mpr,(st.mpr||0)+.5*(1+.12*(L-1))))}else{st.ls=r2(Math.max(st.ls||0,Math.min(GK.ls,(st.ls||0)+.02*(1+.12*(L-1)))));st.cr=r2(Math.max(st.cr||0,Math.min(GK.cr,(st.cr||0)+.03*(1+.12*(L-1)))))}}
   Object.keys(st).forEach(k=>{let v=r2(Math.min(gkCap(k,r,L),st[k]*(.9+Math.random()*.25)));if(Math.abs(v-GK[k])<1e-9)v=r2(v+.001);st[k]=v});
+  {const fb=fdBase({sl,r,L});if(fb>0)st.fd=fb}
   return{sl,r,L,u:0,st};
 }
 const upMul=u=>1+.1*Math.min(u,10)+.05*Math.max(0,Math.min(u,20)-10)+.04*Math.max(0,u-20);const eff=(it,k)=>it.st[k]*upMul(it.u|0);
@@ -8806,6 +8815,7 @@ function cleanItem(it,sl){
   /* ซ่อมของที่เคยถูกตัดค่าสเตตัสจากบัคเพดานเก่า: ค่าหลักคำนวณย้อนได้จากเลเวลและระดับของไอเทม */
   {const sc=(1+.18*(o.L-1))*RMUL[o.r],EX={b:{sp:.045*sc,hp:.025*sc},a:{hp:.06*sc,red:.015*sc},w:{dm:.04*sc},h:{mp:.05*sc,red:.012*sc}}[o.sl]||{},CB={sp:.03,mp:.08,reg:.8,cr:.03,ls:.015};
    Object.keys(o.st).forEach(k=>{if(Math.abs(o.st[k]-GK[k])>1e-9)return;let ex=EX[k];if(o.sl==='c'&&CB[k]){const c1=CB[k]*sc,c2=c1*.5;ex=c2>GK[k]?c2:c1}if(ex&&ex>GK[k]+1e-9)o.st[k]=r2(Math.min(ex,gkCap(k,o.r,o.L)))})}
+  {const fb=fdBase(o);if(fb>0&&!(o.st.fd>=fb))o.st.fd=fb}
   return Object.keys(o.st).length?o:null;
 }
 /* ขายอัตโนมัติตอนเก็บของดรอป: ของที่ด้อยกว่าชิ้นที่สวมอยู่ (ทั้งค่าจริงและค่าดิบ) และระดับไม่เกินที่ตั้งไว้ · ไม่แตะของเซ็ต/ของล็อก/Ancient+ */
@@ -11316,9 +11326,9 @@ function drawDumPanel(){if(curMap!==1||!me.cls)return;const dd=Math.hypot(me.x-T
   let dps=0,avg=0,el=0;if(act){const s5=DUM.log.reduce((q,[,v])=>q+v,0),win=Math.max(1,Math.min(5,(n-DUM.s)/1000));dps=s5/win;el=Math.max(1,(n-DUM.s)/1000);avg=DUM.tot/el}
   let P=0,CR=0,CD=0;try{P=pd();CR=crC();CD=crD()}catch(e){}
   const L=act?[['DPS (5 วิล่าสุด)',dumF(dps),'#ffd84a',1],['เฉลี่ย/วิ · รวม',dumF(avg)+' · '+dumF(DUM.tot),'#fff0c8'],['ตีสูงสุด · คริ',dumF(DUM.mx)+' · '+Math.round(DUM.cr/DUM.n*100)+'% ('+DUM.cr+'/'+DUM.n+')','#fff0c8'],['เวลา',el.toFixed(1)+' วิ (หยุดตี 5 วิ = เริ่มใหม่)','#c8b898']]:[['ตีหุ่นเพื่อวัดดาเมจ','สกิล/ตีธรรมดา/ธาตุ นับหมด','#c8b898']];
-  const w=208,h=40+L.length*15,x=TG.x-w/2,y=TG.y-104-h;g.save();g.globalAlpha=a;g.fillStyle='rgba(28,18,10,.88)';g.beginPath();g.roundRect(x,y,w,h,7);g.fill();g.strokeStyle='#c8a050';g.lineWidth=1.2;g.stroke();
+  const w=222,h=40+L.length*15,x=TG.x-w/2,y=TG.y-104-h;g.save();g.globalAlpha=a;g.fillStyle='rgba(28,18,10,.88)';g.beginPath();g.roundRect(x,y,w,h,7);g.fill();g.strokeStyle='#c8a050';g.lineWidth=1.2;g.stroke();
   g.textAlign='center';g.fillStyle='#ffe0a0';g.font='bold 10px system-ui';g.fillText('🎯 หุ่นไล่กาทดสอบดาเมจ',TG.x,y+14);
-  g.font='9px system-ui';g.fillStyle='#d8c8a8';g.fillText('พลังโจมตี '+dumF(P)+' · คริ '+Math.round(CR*100)+'% · แรงคริ ×'+(+CD).toFixed(2),TG.x,y+28);
+  g.font='9px system-ui';g.fillStyle='#d8c8a8';let FD=0;try{FD=FDv()}catch(e){}g.fillText('พลัง '+dumF(P)+' · คริ '+Math.round(CR*100)+'% ×'+(+CD).toFixed(2)+' · สุดท้าย +'+Math.round(FD*100)+'%',TG.x,y+28);
   L.forEach(([k,v,c,big],i)=>{const yy=y+44+i*15;g.textAlign='left';g.fillStyle='#bfae8a';g.font='9px system-ui';g.fillText(k,x+10,yy);g.textAlign='right';g.fillStyle=c;g.font=(big?'bold 12px':'bold 9px')+' system-ui';g.fillText(v,x+w-10,yy)});
   g.beginPath();g.moveTo(TG.x-6,y+h);g.lineTo(TG.x+6,y+h);g.lineTo(TG.x,y+h+6);g.closePath();g.fillStyle='rgba(28,18,10,.88)';g.fill();g.restore()}
 /* ===== v275 ภูมิประเทศสูงต่ำจริง (แมพลอยฟ้า 12–18): ที่ราบสูง · หน้าผา · บันได =====
