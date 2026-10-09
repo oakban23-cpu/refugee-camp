@@ -2750,7 +2750,7 @@ function starTick(dt){if(!me.cls||me.down>0||SKL||SKA)return;if(me.zcC!==me.cls)
       else if(k==='bell'){ZST.push({k,x:me.x,y:me.y,t:0,h:.25,e:1.1,r:140,d,heal:1})}
       else if(k==='dag'){const L=mons.filter(m=>!m.wb&&Math.hypot(m.x-me.x,m.y-me.y)<320).sort((a,b)=>Math.hypot(a.x-me.x,a.y-me.y)-Math.hypot(b.x-me.x,b.y-me.y)).slice(0,3);L.forEach((m,i)=>ZST.push({k,x:m.x,y:m.y,x0:me.x,y0:me.y-10,t:-i*.08,h:.14,e:.5,r:26,d}));try{sfx('slash')}catch(e){}}}
     else me.zsT=.6}}
-  ZST.forEach(s=>{s.t+=dt;if(!s.hit&&s.t>=s.h){s.hit=1;zHit(s.x,s.y,s.r,s.d);
+  ZST.forEach(s=>{s.t+=dt;if(!s.hit&&s.t>=s.h){s.hit=1;if(s.dw)dawnHit(s);else zHit(s.x,s.y,s.r,s.d);
     if(s.heal&&me.hp>0){const v=Math.round(me.mh*.08);me.hp=Math.min(me.mh,me.hp+v);dn.push({x:me.x,y:me.y-44,v:'+'+v,t:1,c:'#7aff9a'})}
     if(s.k==='star'){shk=Math.max(shk,.12);burst(s.x,s.y,['#fff6c8','#ffd84a','#9ad8ff'],18,140,.6,{glow:1,g:-20});try{sfx('hit')}catch(e){}}
     else if(s.k==='wave'){shk=Math.max(shk,.15);burst(s.x,s.y-10,['#ff5a3a','#ffb08a','#8a0a0a'],22,200,.5,{glow:1})}
@@ -2877,12 +2877,12 @@ setTimeout(()=>{SETS[3]={n:'ชุดเทวทูตรุ่งอรุณ'
   b:[[2,{dm:.1},'ดาเมจ +10%'],[3,{cr:.05,ls:.03,hp:.08},'คริติคอล +5% · ดูดเลือด +3% · เลือดสูงสุด +8%'],[5,{},'ทุกการโจมตีมีโอกาส 10% เรียกหอกแสงรุ่งอรุณลงใส่เป้า ดาเมจ 150% เป็นวง และฟื้นเลือด 2%']]};MATN.fe=['🪶','ขนนกรุ่งอรุณ']},0);
 const SETCOST3=sl=>sl==='w'?{fe:12,g:80000}:{fe:8,g:50000};
 setTimeout(()=>{SETS[4]={n:'ชุดวิหคพายุ',c:'#4aa8f0',pn:{w:'ทวนอัสนีวิหคพายุ',a:'เกราะขนพายุ',c:'จี้ตาพายุ',h:'มงกุฎหงอนอัสนี',b:'รองเท้าลมกรด'},
-  b:[[2,{as:.08},'ความเร็วโจมตี +8%'],[3,{cr:.05,sp:.06,hp:.06},'คริติคอล +5% · ความเร็วเดิน +6% · เลือดสูงสุด +6%'],[5,{},'ทุกการโจมตีมีโอกาส 12% ปล่อยสายฟ้าโซ่กระโดด 4 เป้า ดาเมจ 120% ต่อเป้า']]};MATN.sf=['⚡','ขนพายุ']},0);
+  b:[[2,{as:.08},'ความเร็วโจมตี +8%'],[3,{cr:.05,sp:.06,hp:.06},'คริติคอล +5% · ความเร็วเดิน +6% · เลือดสูงสุด +6%'],[5,{},'ทุกการโจมตีมีโอกาส 12% ปล่อยสายฟ้าโซ่กระโดด 5 เป้า ดาเมจ 160% ต่อเป้า']]};MATN.sf=['⚡','ขนพายุ']},0);
 const SETCOST4=sl=>sl==='w'?{sf:14,g:150000}:{sf:9,g:90000};
 let CHN=[];
-function stormProc(m){if(setCount(4)<5||Math.random()>=.12)return;const n=performance.now();if(n<(me.stT||0))return;me.stT=n+600;
-  const hit=[m],pts=[[m.x,m.y-10]];let cur=m;for(let k=0;k<3;k++){let b=null,bd=170;for(const q of mons){if(hit.includes(q)||q.hp<=0||q.pv)continue;const d=dist(q,cur);if(d<bd){bd=d;b=q}}if(!b)break;hit.push(b);pts.push([b.x,b.y-10]);cur=b}
-  const d=pd()*1.2;hit.forEach(q=>addHit(q,d,0,1,'bolt'));CHN.push({pts,t:.35})}
+function stormProc(m){if(setCount(4)<5||Math.random()>=.12)return;const n=performance.now();if(n<(me.stT||0))return;me.stT=n+450;
+  const hit=[m],pts=[[m.x,m.y-10]];let cur=m;for(let k=0;k<4;k++){let b=null,bd=170;for(const q of mons){if(hit.includes(q)||q.hp<=0||q.pv)continue;const d=dist(q,cur);if(d<bd){bd=d;b=q}}if(!b)break;hit.push(b);pts.push([b.x,b.y-10]);cur=b}
+  const d=pd()*1.6;hit.forEach(q=>addHit(q,d,0,1,'bolt'));CHN.push({pts,t:.35})}
 function drawChain(){if(!CHN.length)return;g.save();g.globalCompositeOperation='lighter';CHN.forEach(c=>{c.t-=1/60;g.strokeStyle='rgba(200,235,255,'+Math.max(0,c.t/.35)+')';g.lineWidth=2.4;g.beginPath();c.pts.forEach((p,i)=>{if(!i){g.moveTo(p[0],p[1]);return}const a=c.pts[i-1];for(let k=1;k<=4;k++){g.lineTo(a[0]+(p[0]-a[0])*k/4+(k<4?(Math.random()-.5)*14:0),a[1]+(p[1]-a[1])*k/4+(k<4?(Math.random()-.5)*14:0))}});g.stroke()});CHN=CHN.filter(c=>c.t>0);g.restore()}
 function sfGive(n,why){me.mat=me.mat||{sc:0,hr:0,fe:0};me.mat.sf=Math.min(9999,(me.mat.sf|0)+n);dn.push({x:me.x,y:me.y-82,v:'+'+n+' ⚡',t:1.3,c:'#8ad0ff'});if(why)sysMsg('⚡ ได้ขนพายุ ×'+n+' · '+why)}
 function sfRoll(x,y,t,bs){if(!WESTM(curMap)||isDg()||!me.cls||Math.hypot(me.x-x,me.y-y)>420)return;if(bs){if(curMap===18)sfGive(6,'ร่วมปราบเทมเปสต์');return}const k=curMap>=17?1.6:1;if(Math.random()<(t===2?.025:.008)*k)sfGive(1)}
@@ -2890,8 +2890,9 @@ function stormSetH(){me.mat=me.mat||{sc:0,hr:0,fe:0};const S=SETS[4];if(!S)retur
   return'<div class="card" style="border:2px solid '+S.c+'"><div class="br" style="color:'+S.c+'">⚡ '+S.n+' <small>(อุปกรณ์ Ancient Lv 15)</small></div>'+
     '<small style="display:block;margin:4px 0">ขนพายุที่มี: <b>'+sf+'</b> · ได้จากมอนสเตอร์ในหมู่เกาะลอยฟ้าตะวันตก (ตัวใหญ่ดรอปบ่อยสุด · หุบเหวลมหวนกับวิหารพายุดรอปมากกว่า) · หีบสมบัติซ่อน · บอส MVP เทมเปสต์</small>'+setHtml(4)+
     '<div class="bt" style="flex-wrap:wrap;margin-top:8px">'+SLOTS.map(sl=>{const c=SETCOST4(sl),ok=sf>=c.sf&&me.gold>=c.g&&me.bag.length<MAXBAG;return'<button data-setc="4:'+sl+'"'+(ok?'':' disabled')+'>'+SI[sl]+' '+S.pn[sl]+'<br><small>⚡'+c.sf+' · '+(c.g/1000)+'k ทอง</small></button>'}).join('')+'</div></div>'}
-function dawnProc(m){if(setCount(3)<5||Math.random()>=.1)return;const n=performance.now();if(n<(me.dpT||0))return;me.dpT=n+500;
-  ZST.push({k:'star',x:m.x,y:m.y,t:.15,h:.42,e:.95,r:70,d:pd()*1.5});me.hp=Math.min(me.mh,me.hp+me.mh*.02)}
+function dawnHit(s){zHit(s.x,s.y,s.r,s.d)}
+function dawnProc(m){if(setCount(3)<5||Math.random()>=.1)return;const n=performance.now();if(n<(me.dpT||0))return;me.dpT=n+600;
+  ZST.push({k:'star',x:m.x,y:m.y,t:.15,h:.42,e:.95,r:70,d:pd()*1.5,dw:1});me.hp=Math.min(me.mh,me.hp+me.mh*.02)}
 function feGive(n,why){me.mat=me.mat||{sc:0,hr:0,fe:0};me.mat.fe=Math.min(9999,(me.mat.fe|0)+n);dn.push({x:me.x,y:me.y-58,v:'+'+n+' 🪶',t:1.3,c:'#ffd84a'});if(why)sysMsg('🪶 ได้ขนนกรุ่งอรุณ ×'+n+' · '+why)}
 /* ===== เศษคราส: วัตถุดิบยกระดับชุดเซ็ต Ancient → Cosmic ===== */
 function ecGive(n,why){me.mat=me.mat||{sc:0,hr:0,fe:0};me.mat.ec=Math.min(9999,(me.mat.ec|0)+n);dn.push({x:me.x,y:me.y-70,v:'+'+n+' 🌑',t:1.3,c:'#e0a0ff'});if(why)sysMsg('🌑 ได้เศษคราส ×'+n+' · '+why)}
@@ -7327,7 +7328,7 @@ function drawNyxFx(){if(!NFX.length)return;if(!nyxOn()){NFX.length=0;return}cons
   g.restore()}
 /* ===== ชุดผู้ทอเงา (Ancient Lv 21) · ตีที่ช่างตีบวกป้อมประตูเมฆ ด้วยด้ายเงา + เศษคราส ===== */
 setTimeout(()=>{SETS[5]={n:'ชุดผู้ทอเงา',c:'#a050e0',pn:{w:'อาวุธใยเงาราตรี',a:'เสื้อคลุมผู้ทอเงา',c:'แหวนกระสวยเงา',h:'หน้ากากผู้ทอเงา',b:'รองเท้าย่างเงา'},
-  b:[[2,{dm:.12},'ดาเมจ +12%'],[3,{cr:.06,as:.06,hp:.08},'คริติคอล +6% · ความเร็วโจมตี +6% · เลือดสูงสุด +8%'],[5,{sp:.05},'ร่างเงาติดตัว (ภาพติดตาเรืองรุ้ง) · ความเร็วเดิน +5% · ทุกการโจมตีมีโอกาส 15% ให้ร่างเงาฟันซ้ำ ดาเมจ 140%']]};MATN.nt=['🕸️','ด้ายเงา']},0);
+  b:[[2,{dm:.12},'ดาเมจ +12%'],[3,{cr:.06,as:.06,hp:.08},'คริติคอล +6% · ความเร็วโจมตี +6% · เลือดสูงสุด +8%'],[5,{sp:.05},'ร่างเงาติดตัว (ภาพติดตาเรืองรุ้ง) · ความเร็วเดิน +5% · ทุกการโจมตีมีโอกาส 20% ให้ร่างเงาฟันซ้ำ ดาเมจ 320%']]};MATN.nt=['🕸️','ด้ายเงา']},0);
 const SETCOST5=sl=>sl==='w'?{nt:16,ec:30,g:300000}:{nt:10,ec:20,g:200000};
 function ntGive(n,why){me.mat=me.mat||{sc:0,hr:0,fe:0};me.mat.nt=Math.min(9999,(me.mat.nt|0)+n);dn.push({x:me.x,y:me.y-94,v:'+'+n+' 🕸️',t:1.3,c:'#d8a8ff'});if(why)sysMsg('🕸️ ได้ด้ายเงา ×'+n+' · '+why)}
 function ntRoll(x,y,t,bs){if(!SHADEM(curMap)||isDg()||!me.cls||Math.hypot(me.x-x,me.y-y)>420)return;if(bs){if(curMap===22)ntGive(12,'ร่วมปราบนิกซ์ (MVP)');return}const k=curMap>=21?1.6:1;if(Math.random()<(t===2?.02:.006)*k)ntGive(1)}
@@ -7337,8 +7338,8 @@ function shadowSetH(){me.mat=me.mat||{sc:0,hr:0,fe:0};const S=SETS[5];if(!S)retu
     '<div class="bt" style="flex-wrap:wrap;margin-top:8px">'+SLOTS.map(sl=>{const c=SETCOST5(sl),ok=nt>=c.nt&&ec>=c.ec&&me.gold>=c.g&&me.bag.length<MAXBAG;return'<button data-setc="5:'+sl+'"'+(ok?'':' disabled')+'>'+SI[sl]+' '+S.pn[sl]+'<br><small>🕸️'+c.nt+' 🌑'+c.ec+' · '+(c.g/1000)+'k ทอง</small></button>'}).join('')+'</div></div>'}
 /* ร่างเงาฟันซ้ำ */
 let SWP=[];
-function shadowProc(m){if(setCount(5)<5||Math.random()>=.15||!m||m.hp<=0)return;const n=performance.now();if(n<(me.swT||0))return;me.swT=n+450;
-  addHit(m,pd()*1.4,0,1,'shadow');SWP.push({x0:me.x,y0:me.y-14,x1:m.x,y1:m.y-12,t:.34,a:Math.random()*6.28})}
+function shadowProc(m){if(setCount(5)<5||Math.random()>=.2||!m||m.hp<=0)return;const n=performance.now();if(n<(me.swT||0))return;me.swT=n+400;
+  addHit(m,pd()*3.2,0,1,'shadow');SWP.push({x0:me.x,y0:me.y-14,x1:m.x,y1:m.y-12,t:.34,a:Math.random()*6.28})}
 function drawShadowSlash(){if(!SWP.length)return;g.save();g.globalCompositeOperation='lighter';SWP.forEach(z=>{z.t-=1/60;const k=Math.max(0,z.t/.34),q=1-k;
     const gr=g.createLinearGradient(z.x0,z.y0,z.x1,z.y1);gr.addColorStop(0,'rgba(120,160,255,0)');gr.addColorStop(1,'rgba(210,140,255,'+(.8*k)+')');g.strokeStyle=gr;g.lineWidth=6*k+1;g.beginPath();g.moveTo(z.x0+(z.x1-z.x0)*q*.6,z.y0+(z.y1-z.y0)*q*.6);g.lineTo(z.x1,z.y1);g.stroke();
     g.strokeStyle='rgba(235,200,255,'+k+')';g.lineWidth=3;g.beginPath();g.arc(z.x1,z.y1,14+q*10,z.a,z.a+2.4);g.stroke();g.strokeStyle='rgba(140,200,255,'+(.7*k)+')';g.lineWidth=2;g.beginPath();g.arc(z.x1,z.y1,20+q*12,z.a+3,z.a+5);g.stroke()});
@@ -7360,15 +7361,15 @@ function swGhost(x,y,u,fx,draw){const now=performance.now()/1000,T=SWT[u]||(SWT[
   g.restore()}
 /* ===== ชุดรากพิภพ (Ancient Lv 22) · ตีที่ช่างตีบวกในค่ายผู้อพยพ ด้วยยางรากทอง + เศษคราส ===== */
 setTimeout(()=>{SETS[6]={n:'ชุดรากพิภพ',c:'#e0a030',pn:{w:'อาวุธแก่นรากทอง',a:'เกราะเปลือกรากพิภพ',c:'แหวนยางอำพัน',h:'มงกุฎรากโบราณ',b:'รองเท้าย่างราก'},
-  b:[[2,{dm:.12},'ดาเมจ +12%'],[3,{cr:.06,hp:.1,red:.04},'คริติคอล +6% · เลือดสูงสุด +10% · ลดดาเมจที่ได้รับ +4%'],[5,{dm:.05,ls:.02},'รากทองล้อมตัว (แสงรากไหลรอบเท้า) · ดาเมจ +5% · ดูดเลือด +2% · ทุก 6 วิ เมื่อโจมตี รากทองแทงขึ้นรอบตัว ดาเมจ 220% และฟื้นเลือด 3%']]}},0);
+  b:[[2,{dm:.12},'ดาเมจ +12%'],[3,{cr:.06,hp:.1,red:.04},'คริติคอล +6% · เลือดสูงสุด +10% · ลดดาเมจที่ได้รับ +4%'],[5,{dm:.05,ls:.02},'รากทองล้อมตัว (แสงรากไหลรอบเท้า) · ดาเมจ +5% · ดูดเลือด +2% · ทุก 3 วิ เมื่อโจมตี รากทองแทงขึ้นรอบตัว ดาเมจ 500% และฟื้นเลือด 3%']]}},0);
 const SETCOST6=sl=>sl==='w'?{rs:20,ec:30,g:400000}:{rs:12,ec:20,g:260000};
 function rootSetH(){me.mat=me.mat||{sc:0,hr:0};const S=SETS[6];if(!S)return'';const rs=me.mat.rs|0,ec=me.mat.ec|0;
   return'<div class="card" style="border:2px solid '+S.c+'"><div class="br" style="color:'+S.c+'">🍯 '+S.n+' <small>(อุปกรณ์ Ancient Lv 22)</small></div>'+
     '<small style="display:block;margin:4px 0">ยางรากทองที่มี: <b>'+rs+'</b> · เศษคราส: <b>'+ec+'</b> · ยางรากทองได้จากมอนในรากพิภพ (ยิ่งลึกยิ่งบ่อย) · คืนรากดำ · ห้องแกนพิภพ</small>'+setHtml(6)+
     '<div class="bt" style="flex-wrap:wrap;margin-top:8px">'+SLOTS.map(sl=>{const c=SETCOST6(sl),ok=rs>=c.rs&&ec>=c.ec&&me.gold>=c.g&&me.bag.length<MAXBAG;return'<button data-setc="6:'+sl+'"'+(ok?'':' disabled')+'>'+SI[sl]+' '+S.pn[sl]+'<br><small>🍯'+c.rs+' 🌑'+c.ec+' · '+(c.g/1000)+'k ทอง</small></button>'}).join('')+'</div></div>'}
 let RTB=[];
-function rootProc(m){if(setCount(6)<5||!m||m.hp<=0)return;const n=performance.now();if(n<(me.rtP||0))return;me.rtP=n+6000;
-  const d=pd()*2.2;mons.forEach(q=>{if(q.hp>0&&Math.hypot(q.x-me.x,q.y-me.y)<130+mR(q))addHit(q,d,0,1,'root')});me.hp=Math.min(me.mh,me.hp+me.mh*.03);
+function rootProc(m){if(setCount(6)<5||!m||m.hp<=0)return;const n=performance.now();if(n<(me.rtP||0))return;me.rtP=n+3000;
+  const d=pd()*5;mons.forEach(q=>{if(q.hp>0&&Math.hypot(q.x-me.x,q.y-me.y)<170+mR(q))addHit(q,d,0,1,'root')});me.hp=Math.min(me.mh,me.hp+me.mh*.03);
   RTB.push({x:me.x,y:me.y,t:.7});dn.push({x:me.x,y:me.y-60,v:'🌿 รากทอง!',t:.9,c:'#ffd070'})}
 function drawRootBurst(){if(!RTB.length)return;g.save();g.lineCap='round';RTB.forEach(z=>{z.t-=1/60;const k=Math.max(0,z.t/.7),q=1-k;
     g.globalCompositeOperation='lighter';glowAt(z.x,z.y,130*(.5+q*.5),'255,170,60',.35*k);g.globalCompositeOperation='source-over';
@@ -8482,7 +8483,7 @@ function raidReward(){if(dgRew)return;dgRew=1;me.inv.s2=Math.min(999,(me.inv.s2|
   banner={s:'🏆 พิชิตเรดห้วงลึก! '+MATN.sc[0]+' +'+sc+(hr?' · '+MATN.hr[0]+' +1':'')+ex,t:7};sfx('lvl');burst(me.x,me.y-10,['#8ff0e8','#ffffff','#ffd84a'],60,200,1.2,{glow:1,g:-40})}
 /* ชุดเซ็ต */
 const SETS={1:{n:'ชุดราชันห้วงลึก',c:'#1fb8a8',pn:{w:'ตรีศูลราชันห้วงลึก',a:'เกราะเกล็ดราชันห้วงลึก',c:'แหวนไข่มุกราชันห้วงลึก',h:'มงกุฎปะการังราชัน',b:'รองเท้าคลื่นราชัน'},
-    b:[[2,{dm:.08},'ดาเมจ +8%'],[3,{cr:.06,as:.06},'คริติคอล +6% · ความเร็วโจมตี +6%'],[5,{},'ทุกการโจมตีมีโอกาส 12% ระเบิดน้ำวนรอบเป้า ดาเมจ x2.5']]},
+    b:[[2,{dm:.08},'ดาเมจ +8%'],[3,{cr:.06,as:.06},'คริติคอล +6% · ความเร็วโจมตี +6%'],[5,{},'ทุกการโจมตีมีโอกาส 12% ระเบิดน้ำวนรอบเป้า ดาเมจ 100% (เกิดได้ทุก 0.75 วิ)']]},
   2:{n:'ชุดผู้พิทักษ์ห้วงลึก',c:'#4a8ae0',pn:{w:'หอกผู้พิทักษ์ห้วงลึก',a:'เกราะเปลือกผู้พิทักษ์',c:'กำไลหินผู้พิทักษ์',h:'หมวกเปลือกหอยผู้พิทักษ์',b:'รองเท้าหินผู้พิทักษ์'},
     b:[[2,{hp:.1},'เลือดสูงสุด +10%'],[3,{red:.06,reg:6},'ลดดาเมจที่ได้รับ +6% · ฟื้นเลือด 6/วิ'],[5,{},'เลือดต่ำกว่า 50% ได้เกราะ 25% ของเลือดสูงสุดและฟื้นมานา 30% (ทุก 15 วิ)']]}};
 const SETCOST=sl=>sl==='w'?{sc:12,hr:1,g:20000}:{sc:8,hr:0,g:15000};
@@ -8491,8 +8492,8 @@ function makeSetItem(id,sl){const it=genItem(id===6?22:id===5?21:id===4?15:id===
 const setCount=id=>SLOTS.reduce((a,sl)=>a+(me.eq&&me.eq[sl]&&me.eq[sl].ss===id?1:0),0);
 function setB(k){let t=0;if(!me.eq)return 0;for(const id in SETS){const n=setCount(+id);if(n<2)continue;SETS[id].b.forEach(([need,st])=>{if(n>=need&&st[k])t+=st[k]})}return t}
 function setHtml(id){const S=SETS[id],n=setCount(id);return'<div style="margin-top:6px;padding:6px 8px;border-radius:8px;background:rgba(31,184,168,.08);border:1px solid '+S.c+'"><b style="color:'+S.c+'">🔱 '+S.n+' ('+n+'/5)</b>'+S.b.map(([need,,t])=>'<div style="font-size:12px;opacity:'+(n>=need?1:.55)+'">'+(n>=need?'✅':'⬜')+' '+need+' ชิ้น: '+t+'</div>').join('')+'<div style="font-size:12px;opacity:'+(n>=5?1:.55)+'">'+(n>=5?'✅':'⬜')+' 5 ชิ้น: เพดานค่าสเตตัสรวมจากอุปกรณ์ +20%</div></div>'}
-function setProc(m){dawnProc(m);stormProc(m);shadowProc(m);rootProc(m);if(setCount(1)<5||me.spB||Math.random()>=.12)return;const n=performance.now();if(n<(me.spT||0))return;me.spT=n+400;me.spB=1;
-  fx({k:'vortex',x:Math.round(m.x),y:Math.round(m.y),r:75});const d=pd()*2.5;mons.forEach(q=>{if(dist(q,m)<75)addHit(q,d,0,1,'bolt')});me.spB=0}
+function setProc(m){dawnProc(m);stormProc(m);shadowProc(m);rootProc(m);if(setCount(1)<5||me.spB||Math.random()>=.12)return;const n=performance.now();if(n<(me.spT||0))return;me.spT=n+750;me.spB=1;
+  fx({k:'vortex',x:Math.round(m.x),y:Math.round(m.y),r:75});const d=pd()*1.0;mons.forEach(q=>{if(dist(q,m)<75)addHit(q,d,0,1,'bolt')});me.spB=0}
 function setTick(dt){me.s2cd=Math.max(0,(me.s2cd||0)-dt);if(setCount(2)>=5&&me.s2cd<=0&&me.down<=0&&me.hp<me.mh*.5){me.s2cd=15;me.shv=Math.max(me.shv||0,Math.round(me.mh*.25));me.shield=6;me.mp=Math.min(me.mm,me.mp+me.mm*.3);fx({k:'shield',r:40,v:0});dn.push({x:me.x,y:me.y-50,v:'🔱 เกราะผู้พิทักษ์',t:1.2})}}
 function setUI(msg){me.mat=me.mat||{sc:0,hr:0};let h='';if(msg)h+='<div class="note">'+msg+'</div>';
   h+='<div class="sum"><div>'+MATN.sc[0]+' '+MATN.sc[1]+'<b>'+me.mat.sc+'</b></div><div>'+MATN.hr[0]+' '+MATN.hr[1]+'<b>'+me.mat.hr+'</b></div><div>💰 ทอง<b>'+fmtG(me.gold)+'</b></div></div>';
