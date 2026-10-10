@@ -3437,7 +3437,7 @@ const FOOD={grill:['🍢','ปลาย่างเกลือ',{c:3},{hp:.1},1
   ramen:['🍜','ราเมนห้วงลึก',{r:2},{red:.08,hp:.05},25,2500],feast:['🍱','สำรับมัจฉาราชัน',{u:2,r:1,e:1},{dm:.08,hp:.1,xp:.1},30,8000]};
 const FDN={hp:'เลือดสูงสุด',dm:'ดาเมจ',xp:'EXP',gd:'ทองที่เก็บได้',cr:'โอกาสคริ',cdm:'ดาเมจคริ',as:'ความเร็วโจมตี',red:'ลดดาเมจที่ได้รับ',fl:'โอกาสเจอปลาหายาก'};
 const FROD=[['คันไม้ไผ่',0,{}],['คันไม้สัก',5000,{u:5}],['คันเหล็กกล้า',60000,{r:4}],['คันเงินนาค',300000,{e:2}],['คันทองมังกร',1200000,{e:4,r:6}]];
-let FSW=[],FS={ph:'',open:false,t:0,msg:''},FSHR={},fsTab='bag';
+let FSWM=-1,FSW=[],FS={ph:'',open:false,t:0,msg:''},FSHR={},fsTab='bag';
 function fsSt(){let S=me.fs;if(!S||typeof S!=='object')S=me.fs={};S.r=Math.max(0,Math.min(4,S.r|0));['c','n','b','f'].forEach(k=>{if(!S[k]||typeof S[k]!=='object')S[k]={}});if(S.fb&&(!S.fb.id||!FOOD[S.fb.id]||!(S.fb.t>0)))S.fb=null;return S}
 function fdM(k){let v=0;const S=me.fs;if(S&&S.fb&&S.fb.t>0){const F=FOOD[S.fb.id];if(F)v+=F[3][k]||0}try{v+=rbM(k)}catch(e){}return v}
 function fsKinds(){const S=fsSt();return Object.keys(FISH).filter(id=>S.n[id]>0).length}
@@ -3445,7 +3445,7 @@ function fsLegs(){const S=fsSt();return Object.keys(FISH).filter(id=>FISH[id].r=
 function fsCnt(r){const S=fsSt();let t=0;for(const id in S.c)if(FISH[id]&&FISH[id].r===r)t+=S.c[id]|0;return t}
 function fsVal(id){const F=FISH[id];if(!F)return 0;return Math.max(1,Math.round([3,8,25,80,300][F.r]*Math.max(5,me.lv||1)*tierRw()))}
 function fsOkMap(){try{return curMap===1||propsOk()}catch(e){return false}}
-function fshBuild(){fshStop(1);FSW=[];try{if(MAPS[curMap]&&MAPS[curMap].tent){trees.length=0;decor.length=0}if(curMap===1){for(let i=trees.length-1;i>=0;i--)if(Math.hypot(trees[i].x-TNE.x,trees[i].y-TNE.y)<140)trees.splice(i,1);for(let i=decor.length-1;i>=0;i--)if(Math.hypot(decor[i].x-TNE.x,decor[i].y-TNE.y)<110)decor.splice(i,1)}}catch(e){}if(!fsOkMap())return;const M=MAPS[curMap];
+function fshBuild(){FSWM=curMap;fshStop(1);FSW=[];try{if(MAPS[curMap]&&MAPS[curMap].tent){trees.length=0;decor.length=0}if(curMap===1){for(let i=trees.length-1;i>=0;i--)if(Math.hypot(trees[i].x-TNE.x,trees[i].y-TNE.y)<140)trees.splice(i,1);for(let i=decor.length-1;i>=0;i--)if(Math.hypot(decor[i].x-TNE.x,decor[i].y-TNE.y)<110)decor.splice(i,1)}}catch(e){}if(!fsOkMap())return;const M=MAPS[curMap];
   if(curMap===1)FSW.push({x:1380,y:2120,rx:100,ry:60,b:'w',ph:1.7});
   else{const r=rng(hseed('pond'+curMap)),b=FSB[curMap]||'w';
     for(let k=0;k<80&&FSW.length<2;k++){const x=320+r()*(WW-640),y=320+r()*(WH-640),rx=82+r()*30,ry=rx*(.55+r()*.1);
@@ -3499,7 +3499,7 @@ function fsCatch(){const S=fsSt(),id=FS.f,F=FISH[id],X=FS.bx,Y=FS.by;me.stt.fsh=
   FSHR[uid]=Object.assign(FSHR[uid]||{},{on:0,leap:{ic:FS.res.ic,col:FS.res.col,t0:performance.now(),bx:X,by:Y}});
   if(room)try{emitM('fx',{k:'fsc',u:uid,x:Math.round(me.x),y:Math.round(me.y),f:id,bx:Math.round(X),by:Math.round(Y),m:curMap}),emitM('fx',{k:'fsr',u:uid,x:Math.round(me.x),y:Math.round(me.y),on:0,m:curMap})}catch(e){}
   FS.ph='end';FS.t=2.6;FS.msg='';try{achCheck()}catch(e){}fsPanel(1)}
-function fshTick(dt){const S=me.fs;if(S&&S.fb&&S.fb.t>0){S.fb.t-=dt;if(S.fb.t<=0){S.fb=null;try{recalc()}catch(e){}banner={s:'🍽️ ฤทธิ์อาหารหมดแล้ว — ทำอาหารใหม่ได้ที่ป้าบัว',t:4}}}
+function fshTick(dt){if(FSWM!==curMap&&run)try{fshBuild()}catch(e){FSWM=curMap}const S=me.fs;if(S&&S.fb&&S.fb.t>0){S.fb.t-=dt;if(S.fb.t<=0){S.fb=null;try{recalc()}catch(e){}banner={s:'🍽️ ฤทธิ์อาหารหมดแล้ว — ทำอาหารใหม่ได้ที่ป้าบัว',t:4}}}
   const bt=$('fshb');{const w=FS.open?null:(me.cls&&run&&me.down<=0&&ov.hidden&&!SD.on)?fsWaterAt(me.x,me.y,34):null;if(bt){if(bt.hidden!==!w)bt.hidden=!w;if(w){const tx='🎣 ตกปลา · '+FBN[w.b][0];if(bt.textContent!==tx)bt.textContent=tx}}}
   if(!FS.open)return;
   if(me.down>0||!ov.hidden||SD.on){fsClose();return}
@@ -3540,7 +3540,7 @@ function fshRod(x,y,u){const R=FSHR[u];if(!R)return;const n=performance.now(),t=
   const L=R.leap;if(L){const k=(n-L.t0)/1100;if(k>=1){R.leap=null;return}const ex=x,ey=y-40,px=L.bx+(ex-L.bx)*k,py=L.by+(ey-L.by)*k-Math.sin(k*Math.PI)*70;g.save();g.translate(px,py);g.rotate((k-.5)*2.2*(ex>=L.bx?1:-1));
     g.globalCompositeOperation='lighter';glowAt(0,0,22,h2r(L.col),.7*(1-k*.6));g.globalCompositeOperation='source-over';g.font='22px system-ui';g.textAlign='center';g.textBaseline='middle';g.fillText(L.ic,0,0);g.restore();
     if(k<.15&&Math.random()<.5)parts.push({x:L.bx,y:L.by,vx:(Math.random()-.5)*80,vy:-60-Math.random()*60,t:.5,l:.5,c:'#cfefff',r:1.5})}}
-function fshDraw(){if(!FSW.length)return;const t=performance.now()/1000;
+function fshDraw(){if(FSWM!==curMap&&me.cls)try{fshBuild()}catch(e){FSWM=curMap}if(!FSW.length)return;const t=performance.now()/1000;
   FSW.forEach(w=>{if(!inView(w.x,w.y,w.rx+40))return;const B=FBN[w.b],x=w.x,y=w.y,rx=w.rx,ry=w.ry,ph=w.ph,R=rng((w.x*7+w.y)|0);g.save();
     /* ฝั่ง */
     g.fillStyle='rgba(0,0,0,.18)';g.beginPath();g.ellipse(x+3,y+6,rx+14,ry+10,0,0,7);g.fill();g.fillStyle=B[1];g.beginPath();g.ellipse(x,y,rx+12,ry+9,0,0,7);g.fill();
@@ -8539,7 +8539,7 @@ function drawKnight(q){const t=performance.now()/1000+q.x*.01,fx=q.gd===2||(q.gd
   Pg([-11,-6,-3,-6,-3,4,-7,10,-11,4],'#2a4a8a');g.fillStyle='#e0b040';g.fillRect(-7.8,-5,1.6,13);g.fillRect(-10.5,-2,7,1.6);g.strokeStyle='#e0b040';g.lineWidth=.8;g.beginPath();g.moveTo(-11,-6);g.lineTo(-3,-6);g.stroke();
   for(let i=0;i<4;i++){const a=-1.9+i*.25+Math.sin(t*3+i)*.05;g.strokeStyle=i%2?'#e84a3a':'#c2352b';g.lineWidth=2.6;g.beginPath();g.moveTo(1,-24);g.quadraticCurveTo(-2+i*1.5,-34+i,-9+i*1.2,-30+i*2.4+Math.sin(t*3+i));g.stroke()}
   g.restore()}
-function makeGuards(){guards=[];if(curMap===19){fortGuards();return}if(curMap!==1)return;for(let i=0;i<8;i++){const k=i>>1,s=i&1?1:-1,a=k*Math.PI/2,d=CAMP.R+34,x=CX+Math.cos(a)*d-Math.sin(a)*s*30,y=CY+Math.sin(a)*d+Math.cos(a)*s*30;guards.push({px:x,py:y,x,y,hp:GH,dead:0,ac:0,gd:k})}}
+function makeGuards(){guards=[];if(curMap===19){fortGuards();return}if(curMap!==1)return;for(let i=0;i<8;i++){const k=i>>1,s=i&1?1:-1,a=k*Math.PI/2,d=CAMP.R+34,x=CX+Math.cos(a)*d-Math.sin(a)*s*30,y=CY+Math.sin(a)*d+Math.cos(a)*s*30;guards.push({px:x,py:y,x,y,hp:GH,dead:0,ac:0,gd:k})}[[1105,2125,2],[1250,2250,1],[1425,2262,1],[1570,2165,0]].forEach(([x,y,gd])=>guards.push({px:x,py:y,x,y,hp:3000,mh:3000,dm:150,dead:0,ac:0,gd,zn:1}))}
 function bh(){return 40+wave*8}
 function hostId(){return(room&&room.hostUid)?room.hostUid:[uid,...Object.keys(others)].sort()[0]}
 /* รายชื่อทุกคนในแมพเดียวกัน (เซิร์ฟเวอร์ส่งทุก 2 วิ) · ใช้แลกเปลี่ยน/เชิญปาร์ตี้ได้แม้ยืนห่างกันในแมพใหญ่ เช่น นครลอยฟ้า */
@@ -9105,7 +9105,7 @@ function simHost(dt){
     if(q.dead>0){q.dead-=dt;if(q.dead<=0){q.hp=q.mh||GH;q.x=q.px;q.y=q.py}return}
     q.ac-=dt;if(q.ar){let b=null,bd=q.rg||360;mons.forEach(m=>{if(m.p&&!m.fw&&Math.hypot(m.x-FORT.x,m.y-FORT.y)>FORT.R+120)return;if(m.t>=3)return;const d=Math.hypot(m.x-q.x,m.y-q.y);if(d<bd){bd=d;b=m}});if(b&&q.ac<=0){q.ac=1.1+Math.random()*.3;b.hp-=q.dm;b.hitT=performance.now();dn.push({x:b.x,y:b.y-14,v:q.dm,t:.5})}q.hp=Math.min(q.mh,q.hp+60*dt);return}
     let b=null,bd=260;
-    mons.forEach(m=>{if(m.p)return;const d=Math.hypot(m.x-q.x,m.y-q.y);if(d<bd){bd=d;b=m}});
+    mons.forEach(m=>{if(m.p&&!q.zn)return;if(q.zn&&(m.t>=3||m.pv||m.dum||Math.hypot(m.x-q.px,m.y-q.py)>300))return;const d=Math.hypot(m.x-q.x,m.y-q.y);if(d<bd){bd=d;b=m}});
     if(b){if(bd>28)moveTo(q,b.x,b.y,120*dt,curMap===1||curMap===19?0:250);else if(q.ac<=0){q.ac=.6;const qd=q.dm||40;b.hp-=qd;dn.push({x:b.x,y:b.y-14,v:qd,t:.5})}}
     else{moveTo(q,q.px,q.py,90*dt);q.hp=Math.min(q.mh||GH,q.hp+(q.mh?120:8)*dt)}
     if(curMap===19){const RR=FORT.R+22,dx=q.x-FORT.x,dy=q.y-FORT.y,d=Math.hypot(dx,dy)||1;if(d<RR){q.x=FORT.x+dx/d*RR;q.y=FORT.y+dy/d*RR}const lx=q.x-q.px,ly=q.y-q.py,ld=Math.hypot(lx,ly);if(ld>240){q.x=q.px+lx/ld*240;q.y=q.py+ly/ld*240}}
@@ -9145,7 +9145,7 @@ function simHost(dt){
   });
   if(DGM)mons.forEach(m=>{const q=Math.hypot(m.x-CX,m.y-CY);if(q>DR){m.x=CX+(m.x-CX)*DR/q;m.y=CY+(m.y-CY)*DR/q}});
   try{terMons()}catch(e){}
-  if(curMap===1){const RR=CAMP.R+18;mons.forEach(m=>{const q=Math.hypot(m.x-CX,m.y-CY)||1;if(q<RR){m.x=CX+(m.x-CX)*RR/q;m.y=CY+(m.y-CY)*RR/q}})}if(curMap===1&&FSW[0]){const w=FSW[0],ax=w.rx+170,ay=w.ry+150;mons.forEach(m=>{if(m.t>=3)return;const dx=m.x-w.x,dy=m.y-w.y,e=(dx/ax)**2+(dy/ay)**2;if(e<1){const f=1/Math.sqrt(Math.max(.0001,e));m.x=w.x+dx*f;m.y=w.y+dy*f}})}
+  if(curMap===1){const RR=CAMP.R+18;mons.forEach(m=>{const q=Math.hypot(m.x-CX,m.y-CY)||1;if(q<RR){m.x=CX+(m.x-CX)*RR/q;m.y=CY+(m.y-CY)*RR/q}})}if(curMap===1){const RR=190;mons.forEach(m=>{if(m.t>=3)return;const dx=m.x-TNE.x,dy=m.y-TNE.y,d=Math.hypot(dx,dy)||1;if(d<RR){m.x=TNE.x+dx/d*RR;m.y=TNE.y+dy/d*RR}})}if(curMap===1&&FSW[0]){const w=FSW[0],ax=w.rx+170,ay=w.ry+150;mons.forEach(m=>{if(m.t>=3)return;const dx=m.x-w.x,dy=m.y-w.y,e=(dx/ax)**2+(dy/ay)**2;if(e<1){const f=1/Math.sqrt(Math.max(.0001,e));m.x=w.x+dx*f;m.y=w.y+dy*f}})}
   if(curMap===19){const RR=FORT.R+20;mons.forEach(m=>{if(m.t>=3)return;const q=Math.hypot(m.x-FORT.x,m.y-FORT.y)||1;if(q<RR){m.x=FORT.x+(m.x-FORT.x)*RR/q;m.y=FORT.y+(m.y-FORT.y)*RR/q}})}
   try{ekBoomTick(dt,pl)}catch(e){}try{fevTick(dt,pl)}catch(e){}try{propsHost(dt,pl)}catch(e){}try{mProjTick(dt,pl)}catch(e){}const dead=mons.filter(m=>m.hp<=0);
   if(dead.length){
