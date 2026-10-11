@@ -132,7 +132,7 @@ function onEmit(c,m){
       if(have<MK.L[i].p){mkReply(c,'mkg',{ok:0,why:'gold'});return}A.exp=A.exp||{};A.exp[f.k]={g:have-MK.L[i].p,at:ex?ex.at:Date.now()};accDirty=true}const x=MK.L.splice(i,1)[0];MK.sales[x.u]=(MK.sales[x.u]||0)+Math.floor(x.p*.95);mkDirty=true;mkReply(c,'mkg',{ok:1,k:x.k,d:x.d,p:x.p,id:x.id});const s=byMid.get(x.u)||byUid.get(x.u);if(s)mkReply(s,'mks',{n:c.p.n,p:x.p,id:x.id,g:Math.floor(x.p*.95)});return}
   if(k==='mkx'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id)&&x.u===u);if(i<0)return;const x=MK.L.splice(i,1)[0];mkDirty=true;mkReply(c,'mkg',{ok:1,back:1,k:x.k,d:x.d,p:0,id:x.id});return}
   if(k==='mkc'){const u=mkOwner(c,d);if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];if(g>0){const A=ACCS[c.accA],f=svChar(c.accA,d.mid);if(A&&f){A.cr=A.cr||{};A.cr[f.k]=(A.cr[f.k]||0)+g;accDirty=true}}delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
-  if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
+  if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;let o=byUid.get(d.to);if(!o&&d.op==='lnk'&&typeof d.toN==='string'&&d.toN){const nm=d.toN.slice(0,24);for(const x of clients)if(x!==c&&x.p&&x.p.n===nm){o=x;break}}if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,key==='wb'?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='mvq'){send(c,JSON.stringify({t:'emit',k:'mvr',d:{mp,d:mvTable()},from:0}));return}
   if(k==='mva'||k==='mvd'||k==='mvk'||k==='mvlost'){const V=MV[mp];if(!V)return;const now=Date.now();
