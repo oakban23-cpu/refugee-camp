@@ -90,3 +90,5 @@ R("if(t.inv)return;const r=t.r,sw=Math.sin(now/1400+t.x*.01)*.8;","if(t.inv)retu
 R("else drawMon(m.x,m.y,m.t,st.ck,m.fx||1,m.sl,hf);MON_CUR=null;","else monLit(m,()=>drawMon(m.x,m.y,m.t,st.ck,m.fx||1,m.sl,hf));MON_CUR=null;")
 open(P,'w').write(s)
 print('ok')
+import subprocess
+subprocess.run(['node','/home/claude/tools/dead.js',P,P,'drawBoss10','drawBoss8','drawBoss7','drawBoss11','musTickOld','petUI0','casDrawFx0','d4DrapeSpr','drawVoidSky','drawBoots'],check=True)
