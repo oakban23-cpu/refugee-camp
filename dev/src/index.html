@@ -8745,6 +8745,25 @@ setTimeout(()=>{try{
   try{const _sd=stDone;window.stDone=stDone=function(){const st=stCur(),q=me.sty;if(st&&st.p7m&&q&&!q.p7m){q.a=2;setTimeout(()=>{stSay([['me','(ทุกสายตาจับจ้องมา… จะจ่ายราคาของดาวด้วยอะไร?)']],()=>{},{cine:1,choice:[['💰 จ่ายราคาให้บรอม',1],['🤝 ถามคนงานที่ขุดมันขึ้นมา',2]]});
       SD.onChoose=e=>{q.p7m=e;stClose();setTimeout(()=>stSay(STEND7[e],()=>{_sd();setTimeout(()=>{banner={s:e===1?'💰 สัญญาการค้าฉบับแรกของค่ายผู้อพยพ':'🤝 สหกรณ์คนงานคาร์น · ชาวนครลี้ภัยกลุ่มแรกจากนอกค่าย',t:6};try{stFlash()}catch(_){}},600)},{cine:1}),250)}},200);return}
     if(st&&st.p7rs)setTimeout(()=>sdGive(5,'คนงานขอบคุณ'),400);if(st&&st.p7c2)setTimeout(()=>sdGive(10,'เซเลสต์แบ่งเศษดาวให้'),400);return _sd()}}catch(e){}},0);
+/* ---------- v358 ปุ่มซ่อน/แสดงช่องแชทบนจอ ----------
+   · ปุ่ม «✕ ซ่อนแชท» ใต้ข้อความล่าสุด → ซ่อนข้อความผู้เล่น (ข้อความระบบยังขึ้นสั้น ๆ ตามเดิม)
+   · ตอนซ่อนเหลือปุ่มเล็ก «💬 แชท» + จำนวนข้อความใหม่ → แตะเพื่อแสดงกลับ
+   · ระหว่างเปิดช่องพิมพ์ (💬 บนแถบบน) แชทจะแสดงชั่วคราวให้เห็นบทสนทนา
+   · จำค่าไว้ในเครื่อง (refugee_clogmin) */
+var CLG={min:false,n:0};try{CLG.min=localStorage.getItem('refugee_clogmin')==='1'}catch(e){}
+function clogHid(){if(!CLG.min)return false;const b=$('cbar');return!b||b.hidden}
+function clogSet(v){CLG.min=!!v;CLG.n=0;try{localStorage.setItem('refugee_clogmin',CLG.min?'1':'0')}catch(e){}logSig='';try{sfx('click')}catch(e){}renderLog()}
+function clogPill(el,CM){const hasP=chatLog.some(l=>!l.sys);if(!CM&&!hasP)return;const d=document.createElement('div');d.className='clp'+(CM?'':' clx');d.setAttribute('role','button');
+  if(CM){d.textContent='💬 แชท';d.title='แสดงแชท';if(CLG.n){const b=document.createElement('b');b.textContent=CLG.n>99?'99+':String(CLG.n);d.appendChild(b)}}else{d.textContent='✕ ซ่อนแชท';d.title='ซ่อนข้อความแชทบนจอ'}
+  const stop=e=>e.stopPropagation();d.addEventListener('pointerdown',stop);d.addEventListener('mousedown',stop);d.addEventListener('touchstart',stop,{passive:true});
+  d.addEventListener('click',e=>{e.stopPropagation();e.preventDefault();clogSet(!CM)});el.appendChild(d)}
+{const s=document.createElement('style');s.textContent=
+  '#clog .clp{align-self:flex-start;pointer-events:auto;cursor:pointer;display:inline-flex;align-items:center;gap:5px;min-height:22px;box-sizing:border-box;padding:2px 10px!important;border-radius:11px!important;'
+ +'font-size:11px!important;font-weight:700;color:#f3d08a;background:rgba(12,10,16,.66)!important;border:1px solid rgba(243,208,138,.5);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;white-space:nowrap}'
+ +'#clog .clp.clx{color:#e8dcc0;border-color:rgba(232,220,192,.32);opacity:.78!important}'
+ +'#clog .clp:active{transform:scale(.95)}'
+ +'#clog .clp b{color:#fff;background:#c0392b;border-radius:8px;padding:0 5px;font-size:10px;line-height:15px;font-weight:800}';
+  document.head.appendChild(s)}
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -13820,11 +13839,11 @@ let logSig='';function logFit(el){try{const tb=$('topb'),st=$('stage')||el.paren
     const bottom=er.bottom||(sr.bottom-sr.height*.25),mh=Math.max(36,Math.min(210,sr.height*.32,bottom-top));el.style.maxHeight=Math.round(mh)+'px'}catch(e){}}
 function renderLog(){const el=$('clog');if(!el)return;const now=Date.now();
   chatLog=chatLog.filter(l=>!l.sys||now-l.at<4500);{let n=0;for(let i=chatLog.length-1;i>=0;i--){if(!chatLog[i].sys&&++n>40)chatLog.splice(i,1)}}
-  logFit(el);const sig=chatLog.map(l=>l.at+(l.sys?'s':'')).join(',');
+  logFit(el);const CM=clogHid(),sig=chatLog.map(l=>l.at+(l.sys?'s':'')).join(',')+'|'+(CM?'m'+CLG.n:'o');
   if(sig===logSig){el.querySelectorAll('.sy').forEach(d=>{const age=now-(+d.dataset.at);d.style.opacity=Math.max(.15,Math.min(1,(4500-age)/1200)).toFixed(2)});return}logSig=sig;el.textContent='';
-  const last=chatLog.length-1,sysI=chatLog.map((l,i)=>l.sys?i:-1).filter(i=>i>=0).slice(-2);chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;const d=document.createElement('div');if(l.sys){d.className='sy';d.dataset.at=l.at;d.style.opacity=Math.max(.15,Math.min(1,(4500-(now-l.at))/1200)).toFixed(2);d.textContent=l.t;d.title=l.t}
-    else{const b=document.createElement('b');b.textContent=l.n+': ';d.appendChild(b);d.appendChild(document.createTextNode(l.t));if(i<last-2)d.style.opacity='.82'}el.appendChild(d)});el.classList.toggle('ovf',el.scrollHeight>el.clientHeight+1)}
-let chUnread=0;function addChat(n,t,u){chatLog.push({n,t,at:Date.now()});if(u&&u!==uid)chUnread=1;if(u)says[u]={t,ttl:6};renderLog()}
+  const last=chatLog.length-1,sysI=chatLog.map((l,i)=>l.sys?i:-1).filter(i=>i>=0).slice(-2);chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;if(CM&&!l.sys)return;const d=document.createElement('div');if(l.sys){d.className='sy';d.dataset.at=l.at;d.style.opacity=Math.max(.15,Math.min(1,(4500-(now-l.at))/1200)).toFixed(2);d.textContent=l.t;d.title=l.t}
+    else{const b=document.createElement('b');b.textContent=l.n+': ';d.appendChild(b);d.appendChild(document.createTextNode(l.t));if(i<last-2)d.style.opacity='.82'}el.appendChild(d)});clogPill(el,CM);el.classList.toggle('ovf',el.scrollHeight>el.clientHeight+1)}
+let chUnread=0;function addChat(n,t,u){chatLog.push({n,t,at:Date.now()});if(u&&u!==uid)chUnread=1;if(u&&u!==uid&&CLG.min)CLG.n++;if(u)says[u]={t,ttl:6};renderLog()}
 function dnStack(){const isT=d=>typeof d.v==='string'&&!d.s&&!d.c&&d.vx===undefined&&d.t>0,isO=d=>typeof d.v==='string'&&!d.c&&d.vx===undefined&&d.t>0;
   for(const d of dn){if(!isO(d)||d._st)continue;d._st=1;const base=d.v;
     if(isT(d)){const gm=/^\+([\d,]+) (ทอง|XP)$/.exec(base);if(gm){const nv=+gm[1].replace(/,/g,''),gs=dn.find(e=>e!==d&&e._st&&e.gk===gm[2]&&e.t>.3&&Math.abs(e.x-d.x)<90&&Math.abs(e.y-d.y)<90);if(gs){gs.gs+=nv;gs.v='+'+gs.gs.toLocaleString()+' '+gm[2];gs.t=Math.max(gs.t,d.t);d.t=0;continue}d.gk=gm[2];d.gs=nv}const dup=dn.find(e=>e!==d&&e._st&&isT(e)&&(e.bv||e.v)===base&&Math.abs(e.x-d.x)<80&&Math.abs(e.y-d.y)<90);
@@ -13840,7 +13859,7 @@ function sendChat(){const inp=$('cin');const t=inp.value.replace(/[\u0000-\u001f
     fetch('/admin/api',{headers:{'x-admin-key':gm[2]},cache:'no-store'}).then(r=>{if(r.ok)gmSet(true);else sysMsg('🛠 รหัสผู้ดูแลไม่ถูกต้อง')}).catch(()=>sysMsg('🛠 ตรวจรหัสไม่ได้'));return}}
   const now=Date.now();if(now-lastChat<700)return;lastChat=now;inp.value='';
   addChat(myName,t,uid);if(room)room.emit('chat',{u:uid,n:myName,t})}
-function toggleChat(force){const bar=$('cbar');const on=force!==undefined?force:bar.hidden;bar.hidden=!on;if(on)$('cin').focus();else $('cin').blur()}
+function toggleChat(force){const bar=$('cbar');const on=force!==undefined?force:bar.hidden;bar.hidden=!on;if(on)$('cin').focus();else $('cin').blur();try{logSig='';renderLog()}catch(e){}}
 $('cb').onclick=()=>toggleChat();$('cht').onclick=()=>{chUnread=0;toggleChat()};$('evt').onclick=()=>{if(me.cls&&run){ov.hidden=false;eventUI()}};
 $('csend').onclick=()=>{sendChat();$('cin').focus()};
 $('cin').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();sendChat()}else if(e.key==='Escape')toggleChat(false)});

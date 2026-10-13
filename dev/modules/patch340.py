@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('ux1.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -161,6 +161,12 @@ R("if(!down&&rwOn(lk))rootAura(x,y);","if(!down&&rwOn(lk))rootAura(x,y);if(!down
 R("if(dk>0){const vp=VIG.pend;VIG.pend='';if(curMap===9){","if(dk>0){const vp=VIG.pend;VIG.pend='';if(curMap===9||curMap===35){")
 # เซฟ: เก็บค่าเนื้อเรื่องภาค 6–7 (e6, p6h, p7sc ฯลฯ) ไม่ให้หายตอนโหลดใหม่
 R("e4:n(y.e4,0,2,0)}}","e4:n(y.e4,0,2,0)};Object.keys(y).slice(0,60).forEach(k=>{if(/^(e[5-9]|p[6-9][a-z0-9]{1,4})$/.test(k)){const v=n(y[k],0,1e9,0);if(v)o.sty[k]=v}})}")
+# ---------- v358 ซ่อน/แสดงช่องแชท ----------
+R("logFit(el);const sig=chatLog.map(l=>l.at+(l.sys?'s':'')).join(',');","logFit(el);const CM=clogHid(),sig=chatLog.map(l=>l.at+(l.sys?'s':'')).join(',')+'|'+(CM?'m'+CLG.n:'o');")
+R("chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;","chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;if(CM&&!l.sys)return;")
+R("el.appendChild(d)});el.classList.toggle('ovf',el.scrollHeight>el.clientHeight+1)}","el.appendChild(d)});clogPill(el,CM);el.classList.toggle('ovf',el.scrollHeight>el.clientHeight+1)}")
+R("function addChat(n,t,u){chatLog.push({n,t,at:Date.now()});if(u&&u!==uid)chUnread=1;","function addChat(n,t,u){chatLog.push({n,t,at:Date.now()});if(u&&u!==uid)chUnread=1;if(u&&u!==uid&&CLG.min)CLG.n++;")
+R("if(on)$('cin').focus();else $('cin').blur()}","if(on)$('cin').focus();else $('cin').blur();try{logSig='';renderLog()}catch(e){}}")
 open(P,'w').write(s)
 print('ok')
 import subprocess
