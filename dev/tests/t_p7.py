@@ -4,7 +4,7 @@ async def adv(A,n=30):
     for i in range(n):
         await A.ev("()=>{stTick();if(SD.on&&!SD.choice){if(SD.typ){stNext()}stNext()}}");await A.wait(110)
     for i in range(90):
-        on=await A.ev("()=>{stTick();if(SD.on&&!SD.choice){if(SD.typ){stNext()}stNext()}return SD.on&&!SD.choice}")
+        on=await A.ev("()=>{if(!isDg())mons=mons.filter(m=>m.t===3||Math.hypot(m.x-me.x,m.y-me.y)>340);stTick();if(SD.on&&!SD.choice){if(SD.typ){stNext()}stNext()}return SD.on&&!SD.choice}")
         await A.wait(110)
         if not on:break
 async def shot(A,x,y,f,w=1500):
@@ -33,7 +33,7 @@ async def main():
             await A.ev(f"()=>{{me.x=SFSH[{i}][0];me.y=SFSH[{i}][1]+20}}");await A.wait(600)
         await adv(A);print('shards',await A.ev("()=>[me.sty.s,me.sty.a,me.sty.p7sc,stTxt()]"))
         for i in range(40):
-            if await A.ev("()=>me.sty.a===1&&!SD.on"):break
+            if await A.ev("()=>stCur().g==='kill'&&me.sty.a===1&&!SD.on"):break
             await adv(A,3)
         await A.ev("()=>{for(let i=0;i<40;i++)stKill(0,0)}");await adv(A)
         print('kill',await A.ev("()=>[me.sty.s,me.sty.a,stTxt(),MAPS[34].npc2.x]"))
