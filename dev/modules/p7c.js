@@ -27,7 +27,7 @@ function obChain(){const R=p6Past('p7mr')?OBOK.slice():obRot(),segs=[],lit=[],se
 function obC(){const n=performance.now();if(OBCC.c&&n-OBCC.t<40)return OBCC.c;OBCC.t=n;return OBCC.c=obChain()}
 function obAqT(st){if(!st.p7mr||!me.sty)return null;const C=obChain();if(C.links>=5)return null;const[mx,my]=OBM[C.links];return{mp:36,act:'reach',x:mx,y:my+OBPL,lb:'ไปหมุนกระจกบานที่ '+(C.links+1)}}
 function obTick(dt,now,x,y,mv){if(me.down<=0){me.x=Math.max(130,Math.min(3070,me.x));me.y=Math.max(200,Math.min(3060,me.y))}
-  {const N=MAPS[36].npc2,on=p6Past('p7ob');N.x=on?1760:-9999;N.y=on?1390:-9999}
+  {const N=MAPS[36].npc2,on=p6Past('p7ob')&&!p6Past('p7h');N.x=on?1760:-9999;N.y=on?1390:-9999}
   const st=stCur(),q=me.sty;if(!st||!q||q.a!==1||!st.p7mr){OBP.on=-1;OBP.pr=0;return}
   const C=obChain();if(q.n!==C.links){q.n=C.links;try{stHud()}catch(e){}}
   let on=-1;OBM.forEach(([mx,my],i)=>{if(Math.hypot(x-mx,y-my-OBPL)<OBPR)on=i});
