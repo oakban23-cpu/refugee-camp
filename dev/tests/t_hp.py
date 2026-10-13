@@ -17,7 +17,7 @@ async def main():
         b=await pw.chromium.launch()
         A=await new_client(b,'T'+str(random.randint(1000,9999)),'mage',99)
         await A.pg.set_viewport_size({'width':390,'height':844})
-        i0=await A.ev("()=>STY.findIndex(x=>x.c===STCH.length-1)")
+        i0=await A.ev("()=>STY.findIndex(x=>x.c===STCH.indexOf('ภาค 6 · บทสุดท้าย · หลุมหัวใจว่าง'))")
         await A.ev(f"()=>{{gmGod=true;LOWQ=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,p6s:31,p6b:7,p6g:15}};ov.hidden=true;enterMap(9,{{x:1600,y:1400}})}}");await A.wait(2500)
         r=await A.ev("()=>{const i=CITY.npcs.findIndex(n=>n.k==='qn');const N=CITY.npcs[i];me.x=N.x;me.y=N.y+40;npcSel='x'+i;return stNpcClick()}");await adv(A)
         print('qn',r,await A.ev("()=>[me.sty.s,stTxt(),JSON.stringify((aqRoute(33)||[]).map(g=>g.to))]"))
