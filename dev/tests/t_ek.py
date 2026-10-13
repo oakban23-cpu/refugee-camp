@@ -1,0 +1,25 @@
+import asyncio, sys
+sys.path.insert(0, __file__.rsplit('/', 1)[0])
+from h import *
+async def main():
+    p = start_server()
+    async with async_playwright() as pw:
+        b = await pw.chromium.launch()
+        A = await new_client(b, 'Alpha', 'mage'); B = await new_client(b, 'Bravo', 'assn')
+        for c in (A,B): await c.ev("()=>{ov.hidden=true;enterMap(6,{x:1500,y:1500});}")
+        await A.wait(3000)
+        H,O=(A,B) if await A.ev("()=>isHost()") else (B,A)
+        await H.ev("()=>{me.x=1500;me.y=1500}");await O.ev("()=>{me.x=1560;me.y=1500;me.stt.elk=0}")
+        await H.wait(1500)
+        await H.ev("()=>{const x=1700,y=1500,hp=mhp(1,20);const m={id:++mid,x,y,tx:x,ty:y,t:1,L:20,p:1,hx:x,hy:y,hp,mh:hp,tg:null,tt:0,ac:99,w:null,lg:0,el:3,elb:1,tzb:1,shb:1,szb:1,root:99};m.hp*=EKHP;m.mh*=EKHP;mons.push(m);window._ek=m.id}")
+        await H.wait(1200)
+        eid=await H.ev("()=>window._ek")
+        print('O sees', await O.ev(f"()=>{{const m=mons.find(q=>q.id==={eid});return m?[m.el,m.esp,Math.round(m.hp),Math.round(m.mh)]:null}}"))
+        await H.ev(f"()=>{{const m=mons.find(q=>q.id==={eid});m.hp-=m.mh*.5}}");await H.wait(1200)
+        print('O after break', await O.ev(f"()=>{{const m=mons.find(q=>q.id==={eid});return m?[m.el,m.esp,Math.round(m.hp/m.mh*100)]:null}}"))
+        await H.ev(f"()=>{{const m=mons.find(q=>q.id==={eid});m.hp=0}}");await H.wait(1500)
+        print('O elk',await O.ev("()=>me.stt.elk"),'H elk',await H.ev("()=>me.stt.elk|0"))
+        for c in (A,B):print(c.name,[e for e in c.errs if 'TUNNEL' not in e][:3])
+        await b.close()
+    p.terminate()
+asyncio.run(main())

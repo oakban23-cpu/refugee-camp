@@ -1,0 +1,44 @@
+import asyncio, sys, random
+sys.path.insert(0, __file__.rsplit('/', 1)[0])
+from h import *
+async def adv(A,n=40):
+    for i in range(n):
+        await A.ev("()=>{mons=mons.filter(m=>Math.hypot(m.x-me.x,m.y-me.y)>400);stTick();if(SD.on){if(SD.typ){stNext()}stNext()}}");await A.wait(130)
+async def talk(A,mp):
+    r=await A.ev(f"()=>{{npcSel=1;me.x=MAPS[{mp}].npc.x;me.y=MAPS[{mp}].npc.y+40;return stNpcClick()}}");await adv(A,35);return r
+async def main():
+    p = start_server()
+    async with async_playwright() as pw:
+        b = await pw.chromium.launch()
+        A = await new_client(b, 'T'+str(random.randint(1000,9999)), 'mage', 99)
+        i0=await A.ev("()=>STY.findIndex(x=>x.c===STCH.length-1)")
+        print('ch5 start',i0, await A.ev("()=>STY.length"))
+        await A.ev(f"()=>{{gmGod=true;me.sty={{s:{i0},n:0,a:0,e:1,e4:2}};ov.hidden=true;enterMap(27,{{x:1600,y:900}})}}");await A.wait(2500)
+        print('palace npc',await A.ev("()=>[MAPS[27].npc.n,stTalkKey&&(npcSel=1,stTalkKey()),gHid(MAPS[27].gates.find(g=>g.to===29))]"))
+        print('talk q5',await talk(A,27),await A.ev("()=>[me.sty.s,me.sty.a,stTxt()]"))
+        print('door',await A.ev("()=>{const G=MAPS[27].gates.find(g=>g.to===29);return [gHid(G),wpGateOk(G)]}"))
+        await A.ev("()=>{me.x=1600;me.y=330;mons=[]}");await A.wait(900);await A.pg.screenshot(path='../fx/t_door.png')
+        await A.ev("()=>{useGate()}");await A.wait(2500);await adv(A,25)
+        print('in throne',await A.ev("()=>[curMap,me.sty.s,me.sty.a,stTxt(),trees.length]"))
+        await A.ev("()=>{for(let i=0;i<40;i++)stKill(0,0)}");await adv(A,30)
+        print('after kill',await A.ev("()=>[me.sty.s,me.sty.a,stTxt()]"))
+        print('talk qnt',await talk(A,29),await A.ev("()=>[me.sty.s,me.sty.a,stTxt()]"))
+        r=await talk(A,29);await A.wait(1500)
+        print('instance',r,await A.ev("()=>[curMap,ORNI(),dg.ph]"))
+        await A.ev("()=>{dgStart()}");await adv(A,20);await A.wait(1000)
+        await A.ev("()=>{const m=mons.find(q=>q.t===3);me.x=m.x;me.y=m.y+170}");await A.wait(5000);await A.pg.screenshot(path='../fx/t_orn1.png')
+        await A.ev("()=>{const m=mons.find(q=>q.t===3);m.hp=m.mh*.5;m.s1=1;m.inv=0;m.stun=0;mons=mons.filter(q=>q.t!==4)}");await A.wait(5000);await A.pg.screenshot(path='../fx/t_orn2.png')
+        await A.ev("()=>{const m=mons.find(q=>q.t===3);m.hp=m.mh*.2;m.s1=1;m.s2=1;m.inv=0;m.stun=0;mons=mons.filter(q=>q.t===3)}");await A.wait(5200);await A.ev("()=>{const m=mons.find(q=>q.t===3);if(m.ecl){me.x=(m.ecl.sx+m.x)/2;me.y=(m.ecl.sy+m.y)/2}}");await A.wait(400);await A.pg.screenshot(path='../fx/t_orn3.png')
+        print('ph',await A.ev("()=>{const m=mons.find(q=>q.t===3);return [m.oph,!!m.ecl,EFX.length,CFX.length,m.inv]}"))
+        await A.ev("()=>{const m=mons.find(q=>q.t===3);m.hp=0}");await A.wait(1500)
+        print('win',await A.ev("()=>[dg.ph,me.sty.n,me.ach.stOr]"))
+        await A.wait(10500);await adv(A,40)
+        print('after orn',await A.ev("()=>[curMap,me.sty.s,me.sty.a,stTxt()]"))
+        g0=await A.ev("()=>me.gold")
+        print('final',await talk(A,29),await A.ev("()=>[me.sty.s,me.sty.a,stTxt(),gP5end(),me.gold]"),g0)
+        await A.wait(500);r=await A.ev("()=>{npcSel=1;return stNpcClick()}");await A.wait(400)
+        print('repeat',r,await A.ev("()=>SD.on"))
+        print([e for e in A.errs if 'TUNNEL' not in e][:6])
+        await b.close()
+    p.terminate()
+asyncio.run(main())
