@@ -139,26 +139,31 @@ Object.assign(PALK,{
   g.strokeStyle='rgba(210,190,160,.85)';g.lineWidth=1.4;g.beginPath();g.moveTo(x+20,y-206);g.lineTo(x+20,y+40);g.stroke()},
  cel5(t,T){const N=MAPS[35].npc2;if(!N||N.x<0)return;celD(N.x,N.y,T,me.x<N.x?-1:1)}});
 /* ---------- เศษดาว (สกุลเงินแต่งตัว) + ออร่า ---------- */
-const SDIT=[[1,'🌟 วงดาวโคจร',20,'ดาวสามดวงโคจรรอบตัว'],[2,'✨ ฝุ่นดาวตก',45,'ละอองดาวโปรยลงรอบตัว'],[3,'🌌 ปีกกลุ่มดาว',80,'กลุ่มดาวกางเป็นปีกด้านหลัง']];
+const SDIT=[[1,'🌟 วงดาวโคจร',20,'ดาวสามดวงโคจรรอบตัว'],[2,'✨ ฝุ่นดาวตก',45,'ละอองดาวโปรยลงรอบตัว'],[3,'🌌 ปีกกลุ่มดาว',80,'กลุ่มดาวกางเป็นปีกด้านหลัง'],[4,'🪞 เศษกระจกโอเรียน',60,'เศษกระจกเงาหมุนรอบตัว สะท้อนแสงวาบ',()=>p6Past('p7c3')]];
 const sdN=()=>(me.sty&&me.sty.p7sd)|0;
 function sdGive(n,why){if(!me.sty||n<=0)return;me.sty.p7sd=Math.min(99999,sdN()+n);try{fx({k:'msg',s:'🌠 +'+n+' เศษดาว'+(why?' · '+why:'')+' (มี '+sdN()+')'})}catch(e){}try{writeSave()}catch(e){}}
-function sdShop(spk){const q=me.sty;if(!q)return true;const own=q.p7so|0,eq=q.p7sq|0,ch=SDIT.map(([id,nm,c])=>[(own>>id&1)?(eq===id?'✅ '+nm+' (สวมอยู่)':nm+' · สวม'):nm+' · แลก '+c+' เศษดาว',id]);if(eq)ch.push(['ถอดออร่า',9]);ch.push(['ไว้ก่อน',0]);
+function sdShop(spk){const q=me.sty;if(!q)return true;const own=q.p7so|0,eq=q.p7sq|0,ch=SDIT.filter(it=>!it[4]||it[4]()).map(([id,nm,c])=>[(own>>id&1)?(eq===id?'✅ '+nm+' (สวมอยู่)':nm+' · สวม'):nm+' · แลก '+c+' เศษดาว',id]);if(eq)ch.push(['ถอดออร่า',9]);ch.push(['ไว้ก่อน',0]);
   stSay([[spk,(q.p7m===2?'สหกรณ์คนงานรับแลกเศษดาวเป็นของแต่งตัว แสงดาวไม่ได้ทำให้ใครเก่งขึ้นหรอก แต่มันสวยนะ':'เศษดาวแลกได้แต่ของสวย ๆ เท่านั้นแหละ ข้าไม่ขายอาวุธให้ใครที่ข้ายังไม่ไว้ใจ')+' · เจ้ามีเศษดาว '+sdN()+' ชิ้น']],()=>{},{choice:ch});
   SD.onChoose=e=>{stClose();if(!e)return;if(e===9){q.p7sq=0;fx({k:'msg',s:'ถอดออร่าแล้ว'});writeSave();return}const it=SDIT.find(x=>x[0]===e);if(!it)return;
     if(!((q.p7so|0)>>e&1)){if(sdN()<it[2]){fx({k:'msg',s:'🌠 เศษดาวไม่พอ (ต้องการ '+it[2]+' · มี '+sdN()+')'});return}q.p7sd=sdN()-it[2];q.p7so=(q.p7so|0)|(1<<e);try{sfx('lvl')}catch(_){}}
     q.p7sq=e;banner={s:'🌠 สวม '+it[1]+' แล้ว · '+it[3],t:5};try{burst(me.x,me.y-20,['#c8f0ff','#ffffff','#ffe8a0'],50,180,1,{glow:1,g:-40})}catch(_){}writeSave()};return true}
 const sdOn=lk=>!lk?0:lk.u===uid?((me.sty&&me.sty.p7sq)|0):(lk.sd|0);
-function sdAura(x,y,k){const T=performance.now()/1000;g.save();g.globalCompositeOperation='lighter';
-  if(k===1){glowAt(x,y-24,34,'150,210,255',.14);for(let i=0;i<3;i++){const a=T*1.8+i*2.094,px=x+Math.cos(a)*26,py=y-24+Math.sin(a)*10,fr=Math.sin(a)>0;g.globalAlpha=fr?1:.5;
-      if(!LOWQ)for(let j=1;j<5;j++){const b=a-j*.16;glowAt(x+Math.cos(b)*26,y-24+Math.sin(b)*10,3.4-j*.5,'170,225,255',.5-j*.1)}
-      glowAt(px,py,13,'170,225,255',.65);g.fillStyle='#ffffff';PST(g,px,py,6,2.4,4,T*2+i);g.fill()}g.globalAlpha=1}
-  else if(k===2){const pu=.7+.3*Math.sin(T*2);glowAt(x,y+6,34,'150,210,255',.3*pu);g.strokeStyle='rgba(170,225,255,'+(.55*pu)+')';g.lineWidth=1.6;g.beginPath();g.ellipse(x,y+6,24,8,0,0,7);g.stroke();
-    const n=LOWQ?8:16;for(let i=0;i<n;i++){const q=(T*.8+i/n)%1,px=x+Math.sin(i*2.7+T*.5)*22,py=y-62+q*68,a=Math.sin(q*3.14);glowAt(px,py,5,i%3?'190,230,255':'255,225,160',.55*a);g.fillStyle='rgba(255,255,255,'+a+')';g.fillRect(px-1,py-1,2,2)}}
-  else if(k===3){const fl=Math.sin(T*1.6)*3;glowAt(x,y-28,40,'150,190,255',.16);
-    for(const sd of[-1,1]){const P=[[12,-20],[26,-34+fl],[40,-46+fl*1.3],[46,-30+fl],[36,-16+fl*.6],[24,-8]].map(([dx,dy])=>[x+sd*dx,y+dy]);
-      g.strokeStyle='rgba(190,220,255,.55)';g.lineWidth=1.3;g.beginPath();P.forEach(([px,py],i)=>i?g.lineTo(px,py):g.moveTo(px,py));g.moveTo(P[1][0],P[1][1]);g.lineTo(P[4][0],P[4][1]);g.stroke();
-      if(!LOWQ){g.fillStyle='rgba(140,180,255,.08)';g.beginPath();P.forEach(([px,py],i)=>i?g.lineTo(px,py):g.moveTo(px,py));g.closePath();g.fill()}
-      P.forEach(([px,py],i)=>{const tw=.6+.4*Math.sin(T*3+i*1.7+sd);glowAt(px,py,i===2?10:7,'200,230,255',.5*tw);g.fillStyle='#ffffff';PST(g,px,py,i===2?5:3.6,1.4,4,0);g.fill()})}}
+function sdAura(x,y,k){const T=performance.now()/1000,L=()=>{g.globalCompositeOperation='lighter'},S=()=>{g.globalCompositeOperation='source-over'},star=(px,py,R,r,rot,f,st)=>{g.fillStyle=f;PST(g,px,py,R,r,4,rot);g.fill();if(st){g.strokeStyle=st;g.lineWidth=1;g.stroke()}};g.save();
+  if(k===1){L();glowAt(x,y-24,34,'150,210,255',.14);const P=[];for(let i=0;i<3;i++){const a=T*1.8+i*2.094;P.push([x+Math.cos(a)*26,y-24+Math.sin(a)*10,Math.sin(a)>0,a])}
+    for(const[px,py,fr,a]of P){g.globalAlpha=fr?1:.5;if(!LOWQ)for(let j=1;j<5;j++){const b=a-j*.16;glowAt(x+Math.cos(b)*26,y-24+Math.sin(b)*10,3.4-j*.5,'150,210,255',.5-j*.1)}glowAt(px,py,13,'170,225,255',.6)}
+    S();for(const[px,py,fr,a]of P){g.globalAlpha=fr?1:.55;star(px,py,6,2.4,a*2,'#ffffff','rgba(50,100,190,.85)')}g.globalAlpha=1}
+  else if(k===2){const pu=.7+.3*Math.sin(T*2);L();glowAt(x,y+6,34,'150,210,255',.28*pu);S();g.strokeStyle='rgba(60,120,210,'+(.55*pu)+')';g.lineWidth=2;g.beginPath();g.ellipse(x,y+6,24,8,0,0,7);g.stroke();g.strokeStyle='rgba(255,255,255,'+(.8*pu)+')';g.lineWidth=1;g.stroke();
+    const n=LOWQ?8:16,D=[];for(let i=0;i<n;i++){const q=(T*.8+i/n)%1;D.push([x+Math.sin(i*2.7+T*.5)*22,y-62+q*68,Math.sin(q*3.14),i])}
+    L();for(const[px,py,a,i]of D)glowAt(px,py,5,i%3?'170,220,255':'255,225,160',.5*a);S();for(const[px,py,a,i]of D){g.fillStyle=i%3?'rgba(60,130,230,'+a+')':'rgba(220,150,40,'+a+')';g.fillRect(px-1.5,py-1.5,3,3);g.fillStyle='rgba(255,255,255,'+a+')';g.fillRect(px-.7,py-.7,1.4,1.4)}}
+  else if(k===4){const P=[];for(let i=0;i<4;i++){const a=T*1.3+i*1.5708;P.push([x+Math.cos(a)*24,y-30+Math.sin(a)*8+Math.sin(T*2+i)*4,Math.sin(a)>0,Math.max(0,Math.sin(T*2.6+i*1.9))])}
+    L();for(const[px,py,fr,fl]of P){g.globalAlpha=fr?1:.5;glowAt(px,py,8+fl*8,'200,230,255',.3+.4*fl)}S();
+    for(const[px,py,fr,fl]of P){g.globalAlpha=fr?1:.55;const sg=g.createLinearGradient(px-4,py-7,px+4,py+6);sg.addColorStop(0,'#ffffff');sg.addColorStop(.5,fl>.85?'#ffffff':'#8fb0d8');sg.addColorStop(1,'#e2eefa');g.fillStyle=sg;g.beginPath();g.moveTo(px,py-7);g.lineTo(px+4,py-1);g.lineTo(px+1,py+6);g.lineTo(px-4,py);g.closePath();g.fill();g.strokeStyle='#b8902e';g.lineWidth=1.2;g.stroke()}g.globalAlpha=1}
+  else if(k===3){const fl=Math.sin(T*1.6)*3;L();glowAt(x,y-28,40,'150,190,255',.16);const W2=[];
+    for(const sd of[-1,1])W2.push([[12,-20],[26,-34+fl],[40,-46+fl*1.3],[46,-30+fl],[36,-16+fl*.6],[24,-8]].map(([dx,dy])=>[x+sd*dx,y+dy]));
+    for(const P of W2)P.forEach(([px,py],i)=>{const tw=.6+.4*Math.sin(T*3+i*1.7);glowAt(px,py,i===2?10:7,'200,230,255',.45*tw)});
+    S();for(const P of W2){if(!LOWQ){g.fillStyle='rgba(90,140,230,.12)';g.beginPath();P.forEach(([px,py],i)=>i?g.lineTo(px,py):g.moveTo(px,py));g.closePath();g.fill()}
+      g.strokeStyle='rgba(60,110,200,.6)';g.lineWidth=1.6;g.beginPath();P.forEach(([px,py],i)=>i?g.lineTo(px,py):g.moveTo(px,py));g.moveTo(P[1][0],P[1][1]);g.lineTo(P[4][0],P[4][1]);g.stroke();g.strokeStyle='rgba(230,242,255,.85)';g.lineWidth=.8;g.stroke();
+      P.forEach(([px,py],i)=>star(px,py,i===2?5:3.6,1.4,0,'#ffffff','rgba(50,100,190,.8)'))}}
   g.restore()}
 /* ---------- ดันเจี้ยนป้องกันลิฟต์เหมือง (ห้อง 83000–83999) ---------- */
 setTimeout(()=>{DT[22]={n:'ลิฟต์เหมืองคาร์น',lv:1,L:126,bL:22,hp:5200000,xp:600000,g:90000,dm:56,tn:9,sm:2,rm:4,lg:1,tm:840,gold:560000,exp:4800000}},0);
@@ -325,7 +330,7 @@ const STEND7=[null,
    ['cel','ในบันทึกของท่านโอเรียนมีชื่อหนึ่งที่ข้าไม่เคยเข้าใจ «ช่างเย็บดาว» อยู่ที่ไหนสักแห่งเหนือทะเลเมฆฝั่งตะวันตก'],
    ['cel','…ข้าจะไปด้วย ไม่ใช่เพราะข้าเปลี่ยนใจเรื่องเจ้า แต่เพราะข้าไม่อยากเห็นดาวดับต่อหน้า'],
    ['til','(ทิลวิ่งลงมาจากทางลาด หอบแฮ่ก) ท่านผู้นำ! ยายเอดาร้องท่อนต่อให้ฟังแล้ว «…ผู้นั้นต้องจ่ายราคา ด้วยเพลงที่ไม่เคยมีใครร้อง»']],
-  post:[['nar','🌠 — จบภาค 7 บทที่ 2 · ราคาของดาว — บทต่อไป: ช่างเย็บดาว (เร็ว ๆ นี้)']],rw:{g:150000,s3:10}})}
+  post:[['nar','🌠 — จบภาค 7 บทที่ 2 · ราคาของดาว — บทต่อไป: กระจกของโอเรียน (เร็ว ๆ นี้)']],rw:{g:150000,s3:10}})}
 setTimeout(()=>{try{
     SFPATH.push([[2250,2000],[2330,2450],[2250,2950]]);
     MAPS[34].gates.push({x:2250,y:3060,to:35,req:1,p7k:1,nm:'เหมืองดาวคาร์น',arr:{x:1600,y:430}});
@@ -348,7 +353,7 @@ setTimeout(()=>{try{
   try{const _dn=drawNyxFx;window.drawNyxFx=drawNyxFx=function(){try{mdfDraw()}catch(e){}_dn()}}catch(e){}
   try{const _px=plxScreen;window.plxScreen=plxScreen=function(){_px();try{mdfScreen()}catch(e){}}}catch(e){}
   try{const _ir=instRepeat;window.instRepeat=instRepeat=function(k){if(k==='mdf')return instRepeatMdf();return _ir(k)}}catch(e){}
-  try{const _sk=stKill;window.stKill=stKill=function(t,bs){_sk(t,bs);try{if((curMap===34||curMap===35)&&!isDg()&&me.sty&&p6Past('p7br')&&Math.random()<.05)sdGive(1)}catch(e){}}}catch(e){}
+  try{const _sk=stKill;window.stKill=stKill=function(t,bs){_sk(t,bs);try{if(curMap>=34&&curMap<=36&&!isDg()&&me.sty&&p6Past('p7br')&&Math.random()<.05)sdGive(1)}catch(e){}}}catch(e){}
   try{const _sd=stDone;window.stDone=stDone=function(){const st=stCur(),q=me.sty;if(st&&st.p7m&&q&&!q.p7m){q.a=2;setTimeout(()=>{stSay([['me','(ทุกสายตาจับจ้องมา… จะจ่ายราคาของดาวด้วยอะไร?)']],()=>{},{cine:1,choice:[['💰 จ่ายราคาให้บรอม',1],['🤝 ถามคนงานที่ขุดมันขึ้นมา',2]]});
       SD.onChoose=e=>{q.p7m=e;stClose();setTimeout(()=>stSay(STEND7[e],()=>{_sd();setTimeout(()=>{banner={s:e===1?'💰 สัญญาการค้าฉบับแรกของค่ายผู้อพยพ':'🤝 สหกรณ์คนงานคาร์น · ชาวนครลี้ภัยกลุ่มแรกจากนอกค่าย',t:6};try{stFlash()}catch(_){}},600)},{cine:1}),250)}},200);return}
     if(st&&st.p7rs)setTimeout(()=>sdGive(5,'คนงานขอบคุณ'),400);if(st&&st.p7c2)setTimeout(()=>sdGive(10,'เซเลสต์แบ่งเศษดาวให้'),400);return _sd()}}catch(e){}},0);
