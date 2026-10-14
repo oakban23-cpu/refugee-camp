@@ -11805,7 +11805,7 @@ function wbMap(id){if(MAPS[id])return MAPS[id];
 return MAPS[id]={n:'ลานบอสโลก',dg:8,wb:1,sx:CX,sy:CY+440,sr:70,seed:61,bg:'#1a0c0a',tile:'#26120e',safe:'#3a1a14',ring:'#ff7a3a',t1:'#0e0605',t2:'#24100c',d1:'#3a1810',d2:'#ff8a4a',nests:[],
 gates:[{x:CX-150,y:CY+430,to:1,req:1,arr:{x:WBP.x,y:WBP.y+70}}],qk:1,ql:8,npc:{x:-9999,y:-9999,n:'',L:1},
 boss:{x:-9999,y:-9999,n:WBN,hp:1,xp:0,L:1,rm:0,g:0,dm:1,tn:1,sm:0,col:'#ff5a2a',bar:'#e0501c',ln:'#ffb070',rec:'',pos:''}}}
-function wbEnter(){if(!me.cls||me.lv<20||me.down>0)return;const id=80000+(Math.random()*6999|0);if(!dgMap(id))return;if(PTY)sysMsg('👥 ลานบอสโลกเป็นห้องเดี่ยว เพื่อนร่วมปาร์ตี้จะไม่เข้ามาด้วย');
+function wbEnter(){if(!me.cls||me.lv<20||me.down>0)return;const id=86000+(Math.random()*999|0);if(!dgMap(id))return;if(PTY)sysMsg('👥 ลานบอสโลกเป็นห้องเดี่ยว เพื่อนร่วมปาร์ตี้จะไม่เข้ามาด้วย');
 ov.hidden=true;sfx('gate');enterMap(id,{x:CX,y:CY+380});WB.res=null;banner={s:'🐉 ลานบอสโลก · กดปุ่ม ▶ เพื่อเริ่มจับเวลา 60 วินาที',t:5}}
 function wbStart(){if(!isWB())return;wbReset();dg={ph:'boss',w:0,tl:WBTM,nx:0};WB.dmg=0;WB.n=0;WB.cd=3;WB.res=null;WB.hist=[];me.hp=me.mh;me.mp=me.mm;me.sk=me.sk.map(()=>0);sfx('boss')}
 function wbAdd(d){if(!isWB()||dg.ph!=='boss'||WB.cd>0)return;WB.dmg+=d*(WBA.weak>0?1.5:1);WB.n++}

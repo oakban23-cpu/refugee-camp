@@ -250,6 +250,8 @@ R("const yy=yo-wrap(cy*f*.25+i*40,90);","const yy=yo-((i*40)%90)+FGO.y*.6;")
 R("if(bTheme()===34||bTheme()===35)return drawMonSF(","if(bTheme()===35)return drawMonKM(t,r,T,E,Pg,Ln,eye,F,W,bob,sw,la,ra);if(bTheme()===34)return drawMonSF(")
 # ---------- v364 สมดุลภาค 5–7: รางวัลฆ่ามอนสนาม ×1.8 ----------
 R("SZ*(m.t<3?tierRw():1)),gd3=Math.round(gd2*ELK*(NK?2:1)*(SK?5:1)*Math.max(1,SZ)*(m.t<3?tierRw():1))","SZ*(m.t<3?tierRw()*TKB():1)),gd3=Math.round(gd2*ELK*(NK?2:1)*(SK?5:1)*Math.max(1,SZ)*(m.t<3?tierRw()*TKB():1))")
+# ---------- v367 ลานบอสโลกใช้เลขห้อง 86000–86999 (เดิม 80000–86998 ชนดันเจี้ยนภาค 6–7) ----------
+R("function wbEnter(){if(!me.cls||me.lv<20||me.down>0)return;const id=80000+(Math.random()*6999|0);","function wbEnter(){if(!me.cls||me.lv<20||me.down>0)return;const id=86000+(Math.random()*999|0);")
 # ---------- v358 ซ่อน/แสดงช่องแชท ----------
 R("logFit(el);const sig=chatLog.map(l=>l.at+(l.sys?'s':'')).join(',');","logFit(el);const CM=clogHid(),sig=chatLog.map(l=>l.at+(l.sys?'s':'')).join(',')+'|'+(CM?'m'+CLG.n:'o');")
 R("chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;","chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;if(CM&&!l.sys)return;")
