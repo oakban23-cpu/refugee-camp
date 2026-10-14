@@ -84,7 +84,7 @@ function mkOwner(c,d){const v=d&&typeof d.mid==='string'&&/^[a-z0-9]{8,16}$/.tes
 const LBF=path.join(DATA_DIR,'leaderboard.json');let LB={},lbDirty=false;
 /* หนึ่งตัวละคร (ชื่อ+อาชีพ) = หนึ่งแถว เก็บเฉพาะสถิติที่ดีที่สุด */
 const lbId=r=>String(r.n||'').trim().toLowerCase()+'|'+String(r.c||'');
-const lbHi=key=>key==='wb'||key==='pv';
+const lbHi=key=>key==='wb'||key==='pv'||/^s\d{4}$/.test(key);
 /* ผู้ดูแลคุมตารางอันดับ: แบนชื่อ · ตั้งเพดานสถิติต่อตาราง (ตารางคะแนน=ค่าสูงสุดที่ Lv75 ลดตามเลเวลแบบเส้นตรง · ตารางเวลา=เวลาเร็วสุดที่ยอมรับ) · เก็บสถิติที่ถูกปัดตก */
 const LBCF=path.join(DATA_DIR,'lbcfg.json');let LBC={caps:{},ban:{},rej:[]};
 try{const j=JSON.parse(fs.readFileSync(LBCF,'utf8'));if(j&&typeof j==='object')LBC={caps:j.caps||{},ban:j.ban||{},rej:Array.isArray(j.rej)?j.rej:[]}}catch(e){}
@@ -95,7 +95,7 @@ function lbRej(key,row,why){LBC.rej.unshift({k:key,n:row.n,c:row.c,l:row.l,t:row
 function lbAdmin(act,q){const key=String(q.k||''),id=String(q.n||'').trim().toLowerCase()+'|'+String(q.c||'');
   if(act==='lbdel'){let n=0;for(const k in LB){if(key!=='*'&&k!==key)continue;const b=LB[k].length;LB[k]=LB[k].filter(r=>lbId(r)!==id);n+=b-LB[k].length}lbDirty=true;console.log('ลบแถวอันดับ',key,id,n);return{ok:1,n}}
   if(act==='lbban'){if(q.on){LBC.ban[id]={n:String(q.n||'').slice(0,12),c:String(q.c||'').slice(0,8),at:Date.now()};for(const k in LB)LB[k]=LB[k].filter(r=>lbId(r)!==id);lbDirty=true}else delete LBC.ban[id];lbcSave();console.log('แบนอันดับ',id,!!q.on);return{ok:1}}
-  if(act==='lbcap'){if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv)$/.test(key))return{ok:0};const v=Math.max(0,+q.v||0);if(v)LBC.caps[key]=v;else delete LBC.caps[key];
+  if(act==='lbcap'){if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv|s\d{4})$/.test(key))return{ok:0};const v=Math.max(0,+q.v||0);if(v)LBC.caps[key]=v;else delete LBC.caps[key];
     let n=0;if(v){const hi=lbHi(key),b=(LB[key]||[]).length;LB[key]=(LB[key]||[]).filter(r=>{const c=lbCapFor(key,r.l);return!(c&&(hi?r.t>c:r.t<c))});n=b-LB[key].length;if(n)lbDirty=true}
     lbcSave();return{ok:1,removed:n}}
   return{ok:0}}
@@ -115,11 +115,12 @@ function onEmit(c,m){
   if(!c.p||!pl||typeof pl!=='object')return;
   const mp=c.p.mp,d=pl.d,host=hostByMap[mp];
   const wrap=x=>JSON.stringify({t:'emit',k,d:{mp,d:x},from:c.id});
-  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv)$/.test(key))return;const hi=key==='wb'||key==='pv',t=+d.t;if(hi?!(t>=1&&t<1e12):!(t>=5&&t<36000))return;
+  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv|s\d{4})$/.test(key))return;const ss=/^s\d{4}$/.test(key),hi=lbHi(key),t=+d.t;if(hi?!(t>=1&&t<(ss?100000:1e12)):!(t>=5&&t<36000))return;
     const row={n:String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,12)||'ผู้เล่น',c:String(d.cls||'').slice(0,8),l:num(d.lv|0,1,99,1),t:hi?Math.round(t):Math.round(t*10)/10,p:num(d.pc|0,1,99,1),u:c.uid||'',at:Date.now()};
     {const why=lbBlock(key,row,hi);if(why){lbRej(key,row,why);return}}
     const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>lbId(r)===lbId(row));if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
-    arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;return}
+    arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;
+    /* ตารางคะแนนฤดูกาลรายเดือน sYYMM: เก็บไว้แค่ 3 ฤดูกาลล่าสุด */if(ss){const ks=Object.keys(LB).filter(x=>/^s\d{4}$/.test(x)).sort();while(ks.length>3)delete LB[ks.shift()]}return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='pvc'||k==='pva'||k==='pvn'||k==='pvh'||k==='pvd'||k==='pvt'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||'';send(o,wrap(d))}return}
   if(k==='mkq'||k==='mkl'||k==='mkb'||k==='mkx'||k==='mkc'){const why=mkGate(c,d,k);if(why){const t=String(d&&d.t||'').slice(0,12);
@@ -133,7 +134,7 @@ function onEmit(c,m){
   if(k==='mkx'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id)&&x.u===u);if(i<0)return;const x=MK.L.splice(i,1)[0];mkDirty=true;mkReply(c,'mkg',{ok:1,back:1,k:x.k,d:x.d,p:0,id:x.id});return}
   if(k==='mkc'){const u=mkOwner(c,d);if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];if(g>0){const A=ACCS[c.accA],f=svChar(c.accA,d.mid);if(A&&f){A.cr=A.cr||{};A.cr[f.k]=(A.cr[f.k]||0)+g;accDirty=true}}delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
   if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;let o=byUid.get(d.to);if(!o&&d.op==='lnk'&&typeof d.toN==='string'&&d.toN){const nm=d.toN.slice(0,24);for(const x of clients)if(x!==c&&x.p&&x.p.n===nm){o=x;break}}if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
-  if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,key==='wb'?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
+  if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,(key==='wb'||/^s\d{4}$/.test(key))?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='mvq'){send(c,JSON.stringify({t:'emit',k:'mvr',d:{mp,d:mvTable()},from:0}));return}
   if(k==='mva'||k==='mvd'||k==='mvk'||k==='mvlost'){const V=MV[mp];if(!V)return;const now=Date.now();
     if(k==='mva'){if(host!==c||V.alive)return;const id=+(d&&d.id)||0;if(!id)return;V.alive=1;V.id=id;V.dm={};V.ask=0;V.empty=0;mvDirty=true;mvAll({s:'sp',mp});return}
