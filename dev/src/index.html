@@ -1543,11 +1543,11 @@ function lbResync(){if(lbResynced||gmUsed||!me.cls||!lbData||!(room&&room.url))r
 let SAB=null,SVOL=1;const SKB={'melee.0':1.8,'melee.s4b':1.3,'archer.0':2,'archer.1':1.3,'archer.s4':1.8,'archer.s4b':2,'sup.0':1.5,'sup.1':1.4,'sup.s4':1.8,'sup.s4b':1.6,'assn.s4':3,'assn.0':.8,'mage.s4':1.6};
 function abus(){const a=acx();if(!a)return null;if(SAB&&SAB.a===a)return SAB;try{
   const comp=a.createDynamicsCompressor();comp.threshold.value=-10;comp.knee.value=6;comp.ratio.value=5;comp.attack.value=.003;comp.release.value=.2;
-  const mg=a.createGain();mg.gain.value=.95;comp.connect(mg);mg.connect(a.destination);
+  const mg=a.createGain();mg.gain.value=.95;comp.connect(mg);mg.connect(sfxDest(a));
   const cv=a.createConvolver(),L=Math.floor(a.sampleRate*1.8),ir=a.createBuffer(2,L,a.sampleRate);for(let ch=0;ch<2;ch++){const d=ir.getChannelData(ch);for(let i=0;i<L;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/L,2.6)}cv.buffer=ir;
   const wet=a.createGain();wet.gain.value=.32;cv.connect(wet);wet.connect(comp);
   const nb=a.createBuffer(1,a.sampleRate*2,a.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
-  SAB={a,in:comp,rv:cv,nb}}catch(e){SAB={a,in:a.destination,rv:null,nb:null}}return SAB}
+  SAB={a,in:comp,rv:cv,nb}}catch(e){SAB={a,in:sfxDest(a),rv:null,nb:null}}return SAB}
 function aOut(node,rv,pan){const B=abus();if(!B)return;let n=node;if(pan&&B.a.createStereoPanner){const p=B.a.createStereoPanner();p.pan.value=Math.max(-1,Math.min(1,pan));n.connect(p);n=p}n.connect(B.in);if(rv&&B.rv){const s=B.a.createGain();s.gain.value=rv;n.connect(s);s.connect(B.rv)}}
 const aOk=()=>{const a=acx();return a&&a.state==='running'?a:null};
 /* oscillator: o={dl,at,lp,q,rv,pan,vib,vr,det} */
@@ -10066,6 +10066,53 @@ setTimeout(()=>{try{const _at=arTick;window.arTick=arTick=function(dt,now,x,y,mv
     _aw(P[AQP.i][0],P[AQP.i][1],dt,C);return Math.hypot(tx-me.x,ty-me.y)}}catch(e){console.warn('aqp',e)}},80);
 /* โนอาในป่าเห็ดเรืองแสง (แมพ 19) ยืนที่ npc4 แต่ระบบเควสชี้ไปที่ npc (พ่อค้า) → ออโต้เควสเดินไปผิดคนและเครื่องหมาย ! ขึ้นผิดหัว */
 setTimeout(()=>{try{STNPC.nox=[19,'npc4'];const _anp=aqNpcPos;window.aqNpcPos=aqNpcPos=function(k){if(k==='nox'&&curMap===19){const N=MAPS[19].npc4;return N&&N.x>0?{x:N.x,y:N.y}:null}return _anp(k)}}catch(e){}},80);
+/* ---------- v371 หน้าตั้งค่า ----------
+   รวมของที่เคยกระจาย (ปุ่มกราฟิกแบบกดวน · ภาพ HD · วัดความลื่น · ปุ่มเปิด/ปิดเสียงสองปุ่ม) ไว้หน้าเดียว + เพิ่ม:
+   ความดังเพลง/เอฟเฟกต์แยกกัน (ต่อผ่านช่องเสียงของตัวเอง) · ขนาดตัวอักษร (เมนู/บทพูด/แชท/กล่องเควส) · สั่นจอ · สั่นเครื่อง · ตัวเลขดาเมจ
+   ค่าทั้งหมดจำในเครื่อง (localStorage) */
+const CFGV=(()=>{const d={vm:.8,vs:.9,fs:1,shk:1,vib:1};try{const o=JSON.parse(localStorage.getItem('refugee_set')||'{}');for(const k in d)if(typeof o[k]==='number')d[k]=o[k]}catch(e){}return d})();
+function cfgSave(){try{localStorage.setItem('refugee_set',JSON.stringify(CFGV))}catch(e){}}
+/* ช่องเสียงแยก: เอฟเฟกต์ / เพลง+เสียงบรรยากาศ */
+const CFGA={a:null,s:null,m:null};
+function cfgBus(a){if(!a)return null;if(CFGA.a!==a){CFGA.a=a;try{CFGA.s=a.createGain();CFGA.s.gain.value=CFGV.vs;CFGA.s.connect(a.destination);CFGA.m=a.createGain();CFGA.m.gain.value=CFGV.vm;CFGA.m.connect(a.destination)}catch(e){CFGA.s=CFGA.m=null}}return CFGA}
+function sfxDest(a){const B=cfgBus(a);return B&&B.s||a.destination}
+function musDest(a){const B=cfgBus(a);return B&&B.m||a.destination}
+function cfgVol(k,v){CFGV[k]=Math.max(0,Math.min(1,v));cfgSave();const B=CFGA,n=k==='vs'?B.s:B.m;if(n&&B.a)try{n.gain.setTargetAtTime(CFGV[k],B.a.currentTime,.05)}catch(e){n.gain.value=CFGV[k]}}
+/* ขนาดตัวอักษร: ขยายส่วน UI ที่เป็นตัวหนังสือ (ไม่แตะแคนวาส/ปุ่มควบคุม) */
+const CFGFS=[[.9,'<small>ก</small> เล็ก'],[1,'ก ปกติ'],[1.12,'<big>ก</big> ใหญ่'],[1.25,'<big><b>ก</b></big> ใหญ่สุด']];
+function cfgFsApply(){const z=CFGV.fs;let st=document.getElementById('setfs');if(!st){st=document.createElement('style');st.id='setfs';document.head.appendChild(st)}
+  st.textContent=z===1?'':'#ov>.pn,#sdlg .sdb,#clog,#stq,#cbar{zoom:'+z+'}#clog{width:calc(58% / '+z+')!important}#stq{max-width:calc(178px * '+Math.min(1,1.06/z).toFixed(3)+')!important}'}
+cfgFsApply();
+/* สั่นเครื่อง */
+try{if(navigator.vibrate){const _vb=navigator.vibrate.bind(navigator);navigator.vibrate=function(p){return CFGV.vib?_vb(p):false}}}catch(e){}
+/* หน้าตั้งค่า */
+function cfgUI(msg){if(!me.cls)return;ov.dataset.k='set';ov.hidden=false;const seg=(key,opts,cur)=>'<div class="setseg">'+opts.map(([v,l])=>'<button class="cfgb'+(String(v)===String(cur)?' on':'')+'" data-setk="'+key+'" data-setv="'+v+'">'+l+'</button>').join('')+'</div>';
+  const sl=(k,ic,lb,off)=>'<div class="setrow"><span class="setl">'+ic+' '+lb+'</span><input type="range" min="0" max="100" step="5" value="'+Math.round(CFGV[k]*100)+'" data-setr="'+k+'"'+(off?' class="off"':'')+'><b class="setp" data-setp="'+k+'">'+Math.round(CFGV[k]*100)+'%</b></div>';
+  const tg=(k,ic,lb,sub,on)=>'<div class="setrow"><span class="setl">'+ic+' '+lb+(sub?'<small>'+sub+'</small>':'')+'</span><button class="cfgb cfgt'+(on?' on':'')+'" data-sett="'+k+'">'+(on?'เปิด':'ปิด')+'</button></div>';
+  let h=hdr('⚙️','ตั้งค่า','ค่าทั้งหมดจำไว้ในเครื่องนี้');if(msg)h+='<div class="note">'+msg+'</div>';
+  const lowNow=GQ==='auto'&&LOWQ;
+  h+='<div class="card"><div class="cap">🖥️ คุณภาพภาพ</div>'+seg('gq',[['auto','อัตโนมัติ'],['high','สูง'],['low','ประหยัด']],GQ)+'<div class="seth">'+({auto:'ปรับเองตามความลื่น'+(lowNow?' · <b>ตอนนี้ใช้โหมดประหยัดอยู่</b> เพราะเครื่องกระตุก':' · ตอนนี้ภาพเต็ม'),high:'คมชัดที่สุด · ใช้แรงเครื่องมากสุด (ไม่ลดเองแม้กระตุก)',low:'ลื่นที่สุด · ลดแสงเงาและความละเอียดลง ประหยัดแบต'}[GQ])+'</div>'
+    +'<hr>'+tg('hd','🖼️','ภาพเมืองหลวง HD','ภาพวาดละเอียดในนครอัสตรา (โหลดเพิ่มครั้งแรก)',!!(typeof HDI!=='undefined'&&HDI.on))+'</div>';
+  h+='<div class="card"><div class="cap">🔊 เสียง</div>'+sl('vm','🎵','เพลงประกอบ',!musOn)+sl('vs','💥','เสียงเอฟเฟกต์',muted)
+    +'<div class="seth">ลากไปซ้ายสุดเพื่อปิด · ปุ่ม 🔊 🎵 มุมจอยังกดปิด/เปิดด่วนได้เหมือนเดิม</div></div>';
+  h+='<div class="card"><div class="cap">🔤 ขนาดตัวอักษร</div>'+seg('fs',CFGFS.map(([v,l])=>[v,l]),CFGV.fs)+'<div class="seth">มีผลกับหน้าเมนู บทพูด แชท และกล่องเควส</div></div>';
+  h+='<div class="card"><div class="cap">📳 การสั่น</div>'+tg('shk','💢','สั่นจอ','ตอนโดนตีแรง/ใช้สกิลใหญ่',CFGV.shk>0)+'<hr>'+tg('vib','📱','สั่นเครื่อง','ตอนกดสกิล/หลบ/ปลากินเหยื่อ',!!CFGV.vib)+'</div>';
+  h+='<div class="bt"><button data-setperf="1">📊 วัดความลื่น</button><button data-setrst="1">↺ คืนค่าเริ่มต้น</button></div>';
+  ov.innerHTML='<div class="pn" data-pn="set">'+h+'</div>'}
+{const st=document.createElement('style');st.textContent='.setseg{display:flex;gap:5px;margin:4px 0 6px}#ov .pn button.cfgb:not(.on){background:rgba(255,255,255,.05)!important;color:#cbbd9c!important;box-shadow:none!important}.cfgb{flex:1 1 0;min-width:0;padding:8px 1px;border-radius:10px;font-size:12px;letter-spacing:-.2px;overflow:hidden;text-overflow:clip;line-height:1.2;white-space:nowrap;background:rgba(255,255,255,.05);border:1px solid rgba(231,183,90,.35);color:#cbbd9c;box-shadow:none}#ov .pn button.cfgb.on{background:linear-gradient(180deg,#ffe29a,#c99a40)!important;color:#24170a!important;border-color:#ffe29a!important;font-weight:700;box-shadow:0 0 10px rgba(231,183,90,.4)!important;opacity:1!important}#ov .pn button.cfgb.on *{color:#24170a!important}.cfgb small{font-size:10px}.cfgb big{font-size:14px}.cfgt{flex:0 0 auto;width:66px;position:relative;padding-left:22px}.cfgt::before{content:"";position:absolute;left:8px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:#6a5a40}.cfgt.on::before{background:#3a8a2a;box-shadow:0 0 6px #7aff6a}.seth{font-size:11px;opacity:.8;line-height:1.4}.setrow{display:flex;align-items:center;gap:8px;padding:5px 0}.setl{flex:1 1 auto;min-width:0;font-size:13px}.setl small{display:block;font-size:10.5px;opacity:.7}.setrow input[type=range]{flex:1 1 120px;min-width:90px;accent-color:#e7b75a}.setrow input.off{opacity:.45}.setp{width:40px;text-align:right;font-size:12px;color:#ffd88a}';document.head.appendChild(st)}
+setTimeout(()=>{
+ov.addEventListener('click',e=>{if(ov.dataset.k!=='set')return;const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.setk){const k=b.dataset.setk,v=b.dataset.setv;if(k==='gq'){setGQ(v);try{gqLabel()}catch(_){}}else if(k==='fs'){CFGV.fs=+v;cfgSave();cfgFsApply()}try{sfx('click')}catch(_){}cfgUI();return}
+  if(b.dataset.sett){const k=b.dataset.sett;if(k==='hd'){try{$('hdb').onclick()}catch(_){}}else if(k==='shk'){CFGV.shk=CFGV.shk>0?0:1;cfgSave()}else if(k==='vib'){CFGV.vib=CFGV.vib?0:1;cfgSave();if(CFGV.vib)try{navigator.vibrate(20)}catch(_){}}try{sfx('click')}catch(_){}cfgUI();return}
+  if(b.dataset.setperf){try{perfUI()}catch(_){}return}
+  if(b.dataset.setrst){CFGV.vm=.8;CFGV.vs=.9;CFGV.fs=1;CFGV.shk=1;CFGV.vib=1;cfgSave();cfgVol('vm',.8);cfgVol('vs',.9);cfgFsApply();setGQ('auto');try{gqLabel()}catch(_){}if(muted)setMute(false);if(!musOn)setMusic(true);cfgUI('↺ คืนค่าเริ่มต้นแล้ว');return}});
+ov.addEventListener('input',e=>{if(ov.dataset.k!=='set')return;const r=e.target.closest('[data-setr]');if(!r)return;const k=r.dataset.setr,v=(+r.value)/100;cfgVol(k,v);
+  /* ลากขึ้นจากศูนย์ = เปิดเสียงที่เคยปิดไว้ด้วย · ลากลงศูนย์ = ปิด */if(k==='vs'){if(v>0&&muted)setMute(false);if(v===0&&!muted)setMute(true)}else{if(v>0&&!musOn)setMusic(true);if(v===0&&musOn)setMusic(false)}
+  r.classList.toggle('off',v===0);const p=ov.querySelector('[data-setp="'+k+'"]');if(p)p.textContent=Math.round(v*100)+'%';if(k==='vs'&&v>0){clearTimeout(r._t);r._t=setTimeout(()=>{try{sfx('click')}catch(_){}},120)}});
+/* เมนู: ปุ่ม "กราฟิก" กลายเป็น "ตั้งค่า" · ซ่อนปุ่ม HD/วัดความลื่น (ย้ายเข้าไปในหน้าตั้งค่าแล้ว) */
+try{$('gqb').onclick=()=>{if(me.cls&&run)cfgUI()};window.gqLabel=gqLabel=function(){mnSet('gqb',null,'ตั้งค่า')};gqLabel();$('hdb').style.setProperty('display','none','important');$('pfb').style.setProperty('display','none','important');
+  const _hl=hdLabel;window.hdLabel=hdLabel=function(){try{_hl()}catch(_){}}}catch(e){console.warn('cfgUI menu',e)}
+},0);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -11780,7 +11827,7 @@ function mzBus(){const a=AC;if(!a)return null;if(MZ.bus&&MZ.bus.a===a)return MZ.
   const cv=a.createConvolver(),L=Math.floor(a.sampleRate*2.8),ir=a.createBuffer(2,L,a.sampleRate);for(let ch=0;ch<2;ch++){const d=ir.getChannelData(ch);for(let i=0;i<L;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/L,3.2)*(i<a.sampleRate*.01?i/(a.sampleRate*.01):1)}cv.buffer=ir;
   const rv=a.createGain();rv.gain.value=1;const wet=a.createGain();wet.gain.value=.42;rv.connect(cv);cv.connect(wet);wet.connect(lp);
   const dl=a.createDelay(1.5),fb=a.createGain(),dlw=a.createGain(),ds=a.createGain();dl.delayTime.value=.36;fb.gain.value=.32;dlw.gain.value=.22;ds.connect(dl);dl.connect(fb);fb.connect(dl);dl.connect(dlw);dlw.connect(lp);
-  inp.connect(lp);lp.connect(comp);comp.connect(out);out.connect(a.destination);
+  inp.connect(lp);lp.connect(comp);comp.connect(out);out.connect(musDest(a));
   const nb=a.createBuffer(1,a.sampleRate*2,a.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
   return MZ.bus={a,out,lp,in:inp,rv,dl:ds,dlNode:dl,nb}}
 const mzF=n=>440*Math.pow(2,(n-69)/12);
@@ -11875,7 +11922,7 @@ function musTick(){const a=AC;if(!a||a.state!=='running')return;const B=mzBus();
 /* ---------- เสียงบรรยากาศ ---------- */
 function ambBed(B,name,ft,f,q,pr){const a=B.a;const s=a.createBufferSource();s.buffer=B.nb;s.loop=true;s.playbackRate.value=pr||1;const fl=a.createBiquadFilter();fl.type=ft;fl.frequency.value=f;fl.Q.value=q||1;const gn=a.createGain();gn.gain.value=0;s.connect(fl);fl.connect(gn);gn.connect(MZ.ambOut);s.start();
   const l=a.createOscillator(),lg=a.createGain();l.frequency.value=.07+Math.random()*.08;lg.gain.value=f*.35;l.connect(lg);lg.connect(fl.frequency);l.start();return{gn,fl}}
-function ambTick(){const B=MZ.bus,a=B&&B.a;if(!a)return;if(!MZ.amb){MZ.ambOut=a.createGain();MZ.ambOut.gain.value=0;MZ.ambOut.connect(a.destination);
+function ambTick(){const B=MZ.bus,a=B&&B.a;if(!a)return;if(!MZ.amb){MZ.ambOut=a.createGain();MZ.ambOut.gain.value=0;MZ.ambOut.connect(musDest(a));
     MZ.amb={wind:ambBed(B,'wind','bandpass',520,1.4,.6),rain:ambBed(B,'rain','highpass',1800,.5,1),rumble:ambBed(B,'rum','lowpass',150,1,.4),water:ambBed(B,'wat','lowpass',420,2,.5)}}
   const on=!muted&&me.cls&&run&&!window.PRO_ON,now=a.currentTime;MZ.ambOut.gain.setTargetAtTime(on?.55:0,now,.4);if(!on)return;
   let w=0,rn=0,rb=0,wt=0,nt=false;try{nt=isNight();w=({2:.05,4:.07,8:.05,9:.04,10:.05})[curMap]||(curMap===1?.015:0);rn=wxNow()===1?.06:0;if(wxNow()===2)w+=.03;rb=curMap===3?.12:curMap===7?.05:0;wt=curMap===6?.08:0;w+=({12:.06,17:.07,18:.05,21:.04,25:.03,13:.02})[curMap]||0;wt+=({15:.05,24:.07,20:.05,23:.03})[curMap]||0;rb+=({26:.12,23:.04,22:.03})[curMap]||0;if(curMap===16)rn=Math.max(rn,.07);if(isDg()||isTw()){w=.02;rn=0;rb=.04;wt=0}}catch(e){}
@@ -16502,10 +16549,10 @@ function unlockAudio(){const a=acx();if(a&&a.state==='suspended')a.resume().catc
 ['pointerdown','keydown','touchstart'].forEach(ev=>addEventListener(ev,unlockAudio,{passive:true}));
 function tone(f,d,type,v,f2,dl){const a=acx();if(!a||a.state!=='running')return;
   const t=a.currentTime+(dl||0),o=a.createOscillator(),gn=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(Math.max(20,f2),t+d);
-  gn.gain.setValueAtTime(0.0001,t);gn.gain.exponentialRampToValueAtTime(v||.15,t+.008);gn.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(gn);gn.connect(a.destination);o.start(t);o.stop(t+d+.02)}
+  gn.gain.setValueAtTime(0.0001,t);gn.gain.exponentialRampToValueAtTime(v||.15,t+.008);gn.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(gn);gn.connect(sfxDest(a));o.start(t);o.stop(t+d+.02)}
 function noise(d,v,lp,dl){const a=acx();if(!a||a.state!=='running')return;
   const n=Math.floor(a.sampleRate*d),b=a.createBuffer(1,n,a.sampleRate),c=b.getChannelData(0);for(let i=0;i<n;i++)c[i]=(Math.random()*2-1)*(1-i/n);
-  const t=a.currentTime+(dl||0),src=a.createBufferSource(),f=a.createBiquadFilter(),gn=a.createGain();f.type='lowpass';f.frequency.value=lp||3000;gn.gain.value=v||.15;src.buffer=b;src.connect(f);f.connect(gn);gn.connect(a.destination);src.start(t)}
+  const t=a.currentTime+(dl||0),src=a.createBufferSource(),f=a.createBiquadFilter(),gn=a.createGain();f.type='lowpass';f.frequency.value=lp||3000;gn.gain.value=v||.15;src.buffer=b;src.connect(f);f.connect(gn);gn.connect(sfxDest(a));src.start(t)}
 const SFXD={
   slash:()=>{SVOL=1.6;sWhoosh(.11,.2,900,3200);SVOL=1;noise(.07,.12,2600);tone(300,.07,'triangle',.06,120)},
   bow:()=>{SVOL=1.6;sTwang(.13);sArrow(.08,.02);SVOL=1},
@@ -19080,7 +19127,7 @@ function draw(){
   g.setTransform(DPR,0,0,DPR,0,0);const MP=MAPS[curMap];zmPre();
   {let _fx=me.x,_fy=me.y;try{const _c=rt3Cam()||rt3Cam2();if(_c){_fx=_c[0];_fy=_c[1]}}catch(e){}cam.x=cl(_fx-W/2,0,WW-W);cam.y=cl(_fy-H/2,0,WH-H);CAMF.x=cam.x+W/2;CAMF.y=cam.y+H/2;try{fgUpd()}catch(e){}}if(!(curMap===9&&!flash&&!shk&&cityCovers())){g.fillStyle=flash>0?'#3a1a24':MP.bg;g.fillRect(0,0,SW0,ZM.on?ZM.h0:H)}
   updParts();if(me.cls){if(me.px!==undefined&&me.down<=0)walkTick(me,me.x-me.px,me.y-me.py);me.px=me.x;me.py=me.y}
-  g.save();if(ZM.on)g.scale(ZM.z,ZM.z);g.translate(-cam.x+(shk>0?(Math.random()-.5)*shk*14:0),-cam.y+(shk>0?(Math.random()-.5)*shk*14:0));
+  g.save();if(ZM.on)g.scale(ZM.z,ZM.z);g.translate(-cam.x+(shk>0?(Math.random()-.5)*shk*14*CFGV.shk:0),-cam.y+(shk>0?(Math.random()-.5)*shk*14*CFGV.shk:0));
   if(!gxGround(MP)){g.fillStyle=MP.tile;for(let i=0;i<170;i++){const px=(i*197)%WW,py=(i*311)%WH,pr=16+((i*53)%20);g.globalAlpha=.35+((i*37)%10)/22;g.beginPath();g.ellipse(px,py,pr,pr*.52,(i*29)%6,0,7);g.fill()}g.globalAlpha=1;}try{terDraw(MP)}catch(e){}
   if(MP.dg&&!MP.esc&&!MP.clk&&!MP.vsp&&!MP.mdf&&!MP.qsh&&!MP.hfg){const now=performance.now()/1000;
     /* ลานดันเจี้ยนธีมกรมท่า-ทอง: วงทองฝังพื้น · วงอักขระหมุน · กำแพงหินขอบทอง · ธงน้ำเงิน · กระถางไฟ */

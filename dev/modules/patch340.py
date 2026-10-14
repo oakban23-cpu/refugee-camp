@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -268,6 +268,14 @@ R("mk:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1215,y:2005}",
 # ---------- v369 ยอดหอดูดาว 36: พื้นหิมะขาวจ้าเกินไป → ลดความสว่างพื้นฐาน/หมอกขาว ----------
 R("bg.addColorStop(0,'#e3ebf4');bg.addColorStop(.6,'#d4deea');bg.addColorStop(1,'#c2cedd')","bg.addColorStop(0,'#d6e0ec');bg.addColorStop(.6,'#c4d0e0');bg.addColorStop(1,'#aebdd1')")
 R("summit={fog:'200,220,245',fa:.12,bd:.14}","summit={fog:'170,195,235',fa:.08,bd:.16}")
+# ---------- v371 หน้าตั้งค่า: ต่อเสียงผ่านช่องเพลง/เอฟเฟกต์ของตัวเอง · สั่นจอปิดได้ ----------
+R("const mg=a.createGain();mg.gain.value=.95;comp.connect(mg);mg.connect(a.destination);","const mg=a.createGain();mg.gain.value=.95;comp.connect(mg);mg.connect(sfxDest(a));")
+R("SAB={a,in:a.destination,rv:null,nb:null}","SAB={a,in:sfxDest(a),rv:null,nb:null}")
+R("o.connect(gn);gn.connect(a.destination);o.start(t)","o.connect(gn);gn.connect(sfxDest(a));o.start(t)")
+R("src.connect(f);f.connect(gn);gn.connect(a.destination);src.start(t)","src.connect(f);f.connect(gn);gn.connect(sfxDest(a));src.start(t)")
+R("comp.connect(out);out.connect(a.destination);","comp.connect(out);out.connect(musDest(a));")
+R("MZ.ambOut.connect(a.destination);","MZ.ambOut.connect(musDest(a));")
+R("(Math.random()-.5)*shk*14:0)","(Math.random()-.5)*shk*14*CFGV.shk:0)",2)
 open(P,'w').write(s)
 print('ok')
 import subprocess
