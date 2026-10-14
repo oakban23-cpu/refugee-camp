@@ -10,7 +10,7 @@ const ARLORE=['แท่นแสงจุดขึ้น ภาพเลือ�
  'ภาพในแสง: ผู้คนปีนเชือกขึ้นไปบนเมฆ ไปหาเมืองใหม่ที่ลอยอยู่ข้างบน… แล้วประตูเมืองนั้นก็ปิดใส่หน้าพวกเขา',
  'ภาพในแสง: คนที่ไม่ได้ปีนขึ้นไปจับมือกันรอบระฆังใหญ่ ร้องเพลงกล่อมเพลงเดียวกับที่ยายเอดาร้อง… จนเงากลืนพวกเขาไปทีละคน'];
 let ARN={F:null,cl:[],dec:[],gh:[],deb:[]},ARS={lp:{x:1600,y:430},rev:0};
-const arRev=()=>!!(me.sty&&(me.sty.p6b|0)===7);
+const arRev=()=>!!(me.sty&&((me.sty.p6b|0)===7||(typeof p6Past==='function'&&p6Past('p6bl'))));
 function arField(){if(ARN.F)return ARN.F;const G=16,N=200,F=new Float32Array(N*N);
   for(let j=0;j<N;j++)for(let i=0;i<N;i++){const x=i*G+8,y=j*G+8;let v=-1e9;for(const[cx,cy,r]of ARI){const d=r-Math.hypot(x-cx,y-cy);if(d>v)v=d}
     for(const[x0,y0,x1,y1,w]of ARW){const dx=x1-x0,dy=y1-y0,t=Math.max(0,Math.min(1,((x-x0)*dx+(y-y0)*dy)/(dx*dx+dy*dy))),d=w-Math.hypot(x-x0-dx*t,y-y0-dy*t);if(d>v)v=d}F[j*N+i]=v}
@@ -209,7 +209,7 @@ function arPitStair(G){const t=performance.now()/1000,x=G.x,y=G.y,st=stCur(),wan
   g.font='bold 12px system-ui';g.textAlign='center';g.lineWidth=3.5;g.strokeStyle='rgba(20,10,30,.9)';const lb='🕳️ บันไดลง'+(G.nm||'หลุมหัวใจว่าง');g.strokeText(lb,x,y-66);g.fillStyle='#ffe8b0';g.fillText(lb,x,y-66);
   if(want){const b=Math.sin(t*5)*6;g.font='22px system-ui';g.fillText('⬇️',x,y-88+b)}
   g.restore()}
-function arStairDraw(G){if(G&&G.to===33)return arPitStair(G);const t=performance.now()/1000;g.save();g.font='bold 11px system-ui';g.textAlign='center';g.lineWidth=3;g.strokeStyle='rgba(20,10,30,.85)';const lb=G.to===32?'🌫️ '+(G.nm||''):'☁️ '+(G.nm||'');g.strokeText(lb,G.x,G.y-24);g.fillStyle='#e8dcff';g.fillText(lb,G.x,G.y-24);g.restore()}
+function arStairDraw(G){if(G&&G.to===33&&curMap===32)return arPitStair(G);const t=performance.now()/1000;g.save();g.font='bold 11px system-ui';g.textAlign='center';g.lineWidth=3;g.strokeStyle='rgba(20,10,30,.85)';const lb=G.to===32?'🌫️ '+(G.nm||''):'☁️ '+(G.nm||'');g.strokeText(lb,G.x,G.y-24);g.fillStyle='#e8dcff';g.fillText(lb,G.x,G.y-24);g.restore()}
 setTimeout(()=>{try{
     MAPS[30].gates.push({x:1600,y:1935,to:32,req:1,p6d:1,ars:1,nm:'บันไดลงใต้เมฆ',arr:{x:1600,y:430}});
     const M7=MAPS[27];MAPS[32]=Object.assign({},M7,{n:'ซากอารัณยา',sx:1600,sy:430,sr:110,seed:321,bg:'#1a1228',tile:'#4e4460',safe:'#5a5070',ring:'#d8a050',t1:'#120c1c',t2:'#241a30',d1:'#3a2c46',d2:'#d8a050',bth:30,
