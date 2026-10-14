@@ -65,26 +65,26 @@ function qshSim(dt){if(!QSHI()||dg.ph!=='boss')return;const B=qshBoss();if(!B)re
   QS.nt-=dt;if(QS.nt<=0){QS.nt=f>.5?14:f>.25?11:9;const k=2+Math.min(2,np-1),wa=Math.atan2(QSW.y-CY,QSW.x-CX);for(let i=0;i<k;i++){let a,c=0;do{a=Math.random()*6.283;c++}while(Math.abs(Math.atan2(Math.sin(a-wa),Math.cos(a-wa)))<.9&&c<20);QS.o.push({id:++QS.oid,x:CX+Math.cos(a)*(DR-50),y:CY+Math.sin(a)*(DR-50),c:'',t:0})}fx({k:'msg',s:'✨ ราชินีเรียกแสงดาว '+k+' ดวง! แย่งมาก่อนถึงตัวนาง'})}
   const pos=u=>u===uid?(me.down<=0?{x:me.x,y:me.y}:null):(others[u]&&others[u].hp>0?{x:others[u].x,y:others[u].y}:null);
   const inh=QS.inh&&QS.inh.t>0;
-  for(const o of QS.o){o.t+=dt;if(o.c){const p=pos(o.c);if(!p){o.c='';continue}o.x=p.x;o.y=p.y-6;if(Math.hypot(p.x-QSW.x,p.y-QSW.y)<QSW.r){o.dn=1;QS.w++;fx({k:'qsd',x:Math.round(QSW.x),y:Math.round(QSW.y)});fx({k:'msg',s:'🌟 ส่งแสงดาวให้เซเลสต์ '+Math.min(QS.w,QS.need)+'/'+QS.need});
-        if(QS.w>=QS.need){QS.w=0;if(!B.inv){B.hp=Math.max(1,B.hp-B.mh*.05)}B.stun=Math.max(B.stun||0,5);fx({k:'qsl',x:Math.round(B.x),y:Math.round(B.y)});fx({k:'msg',s:'⚡ เซเลสต์ยิงหอกดาว! ราชินีมึนงง'});try{sfx('boss')}catch(e){}}}continue}
+  for(const o of QS.o){o.t+=dt;if(o.c){const p=pos(o.c);if(!p){o.c='';continue}o.x=p.x;o.y=p.y-6;if(Math.hypot(p.x-QSW.x,p.y-QSW.y)<QSW.r){o.dn=1;QS.w++;fx({k:'qsd',x:CX,y:CY});fx({k:'msg',s:'🌟 ส่งแสงดาวให้เซเลสต์ '+Math.min(QS.w,QS.need)+'/'+QS.need});
+        if(QS.w>=QS.need){QS.w=0;if(!B.inv){B.hp=Math.max(1,B.hp-B.mh*.05)}B.stun=Math.max(B.stun||0,5);fx({k:'qsl',x:CX,y:CY,lx:Math.round(B.x),ly:Math.round(B.y)});fx({k:'msg',s:'⚡ เซเลสต์ยิงหอกดาว! ราชินีมึนงง'});try{sfx('boss')}catch(e){}}}continue}
     const d=Math.hypot(B.x-o.x,B.y-o.y),sp=(inh?190:55+(1-f)*40)*dt;if(d>1){o.x+=(B.x-o.x)/d*Math.min(d,sp);o.y+=(B.y-o.y)/d*Math.min(d,sp)}
-    if(d<70){o.dn=1;B.hp=Math.min(B.mh,B.hp+B.mh*.03);B.qsb=Math.min(5,(B.qsb|0)+1);fx({k:'qsab',x:Math.round(o.x),y:Math.round(o.y),bx:Math.round(B.x),by:Math.round(B.y)});fx({k:'msg',s:'🌑 ราชินีกลืนแสงดาว! ฟื้นพลังและแรงขึ้น (×'+(B.qsb|0)+')'});continue}
+    if(d<70){o.dn=1;B.hp=Math.min(B.mh,B.hp+B.mh*.03);B.qsb=Math.min(5,(B.qsb|0)+1);fx({k:'qsab',x:CX,y:CY,ax:Math.round(o.x),ay:Math.round(o.y),bx:Math.round(B.x),by:Math.round(B.y)});fx({k:'msg',s:'🌑 ราชินีกลืนแสงดาว! ฟื้นพลังและแรงขึ้น (×'+(B.qsb|0)+')'});continue}
     for(const p of pl){if(Math.hypot(p.x-o.x,p.y-o.y)<44&&!QS.o.some(q=>q.c===p.u&&!q.dn)){o.c=p.u;fx({k:'msg',s:'✋ '+(p.u===uid?'คุณ':(others[p.u]&&others[p.u].n)||'เพื่อน')+'ถือลูกแสงดาว · รีบพาไปที่วงผนึก!'});break}}}
   QS.o=QS.o.filter(o=>!o.dn);
   QS.z.forEach(z=>{z.t-=dt;z.k-=dt;if(z.k<=0){z.k=1;pl.forEach(p=>{if(Math.hypot(p.x-z.x,p.y-z.y)<z.r)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(24*BS().dm*(1+.06*(B.qsb|0)))})}});QS.z=QS.z.filter(z=>z.t>0);
   if(QS.inh){QS.inh.t-=dt;if(QS.inh.t<=0&&!QS.inh.dn){QS.inh.dn=1;pl.forEach(p=>{if(Math.hypot(p.x-B.x,p.y-B.y)<230)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(95*BS().dm*(1+.06*(B.qsb|0)))});fx({k:'bslam',x:Math.round(B.x),y:Math.round(B.y),r:230});QS.inh=null}}
-  QS.bt-=dt;if(QS.bt<=0){QS.bt=.22;fx({k:'qsv',o:QS.o.map(o=>[o.id,Math.round(o.x),Math.round(o.y),o.c]),z:QS.z.map(z=>[Math.round(z.x),Math.round(z.y),z.r,+z.t.toFixed(1)]),w:QS.w,n:QS.need,i:QS.inh?+QS.inh.t.toFixed(2):0,b:B.qsb|0})}}
+  QS.bt-=dt;if(QS.bt<=0){QS.bt=.22;fx({k:'qsv',x:CX,y:CY,o:QS.o.map(o=>[o.id,Math.round(o.x),Math.round(o.y),o.c]),z:QS.z.map(z=>[Math.round(z.x),Math.round(z.y),z.r,+z.t.toFixed(1)]),w:QS.w,n:QS.need,i:QS.inh?+QS.inh.t.toFixed(2):0,b:B.qsb|0})}}
 /* ท่าบอส (โฮสต์) */
 function qshAI(m,dt,pl,enr,dm){if(m.t!==3)return;const f=m.hp/m.mh,mul=1+.06*(m.qsb|0);if(m.stun>0||m.inv)return;
   m.q1=(m.q1===undefined?4:m.q1)-dt;if(m.q1<=0&&pl.length){m.q1=enr?5.5:7;pl.forEach(p=>{const px=Math.round(p.x),py=Math.round(p.y);m.tl.push({x:px,y:py,r:85,t:1.4,k:'star'});fx({k:'tele',x:px,y:py,r:85,dur:1.4})});fx({k:'msg',s:'🦂 กรงเล็บเปลือก! ขยับออกจากวง'})}
   if(f<.7){m.q2=(m.q2===undefined?3:m.q2)-dt;if(m.q2<=0&&pl.length){m.q2=enr?12:15;const n=Math.min(3,1+Math.floor(pl.length/2));for(let i=0;i<n;i++){const p=pl[Math.random()*pl.length|0],x=Math.max(CX-DR+90,Math.min(CX+DR-90,p.x+rnd(-60,60))),y=Math.max(CY-DR+90,Math.min(CY+DR-90,p.y+rnd(-60,60)));QS.z.push({x,y,r:100,t:7,k:1})}fx({k:'msg',s:'🌀 หลุมดำเปิด! เดินออกก่อนถูกดูดลงไป'})}}
-  if(f<.42&&!QS.inh){m.q3=(m.q3===undefined?4:m.q3)-dt;if(m.q3<=0){m.q3=enr?16:20;QS.inh={t:3.2};fx({k:'qsi',x:Math.round(m.x),y:Math.round(m.y),dur:3.2});fx({k:'msg',s:'🌬️ ราชินีสูดลมหายใจกลืนฟ้า! วิ่งออกจากตัวนางให้ไกล'});try{sfx('boss')}catch(e){}}}}
+  if(f<.42&&!QS.inh){m.q3=(m.q3===undefined?4:m.q3)-dt;if(m.q3<=0){m.q3=enr?16:20;QS.inh={t:3.2};fx({k:'qsi',x:CX,y:CY,dur:3.2});fx({k:'msg',s:'🌬️ ราชินีสูดลมหายใจกลืนฟ้า! วิ่งออกจากตัวนางให้ไกล'});try{sfx('boss')}catch(e){}}}}
 /* รับสถานะ + ผลบนผู้เล่นเอง (ทุกเครื่อง) */
 function qshFx(o){if(!o)return false;const n=performance.now();
   if(o.k==='qsv'){const seen={};(o.o||[]).forEach(([id,x,y,c])=>{seen[id]=1;const v=QSV.o[id];if(v){v.tx=x;v.ty=y;v.c=c}else QSV.o[id]={x,y,tx:x,ty:y,c,t0:n}});for(const id in QSV.o)if(!seen[id])delete QSV.o[id];
     QSV.z=o.z||[];QSV.w=o.w|0;QSV.n=o.n|0||3;QSV.b=o.b|0;QSV.t=n;if(o.i>0&&(!QSFX.inh||n-QSFX.inh.t0>500))QSFX.inh={t0:n-(3.2-o.i)*1000,d:3200};return true}
-  if(o.k==='qsab'){QSFX.ab.push({x:+o.x,y:+o.y,bx:+o.bx,by:+o.by,t0:n});if(QSFX.ab.length>8)QSFX.ab.shift();return true}
-  if(o.k==='qsl'){QSFX.ln={x:+o.x,y:+o.y,t0:n};return true}
+  if(o.k==='qsab'){QSFX.ab.push({x:+(o.ax!=null?o.ax:o.x),y:+(o.ay!=null?o.ay:o.y),bx:+o.bx,by:+o.by,t0:n});if(QSFX.ab.length>8)QSFX.ab.shift();return true}
+  if(o.k==='qsl'){QSFX.ln={x:+(o.lx!=null?o.lx:o.x),y:+(o.ly!=null?o.ly:o.y),t0:n};return true}
   if(o.k==='qsi'){QSFX.inh={t0:n,d:(+o.dur||3.2)*1000,x:+o.x,y:+o.y};return true}
   if(o.k==='qsd'){QSFX.dl=n;return true}return false}
 function qshLocal(dt){if(!QSHI()||dg.ph!=='boss'||me.down>0||!me.cls)return;const B=qshBoss();if(!B)return;let px=0,py=0;
@@ -208,7 +208,7 @@ STCH.push('ภาค 7 · บทที่ 4 · เปลือกราชิน
    ['me','(แบบเตาหลอมหัวใจ: แสงดาว ✓ · เวลา … · เสียงเพลง …)'],
    ['cel','เวลาต้องขอจากเวสเปอร์ ผู้เฝ้าหลุมหัวใจ ส่วนเสียงเพลง… ยายเอดาบอกว่าต้องให้คนทั้งสามเมืองร้องพร้อมกัน'],
    ['cel','ไปที่หลุมหัวใจว่างกันเถอะ ที่นั่นคือที่เดียวที่หัวใจดวงใหม่จะเกิดได้']],
-  post:[['nar','🌘 — จบภาค 7 บทที่ 4 · เปลือกราชินี — บทต่อไป: เตาหลอมหัวใจ · บทสุดท้ายของภาค 7 (เร็ว ๆ นี้)']],rw:{g:180000,s3:12}})}
+  post:[['nar','🌘 — จบภาค 7 บทที่ 4 · เปลือกราชินี — บทต่อไป: เตาหลอมหัวใจ · บทสุดท้ายของภาค 7']],rw:{g:180000,s3:12}})}
 setTimeout(()=>{try{MAPS[10].npc2=MAPS[10].npc2||{x:-9999,y:-9999,n:'เซเลสต์ · นักดาราศาสตร์หลวง'}}catch(e){}
   try{const _bt=buildTrees;window.buildTrees=buildTrees=function(){_bt();try{if(curMap===10&&!isDg())for(let i=trees.length-1;i>=0;i--){const t=trees[i];if(QSA.some(([x,y])=>Math.hypot(t.x-x,t.y-y)<96)||Math.hypot(t.x-470,t.y-1650)<70)trees.splice(i,1)}}catch(e){}}}catch(e){}
   try{const _q=arAqT;window.arAqT=arAqT=function(st){if(st.p7ls)return qsAqT(st);return _q(st)}}catch(e){}

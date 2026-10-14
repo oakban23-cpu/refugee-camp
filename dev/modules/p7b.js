@@ -185,7 +185,7 @@ function mdfStart(){if(!MDFI()||dg.ph!=='lobby')return;const D=DT[22];stSay(MDF_
   fx({k:'msg',s:'⛏️ รอกเริ่มหมุน! ปกป้องลิฟต์จนแกนดาวขึ้นถึงปากหลุม'});try{sfx('quest')}catch(e){}},{cine:1})}
 function mdfSpawn(n,boss){const D=DT[22],np=Math.max(1,plCount()),pts=[];for(let i=0;i<n;i++){const T=mdTN()[Math.random()*mdTN().length|0],x=T[0]+rnd(-30,30),y=T[1]+rnd(-30,30);
     const t=boss?0:(Math.random()<.14+MDF.wv*.06?2:(Math.random()<.45?1:0)),L=D.L+(MDF.wv|0),hp=mhp(t,L)*(1+.25*(np-1));mons.push({id:++mid,x,y,tx:x,ty:y,t,L,p:0,hx:x,hy:y,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,mdf:1});if(pts.length<10)pts.push([Math.round(x),Math.round(y)])}
-  if(pts.length)fx({k:'mdtl',p:pts})}
+  if(pts.length)fx({k:'mdtl',x:CX,y:CY,p:pts})}
 function mdfSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
   if(MDF.hp<=0){dgEnd(0,'ลิฟต์เหมืองพังลงก้นหลุม');return}
@@ -194,16 +194,16 @@ function mdfSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=
   if(dg.ph==='run'){const np=Math.max(1,plCount());
     if(MDF.st==='brk'){MDF.nt-=dt;if(MDF.nt<=0){MDF.wv++;dg.w=MDF.wv;MDF.st='wave';MDF.q=Math.round((6+MDF.wv*3)*(.7+.45*np));MDF.qt=0;fx({k:'msg',s:'🐺 คลื่นที่ '+MDF.wv+'/3 · ฝูงหมาป่าดาวโผล่จากอุโมงค์!'});try{sfx('boss')}catch(e){}}}
     else if(MDF.st==='wave'){MDF.qt-=dt;if(MDF.q>0&&MDF.qt<=0){const k=Math.min(3,MDF.q);mdfSpawn(k);MDF.q-=k;MDF.qt=2.4}
-      if(MDF.q<=0&&!mons.some(m=>m.mdf&&m.hp>0)){if(MDF.wv>=3){dg.ph='boss';MDF.st='boss';bossCd=1e9;spawnBoss();dg.tl+=DGBOSS;fx({k:'mdtl',p:[mdTN()[1].map(Math.round)],big:1});fx({k:'msg',s:'🌠 ราชาหมาป่าดาวก้าวออกจากอุโมงค์เหนือ! ปกป้องลิฟต์ให้ได้'});try{sfx('boss')}catch(e){}}
+      if(MDF.q<=0&&!mons.some(m=>m.mdf&&m.hp>0)){if(MDF.wv>=3){dg.ph='boss';MDF.st='boss';bossCd=1e9;spawnBoss();dg.tl+=DGBOSS;fx({k:'mdtl',x:CX,y:CY,p:[mdTN()[1].map(Math.round)],big:1});fx({k:'msg',s:'🌠 ราชาหมาป่าดาวก้าวออกจากอุโมงค์เหนือ! ปกป้องลิฟต์ให้ได้'});try{sfx('boss')}catch(e){}}
         else{MDF.st='brk';MDF.nt=6;fx({k:'msg',s:'✨ ตีฝูงถอยได้แล้ว! รอกหมุนต่อ… (พักซ่อมลิฟต์ได้)'})}}}}
-  MDF.bt-=dt;if(MDF.bt<=0){MDF.bt=.4;fx({k:'mdfv',hp:Math.round(MDF.hp*10)/10,wv:MDF.wv,st:MDF.st})}}
+  MDF.bt-=dt;if(MDF.bt<=0){MDF.bt=.4;fx({k:'mdfv',x:CX,y:CY,hp:Math.round(MDF.hp*10)/10,wv:MDF.wv,st:MDF.st})}}
 function mdfMon(m,dt,pl,spd){if(!MDFI()||(dg.ph!=='run'&&dg.ph!=='boss'))return false;for(const p of pl)if(Math.hypot(p.x-m.x,p.y-m.y)<140)return false;
   const d=Math.hypot(CX-m.x,CY-m.y);if(d>74){moveTo(m,CX,CY,spd*1.1*dt);return true}
   if(m.ac<=0){m.ac=1;m.akN=((m.akN|0)+1)%100;m.akT=performance.now();MDF.hp=Math.max(0,MDF.hp-(m.t===2?1.4:m.t===0?1.2:.8));MDF.hit=performance.now()}return true}
 function mdfAI(m,dt,pl,enr,dm){if(m.t!==3)return;const f=m.hp/m.mh,x=Math.round(m.x),y=Math.round(m.y);
   if(m.mz){m.mz.t-=dt;if(m.mz.t<=0){pl.forEach(p=>{if(Math.hypot(p.x-CX,p.y-CY)>150)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(80*dm)});fx({k:'bslam',x:CX,y:CY,r:480});m.mz=null}}
   if(m.stun>0||m.inv)return;
-  m.w1=(m.w1===undefined?9:m.w1)-dt;if(m.w1<=0&&!m.mz){m.w1=enr?12:15;m.mz={t:3.2};fx({k:'mdz',dur:3.2});fx({k:'msg',s:'🌠 ราชาหมาป่าหอนเรียกฝนดาว! เข้าไปหลบในวงแสงรอบลิฟต์'})}
+  m.w1=(m.w1===undefined?9:m.w1)-dt;if(m.w1<=0&&!m.mz){m.w1=enr?12:15;m.mz={t:3.2};fx({k:'mdz',x:CX,y:CY,dur:3.2});fx({k:'msg',s:'🌠 ราชาหมาป่าหอนเรียกฝนดาว! เข้าไปหลบในวงแสงรอบลิฟต์'})}
   m.w2=(m.w2===undefined?4:m.w2)-dt;if(m.w2<=0&&pl.length){m.w2=enr?5.5:7;pl.forEach(p=>{const px=Math.round(p.x),py=Math.round(p.y);m.tl.push({x:px,y:py,r:85,t:1.4,k:'star'});fx({k:'tele',x:px,y:py,r:85,dur:1.4})});fx({k:'msg',s:'🐾 กรงเล็บดาว! ขยับออกจากวง'})}
   if(f<.5){m.w3=(m.w3===undefined?2:m.w3)-dt;if(m.w3<=0){m.w3=enr?14:18;mdfSpawn(2+Math.min(2,pl.length-1),1);fx({k:'msg',s:'🐺 จ่าฝูงหอนเรียกลูกฝูง! อย่าให้มันถึงลิฟต์'})}}}
 function mdfFx(o){if(!o)return false;const n=performance.now();if(o.k==='mdz'){MDZ={t0:n,d:(+o.dur||3.2)*1000};return true}

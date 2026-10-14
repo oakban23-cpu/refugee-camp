@@ -13,7 +13,7 @@ function ambTheme(){let d=0;try{d=isDg()||isTw()||isArena()}catch(e){}if(d){try{
 {const _r=gxRimCol;gxRimCol=function(){const th=ambTheme(),A=th&&AMB2[th];if(!A)return _r();let nt=false;try{nt=isNight()&&!isDg()}catch(e){}return nt?'170,200,255':A[2]}}
 /* 6.2) มอนสเตอร์ได้แสงแวดล้อม + แสงขอบแบบเดียวกับผู้เล่น (จำกัดจำนวนต่อเฟรมให้ลื่นบนมือถือ · บอสได้เสมอ) */
 const MLB={n:0,cap:5,S:new Set(),f:0};
-function monLit(m,fn){if(LOWQ||(typeof FQ!=='undefined'&&FQ.avg>20)){fn();return}const boss=m.t===3;if(!boss&&!MLB.S.has(m)){fn();return}if(boss&&MAPS[curMap]&&(MAPS[curMap].qsh||MAPS[curMap].queen)){fn();return}
+function monLit(m,fn){if(LOWQ||(typeof FQ!=='undefined'&&FQ.avg>20)){fn();return}const boss=m.t===3;if(!boss&&!MLB.S.has(m)){fn();return}if(boss&&MAPS[curMap]&&(MAPS[curMap].qsh||MAPS[curMap].queen||MAPS[curMap].hfg)){fn();return}
   let R=12;try{R=mR(m)}catch(e){R=(MT[m.t]&&MT[m.t].r)||12}const hw=R*(boss?2.6:1.9)+14,hh=R*(boss?2.6:2.1)+18,G=g,Mm=g.getTransform();let first=true;
   try{gxLit(m.x,m.y-R*.7,hw,hh,()=>{if(first){first=false;const M0=g.getTransform();MLSH={g:G,dx:Mm.e-M0.e,dy:Mm.f-M0.f,ga:G.globalAlpha}}fn()})}finally{MLSH=null}}
 /* เงาใต้มอนวาดลงพื้นจริง (นอกก้อนที่ลงแสง) → ไม่ถูกย้อมสี/ไม่มีขอบเรือง */
