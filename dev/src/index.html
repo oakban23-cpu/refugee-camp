@@ -9776,6 +9776,13 @@ const CAMF={x:0,y:0},FGO={x:0,y:0,lx:null,ly:null,t:0};
 function fgUpd(){const n=performance.now(),dt=Math.min(.05,FGO.t?(n-FGO.t)/1000:.016);FGO.t=n;
   if(FGO.lx===null||Math.abs(CAMF.x-FGO.lx)>300||Math.abs(CAMF.y-FGO.ly)>300){FGO.lx=CAMF.x;FGO.ly=CAMF.y;FGO.x=0;FGO.y=0;return}
   FGO.x-=(CAMF.x-FGO.lx)*.3;FGO.y-=(CAMF.y-FGO.ly)*.3;FGO.lx=CAMF.x;FGO.ly=CAMF.y;const k=Math.exp(-dt*3);FGO.x=Math.max(-26,Math.min(26,FGO.x*k));FGO.y=Math.max(-26,Math.min(26,FGO.y*k))}
+/* ---------- v364 สมดุลภาค 5–7 (ดูบันทึก สมดุล-ภาค5-7-v363) ----------
+   · เลือดมอนสนามแมพ 27–36 เพิ่มให้ฆ่าได้ราว 1 วิตามของในแต่ละช่วง (เดิม 0.15–0.6 วิ)
+   · EXP/ทองจากการฆ่ามอนสนามในแมพเหล่านี้ ×1.8 (ไม่แตะรางวัลตกปลา/กิจกรรม)
+   · ฉายาภาค 5–7 ที่ให้ "ลดดาเมจ" (ชนเพดาน 60% อยู่แล้ว ไม่มีผล) เปลี่ยนเป็นเลือดสูงสุดค่าเท่าเดิม */
+const TKB=()=>{try{return!isDg()&&curMap>=27&&curMap<=36?1.8:1}catch(e){return 1}};
+setTimeout(()=>{try{const H={27:40,28:40,29:40,30:52,31:54,32:56,33:58,34:68,35:71,36:73};for(const k in H){const T=TIER[k];if(T)TIER[k]=[H[k],T[1],T[2]]}
+  ['stCa','stP5','stEs','stAr','stP6','stS2','stS5','stP7'].forEach(id=>{const b=TTB[id]&&TTB[id].b;if(b&&b.red){b.hp=+((b.hp||0)+b.red).toFixed(3);delete b.red}});TTBC.k=''}catch(e){console.warn('bal364',e)}},60);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -15389,7 +15396,7 @@ function simHost(dt){
       if(m.boom){fx({k:'ring',x:m.x,y:m.y,r:70,c:'#ff8a3a'});pl.forEach(p=>{if(Math.hypot(p.x-m.x,p.y-m.y)<70)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round((6+3*m.L)*(m.dmx||1))})}
       const v=m.mn?3:TW?5*m.L*(m.t===2?3:1)*(m.chief?4:1):(m.p||m.fw)?8*m.L*(m.t===2?3:1)*(WESTM(curMap)?1.3:SHADEM(curMap)?2:ROOTM(curMap)?3.5:CASTM(curMap)?4:1):2,gd=m.mn?1:TW?2*m.L+(Math.random()*3|0):(m.p||m.fw)?3*m.L+(Math.random()*4|0):1+(Math.random()*2|0),pz=Math.random()<(m.p?.14:.05)?(Math.random()<.5?1:2):0,gl=Math.random()<(m.p?.05+.015*(m.L||1):.02)?(m.L||1):0;
       const [v2,gd2,gl2]=curMap===7&&!m.mn?mineRew(m,v,gd,gl):[v,gd,gl];if(m.tgb)fx({k:'msg',s:'💰 จับก็อบลินถุงทองได้แล้ว! ทองกระจายเต็มพื้น'});
-      const NK=ntOf(m),SK=shOf(m),SZ=szHp(szOf(m)),ELK=m.el?4:1,v3=Math.round(v2*ELK*(NK?2.5:1)*(SK?5:1)*SZ*(m.t<3?tierRw():1)),gd3=Math.round(gd2*ELK*(NK?2:1)*(SK?5:1)*Math.max(1,SZ)*(m.t<3?tierRw():1));gainXP(m.x,m.y,v3);qKill(m.x,m.y,m.t,0);dropLoot(m.x,m.y,gd3,pz,gl2);if(SK)shinyLoot(m.x,m.y,m.L);if(m.el)ekLoot(m.x,m.y,m.L,m.el);xpOut.push([Math.round(m.x),Math.round(m.y),v3,gd3,pz,gl2,0,m.t,SK?m.L||1:0,m.el?(m.L|0)*10+m.el:0])});
+      const NK=ntOf(m),SK=shOf(m),SZ=szHp(szOf(m)),ELK=m.el?4:1,v3=Math.round(v2*ELK*(NK?2.5:1)*(SK?5:1)*SZ*(m.t<3?tierRw()*TKB():1)),gd3=Math.round(gd2*ELK*(NK?2:1)*(SK?5:1)*Math.max(1,SZ)*(m.t<3?tierRw()*TKB():1));gainXP(m.x,m.y,v3);qKill(m.x,m.y,m.t,0);dropLoot(m.x,m.y,gd3,pz,gl2);if(SK)shinyLoot(m.x,m.y,m.L);if(m.el)ekLoot(m.x,m.y,m.L,m.el);xpOut.push([Math.round(m.x),Math.round(m.y),v3,gd3,pz,gl2,0,m.t,SK?m.L||1:0,m.el?(m.L|0)*10+m.el:0])});
     mons=mons.filter(m=>m.hp>0);
   }
   Object.entries(dmgQ).forEach(([u,d])=>{if(u===uid)hurt(d);else dmgOut.push([u,d])});
