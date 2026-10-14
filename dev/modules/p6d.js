@@ -197,7 +197,19 @@ STCH.push('ภาค 6 · บทที่ 3 · ซากอารัณยา');
    ['nar','เฟืองตะวันบนประตูหมุนไปหนึ่งช่อง… และเข็มนาฬิกาที่ค้างมาสามร้อยปี ขยับไปหนึ่งวินาที'],
    ['til','(ทิลจับมือยายแน่น) …ยาย ข้าว่าเขาไม่ได้โกรธนะ เขาแค่เหนื่อยมาก ๆ'],
    ['nar','⌛ — จบภาค 6 บทที่ 3 · ซากอารัณยา — บทต่อไป: หอนาฬิกาหยุดเดิน (เร็ว ๆ นี้)']],rw:{g:220000,s3:12}})}
-function arStairDraw(G){const t=performance.now()/1000;g.save();g.font='bold 11px system-ui';g.textAlign='center';g.lineWidth=3;g.strokeStyle='rgba(20,10,30,.85)';const lb=G.to===32?'🌫️ '+(G.nm||''):'☁️ '+(G.nm||'');g.strokeText(lb,G.x,G.y-24);g.fillStyle='#e8dcff';g.fillText(lb,G.x,G.y-24);g.restore()}
+function arPitStair(G){const t=performance.now()/1000,x=G.x,y=G.y,st=stCur(),want=!!(st&&me.sty&&me.sty.a===1&&st.g==='map'&&st.m===33)||!!(st&&st.g==='map'&&st.m===33);g.save();
+  g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x+4,y+40,84,18,0,0,7);g.fill();
+  g.fillStyle='#5a4c68';g.beginPath();g.roundRect(x-74,y-54,148,96,10);g.fill();g.strokeStyle='#2a2034';g.lineWidth=2;g.stroke();
+  g.strokeStyle='rgba(216,160,80,.75)';g.lineWidth=2.4;g.beginPath();g.roundRect(x-68,y-48,136,84,8);g.stroke();
+  {const gr=g.createLinearGradient(0,y+30,0,y-42);gr.addColorStop(0,'#2a2036');gr.addColorStop(1,'#050208');g.fillStyle=gr;g.beginPath();g.roundRect(x-58,y-40,116,70,5);g.fill()}
+  for(let i=0;i<6;i++){const yy=y+24-i*11,w=54-i*5,a=1-i*.14;g.fillStyle='rgba(120,104,140,'+a+')';g.fillRect(x-w,yy-4,w*2,5);g.fillStyle='rgba(30,20,40,'+a+')';g.fillRect(x-w,yy+1,w*2,3)}
+  g.strokeStyle='#b07a3a';g.lineWidth=2.4;g.beginPath();g.moveTo(x-56,y+28);g.lineTo(x-30,y-38);g.moveTo(x+56,y+28);g.lineTo(x+30,y-38);g.stroke();
+  g.save();g.globalCompositeOperation='lighter';glowAt(x,y-20,60,'190,140,255',.28+.1*Math.sin(t*2));for(let i=0;i<5;i++){const q=(t*.4+i/5)%1;glowAt(x-30+i*15,y-30-q*60,2.6,'220,190,255',Math.sin(q*3.14))}g.restore();
+  for(const s of[-1,1]){const lx=x+s*86,ly=y+10;g.strokeStyle='#3a2a1a';g.lineWidth=4;g.beginPath();g.moveTo(lx,ly);g.lineTo(lx,ly-70);g.stroke();g.fillStyle='#d8a050';g.beginPath();g.roundRect(lx-7,ly-84,14,16,3);g.fill();g.save();g.globalCompositeOperation='lighter';glowAt(lx,ly-76,26,'255,200,120',.55+.1*Math.sin(t*3+s));g.restore()}
+  g.font='bold 12px system-ui';g.textAlign='center';g.lineWidth=3.5;g.strokeStyle='rgba(20,10,30,.9)';const lb='🕳️ บันไดลง'+(G.nm||'หลุมหัวใจว่าง');g.strokeText(lb,x,y-66);g.fillStyle='#ffe8b0';g.fillText(lb,x,y-66);
+  if(want){const b=Math.sin(t*5)*6;g.font='22px system-ui';g.fillText('⬇️',x,y-88+b)}
+  g.restore()}
+function arStairDraw(G){if(G&&G.to===33)return arPitStair(G);const t=performance.now()/1000;g.save();g.font='bold 11px system-ui';g.textAlign='center';g.lineWidth=3;g.strokeStyle='rgba(20,10,30,.85)';const lb=G.to===32?'🌫️ '+(G.nm||''):'☁️ '+(G.nm||'');g.strokeText(lb,G.x,G.y-24);g.fillStyle='#e8dcff';g.fillText(lb,G.x,G.y-24);g.restore()}
 setTimeout(()=>{try{
     MAPS[30].gates.push({x:1600,y:1935,to:32,req:1,p6d:1,ars:1,nm:'บันไดลงใต้เมฆ',arr:{x:1600,y:430}});
     const M7=MAPS[27];MAPS[32]=Object.assign({},M7,{n:'ซากอารัณยา',sx:1600,sy:430,sr:110,seed:321,bg:'#1a1228',tile:'#4e4460',safe:'#5a5070',ring:'#d8a050',t1:'#120c1c',t2:'#241a30',d1:'#3a2c46',d2:'#d8a050',bth:30,
