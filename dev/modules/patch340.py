@@ -311,6 +311,19 @@ R("MZ.key.indexOf('boss')===0||MZ.key.indexOf('opera')===0?.8:.6","MZ.key.indexO
 R("while(MZ.next<a.currentTime+.5){const t=MZ.next,st=MZ.step,","while(MZ.next<a.currentTime+.5){if(T.rk){rkStep(T,MZ.next,MZ.step);MZ.step++;MZ.next+=s16;continue}const t=MZ.next,st=MZ.step,",1)
 # v381 tent: cosmetic-only deco label
 R("<small>ความสบาย +'+D[4]+(own?'':","<small>'+(D[4]?'ความสบาย +'+D[4]:'✨ แต่งสวย')+(own?'':",1)
+# v382 prologue loop: never negative dt; stop if its canvas was removed (fixes negative arc radius in demonBody)
+R("function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;P.t+=dt","function loop(now){if(!cv.isConnected){window.PRO_ON=0;return}const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;P.t+=dt",1)
+# v382 hearth cooking in tent
+R("h+='<div class=\"br\">👩‍🍳 สูตรอาหารของป้าบัว '+(near?'':'<small style=\"opacity:.75\">(ไปหาป้าบัวที่ครัวริมบึง หน้าประตูใต้ของค่าย เพื่อปรุง)</small>')+'</div>';","h+='<div class=\"br\">'+fsHearthHdr(near)+'</div>';",1)
+R("const F=FOOD[k],can=!!fsFoodCan(k)&&me.gold>=F[5];","const F=FOOD[k],fee=fsFee(k),can=!!fsFoodCan(k)&&me.gold>=fee;",1)
+R("<span class=\"'+(me.gold>=F[5]?'ok':'no')+'\">🪙 '+F[5].toLocaleString()+'</span>","<span class=\"'+(me.gold>=fee?'ok':'no')+'\">🪙 '+fee.toLocaleString()+(fee<F[5]?' <s style=\"opacity:.55\">'+F[5].toLocaleString()+'</s>':'')+'</span>",1)
+R("(can&&near?'':' disabled')","(can&&near&&fsHearthOk(k)?'':' disabled')",1)
+R("<div class=\"card fsrow fsrc\"><span class=\"fsic\">'+F[0]+'</span><div class=\"nm\"><b>'+F[1]+'</b>","<div class=\"card fsrow fsrc\"><span class=\"fsic\">'+F[0]+'</span><div class=\"nm\"><b>'+F[1]+(F[6]?' <small style=\"color:#ffb070\">🔥 '+(F[6]==='fir2'?'เฉพาะเตาผิงหิน':'เฉพาะเตาในเต็นท์')+'</small>':'')+'</b>",1)
+R("if(!F||!fsNearCook())return;const use=fsFoodCan(k);if(!use||me.gold<F[5])return;me.gold-=F[5];","if(!F||!fsNearCook()||!fsHearthOk(k))return;const use=fsFoodCan(k),fee=fsFee(k);if(!use||me.gold<fee)return;me.gold-=fee;",1)
+R("fishUI('food','👩‍🍳 ป้าบัวปรุง «'+F[0]+' '+F[1]+'» เสร็จแล้ว! กด \"กิน\" เพื่อรับบัฟ')","fishUI('food',fsCookDone(k,F,S))",1)
+R("else if(tentMine()&&Math.hypot(me.x-TBED.x,me.y-TBED.y)<75){tx='😴 นอนพัก (บัฟ 30 นาที)';fn='bed'}","else if(tentMine()&&tvNearHearth()){tx='🔥 ทำอาหารที่เตา';fn='cook'}else if(tentMine()&&Math.hypot(me.x-TBED.x,me.y-TBED.y)<75){tx='😴 นอนพัก (บัฟ 30 นาที)';fn='bed'}",1)
+R("else if(f==='bed'&&tentMine()){","else if(f==='cook'&&tvNearHearth()){fishUI('food')}else if(f==='bed'&&tentMine()){",1)
+R("<small>'+(D[4]?'ความสบาย +'+D[4]:'✨ แต่งสวย')+(own?'':","<small>'+(D[4]?'ความสบาย +'+D[4]:D[0]==='fir'?(k==='fir2'?'🍳 ทำอาหาร −50% · ลุ้น 2 จาน':'🍳 ทำอาหาร −30%'):'✨ แต่งสวย')+(own?'':",1)
 open(P,'w').write(s)
 print('ok')
 import subprocess

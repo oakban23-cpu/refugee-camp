@@ -201,3 +201,31 @@ drawTent=function(){tvInit();const M=MAPS[curMap];if(!M||!M.tent)return;const T=
   /* ฝุ่นลอยในแสง */if(lum>0){for(let i=0;i<22;i++){const sx=TRX0+((i*97)%380),sy=TRY0+((i*61)%360),px=sx+Math.sin(t*.3+i)*18,py=sy-((t*6+i*13)%60);g.fillStyle='rgba(255,236,190,'+(.18+.14*Math.sin(t*1.7+i))+')';g.beginPath();g.arc(px,py,.9+(i%3)*.4,0,7);g.fill()}}
   /* ประตู */tvGlow(CX,TRY1+18,56,'255,220,150',.14);g.font='bold 9px system-ui';g.textAlign='center';g.fillStyle='rgba(255,230,180,.85)';g.fillText('🚪 ทางออก',CX,TRY1+44);
   g.restore()};
+/* ---------- v382 ทำอาหารที่เตาในเต็นท์ ----------
+   ยืนใกล้เตาในเต็นท์ตัวเอง → ปุ่ม "🔥 ทำอาหารที่เตา" เปิดหน้าทำอาหาร (ไม่ต้องเดินไปหาป้าบัว)
+   เตาถ่านเหล็ก: ค่าปรุง −30% · เตาผิงหิน: ค่าปรุง −50% + ลุ้นอร่อยพิเศษได้ 2 จาน 25%
+   สูตรเฉพาะเตา: ปลารมควัน (เตาไหนก็ได้) · สตูว์ปลาเตาผิงหิน (เฉพาะเตาผิงหิน) */
+Object.assign(FOOD,{smoke:['🐟','ปลารมควันเตาถ่าน',{c:3,u:1},{fl:.25,xp:.06},20,1200,'fir1'],stew:['🥘','สตูว์ปลาเตาผิงหิน',{c:2,u:2,r:1},{hp:.06,dm:.05,xp:.07,gd:.04},30,4000,'fir2']});
+const FIRP={fir1:{off:.3,dbl:0},fir2:{off:.5,dbl:.25}};let TVCK=0;
+function tvHK(){try{if(!tentMine())return'';const d=MAPS[curMap].tent.d||{};return FIRP[d.fir]?d.fir:''}catch(e){return''}}
+function tvNearHearth(){const k=tvHK();return!!k&&Math.hypot(me.x-(TRX0+44),me.y-(CY-60))<100}
+function fsHearthOk(k){const F=FOOD[k];if(!F||!F[6])return true;const h=tvNearHearth()?tvHK():'';return F[6]==='fir1'?!!h:h==='fir2'}
+function fsFee(k){const F=FOOD[k];if(!F)return 0;const h=tvNearHearth()?tvHK():'';return Math.round(F[5]*(1-(h?FIRP[h].off:0)))}
+function fsHearthHdr(near){const h=tvNearHearth()?tvHK():'';if(h){const P=FIRP[h];return'🔥 '+TDECO[h][2]+'ในเต็นท์ · ค่าปรุง −'+Math.round(P.off*100)+'%'+(P.dbl?' · ลุ้นได้ 2 จาน '+Math.round(P.dbl*100)+'%':'')}
+  return'👩‍🍳 สูตรอาหารของป้าบัว '+(near?'':'<small style="opacity:.75">(ไปหาป้าบัวที่ครัวริมบึง หน้าประตูใต้ของค่าย หรือใช้เตาผิงในเต็นท์ของคุณ)</small>')}
+function fsCookDone(k,F,S){let two=0;const h=tvNearHearth()?tvHK():'';if(h){if(Math.random()<FIRP[h].dbl){S.f[k]=Math.min(99,(S.f[k]|0)+1);two=1}TVCK=performance.now()/1000+2.6;
+  try{for(let i=0;i<14;i++)parts.push({x:TRX0+44+(Math.random()-.5)*24,y:CY-80,vx:(Math.random()-.5)*30,vy:-50-Math.random()*40,t:1.1,l:1.1,c:i%2?'#ffd84a':'#ffffff',r:1.8})}catch(e){}
+  return'🔥 ปรุง «'+F[0]+' '+F[1]+'» ที่เตาเสร็จแล้ว!'+(two?' ✨ อร่อยพิเศษ ได้ 2 จาน!':'')+' กด "กิน" เพื่อรับบัฟ'}
+  return'👩‍🍳 ป้าบัวปรุง «'+F[0]+' '+F[1]+'» เสร็จแล้ว! กด "กิน" เพื่อรับบัฟ'}
+{const o=fsNearCook;fsNearCook=function(){return o()||tvNearHearth()}}
+/* อุปกรณ์บนเตา + แอนิเมชันตอนปรุง */
+function tvCookware(f,x,y,t){const ck=TVCK>t,O='#1a100a';
+  if(f==='fir2'){const px=x,py=y-6;g.strokeStyle='#3a3a40';g.lineWidth=1.4;g.beginPath();g.moveTo(px-14,py-26);g.lineTo(px,py-34);g.lineTo(px+14,py-26);g.stroke();
+    g.fillStyle='#24242a';g.beginPath();g.ellipse(px,py-10,13,10,0,0,7);g.fill();g.strokeStyle=O;g.lineWidth=.8;g.stroke();g.fillStyle='#3a3a44';g.beginPath();g.ellipse(px,py-18,13,3.4,0,0,7);g.fill();
+    g.fillStyle=ck?'#e8b060':'#c89048';g.beginPath();g.ellipse(px,py-18,10.5,2.4,0,0,7);g.fill();for(let i=0;i<(ck?6:3);i++){const q=(t*(ck?1.2:.5)+i/ (ck?6:3))%1;g.fillStyle='rgba(240,240,240,'+(.4*(1-q))+')';g.beginPath();g.arc(px-6+i*3+Math.sin(q*6+i)*3,py-22-q*(ck?40:24),2+q*5,0,7);g.fill()}}
+  else{const px=x,py=y-16;g.strokeStyle='#5a5a62';g.lineWidth=1;for(let i=-2;i<=2;i++){g.beginPath();g.moveTo(px-16,py+i*2.4);g.lineTo(px+16,py+i*2.4);g.stroke()}
+    [[-6,0],[6,1]].forEach(([dx,k])=>{g.strokeStyle='#c8a870';g.lineWidth=1;g.beginPath();g.moveTo(px+dx-12,py+3);g.lineTo(px+dx+10,py-5);g.stroke();g.fillStyle=ck?'#c87838':'#9aa8b8';g.beginPath();g.ellipse(px+dx,py-1,7,3,-.35,0,7);g.fill();g.strokeStyle=O;g.lineWidth=.6;g.stroke();
+      g.fillStyle=ck?'#c87838':'#9aa8b8';g.beginPath();g.moveTo(px+dx+6,py-3);g.lineTo(px+dx+10,py-6);g.lineTo(px+dx+9,py);g.closePath();g.fill()});
+    for(let i=0;i<(ck?5:2);i++){const q=(t*(ck?1.1:.4)+i/(ck?5:2))%1;g.fillStyle='rgba(200,200,200,'+(.35*(1-q))+')';g.beginPath();g.arc(px-4+i*4,py-8-q*(ck?36:20),2+q*4,0,7);g.fill()}}
+  if(ck){const k=TVCK-t;tvGlow(x,y-10,70,'255,170,60',.35*Math.min(1,k));g.font='bold 9px system-ui';g.textAlign='center';g.fillStyle='rgba(255,236,190,'+Math.min(1,k)+')';g.fillText('ฉ่า~ 🍳',x,y-58-(2.6-k)*8)}}
+{const o=tvHearth;tvHearth=function(f,x,y,t,O){o(f,x,y,t,O);if(f)tvCookware(f,x,y,t)}}

@@ -3582,8 +3582,8 @@ function fishUI(tab,msg){if(!me.cls)return;if(tab)fsTab=tab;ov.dataset.k='fish';
   else if(fsTab==='food'){const near=fsNearCook();
     if(S.fb){const F=FOOD[S.fb.id];h+='<div class="card fsnow"><span class="fsic">'+F[0]+'</span><div class="nm"><b>กำลังอิ่มอร่อย: '+F[1]+'</b><small>'+fsBuffTxt(F[3])+' · เหลือ '+Math.floor(S.fb.t/60)+':'+String(Math.floor(S.fb.t%60)).padStart(2,'0')+' นาที</small></div></div>'}
     const own=Object.keys(S.f).filter(k=>FOOD[k]&&S.f[k]>0);if(own.length){h+='<div class="br">🍽️ อาหารในกระเป๋า (กินได้ทุกที่ · กินได้ทีละอย่าง)</div>';own.forEach(k=>{const F=FOOD[k];h+='<div class="card fsrow"><span class="fsic">'+F[0]+'</span><div class="nm"><b>'+F[1]+' <small>×'+S.f[k]+'</small></b><small>'+fsBuffTxt(F[3])+' · '+F[4]+' นาที</small></div><div class="fsbtn"><button class="pri" data-fse="'+k+'">กิน</button></div></div>'})}
-    h+='<div class="br">👩‍🍳 สูตรอาหารของป้าบัว '+(near?'':'<small style="opacity:.75">(ไปหาป้าบัวที่ครัวริมบึง หน้าประตูใต้ของค่าย เพื่อปรุง)</small>')+'</div>';
-    Object.keys(FOOD).forEach(k=>{const F=FOOD[k],can=!!fsFoodCan(k)&&me.gold>=F[5];h+='<div class="card fsrow fsrc"><span class="fsic">'+F[0]+'</span><div class="nm"><b>'+F[1]+'</b><small style="color:#ffe6a0">'+fsBuffTxt(F[3])+' · '+F[4]+' นาที</small><div class="fsneed">'+fsNeedTxt(k)+'<span class="'+(me.gold>=F[5]?'ok':'no')+'">🪙 '+F[5].toLocaleString()+'</span></div></div><div class="fsbtn"><button class="pri" data-fsc="'+k+'"'+(can&&near?'':' disabled')+'>ปรุง</button></div></div>'})}
+    h+='<div class="br">'+fsHearthHdr(near)+'</div>';
+    Object.keys(FOOD).forEach(k=>{const F=FOOD[k],fee=fsFee(k),can=!!fsFoodCan(k)&&me.gold>=fee;h+='<div class="card fsrow fsrc"><span class="fsic">'+F[0]+'</span><div class="nm"><b>'+F[1]+(F[6]?' <small style="color:#ffb070">🔥 '+(F[6]==='fir2'?'เฉพาะเตาผิงหิน':'เฉพาะเตาในเต็นท์')+'</small>':'')+'</b><small style="color:#ffe6a0">'+fsBuffTxt(F[3])+' · '+F[4]+' นาที</small><div class="fsneed">'+fsNeedTxt(k)+'<span class="'+(me.gold>=fee?'ok':'no')+'">🪙 '+fee.toLocaleString()+(fee<F[5]?' <s style="opacity:.55">'+F[5].toLocaleString()+'</s>':'')+'</span></div></div><div class="fsbtn"><button class="pri" data-fsc="'+k+'"'+(can&&near&&fsHearthOk(k)?'':' disabled')+'>ปรุง</button></div></div>'})}
   else if(fsTab==='book'){const legs=fsLegs(),ok=id=>me.ach&&me.ach[id];
     h+='<div class="card" style="text-align:left;font-size:12px"><b>📖 บันทึกแล้ว '+kinds+'/'+tot+' ชนิด</b> · ตกได้ทั้งหมด '+(me.stt.fsh|0)+' ครั้ง<div style="height:7px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden;margin:5px 0"><div style="height:100%;width:'+(kinds/tot*100)+'%;background:#5ab0ff"></div></div>'+(ok('fs20')?'✅':'🔒')+' ฉายา «นักตกปลา» — บันทึกปลา 20 ชนิด<br>'+(ok('fsL8')?'✅':'🔒')+' ฉายา «เจ้าแห่งสายน้ำ» — ปลาตำนานครบ 8 ชนิด ('+legs+'/8)</div>';
     Object.keys(FBN).forEach(b=>{const maps=Object.keys(FSB).filter(m=>FSB[m]===b&&MAPS[m]).map(m=>MAPS[m].n);h+='<div class="br">'+FBN[b][0]+' <small style="opacity:.7">· '+maps.join(' / ')+'</small></div><div class="fsgrid">';
@@ -3597,7 +3597,7 @@ function fishUI(tab,msg){if(!me.cls)return;if(tab)fsTab=tab;ov.dataset.k='fish';
   ov.querySelectorAll('[data-fst]').forEach(b=>b.onclick=()=>fishUI(b.dataset.fst));
   ov.querySelectorAll('[data-fss]').forEach(b=>b.onclick=()=>{const [id,q]=b.dataset.fss.split(':'),n=Math.min(q|0,S.c[id]|0);if(!FISH[id]||n<=0)return;const g0=fsVal(id)*n;S.c[id]-=n;if(S.c[id]<=0)delete S.c[id];me.gold+=g0;try{sfx('coin')}catch(e){}fishUI('bag','💰 ขาย '+FISH[id].n+' ×'+n+' ได้ '+g0.toLocaleString()+' ทอง')});
   ov.querySelectorAll('[data-fsa]').forEach(b=>b.onclick=()=>{let g0=0,n=0;Object.keys(S.c).forEach(id=>{if(FISH[id]&&FISH[id].r===0){g0+=fsVal(id)*S.c[id];n+=S.c[id];delete S.c[id]}});if(!n)return;me.gold+=g0;try{sfx('coin')}catch(e){}fishUI('bag','💰 ขายปลาธรรมดา '+n+' ตัว ได้ '+g0.toLocaleString()+' ทอง')});
-  ov.querySelectorAll('[data-fsc]').forEach(b=>b.onclick=()=>{const k=b.dataset.fsc,F=FOOD[k];if(!F||!fsNearCook())return;const use=fsFoodCan(k);if(!use||me.gold<F[5])return;me.gold-=F[5];for(const id in use){S.c[id]-=use[id];if(S.c[id]<=0)delete S.c[id]}S.f[k]=Math.min(99,(S.f[k]|0)+1);me.stt.cook=(me.stt.cook|0)+1;try{sfx('fs_cook')}catch(e){}try{burst(me.x,me.y-20,['#ffd84a','#ff9a5a','#ffffff'],22,110,.7,{g:-30})}catch(e){}fishUI('food','👩‍🍳 ป้าบัวปรุง «'+F[0]+' '+F[1]+'» เสร็จแล้ว! กด "กิน" เพื่อรับบัฟ')});
+  ov.querySelectorAll('[data-fsc]').forEach(b=>b.onclick=()=>{const k=b.dataset.fsc,F=FOOD[k];if(!F||!fsNearCook()||!fsHearthOk(k))return;const use=fsFoodCan(k),fee=fsFee(k);if(!use||me.gold<fee)return;me.gold-=fee;for(const id in use){S.c[id]-=use[id];if(S.c[id]<=0)delete S.c[id]}S.f[k]=Math.min(99,(S.f[k]|0)+1);me.stt.cook=(me.stt.cook|0)+1;try{sfx('fs_cook')}catch(e){}try{burst(me.x,me.y-20,['#ffd84a','#ff9a5a','#ffffff'],22,110,.7,{g:-30})}catch(e){}fishUI('food',fsCookDone(k,F,S))});
   ov.querySelectorAll('[data-fse]').forEach(b=>b.onclick=()=>{const k=b.dataset.fse,F=FOOD[k];if(!F||!(S.f[k]>0))return;const prev=S.fb?FOOD[S.fb.id][1]:'';S.f[k]--;if(S.f[k]<=0)delete S.f[k];S.fb={id:k,t:F[4]*60};try{recalc()}catch(e){}try{sfx('fs_eat')}catch(e){}try{burst(me.x,me.y-20,['#ffe08a','#ffffff','#ffb070'],20,90,.6,{g:-40})}catch(e){}fishUI('food','😋 กิน «'+F[1]+'» แล้ว! '+fsBuffTxt(F[3])+' นาน '+F[4]+' นาที'+(prev?' (แทนที่ '+prev+')':''))});
   ov.querySelectorAll('[data-fsr]').forEach(b=>b.onclick=()=>{const nx=FROD[S.r+1];if(!nx||me.gold<nx[1])return;for(const k in nx[2])if(fsCnt(FRK.indexOf(k))<nx[2][k])return;
     me.gold-=nx[1];for(const k in nx[2]){let n=nx[2][k];const r=FRK.indexOf(k);Object.keys(S.c).filter(id=>FISH[id]&&FISH[id].r===r).sort((a,b)=>S.c[b]-S.c[a]).forEach(id=>{const q=Math.min(n,S.c[id]);S.c[id]-=q;n-=q;if(S.c[id]<=0)delete S.c[id]})}S.r++;try{sfx('up')}catch(e){}fishUI('rod','⬆️ ได้ '+nx[0]+' แล้ว!')})}
@@ -10729,6 +10729,34 @@ drawTent=function(){tvInit();const M=MAPS[curMap];if(!M||!M.tent)return;const T=
   /* ฝุ่นลอยในแสง */if(lum>0){for(let i=0;i<22;i++){const sx=TRX0+((i*97)%380),sy=TRY0+((i*61)%360),px=sx+Math.sin(t*.3+i)*18,py=sy-((t*6+i*13)%60);g.fillStyle='rgba(255,236,190,'+(.18+.14*Math.sin(t*1.7+i))+')';g.beginPath();g.arc(px,py,.9+(i%3)*.4,0,7);g.fill()}}
   /* ประตู */tvGlow(CX,TRY1+18,56,'255,220,150',.14);g.font='bold 9px system-ui';g.textAlign='center';g.fillStyle='rgba(255,230,180,.85)';g.fillText('🚪 ทางออก',CX,TRY1+44);
   g.restore()};
+/* ---------- v382 ทำอาหารที่เตาในเต็นท์ ----------
+   ยืนใกล้เตาในเต็นท์ตัวเอง → ปุ่ม "🔥 ทำอาหารที่เตา" เปิดหน้าทำอาหาร (ไม่ต้องเดินไปหาป้าบัว)
+   เตาถ่านเหล็ก: ค่าปรุง −30% · เตาผิงหิน: ค่าปรุง −50% + ลุ้นอร่อยพิเศษได้ 2 จาน 25%
+   สูตรเฉพาะเตา: ปลารมควัน (เตาไหนก็ได้) · สตูว์ปลาเตาผิงหิน (เฉพาะเตาผิงหิน) */
+Object.assign(FOOD,{smoke:['🐟','ปลารมควันเตาถ่าน',{c:3,u:1},{fl:.25,xp:.06},20,1200,'fir1'],stew:['🥘','สตูว์ปลาเตาผิงหิน',{c:2,u:2,r:1},{hp:.06,dm:.05,xp:.07,gd:.04},30,4000,'fir2']});
+const FIRP={fir1:{off:.3,dbl:0},fir2:{off:.5,dbl:.25}};let TVCK=0;
+function tvHK(){try{if(!tentMine())return'';const d=MAPS[curMap].tent.d||{};return FIRP[d.fir]?d.fir:''}catch(e){return''}}
+function tvNearHearth(){const k=tvHK();return!!k&&Math.hypot(me.x-(TRX0+44),me.y-(CY-60))<100}
+function fsHearthOk(k){const F=FOOD[k];if(!F||!F[6])return true;const h=tvNearHearth()?tvHK():'';return F[6]==='fir1'?!!h:h==='fir2'}
+function fsFee(k){const F=FOOD[k];if(!F)return 0;const h=tvNearHearth()?tvHK():'';return Math.round(F[5]*(1-(h?FIRP[h].off:0)))}
+function fsHearthHdr(near){const h=tvNearHearth()?tvHK():'';if(h){const P=FIRP[h];return'🔥 '+TDECO[h][2]+'ในเต็นท์ · ค่าปรุง −'+Math.round(P.off*100)+'%'+(P.dbl?' · ลุ้นได้ 2 จาน '+Math.round(P.dbl*100)+'%':'')}
+  return'👩‍🍳 สูตรอาหารของป้าบัว '+(near?'':'<small style="opacity:.75">(ไปหาป้าบัวที่ครัวริมบึง หน้าประตูใต้ของค่าย หรือใช้เตาผิงในเต็นท์ของคุณ)</small>')}
+function fsCookDone(k,F,S){let two=0;const h=tvNearHearth()?tvHK():'';if(h){if(Math.random()<FIRP[h].dbl){S.f[k]=Math.min(99,(S.f[k]|0)+1);two=1}TVCK=performance.now()/1000+2.6;
+  try{for(let i=0;i<14;i++)parts.push({x:TRX0+44+(Math.random()-.5)*24,y:CY-80,vx:(Math.random()-.5)*30,vy:-50-Math.random()*40,t:1.1,l:1.1,c:i%2?'#ffd84a':'#ffffff',r:1.8})}catch(e){}
+  return'🔥 ปรุง «'+F[0]+' '+F[1]+'» ที่เตาเสร็จแล้ว!'+(two?' ✨ อร่อยพิเศษ ได้ 2 จาน!':'')+' กด "กิน" เพื่อรับบัฟ'}
+  return'👩‍🍳 ป้าบัวปรุง «'+F[0]+' '+F[1]+'» เสร็จแล้ว! กด "กิน" เพื่อรับบัฟ'}
+{const o=fsNearCook;fsNearCook=function(){return o()||tvNearHearth()}}
+/* อุปกรณ์บนเตา + แอนิเมชันตอนปรุง */
+function tvCookware(f,x,y,t){const ck=TVCK>t,O='#1a100a';
+  if(f==='fir2'){const px=x,py=y-6;g.strokeStyle='#3a3a40';g.lineWidth=1.4;g.beginPath();g.moveTo(px-14,py-26);g.lineTo(px,py-34);g.lineTo(px+14,py-26);g.stroke();
+    g.fillStyle='#24242a';g.beginPath();g.ellipse(px,py-10,13,10,0,0,7);g.fill();g.strokeStyle=O;g.lineWidth=.8;g.stroke();g.fillStyle='#3a3a44';g.beginPath();g.ellipse(px,py-18,13,3.4,0,0,7);g.fill();
+    g.fillStyle=ck?'#e8b060':'#c89048';g.beginPath();g.ellipse(px,py-18,10.5,2.4,0,0,7);g.fill();for(let i=0;i<(ck?6:3);i++){const q=(t*(ck?1.2:.5)+i/ (ck?6:3))%1;g.fillStyle='rgba(240,240,240,'+(.4*(1-q))+')';g.beginPath();g.arc(px-6+i*3+Math.sin(q*6+i)*3,py-22-q*(ck?40:24),2+q*5,0,7);g.fill()}}
+  else{const px=x,py=y-16;g.strokeStyle='#5a5a62';g.lineWidth=1;for(let i=-2;i<=2;i++){g.beginPath();g.moveTo(px-16,py+i*2.4);g.lineTo(px+16,py+i*2.4);g.stroke()}
+    [[-6,0],[6,1]].forEach(([dx,k])=>{g.strokeStyle='#c8a870';g.lineWidth=1;g.beginPath();g.moveTo(px+dx-12,py+3);g.lineTo(px+dx+10,py-5);g.stroke();g.fillStyle=ck?'#c87838':'#9aa8b8';g.beginPath();g.ellipse(px+dx,py-1,7,3,-.35,0,7);g.fill();g.strokeStyle=O;g.lineWidth=.6;g.stroke();
+      g.fillStyle=ck?'#c87838':'#9aa8b8';g.beginPath();g.moveTo(px+dx+6,py-3);g.lineTo(px+dx+10,py-6);g.lineTo(px+dx+9,py);g.closePath();g.fill()});
+    for(let i=0;i<(ck?5:2);i++){const q=(t*(ck?1.1:.4)+i/(ck?5:2))%1;g.fillStyle='rgba(200,200,200,'+(.35*(1-q))+')';g.beginPath();g.arc(px-4+i*4,py-8-q*(ck?36:20),2+q*4,0,7);g.fill()}}
+  if(ck){const k=TVCK-t;tvGlow(x,y-10,70,'255,170,60',.35*Math.min(1,k));g.font='bold 9px system-ui';g.textAlign='center';g.fillStyle='rgba(255,236,190,'+Math.min(1,k)+')';g.fillText('ฉ่า~ 🍳',x,y-58-(2.6-k)*8)}}
+{const o=tvHearth;tvHearth=function(f,x,y,t,O){o(f,x,y,t,O);if(f)tvCookware(f,x,y,t)}}
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -10893,9 +10921,9 @@ function tentTick(dt){const S=me.tent;if(S&&S.rb>0){S.rb-=dt;if(S.rb<=0){S.rb=0;
   const b=$('tnb');if(!b)return;let tx='',fn='';if(me.cls&&run&&me.down<=0&&ov.hidden&&!SD.on&&!TSL){
     if(curMap===1&&Math.hypot(me.x-TNE.x,me.y-TNE.y)<85){tx='🏠 เข้าเต็นท์ของฉัน';fn='in'}
     else if(tentHere()&&me.y>TRY1-60&&Math.abs(me.x-CX)<70){tx='🚪 ออกจากเต็นท์';fn='out'}
-    else if(tentMine()&&Math.hypot(me.x-TBED.x,me.y-TBED.y)<75){tx='😴 นอนพัก (บัฟ 30 นาที)';fn='bed'}}
+    else if(tentMine()&&tvNearHearth()){tx='🔥 ทำอาหารที่เตา';fn='cook'}else if(tentMine()&&Math.hypot(me.x-TBED.x,me.y-TBED.y)<75){tx='😴 นอนพัก (บัฟ 30 นาที)';fn='bed'}}
   if(b.hidden!==!tx)b.hidden=!tx;if(tx&&b.textContent!==tx)b.textContent=tx;b.dataset.f=fn}
-function tentBtn(){const f=$('tnb').dataset.f;if(f==='in')tentHome();else if(f==='out')tentExit();else if(f==='bed'&&tentMine()){me.x=TBED.x+6;me.y=TBED.y-2;TSL={t:4,x:me.x,y:me.y};banner={s:'😴 หลับสบาย… (4 วิ · ขยับเพื่อตื่น)',t:4};try{sfx('ek_summon')}catch(e){}}}
+function tentBtn(){const f=$('tnb').dataset.f;if(f==='in')tentHome();else if(f==='out')tentExit();else if(f==='cook'&&tvNearHearth()){fishUI('food')}else if(f==='bed'&&tentMine()){me.x=TBED.x+6;me.y=TBED.y-2;TSL={t:4,x:me.x,y:me.y};banner={s:'😴 หลับสบาย… (4 วิ · ขยับเพื่อตื่น)',t:4};try{sfx('ek_summon')}catch(e){}}}
 function trophyName(k){const n=+k.slice(1);if(k[0]==='m')return MAPS[n]&&MAPS[n].boss?MAPS[n].boss.n:'บอส';return DT[n]&&DT[n].n?DT[n].n:'ดันเจี้ยน'}
 function drawTentGate(){if(curMap!==1||!inView(TNE.x,TNE.y,140))return;const x=TNE.x,y=TNE.y,t=performance.now()/1000,O='#1a100a';g.save();
   const P=(pts,f,st,lw)=>{g.beginPath();g.moveTo(pts[0],pts[1]);for(let i=2;i<pts.length;i+=2)g.lineTo(pts[i],pts[i+1]);g.closePath();g.fillStyle=f;g.fill();if(st){g.lineWidth=lw||1;g.strokeStyle=st;g.stroke()}};
@@ -10977,7 +11005,7 @@ function tentUI(tab,msg){if(!me.cls)return;if(tab)tnTab=tab;ov.dataset.k='tent';
   h+='<div class="tabs">'+[['deco','🪑 ตกแต่ง'],['show','🏆 ตู้โชว์'],['visit','👋 เยี่ยมเพื่อน']].map(([k,l])=>'<button class="tab'+(tnTab===k?' on':'')+'" data-tnt="'+k+'">'+l+'</button>').join('')+'</div>';
   if(tnTab==='deco'){h+='<div class="card" style="display:block;text-align:left;font-size:12px;line-height:1.55">😴 นอนพักบนเตียงในเต็นท์ = บัฟ 30 นาที: EXP <b>+'+Math.round(R.xp*100)+'%</b> · เลือด <b>+'+Math.round(R.hp*100)+'%</b>'+(R.gd?' · ทอง <b>+'+(R.gd*100).toFixed(1)+'%</b>':'')+'<br>🪑 ของตกแต่งเพิ่ม "ความสบาย" ยิ่งสบายบัฟยิ่งแรง (สูงสุด EXP +12% · เลือด +5.8% · ทอง +5.6%)<div style="height:7px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:6px"><div style="height:100%;width:'+(c/28*100)+'%;background:linear-gradient(90deg,#ffb070,#ffd84a)"></div></div></div>';
     Object.keys(TSLOT).forEach(sl=>{h+='<div class="br">'+TSLOT[sl]+'</div>';Object.keys(TDECO).filter(k=>TDECO[k][0]===sl).forEach(k=>{const D=TDECO[k],own=!!S.own[k],on=S.d[sl]===k;
-      h+='<div class="card fsrow'+(on?' tnon':'')+'"><span class="fsic" style="--c:'+(on?'#ffd84a':'#8a7a6a')+'">'+D[1]+'</span><div class="nm"><b>'+D[2]+'</b><small>'+(D[4]?'ความสบาย +'+D[4]:'✨ แต่งสวย')+(own?'':' · 🪙 '+D[3].toLocaleString())+'</small></div><div class="fsbtn">'+(on?'<button data-tnu="'+sl+':">เก็บ</button>':own?'<button class="pri" data-tnu="'+sl+':'+k+'">ใช้</button>':'<button class="pri" data-tnb="'+k+'"'+(me.gold>=D[3]?'':' disabled')+'>ซื้อ</button>')+'</div></div>'})})}
+      h+='<div class="card fsrow'+(on?' tnon':'')+'"><span class="fsic" style="--c:'+(on?'#ffd84a':'#8a7a6a')+'">'+D[1]+'</span><div class="nm"><b>'+D[2]+'</b><small>'+(D[4]?'ความสบาย +'+D[4]:D[0]==='fir'?(k==='fir2'?'🍳 ทำอาหาร −50% · ลุ้น 2 จาน':'🍳 ทำอาหาร −30%'):'✨ แต่งสวย')+(own?'':' · 🪙 '+D[3].toLocaleString())+'</small></div><div class="fsbtn">'+(on?'<button data-tnu="'+sl+':">เก็บ</button>':own?'<button class="pri" data-tnu="'+sl+':'+k+'">ใช้</button>':'<button class="pri" data-tnb="'+k+'"'+(me.gold>=D[3]?'':' disabled')+'>ซื้อ</button>')+'</div></div>'})})}
   else if(tnTab==='show'){const T=tentClean(tentData(),uid);
     h+='<div class="card" style="text-align:left;font-size:12px">🏆 ตู้โชว์จัดให้อัตโนมัติจากความสำเร็จของคุณ · เพื่อนที่มาเยี่ยมจะเห็นทั้งหมดนี้</div>';
     h+='<div class="br">🐟 แผ่นโชว์ปลา (ปลามหากาพย์/ตำนานตัวใหญ่สุด 6 ตัว)</div>'+(T.f.length?'<div class="fsgrid">'+T.f.map(([id,sz])=>{const F=FISH[id];return'<div class="fscell" style="--c:'+FRC[F.r]+'"><span class="fsic">'+F.ic+'</span><b>'+F.n+'</b><small>'+sz+' ซม.</small></div>'}).join('')+'</div>':'<div class="card hint">ยังไม่มี — ตกปลาระดับมหากาพย์ขึ้นไปเพื่อแขวนโชว์</div>');
@@ -11449,7 +11477,7 @@ function prologueStart(done){window.PRO_ON=1;
   let last=performance.now(),raf=0,closed=false;
   function finish(){if(closed)return;closed=true;cancelAnimationFrame(raf);cv.removeEventListener('pointerdown',onDown);removeEventListener('keydown',onKey);removeEventListener('keyup',onKU);removeEventListener('resize',rs);
     cv.style.transition='opacity .8s';cv.style.opacity='0';window.PRO_ON=0;setTimeout(()=>{cv.remove();try{done&&done()}catch(e){}},820)}
-  function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;P.t+=dt;const t=P.t;
+  function loop(now){if(!cv.isConnected){window.PRO_ON=0;return}const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;P.t+=dt;const t=P.t;
     if(P.ph==='fight'&&!P.dlg){let mx=JOY.dx,my=JOY.dy;if(KEYS.a||KEYS.arrowleft)mx=-1;if(KEYS.d||KEYS.arrowright)mx=1;if(KEYS.w||KEYS.arrowup)my=-1;if(KEYS.s||KEYS.arrowdown)my=1;const sp=300*S;P.mvx+=(mx-P.mvx)*Math.min(1,dt*8);P.mvy+=(my-P.mvy)*Math.min(1,dt*8);
       P.hx=Math.max(50*S,Math.min(W-50*S,P.hx+P.mvx*sp*dt));P.hy=Math.max(H*.4,Math.min(H*.68,P.hy+P.mvy*sp*dt));if(Math.hypot(P.mvx,P.mvy)>.3&&R()<.7)part(P.hx-P.mvx*30*S+(R()-.5)*40*S,P.hy-20*S,1,['#fff4c0','#ffe08a'],30,.6,{r:2.5});
       P.ft+=dt;for(let i=0;i<8;i++)cds[i]=Math.max(0,cds[i]-dt);if(P.ft>=60||P.hp<=HPM*.0001)startEnd();
