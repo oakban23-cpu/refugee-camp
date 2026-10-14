@@ -160,7 +160,7 @@ R("sw:o.sw|0,rw:o.rw|0}","sw:o.sw|0,rw:o.rw|0,sd:o.sd|0}")
 R("if(!down&&rwOn(lk))rootAura(x,y);","if(!down&&rwOn(lk))rootAura(x,y);if(!down){const _s=sdOn(lk);if(_s)try{sdAura(x,y,_s)}catch(e){}}")
 R("if(dk>0){const vp=VIG.pend;VIG.pend='';if(curMap===9){","if(dk>0){const vp=VIG.pend;VIG.pend='';if(curMap===9||curMap===35||curMap===36){")
 # เซฟ: เก็บค่าเนื้อเรื่องภาค 6–7 (e6, p6h, p7sc ฯลฯ) ไม่ให้หายตอนโหลดใหม่
-R("e4:n(y.e4,0,2,0)}}","e4:n(y.e4,0,2,0)};Object.keys(y).slice(0,60).forEach(k=>{if(/^(e[5-9]|p[6-9][a-z0-9]{1,4})$/.test(k)){const v=n(y[k],0,1e9,0);if(v)o.sty[k]=v}})}")
+R("e4:n(y.e4,0,2,0)}}","e4:n(y.e4,0,2,0)};Object.keys(y).slice(0,160).forEach(k=>{if(STYK.test(k)){const v=n(y[k],0,1e9,0);if(v)o.sty[k]=v}})}")
 # ---------- ภาค 7 บทที่ 3 (v359) ----------
 R("CASTM=m=>m>=27&&m<=35","CASTM=m=>m>=27&&m<=36")
 R("function castPillars(M){if(curMap===35)return kmBuild(M);","function castPillars(M){if(curMap===36)return obBuild(M);if(curMap===35)return kmBuild(M);")
@@ -258,7 +258,15 @@ R("chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;","chatLog.forEach
 R("el.appendChild(d)});el.classList.toggle('ovf',el.scrollHeight>el.clientHeight+1)}","el.appendChild(d)});clogPill(el,CM);el.classList.toggle('ovf',el.scrollHeight>el.clientHeight+1)}")
 R("function addChat(n,t,u){chatLog.push({n,t,at:Date.now()});if(u&&u!==uid)chUnread=1;","function addChat(n,t,u){chatLog.push({n,t,at:Date.now()});if(u&&u!==uid)chUnread=1;if(u&&u!==uid&&CLG.min)CLG.n++;")
 R("if(on)$('cin').focus();else $('cin').blur()}","if(on)$('cin').focus();else $('cin').blur();try{logSig='';renderLog()}catch(e){}}")
+# ---------- v368 เซฟเนื้อเรื่อง: ธงภาค 5–7 หายตอนล็อกอินใหม่ ----------
+# cleanChar เก็บแค่ e5–9/p6–9 (ธงภาค 5 p5m/p5mr/p5nr/p5tr ไม่ถูกเซฟเลย) และ applySave คัดเหลือแค่ s,n,a,e,e4 → ฉากจบ e6/e7, p6b, p7m ฯลฯ หายทุกครั้งที่เข้าเกมใหม่
+R("function cleanChar(c){","const STYK=/^(e[5-9]|p[5-9][a-z0-9]{1,4})$/;function cleanChar(c){")
+R("e4:c.sty.e4|0}:{s:0,n:0,a:0,e:0};","e4:c.sty.e4|0}:{s:0,n:0,a:0,e:0};if(c.sty&&typeof c.sty==='object')Object.keys(c.sty).slice(0,160).forEach(k=>{if(STYK.test(k)){const v=+c.sty[k];if(v>0&&v<=1e9)me.sty[k]=v}});")
+# ประตูจากแมพ 27/31 ส่งมาลงห่างประตูกลับแค่ 43–48px (ระยะปุ่มเข้าประตูคือ 70) → ปุ่ม "เข้า" เด้งทันทีที่มาถึง กดพลาดก็เด้งกลับ
+R("pal:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1840,y:1262}","pal:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1840,y:1300}")
+R("mk:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1215,y:2005}","mk:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1287,y:2022}")
 open(P,'w').write(s)
 print('ok')
 import subprocess
+
 subprocess.run(['node','/home/claude/tools/dead.js',P,P,'drawBoss10','drawBoss8','drawBoss7','drawBoss11','musTickOld','petUI0','casDrawFx0','d4DrapeSpr','drawVoidSky','drawBoots'],check=True)
