@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('ux1.js').read()+open('ux2.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('ux1.js').read()+open('ux2.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -246,6 +246,8 @@ R("cx=cam.x*z,cy=cam.y*z","cx=CAMF.x-SW0/2,cy=CAMF.y-H/2",7)
 R("cam.x*z*1.4","(CAMF.x-SW0/2)*1.4")
 R("cam.y*z*1.4","(CAMF.y-H/2)*1.4")
 R("const yy=yo-wrap(cy*f*.25+i*40,90);","const yy=yo-((i*40)%90)+FGO.y*.6;")
+# ---------- v363 มอนชุดใหม่เหมืองคาร์น ----------
+R("if(bTheme()===34||bTheme()===35)return drawMonSF(","if(bTheme()===35)return drawMonKM(t,r,T,E,Pg,Ln,eye,F,W,bob,sw,la,ra);if(bTheme()===34)return drawMonSF(")
 # ---------- v358 ซ่อน/แสดงช่องแชท ----------
 R("logFit(el);const sig=chatLog.map(l=>l.at+(l.sys?'s':'')).join(',');","logFit(el);const CM=clogHid(),sig=chatLog.map(l=>l.at+(l.sys?'s':'')).join(',')+'|'+(CM?'m'+CLG.n:'o');")
 R("chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;","chatLog.forEach((l,i)=>{if(l.sys&&!sysI.includes(i))return;if(CM&&!l.sys)return;")
