@@ -90,7 +90,7 @@ function d3Screen(thO){const th=thO||DEPM[curMap];if(!DEP3[th]||(!thO&&!depOn())
   const edge=(spr,w,h,al,yo)=>{for(let s=0;s<2;s++){g.globalAlpha=al;g.drawImage(yo===undefined?hudFade(spr(s)):spr(s),s?SW0-w*.62:-w*.38,(yo===undefined?hudBY(s,h):yo)+Math.sin(t*.5+s)*3,w,h)}g.globalAlpha=1};
   if(th==='mush'){edge(d3CapSpr,260,240,.7);motes(8,'120,255,230',10,1)}
   if(th==='bog'){for(let s=0;s<2;s++){g.globalAlpha=.85;g.drawImage(d3MossSpr(s),hudTX(s,150)+Math.sin(t*.6+s)*3,-20-wrap(cy*1.5+s*130,120),150,270)}g.globalAlpha=1;motes(14,'210,150,255',6,0)}
-  if(th==='ruin'){for(let i=0;i<(Q?1:2);i++){const side=i%2;g.globalAlpha=.85;g.drawImage(d2PillarSpr(i+2),side?SW0-80:-50,wrap(i*300-cy*1.6,Hs+400)-120,120,300)}g.globalAlpha=1;
+  if(th==='ruin'){for(let i=0;i<(Q?1:2);i++){const side=i%2;g.globalAlpha=.85;g.drawImage(d2PillarSpr(i+2),side?SW0-80:-50,wrap(i*300,Hs+400)-120+FGO.y,120,300)}g.globalAlpha=1;
     if(!Q)for(let i=0;i<16;i++){const x=wrap(i*71+t*(6+i%4*3)-cx*1.3,SW0+20)-10,y=wrap(i*113+Math.sin(t*.5+i)*20-cy*1.3,Hs+20)-10;g.fillStyle='rgba(220,220,240,'+(.18+.15*Math.sin(t+i))+')';g.fillRect(x,y,2,2)}}
   if(th==='throne'){edge(d3TendSpr,220,260,.85);motes(16,'200,120,255',8,1);const gr=g.createRadialGradient(SW0/2,Hs/2,Math.min(SW0,Hs)*.35,SW0/2,Hs/2,Math.max(SW0,Hs)*.75);gr.addColorStop(0,'rgba(20,0,40,0)');gr.addColorStop(1,'rgba(20,0,40,.35)');g.fillStyle=gr;g.fillRect(0,0,SW0,Hs)}
   if(th==='roots'){motes(10,'255,190,90',5,1);if(!Q)for(let i=0;i<8;i++){const q=(t*(.3+i%3*.1)+i/8)%1,x=wrap(i*157-cx*1.2,SW0),y=q*Hs*1.1;g.fillStyle='rgba(150,110,70,'+(.6*(1-q))+')';g.fillRect(x,y,2,3)}}

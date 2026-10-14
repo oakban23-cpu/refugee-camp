@@ -28,10 +28,10 @@ function d4Screen(thO){const th=thO||DEPM[curMap],C=DEP4[th];if(!C||(!thO&&!depO
   if(th==='qgarden'){if(!nt)rays('255,250,220',2,.07);for(let s=0;s<2;s++){g.globalAlpha=.85;g.drawImage(d2VineSpr(s+3),hudTX(s,150)+Math.sin(t*.6+s)*4,-30-wrap(cy*1.5+s*170,140),150,280)}g.globalAlpha=1}
   if(th==='stars'){g.globalCompositeOperation='lighter';const R=depRng(29);const st=[];for(let i=0;i<(Q?18:40);i++){const x=wrap(R()*SW0*1.4-cx*.25,SW0+40)-20,y=wrap(R()*Hs*.6-cy*.25,Hs*.6+40)-20;st.push([x,y]);glowAt(x,y,1.6+R()*2,'230,220,255',.3+.5*Math.abs(Math.sin(t*(.6+R())+i)))}
     g.strokeStyle='rgba(200,180,255,.14)';g.lineWidth=1;g.beginPath();for(let i=0;i<st.length-1;i+=3){g.moveTo(st[i][0],st[i][1]);g.lineTo(st[i+1][0],st[i+1][1]);g.lineTo(st[i+2][0],st[i+2][1])}g.stroke();g.globalCompositeOperation='source-over';
-    for(let i=0;i<(Q?1:2);i++){const side=i%2;g.globalAlpha=.9;g.drawImage(d4ColSpr(i),side?SW0-62:-88,Hs*.5+wrap(i*260-cy*1.6,Hs*.6)-120,150,360)}g.globalAlpha=1;motes(12,'210,170,255',6,1)}
+    for(let i=0;i<(Q?1:2);i++){const side=i%2;g.globalAlpha=.9;g.drawImage(d4ColSpr(i),side?SW0-62:-88,Hs*.5+wrap(i*260,Hs*.6)-120+FGO.y,150,360)}g.globalAlpha=1;motes(12,'210,170,255',6,1)}
   if(th==='dawn'){const gr=g.createRadialGradient(SW0*.5,-Hs*.1,0,SW0*.5,-Hs*.1,Hs*.7);gr.addColorStop(0,'rgba(255,220,150,'+(nt?.08:DGON?.07:.22)+')');gr.addColorStop(1,'rgba(255,200,140,0)');g.fillStyle=gr;g.fillRect(0,0,SW0,Hs*.7);
     const Cl=plxCloud();for(let i=0;i<(Q?1:3);i++){const x=wrap(i*360+t*(8+i*3)-cx*.6,SW0+500)-250,y=Hs*.86+i*18-wrap(cy*.15,30);g.globalAlpha=(nt?.15:DGON?.18:.4);g.drawImage(Cl,x-200,y-50,400,200)}
-    for(let i=0;i<(Q?1:2);i++){const side=i%2,y=wrap(i*380-cy*1.6,Hs+500)-250;g.globalAlpha=nt?.18:DGON?.22:.45;g.drawImage(Cl,side?SW0-120:-200,y,320,160)}g.globalAlpha=1;
+    for(let i=0;i<(Q?1:2);i++){const side=i%2,y=wrap(i*380,Hs+500)+FGO.y-250;g.globalAlpha=nt?.18:DGON?.22:.45;g.drawImage(Cl,side?SW0-120:-200,y,320,160)}g.globalAlpha=1;
     if(!nt)for(let fl=0;fl<(Q?1:2);fl++){const span=SW0+400,bx=wrap(fl*420+t*(20+fl*6)-cx*.25,span)-200,by=50+fl*80+Math.sin(t*.3+fl)*12;g.strokeStyle='rgba(90,60,40,.45)';g.lineWidth=1.4;for(let k=0;k<5;k++){const px=bx-k*14-(k%2)*6,py=by+k*6*(k%2?1:-.4)+k*3,fp=Math.sin(t*8+k)*3;g.beginPath();g.moveTo(px-5,py-fp);g.quadraticCurveTo(px-2,py-2,px,py);g.quadraticCurveTo(px+2,py-2,px+5,py-fp);g.stroke()}}}
   if(th==='ring'){const sw=Math.sin(t*.8)*4,yo=-wrap(cy*1.45,60)-6;g.strokeStyle='#2a1e14';g.lineWidth=1.5;g.beginPath();g.moveTo(-10,30+yo);g.quadraticCurveTo(SW0/2,80+yo+sw,SW0+10,30+yo);g.stroke();
     const cols=['#c2352b','#e8c060','#3b7bd6','#e8e0cc','#6aa040'];const nb=Math.ceil(SW0/26);for(let i=0;i<nb;i++){const u=(i+.5)/nb,x=-10+(SW0+20)*u,y=30+yo+(50+sw)*4*u*(1-u),w=Math.sin(t*2.4+i)*1.5;
@@ -40,7 +40,7 @@ function d4Screen(thO){const th=thO||DEPM[curMap],C=DEP4[th];if(!C||(!thO&&!depO
     if(!Q){const F=plxFog('200,190,180');for(let i=0;i<3;i++){const q=(t*.03+i/3)%1,x=wrap(i*300+120-cx*.5,SW0+300)-150+q*60,y=Hs*.45-q*Hs*.5-wrap(cy*.5,200)+100;g.globalAlpha=.18*Math.sin(q*3.14);g.drawImage(F,x-60,y-20,120+q*120,40+q*30)}g.globalAlpha=1}
     motes(10,'255,200,120',4,1,1.3)}
   if(th==='aranya'){for(let s=0;s<2;s++){g.globalAlpha=.8;g.drawImage(d2VineSpr(s+5),hudTX(s,150)+Math.sin(t*.6+s)*4,-30-wrap(cy*1.5+s*170,140),150,280)}g.globalAlpha=1;
-    for(let i=0;i<(Q?1:2);i++){const side=i%2;g.globalAlpha=.8;g.drawImage(d2PillarSpr(i+4),side?SW0-80:-50,wrap(i*300+150-cy*1.6,Hs+400)-120,120,300)}g.globalAlpha=1;motes(14,'190,255,170',6,0)}
+    for(let i=0;i<(Q?1:2);i++){const side=i%2;g.globalAlpha=.8;g.drawImage(d2PillarSpr(i+4),side?SW0-80:-50,wrap(i*300+150,Hs+400)-120+FGO.y,120,300)}g.globalAlpha=1;motes(14,'190,255,170',6,0)}
   if(th==='pit'){for(let s=0;s<2;s++){g.save();const px=hudTX(s,90),sw=Math.sin(t*.7+s*2)*.05;g.translate(px+45,-wrap(cy*1.5+s*90,80));g.rotate(sw);g.globalAlpha=.9;g.drawImage(d4ChainSpr(s),-45,0,90,300);g.restore()}motes(16,'200,150,255',10,1,.6)}
   g.restore()}
 {const _ds=depScreen;depScreen=function(){if(DEP4[DEPM[curMap]]){try{d4Screen()}catch(e){console.warn('d4Screen',e)}return}_ds()}}
