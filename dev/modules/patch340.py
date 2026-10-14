@@ -304,7 +304,8 @@ R("if(me.cd<=0&&!rgMove){const t=pickTarget(C.rg+M('rg'));","if(me.cd<=0&&!rgMov
 R("if(me.inv3>0)add('inv','✨','พรศักดิ์สิทธิ์','ไม่ได้รับความเสียหาย',me.inv3,'#fff0a0');","if(me.rsp>0)add('rsp','🛡️','เพิ่งฟื้น','อมตะ · มอนไม่สนใจ · ใช้สกิลไม่ได้',me.rsp,'#ffe08a');else if(me.inv3>0)add('inv','✨','พรศักดิ์สิทธิ์','ไม่ได้รับความเสียหาย',me.inv3,'#fff0a0');")
 # v379 rock boss music
 R("try{if(mons.some(m=>m.t===3&&Math.hypot(m.x-me.x,m.y-me.y)<650))return'boss'}catch(e){}","try{const rk=rkKey();if(rk)return rk}catch(e){}",1)
-R("MZ.th=want?MZT[want]:null;","MZ.th=want?(MZT[want]||(want.indexOf('rk:')===0?rkTheme(want.slice(3)):null)):null;",1)
+R("MZ.th=want?MZT[want]:null;","MZ.th=want?(MZT[want]||(want.indexOf('rk:')===0?rkTheme(want.slice(3)):null)):null;if(!(MZ.th&&MZ.th.rk))rkStop();",1)
+R("const key=want+(night?'n':'');","if(want.indexOf('rk:')===0)night=false;const key=want+(night?'n':'');",1)
 R("want==='boss'||want==='opera'?.8:.6","want==='boss'||want==='opera'||want.indexOf('rk:')===0?.8:.6",1)
 R("MZ.key.indexOf('boss')===0||MZ.key.indexOf('opera')===0?.8:.6","MZ.key.indexOf('boss')===0||MZ.key.indexOf('opera')===0||MZ.key.indexOf('rk:')===0?.8:.6",1)
 R("while(MZ.next<a.currentTime+.5){const t=MZ.next,st=MZ.step,","while(MZ.next<a.currentTime+.5){if(T.rk){rkStep(T,MZ.next,MZ.step);MZ.step++;MZ.next+=s16;continue}const t=MZ.next,st=MZ.step,",1)
