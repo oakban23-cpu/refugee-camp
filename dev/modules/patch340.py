@@ -296,6 +296,12 @@ R("  const g=Math.floor(me.gold*.08),x=Math.floor(me.xp*.3);\n  me.gold-=g;me.xp
 R("v:'🛡️ ผู้เริ่มต้น (ต่ำกว่า Lv 15) ไม่เสียทอง/EXP'","v:'🛡️ ผู้เริ่มต้น (ต่ำกว่า Lv 15) ไม่เสีย EXP'")
 R("ผู้เริ่มต้นไม่เสียทอง/EXP · กดปุ่มยา","ผู้เริ่มต้นไม่เสีย EXP · กดปุ่มยา")
 R("if(me.pen){g.font='13px system-ui';g.fillStyle='#ff9a8f';g.fillText(me.pen,W/2,H/2+38)}","if(me.pen){g.font='13px system-ui';g.textAlign='center';g.fillStyle='#ff9a8f';g.fillText(me.pen,W/2,H/2+38,W-24)}")
+# ---------- v377 ฟื้นแล้ว 3 วิ: มอนไม่สนใจ · เดินได้ · ใช้สกิล/โจมตีไม่ได้ ----------
+R("const pl=[{u:uid,x:me.x,y:me.y,d:me.down>0||me.stealth>0},","const pl=[{u:uid,x:me.x,y:me.y,d:me.down>0||me.stealth>0||me.rsp>0},")
+R("sl:me.stealth>0?1:0","sl:(me.stealth>0||me.rsp>0)?1:0")
+R("function escPl(){const a=[];if(me.cls&&me.down<=0)a.push","function escPl(){const a=[];if(me.cls&&me.down<=0&&!(me.rsp>0))a.push")
+R("if(me.cd<=0&&!rgMove){const t=pickTarget(C.rg+M('rg'));","if(me.cd<=0&&!rgMove&&!(me.rsp>0)){const t=pickTarget(C.rg+M('rg'));")
+R("if(me.inv3>0)add('inv','✨','พรศักดิ์สิทธิ์','ไม่ได้รับความเสียหาย',me.inv3,'#fff0a0');","if(me.rsp>0)add('rsp','🛡️','เพิ่งฟื้น','อมตะ · มอนไม่สนใจ · ใช้สกิลไม่ได้',me.rsp,'#ffe08a');else if(me.inv3>0)add('inv','✨','พรศักดิ์สิทธิ์','ไม่ได้รับความเสียหาย',me.inv3,'#fff0a0');")
 open(P,'w').write(s)
 print('ok')
 import subprocess
