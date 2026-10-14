@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -265,6 +265,9 @@ R("e4:c.sty.e4|0}:{s:0,n:0,a:0,e:0};","e4:c.sty.e4|0}:{s:0,n:0,a:0,e:0};if(c.sty
 # ประตูจากแมพ 27/31 ส่งมาลงห่างประตูกลับแค่ 43–48px (ระยะปุ่มเข้าประตูคือ 70) → ปุ่ม "เข้า" เด้งทันทีที่มาถึง กดพลาดก็เด้งกลับ
 R("pal:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1840,y:1262}","pal:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1840,y:1300}")
 R("mk:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1215,y:2005}","mk:1,nm:'นครลอยฟ้าอัสตรา',arr:{x:1287,y:2022}")
+# ---------- v369 ยอดหอดูดาว 36: พื้นหิมะขาวจ้าเกินไป → ลดความสว่างพื้นฐาน/หมอกขาว ----------
+R("bg.addColorStop(0,'#e3ebf4');bg.addColorStop(.6,'#d4deea');bg.addColorStop(1,'#c2cedd')","bg.addColorStop(0,'#d6e0ec');bg.addColorStop(.6,'#c4d0e0');bg.addColorStop(1,'#aebdd1')")
+R("summit={fog:'200,220,245',fa:.12,bd:.14}","summit={fog:'170,195,235',fa:.08,bd:.16}")
 open(P,'w').write(s)
 print('ok')
 import subprocess
