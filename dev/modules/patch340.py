@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -324,6 +324,15 @@ R("fishUI('food','👩‍🍳 ป้าบัวปรุง «'+F[0]+' '+F[1]+'
 R("else if(tentMine()&&Math.hypot(me.x-TBED.x,me.y-TBED.y)<75){tx='😴 นอนพัก (บัฟ 30 นาที)';fn='bed'}","else if(tentMine()&&tvNearHearth()){tx='🔥 ทำอาหารที่เตา';fn='cook'}else if(tentMine()&&Math.hypot(me.x-TBED.x,me.y-TBED.y)<75){tx='😴 นอนพัก (บัฟ 30 นาที)';fn='bed'}",1)
 R("else if(f==='bed'&&tentMine()){","else if(f==='cook'&&tvNearHearth()){fishUI('food')}else if(f==='bed'&&tentMine()){",1)
 R("<small>'+(D[4]?'ความสบาย +'+D[4]:'✨ แต่งสวย')+(own?'':","<small>'+(D[4]?'ความสบาย +'+D[4]:D[0]==='fir'?(k==='fir2'?'🍳 ทำอาหาร −50% · ลุ้น 2 จาน':'🍳 ทำอาหาร −30%'):'✨ แต่งสวย')+(own?'':",1)
+# v383 popup with colour string in d.c must not render as CRITICAL
+R("else if(d.c){const q=Math.min(1,age/.16)","else if(d.c&&typeof d.c!=='string'){const q=Math.min(1,age/.16)",1)
+R("else{g.font='bold 15px system-ui';g.lineWidth=3;g.strokeStyle='#000';g.fillStyle='#fff';g.strokeText(d.v,d.x,d.y);g.fillText(d.v,d.x,d.y)}});","else{g.font='bold 15px system-ui';g.lineWidth=3;g.strokeStyle='#000';g.fillStyle=typeof d.c==='string'?d.c:(d.col||'#fff');g.strokeText(d.v,d.x,d.y);g.fillText(d.v,d.x,d.y)}});",1)
+# v383 reaction labels: one label per reaction type on screen (×n), rings still on every monster
+R("if(!RXFX.some(f=>f.r===o.r&&f.t<.6&&Math.hypot(f.x-o.x,f.y-o.y)<90))RXFX.push({r:o.r,x:o.x,y:o.y,t:0,tm:o.tm,n1:o.n1,n2:o.n2});","{const ex=RXFX.find(f=>f.r===o.r&&!f.nl&&f.t<.9&&Math.hypot(f.x-o.x,f.y-o.y)<420);if(ex){ex.c=(ex.c||1)+1;if(ex.t>.15)ex.t=.15;RXFX.push({r:o.r,x:o.x,y:o.y,t:0,nl:1})}else RXFX.push({r:o.r,x:o.x,y:o.y,t:0,tm:o.tm,n1:o.n1,n2:o.n2})}",1)
+R("g.translate(f.x,f.y-34-q*22);g.scale(sc,sc);g.font='900 15px system-ui';g.lineWidth=4;g.strokeStyle='rgba(20,10,20,.85)';const tx=R[0]+' '+R[1]+'!';g.strokeText(tx,0,0);g.fillStyle='rgb('+R[4]+')';g.fillText(tx,0,0);","g.translate(f.x,f.y-34-q*22);g.scale(sc,sc);g.font='900 15px system-ui';g.lineWidth=4;g.strokeStyle='rgba(20,10,20,.85)';const tx=R[0]+' '+R[1]+'!'+(f.c>1?' ×'+f.c:'');if(!f.nl){g.strokeText(tx,0,0);g.fillStyle='rgb('+R[4]+')';g.fillText(tx,0,0)}",1)
+# v383 night readability: lighter max darkness + wider player light
+R("const dk=Math.min(.68,S.dk+(w?.08:0));","const dk=Math.min(.56,S.dk*.85+(w?.07:0));",1)
+R("if(me.cls){L(me.x,me.y-10,150,'255,230,190',.2*k);L(me.x,me.y-12,60,'255,220,170',.16*k)}","if(me.cls){L(me.x,me.y-10,200,'255,230,190',.24*k);L(me.x,me.y-12,70,'255,220,170',.18*k)}",1)
 open(P,'w').write(s)
 print('ok')
 import subprocess
