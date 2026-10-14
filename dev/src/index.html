@@ -10187,6 +10187,8 @@ setTimeout(()=>{
   ov.addEventListener('click',e=>{if(ov.dataset.k!=='wm')return;const n=e.target.closest('[data-wm]');if(n){WMSEL=+n.dataset.wm;try{sfx('click')}catch(_){}const sc=ov.querySelector('.wmsc'),top=sc?sc.scrollTop:0;wmUI.keep=1;wmUI(WMSEL);const s2=ov.querySelector('.wmsc');if(s2)s2.scrollTop=top;return}
     const q=e.target.closest('[data-wmsel]');if(q){WMSEL=+q.dataset.wmsel;wmUI(WMSEL);return}const g=e.target.closest('[data-wmgo]');if(g){wmGo(+g.dataset.wmgo)}});
   /* บันทึกแมพที่เคยไป */try{const _em=enterMap;window.enterMap=enterMap=function(id,arr){const r=_em(id,arr);try{if(curMap===id)wmVisit(id)}catch(e){}return r}}catch(e){console.warn('wm enter',e)}
+  /* แตะมินิแมพมุมขวาบน = เปิดแผนที่โลก (มินิแมพวาดที่ uisMini: R 40 · ศูนย์กลาง W-48,60) */
+  try{const _tt=tapTarget;window.tapTarget=tapTarget=function(p){if(p&&me.cls&&Math.hypot(p.x-(W-48),p.y-60)<=46){try{sfx('click')}catch(_){}WMSEL=null;wmUI();return}return _tt(p)}}catch(e){console.warn('wm mini',e)}
   try{const _wt=wpTick;window.wpTick=wpTick=function(dt){_wt(dt);try{wmTick(dt)}catch(e){}}}catch(e){}
   /* ปุ่มเมนู */try{const ref=$('pb');if(ref&&!$('wmm')){const b=document.createElement('button');b.id='wmm';b.innerHTML='<i>🗺️</i><span>แผนที่โลก</span><b class="bd"></b>';ref.parentNode.insertBefore(b,ref);b.onclick=()=>{if(me.cls&&run){WMSEL=null;wmUI()}}}}catch(e){console.warn('wm menu',e)}
 },0);
