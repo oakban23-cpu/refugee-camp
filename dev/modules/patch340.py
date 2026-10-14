@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -276,6 +276,11 @@ R("src.connect(f);f.connect(gn);gn.connect(a.destination);src.start(t)","src.con
 R("comp.connect(out);out.connect(a.destination);","comp.connect(out);out.connect(musDest(a));")
 R("MZ.ambOut.connect(a.destination);","MZ.ambOut.connect(musDest(a));")
 R("(Math.random()-.5)*shk*14:0)","(Math.random()-.5)*shk*14*CFGV.shk:0)",2)
+# ---------- v372 แผนที่โลก: เซฟแมพที่เคยไป (me.wv) ----------
+R("ivd:me.ivd||null}}","ivd:me.ivd||null,wv:Array.isArray(me.wv)?me.wv:undefined}}")
+R("o.pets=Array.isArray(c.pets)","if(Array.isArray(c.wv))o.wv=[...new Set(c.wv.map(v=>v|0).filter(v=>v>=1&&v<=99))];o.pets=Array.isArray(c.pets)")
+R("me.pets=(c.pets||[]).filter(i=>PETS[i]);","me.pets=(c.pets||[]).filter(i=>PETS[i]);me.wv=Array.isArray(c.wv)?c.wv.map(v=>v|0).filter(v=>v>=1&&v<=99):undefined;")
+R("else{me.asl={on:0,k:2};me.mkid=NEWMID||'';me.mkesc=[]}","else{me.asl={on:0,k:2};me.mkid=NEWMID||'';me.mkesc=[];me.wv=undefined}")
 open(P,'w').write(s)
 print('ok')
 import subprocess
