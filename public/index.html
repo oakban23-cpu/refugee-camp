@@ -9447,6 +9447,9 @@ setTimeout(()=>{try{const _dr=dgReward;window.dgReward=dgReward=function(){const
 const wkDot=()=>{try{wkEnsure();return me.wkly.m.some(m=>m.h>=m.n&&!m.cl)||(!me.wkly.b&&me.wkly.m.every(m=>m.cl))}catch(e){return false}};
 const ssDot=()=>{try{ssEnsure();return SSTR.some(([v],i)=>me.sson.p>=v&&!me.sson.tg.includes(i))}catch(e){return false}};
 setInterval(()=>{try{if(me.cls){wkEnsure();ssEnsure();ssTopCheck()}}catch(e){}},5000);
+const RSPW={d:false};
+function rspGuard(){me.inv3=Math.max(me.inv3||0,3);try{dn.push({x:me.x,y:me.y-62,v:'🛡️ อมตะ 3 วิ',t:1.6,col:'#fff0a0'})}catch(e){}try{burst(me.x,me.y-10,['#fff0a0','#ffffff','#ffd27a'],22,120,.6,{glow:1,g:-40})}catch(e){}}
+setTimeout(()=>{try{const _wt=wpTick;window.wpTick=wpTick=function(dt){_wt(dt);try{if(!me.cls){RSPW.d=false;return}const d=me.down>0;if(RSPW.d&&!d&&me.hp>0)rspGuard();RSPW.d=d}catch(e){}}}catch(e){console.warn('rsp',e)}},70);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
@@ -9541,7 +9544,7 @@ let ONB={dt:0};
 function onbAutoEq(it){if(!me.cls||me.lv>=20||!it||it.lk)return;const cur=me.eq[it.sl];if(cur&&(cur.ss||cur.lg||cur.lk))return;if(cur&&!(gScore(it)>gScore(cur)+.004))return;
 const i=me.bag.indexOf(it);if(i<0)return;me.eq[it.sl]=it;if(cur)me.bag[i]=cur;else me.bag.splice(i,1);try{recalc()}catch(e){}try{sfx('equip')}catch(e){}
 setTimeout(()=>dn.push({x:me.x,y:me.y-58,v:'⚔️ สวมอัตโนมัติ: '+itemName(it),t:1.6,col:'#9af0a8'}),250)}
-function onbDeathTip(){ONB.dt=(ONB.dt|0)+1;if(ONB.dt>3)return;const tips=['💡 ตายไม่เป็นไร! ผู้เริ่มต้นไม่เสียทอง/EXP · กดปุ่มยา ❤️ เมื่อเลือดเหลือน้อย','💡 เลือดฟื้นเร็วในวงค่าย · มอนตัวใหญ่สีม่วงอึดกว่า ระวังโดนรุม','💡 อัปเลเวลแล้วอย่าลืมกด เมนู → สกิล เพื่อเพิ่มพลัง'];setTimeout(()=>{banner={s:tips[(ONB.dt-1)%3],t:6}},1200)}
+function onbDeathTip(){ONB.dt=(ONB.dt|0)+1;if(ONB.dt>3)return;const tips=['💡 ตายไม่เป็นไร! ผู้เริ่มต้นไม่เสีย EXP · กดปุ่มยา ❤️ เมื่อเลือดเหลือน้อย','💡 เลือดฟื้นเร็วในวงค่าย · มอนตัวใหญ่สีม่วงอึดกว่า ระวังโดนรุม','💡 อัปเลเวลแล้วอย่าลืมกด เมนู → สกิล เพื่อเพิ่มพลัง'];setTimeout(()=>{banner={s:tips[(ONB.dt-1)%3],t:6}},1200)}
 function onbArrow(px,py){if(curMap!==1||me.lv>=6||me.down>0||!run||SD.on||!ov.hidden)return;let b=null,bd=1e9;
 for(const m of mons){if(m.hp<=0||m.t>=3||m.dum||m.pv)continue;const d=Math.hypot(m.x-me.x,m.y-me.y);if(d<bd){bd=d;b=m}}
 if(!b||bd<230)return;let tx=b.x,ty=b.y;const dc=Math.hypot(me.x-CX,me.y-CY);
@@ -14068,9 +14071,9 @@ function hurt(d){if(me.down>0||me.inv3>0||gmGod||SD.on||SKL||SKA)return;if(FS.ph
 me.hp-=d;flash=.2;if(d>0){sfx('hurt');shk=Math.max(shk,Math.min(.35,.08+d/(me.mh||1)*1.2));spark(me.x,me.y-4,'#ff6a5a',4,60,.3)}if(me.hp<=0&&!isArena()&&lgSave()){}else if(me.hp<=0){if(isArena()&&pvHurtDead())return;me.hp=0;me.down=8;sfx('die');deathPenalty()}}
 const rvCost=()=>20*me.lv;
 function deathPenalty(){if(isDg()){me.pen='';return}
-me.pen='';if(me.lv<3)return;if(me.lv<15){me.pen='';dn.push({x:me.x,y:me.y-50,v:'🛡️ ผู้เริ่มต้น (ต่ำกว่า Lv 15) ไม่เสียทอง/EXP',t:2.2});try{onbDeathTip()}catch(e){}return}
-const g=Math.floor(me.gold*.08),x=Math.floor(me.xp*.3);
-me.gold-=g;me.xp-=x;me.pen='เสียทอง '+g+(x?' · EXP '+x:'');dn.push({x:me.x,y:me.y-50,v:me.pen,t:2})}
+me.pen='';if(me.lv<3)return;if(me.lv<15){me.pen='';dn.push({x:me.x,y:me.y-50,v:'🛡️ ผู้เริ่มต้น (ต่ำกว่า Lv 15) ไม่เสีย EXP',t:2.2});try{onbDeathTip()}catch(e){}return}
+const x=Math.max(0,Math.min(me.xp|0,Math.floor(need(Math.min(me.lv,LMAX-1))*.05)));
+me.xp-=x;me.pen=x?'เสีย EXP '+x.toLocaleString()+' (5%) · ทองไม่หาย':'ทองและ EXP ไม่หาย';dn.push({x:me.x,y:me.y-50,v:me.pen,t:2})}
 function reviveHere(){if(!me.cls||me.down<=0||me.gold<rvCost())return;me.gold-=rvCost();me.down=0;me.hp=Math.round(me.mh*.6);me.shv=Math.round(me.mh*.2);dn.push({x:me.x,y:me.y-40,v:'ฟื้นตรงนี้!',t:1.2});fxs.push({x:me.x,y:me.y,r:70,k:'heal',t:.5})}
 const rnd=(a,b)=>a+Math.random()*(b-a);
 function spawnNest(i){const[nx,ny]=MAPS[curMap].nests[i],L=(CASTM(curMap)?(curMap===36?130:curMap===35?126:curMap===34?122:curMap===33?118:curMap===32?116:curMap===31?114:curMap===30?112:108)+Math.min(4,Math.floor(Math.hypot(nx-SX,ny-SY)/600)):ROOTM(curMap)?RL0[curMap]+Math.min(RLD[curMap],Math.floor(Math.hypot(nx-SX,ny-SY)/600)):SHADEM(curMap)?SL0[curMap]+Math.min(SLD[curMap],Math.floor(Math.hypot(nx-SX,ny-SY)/600)):WESTM(curMap)?WL0[curMap]+Math.min(WLD[curMap],Math.floor(Math.hypot(nx-SX,ny-SY)/700)):curMap===11?52+Math.min(8,Math.floor(Math.hypot(nx-SX,ny-SY)/320)):curMap===10?43+Math.floor(Math.hypot(nx-SX,ny-SY)/300):curMap===8?32+Math.floor(Math.hypot(nx-SX,ny-SY)/260):curMap===7?20+Math.floor(Math.hypot(nx-SX,ny-SY)/280):curMap===6?24+Math.floor(Math.hypot(nx-SX,ny-SY)/260):curMap===4&&nx>2250?21+Math.floor((nx-2250)/300):([0,4,8,12,16][curMap]||1))+(Math.random()<.5?1:0),n=7+(Math.random()*3|0);
@@ -17852,7 +17855,7 @@ g.fillStyle='rgba(14,12,18,.74)';g.beginPath();g.roundRect(W/2-bw/2,by,bw,bh,12)
 g.textAlign='center';g.fillStyle='#f3d08a';L.forEach((l,i)=>g.fillText(l,W/2,by+19+i*17));g.restore()}
 if(!joy&&run&&me.cls&&me.down<=0)uisJoy(JB.x,JB.y,JB.x,JB.y,0);
 if(joy){const m=Math.min(40,Math.hypot(joy.dx,joy.dy)),a=Math.atan2(joy.dy,joy.dx);uisJoy(joy.ox,joy.oy,joy.ox+Math.cos(a)*m,joy.oy+Math.sin(a)*m,1);g.lineWidth=1}
-if(me.down>0){g.fillStyle='rgba(20,16,15,.6)';g.fillRect(0,H/2-24,W,48);g.fillStyle='#d9cfc0';g.font='16px system-ui';g.fillText('ล้มลง ฟื้นที่ค่ายใน '+Math.ceil(me.down)+' วิ',W/2,H/2+6);if(me.pen){g.font='13px system-ui';g.fillStyle='#ff9a8f';g.fillText(me.pen,W/2,H/2+38)}}
+if(me.down>0){g.fillStyle='rgba(20,16,15,.6)';g.fillRect(0,H/2-24,W,48);g.fillStyle='#d9cfc0';g.font='16px system-ui';g.fillText('ล้มลง ฟื้นที่ค่ายใน '+Math.ceil(me.down)+' วิ',W/2,H/2+6);if(me.pen){g.font='13px system-ui';g.textAlign='center';g.fillStyle='#ff9a8f';g.fillText(me.pen,W/2,H/2+38,W-24)}}
 }
 function zoneTick(dt){
 zones.forEach(z=>{

@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -291,6 +291,11 @@ R("['stS4','ผู้คืนแสงสู่ฟ้า',","['ssB','นัก�
 R("stS4:{gr:'p',b:{dm:.06,hp:.06,cr:.02}},","stS4:{gr:'p',b:{dm:.06,hp:.06,cr:.02}},ssB:{gr:'w',b:{all:3}},wkA:{gr:'g',b:{str:.05,int:.05}},ssG:{gr:'g',b:{all:.04}},ssP:{gr:'p',b:{dm:.04,hp:.05}},ssT:{gr:'p',b:{dm:.05,hp:.05,cr:.02}},")
 R("const o={};LBK.forEach(k=>{if(Array.isArray(m.data[k])){","const o={};[...LBK,...Object.keys(m.data).filter(k=>/^s\d{4}$/.test(k))].forEach(k=>{if(Array.isArray(m.data[k])){")
 R("return true}).slice(0,k==='wb'?30:10)}});lbData=o;lbAt=Date.now();wbTitleSync();try{lbResync()}catch(e){}if(!ov.hidden&&ov.dataset.k==='ev'&&evTab==='lb')eventUI()});","return true}).slice(0,(k==='wb'||/^s\d{4}$/.test(k))?30:10)}});lbData=o;lbAt=Date.now();wbTitleSync();try{lbResync()}catch(e){}if(!ov.hidden&&ov.dataset.k==='ev'&&(evTab==='lb'||evTab==='ss'))eventUI()});")
+# ---------- v376 ตายเสียแค่ EXP 5% ไม่เสียทอง · ฟื้นแล้วอมตะ 3 วิ ----------
+R("  const g=Math.floor(me.gold*.08),x=Math.floor(me.xp*.3);\n  me.gold-=g;me.xp-=x;me.pen='เสียทอง '+g+(x?' · EXP '+x:'');dn.push({x:me.x,y:me.y-50,v:me.pen,t:2})}","  const x=Math.max(0,Math.min(me.xp|0,Math.floor(need(Math.min(me.lv,LMAX-1))*.05)));\n  me.xp-=x;me.pen=x?'เสีย EXP '+x.toLocaleString()+' (5%) · ทองไม่หาย':'ทองและ EXP ไม่หาย';dn.push({x:me.x,y:me.y-50,v:me.pen,t:2})}")
+R("v:'🛡️ ผู้เริ่มต้น (ต่ำกว่า Lv 15) ไม่เสียทอง/EXP'","v:'🛡️ ผู้เริ่มต้น (ต่ำกว่า Lv 15) ไม่เสีย EXP'")
+R("ผู้เริ่มต้นไม่เสียทอง/EXP · กดปุ่มยา","ผู้เริ่มต้นไม่เสีย EXP · กดปุ่มยา")
+R("if(me.pen){g.font='13px system-ui';g.fillStyle='#ff9a8f';g.fillText(me.pen,W/2,H/2+38)}","if(me.pen){g.font='13px system-ui';g.textAlign='center';g.fillStyle='#ff9a8f';g.fillText(me.pen,W/2,H/2+38,W-24)}")
 open(P,'w').write(s)
 print('ok')
 import subprocess
