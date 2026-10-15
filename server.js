@@ -6,6 +6,7 @@ const R_PEER=650, R_WORLD=480, R_XP=420, R_FX=520, MAXPEERS=40, BUFCAP=1<<20;
 const page=path.join(__dirname,'public','index.html');
 const server=http.createServer((req,res)=>{
   if(req.url==='/health'){res.writeHead(200);return res.end('ok')}
+  if(req.url==='/version'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});return res.end(JSON.stringify({v:SRV_V,up:Math.round(process.uptime())}))}
   if(req.url==='/admin'||req.url.startsWith('/admin/'))return adminRoute(req,res);
   if(req.url.startsWith('/api/acc/'))return accRoute(req,res);
   if(req.url==='/stats'){res.writeHead(200,{'Content-Type':'application/json'});return res.end(JSON.stringify(stats()))}
@@ -236,6 +237,8 @@ setInterval(()=>{const now=Date.now(),dk=new Date(now+7*3600e3).toISOString().sl
     if(!B.length)delete ML.b[mid]}
   if(!mlDirty)return;mlDirty=false;wj(MLF,ML)},15000);
 function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
+/* เวอร์ชันเซิร์ฟเวอร์ (เปิด /version เช็กว่า Render ใช้โค้ดล่าสุดแล้ว) */
+const SRV_V='v391';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;

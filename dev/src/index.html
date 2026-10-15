@@ -11239,7 +11239,7 @@ function sgUI(msg){if(!me.cls)return;sgCSS();ov.dataset.k='rune';const S=rnSt(),
   h+='<div class="card"><div style="display:flex;gap:6px;align-items:center;text-align:left"><div style="flex:1;font-size:12px"><b>🎲 สร้างรูนเสริมแบบสุ่ม</b><br><small>ได้ 1 อันจากทั้งหมด '+Object.keys(SGD).length+' แบบ · โอกาสได้รูนหายาก ✨ 6%</small></div><button class="pri" data-sgr="1"'+((S.sh|0)>=SGRC?'':' disabled')+'>สุ่ม<br><small>💠'+SGRC+'</small></button></div></div>';
   h+='<div class="sgbag">';Object.keys(SGCAT).forEach(c=>{const C=SGCAT[c];h+='<div class="sgcat" style="color:'+C[2]+'">'+C[0]+' '+C[1]+'</div>';
     Object.keys(SGD).filter(id=>SGD[id][3]===c).forEach(id=>{const D=SGD[id],own=X.i[id]|0,col=sgCol(id),m=D[5],cost=[];if(m.mana)cost.push('มานา ×'+m.mana);if(m.cd)cost.push('คูลดาวน์ ×'+m.cd);if(m.pow)cost.push('พลัง ×'+m.pow);
-      h+='<div class="it" style="border-left-color:'+col+(own?'':';opacity:.78')+'"><span class="gi">'+D[0]+'</span><div class="tx"><b style="color:'+col+'">'+D[1]+'</b>'+(own?' '+sgStar(id)+(sgLv(id)>1?' <small style="color:#ffd84a">ผล +'+(sgLv(id)-1)*20+'%</small>':''):'')+'<br>'+D[2]+(cost.length?'<br><small style="opacity:.75">ราคา: '+cost.join(' · ')+'</small>':'')+(D[4]?'<br><small style="opacity:.6">ต้องการ: '+D[4].split(' ').map(q=>q[0]==='!'?'ไม่ใช่'+(SGTN[q.slice(1)]||q):(SGTN[q]||q)).join(', ')+'</small>':'')+'</div><div style="text-align:right"><div class="n">×'+own+'</div>'+sgUpBtn(id)+'<button data-sgb="'+id+'"'+((S.sh|0)>=(D[3]==='rare'?SGSR:SGSC)?'':' disabled')+'>สร้าง<br><small>💠'+(D[3]==='rare'?SGSR:SGSC)+'</small></button></div></div>'})});
+      h+='<div class="it" style="border-left-color:'+col+(own?'':';opacity:.78')+'"><span class="gi">'+D[0]+'</span><div class="tx"><b style="color:'+col+'">'+D[1]+'</b>'+(own?' '+sgStar(id)+(sgLv(id)>1?' <small style="color:#ffd84a">ผล +'+(sgLv(id)-1)*20+'%</small>':''):'')+'<br>'+D[2]+(cost.length?'<br><small style="opacity:.75">ราคา: '+cost.join(' · ')+'</small>':'')+(D[4]?'<br><small style="opacity:.6">ต้องการ: '+D[4].split(' ').map(q=>q[0]==='!'?'ไม่ใช่'+(SGTN[q.slice(1)]||q):(SGTN[q]||q)).join(', ')+'</small>':'')+'</div><div style="text-align:right"><div class="n">×'+own+'</div>'+sgUpBtn(id)+sgDisBtn(id)+'<button data-sgb="'+id+'"'+((S.sh|0)>=(D[3]==='rare'?SGSR:SGSC)?'':' disabled')+'>สร้าง<br><small>💠'+(D[3]==='rare'?SGSR:SGSC)+'</small></button></div></div>'})});
   h+='</div><div class="card hint" style="font-size:11.5px;opacity:.85">💡 ลองคอมโบ: ทอเท็ม + ร่ายซ้ำ · กับดัก + แยกร่าง · เจ็บแล้วร่าย + โทสะ · ธาตุไฟ + เพื่อนธาตุน้ำแข็ง = ไอน้ำระเบิด</div></div>';
   ov.innerHTML=h;ov.hidden=false;
   ov.querySelectorAll('[data-sgtab]').forEach(b=>b.onclick=()=>{SGTAB=b.dataset.sgtab;SGSEL=null;runeUI()});
@@ -11248,8 +11248,14 @@ function sgUI(msg){if(!me.cls)return;sgCSS();ov.dataset.k='rune';const S=rnSt(),
   ov.querySelectorAll('[data-sgc]').forEach(b=>b.onclick=()=>{SGSEL=null;sgUI()});
   ov.querySelectorAll('[data-sgu]').forEach(b=>b.onclick=()=>{const id=b.dataset.sgu,r=sgUpOk(id);if(!r.ok)return;X.i[id]-=r.n;S.sh-=r.sh;X.v[id]=sgLv(id)+1;try{sfx('up')}catch(e){}try{burst(me.x,me.y-20,['#ffd84a',sgCol(id),'#ffffff'],30,140,.8,{glow:1,g:-30})}catch(e){}sgUI('⬆️ «'+SGD[id][0]+' '+SGD[id][1]+'» ขึ้นขั้น '+SGRM[sgLv(id)]+' แล้ว! ผลรูน +'+(sgLv(id)-1)*20+'%')});
   sgSetsBind(m=>sgUI(m));
+  ov.querySelectorAll('[data-sgdx]').forEach(b=>b.onclick=()=>{const id=b.dataset.sgdx,v=sgDisV(id);if(sgSpare(id)<1)return;X.i[id]-=1;S.sh=Math.min(99999,(S.sh|0)+v);try{sfx('coin')}catch(e){}sgUI('♻️ แยก «'+SGD[id][0]+' '+SGD[id][1]+'» 1 ชิ้น → +'+v+' ผงรูน 💠')});
   ov.querySelectorAll('[data-sgr]').forEach(b=>b.onclick=()=>{if((S.sh|0)<SGRC)return;S.sh-=SGRC;const id=sgPick(.06);X.i[id]=(X.i[id]|0)+1;try{sfx('lg_get')}catch(e){}sgUI((SGD[id][3]==='rare'?'✨ โชคดี! ได้รูนหายาก «':'🎲 ได้ «')+SGD[id][0]+' '+SGD[id][1]+'»!')});
   ov.querySelectorAll('[data-sgb]').forEach(b=>b.onclick=()=>{const id=b.dataset.sgb,cs=SGD[id][3]==='rare'?SGSR:SGSC;if((S.sh|0)<cs)return;S.sh-=cs;X.i[id]=(X.i[id]|0)+1;try{sfx('lg_get')}catch(e){}sgUI('💠 สร้าง «'+SGD[id][0]+' '+SGD[id][1]+'» แล้ว')})}
+/* ---------- แยกรูนเสริมที่ซ้ำเป็นผงรูน (เก็บไว้อย่างน้อย 1 ชิ้น และไม่แตะชิ้นที่ใส่ลิงก์อยู่) ---------- */
+const SGDV={c:15,r:60};
+function sgDisV(id){return SGD[id]&&SGD[id][3]==='rare'?SGDV.r:SGDV.c}
+function sgSpare(id){const X=sgSt();return Math.max(0,(X.i[id]|0)-Math.max(1,sgUsed(id)))}
+function sgDisBtn(id){const n=sgSpare(id);if(!n)return'';return'<button data-sgdx="'+id+'" style="margin-bottom:4px" title="แยกชิ้นที่ซ้ำ 1 ชิ้น">♻️ แยก<br><small>+💠'+sgDisV(id)+' · ซ้ำ '+n+'</small></button>'}
 /* ---------- อัปขั้นรูนเสริม: ใช้ชิ้นซ้ำ + ผงรูน · ทุกชิ้นของแบบนั้นได้ขั้นเดียวกัน ---------- */
 function sgUpOk(id){const lv=sgLv(id);if(lv>=3)return{ok:false,max:1};const[n,sh]=SGUC[lv],X=sgSt(),own=X.i[id]|0,keep=Math.max(1,sgUsed(id));return{ok:own-n>=keep&&(rnSt().sh|0)>=sh,n,sh,lack:own-n<keep}}
 function sgUpBtn(id){const X=sgSt();if(!(X.i[id]|0))return'';const lv=sgLv(id);if(lv>=3)return'<span class="rnmax" style="display:block;margin-bottom:4px">MAX</span>';const r=sgUpOk(id);
@@ -11292,13 +11298,13 @@ setTimeout(()=>{try{
   try{const _tu=treeUI;window.treeUI=treeUI=function(){const r=_tu.apply(this,arguments);try{if(sgSockN()>0&&sgSt().sv.some(Boolean)){sgCSS();const p=ov.querySelector('.pn'),hd=p&&p.querySelector('.ph');if(hd){hd.insertAdjacentHTML('afterend',sgSetsCard(false));sgSetsBind(m=>{treeUI();try{banner={s:m,t:3}}catch(e){}})}}}catch(e){}return r}}catch(e){}
   const _bl=bossLoot;window.bossLoot=bossLoot=function(x,y,mv){const r=_bl.apply(this,arguments);try{if(me.cls&&Math.hypot(me.x-x,me.y-y)<=650&&sgSockN()>0&&Math.random()<(mv?.6:.25))sgGive(null,mv?'บอส MVP':'บอส')}catch(e){}return r};
   const _dg=dgReward;window.dgReward=dgReward=function(){const r=_dg.apply(this,arguments);try{if(sgSockN()>0&&Math.random()<.35)sgGive(null,'ดันเจี้ยน')}catch(e){}return r};
-  const _rs=rnShard;window.rnShard=rnShard=function(n,why){const r=_rs.apply(this,arguments);try{if(n>0&&n<=10&&sgSockN()>0&&Math.random()<n*.015)sgGive(null,'หัวหน้ามอน/เหตุการณ์')}catch(e){}return r};
+  const _rs=rnShard;window.rnShard=rnShard=function(n,why){const r=_rs.apply(this,arguments);try{if(why!=='grind'&&n>0&&n<=10&&sgSockN()>0&&Math.random()<n*.015)sgGive(null,'หัวหน้ามอน/เหตุการณ์')}catch(e){}return r};
 }catch(e){console.warn('sg init',e)}},300);
 /* ---------- กระเป๋า «ของใช้ & วัตถุดิบ»: โชว์ผงรูน + รูนเสริม (ดูอย่างเดียว ไม่เข้าระบบแลกเปลี่ยน) ---------- */
 function sgGdCells(sel){if(!me.cls)return'';const S=rnSt(),X=sgSt(),sh=S.sh|0,ns=Object.values(X.i).reduce((a,b)=>a+(b|0),0),cell=(k,ic,v)=>'<button class="cell" data-gd="'+k+'" style="'+(v?'':'opacity:.45;')+(sel===k?'border-color:#d8a040;box-shadow:0 0 0 2px rgba(216,160,64,.5);':'')+'font-size:22px">'+ic+'<span style="position:absolute;right:4px;bottom:2px;font-size:11px;font-weight:700;text-shadow:0 1px 2px #000;color:#fff">'+(v>9999?Math.floor(v/1000)+'k':v)+'</span></button>';
   return cell('rnsh','<span style="filter:hue-rotate(40deg) saturate(1.3)">💠</span>',sh)+cell('rnsg','🔗',ns)}
 function sgGdNote(sel){const S=rnSt(),X=sgSt();
-  if(sel==='rnsh')return'<div class="note" style="margin-top:8px"><b>💠 ผงรูน</b> · มี '+((S.sh|0).toLocaleString())+'<br><small>ใช้ที่ช่างรูนไอริสในค่าย: สร้างรูนหลัก ('+RNC+') · อัปเกรดรูน ('+RNU[1]+'/'+RNU[2]+') · สุ่มรูนเสริม ('+SGRC+') · สร้างรูนเสริมแบบเลือกเอง ('+SGSC+') · ได้จากหัวหน้ามอน เหตุการณ์สุ่ม ดันเจี้ยน บอส และรูนซ้ำ</small></div>';
+  if(sel==='rnsh')return'<div class="note" style="margin-top:8px"><b>💠 ผงรูน</b> · มี '+((S.sh|0).toLocaleString())+'<br><small>ใช้ที่ช่างรูนไอริสในค่าย: สร้างรูนหลัก ('+RNC+') · อัปเกรดรูน ('+RNU[1]+'/'+RNU[2]+') · สุ่มรูนเสริม ('+SGRC+') · สร้างรูนเสริมแบบเลือกเอง ('+SGSC+') <br>ได้จาก: หัวหน้ามอน 1–3 · บอส 2 (MVP 8) · ดันเจี้ยน/หอคอย 3 · เหตุการณ์สุ่ม 4–8 · ตกปลา (ขวด/หีบ) · รูนหลักซ้ำ 20 · แยกรูนเสริมซ้ำ '+SGDV.c+'/'+SGDV.r+' · บดอัญมณีดิบ/เห็ดวิญญาณ ก้อนละ 6 (เมนู ⛏️ งานฝีมือ)</small></div>';
   if(sel==='rnsg'){const L=Object.keys(SGD).filter(id=>(X.i[id]|0)>0);return'<div class="note" style="margin-top:8px"><b>🔗 รูนเสริม</b> · มี '+L.reduce((a,id)=>a+(X.i[id]|0),0)+' ชิ้น ('+L.length+'/'+Object.keys(SGD).length+' แบบ)<br><small>'+(L.length?L.map(id=>SGD[id][0]+' '+SGD[id][1]+' ×'+(X.i[id]|0)+(sgUsed(id)?' (ใส่อยู่ '+sgUsed(id)+')':'')).join(' · '):'ยังไม่มี — ปลดช่องลิงก์ที่ Lv '+SGLV[0]+' แล้วรับฟรี 3 อัน')+'<br>ใส่ลิงก์สกิลได้ที่ช่างรูนไอริส แท็บ 🔗 รูนเสริม</small></div>'}
   return''}
 /* ---------- แผง GM: เสกผงรูน / รูนเสริมครบ / อัปขั้น III (เห็นเฉพาะเจ้าของเกม) ---------- */
@@ -11450,7 +11456,9 @@ const GTSM={
  s1:['⚒️','หินตีบวกขั้นแรก','ใช้ตีบวก +6 ถึง +10',{o1:8},300,{},{inv:'s1',n:1}],
  ps:['🛡️','หินกันแตก','ตีบวกพลาดอุปกรณ์ไม่แตก',{o1:6,gm:1},1500,{},{inv:'ps',n:1}],
  s2:['⚒️','หินตีบวกขั้นสอง','ใช้ตีบวก +11 ถึง +20',{o2:6,gm:2},3000,{o:3},{inv:'s2',n:1}],
- s3:['⚒️','หินตีบวกขั้นสูง','ใช้ตีบวก +21 ถึง +30 (ชุดเซ็ตสีชมพู)',{o3:10,gm:5},30000,{o:6},{inv:'s3',n:1}]};
+ s3:['⚒️','หินตีบวกขั้นสูง','ใช้ตีบวก +21 ถึง +30 (ชุดเซ็ตสีชมพู)',{o3:10,gm:5},30000,{o:6},{inv:'s3',n:1}],
+ rgg:['💠','บดอัญมณีเป็นผงรูน','อัญมณีดิบ 1 ก้อน → ผงรูน 6',{gm:1},100,{},{rn:6}],
+ rgr:['💠','บดเห็ดวิญญาณเป็นผงรูน','เห็ดวิญญาณ 1 ดอก → ผงรูน 6',{rt:1},100,{},{rn:6}]};
 const GTBR={
  php:['❤️','ยาฟื้นเลือด ×20','ยาแดงพื้นฐาน',{h1:3},50,{},{inv:'hp',n:20}],
  pmp:['💧','ยาฟื้นมานา ×20','ยาฟ้าพื้นฐาน',{h1:2,h2:1},80,{h:3},{inv:'mp',n:20}],
@@ -11536,19 +11544,19 @@ function gtNeedTxt(R){const[,,,need,gold,lv]=R;let h='';for(const k in need){con
   if(lv.o)h+='<i class="'+(gtLvO()>=lv.o?'':'no')+'">⛏️ Lv '+lv.o+'</i>';if(lv.h)h+='<i class="'+(gtLvH()>=lv.h?'':'no')+'">🌿 Lv '+lv.h+'</i>';return h}
 function gtCan(R){const[,,,need,gold,lv]=R;for(const k in need)if(gtHas(k)<need[k])return false;if(me.gold<gold)return false;if(lv.o&&gtLvO()<lv.o)return false;if(lv.h&&gtLvH()<lv.h)return false;return true}
 function gtMake(book,id,times){const R=book[id];if(!R)return'';let n=0;for(let i=0;i<times;i++){if(!gtCan(R))break;const[,,,need,gold,,out]=R;for(const k in need)gtAdd(k,-need[k]);me.gold-=gold;
-    if(out.inv){me.inv[out.inv]=Math.min(out.inv==='hp'||out.inv==='mp'?POTMAX:999,(me.inv[out.inv]|0)+out.n)}else if(out.ex){const G=gtSt();G.eb={id:out.ex,t:1800};try{recalc()}catch(e){}}n++;if(out.ex)break}
+    if(out.inv){me.inv[out.inv]=Math.min(out.inv==='hp'||out.inv==='mp'?POTMAX:999,(me.inv[out.inv]|0)+out.n)}else if(out.ex){const G=gtSt();G.eb={id:out.ex,t:1800};try{recalc()}catch(e){}}else if(out.rn){try{rnShard(out.rn,'grind')}catch(e){}}n++;if(out.ex)break}
   if(!n)return'วัตถุดิบหรือทองไม่พอ';me.stt.gtc=(me.stt.gtc|0)+n;try{sfx(book===GTSM?'up':'lg_get')}catch(e){}try{burst(me.x,me.y-20,book===GTSM?['#ffd06a','#ffffff','#c8c0b0']:['#8af08a','#ffffff','#c8a0ff'],22,120,.7,{glow:1,g:-30})}catch(e){}
-  return(book===GTSM?'⚒️ หลอมได้ ':'🧪 ปรุงได้ ')+R[1]+(n>1?' ×'+n:'')+(R[6].ex?' — ดื่มแล้ว ฤทธิ์อยู่ 30 นาที':'')}
+  return(R[6].rn?'💠 บดได้ผงรูน +'+R[6].rn*n+' (รวม '+((rnSt().sh|0).toLocaleString())+')':(book===GTSM?'⚒️ หลอมได้ ':'🧪 ปรุงได้ ')+R[1]+(n>1?' ×'+n:''))+(R[6].ex?' — ดื่มแล้ว ฤทธิ์อยู่ 30 นาที':'')}
 function gtUI(msg){if(!me.cls)return;gtCSS();ov.dataset.k='gth';const G=gtSt(),lo=gtLvO(),lh=gtLvH();
   let h='<div class="pn" data-pn="gth">'+hdr('⛏️','งานฝีมือ','ขุดแร่ Lv '+lo+' · สมุนไพร Lv '+lh+(G.eb?' · 🧪 '+GTBR[G.eb.id][1]+' เหลือ '+Math.ceil(G.eb.t/60)+' นาที':''))+(msg?'<div class="note">'+msg+'</div>':'');
-  h+='<div class="tabs">'+[['lv','📊 ความชำนาญ'],['sm','⚒️ หลอมแร่'],['br','🧪 ปรุงยา']].map(([k,l])=>'<button class="tab'+(GTTAB===k?' on':'')+'" data-gtt="'+k+'">'+l+'</button>').join('')+'</div>';
+  h+='<div class="tabs">'+[['lv','📊 ความชำนาญ'],['sm','⚒️ หลอม/บด'],['br','🧪 ปรุงยา']].map(([k,l])=>'<button class="tab'+(GTTAB===k?' on':'')+'" data-gtt="'+k+'">'+l+'</button>').join('')+'</div>';
   if(GTTAB==='lv'){const bar=(x,c)=>'<div class="bar"><i style="width:'+Math.round(gtLvP(x)*100)+'%;background:'+c+'"></i></div>';
     h+='<div class="card"><div class="gtpr"><span class="ic">⛏️</span><div style="flex:1"><b>ขุดแร่ Lv '+lo+'</b>'+(lo>=GTLV?' <small>MAX</small>':'')+bar(G.ox,'#e8b060')+'<small style="opacity:.8">เร็วขึ้น '+(lo-1)*5+'% · ได้ 2 ชิ้น '+(25+5*lo)+'% · อัญมณี '+(4+.6*lo).toFixed(1)+'%'+(lo<3?' · ปลดแร่มิธริลที่ Lv 3':lo<6?' · ปลดแร่ดาวตกที่ Lv 6':'')+'</small></div></div>'+
       '<div class="gtpr"><span class="ic">🌿</span><div style="flex:1"><b>สมุนไพร Lv '+lh+'</b>'+(lh>=GTLV?' <small>MAX</small>':'')+bar(G.hx,'#7ad87a')+'<small style="opacity:.8">เร็วขึ้น '+(lh-1)*5+'% · ได้ 2 ชิ้น '+(25+5*lh)+'% · เห็ดวิญญาณ '+(4+.6*lh).toFixed(1)+'%'+(lh<3?' · ปลดดอกจันทร์เงินที่ Lv 3':lh<6?' · ปลดบัวแสงดาวที่ Lv 6':'')+'</small></div></div></div>';
     h+='<div class="card"><div class="cap">🧺 วัตถุดิบ</div><div class="gtgrid">'+GTK.map(k=>'<div style="'+(gtHas(k)?'':'opacity:.45')+'">'+GTI[k][0]+'<b>'+gtHas(k)+'</b><small>'+GTI[k][1]+'</small></div>').join('')+'</div></div>';
     const T=gtOkMap()?gtTier():0;h+='<div class="card hint" style="font-size:11.5px;text-align:left;line-height:1.55">🗺️ ทุกแมพสนามมีสายแร่ 5 จุดและสมุนไพร 5 จุด เดินเข้าใกล้แล้วกดปุ่ม <b>⛏️ ขุด / 🌿 เก็บ</b> · เก็บแล้วงอกใหม่ใน 2–3 นาที<br>แมพช่วงต้น = 🪨 🌿 · ช่วงกลาง (ตั้งแต่วิหารน้ำแข็ง) = 🔷 🌸 · ช่วงปลาย (ตั้งแต่ทะเลสาบดาวตก) = ☄️ 🪷'+(T?'<br>📍 แมพนี้: '+(T===1?'🪨 แร่เหล็ก · 🌿 สมุนไพรเขียว':T===2?'🔷 แร่มิธริล · 🌸 ดอกจันทร์เงิน':'☄️ แร่ดาวตก · 🪷 บัวแสงดาว')+' (เหลือ '+gtNodes().filter(gtReady).length+'/'+gtNodes().length+' จุด)':'')+'</div>'}
   else{const book=GTTAB==='sm'?GTSM:GTBR;h+='<div class="card" style="padding:4px 8px">'+Object.keys(book).map(id=>{const R=book[id],can=gtCan(R),multi=!R[6].ex;
-      return'<div class="gtrc"><span class="ic">'+R[0]+'</span><div class="tx"><b>'+R[1]+'</b><br>'+R[2]+'<div class="need">'+gtNeedTxt(R)+'</div></div><div style="display:flex;flex-direction:column;gap:4px"><button class="pri" data-gtm="'+id+'"'+(can?'':' disabled')+'>'+(GTTAB==='sm'?'หลอม':R[6].ex?'ปรุง+ดื่ม':'ปรุง')+'</button>'+(multi?'<button data-gtm5="'+id+'"'+(can?'':' disabled')+'>×5</button>':'')+'</div></div>'}).join('')+'</div>';
+      return'<div class="gtrc"><span class="ic">'+R[0]+'</span><div class="tx"><b>'+R[1]+'</b><br>'+R[2]+'<div class="need">'+gtNeedTxt(R)+'</div></div><div style="display:flex;flex-direction:column;gap:4px"><button class="pri" data-gtm="'+id+'"'+(can?'':' disabled')+'>'+(GTTAB==='sm'?(R[6].rn?'บด':'หลอม'):R[6].ex?'ปรุง+ดื่ม':'ปรุง')+'</button>'+(multi?'<button data-gtm5="'+id+'"'+(can?'':' disabled')+'>×5</button>':'')+'</div></div>'}).join('')+'</div>';
     if(GTTAB==='br')h+='<div class="card hint" style="font-size:11.5px">🧪 ยาบัฟใช้ได้ทีละขวด (ขวดใหม่แทนขวดเก่า) · ใช้พร้อมอาหารจากปลาได้ · ฤทธิ์ 30 นาที</div>';
     else h+='<div class="card hint" style="font-size:11.5px">⚒️ ของที่หลอมได้เข้ากระเป๋า 🧺 ของใช้ & วัตถุดิบ ทันที</div>'}
   h+='</div>';ov.innerHTML=h;ov.hidden=false;
@@ -11556,7 +11564,7 @@ function gtUI(msg){if(!me.cls)return;gtCSS();ov.dataset.k='gth';const G=gtSt(),l
   ov.querySelectorAll('[data-gtm]').forEach(b=>b.onclick=()=>{const id=b.dataset.gtm;gtUI(gtMake(GTTAB==='sm'?GTSM:GTBR,id,1))});
   ov.querySelectorAll('[data-gtm5]').forEach(b=>b.onclick=()=>{const id=b.dataset.gtm5;gtUI(gtMake(GTTAB==='sm'?GTSM:GTBR,id,5))})}
 /* ---- ลงทะเบียนวัตถุดิบเป็น "ของใช้" (ขายในตลาด/แนบจดหมายได้) · เรียกทันทีหลังสร้าง GDM ---- */
-function gtGdReg(){GTK.forEach(k=>{if(!GDM[k]){const I=GTI[k];GDM[k]={k,n:I[0]+' '+I[1],ic:()=>I[0],max:GTMX,d:I[2]}}if(!MKG.includes(k))MKG.push(k)})}
+function gtGdReg(){GTK.forEach(k=>{if(!GDM[k]){const I=GTI[k];GDM[k]={k,n:I[0]+' '+I[1],ic:()=>I[0],max:GTMX,d:I[2]+' · ใช้หลอม/บด/ปรุงยาที่เมนู ⛏️ งานฝีมือ'};GOODS.push(GDM[k])}if(!MKG.includes(k))MKG.push(k)})}
 /* ---- กรองเซฟ ---- */
 function gtClean(x){if(!x||typeof x!=='object')return undefined;const o={m:{},ox:Math.max(0,Math.min(1e7,Math.floor(+x.ox||0))),hx:Math.max(0,Math.min(1e7,Math.floor(+x.hx||0)))};
   if(x.m&&typeof x.m==='object')GTK.forEach(k=>{const v=Math.max(0,Math.min(GTMX,Math.floor(+x.m[k]||0)));if(v)o.m[k]=v});
@@ -11569,8 +11577,7 @@ setTimeout(()=>{try{
   const _fm=fdM;window.fdM=fdM=function(k){return _fm(k)+gtEx(k)};
   const _dr=drawRx;window.drawRx=drawRx=function(){_dr.apply(this,arguments);try{gtPose()}catch(e){}};
   const _bl=buffList;window.buffList=buffList=function(){const L=_bl.apply(this,arguments);try{const G=me.gth;if(G&&G.eb&&G.eb.t>0&&me.cls&&run){const R=GTBR[G.eb.id];BFX.gtx=1800;L.push({k:'gtx',ic:R[0],n:R[1],d:R[2],t:G.eb.t,mx:1800,col:'#8af08a'})}}catch(e){}return L};
-  /* ช่องในกระเป๋า 🧺 */const _gc=sgGdCells;window.sgGdCells=sgGdCells=function(sel){let h=_gc(sel);try{GTK.forEach(k=>{const v=gtHas(k);if(!v)return;h+='<button class="cell" data-gd="gt'+k+'" style="'+(sel==='gt'+k?'border-color:#d8a040;box-shadow:0 0 0 2px rgba(216,160,64,.5);':'')+'font-size:22px">'+GTI[k][0]+'<span style="position:absolute;right:4px;bottom:2px;font-size:11px;font-weight:700;text-shadow:0 1px 2px #000;color:#fff">'+v+'</span></button>'})}catch(e){}return h};
-  const _gn=sgGdNote;window.sgGdNote=sgGdNote=function(sel){if(typeof sel==='string'&&sel.slice(0,2)==='gt'&&GTI[sel.slice(2)]){const k=sel.slice(2);return'<div class="note" style="margin-top:8px"><b>'+GTI[k][0]+' '+GTI[k][1]+'</b> · มี '+gtHas(k).toLocaleString()+'<br><small>'+GTI[k][2]+' · ใช้หลอมแร่/ปรุงยาที่เมนู ⛏️ งานฝีมือ</small></div>'}return _gn(sel)};
+  /* วัตถุดิบอยู่ใน GOODS แล้ว (ช่องในกระเป๋า 🧺 + หน้าแลกเปลี่ยน) */
 }catch(e){console.warn('gth init',e)}},330);
 setInterval(()=>{try{if(!$('gtm')){const ref=$('fsm');if(ref){const b=document.createElement('button');b.id='gtm';b.innerHTML='<i>⛏️</i><span>งานฝีมือ</span><b class="bd"></b>';ref.parentNode.insertBefore(b,ref.nextSibling);b.onclick=()=>{if(me.cls&&run){GTTAB='lv';gtUI()}}}}}catch(e){}},1000);
 /* ---------- v390 กล่องจดหมาย ----------
@@ -11716,6 +11723,26 @@ function mlClean(x){if(!Array.isArray(x))return undefined;const o=x.slice(-10).m
   const P=mlPend();if(P.length&&P.some(p=>now-p.at>12000)&&now-MLX.q>10000){mlQ(1);return}
   if(now-MLX.poll>180000)mlQ()
 }catch(e){}},1000)}
+/* ---------- v391 กระเป๋า «ของใช้ & วัตถุดิบ»: โชว์ปลาในถัง · อาหารที่ปรุงไว้ · ผลึกวิญญาณจุติ (ดูอย่างเดียว) ---------- */
+function xgCell(k,ic,v,sel,dim){return'<button class="cell" data-gd="'+k+'" style="'+(v||!dim?'':'opacity:.45;')+(sel===k?'border-color:#d8a040;box-shadow:0 0 0 2px rgba(216,160,64,.5);':'')+'font-size:22px">'+ic+'<span style="position:absolute;right:4px;bottom:2px;font-size:11px;font-weight:700;text-shadow:0 1px 2px #000;color:#fff">'+(typeof v==='string'?v:v>9999?Math.floor(v/1000)+'k':v)+'</span></button>'}
+function xgFish(){const S=fsSt();return Object.keys(S.c).filter(id=>FISH[id]&&S.c[id]>0).sort((a,b)=>FISH[b].r-FISH[a].r||(S.c[b]|0)-(S.c[a]|0))}
+function xgFood(){const S=fsSt();return Object.keys(S.f).filter(k=>FOOD[k]&&S.f[k]>0)}
+function xgCells(sel){if(!me.cls)return'';let h='';try{const S=fsSt(),nf=xgFish().reduce((a,id)=>a+(S.c[id]|0),0),nd=xgFood().reduce((a,k)=>a+(S.f[k]|0),0);
+  h+=xgCell('xgfs','🪣',nf,sel,1)+xgCell('xgfd','🍱',nd,sel,1);
+  const R=rbSt();if(me.rb)h+=xgCell('xgrb','🌅','✔',sel,0);else h+=xgCell('xgrb','🌅',(R.sh|0)+'/'+RBN,sel,!(R.sh>0))}catch(e){}return h}
+function xgNote(sel){const N=(t,b)=>'<div class="note" style="margin-top:8px;text-align:left"><b>'+t+'</b><br><small>'+b+'</small></div>';
+  if(sel==='xgfs'){const S=fsSt(),L=xgFish(),n=L.reduce((a,id)=>a+(S.c[id]|0),0);
+    return N('🪣 ปลาในถัง · '+n.toLocaleString()+' ตัว ('+L.length+' ชนิด)',(L.length?L.slice(0,14).map(id=>'<span style="color:'+FRC[FISH[id].r]+'">'+FISH[id].ic+' '+FISH[id].n+'</span> ×'+S.c[id]).join(' · ')+(L.length>14?' · …':'')+'<br>':'ยังไม่มีปลา — หาบ่อน้ำที่มีป้าย 🎣 ในแมพแล้วกดตกปลา<br>')+'ขายหรือเอาไปทำอาหารได้ที่เมนู 🎣 ตกปลา (ปลาหายากขายได้แพง)')}
+  if(sel==='xgfd'){const S=fsSt(),L=xgFood(),fb=S.fb&&S.fb.t>0&&FOOD[S.fb.id]?FOOD[S.fb.id]:null;
+    return N('🍱 อาหารที่ปรุงไว้ · '+L.reduce((a,k)=>a+(S.f[k]|0),0)+' จาน',(L.length?L.map(k=>FOOD[k][0]+' '+FOOD[k][1]+' ×'+S.f[k]+' <span style="opacity:.75">('+fsBuffTxt(FOOD[k][3])+' · '+FOOD[k][4]+' นาที)</span>').join('<br>')+'<br>':'ยังไม่มีอาหาร — ปรุงจากปลาที่ครัวป้าบัวริมบึงหน้าค่าย หรือเตาผิงในเต็นท์<br>')+
+      (fb?'กำลังอิ่ม: '+fb[0]+' '+fb[1]+' เหลือ '+Math.ceil(S.fb.t/60)+' นาที<br>':'')+'กินได้ที่เมนู 🎣 ตกปลา → แท็บอาหาร (กินได้ทีละอย่าง · ใช้คู่กับยาบัฟจากงานฝีมือได้)')}
+  if(sel==='xgrb'){const R=rbSt();if(me.rb)return N('🌅 ผลึกวิญญาณจุติ','ตัวละครนี้จุติแล้ว ✔ ไม่ต้องใช้ผลึกอีก');
+    const ok=rbEligible();return N('🌅 ผลึกวิญญาณจุติ · '+(R.sh|0)+'/'+RBN,(ok?'เก็บครบ '+RBN+' ก้อน + ทอง '+RBG.toLocaleString()+' แล้วไปที่แท่นจุติในค่าย':'เริ่มดรอปเมื่อ Lv 99 และเปลี่ยนอาชีพขั้น 2 แล้ว')+'<br>ดรอปจาก: บอส MVP · บอสดันเจี้ยนเนื้อเรื่อง · บอสโลก (ถ้าไม่ตก โอกาสครั้งต่อไปจะสูงขึ้น)')}
+  return''}
+setTimeout(()=>{try{
+  const _c=sgGdCells;window.sgGdCells=sgGdCells=function(sel){return _c.apply(this,arguments)+xgCells(sel)};
+  const _n=sgGdNote;window.sgGdNote=sgGdNote=function(sel){if(typeof sel==='string'&&sel.slice(0,2)==='xg')return xgNote(sel);return _n.apply(this,arguments)};
+}catch(e){console.warn('xg init',e)}},340);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -15185,7 +15212,7 @@ const gdClean=o=>{const r={};if(o&&typeof o==='object')GOODS.forEach(g2=>{const 
 const gdSum=o=>Object.values(o||{}).reduce((a,b)=>a+b,0);
 const gdTxt=o=>GOODS.filter(g2=>o&&o[g2.k]).map(g2=>'<div class="sr"><div class="ico">'+g2.ic()+'</div><div class="nm"><b>'+g2.n+' × '+o[g2.k].toLocaleString()+'</b></div></div>').join('');
 function goodsCard(sel){return'<div class="card"><div class="cap">🧺 ของใช้ & วัตถุดิบ</div><div class="grid g5">'+GOODS.map(g2=>{const v=gdGet(g2.k);return'<button class="cell" data-gd="'+g2.k+'" style="'+(v?'':'opacity:.45;')+(sel===g2.k?'border-color:#d8a040;box-shadow:0 0 0 2px rgba(216,160,64,.5);':'')+'font-size:22px">'+g2.ic()+'<span style="position:absolute;right:4px;bottom:2px;font-size:11px;font-weight:700;text-shadow:0 1px 2px #000;color:#fff">'+(v>9999?Math.floor(v/1000)+'k':v)+'</span></button>'}).join('')+sgGdCells(sel)+'</div>'+
-  (typeof sel==='string'&&(sel==='rnsh'||sel==='rnsg'||sel.slice(0,2)==='gt')?sgGdNote(sel):sel&&GDM[sel]?'<div class="note" style="margin-top:8px"><b>'+GDM[sel].n+'</b> · มี '+gdGet(sel).toLocaleString()+'<br><small>'+GDM[sel].d+'</small></div>':'<small style="opacity:.75">แตะเพื่อดูรายละเอียด · แลกเปลี่ยนกับผู้เล่นอื่นได้ที่หน้าแลกเปลี่ยน</small>')+'</div>'}
+  (typeof sel==='string'&&(sel==='rnsh'||sel==='rnsg'||sel.slice(0,2)==='gt'||sel.slice(0,2)==='xg')?sgGdNote(sel):sel&&GDM[sel]?'<div class="note" style="margin-top:8px"><b>'+GDM[sel].n+'</b> · มี '+gdGet(sel).toLocaleString()+'<br><small>'+GDM[sel].d+'</small></div>':'<small style="opacity:.75">แตะเพื่อดูรายละเอียด · แลกเปลี่ยนกับผู้เล่นอื่นได้ที่หน้าแลกเปลี่ยน</small>')+'</div>'}
 let gdSel=null;
 /* ---------- แลกเปลี่ยนไอเทมระหว่างผู้เล่น ---------- */
 const TMAX=6;let tr=null,trReq=null,trLastReq=0,trDone=null,trResend=0;

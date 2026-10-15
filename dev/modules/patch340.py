@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()+open('ux14.js').read()+open('ux15.js').read()+open('ux16.js').read()+open('ux17.js').read()+open('ux18.js').read()+open('ux19.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()+open('ux14.js').read()+open('ux15.js').read()+open('ux16.js').read()+open('ux17.js').read()+open('ux18.js').read()+open('ux19.js').read()+open('ux20.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -362,6 +362,7 @@ R("gth:me.gth||undefined,","gth:me.gth||undefined,mlp:me.mlp&&me.mlp.length?me.m
 R("me.gth=c.gth&&","me.mlp=Array.isArray(c.mlp)?JSON.parse(JSON.stringify(c.mlp)):[];me.gth=c.gth&&")
 R("me.mkid=NEWMID||'';me.mkesc=[];","me.mkid=NEWMID||'';me.mkesc=[];me.mlp=[];me.gth={m:{},ox:0,hx:0};me.frd={L:[]};me.rn={sh:0,u:{},e:{}};me.cmp={};me.fs={};me.tent={};me.ivb=0;me.ivd=null;me.ivr=[];me.ptx={};me.rb=0;me.rbq={sh:0};me.rbC2=null;")
 R("mktUI('✅ ล็อกอินบัญชีแล้ว')}}else intro()}","mktUI('✅ ล็อกอินบัญชีแล้ว')}try{mlAfterLogin()}catch(e){}}else intro()}")
+R("sel==='rnsg'||sel.slice(0,2)==='gt')?sgGdNote(sel)","sel==='rnsg'||sel.slice(0,2)==='gt'||sel.slice(0,2)==='xg')?sgGdNote(sel)")
 open(P,'w').write(s)
 print('ok')
 import subprocess
