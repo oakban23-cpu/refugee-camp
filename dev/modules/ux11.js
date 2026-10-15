@@ -279,11 +279,17 @@ function tvBlanket(b,x,y,t,cv,br){if(cv<=0)return;const sh=b==='bed3'?['#9a1830'
   /* ขอบผ้าพับ */g.fillStyle='rgba(255,255,255,.75)';g.beginPath();g.moveTo(x0,top+4);g.quadraticCurveTo(x0+5,top-1,x0+12,top+1);g.lineTo(x0+12,y+8);g.lineTo(x0-2,y+8);g.closePath();g.fill();
   g.strokeStyle='rgba(255,255,255,.18)';g.lineWidth=1.2;for(let i=0;i<3;i++){const fx=x0+20+i*12;if(fx>x+46)break;g.beginPath();g.moveTo(fx,top+2);g.quadraticCurveTo(fx+5,y-6,fx,y+6);g.stroke()}
   if(b==='bed3'){g.strokeStyle='#ffd76a';g.lineWidth=1.4;g.beginPath();g.moveTo(x0+12,y+3);g.lineTo(x+49,y+3);g.stroke()}g.restore()}
+/* v387: ซิงก์ท่านอน — เพื่อนที่มาเยี่ยมเต็นท์เห็นเจ้าของนอนห่มผ้าด้วย (presence zz) */
+const TVZS={};function tvZzz(){try{return TSL&&tentMine()?1:0}catch(e){return 0}}
 {const o=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){
-  if(!(lk&&lk.u===uid)||down)return o.apply(this,arguments);const now=performance.now()/1000,dt=TVZ.lt?Math.min(.1,now-TVZ.lt):0;TVZ.lt=now;
-  let mine=false;try{mine=tentMine()}catch(e){}const want=(TSL&&mine)?1:0;TVZ.a=want?Math.min(1,TVZ.a+dt/.65):Math.max(0,TVZ.a-dt/.45);if(!mine)TVZ.a=0;
-  if(TVZ.a<=0)return o.apply(this,arguments);
-  const a=TVZ.a,e=a<.5?2*a*a:1-Math.pow(-2*a+2,2)/2,bx=TBED.x,by=TBED.y,b=(MAPS[curMap].tent.d||{}).bed,br=a>=1?Math.sin(now*1.6)*.9:0;
+  const u=lk&&lk.u;if(!u||down)return o.apply(this,arguments);let inT=false;try{inT=!!(MAPS[curMap]&&MAPS[curMap].tent)}catch(e){}
+  const Z=TVZS[u]||(TVZS[u]={a:0,lt:0});if(!inT){Z.a=0;return o.apply(this,arguments)}
+  const now=performance.now()/1000,dt=Z.lt?Math.min(.1,now-Z.lt):0;Z.lt=now;let want=0;
+  if(u===uid){let mine=false;try{mine=tentMine()}catch(e){}want=(TSL&&mine)?1:0;if(!mine)Z.a=0}
+  else{const q=others[u];want=q&&q.zz&&Math.hypot(q.x-(TBED.x+6),q.y-(TBED.y-2))<46?1:0}
+  Z.a=want?Math.min(1,Z.a+dt/.65):Math.max(0,Z.a-dt/.45);if(u===uid){TVZ.a=Z.a;TVZ.lt=Z.lt}
+  if(Z.a<=0)return o.apply(this,arguments);
+  const a=Z.a,e=a<.5?2*a*a:1-Math.pow(-2*a+2,2)/2,bx=TBED.x,by=TBED.y,b=(MAPS[curMap].tent.d||{}).bed,br=a>=1?Math.sin(now*1.6)*.9:0;
   /* จุดหมุน: จากยืนที่ (x,y) → นอน (หัวไปทางหมอนซ้าย) */const px=x+((bx-4)-x)*e,py=y+((by-8)-y)*e-Math.sin(Math.PI*e)*12,rot=-Math.PI/2*e;
   g.save();g.globalAlpha=1;if(a<1)gxShadow(px,py+15*(1-e),15*(1-e)+6,5,.4*(1-e));g.translate(px,py);g.rotate(rot);if(a>=1)g.scale(1,1+br*.012);
   try{drawChar(0,0,cls,1,0,hd,now,bt,lk&&lk.w,lk&&lk.a,c2,0)}catch(err){}g.restore();
