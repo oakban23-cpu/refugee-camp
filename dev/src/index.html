@@ -1400,7 +1400,7 @@ function stReady(){const d=$('sdlg');d.classList.add('rd');if(SD.i===SD.q.length
 function stNext(){if(!SD.on)return;if(SD.typ){clearInterval(SD.typ);SD.typ=null;SD.ch=SD.tx.length;$('sdlg').querySelector('.sdt').textContent=SD.tx;stReady();return}
   if(SD.i===SD.q.length-1&&SD.choice)return;SD.i++;if(SD.i>=SD.q.length)stClose();else stLine()}
 function stClose(){clearInterval(SD.typ);SD.typ=null;SD.on=false;const d=$('sdlg');if(d){d.hidden=true;d.classList.remove('chs')}$('scine').classList.remove('on');const f=SD.done;SD.done=null;SD.choice=null;if(f)f()}
-function stCalm(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on)return false;if(typeof tutI!=='undefined'&&tutI>=0)return false;return!mons.some(m=>Math.hypot(m.x-me.x,m.y-me.y)<320)}
+function stCalm(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on)return false;if(typeof tutI!=='undefined'&&tutI>=0&&tutI<2)return false;return!mons.some(m=>Math.hypot(m.x-me.x,m.y-me.y)<320)}
 function stGive(rw){if(!rw)return'';const p=[];for(const k in rw){const v=rw[k];if(k==='g'){me.gold+=v}else if(k==='rbs'){if(!me.rb){const S=rbSt();S.sh=Math.min(RBN,S.sh+v)}}else if(k==='twc'){me.twc=(me.twc||0)+v}else if(k==='hp'||k==='mp'){me.inv[k]=Math.min(POTMAX,(me.inv[k]|0)+v)}else{me.inv[k]=Math.min(999,(me.inv[k]|0)+v)}p.push('+'+v.toLocaleString()+' '+STRW[k])}
   sfx('coin');return p.join(' · ')}
 function stDone(){const st=stCur();if(!st)return;const q=me.sty;q.a=2;
@@ -1739,7 +1739,7 @@ function drawMon8(t,r,T,E,Pg,Ln,eye,F,W,bob,sw,la,ra){
 /* v235: บอส MVP เลือดและดาเมจ x20 จากเดิม (เดิม 4 / 1.5) · บอสปกติ (แมพ/ดันเจี้ยน/เรด/หอคอย) x10 · บอสโลกไม่เปลี่ยน */
 /* บอสเนื้อเรื่องภาค 1 (แมพ 1 2 3 4 6 7) เบากว่า: x3 */
 /* v241: บอสหอคอยชั้น 1–100 x3 · ชั้น 101–150 ไต่จาก x3 ถึง x10 · ชั้น 150+ x10 */
-const BOSS_EARLY=[1,2,3,4,6,7],twBX=f=>f<=100?3:f>=150?10:Math.round((3+7*(f-100)/50)*10)/10,bossX=()=>isWB()?1:(!isDg()&&BOSS_EARLY.includes(curMap))?3:(typeof NYXI==='function'&&NYXI())||(typeof ROOTI==='function'&&ROOTI())||(typeof RTEI==='function'&&RTEI())||(typeof CASI==='function'&&CASI())||(typeof ORNI==='function'&&ORNI())||(typeof ESCI==='function'&&ESCI())||(typeof CLKI==='function'&&CLKI())||(typeof VSPI==='function'&&VSPI())||(typeof MDFI==='function'&&MDFI())||(typeof QSHI==='function'&&QSHI())||(typeof HFGI==='function'&&HFGI())?3:(typeof isTw==='function'&&isTw())?twBX(twF()):10,MVDEF={8:60,10:60,18:60,22:60},MVHP=80,MVDM=30,MVO=[22,18,10,8],MVREC={22:'Lv 95+ (ปาร์ตี้)',18:'Lv 70+ (ปาร์ตี้)',3:'Lv 35+',4:'Lv 45+',6:'Lv 58+ (ปาร์ตี้)',7:'Lv 42+',8:'Lv 55+ (ปาร์ตี้)',10:'Lv 60 (ปาร์ตี้)'};
+const BOSS_EARLY=[1,2,3,4,6,7],twBX=f=>f<=100?3:f>=150?10:Math.round((3+7*(f-100)/50)*10)/10,bossX=()=>isWB()?1:(!isDg()&&BOSS_EARLY.includes(curMap))?(plCount()<=1&&me.cls&&me.lv<20?(curMap===1?.6:1):3):(typeof NYXI==='function'&&NYXI())||(typeof ROOTI==='function'&&ROOTI())||(typeof RTEI==='function'&&RTEI())||(typeof CASI==='function'&&CASI())||(typeof ORNI==='function'&&ORNI())||(typeof ESCI==='function'&&ESCI())||(typeof CLKI==='function'&&CLKI())||(typeof VSPI==='function'&&VSPI())||(typeof MDFI==='function'&&MDFI())||(typeof QSHI==='function'&&QSHI())||(typeof HFGI==='function'&&HFGI())?3:(typeof isTw==='function'&&isTw())?twBX(twF()):10,MVDEF={8:60,10:60,18:60,22:60},MVHP=80,MVDM=30,MVO=[22,18,10,8],MVREC={22:'Lv 95+ (ปาร์ตี้)',18:'Lv 70+ (ปาร์ตี้)',3:'Lv 35+',4:'Lv 45+',6:'Lv 58+ (ปาร์ตี้)',7:'Lv 42+',8:'Lv 55+ (ปาร์ตี้)',10:'Lv 60 (ปาร์ตี้)'};
 let MVT=null,MVTat=0,MVD={id:0,acc:0,tot:0},mvLoc=null,mvLostT=0;
 const mvSrv=()=>!!(room&&room.url);
 const mvBoss=()=>mons.find(m=>m.t===3&&m.mvp);
@@ -11743,6 +11743,32 @@ setTimeout(()=>{try{
   const _c=sgGdCells;window.sgGdCells=sgGdCells=function(sel){return _c.apply(this,arguments)+xgCells(sel)};
   const _n=sgGdNote;window.sgGdNote=sgGdNote=function(sel){if(typeof sel==='string'&&sel.slice(0,2)==='xg')return xgNote(sel);return _n.apply(this,arguments)};
 }catch(e){console.warn('xg init',e)}},340);
+/* ---------- v392 ประสบการณ์ผู้เล่นใหม่ 10 นาทีแรก ----------
+   · บทสอนไม่ขวางเนื้อเรื่องอีก (ขวางเฉพาะ 3 ขั้นแรก) · ขั้นเปิดเมนูข้ามเองถ้าไม่ได้กด · ซ่อนกล่องบทสอนตอนเปิดเมนู/บทสนทนา + ปุ่มเป้าหมายเรืองแสง
+   · เควสบอสแรก (ราชาหมอกพิษ) ต้อง Lv 5 · ระหว่างนั้นออโต้เควสล่ามอนเก็บเลเวลให้เอง
+   · บอสแมพต้นเล่นคนเดียวตอน Lv < 20 ไม่คูณ ×3 · ออโต้เควสเดินไปหาบอสไม่ติดขอบค่าย
+   · โบนัส EXP ผู้เล่นใหม่ (×2.5 ถึง Lv 5 · ×1.8 ถึง Lv 10 · ×1.3 ถึง Lv 15) · อาวุธ+เกราะเริ่มต้น · ดรอปอุปกรณ์ถี่ขึ้นช่วง Lv < 10 */
+const NV_LV=[[5,2.5],[10,1.8],[15,1.3]];
+function nvXp(){if(!me.cls||me.rb)return 1;for(const[l,m]of NV_LV)if(me.lv<l)return m;return 1}
+function tutMnOpen(){const m=$('mnp');return!!(m&&!m.hidden)}
+function nvCSS(){if($('nvcss'))return;const s=document.createElement('style');s.id='nvcss';
+  s.textContent='@keyframes nvglow{0%,100%{outline-color:#ffd84a;box-shadow:0 0 10px 2px rgba(255,216,74,.55)}50%{outline-color:#fff6c8;box-shadow:0 0 22px 6px rgba(255,216,74,.9)}}.nvglow{outline:3px solid #ffd84a;outline-offset:2px;animation:nvglow 1.1s ease-in-out infinite;z-index:3}@media (prefers-reduced-motion:reduce){.nvglow{animation:none}}';document.head.appendChild(s)}
+try{if(typeof STY!=='undefined'&&STY[1]&&STY[1].g==='boss'&&STY[1].m===1&&!STY[1].lv)STY[1].lv=5}catch(e){}
+{let last='';setInterval(()=>{try{nvCSS();let want='';
+  if(me.cls&&run&&typeof tutI!=='undefined'&&(tutI===4||tutI===5)&&ov.hidden)want=tutMnOpen()?(tutI===4?'gb':'tb'):'mn';
+  if(want!==last){if(last&&$(last))$(last).classList.remove('nvglow');if(want&&$(want))$(want).classList.add('nvglow');last=want}}catch(e){}},300)}
+setTimeout(()=>{try{
+  const _bl=buffList;window.buffList=buffList=function(){const L=_bl.apply(this,arguments);try{const m=nvXp();if(m>1&&me.cls&&run){const nx=NV_LV.find(([l])=>me.lv<l);L.push({k:'nvx',ic:'🌱',n:'โบนัสผู้เล่นใหม่',d:'EXP ×'+m+' จนถึง Lv '+(nx?nx[0]:''),t:0,mx:0,col:'#9be37a'})}}catch(e){}return L};
+}catch(e){console.warn('nv init',e)}},350);
+/* ---- กันตายวนกับบอส: ออโต้เควสตายต่อบอส 2 ครั้ง → พาไปเก็บเลเวลเพิ่ม 1 เลเวลก่อนแล้วกลับไปสู้ใหม่ ---- */
+let NVTR=null;const NVD={was:0,n:0,key:''};
+setInterval(()=>{try{if(!me.cls||!run){NVD.was=0;return}const dn=me.down>0;const k=(me.sty&&me.sty.s)+':'+curMap;if(k!==NVD.key){NVD.key=k;NVD.n=0}
+  if(dn&&!NVD.was&&typeof AQ!=='undefined'&&AQ&&AQ.T&&AQ.T.act==='boss'){NVD.n++;if(NVD.n>=2&&!NVTR){NVTR={lv:me.lv+1};NVD.n=0;const t='💪 บอสยังแรงไป · ออโต้เควสจะพาเก็บเลเวลถึง Lv '+NVTR.lv+' ก่อน แล้วกลับไปสู้ใหม่';banner={s:t,t:6};sysMsg(t)}}
+  NVD.was=dn;if(NVTR&&me.lv>=NVTR.lv){NVTR=null;banner={s:'⚔️ เลเวลพอแล้ว! ออโต้เควสพากลับไปสู้บอส',t:4}}}catch(e){}},400);
+setTimeout(()=>{try{
+  const _t=aqTarget;window.aqTarget=aqTarget=function(){const T=_t.apply(this,arguments);try{if(NVTR&&T&&T.act==='boss'&&!isDg())return{mp:curMap,act:'hunt',lb:'เก็บเลเวลถึง Lv '+NVTR.lv+' ก่อนสู้บอสอีกรอบ'}}catch(e){}return T};
+  const _k=aqKey;window.aqKey=aqKey=function(){return _k.apply(this,arguments)+(NVTR?'T':'')};
+}catch(e){console.warn('nvtr init',e)}},360);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -11790,7 +11816,7 @@ function aqTarget(){if(!AQ)return null;if(AQ.src==='rb')return rbAqT();
     if(q.h>=q.n){if(MAPS[curMap].npc&&MAPS[curMap].npc.x>0&&curMap<10000)return{mp:curMap,act:'merchant',lb:'ไปส่งเควสที่พ่อค้า'};return{mp:1,act:'merchant',lb:'กลับไปส่งเควสที่พ่อค้าในค่าย'}}
     if(q.t==='reach')return{mp:q.mp,act:'reach',x:q.x,y:q.y,lb:'เดินไปจุดหมาย'};if(q.t==='boss')return{mp:q.mp,act:'boss',lb:'ไปล้มบอส'};return{mp:q.mp,act:'hunt',lb:q.t==='elite'?'ไปล่ามอนตัวแข็ง':'ไปล่ามอนสเตอร์'}}
   stInit();const s=me.sty,st=STY[s.s];if(!st)return{none:1,msg:'✅ เนื้อเรื่องที่มีตอนนี้จบแล้ว'};
-  if(st.lv&&me.lv<st.lv)return{none:1,msg:'⏸️ เควสถัดไปต้อง Lv '+st.lv+' — ล่ามอนเก็บเลเวลก่อนนะ'};
+  if(st.lv&&me.lv<st.lv){if(curMap===1||(typeof FIELDM!=='undefined'&&FIELDM[curMap]&&!isDg()))return{mp:curMap,act:'hunt',lb:'เก็บเลเวลให้ถึง Lv '+st.lv};return{none:1,msg:'⏸️ เควสถัดไปต้อง Lv '+st.lv+' — ล่ามอนเก็บเลเวลก่อนนะ'}}
   if(st.k&&(s.a===0||AQINST[st.g]||st.g==='talk')){const n=STNPC[st.k];return{mp:aqNpcMap(st.k),act:'talk',k:st.k,inst:!!AQINST[st.g],lb:'ไปคุยกับ NPC'}}
   if(s.a===0&&!st.k&&st.pre&&st.pre.length)return{mp:curMap,act:'calm',lb:'รอรับเควสใหม่'};
   if(s.a===1&&st.g==='kill'&&s.n>=st.n)return{mp:curMap,act:'calm',lb:'ส่งเควส'};
@@ -11802,7 +11828,7 @@ function aqStart(src,id){if(!me.cls||!run)return;if(isDg()||(MAPS[curMap]&&(MAPS
   AQ={src,id:id||'',hb0:!!HB.on,t:0,ev:0,sx:me.x,sy:me.y,st:0,det:0,gt:0,nt:0,hunt:0,key:'',msg:'',T:null};aqHB(false);const T=aqTarget();if(T&&T.none){const m=T.msg;AQ=null;banner={s:m,t:4};return}
   ov.hidden=true;try{sfx('quest')}catch(e){}banner={s:'🧭 ออโต้เควส: '+(T?T.lb:'เริ่ม')+' · ขยับจอยเพื่อหยุด',t:3};try{stHud()}catch(e){}}
 function aqStop(msg){if(!AQ)return;const hb0=AQ.hb0;AQ=null;aqHB(hb0);if(msg)banner={s:msg,t:4};try{stHud()}catch(e){}}
-function aqKey(){if(AQ.src==='rb'){const S=rbSt();return 'rb'+S.sh+(me.gold>=RBG?1:0)+(me.rb?1:0)}if(AQ.src==='bq'){const q=me.qs.find(x=>x.id===AQ.id);return q?q.id+':'+(q.h>=q.n?1:0):'x'}const s=me.sty;return s.s+':'+s.a}
+function aqKey(){if(AQ.src==='rb'){const S=rbSt();return 'rb'+S.sh+(me.gold>=RBG?1:0)+(me.rb?1:0)}if(AQ.src==='bq'){const q=me.qs.find(x=>x.id===AQ.id);return q?q.id+':'+(q.h>=q.n?1:0):'x'}const s=me.sty,S2=STY[s.s];return s.s+':'+s.a+(S2&&S2.lv&&me.lv<S2.lv?'L':'')}
 function aqWalk(tx,ty,dt,C){let wx=tx,wy=ty;
   if(curMap===1){const R=CAMP.R,dm=Math.hypot(me.x-CX,me.y-CY),dt2=Math.hypot(tx-CX,ty-CY),inT=dt2<R,inM=inT?dm>R-40?false:true:dm<R+40;
     if(inM!==inT){const ref=inM?Math.atan2(ty-CY,tx-CX):Math.atan2(me.y-CY,me.x-CX),am=Math.atan2(me.y-CY,me.x-CX),gm=Math.round(am/1.5708)*1.5708;let ga=Math.round(ref/1.5708)*1.5708;if(Math.abs(dm-R)<70&&Math.abs(Math.atan2(Math.sin(am-gm),Math.cos(am-gm)))*dm<22)ga=gm;const ux=Math.cos(ga),uy=Math.sin(ga),gi={x:CX+ux*(R-46),y:CY+uy*(R-46)},go={x:CX+ux*(R+56),y:CY+uy*(R+56)};
@@ -11825,17 +11851,17 @@ function aqStep(dt,C){if(!AQ)return;if(!me.cls||!run){AQ=null;return}
   if(T.act==='talk'||T.act==='merchant'){const p=T.act==='talk'?aqNpcPos(T.k):(MAPS[curMap].npc||null);if(!p||!(p.x>0)){aqStop('🧭 หา NPC ไม่เจอ ลองเดินหาเองนะ');return}AQ.msg=T.act==='talk'?'ไปคุยกับ NPC':'ไปส่งเควส';
     const d=aqWalk(p.x,p.y+34,dt,C);if(T.act==='merchant'&&d<60){const id=AQ.id;aqStop();try{qClaim(id);ov.hidden=false;banner={s:'✅ ส่งเควสเรียบร้อย!',t:3}}catch(e){}return}if(d<46){AQ.nt-=dt;if(AQ.nt<=0){AQ.nt=2.5;const b=$('npcb');if(b&&b.style.display!=='none'){b.click();if(T.inst){aqStop('🧭 ถึงแล้ว! เลือกเข้าด่านได้เลย');return}}}}return}
   if(T.act==='rbalt'){AQ.msg='ไปแท่นบูชาจุติ';const d=aqWalk(RBA.x,RBA.y+50,dt,C);if(d<36){aqStop('🌅 ถึงแท่นบูชาจุติแล้ว');RBC=0;try{rbUI()}catch(e){}}return}
-  if(T.act==='rbmvp'){const bm=mvBoss();if(!bm||bm.hp<=0){AQ.T=null;AQ.hunt=0;return}if(!AQ.hunt){AQ.msg='ไปหาบอส MVP';const d=aqWalk(bm.x,bm.y+120,dt,C);if(d<90){AQ.hunt=1;aqHB(true)}}else{if(!HB.on)aqHB(true);AQ.msg='กำลังสู้บอส MVP';lockId=bm.id;if(Math.hypot(bm.x-me.x,bm.y-me.y)>W*.7)AQ.hunt=0}return}
+  if(T.act==='rbmvp'){const bm=mvBoss();if(!bm||bm.hp<=0){AQ.T=null;AQ.hunt=0;return}if(!AQ.hunt){AQ.msg='ไปหาบอส MVP';const d=aqWalk(bm.x,bm.y+120,dt,C);if(d<90){AQ.hunt=1;aqHB(true)}}else{if(!HB.on)aqHB(true);AQ.msg='กำลังสู้บอส MVP';lockId=bm.id;if(Math.hypot(bm.x-me.x,bm.y-me.y)>Math.max(700,W*.7))AQ.hunt=0}return}
   if(T.act==='reach'){AQ.msg='เดินไปจุดหมาย';aqWalk(T.x,T.y,dt,C);return}
   if(T.act==='arrive'){AQ.msg='ถึงแล้ว';return}
   if(T.act==='calm'){if(HB.on)aqHB(false);AQ.hunt=0;AQ.msg='หาที่ปลอดภัยรับเควสใหม่';let px,py;if(curMap===1){px=CX;py=CY+70}else{const N=MAPS[curMap].npc;if(N&&N.x>0){px=N.x;py=N.y+50}else{px=SX;py=SY+60}}
     const nm=aqNearMon();if(nm&&nm[1]<320&&Math.hypot(me.x-px,me.y-py)<60){aqHB(true);AQ.msg='เคลียร์มอนรอบตัว'}else aqWalk(px,py,dt,C);try{stTick()}catch(e){}return}
   if(T.act==='tw'){AQ.msg='ไปประตูหอคอย';const d=aqWalk(TWDOOR.x,TWDOOR.y+40,dt,C);if(d<60){aqStop('🗼 ถึงหอคอยแล้ว เลือกชั้นแล้วปีนต่อได้เลย');try{twEnterUI()}catch(e){}}return}
   if(T.act==='wb'){const G=MAPS[1].gates.find(g=>g.wb);if(!G){aqStop();return}AQ.msg='ไปลานบอสโลก';const d=aqWalk(G.x,G.y+6,dt,C);if(d<70){aqStop();useGate()}return}
-  if(T.act==='boss'){const B=MAPS[curMap].boss,bm=mons.find(m=>m.t===3&&m.hp>0);if(!AQ.hunt){AQ.msg='ไปหาบอส';const d=aqWalk(bm?bm.x:B.x,(bm?bm.y:B.y)+150,dt,C);if(d<60){AQ.hunt=1;aqHB(true)}}else{if(!HB.on)aqHB(true);if(bm){AQ.msg='กำลังสู้บอส';lockId=bm.id;if(Math.hypot(bm.x-me.x,bm.y-me.y)>W*.7)AQ.hunt=0}else AQ.msg=bossCd<9e8&&bossCd>0?'รอบอสเกิด '+Math.ceil(bossCd)+' วิ · ล่ามอนรอ':'รอบอสปรากฏ'}return}
+  if(T.act==='boss'){const B=MAPS[curMap].boss,bm=mons.find(m=>m.t===3&&m.hp>0);if(!AQ.hunt){AQ.msg='ไปหาบอส';if(HB.on)aqHB(false);const tx=bm?bm.x:B.x,ty=(bm?bm.y:B.y)+150;aqWalk(tx,ty,dt,C);if(Math.hypot(me.x-tx,me.y-ty)<110){AQ.hunt=1;aqHB(true)}}else{if(!HB.on)aqHB(true);if(bm){AQ.msg='กำลังสู้บอส';lockId=bm.id;if(Math.hypot(bm.x-me.x,bm.y-me.y)>Math.max(700,W*.7))AQ.hunt=0}else AQ.msg=bossCd<9e8&&bossCd>0?'รอบอสเกิด '+Math.ceil(bossCd)+' วิ · ล่ามอนรอ':'รอบอสปรากฏ'}return}
   if((T.act==='hunt'||T.act==='boss')&&curMap===1&&Math.hypot(me.x-CX,me.y-CY)<CAMP.R+24){if(HB.on)aqHB(false);AQ.hunt=0;const nm=T.act==='boss'?[{x:MAPS[1].boss.x,y:MAPS[1].boss.y}]:aqNearMon(),tx=nm?nm[0].x:CX,ty=nm?nm[0].y:CY+600,a=Math.atan2(ty-CY,tx-CX);AQ.msg='ออกจากค่าย';aqWalk(CX+Math.cos(a)*(CAMP.R+140),CY+Math.sin(a)*(CAMP.R+140),dt,C);return}
   if(T.act==='hunt'){if(AQ.hunt){AQ.msg='กำลังล่ามอนสเตอร์';if(!HB.on)aqHB(true);const has=mons.some(m=>m.hp>0&&m.t<3&&!m.dum&&!m.pv&&huntIn(m));if(!has){AQ.idle=(AQ.idle||0)+dt;if(AQ.idle>2.5){AQ.idle=0;AQ.hunt=0;aqHB(false)}}else AQ.idle=0;return}
-    const nm=aqNearMon();AQ.msg='ไปหามอนสเตอร์';if(nm){const d=aqWalk(nm[0].x,nm[0].y,dt,C);if(d<150){AQ.hunt=1;aqHB(true)}}else{const N=(MAPS[curMap].nests||[]).slice().sort((a,b)=>Math.hypot(a[0]-me.x,a[1]-me.y)-Math.hypot(b[0]-me.x,b[1]-me.y))[0];if(N)aqWalk(N[0],N[1],dt,C)}}}
+    const nm=aqNearMon();AQ.msg='ไปหามอนสเตอร์';if(nm){aqWalk(nm[0].x,nm[0].y,dt,C);if(Math.hypot(me.x-nm[0].x,me.y-nm[0].y)<150){AQ.hunt=1;aqHB(true)}}else{const N=(MAPS[curMap].nests||[]).slice().sort((a,b)=>Math.hypot(a[0]-me.x,a[1]-me.y)-Math.hypot(b[0]-me.x,b[1]-me.y))[0];if(N)aqWalk(N[0],N[1],dt,C)}}}
 function aqDraw(px,py){if(!AQ||me.down>0)return;const t=performance.now()/1000;g.save();g.font='bold 10px system-ui';g.textAlign='center';const lb='🧭 '+(AQ.msg||'ออโต้เควส');const w=g.measureText(lb).width+14,y=py+30;g.globalAlpha=.85+.15*Math.sin(t*4);g.fillStyle='rgba(10,30,50,.82)';g.beginPath();g.roundRect(px-w/2,y,w,15,7);g.fill();g.strokeStyle='#7ff0ff';g.lineWidth=1;g.stroke();g.fillStyle='#cff8ff';g.fillText(lb,px,y+11);g.restore()}
 
 /* ---------- ช่วยผู้เล่นใหม่ v307: ลูกศรนำทาง · สวมของอัตโนมัติ · ไม่เสียของตอนตาย ---------- */
@@ -13732,6 +13758,7 @@ function introRaw(){
   if(csMode==='new'&&!freeN)csMode='';
   if(csMode==='empty'&&have.length&&!freeN)csMode='';
   if(csMode===''&&!have.includes(csSel)){if(have.length)csSel=have.includes(saves.last)?saves.last:have[0];else csMode='empty'}
+  if(!wait&&!have.length&&csMode!=='new')csMode='new';
   if(csMode==='new'&&!CL[csPick])csPick=ks[0];
   const head='<div class="cs-top"><div class="cs-lg">REFUGEE<small>ค่ายผู้อพยพ</small></div><div class="cs-net"><p id="st"></p><p id="sv">'+(wait?'กำลังโหลดข้อมูลบันทึก...':'บันทึก: '+saveState)+'</p></div></div>';
   const slots='<div class="cs-h">ตัวละครของคุณ <span style="opacity:.6">'+have.length+'/'+CS_MAX+'</span></div><div class="cs-cls cs-sl">'+
@@ -17233,7 +17260,7 @@ function bossLoot(x,y,mv){bossRecord();if(me.cls&&Math.hypot(me.x-x,me.y-y)<=650
 
 function gainXP(x,y,v){
   if(!me.cls||me.down>0||(me.lv>=LMAX&&astOf().n>=AMAX)||Math.hypot(me.x-x,me.y-y)>380)return;
-  v=Math.round(v*(1+petV('xp'))*ptXpMul()*(1+cmpM('xp')+fdM('xp'))*(me.rb?1.1:1));
+  v=Math.round(v*nvXp()*(1+petV('xp'))*ptXpMul()*(1+cmpM('xp')+fdM('xp'))*(me.rb?1.1:1));
   if(me.lv>=LMAX){dn.push({x:me.x,y:me.y-40,v:'+'+v+' ★',t:.8});astGain(v);return}
   me.xp+=v;dn.push({x:me.x,y:me.y-40,v:'+'+v+' XP',t:.8});
   while(me.lv<LMAX&&me.xp>=need(me.lv)){me.xp-=need(me.lv);me.lv++;try{rbLv()}catch(e){}if(me.lv>=LMAX)me.xp=0;me.mh=maxHp();me.hp=me.mh;me.mm=maxMp();me.mp=me.mm;
@@ -17975,7 +18002,7 @@ function dropLoot(x,y,g,pz,gl){
   if(g>=400){const n=Math.min(9,2+Math.floor(g/450)),sh=Math.floor(g/n);for(let i=0;i<n;i++){const a=i*6.283/n+Math.random()*.5,d=10+Math.random()*26;drops.push({x:x+Math.cos(a)*d,y:y+Math.sin(a)*d*.7,k:'g',v:i?sh:g-sh*(n-1),t:50})}}
   else if(g>0)drops.push({x,y,k:'g',v:g,t:50});
   if(pz)drops.push({x:x+8,y:y-4,k:pz===1?'hp':'mp',v:1,t:50});
-  if(gl)drops.push({x:x-8,y:y+4,k:'e',L:iLv(gl),t:50});
+  if(!gl&&me.lv<10&&!me.rb&&Math.random()<.06)gl=Math.max(1,me.lv);if(gl)drops.push({x:x-8,y:y+4,k:'e',L:iLv(gl),t:50});
   if(me.lv>=20&&Math.random()<.012)drops.push({x:x+4,y:y+8,k:'s',v:1,t:50});
 }
 function pickup(dt){
@@ -18808,10 +18835,10 @@ setInterval(musTick,150);
 /* ---------- บทสอนผู้เล่นใหม่ ---------- */
 const TUT=[['🕹️','ลากจอยสติ๊กมุมซ้ายล่างเพื่อเดิน',()=>tutD>60],
  ['⚔️','เดินตามลูกศรสีฟ้าออกนอกค่ายไปหามอนสเตอร์ ตัวละครจะโจมตีเองเมื่อศัตรูอยู่ในระยะ',()=>me.xp>0||me.lv>1],
- ['✨','กดปุ่มสกิลมุมขวาล่างเพื่อใช้ท่าพิเศษ (ใช้ MP ซึ่งฟื้นเร็วขึ้นในค่าย)',()=>me.sk[0]>0||me.sk[1]>0],
+ ['✨','กดปุ่มสกิลมุมขวาล่างเพื่อใช้ท่าพิเศษ (ใช้ MP ซึ่งฟื้นเร็วขึ้นในค่าย)',()=>me.sk[0]>0||me.sk[1]>0||tutT>30],
  ['🧪','HP ใกล้หมดให้กดปุ่มยา หรือกลับเข้าวงค่ายเพื่อฟื้นเลือด',()=>tutT>7],
- ['🎒','อุปกรณ์ที่ดีกว่าจะสวมให้อัตโนมัติ (ถึง Lv 20) · เปิด เมนู → อุปกรณ์ เพื่อดูและอัปเกรด',()=>!ov.hidden&&ov.dataset.k==='gear'],
- ['⭐','เลเวลอัปได้แต้มสกิลและสเตตัส เปิด เมนู → สกิล เพื่ออัปเกรด',()=>me.lv>1&&!ov.hidden&&ov.dataset.k==='char'],
+ ['🎒','อุปกรณ์ที่ดีกว่าจะสวมให้อัตโนมัติ (ถึง Lv 20) · เปิด เมนู → อุปกรณ์ เพื่อดูและอัปเกรด',()=>(!ov.hidden&&ov.dataset.k==='gear')||tutT>18],
+ ['⭐','เลเวลอัปได้แต้มสกิลและสเตตัส เปิด เมนู → สกิล เพื่ออัปเกรด',()=>(me.lv>1&&!ov.hidden&&ov.dataset.k==='char')||tutT>18],
  ['📜','รับเควสได้ที่พ่อค้าในค่าย ทำเควสได้ทองและอุปกรณ์',()=>me.qs.length>0||tutT>25]];
 let tutI=-1,tutT=0,tutD=0,tutPX=0,tutPY=0,tutLast=0;
 function tutStart(){try{if(localStorage.getItem('refugee_tut')==='1')return}catch(e){}if(me.lv>3)return;tutI=0;tutT=0;tutD=0;tutPX=me.x;tutPY=me.y;tutShow()}
@@ -18819,7 +18846,7 @@ function tutShow(){if(tutI<0||tutI>=TUT.length){$('tut').hidden=true;return}cons
 function tutEnd(done){tutI=-1;$('tut').hidden=true;try{localStorage.setItem('refugee_tut','1')}catch(e){}if(done)banner={s:'พร้อมแล้ว! ขอให้โชคดีในค่ายผู้อพยพ',t:4}}
 function tutTick(){const n=performance.now(),dt=Math.min(.1,(n-tutLast)/1000);tutLast=n;const e=$('tut');
   if(tutI<0||!me.cls||!run){if(!e.hidden)e.hidden=true;return}
-  const vis=ov.hidden;if(e.hidden===vis){e.hidden=!vis;if(vis)tutShow()}
+  const vis=ov.hidden&&!SD.on&&!tutMnOpen();if(e.hidden===vis){e.hidden=!vis;if(vis)tutShow()}
   tutT+=dt;tutD+=Math.hypot(me.x-tutPX,me.y-tutPY);tutPX=me.x;tutPY=me.y;
   if(TUT[tutI][2]()){tutI++;tutT=0;sfx('quest');if(tutI>=TUT.length)tutEnd(1);else tutShow()}}
 $('tutx').onclick=()=>tutEnd(0);
@@ -20148,7 +20175,7 @@ function campCollide(){if(isWB())wbCollide();if(curMap!==1){campLM=0;return}CAMP
 /* ---------- ออโต้สกิล ---------- */
 let AUTO={on:false,sel:{},t:0};
 const autoKey=()=>'refugee_auto_'+(me.slot||me.cls||'x');
-function autoLoad(){try{const d=JSON.parse(localStorage.getItem(autoKey())||'null');AUTO.sel=d&&d.sel?d.sel:{0:1,1:1,2:1,3:1,4:1};AUTO.on=!!(d&&d.on)}catch(e){AUTO.sel={0:1,1:1,2:1,3:1,4:1}}autoBtn()}
+function autoLoad(){try{const d=JSON.parse(localStorage.getItem(autoKey())||'null');AUTO.sel=d&&d.sel?d.sel:{0:1,1:1,2:1,3:1,4:1};AUTO.on=d?!!d.on:true}catch(e){AUTO.on=true;AUTO.sel={0:1,1:1,2:1,3:1,4:1}}autoBtn()}
 function autoSave(){try{localStorage.setItem(autoKey(),JSON.stringify({on:AUTO.on,sel:AUTO.sel}))}catch(e){}}
 const skName=k=>{const C=CL[me.cls];return k===5?sk6Of()[0]:k===2?ultOf()[0]:k===4?(SK4[me.cls]||['สกิลที่ 4'])[0]:(C.s[k]||'สกิล '+(k+1))};
 const skOpen=k=>k===2?me.lv>=ULV:k===3?me.lv>=SK3LV:k===4?!!me.cls2:k===5?s6Open():true;
@@ -21255,7 +21282,7 @@ function pick(c,slot,nm){if(saveMode==='wait')return;
   if(slot&&saves.chars[slot])c=scls(slot);else slot=newSlotKey(c);if(!CL[c])return;me.slot=slot;csMode='';csSel=slot;delArm=null;
   setTimeout(()=>{try{autoLoad();huntLoad()}catch(e){}},0);
   const C=CL[c];me.cls=c;me.mh=C.hp;me.hp=C.hp;me.lv=1;me.xp=0;me.tr={};me.ab={str:0,vit:0,int:0,agi:0,luk:0};me.gold=40;me.inv={hp:2,mp:1,ps:0};me.twc=0;me.twCp=1;me.twBest=0;me.cls2=0;me.cq={s:0,n:0};me.mts=[];me.mt=0;me.pets=[];me.pet=0;PT=null;me.cards={};me.cslot=['',''];me.cmv='';CARDB={};me.rs=null;me.pvp={w:0,l:0};me.sty={s:0,n:0,a:0,e:0};me.rxd={};me.rxt=0;me.br=1;me.brU={};me.dk={s:0,n:0};me.rg2=0;me.riding=0;me.mat={sc:0,hr:0};me.mcnt=0;me.freeC=0;me.eq={w:null,a:null,c:null,h:null,b:null};me.bag=[];me.qs=[];me.mm=C.mp;me.mp=C.mp;me.x=CX;me.y=CY+60;me.sk=[0,0,0,0,0];me.rage=0;me.clone=null;me.mark=null;pend=[];me.dq=null;me.ls={last:'',st:0,cl:''};me.stt=newStt();me.ach={};me.title='';me.pb={};me.ast={n:0,x:0,p:{}};bf=null;
-  const isNew=!saves.chars[slot];if(!isNew)applySave(saves.chars[slot]);else{me.asl={on:0,k:2};me.mkid=NEWMID||'';me.mkesc=[];me.mlp=[];me.gth={m:{},ox:0,hx:0};me.frd={L:[]};me.rn={sh:0,u:{},e:{}};me.cmp={};me.fs={};me.tent={};me.ivb=0;me.ivd=null;me.ivr=[];me.ptx={};me.rb=0;me.rbq={sh:0};me.rbC2=null;me.wv=undefined;me.wkly=undefined;me.sson=undefined}NMC.done=isNew&&!!NEWMID&&NMC.done;NEWMID='';NMC.bad=false;NMC.wait=0;ASS={n:0,g:0};
+  const isNew=!saves.chars[slot];if(!isNew)applySave(saves.chars[slot]);else{me.asl={on:0,k:2};me.mkid=NEWMID||'';me.mkesc=[];me.mlp=[];try{me.eq.w=genItem(1,'w',0,0);me.eq.a=genItem(1,'a',0,0)}catch(e){}me.gth={m:{},ox:0,hx:0};me.frd={L:[]};me.rn={sh:0,u:{},e:{}};me.cmp={};me.fs={};me.tent={};me.ivb=0;me.ivd=null;me.ivr=[];me.ptx={};me.rb=0;me.rbq={sh:0};me.rbC2=null;me.wv=undefined;me.wkly=undefined;me.sson=undefined}NMC.done=isNew&&!!NEWMID&&NMC.done;NEWMID='';NMC.bad=false;NMC.wait=0;ASS={n:0,g:0};
   me.nm=cleanName(isNew?nm:saves.chars[slot].nm)||cleanName(myName)||'ผู้เล่น';myName=me.nm;
   lastJ=JSON.stringify(snap());
   ov.hidden=true;run=true;last=performance.now();makeGuards();
