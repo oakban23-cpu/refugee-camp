@@ -1,0 +1,33 @@
+import asyncio,io
+from h import *
+from PIL import Image
+async def main():
+    p=start_server()
+    async with async_playwright() as pw:
+        b=await pw.chromium.launch()
+        A=await new_client(b,'Aa','mage',60);B=await new_client(b,'Bb','sup',50)
+        await A.ev("()=>{enterMap(1,{x:SX,y:SY});ov.hidden=true}");await B.ev("()=>{enterMap(2,{x:1600,y:1600});ov.hidden=true}");await A.wait(2000)
+        print('names',await A.ev("()=>myName"),await B.ev("()=>myName"))
+        await A.ev("()=>friReq('Bb')");await A.wait(1500)
+        print('B pending',await B.ev("()=>FRIP.map(q=>q.n)"))
+        await B.ev("()=>friAccept('Aa')");await B.wait(1500)
+        print('A list',await A.ev("()=>friSt().L.map(f=>f.n)"),'B list',await B.ev("()=>friSt().L.map(f=>f.n)"))
+        await A.ev("()=>friPoll(1)");await A.wait(1200)
+        print('A sees B',await A.ev("()=>({on:friOn('Bb'),s:FRIS['Bb']})"))
+        await A.ev("()=>friWhisper('Bb','สวัสดีจ้า')");await A.wait(1200)
+        print('B chat',await B.ev("()=>chatLog.slice(-2).map(l=>l.n+': '+l.t)"))
+        await A.ev("()=>{friUI();}");await A.wait(500)
+        await A.ev("()=>{FRIX.sel='Bb';friList()}");await A.wait(300)
+        im=Image.open(io.BytesIO(await A.pg.screenshot())).convert('RGB');im.save('/tmp/claude-0/-home-claude/552bdb98-0d0b-5b28-ae92-36a473137925/scratchpad/sr/fri_A.png')
+        await A.ev("()=>friPtInv('Bb')");await A.wait(1200)
+        print('B party req',await B.ev("()=>ptReq&&ptReq.n"))
+        await A.ev("()=>{wpCd=0;friWarp('Bb')}");await A.wait(2600)
+        print('A map after warp',await A.ev("()=>[curMap,Math.round(me.x),Math.round(me.y)]"),'B',await B.ev("()=>[curMap,Math.round(me.x),Math.round(me.y)]"))
+        print('save rt',await A.ev("()=>{const s=JSON.parse(JSON.stringify(snap()));const c=cleanSaves({v:1,chars:{x:Object.assign(s,{cls:me.cls})}}).chars.x;return JSON.stringify(c.frd)}"))
+        await A.ev("()=>friReq('Nobody')");await A.wait(1200);print('A off msg',await A.ev("()=>chatLog.slice(-1).map(l=>l.t)"))
+        await A.ev("()=>friDel('Bb')");await A.wait(1200)
+        print('after del A',await A.ev("()=>friSt().L.length"),'B',await B.ev("()=>friSt().L.length"))
+        print('errs',[e for e in A.errs+B.errs if 'TUNNEL' not in e][:4])
+        await b.close()
+    p.terminate()
+asyncio.run(main())

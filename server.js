@@ -134,6 +134,15 @@ function onEmit(c,m){
   if(k==='mkx'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id)&&x.u===u);if(i<0)return;const x=MK.L.splice(i,1)[0];mkDirty=true;mkReply(c,'mkg',{ok:1,back:1,k:x.k,d:x.d,p:0,id:x.id});return}
   if(k==='mkc'){const u=mkOwner(c,d);if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];if(g>0){const A=ACCS[c.accA],f=svChar(c.accA,d.mid);if(A&&f){A.cr=A.cr||{};A.cr[f.k]=(A.cr[f.k]||0)+g;accDirty=true}}delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
   if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;let o=byUid.get(d.to);if(!o&&d.op==='lnk'&&typeof d.toN==='string'&&d.toN){const nm=d.toN.slice(0,24);for(const x of clients)if(x!==c&&x.p&&x.p.n===nm){o=x;break}}if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
+  /* ===== เพื่อน: ถามสถานะตามชื่อ / ส่งข้อความหาคนตามชื่อ (ข้ามแมพได้) ===== */
+  if(k==='frq'){if(!d||!Array.isArray(d.n))return;const now=Date.now();if(now-(c.frqT||0)<2500)return;c.frqT=now;const want=new Set(d.n.slice(0,50).map(x=>String(x).slice(0,24)));const L=[];
+    for(const o of clients){if(!o.p||o===c||!want.has(o.p.n))continue;L.push([o.p.n,o.p.cls,o.p.lv,o.p.mp,Math.round(o.p.x),Math.round(o.p.y),o.uid||'',o.p.aw?1:0]);if(L.length>=50)break}
+    send(c,JSON.stringify({t:'emit',k:'frr',d:{mp,d:{L}},from:0}));return}
+  if(k==='frm'){if(!d||typeof d!=='object')return;const op=String(d.op||'');if(!/^(req|acc|dec|del|w)$/.test(op))return;const now=Date.now();c.frB=Math.min(6,(c.frB==null?6:c.frB)+(now-(c.frT||now))/2000);c.frT=now;if(c.frB<1)return;c.frB--;
+    const tn=String(d.toN||'').slice(0,24);let o=typeof d.to==='string'?byUid.get(d.to):null;if(o&&(!o.p||(tn&&o.p.n!==tn)))o=null;if(!o&&tn){for(const x of clients)if(x!==c&&x.p&&x.p.n===tn){o=x;break}}
+    if(!o||o===c||!o.p){if(op==='req'||op==='w')send(c,JSON.stringify({t:'emit',k:'frm',d:{mp,d:{op:'off',toN:tn}},from:0}));return}
+    const out={op,from:c.uid||'',n:c.p.n,c:c.p.cls,lv:c.p.lv};if(op==='w'){out.t=String(d.t||'').replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!out.t)return}
+    send(o,JSON.stringify({t:'emit',k:'frm',d:{mp:o.p.mp,d:out},from:c.id}));return}
   if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,(key==='wb'||/^s\d{4}$/.test(key))?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='mvq'){send(c,JSON.stringify({t:'emit',k:'mvr',d:{mp,d:mvTable()},from:0}));return}
   if(k==='mva'||k==='mvd'||k==='mvk'||k==='mvlost'){const V=MV[mp];if(!V)return;const now=Date.now();
