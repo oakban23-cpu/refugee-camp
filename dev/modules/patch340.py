@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()+open('ux14.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()+open('ux14.js').read()+open('ux15.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -333,6 +333,8 @@ R("g.translate(f.x,f.y-34-q*22);g.scale(sc,sc);g.font='900 15px system-ui';g.lin
 # v383 night readability: lighter max darkness + wider player light
 R("const dk=Math.min(.68,S.dk+(w?.08:0));","const dk=Math.min(.56,S.dk*.85+(w?.07:0));",1)
 R("if(me.cls){L(me.x,me.y-10,150,'255,230,190',.2*k);L(me.x,me.y-12,60,'255,220,170',.16*k)}","if(me.cls){L(me.x,me.y-10,200,'255,230,190',.24*k);L(me.x,me.y-12,70,'255,220,170',.18*k)}",1)
+R("e:Object.assign({},c.rn.e||{})}:{sh:0,u:{},e:{}};","e:Object.assign({},c.rn.e||{}),x:c.rn.x&&typeof c.rn.x==='object'?JSON.parse(JSON.stringify(c.rn.x)):undefined}:{sh:0,u:{},e:{}};")
+R("st=cd?Math.ceil(me.sk[k])+' วิ':mcOf(k)+' MP',ht=lk","st=cd?Math.ceil(me.sk[k])+' วิ':sgMcL(k),ht=lk")
 open(P,'w').write(s)
 print('ok')
 import subprocess
