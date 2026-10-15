@@ -10798,6 +10798,25 @@ drawTentGate=function(){if(curMap!==1||!inView(TNE.x,TNE.y,220))return;const x=T
     g.fillRect(px+2,py-40,10,2);const ly=py-34;tvGlow(px+11,ly,26+nf*16,'255,200,110',.5+nf*.3+.08*Math.sin(t*3));tvP([px+7,ly-5,px+15,ly-5,px+16,ly+5,px+6,ly+5],'rgba(255,226,160,.92)','#4a2e18',1)}
   if(Math.hypot(me.x-x,me.y-y)<260){g.font='bold 11px system-ui';g.textAlign='center';const lb='🏠 ลานเต็นท์ส่วนตัว',tw=g.measureText(lb).width+18;g.fillStyle='rgba(40,24,10,.82)';g.beginPath();g.roundRect(x-tw/2,y-124,tw,18,9);g.fill();g.strokeStyle='rgba(255,210,140,.6)';g.lineWidth=1;g.stroke();g.fillStyle='#ffe6b0';g.fillText(lb,x,y-111)}
   g.restore()};
+/* ---------- v384 ท่านอนบนเตียง ----------
+   ตอนนอนพัก ตัวละครเอนตัวลงนอนบนเตียง (หัวบนหมอน) ผ้าห่มเลื่อนขึ้นคลุม หายใจขึ้นลง · ตื่นแล้วลุกขึ้นยืน (ไม่ยืนแข็งบนเตียง) */
+const TVZ={a:0,lt:0};
+function tvBlanket(b,x,y,t,cv,br){if(cv<=0)return;const sh=b==='bed3'?['#9a1830','#6a0c20']:b==='bed2'?['#3a6aa8','#24487a']:b==='bed1'?['#c8b078','#9a8450']:['#a04a30','#7a3420'],O='#1a100a';
+  const x0=x+49-(65*cv),top=y-19-br;g.save();const gr=g.createLinearGradient(0,top,0,y+8);gr.addColorStop(0,sh[0]);gr.addColorStop(1,sh[1]);g.fillStyle=gr;g.beginPath();g.moveTo(x0,top+4);g.quadraticCurveTo(x0+6,top-2,x0+14,top);
+  g.quadraticCurveTo(x+16,top-4-br,x+49,top+1);g.lineTo(x+50,y+8);g.lineTo(x0-2,y+8);g.closePath();g.fill();g.strokeStyle=O;g.lineWidth=.8;g.stroke();
+  /* ขอบผ้าพับ */g.fillStyle='rgba(255,255,255,.75)';g.beginPath();g.moveTo(x0,top+4);g.quadraticCurveTo(x0+5,top-1,x0+12,top+1);g.lineTo(x0+12,y+8);g.lineTo(x0-2,y+8);g.closePath();g.fill();
+  g.strokeStyle='rgba(255,255,255,.18)';g.lineWidth=1.2;for(let i=0;i<3;i++){const fx=x0+20+i*12;if(fx>x+46)break;g.beginPath();g.moveTo(fx,top+2);g.quadraticCurveTo(fx+5,y-6,fx,y+6);g.stroke()}
+  if(b==='bed3'){g.strokeStyle='#ffd76a';g.lineWidth=1.4;g.beginPath();g.moveTo(x0+12,y+3);g.lineTo(x+49,y+3);g.stroke()}g.restore()}
+{const o=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){
+  if(!(lk&&lk.u===uid)||down)return o.apply(this,arguments);const now=performance.now()/1000,dt=TVZ.lt?Math.min(.1,now-TVZ.lt):0;TVZ.lt=now;
+  let mine=false;try{mine=tentMine()}catch(e){}const want=(TSL&&mine)?1:0;TVZ.a=want?Math.min(1,TVZ.a+dt/.65):Math.max(0,TVZ.a-dt/.45);if(!mine)TVZ.a=0;
+  if(TVZ.a<=0)return o.apply(this,arguments);
+  const a=TVZ.a,e=a<.5?2*a*a:1-Math.pow(-2*a+2,2)/2,bx=TBED.x,by=TBED.y,b=(MAPS[curMap].tent.d||{}).bed,br=a>=1?Math.sin(now*1.6)*.9:0;
+  /* จุดหมุน: จากยืนที่ (x,y) → นอน (หัวไปทางหมอนซ้าย) */const px=x+((bx-4)-x)*e,py=y+((by-8)-y)*e-Math.sin(Math.PI*e)*12,rot=-Math.PI/2*e;
+  g.save();g.globalAlpha=1;if(a<1)gxShadow(px,py+15*(1-e),15*(1-e)+6,5,.4*(1-e));g.translate(px,py);g.rotate(rot);if(a>=1)g.scale(1,1+br*.012);
+  try{drawChar(0,0,cls,1,0,hd,now,bt,lk&&lk.w,lk&&lk.a,c2,0)}catch(err){}g.restore();
+  tvBlanket(b,bx,by,now,Math.max(0,(a-.55)/.45),br);
+  /* หลับตาพริ้ม: แก้มแดงจาง ๆ ตอนนอนสนิท */if(a>=1){g.fillStyle='rgba(255,140,140,.25)';g.beginPath();g.ellipse(bx-28,by-12,3,2,0,0,7);g.fill()}}}
 /* ---------- v383 ตัวเลข/ข้อความเด้งตอนสู้ไม่รก ----------
    1) ของที่ได้ (+ทอง +XP +★ +ผงรูน ได้ไอเทม/การ์ด เควสสำเร็จ ฯลฯ) ย้ายไปขึ้น "แถบรางวัล" ชิดขวาจอ รวมยอดตามชนิด ไม่ลอยทับตัวละคร
    2) เลขดาเมจธรรมดาที่โดนจุดเดียวกันถี่ ๆ รวมเป็นเลขเดียว (เด้งใหม่ทุกครั้งที่บวกเพิ่ม)
