@@ -350,6 +350,7 @@ R("function plPopAct(a){const u=plPop&&plPop.u;plPopHide();if(!u)return;if(a==='
 R("  return o;\n}\nfunction cleanSaves(d){","  if(c.frd&&typeof c.frd==='object'&&Array.isArray(c.frd.L)){o.frd={L:c.frd.L.filter(f=>f&&typeof f.n==='string'&&f.n).slice(0,50).map(f=>({n:String(f.n).replace(/[\\u0000-\\u001f<>]/g,'').slice(0,24),c:CL[f.c]?f.c:'',lv:n(f.lv,0,99,0),at:n(f.at,0,9e15,0),ls:n(f.ls,0,9e15,0)}))}}\n  return o;\n}\nfunction cleanSaves(d){")
 R("sson:me.sson||undefined}}","sson:me.sson||undefined,frd:me.frd&&me.frd.L&&me.frd.L.length?{L:me.frd.L.map(f=>({n:f.n,c:f.c,lv:f.lv|0,at:Math.floor(+f.at||0),ls:Math.floor(+f.ls||0)}))}:undefined}}")
 R("me.ivb=+c.ivb||0;","me.ivb=+c.ivb||0;me.frd=c.frd&&Array.isArray(c.frd.L)?JSON.parse(JSON.stringify(c.frd)):{L:[]};")
+R("o.rn={sh:n(r.sh,0,99999,0),u,e}","o.rn={sh:n(r.sh,0,99999,0),u,e,x:sgClean(r.x)}")
 open(P,'w').write(s)
 print('ok')
 import subprocess

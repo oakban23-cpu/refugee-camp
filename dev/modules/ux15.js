@@ -282,3 +282,9 @@ setTimeout(()=>{try{
     else if(k==='sgmain'){const R=RUNES[me.cls]||{};let n=0;Object.keys(R).forEach(q=>['a','b'].forEach(e=>{if(R[q]&&R[q][e]){S.u[R[q][e][0]]=3;n++}}));msg='ได้รูนหลักครบ '+n+' แบบ ขั้น III'}
     try{sfx('lg_get')}catch(e){}gmUI(msg)};
 }catch(e){console.warn('sg gm',e)}},320);
+/* ---------- กรองข้อมูลรูนเสริมตอนโหลดเซฟ (cleanChar) — v389 แก้บั๊กรูนเสริมหายหลังรีเฟรช ---------- */
+function sgClean(x){if(!x||typeof x!=='object')return undefined;const ok=id=>typeof id==='string'&&/^[a-z]{2,8}$/.test(id),o={i:{},l:{},v:{},sv:[],g:x.g?1:0};
+  if(x.i&&typeof x.i==='object')Object.keys(x.i).slice(0,60).forEach(id=>{if(ok(id)){const v=Math.max(0,Math.min(999,Math.floor(+x.i[id]||0)));if(v)o.i[id]=v}});
+  const cl=l=>{const r={};if(l&&typeof l==='object')['0','1','3','4'].forEach(k=>{if(Array.isArray(l[k])){const a=l[k].filter(ok).slice(0,3);if(a.length)r[k]=a}});return r};o.l=cl(x.l);
+  if(x.v&&typeof x.v==='object')Object.keys(x.v).slice(0,60).forEach(id=>{if(ok(id))o.v[id]=Math.max(1,Math.min(3,Math.floor(+x.v[id]||1)))});
+  if(Array.isArray(x.sv))o.sv=x.sv.slice(0,3).map(s=>s&&typeof s==='object'?{l:cl(s.l)}:null);if(Number.isFinite(+x.cur))o.cur=Math.max(-1,Math.min(2,Math.floor(+x.cur)));return o}
