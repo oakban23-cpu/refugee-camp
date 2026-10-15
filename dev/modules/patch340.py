@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()+open('ux14.js').read()+open('ux15.js').read()+open('ux16.js').read()+open('ux17.js').read()+open('ux18.js').read()+open('ux19.js').read()+open('ux20.js').read()+open('ux21.js').read()+open('ux22.js').read()+open('ux23.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()+open('ux14.js').read()+open('ux15.js').read()+open('ux16.js').read()+open('ux17.js').read()+open('ux18.js').read()+open('ux19.js').read()+open('ux20.js').read()+open('ux21.js').read()+open('ux22.js').read()+open('ux23.js').read()+open('ux24.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -385,6 +385,7 @@ R("by=P.ph==='fight'?H*.04+40:H-bh-24","by=P.ph!=='intro'?Math.max(H*.04+40,88):
 R("try{return localStorage.getItem('refugee_rbqmin')==='1'}catch(_){return!!window._rbqMin}","try{return localStorage.getItem('refugee_rbqmin')!=='0'}catch(_){return window._rbqMin!==false}")
 R("g.strokeStyle='rgba('+R[4]+','+(.8*(1-q))+')';g.lineWidth=3*(1-q);g.beginPath();g.arc(f.x,f.y,20+q*70,0,7);g.stroke();","if(!f.nl||RXFX.length<5){g.strokeStyle='rgba('+R[4]+','+(.8*(1-q)*(f.nl?.35:1))+')';g.lineWidth=(f.nl?1.4:3)*(1-q);g.beginPath();g.arc(f.x,f.y,(f.nl?14:20)+q*(f.nl?36:70),0,7);g.stroke()}")
 R("if(o.k==='shield'&&near){me.shv=o.v;me.shield=6}","if(o.k==='shield'&&near&&+o.v>0){me.shv=Math.max(me.shv||0,+o.v);me.shield=Math.max(me.shield||0,6)}")
+R("if(cls!=='assn'){const bx=-6.5-","if(cls!=='assn'&&!R24B()){const bx=-6.5-")
 open(P,'w').write(s)
 print('ok')
 import subprocess
