@@ -386,6 +386,9 @@ R("try{return localStorage.getItem('refugee_rbqmin')==='1'}catch(_){return!!wind
 R("g.strokeStyle='rgba('+R[4]+','+(.8*(1-q))+')';g.lineWidth=3*(1-q);g.beginPath();g.arc(f.x,f.y,20+q*70,0,7);g.stroke();","if(!f.nl||RXFX.length<5){g.strokeStyle='rgba('+R[4]+','+(.8*(1-q)*(f.nl?.35:1))+')';g.lineWidth=(f.nl?1.4:3)*(1-q);g.beginPath();g.arc(f.x,f.y,(f.nl?14:20)+q*(f.nl?36:70),0,7);g.stroke()}")
 R("if(o.k==='shield'&&near){me.shv=o.v;me.shield=6}","if(o.k==='shield'&&near&&+o.v>0){me.shv=Math.max(me.shv||0,+o.v);me.shield=Math.max(me.shield||0,6)}")
 R("if(cls!=='assn'){const bx=-6.5-","if(cls!=='assn'&&!R24B()){const bx=-6.5-")
+R("k===4?(SK4[me.cls]||['สกิลที่ 4'])[0]","k===4?((me.cls2&&sk4Of())||SK4[me.cls]||['สกิลที่ 4'])[0]")
+R("if(!r||BR2()&&(c==='melee'||c==='archer'))return false;","if(!r||BR2())return false;")
+R("k===4&&!me.cls2?'ปลดสกิลนี้เมื่อตื่นพลัง (Lv '+AWLV+')'","k===4&&!me.cls2?'ปลดสกิลนี้เมื่อตื่นพลัง (Lv '+AWLV+')':k===4&&BR2()&&me.cls!=='melee'&&me.cls!=='archer'?'รูนช่องนี้ทำให้ «'+SK4[me.cls][0]+'» ของสายแสง · สายทมิฬใส่ได้แต่ไม่มีผลกับ «'+sk4Of()[0]+'»'")
 open(P,'w').write(s)
 print('ok')
 import subprocess
