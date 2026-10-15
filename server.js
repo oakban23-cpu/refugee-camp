@@ -134,6 +134,38 @@ function onEmit(c,m){
   if(k==='mkx'){const u=mkOwner(c,d),i=MK.L.findIndex(x=>x.id===+(d&&d.id)&&x.u===u);if(i<0)return;const x=MK.L.splice(i,1)[0];mkDirty=true;mkReply(c,'mkg',{ok:1,back:1,k:x.k,d:x.d,p:0,id:x.id});return}
   if(k==='mkc'){const u=mkOwner(c,d);if(!u)return;const g=Math.floor(MK.sales[u]||0),r=MK.ret[u]||[];if(g>0){const A=ACCS[c.accA],f=svChar(c.accA,d.mid);if(A&&f){A.cr=A.cr||{};A.cr[f.k]=(A.cr[f.k]||0)+g;accDirty=true}}delete MK.sales[u];delete MK.ret[u];mkDirty=true;mkReply(c,'mkc',{g,r});return}
   if(k==='pty'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;let o=byUid.get(d.to);if(!o&&d.op==='lnk'&&typeof d.toN==='string'&&d.toN){const nm=d.toN.slice(0,24);for(const x of clients)if(x!==c&&x.p&&x.p.n===nm){o=x;break}}if(o&&o!==c){d.from=c.uid||d.from;send(o,wrap(d))}return}
+  /* ===== กล่องจดหมาย: ส่งข้อความ/ของ/ทองถึงตัวละครตามชื่อ (ผู้รับออฟไลน์ก็ได้) ===== */
+  if(k==='mlq'||k==='mls'||k==='mlc'||k==='mlm'){if(!d||typeof d!=='object')return;const mid=typeof d.mid==='string'&&/^[a-z0-9]{8,16}$/.test(d.mid)?d.mid:'';if(!mid)return;
+    const R=(kk,o)=>mkReply(c,kk,o),t=String(d.t||'').slice(0,12),own=MK.own&&MK.own[mid];let accOk=false;
+    if(d.acc&&typeof d.acc==='object'){const a=accName(String(d.acc.a||'')),A=a&&accAuth(a,d.acc.t);if(A&&(!own||own===a)){accOk=true;c.accA=a}}
+    /* ตัวละครที่ผูกบัญชีแล้ว ต้องแนบบัญชีเดียวกันมาด้วยถึงจะเปิดกล่องได้ */
+    if(own&&!accOk){if(k==='mls'){const T=ML.tk[mid]||(ML.tk[mid]={});if(t&&T[t]==null){T[t]=0;mlTrim(mid);mlDirty=true}R('mla',{t,ok:T[t]?1:0,why:'acc'})}else R(k==='mlc'?'mlg':'mlr',{id:+d.id|0,ok:0,err:'acc',why:'acc'});return}
+    mkOwner(c,d);const now=Date.now();
+    if(k==='mlq'){if(now-(c.mlQ||0)<1000)return;c.mlQ=now;const out={};if(Array.isArray(d.tk)){const T=ML.tk[mid]||(ML.tk[mid]={});d.tk.slice(0,20).forEach(x=>{x=String(x).slice(0,12);if(!x)return;if(T[x]==null){T[x]=0;mlDirty=true}out[x]=T[x]});mlTrim(mid)}R('mlr',mlList(mid,out));return}
+    if(k==='mlm'){const B=ML.b[mid];if(B){const ids=new Set((Array.isArray(d.ids)?d.ids:[]).slice(0,60).map(v=>+v));
+        if(d.op==='rd')B.forEach(x=>{if(ids.has(x.id)&&!x.rd){x.rd=1;mlDirty=true}});
+        else if(d.op==='del'){const L=B.filter(x=>!(ids.has(x.id)&&!x.a&&!(x.g>0)));if(L.length!==B.length){mlDirty=true;if(L.length)ML.b[mid]=L;else delete ML.b[mid]}}}
+      R('mlr',mlList(mid,{}));return}
+    if(k==='mls'){if(!t)return;const T=ML.tk[mid]||(ML.tk[mid]={});if(T[t]!=null){R('mla',{t,ok:T[t]?1:0,why:T[t]?'':'dup'});return}
+      const no=why=>{T[t]=0;mlTrim(mid);mlDirty=true;R('mla',{t,ok:0,why})};
+      if(now-(c.mlT||0)<1500)return no('busy');c.mlT=now;
+      const S0=NM[nmKey(c.p.n)];if(!S0||S0.mid!==mid)return no('name');
+      const tn=nmClean(d.to),tk=nmKey(tn),R0=tk&&NM[tk];if(!R0||!R0.mid||now-(R0.at||0)>NM_TTL)return no('who');if(R0.mid===mid)return no('self');
+      const tx=String(d.tx||'').replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g,'').trim().slice(0,200);
+      let a=null;if(d.k!=null){if(!mkOk(d.k,d.d))return no('bad');a={k:d.k,d:d.d}}
+      const g=Math.floor(+d.g||0);if(!(g>=0&&g<=1e9))return no('bad');if(!tx&&!a&&!g)return no('empty');
+      if((ML.dy[mid]|0)>=ML_DAY)return no('day');
+      const B=ML.b[R0.mid]||[];if(B.length>=ML_MAX)return no('full');if(B.filter(x=>x.fm===mid&&!x.rd).length>=10)return no('spam');
+      if(a||g){const why=mkGate(c,d,'mkl');if(why)return no(why);
+        if(g>0){const A=ACCS[c.accA],f=svChar(c.accA,mid);if(!A||!f)return no('sync');if((A.fo|0)>0)return no('flag');
+          const gold=Math.max(0,+f.ch.gold||0),ex=A.exp&&A.exp[f.k],have=ex?Math.min(gold,ex.g):gold,need=g+mlFee(g);if(have<need)return no('gold');
+          A.exp=A.exp||{};A.exp[f.k]={g:have-need,at:ex?ex.at:now};accDirty=true}}
+      const x={id:ML.n++,fn:c.p.n,fc:c.p.cls,fm:mid,tn:R0.n,t:tx,a,g,at:now,rd:0};mlBox(R0.mid).push(x);ML.dy[mid]=(ML.dy[mid]|0)+1;T[t]=1;mlTrim(mid);mlDirty=true;
+      R('mla',{t,ok:1,id:x.id,tn:R0.n});mlNotify(R0.mid,R0.n,x);return}
+    if(k==='mlc'){const B=ML.b[mid]||[],x=B.find(q=>q.id===+d.id);if(!x||(!x.a&&!(x.g>0))){R('mlg',{id:+d.id|0,ok:0,why:'gone'});return}
+      const why=mkGate(c,d,'mkc');if(why){R('mlg',{id:x.id,ok:0,why});return}
+      const g=x.g|0,a=x.a;if(g>0){const A=ACCS[c.accA],f=svChar(c.accA,mid);if(!A||!f){R('mlg',{id:x.id,ok:0,why:'sync'});return}A.cr=A.cr||{};A.cr[f.k]=(A.cr[f.k]||0)+g;accDirty=true}
+      x.a=null;x.g=0;x.rd=1;x.cl=1;mlDirty=true;R('mlg',{id:x.id,ok:1,a,g});return}}
   /* ===== เพื่อน: ถามสถานะตามชื่อ / ส่งข้อความหาคนตามชื่อ (ข้ามแมพได้) ===== */
   if(k==='frq'){if(!d||!Array.isArray(d.n))return;const now=Date.now();if(now-(c.frqT||0)<2500)return;c.frqT=now;const want=new Set(d.n.slice(0,50).map(x=>String(x).slice(0,24)));const L=[];
     for(const o of clients){if(!o.p||o===c||!want.has(o.p.n))continue;L.push([o.p.n,o.p.cls,o.p.lv,o.p.mp,Math.round(o.p.x),Math.round(o.p.y),o.uid||'',o.p.aw?1:0]);if(L.length>=50)break}
@@ -189,7 +221,20 @@ const MKF=path.join(DATA_DIR,'market.json');let MK={n:1,L:[],sales:{},ret:{}},mk
 try{const j=JSON.parse(fs.readFileSync(MKF,'utf8'));if(j&&Array.isArray(j.L))MK=Object.assign(MK,j)}catch(e){}
 if(!MK.ep){MK.ep=crypto.randomBytes(6).toString('hex');mkDirty=true}/* ep เปลี่ยน = ข้อมูลตลาดชุดเดิมหายไป ผู้เล่นจะได้ของที่ฝากขายคืนจากสำเนาในเซฟ */
 setInterval(()=>{const now=Date.now();MK.L=MK.L.filter(x=>{if(now-x.at>48*3600e3){(MK.ret[x.u]=MK.ret[x.u]||[]).push({k:x.k,d:x.d});mkDirty=true;return false}return true});if(!mkDirty)return;mkDirty=false;wj(MKF,MK)},15000);
-function mkOk(k,d){if(k==='it')return!!d&&typeof d==='object'&&typeof d.sl==='string'&&d.sl.length<3&&!!d.st&&typeof d.st==='object'&&JSON.stringify(d).length<700;if(k==='cd')return typeof d==='string'&&/^[a-z]{2,5}$/.test(d);if(k==='st')return!!d&&typeof d==='object'&&/^(hp|mp|ps|s1|s2|s3|twc|sc|hr|fe|sf|ec|nt|rs)$/.test(d.k)&&(d.n|0)>=1&&(d.n|0)<=999;return false}
+function mkOk(k,d){if(k==='it')return!!d&&typeof d==='object'&&typeof d.sl==='string'&&d.sl.length<3&&!!d.st&&typeof d.st==='object'&&JSON.stringify(d).length<700;if(k==='cd')return typeof d==='string'&&/^[a-z]{2,5}$/.test(d);if(k==='st')return!!d&&typeof d==='object'&&/^(hp|mp|ps|s1|s2|s3|twc|sc|hr|fe|sf|ec|nt|rs|o1|o2|o3|gm|h1|h2|h3|rt)$/.test(d.k)&&(d.n|0)>=1&&(d.n|0)<=999;return false}
+/* ===== กล่องจดหมาย: เก็บตามรหัสตัวละครถาวร (mid) · 50 ฉบับต่อกล่อง · 30 วัน (ของแนบที่ไม่ได้รับจะตีกลับผู้ส่ง) ===== */
+const MLF=path.join(DATA_DIR,'mail.json'),ML_MAX=50,ML_TTL=30*864e5,ML_DAY=60;let ML={n:1,b:{},tk:{},dy:{},dk:''},mlDirty=false;
+try{const j=JSON.parse(fs.readFileSync(MLF,'utf8'));if(j&&typeof j==='object'&&j.b&&typeof j.b==='object')ML=Object.assign(ML,j)}catch(e){}
+const mlFee=g=>50+Math.floor(g*.01);
+function mlBox(mid){return ML.b[mid]||(ML.b[mid]=[])}
+function mlTrim(mid){const T=ML.tk[mid];if(!T)return;const ks=Object.keys(T);if(ks.length>40)ks.slice(0,ks.length-40).forEach(x=>delete T[x])}
+function mlList(mid,tk){const B=ML.b[mid]||[];return{L:B.slice(-ML_MAX).map(x=>({id:x.id,fn:x.fn,fc:x.fc||'',tn:x.tn||'',t:x.t||'',a:x.a||null,g:x.g|0,at:x.at,rd:x.rd?1:0,rt:x.rt?1:0})),tk:tk||{},sent:ML.dy[mid]|0,day:ML_DAY}}
+function mlNotify(mid,nm,x){let o=byMid.get('m:'+mid);if(!o||!o.p||o.p.n!==nm){o=null;for(const q of clients)if(q.p&&q.p.n===nm){o=q;break}}if(o)mkReply(o,'mln',{fn:x.fn,rt:x.rt?1:0,n:(ML.b[mid]||[]).filter(q=>!q.rd).length,a:x.a||x.g>0?1:0})}
+setInterval(()=>{const now=Date.now(),dk=new Date(now+7*3600e3).toISOString().slice(0,10);if(ML.dk!==dk){ML.dk=dk;ML.dy={};mlDirty=true}
+  for(const mid of Object.keys(ML.b)){const B=ML.b[mid];for(let i=B.length-1;i>=0;i--){const x=B[i];if(now-x.at<ML_TTL)continue;B.splice(i,1);mlDirty=true;
+      if((x.a||x.g>0)&&!x.rt&&x.fm){const S=mlBox(x.fm);if(S.length<ML_MAX+10)S.push({id:ML.n++,fn:x.tn||'?',fc:'',fm:'',tn:'',t:'',a:x.a||null,g:x.g|0,at:now,rd:0,rt:1})}}
+    if(!B.length)delete ML.b[mid]}
+  if(!mlDirty)return;mlDirty=false;wj(MLF,ML)},15000);
 function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
@@ -337,7 +382,7 @@ function adminData(){const now=Date.now(),pl=[];
   let disk=null;try{if(fs.statfsSync){const f=fs.statfsSync(DATA_DIR);disk={free:f.bavail*f.bsize,total:f.blocks*f.bsize}}}catch(e){}
   const mem=process.memoryUsage();
   return{now,online:pl.length,conn:clients.size,max:MAX,players:pl,byMap:countByMap,peak:ST.peak,today:{peak:today.peak,u:today.u.length,min:today.min,sess:today.sess,full:today.full|0},hours,days,samples:ST.s,
-    mk,mvp:mvTable(),lb,lbc,acc:accTable(),chat:{n:CHL.length,today:CHL.filter(x=>dayKey(x.at)===dayKey(now)).length},srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
+    mk,ml:{box:Object.keys(ML.b).length,n:Object.values(ML.b).reduce((a,v)=>a+v.length,0),att:Object.values(ML.b).reduce((a,v)=>a+v.filter(x=>x.a||x.g>0).length,0)},mvp:mvTable(),lb,lbc,acc:accTable(),chat:{n:CHL.length,today:CHL.filter(x=>dayKey(x.at)===dayKey(now)).length},srv:{up:Math.round(process.uptime()),rss:mem.rss,heap:mem.heapUsed,cpu:Math.round(cpuPct*10)/10,bw:Math.round(bwRate),msg:Math.round(msgRate),node:process.version,names:Object.keys(NM).length,dataDir:DATA_DIR,persist:!!process.env.DATA_DIR,disk}}}
 function adminRoute(req,res){const H={'Cache-Control':'no-store','X-Robots-Tag':'noindex','X-Frame-Options':'DENY','Referrer-Policy':'no-referrer'};
   if(req.url==='/admin'||req.url==='/admin/'){return fs.readFile(path.join(__dirname,'admin.html'),(e,b)=>{if(e){res.writeHead(404,H);return res.end('missing admin.html')}res.writeHead(200,Object.assign({'Content-Type':'text/html; charset=utf-8',"Content-Security-Policy":"default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:"},H));res.end(b)})}
   const J=(code,o)=>{res.writeHead(code,Object.assign({'Content-Type':'application/json'},H));res.end(JSON.stringify(o))};
@@ -395,7 +440,7 @@ function chatQuery(q){const n=Math.max(1,Math.min(500,+q.get('n')||150)),before=
   const out=[];for(let i=CHL.length-1;i>=0&&out.length<n;i--){const x=CHL[i];if(x.at>=before)continue;if(s&&!(x.t.toLowerCase().includes(s)||x.n.toLowerCase().includes(s)))continue;out.push(x)}
   return{items:out,total:CHL.length,more:out.length===n}}
 function stats(){return{clients:clients.size,countByMap,bytesOut,msgsOut,uptime:Math.round(process.uptime())}}
-function flushAll(){try{wjSync(ACF,ACCS)}catch(e){}try{wjSync(CHF,CHL)}catch(e){}try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK)}
+function flushAll(){try{wjSync(ACF,ACCS)}catch(e){}try{wjSync(CHF,CHL)}catch(e){}try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK);try{wjSync(MLF,ML)}catch(e){}}
 for(const sig of['SIGTERM','SIGINT'])process.on(sig,()=>{console.log('ปิดเซิร์ฟเวอร์: บันทึกข้อมูล...');flushAll();process.exit(0)});
 process.on('uncaughtException',e=>{console.error('uncaught (เซิร์ฟเวอร์ยังทำงานต่อ):',e&&e.stack||e)});
 server.listen(PORT,()=>console.log('listening on '+PORT+' (สูงสุด '+MAX+' คน)'));

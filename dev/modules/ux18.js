@@ -116,6 +116,8 @@ function gtUI(msg){if(!me.cls)return;gtCSS();ov.dataset.k='gth';const G=gtSt(),l
   ov.querySelectorAll('[data-gtt]').forEach(b=>b.onclick=()=>{GTTAB=b.dataset.gtt;gtUI()});
   ov.querySelectorAll('[data-gtm]').forEach(b=>b.onclick=()=>{const id=b.dataset.gtm;gtUI(gtMake(GTTAB==='sm'?GTSM:GTBR,id,1))});
   ov.querySelectorAll('[data-gtm5]').forEach(b=>b.onclick=()=>{const id=b.dataset.gtm5;gtUI(gtMake(GTTAB==='sm'?GTSM:GTBR,id,5))})}
+/* ---- ลงทะเบียนวัตถุดิบเป็น "ของใช้" (ขายในตลาด/แนบจดหมายได้) · เรียกทันทีหลังสร้าง GDM ---- */
+function gtGdReg(){GTK.forEach(k=>{if(!GDM[k]){const I=GTI[k];GDM[k]={k,n:I[0]+' '+I[1],ic:()=>I[0],max:GTMX,d:I[2]}}if(!MKG.includes(k))MKG.push(k)})}
 /* ---- กรองเซฟ ---- */
 function gtClean(x){if(!x||typeof x!=='object')return undefined;const o={m:{},ox:Math.max(0,Math.min(1e7,Math.floor(+x.ox||0))),hx:Math.max(0,Math.min(1e7,Math.floor(+x.hx||0)))};
   if(x.m&&typeof x.m==='object')GTK.forEach(k=>{const v=Math.max(0,Math.min(GTMX,Math.floor(+x.m[k]||0)));if(v)o.m[k]=v});

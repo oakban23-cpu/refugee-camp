@@ -23,7 +23,7 @@ function friAccept(n){const i=FRIP.findIndex(q=>q.n===n);if(i<0)return;const p=F
   friSend('frm',{op:'acc',toN:p.n,to:p.from,n:myName,c:me.cls,lv:me.lv});sysMsg('👫 '+p.n+' เป็นเพื่อนกับคุณแล้ว!');try{sfx('quest')}catch(e){}friPoll(1)}
 function friDecline(n){const i=FRIP.findIndex(q=>q.n===n);if(i<0)return;const p=FRIP.splice(i,1)[0];friSend('frm',{op:'dec',toN:p.n,to:p.from,n:myName})}
 function friDel(n){const S=friSt();S.L=S.L.filter(f=>f.n!==n);delete FRIS[n];friSend('frm',{op:'del',toN:n,to:friUid(n),n:myName});try{writeSave&&writeSave()}catch(e){}}
-function friWhisper(n,t){t=String(t||'').replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!t)return false;if(!friOn(n)){sysMsg('💌 '+n+' ออฟไลน์อยู่ ส่งข้อความไม่ได้');return false}
+function friWhisper(n,t){t=String(t||'').replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!t)return false;if(!friOn(n)){sysMsg('💌 '+n+' ออฟไลน์อยู่ · ส่ง ✉️ จดหมายแทนได้ (เพื่อน → ⋯ → ส่งจดหมาย)');return false}
   friSend('frm',{op:'w',toN:n,to:friUid(n),n:myName,t});try{addChat('💌 ถึง '+n,t,uid)}catch(e){}return true}
 function friPtInv(n){const u=friUid(n);if(!u){sysMsg('👥 '+n+' ออฟไลน์อยู่');return}if(inPty(u)){sysMsg(n+' อยู่ในปาร์ตี้ของคุณแล้ว');return}
   if(PTY&&PTY.mem.length>1&&PTY.lead!==uid){sysMsg('เฉพาะหัวหน้าปาร์ตี้เท่านั้นที่เชิญได้');return}if(PTY&&PTY.mem.length>=PTMAX){sysMsg('ปาร์ตี้เต็มแล้ว ('+PTMAX+' คน)');return}
@@ -69,8 +69,8 @@ function friRow(f){const on=friOn(f.n),s=FRIS[f.n]||{},C=CL[f.c]||{c:'#777',n:'-
    '<button data-frs="'+esc(f.n)+'" style="font-size:12px;padding:6px 10px">'+(sel?'▲':'⋯')+'</button></div>';
   if(f.lw)h+='<div class="frlw">💌 '+esc(f.lw)+'</div>';
   if(sel){const tentOk=on&&curMap===1&&u;h+='<div class="frbt"><button data-frw="'+esc(f.n)+'"'+(on?'':' disabled')+'>🌀 วาปไปหา</button><button data-frp="'+esc(f.n)+'"'+(on?'':' disabled')+'>👥 ชวนปาร์ตี้</button><button data-frt="'+esc(f.n)+'"'+(tentOk?'':' disabled')+' title="ต้องอยู่ในค่าย">🏠 เยี่ยมเต็นท์</button>'+
-    '<button data-frx="'+esc(f.n)+'" style="'+(del?'background:#7a1a1a!important;border-color:#ff6a6a!important':'')+'">'+(del?'❗ แตะอีกครั้งเพื่อลบ':'❌ ลบเพื่อน')+'</button></div>';
-    h+='<div class="frw"><input id="frwi" maxlength="80" placeholder="'+(on?'กระซิบหา '+esc(f.n)+'…':'ส่งได้เมื่อเพื่อนออนไลน์')+'"'+(on?'':' disabled')+' autocomplete="off"><button class="pri" data-frm="'+esc(f.n)+'"'+(on?'':' disabled')+'>💌 ส่ง</button></div>'}
+    '<button data-frml="'+esc(f.n)+'">✉️ ส่งจดหมาย</button>'+'<button data-frx="'+esc(f.n)+'" style="'+(del?'background:#7a1a1a!important;border-color:#ff6a6a!important':'')+'">'+(del?'❗ แตะอีกครั้งเพื่อลบ':'❌ ลบเพื่อน')+'</button></div>';
+    h+='<div class="frw"><input id="frwi" maxlength="80" placeholder="'+(on?'กระซิบหา '+esc(f.n)+'…':'ออฟไลน์อยู่ · ส่ง ✉️ จดหมายแทนได้')+'"'+(on?'':' disabled')+' autocomplete="off"><button class="pri" data-frm="'+esc(f.n)+'"'+(on?'':' disabled')+'>💌 ส่ง</button></div>'}
   return h}
 function friList(){const e=$('frlist');if(!e)return;const L=friSt().L.slice().sort((a,b)=>(friOn(b.n)-friOn(a.n))||((b.ls||0)-(a.ls||0)));
   e.innerHTML=L.length?L.map(friRow).join(''):'<div style="opacity:.75;font-size:12.5px;padding:8px 4px">ยังไม่มีเพื่อน — แตะตัวผู้เล่นในแมพแล้วกด ➕ เพิ่มเพื่อน หรือพิมพ์ชื่อด้านบน</div>';friBind()}
@@ -86,6 +86,7 @@ function friUI(msg){if(!me.cls)return;friCSS();ov.dataset.k='fri';FRIW.n=0;const
   const ni=$('frni'),go=()=>{friReq(ni.value);ni.value=''};ov.querySelectorAll('[data-frn]').forEach(b=>b.onclick=go);if(ni)ni.onkeydown=e=>{if(e.key==='Enter')go()}}
 function friBind(){const e=$('frlist');if(!e)return;
   e.querySelectorAll('[data-frs]').forEach(b=>b.onclick=()=>{const n=b.dataset.frs;FRIX.sel=FRIX.sel===n?'':n;FRIX.del='';friList();const i=$('frwi');if(i&&FRIX.sel)setTimeout(()=>{try{i.focus({preventScroll:true})}catch(x){}},0)});
+  e.querySelectorAll('[data-frml]').forEach(b=>b.onclick=()=>{try{mlTo(b.dataset.frml)}catch(x){}});
   e.querySelectorAll('[data-frw]').forEach(b=>b.onclick=()=>friWarp(b.dataset.frw));
   e.querySelectorAll('[data-frp]').forEach(b=>b.onclick=()=>friPtInv(b.dataset.frp));
   e.querySelectorAll('[data-frt]').forEach(b=>b.onclick=()=>{const u=friUid(b.dataset.frt);if(u){ov.hidden=true;tentVisit(u)}});
