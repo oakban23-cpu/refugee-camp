@@ -335,6 +335,7 @@ R("const dk=Math.min(.68,S.dk+(w?.08:0));","const dk=Math.min(.56,S.dk*.85+(w?.0
 R("if(me.cls){L(me.x,me.y-10,150,'255,230,190',.2*k);L(me.x,me.y-12,60,'255,220,170',.16*k)}","if(me.cls){L(me.x,me.y-10,200,'255,230,190',.24*k);L(me.x,me.y-12,70,'255,220,170',.18*k)}",1)
 R("e:Object.assign({},c.rn.e||{})}:{sh:0,u:{},e:{}};","e:Object.assign({},c.rn.e||{}),x:c.rn.x&&typeof c.rn.x==='object'?JSON.parse(JSON.stringify(c.rn.x)):undefined}:{sh:0,u:{},e:{}};")
 R("st=cd?Math.ceil(me.sk[k])+' วิ':mcOf(k)+' MP',ht=lk","st=cd?Math.ceil(me.sk[k])+' วิ':sgMcL(k),ht=lk")
+R("+'</span></button>'}).join('')+'</div>'+\n  (sel&&GDM[sel]?","+'</span></button>'}).join('')+sgGdCells(sel)+'</div>'+\n  (sel==='rnsh'||sel==='rnsg'?sgGdNote(sel):sel&&GDM[sel]?")
 open(P,'w').write(s)
 print('ok')
 import subprocess

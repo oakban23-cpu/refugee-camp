@@ -217,3 +217,10 @@ setTimeout(()=>{try{
   const _dg=dgReward;window.dgReward=dgReward=function(){const r=_dg.apply(this,arguments);try{if(sgSockN()>0&&Math.random()<.35)sgGive(null,'ดันเจี้ยน')}catch(e){}return r};
   const _rs=rnShard;window.rnShard=rnShard=function(n,why){const r=_rs.apply(this,arguments);try{if(n>0&&n<=10&&sgSockN()>0&&Math.random()<n*.015)sgGive(null,'หัวหน้ามอน/เหตุการณ์')}catch(e){}return r};
 }catch(e){console.warn('sg init',e)}},300);
+/* ---------- กระเป๋า «ของใช้ & วัตถุดิบ»: โชว์ผงรูน + รูนเสริม (ดูอย่างเดียว ไม่เข้าระบบแลกเปลี่ยน) ---------- */
+function sgGdCells(sel){if(!me.cls)return'';const S=rnSt(),X=sgSt(),sh=S.sh|0,ns=Object.values(X.i).reduce((a,b)=>a+(b|0),0),cell=(k,ic,v)=>'<button class="cell" data-gd="'+k+'" style="'+(v?'':'opacity:.45;')+(sel===k?'border-color:#d8a040;box-shadow:0 0 0 2px rgba(216,160,64,.5);':'')+'font-size:22px">'+ic+'<span style="position:absolute;right:4px;bottom:2px;font-size:11px;font-weight:700;text-shadow:0 1px 2px #000;color:#fff">'+(v>9999?Math.floor(v/1000)+'k':v)+'</span></button>';
+  return cell('rnsh','<span style="filter:hue-rotate(40deg) saturate(1.3)">💠</span>',sh)+cell('rnsg','🔗',ns)}
+function sgGdNote(sel){const S=rnSt(),X=sgSt();
+  if(sel==='rnsh')return'<div class="note" style="margin-top:8px"><b>💠 ผงรูน</b> · มี '+((S.sh|0).toLocaleString())+'<br><small>ใช้ที่ช่างรูนไอริสในค่าย: สร้างรูนหลัก ('+RNC+') · อัปเกรดรูน ('+RNU[1]+'/'+RNU[2]+') · สุ่มรูนเสริม ('+SGRC+') · สร้างรูนเสริมแบบเลือกเอง ('+SGSC+') · ได้จากหัวหน้ามอน เหตุการณ์สุ่ม ดันเจี้ยน บอส และรูนซ้ำ</small></div>';
+  if(sel==='rnsg'){const L=Object.keys(SGD).filter(id=>(X.i[id]|0)>0);return'<div class="note" style="margin-top:8px"><b>🔗 รูนเสริม</b> · มี '+L.reduce((a,id)=>a+(X.i[id]|0),0)+' ชิ้น ('+L.length+'/'+Object.keys(SGD).length+' แบบ)<br><small>'+(L.length?L.map(id=>SGD[id][0]+' '+SGD[id][1]+' ×'+(X.i[id]|0)+(sgUsed(id)?' (ใส่อยู่ '+sgUsed(id)+')':'')).join(' · '):'ยังไม่มี — ปลดช่องลิงก์ที่ Lv '+SGLV[0]+' แล้วรับฟรี 3 อัน')+'<br>ใส่ลิงก์สกิลได้ที่ช่างรูนไอริส แท็บ 🔗 รูนเสริม</small></div>'}
+  return''}
