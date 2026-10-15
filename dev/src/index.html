@@ -11301,6 +11301,20 @@ function sgGdNote(sel){const S=rnSt(),X=sgSt();
   if(sel==='rnsh')return'<div class="note" style="margin-top:8px"><b>💠 ผงรูน</b> · มี '+((S.sh|0).toLocaleString())+'<br><small>ใช้ที่ช่างรูนไอริสในค่าย: สร้างรูนหลัก ('+RNC+') · อัปเกรดรูน ('+RNU[1]+'/'+RNU[2]+') · สุ่มรูนเสริม ('+SGRC+') · สร้างรูนเสริมแบบเลือกเอง ('+SGSC+') · ได้จากหัวหน้ามอน เหตุการณ์สุ่ม ดันเจี้ยน บอส และรูนซ้ำ</small></div>';
   if(sel==='rnsg'){const L=Object.keys(SGD).filter(id=>(X.i[id]|0)>0);return'<div class="note" style="margin-top:8px"><b>🔗 รูนเสริม</b> · มี '+L.reduce((a,id)=>a+(X.i[id]|0),0)+' ชิ้น ('+L.length+'/'+Object.keys(SGD).length+' แบบ)<br><small>'+(L.length?L.map(id=>SGD[id][0]+' '+SGD[id][1]+' ×'+(X.i[id]|0)+(sgUsed(id)?' (ใส่อยู่ '+sgUsed(id)+')':'')).join(' · '):'ยังไม่มี — ปลดช่องลิงก์ที่ Lv '+SGLV[0]+' แล้วรับฟรี 3 อัน')+'<br>ใส่ลิงก์สกิลได้ที่ช่างรูนไอริส แท็บ 🔗 รูนเสริม</small></div>'}
   return''}
+/* ---------- แผง GM: เสกผงรูน / รูนเสริมครบ / อัปขั้น III (เห็นเฉพาะเจ้าของเกม) ---------- */
+async function gmLocalOk(){try{const h=location.hostname;if(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1')return true;const u=window.claude&&await claude.use('user');return!!(u&&u.isOwner&&await u.isOwner())}catch(e){return false}}
+setTimeout(()=>{try{
+  const _gu=gmUI;window.gmUI=gmUI=function(msg){const r=_gu.apply(this,arguments);try{if(!gmOk||!me.cls)return r;const S=rnSt(),X=sgSt(),nk=Object.keys(SGD).length,own=Object.keys(SGD).filter(id=>(X.i[id]|0)>0).length;
+    const B=(k,t)=>'<button data-gm="'+k+'">'+t+'</button>',c='<div class="card" style="border-left:5px solid #c8a0ff"><div class="cap">💠 รูน · ผงรูน '+(S.sh|0).toLocaleString()+' · รูนเสริม '+own+'/'+nk+' แบบ · ช่องลิงก์ '+sgSockN()+'/3</div><div class="bt" style="flex-wrap:wrap">'+
+      B('sgsh','💠 +1,000 ผงรูน')+B('sgall','🔗 รูนเสริมครบทุกแบบ ×3')+B('sgmax','⬆️ รูนเสริมทุกแบบขั้น III')+B('sgmain','💠 รูนหลักครบทุกสกิล ขั้น III')+'</div><small style="opacity:.75">ช่องลิงก์เปิดที่ Lv 20/45/70 (ตั้งเลเวลด้านบนได้) · แก้ลิงก์ได้ที่ช่างรูนไอริสในค่าย</small></div>';
+    const cards=ov.querySelectorAll('.card');if(cards.length>1)cards[1].insertAdjacentHTML('afterend',c)}catch(e){}return r};
+  const _ga=gmAct;window.gmAct=gmAct=function(k){if(typeof k!=='string'||k.slice(0,2)!=='sg'||!gmOk||!me.cls)return _ga.apply(this,arguments);gmUsed=true;const S=rnSt(),X=sgSt();let msg='';
+    if(k==='sgsh'){S.sh=Math.min(99999,(S.sh|0)+1000);msg='+1,000 ผงรูน (รวม '+S.sh.toLocaleString()+')'}
+    else if(k==='sgall'){Object.keys(SGD).forEach(id=>X.i[id]=Math.max(3,X.i[id]|0));X.g=1;msg='ได้รูนเสริมครบ '+Object.keys(SGD).length+' แบบ แบบละ 3 ชิ้น (รวมรูนหายาก)'}
+    else if(k==='sgmax'){Object.keys(SGD).forEach(id=>{X.i[id]=Math.max(1,X.i[id]|0);X.v[id]=3});X.g=1;msg='รูนเสริมทุกแบบเป็นขั้น III แล้ว'}
+    else if(k==='sgmain'){const R=RUNES[me.cls]||{};let n=0;Object.keys(R).forEach(q=>['a','b'].forEach(e=>{if(R[q]&&R[q][e]){S.u[R[q][e][0]]=3;n++}}));msg='ได้รูนหลักครบ '+n+' แบบ ขั้น III'}
+    try{sfx('lg_get')}catch(e){}gmUI(msg)};
+}catch(e){console.warn('sg gm',e)}},320);
 /* ---------- v387: ออโต้ล่าเดินอ้อมด้วยตัวหาทาง ----------
    เดิม huntStep วิ่งตรงเข้าหามอน/ของดรอป/จุดล่า → ติดขอบผา ต้นไม้ ป้อม แล้วต้องรอ 1.6 วิ ให้ตัดเป้าทิ้ง
    ตอนนี้ใช้ aqPath (รู้จักที่ราบ บันได หน้าผา ต้นไม้ ป้อม หลุมอเวจี) · วางทางใหม่เมื่อเป้าขยับ/ทุก 1.2 วิ
@@ -16404,7 +16418,7 @@ function dnStack(){const isT=d=>typeof d.v==='string'&&!d.s&&!d.c&&d.vx===undefi
 function sysMsg(t){chatLog.push({sys:1,t,at:Date.now()});renderLog()}
 setInterval(renderLog,1000);
 function sendChat(){const inp=$('cin');const t=inp.value.replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!t)return;
-  {const gm=t.match(/^\/gmmode\s+(on|off)(?:\s+(\S+))?$/i);if(gm){inp.value='';const on=gm[1].toLowerCase()==='on';if(!on||!srvAcc()){gmSet(on);return}
+  {const gm=t.match(/^\/gmmode\s+(on|off)(?:\s+(\S+))?$/i);if(gm){inp.value='';const on=gm[1].toLowerCase()==='on';if(!on){gmSet(false);return}if(!srvAcc()){gmLocalOk().then(ok=>{if(ok)gmSet(true);else sysMsg('🛠 โหมด GM ใช้ได้เฉพาะเจ้าของเกม')});return}
     if(!gm[2]){sysMsg('🛠 บนเซิร์ฟเวอร์ต้องพิมพ์ /gmmode on <รหัสผู้ดูแล>');return}
     fetch('/admin/api',{headers:{'x-admin-key':gm[2]},cache:'no-store'}).then(r=>{if(r.ok)gmSet(true);else sysMsg('🛠 รหัสผู้ดูแลไม่ถูกต้อง')}).catch(()=>sysMsg('🛠 ตรวจรหัสไม่ได้'));return}}
   const now=Date.now();if(now-lastChat<700)return;lastChat=now;inp.value='';
@@ -17121,7 +17135,7 @@ function awkAct(a){const q=me.cq||(me.cq={s:0,n:0});if(me.lv<AWLV||hasBr(1))retu
 function afterCast(k,b,free){if(!(me.sk[k]>b))return;if(me.cls!=='mage'||!br1())return;if(free){me.freeC=0;return}me.mcnt=(me.mcnt||0)+1;if(me.mcnt>=4){me.mcnt=0;me.freeC=1;dn.push({x:me.x,y:me.y-56,v:'✨ วงจรเวท: สกิลถัดไปไม่เสีย MP',t:1.4})}}
 /* ---------- แผงทดสอบ (GM) — เปิดได้เฉพาะเจ้าของเกม ---------- */
 let gmOk=false,gmGod=false,gmMp=false,gmUsed=false,dpsLog=[],dpsT0=performance.now();
-const GM_ON=false;/* เปลี่ยนเป็น true เพื่อเปิดแผงทดสอบ GM อีกครั้ง */
+const GM_ON=true;/* เปลี่ยนเป็น true เพื่อเปิดแผงทดสอบ GM อีกครั้ง */
 (async()=>{if(!GM_ON)return;try{const h=location.hostname;if(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1')gmOk=true;
   else{const u=window.claude&&await claude.use('user');if(u&&await u.isOwner())gmOk=true}}catch(e){}if(gmOk&&$('gmb'))$('gmb').hidden=false})();
 function gmSet(on,quiet){gmOk=!!on;if($('gmb'))$('gmb').hidden=!gmOk;if(!gmOk){gmGod=false;gmMp=false;if(ov.dataset.k==='gm'&&!ov.hidden)ov.hidden=true}try{localStorage.setItem('refugee_gm',gmOk?'1':'0')}catch(e){}if(!quiet)sysMsg(gmOk?'🛠 เปิดโหมด GM แล้ว · เมนู → 🛠 ทดสอบ (GM)':'🛠 ปิดโหมด GM แล้ว')}

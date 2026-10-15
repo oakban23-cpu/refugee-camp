@@ -268,3 +268,17 @@ function sgGdNote(sel){const S=rnSt(),X=sgSt();
   if(sel==='rnsh')return'<div class="note" style="margin-top:8px"><b>💠 ผงรูน</b> · มี '+((S.sh|0).toLocaleString())+'<br><small>ใช้ที่ช่างรูนไอริสในค่าย: สร้างรูนหลัก ('+RNC+') · อัปเกรดรูน ('+RNU[1]+'/'+RNU[2]+') · สุ่มรูนเสริม ('+SGRC+') · สร้างรูนเสริมแบบเลือกเอง ('+SGSC+') · ได้จากหัวหน้ามอน เหตุการณ์สุ่ม ดันเจี้ยน บอส และรูนซ้ำ</small></div>';
   if(sel==='rnsg'){const L=Object.keys(SGD).filter(id=>(X.i[id]|0)>0);return'<div class="note" style="margin-top:8px"><b>🔗 รูนเสริม</b> · มี '+L.reduce((a,id)=>a+(X.i[id]|0),0)+' ชิ้น ('+L.length+'/'+Object.keys(SGD).length+' แบบ)<br><small>'+(L.length?L.map(id=>SGD[id][0]+' '+SGD[id][1]+' ×'+(X.i[id]|0)+(sgUsed(id)?' (ใส่อยู่ '+sgUsed(id)+')':'')).join(' · '):'ยังไม่มี — ปลดช่องลิงก์ที่ Lv '+SGLV[0]+' แล้วรับฟรี 3 อัน')+'<br>ใส่ลิงก์สกิลได้ที่ช่างรูนไอริส แท็บ 🔗 รูนเสริม</small></div>'}
   return''}
+/* ---------- แผง GM: เสกผงรูน / รูนเสริมครบ / อัปขั้น III (เห็นเฉพาะเจ้าของเกม) ---------- */
+async function gmLocalOk(){try{const h=location.hostname;if(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1')return true;const u=window.claude&&await claude.use('user');return!!(u&&u.isOwner&&await u.isOwner())}catch(e){return false}}
+setTimeout(()=>{try{
+  const _gu=gmUI;window.gmUI=gmUI=function(msg){const r=_gu.apply(this,arguments);try{if(!gmOk||!me.cls)return r;const S=rnSt(),X=sgSt(),nk=Object.keys(SGD).length,own=Object.keys(SGD).filter(id=>(X.i[id]|0)>0).length;
+    const B=(k,t)=>'<button data-gm="'+k+'">'+t+'</button>',c='<div class="card" style="border-left:5px solid #c8a0ff"><div class="cap">💠 รูน · ผงรูน '+(S.sh|0).toLocaleString()+' · รูนเสริม '+own+'/'+nk+' แบบ · ช่องลิงก์ '+sgSockN()+'/3</div><div class="bt" style="flex-wrap:wrap">'+
+      B('sgsh','💠 +1,000 ผงรูน')+B('sgall','🔗 รูนเสริมครบทุกแบบ ×3')+B('sgmax','⬆️ รูนเสริมทุกแบบขั้น III')+B('sgmain','💠 รูนหลักครบทุกสกิล ขั้น III')+'</div><small style="opacity:.75">ช่องลิงก์เปิดที่ Lv 20/45/70 (ตั้งเลเวลด้านบนได้) · แก้ลิงก์ได้ที่ช่างรูนไอริสในค่าย</small></div>';
+    const cards=ov.querySelectorAll('.card');if(cards.length>1)cards[1].insertAdjacentHTML('afterend',c)}catch(e){}return r};
+  const _ga=gmAct;window.gmAct=gmAct=function(k){if(typeof k!=='string'||k.slice(0,2)!=='sg'||!gmOk||!me.cls)return _ga.apply(this,arguments);gmUsed=true;const S=rnSt(),X=sgSt();let msg='';
+    if(k==='sgsh'){S.sh=Math.min(99999,(S.sh|0)+1000);msg='+1,000 ผงรูน (รวม '+S.sh.toLocaleString()+')'}
+    else if(k==='sgall'){Object.keys(SGD).forEach(id=>X.i[id]=Math.max(3,X.i[id]|0));X.g=1;msg='ได้รูนเสริมครบ '+Object.keys(SGD).length+' แบบ แบบละ 3 ชิ้น (รวมรูนหายาก)'}
+    else if(k==='sgmax'){Object.keys(SGD).forEach(id=>{X.i[id]=Math.max(1,X.i[id]|0);X.v[id]=3});X.g=1;msg='รูนเสริมทุกแบบเป็นขั้น III แล้ว'}
+    else if(k==='sgmain'){const R=RUNES[me.cls]||{};let n=0;Object.keys(R).forEach(q=>['a','b'].forEach(e=>{if(R[q]&&R[q][e]){S.u[R[q][e][0]]=3;n++}}));msg='ได้รูนหลักครบ '+n+' แบบ ขั้น III'}
+    try{sfx('lg_get')}catch(e){}gmUI(msg)};
+}catch(e){console.warn('sg gm',e)}},320);

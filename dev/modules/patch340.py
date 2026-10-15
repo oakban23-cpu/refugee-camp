@@ -343,6 +343,8 @@ R("aw:document.hidden?1:0})","aw:document.hidden?1:0,zz:tvZzz()})")
 R("at:r.at|0,","at:r.at|0,zz:r.zz?1:0,")
 R("sd:ex[11]|0}","sd:ex[11]|0,zz:ex[12]|0}")
 R("rb:i.rb,sd:i.sd}","rb:i.rb,sd:i.sd,zz:i.zz}")
+R("const GM_ON=false;","const GM_ON=true;")
+R("if(!on||!srvAcc()){gmSet(on);return}","if(!on){gmSet(false);return}if(!srvAcc()){gmLocalOk().then(ok=>{if(ok)gmSet(true);else sysMsg('🛠 โหมด GM ใช้ได้เฉพาะเจ้าของเกม')});return}")
 open(P,'w').write(s)
 print('ok')
 import subprocess
