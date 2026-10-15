@@ -1,9 +1,13 @@
 /* ---------- v398 รูนหลักช่อง 4 ของสายทมิฬ (นักฆ่า · ซัพพอร์ต · เวท) ----------
    เดิม: รูนช่อง 4 ออกแบบให้สกิลสายแสง พอเป็นสายทมิฬ (v396) รูนช่องนี้ไม่มีผล
-   ใหม่: RUNES[cls][4] เปลี่ยนตามสาย (getter) → หน้าช่างรูน/การสร้าง/อัปเกรด/ใส่/ดรอป ใช้ชุดของสายที่เป็นอยู่เองทั้งหมด
+   ใหม่ (v399 ครบ 5 อาชีพ): RUNES[cls][4] เปลี่ยนตามสาย (getter) → หน้าช่างรูน/การสร้าง/อัปเกรด/ใส่/ดรอป ใช้ชุดของสายที่เป็นอยู่เองทั้งหมด
    ผลของรูนอยู่ใน rnUse4B (แทนสกิลทั้งท่า เหมือนรูนสายแสง) · ค่าในวงเล็บคือขั้น I (ขั้น II/III พลัง +15%/+30%)
    แถม: แก้ช่องโหว่รูน «สองจังหวะ» ของนักรบ — ถ้าไม่พุ่งครั้งที่ 2 ภายในเวลา เดิมคูลดาวน์เหลือ 0.3 วิ (พุ่งได้ทุก ~1.3 วิ) */
 const RUNESB={
+ melee:{a:['w4a','🔨','ทุบสนั่น','ทุบโล่รอบตัว 360° (วงกว้างขึ้น) มอนมึน 2 วิ แต่ดาเมจ 75%'],
+        b:['w4b','💢','แค้นระเบิด','แค้นแต่ละชั้นแรงขึ้น 30% (แทน 15%) และได้เกราะชั้นละ 3% ของเลือดสูงสุด 5 วิ']},
+ archer:{a:['v4a','🌪️','พายุคู่','ปล่อยทอร์นาโด 2 ลูกเป็นรูปตัว V (ลูกละ 65%)'],
+         b:['v4b','🌀','พายุนิ่ง','ทอร์นาโดหยุดอยู่กับที่ตรงเป้าหมาย ใหญ่ขึ้น 30% อยู่ 4 วิ ดูดมอนเข้าหาตลอด (แรงต่อครั้ง 50%)']},
  assn:{a:['x4a','🌪️','พายุค้าง','พายุใบมีดค้างนาน 4 วิ และวงกว้างขึ้น 30% (ดาเมจตอนพุ่ง 80%)'],
        b:['x4b','👣','สองจังหวะ','พุ่งได้ 2 ครั้งติดกันภายใน 1.5 วิ (ครั้งละ 85%) แต่ละครั้งทิ้งพายุใบมีด 2 วิ']},
  sup:{a:['y4a','🩸','ตราดูดวิญญาณ','ตรากว้างขึ้น 30% · ทุก 1 วิ แผดเผามอนในตรา (40%) และฮีลเพื่อนในตรา 3% ของเลือดสูงสุด'],
@@ -13,6 +17,18 @@ const RUNESB={
 const R26A={};
 try{Object.keys(RUNESB).forEach(c=>{if(!RUNES[c])return;R26A[c]=RUNES[c][4];Object.defineProperty(RUNES[c],4,{configurable:true,enumerable:true,get(){try{if(me&&me.cls===c&&BR2())return RUNESB[c]}catch(e){}return R26A[c]},set(v){R26A[c]=v}})})}catch(e){}
 function rnUse4B(c,P,cost,r){const X=v=>Math.round(v);
+  if(c==='melee'){const t=pickTarget(200),a=t?Math.atan2(t.y-me.y,t.x-me.x):me.face;me.face=a;me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
+    const st=me.rg2|0;me.rg2=0;
+    if(r==='a'){const mul=1+.15*st;fx({k:'roar',r:170});fx({k:'bash',r:170,a:Math.round(a*100)/100,len:st});fx({k:'stun',r:170,a:0,full:1,dur:2});fx({k:'taunt',r:170,dur:4});shk=Math.max(shk,.35);
+      mons.forEach(m=>{if(Math.hypot(m.x-me.x,m.y-me.y)<170+mR(m))addHit(m,pd()*3.2*.75*P*mul,0,1,'melee')})}
+    else{const mul=1+.3*st;fx({k:'bash',r:150,a:Math.round(a*100)/100,len:st});fx({k:'stun',r:150,a:Math.round(a*100)/100,dur:1.5});fx({k:'taunt',r:160,dur:4});shk=Math.max(shk,.3);
+      mons.forEach(m=>{const dx=m.x-me.x,dy=m.y-me.y,d=Math.hypot(dx,dy);if(d>150+mR(m))return;let da=Math.atan2(dy,dx)-a;da=Math.atan2(Math.sin(da),Math.cos(da));if(Math.abs(da)<1.1||d<30)addHit(m,pd()*3.2*P*mul,0,1,'melee')});
+      if(st){me.shv=Math.max(me.shv||0,Math.round(me.mh*.03*st));me.shield=Math.max(me.shield||0,5)}}
+    if(st)dn.push({x:me.x,y:me.y-56,v:'แค้น ×'+st+' → ดาเมจ +'+Math.round(st*(r==='a'?15:30))+'%'+(r==='b'?' · เกราะ '+st*3+'%':''),t:1.4});return true}
+  if(c==='archer'){const t=pickTarget(320);if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return true}const a=Math.atan2(t.y-me.y,t.x-me.x);me.face=a;me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
+    if(r==='a')[-.35,.35].forEach(da=>{const b=a+da;fx({k:'torn',r:70,a:Math.round(b*100)/100,dur:3,v:X(pd()*.75*.65*P),x:X(me.x+Math.cos(b)*30),y:X(me.y+Math.sin(b)*30)})});
+    else fx({k:'torn',r:90,a:Math.round(a*100)/100,dur:4,len:1,v:X(pd()*.75*.5*P),x:X(t.x),y:X(t.y)});
+    return true}
   if(c==='assn'){const t=pickTarget(260),a=t?Math.atan2(t.y-me.y,t.x-me.x):me.face,L=180,sx=me.x,sy=me.y;me.face=a;
     if(r==='b'){const n=performance.now();if(me.rnB2>n){me.rnB2=0;me.sk[4]=cdOf(4)}else{me.rnB2=n+1500;me.r26c4=cdOf(4);me.sk[4]=.3;me.mp-=cost;dqProg('skill',1)}}
     else{me.sk[4]=cdOf(4);me.mp-=cost;dqProg('skill',1)}
@@ -32,6 +48,7 @@ function rnUse4B(c,P,cost,r){const X=v=>Math.round(v);
     return true}
   return false}
 setTimeout(()=>{
+  try{const _q=rnUse4post;rnUse4post=function(c,P){try{if(BR2()&&RUNESB[c])return}catch(e){}return _q.apply(this,arguments)}}catch(e){}
   try{const _p=rnUse4pre;rnUse4pre=function(c,P,cost){try{if(BR2()&&RUNESB[c]){const r=rnOf(4);if(!r)return false;return rnUse4B(c,P*rnPow(4),cost,r)}}catch(e){console.warn('r26',e)}return _p.apply(this,arguments)}}catch(e){}
   /* ช่วงรอพุ่งครั้งที่ 2 หมด → คิดคูลดาวน์เต็มนับจากครั้งแรก (นักรบ สองจังหวะ · นักฆ่า สองจังหวะ) */
   try{const _t=rnTick;rnTick=function(dt){const d0=me.rnD2||0;const r=_t.apply(this,arguments);try{if(d0>0&&!((me.rnD2||0)>0)&&(me.sk[1]||0)<cdOf(1)-1.3)me.sk[1]=Math.max(me.sk[1]||0,cdOf(1)-1.3);
