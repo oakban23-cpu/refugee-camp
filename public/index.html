@@ -547,7 +547,7 @@ mage:{n:'จอมเวทอาคม',c:'#49b8d8',hp:104,sp:115,rg:240,dmg:17
 };
 const ULT={melee:['ฟันแยกปฐพี','ฟาดดาบลงพื้นจนแผ่นดินแยกเป็นแนวยาวข้างหน้า ดาเมจมหาศาลทุกตัวในแนว',30,50],
 archer:['ธนูทะลวงสวรรค์','ยิงลำแสงธนูทะลุทุกตัวในแนวยาวไปยังเป้าหมาย',28,45],
-sup:['ปาฏิหาริย์','ชุบชีวิตเพื่อนที่ล้มรอบตัว ฟื้นเลือดครึ่งหลอดและให้เกราะกับทั้งทีม',45,70],
+sup:['ปาฏิหาริย์','ชุบชีวิตเพื่อนที่ล้มรอบตัว (ฟื้นมาพร้อมเลือด 60%) คนที่ยืนอยู่ฟื้นเลือดครึ่งหลอด และให้เกราะ 25% กับทั้งทีม',45,70],
 mage:['พายุอุกกาบาต','วงเวทเรียกอุกกาบาต 7 ลูกถล่มพื้นที่รอบเป้าหมาย',32,70],
 assn:['ร่างเงาพันคม','แยกร่างเงาพุ่งแทงศัตรูรอบตัวสูงสุด 6 ตัวต่อเนื่อง แล้วหายตัว',28,45]};
 Object.keys(ULT).forEach(k=>{CL[k].s[2]=ULT[k][0];CL[k].cds[2]=ULT[k][2];CL[k].mc[2]=ULT[k][3]});
@@ -555,7 +555,7 @@ const SK3LV=12,SK3={melee:['โทสะอสูร','ปลุกโทสะ 
 archer:['ธนูตรึงเงา','ยิงธนูตรึงเป้าหมายไว้กับที่ 2 วิ (บอสไม่โดนตรึง) และทำให้มอนรอบ ๆ ช้าลง',9,25],
 sup:['ทัณฑ์แห่งแสง','ลำแสงศักดิ์สิทธิ์ผ่าลงเป้าหมายและมอนรอบ ๆ ดาเมจ 30% แปลงเป็นฮีลให้เพื่อนที่เลือดน้อยที่สุด (รวมตัวเอง)',6,25],
 mage:['โซ่สายฟ้า','สายฟ้ากระโดดต่อได้สูงสุด 5 ตัว แรงลดลง 15% ทุกครั้งที่กระโดด',7,35],
-assn:['ตราประทับมรณะ','ประทับตราบนเป้าหมาย 5 วิ แล้วระเบิดเป็นดาเมจ 16% ของดาเมจทั้งหมดที่ใส่เป้านั้นระหว่างติดตรา (มอนรอบ ๆ โดนด้วย)',12,25]};
+assn:['ตราประทับมรณะ','ประทับตราบนเป้าหมาย 5 วิ แล้วระเบิด 120% + 16% ของดาเมจทั้งหมดที่ใส่เป้านั้นระหว่างติดตรา (มอนรอบ ๆ โดน 40%)',12,25]};
 Object.keys(SK3).forEach(k=>{CL[k].s[3]=SK3[k][0];CL[k].cds[3]=SK3[k][2];CL[k].mc[3]=SK3[k][3]});
 const SKSVG={
 melee:[
@@ -770,7 +770,7 @@ assn:{n:'นักระบำใบมีด',ps:'จังหวะใบม�
 mage:{n:'จอมเวทอสูรอัญเชิญ',ps:'สัญญาอสูร: ทุก 6 วิ อิมป์ไฟออกมาติดตาม (สูงสุด 3 ตัว) ยิงลูกไฟใส่มอนทุก 1 วิ · ดาเมจเวทตัวเอง −15%'}});
 Object.assign(SK4B,{sup:['ตราประทับวิญญาณ','วางตราคำสาปบนพื้น 6 วิ มอนในตราติดคำสาป มอนที่ตายในตราระเบิดวิญญาณใส่มอนรอบ ๆ และฮีลเพื่อน',14,40],
 assn:['ระบำพันใบมีด','หมุนตัวพุ่งทะลุมอน ทิ้งพายุใบมีดค้างตามทาง 3 วิ',10,30],
-mage:['อัญเชิญโกเลมลาวา','เรียกโกเลมลาวา 8 วิ ทุบพื้นทุก 1.5 วิ ดาเมจรอบตัวและทำให้มอนช้า',16,45]});
+mage:['อัญเชิญโกเลมลาวา','เรียกโกเลมลาวา 8 วิ ทุบพื้นทุก 1.5 วิ ดาเมจรอบตัวและทำให้มอนชะงัก 0.7 วิ',16,45]});
 Object.assign(ULT2B,{sup:['ระฆังวิญญาณ','เรียกระฆังสาปลอยกลางวง 6 วิ ดูดเลือดมอนรอบ ๆ แล้วนำไปฮีลทั้งทีม',45,70],
 assn:['พายุใบมีดราตรี','ร่างกลายเป็นพายุใบมีด 4 วิ เดินได้อิสระ ฟันมอนรอบตัวต่อเนื่อง คอมโบไม่หลุด',28,45],
 mage:['ประตูนรก','เปิดประตูนรก เจ้าอสูรออกมา 6 วิ กระทืบพื้นและพ่นไฟใส่มอนรอบประตู',32,70]});
@@ -3029,12 +3029,12 @@ smite(t,1,1);if(r==='b'){const t2=mons.filter(m=>m!==t&&m.hp>0&&!m.pv&&dist(m,t)
 return true}
 function rnUse4pre(c,P,cost){const r=rnOf(4);if(!r||BR2())return false;P*=rnPow(4);const X=v=>Math.round(v);
 if(c==='sup'){me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
-if(r==='a'){const x=me.x,y=me.y;RZ.push({x,y,r:130,t:6,tk:.25,v:pd()*.62*P});for(let i=0;i<5;i++){const a=i*1.2566,d=i?70:0;fx({k:'rnfire',x:X(x+Math.cos(a)*d),y:X(y+Math.sin(a)*d*.6),r:44})}fx({k:'ring',x:X(x),y:X(y),r:130,c:'#ff8a3a'})}
+if(r==='a'){const x=me.x,y=me.y;RZ.push({x,y,r:130,t:6,tk:.25,v:pd()*1.0*P});for(let i=0;i<5;i++){const a=i*1.2566,d=i?70:0;fx({k:'rnfire',x:X(x+Math.cos(a)*d),y:X(y+Math.sin(a)*d*.6),r:44})}fx({k:'ring',x:X(x),y:X(y),r:130,c:'#ff8a3a'})}
 else{for(let i=0;i<6;i++)setTimeout(()=>{if(me.cls&&me.down<=0)fx({k:'sanct',r:95,dur:1.3,v:Math.round(pd()*.9*P)})},i*1000)}return true}
 if(c==='assn'){me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);fx({k:'shadow',r:50,len:1});
 if(r==='a')me.clone={t:6,tk:.2,P,boom:1};else{me.clone={t:4,tk:.2,P};me.clone2={t:4,tk:.4,P}}return true}
 if(c==='mage'){const t=pickTarget(300);if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return true}me.face=Math.atan2(t.y-me.y,t.x-me.x);me.sk[4]=cdOf(4);me.mp-=cost;skSfx();dqProg('skill',1);
-if(r==='a')fx({k:'rift',x:X(t.x),y:X(t.y),r:150,dur:3,v:Math.round(pd()*1.0*P),b:Math.round(pd()*6.1*P)});
+if(r==='a')fx({k:'rift',x:X(t.x),y:X(t.y),r:150,dur:3,v:Math.round(pd()*1.1*P),b:Math.round(pd()*6.1*P)});
 else{fx({k:'tstop',x:X(t.x),y:X(t.y),r:130,dur:3});fx({k:'frost',x:X(t.x),y:X(t.y),r:130,dur:3});mons.forEach(m=>{if(dist(m,t)<130)addHit(m,pd()*1.2*P,0,1,'bolt')})}return true}
 return false}
 function rnUse4post(c,P){const r=rnOf(4);if(!r)return;P*=rnPow(4);const X=v=>Math.round(v);
@@ -3080,9 +3080,9 @@ else{fx({k:'arrows',x:X(t.x),y:X(t.y),r:90});fx({k:'frost',x:X(t.x),y:X(t.y),r:9
 if(c==='archer'&&k===1){me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(1);const t0=nearestMon(400),sx=me.x,sy=me.y;fx({k:'leap',r:30});dash(t0?Math.atan2(me.y-t0.y,me.x-t0.x):me.face+Math.PI,110,0);
 if(r==='a')setTimeout(()=>{const T=mons.filter(m=>m.hp>0&&!m.pv&&dist(m,me)<280).sort((p,q)=>dist(p,me)-dist(q,me)).slice(0,3);T.forEach((m,i)=>setTimeout(()=>{if(m.hp<=0)return;fxs.push({k:'rnarrow',x:me.x,y:me.y-10,sx:m.x,sy:m.y-8,t:.25,d:.25,r:1,s:0});addHit(m,pd()*1*P,0,1,'archer')},i*90))},220);
 else{fxs.push({k:'rnbomb',x:sx,y:sy,r:80,t:.7,d:.7,s:0});setTimeout(()=>{fx({k:'elbx',x:X(sx),y:X(sy),r:80});mons.forEach(m=>{if(m.hp>0&&Math.hypot(m.x-sx,m.y-sy)<80)addHit(m,pd()*2.2*P,0,1,'archer')})},700)}return true}
-if(c==='sup'&&k===0){me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(0);const v=45*P*(hexR()?.7:1)*(supSolo()?1.6:1);
-if(r==='a'){fx({k:'heal',r:170,v:v*.5,ov:br1()?1:0});fx({k:'skimp',x:X(me.x),y:X(me.y),r:90,c:'#ffe68a'});mons.forEach(m=>{if(m.hp>0&&dist(m,me)<170)addHit(m,pd()*1.6*P,0,1,'holy')})}
-else{fx({k:'heal',r:170,v:v*.5,ov:br1()?1:0});for(let i=1;i<=5;i++)setTimeout(()=>{if(me.cls&&me.down<=0)fx({k:'heal',r:170,v:v*.16,ov:0})},i*1000)}return true}
+if(c==='sup'&&k===0){me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(0);const v=45*P*(hexR()?.7:1)*(supSolo()?1.6:1),pv=Math.round(v/45*.12*1000)/1000;
+if(r==='a'){fx({k:'heal',r:170,v:v*.5,pc:pv*.5,ov:br1()?1:0});fx({k:'skimp',x:X(me.x),y:X(me.y),r:90,c:'#ffe68a'});mons.forEach(m=>{if(m.hp>0&&dist(m,me)<170)addHit(m,pd()*1.6*P,0,1,'holy')})}
+else{fx({k:'heal',r:170,v:v*.5,pc:pv*.5,ov:br1()?1:0});for(let i=1;i<=5;i++)setTimeout(()=>{if(me.cls&&me.down<=0)fx({k:'heal',r:170,v:v*.16,pc:pv*.16,ov:0})},i*1000)}return true}
 if(c==='sup'&&k===1){me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(1);fx(r==='a'?{k:'rcr',r:190,v:10}:{k:'ras',r:190,v:10});return true}
 if(c==='assn'&&k===0){const t=pickTarget(260);if(!t)return true;me.sk[k]=cdOf(k);me.mp-=cost;dqProg('skill',1);skSfx(0);
 const stab=(m,mul)=>{const a=Math.atan2(m.y-me.y,m.x-me.x);fx({k:'shadow',r:40});me.x=cl(m.x-Math.cos(a)*24,12,WW-12);me.y=cl(m.y-Math.sin(a)*24,12,WH-12);me.face=a;fx({k:'shadow',x:X(m.x),y:X(m.y),r:40,len:1});addHit(m,pd()*4*P*mul,0,1,'assn')};
@@ -11126,6 +11126,12 @@ let o;try{o=r24Arm(cls,C)}catch(e){return _dw.apply(this,arguments)}const H=R24H
 g.save();g.translate(hx+o.dx,hy+o.dy);g.rotate(o.rot);g.translate(-hx,-hy);try{_dw.call(this,cls,c,ay,t,skin,Pg,E,o.ak!=null?o.ak:ak)}finally{g.restore()}
 try{if(o.off)r24Hand(o.off[0],ay+3+o.off[1],skin);if(o.gl)r24Glow(o.gl[0],ay+3+o.gl[1],o.gl[2],o.gl[3],o.zap,o.orb)}catch(e){}}}catch(e){}
 },0);
+const SK12D={
+melee:['หมุนดาบฟันมอนรอบตัวในวงใกล้ (250%)','พุ่งไปข้างหน้า ฟันทุกตัวที่พุ่งผ่าน (200%)'],
+archer:['ห่าธนูตกใส่วงรอบเป้าหมาย (360%)','กระโดดถอยหนีจากมอนที่ใกล้ที่สุด ใช้เปิดระยะ (ไม่มีดาเมจ)'],
+mage:['ลูกไฟระเบิดที่เป้าหมาย (340%) มอนรอบ ๆ โดน 75%','ปล่อยไอเย็นรอบตัว (160%) มอนในวงช้าลง 3.5 วิ'],
+assn:['วาร์ปไปแทงเป้าหมาย (400%) แล้วล่องหน 2.5 วิ — ตีครั้งถัดไปคริแน่นอน','ปล่อยหมอกพิษรอบตัว 5 วิ พิษกัดทุก 0.5 วิ (35%) มอนในหมอกช้าลง'],
+sup:['ฮีลตัวเองและเพื่อนรอบตัว 12% ของเลือดสูงสุดผู้รับ +45 (เล่นเดี่ยว ×1.6)','สวดเพิ่มพลังทีมรอบตัว ดาเมจ +40% แล้วค่อย ๆ ลดลงจนหมดใน 8 วิ']};
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
@@ -15727,7 +15733,7 @@ if(o.k==='qgz'){if(Array.isArray(o.pts))EYEG={t:+o.dur||2.8,d:+o.dur||2.8,pts:o.
 {const D=FXD[o.k]||.5;fxs.push({x:o.x,y:o.y,r:o.r,k:o.k,t:D,d:D,a:+o.a||0,len:+o.len||0,s:Math.random()*999,u:typeof o.u==='string'?o.u.slice(0,12):'',pts:Array.isArray(o.pts)?o.pts.slice(0,8).filter(q=>Array.isArray(q)).map(q=>[+q[0]||0,+q[1]||0]):null,sx:+o.sx||0,sy:+o.sy||0});fxBurst(o);try{gxImpact(o)}catch(e){}}
 const near=dist(me,o)<o.r&&me.down<=0;
 if(o.k==='shield'&&near&&+o.v>0){me.shv=Math.max(me.shv||0,+o.v);me.shield=Math.max(me.shield||0,6)}
-if(o.k==='heal'&&near){if(o.ov){const ex=me.hp+o.v-me.mh;if(ex>0){me.shv=Math.max(me.shv||0,Math.round(Math.min(ex,me.mh*.4)));me.shield=6}}me.hp=Math.min(me.mh,me.hp+o.v)}
+if(o.k==='heal'&&near){if(+o.pc>0)o=Object.assign({},o,{v:(+o.v||0)+Math.min(.5,+o.pc)*me.mh});if(o.ov){const ex=me.hp+o.v-me.mh;if(ex>0){me.shv=Math.max(me.shv||0,Math.round(Math.min(ex,me.mh*.4)));me.shield=6}}me.hp=Math.min(me.mh,me.hp+o.v)}
 if(o.k==='atk'&&near)me.atk=o.v;if(o.k==='rinv'&&near&&me.cls&&me.down<=0){me.inv3=Math.max(me.inv3||0,+o.v||2);dn.push({x:me.x,y:me.y-60,v:'🕊️ อมตะ!',t:1,col:'#fff0b0'})}if(o.k==='rcr'&&near)me.rcrT=Math.max(me.rcrT||0,+o.v||10);if(o.k==='ras'&&near)me.rasT=Math.max(me.rasT||0,+o.v||10);
 if(o.k==='holy'&&o.inv&&me.cls&&dist(me,o)<o.r)me.inv3=+o.inv||3;
 if(o.k==='tstop'&&isHost())mons.forEach(m=>{if(dist(m,o)>=o.r)return;if(m.t>=3)m.sl=Math.max(m.sl||0,2.5);else m.root=Math.max(m.root||0,+o.dur||2.4)});
@@ -16082,7 +16088,7 @@ if(i<0)lockId=(l[1]||l[0]).id;else lockId=l[i+1]?l[i+1].id:null;}
 function nearestMon(rg){let b=null,bd=rg;mons.forEach(m=>{const d=dist(m,me)-bigR(m);if(d<bd){bd=d;b=m}});return b}
 const BFX={};let bfbKey='',bfbTip=null,bfbTipT=0;
 function buffList(){if(!me.cls||!run||me.down>0)return[];const L=[],add=(k,ic,n,d,t,col)=>{let mx=0;if(t>0){mx=BFX[k]=Math.max(BFX[k]||0,t)}L.push({k,ic,n,d,t:t||0,mx,col})};
-if(me.rage>0)add('rage','🔥','คลั่งโลหิต','ความเร็วโจมตี +'+Math.round(40*(me.rgP||1))+'% · ดูดเลือด +10%',me.rage,'#ff6a3a');
+if(me.rage>0)add('rage','🔥','คลั่งโลหิต','ความเร็วโจมตี +'+Math.round(40*(me.rgP||1))+'%'+(me.rnBlood>0?' · ยิ่งเลือดน้อยยิ่งตีแรง (ไม่ดูดเลือด)':me.rnRock>0?' · รับดาเมจ −25% (ไม่ดูดเลือด)':' · ดูดเลือด +10%'),me.rage,'#ff6a3a');
 if(me.atk>0)add('atk','⚔️','ปลุกพลัง','ดาเมจ +'+Math.round(me.atk/20*100)+'% (ค่อย ๆ ลดลง)',me.atk,'#ffb030');
 if(me.shield>0&&(me.shv|0)>0)add('shd','🛡️','เกราะคุ้มกัน','ดูดซับดาเมจได้อีก '+Math.round(me.shv).toLocaleString(),me.shield,'#8ad0ff');
 if(me.rsp>0)add('rsp','🛡️','เพิ่งฟื้น','อมตะ · มอนไม่สนใจ · ใช้สกิลไม่ได้',me.rsp,'#ffe08a');else if(me.inv3>0)add('inv','✨','พรศักดิ์สิทธิ์','ไม่ได้รับความเสียหาย',me.inv3,'#fff0a0');
@@ -16459,7 +16465,7 @@ if(c==='assn'){
 if(!k){const t=pickTarget(260);if(t){const a=Math.atan2(t.y-me.y,t.x-me.x);fx({k:'shadow',r:40});me.x=cl(t.x-Math.cos(a)*24,12,WW-12);me.y=cl(t.y-Math.sin(a)*24,12,WH-12);me.face=a;fx({k:'shadow',x:t.x,y:t.y,r:40,len:1});addHit(t,pd()*4*P,0,1,'assn');me.stealth=2.5}}
 else fx({k:'fog',r:100*P,dur:5*P,v:pd()*.35});
 }
-if(c==='sup')fx(k?{k:'atk',r:190,v:8*P}:{k:'heal',r:170,v:45*P*(hexR()?.7:1)*(supSolo()?1.6:1),ov:br1()?1:0});
+if(c==='sup')fx(k?{k:'atk',r:190,v:8*P}:{k:'heal',r:170,v:45*P*(hexR()?.7:1)*(supSolo()?1.6:1),pc:Math.round(.12*P*(hexR()?.7:1)*(supSolo()?1.6:1)*1000)/1000,ov:br1()?1:0});
 }
 const RCL=['#8a8a98','#2f9a4a','#2a6fd0','#8a3ad8','#d08a10','#d0202e','#e0409a'],RTINT=['#f2f2f6','#dff4e2','#dbe8fb','#ecdcfb','#fbe6b8','#fbd2d4','#fde0f2'],SI={w:'⚔️',a:'<svg viewBox="0 0 32 32" width="1.3em" height="1.3em" style="vertical-align:-.28em" aria-label="เกราะ" stroke-linejoin="round"><path d="M3 10Q4 5 10.5 5L12.5 6.5L12.5 13Q7.5 13.5 4 15Z" fill="#8e98a4" stroke="#2e3238" stroke-width="1.2"/><path d="M29 10Q28 5 21.5 5L19.5 6.5L19.5 13Q24.5 13.5 28 15Z" fill="#7d8791" stroke="#2e3238" stroke-width="1.2"/><path d="M9 7.5L13 5.5Q16 9 19 5.5L23 7.5L23 20Q23 26 16 29.5Q9 26 9 20Z" fill="#b8c2cc" stroke="#2e3238" stroke-width="1.3"/><path d="M10.6 9.5L14.6 9L14.6 19L10.6 18.5Z" fill="#e8eef3" opacity=".75"/><path d="M16 9.6V27.5" stroke="#6d7681" stroke-width="1.2"/><path d="M9 19.2H23V22.4H9Z" fill="#7a4f2a" stroke="#2e3238" stroke-width=".9"/><rect x="14.3" y="19" width="3.4" height="3.6" rx=".6" fill="#e0b030" stroke="#6a4a08" stroke-width=".7"/><circle cx="11.2" cy="8.4" r=".9" fill="#5a626c"/><circle cx="20.8" cy="8.4" r=".9" fill="#5a626c"/></svg>',c:'💍',h:'⛑️',b:'🥾'};
 const hdr=(ic,t,sub)=>'<div class="ph"><span class="ic">'+ic+'</span><div><b>'+t+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</div></div>';
@@ -16507,8 +16513,8 @@ h+='<details class="sk2b'+(full?' fu':'')+(b.star?' st':'')+'" data-skbn="'+b.bn
 if(lk.length){h+='<div class="sk2lh">🔒 ยังไม่ปลด</div>';lk.forEach(b=>{const need='ปลดที่ Lv '+b.rq+(b.aw?' + อาชีพขั้นที่ 2':''),left=me.lv<b.rq?' · อีก '+(b.rq-me.lv)+' เลเวล':(b.aw&&!me.cls2?' · ต้องเปลี่ยนอาชีพ':'');h+='<div class="sk2lk"><b>'+(b.star?'🌠 ':'⭐ ')+'สาย'+b.bn+'</b><small>'+need+left+'</small><span>'+b.N.map(n=>n.n).join(' · ')+'</span></div>'})}
 return h}
 function skActH(){const C=CL[me.cls],L=[];const row=(k,ic,nm,d,cd,mp,ok,lab,col)=>L.push('<details class="sk2a'+(ok?'':' lk')+'"><summary>'+skImg(me.cls,ic,40)+'<span class="nm"><b>'+nm+'</b><small><i class="dot" style="background:'+col+'"></i>'+lab+'</small></span><span class="cs"><em>⏱ '+cd+' วิ</em><em>💧 '+mp+'</em></span></summary><p>'+d+'</p></details>');
-row(0,0,C.s[0],'สกิลพื้นฐานช่องที่ 1',C.cds[0],C.mc[0],1,'ปุ่มสกิล 1','#7ab8ff');
-row(1,1,C.s[1],'สกิลพื้นฐานช่องที่ 2',C.cds[1],C.mc[1],1,'ปุ่มสกิล 2','#7ab8ff');
+row(0,0,C.s[0],(SK12D[me.cls]||[])[0]||'สกิลพื้นฐานช่องที่ 1',C.cds[0],C.mc[0],1,'ปุ่มสกิล 1','#7ab8ff');
+row(1,1,C.s[1],(SK12D[me.cls]||[])[1]||'สกิลพื้นฐานช่องที่ 2',C.cds[1],C.mc[1],1,'ปุ่มสกิล 2','#7ab8ff');
 {const u=SK3[me.cls],ok=me.lv>=SK3LV;row(3,3,u[0],u[1],u[2],u[3],ok,ok?'ปุ่มสีฟ้า':'🔒 ปลดที่ Lv '+SK3LV,'#4ac8ff')}
 {const u=sk4Of(),ok=!!me.cls2;row(4,4,u[0],u[1],u[2],u[3],ok,ok?'ปุ่มสีม่วงทอง':'🔒 ปลดเมื่อเป็นอาชีพขั้นที่ 2','#b070ff')}
 if(me.rb){applyS6();const u=sk6Of(),ok=s6Open();row(5,5,'🌅 '+u[0],u[1],u[2],u[3],ok,ok?'ปุ่มสีอรุณ':'🔒 ปลดที่ Lv '+RBL5,'#ff9a40')}
