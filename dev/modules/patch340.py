@@ -494,6 +494,7 @@ R("rp:rideRp()})","rp:rideRp(),sk:skP()})")
 R("rp:typeof ex[14]==='string'?ex[14]:''}","rp:typeof ex[14]==='string'?ex[14]:'',sk:typeof ex[15]==='string'?ex[15]:''}")
 R("rp:i.rp}","rp:i.rp,sk:i.sk}")
 R("rp:typeof r.rp==='string'?r.rp.slice(0,24):'',","rp:typeof r.rp==='string'?r.rp.slice(0,24):'',sk:typeof r.sk==='string'?r.sk.replace(/[^a-z0-9]/gi,'').slice(0,32):'',")
+R("if(me.cd<=0&&!rgMove&&!(me.rsp>0)){const t=pickTarget(","if(me.cd<=0&&!rgMove&&!(me.rsp>0)&&!SKB0){const t=pickTarget(")
 open(P,'w').write(s)
 print('ok')
 import subprocess
