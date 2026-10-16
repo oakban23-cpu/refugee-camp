@@ -11323,7 +11323,7 @@ setTimeout(()=>{try{
     try{sfx('lg_get')}catch(e){}gmUI(msg)};
 }catch(e){console.warn('sg gm',e)}},320);
 /* ---------- กรองข้อมูลรูนเสริมตอนโหลดเซฟ (cleanChar) — v389 แก้บั๊กรูนเสริมหายหลังรีเฟรช ---------- */
-function sgClean(x){if(!x||typeof x!=='object')return undefined;const ok=id=>typeof id==='string'&&/^[a-z]{2,8}$/.test(id),o={i:{},l:{},v:{},sv:[],g:x.g?1:0};
+function sgClean(x){if(!x||typeof x!=='object')return undefined;const ok=id=>typeof id==='string'&&/^[a-z]{2,8}$/.test(id),o={i:{},l:{},v:{},sv:[],g:x.g?1:0,gd:x.gd==null?undefined:Math.max(0,Math.min(9,x.gd|0)),gc:Math.max(0,Math.min(99,x.gc|0))};
   if(x.i&&typeof x.i==='object')Object.keys(x.i).slice(0,60).forEach(id=>{if(ok(id)){const v=Math.max(0,Math.min(999,Math.floor(+x.i[id]||0)));if(v)o.i[id]=v}});
   const cl=l=>{const r={};if(l&&typeof l==='object')['0','1','3','4','5'].forEach(k=>{if(Array.isArray(l[k])){const a=l[k].filter(ok).slice(0,3);if(a.length)r[k]=a}});return r};o.l=cl(x.l);
   if(x.v&&typeof x.v==='object')Object.keys(x.v).slice(0,60).forEach(id=>{if(ok(id))o.v[id]=Math.max(1,Math.min(3,Math.floor(+x.v[id]||1)))});
@@ -12355,15 +12355,15 @@ FXB.r27rf=(f,p,x,y,r,now)=>{const o=s6Own(f.u);if(o){x=o.x;y=o.y}const D=7,el=p*
 FXB.r27cd=(f,p,x,y,r,now)=>{const o=s6Own(f.u);if(o){x=o.x;y=o.y}const D=5,el=p*D,a=Math.min(1,el*4,(D-el)*8+.15),R=r||44,late=el>3.6,pu=.6+.4*Math.sin(now*(late?24:7)),gc=Math.round(215-140*p);g.save();VX.lite();
   g.save();g.translate(x,y);g.scale(1,.45);VX.ring(0,0,R,2,'255,210,140',.3*a);
   g.strokeStyle='rgba(255,'+gc+',60,'+(.95*a*pu)+')';g.lineWidth=6;g.lineCap='round';g.beginPath();g.arc(0,0,R,-Math.PI/2,-Math.PI/2+p*6.283);g.stroke();
-  g.strokeStyle='rgba(255,250,220,'+(.8*a)+')';g.lineWidth=2;g.beginPath();g.arc(0,0,R,-Math.PI/2+Math.max(0,p*6.283-.25),-Math.PI/2+p*6.283);g.stroke();g.restore();
+  if(!LOWQ){g.strokeStyle='rgba(255,250,220,'+(.8*a)+')';g.lineWidth=2;g.beginPath();g.arc(0,0,R,-Math.PI/2+Math.max(0,p*6.283-.25),-Math.PI/2+p*6.283);g.stroke();}g.restore();
   glowAt(x,y-22,24+22*p,'255,'+gc+',70',(.12+.42*p)*pu*a);
   const n=Math.ceil(D-el);if(n>=1&&n<=3){g.globalCompositeOperation='source-over';const s=1+.35*(1-((D-el)%1));g.save();g.translate(x,y+R*.45+16);g.scale(s,s);g.font='bold 14px sans-serif';g.textAlign='center';g.textBaseline='middle';
-    g.lineWidth=3;g.strokeStyle='rgba(70,20,0,'+a+')';g.strokeText(n,0,0);g.fillStyle='rgba(255,'+gc+',120,'+a+')';g.fillText(n,0,0);g.restore()}
+    if(!LOWQ){g.lineWidth=3;g.strokeStyle='rgba(70,20,0,'+a+')';g.strokeText(n,0,0)}g.fillStyle='rgba(255,'+gc+',120,'+a+')';g.fillText(n,0,0);g.restore()}
   g.restore()};
 FXB.r27hl=(f,p,x,y,r,now)=>{const o=s6Own(f.u);if(o){x=o.x;y=o.y}const D=6,el=p*D,a=Math.min(1,el*4,(D-el)*2),R=r||140;if(a<=.01)return;g.save();VX.lite();
   g.save();g.translate(x,y);g.scale(1,.5);VX.ring(0,0,R*.93,3,'110,255,150',.5*a);VX.ring(0,0,R*.62,1.5,'190,255,200',.32*a);g.restore();
   const n=VX.n(10,22);for(let i=0;i<n;i++){const an=fxR(f,i,1)*6.283,d=R*.9*Math.sqrt(fxR(f,i,2)),ph=(now*.55+fxR(f,i,3))%1,px=x+Math.cos(an)*d,py=y+Math.sin(an)*d*.5-ph*58,aa=a*Math.sin(ph*Math.PI);
-    glowAt(px,py,7,'100,255,140',.6*aa);g.fillStyle='rgba(225,255,225,'+(.9*aa)+')';g.fillRect(px-.9,py-3.2,1.8,6.4);g.fillRect(px-3.2,py-.9,6.4,1.8)}
+    if(!LOWQ)glowAt(px,py,7,'100,255,140',.6*aa);g.fillStyle='rgba(225,255,225,'+(.9*aa)+')';g.fillRect(px-.9,py-3.2,1.8,6.4);g.fillRect(px-3.2,py-.9,6.4,1.8)}
   if(o&&o===me&&me.hp<me.mh)glowAt(x,y-20,30,'120,255,150',.25*a*(.6+.4*Math.sin(now*5)));
   g.restore()};
 FXB.r27ln=(f,p,x,y,r,now)=>{const sx=f.sx,sy=f.sy-16,ex=x,ey=y-16,an=Math.atan2(ey-sy,ex-sx),L=Math.hypot(ex-sx,ey-sy),q=Math.min(1,p/.16),a=p<.16?1:Math.max(0,1-(p-.16)/.84),W=r||34,len=L*q;
@@ -12402,6 +12402,59 @@ setTimeout(()=>{
   try{const _c=s6Cast;s6Cast=function(){const a=arguments,t=this;return s5Run(()=>_c.apply(t,a))}}catch(e){}
   try{const _t=s6Tick;s6Tick=function(){const a=arguments,t=this;return s5Run(()=>_t.apply(t,a))}}catch(e){}
 },60);
+/* ---------- v403 คู่มือรูนสำหรับผู้เล่นใหม่ ----------
+   ระบบรูนมีหลายชั้น (รูนหลัก · รูนตามสาย · รูนเสริมลิงก์สกิล) แต่ไม่มีอะไรพาผู้เล่นไปลองเลย
+   การ์ด «🔮 คู่มือรูน» ใต้การ์ดเควส (แบบเดียวกับภารกิจจุติ) พาทำ 5 ขั้น · แตะการ์ด = ออโต้เดินไปหาช่างรูนไอริสในค่าย
+   1 คุยกับไอริส (ได้ผงรูน 30 = พอสร้างรูนแรก) · 2 สร้างรูนหลัก · 3 ใส่รูนให้สกิล · 4 ใช้สกิลที่ใส่รูน 3 ครั้ง · 5 (Lv 20) ลิงก์รูนเสริม
+   เริ่มที่ Lv 10 · ความคืบหน้าเก็บใน rn.x.gd / rn.x.gc (เซฟติดตัวละคร) · ตัวเก่าที่ใช้รูนเป็นแล้วข้ามขั้นที่ทำแล้วโดยไม่รับของซ้ำ */
+const RGLV=10,RGN=5;
+const RGS=[
+ {t:'คุยกับช่างรูนไอริสในค่าย',d:'ไอริสจะมอบผงรูน 💠30 พอสร้างรูนแรก',rw:{sh:30}},
+ {t:'สร้างรูนหลักอันแรก',d:'ที่ช่างรูน เลือกรูนของสกิลไหนก็ได้ แล้วกด «สร้าง»',rw:{sh:10,g:1500}},
+ {t:'ใส่รูนให้สกิล',d:'กด «ใส่» ที่รูนที่สร้าง (ใส่/ถอดได้เฉพาะในค่าย)',rw:{g:2000}},
+ {t:'ใช้สกิลที่ใส่รูน 3 ครั้ง',d:'รูนเปลี่ยนวิธีทำงานของสกิล — ลองดูว่าต่างจากเดิมยังไง',rw:{sh:20}},
+ {t:'ลิงก์รูนเสริมกับสกิล',d:'แท็บ «🔗 รูนเสริม · ลิงก์» ที่ช่างรูน · ได้รูนเสริมฟรี 3 อันตอน Lv 20',rw:{sh:40,sg:1}}];
+let RGOPEN=0;
+function rgSt(){const X=sgSt();if(X.gd==null){const S=rnSt(),hasU=Object.keys(S.u||{}).some(k=>S.u[k]),hasL=Object.keys(X.l||{}).some(k=>(X.l[k]||[]).length);X.gd=hasL?RGN:hasU?4:0;X.gc=0}return X}
+function rgStep(){if(!me.cls)return RGN;return Math.max(0,Math.min(RGN,rgSt().gd|0))}
+function rgShow(){if(!me.cls||!run||me.lv<RGLV)return false;try{if(isDg()||isArena())return false}catch(e){}const s=rgStep();if(s>=RGN)return false;if(s===4&&sgSockN()<1)return false;return true}
+function rgDone(s){const X=rgSt();if((X.gd|0)!==s)return;const R=RGS[s].rw,S=rnSt(),P=[];
+  if(R.sh){S.sh=Math.min(99999,(S.sh|0)+R.sh);P.push('💠'+R.sh)}if(R.g){me.gold=(me.gold|0)+R.g;P.push('🪙'+R.g.toLocaleString())}if(R.sg){try{sgGive(null,'คู่มือรูน')}catch(e){}P.push('รูนเสริม 1 อัน')}
+  X.gd=s+1;X.gc=0;try{sfx('quest')}catch(e){}try{burst(me.x,me.y-24,['#c8a0ff','#ffffff','#8fd0ff'],20,120,.7,{glow:1,g:-30})}catch(e){}
+  banner={s:(X.gd>=RGN?'🔮 จบคู่มือรูนแล้ว! ':'🔮 คู่มือรูน '+X.gd+'/'+RGN+' สำเร็จ · ')+'ได้ '+P.join(' · '),t:5};try{sysMsg('🔮 คู่มือรูน: '+RGS[s].t+' ✔ · ได้ '+P.join(' · '))}catch(e){}
+  if(X.gd===4&&sgSockN()<1)try{sysMsg('🔮 ขั้นสุดท้าย (ลิงก์รูนเสริม) จะเปิดตอน Lv '+SGLV[0])}catch(e){}rgHud()}
+function rgCheck(){if(!me.cls||me.lv<RGLV)return;const s=rgStep();if(s>=RGN)return;const S=rnSt(),X=rgSt();
+  if(s===1&&Object.keys(S.u).some(k=>S.u[k]))rgDone(1);
+  else if(s===2&&[0,1,2,3,4,5].some(k=>{try{return!!rnOf(k)}catch(e){return false}}))rgDone(2);
+  else if(s===3&&(X.gc|0)>=3)rgDone(3);
+  else if(s===4&&SGK.some(k=>sgLinks(k).length))rgDone(4)}
+function rgHud(){let e=$('rnq');if(!e){const p=$('rbq');if(!p||!p.parentNode)return;e=document.createElement('div');e.id='rnq';e.hidden=true;p.parentNode.insertBefore(e,p.nextSibling);rgCSS()}
+  if(!rgShow()){if(!e.hidden)e.hidden=true;return}const s=rgStep(),X=rgSt(),st=RGS[s],on=typeof AQ!=='undefined'&&AQ&&AQ.src==='rn',walk=s!==3;
+  let mn=false;try{mn=localStorage.getItem('refugee_rnqmin')==='1'}catch(_){mn=!!window._rnqMin}
+  const pr=s===3?' ('+Math.min(3,X.gc|0)+'/3)':'',h=mn?'<b class="rm">🔮 <em>'+(on?'🧭 ':'')+'รูน '+s+'/'+RGN+'</em></b>':
+    '<i class="rqx" data-rqx="1" aria-label="ย่อ"><svg viewBox="0 0 10 10" width="10" height="10"><path d="M6.7 1.7 3.5 5l3.2 3.3" fill="none" stroke="#1a0e2a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></i><b>🔮 คู่มือรูน <small class="rp">· '+s+'/'+RGN+'</small></b><small class="rs">🔮 '+s+'/'+RGN+'</small><span><b>'+st.t+pr+'</b><br>'+st.d+'</span>'+
+    (walk?(on?'<u class="on">🧭 '+(AQ.msg||'ไปหาไอริส')+' · แตะเพื่อหยุด</u>':'<u>🧭 แตะเพื่อเดินไปหาช่างรูนไอริส</u>'):'');
+  if(e.dataset.h!==h){e.dataset.h=h;e.innerHTML=h}e.classList.toggle('min',mn);e.classList.toggle('al',s===0);if(e.hidden)e.hidden=false;
+  if(!e.dataset.w){e.dataset.w=1;e.addEventListener('click',ev=>{ev.stopPropagation();if(ev.target.closest('[data-rqx]')||e.classList.contains('min')){const v=e.classList.contains('min')?'0':'1';try{localStorage.setItem('refugee_rnqmin',v)}catch(_){}window._rnqMin=v==='1';try{sfx('click')}catch(_){}e.dataset.h='';rgHud();return}
+    const s=rgStep();if(s===3){banner={s:'🔮 ใช้สกิลที่ใส่รูนอีก '+Math.max(0,3-(rgSt().gc|0))+' ครั้ง (ใช้ที่ไหนก็ได้)',t:3};return}
+    if(curMap===1){const N=MAPS[1].npc5;if(N&&Math.hypot(me.x-N.x,me.y-N.y)<90){if(s===4)SGTAB='sup';runeUI();return}}
+    if(AQ&&AQ.src==='rn')aqStop('🧭 หยุดออโต้เควส');else aqStart('rn')})}}
+/* ใช้สไตล์เดียวกับการ์ดภารกิจจุติ (#rbq) แต่โทนม่วง */
+function rgCSS(){if($('rgcss'))return;let css='';try{for(const sh of document.styleSheets){let R;try{R=sh.cssRules}catch(e){continue}const walk=(L,wrap)=>{for(const r of L){if(r.cssRules&&r.media){walk(r.cssRules,'@media '+r.media.mediaText);continue}if(r.selectorText&&r.selectorText.indexOf('#rbq')>=0){const t=r.cssText.split('#rbq').join('#rnq');css+=wrap?wrap+'{'+t+'}':t}}};walk(R,'')}}catch(e){}
+  css+='#rnq{background:linear-gradient(135deg,rgba(40,18,70,.86),rgba(16,10,30,.86))!important;border-color:#b48cff!important;box-shadow:0 0 10px rgba(180,140,255,.35)!important;color:#efe4ff!important}#rnq b{color:#d8c0ff!important}#rnq span b{color:#fff!important}#rnq u{color:#d8c8ff!important}#rnq.al{border-color:#e0d0ff!important;box-shadow:0 0 14px rgba(200,170,255,.75)!important}';
+  const st=document.createElement('style');st.id='rgcss';st.textContent=css;document.head.appendChild(st)}
+setTimeout(()=>{
+  /* ออโต้เควส src 'rn' → เดินไปไอริส (ใช้ act 'talk' เดิม: เดินถึงแล้วกดปุ่มคุย = เปิดหน้าช่างรูน) */
+  try{const _np=aqNpcPos;aqNpcPos=function(k){if(k==='iris'){const N=curMap===1&&MAPS[1].npc5;return N&&N.x>0?{x:N.x,y:N.y}:null}return _np.apply(this,arguments)}}catch(e){}
+  try{const _at=aqTarget;aqTarget=function(){if(AQ&&AQ.src==='rn'){const s=rgStep();if(s>=RGN||s===3)return{none:1,msg:'🔮 ขั้นนี้ทำที่ไหนก็ได้'};return{mp:1,act:'talk',k:'iris',lb:'ไปหาช่างรูนไอริส'}}return _at.apply(this,arguments)}}catch(e){}
+  try{const _ak=aqKey;aqKey=function(){if(AQ&&AQ.src==='rn')return'rn'+rgStep()+(curMap===1?1:0);return _ak.apply(this,arguments)}}catch(e){}
+  try{const _ru=runeUI;runeUI=function(msg){const s=rgStep(),open=!!me.cls&&me.lv>=RGLV&&s<RGN;if(open&&curMap===1&&s===0){RGOPEN=1}
+      if(AQ&&AQ.src==='rn'){const a=AQ;aqStop();if(s===4)SGTAB='sup'}
+      if(!msg&&open&&curMap===1&&s>=1&&s<=2)msg='🔮 คู่มือรูน: '+(s===1?'กด «สร้าง» ที่รูนของสกิลไหนก็ได้ (ใช้ 💠'+RNC+')':'กด «ใส่» ที่รูนที่สร้างไว้');
+      const r=_ru.call(this,msg);if(RGOPEN){RGOPEN=0;setTimeout(()=>{try{rgDone(0);runeUI('🔮 ไอริส: "ผงรูน 30 นี่ของเจ้า ลองสร้างรูนแรกดูสิ"')}catch(e){}},250)}return r}}catch(e){}
+  try{const _us=useSkill;useSkill=function(k){const s0=me.sk&&me.sk[k]||0;const r=_us.apply(this,arguments);try{if(rgStep()===3&&me.sk&&(me.sk[k]||0)>s0&&rnOf(k)){const X=rgSt();X.gc=(X.gc|0)+1;rgHud()}}catch(e){}return r}}catch(e){}
+  setInterval(()=>{try{rgCheck();rgHud()}catch(e){}},1000);
+},400);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();

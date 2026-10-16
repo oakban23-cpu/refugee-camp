@@ -5,7 +5,7 @@ def R(a,b,cnt=1):
     n=s.count(a)
     assert n==cnt,(n,a[:80])
     s=s.replace(a,b)
-mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()+open('ux14.js').read()+open('ux15.js').read()+open('ux16.js').read()+open('ux17.js').read()+open('ux18.js').read()+open('ux19.js').read()+open('ux20.js').read()+open('ux21.js').read()+open('ux22.js').read()+open('ux23.js').read()+open('ux24.js').read()+open('ux25.js').read()+open('ux26.js').read()+open('ux27.js').read()+open('ux28.js').read()+open('ux29.js').read()
+mod=open('p6a.js').read()+open('p6b.js').read()+open('p6c.js').read()+open('p6d.js').read()+open('p6e.js').read()+open('p6f.js').read()+open('dep1.js').read()+open('dep2.js').read()+open('dep3.js').read()+open('dep4.js').read()+open('dep5.js').read()+open('dep6.js').read()+open('p7a.js').read()+open('p7b.js').read()+open('p7c.js').read()+open('p7d.js').read()+open('p7e.js').read()+open('p7f.js').read()+open('p7g.js').read()+open('p7h.js').read()+open('ux1.js').read()+open('ux2.js').read()+open('ux3.js').read()+open('ux4.js').read()+open('ux5.js').read()+open('ux6.js').read()+open('ux7.js').read()+open('ux8.js').read()+open('ux9.js').read()+open('ux10.js').read()+open('ux11.js').read()+open('ux12.js').read()+open('ux13.js').read()+open('ux14.js').read()+open('ux15.js').read()+open('ux16.js').read()+open('ux17.js').read()+open('ux18.js').read()+open('ux19.js').read()+open('ux20.js').read()+open('ux21.js').read()+open('ux22.js').read()+open('ux23.js').read()+open('ux24.js').read()+open('ux25.js').read()+open('ux26.js').read()+open('ux27.js').read()+open('ux28.js').read()+open('ux29.js').read()+open('ux30.js').read()
 R("const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;","const ok=(x,y,pad)=>{if(x<80||y<80||x>WW-80||y>WH-80)return false;if(curMap===30&&!brgIn(x,y,30))return false;")
 R("function drawPalGate(G){","\n"+mod+"\nfunction drawPalGate(G){")
 R("CASTM=m=>m>=27&&m<=29","CASTM=m=>m>=27&&m<=33")
@@ -427,6 +427,8 @@ R("(ok?'':'<br><small>❌ ต้องการแท็ก: '+SGD[id][4].split(
 # v402 ดาเมจจากสกิลคลาส 3 นับเป็นช่อง 5
 R("function sgSlot(ck,lv){if(SGX){","function sgSlot(ck,lv){if(S5CTX&&!SGX)return 5;if(SGX){")
 R("if(m){addHit(m,(pd()*.9+d*.3)*(me.s6gM&&me.s6gT>0?me.s6gM:1),0,3,'melee');","if(m){s5Run(()=>addHit(m,(pd()*.9+d*.3)*(me.s6gM&&me.s6gT>0?me.s6gM:1),0,3,'melee'));")
+# v403 คู่มือรูน: เก็บความคืบหน้าใน rn.x
+R("o={i:{},l:{},v:{},sv:[],g:x.g?1:0};","o={i:{},l:{},v:{},sv:[],g:x.g?1:0,gd:x.gd==null?undefined:Math.max(0,Math.min(9,x.gd|0)),gc:Math.max(0,Math.min(99,x.gc|0))};")
 open(P,'w').write(s)
 print('ok')
 import subprocess
