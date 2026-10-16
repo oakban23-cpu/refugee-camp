@@ -1,6 +1,6 @@
 /* ---------- v416 ขี่คอต่อตัว (เฉพาะในปาร์ตี้) ----------
    แตะ 🧗 ที่ชื่อเพื่อนในแถบปาร์ตี้ด้านขวา → ปีนขึ้นขี่คอ (ถ้าเพื่อนมีคนขี่อยู่แล้ว จะปีนขึ้นไปบนสุดของหอ)
-   ฐาน (ล่างสุด) = เดิน/บังคับทิศ และ **รับดาเมจทั้งหมด** แทนคนข้างบน · v417 ฐานเป็นโล่ล้วน โจมตี/ใช้สกิลไม่ได้ · คนขี่คอ = ไม่โดนดาเมจ โจมตี/ใช้สกิลได้ตามปกติ
+   ฐาน (ล่างสุด) = เดิน/บังคับทิศ และ **รับดาเมจทั้งหมด** แทนคนข้างบน · v417 ฐานเป็นโล่ล้วน โจมตี/ใช้สกิล/หลบไม่ได้ · คนขี่คอ = ไม่โดนดาเมจ โจมตี/ใช้สกิลได้ตามปกติ
    สูงสุด 3 คนบนฐาน (รวม 4) · ลง: ปุ่ม «🧗 ลงจากคอ» / ดันจอยค้าง · ฐานกด «ให้ทุกคนลง» ได้
    หลุดอัตโนมัติ: ฐานล้ม ไปแมพอื่น ออกจากปาร์ตี้ หรือขี่สัตว์ · คนขี่ล้ม
    presence ช่องใหม่ sk = uid ฐาน + 'x' + ลำดับเวลาที่ปีน (ใช้เรียงชั้น) · ดาเมจของคนขี่ส่งไปฐานผ่าน fx skd */
@@ -35,7 +35,7 @@ function skTick(dt){if(!SKE.b)return;const RB=skRoot(uid),o=others[RB];
   me.x=o.x;me.y=o.y;me.face=(o.fx||1)<0?Math.PI:0;me.riding=0}
 /* ฐาน: เช็กคนขึ้น/ลง เพื่อแจ้ง */
 let SKSEEN='',SKB0=0,SKBT=0;
-function skBaseNo(){const n=performance.now();if(n-SKBT>1500){SKBT=n;try{dn.push({x:me.x,y:me.y-58,v:'🛡️ เป็นฐานอยู่ — โจมตีไม่ได้',t:1,col:'#ffe08a'})}catch(e){}}}
+function skBaseNo(){const n=performance.now();if(n-SKBT>1500){SKBT=n;try{dn.push({x:me.x,y:me.y-58,v:'🛡️ เป็นฐานอยู่ — โจมตี/หลบไม่ได้',t:1,col:'#ffe08a'})}catch(e){}}}
 function skBaseWatch(){const RR=skRiders(uid),R=RR.map(r=>r.u).join(',');const was=SKB0;SKB0=RR.length>0?1:0;if(SKB0&&!was)try{me.cast=null}catch(e){}if(R===SKSEEN)return;const old=SKSEEN?SKSEEN.split(','):[],now=R?R.split(','):[];SKSEEN=R;
   now.filter(u=>old.indexOf(u)<0).forEach(u=>{banner={s:'🧗 '+skNm(u)+' ขึ้นขี่คอคุณ · 🛡️ คุณเป็นฐาน: เดินพาหอ + รับดาเมจแทนทุกคน (โจมตีไม่ได้) ('+now.length+'/'+SKMAX+')',t:4}})}
 /* ป้ายชื่อรวมของหอ (ฐาน) */
@@ -54,6 +54,7 @@ setTimeout(()=>{
   try{const _f=handleFx;handleFx=function(o){if(o&&(o.k==='skd'||o.k==='skx')){try{if(o.to===uid&&me.cls){if(o.k==='skd'){const s=skOf(o.by);if(s&&skRoot(o.by)===uid&&o.d>0)hurt(Math.min(o.d,me.mh*2))}else if(o.k==='skx'&&SKE.b&&(SKE.b===o.by||skRoot(uid)===o.by))skDrop('🧗 '+skNm(o.by)+' ให้ทุกคนลงจากคอ')}}catch(e){}return}return _f.apply(this,arguments)}}catch(e){}
   /* ฐาน = โล่: ใช้สกิลไม่ได้ (ตีปกติถูกกันใน updateMe) */
   try{const _us=useSkill;useSkill=function(k){if(SKB0){skBaseNo();return}return _us.apply(this,arguments)}}catch(e){}
+  try{const _dg=dodge;dodge=function(){if(SKB0){skBaseNo();return false}return _dg.apply(this,arguments)}}catch(e){}
   try{const _mt=mountToggle;mountToggle=function(){if(SKE.b){banner={s:'🧗 กำลังขี่คออยู่ · ลงก่อน',t:2};return}if(!me.riding&&skRiders(uid).length){banner={s:'🧗 มีคนขี่คออยู่ · ให้ลงก่อนขี่สัตว์',t:2};return}return _mt.apply(this,arguments)}}catch(e){}
   /* ปุ่มลอยเดียวกับซ้อนท้าย (#rdb): ลงจากคอ / ให้ทุกคนลง */
   try{const _ru=rdUI;rdUI=function(){_ru.apply(this,arguments);const b=$('rdb');if(!b||RDF)return;let tx='',f='';if(me.cls&&run&&ov.hidden&&!SD.on){if(SKE.b){tx='🧗 ลงจากคอ';f='skoff'}else{const n=skRiders(uid).length;if(n){tx='🧗 ให้ทุกคนลง ('+n+')';f='skall'}}}
