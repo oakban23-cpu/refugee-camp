@@ -13025,18 +13025,18 @@ function rdStop(msg){if(!RDE.on)return;const p=rdPos(RDE.o);RDE.on=0;RDE.o='';if
 /* ปุ่มลอย (สไตล์เดียวกับปุ่มเต็นท์) */
 function rdBtn(){let b=$('rdb');if(!b){const t=$('tnb');if(!t||!t.parentNode)return null;b=document.createElement('button');b.id='rdb';b.hidden=true;t.parentNode.insertBefore(b,t.nextSibling);
     let css='';try{for(const sh of document.styleSheets){let R;try{R=sh.cssRules}catch(e){continue}for(const r of R){if(r.selectorText==='#tnb')css+=r.cssText.split('#tnb').join('#rdb')}}}catch(e){}
-    css+='#rdb{bottom:292px!important;background:linear-gradient(#6a4a2a,#3a2614)!important;border-color:#e8c890!important}#rdb.ask{background:linear-gradient(#3a7a3a,#1e4a1e)!important;border-color:#a8f0a8!important;animation:rdp 1s infinite}@keyframes rdp{50%{box-shadow:0 0 22px rgba(160,255,160,.9)}}';
+    css+='#rdb{left:auto!important;right:10px!important;bottom:262px!important;transform:none!important;padding:7px 11px!important;font-size:12.5px!important;max-width:48%;overflow:hidden;text-overflow:ellipsis;border-radius:18px;background:linear-gradient(#6a4a2a,#3a2614)!important;border-color:#e8c890!important}@media (max-height:780px){#rdb{bottom:236px!important}}@media (max-height:700px){#rdb{bottom:212px!important}}#rdb.ask{background:linear-gradient(#3a7a3a,#1e4a1e)!important;border-color:#a8f0a8!important;animation:rdp 1s infinite}@keyframes rdp{50%{box-shadow:0 0 22px rgba(160,255,160,.9)}}';
     const st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
     b.addEventListener('click',e=>{e.stopPropagation();rdClick()})}return b}
 function rdNear(){if(!me.cls||me.riding||RDE.on||me.down>0)return null;let best=null,bd=64;for(const k in others){const o=others[k];if(!o||!(o.mt>0)||o.hp<=0||o.rp)continue;if(rdPassOf(k))continue;const d=Math.hypot(o.x-me.x,o.y-me.y);if(d<bd){bd=d;best=k}}return best}
-let RDF='';
+let RDF='';const rdSn=n=>{n=String(n||'');return n.length>10?n.slice(0,9)+'…':n};
 function rdUI(){const b=rdBtn();if(!b)return;let tx='',f='',ask=0;const now=performance.now();
   if(me.cls&&run&&ov.hidden&&!SD.on){
-    if(RDE.on){tx='🐎 ลงจากหลัง ('+rdName(RDE.o)+')';f='off'}
-    else if(RDP.u&&now<RDP.t&&me.riding&&!rdPassOf(uid)){tx='✅ รับ '+RDP.n+' ซ้อนท้าย';f='acc';ask=1}
+    if(RDE.on){tx='🐎 ลงจากหลัง';f='off'}
+    else if(RDP.u&&now<RDP.t&&me.riding&&!rdPassOf(uid)){tx='✅ รับ '+rdSn(RDP.n)+' ซ้อน';f='acc';ask=1}
     else if(RDE.req&&now<RDE.reqT){tx='⏳ รอ '+rdName(RDE.req)+' ตอบรับ…';f='wait'}
-    else if(me.riding&&rdPassOf(uid)){const pu=rdPassOf(uid);tx='🐎 ให้ '+rdName(pu)+' ลง';f='kick:'+pu}
-    else{const k=rdNear();if(k){tx='🐎 ขอซ้อนท้าย '+rdName(k);f='req:'+k}}}
+    else if(me.riding&&rdPassOf(uid)){const pu=rdPassOf(uid);tx='🐎 ให้ '+rdSn(rdName(pu))+' ลง';f='kick:'+pu}
+    else{const k=rdNear();if(k){tx='🐎 ขอซ้อน '+rdSn(rdName(k));f='req:'+k}}}
   if(b.hidden!==!tx)b.hidden=!tx;if(tx&&b.textContent!==tx)b.textContent=tx;b.classList.toggle('ask',!!ask);b.disabled=f==='wait';RDF=f}
 function rdClick(){const f=RDF;if(!f)return;
   if(f==='off'){const o=RDE.o;rdStop('🐎 ลงจากหลัง '+rdName(o)+' แล้ว');return}
