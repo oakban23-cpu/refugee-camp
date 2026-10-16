@@ -40,7 +40,7 @@ function send(c,str,droppable){if(c.dead||!c.sock.writable)return;
 function kill(c){if(c.dead)return;c.dead=true;clients.delete(c);if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);if(c.mid&&byMid.get(c.mid)===c)byMid.delete(c.mid);try{c.sock.destroy()}catch(e){}}
 const num=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,v)):d;
 function cleanPresence(p){return{uid:String(p.uid||'').slice(0,12),x:num(p.x,0,20000,0),y:num(p.y,0,20000,0),hp:num(p.hp,0,1e6,0),mh:num(p.mh,1,1e6,1),
-  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,rb:num(p.rb|0,0,2,0),mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,399,0),bt:num(p.bt|0,0,399,0),wp:num(p.wp|0,0,399,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,399,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),aw:p.aw?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,30,0),sw:p.sw?1:0,as:num(p.as|0,0,200,0),rw:p.rw?1:0,sd:num(p.sd|0,0,9,0),zz:p.zz?1:0,fa:num(p.fa|0,0,40,0)}}
+  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,rb:num(p.rb|0,0,2,0),mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,399,0),bt:num(p.bt|0,0,399,0),wp:num(p.wp|0,0,399,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,399,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),aw:p.aw?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,30,0),sw:p.sw?1:0,as:num(p.as|0,0,200,0),rw:p.rw?1:0,sd:num(p.sd|0,0,9,0),zz:p.zz?1:0,fa:num(p.fa|0,0,40,0),rp:/^[a-z0-9]{1,24}$/i.test(String(p.rp||''))?String(p.rp):''}}
 const inMap=mp=>{const a=[];for(const c of clients)if(c.p&&c.p.mp===mp)a.push(c);return a};
 /* เลือก host ต่อแมพ: คงคนเดิมไว้ถ้ายังใช้ได้ · ข้ามคนที่พับจอ/ไม่ส่ง world · เลือกคนที่อยู่ในแมพนานสุด */
 function okHost(c,now){return c.p&&!c.dead&&!c.p.aw&&!(c.badUntil>now)}
@@ -61,7 +61,7 @@ function tickPeers(){
     if(cand.length>MAXPEERS){cand.sort((a,b)=>a[0]-b[0]);cand.length=MAXPEERS}
     const rows=[],info=[],seen=new Map();
     for(const [,o] of cand){const p=o.p;rows.push([p.uid,Math.round(p.x),Math.round(p.y),Math.round(p.hp),p.sl,p.at|0]);
-      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt,p.im,p.sw|0,p.as|0,p.rw|0,p.rb|0,p.sd|0,p.zz|0,p.fa|0];
+      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt,p.im,p.sw|0,p.as|0,p.rw|0,p.rb|0,p.sd|0,p.zz|0,p.fa|0,p.rp||''];
       const key=p.n+'|'+p.cls+'|'+p.lv+'|'+p.mh+'|'+p.mp+'|'+p.hd+'|'+p.bt+'|'+p.tt+'|'+ex.join(',');seen.set(p.uid,key);
       if(c.known.get(p.uid)!==key)info.push([p.uid,p.n,p.cls,p.lv,p.mh,p.mp,p.hd,p.bt,p.tt,ex])}
     c.known=seen;
@@ -122,6 +122,7 @@ function onEmit(c,m){
     const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>lbId(r)===lbId(row));if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
     arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;
     /* ตารางคะแนนฤดูกาลรายเดือน sYYMM: เก็บไว้แค่ 3 ฤดูกาลล่าสุด */if(ss){const ks=Object.keys(LB).filter(x=>/^s\d{4}$/.test(x)).sort();while(ks.length>3)delete LB[ks.shift()]}return}
+  if(k==='ride'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;d.n=String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24);if(typeof d.why==='string')d.why=d.why.slice(0,40);send(o,wrap(d))}return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='pvc'||k==='pva'||k==='pvn'||k==='pvh'||k==='pvd'||k==='pvt'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||'';send(o,wrap(d))}return}
   if(k==='mkq'||k==='mkl'||k==='mkb'||k==='mkx'||k==='mkc'){const why=mkGate(c,d,k);if(why){const t=String(d&&d.t||'').slice(0,12);
@@ -238,7 +239,7 @@ setInterval(()=>{const now=Date.now(),dk=new Date(now+7*3600e3).toISOString().sl
   if(!mlDirty)return;mlDirty=false;wj(MLF,ML)},15000);
 function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
 /* เวอร์ชันเซิร์ฟเวอร์ (เปิด /version เช็กว่า Render ใช้โค้ดล่าสุดแล้ว) */
-const SRV_V='v413';
+const SRV_V='v414';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
