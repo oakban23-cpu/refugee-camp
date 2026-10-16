@@ -11046,7 +11046,7 @@ const SGTN={atk:'โจมตี',aoe:'วงกว้าง',melee:'ประ�
 /* id: [ไอคอน, ชื่อ, คำอธิบาย, หมวด, เงื่อนไขแท็ก, ตัวคูณ] */
 const SGD={
  echo:['🔁','ร่ายซ้ำ','ร่ายสกิลซ้ำเองอีกครั้งหลัง 0.4 วิ (ครั้งที่สองพลัง 60%)','cast','!self',{mana:1.4,cd:1.1}],
- split:['👥','แยกร่าง','สกิลแยกไปเกิดซ้ำที่มอน 2 ตัวถัดไป (จุดละ 50%) · สกิลฮีล/บัฟจะแยกไปเกิดที่เพื่อนปาร์ตี้แทน','cast','!self',{mana:1.5}],
+ split:['👥','แยกร่าง','สกิลแยกไปเกิดซ้ำที่มอน 2 ตัวถัดไป (จุดละ 35%) · สกิลฮีล/บัฟจะแยกไปเกิดที่เพื่อนปาร์ตี้แทน','cast','!self',{mana:1.5}],
  party:['🤝','สายใยทีม','ทุกครั้งที่ร่าย สกิลเกิดซ้ำที่ตัวเพื่อนปาร์ตี้ทุกคนในแมพ (คนละ 60%)','cast','!self',{mana:1.3}],
  totem:['🗿','ทอเท็ม','ปักทอเท็มที่ร่ายสกิลนี้แทนเรา นาน 9 วิ (ครั้งละ 45% · ร่ายถี่สุดทุก 1.8 วิ สกิลคูลดาวน์ยาวจะร่ายห่างขึ้น) · ตัวเราไม่ได้ร่ายเอง','cast','!self !move',{cd:1.2}],
  trap:['🪤','กับดัก','โยนกับดักใส่เป้า มอนเหยียบแล้วระเบิดเป็นสกิลนี้ (พลัง 130%) · วางค้างได้ 3 อัน','cast','!self !move',{}],
@@ -11057,13 +11057,13 @@ const SGD={
  ice:['❄️','ธาตุน้ำแข็ง','ดาเมจกลายเป็นน้ำแข็ง โอกาส 20% แช่แข็ง 1.2 วิ (บอสโดนช้าลงแทน)','elem','atk',{mana:1.1}],
  zap:['⚡','ธาตุสายฟ้า','ดาเมจกลายเป็นสายฟ้า เป้าช็อตรับดาเมจเรา +25% 3 วิ และไฟฟ้ากระโดดต่ออีก 1 ตัว (30%)','elem','atk',{mana:1.1}],
  chain:['⛓️','โซ่','ทุกครั้งที่โดน เด้งต่อไปมอนอีก 2 ตัว (60% → 40%)','hit','atk',{mana:1.25,pow:.9}],
- wide:['🌐','กระจายวง','ทุกครั้งที่โดน กระเซ็นใส่มอนรอบเป้า (45%)','hit','atk',{mana:1.25,pow:.9}],
+ wide:['🌐','กระจายวง','ทุกครั้งที่โดน กระเซ็นใส่มอนรอบเป้า (40% · สูงสุด 5 ตัว)','hit','atk',{mana:1.25,pow:.9}],
  burst:['💥','ระเบิดซาก','มอนที่ตายจากสกิลนี้ระเบิดใส่รอบ ๆ (15% ของเลือดสูงสุดของมอนตัวนั้น)','hit','atk',{mana:1.2}],
  leech:['🩸','ดูดชีวิต','ดาเมจจากสกิลนี้ดูดเลือด 3% และมานา 0.5%','hit','atk',{pow:.9}],
  prec:['🔍','แม่นยำ','สกิลนี้โอกาสคริ +25% และดาเมจคริ +30%','stat','atk',{mana:1.2}],
- brut:['💢','ทุ่มสุดตัว','พลังสกิล +45% แต่คูลดาวน์นานขึ้น 35%','stat','',{pow:1.45,cd:1.35}],
+ brut:['💢','ทุ่มสุดตัว','พลังสกิล +45% แต่คูลดาวน์นานขึ้น 35% · โบนัสพลังจากรูนเสริมหลายอันบวกกัน ไม่คูณทบ','stat','',{pow:1.45,cd:1.35}],
  haste:['⏩','เร่งร่าย','คูลดาวน์ −35% แต่พลังเหลือ 80%','stat','',{cd:.65,pow:.8}],
- blood:['🫀','สังเวยโลหิต','ใช้เลือดแทนมานา (4% ของเลือดสูงสุด × ตัวคูณมานา) พลัง +15%','stat','',{pow:1.15}],
+ blood:['🫀','สังเวยโลหิต','ใช้เลือดแทนมานา (4% ของเลือดสูงสุด × ตัวคูณมานา) พลัง +15% (บวกกับโบนัสพลังรูนเสริมอื่น)','stat','',{pow:1.15}],
  pierce:['🏹','ทะลุทวีคูณ','ยิงเพิ่มอีก 2 ลูกใส่มอนตัวถัดไป (ลูกละ 60%) และทุกลูกทะลุโดนมอนในแนวทาง (40%)','rare','proj',{mana:1.35}],
  minion:['👻','วิญญาณรับใช้','ร่ายแล้วเรียกวิญญาณลอยตามตัว 12 วิ คอยร่ายสกิลนี้ใส่มอนใกล้ ๆ เอง (ครั้งละ 35%)','rare','!self !move',{mana:1.3,cd:1.4}],
  charge:['⏳','สะสมพลัง','ร่าย 2 ครั้งแรกพลังเหลือ 75% ครั้งที่ 3 ปลดพลังทั้งหมด ×2.6','rare','',{}],
@@ -11082,7 +11082,7 @@ function sgOk(id,k){const d=SGD[id];if(!d)return false;const T=sgTags(k);if(T.in
 const SGSOLO={echo:1,split:1,party:1,totem:1,trap:1,coc:1,cok:1,minion:1,pierce:1};
 function sgLinks(k){if(!me.cls||SGK.indexOf(k)<0)return[];const a=sgSt().l[k];if(!Array.isArray(a))return[];return a.slice(0,sgSockN()).filter(id=>id&&sgOk(id,k))}
 function sgHas(k,id){return sgLinks(k).indexOf(id)>=0}
-function sgMods(k){const o={mana:1,cd:1,pow:1};sgLinks(k).forEach(id=>{const m=SGD[id][5],qq=sgQ(id);for(const p in m){let v=m[p];if((id==='brut'||id==='blood')&&p==='pow')v=1+(v-1)*qq;else if(id==='haste'&&p==='cd')v=1-(1-v)*qq;o[p]*=v}});return o}
+function sgMods(k){const o={mana:1,cd:1,pow:1};sgLinks(k).forEach(id=>{const m=SGD[id][5],qq=sgQ(id);for(const p in m){let v=m[p];if((id==='brut'||id==='blood')&&p==='pow')v=1+(v-1)*qq;else if(id==='haste'&&p==='cd')v=1-(1-v)*qq;if(p==='pow'&&v>1)o.pb=(o.pb||0)+v-1;else o[p]*=v}});if(o.pb){o.pow*=1+o.pb;delete o.pb}return o}
 function sgUsed(id){const X=sgSt();let n=0;for(const k in X.l)(X.l[k]||[]).forEach(q=>{if(q===id)n++});return n}
 function sgFree(id){return(sgSt().i[id]|0)-sgUsed(id)}
 function sgOff(){try{return isArena()||!!(MAPS[curMap]&&MAPS[curMap].trial)}catch(e){return false}}
@@ -11115,7 +11115,7 @@ function sgAfter(k,L,mo){const T=sgTags(k),ally=sgAlly(k);
   if(L.indexOf('split')>=0){let P=[];if(ally)P=sgPals(900).slice(0,2).map(o=>[o.x,o.y]);
     else{const F=mons.filter(m=>m.hp>0&&!m.inv&&!m.pv&&m.t!==4&&!m.dum&&Math.hypot(m.x-me.x,m.y-me.y)<440).sort((a,b)=>Math.hypot(a.x-me.x,a.y-me.y)-Math.hypot(b.x-me.x,b.y-me.y));
       const used=[];for(const m of F.slice(1)){if(used.some(u=>Math.hypot(u[0]-m.x,u[1]-m.y)<60))continue;used.push([m.x,m.y]);if(used.length>=2)break}P=used.map(([x,y])=>{const a=Math.atan2(y-me.y,x-me.x);return[x-Math.cos(a)*26,y-Math.sin(a)*26]})}
-    P.forEach(([x,y],i)=>setTimeout(()=>{if(sgCastAt(k,x,y,mo.pow*.5*sgQ('split'),{src:'split'}))sgFlash(x,y,'split')},90+i*90))}
+    P.forEach(([x,y],i)=>setTimeout(()=>{if(sgCastAt(k,x,y,mo.pow*.35*sgQ('split'),{src:'split'}))sgFlash(x,y,'split')},90+i*90))}
   if(L.indexOf('party')>=0)sgPals(1000).forEach((o,i)=>setTimeout(()=>{const p=others[o.u]||o;if(sgCastAt(k,p.x,p.y,mo.pow*.6*sgQ('party'),{src:'party'}))sgFlash(p.x,p.y,'party')},150+i*110));
   if(L.indexOf('echo')>=0)setTimeout(()=>{if(!me.cls||me.down>0||sgOff())return;const mv=T.indexOf('move')>=0;if(sgCastAt(k,me.x,me.y,mo.pow*Math.min(.9,.6*sgQ('echo')),{src:'echo',keep:mv}))sgFlash(me.x,me.y,'echo')},400);
   if(L.indexOf('pierce')>=0){const F=mons.filter(m=>m.hp>0&&!m.inv&&!m.pv&&m.t!==4&&!m.dum&&Math.hypot(m.x-me.x,m.y-me.y)<380).sort((a,b)=>Math.hypot(a.x-me.x,a.y-me.y)-Math.hypot(b.x-me.x,b.y-me.y));
@@ -11135,7 +11135,7 @@ function sgOnHit(k,L,m,d,ck,kill,ah){const n=performance.now(),id=m.id,th=(nm,ms
   if(L.indexOf('ice')>=0&&Math.random()<.2*sgQ('ice')&&th('i',1500)){try{rxCC(m,'f',0,1.2)}catch(e){}if(m.t<3)RXV[id]=Object.assign(RXV[id]||{},{frz:n+1200,u:uid})}
   if(L.indexOf('zap')>=0){RVUL[id]=n+3000;if(th('z',450,3)){const q=sgNear(m,170,[id])[0];if(q){ah(q,d*.3*sgQ('zap'),0,3,'bolt');sgFx({k:'sgz',p:[[m.x|0,(m.y-12)|0],[q.x|0,(q.y-12)|0]],c:SGEC.zap})}}}
   if(L.indexOf('chain')>=0&&th('c',350,2)){const hit=[id],pts=[[m.x|0,(m.y-12)|0]];let cur=m,f=.6*sgQ('chain');for(let j=0;j<2;j++){const q=sgNear(cur,240,hit)[0];if(!q)break;hit.push(q.id);ah(q,d*f,0,3,ck);pts.push([q.x|0,(q.y-12)|0]);cur=q;f=.4*sgQ('chain')}if(pts.length>1)sgFx({k:'sgz',p:pts,c:'#ff9ae0'})}
-  if(L.indexOf('wide')>=0&&th('w',300,3)){const Q=sgNear(m,95,[id]).slice(0,8);Q.forEach(q=>ah(q,d*.45*sgQ('wide'),0,3,ck));sgFx({k:'sgw',x:m.x|0,y:m.y|0,r:95,c:'#ff7ad0'})}
+  if(L.indexOf('wide')>=0&&th('w',300,3)){const Q=sgNear(m,95,[id]).slice(0,5);Q.forEach(q=>ah(q,d*.4*sgQ('wide'),0,3,ck));sgFx({k:'sgw',x:m.x|0,y:m.y|0,r:95,c:'#ff7ad0'})}
   if(L.indexOf('burst')>=0&&kill&&!m.dum){const v=Math.min((m.mh||0)*.15*sgQ('burst'),pd()*6*sgQ('burst'));if(v>0){sgNear(m,115,[id]).slice(0,10).forEach(q=>ah(q,v,0,3,ck));sgFx({k:'sgb',x:m.x|0,y:m.y|0,r:115})}}
   if(L.indexOf('leech')>=0&&me.down<=0){if(n-SGLB.t>1000){SGLB.t=n;SGLB.v=0}const cap=me.mh*.08,h=Math.min(d*.03*sgQ('leech'),Math.max(0,cap-SGLB.v));if(h>0){SGLB.v+=h;me.hp=Math.min(me.mh,me.hp+h)}me.mp=Math.min(me.mm,me.mp+d*.005)}
   if(L.indexOf('pierce')>=0&&th('p',300,4)){const ax=me.x,ay=me.y-10,bx=m.x,by=m.y-10,dx=bx-ax,dy=by-ay,LL=dx*dx+dy*dy||1;mons.forEach(q=>{if(q===m||q.hp<=0||q.inv||q.pv||q.t===4||q.dum)return;const u=((q.x-ax)*dx+(q.y-10-ay)*dy)/LL;if(u<.05||u>1)return;if(Math.hypot(ax+dx*u-q.x,ay+dy*u-q.y+10)<26+bigR(q)*.5)ah(q,d*.4*sgQ('pierce'),0,3,ck)})}}

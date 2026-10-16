@@ -429,6 +429,14 @@ R("function sgSlot(ck,lv){if(SGX){","function sgSlot(ck,lv){if(S5CTX&&!SGX)retur
 R("if(m){addHit(m,(pd()*.9+d*.3)*(me.s6gM&&me.s6gT>0?me.s6gM:1),0,3,'melee');","if(m){s5Run(()=>addHit(m,(pd()*.9+d*.3)*(me.s6gM&&me.s6gT>0?me.s6gM:1),0,3,'melee'));")
 # v403 คู่มือรูน: เก็บความคืบหน้าใน rn.x
 R("o={i:{},l:{},v:{},sv:[],g:x.g?1:0};","o={i:{},l:{},v:{},sv:[],g:x.g?1:0,gd:x.gd==null?undefined:Math.max(0,Math.min(9,x.gd|0)),gc:Math.max(0,Math.min(99,x.gc|0))};")
+# v404 บาลานซ์รูนเสริม: พลังจากรูนปรับค่าบวกกัน (ไม่คูณทบ) · แยกร่าง 50→40% · กระจายวงสูงสุด 5 ตัว 40%
+R("for(const p in m){let v=m[p];if((id==='brut'||id==='blood')&&p==='pow')v=1+(v-1)*qq;else if(id==='haste'&&p==='cd')v=1-(1-v)*qq;o[p]*=v}});return o}","for(const p in m){let v=m[p];if((id==='brut'||id==='blood')&&p==='pow')v=1+(v-1)*qq;else if(id==='haste'&&p==='cd')v=1-(1-v)*qq;if(p==='pow'&&v>1)o.pb=(o.pb||0)+v-1;else o[p]*=v}});if(o.pb){o.pow*=1+o.pb;delete o.pb}return o}")
+R("mo.pow*.5*sgQ('split')","mo.pow*.35*sgQ('split')")
+R("sgNear(m,95,[id]).slice(0,8);Q.forEach(q=>ah(q,d*.45*sgQ('wide')","sgNear(m,95,[id]).slice(0,5);Q.forEach(q=>ah(q,d*.4*sgQ('wide')")
+R("สกิลแยกไปเกิดซ้ำที่มอน 2 ตัวถัดไป (จุดละ 50%)","สกิลแยกไปเกิดซ้ำที่มอน 2 ตัวถัดไป (จุดละ 35%)")
+R("ทุกครั้งที่โดน กระเซ็นใส่มอนรอบเป้า (45%)","ทุกครั้งที่โดน กระเซ็นใส่มอนรอบเป้า (40% · สูงสุด 5 ตัว)")
+R("พลังสกิล +45% แต่คูลดาวน์นานขึ้น 35%","พลังสกิล +45% แต่คูลดาวน์นานขึ้น 35% · โบนัสพลังจากรูนเสริมหลายอันบวกกัน ไม่คูณทบ")
+R("ใช้เลือดแทนมานา (4% ของเลือดสูงสุด × ตัวคูณมานา) พลัง +15%","ใช้เลือดแทนมานา (4% ของเลือดสูงสุด × ตัวคูณมานา) พลัง +15% (บวกกับโบนัสพลังรูนเสริมอื่น)")
 open(P,'w').write(s)
 print('ok')
 import subprocess
