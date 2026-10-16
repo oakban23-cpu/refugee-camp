@@ -51,6 +51,11 @@ function sgHas(k,id){return sgLinks(k).indexOf(id)>=0}
 function sgMods(k){const o={mana:1,cd:1,pow:1};sgLinks(k).forEach(id=>{const m=SGD[id][5],qq=sgQ(id);for(const p in m){let v=m[p];if((id==='brut'||id==='blood')&&p==='pow')v=1+(v-1)*qq;else if(id==='haste'&&p==='cd')v=1-(1-v)*qq;o[p]*=v}});return o}
 function sgUsed(id){const X=sgSt();let n=0;for(const k in X.l)(X.l[k]||[]).forEach(q=>{if(q===id)n++});return n}
 function sgFree(id){return(sgSt().i[id]|0)-sgUsed(id)}
+/* v412 รูนเสริมแบบเดียวกันใส่ได้ไม่เกิน 2 สกิล */
+const SGMAX=2;let SGTRIM=0;
+function sgWhere(id){const X=sgSt();return SGK.filter(k=>(X.l[k]||[]).indexOf(id)>=0)}
+function sgCap(r,cnt){const c={};let cut=0;['0','1','3','4','5'].forEach(k=>{if(!r[k])return;r[k]=r[k].filter(id=>{c[id]=(c[id]|0)+1;if(c[id]>SGMAX){cut++;return false}return true});if(!r[k].length)delete r[k]});if(cnt)SGTRIM+=cut;return r}
+setInterval(()=>{if(SGTRIM&&me&&me.cls){try{sysMsg('🔗 รูนเสริมแบบเดียวกันใส่ได้ไม่เกิน '+SGMAX+' สกิล · ถอดลิงก์ที่เกินออก '+SGTRIM+' อัน (รูนยังอยู่ในกระเป๋า)')}catch(e){}SGTRIM=0}},2500);
 function sgOff(){try{return isArena()||!!(MAPS[curMap]&&MAPS[curMap].trial)}catch(e){return false}}
 function sgMcL(k){if(!me.cls)return'';const L=sgLinks(k);if(!L.length)return mcOf(k)+' MP';const mo=sgMods(k);if(L.indexOf('blood')>=0)return'❤️'+Math.round(4*mo.mana)+'%';return Math.round(mcOf(k)*mo.mana)+' MP'}
 function sgMsg(t){const n=performance.now();if(n-SGMSG<900)return;SGMSG=n;dn.push({x:me.x,y:me.y-44,v:t,t:.9,col:'#c8a0ff'})}
@@ -191,7 +196,7 @@ function sgTabBar(cur){return'<div class="sgtabs"><button data-sgtab=""'+(cur?''
 function sgModsTxt(k){const o=sgMods(k),L=sgLinks(k),f=v=>'×'+(Math.round(v*100)/100);if(!L.length)return'';const P=[];if(L.indexOf('blood')>=0)P.push('ใช้ ❤️ '+Math.round(4*o.mana)+'% แทนมานา');else if(o.mana!==1)P.push('มานา <b>'+f(o.mana)+'</b>');if(o.cd!==1)P.push('คูลดาวน์ <b>'+f(o.cd)+'</b>');if(o.pow!==1)P.push('พลัง <b>'+f(o.pow)+'</b>');return P.length?'<div class="sgmd">'+P.join(' · ')+'</div>':''}
 function sgUI(msg){if(!me.cls)return;sgCSS();ov.dataset.k='rune';const S=rnSt(),X=sgSt(),N=sgSockN(),inCamp=curMap===1;
   let h='<div class="pn" data-pn="rune">'+hdr('🔗','ช่างรูน ไอริส · รูนเสริม','ผงรูน 💠 '+(S.sh|0)+' · ช่องลิงก์ '+N+'/3')+sgTabBar('sup');if(msg)h+='<div class="note">'+msg+'</div>';
-  h+='<div class="card" style="font-size:12px;line-height:1.55;text-align:left">🔗 ใส่รูนเสริมลงช่องลิงก์ของสกิล รูนแต่ละอันเปลี่ยนวิธีทำงานของสกิล ผสมกันได้อิสระแบบ Path of Exile<br>🔓 ช่องที่ 1/2/3 ปลดที่ Lv '+SGLV.join('/')+' (จุติแล้วเปิดครบ) · ทุกอันมีราคา มานา/คูลดาวน์/พลัง<br>'+(inCamp?'':'⚠️ เปลี่ยนรูนเสริมได้ที่ค่ายเท่านั้น<br>')+'⚔️ ปิดผลในลานประลอง PvP</div>';
+  h+='<div class="card" style="font-size:12px;line-height:1.55;text-align:left">🔗 ใส่รูนเสริมลงช่องลิงก์ของสกิล รูนแต่ละอันเปลี่ยนวิธีทำงานของสกิล ผสมกันได้อิสระแบบ Path of Exile<br>🔓 ช่องที่ 1/2/3 ปลดที่ Lv '+SGLV.join('/')+' (จุติแล้วเปิดครบ) · ทุกอันมีราคา มานา/คูลดาวน์/พลัง<br>🔢 รูนเสริมแบบเดียวกันใส่ได้ไม่เกิน '+SGMAX+' สกิล<br>'+(inCamp?'':'⚠️ เปลี่ยนรูนเสริมได้ที่ค่ายเท่านั้น<br>')+'⚔️ ปิดผลในลานประลอง PvP</div>';
   h+=sgSetsCard(true);
   SGK.forEach(k=>{let open=true;try{open=skOpen(k)}catch(e){}const T=sgTags(k),A=X.l[k]||[];
     h+='<div class="card sgsk"><div class="hd">'+skImg(me.cls,k,28)+'<div style="flex:1"><b>'+skName(k)+'</b>'+(open?'':' <small style="opacity:.7">(ยังไม่ปลดสกิล)</small>')+'<div class="tg">'+T.map(t=>'<i>'+(SGTN[t]||t)+'</i>').join('')+'</div></div></div><div class="sgso">';
@@ -200,7 +205,7 @@ function sgUI(msg){if(!me.cls)return;sgCSS();ov.dataset.k='rune';const S=rnSt(),
     h+='</div>'+sgModsTxt(k);
     if(SGSEL&&SGSEL.k===k){const L=Object.keys(SGD).filter(id=>(X.i[id]|0)>0);h+='<div class="sgpk"><div style="font-size:11.5px;opacity:.85;margin-bottom:3px;text-align:left">เลือกรูนเสริมใส่ช่องที่ '+(SGSEL.i+1)+'</div>';
       if(!L.length)h+='<div style="font-size:12px;opacity:.8;padding:6px">ยังไม่มีรูนเสริม — สร้างได้ด้านล่าง หรือหาจากบอส/ดันเจี้ยน/หัวหน้ามอน</div>';
-      L.forEach(id=>{const ok=sgOk(id,k),fr=sgFree(id),dup=A.indexOf(id)>=0,can=ok&&fr>0&&!dup;h+='<div class="it'+(can?'':' no')+'"><span class="gi">'+SGD[id][0]+'</span><div class="tx"><b style="color:'+sgCol(id)+'">'+SGD[id][1]+'</b> '+sgStar(id)+' <small>×'+fr+' ว่าง</small><br>'+SGD[id][2]+(ok?'':'<br><small>❌ ต้องการแท็ก: '+SGD[id][4].split(' ').map(q=>q[0]==='!'?'ไม่ใช่'+(SGTN[q.slice(1)]||q):(SGTN[q]||q)).join(', ')+'</small>')+(dup?'<br><small>❌ ใส่ซ้ำในสกิลเดียวกันไม่ได้</small>':'')+'</div>'+(can?'<button class="pri" data-sgp="'+id+'">ใส่</button>':'')+'</div>'});
+      L.forEach(id=>{const ok=sgOk(id,k),fr=sgFree(id),dup=A.indexOf(id)>=0,wh=sgWhere(id),lim=!dup&&wh.length>=SGMAX,can=ok&&fr>0&&!dup&&!lim;h+='<div class="it'+(can?'':' no')+'"><span class="gi">'+SGD[id][0]+'</span><div class="tx"><b style="color:'+sgCol(id)+'">'+SGD[id][1]+'</b> '+sgStar(id)+' <small>×'+fr+' ว่าง · ใช้ '+sgWhere(id).length+'/'+SGMAX+' สกิล</small><br>'+SGD[id][2]+(ok?'':'<br><small>❌ ต้องการแท็ก: '+SGD[id][4].split(' ').map(q=>q[0]==='!'?'ไม่ใช่'+(SGTN[q.slice(1)]||q):(SGTN[q]||q)).join(', ')+'</small>')+(dup?'<br><small>❌ ใส่ซ้ำในสกิลเดียวกันไม่ได้</small>':'')+(lim?'<br><small>❌ ใส่ครบ '+SGMAX+' สกิลแล้ว ('+wh.map(q=>skName(q)).join(', ')+') · ถอดจากสกิลอื่นก่อน</small>':'')+'</div>'+(can?'<button class="pri" data-sgp="'+id+'">ใส่</button>':'')+'</div>'});
       h+='<div style="text-align:right;margin-top:4px"><button data-sgc="1">ปิด</button></div></div>'}
     h+='</div>'});
   h+='<div class="card"><div style="display:flex;gap:6px;align-items:center;text-align:left"><div style="flex:1;font-size:12px"><b>🎲 สร้างรูนเสริมแบบสุ่ม</b><br><small>ได้ 1 อันจากทั้งหมด '+Object.keys(SGD).length+' แบบ · โอกาสได้รูนหายาก ✨ 6%</small></div><button class="pri" data-sgr="1"'+((S.sh|0)>=SGRC?'':' disabled')+'>สุ่ม<br><small>💠'+SGRC+'</small></button></div></div>';
@@ -211,7 +216,7 @@ function sgUI(msg){if(!me.cls)return;sgCSS();ov.dataset.k='rune';const S=rnSt(),
   ov.innerHTML=h;ov.hidden=false;
   ov.querySelectorAll('[data-sgtab]').forEach(b=>b.onclick=()=>{SGTAB=b.dataset.sgtab;SGSEL=null;runeUI()});
   ov.querySelectorAll('[data-sgs]').forEach(b=>b.onclick=()=>{if(curMap!==1)return;const[k,i]=b.dataset.sgs.split(':').map(Number),A=X.l[k]=X.l[k]||[];if(A[i]){const id=A[i];A.splice(i,1);SGSEL=null;X.cur=-1;try{sfx('equip')}catch(e){}sgUI('ถอด «'+SGD[id][1]+'» แล้ว')}else{SGSEL=SGSEL&&SGSEL.k===k&&SGSEL.i===i?null:{k,i:Math.min(i,A.length)};sgUI()}});
-  ov.querySelectorAll('[data-sgp]').forEach(b=>b.onclick=()=>{if(!SGSEL||curMap!==1)return;const id=b.dataset.sgp,k=SGSEL.k,A=X.l[k]=X.l[k]||[];if(!sgOk(id,k)||sgFree(id)<=0||A.indexOf(id)>=0)return;A.splice(Math.min(SGSEL.i,A.length),0,id);if(A.length>3)A.length=3;SGSEL=null;X.cur=-1;try{sfx('equip')}catch(e){}try{burst(me.x,me.y-20,[sgCol(id),'#ffffff'],14,110,.5,{glow:1,g:-30})}catch(e){}sgUI('ลิงก์ «'+SGD[id][0]+' '+SGD[id][1]+'» เข้ากับ '+skName(k)+' แล้ว — ลองใช้สกิลได้เลย')});
+  ov.querySelectorAll('[data-sgp]').forEach(b=>b.onclick=()=>{if(!SGSEL||curMap!==1)return;const id=b.dataset.sgp,k=SGSEL.k,A=X.l[k]=X.l[k]||[];if(!sgOk(id,k)||sgFree(id)<=0||A.indexOf(id)>=0||sgWhere(id).length>=SGMAX)return;A.splice(Math.min(SGSEL.i,A.length),0,id);if(A.length>3)A.length=3;SGSEL=null;X.cur=-1;try{sfx('equip')}catch(e){}try{burst(me.x,me.y-20,[sgCol(id),'#ffffff'],14,110,.5,{glow:1,g:-30})}catch(e){}sgUI('ลิงก์ «'+SGD[id][0]+' '+SGD[id][1]+'» เข้ากับ '+skName(k)+' แล้ว — ลองใช้สกิลได้เลย')});
   ov.querySelectorAll('[data-sgc]').forEach(b=>b.onclick=()=>{SGSEL=null;sgUI()});
   ov.querySelectorAll('[data-sgu]').forEach(b=>b.onclick=()=>{const id=b.dataset.sgu,r=sgUpOk(id);if(!r.ok)return;X.i[id]-=r.n;S.sh-=r.sh;X.v[id]=sgLv(id)+1;try{sfx('up')}catch(e){}try{burst(me.x,me.y-20,['#ffd84a',sgCol(id),'#ffffff'],30,140,.8,{glow:1,g:-30})}catch(e){}sgUI('⬆️ «'+SGD[id][0]+' '+SGD[id][1]+'» ขึ้นขั้น '+SGRM[sgLv(id)]+' แล้ว! ผลรูน +'+(sgLv(id)-1)*20+'%')});
   sgSetsBind(m=>sgUI(m));
@@ -229,8 +234,8 @@ function sgUpBtn(id){const X=sgSt();if(!(X.i[id]|0))return'';const lv=sgLv(id);i
   return'<button class="rnup" data-sgu="'+id+'"'+(r.ok?'':' disabled')+' style="margin-bottom:4px">⬆️ '+SGRM[lv+1]+'<br><small>ใช้ '+r.n+' ชิ้น · 💠'+r.sh+'</small></button>'}
 /* ---------- ชุดลิงก์ 3 ชุด: บันทึกที่ช่างรูน · สลับได้ทุกที่ (หน้าสกิล) ---------- */
 function sgSetSum(l){return SGK.map(k=>(l&&l[k]||[]).map(id=>SGD[id]?SGD[id][0]:'').join('')).filter(Boolean).join(' · ')||'ว่าง'}
-function sgSetLoad(i){const X=sgSt(),S=X.sv[i];if(!S||!S.l)return'ชุดนี้ยังว่าง';const av={};Object.keys(X.i).forEach(id=>av[id]=X.i[id]|0);const nl={},miss=[];
-  SGK.forEach(k=>{const A=[];(S.l[k]||[]).forEach(id=>{if(!SGD[id]||A.indexOf(id)>=0)return;if(!sgOk(id,k)||(av[id]|0)<=0){miss.push(SGD[id][0]+SGD[id][1]);return}av[id]--;A.push(id)});if(A.length)nl[k]=A});
+function sgSetLoad(i){const X=sgSt(),S=X.sv[i];if(!S||!S.l)return'ชุดนี้ยังว่าง';const av={};Object.keys(X.i).forEach(id=>av[id]=X.i[id]|0);const nl={},miss=[],cn={};
+  SGK.forEach(k=>{const A=[];(S.l[k]||[]).forEach(id=>{if(!SGD[id]||A.indexOf(id)>=0)return;if(!sgOk(id,k)||(av[id]|0)<=0||(cn[id]|0)>=SGMAX){miss.push(SGD[id][0]+SGD[id][1]+((cn[id]|0)>=SGMAX?' (เกิน '+SGMAX+' สกิล)':''));return}av[id]--;cn[id]=(cn[id]|0)+1;A.push(id)});if(A.length)nl[k]=A});
   X.l=nl;X.cur=i;SGSEL=null;try{sfx('equip')}catch(e){}return'🔗 ใช้ชุดลิงก์ '+(i+1)+' แล้ว'+(miss.length?' · ขาด: '+miss.join(', '):'')}
 function sgSetsCard(save){const X=sgSt(),N=sgSockN();if(!N)return'';let h='<div class="card" style="text-align:left;padding:9px 10px"><b style="font-size:13px">💾 ชุดลิงก์รูนเสริม</b> <small style="opacity:.75">'+(save?'บันทึกชุดที่ตั้งไว้ แล้วสลับได้ทุกที่ (เมนู ✨ สกิล → หน้าตัวละคร)':'สลับได้ทุกที่ · แก้ลิงก์ได้ที่ช่างรูนไอริสในค่าย')+'</small>';
   for(let i=0;i<3;i++){const S=X.sv[i],on=X.cur===i;h+='<div style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:6px 8px;border-radius:10px;background:'+(on?'rgba(200,160,255,.18)':'rgba(255,255,255,.05)')+';border:1px solid '+(on?'#c8a0ff':'transparent')+'"><b style="font-size:12px;white-space:nowrap">ชุด '+(i+1)+(on?' ✓':'')+'</b><span style="flex:1;font-size:13px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+sgSetSum(S&&S.l)+'</span>'+
@@ -291,6 +296,6 @@ setTimeout(()=>{try{
 /* ---------- กรองข้อมูลรูนเสริมตอนโหลดเซฟ (cleanChar) — v389 แก้บั๊กรูนเสริมหายหลังรีเฟรช ---------- */
 function sgClean(x){if(!x||typeof x!=='object')return undefined;const ok=id=>typeof id==='string'&&/^[a-z]{2,8}$/.test(id),o={i:{},l:{},v:{},sv:[],g:x.g?1:0};
   if(x.i&&typeof x.i==='object')Object.keys(x.i).slice(0,60).forEach(id=>{if(ok(id)){const v=Math.max(0,Math.min(999,Math.floor(+x.i[id]||0)));if(v)o.i[id]=v}});
-  const cl=l=>{const r={};if(l&&typeof l==='object')['0','1','3','4'].forEach(k=>{if(Array.isArray(l[k])){const a=l[k].filter(ok).slice(0,3);if(a.length)r[k]=a}});return r};o.l=cl(x.l);
+  const cl=l=>{const r={};if(l&&typeof l==='object')['0','1','3','4'].forEach(k=>{if(Array.isArray(l[k])){const a=l[k].filter(ok).slice(0,3);if(a.length)r[k]=a}});return r};o.l=sgCap(cl(x.l),1);
   if(x.v&&typeof x.v==='object')Object.keys(x.v).slice(0,60).forEach(id=>{if(ok(id))o.v[id]=Math.max(1,Math.min(3,Math.floor(+x.v[id]||1)))});
-  if(Array.isArray(x.sv))o.sv=x.sv.slice(0,3).map(s=>s&&typeof s==='object'?{l:cl(s.l)}:null);if(Number.isFinite(+x.cur))o.cur=Math.max(-1,Math.min(2,Math.floor(+x.cur)));return o}
+  if(Array.isArray(x.sv))o.sv=x.sv.slice(0,3).map(s=>s&&typeof s==='object'?{l:sgCap(cl(s.l))}:null);if(Number.isFinite(+x.cur))o.cur=Math.max(-1,Math.min(2,Math.floor(+x.cur)));return o}
