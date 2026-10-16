@@ -68,10 +68,12 @@ const GPVP=[['idle','🧍','ยืน'],['run','🏃','วิ่ง'],['atk','�
 function gpvTry(){try{if(!gsel)return null;const [w,k]=gsel.split(':');if(w!=='bag')return null;const it=me.bag[+k];return it&&it.sl&&['w','a','h','b'].indexOf(it.sl)>=0?it:null}catch(e){return null}}
 function gpvHTML(){const it=gpvTry();
   return'<div id="gpvw" style="position:relative;margin:0 auto 8px;max-width:330px"><canvas id="gpv" style="display:block;width:100%;height:220px;border-radius:14px;touch-action:pan-y;cursor:grab;background:radial-gradient(ellipse at 50% 38%,#5a4a68,#221a2a 62%,#120e16);box-shadow:inset 0 0 0 1px rgba(201,170,110,.5)"></canvas>'+
-   (it?'<div style="position:absolute;left:8px;top:8px;font-size:11px;padding:3px 8px;border-radius:9px;background:rgba(20,12,30,.78);border:1px solid rgba(255,216,140,.55);color:#ffe6b0">👀 ลองใส่: '+itemName(it)+'</div>':'')+
+   (()=>{const pf=typeof WDRM!=='undefined'&&GPV.pf&&WDRM[GPV.pf],on=typeof wdrCur==='function'&&wdrCur(),tx=pf?'👗 ดูชุด: '+pf.e+' '+pf.n+(wdrOwn(pf.id)?'':' 🔒'):it?'👀 ลองใส่: '+itemName(it):on?'👗 สวม: '+on.e+' '+on.n:'';return tx?'<div style="position:absolute;left:8px;top:8px;max-width:72%;font-size:11px;padding:3px 8px;border-radius:9px;background:rgba(20,12,30,.78);border:1px solid rgba(255,216,140,.55);color:#ffe6b0">'+tx+'</div>':''})()+
    '<div style="position:absolute;right:8px;top:8px;font-size:10px;opacity:.6;color:#efe4ff">↔ ลากเพื่อหมุน</div>'+
-   '<div style="display:flex;gap:6px;justify-content:center;margin-top:6px">'+GPVP.map(([k,i,n])=>'<button class="tab sm'+(GPV.pose===k?' on':'')+'" data-gpvp="'+k+'" style="font-size:12px;padding:4px 10px">'+i+' '+n+'</button>').join('')+'</div></div>'}
-function gpvLook(){const it=gpvTry(),E=Object.assign({},me.eq);if(it)E[it.sl]=it;return{w:lkc(E.w),a:lkc(E.a),h:lkc(E.h),b:lkc(E.b),wu:(E.w&&E.w.u)|0}}
+   '<div style="display:flex;gap:6px;justify-content:center;margin-top:6px">'+GPVP.map(([k,i,n])=>'<button class="tab sm'+(GPV.pose===k?' on':'')+'" data-gpvp="'+k+'" style="font-size:12px;padding:4px 10px">'+i+' '+n+'</button>').join('')+'</div>'+(typeof wdrHTML==='function'?wdrHTML():'')+'</div>'}
+function gpvLook(){const it=gpvTry(),E=Object.assign({},me.eq);if(it)E[it.sl]=it;const wu=(E.w&&E.w.u)|0;
+  try{const pf=GPV.pf&&WDRM[GPV.pf];if(pf)return{w:pf.w,a:pf.a,h:pf.h,b:pf.b,wu,fa:pf.fa};const O=wdrCur();if(O){const L={w:(me.wdr.rw?lkc(E.w):O.w),a:O.a,h:O.h,b:O.b,wu,fa:O.fa};if(it)L[it.sl]=lkc(it);return L}}catch(e){}
+  return{w:lkc(E.w),a:lkc(E.a),h:lkc(E.h),b:lkc(E.b),wu}}
 function drawGearPreview2(){const c=$('gpv');if(!c||ov.hidden||!me.cls)return;const w=c.clientWidth||300,h=c.clientHeight||220;if(c.width!==Math.round(w*DPR)||c.height!==Math.round(h*DPR)){c.width=Math.round(w*DPR);c.height=Math.round(h*DPR)}
   const n=performance.now(),t=n/1000,dt=Math.min(.05,(n-(GPV.lt||n))/1000);GPV.lt=n;if(!GPV.drag){GPV.rot+=(GPV.tr-GPV.rot)*Math.min(1,dt*9)}
   const L=gpvLook(),c2=c2v(),cls=me.cls,fx=Math.cos(GPV.rot),sc=Math.min(3.4,h/70)*(GPV.pose==='sk'?.8:1);
@@ -93,7 +95,9 @@ function drawGearPreview2(){const c=$('gpv');if(!c||ov.hidden||!me.cls)return;co
       const gr=g.createRadialGradient(0,15,1,0,15,19);gr.addColorStop(0,'rgba('+rc+',.4)');gr.addColorStop(1,'rgba('+rc+',0)');g.fillStyle=gr;g.beginPath();g.ellipse(0,15,19,7,0,0,7);g.fill();g.restore()}
     const by=ph?-Math.abs(Math.sin(ph))*2.6:0;g.translate(0,by);
     let AC=null,AS=1;WFX={};{const m=g.getTransform();AC=m.transformPoint(new DOMPoint(0,0));AC=[AC.x,AC.y];AS=Math.hypot(m.a,m.b)}
+    if(L.fa)try{wdrAura(L.fa,0,0,t,0,1)}catch(e){}
     drawChar(0,0,cls,fx<0?-1:1,ph,L.h,t,L.b,L.w,L.a,c2,ak);
+    if(L.fa)try{wdrAura(L.fa,0,0,t,1,1)}catch(e){}
     try{if(L.wu>=10)upAura(WFX,L.wu,L.w,AC,AS);else upShine(WFX,L.wu,L.w,AS)}catch(e){}
     g.restore()}
   catch(e){}finally{WFX=null;g=g0;CHA=cha0;CHS=chs0;CHE=che0}}
