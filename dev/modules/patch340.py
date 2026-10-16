@@ -424,6 +424,9 @@ R("if(k===3&&me.lv<SK3LV)return _sgU0(k,free);","if(k===3&&me.lv<SK3LV)return _s
 R("['0','1','3','4'].forEach(k=>{if(Array.isArray(l[k]))","['0','1','3','4','5'].forEach(k=>{if(Array.isArray(l[k]))")
 R("function sgOk(id,k){const d=SGD[id];if(!d)return false;const r=d[4];if(!r)return true;const T=sgTags(k);return r.split(' ').every(q=>q[0]==='!'?!T.includes(q.slice(1)):T.includes(q))}","function sgOk(id,k){const d=SGD[id];if(!d)return false;const T=sgTags(k);if(T.includes('solo')&&SGSOLO[id])return false;const r=d[4];if(!r)return true;return r.split(' ').every(q=>q[0]==='!'?!T.includes(q.slice(1)):T.includes(q))}\nconst SGSOLO={echo:1,split:1,party:1,totem:1,trap:1,coc:1,cok:1,minion:1,pierce:1};")
 R("(ok?'':'<br><small>❌ ต้องการแท็ก: '+SGD[id][4].split(' ').map(q=>q[0]==='!'?'ไม่ใช่'+(SGTN[q.slice(1)]||q):(SGTN[q]||q)).join(', ')+'</small>')","(ok?'':'<br><small>❌ '+(sgTags(k).includes('solo')&&SGSOLO[id]?'สกิล «ซ้อนไม่ได้» ใส่รูนที่ร่ายสำเนาไม่ได้ (สำเนาจะทับของเดิม)':'ต้องการแท็ก: '+SGD[id][4].split(' ').map(q=>q[0]==='!'?'ไม่ใช่'+(SGTN[q.slice(1)]||q):(SGTN[q]||q)).join(', '))+'</small>')")
+# v402 ดาเมจจากสกิลคลาส 3 นับเป็นช่อง 5
+R("function sgSlot(ck,lv){if(SGX){","function sgSlot(ck,lv){if(S5CTX&&!SGX)return 5;if(SGX){")
+R("if(m){addHit(m,(pd()*.9+d*.3)*(me.s6gM&&me.s6gT>0?me.s6gM:1),0,3,'melee');","if(m){s5Run(()=>addHit(m,(pd()*.9+d*.3)*(me.s6gM&&me.s6gT>0?me.s6gM:1),0,3,'melee'));")
 open(P,'w').write(s)
 print('ok')
 import subprocess

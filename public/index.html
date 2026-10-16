@@ -4545,7 +4545,7 @@ g.globalCompositeOperation='source-over';glowAt(x,y-30-30*e,30+20*e,'40,20,16',.
 function s6Draw(){if(!me.cls)return;const now=performance.now()/1000;if(me.s6rT>0){VX.lite();glowAt(me.x,me.y-18,26,'255,220,140',.25)}g.globalCompositeOperation='source-over'}
 setTimeout(()=>{try{Object.assign(FXD,{s6sw:2.6,s6st:.5,s6gd:5,s6ar:.62,s6ch:.6,s6rg:6,s6ln:5,s6cl:.75,s6bw:6,s6ob:8,s6zp:.25,s6im:1})}catch(e){}
 try{const _hf=handleFx;window.handleFx=handleFx=function(o){_hf(o);try{s6Recv(o)}catch(e){}}}catch(e){}
-try{const _hu=hurt;window.hurt=hurt=function(d){if(d>0&&me.s6rT>0)d*=.75;if(d>0&&me.s6gT>0){const n=performance.now();if(n-(me.s6gR||0)>250){me.s6gR=n;const m=s6Near(me.x,me.y,150,1)[0];if(m){addHit(m,(pd()*.9+d*.3)*(me.s6gM&&me.s6gT>0?me.s6gM:1),0,3,'melee');fxs.push({k:'s6st',x:m.x,y:m.y-10,sx:me.x,sy:me.y-24,t:.5,d:.5,s:0})}}}return _hu(d)}}catch(e){}
+try{const _hu=hurt;window.hurt=hurt=function(d){if(d>0&&me.s6rT>0)d*=.75;if(d>0&&me.s6gT>0){const n=performance.now();if(n-(me.s6gR||0)>250){me.s6gR=n;const m=s6Near(me.x,me.y,150,1)[0];if(m){s5Run(()=>addHit(m,(pd()*.9+d*.3)*(me.s6gM&&me.s6gT>0?me.s6gM:1),0,3,'melee'));fxs.push({k:'s6st',x:m.x,y:m.y-10,sx:me.x,sy:me.y-24,t:.5,d:.5,s:0})}}}return _hu(d)}}catch(e){}
 try{const _ah=addHit;window.addHit=addHit=function(m,d,cr,lv,ck){const L=S6.ln;_ah(m,d,cr,lv,ck);if(L&&ck!=='s6l'&&m&&L.ids.has(m.id)&&d>0){const sh=d*(L.sh||.4);mons.forEach(q=>{if(q!==m&&q.hp>0&&L.ids.has(q.id))_ah(q,sh,0,3,'s6l')})}}}catch(e){}
 try{const _rba=rbAura;window.rbAura=rbAura=function(){_rba();try{s6Draw()}catch(e){}}}catch(e){}},0);
 const ULT3={melee:[['ดาบพิพากษาสวรรค์','ดาบยักษ์ตกจากฟ้าปักลงเป้าหมาย แผ่นดินแยกเป็นกากบาท แล้วคลื่นกระแทก 3 ระลอก',40,80],
@@ -10151,7 +10151,7 @@ function sgFoe(x,y,r){let b=null,bd=r;for(const m of mons){if(m.hp<=0||m.inv||m.
 function sgAlly(k){const T=sgTags(k);return T.indexOf('heal')>=0||T.indexOf('buff')>=0||T.indexOf('self')>=0}
 function sgPals(r){try{return Object.values(others).filter(o=>o&&inPty(o.u)&&Math.hypot(o.x-me.x,o.y-me.y)<r)}catch(e){return[]}}
 function sgRec(k){const n=performance.now();SGLAST[k]=n}
-function sgSlot(ck,lv){if(SGX){if(ck){(SGCK[ck]=SGCK[ck]||{})[SGX.k]=1}return SGX.k}if(!ck||!lv||lv===2)return-1;const n=performance.now();let b=-1,bt=0;
+function sgSlot(ck,lv){if(S5CTX&&!SGX)return 5;if(SGX){if(ck){(SGCK[ck]=SGCK[ck]||{})[SGX.k]=1}return SGX.k}if(!ck||!lv||lv===2)return-1;const n=performance.now();let b=-1,bt=0;
 for(const k of SGK){const t=SGLAST[k];if(!t)continue;if(lv===1&&n-t<700&&t>bt){b=k;bt=t;continue}if(n-t<7000&&SGCK[ck]&&SGCK[ck][k]&&t>bt){b=k;bt=t}}
 if(b>=0&&lv===1&&n-SGLAST[b]<700&&ck)(SGCK[ck]=SGCK[ck]||{})[b]=1;return b}
 let _sgU0=null;
@@ -11299,6 +11299,12 @@ mage:['atk dur solo','atk aoe proj']};
 try{SGK.push(5)}catch(e){}
 try{SGTN.solo='ซ้อนไม่ได้'}catch(e){}
 try{Object.keys(R29T).forEach(c=>{if(!SGT[c])return;Object.defineProperty(SGT[c],5,{configurable:true,enumerable:true,get(){let b=0;try{if(me&&me.cls===c&&me.rb)b=s6B()}catch(e){}return R29T[c][b]}})})}catch(e){}
+let S5CTX=0;
+function s5Run(fn){S5CTX++;const A=pend,n=A.length;try{return fn()}finally{S5CTX--;try{for(let i=n;i<A.length;i++){const it=A[i];if(it&&!it.s5&&typeof it.f==='function'){const f=it.f;it.s5=1;it.f=()=>s5Run(f)}}}catch(e){}}}
+setTimeout(()=>{
+try{const _c=s6Cast;s6Cast=function(){const a=arguments,t=this;return s5Run(()=>_c.apply(t,a))}}catch(e){}
+try{const _t=s6Tick;s6Tick=function(){const a=arguments,t=this;return s5Run(()=>_t.apply(t,a))}}catch(e){}
+},60);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
