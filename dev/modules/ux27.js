@@ -16,12 +16,14 @@ const R27={
 /* ภาพของเอฟเฟกต์เหล่านี้ยืด/หดตามเวลาที่รูนตั้ง (dur) */
 const R27D={bstrm:1,seal:1,s6sw:1,s6bw:1,s6ob:1,s6rg:1,s6ln:1,s6gd:1,torn:1};
 function r27Fx(k,o){try{fxs=fxs.filter(f=>!(f.k===k&&(f.u===uid||!f.u)))}catch(e){}fx(Object.assign({k,u:uid},o))}
+/* v401 ร่ายสกิลเดิมแต่แก้ค่าเอฟเฟกต์ก่อนส่ง (เพื่อนในห้องจะได้เห็นอันเดียว ไม่ซ้อน 2 ชั้น) */
+function r27With(k,patch,fn){const _f=fx;fx=function(o){if(o&&o.k===k)Object.assign(o,typeof patch==='function'?patch(o):patch);return _f.apply(this,arguments)};try{return fn()}finally{fx=_f}}
 function r27Pre(cost,needT,rg){if(!s6Open()){dn.push({x:me.x,y:me.y-40,v:'ปลดที่ Lv '+RBL5+' (คลาส 3)',t:.9});return null}let t=null;
   if(needT){t=pickTarget(rg||320)||s6Near(me.x,me.y,rg||320,1)[0];if(!t){dn.push({x:me.x,y:me.y-40,v:'ไม่มีเป้าหมาย',t:.8});return null}me.face=Math.atan2(t.y-me.y,t.x-me.x)}
   me.sk[5]=cdOf(5);me.mp-=cost;dqProg('skill',1);try{s6Snd()}catch(e){}return t||{x:me.x+Math.cos(me.face)*120,y:me.y+Math.sin(me.face)*120,id:-1}}
 function r27Cast(P,cost,r,_s6){const c=me.cls,b=s6B(),K=c+b+r;P*=rnPow(5);
   /* ---- นักรบ ---- */
-  if(K==='melee0a'){_s6(P,cost);if(S6.sw){S6.sw.t=3.5;S6.sw.n=4;S6.sw.r=89;r27Fx('s6sw',{r:72,dur:4.55})}return}
+  if(K==='melee0a'){r27With('s6sw',{r:72,dur:4.55},()=>_s6(P,cost));if(S6.sw){S6.sw.t=3.5;S6.sw.n=4;S6.sw.r=89}return}
   if(K==='melee0b'){const t=r27Pre(cost,1,320);if(!t)return;fx({k:'r27sum',u:uid,x:s6R(t.x),y:s6R(t.y-10),sx:s6R(me.x),sy:s6R(me.y)});pend.push({t:.83,f:()=>{if(t.hp>0){fx({k:'r27x',x:s6R(t.x),y:s6R(t.y),r:44});shk=Math.max(shk,.25)}}});for(let i=0;i<6;i++){const a=i*1.047;pend.push({t:.25+i*.07,f:()=>{if(!(t.hp>0))return;fx({k:'s6st',x:s6R(t.x),y:s6R(t.y-10),sx:s6R(me.x+Math.cos(a)*58),sy:s6R(me.y-34+Math.sin(a)*18)});pend.push({t:.16,f:()=>{if(t.hp>0)addHit(t,pd()*3.8*P,0,1,'melee')}})}})}shk=Math.max(shk,.2);return}
   if(K==='melee1a'){_s6(P,cost);fx({k:'r27rf',u:uid});me.s6gT=7;me.s6gM=2;me.shv=Math.round(me.mh*.15);return}
   if(K==='melee1b'){_s6(P,cost);fx({k:'r27cd',u:uid,r:44});pend.push({t:5,f:()=>{if(!me.cls)return;const x=me.x,y=me.y;fx({k:'elbx',x:s6R(x),y:s6R(y),r:160});fx({k:'roar',r:160});shk=Math.max(shk,.35);mons.forEach(m=>{if(m.hp>0&&Math.hypot(m.x-x,m.y-y)<160+bigR(m)*.5)addHit(m,pd()*3.5*P,0,1,'holy')})}});return}
@@ -42,10 +44,10 @@ function r27Cast(P,cost,r,_s6){const c=me.cls,b=s6B(),K=c+b+r;P*=rnPow(5);
     if(r==='a'){fx({k:'s6cl',a:Math.round((a0-.31)*100)/100,r:180});fx({k:'s6cl',a:Math.round((a0+.31)*100)/100,r:180})}
     else{fx({k:'r27ln',x:s6R(ox+Math.cos(a0)*Ln),y:s6R(oy+Math.sin(a0)*Ln),sx:s6R(ox),sy:s6R(oy),r:34});fx({k:'shadow',x:s6R(ox+Math.cos(a0)*Ln),y:s6R(oy+Math.sin(a0)*Ln),r:50,len:1})}
     AN.forEach(da=>{const a=a0+da;mons.forEach(m=>{if(m.hp<=0||hit.has(m.id))return;const dx=m.x-ox,dy=m.y-oy,l=dx*Math.cos(a)+dy*Math.sin(a),w=Math.abs(-dx*Math.sin(a)+dy*Math.cos(a));if(l>-10&&l<Ln&&w<W+bigR(m)*.5){hit.add(m.id);pend.push({t:.12+l/Ln*.3,f:()=>{if(m.hp>0){addHit(m,pd()*mul*P,0,1,'assn');fx({k:'stun',x:s6R(m.x),y:s6R(m.y),r:14,full:1,dur:sd})}}})}})});me.stealth=Math.max(me.stealth,1);return}
-  if(K==='assn1a'){_s6(P,cost);if(S6.bw){S6.bw.n=8;S6.bw.t=4;r27Fx('s6bw',{r:70,len:8,dur:4})}return}
-  if(K==='assn1b'){_s6(P,cost);if(S6.bw){S6.bw.t=9;S6.bw.r=138;S6.bw.iv=.45;r27Fx('s6bw',{r:105,len:S6.bw.n,dur:9})}return}
+  if(K==='assn1a'){r27With('s6bw',{r:70,len:8,dur:4},()=>_s6(P,cost));if(S6.bw){S6.bw.n=8;S6.bw.t=4}return}
+  if(K==='assn1b'){r27With('s6bw',{r:105,dur:9},()=>_s6(P,cost));if(S6.bw){S6.bw.t=9;S6.bw.r=138;S6.bw.iv=.45}return}
   /* ---- เวท ---- */
-  if(K==='mage0a'){_s6(P,cost);if(S6.ob){S6.ob.t=5;S6.ob.iv=.28;r27Fx('s6ob',{r:46,dur:5})}return}
+  if(K==='mage0a'){r27With('s6ob',{dur:5},()=>_s6(P,cost));if(S6.ob){S6.ob.t=5;S6.ob.iv=.28}return}
   if(K==='mage0b'){_s6(P,cost);if(S6.ob)S6.ob.ch=1;return}
   if(c==='mage'){const t=r27Pre(cost,1,320);if(!t)return;const n=r==='a'?1:9,R=r==='a'?130:70,mul=r==='a'?3.6:.45,T=s6Near(t.x,t.y,150,n);
     for(let i=0;i<n;i++){const m=T[i%T.length]||t,ang=i*6.283/n,big=r==='a',tx=s6R(m.x+(T.length<i+1||big?Math.cos(ang)*(big?0:40):0)),ty=s6R(m.y+(T.length<i+1&&!big?Math.sin(ang)*24:0)),ia=i;

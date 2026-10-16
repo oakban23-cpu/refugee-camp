@@ -3,11 +3,16 @@
    ใหม่: ท่าเฉพาะสกิลรายอาชีพ (SKP) + รูนที่เปลี่ยนวิธีใช้สกิลมีท่าแยก · ขยับมือ/อาวุธ (ง้าง-ฟัน-แทง-ยกไม้เท้า-น้าวธนู) · มือข้างที่ว่างออกมาร่าย/ประสาน/ชี้ พร้อมแสงสีตามธาตุ
    ทำงานผ่านระบบท่าร่ายเดิม (me.cast → castNet) เพื่อนในห้องจึงเห็นท่าเดียวกัน (เครื่องเก่าที่ไม่รู้จักท่าใหม่จะข้ามไปเฉย ๆ) */
 const SKP={
- melee:{'4B':['lunge',.5],0:['spin2',.62],'0a':['spinL',2],'0b':['pullspin',.8],1:['lunge',.46],'1a':['lunge',.34],3:['rage',.75],4:['roar',.7],2:['cleave',.9],5:['flurry',.8]},
- archer:{'4B':['snipe',.55],0:['volley',.62],1:['leap2',.6],'1a':['leapshot',.95],'1b':['leaptoss',.62],3:['snipe',.62],4:['plant',.6],'4a':['skyshot',.62],2:['skyshot',.95],5:['rapid',.62]},
- mage:{'4B':['summon',.8],0:['cast',.56],'0a':['cast',.66],1:['stomp',.6],3:['point',.58],'3a':['point',.72],4:['channel',.8],2:['summon',1],5:['orb',.62]},
- assn:{'4B':['spindash',.6],'2B':['spinL',2],0:['lunge',.42],'0a':['lunge',.52],1:['toss',.56],3:['mark',.56],4:['seal',.62],2:['flurry',.9],5:['seal',.62]},
- sup:{0:['pray2',.62],'0a':['smite',.56],1:['bless',.66],3:['smite',.56],4:['plant',.62],'4a':['stomp',.6],2:['bless',1],5:['bless',.66]}};
+ melee:{'4B':['lunge',.5],0:['spin2',.62],'0a':['spinL',2],'0b':['pullspin',.8],1:['lunge',.46],'1a':['lunge',.34],3:['rage',.75],4:['roar',.7],2:['cleave',.9],5:['flurry',.8],
+   '4Ba':['spin2',.62],'4Bb':['rage',.7],'50':['roar',.7],'50a':['spin2',.8],'50b':['lunge',.9],'51':['rage',.75],'51a':['roar',.8],'51b':['rage',.95]},
+ archer:{'4B':['snipe',.55],0:['volley',.62],1:['leap2',.6],'1a':['leapshot',.95],'1b':['leaptoss',.62],3:['snipe',.62],4:['plant',.6],'4a':['skyshot',.62],2:['skyshot',.95],5:['rapid',.62],
+   '4Ba':['rapid',.62],'4Bb':['plant',.6],'50':['skyshot',.8],'50a':['snipe',.7],'50b':['volley',.8],'51':['snipe',.55],'51a':['volley',.62],'51b':['snipe',.75]},
+ mage:{'4B':['summon',.8],0:['cast',.56],'0a':['cast',.66],1:['stomp',.6],3:['point',.58],'3a':['point',.72],4:['channel',.8],2:['summon',1],5:['orb',.62],
+   '4Ba':['stomp',.7],'4Bb':['summon',.8],'50':['orb',.62],'50a':['orb',.5],'50b':['point',.62],'51':['summon',.8],'51a':['summon',1],'51b':['channel',.8]},
+ assn:{'4B':['spindash',.6],'2B':['spinL',2],0:['lunge',.42],'0a':['lunge',.52],1:['toss',.56],3:['mark',.56],4:['seal',.62],2:['flurry',.9],5:['seal',.62],
+   '4Ba':['spindash',.6],'4Bb':['spindash',.45],'50':['mark',.56],'50a':['toss',.56],'50b':['lunge',.52],'51':['seal',.62],'51a':['flurry',.6],'51b':['spin2',.62]},
+ sup:{0:['pray2',.62],'0a':['smite',.56],1:['bless',.66],3:['smite',.56],4:['plant',.62],'4a':['stomp',.6],2:['bless',1],5:['bless',.66],
+   '4B':['plant',.62],'4Ba':['pray2',.7],'4Bb':['smite',.6],'50':['bless',.66],'50a':['pray2',.7],'50b':['bless',.9],'51':['smite',.56],'51a':['point',.62],'51b':['smite',.7]}};
 const R24T=new Set(['spindash','spin2','spinL','pullspin','lunge','rage','roar','cleave','flurry','volley','leap2','leapshot','leaptoss','snipe','plant','skyshot','rapid','cast','stomp','point','channel','summon','orb','toss','mark','seal','pray2','bless','smite']);
 /* ท่าที่มือข้างที่ว่างออกมาด้านหน้า (ซ่อนแขนหลังเดิมไว้ไม่ให้มี 3 มือ) */
 const R24OFF={rage:1,roar:1,leaptoss:1,plant:1,cast:1,point:1,channel:1,summon:1,orb:1,pray2:1,bless:1,smite:1,stomp:1};
@@ -91,7 +96,8 @@ function r24Glow(x,y,col,a,zap,orb){if(!(a>0))return;g.save();g.globalCompositeO
 setTimeout(()=>{
   try{['spindash','spin2','spinL','pullspin','lunge','rage','roar','cleave','flurry','volley','leap2','leapshot','leaptoss','snipe','plant','skyshot','rapid','cast','stomp','point','channel','summon','orb','toss','mark','seal','pray2','bless','smite'].forEach(t=>PCTY.add(t))}catch(e){}
   try{const _tg=sgTags;sgTags=function(k){const T=_tg.apply(this,arguments);try{if(k===4&&me.cls==='assn'&&BR2()&&T.indexOf('move')<0)T.push('move')}catch(e){}return T}}catch(e){}
-  try{const _cs=castStart;castStart=function(k){const r=_cs.apply(this,arguments);try{const C=me.cast,T=SKP[me.cls];if(C&&C.k===k&&T){const rn=rnOf(k),bk=BR2()&&T[k+'B'],e=bk||(rn&&T[k+rn])||T[k];if(e){C.ty=e[0];C.d=e[1];PCT=0;castNet({ty:e[0],d:Math.min(1,e[1]),b:C.big?1:0})}}}catch(e){}return r}}catch(e){}
+  try{const _cs=castStart;castStart=function(k){const r=_cs.apply(this,arguments);try{const C=me.cast,T=SKP[me.cls];if(C&&C.k===k&&T){const rn=rnOf(k);let e=null;/* v401 ท่าตามสาย/รูน: ช่อง 5 = '5'+สายคลาส3+รูน · ช่อง 4 สายทมิฬ = '4B'+รูน */
+      if(k===5){let b=0;try{if(me.rb)b=s6B()}catch(e){}e=(rn&&T['5'+b+rn])||T['5'+b]||T[5]}else if(BR2()&&T[k+'B'])e=(rn&&T[k+'B'+rn])||T[k+'B'];else e=(rn&&T[k+rn])||T[k];if(e){C.ty=e[0];C.d=e[1];PCT=0;castNet({ty:e[0],d:Math.min(1,e[1]),b:C.big?1:0})}}}catch(e){}return r}}catch(e){}
   try{const _cp=castPose;castPose=function(C){if(C&&R24T.has(C.ty)){g.translate(0,14);try{r24Body(C)}catch(e){}g.translate(0,-14);return}return _cp.apply(this,arguments)}}catch(e){}
   /* เงาติดตา/วงใต้เท้า: ท่าใหม่ยืมเอฟเฟกต์ของท่าเดิมที่ใกล้เคียง */
   const MAP={spindash:'dash',lunge:'dash',leap2:'leap',leaptoss:'leap',leapshot:'leap',mark:'thrust',cast:'raise',stomp:'raise',point:'raise',channel:'raise',summon:'raise',orb:'raise',seal:'raise',pray2:'pray',bless:'pray',smite:'raise',plant:'raise',rage:'raise',roar:'raise'};
