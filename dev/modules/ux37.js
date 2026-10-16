@@ -14,7 +14,9 @@ function skShin(rx,ry,d,cls,c2){const P=(c2===2&&CHR3[cls])?CHR3[cls]:(c2&&CHR2[
   g.fillStyle=chSh(P.leg,7,18);g.beginPath();g.roundRect(12.2,8,4.2,10,1.8);g.fill();g.stroke();
   g.fillStyle=chSh(P.leg,5,9);g.beginPath();g.ellipse(13.6,8.4,2.7,2.2,0,0,7);g.fill();g.stroke();
   g.fillStyle='#4a3424';g.beginPath();g.roundRect(11.6,16.4,6.6,3.8,1.5);g.fill();g.stroke();g.fillStyle='rgba(255,255,255,.2)';g.fillRect(12.5,17,4,1);g.restore()}
-const SKE={b:'',id:'',lost:0,jt:0},SKMAX=3,SKQ={},SKH=24;let SKBN=0;
+const SKE={b:'',id:'',lost:0,jt:0,jump:null},SKMAX=3,SKQ={},SKH=24,SKJ={};let SKBN=0,SKJBYP=0;
+/* v420: คนที่ถูกโยนออกจากหอแล้ว (พ้นช่วงฐานย่อ) — ไม่นับเป็นคนบนหออีก แม้ presence ยังไม่อัปเดต */
+function skJumping(u){const J=SKJ[u];return!!(J&&performance.now()-J.t0>=250)}
 function skP(){return SKE.b?SKE.b+'x'+SKE.id:''}
 function skOf(u){if(u===uid)return SKE.b?{b:SKE.b,t:SKE.id}:null;const o=others[u];if(!o||typeof o.sk!=='string'||!o.sk)return null;const k=o.sk;/* v419: ทั้ง uid และเวลา (ฐาน36) มีตัว x ได้ → หาจุดแยกที่ด้านหน้าเป็น uid ที่รู้จัก */let i=-1;for(let j=k.indexOf('x');j>0;j=k.indexOf('x',j+1)){const c=k.slice(0,j);if(c===uid||others[c]){i=j;break}}if(i<0)i=k.lastIndexOf('x');if(i<1)return null;return{b:k.slice(0,i),t:k.slice(i+1)}}
 /* ฐานจริง = ไล่ลงไปจนเจอคนที่ไม่ได้ขี่คอใคร (ปีนต่อจากคนบนหอก่อนข้อมูลมาถึงก็ยังถูกฐานเดียวกัน) */
@@ -46,7 +48,7 @@ function skTick(dt){if(!SKE.b)return;const RB=skRoot(uid),o=others[RB];
 /* ฐาน: เช็กคนขึ้น/ลง เพื่อแจ้ง */
 let SKSEEN='',SKB0=0,SKBT=0;
 function skBaseNo(){const n=performance.now();if(n-SKBT>1500){SKBT=n;try{dn.push({x:me.x,y:me.y-58,v:'🛡️ เป็นฐานอยู่ — โจมตี/หลบไม่ได้',t:1,col:'#ffe08a'})}catch(e){}}}
-function skBaseWatch(){const RR=skRiders(uid),R=RR.map(r=>r.u).join(',');const was=SKB0;SKB0=RR.length>0?1:0;if(SKB0&&!was)try{me.cast=null}catch(e){}if(R===SKSEEN)return;const old=SKSEEN?SKSEEN.split(','):[],now=R?R.split(','):[];SKSEEN=R;
+function skBaseWatch(){const RR=skRiders(uid).filter(r=>!skJumping(r.u)),R=RR.map(r=>r.u).join(',');const was=SKB0;SKB0=RR.length>0?1:0;if(SKB0&&!was)try{me.cast=null}catch(e){}if(R===SKSEEN)return;const old=SKSEEN?SKSEEN.split(','):[],now=R?R.split(','):[];SKSEEN=R;
   now.filter(u=>old.indexOf(u)<0).forEach(u=>{banner={s:'🧗 '+skNm(u)+' ขึ้นขี่คอคุณ · 🛡️ คุณเป็นฐาน: เดินพาหอ + รับดาเมจแทนทุกคน (โจมตีไม่ได้) ('+now.length+'/'+SKMAX+')',t:4}})}
 /* ป้ายชื่อรวมของหอ (ฐาน) */
 function skTag(x,yTop,name,hp,mh,n){g.save();g.globalAlpha=1;g.font='bold 11px system-ui';g.textAlign='center';const tx='🛡️ '+name+' · 🧗'+n,w=g.measureText(tx).width;
@@ -75,10 +77,10 @@ setTimeout(()=>{
      · คนข้างล่าง (ฐาน/ชั้นกลาง) ยกมือจับหน้าแข้งคนข้างบน ย่อเข่ารับน้ำหนัก (ยิ่งแบกหลายคนยิ่งย่อ) · ชั้นกลางที่กำลังตี/ร่ายใช้ท่าตีตามปกติ
      · ทั้งหอโยกเบา ๆ และเอนตามแรงเฉื่อยตอนออกวิ่ง/หยุด (ชั้นสูงเอนมากกว่า) */
   try{const _p=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const u=lk&&lk.u;
-      if(u&&!down){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
-      const R=u&&!down?skRiders(u):[];if(!R.length)return _p.apply(this,arguments);
+      if(u&&!down&&!SKJBYP&&!skJumping(u)){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
+      const R=u&&!down?skRiders(u).filter(r=>!skJumping(r.u)):[];if(!R.length)return _p.apply(this,arguments);
       const now=performance.now(),Q=SKQ[u]||{},d=(fx||1)<0?-1:1,t=now/1000,bob=ph?Math.abs(Math.sin(ph))*1.6:0;
-      let lag=0;try{const S=CHSS[u];if(S)lag=Math.max(-1.3,Math.min(1.3,S.p-S.u))}catch(e){}
+      let lag=0;try{const S=CHSS[u];if(S&&!(LITEQ&&u!==uid))lag=Math.max(-1.3,Math.min(1.3,S.p-S.u))}catch(e){}
       const L=[];R.forEach(r=>{const q=Q[r.u];if(q&&now-q.t<=1500)L.push(q)});const n=L.length;
       /* ตำแหน่งแต่ละชั้น (0 = ฐาน) */
       const pos=[{x,y}];for(let i=1;i<=n;i++){const sw=Math.sin(t*1.7+i*.8)*.55*i+(ph?Math.sin(ph)*.5*i:0)-d*lag*2.4*i;pos.push({x:x-d*2.2*i+sw,y:y-SKH*i-bob*(1+i*.15)})}
