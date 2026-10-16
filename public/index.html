@@ -467,9 +467,9 @@ w.onopen=()=>{R.ok=true;if(st.pres)w.send(JSON.stringify({t:'presence',p:st.pres
 w.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(x){return}
 if(m.t==='roster'){if(Array.isArray(m.r))R.roster={mp:m.mp,at:Date.now(),m:new Map(m.r.filter(x=>Array.isArray(x)&&typeof x[0]==='string').map(x=>[x[0],{u:x[0],n:String(x[1]||'ผู้เล่น'),cls:String(x[2]||''),lv:x[3]|0}]))};return}
 if(m.t==='peers'){
-(m.info||[]).forEach(([u,n,c,l,mh,mp,hd,bt,tt,ex])=>{ex=Array.isArray(ex)?ex:[];st.info[u]={n,cls:c,lv:l,mh,mp,hd,bt,tt,wp:ex[0]|0,ar:ex[1]|0,c2:ex[2]|0,mt:ex[3]|0,wu:ex[4]|0,pt:ex[5]|0,im:ex[6]|0,sw:ex[7]|0,as:ex[8]|0,rw:ex[9]|0,rb:ex[10]|0,sd:ex[11]|0,zz:ex[12]|0,fa:ex[13]|0,rp:typeof ex[14]==='string'?ex[14]:''}});
+(m.info||[]).forEach(([u,n,c,l,mh,mp,hd,bt,tt,ex])=>{ex=Array.isArray(ex)?ex:[];st.info[u]={n,cls:c,lv:l,mh,mp,hd,bt,tt,wp:ex[0]|0,ar:ex[1]|0,c2:ex[2]|0,mt:ex[3]|0,wu:ex[4]|0,pt:ex[5]|0,im:ex[6]|0,sw:ex[7]|0,as:ex[8]|0,rw:ex[9]|0,rb:ex[10]|0,sd:ex[11]|0,zz:ex[12]|0,fa:ex[13]|0,rp:typeof ex[14]==='string'?ex[14]:'',sk:typeof ex[15]==='string'?ex[15]:''}});
 R.hostUid=m.host||'';R.count=m.n||0;R.allPlayers=m.all||null;
-const peers=m.rows.map(([u,x,y,hp,sl,at])=>{const i=st.info[u]||{};return{presence:{uid:u,x,y,hp,sl,at:at|0,n:i.n,cls:i.cls,lv:i.lv,mh:i.mh,mp:i.mp,hd:i.hd,bt:i.bt,tt:i.tt,wp:i.wp,ar:i.ar,c2:i.c2,mt:i.mt,wu:i.wu,pt:i.pt,im:i.im,sw:i.sw,as:i.as,rw:i.rw,rb:i.rb,sd:i.sd,zz:i.zz,fa:i.fa,rp:i.rp}}});
+const peers=m.rows.map(([u,x,y,hp,sl,at])=>{const i=st.info[u]||{};return{presence:{uid:u,x,y,hp,sl,at:at|0,n:i.n,cls:i.cls,lv:i.lv,mh:i.mh,mp:i.mp,hd:i.hd,bt:i.bt,tt:i.tt,wp:i.wp,ar:i.ar,c2:i.c2,mt:i.mt,wu:i.wu,pt:i.pt,im:i.im,sw:i.sw,as:i.as,rw:i.rw,rb:i.rb,sd:i.sd,zz:i.zz,fa:i.fa,rp:i.rp,sk:i.sk}}});
 st.cb&&st.cb({peers})}
 else if(m.t==='emit'&&H[m.k])H[m.k].forEach(f=>f({data:m.d,sameTab:false,from:m.from}))};
 w.onclose=()=>{R.ok=false;R.hostUid='';R.count=0;R.allPlayers=null;st.cb&&st.cb({peers:[]});setTimeout(conn,2000)};
@@ -11883,6 +11883,59 @@ name=name+' · 🐎 '+rdName(pu)}}
 return _p.call(this,x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk)}}catch(e){}
 setInterval(()=>{try{rdUI()}catch(e){}},150);
 },780);
+const SKE={b:'',id:'',lost:0,jt:0},SKMAX=3,SKQ={},SKH=25;let SKBN=0;
+function skP(){return SKE.b?SKE.b+'x'+SKE.id:''}
+function skOf(u){if(u===uid)return SKE.b?{b:SKE.b,t:SKE.id}:null;const o=others[u];if(!o||typeof o.sk!=='string'||!o.sk)return null;const i=o.sk.lastIndexOf('x');if(i<1)return null;return{b:o.sk.slice(0,i),t:o.sk.slice(i+1)}}
+function skRoot(u){let x=u;for(let i=0;i<5;i++){const s=skOf(x);if(!s)return x;x=s.b}return x}
+function skRiders(b){const L=[];if(SKE.b&&skRoot(uid)===b)L.push({u:uid,t:SKE.id});for(const k in others){const s=skOf(k);if(s&&skRoot(k)===b)L.push({u:k,t:s.t})}
+return L.sort((a,c)=>parseInt(a.t,36)-parseInt(c.t,36)||(a.u<c.u?-1:1))}
+function skPos(u){if(u===uid)return{x:me.x,y:me.y,d:Math.cos(me.face)<0?-1:1,hp:me.hp,mt:me.riding?1:0};const o=others[u];return o?{x:o.x,y:o.y,d:(o.fx||1)<0?-1:1,hp:o.hp,mt:o.mt|0}:null}
+function skNm(u){if(u===uid)return me.nm||myName||'คุณ';const o=others[u];if(o)return o.n;try{const m=PTY&&PTY.mem.find(q=>q.u===u);if(m)return m.n}catch(e){}return'เพื่อน'}
+function skBase(u){return skRoot(u)}
+function skClimb(u){if(!me.cls||me.down>0)return;let ip=false;try{ip=inPty(u)}catch(e){}if(!ip){banner={s:'🧗 ขี่คอได้เฉพาะเพื่อนในปาร์ตี้',t:2.5};return}
+if(SKE.b){banner={s:'🧗 กำลังขี่คออยู่แล้ว · ลงก่อน',t:2};return}
+if(me.riding||(typeof RDE!=='undefined'&&RDE.on)){banner={s:'🧗 ลงจากสัตว์ขี่ก่อน',t:2};return}
+if(skRiders(uid).length){banner={s:'🧗 มีคนขี่คอคุณอยู่ · ให้ลงก่อนถึงจะไปขี่คอคนอื่นได้',t:2.5};return}
+const b=skBase(u),P=skPos(b);if(!P||!others[b]){banner={s:'🧗 '+skNm(u)+' ไม่ได้อยู่แมพเดียวกัน',t:2.5};return}
+if(b===uid)return;if(P.hp<=0){banner={s:'🧗 '+skNm(b)+' ล้มอยู่',t:2};return}if(P.mt){banner={s:'🧗 '+skNm(b)+' ขี่สัตว์อยู่ · ใช้ «ขอซ้อนท้าย» แทน',t:2.5};return}
+if(Math.hypot(P.x-me.x,P.y-me.y)>160){banner={s:'🧗 เข้าไปใกล้ '+skNm(u)+' ก่อน (แตะชื่อเพื่อวาปไปหาได้)',t:2.5};return}
+const n=skRiders(b).length;if(n>=SKMAX){banner={s:'🧗 หอของ '+skNm(b)+' เต็มแล้ว (ฐาน + '+SKMAX+' คน)',t:2.5};return}
+SKE.b=b;SKE.id=Date.now().toString(36);SKE.lost=0;SKE.jt=0;try{sfx('gate')}catch(e){}try{burst(me.x,me.y-10,['#ffe08a','#ffffff'],14,90,.5,{g:-20})}catch(e){}
+banner={s:'🧗 ขี่คอ '+skNm(b)+' ชั้นที่ '+(n+1)+' · '+skNm(b)+' รับดาเมจแทน คุณโจมตีได้เต็มที่',t:4}}
+function skDrop(msg){if(!SKE.b)return;const P=skPos(skRoot(uid));SKE.b='';SKE.id='';if(P){me.x=P.x+(Math.random()<.5?-1:1)*(18+Math.random()*14);me.y=P.y+10}if(msg)banner={s:msg,t:3};try{sfx('click')}catch(e){}}
+function skTick(dt){if(!SKE.b)return;const RB=skRoot(uid),o=others[RB];
+if(!o||RB===uid){SKE.lost++;if(SKE.lost>30)skDrop('🧗 '+skNm(SKE.b)+' ไปที่อื่นแล้ว · ลงจากคอ');return}SKE.lost=0;
+let ip=true;try{ip=inPty(RB)}catch(e){}if(!ip)return skDrop('🧗 ไม่ได้อยู่ปาร์ตี้เดียวกันแล้ว · ลงจากคอ');
+if(o.hp<=0)return skDrop('🧗 '+o.n+' ล้ม! หอพังลงมา');if(o.mt>0)return skDrop('🧗 '+o.n+' ขึ้นสัตว์ขี่ · ลงจากคอ');if(me.down>0)return skDrop('');
+try{if(typeof joy!=='undefined'&&joy&&joy.mv&&Math.hypot(joy.dx||0,joy.dy||0)>8){SKE.jt+=dt||0;if(SKE.jt>.6){SKE.jt=0;return skDrop('🧗 กระโดดลงจากคอแล้ว')}}else SKE.jt=0}catch(e){}
+me.x=o.x;me.y=o.y;me.face=(o.fx||1)<0?Math.PI:0;me.riding=0}
+let SKSEEN='';
+function skBaseWatch(){const R=skRiders(uid).map(r=>r.u).join(',');if(R===SKSEEN)return;const old=SKSEEN?SKSEEN.split(','):[],now=R?R.split(','):[];SKSEEN=R;
+now.filter(u=>old.indexOf(u)<0).forEach(u=>{banner={s:'🧗 '+skNm(u)+' ขึ้นขี่คอคุณ · คุณเป็นฐาน รับดาเมจแทนทุกคน ('+now.length+'/'+SKMAX+')',t:4}})}
+function skTag(x,yTop,name,hp,mh,n){g.save();g.globalAlpha=1;g.font='bold 11px system-ui';g.textAlign='center';const tx=name+' · 🧗'+n,w=g.measureText(tx).width;
+g.fillStyle='rgba(12,9,16,.5)';g.beginPath();g.roundRect(x-w/2-7,yTop-12,w+14,15,7);g.fill();g.lineWidth=2.5;g.strokeStyle='rgba(10,6,4,.8)';g.strokeText(tx,x,yTop);g.fillStyle='#ffe6a8';g.fillText(tx,x,yTop);
+g.fillStyle='#000';g.fillRect(x-18,yTop+5,36,4);g.fillStyle=hp/mh<.3?'#ff5a4a':'#6fd06a';g.fillRect(x-18,yTop+5,36*Math.max(0,Math.min(1,hp/(mh||1))),4);g.restore()}
+function skBtn(u,far){if(far||!me.cls)return'';const on=SKE.b&&(SKE.b===u||skRoot(u)===skRoot(uid));return'<span class="skb'+(on?' on':'')+'" data-sk="'+esc(u)+'" title="ขี่คอ">🧗</span>'}
+setTimeout(()=>{
+try{const st=document.createElement('style');st.textContent='#ptyhud .pr{position:relative}#ptyhud .skb{position:absolute;right:2px;top:2px;pointer-events:auto;font-size:13px;line-height:1;padding:3px 3px 2px;border-radius:6px;background:rgba(255,224,138,.18);border:1px solid rgba(255,224,138,.55);cursor:pointer}#ptyhud .skb.on{background:rgba(160,255,160,.3);border-color:#a8f0a8}#ptyhud .pr b{padding-right:20px}';document.head.appendChild(st)}catch(e){}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-sk]');if(!b)return;e.stopPropagation();e.preventDefault();const u=b.dataset.sk;
+if(SKE.b&&(SKE.b===u||skRoot(u)===skRoot(uid))){skDrop('🧗 ลงจากคอแล้ว');return}skClimb(u)},true);
+try{const _u=updateMe;updateMe=function(dt){const r=_u.apply(this,arguments);try{skTick(dt);skBaseWatch()}catch(e){}return r}}catch(e){}
+try{const _h=hurt;window.hurt=hurt=function(d){const RB=SKE.b?skRoot(uid):'';if(RB&&RB!==uid&&d>0&&others[RB]&&others[RB].hp>0&&me.down<=0){try{fx({k:'skd',to:RB,d:Math.round(d)})}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
+try{const _f=handleFx;handleFx=function(o){if(o&&(o.k==='skd'||o.k==='skx')){try{if(o.to===uid&&me.cls){if(o.k==='skd'){const s=skOf(o.by);if(s&&skRoot(o.by)===uid&&o.d>0)hurt(Math.min(o.d,me.mh*2))}else if(o.k==='skx'&&SKE.b&&(SKE.b===o.by||skRoot(uid)===o.by))skDrop('🧗 '+skNm(o.by)+' ให้ทุกคนลงจากคอ')}}catch(e){}return}return _f.apply(this,arguments)}}catch(e){}
+try{const _mt=mountToggle;mountToggle=function(){if(SKE.b){banner={s:'🧗 กำลังขี่คออยู่ · ลงก่อน',t:2};return}if(!me.riding&&skRiders(uid).length){banner={s:'🧗 มีคนขี่คออยู่ · ให้ลงก่อนขี่สัตว์',t:2};return}return _mt.apply(this,arguments)}}catch(e){}
+try{const _ru=rdUI;rdUI=function(){_ru.apply(this,arguments);const b=$('rdb');if(!b||RDF)return;let tx='',f='';if(me.cls&&run&&ov.hidden&&!SD.on){if(SKE.b){tx='🧗 ลงจากคอ';f='skoff'}else{const n=skRiders(uid).length;if(n){tx='🧗 ให้ทุกคนลง ('+n+')';f='skall'}}}
+if(b.hidden!==!tx)b.hidden=!tx;if(tx&&b.textContent!==tx)b.textContent=tx;if(tx){b.classList.remove('ask');b.disabled=false}RDF=f}}catch(e){}
+try{const _rc=rdClick;rdClick=function(){if(RDF==='skoff'){skDrop('🧗 ลงจากคอแล้ว');return}if(RDF==='skall'){skRiders(uid).forEach(r=>{try{fx({k:'skx',to:r.u})}catch(e){}});banner={s:'🧗 ให้ทุกคนลงจากคอแล้ว',t:2};return}return _rc.apply(this,arguments)}}catch(e){}
+try{const _p=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const u=lk&&lk.u;
+if(u&&!down){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
+const R=u&&!down?skRiders(u):[];if(!R.length)return _p.apply(this,arguments);
+const now=performance.now(),Q=SKQ[u]||{},d=(fx||1)<0?-1:1,t=now/1000,bob=ph?Math.abs(Math.sin(ph))*1.6:0;
+SKBN=1;PGNT=1;try{_p.apply(this,arguments)}finally{PGNT=0;SKBN=0}
+let lv=0;R.forEach(r=>{const q=Q[r.u];if(!q||now-q.t>500)return;lv++;const a=q.a.slice();a[0]=x+d*(lv%2?1.5:-1.5)+Math.sin(t*2+lv)*.6;a[1]=y-SKH*lv-bob;a[9]=0;a[10]=d;
+PGNT=1;MSHOFF=1;try{_p.apply(this,a)}catch(e){}finally{PGNT=0;MSHOFF=0}});
+skTag(x,y-SKH*lv-44-bob,(name||'').replace(/^🌅/,''),hp,mh,lv)}}catch(e){}
+},800);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
@@ -16245,7 +16298,7 @@ setInterval(status,1500);
 try{room=window.claude&&await claude.use('room')}catch(e){room=null}
 status();if(!room)return;
 room.onPeers(ch=>{const o={};ch.peers.forEach(p=>{const r=p.presence;if(!r||!r.uid||r.uid===uid||!r.cls||(r.mp||1)!==curMap)return;const old=others[r.uid];
-o[r.uid]={x:old?old.x:r.x,y:old?old.y:r.y,tx:r.x,ty:r.y,hp:r.hp,mh:r.mh,cls:r.cls,n:cleanName(r.n)||'ผู้เล่น',lv:r.lv||1,sl:r.sl||0,hd:r.hd|0,bt:r.bt|0,wp:r.wp|0,ar:r.ar|0,wu:Math.max(0,Math.min(30,r.wu|0)),tt:typeof r.tt==='string'&&ACHM[r.tt]?r.tt:'',c2:(r.c2|0)===2?2:r.c2?1:0,im:Math.max(0,Math.min(3,r.im|0)),sw:r.sw?1:0,rw:r.rw?1:0,sd:Math.max(0,Math.min(9,r.sd|0)),rb:Math.max(0,Math.min(2,r.rb|0)),as:Math.max(0,Math.min(AMAX,r.as|0)),mt:(r.mt|0)>=1&&(r.mt|0)<=MT_N?r.mt|0:0,pt:(r.pt|0)>=1&&(r.pt|0)<=PT_N?r.pt|0:0,_p:old?old._p:null,u:r.uid,at:r.at|0,zz:r.zz?1:0,fa:Math.max(0,Math.min(40,r.fa|0)),rp:typeof r.rp==='string'?r.rp.slice(0,24):'',atkT:old&&(old.at|0)!==(r.at|0)?performance.now():(old?old.atkT:0)}});
+o[r.uid]={x:old?old.x:r.x,y:old?old.y:r.y,tx:r.x,ty:r.y,hp:r.hp,mh:r.mh,cls:r.cls,n:cleanName(r.n)||'ผู้เล่น',lv:r.lv||1,sl:r.sl||0,hd:r.hd|0,bt:r.bt|0,wp:r.wp|0,ar:r.ar|0,wu:Math.max(0,Math.min(30,r.wu|0)),tt:typeof r.tt==='string'&&ACHM[r.tt]?r.tt:'',c2:(r.c2|0)===2?2:r.c2?1:0,im:Math.max(0,Math.min(3,r.im|0)),sw:r.sw?1:0,rw:r.rw?1:0,sd:Math.max(0,Math.min(9,r.sd|0)),rb:Math.max(0,Math.min(2,r.rb|0)),as:Math.max(0,Math.min(AMAX,r.as|0)),mt:(r.mt|0)>=1&&(r.mt|0)<=MT_N?r.mt|0:0,pt:(r.pt|0)>=1&&(r.pt|0)<=PT_N?r.pt|0:0,_p:old?old._p:null,u:r.uid,at:r.at|0,zz:r.zz?1:0,fa:Math.max(0,Math.min(40,r.fa|0)),rp:typeof r.rp==='string'?r.rp.slice(0,24):'',sk:typeof r.sk==='string'?r.sk.replace(/[^a-z0-9]/gi,'').slice(0,32):'',atkT:old&&(old.at|0)!==(r.at|0)?performance.now():(old?old.atkT:0)}});
 Object.keys(o).forEach(k=>{if(!others[k]&&Date.now()>quietUntil)sysMsg(o[k].n+' เข้ามาในแมพนี้')});Object.keys(others).forEach(k=>{if(!o[k]){if(Date.now()>quietUntil)sysMsg(others[k].n+' ออกจากแมพนี้');delete says[k]}});
 others=o;status();if(partyOpen)partyList()});
 room.on('chat',m=>{const d=m.data;if(m.sameTab||!d||typeof d.t!=='string')return;const t=d.t.replace(/[\u0000-\u001f\u007f]/g,'').slice(0,80);if(!t)return;
@@ -16269,7 +16322,7 @@ room.on('trade',m=>{m=U(m);if(!m.sameTab&&m.data)tradeMsg(m.data)});
 room.on('dgo',m=>{m=U(m);if(!m.sameTab&&isHost())dgStart()});
 room.on('dinv',m=>{m=U(m);if(m.sameTab||!m.data||isDg())return;const id=m.data.id|0,tr=Math.floor(id/10000);if(!DT[tr])return;dInv={id,tr,n:cleanName(m.data.n)||'ผู้เล่น',until:Date.now()+30000};sfx('quest')});
 room.on('xp',m=>{m=U(m);if(!m.sameTab&&Array.isArray(m.data))m.data.forEach(([x,y,v,gd,pz,gl,bs,tt,sh,el])=>{gainXP(x,y,v);qKill(x,y,tt|0,bs);if(bs)bossLoot(x,y,bs===2);else{dropLoot(x,y,gd||0,pz||0,gl||0);if(sh>0)shinyLoot(x,y,Math.min(99,sh|0));if(el>0&&el<1e4)ekLoot(x,y,Math.floor(el/10),el%10)}})});
-setInterval(()=>{if(me.cls)room.presence(window.lastPres={uid,x:Math.round(me.x),y:Math.round(me.y),hp:Math.round(me.hp),mh:me.mh,cls:me.cls,n:myName,lv:me.lv,rb:me.rb?rbBr():0,sl:(me.stealth>0||me.rsp>0)?1:0,mp:curMap,hd:myLk('h'),bt:myLk('b'),wp:myLk('w'),pt:me.pet|0,im:summR()?IMPS.length:0,wu:(me.eq&&me.eq.w&&me.eq.w.u)|0,ar:myLk('a'),tt:me.title||'',c2:c2v(),at:me.atkN|0,mt:me.riding?me.mt|0:0,sw:setCount(5)>=5?1:0,rw:setCount(6)>=5?1:0,sd:(me.sty&&me.sty.p7sq)|0,as:me.lv>=LMAX&&me.ast?me.ast.n|0:0,aw:document.hidden?1:0,zz:tvZzz(),fa:wdrFa(),rp:rideRp()})},200);
+setInterval(()=>{if(me.cls)room.presence(window.lastPres={uid,x:Math.round(me.x),y:Math.round(me.y),hp:Math.round(me.hp),mh:me.mh,cls:me.cls,n:myName,lv:me.lv,rb:me.rb?rbBr():0,sl:(me.stealth>0||me.rsp>0)?1:0,mp:curMap,hd:myLk('h'),bt:myLk('b'),wp:myLk('w'),pt:me.pet|0,im:summR()?IMPS.length:0,wu:(me.eq&&me.eq.w&&me.eq.w.u)|0,ar:myLk('a'),tt:me.title||'',c2:c2v(),at:me.atkN|0,mt:me.riding?me.mt|0:0,sw:setCount(5)>=5?1:0,rw:setCount(6)>=5?1:0,sd:(me.sty&&me.sty.p7sq)|0,as:me.lv>=LMAX&&me.ast?me.ast.n|0:0,aw:document.hidden?1:0,zz:tvZzz(),fa:wdrFa(),rp:rideRp(),sk:skP()})},200);
 setInterval(()=>{
 if(hitBuf.length)emitM('hit',hitBuf.splice(0,60));
 if(isHost()&&run&&!document.hidden){
@@ -16367,7 +16420,7 @@ else if(dead.some(m=>m.u===PTY.lead)){const rest=PTY.mem.filter(m=>!dead.include
 function ptXpMul(){if(!PTY)return 1;let n=0;PTY.mem.forEach(m=>{const o=m.u!==uid&&others[m.u];if(o&&o.hp>0&&Math.hypot(o.x-me.x,o.y-me.y)<700)n++});return 1+.1*Math.min(3,n)}
 function ptHud(){const el=$('ptyhud');if(!el)return;const on=!!(PTY&&me.cls&&run);if(el.hidden===on)el.hidden=!on;if(!on)return;
 const h=PTY.mem.filter(m=>m.u!==uid).map(m=>{const f=Math.max(0,Math.min(1,m.hp/(m.mh||1))),far=m.mp!==curMap,off=Date.now()-m.s>8000;
-const wy=wpCheck(m.u),wk=!wy;return'<div class="pr'+(off?' off':'')+(wk?' wk':'')+(WP&&WP.u===m.u?' wg':'')+'" data-pw="'+esc(m.u)+'"><b>'+(m.u===PTY.lead?'👑':'')+esc(m.n)+'<em>🌀</em></b><small>'+(CL[m.cls]?CL[m.cls].n.split(' ')[0]:'')+' '+m.lv+(far&&MAPS[m.mp]?' · '+esc(MAPS[m.mp].n):'')+'</small><i><u style="width:'+Math.round(f*100)+'%'+(f<.3?';background:#ff5a4a':'')+'"></u></i></div>'}).join('')+(ptXpMul()>1?'<div class="xb">EXP +'+Math.round((ptXpMul()-1)*100)+'%</div>':'')+(wpCd>0?'<div class="xb wpc">🌀 วาปได้ใน '+Math.ceil(wpCd)+' วิ</div>':'<div class="xb wpc">🌀 แตะชื่อเพื่อวาป</div>');
+const wy=wpCheck(m.u),wk=!wy;return'<div class="pr'+(off?' off':'')+(wk?' wk':'')+(WP&&WP.u===m.u?' wg':'')+'" data-pw="'+esc(m.u)+'"><b>'+(m.u===PTY.lead?'👑':'')+esc(m.n)+'<em>🌀</em></b>'+skBtn(m.u,far)+'<small>'+(CL[m.cls]?CL[m.cls].n.split(' ')[0]:'')+' '+m.lv+(far&&MAPS[m.mp]?' · '+esc(MAPS[m.mp].n):'')+'</small><i><u style="width:'+Math.round(f*100)+'%'+(f<.3?';background:#ff5a4a':'')+'"></u></i></div>'}).join('')+(ptXpMul()>1?'<div class="xb">EXP +'+Math.round((ptXpMul()-1)*100)+'%</div>':'')+(wpCd>0?'<div class="xb wpc">🌀 วาปได้ใน '+Math.ceil(wpCd)+' วิ</div>':'<div class="xb wpc">🌀 แตะชื่อเพื่อวาป</div>');
 if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}}
 function plPopShow(u){const o=others[u];if(!o)return;plPop={u,t:Date.now()};const el=$('plpop'),inP=inPty(u),lead=PTY&&PTY.lead===uid;
 el.innerHTML='<div class="ph"><b>'+esc(o.n)+'</b><small>'+(CL[o.cls]?esc(CL[o.cls].n):'')+' · Lv '+(o.lv||1)+(inP?' · 👥 ปาร์ตี้':'')+'</small></div>'+
