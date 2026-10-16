@@ -49,23 +49,27 @@ function chEyesA(c2,hy,t,O){const E=CHE;if(!E)return false;const k=E.k;
   else{g.fillRect(1.5+lx,hy-2,2.4,k==='low'?1.1:1.6);g.fillRect(5.5+lx,hy-2,2.4,k==='low'?1.1:1.6)}
   g.shadowBlur=0;if(k==='low'){const q=(t*.8)%1;g.fillStyle='rgba(150,220,255,'+(.9-q*.5)+')';g.beginPath();g.ellipse(9.4,hy-2+q*3,.9,1.3,0,0,7);g.fill()}return true}
 /* 1) เงาตามรูปทรง + เส้นแสงขอบหลัง */
-function gxCel(c,w,h,s){if(typeof FQ!=='undefined'&&FQ.avg>21)return;let S=GX.celc;if(!S){S=GX.celc=document.createElement('canvas');S.width=S.height=128;GX.celx=S.getContext('2d')}
-  if(S.width<w||S.height<h){S.width=Math.max(S.width,w);S.height=Math.max(S.height,h);GX.celx=S.getContext('2d')}
-  const q=GX.celx,k=Math.max(1.5,2.3*s),o=GX.oc;
-  q.setTransform(1,0,0,1,0,0);q.globalAlpha=1;q.globalCompositeOperation='source-over';q.clearRect(0,0,w+2,h+2);q.drawImage(c,0,0,w,h,0,0,w,h);
-  q.globalCompositeOperation='destination-out';q.drawImage(c,0,0,w,h,-k,-k*.75,w,h);q.globalCompositeOperation='source-in';
-  const nt=(()=>{try{return isNight()&&!isDg()}catch(e){return false}})();q.fillStyle=nt?'rgba(4,8,40,.42)':'rgba(30,14,48,.34)';q.fillRect(0,0,w,h);
-  o.save();o.setTransform(1,0,0,1,0,0);o.globalCompositeOperation='source-atop';o.drawImage(S,0,0,w,h,0,0,w,h);
+/* v408: วาดเงาการ์ตูนเฉพาะตัวเรา (ผู้เล่นอื่นยังมีแสงขอบ/แสงบรรยากาศเดิม) · ต้นทุนราว 1.5 ms ต่อตัว */
+let CELME=0;
+function gxCel(c,w,h,s){if(!CELME||(typeof FQ!=='undefined'&&FQ.avg>21))return;let S=GX.celc;if(!S){S=GX.celc=document.createElement('canvas');S.width=S.height=128;GX.celx=S.getContext('2d')}
+  /* v408: จอความละเอียดสูงทำที่ครึ่งความละเอียดแล้วขยายกลับ (แถบเงานุ่มอยู่แล้ว · ลดงานพิกเซลลง 4 เท่า) */
+  const r=s>=1.6?.5:1,W=Math.ceil(w*r),H=Math.ceil(h*r);
+  if(S.width<W+2||S.height<H+2){S.width=Math.max(S.width,W+2);S.height=Math.max(S.height,H+2);GX.celx=S.getContext('2d')}
+  const q=GX.celx,k=Math.max(1.5,2.3*s)*r,o=GX.oc;q.imageSmoothingEnabled=true;
+  q.setTransform(1,0,0,1,0,0);q.globalAlpha=1;q.globalCompositeOperation='source-over';q.clearRect(0,0,W+2,H+2);q.drawImage(c,0,0,w,h,0,0,W,H);
+  q.globalCompositeOperation='destination-out';q.drawImage(c,0,0,w,h,-k,-k*.75,W,H);q.globalCompositeOperation='source-in';
+  const nt=(()=>{try{return isNight()&&!isDg()}catch(e){return false}})();q.fillStyle=nt?'rgba(4,8,40,.42)':'rgba(30,14,48,.34)';q.fillRect(0,0,W,H);
+  o.save();o.setTransform(1,0,0,1,0,0);o.globalCompositeOperation='source-atop';o.drawImage(S,0,0,W,H,0,0,w,h);
   /* เส้นแสงขอบด้านหลัง (ขวา) บาง ๆ */
-  q.globalCompositeOperation='source-over';q.clearRect(0,0,w+2,h+2);q.drawImage(c,0,0,w,h,0,0,w,h);q.globalCompositeOperation='destination-out';q.drawImage(c,0,0,w,h,-Math.max(1,.9*s),0,w,h);
-  q.globalCompositeOperation='source-in';q.fillStyle='rgba('+gxRimCol()+',.55)';q.fillRect(0,0,w,h);o.globalCompositeOperation='lighter';o.drawImage(S,0,0,w,h,0,0,w,h);o.restore()}
+  q.globalCompositeOperation='source-over';q.clearRect(0,0,W+2,H+2);q.drawImage(c,0,0,w,h,0,0,W,H);q.globalCompositeOperation='destination-out';q.drawImage(c,0,0,w,h,-Math.max(1,.9*s)*r,0,W,H);
+  q.globalCompositeOperation='source-in';q.fillStyle='rgba('+gxRimCol()+',.55)';q.fillRect(0,0,W,H);o.globalCompositeOperation='lighter';o.drawImage(S,0,0,W,H,0,0,w,h);o.restore()}
 setTimeout(()=>{
   /* วาดผู้เล่น: คำนวณสปริงผ้า/ผม + สีหน้า + สะดุ้งตอนโดนตี */
   try{const _d=drawP0;drawP0=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const key=(lk&&lk.u)||name||'?';const isMe=key==='me'||(typeof uid!=='undefined'&&key===uid)||(me&&name===me.name&&x===me.x);
       let a=arguments;try{if(!down&&!LOWQ){CHS=chSpring(key,x,y,fx)}else CHS={h:0,c:0};
-        CHE=down?null:chExpr(key,hp,mh,!!(CHA&&CHA.cast),isMe);
+        CHE=down?null:chExpr(key,hp,mh,!!(CHA&&CHA.cast&&!CHA.cast.idle),isMe);
         if(CHE&&CHE.k==='hurt'){const e=(performance.now()-CHE.ht)/150;if(e>=0&&e<1){a=Array.prototype.slice.call(arguments);a[0]=x-(fx<0?-1:1)*1.6*(1-e)}}}catch(e){CHS={h:0,c:0};CHE=null}
-      try{return _d.apply(this,a)}finally{CHS={h:0,c:0};CHE=null}}}catch(e){}
+      CELME=isMe?1:0;try{return _d.apply(this,a)}finally{CHS={h:0,c:0};CHE=null;CELME=0}}}catch(e){}
   try{const _h=hurt;window.hurt=hurt=function(d){const h0=me.hp;const r=_h.apply(this,arguments);try{if(me.hp<h0)me.hurtT=performance.now()}catch(e){}return r}}catch(e){}
   try{const _q=qKill;qKill=function(x,y,t,bs){const r=_q.apply(this,arguments);try{if((bs||t===3)&&me.cls&&Math.hypot(me.x-x,me.y-y)<500)me.happyT=performance.now()+2600}catch(e){}return r}}catch(e){}
 },650);
