@@ -37,7 +37,7 @@ async def main():
         rep('เซฟกรองค่าแปลก',sv['bad']['on']=='' and 'xxx' not in sv['bad']['o'] and sv['bad']['th']==0 and not sv['bad']['k'],json.dumps(sv['bad']))
         pity=await A.ev("()=>{const W=wdrSt();delete W.o.bon;W.k={};const _r=Math.random;Math.random=()=>.99;for(let i=0;i<15;i++)wdrBoss(me.x,me.y,false);Math.random=_r;return new Promise(r=>setTimeout(()=>r({own:!!W.o.bon,k:W.k.bon|0}),1500))}")
         rep('บอสหุบเขากระดูก การันตีครบ 15 ตัว',pity['own'],json.dumps(pity))
-        buy=await A.ev("()=>{const W=wdrSt();delete W.o.hrt;W.th=12;ov.hidden=false;GPV.wd=true;gearUI();const b=document.querySelector('[data-wdb=\"hrt\"]');if(!b)return 'nobtn';b.click();return{own:!!W.o.hrt,th:W.th}}")
+        buy=await A.ev("()=>{const W=wdrSt();delete W.o.hrt;W.th=12;wardrobeUI();const b=document.querySelector('[data-wdb=\"hrt\"]');if(!b)return 'nobtn';b.click();return{own:!!W.o.hrt,th:W.th}}")
         rep('แลกชุดด้วยด้าย 12',isinstance(buy,dict) and buy['own'] and buy['th']==0,json.dumps(buy))
         wr=await A.ev("()=>{const b=document.querySelector('[data-wdo=\"hrt\"]');if(!b)return 'nobtn';b.click();return{on:me.wdr.on,lk:myLook().fa}}")
         rep('กดสวมจากตู้',isinstance(wr,dict) and wr['on']=='hrt' and wr['lk']==21,json.dumps(wr))

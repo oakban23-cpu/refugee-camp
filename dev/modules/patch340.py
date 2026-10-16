@@ -481,6 +481,8 @@ R("me.sson.tg.push(i);me.gold+=T[2];","me.sson.tg.push(i);me.gold+=T[2];try{wdrS
 R("ssAdd(50,'หีบรายสัปดาห์');","ssAdd(50,'หีบรายสัปดาห์');try{wdrThread(1,'หีบรายสัปดาห์')}catch(_){}")
 for _sl in 'hbwa':
     s=s.replace("lkc(me.eq."+_sl+")","myLk('"+_sl+"')")
+R("else if(tentMine()&&tvNearHearth()){tx='🔥 ทำอาหารที่เตา';fn='cook'}","else if(tentMine()&&wdrNear()){tx='👗 เปิดตู้เสื้อผ้า';fn='wdr'}else if(tentMine()&&tvNearHearth()){tx='🔥 ทำอาหารที่เตา';fn='cook'}")
+R("else if(f==='cook'&&tvNearHearth()){fishUI('food')}","else if(f==='wdr'&&wdrNear()){try{sfx('click')}catch(e){}wardrobeUI()}else if(f==='cook'&&tvNearHearth()){fishUI('food')}")
 open(P,'w').write(s)
 print('ok')
 import subprocess
