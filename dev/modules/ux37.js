@@ -4,9 +4,19 @@
    สูงสุด 3 คนบนฐาน (รวม 4) · ลง: ปุ่ม «🧗 ลงจากคอ» / ดันจอยค้าง · ฐานกด «ให้ทุกคนลง» ได้
    หลุดอัตโนมัติ: ฐานล้ม ไปแมพอื่น ออกจากปาร์ตี้ หรือขี่สัตว์ · คนขี่ล้ม
    presence ช่องใหม่ sk = uid ฐาน + 'x' + ลำดับเวลาที่ปีน (ใช้เรียงชั้น) · ดาเมจของคนขี่ส่งไปฐานผ่าน fx skd */
-const SKE={b:'',id:'',lost:0,jt:0},SKMAX=3,SKQ={},SKH=25;let SKBN=0;
+let CHSIT=0,SKPOSE=null;
+/* ขาตอนนั่งคร่อมคอ (พิกัดตัวละคร หันขวา): ต้นขายื่นไปข้างหน้า หน้าแข้งห้อยลง · ขาหลังห้อยด้านหลังคนข้างล่าง */
+function chSitLegs(P){const O='#140e0c';g.lineWidth=1;g.strokeStyle=O;
+  g.fillStyle=chSh(P.leg,3,16);g.beginPath();g.roundRect(-10,5,4.2,10,1.6);g.fill();g.stroke();
+  g.fillStyle=chSh(P.leg,3,8);g.beginPath();g.roundRect(-5,3,13,4.6,1.8);g.fill();g.stroke()}
+/* หน้าแข้ง+รองเท้าขาหน้าของคนขี่ (วาดทับหน้าอกคนข้างล่าง) */
+function skShin(rx,ry,d,cls,c2){const P=(c2===2&&CHR3[cls])?CHR3[cls]:(c2&&CHR2[cls])?CHR2[cls]:(CHR[cls]||CHR.melee),O='#140e0c';g.save();g.translate(rx,ry);g.scale(d,1);g.lineWidth=1;g.strokeStyle=O;
+  g.fillStyle=chSh(P.leg,7,18);g.beginPath();g.roundRect(12.2,8,4.2,10,1.8);g.fill();g.stroke();
+  g.fillStyle=chSh(P.leg,5,9);g.beginPath();g.ellipse(13.6,8.4,2.7,2.2,0,0,7);g.fill();g.stroke();
+  g.fillStyle='#4a3424';g.beginPath();g.roundRect(11.6,16.4,6.6,3.8,1.5);g.fill();g.stroke();g.fillStyle='rgba(255,255,255,.2)';g.fillRect(12.5,17,4,1);g.restore()}
+const SKE={b:'',id:'',lost:0,jt:0},SKMAX=3,SKQ={},SKH=24;let SKBN=0;
 function skP(){return SKE.b?SKE.b+'x'+SKE.id:''}
-function skOf(u){if(u===uid)return SKE.b?{b:SKE.b,t:SKE.id}:null;const o=others[u];if(!o||typeof o.sk!=='string'||!o.sk)return null;const i=o.sk.lastIndexOf('x');if(i<1)return null;return{b:o.sk.slice(0,i),t:o.sk.slice(i+1)}}
+function skOf(u){if(u===uid)return SKE.b?{b:SKE.b,t:SKE.id}:null;const o=others[u];if(!o||typeof o.sk!=='string'||!o.sk)return null;const k=o.sk;/* v419: ทั้ง uid และเวลา (ฐาน36) มีตัว x ได้ → หาจุดแยกที่ด้านหน้าเป็น uid ที่รู้จัก */let i=-1;for(let j=k.indexOf('x');j>0;j=k.indexOf('x',j+1)){const c=k.slice(0,j);if(c===uid||others[c]){i=j;break}}if(i<0)i=k.lastIndexOf('x');if(i<1)return null;return{b:k.slice(0,i),t:k.slice(i+1)}}
 /* ฐานจริง = ไล่ลงไปจนเจอคนที่ไม่ได้ขี่คอใคร (ปีนต่อจากคนบนหอก่อนข้อมูลมาถึงก็ยังถูกฐานเดียวกัน) */
 function skRoot(u){let x=u;for(let i=0;i<5;i++){const s=skOf(x);if(!s)return x;x=s.b}return x}
 function skRiders(b){const L=[];if(SKE.b&&skRoot(uid)===b)L.push({u:uid,t:SKE.id});for(const k in others){const s=skOf(k);if(s&&skRoot(k)===b)L.push({u:k,t:s.t})}
@@ -60,13 +70,31 @@ setTimeout(()=>{
   try{const _ru=rdUI;rdUI=function(){_ru.apply(this,arguments);const b=$('rdb');if(!b||RDF)return;let tx='',f='';if(me.cls&&run&&ov.hidden&&!SD.on){if(SKE.b){tx='🧗 ลงจากคอ';f='skoff'}else{const n=skRiders(uid).length;if(n){tx='🧗 ให้ทุกคนลง ('+n+')';f='skall'}}}
       if(b.hidden!==!tx)b.hidden=!tx;if(tx&&b.textContent!==tx)b.textContent=tx;if(tx){b.classList.remove('ask');b.disabled=false}RDF=f}}catch(e){}
   try{const _rc=rdClick;rdClick=function(){if(RDF==='skoff'){skDrop('🧗 ลงจากคอแล้ว');return}if(RDF==='skall'){skRiders(uid).forEach(r=>{try{fx({k:'skx',to:r.u})}catch(e){}});banner={s:'🧗 ให้ทุกคนลงจากคอแล้ว',t:2};return}return _rc.apply(this,arguments)}}catch(e){}
-  /* วาด: คนขี่ถูกวาดตอนวาดฐาน (ซ้อนขึ้นไปทีละชั้น) · ป้ายชื่อรวมไว้บนสุด */
+  /* v419 วาดหอให้ดูเป็นธรรมชาติ:
+     · คนขี่นั่งคร่อมคอคนข้างล่าง: ตัววาด "หลัง" คนข้างล่าง (หัวคนล่างบังช่วงสะโพก) ขาหลังห้อยด้านหลัง · หน้าแข้งขาหน้าห้อยลงหน้าอกคนล่าง (วาดทับทีหลัง)
+     · คนข้างล่าง (ฐาน/ชั้นกลาง) ยกมือจับหน้าแข้งคนข้างบน ย่อเข่ารับน้ำหนัก (ยิ่งแบกหลายคนยิ่งย่อ) · ชั้นกลางที่กำลังตี/ร่ายใช้ท่าตีตามปกติ
+     · ทั้งหอโยกเบา ๆ และเอนตามแรงเฉื่อยตอนออกวิ่ง/หยุด (ชั้นสูงเอนมากกว่า) */
   try{const _p=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const u=lk&&lk.u;
       if(u&&!down){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
       const R=u&&!down?skRiders(u):[];if(!R.length)return _p.apply(this,arguments);
       const now=performance.now(),Q=SKQ[u]||{},d=(fx||1)<0?-1:1,t=now/1000,bob=ph?Math.abs(Math.sin(ph))*1.6:0;
-      SKBN=1;PGNT=1;try{_p.apply(this,arguments)}finally{PGNT=0;SKBN=0}
-      let lv=0;R.forEach(r=>{const q=Q[r.u];if(!q||now-q.t>500)return;lv++;const a=q.a.slice();a[0]=x+d*(lv%2?1.5:-1.5)+Math.sin(t*2+lv)*.6;a[1]=y-SKH*lv-bob;a[9]=0;a[10]=d;
-        PGNT=1;MSHOFF=1;try{_p.apply(this,a)}catch(e){}finally{PGNT=0;MSHOFF=0}});
-      skTag(x,y-SKH*lv-44-bob,(name||'').replace(/^🌅/,''),hp,mh,lv)}}catch(e){}
+      let lag=0;try{const S=CHSS[u];if(S)lag=Math.max(-1.3,Math.min(1.3,S.p-S.u))}catch(e){}
+      const L=[];R.forEach(r=>{const q=Q[r.u];if(q&&now-q.t<=1500)L.push(q)});const n=L.length;
+      /* ตำแหน่งแต่ละชั้น (0 = ฐาน) */
+      const pos=[{x,y}];for(let i=1;i<=n;i++){const sw=Math.sin(t*1.7+i*.8)*.55*i+(ph?Math.sin(ph)*.5*i:0)-d*lag*2.4*i;pos.push({x:x-d*2.2*i+sw,y:y-SKH*i-bob*(1+i*.15)})}
+      /* คนขี่: วาดจากบนลงล่าง (ชั้นบนอยู่หลังชั้นล่าง) */
+      for(let i=n;i>=1;i--){const a=L[i-1].a.slice();a[0]=pos[i].x;a[1]=pos[i].y;a[9]=0;a[10]=d;const hold=i<n;
+        PGNT=1;MSHOFF=1;CHSIT=1;SKPOSE=hold?{ty:'stkB',n:n-i}:{ty:'stkT',n:0};try{_p.apply(this,a)}catch(e){}finally{PGNT=0;MSHOFF=0;CHSIT=0;SKPOSE=null}}
+      /* ฐาน: ย่อรับน้ำหนัก + มือจับหน้าแข้งชั้นแรก */
+      SKBN=1;PGNT=1;SKPOSE={ty:'stkB',n};try{_p.apply(this,arguments)}finally{PGNT=0;SKBN=0;SKPOSE=null}
+      /* หน้าแข้งขาหน้าของทุกชั้น (อยู่หน้าอกคนข้างล่าง) */
+      for(let i=1;i<=n;i++){try{skShin(pos[i].x,pos[i].y,d,L[i-1].a[2],L[i-1].a[12])}catch(e){}}
+      skTag(x,pos[n].y-44,(name||'').replace(/^🌅/,''),hp,mh,n)}}catch(e){}
+  /* ใส่ท่าหอให้ CHA ตอนวาด (เฉพาะตอนไม่ได้ตี/ร่าย) */
+  try{const _d0=drawP0;drawP0=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const SP=SKPOSE,A=CHA;let set=0;
+      if(SP&&A&&!A.cast&&!(lk&&lk.ak>0)){A.cast={ty:SP.ty,p:.5,idle:1,d:1,n:SP.n};set=1}
+      try{return _d0.apply(this,arguments)}finally{if(set&&A)A.cast=null}}}catch(e){}
+  try{R24T.add('stkB');R24T.add('stkT');R24OFF.stkB=1}catch(e){}
+  try{const _ib=idlBody;idlBody=function(C){if(C.ty==='stkB'){const k=Math.min(3,C.n||1),t=performance.now()/1000;g.scale(1+.02*k,1-.035*k-.006*Math.sin(t*3.2));g.rotate(-.02*k+Math.sin(t*1.7)*.012);return}if(C.ty==='stkT'){const t=performance.now()/1000;g.rotate(Math.sin(t*1.7+1)*.03);return}return _ib.apply(this,arguments)}}catch(e){}
+  try{const _ia=idlArm;idlArm=function(cls,C){if(C.ty==='stkB')return{dx:1,dy:-6,rot:-.45,ak:null,off:[11,-9],gl:null};if(C.ty==='stkT'){const t=performance.now()/1000;return{dx:0,dy:-1+Math.sin(t*2.2)*.6,rot:-.15,ak:null,off:null,gl:null}}return _ia.apply(this,arguments)}}catch(e){}
 },800);

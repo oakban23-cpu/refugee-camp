@@ -495,6 +495,9 @@ R("rp:typeof ex[14]==='string'?ex[14]:''}","rp:typeof ex[14]==='string'?ex[14]:'
 R("rp:i.rp}","rp:i.rp,sk:i.sk}")
 R("rp:typeof r.rp==='string'?r.rp.slice(0,24):'',","rp:typeof r.rp==='string'?r.rp.slice(0,24):'',sk:typeof r.sk==='string'?r.sk.replace(/[^a-z0-9]/gi,'').slice(0,32):'',")
 R("if(me.cd<=0&&!rgMove&&!(me.rsp>0)){const t=pickTarget(","if(me.cd<=0&&!rgMove&&!(me.rsp>0)&&!SKB0){const t=pickTarget(")
+R("g.fillStyle=chSh(P.leg,5-la,14-la);g.beginPath();g.roundRect(-5.5-lsx,5-la,4.5,9,1.5);g.fill();g.stroke();","if(CHSIT)chSitLegs(P);else{g.fillStyle=chSh(P.leg,5-la,14-la);g.beginPath();g.roundRect(-5.5-lsx,5-la,4.5,9,1.5);g.fill();g.stroke();")
+R("g.fillStyle=chSh(P.leg,5-ra,14-ra);g.beginPath();g.roundRect(1+lsx,5-ra,4.5,9,1.5);g.fill();g.stroke();","g.fillStyle=chSh(P.leg,5-ra,14-ra);g.beginPath();g.roundRect(1+lsx,5-ra,4.5,9,1.5);g.fill();g.stroke();}")
+R("if(bt)boots2(la,ra,","if(bt&&!CHSIT)boots2(la,ra,")
 open(P,'w').write(s)
 print('ok')
 import subprocess

@@ -11883,9 +11883,17 @@ name=name+' · 🐎 '+rdName(pu)}}
 return _p.call(this,x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk)}}catch(e){}
 setInterval(()=>{try{rdUI()}catch(e){}},150);
 },780);
-const SKE={b:'',id:'',lost:0,jt:0},SKMAX=3,SKQ={},SKH=25;let SKBN=0;
+let CHSIT=0,SKPOSE=null;
+function chSitLegs(P){const O='#140e0c';g.lineWidth=1;g.strokeStyle=O;
+g.fillStyle=chSh(P.leg,3,16);g.beginPath();g.roundRect(-10,5,4.2,10,1.6);g.fill();g.stroke();
+g.fillStyle=chSh(P.leg,3,8);g.beginPath();g.roundRect(-5,3,13,4.6,1.8);g.fill();g.stroke()}
+function skShin(rx,ry,d,cls,c2){const P=(c2===2&&CHR3[cls])?CHR3[cls]:(c2&&CHR2[cls])?CHR2[cls]:(CHR[cls]||CHR.melee),O='#140e0c';g.save();g.translate(rx,ry);g.scale(d,1);g.lineWidth=1;g.strokeStyle=O;
+g.fillStyle=chSh(P.leg,7,18);g.beginPath();g.roundRect(12.2,8,4.2,10,1.8);g.fill();g.stroke();
+g.fillStyle=chSh(P.leg,5,9);g.beginPath();g.ellipse(13.6,8.4,2.7,2.2,0,0,7);g.fill();g.stroke();
+g.fillStyle='#4a3424';g.beginPath();g.roundRect(11.6,16.4,6.6,3.8,1.5);g.fill();g.stroke();g.fillStyle='rgba(255,255,255,.2)';g.fillRect(12.5,17,4,1);g.restore()}
+const SKE={b:'',id:'',lost:0,jt:0},SKMAX=3,SKQ={},SKH=24;let SKBN=0;
 function skP(){return SKE.b?SKE.b+'x'+SKE.id:''}
-function skOf(u){if(u===uid)return SKE.b?{b:SKE.b,t:SKE.id}:null;const o=others[u];if(!o||typeof o.sk!=='string'||!o.sk)return null;const i=o.sk.lastIndexOf('x');if(i<1)return null;return{b:o.sk.slice(0,i),t:o.sk.slice(i+1)}}
+function skOf(u){if(u===uid)return SKE.b?{b:SKE.b,t:SKE.id}:null;const o=others[u];if(!o||typeof o.sk!=='string'||!o.sk)return null;const k=o.sk;let i=-1;for(let j=k.indexOf('x');j>0;j=k.indexOf('x',j+1)){const c=k.slice(0,j);if(c===uid||others[c]){i=j;break}}if(i<0)i=k.lastIndexOf('x');if(i<1)return null;return{b:k.slice(0,i),t:k.slice(i+1)}}
 function skRoot(u){let x=u;for(let i=0;i<5;i++){const s=skOf(x);if(!s)return x;x=s.b}return x}
 function skRiders(b){const L=[];if(SKE.b&&skRoot(uid)===b)L.push({u:uid,t:SKE.id});for(const k in others){const s=skOf(k);if(s&&skRoot(k)===b)L.push({u:k,t:s.t})}
 return L.sort((a,c)=>parseInt(a.t,36)-parseInt(c.t,36)||(a.u<c.u?-1:1))}
@@ -11934,10 +11942,20 @@ try{const _p=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){
 if(u&&!down){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
 const R=u&&!down?skRiders(u):[];if(!R.length)return _p.apply(this,arguments);
 const now=performance.now(),Q=SKQ[u]||{},d=(fx||1)<0?-1:1,t=now/1000,bob=ph?Math.abs(Math.sin(ph))*1.6:0;
-SKBN=1;PGNT=1;try{_p.apply(this,arguments)}finally{PGNT=0;SKBN=0}
-let lv=0;R.forEach(r=>{const q=Q[r.u];if(!q||now-q.t>500)return;lv++;const a=q.a.slice();a[0]=x+d*(lv%2?1.5:-1.5)+Math.sin(t*2+lv)*.6;a[1]=y-SKH*lv-bob;a[9]=0;a[10]=d;
-PGNT=1;MSHOFF=1;try{_p.apply(this,a)}catch(e){}finally{PGNT=0;MSHOFF=0}});
-skTag(x,y-SKH*lv-44-bob,(name||'').replace(/^🌅/,''),hp,mh,lv)}}catch(e){}
+let lag=0;try{const S=CHSS[u];if(S)lag=Math.max(-1.3,Math.min(1.3,S.p-S.u))}catch(e){}
+const L=[];R.forEach(r=>{const q=Q[r.u];if(q&&now-q.t<=1500)L.push(q)});const n=L.length;
+const pos=[{x,y}];for(let i=1;i<=n;i++){const sw=Math.sin(t*1.7+i*.8)*.55*i+(ph?Math.sin(ph)*.5*i:0)-d*lag*2.4*i;pos.push({x:x-d*2.2*i+sw,y:y-SKH*i-bob*(1+i*.15)})}
+for(let i=n;i>=1;i--){const a=L[i-1].a.slice();a[0]=pos[i].x;a[1]=pos[i].y;a[9]=0;a[10]=d;const hold=i<n;
+PGNT=1;MSHOFF=1;CHSIT=1;SKPOSE=hold?{ty:'stkB',n:n-i}:{ty:'stkT',n:0};try{_p.apply(this,a)}catch(e){}finally{PGNT=0;MSHOFF=0;CHSIT=0;SKPOSE=null}}
+SKBN=1;PGNT=1;SKPOSE={ty:'stkB',n};try{_p.apply(this,arguments)}finally{PGNT=0;SKBN=0;SKPOSE=null}
+for(let i=1;i<=n;i++){try{skShin(pos[i].x,pos[i].y,d,L[i-1].a[2],L[i-1].a[12])}catch(e){}}
+skTag(x,pos[n].y-44,(name||'').replace(/^🌅/,''),hp,mh,n)}}catch(e){}
+try{const _d0=drawP0;drawP0=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const SP=SKPOSE,A=CHA;let set=0;
+if(SP&&A&&!A.cast&&!(lk&&lk.ak>0)){A.cast={ty:SP.ty,p:.5,idle:1,d:1,n:SP.n};set=1}
+try{return _d0.apply(this,arguments)}finally{if(set&&A)A.cast=null}}}catch(e){}
+try{R24T.add('stkB');R24T.add('stkT');R24OFF.stkB=1}catch(e){}
+try{const _ib=idlBody;idlBody=function(C){if(C.ty==='stkB'){const k=Math.min(3,C.n||1),t=performance.now()/1000;g.scale(1+.02*k,1-.035*k-.006*Math.sin(t*3.2));g.rotate(-.02*k+Math.sin(t*1.7)*.012);return}if(C.ty==='stkT'){const t=performance.now()/1000;g.rotate(Math.sin(t*1.7+1)*.03);return}return _ib.apply(this,arguments)}}catch(e){}
+try{const _ia=idlArm;idlArm=function(cls,C){if(C.ty==='stkB')return{dx:1,dy:-6,rot:-.45,ak:null,off:[11,-9],gl:null};if(C.ty==='stkT'){const t=performance.now()/1000;return{dx:0,dy:-1+Math.sin(t*2.2)*.6,rot:-.15,ak:null,off:null,gl:null}}return _ia.apply(this,arguments)}}catch(e){}
 },800);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -18591,10 +18609,10 @@ if(cls==='assn'&&!c2){g.strokeStyle=P.trim;g.lineWidth=2.4;g.beginPath();g.moveT
 if(cls==='archer'){Pg([-9,-12,-5,-13,-3,4,-7,5],'#5a3b22',1);g.strokeStyle='#e8e0cc';g.lineWidth=1;[-8,-6.5,-5].forEach((a,i)=>{g.beginPath();g.moveTo(a,-12.5);g.lineTo(a-1+i,-17);g.stroke()})}
 const la=ph?Math.max(0,-cw)*2.6+Math.max(0,sw)*.6:0,ra=ph?Math.max(0,cw)*2.6+Math.max(0,-sw)*.6:0;
 g.strokeStyle=O;g.lineWidth=1;const lsx=BSX;
-g.fillStyle=chSh(P.leg,5-la,14-la);g.beginPath();g.roundRect(-5.5-lsx,5-la,4.5,9,1.5);g.fill();g.stroke();
-g.fillStyle=chSh(P.leg,5-ra,14-ra);g.beginPath();g.roundRect(1+lsx,5-ra,4.5,9,1.5);g.fill();g.stroke();
+if(CHSIT)chSitLegs(P);else{g.fillStyle=chSh(P.leg,5-la,14-la);g.beginPath();g.roundRect(-5.5-lsx,5-la,4.5,9,1.5);g.fill();g.stroke();
+g.fillStyle=chSh(P.leg,5-ra,14-ra);g.beginPath();g.roundRect(1+lsx,5-ra,4.5,9,1.5);g.fill();g.stroke();}
 if(cls!=='assn'&&!R24B()){const bx=-6.5-(ph?sw*2.2:Math.sin(t*2.2)*.4),by=-1+br*.3;g.save();g.translate(-5.5,-7+br*.3);g.rotate(ph?-sw*.42+.05*(1-A):.05);Pg([-2,0,2,0,1.6,7,-1.6,7],P.bodyL,1);g.restore();E(bx+.6,by+1,2.1,2.1,P.skin,1)}
-if(bt)boots2(la,ra,lkX(bt)?8+lkX(bt):lkT(bt)===9?8:lkB(bt)-1,lkG(bt));
+if(bt&&!CHSIT)boots2(la,ra,lkX(bt)?8+lkX(bt):lkT(bt)===9?8:lkB(bt)-1,lkG(bt));
 const robe=cls==='sup'||cls==='mage';
 if(robe)Pg([-6,-9+br*.3,6,-9+br*.3,9,10,-9,10],P.body,1);
 else Pg([-6.5,-9+br*.3,6.5,-9+br*.3,6,7,-6,7],P.body,1);
