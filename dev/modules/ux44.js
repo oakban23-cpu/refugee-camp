@@ -31,13 +31,14 @@ function gdN(d){if(!d||!d.t)return;const G=GDS.g,tg=G?'🏰['+G.tag+'] ':'🏰 '
     case'on':try{sysMsg(tg+'🟢 '+d.n+' ออนไลน์แล้ว')}catch(e){}break;
     case'ch':{if(G){G.log=(G.log||[]).concat([{n:d.n,t:d.s,at:d.at}]).slice(-40)}try{chatLog.push({sys:1,t:tg+d.n+': '+d.s,at:Date.now()});renderLog()}catch(e){}if(!(ov.dataset.k==='gd'&&!ov.hidden&&GDS.tab==='ch'))GDS.rd++;gdBadge();if(ov.dataset.k==='gd'&&!ov.hidden&&GDS.tab==='ch')gdUI();break}
     case'wkdone':gdMsg(tg+'ภารกิจกิลด์สัปดาห์นี้ครบแล้ว! '+(d.up?'กิลด์เลเวลอัปเป็น Lv '+d.lvl+' · ':'')+'รับรางวัลได้ที่เมนู › กิลด์');try{sfx('lvl')}catch(e){}break;
+    case'gbs':case'gbh':case'gbk':case'gbc':try{gbN(d)}catch(e){}break;
     case'wkc':{const lv=d.lvl|0,gold=3000*Math.max(1,lv),dye=Math.random()<.3?'d8':'d7';me.gold+=gold;try{dyAdd(dye,1)}catch(e){}try{wdrThread(3,'รางวัลกิลด์')}catch(e){}try{writeSave()}catch(e){}
       gdMsg('🎁 รับรางวัลกิลด์: +'+gold.toLocaleString()+' ทอง · '+(dye==='d8'?'🌈 สีย้อมรุ้งดาวตก':'🟡 สีย้อมทองคำ')+' · ✂️ ด้าย 3');try{sfx('coin')}catch(e){}break}}}
 function gdMsg(s){banner={s,t:3.5};if(ov.dataset.k==='gd'&&!ov.hidden)gdUI(s)}
 /* ---- ปุ่มเมนู + ตัวเลขแดง ---- */
 function gdBtn(){let b=$('gdb');if(b)return b;const ref=$('frb')||$('pb');if(!ref||!ref.parentNode)return null;b=document.createElement('button');b.id='gdb';b.innerHTML='<i>🏰</i><span>กิลด์</span><b class="bd"></b>';ref.parentNode.insertBefore(b,ref.nextSibling);
   b.onclick=()=>{if(me.cls&&run){GDS.rd=GDS.tab==='ch'?0:GDS.rd;gdUI();gdEmit('q')}};return b}
-function gdBadge(){const b=gdBtn();if(!b)return;const n=(GDS.inv.length|0)+(GDS.rd|0)+(GDS.g&&GDS.g.wk&&GDS.g.wk.done&&!GDS.g.wk.cl?1:0),e=b.querySelector('.bd');if(e)e.textContent=n?String(n):''}
+function gdBadge(){const b=gdBtn();if(!b)return;const n=(GDS.inv.length|0)+(GDS.rd|0)+(GDS.g&&GDS.g.wk&&GDS.g.wk.done&&!GDS.g.wk.cl?1:0)+gbBadgeN(),e=b.querySelector('.bd');if(e)e.textContent=n?String(n):''}
 /* ---- หน้าต่างกิลด์ ---- */
 function gdBar(v,m,col){const p=Math.min(1,v/Math.max(1,m));return'<div style="height:7px;border-radius:4px;background:rgba(0,0,0,.4);overflow:hidden"><i style="display:block;height:100%;width:'+(p*100).toFixed(1)+'%;background:'+col+'"></i></div>'}
 function gdUI(msg){if(!me.cls)return;ov.dataset.k='gd';ov.hidden=false;const G=GDS.g;
@@ -54,7 +55,7 @@ function gdUI(msg){if(!me.cls)return;ov.dataset.k='gd';ov.hidden=false;const G=G
       '<button class="pri" data-gda="mk"'+(ok&&me.gold>=GDCOST?'':' disabled')+'>🏰 ตั้งกิลด์ ('+GDCOST.toLocaleString()+' ทอง)</button>'+(ok?'':'<small style="opacity:.75">ต้องเลเวล '+GDLV0+' ขึ้นไป</small>')+'</div>'+
       '<div class="card hint">หรือให้หัวหน้า/รองหัวหน้ากิลด์แตะตัวคุณในแมพ › «🏰 ชวนเข้ากิลด์»</div>';
     ov.innerHTML='<div class="pn" data-pn="gd">'+h+'</div>';return}
-  const T=GDS.tab;h+='<div class="tabs">'+[['ov','📜 ภาพรวม'],['mem','👥 สมาชิก'],['ch','💬 แชต'+(GDS.rd?' ('+GDS.rd+')':'')]].map(([k,l])=>'<button class="tab'+(T===k?' on':'')+'" data-gdt="'+k+'">'+l+'</button>').join('')+'</div>';
+  const T=GDS.tab;h+='<div class="tabs" style="flex-wrap:wrap;gap:4px">'+[['ov','📜 ภาพรวม'],['gb','🐉 บอส'+(gbBadgeN()?' ('+gbBadgeN()+')':'')],['mem','👥 สมาชิก'],['ch','💬 แชต'+(GDS.rd?' ('+GDS.rd+')':'')]].map(([k,l])=>'<button class="tab'+(T===k?' on':'')+'" style="flex:1 1 auto;min-width:0;padding:6px 8px;font-size:12.5px" data-gdt="'+k+'">'+l+'</button>').join('')+'</div>';
   if(T==='ov'){const W=G.wk,g=W.goal,col=gdCol(G.col);
     h+='<div class="card" style="border-color:'+col+'88"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:34px;color:'+col+'">'+G.e+'</span><div><b style="font-size:17px;color:'+col+'">'+esc(G.nm)+' ['+esc(G.tag)+']</b><small style="display:block;opacity:.8">กิลด์ Lv '+G.lvl+'/10 · โบนัส EXP +'+G.lvl+'% · ตำแหน่งคุณ: '+gdRN(G.r)+'</small></div></div>'+
       '<div style="font-size:13px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,.05)">📢 '+(G.nt?esc(G.nt):'<span style="opacity:.6">ยังไม่มีประกาศ</span>')+'</div>'+
@@ -65,6 +66,7 @@ function gdUI(msg){if(!me.cls)return;ov.dataset.k='gd';ov.hidden=false;const G=G
       (W.done?(W.cl?'<b style="color:#9fe89f">✓ รับรางวัลสัปดาห์นี้แล้ว</b>':'<button class="pri" data-gda="wkc">🎁 รับรางวัลประจำสัปดาห์ ('+(3000*Math.max(1,G.lvl)).toLocaleString()+' ทอง + สีย้อมหายาก)</button>'):'<small style="opacity:.7">ครบทั้ง 3 ข้อ = กิลด์เลเวลอัป + ทุกคนที่ช่วยรับรางวัลได้</small>')+'</div>';
     h+='<div class="card">'+(G.r>=2?'<div class="cap">⚙️ หัวหน้ากิลด์</div><div style="display:flex;flex-wrap:wrap;gap:4px">'+GDEM.map((e,i)=>'<button data-gdse="'+i+'" style="font-size:16px;padding:3px 6px'+(G.e===e?';outline:2px solid var(--u-gold)':'')+'">'+e+'</button>').join('')+'</div><div style="display:flex;flex-wrap:wrap;gap:6px">'+GDCOL.map((c,i)=>'<button data-gdsc="'+i+'" style="width:26px;height:26px;padding:0;border-radius:50%;background:'+c+(G.col===i?';outline:3px solid #fff':'')+'"></button>').join('')+'</div>':'')+
       '<div style="display:flex;gap:6px;justify-content:flex-end">'+(G.r>=2?'<button data-gda="dis" style="font-size:12px">'+(GDS.cf==='dis'?'⚠️ ยืนยันยุบกิลด์':'ยุบกิลด์')+'</button>':'')+'<button data-gda="lv" style="font-size:12px">'+(GDS.cf==='lv'?'⚠️ ยืนยันออก':'ออกจากกิลด์')+'</button></div></div>'}
+  else if(T==='gb')h+=gbHTML(G);
   else if(T==='mem'){const L=G.mem.slice().sort((a,b)=>(b[5]-a[5])||(b[4]-a[4])||(b[3]-a[3]));
     if(G.r>=1)h+='<div class="card"><div class="cap">➕ เชิญเข้ากิลด์ (ผู้เล่นต้องออนไลน์)</div><div style="display:flex;gap:6px"><input id="gdiv" maxlength="24" placeholder="ชื่อตัวละคร" style="flex:1;min-width:0"><button class="pri" data-gda="inv">เชิญ</button></div></div>';
     h+='<div class="card">'+L.map(m=>{const[mid,n,c,lv,r,on,mp,aw]=m,me2=mid===G.me,sel=GDS.sel===mid;
@@ -83,6 +85,8 @@ function gdAct(a){const G=GDS.g;const p=a.split(':'),op=p[0];
   if(op==='ch'){const i=$('gdch'),t=(i&&i.value||'').trim();if(!t)return;gdEmit('ch',{s:t});i.value='';return}
   if(op==='nt'){gdEmit('set',{nt:(($('gdnt')||{}).value||'')});return}
   if(op==='wkc'){gdEmit('wkc');return}
+  if(op==='gbs'){if(!gbCanGo())return;gdEmit('gbs');return}
+  if(op==='gbc'){gdEmit('gbc',{s:+p[1]});return}
   /* ต้องกดยืนยันสองครั้ง */
   if(op==='lv'||op==='dis'||op==='kick'||op==='ld'){if(GDS.cf!==a){GDS.cf=a;gdUI();return}GDS.cf='';if(op==='lv'||op==='dis')gdEmit(op);else gdEmit(op,{t:p[1]});return}
   if(op==='rk'){gdEmit('rk',{t:p[1],r:+p[2]});return}}

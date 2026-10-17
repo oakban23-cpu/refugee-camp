@@ -3,7 +3,7 @@ import asyncio, sys, json, os
 sys.path.insert(0, __file__.rsplit('/', 1)[0])
 from h import *
 R=[]
-WNV_='v428'
+WNV_='v429'
 def rep(name, ok, info=''):
     R.append((name, ok, info)); print(('PASS ' if ok else 'FAIL ') + name, info, flush=True)
 PTYJS=open(__file__.rsplit('/',1)[0]+'/t_stack.py').read().split('PTYJS="""')[1].split('"""')[0]
@@ -17,7 +17,7 @@ async def main():
         C=[await new_client(b,n,c,lv) for n,c,lv in names]
         A,B,Cc,Dd=C
         for i,c in enumerate(C):
-            await c.ev("(i)=>{ov.hidden=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};AUTO.on=false;gmGod=true;me.gold=100000;me.x=CX+300+i*40;me.y=CY+380;setInterval(()=>{if(banner&&banner.s)window.__bn=banner.s},50)}",i)
+            await c.ev("(i)=>{ov.hidden=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};AUTO.on=false;gmGod=true;me.gold=100000;me.x=CX+300+i*40;me.y=CY+380;setInterval(()=>{if(banner&&banner.s&&banner.s!==window.__bl){window.__bl=banner.s;window.__bn=(window.__bn||'')+'|'+banner.s}},50)}",i)
         await A.wait(2500)
         rep('เมนูมีปุ่ม 🏰 กิลด์ และ 🆕 มีอะไรใหม่',await A.ev("()=>!!$('gdb')&&!!$('wnb')"))
         # ---- ตั้งกิลด์ ----

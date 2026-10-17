@@ -252,12 +252,21 @@ const gdClean=(s,n)=>String(s||'').replace(/[\u0000-\u001f\u007f<>"'`\\]/g,'').r
 const gdWeek=()=>{const d=new Date(Date.now()+7*3600e3),day=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-day);return d.toISOString().slice(0,10)};
 const gdGoal=G=>{const k=Math.max(1,Math.min(4,Object.keys(G.mem).length/5));return{k:Math.round(GDBASE.k*k),b:Math.round(GDBASE.b*k),g:Math.round(GDBASE.g*k)}};
 function gdWk(G){const w=gdWeek();if(!G.wk||G.wk.k!==w){G.wk={k:w,p:{k:0,b:0,g:0},ct:{},cl:{},done:0};gdDirty=true}return G.wk}
+/* v429 บอสกิลด์ประจำสัปดาห์: ขั้นละเลือดเพิ่ม ×1.6 · วันละ 3 ครั้ง/คน · ดาเมจเกินทะลุไปขั้นถัดไป · รับรางวัลได้ทุกขั้นที่ล้ม (ต้องท้าอย่างน้อย 1 ครั้งในสัปดาห์) */
+const GBB=process.env.GD_FAST?1000:3e6,GBF=1.6,GBMX=20,GBD=3;
+const gbDay=()=>new Date(Date.now()+7*3600e3).toISOString().slice(0,10);
+const gbHp=(s,n)=>Math.round(GBB*Math.pow(GBF,s-1)*(.7+.06*Math.max(1,Math.min(30,n))));
+function gbWk(G){const w=gdWeek();let B=G.gb;if(!B||B.k!==w){const last=B&&B.k?{k:B.k,s:Math.max(0,(B.s|0)-1),top:Object.keys(B.dm||{}).map(m=>[B.dm[m].nm||'',B.dm[m].d]).sort((a,b)=>b[1]-a[1]).slice(0,3)}:(B&&B.last)||null;
+  const n=Object.keys(G.mem).length;B=G.gb={k:w,s:1,mx:gbHp(1,n),hp:gbHp(1,n),dm:{},cl:{},day:{},tk:{},last};gdDirty=true}return B}
+function gbLeft(B,mid){const D=B.day[mid];return D&&D.k===gbDay()?Math.max(0,GBD-D.n):GBD}
+function gbView(G,mid){const B=gbWk(G),my=B.dm[mid]||{d:0,n:0,b:0};return{s:B.s,hp:B.hp,mx:B.mx,smx:GBMX,left:gbLeft(B,mid),my:{d:my.d,n:my.n,b:my.b},cl:B.cl[mid]||[],
+  rk:Object.keys(B.dm).map(m=>[(G.mem[m]&&G.mem[m].n)||B.dm[m].nm||'?',B.dm[m].d,B.dm[m].n,m===mid?1:0]).sort((a,b)=>b[1]-a[1]).slice(0,30),last:B.last||null,tk:B.tk[mid]?1:0}}
 function gdOf(mid){const id=GD.by[mid];const G=id&&GD.g[id];if(!G||!G.mem[mid]){if(id)delete GD.by[mid];return null}return G}
 function gdOnline(mid){for(const o of clients)if(o.gmid===mid&&o.p&&!o.dead)return o;return null}
 function gdTag(o){const m=o&&o.gmid;if(!m)return'';const G=gdOf(m);if(!G||!o.p||G.mem[m].n!==o.p.n)return'';return G.e+'|'+G.tag+'|'+G.col}
 function gdView(G,mid){const W=gdWk(G),goal=gdGoal(G);return{id:G.id,nm:G.nm,tag:G.tag,e:G.e,col:G.col,lvl:G.lvl,nt:G.nt||'',lead:G.lead,me:mid,r:G.mem[mid]?G.mem[mid].r:0,max:GDMAX,
   mem:Object.keys(G.mem).map(m=>{const M=G.mem[m],o=gdOnline(m);return[m,M.n,o&&o.p?o.p.cls:M.c,o&&o.p?o.p.lv:M.lv,M.r,o?1:0,o&&o.p?o.p.mp:0,o&&o.p&&o.p.aw?1:0]}),
-  wk:{k:W.k,p:W.p,goal,done:W.done?1:0,cl:W.cl[mid]?1:0,ct:W.ct[mid]|0},log:(G.log||[]).slice(-30)}}
+  wk:{k:W.k,p:W.p,goal,done:W.done?1:0,cl:W.cl[mid]?1:0,ct:W.ct[mid]|0},gb:gbView(G,mid),log:(G.log||[]).slice(-30)}}
 function gdSend(o,k,d){mkReply(o,k,d)}
 function gdCast(G,d,skip){for(const m in G.mem){const o=gdOnline(m);if(o&&o!==skip)gdSend(o,'gdn',d)}}
 function gdRefresh(G){for(const m in G.mem){const o=gdOnline(m);if(o)gdSend(o,'gdr',{g:gdView(G,m),inv:[]})}}
@@ -295,10 +304,24 @@ function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();
   if(op==='wk'){if(now-(c.gdW||0)<(process.env.GD_FAST?800:15000))return;c.gdW=now;const a=d.a&&typeof d.a==='object'?d.a:{},W=gdWk(G),add={k:Math.max(0,Math.min(150,a.k|0)),b:Math.max(0,Math.min(4,a.b|0)),g:Math.max(0,Math.min(25,a.g|0))};
     W.p.k+=add.k;W.p.b+=add.b;W.p.g+=add.g;W.ct[mid]=(W.ct[mid]|0)+add.k+add.b*20+add.g*3;gdDirty=true;const goal=gdGoal(G);
     if(!W.done&&W.p.k>=goal.k&&W.p.b>=goal.b&&W.p.g>=goal.g){W.done=1;const up=G.lvl<10;if(up)G.lvl++;gdCast(G,{t:'wkdone',lvl:G.lvl,up:up?1:0});gdRefresh(G)}return}
+  if(op==='gbs'){const B=gbWk(G);if(B.s>GBMX)return no('ล้มอสูรกิลด์ครบทุกขั้นแล้ว รอสัปดาห์หน้า');if(gbLeft(B,mid)<=0)return no('วันนี้ท้าอสูรกิลด์ครบ '+GBD+' ครั้งแล้ว');
+    const T0=B.tk[mid];if(T0&&now-T0.at<90000)return gdSend(c,'gdn',{t:'gbs',tk:T0.tk,s:B.s,re:1});
+    const D=B.day[mid]&&B.day[mid].k===gbDay()?B.day[mid]:(B.day[mid]={k:gbDay(),n:0});D.n++;const tk=crypto.randomBytes(6).toString('hex');B.tk[mid]={tk,at:now};gdDirty=true;
+    gdSend(c,'gdn',{t:'gbs',tk,s:B.s});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
+  if(op==='gbh'){const B=gbWk(G),T0=B.tk[mid];if(!T0||typeof d.tk!=='string'||d.tk!==T0.tk)return no('รอบท้าอสูรนี้หมดอายุแล้ว');delete B.tk[mid];gdDirty=true;
+    const el=now-T0.at;if(el<(process.env.GD_FAST?0:3000)||el>15*60000)return no('รอบท้าอสูรนี้หมดอายุแล้ว');
+    const M=G.mem[mid],cap=Math.min(1e11,Math.max(process.env.GD_FAST?1e12:1e8,4*(M.gbb||0)));let dm=Math.max(0,Math.min(cap,Math.floor(+d.d||0)));if(!isFinite(dm))dm=0;
+    const R0=B.dm[mid]||(B.dm[mid]={d:0,n:0,b:0,nm:name});R0.d+=dm;R0.n++;R0.b=Math.max(R0.b,dm);R0.nm=name;M.gbb=Math.max(M.gbb||0,dm);
+    const kills=[],n=Object.keys(G.mem).length;let rem=dm;while(rem>0&&B.s<=GBMX){if(rem>=B.hp){rem-=B.hp;kills.push(B.s);B.s++;if(B.s<=GBMX){B.mx=B.hp=gbHp(B.s,n)}else{B.hp=0}}else{B.hp-=rem;rem=0}}
+    gdSend(c,'gdn',{t:'gbh',d:dm,kills,s:B.s});
+    if(kills.length){G.log=G.log||[];kills.forEach(k=>{G.log.push({n:'🐉',t:name+' ล้มอสูรกิลด์ขั้น '+k+'!',at:now});gdCast(G,{t:'gbk',n:name,s:k},c)});if(G.log.length>40)G.log.splice(0,G.log.length-40)}
+    gdRefresh(G);return}
+  if(op==='gbc'){const B=gbWk(G),st=d.s|0;if(st<1||st>=B.s||st>GBMX)return no('ขั้นนี้ยังไม่ถูกล้ม');if(!B.dm[mid]||!B.dm[mid].n)return no('ต้องท้าอสูรกิลด์อย่างน้อย 1 ครั้งในสัปดาห์นี้ก่อน');
+    const L=B.cl[mid]||(B.cl[mid]=[]);if(L.includes(st))return no('รับรางวัลขั้นนี้ไปแล้ว');L.push(st);gdDirty=true;gdSend(c,'gdn',{t:'gbc',s:st,k:B.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
   if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
     W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
 }
-const SRV_V='v428';
+const SRV_V='v429';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
