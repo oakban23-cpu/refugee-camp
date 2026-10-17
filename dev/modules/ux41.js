@@ -17,7 +17,7 @@ function peUse(e){if(!me.cls||!run||me.down>0||!PEL[e])return;if(SKE.b||SKB0){tr
   if(L.length===1){try{emoClose()}catch(_){}return peAsk(L[0].u,e)}
   /* หลายคน: ให้เลือกในแผงท่าทาง */
   const p=$('emp');if(!p)return peAsk(L[0].u,e);
-  p.innerHTML='<div style="grid-column:1/-1;font-size:12px;font-weight:700;padding:2px 4px">'+PEL[e][0]+' '+PEL[e][1]+'กับใคร?</div>'+L.map(q=>'<button data-pp="'+esc(q.u)+'|'+e+'" style="grid-column:span 5;flex-direction:row;justify-content:flex-start;gap:6px;padding:7px 9px"><span style="font-size:15px">'+(q.pt?'👥':'🙂')+'</span><small style="font-size:12px;opacity:1">'+esc(q.n.length>14?q.n.slice(0,13)+'…':q.n)+(q.pt?' · ปาร์ตี้':'')+'</small></button>').join('')+'<button data-pp="x" style="grid-column:span 5;padding:5px"><small>ยกเลิก</small></button>';p.hidden=false}
+  p.innerHTML='<div style="grid-column:1/-1;font-size:12px;font-weight:700;padding:2px 4px">'+PEL[e][0]+' '+PEL[e][1]+'กับใคร?</div>'+L.map(q=>'<button data-pep="'+esc(q.u)+'|'+e+'" style="grid-column:span 5;flex-direction:row;justify-content:flex-start;gap:6px;padding:7px 9px"><span style="font-size:15px">'+(q.pt?'👥':'🙂')+'</span><small style="font-size:12px;opacity:1">'+esc(q.n.length>14?q.n.slice(0,13)+'…':q.n)+(q.pt?' · ปาร์ตี้':'')+'</small></button>').join('')+'<button data-pep="x" style="grid-column:span 5;padding:5px"><small>ยกเลิก</small></button>';p.hidden=false}
 function peAsk(u,e){const now=performance.now();if(!u||!PEL[e])return;
   if(now<PECD.t){banner={s:'🤝 รออีก '+Math.ceil((PECD.t-now)/1000)+' วิ ค่อยชวนใหม่',t:1.8};return}
   const b=PECD.blk[u];if(b&&now<b){banner={s:'🤝 เพิ่งชวน '+peName(u)+' ไป · ชวนซ้ำได้ใน '+Math.ceil((b-now)/1000)+' วิ',t:2.2};return}
@@ -84,7 +84,7 @@ setTimeout(()=>{
   /* แถวท่าคู่ + ปุ่มถ่ายรูปในเมนูท่าทาง */
   try{const _et=emoToggle;emoToggle=function(){_et.apply(this,arguments);const p=$('emp');if(!p||p.hidden||p.querySelector('[data-pe]'))return;
       p.insertAdjacentHTML('beforeend',Object.keys(PEL).map(k=>'<button data-pe="'+k+'" title="'+PEL[k][1]+' (กับคนที่ยืนใกล้สุด)"><span>'+PEL[k][0]+'</span><small>'+PEL[k][1]+'</small></button>').join('')+'<button data-pe="photo" title="โหมดถ่ายรูป"><span>📷</span><small>ถ่ายรูป</small></button>')}}catch(e){}
-  document.addEventListener('click',e=>{const q=e.target.closest&&e.target.closest('[data-pp]');if(q){e.stopPropagation();e.preventDefault();try{emoClose()}catch(_){}const v=q.dataset.pp;if(v!=='x'){const k=v.lastIndexOf('|');peAsk(v.slice(0,k),v.slice(k+1))}return}},true);
+  document.addEventListener('click',e=>{const q=e.target.closest&&e.target.closest('[data-pep]');if(q){e.stopPropagation();e.preventDefault();try{emoClose()}catch(_){}const v=q.dataset.pep;if(v!=='x'){const k=v.lastIndexOf('|');peAsk(v.slice(0,k),v.slice(k+1))}return}},true);
   document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-pe]');if(!b)return;e.stopPropagation();e.preventDefault();const k=b.dataset.pe;if(k==='photo')phOn();else peUse(k)},true);
   try{const _h=handleFx;handleFx=function(o){if(o&&(o.k==='peq'||o.k==='pes'||o.k==='pen')){try{peFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
   /* ท่าทาง: หันหากัน · ขยับเข้าหากัน · ท่าเฉพาะ */

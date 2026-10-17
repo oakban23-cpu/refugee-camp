@@ -22,9 +22,9 @@ async def main():
         # ---- เลือกคน ----
         L=await A.ev("()=>peList().map(q=>[q.u,q.pt])")
         rep('รายชื่อคนรอบตัว: เพื่อนในปาร์ตี้ขึ้นก่อน',len(L)==2 and L[0][0]==B.uid and L[0][1],json.dumps(L))
-        pk=await A.ev("()=>{emoToggle();peUse('hf');const p=$('emp');const bs=[...p.querySelectorAll('[data-pp]')].map(b=>b.dataset.pp);return [p.hidden,bs]}")
+        pk=await A.ev("()=>{emoToggle();peUse('hf');const p=$('emp');const bs=[...p.querySelectorAll('[data-pep]')].map(b=>b.dataset.pep);return [p.hidden,bs]}")
         rep('มีหลายคนใกล้ ๆ → ขึ้นรายชื่อให้เลือกก่อน',not pk[0] and pk[1][0]==B.uid+'|hf' and len(pk[1])==3,json.dumps(pk))
-        await A.ev("()=>document.querySelector('#emp [data-pp]').click()");await A.wait(700)
+        await A.ev("()=>document.querySelector('#emp [data-pep]').click()");await A.wait(700)
         ok=await B.ev("(a)=>!!PE[a]&&PE[a].e==='hf'",A.uid)
         rep('แตะชื่อเพื่อน → เล่นท่ากับคนนั้น',ok)
         # ---- กันรัว ----
@@ -52,6 +52,8 @@ async def main():
           DYFOK=true;LOWQ=LQ0;return out}""")
         fb=px['fallback'];fl=px['filter']
         rep('ย้อมสีได้ทั้งแบบปกติ (filter) และแบบสำรองสำหรับเบราว์เซอร์เก่า (ออกแดง · นอกชิ้นยังใส)',fb[0]>fb[1]+40 and fb[0]>fb[2]+40 and fb[3]==0 and fl[0]>fl[2]+40,json.dumps(px))
+        pp=await A.ev("(u)=>{let got='';const _a=plPopAct;plPopAct=function(k){got=k};plPopShow(u);const b=document.querySelector('#plpop [data-pp=\"fr\"]')||document.querySelector('#plpop [data-pp]');if(b)b.click();plPopAct=_a;$('plpop').hidden=true;return [!!b,got]}",B.uid)
+        rep('ปุ่มในหน้าต่างผู้เล่น (เพิ่มเพื่อน/ชวนปาร์ตี้/แลกของ) ยังกดได้ ไม่ชนกับรายชื่อท่าคู่',pp[0] and pp[1]!='',json.dumps(pp))
         Es=[e for c in C for e in c.errs if not e.startswith('console')];rep('ไม่มี error',not Es,str(Es[:3]))
     finally:
         p.terminate()
