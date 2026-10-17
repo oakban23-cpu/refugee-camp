@@ -138,10 +138,7 @@ function wdrClick(e){const b=e.target.closest&&e.target.closest('[data-wdgo],[da
 /* ===== v411 ตู้เสื้อผ้าในเต็นท์ (ผนังขวา ตรงข้ามเตาผิง) ===== */
 const WDX=()=>TRX1-58,WDY=()=>CY-58;
 function wdrNear(){try{return tentMine()&&Math.hypot(me.x-WDX(),me.y-(WDY()+10))<95}catch(e){return false}}
-function wardrobeUI(msg){if(!me.cls)return;ov.dataset.k='wdr';const W=wdrSt();if(!W.o.ref)W.o.ref=1;gsel=null;
-  let h=hdr('👗','ตู้เสื้อผ้า','ชุดแฟชั่นเปลี่ยนแค่หน้าตา · ค่าพลังมาจากอุปกรณ์จริงเสมอ')+(msg?'<div class="note">'+msg+'</div>':'');
-  h+='<div class="card">'+gpvHTML()+'</div>';
-  ov.innerHTML='<div class="pn" data-pn="wdr">'+h+'</div>';ov.hidden=false}
+/* wardrobeUI ย้ายไป ux45.js (v427 ตู้เสื้อผ้าโฉมใหม่) */
 function tvWardrobe(x,y,t,mine){const O='#1a100a',near=mine&&Math.hypot(me.x-x,me.y-(y+10))<95,op=WDOP.v+=((near?1:0)-WDOP.v)*.12;
   gxShadow(x,y+4,34,7,.5);
   /* ตัวตู้ */tvP([x-28,y-96,x+28,y-96,x+28,y,x-28,y],'#6a4226',O,1.2);tvP([x-32,y-104,x+32,y-104,x+30,y-96,x-30,y-96],'#86562e',O,1);

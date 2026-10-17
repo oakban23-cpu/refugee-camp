@@ -38,20 +38,20 @@ async def main():
         rep('เซฟกรองค่าแปลก',sv['bad']['s']=={} and 'xxx' not in sv['bad']['o'] and sv['bad']['th']==0 and not sv['bad']['k'],json.dumps(sv['bad']))
         pity=await A.ev("()=>{const W=wdrSt();delete W.o.bon;W.k={};const _r=Math.random;Math.random=()=>.99;for(let i=0;i<15;i++)wdrBoss(me.x,me.y,false);Math.random=_r;return new Promise(r=>setTimeout(()=>r({own:!!W.o.bon}),1500))}")
         rep('บอสหุบเขากระดูก การันตีครบ 15 ตัว',pity['own'],json.dumps(pity))
-        buy=await A.ev("()=>{const W=wdrSt();delete W.o.hrt;W.th=12;GPV.wt='set';wardrobeUI();const b=document.querySelector('[data-wdb=\"hrt\"]');if(!b)return 'nobtn';b.click();return{own:!!W.o.hrt,th:W.th}}")
+        buy=await A.ev("()=>{const W=wdrSt();delete W.o.hrt;W.th=12;GPV.wt='set';wardrobeUI();document.querySelector('[data-w2=\"hrt\"]').click();const b=document.querySelector('[data-wdb=\"hrt\"]');if(!b)return 'nobtn';b.click();return{own:!!W.o.hrt,th:W.th}}")
         rep('แลกชุดด้วยด้าย 12',isinstance(buy,dict) and buy['own'] and buy['th']==0,json.dumps(buy))
         wr=await A.ev("()=>{const b=document.querySelector('[data-wdo=\"hrt\"]');if(!b)return 'nobtn';b.click();return{s:me.wdr.s,fa:myLook().fa}}")
         rep('ใส่ทั้งชุดจากแท็บทั้งชุด',isinstance(wr,dict) and all(wr['s'].get(k)=='hrt' for k in 'hwabf') and wr['fa']==21,json.dumps(wr))
-        mix=await A.ev("""()=>{const W=wdrSt();W.o.ice=1;GPV.wt='h';wardrobeUI();let b=document.querySelector('[data-wds="h:skr"]');if(!b)return 'noh';b.click();
-          GPV.wt='f';wardrobeUI();const nf=document.querySelectorAll('[data-wdq^="f:"]').length;b=document.querySelector('[data-wds="f:ice"]');if(!b)return 'nof';b.click();
-          GPV.wt='a';wardrobeUI();b=document.querySelector('[data-wds="a:"]');if(!b)return 'noa';b.click();const L=myLook();return{s:W.s,h:L.h,w:L.w,a:L.a,fa:L.fa,nf,nfa:WDR.filter(o=>(o.fa|0)>0).length,realA:lkc(me.eq.a)}}""")
+        mix=await A.ev("""()=>{const W=wdrSt();W.o.ice=1;const S=i=>{const t=document.querySelector('[data-w2="'+i+'"]');if(t)t.click()};GPV.wt='h';wardrobeUI();S('skr');let b=document.querySelector('[data-wds="h:skr"]');if(!b)return 'noh';b.click();
+          GPV.wt='f';wardrobeUI();const nf=document.querySelectorAll('[data-w2]').length-1;S('ice');b=document.querySelector('[data-wds="f:ice"]');if(!b)return 'nof';b.click();
+          GPV.wt='a';wardrobeUI();S('');b=document.querySelector('[data-wds="a:"]');if(!b)return 'noa';b.click();const L=myLook();return{s:W.s,h:L.h,w:L.w,a:L.a,fa:L.fa,nf,nfa:WDR.filter(o=>(o.fa|0)>0).length,realA:lkc(me.eq.a)}}""")
         rep('ใส่ทีละชิ้นจากคนละชุด (หมวกซากุระ · อาวุธหัวใจ · ออร่าหิมะ · เสื้อของจริง)',isinstance(mix,dict) and mix['h']==29 and mix['w']==49 and mix['fa']==3 and mix['a']==mix['realA'] and mix['nf']==mix['nfa'],json.dumps(mix))
         await A.wait(1300)
         o4=await B.ev("(u)=>{const o=others[u];return o?{wp:o.wp,hd:o.hd,fa:o.fa}:null}",A.uid)
         rep('เพื่อนเห็นชิ้นที่ผสม',o4 and o4['wp']==49 and o4['hd']==29 and o4['fa']==3,json.dumps(o4))
         ss=await A.ev("()=>{const W=wdrSt();delete W.o.ssg;const t0=W.th|0;wdrSeason(2);const a=!!W.o.ssg;wdrSeason(2);return{a,th:(W.th|0)-t0}}")
         rep('ฤดูกาลโกลด์ได้ชุด ครั้งต่อไปได้ด้าย 3',ss['a'] and ss['th']==3,json.dumps(ss))
-        n=await A.ev("()=>{GPV.wt='set';wardrobeUI();return document.querySelectorAll('[data-wdp]').length}")
+        n=await A.ev("()=>{GPV.wt='set';wardrobeUI();return document.querySelectorAll('.w2t').length}")
         rep('แท็บทั้งชุดแสดงครบทุกชุด',n==await A.ev("()=>WDR.length"),str(n))
         E=[e for c in (A,B) for e in c.errs if not e.startswith('console')];rep('ไม่มี error',not E,str(E[:3]))
     finally:
