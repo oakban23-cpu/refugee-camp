@@ -61,7 +61,7 @@ function tickPeers(){
     if(cand.length>MAXPEERS){cand.sort((a,b)=>a[0]-b[0]);cand.length=MAXPEERS}
     const rows=[],info=[],seen=new Map();
     for(const [,o] of cand){const p=o.p;rows.push([p.uid,Math.round(p.x),Math.round(p.y),Math.round(p.hp),p.sl,p.at|0]);
-      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt,p.im,p.sw|0,p.as|0,p.rw|0,p.rb|0,p.sd|0,p.zz|0,p.fa|0,p.rp||'',p.sk||'',p.dy|0];
+      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt,p.im,p.sw|0,p.as|0,p.rw|0,p.rb|0,p.sd|0,p.zz|0,p.fa|0,p.rp||'',p.sk||'',p.dy|0,gdTag(o)];
       const key=p.n+'|'+p.cls+'|'+p.lv+'|'+p.mh+'|'+p.mp+'|'+p.hd+'|'+p.bt+'|'+p.tt+'|'+ex.join(',');seen.set(p.uid,key);
       if(c.known.get(p.uid)!==key)info.push([p.uid,p.n,p.cls,p.lv,p.mh,p.mp,p.hd,p.bt,p.tt,ex])}
     c.known=seen;
@@ -177,6 +177,7 @@ function onEmit(c,m){
     if(!o||o===c||!o.p){if(op==='req'||op==='w')send(c,JSON.stringify({t:'emit',k:'frm',d:{mp,d:{op:'off',toN:tn}},from:0}));return}
     const out={op,from:c.uid||'',n:c.p.n,c:c.p.cls,lv:c.p.lv};if(op==='w'){out.t=String(d.t||'').replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!out.t)return}
     send(o,JSON.stringify({t:'emit',k:'frm',d:{mp:o.p.mp,d:out},from:c.id}));return}
+  if(k==='gdo'){try{gdOp(c,d)}catch(e){console.error('guild',e.message)}return}
   if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,(key==='wb'||/^s\d{4}$/.test(key))?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='mvq'){send(c,JSON.stringify({t:'emit',k:'mvr',d:{mp,d:mvTable()},from:0}));return}
   if(k==='mva'||k==='mvd'||k==='mvk'||k==='mvlost'){const V=MV[mp];if(!V)return;const now=Date.now();
@@ -239,7 +240,65 @@ setInterval(()=>{const now=Date.now(),dk=new Date(now+7*3600e3).toISOString().sl
   if(!mlDirty)return;mlDirty=false;wj(MLF,ML)},15000);
 function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
 /* เวอร์ชันเซิร์ฟเวอร์ (เปิด /version เช็กว่า Render ใช้โค้ดล่าสุดแล้ว) */
-const SRV_V='v424b';
+/* ===== v425 กิลด์ (เซิร์ฟเวอร์เก็บข้อมูลจริง · ระบุตัวด้วย mid ของตัวละคร + ชื่อต้องตรงกับที่บันทึก) =====
+   GD.g[id] = {id,nm,tag,e,col,lead,mem:{mid:{n,c,lv,r(2 หัวหน้า/1 รอง/0 สมาชิก),at}},cr,lvl,nt,iv:{ชื่อ:เวลา},wk:{k,p:{k,b,g},ct:{mid:n},cl:{mid:1},done},log:[{n,t,at}]}
+   GD.by[mid] = id กิลด์ · ข้อความเข้า 'gdo' {op,mid,...} → ตอบ 'gdr' (สถานะกิลด์) / 'gdn' (แจ้งเตือน) */
+const GDF=path.join(DATA_DIR,'guild.json'),GDMAX=30,GDEMB=['⚔️','🛡️','🏹','🔮','🐉','🦅','🐺','🌙','☀️','🔥','❄️','🌸'],GDCN=8,GDLV=20,GDBASE=process.env.GD_FAST?{k:3,b:1,g:1}:{k:1500,b:10,g:120},GDMIN=process.env.GD_FAST?1:30;
+let GD={n:1,g:{},by:{}},gdDirty=false;
+try{const j=JSON.parse(fs.readFileSync(GDF,'utf8'));if(j&&typeof j==='object'&&j.g&&typeof j.g==='object')GD=Object.assign(GD,j)}catch(e){}
+setInterval(()=>{if(!gdDirty)return;gdDirty=false;wj(GDF,GD)},15000);
+const gdMidOk=m=>typeof m==='string'&&/^[a-z0-9]{8,16}$/.test(m);
+const gdClean=(s,n)=>String(s||'').replace(/[\u0000-\u001f\u007f<>"'`\\]/g,'').replace(/\s+/g,' ').trim().slice(0,n);
+const gdWeek=()=>{const d=new Date(Date.now()+7*3600e3),day=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-day);return d.toISOString().slice(0,10)};
+const gdGoal=G=>{const k=Math.max(1,Math.min(4,Object.keys(G.mem).length/5));return{k:Math.round(GDBASE.k*k),b:Math.round(GDBASE.b*k),g:Math.round(GDBASE.g*k)}};
+function gdWk(G){const w=gdWeek();if(!G.wk||G.wk.k!==w){G.wk={k:w,p:{k:0,b:0,g:0},ct:{},cl:{},done:0};gdDirty=true}return G.wk}
+function gdOf(mid){const id=GD.by[mid];const G=id&&GD.g[id];if(!G||!G.mem[mid]){if(id)delete GD.by[mid];return null}return G}
+function gdOnline(mid){for(const o of clients)if(o.gmid===mid&&o.p&&!o.dead)return o;return null}
+function gdTag(o){const m=o&&o.gmid;if(!m)return'';const G=gdOf(m);if(!G||!o.p||G.mem[m].n!==o.p.n)return'';return G.e+'|'+G.tag+'|'+G.col}
+function gdView(G,mid){const W=gdWk(G),goal=gdGoal(G);return{id:G.id,nm:G.nm,tag:G.tag,e:G.e,col:G.col,lvl:G.lvl,nt:G.nt||'',lead:G.lead,me:mid,r:G.mem[mid]?G.mem[mid].r:0,max:GDMAX,
+  mem:Object.keys(G.mem).map(m=>{const M=G.mem[m],o=gdOnline(m);return[m,M.n,o&&o.p?o.p.cls:M.c,o&&o.p?o.p.lv:M.lv,M.r,o?1:0,o&&o.p?o.p.mp:0,o&&o.p&&o.p.aw?1:0]}),
+  wk:{k:W.k,p:W.p,goal,done:W.done?1:0,cl:W.cl[mid]?1:0,ct:W.ct[mid]|0},log:(G.log||[]).slice(-30)}}
+function gdSend(o,k,d){mkReply(o,k,d)}
+function gdCast(G,d,skip){for(const m in G.mem){const o=gdOnline(m);if(o&&o!==skip)gdSend(o,'gdn',d)}}
+function gdRefresh(G){for(const m in G.mem){const o=gdOnline(m);if(o)gdSend(o,'gdr',{g:gdView(G,m),inv:[]})}}
+function gdRemove(G,m){delete G.mem[m];delete GD.by[m];if(G.lead===m){const L=Object.keys(G.mem).sort((a,b)=>(G.mem[b].r-G.mem[a].r)||(G.mem[a].at-G.mem[b].at));if(L.length){G.lead=L[0];G.mem[L[0]].r=2}}
+  if(!Object.keys(G.mem).length)delete GD.g[G.id];gdDirty=true}
+function gdInvites(name){const L=[],now=Date.now();for(const id in GD.g){const G=GD.g[id],t=G.iv&&G.iv[name];if(t&&now-t<600000)L.push({id:G.id,nm:G.nm,tag:G.tag,e:G.e,col:G.col,n:Object.keys(G.mem).length})}return L}
+function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();c.gdB=Math.min(8,(c.gdB==null?8:c.gdB)+(now-(c.gdT||now))/700);c.gdT=now;if(c.gdB<1)return;c.gdB--;
+  const op=String(d.op||''),mid=d.mid;if(!gdMidOk(mid))return;const name=c.p.n;let G=gdOf(mid);
+  const no=s=>gdSend(c,'gdn',{t:'err',s});
+  if(G&&G.mem[mid].n!==name){no('ชื่อตัวละครไม่ตรงกับในกิลด์');return}
+  if(c.gmid!==mid){c.gmid=mid;if(G)gdCast(G,{t:'on',n:name},c)}
+  if(G){const M=G.mem[mid];M.c=c.p.cls;M.lv=c.p.lv;gdWk(G)}
+  if(op==='q'){gdSend(c,'gdr',{g:G?gdView(G,mid):null,inv:G?[]:gdInvites(name)});return}
+  if(op==='mk'){if(G)return no('อยู่กิลด์อยู่แล้ว');if((c.p.lv|0)<GDLV)return no('ต้องเลเวล '+GDLV+' ขึ้นไป');
+    const nm=gdClean(d.nm,16),tag=gdClean(d.tag,4).toUpperCase();if(nm.length<2)return no('ชื่อกิลด์ 2–16 ตัวอักษร');if(!/^[A-Z0-9ก-๙]{2,4}$/.test(tag))return no('ตราย่อ 2–4 ตัว (ตัวอักษร/ตัวเลข)');
+    for(const id in GD.g){const X=GD.g[id];if(X.nm.toLowerCase()===nm.toLowerCase())return no('ชื่อกิลด์นี้มีคนใช้แล้ว');if(X.tag===tag)return no('ตราย่อนี้มีคนใช้แล้ว')}
+    const id=GD.n++;G=GD.g[id]={id,nm,tag,e:GDEMB[(d.e|0)%GDEMB.length],col:Math.abs(d.col|0)%GDCN,lead:mid,mem:{},cr:now,lvl:1,nt:'',iv:{},log:[]};G.mem[mid]={n:name,c:c.p.cls,lv:c.p.lv,r:2,at:now};GD.by[mid]=id;gdWk(G);gdDirty=true;
+    gdSend(c,'gdn',{t:'mk',ok:1,nm});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
+  if(op==='acc'||op==='dec'){const X=GD.g[d.id|0];if(!X||!X.iv||!X.iv[name])return no('คำเชิญหมดอายุแล้ว');delete X.iv[name];gdDirty=true;if(op==='dec')return gdSend(c,'gdr',{g:G?gdView(G,mid):null,inv:gdInvites(name)});
+    if(G)return no('ออกจากกิลด์เดิมก่อน');if(Object.keys(X.mem).length>=GDMAX)return no('กิลด์เต็มแล้ว ('+GDMAX+' คน)');
+    X.mem[mid]={n:name,c:c.p.cls,lv:c.p.lv,r:0,at:now};GD.by[mid]=X.id;gdDirty=true;gdCast(X,{t:'join',n:name},c);gdSend(c,'gdn',{t:'joined',nm:X.nm});gdRefresh(X);return}
+  if(!G)return no('ยังไม่มีกิลด์');const me=G.mem[mid];
+  if(op==='inv'){if(me.r<1)return no('เฉพาะหัวหน้า/รองหัวหน้าที่เชิญได้');if(Object.keys(G.mem).length>=GDMAX)return no('กิลด์เต็มแล้ว');const tn=gdClean(d.to,24);let o=null;for(const x of clients)if(x.p&&x.p.n===tn&&x!==c){o=x;break}
+    if(!o)return no(tn+' ไม่ได้ออนไลน์');if(o.gmid&&gdOf(o.gmid))return no(tn+' อยู่กิลด์อื่นแล้ว');G.iv=G.iv||{};G.iv[tn]=now;gdDirty=true;
+    gdSend(o,'gdn',{t:'inv',id:G.id,nm:G.nm,tag:G.tag,e:G.e,col:G.col,from:name});gdSend(c,'gdn',{t:'sent',n:tn});return}
+  if(op==='lv'){gdRemove(G,mid);gdSend(c,'gdr',{g:null,inv:gdInvites(name)});gdSend(c,'gdn',{t:'left',nm:G.nm});if(GD.g[G.id]){gdCast(G,{t:'leave',n:name});gdRefresh(G)}return}
+  if(op==='dis'){if(me.r<2)return no('เฉพาะหัวหน้ากิลด์');const L=Object.keys(G.mem);L.forEach(m=>delete GD.by[m]);delete GD.g[G.id];gdDirty=true;
+    L.forEach(m=>{const o=gdOnline(m);if(o){gdSend(o,'gdn',{t:'dis',nm:G.nm});gdSend(o,'gdr',{g:null,inv:[]})}});return}
+  const T=typeof d.t==='string'&&G.mem[d.t]?d.t:'';
+  if(op==='kick'){if(!T||T===mid||G.mem[T].r>=me.r)return no('เตะได้เฉพาะคนที่ตำแหน่งต่ำกว่า');const tn=G.mem[T].n;gdRemove(G,T);const o=gdOnline(T);if(o){gdSend(o,'gdn',{t:'kicked',nm:G.nm});gdSend(o,'gdr',{g:null,inv:[]})}gdCast(G,{t:'kick',n:tn});gdRefresh(G);return}
+  if(op==='rk'){if(me.r<2||!T||T===mid)return no('เฉพาะหัวหน้ากิลด์');G.mem[T].r=d.r?1:0;gdDirty=true;gdCast(G,{t:'rk',n:G.mem[T].n,r:G.mem[T].r});gdRefresh(G);return}
+  if(op==='ld'){if(me.r<2||!T||T===mid)return no('เฉพาะหัวหน้ากิลด์');G.mem[T].r=2;me.r=1;G.lead=T;gdDirty=true;gdCast(G,{t:'ld',n:G.mem[T].n});gdRefresh(G);return}
+  if(op==='set'){if(me.r<1)return no('เฉพาะหัวหน้า/รองหัวหน้า');if(typeof d.nt==='string')G.nt=gdClean(d.nt,80);if(me.r>=2){if(d.e!=null)G.e=GDEMB[Math.abs(d.e|0)%GDEMB.length];if(d.col!=null)G.col=Math.abs(d.col|0)%GDCN}gdDirty=true;gdRefresh(G);return}
+  if(op==='ch'){const t=gdClean(d.s,80);if(!t)return;const now2=Date.now();if(now2-(c.gdC||0)<1200)return;c.gdC=now2;G.log=G.log||[];G.log.push({n:name,t,at:now2});if(G.log.length>40)G.log.splice(0,G.log.length-40);gdDirty=true;gdCast(G,{t:'ch',n:name,s:t,at:now2});return}
+  if(op==='wk'){if(now-(c.gdW||0)<(process.env.GD_FAST?800:15000))return;c.gdW=now;const a=d.a&&typeof d.a==='object'?d.a:{},W=gdWk(G),add={k:Math.max(0,Math.min(150,a.k|0)),b:Math.max(0,Math.min(4,a.b|0)),g:Math.max(0,Math.min(25,a.g|0))};
+    W.p.k+=add.k;W.p.b+=add.b;W.p.g+=add.g;W.ct[mid]=(W.ct[mid]|0)+add.k+add.b*20+add.g*3;gdDirty=true;const goal=gdGoal(G);
+    if(!W.done&&W.p.k>=goal.k&&W.p.b>=goal.b&&W.p.g>=goal.g){W.done=1;const up=G.lvl<10;if(up)G.lvl++;gdCast(G,{t:'wkdone',lvl:G.lvl,up:up?1:0});gdRefresh(G)}return}
+  if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
+    W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
+}
+const SRV_V='v425';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
@@ -444,7 +503,7 @@ function chatQuery(q){const n=Math.max(1,Math.min(500,+q.get('n')||150)),before=
   const out=[];for(let i=CHL.length-1;i>=0&&out.length<n;i--){const x=CHL[i];if(x.at>=before)continue;if(s&&!(x.t.toLowerCase().includes(s)||x.n.toLowerCase().includes(s)))continue;out.push(x)}
   return{items:out,total:CHL.length,more:out.length===n}}
 function stats(){return{clients:clients.size,countByMap,bytesOut,msgsOut,uptime:Math.round(process.uptime())}}
-function flushAll(){try{wjSync(ACF,ACCS)}catch(e){}try{wjSync(CHF,CHL)}catch(e){}try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK);try{wjSync(MLF,ML)}catch(e){}}
+function flushAll(){try{wjSync(ACF,ACCS)}catch(e){}try{wjSync(CHF,CHL)}catch(e){}try{wjSync(LBCF,LBC)}catch(e){}try{wjSync(NMF,NM)}catch(e){}try{wjSync(STF,ST)}catch(e){}wjSync(LBF,LB);{const o={};for(const k in MV){const v=MV[k];o[k]={next:v.next,k:v.k,last:v.last}}wjSync(MVF,o)}wjSync(MKF,MK);try{wjSync(GDF,GD)}catch(e){}try{wjSync(MLF,ML)}catch(e){}}
 for(const sig of['SIGTERM','SIGINT'])process.on(sig,()=>{console.log('ปิดเซิร์ฟเวอร์: บันทึกข้อมูล...');flushAll();process.exit(0)});
 process.on('uncaughtException',e=>{console.error('uncaught (เซิร์ฟเวอร์ยังทำงานต่อ):',e&&e.stack||e)});
 server.listen(PORT,()=>console.log('listening on '+PORT+' (สูงสุด '+MAX+' คน)'));

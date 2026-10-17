@@ -37,7 +37,7 @@ async def main():
         await A.wait(1500)
         for c in (B,Cc,Dd): await c.ev("()=>{window.__lh=0;const _l=skLand;skLand=function(u,J){if(u===uid)window.__lh=1;return _l.apply(this,arguments)};window.__hits=0;const _a=addHit;addHit=function(){window.__hits++;return _a.apply(this,arguments)}}")
         base0=await A.ev("()=>[me.x,me.y]")
-        await A.ev("()=>$('skl').click()");await A.wait(500)
+        await A.ev("()=>$('skl').click()");await A.wait(780)
         air=[await c.ev("()=>[SKE.b,!!SKE.jump,me.inv3>0]") for c in (B,Cc,Dd)]
         rep('โยนแล้ว: คนบนคอหลุดจากหอ ลอยอยู่ และไม่โดนตี',all(a[0]=='' and a[1] and a[2] for a in air),json.dumps(air))
         rep('ทุกเครื่องเห็นการโยน (ฐานเห็น 3 คนลอย)',await A.ev("()=>Object.keys(SKJ).length")==3)
@@ -85,10 +85,10 @@ async def main():
         # หลบ: ฐานพาหอเดินออกจากวง
         await B.ev(CLIMB,A.uid);await A.wait(1500)
         for c in (A,B): await c.ev("()=>{me.hp=me.mh;me.inv3=0}")
+        p0=await A.ev("()=>[me.x,me.y]")
         await host.ev("(u)=>{const P=skPos(u);fx({k:'skw',m:'zz',mx:Math.round(P.x+170),my:Math.round(P.y),x:Math.round(P.x),y:Math.round(P.y),r:95,w:1.4})}",A.uid)
-        await A.wait(200)
-        await A.ev("()=>{joy={dx:0,dy:40,mv:1}}");await A.wait(1100);await A.ev("()=>{joy=null}")
-        await A.wait(900)
+        await A.ev("()=>{joy={dx:0,dy:40,mv:1}}");await A.wait(2000);await A.ev("()=>{joy=null}")
+        await A.wait(400)
         dd=[await c.ev("()=>[Math.round(me.hp/me.mh*100),SKE.b,!!SKF]") for c in (A,B)]
         rep('ฐานพาหอออกจากวงทัน → หอไม่พัง ไม่เสียเลือด',dd[0][0]==100 and dd[1][0]==100 and dd[1][1]==A.uid and not dd[0][2],json.dumps(dd))
         Es=[e for c in C for e in c.errs if not e.startswith('console')];rep('ไม่มี error',not Es,str(Es[:3]))

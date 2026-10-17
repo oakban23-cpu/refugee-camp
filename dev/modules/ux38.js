@@ -63,14 +63,21 @@ function skwFx(o){if(!o||typeof o.x!=='number'||typeof o.y!=='number')return;con
 function skwResolve(W){W.done=1;const x=W.x,y=W.y,r=W.r;
   try{fxs.push({k:'dgring',x:Math.round(x),y:Math.round(y),r:r+8,t:.5,d:.5,s:0,c:'#ff4a3a'})}catch(e){}try{burst(x,y-10,['#ff6a5a','#ffd0a0','#ffffff'],LOWQ?8:16,200,.45,{g:40})}catch(e){}
   try{if(Math.hypot(me.x-x,me.y-y)<460)shk=Math.max(shk,.22)}catch(e){}try{sfx('shatter')}catch(e){}
-  if(!me.cls||me.down>0||SKE.jump)return;
-  const base=SKE.b?skRoot(uid):SKB0?uid:'',P=base?skPos(base):null,inT=!!(P&&Math.hypot(P.x-x,P.y-y)<r);
-  if(inT){const rider=!!SKE.b;if(rider){SKE.b='';SKE.id='';const a=Math.random()*6.283;me.x=P.x+Math.cos(a)*(34+Math.random()*20);me.y=P.y+Math.sin(a)*22+12}
+  if(!me.cls||me.down>0||SKE.jump){W.fin=1;return}
+  /* v425 ฐานเป็นคนตัดสินแทนทั้งหอ (ตำแหน่งบนจอฐานแม่นที่สุด) → ส่งผลให้คนบนคอ · คนบนคอรอผล 0.8 วิ ถ้าไม่มาค่อยเช็กเอง */
+  const key=Math.round(x)+','+Math.round(y);
+  if(SKB0){const inT=Math.hypot(me.x-x,me.y-y)<r;try{fx({k:'skv',key,hit:inT?1:0})}catch(e){}skwApply(W,inT,0);return}
+  if(SKE.b){W.key=key;W.wait=performance.now();return}
+  W.fin=1;if(Math.hypot(me.x-x,me.y-y)<r){try{hurt(me.mh*.08)}catch(e){}}}
+const SKV={};
+function skwApply(W,inT,rider){W.fin=1;const P=skPos(rider?skRoot(uid):uid)||{x:me.x,y:me.y};
+  if(inT){if(rider){SKE.b='';SKE.id='';const a=Math.random()*6.283;me.x=P.x+Math.cos(a)*(34+Math.random()*20);me.y=P.y+Math.sin(a)*22+12}
     try{hurt(me.mh*(rider?.12:.18))}catch(e){}SKF={t:.9,x:me.x,y:me.y};banner={s:'💥 หอถูกบอสกวาดล้ม! '+(rider?'ร่วงลงมา':'ทุกคนร่วง')+' · มึน 0.9 วิ',t:2.5};
     try{dn.push({x:me.x,y:me.y-52,v:'💫 หอพัง!',t:1.2,col:'#ff8a6a'})}catch(e){}return}
-  if(Math.hypot(me.x-x,me.y-y)<r){try{hurt(me.mh*.08)}catch(e){}return}
-  if(base){skStat('twd');try{dn.push({x:me.x,y:me.y-56,v:'✨ หลบทัน!',t:1,col:'#a8f0a8'})}catch(e){}}}
-function skwTick(dt){const now=performance.now();SKW.forEach(W=>{if(!W.done&&now-W.t0>=W.w*1000)skwResolve(W)});SKW=SKW.filter(W=>now-W.t0<W.w*1000+600);
+  skStat('twd');try{dn.push({x:me.x,y:me.y-56,v:'✨ หลบทัน!',t:1,col:'#a8f0a8'})}catch(e){}}
+function skwTick(dt){const now=performance.now();SKW.forEach(W=>{if(!W.done&&now-W.t0>=W.w*1000)skwResolve(W);
+    else if(W.done&&W.wait&&!W.fin){if(!SKE.b){W.fin=1;return}const v=SKV[W.key];if(v!==undefined){skwApply(W,!!v,1)}else if(now-W.wait>800){const P=skPos(skRoot(uid));skwApply(W,!!(P&&Math.hypot(P.x-W.x,P.y-W.y)<W.r),1)}}});
+  SKW=SKW.filter(W=>(!W.fin&&now-W.t0<W.w*1000+2000)||now-W.t0<W.w*1000+600);for(const k in SKV)if(now-SKV[k+'@']>3000){delete SKV[k];delete SKV[k+'@']}
   if(SKF){SKF.t-=dt||0;if(SKF.t<=0)SKF=null}}
 /* วงเตือน */
 function skwDraw(){if(!SKW.length)return;const now=performance.now();g.save();SKW.forEach(W=>{const e=(now-W.t0)/1000,p=Math.min(1,e/W.w);if(W.done)return;
@@ -96,7 +103,7 @@ function skcTick(){const now=performance.now();for(const u in SKCL){const C=SKCL
     if(e>SKCD+1)delete SKCL[u]}
   for(const b in SKCB)if(now-SKCB[b].t0>400)delete SKCB[b]}
 setTimeout(()=>{
-  try{const _h=handleFx;handleFx=function(o){if(o&&(o.k==='skl'||o.k==='skw'||o.k==='skc')){try{if(o.k==='skl')skLaunchFx(o);else if(o.k==='skc')skcFx(o);else skwFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
+  try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='skv'){try{if(typeof o.key==='string'&&SKE.b&&skRoot(uid)===o.by){SKV[o.key]=o.hit?1:0;SKV[o.key+'@']=performance.now()}}catch(e){}return}if(o&&(o.k==='skl'||o.k==='skw'||o.k==='skc')){try{if(o.k==='skl')skLaunchFx(o);else if(o.k==='skc')skcFx(o);else skwFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
   try{const _u=updateMe;updateMe=function(dt){const sx=me.x,sy=me.y;const r=_u.apply(this,arguments);try{skJTick();skcTick();skwTick(dt);if(SKF&&me.down<=0){me.x=SKF.x;me.y=SKF.y}}catch(e){}return r}}catch(e){}
   /* มึนอยู่ = ตี/สกิล/หลบไม่ได้ */
   try{const _us=useSkill;useSkill=function(k){if(SKF)return;return _us.apply(this,arguments)}}catch(e){}
