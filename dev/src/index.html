@@ -13090,6 +13090,9 @@ function skShin(rx,ry,d,cls,c2){const P=(c2===2&&CHR3[cls])?CHR3[cls]:(c2&&CHR2[
 const SKE={b:'',id:'',lost:0,jt:0,jump:null},SKMAX=3,SKQ={},SKH=24,SKJ={};let SKBN=0,SKJBYP=0;
 /* v420: คนที่ถูกโยนออกจากหอแล้ว (พ้นช่วงฐานย่อ) — ไม่นับเป็นคนบนหออีก แม้ presence ยังไม่อัปเดต */
 function skJumping(u){const J=SKJ[u];return!!(J&&performance.now()-J.t0>=250)}
+/* v421 กำลังตีลังกาปีนขึ้นหอ (ยังไม่วาดเป็นคนนั่งบนหอ) */
+const SKCL={},SKCD=.58;function skClimbing(u){const C=SKCL[u];return!!(C&&performance.now()-C.t0<SKCD*1000)}
+function skFlying(u){return skJumping(u)||skClimbing(u)}
 function skP(){return SKE.b?SKE.b+'x'+SKE.id:''}
 function skOf(u){if(u===uid)return SKE.b?{b:SKE.b,t:SKE.id}:null;const o=others[u];if(!o||typeof o.sk!=='string'||!o.sk)return null;const k=o.sk;/* v419: ทั้ง uid และเวลา (ฐาน36) มีตัว x ได้ → หาจุดแยกที่ด้านหน้าเป็น uid ที่รู้จัก */let i=-1;for(let j=k.indexOf('x');j>0;j=k.indexOf('x',j+1)){const c=k.slice(0,j);if(c===uid||others[c]){i=j;break}}if(i<0)i=k.lastIndexOf('x');if(i<1)return null;return{b:k.slice(0,i),t:k.slice(i+1)}}
 /* ฐานจริง = ไล่ลงไปจนเจอคนที่ไม่ได้ขี่คอใคร (ปีนต่อจากคนบนหอก่อนข้อมูลมาถึงก็ยังถูกฐานเดียวกัน) */
@@ -13109,7 +13112,8 @@ function skClimb(u){if(!me.cls||me.down>0)return;let ip=false;try{ip=inPty(u)}ca
   if(Math.hypot(P.x-me.x,P.y-me.y)>160){banner={s:'🧗 เข้าไปใกล้ '+skNm(u)+' ก่อน (แตะชื่อเพื่อวาปไปหาได้)',t:2.5};return}
   const n=skRiders(b).length;if(n>=SKMAX){banner={s:'🧗 หอของ '+skNm(b)+' เต็มแล้ว (ฐาน + '+SKMAX+' คน)',t:2.5};return}
   SKE.b=b;SKE.id=Date.now().toString(36);SKE.lost=0;SKE.jt=0;try{sfx('gate')}catch(e){}try{burst(me.x,me.y-10,['#ffe08a','#ffffff'],14,90,.5,{g:-20})}catch(e){}
-  banner={s:'🧗 ขี่คอ '+skNm(b)+' ชั้นที่ '+(n+1)+' · '+skNm(b)+' รับดาเมจแทน คุณโจมตีได้เต็มที่',t:4}}
+  banner={s:'🧗 ขี่คอ '+skNm(b)+' ชั้นที่ '+(n+1)+' · '+skNm(b)+' รับดาเมจแทน คุณโจมตีได้เต็มที่',t:4};
+  /* v421 ทุกเครื่องเห็นตีลังกาจากจุดที่ยืนขึ้นไปนั่งบนหอ */try{fx({k:'skc',b,sx:Math.round(me.x),sy:Math.round(me.y)})}catch(e){}}
 function skDrop(msg){if(!SKE.b)return;const P=skPos(skRoot(uid));SKE.b='';SKE.id='';if(P){me.x=P.x+(Math.random()<.5?-1:1)*(18+Math.random()*14);me.y=P.y+10}if(msg)banner={s:msg,t:3};try{sfx('click')}catch(e){}}
 /* คนขี่: ล็อกตำแหน่งตามฐาน */
 function skTick(dt){if(!SKE.b)return;const RB=skRoot(uid),o=others[RB];
@@ -13150,8 +13154,8 @@ setTimeout(()=>{
      · คนข้างล่าง (ฐาน/ชั้นกลาง) ยกมือจับหน้าแข้งคนข้างบน ย่อเข่ารับน้ำหนัก (ยิ่งแบกหลายคนยิ่งย่อ) · ชั้นกลางที่กำลังตี/ร่ายใช้ท่าตีตามปกติ
      · ทั้งหอโยกเบา ๆ และเอนตามแรงเฉื่อยตอนออกวิ่ง/หยุด (ชั้นสูงเอนมากกว่า) */
   try{const _p=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const u=lk&&lk.u;
-      if(u&&!down&&!SKJBYP&&!skJumping(u)){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
-      const R=u&&!down?skRiders(u).filter(r=>!skJumping(r.u)):[];if(!R.length)return _p.apply(this,arguments);
+      if(u&&!down&&!SKJBYP&&!skFlying(u)){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
+      const R=u&&!down?skRiders(u).filter(r=>!skFlying(r.u)):[];if(!R.length)return _p.apply(this,arguments);
       const now=performance.now(),Q=SKQ[u]||{},d=(fx||1)<0?-1:1,t=now/1000,bob=ph?Math.abs(Math.sin(ph))*1.6:0;
       let lag=0;try{const S=CHSS[u];if(S&&!(LITEQ&&u!==uid))lag=Math.max(-1.3,Math.min(1.3,S.p-S.u))}catch(e){}
       const L=[];R.forEach(r=>{const q=Q[r.u];if(q&&now-q.t<=1500)L.push(q)});const n=L.length;
@@ -13255,15 +13259,32 @@ function skwDraw(){if(!SKW.length)return;const now=performance.now();g.save();SK
     let bx=W.mx,by=W.my;try{const m=mons.find(q=>q.id===W.mid);if(m){bx=m.x;by=m.y}}catch(e){}
     g.globalAlpha=.35+.3*p;g.lineWidth=3;g.strokeStyle='#ff6a4a';g.beginPath();g.moveTo(bx,by-20);g.quadraticCurveTo((bx+W.x)/2,Math.min(by,W.y)-60,W.x,W.y);g.stroke();
     g.globalAlpha=1;g.font='bold 16px system-ui';g.textAlign='center';g.fillStyle='#fff';g.strokeStyle='rgba(60,0,0,.8)';g.lineWidth=3;const tx='💢 '+Math.max(0,W.w-e).toFixed(1);g.strokeText(tx,W.x,W.y+W.r*.62+18);g.fillText(tx,W.x,W.y+W.r*.62+18)});g.restore()}
+/* ---- v421 ตีลังกาปีนขึ้นหอ ----
+   คนปีนกระโดดจากจุดที่ยืน ตีลังกาหลัง 1 รอบ แล้วลงนั่งคร่อมคอ · คนข้างล่างย่อรับ · ทุกเครื่องเห็น (fx skc) */
+const SKCB={};
+function skcFx(o){if(!o||typeof o.by!=='string'||typeof o.b!=='string'||typeof o.sx!=='number'||typeof o.sy!=='number')return;const now=performance.now();
+  SKCL[o.by]={t0:now,sx:o.sx,sy:o.sy,b:o.b,land:0};
+  try{burst(o.sx,o.sy,['#d8c8a8','#a89878'],LOWQ?5:10,90,.4,{g:50})}catch(e){}try{if(Math.hypot(me.x-o.sx,me.y-o.sy)<500)sfx('flip')}catch(e){}}
+/* ตำแหน่งตามเส้นโค้งตอนปีน (ที่นั่งคำนวณจากฐานปัจจุบัน — ฐานเดินอยู่ก็ตามทัน) */
+function skcPos(u,C,now){const rb0=skRoot(u),rb=rb0!==u?rb0:C.b,P=skPos(rb);if(!P)return null;const R=skRiders(rb);let lv=R.findIndex(r=>r.u===u)+1;if(lv<1)lv=R.length+1;lv=Math.max(1,Math.min(SKMAX,lv));
+  const d=P.d,p=Math.min(1,(now-C.t0)/1000/SKCD),q=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,tx=P.x-d*2.2*lv,gx=C.sx+(tx-C.sx)*q,gy=C.sy+(P.y-C.sy)*q,h=SKH*lv*q+(30+6*lv)*4*p*(1-p),
+    f=Math.max(0,Math.min(1,(p-.08)/.8)),rot=-d*6.283*(f*f*(3-2*f));return{gx,gy,h,p,rot,d,lv,rb,R}}
+function skcTick(){const now=performance.now();for(const u in SKCL){const C=SKCL[u],e=(now-C.t0)/1000;
+    if(!C.land&&e>=SKCD){C.land=1;try{const Q=skcPos(u,C,now-1);if(Q){const below=Q.lv>1&&Q.R[Q.lv-2]?Q.R[Q.lv-2].u:Q.rb;SKCB[below]={t0:now};burst(Q.gx,Q.gy-Q.h+8,['#fff2c8','#d8c8a8'],LOWQ?4:8,70,.35,{g:40})}}catch(e){}}
+    if(e>SKCD+1)delete SKCL[u]}
+  for(const b in SKCB)if(now-SKCB[b].t0>400)delete SKCB[b]}
 setTimeout(()=>{
-  try{const _h=handleFx;handleFx=function(o){if(o&&(o.k==='skl'||o.k==='skw')){try{if(o.k==='skl')skLaunchFx(o);else skwFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
-  try{const _u=updateMe;updateMe=function(dt){const sx=me.x,sy=me.y;const r=_u.apply(this,arguments);try{skJTick();skwTick(dt);if(SKF&&me.down<=0){me.x=SKF.x;me.y=SKF.y}}catch(e){}return r}}catch(e){}
+  try{const _h=handleFx;handleFx=function(o){if(o&&(o.k==='skl'||o.k==='skw'||o.k==='skc')){try{if(o.k==='skl')skLaunchFx(o);else if(o.k==='skc')skcFx(o);else skwFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
+  try{const _u=updateMe;updateMe=function(dt){const sx=me.x,sy=me.y;const r=_u.apply(this,arguments);try{skJTick();skcTick();skwTick(dt);if(SKF&&me.down<=0){me.x=SKF.x;me.y=SKF.y}}catch(e){}return r}}catch(e){}
   /* มึนอยู่ = ตี/สกิล/หลบไม่ได้ */
   try{const _us=useSkill;useSkill=function(k){if(SKF)return;return _us.apply(this,arguments)}}catch(e){}
   try{const _dg=dodge;dodge=function(){if(SKF)return false;return _dg.apply(this,arguments)}}catch(e){}
   /* วาดชั้นบน (ทับตัวละครแบบโปร่ง) ให้เห็นชัดแม้ฉากกลางคืน */try{const _mp=drawMProj;drawMProj=function(){try{skwDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
   /* วาดคนที่ถูกโยน: ลอยตามเส้นโค้ง + ตีลังกา + เงาบนพื้น */
-  try{const _p=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const u=lk&&lk.u,J=u&&SKJ[u];
+  try{const _p=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const u=lk&&lk.u,J=u&&SKJ[u],CL=u&&!down&&skClimbing(u)?SKCL[u]:null;
+      if(CL){const Q=skcPos(u,CL,performance.now());if(Q){const a=Array.prototype.slice.call(arguments),cy=Q.gy-Q.h-14;
+          g.save();g.globalAlpha=.3*Math.max(.3,1-Q.h/120);g.fillStyle='#000';g.beginPath();g.ellipse(Q.gx,Q.gy+2,12*(1-Math.min(.5,Q.h/160)),4.2*(1-Math.min(.5,Q.h/160)),0,0,7);g.fill();g.restore();
+          a[0]=Q.gx;a[1]=Q.gy-Q.h;a[9]=0;a[10]=Q.d;g.save();g.translate(Q.gx,cy);g.rotate(Q.rot);g.translate(-Q.gx,-cy);PGNT=1;MSHOFF=1;SKJBYP=1;CHSIT=Q.p>.82?1:0;try{_p.apply(this,a)}catch(e){}finally{PGNT=0;MSHOFF=0;SKJBYP=0;CHSIT=0;g.restore()}return}}
       if(J&&!down){const now=performance.now(),P=skJPos(J,now);if(P&&!J.land){const a=Array.prototype.slice.call(arguments),cy=P.gy-P.h-14,rot=J.sp*J.d*Math.min(1,P.p*1.15)*6.283;
           g.save();g.globalAlpha=.32*Math.max(.3,1-P.h/160);g.fillStyle='#000';g.beginPath();g.ellipse(P.gx,P.gy+2,13*(1-Math.min(.6,P.h/200)),4.5*(1-Math.min(.6,P.h/200)),0,0,7);g.fill();g.restore();
           a[0]=P.gx;a[1]=P.gy-P.h;a[9]=0;a[10]=J.d;g.save();g.translate(P.gx,cy);g.rotate(rot);g.translate(-P.gx,-cy);PGNT=1;MSHOFF=1;SKJBYP=1;try{_p.apply(this,a)}catch(e){}finally{PGNT=0;MSHOFF=0;SKJBYP=0;g.restore()}return}
@@ -13271,12 +13292,13 @@ setTimeout(()=>{
         SKJBYP=1;try{return _p.apply(this,arguments)}finally{SKJBYP=0}}
       return _p.apply(this,arguments)}}catch(e){}
   /* ท่าฐานตอนโยน: ย่อลึก → ดีดยืดแขนชูขึ้น */
-  try{const _d0=drawP0;drawP0=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const B=lk&&lk.u&&SKLB[lk.u],A=CHA;let set=0;
+  try{const _d0=drawP0;drawP0=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const B=lk&&lk.u&&SKLB[lk.u],K=lk&&lk.u&&SKCB[lk.u],A=CHA;let set=0;
       if(B&&A&&!A.cast){const e=(performance.now()-B.t0)/1000;A.cast={ty:'stkL',p:e,idle:1,d:1};set=1}
+      else if(K&&A&&!A.cast&&!(lk&&lk.ak>0)){const e=(performance.now()-K.t0)/1000;A.cast={ty:'stkC',p:e,idle:1,d:1};set=1}
       try{return _d0.apply(this,arguments)}finally{if(set&&A)A.cast=null}}}catch(e){}
-  try{R24T.add('stkL');R24OFF.stkL=1}catch(e){}
-  try{const _ib=idlBody;idlBody=function(C){if(C.ty==='stkL'){const e=C.p;if(e<.25){const k=e/.25;g.scale(1+.1*k,1-.16*k)}else{const k=Math.max(0,1-(e-.25)/.35);g.scale(1-.06*k,1+.12*k)}return}return _ib.apply(this,arguments)}}catch(e){}
-  try{const _ia=idlArm;idlArm=function(cls,C){if(C.ty==='stkL'){const e=C.p;return e<.25?{dx:2,dy:-4,rot:-.3,ak:null,off:[9,-6],gl:null}:{dx:0,dy:-13,rot:-1.35,ak:null,off:[3,-18],gl:null}}return _ia.apply(this,arguments)}}catch(e){}
+  try{R24T.add('stkL');R24OFF.stkL=1;R24T.add('stkC');R24OFF.stkC=1}catch(e){}
+  try{const _ib=idlBody;idlBody=function(C){if(C.ty==='stkC'){const k=Math.max(0,1-C.p/.4);g.scale(1+.06+.09*k,1-.1-.14*k*Math.cos(C.p*18));g.rotate(-.04);return}if(C.ty==='stkL'){const e=C.p;if(e<.25){const k=e/.25;g.scale(1+.1*k,1-.16*k)}else{const k=Math.max(0,1-(e-.25)/.35);g.scale(1-.06*k,1+.12*k)}return}return _ib.apply(this,arguments)}}catch(e){}
+  try{const _ia=idlArm;idlArm=function(cls,C){if(C.ty==='stkC')return{dx:1,dy:-5,rot:-.4,ak:null,off:[11,-8],gl:null};if(C.ty==='stkL'){const e=C.p;return e<.25?{dx:2,dy:-4,rot:-.3,ak:null,off:[9,-6],gl:null}:{dx:0,dy:-13,rot:-1.35,ak:null,off:[3,-18],gl:null}}return _ia.apply(this,arguments)}}catch(e){}
   /* ดาวมึนเหนือหัว */
   try{const _p2=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const r=_p2.apply(this,arguments);try{if(SKF&&lk&&lk.u===uid&&!down){const t=performance.now()/1000;g.save();g.font='10px system-ui';g.textAlign='center';for(let i=0;i<3;i++){const a=t*5+i*2.09;g.fillText('⭐',x+Math.cos(a)*11,y-40+Math.sin(a)*3.5)}g.restore()}}catch(e){}return r}}catch(e){}
   setInterval(()=>{try{sklUI()}catch(e){}},150);

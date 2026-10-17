@@ -17,6 +17,9 @@ function skShin(rx,ry,d,cls,c2){const P=(c2===2&&CHR3[cls])?CHR3[cls]:(c2&&CHR2[
 const SKE={b:'',id:'',lost:0,jt:0,jump:null},SKMAX=3,SKQ={},SKH=24,SKJ={};let SKBN=0,SKJBYP=0;
 /* v420: คนที่ถูกโยนออกจากหอแล้ว (พ้นช่วงฐานย่อ) — ไม่นับเป็นคนบนหออีก แม้ presence ยังไม่อัปเดต */
 function skJumping(u){const J=SKJ[u];return!!(J&&performance.now()-J.t0>=250)}
+/* v421 กำลังตีลังกาปีนขึ้นหอ (ยังไม่วาดเป็นคนนั่งบนหอ) */
+const SKCL={},SKCD=.58;function skClimbing(u){const C=SKCL[u];return!!(C&&performance.now()-C.t0<SKCD*1000)}
+function skFlying(u){return skJumping(u)||skClimbing(u)}
 function skP(){return SKE.b?SKE.b+'x'+SKE.id:''}
 function skOf(u){if(u===uid)return SKE.b?{b:SKE.b,t:SKE.id}:null;const o=others[u];if(!o||typeof o.sk!=='string'||!o.sk)return null;const k=o.sk;/* v419: ทั้ง uid และเวลา (ฐาน36) มีตัว x ได้ → หาจุดแยกที่ด้านหน้าเป็น uid ที่รู้จัก */let i=-1;for(let j=k.indexOf('x');j>0;j=k.indexOf('x',j+1)){const c=k.slice(0,j);if(c===uid||others[c]){i=j;break}}if(i<0)i=k.lastIndexOf('x');if(i<1)return null;return{b:k.slice(0,i),t:k.slice(i+1)}}
 /* ฐานจริง = ไล่ลงไปจนเจอคนที่ไม่ได้ขี่คอใคร (ปีนต่อจากคนบนหอก่อนข้อมูลมาถึงก็ยังถูกฐานเดียวกัน) */
@@ -36,7 +39,8 @@ function skClimb(u){if(!me.cls||me.down>0)return;let ip=false;try{ip=inPty(u)}ca
   if(Math.hypot(P.x-me.x,P.y-me.y)>160){banner={s:'🧗 เข้าไปใกล้ '+skNm(u)+' ก่อน (แตะชื่อเพื่อวาปไปหาได้)',t:2.5};return}
   const n=skRiders(b).length;if(n>=SKMAX){banner={s:'🧗 หอของ '+skNm(b)+' เต็มแล้ว (ฐาน + '+SKMAX+' คน)',t:2.5};return}
   SKE.b=b;SKE.id=Date.now().toString(36);SKE.lost=0;SKE.jt=0;try{sfx('gate')}catch(e){}try{burst(me.x,me.y-10,['#ffe08a','#ffffff'],14,90,.5,{g:-20})}catch(e){}
-  banner={s:'🧗 ขี่คอ '+skNm(b)+' ชั้นที่ '+(n+1)+' · '+skNm(b)+' รับดาเมจแทน คุณโจมตีได้เต็มที่',t:4}}
+  banner={s:'🧗 ขี่คอ '+skNm(b)+' ชั้นที่ '+(n+1)+' · '+skNm(b)+' รับดาเมจแทน คุณโจมตีได้เต็มที่',t:4};
+  /* v421 ทุกเครื่องเห็นตีลังกาจากจุดที่ยืนขึ้นไปนั่งบนหอ */try{fx({k:'skc',b,sx:Math.round(me.x),sy:Math.round(me.y)})}catch(e){}}
 function skDrop(msg){if(!SKE.b)return;const P=skPos(skRoot(uid));SKE.b='';SKE.id='';if(P){me.x=P.x+(Math.random()<.5?-1:1)*(18+Math.random()*14);me.y=P.y+10}if(msg)banner={s:msg,t:3};try{sfx('click')}catch(e){}}
 /* คนขี่: ล็อกตำแหน่งตามฐาน */
 function skTick(dt){if(!SKE.b)return;const RB=skRoot(uid),o=others[RB];
@@ -77,8 +81,8 @@ setTimeout(()=>{
      · คนข้างล่าง (ฐาน/ชั้นกลาง) ยกมือจับหน้าแข้งคนข้างบน ย่อเข่ารับน้ำหนัก (ยิ่งแบกหลายคนยิ่งย่อ) · ชั้นกลางที่กำลังตี/ร่ายใช้ท่าตีตามปกติ
      · ทั้งหอโยกเบา ๆ และเอนตามแรงเฉื่อยตอนออกวิ่ง/หยุด (ชั้นสูงเอนมากกว่า) */
   try{const _p=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const u=lk&&lk.u;
-      if(u&&!down&&!SKJBYP&&!skJumping(u)){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
-      const R=u&&!down?skRiders(u).filter(r=>!skJumping(r.u)):[];if(!R.length)return _p.apply(this,arguments);
+      if(u&&!down&&!SKJBYP&&!skFlying(u)){const s=skOf(u);if(s){const rb=skRoot(u),P=skPos(rb);if(rb!==u&&P&&P.hp>0&&(rb===uid||others[rb])){(SKQ[rb]=SKQ[rb]||{})[u]={a:Array.prototype.slice.call(arguments),t:performance.now()};return}}}
+      const R=u&&!down?skRiders(u).filter(r=>!skFlying(r.u)):[];if(!R.length)return _p.apply(this,arguments);
       const now=performance.now(),Q=SKQ[u]||{},d=(fx||1)<0?-1:1,t=now/1000,bob=ph?Math.abs(Math.sin(ph))*1.6:0;
       let lag=0;try{const S=CHSS[u];if(S&&!(LITEQ&&u!==uid))lag=Math.max(-1.3,Math.min(1.3,S.p-S.u))}catch(e){}
       const L=[];R.forEach(r=>{const q=Q[r.u];if(q&&now-q.t<=1500)L.push(q)});const n=L.length;

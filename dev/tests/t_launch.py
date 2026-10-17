@@ -21,10 +21,13 @@ async def main():
         mem=[[c.uid,n,cl] for c,(n,cl) in zip(C,names)]
         for c in C: await c.ev(PTYJS,mem)
         await A.wait(1200)
+        for c in C: await c.ev("()=>{window.__skc=0;const _s=skcFx;skcFx=function(o){window.__skc++;return _s.apply(this,arguments)}}")
         for c in (B,Cc,Dd):
             await c.ev(CLIMB,A.uid);await A.wait(700)
         await A.wait(1200)
         rep('ปีนครบ 3 ชั้น',await A.ev("()=>skRiders(uid).length")==3)
+        sc=[await c.ev("()=>window.__skc|0") for c in (A,Dd)]
+        rep('ปีนขึ้นแบบตีลังกา: ทุกเครื่องเห็น (fx skc)',all(x>=1 for x in sc),json.dumps(sc))
         bt=await A.ev("()=>{sklUI();const b=$('skl');return b&&!b.hidden?b.textContent:''}")
         rep('ฐานมีปุ่ม 🤸 โยนขึ้น',bt.startswith('🤸 โยนขึ้น') and '3' in bt,bt)
         nb=await B.ev("()=>{sklUI();const b=$('skl');return !!(b&&!b.hidden)}")
