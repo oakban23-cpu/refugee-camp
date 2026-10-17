@@ -39,7 +39,7 @@ async def main():
         pb0=await A.ev("()=>me.pb&&me.pb.wb||0")
         await A.ev("()=>{document.querySelector('[data-gda=\"gbs\"]').click()}");await A.wait(1500)
         inn=await A.ev("()=>[isWB(),!!GBS.go,MAPS[curMap].boss.n,MAPS[curMap].n]")
-        rep('กดท้า → เข้าลานอสูรกิลด์ (ชื่อบอสตามขั้น)',inn[0] and inn[1] and 'ขั้น 1' in inn[2] and 'GB' in inn[3],json.dumps(inn,ensure_ascii=False))
+        rep('กดท้า → เข้าลานอสูรกิลด์ (ชื่อบอสตามขั้น)',inn[0] and inn[1] and 'ขั้น 1' in inn[2] and 'GB' in inn[3] and 'ห้องโถงกิลด์' in inn[3],json.dumps(inn,ensure_ascii=False))
         ok=await A.ev(FIN,2000)
         await A.wait(1500)
         st=await A.ev("()=>({s:GDS.g.gb.s,hp:GDS.g.gb.hp,left:GDS.g.gb.left,my:GDS.g.gb.my,pb:me.pb&&me.pb.wb||0,bh:window.__bh.slice(-4)})")

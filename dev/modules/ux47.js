@@ -26,7 +26,7 @@ function gbHTML(G){const B=G.gb;if(!B)return'<div class="card hint">กำลั
   return h}
 /* ---- เข้าลาน ---- */
 function gbEnter(tk,s){const id=82000+(Math.random()*999|0);if(!dgMap(id))return false;const M=MAPS[id];GBS.go={tk,s,id,done:0,sent:0,gm:!!gmUsed};GBS.mp0={n:M.boss.n,ring:M.ring,name:M.n};
-  try{const G=GDS.g;M.boss.n='🐉 '+GBN+' ขั้น '+s;M.n='ลานอสูรกิลด์'+(G?' ['+G.tag+']':'');if(G)M.ring=gdCol(G.col)}catch(e){}
+  try{const G=GDS.g;M.boss.n='🐉 '+GBN+' ขั้น '+s;M.n='ห้องโถงกิลด์'+(G?' ['+G.tag+']':'');gbTheme(M)}catch(e){}
   ov.hidden=true;try{sfx('gate')}catch(e){}enterMap(id,{x:CX,y:CY+380});WB.res=null;banner={s:'🐉 '+GBN+' ขั้น '+s+' · เริ่มใน 3 วินาที · ตีให้ได้ดาเมจมากที่สุดใน 60 วิ!',t:5};
   setTimeout(()=>{try{if(GBS.go&&isWB()&&dg&&dg.ph!=='boss')wbStart()}catch(e){}},1200);return true}
 function gbRestoreMap(){const G=GBS.go,M=G&&MAPS[G.id];if(M&&GBS.mp0){M.boss.n=GBS.mp0.n;M.ring=GBS.mp0.ring;M.n=GBS.mp0.name}GBS.mp0=null}
