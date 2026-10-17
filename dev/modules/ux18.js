@@ -48,21 +48,21 @@ function gtNear(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on)return null;let
 function gtTierFor(n){const L=n.k==='o'?gtLvO():gtLvH(),cap=L>=6?3:L>=3?2:1;return Math.min(n.t,cap)}
 const gtMat=(n,t)=>(n.k==='o'?'o':'h')+t;
 /* ---- เก็บ ---- */
-function gtStart(){const n=gtNear();if(!n||GTC)return;try{if(FS&&FS.open)fsClose()}catch(e){}const L=n.k==='o'?gtLvO():gtLvH(),dur=Math.max(1.3,2.4*(1-.05*(L-1)));
-  GTC={n,t:0,d:dur,x0:me.x,y0:me.y,sp:0};me.face=Math.atan2(n.y-me.y,n.x-me.x);try{sfx(n.k==='o'?'hit':'item')}catch(e){}}
+function gtStart(){const n=gtNear();if(!n||GTC)return;try{if(FS&&FS.open)fsClose()}catch(e){}const L=n.k==='o'?gtLvO():gtLvH(),dur=Math.max(.8,Math.max(1.3,2.4*(1-.05*(L-1)))*gwSpd(n.k)*(n.gg?.6:1));
+  GTC={n,t:0,d:dur,x0:me.x,y0:me.y,sp:0,mg:gwMg(n,dur)};me.face=Math.atan2(n.y-me.y,n.x-me.x);try{sfx(n.k==='o'?'hit':'item')}catch(e){}}
 function gtStop(msg){if(!GTC)return;GTC=null;if(msg)dn.push({x:me.x,y:me.y-46,v:msg,t:1.2,col:'#ffd0a0'})}
 function gtTick(dt){const b=$('gthb');{const n=GTC?null:gtNear();if(b){if(b.hidden!==!n)b.hidden=!n;if(n){const t=gtTierFor(n),k=gtMat(n,t),tx=(n.k==='o'?'⛏️ ขุด ':'🌿 เก็บ ')+GTI[k][1]+(t<n.t?' (ความชำนาญยังไม่ถึง)':'');if(b.textContent!==tx)b.textContent=tx}}}
   const G=gtSt();if(G.eb&&G.eb.t>0){G.eb.t-=dt;if(G.eb.t<=0){G.eb=null;try{recalc()}catch(e){}banner={s:'🧪 ฤทธิ์ยาบัฟหมดแล้ว — ปรุงใหม่ได้ที่เมนู ⛏️ งานฝีมือ',t:4}}}
   if(!GTC)return;const C=GTC;if(me.down>0||!ov.hidden||SD.on){gtStop('ยกเลิกการเก็บ');return}if(Math.hypot(me.x-C.x0,me.y-C.y0)>8){gtStop('ขยับตัว — ยกเลิกการเก็บ');return}
   C.t+=dt;C.sp-=dt;if(C.sp<=0){C.sp=C.n.k==='o'?.42:.5;const cx=C.n.x,cy=C.n.y-10;try{if(C.n.k==='o'){spark(cx,cy,'#ffe0a0',6,110,.35);spark(cx,cy,'#c8c0b0',4,70,.4);sfx('hit')}else{for(let i=0;i<5;i++)parts.push({x:cx+(Math.random()-.5)*20,y:cy,vx:(Math.random()-.5)*60,vy:-40-Math.random()*50,t:.7,l:.7,c:Math.random()<.5?'#7ad87a':'#c8f0a0',r:1.8})}}catch(e){}}
-  if(C.t<C.d)return;GTC=null;gtDone(C.n)}
-function gtDone(n){const G=gtSt(),o=n.k==='o',L=o?gtLvO():gtLvH(),t=gtTierFor(n),k=gtMat(n,t);let q=1;if(Math.random()<.25+.05*L)q++;if(L>=8&&Math.random()<.5)q++;
-  gtAdd(k,q);let rare='';const rk=o?'gm':'rt';if(Math.random()<.04+.006*L+(n.t>=3?.02:0)){gtAdd(rk,1);rare=rk}
-  const xp=8*t+(n.t>t?6:0)+(rare?10:0),L0=L;if(o)G.ox+=xp;else G.hx+=xp;const L1=o?gtLvO():gtLvH();
+  if(C.t<C.d)return;GTC=null;gtDone(C.n,C)}
+function gtDone(n,C){if(n.gg)return ggHitDone(n,C);const G=gtSt(),o=n.k==='o',L=o?gtLvO():gtLvH(),t=gtTierFor(n),k=gtMat(n,t),pf=C&&C.mg?C.mg.r|0:0,S0=gwStar(n.k);let q=1;if(Math.random()<.25+.05*L+gwDbl(n.k))q++;if(L>=8&&Math.random()<.5)q++;if(pf===2)q++;
+  gtAdd(k,q);gwGain(k,q);let rare='';const rk=o?'gm':'rt';if(Math.random()<.04+.006*L+(n.t>=3?.02:0)+gwRare(n.k)+(pf===2?.06:0)){gtAdd(rk,1);gwGain(rk,1);rare=rk}
+  const xp=Math.round((8*t+(n.t>t?6:0)+(rare?10:0))*(pf===2?1.5:pf===1?1.2:1)),L0=L;if(o)G.ox+=xp;else G.hx+=xp;const L1=o?gtLvO():gtLvH();
   GTD[n.id]=Date.now()+(o?GTRS.o:GTRS.h)*1000;me.stt.gth=(me.stt.gth|0)+1;
   dn.push({x:me.x,y:me.y-52,v:GTI[k][0]+' +'+q+' '+GTI[k][1],t:1.4,col:o?'#ffd8a0':'#a8f0a0'});if(rare)dn.push({x:me.x,y:me.y-74,v:'✨ '+GTI[rare][0]+' '+GTI[rare][1]+'!',t:1.6,col:'#ffb0f0'});
   try{burst(n.x,n.y-12,o?['#ffe0a0','#c8c0b0','#ffffff']:['#7ad87a','#c8f0a0','#ffffff'],14,110,.6,{g:-20})}catch(e){}try{sfx(rare?'lg_get':'item')}catch(e){}
-  if(L1>L0){banner={s:(o?'⛏️ ความชำนาญขุดแร่':'🌿 ความชำนาญสมุนไพร')+' Lv '+L1+'!'+(L1===3||L1===6?' · ปลดวัตถุดิบระดับใหม่':''),t:4};try{sfx('up')}catch(e){}}
+  gwStarUp(n.k,S0);if(L1>L0){banner={s:(o?'⛏️ ความชำนาญขุดแร่':'🌿 ความชำนาญสมุนไพร')+' Lv '+L1+'!'+(L1===3||L1===6?' · ปลดวัตถุดิบระดับใหม่':''),t:4};try{sfx('up')}catch(e){}}
   try{dqProg('gth',1)}catch(e){}}
 /* ---- วาดจุดเก็บบนพื้น ---- */
 function gtDraw(){if(!me.cls)return;const now=Date.now(),t=performance.now()/1000;
@@ -84,8 +84,9 @@ function gtDraw(){if(!me.cls)return;const now=Date.now(),t=performance.now()/100
 /* ท่าทางตอนเก็บ: ขุด = เหวี่ยงจอบ · เก็บ = ก้มตัว (วาดทับตัวเรา) */
 function gtPose(){if(!GTC)return;const t=GTC.t,n=GTC.n,dir=n.x<me.x?-1:1,x=me.x+dir*12,y=me.y-22;g.save();
   if(n.k==='o'){const a=-1.2+Math.abs(Math.sin(t*Math.PI/.42))*1.6;g.translate(x,y);g.scale(dir,1);g.rotate(a);g.strokeStyle='#6a4a2a';g.lineWidth=2.6;g.lineCap='round';g.beginPath();g.moveTo(0,0);g.lineTo(0,-18);g.stroke();
-    g.fillStyle='#c8c8d0';g.strokeStyle='#2a2a30';g.lineWidth=1;g.beginPath();g.moveTo(-9,-16);g.quadraticCurveTo(0,-23,10,-15);g.lineTo(9,-13);g.quadraticCurveTo(0,-19,-8,-14);g.closePath();g.fill();g.stroke()}
-  else{const b=Math.sin(t*6)*2;g.fillStyle='#7ad87a';g.beginPath();g.ellipse(x+dir*2,y+10+b,4,2.4,0,0,7);g.fill()}
+    g.fillStyle=gwHead('o');g.strokeStyle='#2a2a30';g.lineWidth=1;g.beginPath();g.moveTo(-9,-16);g.quadraticCurveTo(0,-23,10,-15);g.lineTo(9,-13);g.quadraticCurveTo(0,-19,-8,-14);g.closePath();g.fill();g.stroke()}
+  else{const b=Math.sin(t*6)*2;g.fillStyle='#7ad87a';g.beginPath();g.ellipse(x+dir*2,y+10+b,4,2.4,0,0,7);g.fill();
+    g.save();g.translate(x+dir*6,y+6+b);g.scale(dir,1);g.rotate(Math.sin(t*6)*.5);g.strokeStyle='#6a4a2a';g.lineWidth=2;g.lineCap='round';g.beginPath();g.moveTo(0,4);g.lineTo(0,-6);g.stroke();g.strokeStyle=gwHead('h');g.lineWidth=2.2;g.beginPath();g.arc(4,-6,5,Math.PI,Math.PI*1.9);g.stroke();g.restore()}
   g.restore()}
 /* ---- ยาบัฟ: ใส่ผ่าน fdM เดียวกับอาหาร (ใช้ได้พร้อมอาหาร แต่ยาบัฟทีละขวด) ---- */
 function gtEx(k){const G=me.gth;if(!G||!G.eb||!(G.eb.t>0))return 0;const E=GTEX[G.eb.id];return E&&E[k]||0}
@@ -104,12 +105,13 @@ function gtMake(book,id,times){const R=book[id];if(!R)return'';let n=0;for(let i
   return(R[6].rn?'💠 บดได้ผงรูน +'+R[6].rn*n+' (รวม '+((rnSt().sh|0).toLocaleString())+')':(book===GTSM?'⚒️ หลอมได้ ':'🧪 ปรุงได้ ')+R[1]+(n>1?' ×'+n:''))+(R[6].ex?' — ดื่มแล้ว ฤทธิ์อยู่ 30 นาที':'')}
 function gtUI(msg){if(!me.cls)return;gtCSS();ov.dataset.k='gth';const G=gtSt(),lo=gtLvO(),lh=gtLvH();
   let h='<div class="pn" data-pn="gth">'+hdr('⛏️','งานฝีมือ','ขุดแร่ Lv '+lo+' · สมุนไพร Lv '+lh+(G.eb?' · 🧪 '+GTBR[G.eb.id][1]+' เหลือ '+Math.ceil(G.eb.t/60)+' นาที':''))+(msg?'<div class="note">'+msg+'</div>':'');
-  h+='<div class="tabs">'+[['lv','📊 ความชำนาญ'],['sm','⚒️ หลอม/บด'],['br','🧪 ปรุงยา']].map(([k,l])=>'<button class="tab'+(GTTAB===k?' on':'')+'" data-gtt="'+k+'">'+l+'</button>').join('')+'</div>';
+  h+='<div class="tabs" style="flex-wrap:wrap;gap:4px">'+[['lv','📊 ชำนาญ'],['tl','🛠️ เครื่องมือ'],['bk','📖 สมุด'],['sm','⚒️ หลอม'],['br','🧪 ปรุงยา']].map(([k,l])=>'<button class="tab'+(GTTAB===k?' on':'')+'" style="flex:1 1 auto;min-width:0;padding:6px 8px;font-size:12.5px" data-gtt="'+k+'">'+l+'</button>').join('')+'</div>';
   if(GTTAB==='lv'){const bar=(x,c)=>'<div class="bar"><i style="width:'+Math.round(gtLvP(x)*100)+'%;background:'+c+'"></i></div>';
-    h+='<div class="card"><div class="gtpr"><span class="ic">⛏️</span><div style="flex:1"><b>ขุดแร่ Lv '+lo+'</b>'+(lo>=GTLV?' <small>MAX</small>':'')+bar(G.ox,'#e8b060')+'<small style="opacity:.8">เร็วขึ้น '+(lo-1)*5+'% · ได้ 2 ชิ้น '+(25+5*lo)+'% · อัญมณี '+(4+.6*lo).toFixed(1)+'%'+(lo<3?' · ปลดแร่มิธริลที่ Lv 3':lo<6?' · ปลดแร่ดาวตกที่ Lv 6':'')+'</small></div></div>'+
-      '<div class="gtpr"><span class="ic">🌿</span><div style="flex:1"><b>สมุนไพร Lv '+lh+'</b>'+(lh>=GTLV?' <small>MAX</small>':'')+bar(G.hx,'#7ad87a')+'<small style="opacity:.8">เร็วขึ้น '+(lh-1)*5+'% · ได้ 2 ชิ้น '+(25+5*lh)+'% · เห็ดวิญญาณ '+(4+.6*lh).toFixed(1)+'%'+(lh<3?' · ปลดดอกจันทร์เงินที่ Lv 3':lh<6?' · ปลดบัวแสงดาวที่ Lv 6':'')+'</small></div></div></div>';
+    h+='<div class="card"><div class="gtpr"><span class="ic">⛏️</span><div style="flex:1"><b>ขุดแร่ Lv '+lo+'</b>'+(lo>=GTLV?gwStarTx('o'):'')+(lo>=GTLV?gwStarBar('o','#ffd84a'):bar(G.ox,'#e8b060'))+'<small style="opacity:.8">เร็วขึ้น '+gwSpdPct('o',lo)+'% · ได้ 2 ชิ้น '+Math.round(25+5*lo+gwDbl('o')*100)+'% · อัญมณี '+(4+.6*lo+gwRare('o')*100).toFixed(1)+'%'+(lo<3?' · ปลดแร่มิธริลที่ Lv 3':lo<6?' · ปลดแร่ดาวตกที่ Lv 6':'')+'</small></div></div>'+
+      '<div class="gtpr"><span class="ic">🌿</span><div style="flex:1"><b>สมุนไพร Lv '+lh+'</b>'+(lh>=GTLV?gwStarTx('h'):'')+(lh>=GTLV?gwStarBar('h','#ffd84a'):bar(G.hx,'#7ad87a'))+'<small style="opacity:.8">เร็วขึ้น '+gwSpdPct('h',lh)+'% · ได้ 2 ชิ้น '+Math.round(25+5*lh+gwDbl('h')*100)+'% · เห็ดวิญญาณ '+(4+.6*lh+gwRare('h')*100).toFixed(1)+'%'+(lh<3?' · ปลดดอกจันทร์เงินที่ Lv 3':lh<6?' · ปลดบัวแสงดาวที่ Lv 6':'')+'</small></div></div></div>';
     h+='<div class="card"><div class="cap">🧺 วัตถุดิบ</div><div class="gtgrid">'+GTK.map(k=>'<div style="'+(gtHas(k)?'':'opacity:.45')+'">'+GTI[k][0]+'<b>'+gtHas(k)+'</b><small>'+GTI[k][1]+'</small></div>').join('')+'</div></div>';
     const T=gtOkMap()?gtTier():0;h+='<div class="card hint" style="font-size:11.5px;text-align:left;line-height:1.55">🗺️ ทุกแมพสนามมีสายแร่ 5 จุดและสมุนไพร 5 จุด เดินเข้าใกล้แล้วกดปุ่ม <b>⛏️ ขุด / 🌿 เก็บ</b> · เก็บแล้วงอกใหม่ใน 2–3 นาที<br>แมพช่วงต้น = 🪨 🌿 · ช่วงกลาง (ตั้งแต่วิหารน้ำแข็ง) = 🔷 🌸 · ช่วงปลาย (ตั้งแต่ทะเลสาบดาวตก) = ☄️ 🪷'+(T?'<br>📍 แมพนี้: '+(T===1?'🪨 แร่เหล็ก · 🌿 สมุนไพรเขียว':T===2?'🔷 แร่มิธริล · 🌸 ดอกจันทร์เงิน':'☄️ แร่ดาวตก · 🪷 บัวแสงดาว')+' (เหลือ '+gtNodes().filter(gtReady).length+'/'+gtNodes().length+' จุด)':'')+'</div>'}
+  else if(GTTAB==='tl')h+=gwToolHTML();else if(GTTAB==='bk')h+=gwBookHTML();
   else{const book=GTTAB==='sm'?GTSM:GTBR;h+='<div class="card" style="padding:4px 8px">'+Object.keys(book).map(id=>{const R=book[id],can=gtCan(R),multi=!R[6].ex;
       return'<div class="gtrc"><span class="ic">'+R[0]+'</span><div class="tx"><b>'+R[1]+'</b><br>'+R[2]+'<div class="need">'+gtNeedTxt(R)+'</div></div><div style="display:flex;flex-direction:column;gap:4px"><button class="pri" data-gtm="'+id+'"'+(can?'':' disabled')+'>'+(GTTAB==='sm'?(R[6].rn?'บด':'หลอม'):R[6].ex?'ปรุง+ดื่ม':'ปรุง')+'</button>'+(multi?'<button data-gtm5="'+id+'"'+(can?'':' disabled')+'>×5</button>':'')+'</div></div>'}).join('')+'</div>';
     if(GTTAB==='br')h+='<div class="card hint" style="font-size:11.5px">🧪 ยาบัฟใช้ได้ทีละขวด (ขวดใหม่แทนขวดเก่า) · ใช้พร้อมอาหารจากปลาได้ · ฤทธิ์ 30 นาที</div>';
@@ -117,13 +119,18 @@ function gtUI(msg){if(!me.cls)return;gtCSS();ov.dataset.k='gth';const G=gtSt(),l
   h+='</div>';ov.innerHTML=h;ov.hidden=false;
   ov.querySelectorAll('[data-gtt]').forEach(b=>b.onclick=()=>{GTTAB=b.dataset.gtt;gtUI()});
   ov.querySelectorAll('[data-gtm]').forEach(b=>b.onclick=()=>{const id=b.dataset.gtm;gtUI(gtMake(GTTAB==='sm'?GTSM:GTBR,id,1))});
+  ov.querySelectorAll('[data-gwu]').forEach(b=>b.onclick=()=>gtUI(gwUpTool(b.dataset.gwu)));
+  ov.querySelectorAll('[data-gwc]').forEach(b=>b.onclick=()=>gtUI(gwClaim(b.dataset.gwc)));
   ov.querySelectorAll('[data-gtm5]').forEach(b=>b.onclick=()=>{const id=b.dataset.gtm5;gtUI(gtMake(GTTAB==='sm'?GTSM:GTBR,id,5))})}
 /* ---- ลงทะเบียนวัตถุดิบเป็น "ของใช้" (ขายในตลาด/แนบจดหมายได้) · เรียกทันทีหลังสร้าง GDM ---- */
 function gtGdReg(){GTK.forEach(k=>{if(!GDM[k]){const I=GTI[k];GDM[k]={k,n:I[0]+' '+I[1],ic:()=>I[0],max:GTMX,d:I[2]+' · ใช้หลอม/บด/ปรุงยาที่เมนู ⛏️ งานฝีมือ'};GOODS.push(GDM[k])}if(!MKG.includes(k))MKG.push(k)})}
 /* ---- กรองเซฟ ---- */
 function gtClean(x){if(!x||typeof x!=='object')return undefined;const o={m:{},ox:Math.max(0,Math.min(1e7,Math.floor(+x.ox||0))),hx:Math.max(0,Math.min(1e7,Math.floor(+x.hx||0)))};
   if(x.m&&typeof x.m==='object')GTK.forEach(k=>{const v=Math.max(0,Math.min(GTMX,Math.floor(+x.m[k]||0)));if(v)o.m[k]=v});
-  if(x.eb&&typeof x.eb==='object'&&GTEX[x.eb.id]&&+x.eb.t>0)o.eb={id:x.eb.id,t:Math.min(1800,+x.eb.t)};return o}
+  if(x.eb&&typeof x.eb==='object'&&GTEX[x.eb.id]&&+x.eb.t>0)o.eb={id:x.eb.id,t:Math.min(1800,+x.eb.t)};
+  if(x.tl&&typeof x.tl==='object')o.tl={o:Math.max(0,Math.min(5,x.tl.o|0)),h:Math.max(0,Math.min(5,x.tl.h|0))};
+  if(x.c&&typeof x.c==='object'){o.c={};GTK.forEach(k=>{const v=Math.max(0,Math.min(1e7,Math.floor(+x.c[k]||0)));if(v)o.c[k]=v})}
+  if(x.cb&&typeof x.cb==='object'){o.cb={};GTK.forEach(k=>{const v=Math.max(0,Math.min(4,x.cb[k]|0));if(v)o.cb[k]=v})}return o}
 /* ---- ติดตั้ง ---- */
 setTimeout(()=>{try{
   gtCSS();if(!$('gthb')){const st=$('stage')||document.body,b=document.createElement('button');b.id='gthb';b.hidden=true;b.onclick=()=>gtStart();st.appendChild(b)}

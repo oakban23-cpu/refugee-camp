@@ -3,6 +3,7 @@ import asyncio, sys, json, os
 sys.path.insert(0, __file__.rsplit('/', 1)[0])
 from h import *
 R=[]
+WNV_='v428'
 def rep(name, ok, info=''):
     R.append((name, ok, info)); print(('PASS ' if ok else 'FAIL ') + name, info, flush=True)
 PTYJS=open(__file__.rsplit('/',1)[0]+'/t_stack.py').read().split('PTYJS="""')[1].split('"""')[0]
@@ -100,7 +101,7 @@ async def main():
         wn=await E.ev("()=>{const p=$('wnp');return [p&&!p.hidden,p&&p.querySelectorAll('.it').length]}")
         await E.ev("()=>{const b=document.querySelector('#wnp [data-wnx]');if(b)b.click()}");await E.wait(1500)
         wn2=await E.ev("()=>[$('wnp').hidden,localStorage.getItem('refugee_wn')]")
-        rep('มีอะไรใหม่เด้งครั้งเดียว ปิดแล้วไม่เด้งซ้ำ',wn[0] and wn[1]>=6 and wn2[0] and wn2[1]=='v425',json.dumps([wn,wn2]))
+        rep('มีอะไรใหม่เด้งครั้งเดียว ปิดแล้วไม่เด้งซ้ำ',wn[0] and wn[1]>=6 and wn2[0] and wn2[1]==WNV_,json.dumps([wn,wn2]))
         await E.ev("([a,e])=>{PTY={id:'p',lead:a,mem:[{u:a,n:'Ann'},{u:e,n:'Eve'}]};TIPS.t=0}",[A.uid,await E.ev("()=>uid")]);await E.wait(2500)
         tp=await E.ev("()=>{const c=$('tipc');return [c&&!c.hidden,c&&c.textContent.includes('🧗'),JSON.parse(localStorage.getItem('refugee_tips')||'[]')]}")
         rep('คำแนะนำครั้งแรก: เข้าปาร์ตี้ → บอกวิธีขี่คอ (แสดงครั้งเดียว)',tp[0] and tp[1] and 'pty' in tp[2],json.dumps(tp,ensure_ascii=False))

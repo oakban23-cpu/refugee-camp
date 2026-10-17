@@ -2549,7 +2549,7 @@ try{if(curMap!==1)enterMap(1)}catch(e){}
 chSwBusy=false;run=false;me.cls=null;me.down=0;joy=null;mons.forEach(m=>{if(m.tg===uid)m.tg=null});
 try{$('mnp').hidden=true;$('mn').setAttribute('aria-expanded','false')}catch(e){}
 ov.dataset.k='';ov.hidden=false;intro();try{window.scrollTo(0,0);ov.scrollTop=0}catch(e){}}
-const TTB={skT1:{gr:'w',b:{vit:4}},skT2:{gr:'w',b:{str:4}},skT3:{gr:'g',b:{agi:.05}},skT4:{gr:'g',b:{all:.04}},k100:{gr:'w',b:{str:3}},b1:{gr:'w',b:{vit:3}},dg1:{gr:'w',b:{int:3}},tw10:{gr:'w',b:{agi:3}},st7:{gr:'w',b:{luk:4}},
+const TTB={gwT1:{gr:'w',b:{str:3}},gwT2:{gr:'w',b:{vit:3}},gwT3:{gr:'g',b:{all:.03}},gwT4:{gr:'g',b:{agi:.04}},skT1:{gr:'w',b:{vit:4}},skT2:{gr:'w',b:{str:4}},skT3:{gr:'g',b:{agi:.05}},skT4:{gr:'g',b:{all:.04}},k100:{gr:'w',b:{str:3}},b1:{gr:'w',b:{vit:3}},dg1:{gr:'w',b:{int:3}},tw10:{gr:'w',b:{agi:3}},st7:{gr:'w',b:{luk:4}},
 dq30:{gr:'w',b:{vit:5}},el100:{gr:'w',b:{str:5}},ult100:{gr:'w',b:{int:5}},b2:{gr:'w',b:{agi:5}},b3:{gr:'w',b:{luk:5}},lv30:{gr:'w',b:{all:2}},
 k1000:{gr:'g',b:{str:.05}},tw50:{gr:'g',b:{agi:.06}},b4:{gr:'g',b:{vit:.06}},rich:{gr:'g',b:{luk:.06}},bx50:{gr:'g',b:{vit:.08}},up10:{gr:'g',b:{str:.08}},
 leg:{gr:'g',b:{luk:.08}},stL:{gr:'g',b:{int:.08}},stD:{gr:'g',b:{str:.08}},awk:{gr:'g',b:{all:.04}},set5:{gr:'g',b:{all:.05}},lv60:{gr:'g',b:{all:.06}},lv70:{gr:'p',b:{hp:.04,cr:.02}},lv75:{gr:'p',b:{dm:.03,hp:.03}},lv85:{gr:'p',b:{dm:.02,cr:.02}},lv99:{gr:'p',b:{dm:.04,hp:.04,cr:.02}},sexp:{gr:'g',b:{hp:.04,red:.02}},stG:{gr:'p',b:{dm:.04,hp:.05,red:.02}},cp12:{gr:'w',b:{vit:5}},cp25:{gr:'g',b:{all:.03}},stH:{gr:'p',b:{dm:.03,hp:.04,red:.02}},stI:{gr:'p',b:{dm:.03,cr:.02,hp:.03}},stJ:{gr:'p',b:{dm:.05,hp:.05,cr:.02}},stK:{gr:'p',b:{hp:.07,red:.04,dm:.03}},stCa:{gr:'p',b:{hp:.05,red:.03,dm:.03}},stP5:{gr:'p',b:{dm:.06,hp:.06,cr:.03,red:.02}},stEs:{gr:'p',b:{hp:.06,dm:.04,red:.03}},stMk:{gr:'p',b:{hp:.05,cr:.03,dm:.05}},stAr:{gr:'p',b:{hp:.06,dm:.05,red:.03}},stCk:{gr:'p',b:{dm:.06,cr:.03,hp:.05}},stP6:{gr:'p',b:{dm:.07,hp:.07,cr:.03,red:.03}},stS1:{gr:'p',b:{dm:.05,hp:.05,cr:.02}},stS2:{gr:'p',b:{dm:.05,hp:.06,red:.02}},stS3:{gr:'p',b:{dm:.06,hp:.05,cr:.02}},stS4:{gr:'p',b:{dm:.06,hp:.06,cr:.02}},ssB:{gr:'w',b:{all:3}},wkA:{gr:'g',b:{str:.05,int:.05}},ssG:{gr:'g',b:{all:.04}},ssP:{gr:'p',b:{dm:.04,hp:.05}},ssT:{gr:'p',b:{dm:.05,hp:.05,cr:.02}},stS5:{gr:'p',b:{dm:.06,hp:.06,cr:.02,red:.02}},stP7:{gr:'p',b:{dm:.07,hp:.07,cr:.03,red:.03}},p5mem:{gr:'g',b:{all:.05}},set6:{gr:'p',b:{cdm:.05}},rexp:{gr:'g',b:{hp:.03,red:.02}},ast10:{gr:'g',b:{hp:.03}},ast50:{gr:'p',b:{cdm:.04}},ast200:{gr:'p',b:{dm:.03,hp:.03,cr:.02}},wexp:{gr:'g',b:{sp:.04,hp:.03}},stA:{gr:'p',b:{cr:.02,as:.03,ls:.01}},stB:{gr:'p',b:{hp:.05,red:.03}},stC:{gr:'p',b:{dm:.03,red:.02}},stE:{gr:'p',b:{dm:.02,cr:.02,hp:.03}},stF:{gr:'p',b:{dm:.03,hp:.04,cr:.02}},rxAll:{gr:'p',b:{dm:.03,cr:.02}},rxT:{gr:'p',b:{as:.03,hp:.03}},
@@ -10505,21 +10505,21 @@ const gtReady=n=>!(GTD[n.id]>Date.now());
 function gtNear(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on)return null;let b=null,bd=48;for(const n of gtNodes()){if(!gtReady(n))continue;const d=Math.hypot(n.x-me.x,n.y-(me.y-6));if(d<bd){bd=d;b=n}}return b}
 function gtTierFor(n){const L=n.k==='o'?gtLvO():gtLvH(),cap=L>=6?3:L>=3?2:1;return Math.min(n.t,cap)}
 const gtMat=(n,t)=>(n.k==='o'?'o':'h')+t;
-function gtStart(){const n=gtNear();if(!n||GTC)return;try{if(FS&&FS.open)fsClose()}catch(e){}const L=n.k==='o'?gtLvO():gtLvH(),dur=Math.max(1.3,2.4*(1-.05*(L-1)));
-GTC={n,t:0,d:dur,x0:me.x,y0:me.y,sp:0};me.face=Math.atan2(n.y-me.y,n.x-me.x);try{sfx(n.k==='o'?'hit':'item')}catch(e){}}
+function gtStart(){const n=gtNear();if(!n||GTC)return;try{if(FS&&FS.open)fsClose()}catch(e){}const L=n.k==='o'?gtLvO():gtLvH(),dur=Math.max(.8,Math.max(1.3,2.4*(1-.05*(L-1)))*gwSpd(n.k)*(n.gg?.6:1));
+GTC={n,t:0,d:dur,x0:me.x,y0:me.y,sp:0,mg:gwMg(n,dur)};me.face=Math.atan2(n.y-me.y,n.x-me.x);try{sfx(n.k==='o'?'hit':'item')}catch(e){}}
 function gtStop(msg){if(!GTC)return;GTC=null;if(msg)dn.push({x:me.x,y:me.y-46,v:msg,t:1.2,col:'#ffd0a0'})}
 function gtTick(dt){const b=$('gthb');{const n=GTC?null:gtNear();if(b){if(b.hidden!==!n)b.hidden=!n;if(n){const t=gtTierFor(n),k=gtMat(n,t),tx=(n.k==='o'?'⛏️ ขุด ':'🌿 เก็บ ')+GTI[k][1]+(t<n.t?' (ความชำนาญยังไม่ถึง)':'');if(b.textContent!==tx)b.textContent=tx}}}
 const G=gtSt();if(G.eb&&G.eb.t>0){G.eb.t-=dt;if(G.eb.t<=0){G.eb=null;try{recalc()}catch(e){}banner={s:'🧪 ฤทธิ์ยาบัฟหมดแล้ว — ปรุงใหม่ได้ที่เมนู ⛏️ งานฝีมือ',t:4}}}
 if(!GTC)return;const C=GTC;if(me.down>0||!ov.hidden||SD.on){gtStop('ยกเลิกการเก็บ');return}if(Math.hypot(me.x-C.x0,me.y-C.y0)>8){gtStop('ขยับตัว — ยกเลิกการเก็บ');return}
 C.t+=dt;C.sp-=dt;if(C.sp<=0){C.sp=C.n.k==='o'?.42:.5;const cx=C.n.x,cy=C.n.y-10;try{if(C.n.k==='o'){spark(cx,cy,'#ffe0a0',6,110,.35);spark(cx,cy,'#c8c0b0',4,70,.4);sfx('hit')}else{for(let i=0;i<5;i++)parts.push({x:cx+(Math.random()-.5)*20,y:cy,vx:(Math.random()-.5)*60,vy:-40-Math.random()*50,t:.7,l:.7,c:Math.random()<.5?'#7ad87a':'#c8f0a0',r:1.8})}}catch(e){}}
-if(C.t<C.d)return;GTC=null;gtDone(C.n)}
-function gtDone(n){const G=gtSt(),o=n.k==='o',L=o?gtLvO():gtLvH(),t=gtTierFor(n),k=gtMat(n,t);let q=1;if(Math.random()<.25+.05*L)q++;if(L>=8&&Math.random()<.5)q++;
-gtAdd(k,q);let rare='';const rk=o?'gm':'rt';if(Math.random()<.04+.006*L+(n.t>=3?.02:0)){gtAdd(rk,1);rare=rk}
-const xp=8*t+(n.t>t?6:0)+(rare?10:0),L0=L;if(o)G.ox+=xp;else G.hx+=xp;const L1=o?gtLvO():gtLvH();
+if(C.t<C.d)return;GTC=null;gtDone(C.n,C)}
+function gtDone(n,C){if(n.gg)return ggHitDone(n,C);const G=gtSt(),o=n.k==='o',L=o?gtLvO():gtLvH(),t=gtTierFor(n),k=gtMat(n,t),pf=C&&C.mg?C.mg.r|0:0,S0=gwStar(n.k);let q=1;if(Math.random()<.25+.05*L+gwDbl(n.k))q++;if(L>=8&&Math.random()<.5)q++;if(pf===2)q++;
+gtAdd(k,q);gwGain(k,q);let rare='';const rk=o?'gm':'rt';if(Math.random()<.04+.006*L+(n.t>=3?.02:0)+gwRare(n.k)+(pf===2?.06:0)){gtAdd(rk,1);gwGain(rk,1);rare=rk}
+const xp=Math.round((8*t+(n.t>t?6:0)+(rare?10:0))*(pf===2?1.5:pf===1?1.2:1)),L0=L;if(o)G.ox+=xp;else G.hx+=xp;const L1=o?gtLvO():gtLvH();
 GTD[n.id]=Date.now()+(o?GTRS.o:GTRS.h)*1000;me.stt.gth=(me.stt.gth|0)+1;
 dn.push({x:me.x,y:me.y-52,v:GTI[k][0]+' +'+q+' '+GTI[k][1],t:1.4,col:o?'#ffd8a0':'#a8f0a0'});if(rare)dn.push({x:me.x,y:me.y-74,v:'✨ '+GTI[rare][0]+' '+GTI[rare][1]+'!',t:1.6,col:'#ffb0f0'});
 try{burst(n.x,n.y-12,o?['#ffe0a0','#c8c0b0','#ffffff']:['#7ad87a','#c8f0a0','#ffffff'],14,110,.6,{g:-20})}catch(e){}try{sfx(rare?'lg_get':'item')}catch(e){}
-if(L1>L0){banner={s:(o?'⛏️ ความชำนาญขุดแร่':'🌿 ความชำนาญสมุนไพร')+' Lv '+L1+'!'+(L1===3||L1===6?' · ปลดวัตถุดิบระดับใหม่':''),t:4};try{sfx('up')}catch(e){}}
+gwStarUp(n.k,S0);if(L1>L0){banner={s:(o?'⛏️ ความชำนาญขุดแร่':'🌿 ความชำนาญสมุนไพร')+' Lv '+L1+'!'+(L1===3||L1===6?' · ปลดวัตถุดิบระดับใหม่':''),t:4};try{sfx('up')}catch(e){}}
 try{dqProg('gth',1)}catch(e){}}
 function gtDraw(){if(!me.cls)return;const now=Date.now(),t=performance.now()/1000;
 for(const n of gtNodes()){if(!inView(n.x,n.y,60))continue;const ok=gtReady(n),x=0,y=0;g.save();g.translate(n.x,n.y);g.scale(1.3,1.3);
@@ -10539,8 +10539,9 @@ if(GTC&&GTC.n===n){const p=Math.min(1,GTC.t/GTC.d);g.strokeStyle='rgba(0,0,0,.45
 g.restore()}}
 function gtPose(){if(!GTC)return;const t=GTC.t,n=GTC.n,dir=n.x<me.x?-1:1,x=me.x+dir*12,y=me.y-22;g.save();
 if(n.k==='o'){const a=-1.2+Math.abs(Math.sin(t*Math.PI/.42))*1.6;g.translate(x,y);g.scale(dir,1);g.rotate(a);g.strokeStyle='#6a4a2a';g.lineWidth=2.6;g.lineCap='round';g.beginPath();g.moveTo(0,0);g.lineTo(0,-18);g.stroke();
-g.fillStyle='#c8c8d0';g.strokeStyle='#2a2a30';g.lineWidth=1;g.beginPath();g.moveTo(-9,-16);g.quadraticCurveTo(0,-23,10,-15);g.lineTo(9,-13);g.quadraticCurveTo(0,-19,-8,-14);g.closePath();g.fill();g.stroke()}
-else{const b=Math.sin(t*6)*2;g.fillStyle='#7ad87a';g.beginPath();g.ellipse(x+dir*2,y+10+b,4,2.4,0,0,7);g.fill()}
+g.fillStyle=gwHead('o');g.strokeStyle='#2a2a30';g.lineWidth=1;g.beginPath();g.moveTo(-9,-16);g.quadraticCurveTo(0,-23,10,-15);g.lineTo(9,-13);g.quadraticCurveTo(0,-19,-8,-14);g.closePath();g.fill();g.stroke()}
+else{const b=Math.sin(t*6)*2;g.fillStyle='#7ad87a';g.beginPath();g.ellipse(x+dir*2,y+10+b,4,2.4,0,0,7);g.fill();
+g.save();g.translate(x+dir*6,y+6+b);g.scale(dir,1);g.rotate(Math.sin(t*6)*.5);g.strokeStyle='#6a4a2a';g.lineWidth=2;g.lineCap='round';g.beginPath();g.moveTo(0,4);g.lineTo(0,-6);g.stroke();g.strokeStyle=gwHead('h');g.lineWidth=2.2;g.beginPath();g.arc(4,-6,5,Math.PI,Math.PI*1.9);g.stroke();g.restore()}
 g.restore()}
 function gtEx(k){const G=me.gth;if(!G||!G.eb||!(G.eb.t>0))return 0;const E=GTEX[G.eb.id];return E&&E[k]||0}
 function gtCSS(){if($('gtcss'))return;const s=document.createElement('style');s.id='gtcss';s.textContent=
@@ -10557,12 +10558,13 @@ if(!n)return'วัตถุดิบหรือทองไม่พอ';me.st
 return(R[6].rn?'💠 บดได้ผงรูน +'+R[6].rn*n+' (รวม '+((rnSt().sh|0).toLocaleString())+')':(book===GTSM?'⚒️ หลอมได้ ':'🧪 ปรุงได้ ')+R[1]+(n>1?' ×'+n:''))+(R[6].ex?' — ดื่มแล้ว ฤทธิ์อยู่ 30 นาที':'')}
 function gtUI(msg){if(!me.cls)return;gtCSS();ov.dataset.k='gth';const G=gtSt(),lo=gtLvO(),lh=gtLvH();
 let h='<div class="pn" data-pn="gth">'+hdr('⛏️','งานฝีมือ','ขุดแร่ Lv '+lo+' · สมุนไพร Lv '+lh+(G.eb?' · 🧪 '+GTBR[G.eb.id][1]+' เหลือ '+Math.ceil(G.eb.t/60)+' นาที':''))+(msg?'<div class="note">'+msg+'</div>':'');
-h+='<div class="tabs">'+[['lv','📊 ความชำนาญ'],['sm','⚒️ หลอม/บด'],['br','🧪 ปรุงยา']].map(([k,l])=>'<button class="tab'+(GTTAB===k?' on':'')+'" data-gtt="'+k+'">'+l+'</button>').join('')+'</div>';
+h+='<div class="tabs" style="flex-wrap:wrap;gap:4px">'+[['lv','📊 ชำนาญ'],['tl','🛠️ เครื่องมือ'],['bk','📖 สมุด'],['sm','⚒️ หลอม'],['br','🧪 ปรุงยา']].map(([k,l])=>'<button class="tab'+(GTTAB===k?' on':'')+'" style="flex:1 1 auto;min-width:0;padding:6px 8px;font-size:12.5px" data-gtt="'+k+'">'+l+'</button>').join('')+'</div>';
 if(GTTAB==='lv'){const bar=(x,c)=>'<div class="bar"><i style="width:'+Math.round(gtLvP(x)*100)+'%;background:'+c+'"></i></div>';
-h+='<div class="card"><div class="gtpr"><span class="ic">⛏️</span><div style="flex:1"><b>ขุดแร่ Lv '+lo+'</b>'+(lo>=GTLV?' <small>MAX</small>':'')+bar(G.ox,'#e8b060')+'<small style="opacity:.8">เร็วขึ้น '+(lo-1)*5+'% · ได้ 2 ชิ้น '+(25+5*lo)+'% · อัญมณี '+(4+.6*lo).toFixed(1)+'%'+(lo<3?' · ปลดแร่มิธริลที่ Lv 3':lo<6?' · ปลดแร่ดาวตกที่ Lv 6':'')+'</small></div></div>'+
-'<div class="gtpr"><span class="ic">🌿</span><div style="flex:1"><b>สมุนไพร Lv '+lh+'</b>'+(lh>=GTLV?' <small>MAX</small>':'')+bar(G.hx,'#7ad87a')+'<small style="opacity:.8">เร็วขึ้น '+(lh-1)*5+'% · ได้ 2 ชิ้น '+(25+5*lh)+'% · เห็ดวิญญาณ '+(4+.6*lh).toFixed(1)+'%'+(lh<3?' · ปลดดอกจันทร์เงินที่ Lv 3':lh<6?' · ปลดบัวแสงดาวที่ Lv 6':'')+'</small></div></div></div>';
+h+='<div class="card"><div class="gtpr"><span class="ic">⛏️</span><div style="flex:1"><b>ขุดแร่ Lv '+lo+'</b>'+(lo>=GTLV?gwStarTx('o'):'')+(lo>=GTLV?gwStarBar('o','#ffd84a'):bar(G.ox,'#e8b060'))+'<small style="opacity:.8">เร็วขึ้น '+gwSpdPct('o',lo)+'% · ได้ 2 ชิ้น '+Math.round(25+5*lo+gwDbl('o')*100)+'% · อัญมณี '+(4+.6*lo+gwRare('o')*100).toFixed(1)+'%'+(lo<3?' · ปลดแร่มิธริลที่ Lv 3':lo<6?' · ปลดแร่ดาวตกที่ Lv 6':'')+'</small></div></div>'+
+'<div class="gtpr"><span class="ic">🌿</span><div style="flex:1"><b>สมุนไพร Lv '+lh+'</b>'+(lh>=GTLV?gwStarTx('h'):'')+(lh>=GTLV?gwStarBar('h','#ffd84a'):bar(G.hx,'#7ad87a'))+'<small style="opacity:.8">เร็วขึ้น '+gwSpdPct('h',lh)+'% · ได้ 2 ชิ้น '+Math.round(25+5*lh+gwDbl('h')*100)+'% · เห็ดวิญญาณ '+(4+.6*lh+gwRare('h')*100).toFixed(1)+'%'+(lh<3?' · ปลดดอกจันทร์เงินที่ Lv 3':lh<6?' · ปลดบัวแสงดาวที่ Lv 6':'')+'</small></div></div></div>';
 h+='<div class="card"><div class="cap">🧺 วัตถุดิบ</div><div class="gtgrid">'+GTK.map(k=>'<div style="'+(gtHas(k)?'':'opacity:.45')+'">'+GTI[k][0]+'<b>'+gtHas(k)+'</b><small>'+GTI[k][1]+'</small></div>').join('')+'</div></div>';
 const T=gtOkMap()?gtTier():0;h+='<div class="card hint" style="font-size:11.5px;text-align:left;line-height:1.55">🗺️ ทุกแมพสนามมีสายแร่ 5 จุดและสมุนไพร 5 จุด เดินเข้าใกล้แล้วกดปุ่ม <b>⛏️ ขุด / 🌿 เก็บ</b> · เก็บแล้วงอกใหม่ใน 2–3 นาที<br>แมพช่วงต้น = 🪨 🌿 · ช่วงกลาง (ตั้งแต่วิหารน้ำแข็ง) = 🔷 🌸 · ช่วงปลาย (ตั้งแต่ทะเลสาบดาวตก) = ☄️ 🪷'+(T?'<br>📍 แมพนี้: '+(T===1?'🪨 แร่เหล็ก · 🌿 สมุนไพรเขียว':T===2?'🔷 แร่มิธริล · 🌸 ดอกจันทร์เงิน':'☄️ แร่ดาวตก · 🪷 บัวแสงดาว')+' (เหลือ '+gtNodes().filter(gtReady).length+'/'+gtNodes().length+' จุด)':'')+'</div>'}
+else if(GTTAB==='tl')h+=gwToolHTML();else if(GTTAB==='bk')h+=gwBookHTML();
 else{const book=GTTAB==='sm'?GTSM:GTBR;h+='<div class="card" style="padding:4px 8px">'+Object.keys(book).map(id=>{const R=book[id],can=gtCan(R),multi=!R[6].ex;
 return'<div class="gtrc"><span class="ic">'+R[0]+'</span><div class="tx"><b>'+R[1]+'</b><br>'+R[2]+'<div class="need">'+gtNeedTxt(R)+'</div></div><div style="display:flex;flex-direction:column;gap:4px"><button class="pri" data-gtm="'+id+'"'+(can?'':' disabled')+'>'+(GTTAB==='sm'?(R[6].rn?'บด':'หลอม'):R[6].ex?'ปรุง+ดื่ม':'ปรุง')+'</button>'+(multi?'<button data-gtm5="'+id+'"'+(can?'':' disabled')+'>×5</button>':'')+'</div></div>'}).join('')+'</div>';
 if(GTTAB==='br')h+='<div class="card hint" style="font-size:11.5px">🧪 ยาบัฟใช้ได้ทีละขวด (ขวดใหม่แทนขวดเก่า) · ใช้พร้อมอาหารจากปลาได้ · ฤทธิ์ 30 นาที</div>';
@@ -10570,11 +10572,16 @@ else h+='<div class="card hint" style="font-size:11.5px">⚒️ ของที�
 h+='</div>';ov.innerHTML=h;ov.hidden=false;
 ov.querySelectorAll('[data-gtt]').forEach(b=>b.onclick=()=>{GTTAB=b.dataset.gtt;gtUI()});
 ov.querySelectorAll('[data-gtm]').forEach(b=>b.onclick=()=>{const id=b.dataset.gtm;gtUI(gtMake(GTTAB==='sm'?GTSM:GTBR,id,1))});
+ov.querySelectorAll('[data-gwu]').forEach(b=>b.onclick=()=>gtUI(gwUpTool(b.dataset.gwu)));
+ov.querySelectorAll('[data-gwc]').forEach(b=>b.onclick=()=>gtUI(gwClaim(b.dataset.gwc)));
 ov.querySelectorAll('[data-gtm5]').forEach(b=>b.onclick=()=>{const id=b.dataset.gtm5;gtUI(gtMake(GTTAB==='sm'?GTSM:GTBR,id,5))})}
 function gtGdReg(){GTK.forEach(k=>{if(!GDM[k]){const I=GTI[k];GDM[k]={k,n:I[0]+' '+I[1],ic:()=>I[0],max:GTMX,d:I[2]+' · ใช้หลอม/บด/ปรุงยาที่เมนู ⛏️ งานฝีมือ'};GOODS.push(GDM[k])}if(!MKG.includes(k))MKG.push(k)})}
 function gtClean(x){if(!x||typeof x!=='object')return undefined;const o={m:{},ox:Math.max(0,Math.min(1e7,Math.floor(+x.ox||0))),hx:Math.max(0,Math.min(1e7,Math.floor(+x.hx||0)))};
 if(x.m&&typeof x.m==='object')GTK.forEach(k=>{const v=Math.max(0,Math.min(GTMX,Math.floor(+x.m[k]||0)));if(v)o.m[k]=v});
-if(x.eb&&typeof x.eb==='object'&&GTEX[x.eb.id]&&+x.eb.t>0)o.eb={id:x.eb.id,t:Math.min(1800,+x.eb.t)};return o}
+if(x.eb&&typeof x.eb==='object'&&GTEX[x.eb.id]&&+x.eb.t>0)o.eb={id:x.eb.id,t:Math.min(1800,+x.eb.t)};
+if(x.tl&&typeof x.tl==='object')o.tl={o:Math.max(0,Math.min(5,x.tl.o|0)),h:Math.max(0,Math.min(5,x.tl.h|0))};
+if(x.c&&typeof x.c==='object'){o.c={};GTK.forEach(k=>{const v=Math.max(0,Math.min(1e7,Math.floor(+x.c[k]||0)));if(v)o.c[k]=v})}
+if(x.cb&&typeof x.cb==='object'){o.cb={};GTK.forEach(k=>{const v=Math.max(0,Math.min(4,x.cb[k]|0));if(v)o.cb[k]=v})}return o}
 setTimeout(()=>{try{
 gtCSS();if(!$('gthb')){const st=$('stage')||document.body,b=document.createElement('button');b.id='gthb';b.hidden=true;b.onclick=()=>gtStart();st.appendChild(b)}
 const _fd=fshDraw;window.fshDraw=fshDraw=function(){_fd.apply(this,arguments);try{gtDraw()}catch(e){}};
@@ -12275,16 +12282,16 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v425';
+const WNV='v428';
 const WNL=[
-['🏰','กิลด์','ตั้งกิลด์หรือเข้ากิลด์เพื่อนได้ที่ เมนู › 🏰 กิลด์ · ตราใต้เท้า · แชตกิลด์ · ภารกิจกิลด์รายสัปดาห์ · EXP โบนัสตามเลเวลกิลด์'],
-['🧗','ขี่คอต่อตัว','อยู่ปาร์ตี้แล้วแตะ 🧗 ที่ชื่อเพื่อนในแถบขวา · ตีลังกาขึ้นไปนั่งบนคอ · ฐานรับดาเมจแทนทุกคน · ต่อได้สูงสุด 4 ชั้น'],
-['🤸','ท่าโยนขึ้น','ฐานหอกด «🤸 โยนขึ้น!» ดีดทุกคนลงกระแทกพื้น ยิ่งหอสูงยิ่งแรง · ระวังบอสเล็งวงแดงใต้หอ!'],
-['🐎','ซ้อนท้ายสัตว์ขี่','ยืนใกล้เพื่อนที่ขี่สัตว์ แล้วกด «ขอซ้อน» · เจ้าของสัตว์เป็นคนบังคับ คนซ้อนยังตีได้'],
-['👗','ชุดแฟชั่น + 🎨 ย้อมสี','ตู้เสื้อผ้าในเต็นท์ · ใส่แยกชิ้นได้ · ผสมสีย้อม 8 สีจากวัตถุดิบ (สีทอง/รุ้งหายาก ขายในตลาดได้)'],
-['🤝','ท่าคู่ + 📷 ถ่ายรูป','เมนูท่าทาง 😊 › ไฮไฟว์ กอด โพสคู่ กับคนรอบตัว · โหมดถ่ายรูปซ่อนปุ่มทั้งหมด ซูม/เลื่อนกล้องได้'],
-['🧠','มอนฉลาดขึ้น','เล่นเป็นปาร์ตี้แล้วมอนบางตัวจะไล่ตีตัวยืนหลังหรือคนเลือดน้อย · เห็น ❗ เหนือหัว = มันมาหาคุณ'],
-['🏅','ฉายาใหม่','เสาค้ำฟ้า · ดาวตกถล่มฝูง · ผู้อ่านจังหวะบอส · หอคอยมีชีวิต (ครบ 4 ได้ชุดหอคอยมนุษย์)']];
+['💎','สายแร่ยักษ์ · ดอกไม้ทอง','โผล่สุ่มในแมพสนาม ทุกคนในแมพเห็นพร้อมกัน · ตามลูกศรทองไปช่วยกันขุด · แตกแล้วทุกคนที่ช่วยได้ของหายากแน่นอน'],
+['🎯','จังหวะเป๊ะ!','ระหว่างขุด/เก็บ แตะปุ่มตอนเข็มเข้าช่องทอง → ได้ของเพิ่ม ลุ้นของหายาก XP ×1.5 และเก็บเสร็จทันที'],
+['🛠️','จอบ · เคียว','อัปเกรดเครื่องมือ 5 ขั้นที่ เมนู › ⛏️ งานฝีมือ › 🛠️ เครื่องมือ · เก็บเร็วขึ้น ได้ของมากขึ้น ขุดยักษ์แรงขึ้น'],
+['⭐','ดาวความชำนาญ + 📖 สมุดสะสม','ชำนาญ Lv 10 แล้วไต่ดาวต่อได้ถึง ★10 · ฉายาใหม่ 4 แบบ · สมุดสะสมวัตถุดิบมีรางวัลทุกขั้น'],
+['👗','ตู้เสื้อผ้าโฉมใหม่','พรีวิวตรึงด้านบน · ตารางไอคอนแตะลองใส่ได้ทันที · ‹ › ไล่ดู · กรองชิ้นที่มี/ยังไม่มี'],
+['🏰','กิลด์','ตั้งกิลด์หรือเข้ากิลด์เพื่อนได้ที่ เมนู › 🏰 กิลด์ · ภารกิจกิลด์รายสัปดาห์ · EXP โบนัสตามเลเวลกิลด์'],
+['🧗','ขี่คอต่อตัว + 🤸 ท่าโยนขึ้น','อยู่ปาร์ตี้แล้วแตะ 🧗 ที่ชื่อเพื่อน · ต่อได้ 4 ชั้น · ฐานหอกดโยนเพื่อนลงกระแทกพื้น'],
+['🎨','ย้อมสี + 📷 ถ่ายรูป','ผสมสีย้อมชุดที่ตู้เสื้อผ้า · เมนูท่าทาง 😊 มีท่าคู่และโหมดถ่ายรูป']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -12516,6 +12523,141 @@ document.addEventListener('click',w2Click,true);
 document.addEventListener('pointerdown',e=>{if(ov.dataset.k!=='wdr')return;const b=e.target.closest&&e.target.closest('#w2d [data-wds],#w2d [data-wdo],#w2d [data-wdb]');if(b)WD2.keep={pf:GPV.pf,pp:GPV.pp}},true);
 try{const _gl=gpvLook;gpvLook=function(){const P=GPV.pp;if(P&&P.id===''){GPV.pp=null;try{const L=_gl.apply(this,arguments);if(P.sl==='f')L.fa=0;else L[P.sl]=lkc(me.eq&&me.eq[P.sl]);return L}finally{GPV.pp=P}}return _gl.apply(this,arguments)}}catch(e){}
 },900);
+const GWK=['o1','o2','o3','gm','h1','h2','h3','rt'];
+const GWTN={o:['จอบไม้เก่า','จอบเหล็ก','จอบเหล็กกล้า','จอบมิธริล','จอบดาวตก','จอบตำนาน'],h:['เคียวสนิม','เคียวเหล็ก','เคียวเงิน','เคียวจันทร์เงิน','เคียวแสงดาว','เคียวตำนาน']};
+const GWTC=['#a8a8b0','#c8c8d0','#e0e4ec','#7ac8ff','#ffd76a','#ff9ae8'];
+const GWUP={o:[[{o1:10},2000,1],[{o1:20,gm:1},8000,3],[{o2:15,gm:2},30000,5],[{o2:20,o3:10,gm:4},120000,7],[{o3:25,gm:8},500000,10]],
+h:[[{h1:10},2000,1],[{h1:20,rt:1},8000,3],[{h2:15,rt:2},30000,5],[{h2:20,h3:10,rt:4},120000,7],[{h3:25,rt:8},500000,10]]};
+const GWBASE=4275,GWSMX=10,gwSNeed=s=>1200+300*s;
+const gwTl=k=>{const G=gtSt();return((G.tl&&G.tl[k])|0)};
+const gwSpd=k=>1-.06*gwTl(k);
+const gwHead=k=>GWTC[gwTl(k)]||GWTC[0];
+function gwSpdPct(k,L){return Math.round((1-Math.max(.8,Math.max(1.3,2.4*(1-.05*(L-1)))*gwSpd(k))/2.4)*100)}
+function gwStarOf(x){x-=GWBASE;let s=0;if(x<0)return{s:0,p:0,n:gwSNeed(1)};while(s<GWSMX&&x>=gwSNeed(s+1)){x-=gwSNeed(s+1);s++}return{s,p:s>=GWSMX?1:x/gwSNeed(s+1),n:gwSNeed(s+1),x}}
+const gwStar=k=>{const G=gtSt();return gwStarOf(k==='o'?G.ox:G.hx).s};
+const gwDbl=k=>.04*gwTl(k)+.01*gwStar(k);
+const gwRare=k=>.003*gwStar(k);
+function gwStarTx(k){const s=gwStar(k);return s?' <b style="color:#ffd84a">★'+s+'</b>':' <small>MAX</small>'}
+function gwStarBar(k,c){const G=gtSt(),S=gwStarOf(k==='o'?G.ox:G.hx);return'<div class="bar"><i style="width:'+Math.round(S.p*100)+'%;background:'+c+'"></i></div><small style="opacity:.8;display:block">'+(S.s>=GWSMX?'★10 สูงสุดแล้ว':'ดาวถัดไป ★'+(S.s+1)+' · '+Math.floor(S.x||0)+'/'+S.n+' XP')+' · ดาวละ: ได้ 2 ชิ้น +1% · ของหายาก +0.3%</small>'}
+function gwStarUp(k,S0){const s=gwStar(k);try{me.stt[k==='o'?'gso':'gsh']=Math.max(me.stt[k==='o'?'gso':'gsh']|0,s)}catch(e){}if(s>S0){banner={s:(k==='o'?'⛏️ ความชำนาญขุดแร่':'🌿 ความชำนาญสมุนไพร')+' ★'+s+'!'+(s===5?' · ได้ฉายา '+(k==='o'?'«นักขุดตำนาน»':'«หมอยาพเนจร»'):''),t:4};try{sfx('up')}catch(e){}}}
+const GWMS=[25,100,500,2000],GWMR=[5,25,100,300];
+const gwRareK=k=>k==='gm'||k==='rt';
+const gwTierOf=k=>gwRareK(k)?3:+k[1];
+function gwGain(k,n){const G=gtSt();G.c=G.c||{};G.c[k]=Math.min(1e7,(G.c[k]|0)+n)}
+function gwRw(k,i){const T=gwTierOf(k),rk=k[0]==='o'||k==='gm'?'gm':'rt';
+if(gwRareK(k))return[{g:5000},{rn:20},{th:5,g:20000},{dy:'d8',g:100000}][i];
+return[{g:2000*T},{m:rk,n:1+T},{th:3,xp:200},{m:rk,n:10,g:50000*T}][i]}
+function gwRwTx(r){const L=[];if(r.g)L.push('💰'+r.g.toLocaleString());if(r.m)L.push(GTI[r.m][0]+'×'+r.n);if(r.rn)L.push('💠 ผงรูน '+r.rn);if(r.th)L.push('✂️ ด้าย '+r.th);if(r.xp)L.push('XP ความชำนาญ +'+r.xp);if(r.dy)L.push('🌈 สีย้อมรุ้ง');return L.join(' · ')}
+function gwClaim(k){const G=gtSt();G.cb=G.cb||{};const i=G.cb[k]|0,M=gwRareK(k)?GWMR:GWMS;if(!GWK.includes(k)||i>=4)return'';if(((G.c&&G.c[k])|0)<M[i])return'ยังสะสมไม่ถึง';
+const r=gwRw(k,i);G.cb[k]=i+1;if(r.g)me.gold+=r.g;if(r.m)gtAdd(r.m,r.n);if(r.rn)try{rnShard(r.rn,'book')}catch(e){}if(r.th)try{wdrThread(r.th,'สมุดสะสม')}catch(e){}
+if(r.xp){if(k[0]==='o')G.ox+=r.xp;else G.hx+=r.xp}if(r.dy)try{dyAdd(r.dy,1)}catch(e){}try{sfx('lg_get')}catch(e){}try{burst(me.x,me.y-20,['#ffd84a','#ffffff','#ffb0f0'],22,120,.7,{glow:1,g:-30})}catch(e){}try{writeSave()}catch(e){}
+return'📖 รับรางวัลสะสม '+GTI[k][0]+' '+GTI[k][1]+' ขั้น '+(i+1)+': '+gwRwTx(r)}
+function gwBookHTML(){const G=gtSt(),C=G.c||{},B=G.cb||{};let all=0,done=0;
+let h='<div class="card" style="padding:6px 8px"><div class="cap">📖 สมุดสะสมวัตถุดิบ</div><div style="font-size:11px;opacity:.8;margin-bottom:4px">นับทุกชิ้นที่เก็บได้เอง (ขุด/เก็บ/สายแร่ยักษ์) · ถึงขั้นแล้วกดรับรางวัล</div>';
+h+=GWK.map(k=>{const n=C[k]|0,i=B[k]|0,M=gwRareK(k)?GWMR:GWMS,nx=M[Math.min(3,i)],can=i<4&&n>=nx,found=n>0;all+=4;done+=i;
+return'<div class="gtrc"><span class="ic" style="'+(found?'':'filter:grayscale(1) brightness(.4)')+'">'+GTI[k][0]+'</span><div class="tx"><b>'+(found?GTI[k][1]:'❓ ยังไม่เคยพบ')+'</b> <small style="opacity:.75">สะสม '+n.toLocaleString()+'</small>'+
+'<div style="display:flex;gap:3px;margin:3px 0">'+M.map((m,j)=>'<i style="font-style:normal;font-size:10px;padding:1px 6px;border-radius:7px;'+(j<i?'background:#5a8a3a;color:#efffe0':n>=m?'background:#e7b75a;color:#20180c':'background:rgba(255,255,255,.08);opacity:.7')+'">'+(j<i?'✓ ':'')+m+'</i>').join('')+'</div>'+
+(i<4?'<small style="opacity:.8">ขั้น '+(i+1)+': '+gwRwTx(gwRw(k,i))+'</small>':'<small style="color:#9fe89f">สะสมครบทุกขั้นแล้ว</small>')+(found?'':'<small style="display:block;opacity:.65">'+GTI[k][2]+'</small>')+'</div>'+
+(i<4?'<button class="pri" data-gwc="'+k+'"'+(can?'':' disabled')+'>รับ</button>':'')+'</div>'}).join('');
+return h+'<div style="text-align:right;font-size:11px;opacity:.75;margin-top:4px">ความคืบหน้าสมุด '+done+'/'+all+' ขั้น</div></div>'}
+function gwNeedTx(need,gold,lv,k){let h='';for(const q in need){const ok=gtHas(q)>=need[q];h+='<i class="'+(ok?'':'no')+'">'+GTI[q][0]+' '+gtHas(q)+'/'+need[q]+'</i>'}
+h+='<i class="'+(me.gold>=gold?'':'no')+'">💰'+gold.toLocaleString()+'</i>';const L=k==='o'?gtLvO():gtLvH();h+='<i class="'+(L>=lv?'':'no')+'">'+(k==='o'?'⛏️':'🌿')+' Lv '+lv+'</i>';return h}
+function gwCanUp(k){const l=gwTl(k);if(l>=5)return false;const[need,gold,lv]=GWUP[k][l];for(const q in need)if(gtHas(q)<need[q])return false;return me.gold>=gold&&(k==='o'?gtLvO():gtLvH())>=lv}
+function gwUpTool(k){if(k!=='o'&&k!=='h')return'';if(!gwCanUp(k))return'วัตถุดิบ ทอง หรือความชำนาญยังไม่พอ';const G=gtSt(),l=gwTl(k),[need,gold]=GWUP[k][l];for(const q in need)gtAdd(q,-need[q]);me.gold-=gold;G.tl=G.tl||{o:0,h:0};G.tl[k]=l+1;
+try{sfx('up')}catch(e){}try{burst(me.x,me.y-20,[GWTC[l+1],'#ffffff','#ffd06a'],26,130,.7,{glow:1,g:-30})}catch(e){}try{writeSave()}catch(e){}return'🛠️ อัปเกรดเป็น '+GWTN[k][l+1]+' แล้ว!'}
+function gwToolHTML(){let h='';['o','h'].forEach(k=>{const l=gwTl(k),nm=GWTN[k][l],ef=L=>'เก็บเร็วขึ้น '+Math.round(6*L)+'% · ได้ 2 ชิ้น +'+4*L+'% · ช่องจังหวะกว้างขึ้น'+(L>=3?' · ขุดยักษ์แรง +'+(L>=5?2:1):'');
+h+='<div class="card" style="text-align:left"><div class="gtpr"><span class="ic" style="font-size:30px">'+(k==='o'?'⛏️':'🌾')+'</span><div style="flex:1"><b style="color:'+GWTC[l]+'">'+nm+'</b> <small>ขั้น '+l+'/5</small><br><small style="opacity:.8">'+(l?ef(l):'เครื่องมือพื้นฐาน ยังไม่มีโบนัส')+'</small></div></div>';
+if(l<5){const[need,gold,lv]=GWUP[k][l];h+='<div class="gtrc" style="border:0"><div class="tx">ถัดไป: <b style="color:'+GWTC[l+1]+'">'+GWTN[k][l+1]+'</b><br><small style="opacity:.8">'+ef(l+1)+'</small><div class="need">'+gwNeedTx(need,gold,lv,k)+'</div></div><button class="pri" data-gwu="'+k+'"'+(gwCanUp(k)?'':' disabled')+'>อัปเกรด</button></div>'}
+else h+='<small style="color:#9fe89f">✨ เครื่องมือขั้นสูงสุดแล้ว</small>';h+='</div>'});
+return h+'<div class="card hint" style="font-size:11.5px;text-align:left">🎯 ระหว่างขุด/เก็บ แตะปุ่มตอนเข็มอยู่ใน<b>ช่องทอง</b> = «เป๊ะ!» ได้ของเพิ่ม 1 · ลุ้นของหายาก · XP ×1.5 และเก็บเสร็จทันที</div>'}
+function gwMg(n,dur){return{z:.38+Math.random()*.42,w:.15+.015*gwTl(n.k),sp:2.2/dur,ph:Math.random()*.6,r:0,done:0}}
+const gwTri=u=>{u=((u%2)+2)%2;return u<1?u:2-u};
+function gwNeedle(C){return gwTri(C.t*C.mg.sp+C.mg.ph)}
+const GW={blk:0};
+function gwTap(){const C=GTC;if(!C||!C.mg||C.mg.done)return;const M=C.mg,p=gwNeedle(C),d=Math.abs(p-M.z),r=d<=M.w/2?2:d<=M.w?1:0;M.done=1;M.r=r;M.p=p;GW.blk=performance.now()+450;
+const x=C.n.x,y=C.n.y-(C.n.gg?110:64);
+if(r===2){dn.push({x,y:y-14,v:'✨ เป๊ะ!',t:1.1,col:'#ffe27a'});try{skStat('gpf')}catch(e){}try{burst(x,y,['#ffe27a','#ffffff'],16,120,.5,{glow:1,g:-20})}catch(e){}try{sfx('lg_get')}catch(e){}C.t=Math.max(C.t,C.d)}
+else if(r===1){dn.push({x,y:y-14,v:'👍 ดี',t:.9,col:'#c8f0a0'});try{sfx('item')}catch(e){}}
+else{dn.push({x,y:y-14,v:'พลาด',t:.8,col:'#c8b8a8'})}}
+function gwDrawMg(){const C=GTC;if(!C||!C.mg)return;const M=C.mg,x=C.n.x,y=C.n.y-(C.n.gg?(C.n.k==='o'?100:112):64),w=70,h=9,x0=x-w/2;g.save();
+g.fillStyle='rgba(10,8,14,.78)';g.strokeStyle='rgba(255,230,180,.55)';g.lineWidth=1;g.beginPath();g.roundRect?g.roundRect(x0-3,y-h/2-3,w+6,h+6,6):g.rect(x0-3,y-h/2-3,w+6,h+6);g.fill();g.stroke();
+g.fillStyle='rgba(255,215,106,.35)';g.fillRect(x0+(M.z-M.w)*w,y-h/2,M.w*2*w,h);g.fillStyle='#ffd76a';g.fillRect(x0+(M.z-M.w/2)*w,y-h/2,M.w*w,h);
+const p=M.done?M.p:gwNeedle(C);g.fillStyle=M.done?(M.r===2?'#fff6a0':M.r===1?'#c8f0a0':'#ff9a8a'):'#ffffff';g.fillRect(x0+p*w-1.5,y-h/2-3,3,h+6);
+g.fillStyle='rgba(0,0,0,.4)';g.fillRect(x0,y+h/2+4,w,3);g.fillStyle=C.n.k==='o'?'#ffd06a':'#8af08a';g.fillRect(x0,y+h/2+4,w*Math.min(1,C.t/C.d),3);g.restore()}
+let GG=null;const GGR={},GGL={nx:0,b:0,sd:0},GGFX=[];
+const ggOn=()=>!!(GG&&GG.m===curMap&&GG.hp>0);
+let GGN=null;function ggNode(){if(!ggOn())return null;if(!GGN||GGN.id!==GG.id)GGN={gg:1,id:GG.id,k:GG.k,x:GG.x,y:GG.y,t:GG.t};return GGN}
+const ggName=k=>k==='o'?'สายแร่ยักษ์':'ดอกไม้ทอง';
+function ggPow(){const l=gwTl(GG?GG.k:'o');return 1+(l>=3?1:0)+(l>=5?1:0)}
+function ggBc(){if(!GG)return;GGL.b=performance.now();fx({k:'ggs',id:GG.id,gk:GG.k,gx:GG.x,gy:GG.y,t:GG.t,hp:GG.hp,mx:GG.mx,rm:Math.max(0,Math.round((GG.end-Date.now())/1000)),c:Object.entries(GG.c).slice(0,30)})}
+function ggAnnounce(){if(!GG)return;banner={s:(GG.k==='o'?'💎 สายแร่ยักษ์':'🌼 ดอกไม้ทอง')+' โผล่ในแมพนี้! ตามลูกศรทองไปช่วยกัน'+(GG.k==='o'?'ขุด':'เก็บ')+' · แตกแล้วได้ของหายากแน่นอน',t:6};try{sfx('lvl')}catch(e){}}
+function ggSpawn(force){if(!gtOkMap()||ggOn())return false;const L=gtNodes();if(!L.length)return false;const n=L[(Math.random()*L.length)|0],k=Math.random()<.5?'o':'h',a=Math.random()*6.28,
+pl=Math.max(1,(typeof plCount==='function'?plCount():1)|0),mx=Math.min(40,10+4*(pl-1));
+GG={id:'gg'+curMap+'_'+Date.now().toString(36),m:curMap,k,x:Math.round(n.x+Math.cos(a)*70),y:Math.round(n.y+Math.sin(a)*50),t:gtTier(),hp:mx,mx,end:Date.now()+180000,c:{},last:{}};
+ggAnnounce();ggBc();return true}
+function ggHostTick(){if(!me.cls||!run)return;const now=Date.now();if(GG&&GG.m!==curMap)GG=null;
+if(!isHost())return;if(GG){if(GG.hp>0&&now>GG.end){fx({k:'ggx',id:GG.id});return}if(GG.hp>0&&performance.now()-GGL.b>3000)ggBc();return}
+if(!gtOkMap())return;if(!GGL.nx){GGL.nx=now+60000+Math.random()*60000;return}if(now<GGL.nx)return;GGL.nx=now+20000;if(Math.random()<.07)ggSpawn()}
+function ggFx(o){const now=Date.now();if((o.k==='ggs'||o.k==='ggd'||o.k==='ggx')&&o.by!==hostId())return;
+if(o.k==='ggs'){if(typeof o.id!=='string'||typeof o.gx!=='number')return;const isNew=!GG||GG.id!==o.id;if(isNew&&GGR[o.id])return;
+const c={};(Array.isArray(o.c)?o.c:[]).forEach(e=>{if(Array.isArray(e)&&typeof e[0]==='string')c[e[0]]=Math.max(0,Math.min(999,e[1]|0))});
+if(isNew){GG={id:o.id,m:curMap,k:o.gk==='h'?'h':'o',x:o.gx,y:o.gy,t:Math.max(1,Math.min(3,o.t|0)),hp:o.hp|0,mx:Math.max(1,o.mx|0),end:now+Math.max(0,o.rm|0)*1000,c,last:{}};
+ggAnnounce()}
+else if(!isHost()){GG.hp=Math.min(GG.hp,o.hp|0);GG.mx=Math.max(1,o.mx|0);GG.end=now+Math.max(0,o.rm|0)*1000;Object.assign(GG.c,c)}return}
+if(o.k==='ggh'){if(!GG||o.id!==GG.id||GG.hp<=0)return;const by=typeof o.by==='string'?o.by:'';if(!by)return;
+if(isHost()){const t=performance.now();if(t-(GG.last[by]||0)<550)return;GG.last[by]=t;GG.hp=Math.max(0,GG.hp-Math.max(1,Math.min(4,o.n|0)));GG.c[by]=(GG.c[by]|0)+1;
+if(GG.hp<=0){fx({k:'ggd',id:GG.id,c:Object.entries(GG.c).slice(0,30)})}else if(t-GGL.b>400)ggBc()}
+else if(by!==uid){GG.hp=Math.max(1,GG.hp-Math.max(1,Math.min(4,o.n|0)))}
+try{if(by!==uid&&inView(GG.x,GG.y,80))spark(GG.x+(Math.random()-.5)*30,GG.y-20,GG.k==='o'?'#ffe0a0':'#fff0a0',5,90,.35)}catch(e){}return}
+if(o.k==='ggd'||o.k==='ggx'){if(!GG||o.id!==GG.id||GGR[o.id])return;GGR[o.id]=1;const G0=GG;GG=null;GGN=null;if(GTC&&GTC.n&&GTC.n.gg)GTC=null;GGL.nx=now+180000;
+GGFX.push({x:G0.x,y:G0.y,k:G0.k,t:0,d:o.k==='ggd'});
+if(o.k==='ggx'){banner={s:(G0.k==='o'?'💎 สายแร่ยักษ์จมหายลงดิน':'🌼 ดอกไม้ทองร่วงโรย')+'ไปแล้ว — ครั้งหน้ารีบช่วยกันนะ',t:4};return}
+try{burst(G0.x,G0.y-30,G0.k==='o'?['#ffe0a0','#ffffff','#7ac8ff','#ffd76a']:['#fff0a0','#ffffff','#ffb0e0','#ffd76a'],46,220,1.1,{glow:1,g:-10})}catch(e){}try{sfx('boom')}catch(e){}
+let mine=0;(Array.isArray(o.c)?o.c:[]).forEach(e=>{if(Array.isArray(e)&&e[0]===uid)mine=Math.max(0,Math.min(999,e[1]|0))});if(mine>0)ggReward(G0,mine);
+else banner={s:(G0.k==='o'?'💥 สายแร่ยักษ์':'💥 ดอกไม้ทอง')+'แตกแล้ว! (คุณไม่ได้ช่วย จึงไม่ได้รางวัล)',t:4}}}
+function ggReward(G0,mine){const G=gtSt(),o=G0.k==='o',L=o?gtLvO():gtLvH(),cap=L>=6?3:L>=3?2:1,t=Math.min(G0.t,cap),k=(o?'o':'h')+t,rk=o?'gm':'rt',n=Math.min(12,4+mine),r=Math.min(4,1+Math.floor(mine/4)),S0=gwStar(G0.k);
+gtAdd(k,n);gwGain(k,n);gtAdd(rk,r);gwGain(rk,r);if(o)G.ox+=50*G0.t;else G.hx+=50*G0.t;try{skStat('ggb')}catch(e){}me.stt.gth=(me.stt.gth|0)+1;gwStarUp(G0.k,S0);
+banner={s:'💥 '+ggName(G0.k)+'แตกแล้ว! ได้ '+GTI[k][0]+'×'+n+' '+GTI[rk][0]+'×'+r+' (ช่วย '+mine+' ครั้ง)',t:5};dn.push({x:me.x,y:me.y-70,v:'✨ '+GTI[rk][0]+'×'+r+' '+GTI[rk][1],t:1.8,col:'#ffb0f0'});try{sfx('lg_get')}catch(e){}try{writeSave()}catch(e){}}
+function ggHitDone(n,C){if(!ggOn()||n.id!==GG.id)return;const pf=C&&C.mg?C.mg.r|0:0,pw=ggPow()+(pf===2?1:0),G=gtSt(),o=n.k==='o',t=gtTierFor(n),k=gtMat(n,t);
+gtAdd(k,1);gwGain(k,1);const S0=gwStar(n.k);if(o)G.ox+=6*t;else G.hx+=6*t;gwStarUp(n.k,S0);dn.push({x:me.x,y:me.y-52,v:GTI[k][0]+' +1 · 💥'+pw,t:1,col:o?'#ffd8a0':'#a8f0a0'});
+if(!isHost())GG.hp=Math.max(1,GG.hp-pw);fx({k:'ggh',id:n.id,n:pw});
+try{burst(n.x,n.y-26,o?['#ffe0a0','#ffffff','#7ac8ff']:['#fff0a0','#ffffff','#ffb0e0'],10,120,.5,{g:-20})}catch(e){}
+setTimeout(()=>{try{if(!GTC&&ggOn()&&gtNear()===ggNode())gtStart()}catch(e){}},220)}
+function ggDraw(){const t=performance.now()/1000;
+for(let i=GGFX.length-1;i>=0;i--){const F=GGFX[i];F.t+=1/60;if(F.t>1.4){GGFX.splice(i,1);continue}if(!inView(F.x,F.y,120))continue;const a=1-F.t/1.4;g.save();g.globalCompositeOperation='lighter';glowAt(F.x,F.y-30,90*(1+F.t),F.k==='o'?'255,220,140':'255,240,160',.6*a);g.restore()}
+if(!ggOn())return;const x=GG.x,y=GG.y,o=GG.k==='o',C=o?[['#9a6a48','#c88a5a','#ffd0a0'],['#3a7ac8','#6ab8ff','#c8ecff'],['#c8a040','#ffd76a','#fff4c0']][GG.t-1]:null,pu=(Math.sin(t*2.4)+1)/2;
+if(inView(x,y,200)){g.save();
+g.globalCompositeOperation='lighter';glowAt(x,y-30,90,o?h2r(C[1]):'255,215,110',.22+.16*pu);
+const bh=260;const gr=g.createLinearGradient(x,y-bh,x,y);gr.addColorStop(0,'rgba(255,230,150,0)');gr.addColorStop(1,'rgba(255,230,150,'+(.16+.1*pu)+')');g.fillStyle=gr;g.fillRect(x-16,y-bh,32,bh);
+g.globalCompositeOperation='source-over';g.save();g.translate(x,y);g.scale(1.6,1.6);g.translate(-x,-y);g.fillStyle='rgba(0,0,0,.32)';g.beginPath();g.ellipse(x,y+4,62,17,0,0,7);g.fill();
+if(o){const R=[[-34,2,34,30,'#5a5048'],[22,4,30,26,'#4a4440'],[-8,-6,40,46,'#6a6058'],[-22,-2,20,22,'#504840'],[30,-2,18,18,'#5a5048']];
+R.forEach(([dx,dy,w,hh,c])=>{g.fillStyle=c;g.strokeStyle='#1a1612';g.lineWidth=1.6;g.beginPath();g.moveTo(x+dx-w*.5,y+dy+4);g.lineTo(x+dx-w*.42,y+dy-hh*.6);g.lineTo(x+dx+w*.08,y+dy-hh);g.lineTo(x+dx+w*.5,y+dy-hh*.45);g.lineTo(x+dx+w*.5,y+dy+4);g.closePath();g.fill();g.stroke()});
+for(let i=0;i<9;i++){const a=i*.7+t*.2,cx=x+Math.cos(a*1.3)*30,cy=y-18+Math.sin(a*1.9)*14,s=4+((i*7)%4);g.fillStyle=C[i%3];g.strokeStyle='rgba(20,14,8,.7)';g.lineWidth=.8;g.beginPath();g.moveTo(cx,cy-s*1.6);g.lineTo(cx+s*.8,cy);g.lineTo(cx,cy+s*.7);g.lineTo(cx-s*.8,cy);g.closePath();g.fill();g.stroke()}
+g.globalCompositeOperation='lighter';for(let i=0;i<4;i++){const q=(t*.7+i/4)%1;glowAt(x+Math.sin(i*2.1+t)*28,y-20-q*40,6,h2r(C[2]),.7*(1-q))}g.globalCompositeOperation='source-over'}
+else{const sw=Math.sin(t*1.4)*3;g.strokeStyle='#2a6a2a';g.lineWidth=5;g.lineCap='round';for(let i=0;i<9;i++){const a=-Math.PI/2+(i-4)*.33,L=34+(i%3)*10;g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+Math.cos(a)*L*.5+sw*.5,y+Math.sin(a)*L*.5,x+Math.cos(a)*L+sw,y+Math.sin(a)*L);g.stroke()}
+const fx0=x+sw,fy0=y-52;for(let p=0;p<8;p++){const a=p*.785+t*.25;g.fillStyle=p%2?'#ffd76a':'#ffe9a0';g.strokeStyle='#a87a1a';g.lineWidth=1;g.beginPath();g.ellipse(fx0+Math.cos(a)*13,fy0+Math.sin(a)*13,12,6,a,0,7);g.fill();g.stroke()}
+g.fillStyle='#fff6c8';g.beginPath();g.arc(fx0,fy0,8,0,7);g.fill();g.globalCompositeOperation='lighter';glowAt(fx0,fy0,40,'255,220,110',.5+.3*pu);for(let i=0;i<5;i++){const q=(t*.5+i/5)%1;glowAt(fx0+Math.sin(i*2.7+t)*30,fy0+20-q*50,4,'255,240,170',.8*(1-q))}g.globalCompositeOperation='source-over'}
+g.restore();
+const bw=104,by=y-(o?126:140),p=GG.hp/GG.mx,rm=Math.max(0,Math.ceil((GG.end-Date.now())/1000)),nc=Object.keys(GG.c).length;
+g.fillStyle='rgba(10,8,14,.8)';g.fillRect(x-bw/2-2,by-2,bw+4,10);g.fillStyle=o?'#ffd06a':'#ffe27a';g.fillRect(x-bw/2,by,bw*p,6);g.strokeStyle='rgba(255,240,200,.6)';g.lineWidth=1;g.strokeRect(x-bw/2-2,by-2,bw+4,10);
+g.font='bold 11px system-ui';g.textAlign='center';g.textBaseline='bottom';g.lineWidth=3;g.strokeStyle='rgba(0,0,0,.75)';const tx=(o?'💎 ':'🌼 ')+ggName(GG.k)+' · 👥'+nc+' · ⏳'+Math.floor(rm/60)+':'+String(rm%60).padStart(2,'0');g.strokeText(tx,x,by-4);g.fillStyle='#fff4d0';g.fillText(tx,x,by-4);
+if(!(GTC&&GTC.n&&GTC.n.gg)){const bo=Math.sin(t*2.4)*3;g.font='15px system-ui';g.textBaseline='middle';g.fillText(o?'⛏️':'🌿',x,by-30+bo)}
+g.restore()}
+const d=Math.hypot(x-me.x,y-me.y);if(d>260&&me.cls&&me.down<=0){const a=Math.atan2(y-me.y,x-me.x),r=74+Math.sin(t*5)*6,ax=me.x+Math.cos(a)*r,ay=me.y-14+Math.sin(a)*r*.75;g.save();g.translate(ax,ay);
+g.globalCompositeOperation='lighter';glowAt(0,0,26,'255,215,110',.6);g.globalCompositeOperation='source-over';g.rotate(a);g.fillStyle='#ffd76a';g.strokeStyle='#3a2408';g.lineWidth=2.4;g.beginPath();g.moveTo(18,0);g.lineTo(-8,-12);g.lineTo(-2,0);g.lineTo(-8,12);g.closePath();g.fill();g.stroke();
+g.rotate(-a);g.font='bold 10px system-ui';g.textAlign='center';g.textBaseline='middle';g.lineWidth=3;g.strokeStyle='rgba(0,0,0,.7)';const s=(o?'💎':'🌼')+Math.round(d/10)+'ม.';g.strokeText(s,0,-20);g.fillStyle='#fff4d0';g.fillText(s,0,-20);g.restore()}}
+setTimeout(()=>{try{
+const _gn=gtNear;gtNear=function(){const r=_gn.apply(this,arguments);try{if(me.cls&&run&&me.down<=0&&ov.hidden&&!SD.on){const N=ggNode();if(N&&Math.hypot(N.x-me.x,N.y-(me.y-6))<80)return N}}catch(e){}return r};
+const _gt=gtTick;gtTick=function(dt){_gt.apply(this,arguments);const b=$('gthb');if(!b)return;
+if(GTC&&GTC.mg){const show=!GTC.mg.done;if(b.hidden!==!show)b.hidden=!show;if(show){const tx='🎯 แตะตอนเข็มเข้าช่องทอง!';if(b.textContent!==tx)b.textContent=tx;b.classList.add('gwtap')}return}
+b.classList.remove('gwtap');if(!b.hidden){const n=gtNear();if(n&&n.gg){const tx=(n.k==='o'?'💎 ขุด':'🌼 เก็บ')+ggName(n.k)+' ('+GG.hp+'/'+GG.mx+')';if(b.textContent!==tx)b.textContent=tx}}};
+const _gd=gtDraw;gtDraw=function(){_gd.apply(this,arguments);try{ggDraw()}catch(e){}try{gwDrawMg()}catch(e){}};
+const _h=handleFx;handleFx=function(o){if(o&&typeof o.k==='string'&&o.k.startsWith('gg')&&(o.k==='ggs'||o.k==='ggh'||o.k==='ggd'||o.k==='ggx')){try{ggFx(o)}catch(e){}return}return _h.apply(this,arguments)};
+document.addEventListener('pointerdown',e=>{if(e.target&&e.target.id==='gthb'&&GTC&&GTC.mg&&!GTC.mg.done){e.preventDefault();e.stopPropagation();gwTap()}},true);
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='gthb'&&(GTC||performance.now()<GW.blk)){e.stopPropagation();e.preventDefault()}},true);
+const st=document.createElement('style');st.textContent='#gthb.gwtap{background:linear-gradient(#8a6a1a,#4a3608)!important;border-color:#ffe27a!important;box-shadow:0 0 18px rgba(255,226,122,.7)!important;animation:gwP .6s ease-in-out infinite alternate}@keyframes gwP{to{transform:translateX(-50%) scale(1.06)}}';document.head.appendChild(st);
+setInterval(()=>{try{ggHostTick()}catch(e){}},1000);
+}catch(e){console.warn('gw init',e)}},1200);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
@@ -15237,7 +15379,7 @@ const ACH=[['k100','นักล่ามือใหม่','กำจัดม
 ['rnc10','นักสะสมรูน','เก็บรูนของอาชีพตัวเองครบทั้ง 10 แบบ',()=>{try{return rnCount(1)}catch(e){return 0}},10,1],['rnm10','ปรมาจารย์รูน','อัปเกรดรูนของอาชีพตัวเองครบทั้ง 10 แบบถึงขั้น III',()=>{try{return rnCount(3)}catch(e){return 0}},10,2],['fs20','นักตกปลา','บันทึกปลาลงสมุดปลาได้ 20 ชนิด',()=>{try{return fsKinds()}catch(e){return 0}},20,1],['fsL8','เจ้าแห่งสายน้ำ','ตกปลาระดับตำนานได้ครบทั้ง 8 ชนิด',()=>{try{return fsLegs()}catch(e){return 0}},8,2],
 ['leg','ผู้ถูกเลือก','ได้อุปกรณ์ระดับ Relic',s=>s.leg,1,2],['up10','ช่างตีเหล็กในตำนาน','ตีบวกอุปกรณ์ถึง +10',s=>s.up10,1,2],['st7','ผู้ภักดี','ล็อกอินต่อเนื่อง 7 วัน',s=>s.mst||0,7,1],
 ['dq30','ขยันขันแข็ง','รับรางวัลเควสรายวัน 30 ครั้ง',s=>s.dq,30,1],['ult100','ผู้ปลดปล่อยพลัง','ใช้อัลติเมต 100 ครั้ง',s=>s.ult,100,1],['rich','เศรษฐีค่าย','มีทองในกระเป๋า 50,000',()=>me.gold,50000,2],
-['tw10','ผู้ท้าหอคอย','ปีนหอคอยวิญญาณถึงชั้น 10',()=>me.twBest||0,10,0],['tw50','ผู้ข้ามครึ่งทาง','ปีนหอคอยวิญญาณถึงชั้น 50',()=>me.twBest||0,50,1],['tw100','ผู้พิชิตหอคอย','พิชิตหอคอยวิญญาณครบ 100 ชั้น',()=>me.twBest||0,100,2],['mvp1','ผู้พิชิต MVP','ได้รับรางวัล MVP 1 ครั้ง',s=>s.mvp||0,1,2],['mvp10','ราชันย์ MVP','ได้รับรางวัล MVP 10 ครั้ง',s=>s.mvp||0,10,2],['stL','ผู้ผนึกนิรันดร์','จบเนื้อเรื่องภาค 1: ผนึกเทพไว้อีกครั้ง',()=>me.sty&&me.sty.e===1?1:0,1,2],['stD','ผู้ปลดโซ่เทพ','จบเนื้อเรื่องภาค 1: ปลดปล่อยเทพ',()=>me.sty&&me.sty.e===2?1:0,1,2],['skT1','เสาค้ำฟ้า','เป็นฐานแบกหอขี่คอเต็ม 4 ชั้น (เพื่อนบนคอครบ 3 คน)',s=>s.twf|0,1,0],['skT2','ดาวตกถล่มฝูง','โยนลงกระแทกพื้นโดนมอน 8 ตัวขึ้นไปในครั้งเดียว',s=>s.tws|0,8,1],['skT3','ผู้อ่านจังหวะบอส','อยู่ในหอขี่คอแล้วหลบบอสกวาดหอทัน 5 ครั้ง',s=>s.twd|0,5,1],['skT4','หอคอยมีชีวิต','ร่วมท่าโยนขึ้นของหอขี่คอ 100 ครั้ง (เป็นฐานหรือถูกโยน)',s=>s.twl|0,100,2]];
+['tw10','ผู้ท้าหอคอย','ปีนหอคอยวิญญาณถึงชั้น 10',()=>me.twBest||0,10,0],['tw50','ผู้ข้ามครึ่งทาง','ปีนหอคอยวิญญาณถึงชั้น 50',()=>me.twBest||0,50,1],['tw100','ผู้พิชิตหอคอย','พิชิตหอคอยวิญญาณครบ 100 ชั้น',()=>me.twBest||0,100,2],['mvp1','ผู้พิชิต MVP','ได้รับรางวัล MVP 1 ครั้ง',s=>s.mvp||0,1,2],['mvp10','ราชันย์ MVP','ได้รับรางวัล MVP 10 ครั้ง',s=>s.mvp||0,10,2],['stL','ผู้ผนึกนิรันดร์','จบเนื้อเรื่องภาค 1: ผนึกเทพไว้อีกครั้ง',()=>me.sty&&me.sty.e===1?1:0,1,2],['stD','ผู้ปลดโซ่เทพ','จบเนื้อเรื่องภาค 1: ปลดปล่อยเทพ',()=>me.sty&&me.sty.e===2?1:0,1,2],['skT1','เสาค้ำฟ้า','เป็นฐานแบกหอขี่คอเต็ม 4 ชั้น (เพื่อนบนคอครบ 3 คน)',s=>s.twf|0,1,0],['skT2','ดาวตกถล่มฝูง','โยนลงกระแทกพื้นโดนมอน 8 ตัวขึ้นไปในครั้งเดียว',s=>s.tws|0,8,1],['skT3','ผู้อ่านจังหวะบอส','อยู่ในหอขี่คอแล้วหลบบอสกวาดหอทัน 5 ครั้ง',s=>s.twd|0,5,1],['skT4','หอคอยมีชีวิต','ร่วมท่าโยนขึ้นของหอขี่คอ 100 ครั้ง (เป็นฐานหรือถูกโยน)',s=>s.twl|0,100,2],['gwT1','นักขุดตำนาน','ความชำนาญขุดแร่ถึง ★5',s=>s.gso|0,5,2],['gwT2','หมอยาพเนจร','ความชำนาญสมุนไพรถึง ★5',s=>s.gsh|0,5,2],['gwT3','ผู้พิชิตสายแร่ยักษ์','ช่วยทำลายสายแร่ยักษ์/ดอกไม้ทอง 20 ครั้ง',s=>s.ggb|0,20,1],['gwT4','มือทองคำ','แตะจังหวะ «เป๊ะ!» ตอนขุด/เก็บ 200 ครั้ง',s=>s.gpf|0,200,1]];
 const ACHM=Object.fromEntries(ACH.map(a=>[a[0],a])),TTC=['#f0e0b0','#ffd84a','#ffb030'];
 function achCheck(){if(!me.cls||!run)return;if(me.ach){for(const[o,n]of[['stJ1','stJ'],['stJ2','stK']]){if(me.ach[o]){me.ach[n]=me.ach[n]||me.ach[o];delete me.ach[o]}if(me.title===o)me.title=n}}const S=me.stt,its=[...Object.values(me.eq).filter(Boolean),...me.bag];if(its.some(i=>i.r>=4))S.leg=1;if(its.some(i=>(i.u|0)>=10))S.up10=1;
 ACH.forEach(a=>{if(me.ach[a[0]]||a[3](S)<a[4])return;me.ach[a[0]]=1;me.gold+=[200,800,2000][a[5]];if(!me.title)me.title=a[0];
@@ -21000,7 +21142,7 @@ if(Array.isArray(c.bag))c.bag.slice(0,BAGTOP()).forEach(it=>{const x=cleanItem(i
 const s2=(v,m)=>typeof v==='string'?v.slice(0,m):'';
 if(c.dq&&typeof c.dq==='object'&&Array.isArray(c.dq.q))o.dq={d:s2(c.dq.d,10),ch:c.dq.ch?1:0,q:c.dq.q.slice(0,3).filter(q=>q&&DQT[q.t]).map(q=>({t:q.t,n:n(q.n,1,1e6,1),h:n(q.h,0,1e6,0),g:n(q.g,0,1e6,0),xp:n(q.xp,0,1e7,0),cl:q.cl?1:0}))};
 o.ls=c.ls&&typeof c.ls==='object'?{last:s2(c.ls.last,10),st:n(c.ls.st,0,1e5,0),cl:s2(c.ls.cl,10)}:{last:'',st:0,cl:''};
-{const st=c.stt&&typeof c.stt==='object'?c.stt:{};o.stt={raid:n(st.raid,0,1e6,0),k:n(st.k,0,1e9,0),el:n(st.el,0,1e9,0),dg:n(st.dg,0,1e6,0),dg3:n(st.dg3,0,1e6,0),ult:n(st.ult,0,1e7,0),dq:n(st.dq,0,1e6,0),leg:st.leg?1:0,up10:st.up10?1:0,mst:n(st.mst,0,1e5,0),mvp:n(st.mvp,0,1e6,0),shy:n(st.shy,0,1e6,0),wv:n(st.wv,0,127,0),sv:n(st.sv,0,15,0),wvg:st.wvg?1:0,fsh:n(st.fsh,0,1e9,0),cook:n(st.cook,0,1e9,0),fev:n(st.fev,0,1e9,0),rnup:n(st.rnup,0,1e9,0),twf:n(st.twf,0,1e6,0),tws:n(st.tws,0,999,0),twd:n(st.twd,0,1e6,0),twl:n(st.twl,0,1e7,0),b:{}};
+{const st=c.stt&&typeof c.stt==='object'?c.stt:{};o.stt={raid:n(st.raid,0,1e6,0),k:n(st.k,0,1e9,0),el:n(st.el,0,1e9,0),dg:n(st.dg,0,1e6,0),dg3:n(st.dg3,0,1e6,0),ult:n(st.ult,0,1e7,0),dq:n(st.dq,0,1e6,0),leg:st.leg?1:0,up10:st.up10?1:0,mst:n(st.mst,0,1e5,0),mvp:n(st.mvp,0,1e6,0),shy:n(st.shy,0,1e6,0),wv:n(st.wv,0,127,0),sv:n(st.sv,0,15,0),wvg:st.wvg?1:0,fsh:n(st.fsh,0,1e9,0),cook:n(st.cook,0,1e9,0),fev:n(st.fev,0,1e9,0),rnup:n(st.rnup,0,1e9,0),twf:n(st.twf,0,1e6,0),tws:n(st.tws,0,999,0),twd:n(st.twd,0,1e6,0),twl:n(st.twl,0,1e7,0),gso:n(st.gso,0,10,0),gsh:n(st.gsh,0,10,0),ggb:n(st.ggb,0,1e6,0),gpf:n(st.gpf,0,1e7,0),b:{}};
 if(st.b&&typeof st.b==='object')Object.keys(st.b).forEach(k=>{if(/^(m([1-9]|1[0-9]|2[0-7])|d([1-9]|1[0-9]))$/.test(k))o.stt.b[k]=n(st.b[k],0,1e6,0)})}
 o.ach={};if(c.ach&&typeof c.ach==='object')Object.keys(c.ach).forEach(k=>{if(ACHM[k])o.ach[k]=1});
 o.title=typeof c.title==='string'&&o.ach[c.title]?c.title:'';
