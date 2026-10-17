@@ -4,7 +4,7 @@
          (ไม่มีแสงเงาปริมาตร/แสงขอบ/สปริงผ้า/ฝุ่นเท้า · ออร่าครึ่งเดียว) · มอนลงแสงแค่ 2 ตัวใกล้สุด ไม่มีแสงขอบ · ความละเอียดจอสูงสุด 1.75 เท่า
          ขั้น 2 = โหมดประหยัดเดิม (ต้องผ่านขั้น 1 แล้วยังช้าอยู่)
    กลับขึ้นเอง: อยู่ขั้น 1 แล้วเวลาวาดเฉลี่ยต่ำมาก (<5ms) ต่อเนื่อง ~8 วิ → กลับเต็ม (สูงสุด 2 ครั้ง/รอบเล่น กันสลับไปมา) */
-var LITEQ=0,LQME=0;const LQ={hi:0,lo:0,rec:0,last:0};
+var LITEQ=0,LQME=0,LQOTH=0;/* LQOTH = กำลังวาดคนอื่นแบบประหยัดชั่วคราว (ไม่ใช่โหมดประหยัดจริง) */const LQ={hi:0,lo:0,rec:0,last:0};
 function lqSet(v,msg){if(LITEQ===v)return;LITEQ=v;try{MLB.cap=v?2:5}catch(e){}LQ.hi=0;LQ.lo=0;try{applyQ()}catch(e){}if(msg)try{sysMsg(msg)}catch(e){}}
 function lqWindow(avg){if(GQ!=='auto'||LOWQ){if(LITEQ&&GQ!=='auto')lqSet(0);return}
   if(!LITEQ){if(avg>19){if(++LQ.hi>=2)lqSet(1,'⚙️ ลดรายละเอียดผู้เล่นคนอื่นอัตโนมัติ (ตัวคุณยังเต็ม) เพื่อให้ลื่นขึ้น')}else LQ.hi=0;return}
@@ -16,7 +16,7 @@ setTimeout(()=>{
   try{const _ft=fpsTick;fpsTick=function(now){const n0=FQ.n;const r=_ft.apply(this,arguments);try{if(n0>=89&&FQ.n===0&&FQ.avg)lqWindow(FQ.avg)}catch(e){}return r}}catch(e){}
   /* ขั้น 1: ผู้เล่นคนอื่นวาดด้วยรายละเอียดแบบประหยัด (สลับ LOWQ ชั่วคราวเฉพาะตอนวาดตัวเขา) */
   try{const _d0=drawP0;drawP0=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const im=lqIsMe(name,x,lk),L0=LOWQ;LQME=im?1:0;
-      if(LITEQ&&!im&&!L0){LOWQ=true;try{return _d0.apply(this,arguments)}finally{LOWQ=L0;LQME=0}}
+      if(LITEQ&&!im&&!L0){LOWQ=true;LQOTH=1;try{return _d0.apply(this,arguments)}finally{LOWQ=L0;LQME=0;LQOTH=0}}
       try{return _d0.apply(this,arguments)}finally{LQME=0}}}catch(e){}
   /* ขั้น 1: แสงขอบเฉพาะตัวเรา (มอน/คนอื่นไม่มี) */
   try{const _rp=gxRimPass;gxRimPass=function(){if(LITEQ&&!LQME)return;return _rp.apply(this,arguments)}}catch(e){}

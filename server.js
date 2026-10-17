@@ -40,7 +40,7 @@ function send(c,str,droppable){if(c.dead||!c.sock.writable)return;
 function kill(c){if(c.dead)return;c.dead=true;clients.delete(c);if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);if(c.mid&&byMid.get(c.mid)===c)byMid.delete(c.mid);try{c.sock.destroy()}catch(e){}}
 const num=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,v)):d;
 function cleanPresence(p){return{uid:String(p.uid||'').slice(0,12),x:num(p.x,0,20000,0),y:num(p.y,0,20000,0),hp:num(p.hp,0,1e6,0),mh:num(p.mh,1,1e6,1),
-  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,rb:num(p.rb|0,0,2,0),mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,399,0),bt:num(p.bt|0,0,399,0),wp:num(p.wp|0,0,399,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,399,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),aw:p.aw?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,30,0),sw:p.sw?1:0,as:num(p.as|0,0,200,0),rw:p.rw?1:0,sd:num(p.sd|0,0,9,0),zz:p.zz?1:0,fa:num(p.fa|0,0,40,0),rp:/^[a-z0-9]{1,24}$/i.test(String(p.rp||''))?String(p.rp):'',sk:/^[a-z0-9]{1,32}$/i.test(String(p.sk||''))?String(p.sk):''}}
+  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,rb:num(p.rb|0,0,2,0),mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,399,0),bt:num(p.bt|0,0,399,0),wp:num(p.wp|0,0,399,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,399,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),aw:p.aw?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,30,0),sw:p.sw?1:0,as:num(p.as|0,0,200,0),rw:p.rw?1:0,sd:num(p.sd|0,0,9,0),zz:p.zz?1:0,fa:num(p.fa|0,0,40,0),rp:/^[a-z0-9]{1,24}$/i.test(String(p.rp||''))?String(p.rp):'',sk:/^[a-z0-9]{1,32}$/i.test(String(p.sk||''))?String(p.sk):'',dy:num(p.dy|0,0,65535,0)}}
 const inMap=mp=>{const a=[];for(const c of clients)if(c.p&&c.p.mp===mp)a.push(c);return a};
 /* เลือก host ต่อแมพ: คงคนเดิมไว้ถ้ายังใช้ได้ · ข้ามคนที่พับจอ/ไม่ส่ง world · เลือกคนที่อยู่ในแมพนานสุด */
 function okHost(c,now){return c.p&&!c.dead&&!c.p.aw&&!(c.badUntil>now)}
@@ -61,7 +61,7 @@ function tickPeers(){
     if(cand.length>MAXPEERS){cand.sort((a,b)=>a[0]-b[0]);cand.length=MAXPEERS}
     const rows=[],info=[],seen=new Map();
     for(const [,o] of cand){const p=o.p;rows.push([p.uid,Math.round(p.x),Math.round(p.y),Math.round(p.hp),p.sl,p.at|0]);
-      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt,p.im,p.sw|0,p.as|0,p.rw|0,p.rb|0,p.sd|0,p.zz|0,p.fa|0,p.rp||'',p.sk||''];
+      const ex=[p.wp,p.ar,p.c2,p.mt,p.wu,p.pt,p.im,p.sw|0,p.as|0,p.rw|0,p.rb|0,p.sd|0,p.zz|0,p.fa|0,p.rp||'',p.sk||'',p.dy|0];
       const key=p.n+'|'+p.cls+'|'+p.lv+'|'+p.mh+'|'+p.mp+'|'+p.hd+'|'+p.bt+'|'+p.tt+'|'+ex.join(',');seen.set(p.uid,key);
       if(c.known.get(p.uid)!==key)info.push([p.uid,p.n,p.cls,p.lv,p.mh,p.mp,p.hd,p.bt,p.tt,ex])}
     c.known=seen;
@@ -223,7 +223,7 @@ const MKF=path.join(DATA_DIR,'market.json');let MK={n:1,L:[],sales:{},ret:{}},mk
 try{const j=JSON.parse(fs.readFileSync(MKF,'utf8'));if(j&&Array.isArray(j.L))MK=Object.assign(MK,j)}catch(e){}
 if(!MK.ep){MK.ep=crypto.randomBytes(6).toString('hex');mkDirty=true}/* ep เปลี่ยน = ข้อมูลตลาดชุดเดิมหายไป ผู้เล่นจะได้ของที่ฝากขายคืนจากสำเนาในเซฟ */
 setInterval(()=>{const now=Date.now();MK.L=MK.L.filter(x=>{if(now-x.at>48*3600e3){(MK.ret[x.u]=MK.ret[x.u]||[]).push({k:x.k,d:x.d});mkDirty=true;return false}return true});if(!mkDirty)return;mkDirty=false;wj(MKF,MK)},15000);
-function mkOk(k,d){if(k==='it')return!!d&&typeof d==='object'&&typeof d.sl==='string'&&d.sl.length<3&&!!d.st&&typeof d.st==='object'&&JSON.stringify(d).length<700;if(k==='cd')return typeof d==='string'&&/^[a-z]{2,5}$/.test(d);if(k==='st')return!!d&&typeof d==='object'&&/^(hp|mp|ps|s1|s2|s3|twc|sc|hr|fe|sf|ec|nt|rs|o1|o2|o3|gm|h1|h2|h3|rt)$/.test(d.k)&&(d.n|0)>=1&&(d.n|0)<=999;return false}
+function mkOk(k,d){if(k==='it')return!!d&&typeof d==='object'&&typeof d.sl==='string'&&d.sl.length<3&&!!d.st&&typeof d.st==='object'&&JSON.stringify(d).length<700;if(k==='cd')return typeof d==='string'&&/^[a-z]{2,5}$/.test(d);if(k==='st')return!!d&&typeof d==='object'&&/^(hp|mp|ps|s1|s2|s3|twc|sc|hr|fe|sf|ec|nt|rs|o1|o2|o3|gm|h1|h2|h3|rt|d[1-8])$/.test(d.k)&&(d.n|0)>=1&&(d.n|0)<=999;return false}
 /* ===== กล่องจดหมาย: เก็บตามรหัสตัวละครถาวร (mid) · 50 ฉบับต่อกล่อง · 30 วัน (ของแนบที่ไม่ได้รับจะตีกลับผู้ส่ง) ===== */
 const MLF=path.join(DATA_DIR,'mail.json'),ML_MAX=50,ML_TTL=30*864e5,ML_DAY=60;let ML={n:1,b:{},tk:{},dy:{},dk:''},mlDirty=false;
 try{const j=JSON.parse(fs.readFileSync(MLF,'utf8'));if(j&&typeof j==='object'&&j.b&&typeof j.b==='object')ML=Object.assign(ML,j)}catch(e){}
@@ -239,7 +239,7 @@ setInterval(()=>{const now=Date.now(),dk=new Date(now+7*3600e3).toISOString().sl
   if(!mlDirty)return;mlDirty=false;wj(MLF,ML)},15000);
 function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
 /* เวอร์ชันเซิร์ฟเวอร์ (เปิด /version เช็กว่า Render ใช้โค้ดล่าสุดแล้ว) */
-const SRV_V='v422';
+const SRV_V='v423';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;

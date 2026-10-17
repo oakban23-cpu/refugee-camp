@@ -38,7 +38,7 @@ function wdrClean(c){if(!c||typeof c!=='object')return undefined;const o={o:{},s
   if(c.o&&typeof c.o==='object')Object.keys(c.o).forEach(k=>{if(WDRM[k]&&c.o[k])o.o[k]=1});
   if(c.k&&typeof c.k==='object')Object.keys(c.k).forEach(k=>{if(WDRM[k]){const v=Math.floor(+c.k[k]||0);if(v>0)o.k[k]=Math.min(999,v)}});
   const S=c.s&&typeof c.s==='object'?c.s:null;
-  WSL.forEach(([k])=>{let id=S?S[k]:(typeof c.on==='string'?c.on:'');if(!S&&k==='w'&&c.rw)id='';if(typeof id==='string'&&o.o[id]&&wdrHas(id,k))o.s[k]=id});return o}
+  WSL.forEach(([k])=>{let id=S?S[k]:(typeof c.on==='string'?c.on:'');if(!S&&k==='w'&&c.rw)id='';if(typeof id==='string'&&o.o[id]&&wdrHas(id,k))o.s[k]=id});/* v423 สีย้อมรายชิ้น */if(c.c&&typeof c.c==='object'){o.c={};['h','w','a','b'].forEach(k=>{const d=c.c[k];if(typeof d==='string'&&/^d[1-8]$/.test(d))o.c[k]=d})}return o}
 function wdrSt(){if(!me.wdr||typeof me.wdr!=='object')me.wdr={o:{},s:{},th:0,k:{}};const W=me.wdr;W.o=W.o||{};W.k=W.k||{};W.s=W.s||{};
   if(W.on!==undefined||W.rw!==undefined){if(W.on&&W.o[W.on])WSL.forEach(([k])=>{if(!(k==='w'&&W.rw)&&wdrHas(W.on,k))W.s[k]=W.on});delete W.on;delete W.rw}return W}
 const wdrOwn=id=>!!(me.wdr&&me.wdr.o&&me.wdr.o[id]);
