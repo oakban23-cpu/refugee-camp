@@ -44,8 +44,8 @@ async def main():
         rep('ใส่ทั้งชุดจากแท็บทั้งชุด',isinstance(wr,dict) and all(wr['s'].get(k)=='hrt' for k in 'hwabf') and wr['fa']==21,json.dumps(wr))
         mix=await A.ev("""()=>{const W=wdrSt();W.o.ice=1;GPV.wt='h';wardrobeUI();let b=document.querySelector('[data-wds="h:skr"]');if(!b)return 'noh';b.click();
           GPV.wt='f';wardrobeUI();const nf=document.querySelectorAll('[data-wdq^="f:"]').length;b=document.querySelector('[data-wds="f:ice"]');if(!b)return 'nof';b.click();
-          GPV.wt='a';wardrobeUI();b=document.querySelector('[data-wds="a:"]');if(!b)return 'noa';b.click();const L=myLook();return{s:W.s,h:L.h,w:L.w,a:L.a,fa:L.fa,nf,realA:lkc(me.eq.a)}}""")
-        rep('ใส่ทีละชิ้นจากคนละชุด (หมวกซากุระ · อาวุธหัวใจ · ออร่าหิมะ · เสื้อของจริง)',isinstance(mix,dict) and mix['h']==29 and mix['w']==49 and mix['fa']==3 and mix['a']==mix['realA'] and mix['nf']==sum(1 for _ in range(21)),json.dumps(mix))
+          GPV.wt='a';wardrobeUI();b=document.querySelector('[data-wds="a:"]');if(!b)return 'noa';b.click();const L=myLook();return{s:W.s,h:L.h,w:L.w,a:L.a,fa:L.fa,nf,nfa:WDR.filter(o=>(o.fa|0)>0).length,realA:lkc(me.eq.a)}}""")
+        rep('ใส่ทีละชิ้นจากคนละชุด (หมวกซากุระ · อาวุธหัวใจ · ออร่าหิมะ · เสื้อของจริง)',isinstance(mix,dict) and mix['h']==29 and mix['w']==49 and mix['fa']==3 and mix['a']==mix['realA'] and mix['nf']==mix['nfa'],json.dumps(mix))
         await A.wait(1300)
         o4=await B.ev("(u)=>{const o=others[u];return o?{wp:o.wp,hd:o.hd,fa:o.fa}:null}",A.uid)
         rep('เพื่อนเห็นชิ้นที่ผสม',o4 and o4['wp']==49 and o4['hd']==29 and o4['fa']==3,json.dumps(o4))

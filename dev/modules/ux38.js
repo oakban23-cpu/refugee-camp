@@ -6,7 +6,7 @@
      · หอยังอยู่ในวง = หอพัง: คนบนคอร่วงกระเด็น เสียเลือด 12% ฐานเสีย 18% · ทุกคนในหอมึน 0.9 วิ
      · หลบ: ฐานพาหอเดินออกจากวง หรือคนบนคอกระโดดลงกระจายตัว · คนที่ยืนในวงโดยไม่ได้อยู่หอโดน 8%
      · โฮสต์เป็นคนตัดสินว่าบอสจะเล็งเมื่อไร (fx skw) · แต่ละเครื่องเช็กตัวเองตอนฟาด */
-const SKLCD=12,SKW_R=95,SKW_W=1.4;let SKLT=0,SKLB={},SKW=[],SKF=null;
+const SKACH=['skT1','skT2','skT3','skT4'],SKLCD=12,SKW_R=95,SKW_W=1.4;let SKLT=0,SKLB={},SKW=[],SKF=null;
 function skJTimes(lv){const W=.25,F=.62+.08*lv;return{W,F,L:W+F}}
 function skJPos(J,now){const T=skJTimes(J.lv),e=(now-J.t0)/1000;if(e<T.W)return null;const p=Math.min(1,(e-T.W)/T.F),q=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
   const gx=J.sx+(J.tx-J.sx)*q,gy=J.sy+(J.ty-J.sy)*q,H0=SKH*J.lv+6,pk=30+10*J.lv,h=H0*(1-p)+pk*4*p*(1-p);return{gx,gy,h,p}}
@@ -16,7 +16,7 @@ function skLandAt(x,y,d,i,n){const A=n===1?[0]:n===2?[-.42,.42]:[-.7,0,.7],a=A[i
 /* ---- ฐานกดโยน ---- */
 function skLaunch(){if(!SKB0||me.down>0)return;const now=performance.now();if(now<SKLT){banner={s:'🤸 โยนได้อีกครั้งใน '+Math.ceil((SKLT-now)/1000)+' วิ',t:1.5};return}
   const R=skRiders(uid).map(r=>r.u).slice(0,SKMAX);if(!R.length)return;SKLT=now+SKLCD*1000;const d=Math.cos(me.face)<0?-1:1;
-  try{fx({k:'skl',R,x:Math.round(me.x),y:Math.round(me.y),d})}catch(e){}}
+  skStat('twl');try{fx({k:'skl',R,x:Math.round(me.x),y:Math.round(me.y),d})}catch(e){}}
 function skLaunchFx(o){if(!o||!Array.isArray(o.R)||!o.R.length)return;const now=performance.now(),n=Math.min(SKMAX,o.R.length),d=o.d<0?-1:1;
   SKLB[o.by]={t0:now};
   o.R.slice(0,n).forEach((u,k)=>{if(typeof u!=='string')return;const lv=k+1,T=skLandAt(o.x,o.y,d,lv,n);
@@ -33,6 +33,7 @@ function skLand(u,J){J.land=1;const x=J.tx,y=J.ty,R=64+12*J.n+8*J.lv,col=['#ffe0
   /* เครื่องของคนที่ลง: ดาเมจวงรอบจุดลง */
   const mul=1.5+.45*J.n+.3*J.lv,ck=me.cls==='sup'?'holy':me.cls==='assn'?'assn':me.cls==='mage'?'mage':me.cls==='archer'?'archer':'melee';let hit=0;
   try{mons.forEach(m=>{if(!m||m.hp<=0||m.ally)return;const dd=Math.hypot(m.x-x,m.y-y);if(dd>R+(m.t===3?30:8))return;const f=1-.4*Math.min(1,dd/R);addHit(m,pd()*mul*f,0,1,ck);hit++})}catch(e){}
+  skStat('twl');skStat('tws',hit,1);
   try{dn.push({x,y:y-46,v:'💥 กระแทก ×'+mul.toFixed(1)+(hit?' · '+hit+' ตัว':''),t:1.2,col})}catch(e){}
   try{me.inv3=Math.max(me.inv3||0,.25)}catch(e){}}
 function skJTick(){const now=performance.now();for(const u in SKJ){const J=SKJ[u],T=skJTimes(J.lv),e=(now-J.t0)/1000;
@@ -68,7 +69,7 @@ function skwResolve(W){W.done=1;const x=W.x,y=W.y,r=W.r;
     try{hurt(me.mh*(rider?.12:.18))}catch(e){}SKF={t:.9,x:me.x,y:me.y};banner={s:'💥 หอถูกบอสกวาดล้ม! '+(rider?'ร่วงลงมา':'ทุกคนร่วง')+' · มึน 0.9 วิ',t:2.5};
     try{dn.push({x:me.x,y:me.y-52,v:'💫 หอพัง!',t:1.2,col:'#ff8a6a'})}catch(e){}return}
   if(Math.hypot(me.x-x,me.y-y)<r){try{hurt(me.mh*.08)}catch(e){}return}
-  if(base)try{dn.push({x:me.x,y:me.y-56,v:'✨ หลบทัน!',t:1,col:'#a8f0a8'})}catch(e){}}
+  if(base){skStat('twd');try{dn.push({x:me.x,y:me.y-56,v:'✨ หลบทัน!',t:1,col:'#a8f0a8'})}catch(e){}}}
 function skwTick(dt){const now=performance.now();SKW.forEach(W=>{if(!W.done&&now-W.t0>=W.w*1000)skwResolve(W)});SKW=SKW.filter(W=>now-W.t0<W.w*1000+600);
   if(SKF){SKF.t-=dt||0;if(SKF.t<=0)SKF=null}}
 /* วงเตือน */
@@ -123,5 +124,7 @@ setTimeout(()=>{
   /* ดาวมึนเหนือหัว */
   try{const _p2=drawP;drawP=function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const r=_p2.apply(this,arguments);try{if(SKF&&lk&&lk.u===uid&&!down){const t=performance.now()/1000;g.save();g.font='10px system-ui';g.textAlign='center';for(let i=0;i<3;i++){const a=t*5+i*2.09;g.fillText('⭐',x+Math.cos(a)*11,y-40+Math.sin(a)*3.5)}g.restore()}}catch(e){}return r}}catch(e){}
   setInterval(()=>{try{sklUI()}catch(e){}},150);
+  /* v422 ปลดฉายาหอครบ 4 แบบ → ได้ชุดแฟชั่น «ชุดหอคอยมนุษย์» */
+  setInterval(()=>{try{if(me.cls&&me.ach&&SKACH.every(k=>me.ach[k])&&!wdrOwn('tow'))wdrGive('tow','ปลดฉายาหอขี่คอครบ 4 แบบ')}catch(e){}},2000);
   setInterval(()=>{try{skwHost()}catch(e){}},500);
 },820);

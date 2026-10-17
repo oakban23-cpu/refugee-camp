@@ -30,7 +30,9 @@ function skPos(u){if(u===uid)return{x:me.x,y:me.y,d:Math.cos(me.face)<0?-1:1,hp:
 function skNm(u){if(u===uid)return me.nm||myName||'คุณ';const o=others[u];if(o)return o.n;try{const m=PTY&&PTY.mem.find(q=>q.u===u);if(m)return m.n}catch(e){}return'เพื่อน'}
 function skBase(u){return skRoot(u)}
 /* ปีนขึ้น */
-function skClimb(u){if(!me.cls||me.down>0)return;let ip=false;try{ip=inPty(u)}catch(e){}if(!ip){banner={s:'🧗 ขี่คอได้เฉพาะเพื่อนในปาร์ตี้',t:2.5};return}
+/* v422 สถิติหอ (บันทึกใน me.stt: twf หอเต็มตอนเป็นฐาน · tws มอนโดนกระแทกมากสุดใน 1 ครั้ง · twd หลบบอสกวาด · twl ร่วมท่าโยน) */
+function skStat(k,v,mx){try{me.stt=me.stt||{};me.stt[k]=mx?Math.max(me.stt[k]|0,v|0):(me.stt[k]|0)+(v||1)}catch(e){}}
+function skClimb(u){if(!me.cls||me.down>0)return;if(isArena()){banner={s:'🧗 ลานประลองห้ามขี่คอต่อตัว',t:2.5};return}let ip=false;try{ip=inPty(u)}catch(e){}if(!ip){banner={s:'🧗 ขี่คอได้เฉพาะเพื่อนในปาร์ตี้',t:2.5};return}
   if(SKE.b){banner={s:'🧗 กำลังขี่คออยู่แล้ว · ลงก่อน',t:2};return}
   if(me.riding||(typeof RDE!=='undefined'&&RDE.on)){banner={s:'🧗 ลงจากสัตว์ขี่ก่อน',t:2};return}
   if(skRiders(uid).length){banner={s:'🧗 มีคนขี่คอคุณอยู่ · ให้ลงก่อนถึงจะไปขี่คอคนอื่นได้',t:2.5};return}
@@ -43,7 +45,7 @@ function skClimb(u){if(!me.cls||me.down>0)return;let ip=false;try{ip=inPty(u)}ca
   /* v421 ทุกเครื่องเห็นตีลังกาจากจุดที่ยืนขึ้นไปนั่งบนหอ */try{fx({k:'skc',b,sx:Math.round(me.x),sy:Math.round(me.y)})}catch(e){}}
 function skDrop(msg){if(!SKE.b)return;const P=skPos(skRoot(uid));SKE.b='';SKE.id='';if(P){me.x=P.x+(Math.random()<.5?-1:1)*(18+Math.random()*14);me.y=P.y+10}if(msg)banner={s:msg,t:3};try{sfx('click')}catch(e){}}
 /* คนขี่: ล็อกตำแหน่งตามฐาน */
-function skTick(dt){if(!SKE.b)return;const RB=skRoot(uid),o=others[RB];
+function skTick(dt){if(!SKE.b)return;if(isArena())return skDrop('🧗 ลานประลองห้ามขี่คอ · ลงจากคอแล้ว');const RB=skRoot(uid),o=others[RB];
   if(!o||RB===uid){SKE.lost++;if(SKE.lost>30)skDrop('🧗 '+skNm(SKE.b)+' ไปที่อื่นแล้ว · ลงจากคอ');return}SKE.lost=0;
   let ip=true;try{ip=inPty(RB)}catch(e){}if(!ip)return skDrop('🧗 ไม่ได้อยู่ปาร์ตี้เดียวกันแล้ว · ลงจากคอ');
   if(o.hp<=0)return skDrop('🧗 '+o.n+' ล้ม! หอพังลงมา');if(o.mt>0)return skDrop('🧗 '+o.n+' ขึ้นสัตว์ขี่ · ลงจากคอ');if(me.down>0)return skDrop('');
@@ -52,14 +54,14 @@ function skTick(dt){if(!SKE.b)return;const RB=skRoot(uid),o=others[RB];
 /* ฐาน: เช็กคนขึ้น/ลง เพื่อแจ้ง */
 let SKSEEN='',SKB0=0,SKBT=0;
 function skBaseNo(){const n=performance.now();if(n-SKBT>1500){SKBT=n;try{dn.push({x:me.x,y:me.y-58,v:'🛡️ เป็นฐานอยู่ — โจมตี/หลบไม่ได้',t:1,col:'#ffe08a'})}catch(e){}}}
-function skBaseWatch(){const RR=skRiders(uid).filter(r=>!skJumping(r.u)),R=RR.map(r=>r.u).join(',');const was=SKB0;SKB0=RR.length>0?1:0;if(SKB0&&!was)try{me.cast=null}catch(e){}if(R===SKSEEN)return;const old=SKSEEN?SKSEEN.split(','):[],now=R?R.split(','):[];SKSEEN=R;
+function skBaseWatch(){const RR=skRiders(uid).filter(r=>!skJumping(r.u)),R=RR.map(r=>r.u).join(',');if(RR.length>=SKMAX&&(SKSEEN?SKSEEN.split(',').length:0)<SKMAX&&R!==SKSEEN)skStat('twf');const was=SKB0;SKB0=RR.length>0?1:0;if(SKB0&&!was)try{me.cast=null}catch(e){}if(R===SKSEEN)return;const old=SKSEEN?SKSEEN.split(','):[],now=R?R.split(','):[];SKSEEN=R;
   now.filter(u=>old.indexOf(u)<0).forEach(u=>{banner={s:'🧗 '+skNm(u)+' ขึ้นขี่คอคุณ · 🛡️ คุณเป็นฐาน: เดินพาหอ + รับดาเมจแทนทุกคน (โจมตีไม่ได้) ('+now.length+'/'+SKMAX+')',t:4}})}
 /* ป้ายชื่อรวมของหอ (ฐาน) */
 function skTag(x,yTop,name,hp,mh,n){g.save();g.globalAlpha=1;g.font='bold 11px system-ui';g.textAlign='center';const tx='🛡️ '+name+' · 🧗'+n,w=g.measureText(tx).width;
   g.fillStyle='rgba(12,9,16,.5)';g.beginPath();g.roundRect(x-w/2-7,yTop-12,w+14,15,7);g.fill();g.lineWidth=2.5;g.strokeStyle='rgba(10,6,4,.8)';g.strokeText(tx,x,yTop);g.fillStyle='#ffe6a8';g.fillText(tx,x,yTop);
   g.fillStyle='#000';g.fillRect(x-18,yTop+5,36,4);g.fillStyle=hp/mh<.3?'#ff5a4a':'#6fd06a';g.fillRect(x-18,yTop+5,36*Math.max(0,Math.min(1,hp/(mh||1))),4);g.restore()}
 /* ปุ่ม 🧗 ในแถบปาร์ตี้ */
-function skBtn(u,far){if(far||!me.cls)return'';const on=SKE.b&&(SKE.b===u||skRoot(u)===skRoot(uid));return'<span class="skb'+(on?' on':'')+'" data-sk="'+esc(u)+'" title="ขี่คอ">🧗</span>'}
+function skBtn(u,far){if(far||!me.cls||isArena())return'';const on=SKE.b&&(SKE.b===u||skRoot(u)===skRoot(uid));return'<span class="skb'+(on?' on':'')+'" data-sk="'+esc(u)+'" title="ขี่คอ">🧗</span>'}
 setTimeout(()=>{
   try{const st=document.createElement('style');st.textContent='#ptyhud .pr{position:relative}#ptyhud .skb{position:absolute;right:2px;top:2px;pointer-events:auto;font-size:13px;line-height:1;padding:3px 3px 2px;border-radius:6px;background:rgba(255,224,138,.18);border:1px solid rgba(255,224,138,.55);cursor:pointer}#ptyhud .skb.on{background:rgba(160,255,160,.3);border-color:#a8f0a8}#ptyhud .pr b{padding-right:20px}';document.head.appendChild(st)}catch(e){}
   document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-sk]');if(!b)return;e.stopPropagation();e.preventDefault();const u=b.dataset.sk;
