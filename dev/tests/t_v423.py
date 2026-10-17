@@ -39,7 +39,7 @@ async def main():
         # ===== ท่าคู่ =====
         await B.ev("(u)=>{const o=others[u];me.x=o.x+50;me.y=o.y}",A.uid);await Dd.ev("(u)=>{const o=others[u];me.x=o.x-60;me.y=o.y+10}",A.uid);await A.wait(1200)
         await A.ev("(u)=>{window.__pn=()=>u}",B.uid)
-        await A.ev("()=>{const _n=peNear;peNear=function(){return window.__pn()}}")
+        await A.ev("()=>{peList=function(){return[{u:window.__pn(),n:'x',d:10,pt:true}]};PECD.t=0;PECD.blk={}}")
         await A.ev("()=>peUse('hf')");await A.wait(700)
         st=[await c.ev("([a,b])=>[!!PE[a],!!PE[b],PE[a]&&PE[a].e]",[A.uid,B.uid]) for c in (A,B,Cc)]
         rep('ไฮไฟว์กับเพื่อนในปาร์ตี้ → เล่นทันที ทุกเครื่องเห็น',all(s[0] and s[1] and s[2]=='hf' for s in st),json.dumps(st))
@@ -48,7 +48,7 @@ async def main():
         rep('สองคนหันหากันและขยับเข้าหากัน',vw2 is not None and vw2[0]<0 and vw2[1]==-1,json.dumps([vw,vw2]))
         await A.wait(2200)
         await A.ev("(u)=>{window.__pn=()=>u}",Dd.uid)
-        await A.ev("()=>peUse('hg')");await A.wait(700)
+        await A.ev("()=>{PECD.t=0;PECD.blk={};peUse('hg')}");await A.wait(700)
         q=await Dd.ev("()=>{pebUI();const b=$('peb');return [PER.u,PER.e,b&&!b.hidden]}")
         rep('คนนอกปาร์ตี้ต้องกดรับก่อน (ปุ่ม ✅)',q[0]==A.uid and q[1]=='hg' and q[2],json.dumps(q))
         await Dd.ev("()=>$('peb').click()");await A.wait(700)

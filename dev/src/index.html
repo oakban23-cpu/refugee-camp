@@ -13360,7 +13360,20 @@ const dyOf=(v,sl)=>{const k=DYS.indexOf(sl);if(k<0||!v)return null;const i=(v>>(
 function dyFilter(d){if(!d)return'';if(d[0]==='d8'){const h=(performance.now()/1000*80)%360;return'sepia(1) saturate(4) hue-rotate('+Math.round(h)+'deg) brightness(1.12)'}return d[3]}
 /* วาด: ใส่ filter รอบการวาดแต่ละชิ้น */
 let CHDY=0;
-function dyWrap(fn,sl){return function(){const d=CHDY&&(!LOWQ||LQOTH)?dyOf(CHDY,sl):null;/* โหมดประหยัดจริงไม่ย้อม · ขั้น 1 ยังเห็นสีคนอื่น */if(!d||!('filter' in g))return fn.apply(this,arguments);const f0=g.filter;g.filter=dyFilter(d);try{return fn.apply(this,arguments)}finally{g.filter=f0}}}
+/* v424 เบราว์เซอร์ที่ไม่รองรับ ctx.filter (เช่น Safari ก่อน 18) → ย้อมแบบสำรอง: วาดชิ้นลงแคนวาสพัก แล้วผสมสีด้วยโหมด color/multiply/screen ตัดขอบตามรูปชิ้น */
+let DYFOK=(()=>{try{const c=document.createElement('canvas');c.width=c.height=2;const x=c.getContext('2d');if(!('filter' in x))return false;x.filter='invert(1)';x.fillStyle='#fff';x.fillRect(0,0,2,2);return x.getImageData(0,0,1,1).data[0]<128}catch(e){return false}})();
+const DYC={d1:['color','#d8342a'],d2:['color','#2f7fe0'],d3:['color','#2fbf5a'],d4:['color','#ff8fc8'],d5:['multiply','#4a4a54'],d6:['screen','#bdbdc4'],d7:['color','#ffc81e']},DYB=[{},{}];
+function dyBuf(i,w,h){const B=DYB[i];if(!B.c||B.c.width!==w||B.c.height!==h){B.c=document.createElement('canvas');B.c.width=w;B.c.height=h;B.x=B.c.getContext('2d')}return B}
+function dyTint(d,fn,self,args){const G0=g,C=G0.canvas;if(!C||C.width*C.height>640*640)return fn.apply(self,args);/* วาดบนแคนวาสใหญ่ (นอกก้อนแสงเงา) = ข้าม กันช้า */
+  const w=C.width,h=C.height,A=dyBuf(0,w,h),B=dyBuf(1,w,h);A.x.setTransform(1,0,0,1,0,0);A.x.globalCompositeOperation='source-over';A.x.globalAlpha=1;A.x.clearRect(0,0,w,h);A.x.setTransform(G0.getTransform());
+  A.x.lineJoin=G0.lineJoin;A.x.lineCap=G0.lineCap;A.x.lineWidth=G0.lineWidth;A.x.strokeStyle=G0.strokeStyle;A.x.fillStyle=G0.fillStyle;A.x.globalAlpha=G0.globalAlpha;
+  let r;g=A.x;try{r=fn.apply(self,args)}finally{g=G0}
+  const T=d[0]==='d8'?['color','hsl('+Math.round((performance.now()/1000*80)%360)+',85%,55%)']:DYC[d[0]];
+  B.x.setTransform(1,0,0,1,0,0);B.x.globalAlpha=1;B.x.globalCompositeOperation='copy';B.x.drawImage(A.c,0,0);B.x.globalCompositeOperation=T[0];B.x.fillStyle=T[1];B.x.fillRect(0,0,w,h);
+  B.x.globalCompositeOperation='destination-in';B.x.drawImage(A.c,0,0);B.x.globalCompositeOperation='source-over';
+  G0.save();G0.setTransform(1,0,0,1,0,0);G0.globalAlpha=1;G0.globalCompositeOperation='source-over';G0.drawImage(B.c,0,0);G0.restore();return r}
+function dyWrap(fn,sl){return function(){const d=CHDY&&(!LOWQ||LQOTH)?dyOf(CHDY,sl):null;/* โหมดประหยัดจริงไม่ย้อม · ขั้น 1 ยังเห็นสีคนอื่น */if(!d)return fn.apply(this,arguments);
+    if(!DYFOK)return dyTint(d,fn,this,arguments);const f0=g.filter;g.filter=dyFilter(d);try{return fn.apply(this,arguments)}finally{g.filter=f0}}}
 /* ---- ผสม / ย้อม ---- */
 function dyCan(d){const R=DYM[d].r;for(const k in R)if(((me.gth&&me.gth.m&&me.gth.m[k])|0)<R[k])return false;return me.gold>=DYM[d].g}
 function dyCraft(d){const D=DYM[d];if(!D||!dyCan(d))return'วัตถุดิบหรือทองไม่พอ';for(const k in D.r)me.gth.m[k]-=D.r[k];me.gold-=D.g;dyAdd(d,1);
@@ -13409,16 +13422,28 @@ setTimeout(()=>{
 const PEL={hf:['🙌','ไฮไฟว์',2.2,22],hg:['🤗','กอด',2.8,12],ps:['📸','โพสคู่',3.2,26]},PE={},PER={u:'',e:'',n:'',t:0},PEW={to:'',t:0};
 function peName(u){if(u===uid)return me.nm||myName||'คุณ';const o=others[u];return o?o.n:'เพื่อน'}
 function pePt(u){if(u===uid)return{x:me.x,y:me.y};const o=others[u];return o?{x:o.x,y:o.y}:null}
-function peNear(){let best='',bd=120;for(const k in others){const o=others[k];if(!o||o.hp<=0)continue;const d=Math.hypot(o.x-me.x,o.y-me.y);if(d<bd){bd=d;best=k}}return best}
+/* v424 รายชื่อคนรอบตัว (≤160) — เพื่อนในปาร์ตี้ขึ้นก่อน แล้วเรียงตามระยะ */
+function peList(){const L=[];for(const k in others){const o=others[k];if(!o||o.hp<=0)continue;const d=Math.hypot(o.x-me.x,o.y-me.y);if(d>160)continue;let pt=false;try{pt=inPty(k)}catch(_){}L.push({u:k,n:String(o.n||'ผู้เล่น'),d,pt})}return L.sort((a,b)=>(b.pt-a.pt)||(a.d-b.d)).slice(0,6)}
+function peNear(){const L=peList();return L.length?L[0].u:''}
 function peTrusted(u,n){let ok=false;try{ok=typeof inPty==='function'&&inPty(u)}catch(e){}if(!ok)try{ok=friSt().L.some(f=>f&&f.n===n)}catch(e){}return ok}
-function peUse(e){if(!me.cls||!run||me.down>0||!PEL[e])return;try{emoClose()}catch(_){}if(SKE.b||SKB0){banner={s:'🤝 ลงจากหอขี่คอก่อน',t:2};return}
-  const u=peNear();if(!u){banner={s:PEL[e][0]+' ต้องยืนใกล้ผู้เล่นอื่น (ไม่เกิน ~3 ก้าว)',t:2.5};return}
-  if(me.riding)try{mountToggle()}catch(_){}PEW.to=u;PEW.t=performance.now()+8000;try{fx({k:'peq',to:u,e,n:me.nm||myName||''})}catch(_){}
+/* v424 กันชวนรัว: พัก 5 วิ ต่อการชวน · ชวนคนเดิมที่ยังไม่ตอบรับซ้ำได้หลัง 30 วิ */
+const PECD={t:0,blk:{}},PEIN={};
+function peUse(e){if(!me.cls||!run||me.down>0||!PEL[e])return;if(SKE.b||SKB0){try{emoClose()}catch(_){}banner={s:'🤝 ลงจากหอขี่คอก่อน',t:2};return}
+  const L=peList();if(!L.length){try{emoClose()}catch(_){}banner={s:PEL[e][0]+' ต้องยืนใกล้ผู้เล่นอื่น (ไม่เกิน ~3 ก้าว)',t:2.5};return}
+  if(L.length===1){try{emoClose()}catch(_){}return peAsk(L[0].u,e)}
+  /* หลายคน: ให้เลือกในแผงท่าทาง */
+  const p=$('emp');if(!p)return peAsk(L[0].u,e);
+  p.innerHTML='<div style="grid-column:1/-1;font-size:12px;font-weight:700;padding:2px 4px">'+PEL[e][0]+' '+PEL[e][1]+'กับใคร?</div>'+L.map(q=>'<button data-pp="'+esc(q.u)+'|'+e+'" style="grid-column:span 5;flex-direction:row;justify-content:flex-start;gap:6px;padding:7px 9px"><span style="font-size:15px">'+(q.pt?'👥':'🙂')+'</span><small style="font-size:12px;opacity:1">'+esc(q.n.length>14?q.n.slice(0,13)+'…':q.n)+(q.pt?' · ปาร์ตี้':'')+'</small></button>').join('')+'<button data-pp="x" style="grid-column:span 5;padding:5px"><small>ยกเลิก</small></button>';p.hidden=false}
+function peAsk(u,e){const now=performance.now();if(!u||!PEL[e])return;
+  if(now<PECD.t){banner={s:'🤝 รออีก '+Math.ceil((PECD.t-now)/1000)+' วิ ค่อยชวนใหม่',t:1.8};return}
+  const b=PECD.blk[u];if(b&&now<b){banner={s:'🤝 เพิ่งชวน '+peName(u)+' ไป · ชวนซ้ำได้ใน '+Math.ceil((b-now)/1000)+' วิ',t:2.2};return}
+  PECD.t=now+5000;PECD.blk[u]=now+30000;if(me.riding)try{mountToggle()}catch(_){}PEW.to=u;PEW.t=now+8000;try{fx({k:'peq',to:u,e,n:me.nm||myName||''})}catch(_){}
   banner={s:PEL[e][0]+' ชวน '+peName(u)+' '+PEL[e][1]+' · รอตอบรับ…',t:3}}
 function peStartFx(o){if(!o||typeof o.a!=='string'||typeof o.b!=='string'||!PEL[o.e])return;const now=performance.now();
-  PE[o.a]={p:o.b,e:o.e,t0:now,r:0,clap:0};PE[o.b]={p:o.a,e:o.e,t0:now,r:1,clap:0};if(o.a===uid||o.b===uid){PEW.to='';PER.u=''}}
+  PE[o.a]={p:o.b,e:o.e,t0:now,r:0,clap:0};PE[o.b]={p:o.a,e:o.e,t0:now,r:1,clap:0};if(o.a===uid||o.b===uid){PEW.to='';PER.u='';delete PECD.blk[o.a===uid?o.b:o.a]}}
 function peFx(o){if(!o)return;if(o.k==='pes')return peStartFx(o);if(o.to!==uid||!me.cls)return;const n=typeof o.n==='string'?o.n.slice(0,24):'';
   if(o.k==='peq'){if(!PEL[o.e]||me.down>0)return;if(peTrusted(o.by,n)){try{fx({k:'pes',a:o.by,b:uid,e:o.e})}catch(_){}return}
+    /* v424 ฝั่งรับกันโดนรัว: คนเดิมชวนได้ครั้งเดียวทุก 20 วิ · มีคำชวนค้างอยู่ = ไม่รับคำชวนใหม่ */const nw=performance.now();if((PEIN[o.by]&&nw-PEIN[o.by]<20000)||(PER.u&&PER.u!==o.by&&nw<PER.t))return;PEIN[o.by]=nw;
     PER.u=o.by;PER.e=o.e;PER.n=n||peName(o.by);PER.t=performance.now()+8000;banner={s:PEL[o.e][0]+' '+PER.n+' ชวน'+PEL[o.e][1]+' — กด ✅ เพื่อรับ',t:4};try{sfx('quest')}catch(_){}}
   else if(o.k==='pen'&&PEW.to===o.by){PEW.to='';banner={s:'🤝 อีกฝ่ายไม่สะดวกตอนนี้',t:2}}}
 /* ปุ่มรับ (ลอยเหนือปุ่มขี่/ซ้อนท้าย) */
@@ -13447,7 +13472,9 @@ function phOn(){if(!me.cls||!run)return;try{emoClose()}catch(_){}phCSS();PH.on=1
 function phOff(){PH.on=0;PH.drag=null;document.body.classList.remove('phm');const b=$('phb');if(b)b.hidden=true;const v=$('phv');if(v)v.remove()}
 function phShot(){try{const c=$('c'),u=c.toDataURL('image/png');try{sfx('combo')}catch(_){}PHF.t=performance.now();
     let v=$('phv');if(v)v.remove();v=document.createElement('div');v.id='phv';v.innerHTML='<img alt="ภาพที่ถ่าย"><small>กดค้างที่ภาพเพื่อบันทึก (มือถือ) หรือกดปุ่มดาวน์โหลด</small><div style="display:flex;gap:8px"><a download="refugee-photo.png">⬇️ ดาวน์โหลด</a><button>กลับไปถ่ายต่อ</button></div>';
-    v.querySelector('img').src=u;v.querySelector('a').href=u;v.querySelector('button').onclick=e=>{e.stopPropagation();v.remove()};v.addEventListener('click',e=>e.stopPropagation(),true);document.body.appendChild(v)}catch(e){banner={s:'📸 บันทึกภาพไม่ได้ในเบราว์เซอร์นี้',t:2.5}}}
+    v.querySelector('img').src=u;const A=v.querySelector('a');A.href=u;A.addEventListener('click',ev=>{if(!(window.claude&&window.claude.use))return;ev.preventDefault();phSave(u).then(ok=>{if(!ok)banner={s:'📸 กดค้างที่ภาพเพื่อบันทึกแทน',t:3}})});v.querySelector('button').onclick=e=>{e.stopPropagation();v.remove()};v.addEventListener('click',e=>e.stopPropagation());document.body.appendChild(v)}catch(e){banner={s:'📸 บันทึกภาพไม่ได้ในเบราว์เซอร์นี้',t:2.5}}}
+/* v424 หน้าเว็บบน claude.ai ดาวน์โหลดผ่านความสามารถ downloads (ผู้ใช้กดยืนยัน) · เว็บปกติใช้ลิงก์ดาวน์โหลดตรง */
+async function phSave(u){try{const d=await window.claude.use('downloads');if(!d)return false;const b=await (await fetch(u)).blob();await d.save({filename:'refugee-photo.png',data:b});return true}catch(e){return!!(e&&(e.code==='declined'||e.code==='rate_limited'))}}
 const PHF={t:0},PHB={c:null,x:null,ok:0};
 function phDrag(){const c=$('c');if(!c||c.__ph)return;c.__ph=1;const P=e=>{const t=e.touches?e.touches[0]:e;return[t.clientX,t.clientY]};
   const dn=e=>{if(!PH.on)return;const p=P(e);PH.drag={x:p[0],y:p[1],ox:PH.ox,oy:PH.oy};e.stopPropagation();e.preventDefault()};
@@ -13473,6 +13500,7 @@ setTimeout(()=>{
   /* แถวท่าคู่ + ปุ่มถ่ายรูปในเมนูท่าทาง */
   try{const _et=emoToggle;emoToggle=function(){_et.apply(this,arguments);const p=$('emp');if(!p||p.hidden||p.querySelector('[data-pe]'))return;
       p.insertAdjacentHTML('beforeend',Object.keys(PEL).map(k=>'<button data-pe="'+k+'" title="'+PEL[k][1]+' (กับคนที่ยืนใกล้สุด)"><span>'+PEL[k][0]+'</span><small>'+PEL[k][1]+'</small></button>').join('')+'<button data-pe="photo" title="โหมดถ่ายรูป"><span>📷</span><small>ถ่ายรูป</small></button>')}}catch(e){}
+  document.addEventListener('click',e=>{const q=e.target.closest&&e.target.closest('[data-pp]');if(q){e.stopPropagation();e.preventDefault();try{emoClose()}catch(_){}const v=q.dataset.pp;if(v!=='x'){const k=v.lastIndexOf('|');peAsk(v.slice(0,k),v.slice(k+1))}return}},true);
   document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-pe]');if(!b)return;e.stopPropagation();e.preventDefault();const k=b.dataset.pe;if(k==='photo')phOn();else peUse(k)},true);
   try{const _h=handleFx;handleFx=function(o){if(o&&(o.k==='peq'||o.k==='pes'||o.k==='pen')){try{peFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
   /* ท่าทาง: หันหากัน · ขยับเข้าหากัน · ท่าเฉพาะ */

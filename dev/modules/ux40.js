@@ -23,7 +23,20 @@ const dyOf=(v,sl)=>{const k=DYS.indexOf(sl);if(k<0||!v)return null;const i=(v>>(
 function dyFilter(d){if(!d)return'';if(d[0]==='d8'){const h=(performance.now()/1000*80)%360;return'sepia(1) saturate(4) hue-rotate('+Math.round(h)+'deg) brightness(1.12)'}return d[3]}
 /* วาด: ใส่ filter รอบการวาดแต่ละชิ้น */
 let CHDY=0;
-function dyWrap(fn,sl){return function(){const d=CHDY&&(!LOWQ||LQOTH)?dyOf(CHDY,sl):null;/* โหมดประหยัดจริงไม่ย้อม · ขั้น 1 ยังเห็นสีคนอื่น */if(!d||!('filter' in g))return fn.apply(this,arguments);const f0=g.filter;g.filter=dyFilter(d);try{return fn.apply(this,arguments)}finally{g.filter=f0}}}
+/* v424 เบราว์เซอร์ที่ไม่รองรับ ctx.filter (เช่น Safari ก่อน 18) → ย้อมแบบสำรอง: วาดชิ้นลงแคนวาสพัก แล้วผสมสีด้วยโหมด color/multiply/screen ตัดขอบตามรูปชิ้น */
+let DYFOK=(()=>{try{const c=document.createElement('canvas');c.width=c.height=2;const x=c.getContext('2d');if(!('filter' in x))return false;x.filter='invert(1)';x.fillStyle='#fff';x.fillRect(0,0,2,2);return x.getImageData(0,0,1,1).data[0]<128}catch(e){return false}})();
+const DYC={d1:['color','#d8342a'],d2:['color','#2f7fe0'],d3:['color','#2fbf5a'],d4:['color','#ff8fc8'],d5:['multiply','#4a4a54'],d6:['screen','#bdbdc4'],d7:['color','#ffc81e']},DYB=[{},{}];
+function dyBuf(i,w,h){const B=DYB[i];if(!B.c||B.c.width!==w||B.c.height!==h){B.c=document.createElement('canvas');B.c.width=w;B.c.height=h;B.x=B.c.getContext('2d')}return B}
+function dyTint(d,fn,self,args){const G0=g,C=G0.canvas;if(!C||C.width*C.height>640*640)return fn.apply(self,args);/* วาดบนแคนวาสใหญ่ (นอกก้อนแสงเงา) = ข้าม กันช้า */
+  const w=C.width,h=C.height,A=dyBuf(0,w,h),B=dyBuf(1,w,h);A.x.setTransform(1,0,0,1,0,0);A.x.globalCompositeOperation='source-over';A.x.globalAlpha=1;A.x.clearRect(0,0,w,h);A.x.setTransform(G0.getTransform());
+  A.x.lineJoin=G0.lineJoin;A.x.lineCap=G0.lineCap;A.x.lineWidth=G0.lineWidth;A.x.strokeStyle=G0.strokeStyle;A.x.fillStyle=G0.fillStyle;A.x.globalAlpha=G0.globalAlpha;
+  let r;g=A.x;try{r=fn.apply(self,args)}finally{g=G0}
+  const T=d[0]==='d8'?['color','hsl('+Math.round((performance.now()/1000*80)%360)+',85%,55%)']:DYC[d[0]];
+  B.x.setTransform(1,0,0,1,0,0);B.x.globalAlpha=1;B.x.globalCompositeOperation='copy';B.x.drawImage(A.c,0,0);B.x.globalCompositeOperation=T[0];B.x.fillStyle=T[1];B.x.fillRect(0,0,w,h);
+  B.x.globalCompositeOperation='destination-in';B.x.drawImage(A.c,0,0);B.x.globalCompositeOperation='source-over';
+  G0.save();G0.setTransform(1,0,0,1,0,0);G0.globalAlpha=1;G0.globalCompositeOperation='source-over';G0.drawImage(B.c,0,0);G0.restore();return r}
+function dyWrap(fn,sl){return function(){const d=CHDY&&(!LOWQ||LQOTH)?dyOf(CHDY,sl):null;/* โหมดประหยัดจริงไม่ย้อม · ขั้น 1 ยังเห็นสีคนอื่น */if(!d)return fn.apply(this,arguments);
+    if(!DYFOK)return dyTint(d,fn,this,arguments);const f0=g.filter;g.filter=dyFilter(d);try{return fn.apply(this,arguments)}finally{g.filter=f0}}}
 /* ---- ผสม / ย้อม ---- */
 function dyCan(d){const R=DYM[d].r;for(const k in R)if(((me.gth&&me.gth.m&&me.gth.m[k])|0)<R[k])return false;return me.gold>=DYM[d].g}
 function dyCraft(d){const D=DYM[d];if(!D||!dyCan(d))return'วัตถุดิบหรือทองไม่พอ';for(const k in D.r)me.gth.m[k]-=D.r[k];me.gold-=D.g;dyAdd(d,1);

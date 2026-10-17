@@ -239,7 +239,7 @@ setInterval(()=>{const now=Date.now(),dk=new Date(now+7*3600e3).toISOString().sl
   if(!mlDirty)return;mlDirty=false;wj(MLF,ML)},15000);
 function mkReply(c,k,d){send(c,JSON.stringify({t:'emit',k,d:{mp:c.p?c.p.mp:0,d},from:0}))}
 /* เวอร์ชันเซิร์ฟเวอร์ (เปิด /version เช็กว่า Render ใช้โค้ดล่าสุดแล้ว) */
-const SRV_V='v423';
+const SRV_V='v424';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
