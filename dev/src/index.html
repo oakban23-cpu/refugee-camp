@@ -428,43 +428,35 @@ body.u3c #topb,body.u3c #clog{opacity:.1;transition:opacity .2s}
 </div>
 <script>
 /* ตัวเชื่อมออนไลน์: ทำให้ claude.use('room') ทำงานผ่านเซิร์ฟเวอร์กลางของเรา (WebSocket) */
-function localRoom(H){
-  const ch=new BroadcastChannel('refugee_local_v1'),peers={},R={hostUid:'',count:1,allPlayers:null,ok:true,url:'',local:true};
-  let pres=null,cb=null;
-  const post=o=>{try{ch.postMessage(o)}catch(e){}};
-  function alive(){const n=Date.now();Object.keys(peers).forEach(u=>{if(n-peers[u].t>2500)delete peers[u]});return Object.values(peers)}
-  function refresh(){
-    const l=alive().filter(x=>pres&&(x.p.mp||1)===(pres.mp||1)).map(x=>x.p.uid);
-    if(pres){l.push(pres.uid);R.hostUid=l.sort()[0];R.count=l.length}
-    cb&&cb({peers:alive().map(x=>({presence:x.p}))})}
-  ch.onmessage=e=>{const m=e.data;if(!m)return;
-    if(m.t==='pres'&&m.p&&m.p.uid){peers[m.p.uid]={p:m.p,t:Date.now()};refresh()}
-    else if(m.t==='bye'){delete peers[m.u];refresh()}
-    else if(m.t==='emit'&&H[m.k])H[m.k].forEach(f=>f({data:m.d,sameTab:false,from:m.from}))};
-  setInterval(refresh,500);
-  addEventListener('pagehide',()=>{if(pres)post({t:'bye',u:pres.uid})});
-  return Object.assign(R,{
-    onPeers:f=>{cb=f},
-    on:(k,f)=>{(H[k]=H[k]||[]).push(f)},
-    presence:p=>{pres=p;post({t:'pres',p})},
-    emit:(k,d)=>post({t:'emit',k,d,from:pres?pres.uid:''})})
-}
+const RFG_OFFU='https://refugee-camp.onrender.com',RFG_OFFH=['refugee-camp.onrender.com'];
+const RFG_WEB=/^https?:$/.test(location.protocol)&&!!location.host,RFG_HN=String(location.hostname||'').toLowerCase();
+const RFG_DEV=RFG_HN==='localhost'||RFG_HN==='127.0.0.1';
+/* ไฟล์ที่ก๊อปไปเปิดเอง (file://) หรือเอาไปวางบนเว็บอื่น → ล็อกทันที และไม่ให้สคริปต์เกมทำงาน */
+const RFG_HARD=!RFG_WEB||(!RFG_OFFH.includes(RFG_HN)&&!RFG_DEV);
+function rfgLock(why){if(window.__rfgLk===why)return;window.__rfgLk=why;
+  const show=()=>{if(window.__rfgLk!==why)return;let d=document.getElementById('rfglk');if(!d){d=document.createElement('div');d.id='rfglk';document.body.appendChild(d)}
+    d.style.cssText='position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0d0a12;color:#f3ead8;font:15px/1.6 system-ui,sans-serif;text-align:center;padding:24px';
+    d.setAttribute('data-why',why);
+    d.innerHTML=why==='down'?'<div><div style="font-size:42px">📡</div><b style="font-size:19px;color:#f3d08a">กำลังเชื่อมต่อเซิร์ฟเวอร์…</b><div style="opacity:.8;margin-top:6px">เกมนี้ต้องเล่นออนไลน์ · ถ้ารอนานเกินไปลองรีเฟรชหน้านี้</div></div>'
+      :'<div style="max-width:360px"><div style="font-size:46px">🔒</div><b style="font-size:20px;color:#f3d08a">เกม REFUGEE เล่นได้ที่เว็บทางการเท่านั้น</b><div style="margin:10px 0 18px;opacity:.85">หน้านี้เป็นสำเนาของเกม จึงเปิดเล่นเองไม่ได้<br>ตัวละครและของทั้งหมดอยู่บนเซิร์ฟเวอร์ของเรา</div><a href="'+RFG_OFFU+'" style="display:inline-block;padding:11px 20px;border-radius:12px;background:#e7b75a;color:#20180c;font-weight:700;text-decoration:none">ไปเล่นที่ '+RFG_OFFU.replace('https://','')+'</a></div>'};
+  if(document.body)show();else addEventListener('DOMContentLoaded',show)}
+function rfgUnlock(){window.__rfgLk='';const d=document.getElementById('rfglk');if(d)d.remove()}
+if(RFG_HARD){rfgLock('copy');try{Object.defineProperty(window,'TG',{value:0,writable:false,configurable:false})}catch(e){}}
 window.RFG_SRV=1;window.claude={use:async n=>{
+  if(RFG_HARD)return new Promise(()=>{});
   if(n==='user')return{id:async()=>null};
   if(n!=='room')throw new Error('no '+n);
   const H={},st={ws:null,pres:null,cb:null,info:{}};
   function srvUrl(){
     if(/^https?:$/.test(location.protocol)&&location.host)return(location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws';
-    let v='';try{v=new URLSearchParams(location.search).get('server')||localStorage.getItem('refugee_server')||''}catch(e){}
-    v=String(v).trim().replace(/^(https?|wss?):\/\//,'').replace(/\/.*$/,'');if(!v)return'';
-    return(/^(localhost|\d+\.\d+\.\d+\.\d+)(:|$)/.test(v)?'ws://':'wss://')+v+'/ws'}
+    return''}
   const url=srvUrl();
   const R={hostUid:'',count:0,allPlayers:null,ok:false,url};
   function conn(){
     if(!url)return;
     let w;try{w=new WebSocket(url)}catch(e){return setTimeout(conn,2000)}
     st.ws=w;
-    w.onopen=()=>{R.ok=true;if(st.pres)w.send(JSON.stringify({t:'presence',p:st.pres}))};
+    w.onopen=()=>{R.ok=true;R.ever=1;rfgUnlock();if(st.pres)w.send(JSON.stringify({t:'presence',p:st.pres}))};
     w.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(x){return}
       if(m.t==='roster'){if(Array.isArray(m.r))R.roster={mp:m.mp,at:Date.now(),m:new Map(m.r.filter(x=>Array.isArray(x)&&typeof x[0]==='string').map(x=>[x[0],{u:x[0],n:String(x[1]||'ผู้เล่น'),cls:String(x[2]||''),lv:x[3]|0}]))};return}
       if(m.t==='peers'){
@@ -475,8 +467,10 @@ window.RFG_SRV=1;window.claude={use:async n=>{
       else if(m.t==='emit'&&H[m.k])H[m.k].forEach(f=>f({data:m.d,sameTab:false,from:m.from}))};
     w.onclose=()=>{R.ok=false;R.hostUid='';R.count=0;R.allPlayers=null;st.cb&&st.cb({peers:[]});setTimeout(conn,2000)};
     w.onerror=()=>{try{w.close()}catch(x){}}}
-  if(!url&&typeof BroadcastChannel==='function')return localRoom(H);
+  if(!url){rfgLock('copy');return new Promise(()=>{})}
   conn();
+  /* ต่อเซิร์ฟเวอร์ไม่ติดเลยตั้งแต่เปิดหน้า → ไม่ให้เล่นออฟไลน์ (เคยต่อติดแล้วหลุดกลางทาง = เล่นต่อได้ ระหว่างต่อใหม่) */
+  setTimeout(()=>{if(!R.ever)rfgLock(RFG_OFFH.includes(RFG_HN)?'down':'copy')},window.__rfgWait||10000);
   return Object.assign(R,{
     onPeers:f=>{st.cb=f},
     on:(k,f)=>{(H[k]=H[k]||[]).push(f)},

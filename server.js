@@ -298,7 +298,7 @@ function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();
   if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
     W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
 }
-const SRV_V='v425';
+const SRV_V='v426';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
@@ -325,8 +325,16 @@ function parse(c){
     else if(op===1){let txt;if(rsv){if(!c.z)return kill(c);try{txt=zlib.inflateRawSync(Buffer.concat([data,TAIL]),{maxOutputLength:MAXMSG,finishFlush:zlib.constants.Z_SYNC_FLUSH}).toString('utf8')}catch(e){return kill(c)}}else txt=data.toString('utf8');onMsg(c,txt)}
     if(c.dead)return}
 }
+/* v426 กันก๊อป: รับ WebSocket เฉพาะหน้าเว็บของเราเอง (Origin ต้องตรงกับโฮสต์นี้) · เพิ่มเว็บอื่นได้ทาง env ALLOW_ORIGINS=https://a.com,https://b.com
+   ไม่มีหัว Origin เลย (ไม่ใช่เบราว์เซอร์) = ปล่อยผ่าน เพราะปลอมได้อยู่แล้ว · Origin 'null' (ไฟล์ file://) = ปฏิเสธ */
+const ALLOW_ORIGINS=String(process.env.ALLOW_ORIGINS||'').split(',').map(x=>x.trim().toLowerCase().replace(/\/+$/,'')).filter(Boolean);
+function originOk(req){const o=req.headers.origin;if(o===undefined)return true;const ol=String(o).trim().toLowerCase();
+  let h='';try{h=new URL(ol).host}catch(e){return false}if(!h)return false;
+  if(h===String(req.headers.host||'').toLowerCase()||h===String(req.headers['x-forwarded-host']||'').split(',')[0].trim().toLowerCase())return true;
+  return ALLOW_ORIGINS.includes(ol)||ALLOW_ORIGINS.includes(h)}
 server.on('upgrade',(req,sock)=>{
   const key=req.headers['sec-websocket-key'];
+  if(req.url==='/ws'&&key&&!originOk(req)){try{stDay().badOrigin=(stDay().badOrigin|0)+1}catch(e){}sock.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');return}
   if(req.url==='/ws'&&key&&clients.size>=MAX){try{stDay().full=(stDay().full|0)+1}catch(e){}}
   if(req.url!=='/ws'||!key||clients.size>=MAX){sock.end('HTTP/1.1 503 Service Unavailable\r\n\r\n');return}
   const acc=crypto.createHash('sha1').update(key+'258EAFA5-E914-47DA-95CA-C5AB0DC85B11').digest('base64');

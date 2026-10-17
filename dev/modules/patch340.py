@@ -514,6 +514,32 @@ R("dy:ex[16]|0}","dy:ex[16]|0,gt:typeof ex[17]==='string'?ex[17].slice(0,40):''}
 R("rp:i.rp,sk:i.sk,dy:i.dy}","rp:i.rp,sk:i.sk,dy:i.dy,gt:i.gt}")
 R("dy:(r.dy|0)&65535,","dy:(r.dy|0)&65535,gt:typeof r.gt==='string'?r.gt.slice(0,40):'',")
 R("rp:o.rp||'',dy:o.dy|0}));","rp:o.rp||'',dy:o.dy|0,gt:o.gt||''}));")
+# ---- v426 กันก๊อป: เล่นได้เฉพาะเว็บทางการ (เฉพาะไฟล์บน Render · เวอร์ชัน artifact ตัดตัวเชื่อมนี้ออกอยู่แล้ว) ----
+s,_n=_re.subn(r"function localRoom\(H\)\{.*?\n\}\nwindow\.RFG_SRV=1;","window.RFG_SRV=1;",s,count=1,flags=_re.DOTALL);assert _n==1
+LK=r"""const RFG_OFFU='https://refugee-camp.onrender.com',RFG_OFFH=['refugee-camp.onrender.com'];
+const RFG_WEB=/^https?:$/.test(location.protocol)&&!!location.host,RFG_HN=String(location.hostname||'').toLowerCase();
+const RFG_DEV=RFG_HN==='localhost'||RFG_HN==='127.0.0.1';
+/* ไฟล์ที่ก๊อปไปเปิดเอง (file://) หรือเอาไปวางบนเว็บอื่น → ล็อกทันที และไม่ให้สคริปต์เกมทำงาน */
+const RFG_HARD=!RFG_WEB||(!RFG_OFFH.includes(RFG_HN)&&!RFG_DEV);
+function rfgLock(why){if(window.__rfgLk===why)return;window.__rfgLk=why;
+  const show=()=>{if(window.__rfgLk!==why)return;let d=document.getElementById('rfglk');if(!d){d=document.createElement('div');d.id='rfglk';document.body.appendChild(d)}
+    d.style.cssText='position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0d0a12;color:#f3ead8;font:15px/1.6 system-ui,sans-serif;text-align:center;padding:24px';
+    d.setAttribute('data-why',why);
+    d.innerHTML=why==='down'?'<div><div style="font-size:42px">📡</div><b style="font-size:19px;color:#f3d08a">กำลังเชื่อมต่อเซิร์ฟเวอร์…</b><div style="opacity:.8;margin-top:6px">เกมนี้ต้องเล่นออนไลน์ · ถ้ารอนานเกินไปลองรีเฟรชหน้านี้</div></div>'
+      :'<div style="max-width:360px"><div style="font-size:46px">🔒</div><b style="font-size:20px;color:#f3d08a">เกม REFUGEE เล่นได้ที่เว็บทางการเท่านั้น</b><div style="margin:10px 0 18px;opacity:.85">หน้านี้เป็นสำเนาของเกม จึงเปิดเล่นเองไม่ได้<br>ตัวละครและของทั้งหมดอยู่บนเซิร์ฟเวอร์ของเรา</div><a href="'+RFG_OFFU+'" style="display:inline-block;padding:11px 20px;border-radius:12px;background:#e7b75a;color:#20180c;font-weight:700;text-decoration:none">ไปเล่นที่ '+RFG_OFFU.replace('https://','')+'</a></div>'};
+  if(document.body)show();else addEventListener('DOMContentLoaded',show)}
+function rfgUnlock(){window.__rfgLk='';const d=document.getElementById('rfglk');if(d)d.remove()}
+if(RFG_HARD){rfgLock('copy');try{Object.defineProperty(window,'TG',{value:0,writable:false,configurable:false})}catch(e){}}
+window.RFG_SRV=1;window.claude={use:async n=>{
+  if(RFG_HARD)return new Promise(()=>{});
+  if(n==='user')return{id:async()=>null};"""
+R("window.RFG_SRV=1;window.claude={use:async n=>{\n  if(n==='user')return{id:async()=>null};",LK)
+R("""    let v='';try{v=new URLSearchParams(location.search).get('server')||localStorage.getItem('refugee_server')||''}catch(e){}
+    v=String(v).trim().replace(/^(https?|wss?):\\/\\//,'').replace(/\\/.*$/,'');if(!v)return'';
+    return(/^(localhost|\\d+\\.\\d+\\.\\d+\\.\\d+)(:|$)/.test(v)?'ws://':'wss://')+v+'/ws'}""","    return''}")
+R("w.onopen=()=>{R.ok=true;if(st.pres)","w.onopen=()=>{R.ok=true;R.ever=1;rfgUnlock();if(st.pres)")
+R("  if(!url&&typeof BroadcastChannel==='function')return localRoom(H);\n  conn();",
+  "  if(!url){rfgLock('copy');return new Promise(()=>{})}\n  conn();\n  /* ต่อเซิร์ฟเวอร์ไม่ติดเลยตั้งแต่เปิดหน้า → ไม่ให้เล่นออฟไลน์ (เคยต่อติดแล้วหลุดกลางทาง = เล่นต่อได้ ระหว่างต่อใหม่) */\n  setTimeout(()=>{if(!R.ever)rfgLock(RFG_OFFH.includes(RFG_HN)?'down':'copy')},window.__rfgWait||10000);")
 open(P,'w').write(s)
 print('ok')
 import subprocess

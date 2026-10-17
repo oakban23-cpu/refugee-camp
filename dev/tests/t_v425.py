@@ -67,6 +67,8 @@ async def main():
         still=await A.ev(GQ);await A.wait(800)
         rep('ใช้ mid ของคนอื่นยุบกิลด์ไม่ได้ (ชื่อไม่ตรง)',await A.ev("()=>!!GDS.g")  and await Cc.ev("()=>(window.__bn||'').includes('ไม่ตรง')"))
         # ---- ภารกิจรายสัปดาห์ ----
+        for c in C: await c.ev("()=>{GDS.wkT=1e12;GDS.acc={k:0,b:0,g:0}}")
+        await A.wait(1000)
         g0=await A.ev("()=>me.gold")
         await A.ev("()=>gdEmit('wk',{a:{k:3,b:1,g:1}})");await A.wait(1200);await A.ev(GQ);await A.wait(800)
         w=await A.ev("()=>[GDS.g.wk.done,GDS.g.lvl]")
