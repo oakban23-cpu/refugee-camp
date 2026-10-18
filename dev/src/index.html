@@ -13583,8 +13583,11 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v433';
+const WNV='v436';
 const WNL=[
+  ['🏕️','กลางค่ายโล่งตาขึ้น','ป้ายประตู ชื่อ NPC และฟองคำพูดจะจางลงเองเมื่อมีผู้เล่นยืนทับ · ชาวค่ายพูดน้อยลงตอนคนเยอะ'],
+  ['🎁','ชุดแต่งเต็นท์เริ่มต้น','เข้าเต็นท์ครั้งแรกรับของแต่ง 7 ชิ้นฟรี เตียง พรม ตะเกียง ต้นไม้ ธง โต๊ะ ไฟสายระย้า'],
+  ['🗼','พรหอคอยหลังกดเริ่ม','หน้าเลือกพรเริ่มต้นจะขึ้นหลังกดเริ่มปีนแล้ว ไม่บังห้องรออีกต่อไป'],
   ['⚔️','ฉากสู้อ่านง่ายขึ้น','ป้ายคอมโบทีมรวมเป็นป้ายเล็กชิดซ้ายจอ · ตัวเลขดาเมจที่เด้งติดกันรวมเป็นเลขเดียว · แสงสกิลซ้อนกันไม่ขาวทั้งจอ · มอนไม่ยืนทับกันเป็นก้อน'],
   ['🤸','ท่าโยนขึ้นสะใจขึ้น','ตัวลอยมีหางแสง · ลงพื้นแล้วจอหยุดค้างเสี้ยววิ พื้นแตก ฝุ่นตลบ มอนกระเด็น'],
   ['🎬','ฉากใหม่ทั่วเกม','เปิดตัวบอสแบบหนัง · ลำแสงของดรอปตามความหายาก + การ์ดโชว์ของ · ชาวค่ายเดินไปมา · ฉากตาย/ฟื้น · แผนที่เล็กบอกบอส ประตู จุดเก็บ เพื่อนปาร์ตี้ · แผงเควสย่อเองตอนสู้'],
@@ -14468,7 +14471,7 @@ function vz3VilTick(dt){if(curMap!==1||!me.cls||!run)return;const{V,G}=vz3Vil(),
       if(v.k==='dog'&&dd<260&&dd>46){v.tx=me.x-30*(me.x>v.x?1:-1);v.ty=me.y+10;v.w=.5}
       if(v.w<=0){v.w=2+Math.random()*4;const a=Math.random()*6.28,r=v.k==='hen'?40:120;v.tx=v.x+Math.cos(a)*r;v.ty=v.y+Math.sin(a)*r*.6;const dc=Math.hypot(v.tx-CX,v.ty-CY);if(dc>320||dc<90){v.tx=CX+(v.tx-CX)*200/Math.max(1,dc);v.ty=CY+(v.ty-CY)*200/Math.max(1,dc)}}
       const dx=v.tx-v.x,dy=v.ty-v.y,d=Math.hypot(dx,dy),sp=v.k==='dog'?(dd<260?150:60):26;v.mv=d>3;if(d>3){const s=Math.min(d,sp*dt);v.x+=dx/d*s;v.y+=dy/d*s;if(Math.abs(dx)>1)v.fx=dx<0?-1:1}}}
-  if(t>VZ3.say){VZ3.say=t+7+Math.random()*6;const L=V.filter(v=>(v.k==='w'||v.k==='s')&&Math.hypot(v.x-me.x,v.y-me.y)<240);if(L.length){const v=L[(Math.random()*L.length)|0];v.sy=VZSAY[(Math.random()*VZSAY.length)|0];v.st=t+3.5}}}
+  if(t>VZ3.say){const _cr=typeof u53Crowd==='function'?u53Crowd(me.x,me.y,280):1;VZ3.say=t+(10+Math.random()*7)*(_cr>=4?2.4:_cr>=2?1.6:1);const _P=typeof u53Pl==='function'?u53Pl():[[me.x,me.y]];const L=V.filter(v=>(v.k==='w'||v.k==='s')&&Math.hypot(v.x-me.x,v.y-me.y)<240&&_P.every(([px,py])=>Math.hypot(v.x-px,v.y-py)>80));if(L.length){const v=L[(Math.random()*L.length)|0];v.sy=VZSAY[(Math.random()*VZSAY.length)|0];v.st=t+3.5}}}
 function vz3Char(v,t){const g0={CHA,CHS,CHE};try{CHA={mv:v.mv?1:0,fx:v.fx,cast:null,it:t};CHS={h:0,c:0};CHE=null;g.save();g.translate(v.x,v.y);g.scale(v.sc,v.sc);
     drawChar(0,0,v.c,v.fx,v.mv?t*(v.k==='kid'?12:8)+v.ph:0,v.hd|0,t,0,0,v.ar|0,0,0);g.restore()}catch(e){g.restore()}finally{CHA=g0.CHA;CHS=g0.CHS;CHE=g0.CHE}}
 function vz3VilDraw(){if(curMap!==1||!VZ3.vil)return;const t=performance.now()/1000,lq=vzLow();const L=VZ3.vil.V.filter(v=>inView(v.x,v.y-20,40)).sort((a,b)=>a.y-b.y);let n=0;
@@ -14477,7 +14480,7 @@ function vz3VilDraw(){if(curMap!==1||!VZ3.vil)return;const t=performance.now()/1
       g.beginPath();g.arc(10,-12,4.6,0,7);g.fill();g.fillStyle='#8a5a2a';g.beginPath();g.ellipse(9,-16,1.8,3,-.3,0,7);g.fill();g.fillStyle='#1a1008';g.beginPath();g.arc(14,-12,1.2,0,7);g.fill();g.beginPath();g.arc(11,-13,.8,0,7);g.fill();
       g.strokeStyle='#b07840';g.lineWidth=2;g.lineCap='round';g.beginPath();g.moveTo(-9,-9);g.lineTo(-14,-14+wg*6);g.stroke();g.restore();continue}
     if(lq&&n>=5)continue;n++;g.fillStyle='rgba(0,0,0,.22)';g.beginPath();g.ellipse(v.x,v.y+14*v.sc,9*v.sc,3*v.sc,0,0,7);g.fill();vz3Char(v,t);
-    if(v.sy&&v.st>t){g.save();g.font='10px system-ui';const w=g.measureText(v.sy).width+12,y=v.y-50*v.sc;g.fillStyle='rgba(255,252,240,.92)';g.strokeStyle='rgba(60,40,20,.5)';g.lineWidth=1;g.beginPath();g.roundRect?g.roundRect(v.x-w/2,y-12,w,16,7):g.rect(v.x-w/2,y-12,w,16);g.fill();g.stroke();g.fillStyle='#3a2a1a';g.textAlign='center';g.fillText(v.sy,v.x,y);g.restore()}}}
+    if(v.sy&&v.st>t){g.save();g.font='10px system-ui';const w=g.measureText(v.sy).width+12,y=v.y-50*v.sc;if(typeof u53Aw==='function')g.globalAlpha*=u53Aw(v.x,y,w,16);g.fillStyle='rgba(255,252,240,.92)';g.strokeStyle='rgba(60,40,20,.5)';g.lineWidth=1;g.beginPath();g.roundRect?g.roundRect(v.x-w/2,y-12,w,16,7):g.rect(v.x-w/2,y-12,w,16);g.fill();g.stroke();g.fillStyle='#3a2a1a';g.textAlign='center';g.fillText(v.sy,v.x,y);g.restore()}}}
 /* ---------- ⑤ ตาย/ฟื้น ---------- */
 function vz3DeadTick(){const c=$('c'),dn0=VZ3.dead,d=me.cls&&me.down>0;if(d&&!dn0){VZ3.dead=1;vz3CSS();if(c)c.classList.add('vzdead');let e=$('vzd');if(!e){e=document.createElement('div');e.id='vzd';document.body.appendChild(e)}e.innerHTML='💀 ล้มลงแล้ว…<small>พักหายใจสักครู่ แล้วลุกขึ้นสู้ใหม่</small>';e.classList.remove('on');void e.offsetWidth;e.classList.add('on')}
   else if(!d&&dn0){VZ3.dead=0;if(c)c.classList.remove('vzdead');const e=$('vzd');if(e)e.classList.remove('on');if(me.cls){VZL.t0=performance.now();VZL.k='rev';VZL.job=0;try{burst(me.x,me.y-16,['#ffe9a0','#ffffff','#ffd060'],30,140,.8,{glow:1,g:-40})}catch(_){}}}}
@@ -14599,6 +14602,60 @@ function v33Land(u,J){const x=J.tx,y=J.ty,R=64+12*J.n+8*J.lv,now=performance.now
 function v33PfTag(){let t='';try{if(SKB0||(SKE&&SKE.b))t+=' · 🧗หอ'}catch(e){}
   try{let n=0;for(const f of fxs)if(f.t>0)n++;if(n>=6||GX.fl.length>=4)t+=' · 💥สู้หนัก'}catch(e){}return t}
 try{const _pk=pfKey;pfKey=function(){return _pk.apply(this,arguments)+v33PfTag()}}catch(e){}
+
+/* ===== v436 · กลางค่ายโล่งขึ้น · ของแต่งเต็นท์เริ่มต้น · พรหอคอยหลังกดเริ่ม ===== */
+/* ---------- ① ป้าย/ชื่อ NPC/ฟองคำพูด จางลงเมื่อมีผู้เล่นยืนทับ ---------- */
+const U53={P:[],pt:0,M0:null,Mi:null,dep:0};
+function u53Pl(){const n=performance.now();if(n-U53.pt<30)return U53.P;U53.pt=n;const P=[];
+  try{if(me&&me.cls&&run)P.push([me.x,me.y-(typeof skyOY==='function'?skyOY():0)])}catch(e){}
+  try{for(const o of Object.values(others))if(o&&typeof o.x==='number'&&!(o.sl>0))P.push([o.x,o.y])}catch(e){}
+  U53.P=P;return P}
+/* ค่าความทึบ (0.22–1) ของกล่องข้อความกว้าง w ที่จุด (x,y) พิกัดโลก — ยิ่งทับตัวผู้เล่นมากยิ่งจาง */
+function u53Aw(x,y,w,h){const P=u53Pl();if(!P.length)return 1;const hw=w/2,hh=h||14;let k=0;
+  for(const [px,py] of P){const ox=hw+12-Math.abs(x-px),oy=Math.min(y+4-(py-72),(py+16)-(y-hh));if(ox>0&&oy>0)k=Math.max(k,Math.min(ox,oy)/10)}
+  return k>0?1-.78*Math.min(1,k):1}
+const U53G={ft:CanvasRenderingContext2D.prototype.fillText,st:CanvasRenderingContext2D.prototype.strokeText};
+function u53TA(t,x,y){const M=g.getTransform(),Mi=U53.Mi;if(!Mi)return 1;const dx=M.a*x+M.c*y+M.e,dy=M.b*x+M.d*y+M.f,wx=Mi.a*dx+Mi.c*dy+Mi.e,wy=Mi.b*dx+Mi.d*dy+Mi.f;
+  let w=0;try{w=g.measureText(String(t)).width*(M.a/(U53.M0.a||1))}catch(e){w=40}const sz=Math.max(8,Math.min(26,(parseFloat((/(\d+(\.\d+)?)px/.exec(g.font)||[0,11])[1])||11)*(M.a/(U53.M0.a||1))));
+  let ax=wx;const al=g.textAlign;if(al==='left'||al==='start')ax=wx+w/2;else if(al==='right'||al==='end')ax=wx-w/2;return u53Aw(ax,wy,w,sz)}
+function u53Hook(on){if(on){if(U53.dep++)return;try{U53.M0=g.getTransform();U53.Mi=U53.M0.inverse()}catch(e){U53.Mi=null}
+    g.fillText=function(t,x,y,mw){const a=u53TA(t,x,y);if(a>=.999)return mw===undefined?U53G.ft.call(g,t,x,y):U53G.ft.call(g,t,x,y,mw);const o=g.globalAlpha;g.globalAlpha=o*a;try{mw===undefined?U53G.ft.call(g,t,x,y):U53G.ft.call(g,t,x,y,mw)}finally{g.globalAlpha=o}};
+    g.strokeText=function(t,x,y,mw){const a=u53TA(t,x,y);if(a>=.999)return mw===undefined?U53G.st.call(g,t,x,y):U53G.st.call(g,t,x,y,mw);const o=g.globalAlpha;g.globalAlpha=o*a;try{mw===undefined?U53G.st.call(g,t,x,y):U53G.st.call(g,t,x,y,mw)}finally{g.globalAlpha=o}}}
+  else{if(--U53.dep>0)return;U53.dep=0;delete g.fillText;delete g.strokeText}}
+/* ฟังก์ชันประกาศแบบ global ถูกเรียกตามชื่อ จึงแทนที่ได้ */
+try{drawGate=(f=>function(){if(curMap!==1&&curMap!==9)return f.apply(this,arguments);u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawGate)}catch(e){}
+try{drawCommander=(f=>function(){if(curMap!==1)return f.apply(this,arguments);u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawCommander)}catch(e){}
+try{drawStable=(f=>function(){u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawStable)}catch(e){}
+try{drawCity=(f=>function(){u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawCity)}catch(e){}
+try{drawHerald=(f=>function(){if(curMap!==1)return f.apply(this,arguments);u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawHerald)}catch(e){}
+try{drawRuneSmith=(f=>function(){if(curMap!==1)return f.apply(this,arguments);u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawRuneSmith)}catch(e){}
+try{drawCook=(f=>function(){if(curMap!==1)return f.apply(this,arguments);u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawCook)}catch(e){}
+try{drawTentGate=(f=>function(){if(curMap!==1)return f.apply(this,arguments);u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawTentGate)}catch(e){}
+try{drawFortNpc=(f=>function(){if(curMap!==1)return f.apply(this,arguments);u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawFortNpc)}catch(e){}
+try{drawWBGuards=(f=>function(){if(curMap!==1)return f.apply(this,arguments);u53Hook(1);try{return f.apply(this,arguments)}finally{u53Hook(0)}})(drawWBGuards)}catch(e){}
+/* ชื่อพ่อค้า (วาดตรงใน draw) */
+function u53FT(t,x,y){if(curMap!==1&&curMap!==9){g.fillText(t,x,y);return}const a=u53Aw(x,y,g.measureText(String(t)).width,12),o=g.globalAlpha;g.globalAlpha=o*a;g.fillText(t,x,y);g.globalAlpha=o}
+/* ป้ายประตู (กล่อง + ตัวอักษร) */
+drawGLQ=function(){const c1=curMap===1||curMap===9;for(const[lb,x,y]of GLQ){g.save();g.font='bold 11px system-ui';g.textAlign='center';const tw=g.measureText(lb).width+20;
+    if(c1)g.globalAlpha*=u53Aw(x,y,tw,16);g.fillStyle='rgba(22,30,70,.9)';g.beginPath();g.roundRect(x-tw/2,y-15,tw,22,6);g.fill();g.strokeStyle='#e8c060';g.lineWidth=1.4;g.stroke();g.fillStyle='#fff3cc';U53G.ft.call(g,lb,x,y);g.restore()}GLQ.length=0};
+/* ฟองคำพูด NPC: จางเมื่อทับผู้เล่น + เงียบนานขึ้นเมื่อคนเยอะ */
+function u53BA(x,y,t){if(curMap!==1&&curMap!==9)return 1;return u53Aw(x,y-6,String(t||'').length*5.6+12,16)}
+function u53Crowd(x,y,r){let n=0;for(const [px,py] of u53Pl())if(Math.hypot(px-x,py-y)<(r||260))n++;return n}
+function u53Gap(){if(curMap!==1&&curMap!==9)return 1;const n=u53Crowd(me.x,me.y,260);return n>=4?2.6:n>=3?1.9:1}
+
+/* ---------- ② ของแต่งเต็นท์เริ่มต้น ---------- */
+const TSTART=['bed1','rug1','lit1','pla1','wal1','tab1','cei1'];
+function tentStarter(){if(!me.cls)return 0;const S=tSt();if(Object.keys(S.own).length||S.st0)return 0;let n=0;
+  for(const k of TSTART){const D=TDECO[k];if(!D)continue;S.own[k]=1;if(!S.d[D[0]]){S.d[D[0]]=k;n++}}S.st0=1;try{recalc()}catch(e){}return n}
+try{tentHome=(f=>function(){const ok=me.cls&&run&&!(me.down>0)&&(curMap===1||tentHere());const n=ok?tentStarter():0;const r=f.apply(this,arguments);
+  if(n){setTimeout(()=>{banner={s:'🎁 ได้รับชุดแต่งเต็นท์เริ่มต้น '+n+' ชิ้น · '+tRank(tComfort(tSt().d)),t:4.5};try{sysMsg('🎁 ชุดแต่งเต็นท์เริ่มต้น: เตียงฟาง · พรมทอลาย · ตะเกียง · กระถางสมุนไพร · ธงค่าย · โต๊ะน้ำชา · ไฟสายระย้า (เปลี่ยน/ซื้อเพิ่มได้ที่เมนู 🏠 เต็นท์ → ตกแต่ง)')}catch(e){}try{sfx('quest')}catch(e){}
+    try{for(let i=0;i<22;i++)burst(CX+rnd(-160,160),CY+rnd(-120,120),['#ffe9a0','#ffd060','#fff'],2,60,.7,{glow:1,g:-40})}catch(e){}},700)}return r})(tentHome)}catch(e){}
+
+/* ---------- ③ พรเริ่มต้นหอคอย: เสนอหลังกดเริ่มปีน ไม่ใช่ตอนเข้าห้องรอ ---------- */
+const U53B={on:0,at:0};
+setInterval(()=>{try{if(!isTw()||!me.cls){U53B.on=0;U53B.at=0;return}if(U53B.on)return;
+  if(!dg||dg.ph!=='run'){U53B.at=0;return}if((me.twBl||[]).length){U53B.on=1;return}if(me.blPick)return;
+  const n=performance.now();if(!U53B.at){U53B.at=n+900;return}if(n<U53B.at)return;U53B.on=1;blOffer('พรเริ่มต้นก่อนปีน')}catch(e){}},300);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -16768,9 +16825,9 @@ const NPCSAY={
 const _nps={};
 function npcSay(key,x,y,lines,near,hy,ox,oy){const S=_nps[key]||(_nps[key]={i:Math.floor(Math.random()*lines.length),t:Math.random()*6,on:0});const now=performance.now()/1000;
   const d=Math.hypot(me.x-x-(ox||0),me.y-y-(oy||0)),inR=d<(near||210);if(!S.last)S.last=now;const dt=Math.min(.1,now-S.last);S.last=now;S.t-=dt;
-  if(S.t<=0){if(S.on){S.on=0;S.t=3+Math.random()*5}else if(inR){S.on=1;S.i=(S.i+1+Math.floor(Math.random()*(lines.length-1)))%lines.length;S.t=3.6}else S.t=1}
+  if(S.t<=0){if(S.on){S.on=0;S.t=(3+Math.random()*5)*u53Gap()}else if(inR){S.on=1;S.i=(S.i+1+Math.floor(Math.random()*(lines.length-1)))%lines.length;S.t=3.6}else S.t=1}
   S.a=Math.max(0,Math.min(1,(S.a||0)+(S.on&&inR?dt*5:-dt*5)));if(S.a<=0)return;
-  const tx=lines[S.i],by=y-(hy||40);g.save();g.globalAlpha=S.a;g.font='600 9.5px system-ui';const w=g.measureText(tx).width+12,bx=x-w/2,yy=by-S.a*3;
+  const tx=lines[S.i],by=y-(hy||40);g.save();g.globalAlpha=S.a*u53BA(x,by,tx);g.font='600 9.5px system-ui';const w=g.measureText(tx).width+12,bx=x-w/2,yy=by-S.a*3;
   g.fillStyle='rgba(255,250,238,.95)';g.strokeStyle='rgba(60,40,20,.55)';g.lineWidth=.8;g.beginPath();g.roundRect(bx,yy-13,w,15,7);g.fill();g.stroke();
   g.beginPath();g.moveTo(x-3,yy+2);g.lineTo(x,yy+6);g.lineTo(x+3,yy+2);g.closePath();g.fill();g.fillStyle='#3a2a1a';g.textAlign='center';g.fillText(tx,x,yy-2.6);g.restore()}
 
@@ -18152,7 +18209,7 @@ function twSetBoss(f){const th=twTheme(f),src=TWB[twBI(f)],B=MAPS[curMap].boss;
 function twApplyTheme(f){if(!isTw())return;const th=twTheme(f),M=MAPS[curMap],S=th<=4?MAPS[th]:{bg:'#121628',tile:'#1d2440',safe:'#28325c',ring:'#c9a24a',t1:'#0c0a10',t2:'#1c1624',d1:'#2c2436',d2:'#9a88c0'};
   ['bg','tile','safe','ring','t1','t2','d1','d2'].forEach(k=>M[k]=S[k]);M.n='หอคอยวิญญาณ · ชั้น '+f;twSetBoss(f);
   if(twLastF&&f!==twLastF&&me.cls&&me.down<=0){me.hp=Math.min(me.mh,me.hp+me.mh*.3);me.mp=Math.min(me.mm,me.mp+me.mm*.3)}
-  if(f%10===1&&f>1)me.twCp=Math.max(me.twCp||1,f);if(twLastF&&f>twLastF&&me.cls)twClimbStart(f);if(!twLastF&&me.cls)setTimeout(()=>{if(isTw()&&!(me.twBl||[]).length)blOffer('พรเริ่มต้นก่อนปีน')},2200);twLastF=f}
+  if(f%10===1&&f>1)me.twCp=Math.max(me.twCp||1,f);if(twLastF&&f>twLastF&&me.cls)twClimbStart(f);twLastF=f}
 function twMon(t,x,y,f,extra){const np=Math.max(1,plCount()),L=twL(f),af=(dg.tw&&dg.tw.af)||[];let hp=mhp(t,L)*(1+.25*(np-1))*(1+f*.015);if(af.includes(1))hp*=1.4;
   const m={id:++mid,x,y,tx:x,ty:y,t,L,p:0,hx:x,hy:y,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,spd:af.includes(0)?1.3:1,dmx:(af.includes(4)?1.3:1)*(1+f*.01),rg:af.includes(3)?1:0,boom:af.includes(2)?1:0};
   Object.assign(m,extra||{});mons.push(m);return m}
@@ -23753,7 +23810,7 @@ function draw(){
   const lk=.6+.4*Math.sin(nt*3);g.fillStyle='rgba(255,200,90,'+(.18*lk)+')';g.beginPath();g.arc(NPC.x+nfx*10,NPC.y-2,14,0,7);g.fill();
   g.fillStyle='#ffd66a';g.beginPath();g.arc(NPC.x+nfx*10,NPC.y-2,2.4,0,7);g.fill();
   }
-  g.font='11px system-ui';g.textAlign='center';g.fillStyle='#ffe0a0';g.fillText(NPC.n,NPC.x,NPC.y-(N3?(curMap===4?46:42):curMap===1?40:30))}}
+  g.font='11px system-ui';g.textAlign='center';g.fillStyle='#ffe0a0';u53FT(NPC.n,NPC.x,NPC.y-(N3?(curMap===4?46:42):curMap===1?40:30))}}
   drawGate();drawWBGuards();drawHerald();drawCommander();try{drawRuneSmith()}catch(e){}try{drawCook()}catch(e){}try{drawTentGate()}catch(e){}drawFortNpc();drawWBStatues();drawEndDecor();drawTwArrive();drawTwStairs();
   drops.forEach(d=>{const bl=(d.t<10&&Math.floor(d.t*4)%2)?.3:1,now=performance.now()/1000,lf=5+Math.sin(now*3+d.x)*3,y=d.y-lf,sk=1-lf*.05;
     g.globalAlpha=bl*(.42-lf*.02);g.fillStyle='#000';g.beginPath();g.ellipse(d.x+SUN.dx*3,d.y+7,6*sk,2*sk,0,0,7);g.fill();g.globalAlpha=bl;g.lineWidth=1;
