@@ -14595,6 +14595,10 @@ function v33Land(u,J){const x=J.tx,y=J.ty,R=64+12*J.n+8*J.lv,now=performance.now
   try{const _k=skLand;skLand=function(u,J){const r=_k.apply(this,arguments);try{v33Land(u,J)}catch(e){}return r}}catch(e){}
   try{const _m=uisMini;uisMini=function(){try{if(PH&&PH.on)return}catch(e){}return _m.apply(this,arguments)}}catch(e){}
 })();
+/* ---------- v433b ตัววัดความลื่น: แยกผลตามสถานการณ์ (หอขี่คอ / สู้หนัก) ให้เทียบบนมือถือจริงได้ ---------- */
+function v33PfTag(){let t='';try{if(SKB0||(SKE&&SKE.b))t+=' · 🧗หอ'}catch(e){}
+  try{let n=0;for(const f of fxs)if(f.t>0)n++;if(n>=6||GX.fl.length>=4)t+=' · 💥สู้หนัก'}catch(e){}return t}
+try{const _pk=pfKey;pfKey=function(){return _pk.apply(this,arguments)+v33PfTag()}}catch(e){}
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();

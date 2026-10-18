@@ -44,6 +44,8 @@ async def main():
         rep('⑤ ตัววาดหางแสง/คลื่นกระแทกไม่มี error',tr=='',tr)
         mm=await A.ev("()=>{let n=0;phOn();uisMini(MAPS[curMap],3200,()=>{n++});const a=n;phOff();uisMini(MAPS[curMap],3200,()=>{n++});return[a,n]}")
         rep('⑦ โหมดถ่ายรูปไม่วาดแผนที่มุมจอ (ออกจากโหมดแล้ววาดปกติ)',mm==[0,1],str(mm))
+        pk=await A.ev("()=>{const a=pfKey();const save=fxs.slice();for(let i=0;i<7;i++)fxs.push({k:'ring',x:me.x,y:me.y,r:40,t:1,d:1});const b=pfKey();fxs.length=0;save.forEach(f=>fxs.push(f));return[a,b]}")
+        rep('ตัววัดความลื่นแยกผลตอนสู้หนัก',('สู้หนัก' not in pk[0]) and ('สู้หนัก' in pk[1]),json.dumps(pk,ensure_ascii=False))
         await A.wait(1500)
         Es=[e for e in A.errs if not e.startswith('console')];rep('ไม่มี error',not Es,str(Es[:3]))
     finally:
