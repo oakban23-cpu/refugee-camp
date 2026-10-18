@@ -38,7 +38,7 @@ async def main():
         for c in (B,Cc,Dd): await c.ev("()=>{window.__lh=0;const _l=skLand;skLand=function(u,J){if(u===uid)window.__lh=1;return _l.apply(this,arguments)};window.__hits=0;const _a=addHit;addHit=function(){window.__hits++;return _a.apply(this,arguments)}}")
         base0=await A.ev("()=>[me.x,me.y]")
         await A.ev("()=>$('skl').click()");await A.wait(780)
-        air=[await c.ev("()=>[SKE.b,!!SKE.jump,me.inv3>0]") for c in (B,Cc,Dd)]
+        air=list(await asyncio.gather(*[c.ev("()=>[SKE.b,!!SKE.jump,me.inv3>0]") for c in (B,Cc,Dd)]))
         rep('โยนแล้ว: คนบนคอหลุดจากหอ ลอยอยู่ และไม่โดนตี',all(a[0]=='' and a[1] and a[2] for a in air),json.dumps(air))
         rep('ทุกเครื่องเห็นการโยน (ฐานเห็น 3 คนลอย)',await A.ev("()=>Object.keys(SKJ).length")==3)
         dmg_b=await B.ev("()=>{const h=me.hp;hurt(200);return me.hp===h}")
