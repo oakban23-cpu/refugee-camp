@@ -54,7 +54,7 @@ function hitHandover(mp,h0,h){const L=HITB[mp];if(!L||!L.length||!h0)return 0;co
 function recompute(){const now=Date.now(),prev=hostByMap,byMap={};hostByMap={};countByMap={};
   for(const c of clients){if(!c.p||!c.uid)continue;const mp=c.p.mp;countByMap[mp]=(countByMap[mp]||0)+1;(byMap[mp]=byMap[mp]||[]).push(c)}
   for(const mp in byMap){const L=byMap[mp],h0=prev[mp];
-    if(h0&&h0.p&&h0.p.mp==mp&&h0.hostSince&&now-h0.hostSince>3000&&now-(h0.lastW||0)>2500)h0.badUntil=now+15000;
+    if(h0&&h0.p&&h0.p.mp==mp&&h0.hostSince&&now-h0.hostSince>3000&&now-(h0.lastW||0)>1800)h0.badUntil=now+15000;
     let h=null;if(h0&&L.includes(h0)&&okHost(h0,now))h=h0;
     else{const ok=L.filter(c=>okHost(c,now));const P=ok.length?ok:L;P.sort((a,b)=>(a.mapSince||0)-(b.mapSince||0)||(a.uid<b.uid?-1:1));h=P[0]}
     if(h!==h0&&h0){try{hitHandover(mp,h0,h)}catch(e){if(process.env.HDBG)try{fs.appendFileSync(process.env.HDBG,'ERR '+e.stack+'\n')}catch(_){}}if(process.env.HDBG)try{fs.appendFileSync(process.env.HDBG,'switch '+mp+' '+(h0.uid||'')+' -> '+(h.uid||'')+'\n')}catch(_){}}
@@ -329,7 +329,7 @@ function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();
   if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
     W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
 }
-const SRV_V='v436';
+const SRV_V='v437';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;

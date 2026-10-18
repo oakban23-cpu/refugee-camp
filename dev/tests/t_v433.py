@@ -31,7 +31,7 @@ async def main():
         await A.wait(1500)
         sp=await A.ev("()=>{const L=mons.filter(m=>m.__t6&&m.hp>0);let mn=1e9,mp=1e9;for(let i=0;i<L.length;i++){mp=Math.min(mp,Math.hypot(L[i].x-me.x,L[i].y-me.y));for(let j=i+1;j<L.length;j++)mn=Math.min(mn,Math.hypot(L[i].x-L[j].x,L[i].y-L[j].y))}return[L.length,Math.round(mn),Math.round(mp)]}")
         rep('④ มอน 6 ตัวที่ยืนจุดเดียวกับผู้เล่น กระจายออก (ห่างกัน ≥ 10 · ห่างผู้เล่น ≥ 14)',sp[0]>=5 and sp[1]>=10 and sp[2]>=14,str(sp))
-        atk=await A.ev("()=>new Promise(r=>{const h0=me.hp;gmGod=false;me.mh=1e7;me.hp=1e7;setTimeout(()=>{const d=1e7-me.hp;gmGod=true;r(d)},2500)})")
+        atk=await A.ev("()=>new Promise(r=>{mons.filter(m=>m.__t6&&m.hp>0).forEach((m,i)=>{m.x=me.x+(i%3-1)*16;m.y=me.y+4+(i>>1)*5});const h0=me.hp;gmGod=false;me.mh=1e7;me.hp=1e7;setTimeout(()=>{const d=1e7-me.hp;gmGod=true;r(d)},2500)})")
         rep('④ มอนที่ถูกดันยังตีผู้เล่นโดน',atk>0,str(atk))
         ln=await A.ev("""()=>new Promise(r=>{const L=mons.filter(m=>m.__t6&&m.hp>0);const x=me.x,y=me.y;L.forEach((m,i)=>{m.x=x+80+(i%3)*8;m.y=y+5+(i>>1)*6});const dec0=GX.dec.length;
           skLaunchFx({k:'skl',R:[uid],x:Math.round(x),y:Math.round(y),d:1,by:'zz'});const tr=fxs.some(f=>f.k==='sktr'&&f.u===uid);
