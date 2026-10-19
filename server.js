@@ -269,12 +269,20 @@ function gbWk(G){const w=gdWeek();let B=G.gb;if(!B||B.k!==w){const last=B&&B.k?{
 function gbLeft(B,mid){const D=B.day[mid];return D&&D.k===gbDay()?Math.max(0,GBD-D.n):GBD}
 function gbView(G,mid){const B=gbWk(G),my=B.dm[mid]||{d:0,n:0,b:0};return{s:B.s,hp:B.hp,mx:B.mx,smx:GBMX,left:gbLeft(B,mid),my:{d:my.d,n:my.n,b:my.b},cl:B.cl[mid]||[],
   rk:Object.keys(B.dm).map(m=>[(G.mem[m]&&G.mem[m].n)||B.dm[m].nm||'?',B.dm[m].d,B.dm[m].n,m===mid?1:0]).sort((a,b)=>b[1]-a[1]).slice(0,30),last:B.last||null,tk:B.tk[mid]?1:0}}
+/* v452 บ้านกิลด์ รอบ 1: คลังบริจาค (เข้าอย่างเดียว) · เพดานต่อคนต่อวัน · แต้มกิลด์ · หัวหน้า/รองกดขึ้นขั้น 1→5 */
+const HQK=process.env.GD_FAST?.001:1,HQCAP=2e6,HQMIN=1000,HQLV=20,HQPT=1e4,HQT=[null,{f:0,l:1},{f:20e6,l:2},{f:80e6,l:4},{f:250e6,l:6},{f:800e6,l:8}];
+function hqOf(G){let H=G.hq;if(!H||typeof H!=='object'){H=G.hq={t:1,f:0,dn:{},log:[],wk:{k:gdWeek(),m:{}},sp:0};gdDirty=true}if(!H.dn)H.dn={};if(!H.log)H.log=[];if(!H.wk||H.wk.k!==gdWeek()){H.wk={k:gdWeek(),m:{}};gdDirty=true}return H}
+function hqLog(H,e){H.log.push(e);if(H.log.length>60)H.log.splice(0,H.log.length-60)}
+function hqView(G,mid){const H=hqOf(G),D=H.dn[mid]||{},td=D.d===gbDay()?D.a|0:0,nx=HQT[H.t+1]||null,nm=m=>(G.mem[m]&&G.mem[m].n)||(H.dn[m]&&H.dn[m].n)||'?';
+  return{t:H.t,f:H.f,cap:HQCAP,min:HQMIN,today:td,left:Math.max(0,HQCAP-td),tot:D.tot||0,pt:Math.floor((D.tot||0)/HQPT)-(D.ps|0),nx:nx?{f:Math.round(nx.f*HQK),l:nx.l}:null,
+    top:Object.keys(H.dn).filter(m=>H.dn[m].tot>0).map(m=>[nm(m),H.dn[m].tot,m===mid?1:0,G.mem[m]?1:0]).sort((a,b)=>b[1]-a[1]).slice(0,10),
+    wk:Object.keys(H.wk.m).map(m=>[nm(m),H.wk.m[m],m===mid?1:0]).sort((a,b)=>b[1]-a[1]).slice(0,10),log:H.log.slice(-30)}}
 function gdOf(mid){const id=GD.by[mid];const G=id&&GD.g[id];if(!G||!G.mem[mid]){if(id)delete GD.by[mid];return null}return G}
 function gdOnline(mid){for(const o of clients)if(o.gmid===mid&&o.p&&!o.dead)return o;return null}
 function gdTag(o){const m=o&&o.gmid;if(!m)return'';const G=gdOf(m);if(!G||!o.p||G.mem[m].n!==o.p.n)return'';return G.e+'|'+G.tag+'|'+G.col}
 function gdView(G,mid){const W=gdWk(G),goal=gdGoal(G);return{id:G.id,nm:G.nm,tag:G.tag,e:G.e,col:G.col,lvl:G.lvl,nt:G.nt||'',lead:G.lead,me:mid,r:G.mem[mid]?G.mem[mid].r:0,max:GDMAX,
   mem:Object.keys(G.mem).map(m=>{const M=G.mem[m],o=gdOnline(m);return[m,M.n,o&&o.p?o.p.cls:M.c,o&&o.p?o.p.lv:M.lv,M.r,o?1:0,o&&o.p?o.p.mp:0,o&&o.p&&o.p.aw?1:0]}),
-  wk:{k:W.k,p:W.p,goal,done:W.done?1:0,cl:W.cl[mid]?1:0,ct:W.ct[mid]|0},gb:gbView(G,mid),log:(G.log||[]).slice(-30)}}
+  wk:{k:W.k,p:W.p,goal,done:W.done?1:0,cl:W.cl[mid]?1:0,ct:W.ct[mid]|0},gb:gbView(G,mid),hq:hqView(G,mid),log:(G.log||[]).slice(-30)}}
 function gdSend(o,k,d){mkReply(o,k,d)}
 function gdCast(G,d,skip){for(const m in G.mem){const o=gdOnline(m);if(o&&o!==skip)gdSend(o,'gdn',d)}}
 function gdRefresh(G){for(const m in G.mem){const o=gdOnline(m);if(o)gdSend(o,'gdr',{g:gdView(G,m),inv:[]})}}
@@ -326,10 +334,19 @@ function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();
     gdRefresh(G);return}
   if(op==='gbc'){const B=gbWk(G),st=d.s|0;if(st<1||st>=B.s||st>GBMX)return no('ขั้นนี้ยังไม่ถูกล้ม');if(!B.dm[mid]||!B.dm[mid].n)return no('ต้องท้าอสูรกิลด์อย่างน้อย 1 ครั้งในสัปดาห์นี้ก่อน');
     const L=B.cl[mid]||(B.cl[mid]=[]);if(L.includes(st))return no('รับรางวัลขั้นนี้ไปแล้ว');L.push(st);gdDirty=true;gdSend(c,'gdn',{t:'gbc',s:st,k:B.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
+  if(op==='hqd'){const n=typeof d.n==='string'?d.n.slice(0,16):'',bad=s=>gdSend(c,'gdn',{t:'hqe',n,s});const H=hqOf(G),a=Math.floor(+d.a||0);
+    if((c.p.lv|0)<HQLV)return bad('ต้องเลเวล '+HQLV+' ขึ้นไปถึงบริจาคได้');if(!isFinite(a)||a<HQMIN)return bad('บริจาคขั้นต่ำ '+HQMIN.toLocaleString()+' ทอง');
+    const day=gbDay(),D=H.dn[mid]||(H.dn[mid]={d:day,a:0,tot:0,n:name});if(D.d!==day){D.d=day;D.a=0}if(D.a+a>HQCAP)return bad('เกินเพดานบริจาควันนี้ (เหลือ '+Math.max(0,HQCAP-D.a).toLocaleString()+' ทอง)');
+    D.a+=a;D.tot+=a;D.n=name;H.f+=a;H.wk.m[mid]=(H.wk.m[mid]||0)+a;hqLog(H,{k:'d',n:name,a,at:now});gdDirty=true;
+    gdSend(c,'gdn',{t:'hqd',n,a,f:H.f,pt:Math.floor(D.tot/HQPT)-(D.ps|0)});gdCast(G,{t:'hqx',n:name,a},c);gdRefresh(G);return}
+  if(op==='hqu'){const H=hqOf(G);if(me.r<1)return no('เฉพาะหัวหน้า/รองหัวหน้าที่สั่งขยายบ้านได้');if(H.t>=5)return no('บ้านกิลด์ขั้นสูงสุดแล้ว');if((d.t|0)!==H.t)return no('ขั้นบ้านเปลี่ยนไปแล้ว ลองใหม่อีกครั้ง');
+    const R=HQT[H.t+1],cost=Math.round(R.f*HQK);if(G.lvl<R.l)return no('ต้องกิลด์ Lv '+R.l+' ก่อน');if(H.f<cost)return no('คลังกิลด์ไม่พอ (ต้อง '+cost.toLocaleString()+' ทอง)');
+    H.f-=cost;H.t++;hqLog(H,{k:'u',n:name,a:cost,t:H.t,at:now});G.log=G.log||[];G.log.push({n:'🏰',t:name+' ขยายบ้านกิลด์เป็นขั้น '+H.t+'!',at:now});if(G.log.length>40)G.log.splice(0,G.log.length-40);gdDirty=true;
+    gdCast(G,{t:'hqu',n:name,tt:H.t,a:cost});gdRefresh(G);return}
   if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
     W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
 }
-const SRV_V='v451';
+const SRV_V='v452';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
