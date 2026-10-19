@@ -12282,15 +12282,15 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v437';
+const WNV='v438';
 const WNL=[
+['👥','หอคอย: รอเพื่อนเลือกพรด้วย','เวลาของชั้นจะหยุดจนทุกคนในห้องเลือกพรเริ่มต้นเสร็จ · หลังฉากเนื้อเรื่องมีเวลาตั้งตัว 1.5 วิ ไม่โดนตี'],
 ['🛰️','ออนไลน์ลื่นขึ้น','เวลาเครื่องโฮสต์กระตุก มอนบนจอคุณยังเดินไล่ต่อ ไม่ยืนค้าง และสลับโฮสต์เร็วขึ้น'],
 ['⏸️','หอคอย: เลือกพรไม่เสียเวลา','ตอนเลือกพรเริ่มต้น เวลาของชั้นหยุดรอ มอนจะออกหลังเลือกเสร็จ'],
 ['🏕️','กลางค่ายโล่งตาขึ้น','ป้ายประตู ชื่อ NPC และฟองคำพูดจะจางลงเองเมื่อมีผู้เล่นยืนทับ · ชาวค่ายพูดน้อยลงตอนคนเยอะ'],
 ['🎁','ชุดแต่งเต็นท์เริ่มต้น','เข้าเต็นท์ครั้งแรกรับของแต่ง 7 ชิ้นฟรี เตียง พรม ตะเกียง ต้นไม้ ธง โต๊ะ ไฟสายระย้า'],
 ['🗼','พรหอคอยหลังกดเริ่ม','หน้าเลือกพรเริ่มต้นจะขึ้นหลังกดเริ่มปีนแล้ว ไม่บังห้องรออีกต่อไป'],
-['⚔️','ฉากสู้อ่านง่ายขึ้น','ป้ายคอมโบทีมรวมเป็นป้ายเล็กชิดซ้ายจอ · ตัวเลขดาเมจที่เด้งติดกันรวมเป็นเลขเดียว · แสงสกิลซ้อนกันไม่ขาวทั้งจอ · มอนไม่ยืนทับกันเป็นก้อน'],
-['🤸','ท่าโยนขึ้นสะใจขึ้น','ตัวลอยมีหางแสง · ลงพื้นแล้วจอหยุดค้างเสี้ยววิ พื้นแตก ฝุ่นตลบ มอนกระเด็น']];
+['⚔️','ฉากสู้อ่านง่ายขึ้น','ป้ายคอมโบทีมรวมเป็นป้ายเล็กชิดซ้ายจอ · ตัวเลขดาเมจที่เด้งติดกันรวมเป็นเลขเดียว · แสงสกิลซ้อนกันไม่ขาวทั้งจอ · มอนไม่ยืนทับกันเป็นก้อน']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -13223,6 +13223,19 @@ function u54TagDim(x,y,lk){const me0=lk&&lk.u===uid;if(me0)return 0;for(const[px
 try{drawP0=(f=>function(x,y,cls,name,hp,mh,down,hd,bt,ph,fx,tt,c2,lk){const fr=typeof FRN!=='undefined'?FRN:0;const n=performance.now();if(n-U54T.fr>12){U54T.prev=U54T.cur;U54T.cur=[];U54T.fr=n}
 U54T.cur.push([x,y,lk&&lk.u===uid?1:0]);let dim=0;try{if(!PH||!PH.on)dim=u54TagDim(x,y,lk)}catch(e){dim=0}
 if(!dim)return f.apply(this,arguments);U54NA=.5;try{return f.call(this,x,y,cls,name,hp,mh,down,hd,bt,ph,fx,null,c2,lk)}finally{U54NA=1;g.globalAlpha=1}})(drawP0)}catch(e){}
+const U55={pk:{},sent:0,last:0,sg:0};
+try{handleFx=(f=>function(o){if(o&&o.k==='blpk'){try{if(typeof o.by==='string'&&o.by!==uid){if(o.on)U55.pk[o.by]=performance.now();else delete U55.pk[o.by]}}catch(e){}return}return f.apply(this,arguments)})(handleFx)}catch(e){}
+function u55MatePick(){const n=performance.now();let any=false;for(const u in U55.pk){if(n-U55.pk[u]>2500){delete U55.pk[u];continue}if(others[u])any=true}return any}
+setInterval(()=>{try{const p=me.blPick,on=!!(p&&p.why==='พรเริ่มต้นก่อนปีน'&&isTw()&&dg&&dg.ph==='run');const n=performance.now();
+if(on&&n-U55.last>1000){U55.last=n;U55.sent=1;fx({k:'blpk',on:1})}
+else if(!on&&U55.sent){U55.sent=0;fx({k:'blpk',on:0})}
+if(!isTw())U55.pk={}}catch(e){}},250);
+try{const _bp=u54BlPause;u54BlPause=function(){if(_bp())return true;try{if(!isTw()||!dg||dg.ph!=='run')return false;const n=performance.now();if(!U54.rs||n-U54.rs>16000)return false;return u55MatePick()}catch(e){return false}}}catch(e){}
+setInterval(()=>{try{if(!isTw()||!isHost()||!U54.bp)return;const el=$('blpk');const t=$('u55w')||(()=>{const d=document.createElement('div');d.id='u55w';d.style.cssText='position:fixed;left:50%;top:118px;transform:translateX(-50%);z-index:30;background:rgba(20,14,34,.88);border:1px solid #b48cff;border-radius:999px;padding:4px 12px;color:#efe4ff;font-size:12px;pointer-events:none';document.body.appendChild(d);return d})();
+const w=u55MatePick()&&!(me.blPick);t.textContent='⏸ รอเพื่อนเลือกพรเริ่มต้น…';t.hidden=!w}catch(e){}},300);
+setInterval(()=>{try{const t=$('u55w');if(t&&(!isTw()||!U54.bp||me.blPick||!u55MatePick()))t.hidden=true}catch(e){}},300);
+try{stClose=(f=>function(){const was=SD.on;const r=f.apply(this,arguments);try{if(was&&me.cls)U55.sg=performance.now()+1500}catch(e){}return r})(stClose)}catch(e){}
+try{hurt=(f=>function(d){if(U55.sg>performance.now())return;return f.apply(this,arguments)})(hurt)}catch(e){}
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();

@@ -34,8 +34,8 @@ async def main():
         atk=await A.ev("()=>new Promise(r=>{mons.filter(m=>m.__t6&&m.hp>0).forEach((m,i)=>{m.x=me.x+(i%3-1)*16;m.y=me.y+4+(i>>1)*5});const h0=me.hp;gmGod=false;me.mh=1e7;me.hp=1e7;setTimeout(()=>{const d=1e7-me.hp;gmGod=true;r(d)},2500)})")
         rep('④ มอนที่ถูกดันยังตีผู้เล่นโดน',atk>0,str(atk))
         ln=await A.ev("""()=>new Promise(r=>{const L=mons.filter(m=>m.__t6&&m.hp>0);const x=me.x,y=me.y;L.forEach((m,i)=>{m.x=x+80+(i%3)*8;m.y=y+5+(i>>1)*6});const dec0=GX.dec.length;
-          skLaunchFx({k:'skl',R:[uid],x:Math.round(x),y:Math.round(y),d:1,by:'zz'});const tr=fxs.some(f=>f.k==='sktr'&&f.u===uid);
-          setTimeout(()=>{const J=SKJ[uid];const kb=L.filter(m=>m.__kb).length;r({tr,land:J?J.land:-1,crack:GX.dec.length>dec0&&GX.dec.some(d=>d.t==='crack'),shk:fxs.some(f=>f.k==='skshk'),kb,hs:hsUntil>0})},1150)})""")
+          window.__kbn=-1;const _vl=v33Land;v33Land=function(u,J){const r=_vl.apply(this,arguments);window.__kbn=L.filter(m=>m.__kb).length;v33Land=_vl;return r};skLaunchFx({k:'skl',R:[uid],x:Math.round(x),y:Math.round(y),d:1,by:'zz'});const tr=fxs.some(f=>f.k==='sktr'&&f.u===uid);
+          setTimeout(()=>{const J=SKJ[uid];const kb=window.__kbn;r({tr,land:J?J.land:-1,crack:GX.dec.length>dec0&&GX.dec.some(d=>d.t==='crack'),shk:fxs.some(f=>f.k==='skshk'),kb,hs:hsUntil>0})},1150)})""")
         rep('⑤ โยนขึ้น: มีหางแสงตอนลอย · ลงพื้นมีรอยแตก+คลื่นกระแทก · มอนในวงกระเด็น · หยุดค้างเสี้ยววิ',ln['tr'] and ln['land']==1 and ln['crack'] and ln['shk'] and ln['kb']>=2 and ln['hs'],json.dumps(ln))
         await A.wait(600)
         kbd=await A.ev("()=>{const L=mons.filter(m=>m.__t6&&m.hp>0);return[L.filter(m=>m.__kb).length,Math.round(Math.min(...L.map(m=>Math.hypot(m.x-me.x,m.y-me.y))))]}")
