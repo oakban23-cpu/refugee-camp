@@ -39,7 +39,7 @@ async def main():
         e=await A.ev("()=>{const d=$('fgx');return[FG.ph,d.querySelector('.fgn').textContent,!!d.querySelector('[data-fga=\"close\"]')]}")
         rep('④ แตะตอนเข็มกลางโซน = เป๊ะ (×1.2) → ฉากตี → เฉลยผล',s[0]=='strike' and s[1]==0.2 and e[0]=='res' and len(e[1])>0 and e[2],str(s)+str(e))
         await A.ev("()=>{$('fgx').querySelector('[data-fga=\"close\"]').click()}");await A.wait(400)
-        cl=await A.ev("()=>[$('fgx').hidden,ov.dataset.k,!ov.hidden]")
+        cl=await A.ev("()=>[getComputedStyle($('fgx')).display==='none',ov.dataset.k,!ov.hidden]")
         rep('④ ปิดเตาหลอมแล้วกลับหน้าช่างพร้อมข้อความผล',cl==[True,'smith',True],str(cl))
         await A.ev(MK,12);await A.ev("()=>{smithUp()}");await A.wait(8800)
         a=await A.ev("()=>[FG.ph,FG.lab,FG.tb]")
