@@ -13533,10 +13533,13 @@ function fgCSS(){if($('fgcss'))return;const st=document.createElement('style');s
 '#fgx .fgbar{position:relative;height:22px;margin:8px 2px 4px;border-radius:11px;background:linear-gradient(90deg,#3a1a10,#5a2a12,#3a1a10);border:1px solid #8a5a2a;overflow:hidden}'+
 '#fgx .fgbar i{position:absolute;top:0;bottom:0}#fgx .fgbar .gz{background:rgba(255,200,90,.35)}#fgx .fgbar .pz{background:linear-gradient(90deg,#ffe9a0,#ffb040);box-shadow:0 0 8px #ffd060}'+
 '#fgx .fgbar b{position:absolute;top:-3px;bottom:-3px;width:4px;margin-left:-2px;background:#fff;border-radius:2px;box-shadow:0 0 6px #fff}'+
-'#fgx .fgh{font-size:11.5px;color:#d8b890;margin-bottom:6px}'+
+'#fgx .fgh{font-size:11.5px;color:#d8b890;margin-bottom:6px}'+'#fgx .fgpl{display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;font-size:12.5px;margin:6px 2px 2px;padding:6px 8px;border-radius:10px;border:1px solid #8a5a2a;background:rgba(0,0,0,.25)}#fgx .fgpl.on{border-color:#6ab0ff;background:rgba(40,80,140,.25)}#fgx .fgpl.off{border-color:#c86a3a;background:rgba(140,50,20,.22)}#fgx .fgpl small{display:block;opacity:.75;font-size:11px}#fgx .fgpl b{color:#ffe08a}#fgx .fgpl button{padding:6px 10px;font-size:12px;white-space:nowrap}'+
 '#fgx button{font:700 14px system-ui;border-radius:10px;padding:10px 14px;border:1.5px solid #e0a040;background:linear-gradient(180deg,#ffcf6a,#d8862a);color:#2a1406;cursor:pointer}'+
 '#fgx button.sec{background:#2a1a10;color:#ffe0b0;border-color:#8a5a2a}#fgx .fgk{width:100%;font-size:17px;padding:12px}#fgx .fgbt{display:flex;gap:8px;justify-content:center;margin-top:8px}';
 document.head.appendChild(st)}
+function fgProtH(u){if(u<10)return'';const n=me.inv.ps|0,risk=u>=20?'ลด 1 ขั้น และอาจแตกหาย (25%)':'ลด 1 ขั้น';
+if(n<=0)return'<div class="fgpl off">🛡️ ไม่มีหินกันแตก · ถ้าพลาด: '+risk+'</div>';
+return'<div class="fgpl'+(smProt?' on':' off')+'"><span>'+(smProt?'🛡️ ใช้หินกันแตก · เหลือ <b>'+n+'</b> ก้อน<small>หักเฉพาะตอนพลาด 1 ก้อน</small>':'⚠️ ไม่ใช้หินกันแตก (มี '+n+')<small>ถ้าพลาด: '+risk+'</small>')+'</span><button class="sec" data-fga="prot">'+(smProt?'✅ ใช้':'⬜ ไม่ใช้')+'</button></div>'}
 function fgOpen(){const it=smGet(smSel);if(!it||FG.busy)return;fgCSS();const u=it.u|0,t=fgTier(u)||'a';
 let d=$('fgx');if(!d){d=document.createElement('div');d.id='fgx';document.body.appendChild(d);d.addEventListener('click',e=>{const b=e.target.closest('[data-fga]');if(b){e.stopPropagation();fgAct(b.dataset.fga)}else if(FG.ph==='aim'&&e.target.closest('.fgbar,.fgs'))fgHitNow()})}
 FG.ph='aim';FG.res=null;FG.sel=smSel;FG.p=Math.random();FG.dir=1;FG.v={a:.85,b:1.15,c:1.45}[t];FG.gw={a:.26,b:.21,c:.17}[t];FG.pw={a:.075,b:.06,c:.05}[t];FG.c=.22+Math.random()*.56;FG.lt=performance.now();FG.t0=performance.now();
@@ -13544,6 +13547,7 @@ const base=upRate(u),heat=fgHeat(u);
 d.innerHTML='<div class="fgb"><div class="fgt">🔨 เตาหลอม · ตีบวก +'+u+' ➜ +'+(u+1)+'<small>'+itemName(it)+'</small></div>'+
 '<div class="fgs"><canvas width="360" height="190"></canvas><div class="fgi">'+cellH(it,'disabled',0,it.sl)+'</div><div class="fgn"></div></div>'+
 '<div class="fgr">โอกาสพื้นฐาน <b>'+Math.round(base*100)+'%</b>'+(heat>0?' · 🔥 ไฟเตา <b>+'+Math.round(heat*100)+'%</b>':'')+'<br>แตะ «ตี!» ตอนเข็มอยู่ในโซนทอง: <b>เป๊ะ ×1.2</b> · <b>ดี ×1.1</b></div>'+
+'<div class="fgpr">'+fgProtH(u)+'</div>'+
 '<div class="fgbar"><i class="gz"></i><i class="pz"></i><b></b></div><div class="fgh">⏱ ไม่แตะใน 8 วิ ค้อนจะตีเอง (ไม่มีโบนัส)</div>'+
 '<button class="fgk" data-fga="hit">🔨 ตี!</button><div class="fgbt"><button class="sec" data-fga="close">ยกเลิก</button></div></div>';
 const gz=d.querySelector('.gz'),pz=d.querySelector('.pz');gz.style.left=((FG.c-FG.gw/2)*100)+'%';gz.style.width=(FG.gw*100)+'%';pz.style.left=((FG.c-FG.pw/2)*100)+'%';pz.style.width=(FG.pw*100)+'%';
@@ -13588,7 +13592,7 @@ if(K==='ok'||K==='great'){try{burst(me.x,me.y-10,K==='great'?['#ffc8f8','#ffffff
 const bar=d.querySelector('.fgbar'),hh=d.querySelector('.fgh'),k=d.querySelector('.fgk');if(bar)bar.style.visibility='hidden';if(hh)hh.textContent='';if(k)k.remove();
 const still=K!=='break'&&smGet(FG.sel),can=still&&!upElig(still);
 d.querySelector('.fgbt').innerHTML=(can?'<button data-fga="again">🔨 ตีต่อ +'+((still.u|0)+1)+'</button>':'')+'<button class="sec" data-fga="close">ปิด</button>'}
-function fgAct(a){if(a==='hit')return fgHitNow();if(a==='again'){if(FG.ph!=='res')return;const it=smGet(FG.sel);if(!it)return fgClose();smSel=FG.sel;const u=it.u|0,el=upElig(it),need=upNeed(u);
+function fgAct(a){if(a==='prot'){if(FG.ph!=='aim')return;smProt=!smProt;try{sfx('click')}catch(e){}const it=smGet(FG.sel),el=$('fgx')&&$('fgx').querySelector('.fgpr');if(el&&it)el.innerHTML=fgProtH(it.u|0);return}if(a==='hit')return fgHitNow();if(a==='again'){if(FG.ph!=='res')return;const it=smGet(FG.sel);if(!it)return fgClose();smSel=FG.sel;const u=it.u|0,el=upElig(it),need=upNeed(u);
 if(el||me.gold<upCost(it)||(need&&(me.inv['s'+need]|0)<1)){fgClose();smithUI(el||(me.gold<upCost(it)?'ทองไม่พอ':GDM['s'+need].n+' ไม่พอ'));return}if(u<5||FG.quick){fgClose();fgQuick();return}FG.busy=0;fgOpen();return}
 if(a==='close'){if(FG.ph==='strike'){fgReveal()}fgClose()}}
 function fgClose(){const d=$('fgx');if(d)d.hidden=true;cancelAnimationFrame(FG.raf);FG.raf=0;FG.ph='';FG.busy=0;FGP.length=0;const R=FG.res;FG.res=null;if(!ov.hidden&&ov.dataset.k==='smith')smithUI(R?fgMsg(R):'')}
