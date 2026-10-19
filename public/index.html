@@ -13607,6 +13607,11 @@ let h='<div class="card"><div class="cap">🔥 เตาหลอม</div>'+(it&
 const cards=pn.querySelectorAll('.card');const a=cards[0];if(a)a.insertAdjacentHTML('afterend',h);
 const q=pn.querySelector('[data-fgq]');if(q)q.onclick=e=>{e.stopPropagation();FG.quick=FG.quick?0:1;try{fgSt().q=FG.quick;writeSave()}catch(_){}smithUI()};
 const btn=pn.querySelector('[data-smu]');if(btn&&it&&u>=5&&!FG.quick)btn.innerHTML='🔨 เข้าเตาหลอม +'+(u+1)}catch(e){}return r})(smithUI)}catch(e){}
+const fgSmithHere=()=>curMap===1||curMap===19;
+upBtn=function(it,key){if((it.u|0)>=UMAX)return'<button disabled>ตีบวกสูงสุด +'+UMAX+'</button>';
+return fgSmithHere()?'<button data-up="'+key+'">🔨 ไปเตาหลอม<br><small>ตีบวก +'+((it.u|0)+1)+'</small></button>':'<button disabled style="font-size:11px">🔨 ตีบวกได้ที่<br>ช่างตีบวกในค่าย</button>'};
+upgradeItem=function(key){if(!me.cls)return;if(!fgSmithHere()){banner={s:'🔨 ตีบวกได้ที่ช่างตีบวกในค่ายผู้อพยพ',t:3};return}const p=String(key||'').split(':'),w=p[0],k=p[1];
+const it=w==='eq'?me.eq[k]:w==='bag'?me.bag[+k]:null;if(!it)return;smSel=w==='eq'?'eq:'+k:'bag:'+(+k);ov.hidden=false;smithUI()};
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
