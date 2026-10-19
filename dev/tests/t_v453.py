@@ -39,7 +39,7 @@ async def main():
         rep('เดินเข้าแปลงผัก → ปุ่ม «ฟาร์มกิลด์»',not f1[0] and 'ฟาร์มกิลด์' in f1[1],json.dumps(f1,ensure_ascii=False))
         await A.ev("()=>{$('tnb').click()}");await A.wait(500)
         u=await A.ev("()=>({k:ov.dataset.k,tab:GHS.tab,plant:ov.querySelectorAll('[data-gh2^=\"p:0:\"]').length,lock:(ov.innerHTML.match(/🔒/g)||[]).length,tabs:ov.querySelectorAll('[data-ght]').length})")
-        rep('หน้าฟาร์ม: ปุ่มปลูก 4 พืช · แปลงล็อก 8 · แท็บ 4',u['k']=='gh' and u['tab']=='farm' and u['plant']==4 and u['lock']==8 and u['tabs']==4,json.dumps(u))
+        rep('หน้าฟาร์ม: ปุ่มปลูก 4 พืช · แปลงล็อก 8 · แท็บ 5',u['k']=='gh' and u['tab']=='farm' and u['plant']==4 and u['lock']==8 and u['tabs']==5,json.dumps(u))
         await A.ev("()=>{ov.querySelector('[data-gh2=\"p:0:wheat\"]').click()}");await A.wait(900)
         await B.ev("()=>{gdEmit('hfp',{p:1,c:'pumpkin'})}");await A.wait(900)
         fm=await A.ev("()=>GDS.g.hq.farm.map(f=>f&&[f.c,f.w,f.by,Math.round(f.d/100)])")
