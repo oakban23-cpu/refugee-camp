@@ -271,12 +271,26 @@ function gbView(G,mid){const B=gbWk(G),my=B.dm[mid]||{d:0,n:0,b:0};return{s:B.s,
   rk:Object.keys(B.dm).map(m=>[(G.mem[m]&&G.mem[m].n)||B.dm[m].nm||'?',B.dm[m].d,B.dm[m].n,m===mid?1:0]).sort((a,b)=>b[1]-a[1]).slice(0,30),last:B.last||null,tk:B.tk[mid]?1:0}}
 /* v452 บ้านกิลด์ รอบ 1: คลังบริจาค (เข้าอย่างเดียว) · เพดานต่อคนต่อวัน · แต้มกิลด์ · หัวหน้า/รองกดขึ้นขั้น 1→5 */
 const HQK=process.env.GD_FAST?.001:1,HQCAP=2e6,HQMIN=1000,HQLV=20,HQPT=1e4,HQT=[null,{f:0,l:1},{f:20e6,l:2},{f:80e6,l:4},{f:250e6,l:6},{f:800e6,l:8}];
-function hqOf(G){let H=G.hq;if(!H||typeof H!=='object'){H=G.hq={t:1,f:0,dn:{},log:[],wk:{k:gdWeek(),m:{}},sp:0};gdDirty=true}if(!H.dn)H.dn={};if(!H.log)H.log=[];if(!H.wk||H.wk.k!==gdWeek()){H.wk={k:gdWeek(),m:{}};gdDirty=true}return H}
+/* v453 บ้านกิลด์ รอบ 2: ฟาร์ม · สวนผลไม้ · โกดัง · ครัวกิลด์ (บัฟทั้งกิลด์ 1 ชม.) · แจกเสบียง · ร้านกิลด์ (แต้มกิลด์) */
+const HFK=process.env.GD_FAST?1/2000:1,HPLOT=[0,2,4,6,8,10],HFC={wheat:{h:4,y:6},carrot:{h:6,y:5},pumpkin:{h:12,y:4},herb:{h:24,y:3}},HTD={oak:{h:48,y:4,k:'wood'},apple:{h:24,y:6,k:'apple'}},HTN=[0,0,0,2,4,6],
+  HITM=['wheat','carrot','pumpkin','herb','apple','wood'],HGV={wheat:2000,carrot:3000,pumpkin:6000,herb:12000,apple:2500,wood:4000},HSTMX=999,
+  HRC={bread:{n:{wheat:8},t:1},stew:{n:{carrot:6,wheat:2},t:1},soup:{n:{herb:3,carrot:3},t:1},pie:{n:{pumpkin:3,wheat:4,apple:3},t:3},feast:{n:{wheat:10,carrot:6,pumpkin:3,herb:2,apple:6},t:4}},HBUF=3600e3,
+  HSH={s3:{p:5,w:5},ps:{p:6,w:5},rn:{p:15,w:5},th:{p:15,w:3},rl:{p:40,w:2},d7:{p:30,w:2},d8:{p:80,w:1}};
+const hqPt=D=>Math.floor((D.tot||0)/HQPT)+(D.bp|0)-(D.ps|0);
+function hqFl(H,e){H.fl=H.fl||[];H.fl.push(e);if(H.fl.length>40)H.fl.splice(0,H.fl.length-40)}
+function hqTr(H,now){H.tr=Array.isArray(H.tr)?H.tr:[];while(H.tr.length<HTN[H.t])H.tr.push(now);return H.tr}
+const hqTk=i=>i%2?'apple':'oak';
+function hqTrN(H,i,now){const D=HTD[hqTk(i)],P=D.h*3600e3*HFK,el=Math.max(0,now-H.tr[i]);return{n:Math.min(2,Math.floor(el/P)),r:el>=2*P?0:P-el%P,P}}
+function hqOf(G){let H=G.hq;if(!H||typeof H!=='object'){H=G.hq={t:1,f:0,dn:{},log:[],wk:{k:gdWeek(),m:{}},sp:0};gdDirty=true}if(!H.dn)H.dn={};if(!H.log)H.log=[];if(!H.st)H.st={};if(!Array.isArray(H.farm))H.farm=[];if(!H.gift)H.gift={};if(!H.buy)H.buy={};if(!H.wk||H.wk.k!==gdWeek()){H.wk={k:gdWeek(),m:{}};gdDirty=true}return H}
 function hqLog(H,e){H.log.push(e);if(H.log.length>60)H.log.splice(0,H.log.length-60)}
 function hqView(G,mid){const H=hqOf(G),D=H.dn[mid]||{},td=D.d===gbDay()?D.a|0:0,nx=HQT[H.t+1]||null,nm=m=>(G.mem[m]&&G.mem[m].n)||(H.dn[m]&&H.dn[m].n)||'?';
-  return{t:H.t,f:H.f,cap:HQCAP,min:HQMIN,today:td,left:Math.max(0,HQCAP-td),tot:D.tot||0,pt:Math.floor((D.tot||0)/HQPT)-(D.ps|0),nx:nx?{f:Math.round(nx.f*HQK),l:nx.l}:null,
+  return{t:H.t,f:H.f,cap:HQCAP,min:HQMIN,today:td,left:Math.max(0,HQCAP-td),tot:D.tot||0,pt:hqPt(D),nx:nx?{f:Math.round(nx.f*HQK),l:nx.l}:null,
     top:Object.keys(H.dn).filter(m=>H.dn[m].tot>0).map(m=>[nm(m),H.dn[m].tot,m===mid?1:0,G.mem[m]?1:0]).sort((a,b)=>b[1]-a[1]).slice(0,10),
-    wk:Object.keys(H.wk.m).map(m=>[nm(m),H.wk.m[m],m===mid?1:0]).sort((a,b)=>b[1]-a[1]).slice(0,10),log:H.log.slice(-30)}}
+    wk:Object.keys(H.wk.m).map(m=>[nm(m),H.wk.m[m],m===mid?1:0]).sort((a,b)=>b[1]-a[1]).slice(0,10),log:H.log.slice(-30),...hqView2(G,H,mid)}}
+function hqView2(G,H,mid){const now=Date.now(),tr=hqTr(H,now),B=H.buy[mid];
+  return{farm:Array.from({length:HPLOT[H.t]},(_,i)=>{const F=H.farm[i];if(!F)return null;const rp=F.at+F.d*(1-.1*F.w.length);return{c:F.c,r:Math.max(0,rp-now),d:F.d,w:F.w.length,mw:F.w.includes(mid)?1:0,by:F.n||''}}),
+    trees:tr.map((_,i)=>{const q=hqTrN(H,i,now);return{k:hqTk(i),n:q.n,r:q.r,P:q.P}}),st:H.st,
+    buff:H.bf&&H.bf.u>now?{k:H.bf.k,r:H.bf.u-now,n:H.bf.n}:null,gift:H.gift[mid]||null,buy:B&&B.k===gdWeek()?B.c:{},fl:(H.fl||[]).slice(-20)}}
 function gdOf(mid){const id=GD.by[mid];const G=id&&GD.g[id];if(!G||!G.mem[mid]){if(id)delete GD.by[mid];return null}return G}
 function gdOnline(mid){for(const o of clients)if(o.gmid===mid&&o.p&&!o.dead)return o;return null}
 function gdTag(o){const m=o&&o.gmid;if(!m)return'';const G=gdOf(m);if(!G||!o.p||G.mem[m].n!==o.p.n)return'';return G.e+'|'+G.tag+'|'+G.col}
@@ -338,15 +352,36 @@ function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();
     if((c.p.lv|0)<HQLV)return bad('ต้องเลเวล '+HQLV+' ขึ้นไปถึงบริจาคได้');if(!isFinite(a)||a<HQMIN)return bad('บริจาคขั้นต่ำ '+HQMIN.toLocaleString()+' ทอง');
     const day=gbDay(),D=H.dn[mid]||(H.dn[mid]={d:day,a:0,tot:0,n:name});if(D.d!==day){D.d=day;D.a=0}if(D.a+a>HQCAP)return bad('เกินเพดานบริจาควันนี้ (เหลือ '+Math.max(0,HQCAP-D.a).toLocaleString()+' ทอง)');
     D.a+=a;D.tot+=a;D.n=name;H.f+=a;H.wk.m[mid]=(H.wk.m[mid]||0)+a;hqLog(H,{k:'d',n:name,a,at:now});gdDirty=true;
-    gdSend(c,'gdn',{t:'hqd',n,a,f:H.f,pt:Math.floor(D.tot/HQPT)-(D.ps|0)});gdCast(G,{t:'hqx',n:name,a},c);gdRefresh(G);return}
+    gdSend(c,'gdn',{t:'hqd',n,a,f:H.f,pt:hqPt(D)});gdCast(G,{t:'hqx',n:name,a},c);gdRefresh(G);return}
   if(op==='hqu'){const H=hqOf(G);if(me.r<1)return no('เฉพาะหัวหน้า/รองหัวหน้าที่สั่งขยายบ้านได้');if(H.t>=5)return no('บ้านกิลด์ขั้นสูงสุดแล้ว');if((d.t|0)!==H.t)return no('ขั้นบ้านเปลี่ยนไปแล้ว ลองใหม่อีกครั้ง');
     const R=HQT[H.t+1],cost=Math.round(R.f*HQK);if(G.lvl<R.l)return no('ต้องกิลด์ Lv '+R.l+' ก่อน');if(H.f<cost)return no('คลังกิลด์ไม่พอ (ต้อง '+cost.toLocaleString()+' ทอง)');
     H.f-=cost;H.t++;hqLog(H,{k:'u',n:name,a:cost,t:H.t,at:now});G.log=G.log||[];G.log.push({n:'🏰',t:name+' ขยายบ้านกิลด์เป็นขั้น '+H.t+'!',at:now});if(G.log.length>40)G.log.splice(0,G.log.length-40);gdDirty=true;
     gdCast(G,{t:'hqu',n:name,tt:H.t,a:cost});gdRefresh(G);return}
+  if(op==='hfp'||op==='hfw'||op==='hfh'||op==='htc'||op==='hck'||op==='hgv'||op==='hqg'||op==='hqb'){const H=hqOf(G),i=d.p|0,ST=H.st,add=(k,n)=>{ST[k]=Math.min(HSTMX,(ST[k]|0)+n)};hqTr(H,now);
+    const D=H.dn[mid]||(H.dn[mid]={d:gbDay(),a:0,tot:0,n:name});
+    if(op==='hfp'){const c2=String(d.c||'');if(!HFC[c2])return no('ไม่มีเมล็ดพันธุ์นี้');if(i<0||i>=HPLOT[H.t])return no('แปลงนี้ยังไม่เปิด');if(H.farm[i])return no('แปลงนี้ปลูกอยู่แล้ว');
+      H.farm[i]={c:c2,at:now,d:Math.round(HFC[c2].h*3600e3*HFK),w:[],n:name};gdDirty=true;gdRefresh(G);return}
+    const F=H.farm[i];
+    if(op==='hfw'){if(!F||i>=HPLOT[H.t])return no('แปลงนี้ยังว่างอยู่');if(now>=F.at+F.d*(1-.1*F.w.length))return no('โตเต็มที่แล้ว เก็บเกี่ยวได้เลย');if(F.w.length>=3)return no('รดน้ำครบ 3 ครั้งแล้ว');if(F.w.includes(mid))return no('คุณรดแปลงนี้ไปแล้ว ให้เพื่อนช่วยรดบ้าง');
+      F.w.push(mid);gdDirty=true;gdSend(c,'gdn',{t:'hfw',p:i});gdRefresh(G);return}
+    if(op==='hfh'){if(!F||i>=HPLOT[H.t])return no('แปลงนี้ยังว่างอยู่');if(now<F.at+F.d*(1-.1*F.w.length))return no('ยังไม่สุก');const y=HFC[F.c].y;add(F.c,y);H.farm[i]=null;D.bp=(D.bp|0)+1;hqFl(H,{k:'h',n:name,c:F.c,a:y,at:now});gdDirty=true;
+      gdSend(c,'gdn',{t:'hfh',c:F.c,a:y,pt:hqPt(D)});gdRefresh(G);return}
+    if(op==='htc'){if(i<0||i>=HTN[H.t])return no('ยังไม่มีต้นไม้ต้นนี้');const q=hqTrN(H,i,now);if(q.n<1)return no('ยังไม่มีผลให้เก็บ');const T=HTD[hqTk(i)],y=T.y*q.n;add(T.k,y);H.tr[i]=q.n>=2?now:now-(q.P-q.r);hqFl(H,{k:'t',n:name,c:T.k,a:y,at:now});gdDirty=true;
+      gdSend(c,'gdn',{t:'htc',c:T.k,a:y});gdRefresh(G);return}
+    if(op==='hck'){if(me.r<1)return no('เฉพาะหัวหน้า/รองหัวหน้าที่สั่งครัวกิลด์ได้');const R=HRC[d.r];if(!R)return no('ไม่มีสูตรนี้');if(H.t<R.t)return no('ต้องบ้านกิลด์ขั้น '+R.t+' ขึ้นไป');
+      for(const k in R.n)if((ST[k]|0)<R.n[k])return no('วัตถุดิบในโกดังไม่พอ');for(const k in R.n)ST[k]-=R.n[k];H.bf={k:d.r,u:now+HBUF,n:name};hqFl(H,{k:'c',n:name,c:d.r,at:now});gdDirty=true;
+      gdCast(G,{t:'hck',n:name,r:d.r});gdRefresh(G);return}
+    if(op==='hgv'){if(me.r<1)return no('เฉพาะหัวหน้า/รองหัวหน้าที่แจกเสบียงได้');const T=typeof d.t==='string'&&G.mem[d.t]?d.t:'';if(!T)return no('ไม่พบสมาชิกคนนี้');const it=d.it&&typeof d.it==='object'?d.it:{},take={};let tot=0;
+      for(const k of HITM){const n=Math.max(0,Math.min(999,Math.floor(+it[k]||0)));if(n){if((ST[k]|0)<n)return no('ของในโกดังไม่พอ');take[k]=n;tot+=n}}if(!tot)return no('เลือกของที่จะแจกก่อน');
+      for(const k in take)ST[k]-=take[k];const P=H.gift[T]||(H.gift[T]={it:{},g:0});for(const k in take){P.it[k]=(P.it[k]|0)+take[k];P.g+=take[k]*HGV[k]}hqFl(H,{k:'g',n:name,to:G.mem[T].n,a:tot,at:now});gdDirty=true;
+      const o=gdOnline(T);if(o)gdSend(o,'gdn',{t:'hgv',n:name,it:take});gdSend(c,'gdn',{t:'hgvok',to:G.mem[T].n,a:tot});gdRefresh(G);return}
+    if(op==='hqg'){const P=H.gift[mid];if(!P||!(P.g>0))return no('ไม่มีเสบียงรอรับ');delete H.gift[mid];const id=crypto.randomBytes(5).toString('hex');gdDirty=true;gdSend(c,'gdn',{t:'hqg',it:P.it,g:P.g,id});gdRefresh(G);return}
+    if(op==='hqb'){const k=String(d.i||''),S=HSH[k];if(!S)return no('ไม่มีของชิ้นนี้');const w=gdWeek();let B=H.buy[mid];if(!B||B.k!==w)B=H.buy[mid]={k:w,c:{}};if((B.c[k]|0)>=S.w)return no('ซื้อชิ้นนี้ครบโควตาสัปดาห์นี้แล้ว');if(hqPt(D)<S.p)return no('แต้มกิลด์ไม่พอ');
+      D.ps=(D.ps|0)+S.p;B.c[k]=(B.c[k]|0)+1;const id=crypto.randomBytes(5).toString('hex');gdDirty=true;gdSend(c,'gdn',{t:'hqb',i:k,id,pt:hqPt(D)});gdRefresh(G);return}}
   if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
     W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
 }
-const SRV_V='v452';
+const SRV_V='v453';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;

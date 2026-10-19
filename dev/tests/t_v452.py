@@ -82,8 +82,7 @@ async def main():
         cap=await A.ev("()=>{const i=$('ghamt');i.value=1950000;ov.querySelector('[data-gha=\"don\"]').click();return [ov.innerHTML.includes('เกินเพดาน'),!!GHS.pend]}")
         rep('บริจาคเกินเพดานวันนี้ → หน้าจอไม่ให้ส่ง',cap==[True,False] and await A.ev("()=>me.gold")==g0,json.dumps(cap))
         # ---- โกงฝั่งเครื่อง: แก้ left แล้วส่ง → เซิร์ฟเวอร์ปฏิเสธ คืนทอง ----
-        await A.ev("()=>{GDS.g.hq.left=9e9;ghUI();const i=$('ghamt');i.value=1950000;ov.querySelector('[data-gha=\"don\"]').click()}")
-        mid2=await A.ev("(g0)=>g0-me.gold",g0)
+        mid2=await A.ev("(g0)=>{GDS.g.hq.left=9e9;ghUI();const i=$('ghamt');i.value=1950000;ov.querySelector('[data-gha=\"don\"]').click();return g0-me.gold}",g0)
         await A.wait(1500)
         ch=await A.ev("(g0)=>({dg:g0-me.gold,pend:!!GHS.pend,f:GDS.g.hq.f,ui:ov.innerHTML.includes('คืนทองแล้ว')})",g0)
         rep('แก้ตัวเลขฝั่งเครื่องแล้วส่งเกินเพดาน → เซิร์ฟเวอร์ปฏิเสธ · คืนทองครบ',mid2==1950000 and ch['dg']==0 and not ch['pend'] and ch['f']==100000 and ch['ui'],json.dumps([mid2,ch],ensure_ascii=False))

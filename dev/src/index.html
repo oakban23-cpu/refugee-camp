@@ -13583,15 +13583,15 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v452';
+const WNV='v453';
 const WNL=[
+  ['🌾','บ้านกิลด์: ฟาร์ม ครัว ร้าน','ปลูกผักในบ้านกิลด์ ใครก็ปลูก/รดน้ำ/เก็บเกี่ยวได้ (เก็บเกี่ยว = แต้มกิลด์ +1) · บ้านขั้น 3 มีสวนโอ๊ก/แอปเปิล · หัวหน้า/รองใช้ของในโกดังทำอาหารที่ครัวกิลด์ = บัฟทั้งกิลด์ 1 ชม. · แจกเสบียงให้สมาชิก · ร้านกิลด์แลกของด้วยแต้มกิลด์'],
   ['🏰','บ้านกิลด์ เปิดแล้ว!','ประตูใหม่ในค่าย (ฝั่งตะวันออกเฉียงใต้) พาเข้าบ้านของกิลด์คุณ · เริ่มจากค่ายทหาร ขยายได้ถึงปราสาท 5 ขั้น · บริจาคทองเข้าคลังกิลด์ (คนละไม่เกิน 2 ล้าน/วัน) รับแต้มกิลด์ · หัวหน้า/รองเป็นคนกดขยายบ้าน'],
   ['🔁','ช่างโอนบวก ไซลัส','ได้ของใหม่แต่เสียดายบวกเก่า? คุยกับไซลัส (ค่าย ฝั่งตะวันตกเฉียงเหนือ) โอนระดับตีบวกไปชิ้นใหม่ช่องเดียวกันได้ สำเร็จ 100% · ชิ้นเก่ากลายเป็น +0'],
   ['🏕️','ค่ายกว้างขึ้นเกือบเท่าครึ่ง','รั้วค่ายขยายออก NPC ร้านค้า ประตู และลานกองไฟกระจายห่างกัน ไม่แออัดแล้ว · ปุ่ม 🧭 เดินไวในค่าย (ใต้เกจคลั่ง) พาไปหา NPC/ประตูได้ทันที'],
   ['⌨️','เล่นบนคอมเดินด้วยคีย์บอร์ด','กด W A S D หรือปุ่มลูกศรเพื่อเดิน กดทแยงได้ · แป้นภาษาไทยก็ใช้ได้ ไม่ต้องสลับภาษา · Space/Shift = หลบ'],
   ['🔨','หัวหน้ามอนแบบใหม่','🔨 ทุบพื้น: วงแดงเต็มแล้วทุบ — ออกจากวงให้ทัน · 🏹 ยิงกระจาย: เส้นแดงเป็นพัดแล้วยิงจริง — หลบเข้าช่องว่าง · หัวหน้ามอนโผล่บ่อยขึ้น · กดหลบตอนโดนพอดี = หลบสมบูรณ์!'],
-  ['🅰️','แรงค์สไตล์ D→S','กดสกิลเองสลับไปมา ฆ่ารวด หลบสมบูรณ์ แรงค์จะไต่ขึ้น (ป้ายซ้ายจอ) · แรงค์สูงได้ทอง/EXP สูงสุด +35% · โดนตีแรงหรือยืนเฉยแรงค์ตก · ปล่อยออโต้ได้แต้มน้อย'],
-  ['💥','ทุบบอสให้ล้ม','บอสทุกตัวมีเกจล้มใต้แถบเลือด · ตีและใช้สกิลใส่จนเต็ม บอสทรุด 6 วิ หยุดโจมตี รับดาเมจ ×1.5 · ทั้งปาร์ตี้ช่วยกันเติม รีบรุมตอนล้ม!']];
+  ['🅰️','แรงค์สไตล์ D→S','กดสกิลเองสลับไปมา ฆ่ารวด หลบสมบูรณ์ แรงค์จะไต่ขึ้น (ป้ายซ้ายจอ) · แรงค์สูงได้ทอง/EXP สูงสุด +35% · โดนตีแรงหรือยืนเฉยแรงค์ตก · ปล่อยออโต้ได้แต้มน้อย']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -15652,8 +15652,9 @@ function ghEnter(){if(!me.cls||!run||me.down>0)return;const G=GDS.g;
   try{gdEmit('q')}catch(e){}}
 function ghExit(){if(!ghHere())return;try{sfx('gate')}catch(e){}enterMap(1,{x:GHG.x,y:GHG.y+58})}
 /* ---------- กันชน ---------- */
-const GHR=[[-185,-470,185,-292],[-528,-238,-332,-146],[-572,138,-330,236]];
-function ghCols(){const t=ghT(),L=[[0,22,t>=3?74:44],[-112,-246,10],[112,-246,10],[GHBD.x,GHBD.y-4,22],[-470,300,13],[-410,316,13]];return L}
+const GHR=[[-185,-470,185,-292],[-528,-238,-332,-146],[-572,138,-330,236],[385,34,555,100],[385,274,555,340]];
+const GHTP=[[-540,40],[-460,40],[-540,112],[-460,112],[-380,40],[-380,112]],GHST={x:470,y:128},GHKI={x:470,y:362};
+function ghCols(){const t=ghT(),L=[[0,22,t>=3?74:44],[-112,-246,10],[112,-246,10],[GHBD.x,GHBD.y-4,22],[-470,300,13],[-410,316,13]];const nt=[0,0,0,2,4,6][t];for(let i=0;i<nt;i++)L.push([GHTP[i][0],GHTP[i][1]-4,13]);return L}
 function ghCollide(){if(!ghHere())return;const x0=1600-600+22,x1=1600+600-22,y0=1600-470+26,y1=1600+430-22;
   me.x=Math.max(x0,Math.min(x1,me.x));me.y=Math.max(y0,Math.min(y1,me.y));
   for(const R of GHR){const a=1600+R[0]-12,b=1600+R[1]-10,c=1600+R[2]+12,d=1600+R[3]+10;if(me.x>a&&me.x<c&&me.y>b&&me.y<d){const L=[me.x-a,c-me.x,me.y-b,d-me.y],m=Math.min(...L);if(m===L[0])me.x=a;else if(m===L[1])me.x=c;else if(m===L[2])me.y=b;else me.y=d}}
@@ -15711,7 +15712,7 @@ function ghBuild(t,col,em){const S=(typeof LOWQ!=='undefined'&&LOWQ)?.85:1.2,X0=
   else if(t===2){tower(-560,-430,46,70);tower(560,-430,46,70)}
   /* ฟาร์ม (ยังเปิดใช้ไม่ได้ · รอบหน้า) */
   {const n=GHPLOT[t];Rc(330,-262,236,n>8?262:n>6?212:n>4?162:n>2?112:62,'rgba(60,40,20,.25)');
-    for(let i=0;i<n;i++){const x=i%2?458:342,y=-252+(i>>1)*50;Rc(x,y,96,40,'#5a3e24',O,.6);for(let k=0;k<4;k++)Rc(x+4,y+5+k*9,88,5,'#6e4c2c');for(let k=0;k<6;k++){c.fillStyle='#6fae48';c.beginPath();c.arc(x+12+k*15,y+12+(k%2)*14,2.4,0,7);c.fill()}}
+    for(let i=0;i<n;i++){const x=i%2?458:342,y=-252+(i>>1)*50;Rc(x,y,96,40,'#5a3e24',O,.6);for(let k=0;k<4;k++)Rc(x+4,y+5+k*9,88,5,'#6e4c2c')}
     for(let x=326;x<=570;x+=24){Rc(x-2,-272,4,12,'#7a5232',O,.4)}Rc(326,-268,244,2,'#8a6038')}
   /* กำแพงข้าง */
   vWall(-600,-470,430);vWall(600,-470,430);
@@ -15765,8 +15766,26 @@ function ghBuild(t,col,em){const S=(typeof LOWQ!=='undefined'&&LOWQ)?.85:1.2,X0=
     Rc(-360,272,40,30,'#6a4628',O,.7);for(let k=0;k<4;k++){c.strokeStyle='#bfc4c8';c.lineWidth=2;c.beginPath();c.moveTo(-354+k*9,300);c.lineTo(-354+k*9,262);c.stroke()}}
   /* --- กระดานกิลด์ · ลังของ · บ่อน้ำ --- */
   {const x=GHBD.x,y=GHBD.y;sh(x,y+2,30,6,.3);Rc(x-24,y-40,4,40,'#5a3a1e',O,.5);Rc(x+20,y-40,4,40,'#5a3a1e',O,.5);Rc(x-30,y-62,60,36,'#8a6038',O,.9);Rc(x-26,y-58,52,28,'#d8c8a0');P([x-34,y-62,x,y-74,x+34,y-62],'#6a4628',O,.8)}
-  [[470,280],[500,300],[520,272],[-300,-110],[-288,-90],[300,330]].forEach(([x,y],i)=>{sh(x,y+2,12,4);if(i%3===2){E(x,y-10,10,12,'#7a5232',O,.7);Rc(x-10,y-14,20,2,'#3a2a1a');Rc(x-10,y-6,20,2,'#3a2a1a')}else{Rc(x-12,y-20,24,20,'#9a6a3a',O,.7);c.strokeStyle='#5a3a1a';c.beginPath();c.moveTo(x-12,y-20);c.lineTo(x+12,y);c.stroke()}});
-  if(t<=2){const x=470,y=110;sh(x,y+4,30,8,.3);E(x,y,26,14,'#7c766a',O,.9);E(x,y-2,18,9,'#1e3a4a');Rc(x-22,y-42,4,40,'#5a3a1e',O,.5);Rc(x+18,y-42,4,40,'#5a3a1e',O,.5);P([x-30,y-40,x,y-56,x+30,y-40],'#7a5232',O,.8)}
+  [[-300,-110],[-288,-90],[300,330],[560,250]].forEach(([x,y],i)=>{sh(x,y+2,12,4);if(i%3===2){E(x,y-10,10,12,'#7a5232',O,.7);Rc(x-10,y-14,20,2,'#3a2a1a');Rc(x-10,y-6,20,2,'#3a2a1a')}else{Rc(x-12,y-20,24,20,'#9a6a3a',O,.7);c.strokeStyle='#5a3a1a';c.beginPath();c.moveTo(x-12,y-20);c.lineTo(x+12,y);c.stroke()}});
+  /* โกดังกิลด์ */
+  {const x=470,y=100;sh(x,y+3,96,11,.3);
+    if(t===1){[-80,80].forEach(a=>Rc(x+a-3,y-62,6,62,'#5a3a1e',O,.6));P([x-94,y-60,x,y-92,x+94,y-60],'#a8946a',O,1);c.strokeStyle='rgba(90,64,30,.5)';for(let k=1;k<8;k++){c.beginPath();c.moveTo(x-94+k*23.5,y-60);c.lineTo(x,y-92);c.stroke()}
+      [[x-56,y-2],[x-30,y-4],[x+40,y-2],[x+64,y-6]].forEach(([a,b],i)=>{if(i%2){E(a,b-10,11,12,'#c8b080',O,.7);Rc(a-4,b-24,8,4,'#8a6a40')}else{Rc(a-12,b-18,24,18,'#9a6a3a',O,.7)}})}
+    else if(t===2){Rc(x-86,y-66,172,66,'#7a5232');for(let yy=y-64;yy<y;yy+=9)Rc(x-86,yy,172,8,(yy/9|0)%2?'#865a36':'#7a5232');c.strokeStyle=O;c.strokeRect(x-86,y-66,172,66);P([x-98,y-64,x,y-112,x+98,y-64],'#8a3a2a',O,1);c.strokeStyle='rgba(40,10,5,.4)';for(let k=1;k<10;k++){c.beginPath();c.moveTo(x-98+k*19.6,y-64);c.lineTo(x,y-112);c.stroke()}
+      Rc(x-30,y-50,60,50,'#5a3a1e',O,.8);c.strokeStyle='#e8d8b0';c.lineWidth=2;c.beginPath();c.moveTo(x-30,y-50);c.lineTo(x+30,y);c.moveTo(x+30,y-50);c.lineTo(x-30,y);c.stroke()}
+    else{const K=t===5;Rc(x-88,y-72,176,72,K?'#e6dcc4':WF);c.strokeStyle='rgba(0,0,0,.2)';c.lineWidth=1;for(let yy=y-61;yy<y;yy+=11){c.beginPath();c.moveTo(x-88,yy);c.lineTo(x+88,yy);c.stroke()}c.strokeStyle=O;c.strokeRect(x-88,y-72,176,72);
+      P([x-96,y-70,x-74,y-100,x+74,y-100,x+96,y-70],K?col:'#5a4a3a',O,1);Rc(x-30,y-52,60,52,'#5a3a1e',O,.9);Rc(x-1,y-52,2,52,'#3a2414');Rc(x-30,y-36,60,3,'#3a3a3a');Rc(x-30,y-16,60,3,'#3a3a3a');win(x-74,y-54,18,16);win(x+56,y-54,18,16)}
+    c.font='bold 16px system-ui';c.textAlign='center';c.textBaseline='alphabetic';c.fillText('📦',x,y-(t===1?96:t===2?118:106))}
+  /* ครัวกิลด์ */
+  {const x=470,y=340;sh(x,y+3,96,11,.3);
+    if(t===1){[-78,78].forEach(a=>Rc(x+a-3,y-64,6,64,'#5a3a1e',O,.6));P([x-92,y-62,x-70,y-90,x+70,y-90,x+92,y-62],'#c8b48a',O,1);for(let k=0;k<5;k++){c.strokeStyle=col;c.lineWidth=3;c.beginPath();c.moveTo(x-70+k*35,y-90);c.lineTo(x-92+k*46,y-62);c.stroke()}
+      Rc(x+30,y-30,44,30,'#7a5232',O,.7);Rc(x-74,y-26,36,26,'#7a5232',O,.7)}
+    else if(t===2){Rc(x-84,y-64,168,64,'#7a5232');for(let yy=y-62;yy<y;yy+=9)Rc(x-84,yy,168,8,(yy/9|0)%2?'#865a36':'#7a5232');c.strokeStyle=O;c.strokeRect(x-84,y-64,168,64);P([x-96,y-62,x,y-104,x+96,y-62],'#a8884a',O,1);Rc(x+44,y-118,18,40,'#7c766a',O,.8);win(x-62,y-48,22,18);Rc(x-14,y-44,28,44,'#3a2414',O,.7)}
+    else{const K=t===5;Rc(x-86,y-70,172,70,K?'#e6dcc4':WF);c.strokeStyle='rgba(0,0,0,.2)';c.lineWidth=1;for(let yy=y-59;yy<y;yy+=11){c.beginPath();c.moveTo(x-86,yy);c.lineTo(x+86,yy);c.stroke()}c.strokeStyle=O;c.strokeRect(x-86,y-70,172,70);
+      P([x-94,y-68,x-72,y-98,x+72,y-98,x+94,y-68],K?col:'#4a5262',O,1);Rc(x+46,y-122,18,40,K?'#d8cfb8':'#6e685c',O,.8);win(x-66,y-52,22,20);P([x-16,y,x-16,y-40,x,y-50,x+16,y-40,x+16,y],'#3a2414',O,.8)}
+    c.font='bold 16px system-ui';c.textAlign='center';c.textBaseline='alphabetic';c.fillText('🍲',x,y-(t===1?96:t===2?110:106))}
+  /* สวนผลไม้ (ขั้น 3+) */
+  if(t<3){[[-540,76],[-460,76]].forEach(([a,b])=>{E(a,b,24,9,'#5a3e24',O,.5);Rc(a-1,b-16,2,14,'#7a5232')})}else{const nt=[0,0,0,2,4,6][t];for(let i=0;i<nt;i++){const[a,b]=GHTP[i];E(a,b+2,26,9,'rgba(60,40,20,.35)')}}
   /* --- กำแพงใต้ + ประตู --- */
   hWall(-600,-74,430);hWall(74,600,430);
   if(t===1){Rc(-80,430-80,8,80,'#6a4628',O,.7);Rc(72,430-80,8,80,'#6a4628',O,.7);Rc(-88,430-84,176,9,'#8a6038',O,.8);c.font='bold 13px system-ui';c.textAlign='center';Rc(-50,430-74,100,18,'#c8a870',O,.6);c.fillStyle='#3a2410';c.fillText('บ้านกิลด์',0,430-61)}
@@ -15809,9 +15828,10 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
   /* กระดานกิลด์: ประกาศ */
   {const x=X+GHBD.x,y=Y+GHBD.y;if(inView(x,y,80)){const nt=(G&&G.nt)||'ยังไม่มีประกาศ';g.font='7px system-ui';g.textAlign='left';g.fillStyle='#3a2410';const w=[...nt];let ln='',yy=y-50;for(let i=0;i<w.length&&yy<y-30;i++){ln+=w[i];if(g.measureText(ln).width>46||i===w.length-1){g.fillText(ln,x-24,yy);ln='';yy+=8}}
     g.font='bold 10px system-ui';g.textAlign='center';g.fillStyle='#ffe0a0';g.fillText('📜 กระดานกิลด์',x,y-80)}}
+  try{ghDraw2(t,col,now)}catch(e){}
   /* ป้ายหน้าประตู + ป้ายฟาร์ม/ค่ายทหาร */
   {const lab=(x,y,s,c2)=>{if(!inView(x,y,120))return;g.font='bold 11px system-ui';g.textAlign='center';const tw=g.measureText(s).width+16;g.fillStyle='rgba(30,20,10,.78)';g.beginPath();g.roundRect(x-tw/2,y-12,tw,17,8);g.fill();g.strokeStyle=c2||'rgba(255,220,150,.5)';g.lineWidth=1;g.stroke();g.fillStyle='#ffe6b0';g.fillText(s,x,y+1)};
-    lab(X,Y+262,(G?G.e+' ['+G.tag+'] ':'')+'ขั้น '+t+' · '+GHT[t].n,col);lab(X+448,Y-290,'🌱 ฟาร์มกิลด์ · เปิดเร็ว ๆ นี้');lab(X-450,Y+100,'⚔️ ค่ายทหาร · เปิดเร็ว ๆ นี้');
+    lab(X,Y+262,(G?G.e+' ['+G.tag+'] ':'')+'ขั้น '+t+' · '+GHT[t].n,col);lab(X+448,Y-290,'🌱 ฟาร์มกิลด์');lab(X-450,Y+150,'⚔️ ค่ายทหาร · เปิดเร็ว ๆ นี้');if(t<3)lab(X-500,Y+50,'🌳 สวนผลไม้ · บ้านขั้น 3');
     if(Math.hypot(me.x-X,me.y-(Y+430))<220)lab(X,Y+452,'🚪 ทางออก → ค่ายผู้อพยพ')}
   g.restore();
   /* พลุฉลองขยายบ้าน */
@@ -15835,10 +15855,12 @@ function ghCampGate(){if(curMap!==1||!inView(GHG.x,GHG.y,160))return;const x=GHG
   g.restore()}
 /* ---------- หน้าต่างคลังกิลด์ ---------- */
 function ghUI(msg){if(!me.cls)return;if(msg)GHS.msg={s:msg,t:Date.now()};else if(GHS.msg&&Date.now()-GHS.msg.t<5000)msg=GHS.msg.s;ov.dataset.k='gh';ov.hidden=false;const G=GDS.g,H=G&&G.hq;
-  let h=hdr('🏰','บ้านกิลด์ · คลังกิลด์',G?G.e+' '+esc(G.nm)+' ['+esc(G.tag)+'] · กิลด์ Lv '+G.lvl:'')+(msg?'<div class="note">'+msg+'</div>':'');
+  let h=hdr('🏰','บ้านกิลด์',G?G.e+' '+esc(G.nm)+' ['+esc(G.tag)+'] · กิลด์ Lv '+G.lvl:'')+(msg?'<div class="note">'+msg+'</div>':'');
   if(!gdOnl()||!G){h+='<div class="card hint">'+(!gdOnl()?'🏰 ใช้ได้เมื่อเล่นออนไลน์บนเซิร์ฟเวอร์เท่านั้น':'🏰 ต้องมีกิลด์ก่อน · เมนู › 🏰 กิลด์')+'</div>';ov.innerHTML='<div class="pn" data-pn="gh">'+h+'</div>';return}
   if(!H){h+='<div class="card hint">กำลังโหลดข้อมูลคลังกิลด์…</div>';ov.innerHTML='<div class="pn" data-pn="gh">'+h+'</div>';try{gdEmit('q')}catch(e){}return}
-  const col=gdCol(G.col),t=Math.max(1,Math.min(5,H.t|0)),nx=H.nx;
+  const col=gdCol(G.col),t=Math.max(1,Math.min(5,H.t|0)),nx=H.nx,TB=GHS.tab||'bank';
+  h+='<div class="tabs" style="gap:4px">'+[['bank','💰 คลัง'],['farm','🌱 ฟาร์ม'],['food','🍲 ครัว'+(H.gift?' (1)':'')],['shop','🛒 ร้าน']].map(([k,l])=>'<button class="tab'+(TB===k?' on':'')+'" data-ght="'+k+'" style="flex:1;font-size:12.5px;padding:6px 4px">'+l+'</button>').join('')+'</div>';
+  if(TB!=='bank'){try{h+=ghBody2(TB,G,H,t,col)}catch(e){h+='<div class="card hint">โหลดไม่สำเร็จ</div>'}h+='<div class="card tnact">'+(ghHere()?'<button data-gha="out">🚪 กลับค่ายผู้อพยพ</button>':'')+'<button data-gha="gd">🏰 เมนูกิลด์</button></div>';ov.innerHTML='<div class="pn" data-pn="gh">'+h+'</div>';try{ghAfter2(TB)}catch(e){}return}
   /* ขั้นบ้าน */
   h+='<div class="card" style="border-color:'+col+'88;text-align:left"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:40px">'+GHT[t].ic+'</span><div style="flex:1;min-width:0"><b style="font-size:16px;color:'+col+'">ขั้น '+t+'/5 · '+GHT[t].n+'</b><small style="display:block;opacity:.8">'+GHT[t].d+'</small></div></div>'+
     '<div style="font-size:13px;display:flex;justify-content:space-between;margin-top:6px"><span>💰 คลังกิลด์</span><b style="color:#ffd84a">'+(H.f|0).toLocaleString()+' ทอง</b></div>';
@@ -15878,11 +15900,11 @@ function ghAct(a){const G=GDS.g;
   if(a==='don')return ghDonate();
   if(a==='out'){ov.hidden=true;ghExit();return}
   if(a==='gd'){GDS.tab='ov';gdUI();gdEmit('q');return}
-  if(a==='open'){GHS.cf=0;ghUI();gdEmit('q');return}
+  if(a==='open'){GHS.tab='bank';GHS.cf=0;ghUI();gdEmit('q');return}
   if(a==='up'){const H=G&&G.hq;if(!H||!H.nx||G.r<1)return;if(!GHS.cf){GHS.cf=1;ghUI();return}GHS.cf=0;gdEmit('hqu',{t:H.t});ghUI('⏳ กำลังขยายบ้าน…');return}}
-setTimeout(()=>{try{ov.addEventListener('click',e=>{const k=ov.dataset.k;if(k!=='gh'&&k!=='gd')return;const b=e.target.closest&&e.target.closest('[data-gha],[data-ghm],[data-ghr]');if(!b)return;e.stopPropagation();try{sfx('click')}catch(_){}
+setTimeout(()=>{try{ov.addEventListener('click',e=>{const k=ov.dataset.k;if(k!=='gh'&&k!=='gd')return;const b=e.target.closest&&e.target.closest('[data-gha],[data-ghm],[data-ghr],[data-ght],[data-gh2]');if(!b)return;e.stopPropagation();try{sfx('click')}catch(_){}
   if(b.dataset.ghm){const H=GDS.g&&GDS.g.hq;GHS.amt=b.dataset.ghm==='max'?Math.min(H?H.left|0:0,Math.floor((me.gold|0)/1000)*1000):+b.dataset.ghm;GHS.cf=0;ghUI();return}
-  if(b.dataset.ghr){GHS.rk=b.dataset.ghr;ghUI();return}ghAct(b.dataset.gha)},true)}catch(e){}},0);
+  if(b.dataset.ghr){GHS.rk=b.dataset.ghr;ghUI();return}if(b.dataset.ght){GHS.tab=b.dataset.ght;GHS.cf=0;ghUI();return}if(b.dataset.gh2!=null){try{ghAct2(b.dataset.gh2)}catch(_){}return}ghAct(b.dataset.gha)},true)}catch(e){}},0);
 /* ---------- ข้อความจากเซิร์ฟเวอร์ ---------- */
 gdN=(f=>function(d){try{if(d&&d.t){const G=GDS.g,tg=G?'🏰['+G.tag+'] ':'🏰 ';
   if(d.t==='hqd'){const P=GHS.pend;if(P&&P.n===d.n){GHS.pend=null;try{me.stt.ghd=(me.stt.ghd||0)+P.a}catch(e){}try{writeSave()}catch(e){}try{sfx('coin')}catch(e){}try{burst(me.x,me.y-24,['#ffd84a','#fff3b0','#ffffff'],22,120,.8,{glow:1,g:-30})}catch(e){}
@@ -15892,7 +15914,7 @@ gdN=(f=>function(d){try{if(d&&d.t){const G=GDS.g,tg=G?'🏰['+G.tag+'] ':'🏰 '
   if(d.t==='hqu'){const tt=Math.max(1,Math.min(5,d.tt|0));try{if(G&&G.hq)G.hq.t=tt}catch(e){}banner={s:'🏰 '+d.n+' ขยายบ้านกิลด์เป็นขั้น '+tt+' · '+GHT[tt].n+'! 🎉',t:6};try{sysMsg(tg+'🏰 '+d.n+' ขยายบ้านกิลด์เป็นขั้น '+tt+' · '+GHT[tt].n+' (ใช้ '+(d.a|0).toLocaleString()+' ทองจากคลัง)')}catch(e){}try{sfx('lvl')}catch(e){}
     if(ghHere()){GHS.fw=Date.now()+4500;GHS.ck=''}if(ov.dataset.k==='gh'&&!ov.hidden)ghUI('🎉 ขยายบ้านเป็นขั้น '+tt+' แล้ว!');return}
   if(d.t==='err'&&ov.dataset.k==='gh'&&!ov.hidden){ghUI('⚠️ '+esc(d.s||''));return}}}catch(e){}return f.apply(this,arguments)})(gdN);
-gdR=(f=>function(d){const r=f.apply(this,arguments);try{const G=GDS.g;
+gdR=(f=>function(d){const r=f.apply(this,arguments);GHS.rx=Date.now();try{const G=GDS.g;
   if(ghHere()){const M=MAPS[curMap];if(!G||M.gid!==G.id){banner={s:'🏰 คุณไม่ได้อยู่กิลด์นี้แล้ว · กลับค่าย',t:4};enterMap(1,{x:GHG.x,y:GHG.y+58})}else M.n='บ้านกิลด์ ['+G.tag+']'}
   if(ov.dataset.k==='gh'&&!ov.hidden)ghUI()}catch(e){}return r})(gdR);
 /* ปุ่มในเมนูกิลด์ › ภาพรวม */
@@ -15901,9 +15923,9 @@ gdUI=(f=>function(){const r=f.apply(this,arguments);try{const G=GDS.g;if(G&&GDS.
 /* ---------- ปุ่มโต้ตอบ (ใช้ปุ่มเต็นท์เดิม #tnb) ---------- */
 tentTick=(f=>function(){const r=f.apply(this,arguments);try{GHS.near='';const b=$('tnb');if(!b||!b.hidden||!me.cls||!run||me.down>0||!ov.hidden||SD.on)return r;let tx='';
   if(curMap===1&&Math.hypot(me.x-GHG.x,me.y-(GHG.y+20))<70){tx=GDS.g?'🏰 เข้าบ้านกิลด์ ['+GDS.g.tag+']':'🏰 บ้านกิลด์ (ต้องมีกิลด์)';GHS.near='in'}
-  else if(ghHere()){const X=1600,Y=1600;if(Math.hypot(me.x-(X+GHN.x),me.y-(Y+GHN.y))<80){tx='💰 คลังกิลด์ · บริจาค';GHS.near='bank'}else if(Math.hypot(me.x-(X+GHBD.x),me.y-(Y+GHBD.y+20))<70){tx='📜 กระดานกิลด์';GHS.near='board'}else if(me.y>Y+430-70&&Math.abs(me.x-X)<90){tx='🚪 กลับค่ายผู้อพยพ';GHS.near='out'}}
+  else if(ghHere()){const X=1600,Y=1600;if(Math.hypot(me.x-(X+GHN.x),me.y-(Y+GHN.y))<80){tx='💰 คลังกิลด์ · บริจาค';GHS.near='bank'}else if(Math.hypot(me.x-(X+GHBD.x),me.y-(Y+GHBD.y+20))<70){tx='📜 กระดานกิลด์';GHS.near='board'}else if(Math.hypot(me.x-(X+GHST.x),me.y-(Y+GHST.y))<70){tx='📦 โกดังกิลด์';GHS.near='store'}else if(Math.hypot(me.x-(X+GHKI.x),me.y-(Y+GHKI.y))<75){tx='🍲 ครัวกิลด์';GHS.near='kitchen'}else if(me.x>X+316&&me.x<X+580&&me.y>Y-284&&me.y<Y+22){tx='🌱 ฟาร์มกิลด์';GHS.near='farm'}else if(GHTP.slice(0,[0,0,0,2,4,6][ghT()]).some(([a,b])=>Math.hypot(me.x-(X+a),me.y-(Y+b+14))<52)){tx='🌳 สวนผลไม้';GHS.near='tree'}else if(me.y>Y+430-70&&Math.abs(me.x-X)<90){tx='🚪 กลับค่ายผู้อพยพ';GHS.near='out'}}
   if(tx){b.hidden=false;if(b.textContent!==tx)b.textContent=tx;b.dataset.f='gh'}}catch(e){}return r})(tentTick);
-tentBtn=(f=>function(){const b=$('tnb');if(b&&b.dataset.f==='gh'){const k=GHS.near;try{sfx('click')}catch(e){}if(k==='in')ghEnter();else if(k==='out')ghExit();else if(k==='bank'){GHS.cf=0;ghUI();gdEmit('q')}else if(k==='board'){GDS.tab='ov';gdUI();gdEmit('q')}return}return f.apply(this,arguments)})(tentBtn);
+tentBtn=(f=>function(){const b=$('tnb');if(b&&b.dataset.f==='gh'){const k=GHS.near;try{sfx('click')}catch(e){}if(k==='in')ghEnter();else if(k==='out')ghExit();else if(k==='bank'){GHS.tab='bank';GHS.cf=0;ghUI();gdEmit('q')}else if(k==='board'){GDS.tab='ov';gdUI();gdEmit('q')}else if(k==='farm'||k==='tree'){GHS.tab='farm';GHS.cf=0;ghUI();gdEmit('q')}else if(k==='store'||k==='kitchen'){GHS.tab='food';GHS.cf=0;ghUI();gdEmit('q')}return}return f.apply(this,arguments)})(tentBtn);
 /* ---------- ต่อเข้าระบบเดิม ---------- */
 drawTent=(f=>function(){const r=f.apply(this,arguments);try{ghDraw()}catch(e){}return r})(drawTent);
 drawTentGate=(f=>function(){const r=f.apply(this,arguments);try{ghCampGate()}catch(e){}return r})(drawTentGate);
@@ -15913,6 +15935,113 @@ try{vzKind=(f=>function(id){try{if(MAPS[id]&&MAPS[id].ghq)return'🏰 บ้า�
 try{friMapN=(f=>function(mp){mp=mp|0;if(mp>=5000&&mp<10000)return'🏰 ในบ้านกิลด์';return f.apply(this,arguments)})(friMapN)}catch(e){}
 try{u64Dest=(f=>function(){const L=f.apply(this,arguments);try{L.push({ic:'🏰',n:'ประตูบ้านกิลด์',x:GHG.x,y:GHG.y+40})}catch(e){}return L})(u64Dest)}catch(e){}
 setTimeout(()=>{try{CAMP.cols.push([GHG.x-1600-52,GHG.y-1600-4,15],[GHG.x-1600+52,GHG.y-1600-4,15])}catch(e){}},0);
+/* ===== v453 · บ้านกิลด์ รอบ 2 — ฟาร์ม · สวนผลไม้ · โกดัง · ครัวกิลด์ · แจกเสบียง · ร้านกิลด์ =====
+   - แปลงผัก (ขั้น 1–5 = 2/4/6/8/10 แปลง): ใครในกิลด์ก็ปลูกได้ · โตตามเวลาจริง · รดน้ำแปลงละ 3 ครั้ง (คนละครั้ง) ครั้งละเร็วขึ้น 10% · เก็บเกี่ยว → โกดัง + แต้มกิลด์ 1
+   - สวนผลไม้ (ขั้น 3/4/5 = 2/4/6 ต้น): ต้นโอ๊ก → ไม้ ทุก 48 ชม. · ต้นแอปเปิล → แอปเปิล ทุก 24 ชม. · สะสมได้ 2 รอบ
+   - ครัวกิลด์: หัวหน้า/รองใช้ของในโกดังทำอาหาร → บัฟทั้งกิลด์ 1 ชม. (ทีละอย่าง ทำใหม่ = แทนของเดิม)
+   - แจกเสบียง: หัวหน้า/รองส่งของในโกดังให้สมาชิก → สมาชิกกดรับ ได้ทองตามมูลค่า
+   - ร้านกิลด์: ใช้แต้มกิลด์ (จากการบริจาค/เก็บเกี่ยว) แลกของ · โควตารายสัปดาห์ · เซิร์ฟเวอร์หักแต้ม */
+const GHC={wheat:['🌾','ข้าวสาลี',4,6,'#e8c25a'],carrot:['🥕','แครอท',6,5,'#ff8a30'],pumpkin:['🎃','ฟักทอง',12,4,'#ff9a20'],herb:['🌿','สมุนไพรเรืองแสง',24,3,'#7ff0ff']};
+const GHI={wheat:['🌾','ข้าวสาลี',2000],carrot:['🥕','แครอท',3000],pumpkin:['🎃','ฟักทอง',6000],herb:['🌿','สมุนไพรเรืองแสง',12000],apple:['🍎','แอปเปิล',2500],wood:['🪵','ไม้',4000]};
+const GHRC={bread:['🍞','ขนมปังโฮลวีต',{wheat:8},{xp:.05},1],stew:['🥘','สตูแครอท',{carrot:6,wheat:2},{hp:.05},1],soup:['🍵','ซุปสมุนไพรเรืองแสง',{herb:3,carrot:3},{dm:.03},1],
+  pie:['🥧','พายฟักทองแอปเปิล',{pumpkin:3,wheat:4,apple:3},{gd:.05},3],feast:['🍗','งานเลี้ยงกิลด์',{wheat:10,carrot:6,pumpkin:3,herb:2,apple:6},{xp:.03,hp:.03,gd:.03,dm:.02},4]};
+const GHBN={xp:'EXP',hp:'เลือดสูงสุด',gd:'ทองที่เก็บได้',dm:'ดาเมจ'};
+const GHSH={s3:['💎','หินตีบวกขั้นสูง ×5',5,5,()=>{me.inv.s3=Math.min(999,(me.inv.s3|0)+5)}],ps:['🛡️','หินกันแตก ×2',6,5,()=>{me.inv.ps=Math.min(999,(me.inv.ps|0)+2)}],
+  rn:['💠','ผงรูน ×50',15,5,()=>{rnShard(50,'ร้านกิลด์')}],th:['✂️','ด้ายแฟชั่น ×3',15,3,()=>{wdrThread(3,'ร้านกิลด์')}],rl:['👑','หีบอุปกรณ์ Relic',40,2,()=>{giveGear(4)}],
+  d7:['🟡','สีย้อมทองคำ',30,2,()=>{dyAdd('d7',1)}],d8:['🌈','สีย้อมรุ้งดาวตก',80,1,()=>{dyAdd('d8',1)}]};
+const GH2={got:new Set(),bk:'',gv:{},gt:''};
+const ghTm=ms=>{ms=Math.max(0,ms|0);const s=Math.ceil(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60);return h?h+' ชม. '+m+' น.':m?m+' น. '+(s%60)+' วิ':(s%60)+' วิ'};
+const ghBufTx=b=>Object.keys(b).map(k=>GHBN[k]+' +'+Math.round(b[k]*100)+'%').join(' · ');
+const ghEl=()=>Date.now()-(GHS.rx||Date.now());
+/* ---------- บัฟครัวกิลด์ ---------- */
+function ghBuf(){try{const B=GDS.g&&GDS.g.hq&&GDS.g.hq.buff;if(!B||!GHRC[B.k])return null;const left=B.r-ghEl();return left>0?{k:B.k,left,n:B.n}:null}catch(e){return null}}
+fdM=(f=>function(k){let v=f.apply(this,arguments);try{const B=ghBuf();if(B)v+=GHRC[B.k][3][k]||0}catch(e){}return v})(fdM);
+buffList=(f=>function(){const L=f.apply(this,arguments);try{const B=ghBuf();if(B&&me.cls&&run&&me.down<=0){const R=GHRC[B.k];L.push({k:'ghb',ic:R[0],n:'ครัวกิลด์: '+R[1],d:ghBufTx(R[3])+' · ทั้งกิลด์ · โดย '+esc(B.n||''),t:B.left/1000,mx:3600,col:'#ffb060'})}}catch(e){}return L})(buffList);
+setInterval(()=>{try{const B=ghBuf(),k=B?B.k:'';if(k!==GH2.bk){GH2.bk=k;if(me.cls)recalc()}}catch(e){}},1000);
+/* ---------- วาดสด: พืช · ต้นไม้ · ครัว ---------- */
+function ghPlot(i){return{x:i%2?458:342,y:-252+(i>>1)*50}}
+function ghDraw2(t,col,now){const H=GDS.g&&GDS.g.hq;if(!H)return;const X=1600,Y=1600,el=ghEl(),O='#1a120a';
+  (H.farm||[]).forEach((F,i)=>{const P=ghPlot(i),x=X+P.x,y=Y+P.y;if(!inView(x+48,y+20,80))return;if(!F)return;const C=GHC[F.c];if(!C)return;
+    const tot=F.d*(1-.1*F.w),left=Math.max(0,F.r-el),p=Math.max(0,Math.min(1,1-left/Math.max(1,tot))),ripe=left<=0;
+    if(F.w){g.fillStyle='rgba(30,20,40,'+(.12+.05*F.w)+')';g.fillRect(x+2,y+2,92,36)}
+    for(let k=0;k<6;k++){const px=x+12+k*15,py=y+18+(k%2)*14,sw=Math.sin(now*2+k+i)*1.2;
+      if(F.c==='wheat'){const h=4+16*p,c2=p>.75?'#e8c25a':'#7cc04a';g.strokeStyle=c2;g.lineWidth=1.4;for(let s=-1;s<=1;s++){g.beginPath();g.moveTo(px+s*2.5,py);g.quadraticCurveTo(px+s*3+sw,py-h*.6,px+s*3.5+sw,py-h);g.stroke()}if(p>.6){g.fillStyle=p>.75?'#f2d36a':'#a8d870';for(let s=-1;s<=1;s++){g.beginPath();g.ellipse(px+s*3.5+sw,py-h-2,1.6,3.2,s*.3,0,7);g.fill()}}}
+      else if(F.c==='carrot'){const s=3+7*p;g.fillStyle='#4aa83a';for(let a=-1;a<=1;a++){g.beginPath();g.ellipse(px+a*s*.45+sw*.5,py-s*.7,1.6+p,s*.7,a*.5,0,7);g.fill()}if(p>.7){g.fillStyle='#ff8a30';g.beginPath();g.moveTo(px-3,py-1);g.lineTo(px+3,py-1);g.lineTo(px,py+3);g.closePath();g.fill()}}
+      else if(F.c==='pumpkin'){if(k%2)continue;g.fillStyle='#3e8a30';g.beginPath();g.ellipse(px+5,py-2,5+3*p,2.6+p,.3,0,7);g.fill();const r=1.5+6*p;g.fillStyle=p>.8?'#ff9a20':'#9ac040';g.beginPath();g.ellipse(px,py-r*.6,r*1.15,r*.85,0,0,7);g.fill();g.strokeStyle='rgba(120,60,10,.6)';g.lineWidth=.7;g.beginPath();g.moveTo(px,py-r*1.4);g.lineTo(px,py+r*.2);g.stroke();g.fillStyle='#5a3a1a';g.fillRect(px-.8,py-r*1.5-2,1.6,3)}
+      else{const s=2+6*p;g.fillStyle=p>.8?'#5ad0c0':'#4aa860';g.beginPath();g.ellipse(px-2,py-s*.6,1.6,s*.6,-.5,0,7);g.ellipse(px+2,py-s*.6,1.6,s*.6,.5,0,7);g.ellipse(px,py-s*.8,1.6,s*.8,0,0,7);g.fill();
+        if(p>.5){g.globalCompositeOperation='lighter';glowAt(px,py-s,6+6*p,'120,240,255',(.25+.25*Math.sin(now*3+k))*p);g.globalCompositeOperation='source-over'}}}
+    if(F.w){g.font='9px system-ui';g.textAlign='left';g.fillText('💧'.repeat(Math.min(3,F.w)),x+2,y+10)}
+    if(ripe){const b=Math.sin(now*4+i)*3;g.globalCompositeOperation='lighter';glowAt(x+48,y+16,40,'255,230,120',.28+.1*Math.sin(now*5+i));g.globalCompositeOperation='source-over';g.font='bold 13px system-ui';g.textAlign='center';g.fillText('✨'+C[0],x+48,y-6+b)}
+    else{g.fillStyle='rgba(0,0,0,.5)';g.fillRect(x+18,y-7,60,4);g.fillStyle=C[4];g.fillRect(x+18,y-7,60*p,4)}});
+  /* ต้นไม้ */
+  (H.trees||[]).forEach((T,i)=>{const P=GHTP[i];if(!P)return;const x=X+P[0],y=Y+P[1];if(!inView(x,y-30,90))return;const sw=Math.sin(now*1.3+i)*1.5,n=Math.min(2,T.n|0)+((T.r-el<=0)?1:0);
+    g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x+3,y+2,24,7,0,0,7);g.fill();g.fillStyle='#6a4628';g.fillRect(x-4,y-26,8,28);g.strokeStyle=O;g.lineWidth=.8;g.strokeRect(x-4,y-26,8,28);
+    const oak=T.k==='oak',c1=oak?'#3e7a34':'#4a9a3a',c2=oak?'#2e5e28':'#367a2c';[[0,-46,26],[-15,-34,17],[15,-34,17],[0,-60,15]].forEach(([a,b,r])=>{g.fillStyle=c2;g.beginPath();g.arc(x+a+sw,y+b+2,r,0,7);g.fill()});
+    [[0,-48,24],[-14,-36,15],[14,-36,15],[2,-62,13]].forEach(([a,b,r])=>{g.fillStyle=c1;g.beginPath();g.arc(x+a+sw,y+b,r,0,7);g.fill()});
+    if(!oak){const k2=n?7+n*3:4;for(let q=0;q<k2;q++){const a=q*2.4,r=8+(q*7)%14;g.fillStyle=n?'#e0302a':'#9acd50';g.beginPath();g.arc(x+sw+Math.cos(a)*r,y-44+Math.sin(a)*r*.8,n?2.6:1.8,0,7);g.fill()}}
+    else if(n){for(let q=0;q<n*2;q++){g.fillStyle='#8a5a30';g.fillRect(x+10+q*5,y-2-(q%2)*4,10,4);g.strokeStyle=O;g.lineWidth=.5;g.strokeRect(x+10+q*5,y-2-(q%2)*4,10,4)}}
+    if(n){g.font='bold 12px system-ui';g.textAlign='center';g.fillText((oak?'🪵':'🍎')+'×'+n,x,y-80+Math.sin(now*3+i)*2)}});
+  /* ครัว: หม้อ + ไฟ + ควัน (แรงขึ้นเมื่อมีบัฟ) */
+  {const x=X+470+(t===1?0:-60),y=Y+340+(t===1?-8:12),B=ghBuf();if(inView(x,y,120)){{g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x,y+3,16,5,0,0,7);g.fill();g.globalCompositeOperation='lighter';glowAt(x,y-4,30,'255,140,50',.45+.15*Math.sin(now*9));g.globalCompositeOperation='source-over';
+      for(let q=0;q<3;q++){const f=Math.sin(now*11+q)*2;g.fillStyle=['#ff6a20','#ffa040','#ffe070'][q];g.beginPath();g.moveTo(x-8+q*3,y);g.quadraticCurveTo(x+f,y-12+q*2,x+8-q*3,y);g.fill()}
+      g.fillStyle='#2a2a30';g.beginPath();g.ellipse(x,y-10,12,9,0,0,Math.PI);g.fill();g.fillStyle='#3a3a42';g.beginPath();g.ellipse(x,y-10,12,3.5,0,0,7);g.fill();g.fillStyle=B?'#e0a050':'#7a6a50';g.beginPath();g.ellipse(x,y-10,10,2.6,0,0,7);g.fill()}
+    const sx=t===1?x:X+470+53,sy=t===1?y-14:Y+340-(t===2?118:122);for(let q=0;q<(B?7:3);q++){const k=(now*(B?.6:.35)+q/(B?7:3))%1;g.fillStyle='rgba(235,235,240,'+((B?.4:.25)*(1-k))+')';g.beginPath();g.arc(sx+Math.sin(now+q*2)*6,sy-k*60,4+k*10,0,7);g.fill()}
+    if(B){const R=GHRC[B.k];g.font='bold 11px system-ui';g.textAlign='center';const s=R[0]+' '+R[1]+' · '+ghTm(B.left),tw=g.measureText(s).width+14;g.fillStyle='rgba(60,30,10,.82)';g.beginPath();g.roundRect(X+470-tw/2,Y+340-140,tw,17,8);g.fill();g.fillStyle='#ffe0b0';g.fillText(s,X+470,Y+340-127)}}}}
+/* ---------- หน้าต่าง ---------- */
+function ghBody2(TB,G,H,t,col){let h='';const el=ghEl(),N=[0,2,4,6,8,10][t],ST=H.st||{};
+  if(TB==='farm'){
+    h+='<div class="card" style="text-align:left"><div class="cap">🌱 แปลงผัก '+N+'/10 แปลง</div><small style="display:block;opacity:.75;margin-bottom:4px">ใครในกิลด์ก็ปลูกได้ · 💧 รดน้ำ = โตเร็วขึ้น 10% (แปลงละ 3 ครั้ง · คนละครั้ง) · เก็บเกี่ยวเข้าโกดังกิลด์ + แต้มกิลด์ 1</small>';
+    for(let i=0;i<10;i++){const F=(H.farm||[])[i];if(i>=N){h+='<div class="qr" style="opacity:.5"><div class="ico">🔒</div><div class="nm"><b>แปลง '+(i+1)+'</b><small>ขยายบ้านเป็นขั้น '+[0,1,1,2,2,3,3,4,4,5,5][i+1]+' เพื่อเปิด</small></div></div>';continue}
+      if(!F){h+='<div class="qr"><div class="ico">🟫</div><div class="nm"><b>แปลง '+(i+1)+' · ว่าง</b><div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:3px">'+Object.keys(GHC).map(c=>'<button data-gh2="p:'+i+':'+c+'" style="font-size:11.5px;padding:3px 6px">'+GHC[c][0]+' '+GHC[c][1]+' <small>'+GHC[c][2]+' ชม. · ×'+GHC[c][3]+'</small></button>').join('')+'</div></div></div>';continue}
+      const C=GHC[F.c],tot=F.d*(1-.1*F.w),left=Math.max(0,F.r-el),p=1-left/Math.max(1,tot);
+      if(left<=0)h+='<div class="qr"><div class="ico">✨'+C[0]+'</div><div class="nm"><b>แปลง '+(i+1)+' · '+C[1]+' สุกแล้ว!</b><small>ได้ '+C[1]+' ×'+C[3]+' · ปลูกโดย '+esc(F.by)+'</small></div><button class="pri" data-gh2="h:'+i+'">เก็บเกี่ยว</button></div>';
+      else h+='<div class="qr"><div class="ico">'+C[0]+'</div><div class="nm"><b>แปลง '+(i+1)+' · '+C[1]+'</b><small>เหลือ '+ghTm(left)+' · 💧 '+F.w+'/3 · ปลูกโดย '+esc(F.by)+'</small>'+gdBar(p,1,C[4])+'</div><button data-gh2="w:'+i+'"'+(F.mw||F.w>=3?' disabled':'')+'>💧 รดน้ำ</button></div>'}
+    h+='</div>';
+    h+='<div class="card" style="text-align:left"><div class="cap">🌳 สวนผลไม้</div>';
+    if(t<3)h+='<small style="opacity:.75">เปิดเมื่อบ้านกิลด์ขั้น 3 (ป้อมหิน): ต้นโอ๊กให้ 🪵 ไม้ ทุก 48 ชม. · ต้นแอปเปิลให้ 🍎 ทุก 24 ชม. · ขั้น 3/4/5 = 2/4/6 ต้น</small>';
+    else(H.trees||[]).forEach((T,i)=>{const oak=T.k==='oak',n=Math.min(2,(T.n|0)+(T.r-el<=0?1:0)),y=oak?4:6;h+='<div class="qr"><div class="ico">'+(oak?'🌳':'🍎')+'</div><div class="nm"><b>'+(oak?'ต้นโอ๊ก':'ต้นแอปเปิล')+' '+(i+1)+'</b><small>'+(n?'มีให้เก็บ '+(oak?'🪵 ไม้':'🍎 แอปเปิล')+' ×'+n*y:'รอบถัดไปอีก '+ghTm(T.r-el))+' · สะสมได้ 2 รอบ</small></div><button class="pri" data-gh2="t:'+i+'"'+(n?'':' disabled')+'>เก็บ</button></div>'});
+    h+='</div>'}
+  else if(TB==='food'){const B=ghBuf(),r1=G.r>=1;
+    if(H.gift){const P=H.gift;h+='<div class="card" style="text-align:left;border-color:#ffd84a88"><div class="cap">📦 เสบียงจากกิลด์ รอคุณรับ</div><div style="font-size:13px">'+Object.keys(P.it||{}).map(k=>GHI[k]?GHI[k][0]+' '+GHI[k][1]+' ×'+P.it[k]:'').join(' · ')+'</div><small style="opacity:.75">แลกเป็นทองให้ทันที '+(P.g|0).toLocaleString()+' ทอง</small><button class="pri" data-gh2="g" style="margin-top:4px">💰 รับเสบียง</button></div>'}
+    h+='<div class="card" style="text-align:left"><div class="cap">🍲 บัฟครัวกิลด์ (ทั้งกิลด์ · 1 ชม.)</div>'+(B?'<div style="font-size:13px"><b style="color:#ffb060">'+GHRC[B.k][0]+' '+GHRC[B.k][1]+'</b> · '+ghBufTx(GHRC[B.k][3])+'<br><small style="opacity:.75">เหลือ '+ghTm(B.left)+' · โดย '+esc(B.n||'')+'</small></div>':'<small style="opacity:.7">ตอนนี้ยังไม่มีบัฟ · หัวหน้า/รองเลือกสูตรด้านล่าง</small>')+'</div>';
+    h+='<div class="card" style="text-align:left"><div class="cap">📦 โกดังกิลด์</div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">'+Object.keys(GHI).map(k=>'<div style="padding:5px;border-radius:8px;background:rgba(255,255,255,.05);font-size:12px;text-align:center"><span style="font-size:18px">'+GHI[k][0]+'</span><br>'+GHI[k][1]+'<br><b>'+(ST[k]|0)+'</b></div>').join('')+'</div></div>';
+    h+='<div class="card" style="text-align:left"><div class="cap">👩‍🍳 สูตรครัวกิลด์'+(r1?'':' · หัวหน้า/รองเป็นคนสั่ง')+'</div>';
+    Object.keys(GHRC).forEach(k=>{const R=GHRC[k],okT=t>=R[4],ok=okT&&Object.keys(R[2]).every(q=>(ST[q]|0)>=R[2][q]);
+      h+='<div class="qr"'+(okT?'':' style="opacity:.55"')+'><div class="ico">'+R[0]+'</div><div class="nm"><b>'+R[1]+'</b><small style="color:#ffd9a0">'+ghBufTx(R[3])+'</small><small>'+Object.keys(R[2]).map(q=>'<span style="color:'+((ST[q]|0)>=R[2][q]?'#9fe89f':'#ff9a8a')+'">'+GHI[q][0]+' '+(ST[q]|0)+'/'+R[2][q]+'</span>').join(' ')+(okT?'':' · ต้องบ้านขั้น '+R[4])+'</small></div>'+
+        (r1?'<button class="pri" data-gh2="c:'+k+'"'+(ok?'':' disabled')+'>'+(GH2.ck===k?(B?'⚠️ แทนบัฟเดิม?':'⚠️ ยืนยัน'):'ทำ')+'</button>':'')+'</div>'});
+    h+='</div>';
+    if(r1){const M=(G.mem||[]).map(m=>[m[0],m[1]]);h+='<div class="card" style="text-align:left"><div class="cap">🎁 แจกเสบียงให้สมาชิก (ได้เป็นทองตามมูลค่า)</div><select id="ghgt" style="width:100%">'+M.map(([id,n])=>'<option value="'+esc(id)+'"'+(GH2.gt===id?' selected':'')+'>'+esc(n)+'</option>').join('')+'</select>'+
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:4px">'+Object.keys(GHI).map(k=>'<label style="font-size:11.5px">'+GHI[k][0]+' <small>('+(ST[k]|0)+')</small><input data-ghgi="'+k+'" type="number" min="0" max="'+(ST[k]|0)+'" value="'+(GH2.gv[k]||0)+'" style="width:100%"></label>').join('')+'</div>'+
+      '<small style="display:block;opacity:.7;margin-top:3px">มูลค่า: '+Object.keys(GHI).map(k=>GHI[k][0]+' '+GHI[k][2].toLocaleString()).join(' · ')+' ทอง</small><button data-gh2="v" style="margin-top:4px">📦 แจก</button></div>'}
+    const fl=(H.fl||[]).slice().reverse().slice(0,10);if(fl.length)h+='<div class="card" style="text-align:left"><div class="cap">📜 ความเคลื่อนไหวฟาร์ม/ครัว</div>'+fl.map(e=>'<div style="font-size:11.5px;padding:2px 0">'+(e.k==='h'?'🌾 <b>'+esc(e.n)+'</b> เก็บเกี่ยว '+(GHI[e.c]?GHI[e.c][0]+' '+GHI[e.c][1]:'')+' ×'+e.a:e.k==='t'?'🌳 <b>'+esc(e.n)+'</b> เก็บ '+(GHI[e.c]?GHI[e.c][0]+' '+GHI[e.c][1]:'')+' ×'+e.a:e.k==='c'?'🍲 <b>'+esc(e.n)+'</b> ทำ '+(GHRC[e.c]?GHRC[e.c][0]+' '+GHRC[e.c][1]:''):'🎁 <b>'+esc(e.n)+'</b> แจกเสบียง '+e.a+' ชิ้นให้ '+esc(e.to||''))+' <small style="opacity:.5">'+new Date(e.at).toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})+'</small></div>').join('')+'</div>'}
+  else{const pt=H.pt|0,BY=H.buy||{};h+='<div class="card" style="text-align:left"><div class="cap">🛒 ร้านกิลด์ · แต้มของคุณ <b style="color:#ffd84a">'+pt.toLocaleString()+'</b></div><small style="display:block;opacity:.75;margin-bottom:4px">ได้แต้มจากบริจาค (ทุก 10,000 ทอง = 1) และเก็บเกี่ยวฟาร์ม (ครั้งละ 1) · โควตารีเซ็ตทุกวันจันทร์</small>'+
+    Object.keys(GHSH).map(k=>{const S=GHSH[k],b=BY[k]|0,ok=pt>=S[2]&&b<S[3];return'<div class="qr"><div class="ico">'+S[0]+'</div><div class="nm"><b>'+S[1]+'</b><small>'+S[2]+' แต้ม · สัปดาห์นี้ '+b+'/'+S[3]+'</small></div><button class="pri" data-gh2="b:'+k+'"'+(ok&&!GH2.pb?'':' disabled')+'>แลก</button></div>'}).join('')+'</div>'}
+  return h}
+function ghAfter2(TB){ov.querySelectorAll('[data-ghgi]').forEach(i=>i.oninput=()=>{GH2.gv[i.dataset.ghgi]=Math.max(0,Math.floor(+i.value||0))});const s=$('ghgt');if(s){GH2.gt=s.value;s.onchange=()=>{GH2.gt=s.value}}}
+function ghAct2(a){const p=a.split(':'),op=p[0],G=GDS.g,H=G&&G.hq;if(!H)return;
+  if(op==='p'){gdEmit('hfp',{p:+p[1],c:p[2]});return}
+  if(op==='w'){gdEmit('hfw',{p:+p[1]});return}
+  if(op==='h'){gdEmit('hfh',{p:+p[1]});return}
+  if(op==='t'){gdEmit('htc',{p:+p[1]});return}
+  if(op==='g'){gdEmit('hqg');return}
+  if(op==='b'){if(GH2.pb)return;GH2.pb=p[1];gdEmit('hqb',{i:p[1]});setTimeout(()=>{GH2.pb=null},4000);ghUI();return}
+  if(op==='c'){const k=p[1];if(GH2.ck!==k){GH2.ck=k;ghUI();return}GH2.ck='';gdEmit('hck',{r:k});ghUI('⏳ กำลังทำอาหาร…');return}
+  if(op==='v'){const s=$('ghgt'),t=s?s.value:'';const it={};let n=0;for(const k in GHI){const v=GH2.gv[k]|0;if(v>0){it[k]=v;n+=v}}if(!t||!n)return ghUI('⚠️ เลือกสมาชิกและจำนวนของก่อน');gdEmit('hgv',{t,it});GH2.gv={};return}}
+/* ---------- ข้อความจากเซิร์ฟเวอร์ ---------- */
+gdN=(f=>function(d){try{if(d&&d.t){const G=GDS.g,tg=G?'🏰['+G.tag+'] ':'🏰 ',op=ov.dataset.k==='gh'&&!ov.hidden,msg=s=>{if(op)ghUI(s);else banner={s,t:3.5}};
+  if(d.t==='hfw'){msg('💧 รดน้ำแปลง '+((d.p|0)+1)+' แล้ว · โตเร็วขึ้น 10%');try{sfx('fs_cast')}catch(e){}return}
+  if(d.t==='hfh'){const C=GHC[d.c];msg('🌾 เก็บเกี่ยว '+(C?C[0]+' '+C[1]:'')+' ×'+(d.a|0)+' เข้าโกดัง · แต้มกิลด์ +1');try{sfx('coin');burst(me.x,me.y-20,['#ffd84a','#9fe89f','#ffffff'],18,110,.7,{glow:1,g:-30})}catch(e){}try{me.stt.ghh=(me.stt.ghh|0)+1}catch(e){}return}
+  if(d.t==='htc'){const I=GHI[d.c];msg('🌳 เก็บ '+(I?I[0]+' '+I[1]:'')+' ×'+(d.a|0)+' เข้าโกดัง');try{sfx('coin')}catch(e){}return}
+  if(d.t==='hck'){const R=GHRC[d.r];if(R){banner={s:'🍲 '+d.n+' ทำ «'+R[1]+'» ที่ครัวกิลด์ · ทุกคน '+ghBufTx(R[3])+' 1 ชม.!',t:6};try{sysMsg(tg+'🍲 '+d.n+' ทำ '+R[0]+' '+R[1]+' · บัฟทั้งกิลด์ '+ghBufTx(R[3])+' 1 ชั่วโมง')}catch(e){}try{sfx('fs_eat')}catch(e){}try{burst(me.x,me.y-20,['#ffb060','#ffe08a','#ffffff'],24,120,.8,{glow:1,g:-30})}catch(e){}if(op)ghUI('🍲 ทำ '+R[1]+' แล้ว!')}return}
+  if(d.t==='hgv'){try{sysMsg(tg+'🎁 '+d.n+' แจกเสบียงให้คุณ! รับได้ที่ บ้านกิลด์ › 🍲 ครัว (หรือเมนูกิลด์ › คลัง)')}catch(e){}banner={s:'🎁 '+d.n+' แจกเสบียงกิลด์ให้คุณ! ไปรับที่ครัวกิลด์',t:5};try{sfx('quest')}catch(e){}return}
+  if(d.t==='hgvok'){msg('🎁 แจกเสบียง '+(d.a|0)+' ชิ้นให้ '+esc(d.to||'')+' แล้ว');return}
+  if(d.t==='hqg'){if(!d.id||GH2.got.has(d.id))return;GH2.got.add(d.id);const g0=Math.max(0,Math.min(5e7,d.g|0));me.gold+=g0;try{writeSave()}catch(e){}try{sfx('coin')}catch(e){}msg('💰 รับเสบียงกิลด์ · ได้ '+g0.toLocaleString()+' ทอง');return}
+  if(d.t==='hqb'){GH2.pb=null;if(!d.id||GH2.got.has(d.id))return;const S=GHSH[d.i];if(!S)return;GH2.got.add(d.id);try{S[4]()}catch(e){}try{recalc()}catch(e){}try{writeSave()}catch(e){}try{sfx('coin')}catch(e){}msg('🛒 แลก '+S[0]+' '+S[1]+' แล้ว · เหลือแต้ม '+(d.pt|0).toLocaleString());return}
+  if(d.t==='err')GH2.pb=null}}catch(e){}return f.apply(this,arguments)})(gdN);
+/* รีเฟรชหน้าฟาร์มทุก 1 วิ (เวลานับถอยหลัง) */
+setInterval(()=>{try{if(ov.dataset.k==='gh'&&!ov.hidden&&(GHS.tab==='farm'||GHS.tab==='food')&&!(document.activeElement&&/INPUT|SELECT/.test(document.activeElement.tagName)))ghUI()}catch(e){}},1000);
+/* คงตำแหน่งเลื่อนเมื่อรีเฟรชแท็บเดิม */
+ghUI=(f=>function(){const same=GH2.lt===GHS.tab&&ov.dataset.k==='gh'&&!ov.hidden,a=ov.scrollTop,pn=ov.querySelector('.pn'),b=pn?pn.scrollTop:0;const r=f.apply(this,arguments);GH2.lt=GHS.tab;if(same){try{ov.scrollTop=a;const p2=ov.querySelector('.pn');if(p2)p2.scrollTop=b}catch(e){}}return r})(ghUI);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
