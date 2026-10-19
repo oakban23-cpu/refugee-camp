@@ -58,14 +58,16 @@ function ghTower(x,y,k,lv,t,now,i){const O='#1a120a',st=t>=3;g.fillStyle='rgba(0
   else{const sw=Math.sin(now*1.2+i)*.25;g.fillStyle='#5a3a1e';g.fillRect(x-14,ty-6,28,6);g.strokeStyle=O;g.lineWidth=.8;g.strokeRect(x-14,ty-6,28,6);g.fillStyle='#3a2a1a';g.beginPath();g.arc(x-10,ty,4,0,7);g.arc(x+10,ty,4,0,7);g.fill();
     g.save();g.translate(x,ty-8);g.rotate(-.9+sw);g.fillStyle='#7a5232';g.fillRect(-2,-26,4,28);g.fillStyle='#8a8478';g.beginPath();g.arc(0,-28,6,0,7);g.fill();g.strokeStyle=O;g.stroke();g.restore()}
   g.font='bold 8px system-ui';g.textAlign='center';g.fillStyle='#ffd84a';g.fillText('★'.repeat(lv),x,y+12)}
+function ghSolList(H,now){const X=1600,Y=1600,S=H.sol||{},L=[];['sp','ar','pr'].forEach(k=>{const n=Math.min(16,S[k]|0);for(let i=0;i<n;i++){const P=GHSP[k][i];if(!P)continue;const px=X+P[0],py=Y+P[1],pat=k==='sp'&&i>=4,dx=pat?Math.sin(now*.45+i*1.7)*34:0,v=pat?Math.cos(now*.45+i*1.7):0;
+    L.push({k,i,x:px+dx,y:py,px,mx:pat?v*6:null,fx:pat?(v<0?-1:1):(k==='ar'?(P[0]<0?1:-1):(P[0]<0?1:-1))})}});return L}
 function ghDraw3(t,now){const H=GDS.g&&GDS.g.hq;if(!H)return;const X=1600,Y=1600,N=[0,0,2,4,6,8][t];
   for(let i=0;i<N;i++){const[a,b]=GHTS[i],x=X+a,y=Y+b;if(!inView(x,y-40,90))continue;const T=(H.tw||[])[i];
     if(T)ghTower(x,y,T.k,T.lv,t,now,i);else{g.save();g.strokeStyle='rgba(255,230,170,.55)';g.lineWidth=1.5;g.setLineDash([5,5]);g.lineDashOffset=-now*8;g.beginPath();g.ellipse(x,y,20,9,0,0,7);g.stroke();g.setLineDash([]);g.font='bold 14px system-ui';g.textAlign='center';g.fillStyle='rgba(255,230,170,.7)';g.fillText('+',x,y+5);
       if(Math.hypot(me.x-x,me.y-y)<160){g.font='9px system-ui';g.fillText('ช่องป้อม '+(i+1),x,y-14)}g.restore()}}
-  const S=H.sol||{};['sp','ar','pr'].forEach(k=>{const n=Math.min(16,S[k]|0);for(let i=0;i<n;i++){const P=GHSP[k][i];if(!P)continue;const px=X+P[0],py=Y+P[1];if(!inView(px,py-20,60))continue;
-    const pat=k==='sp'&&i>=4,x=pat?px+Math.sin(now*.45+i*1.7)*34:px,y=py;g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x,y+13,9,3.5,0,0,7);g.fill();g.save();g.translate(x,y);
-    try{if(k==='sp')drawKnight({x,y,px:pat?px+Math.sin(now*.45+i*1.7-.1)*34:x,py:y,gd:x<px?2:x>px?0:(P[0]<0?0:2)});else if(k==='ar')drawFortArcher({x,y,aimX:x+(P[1]>0?0:0)+(P[0]<0?60:-60),shT:0});else{g.scale(.85,.85);drawChar(0,0,'sup',P[0]<0?1:-1,0,0,now+i,0)}}catch(e){}g.restore();
-    if(k==='pr'){g.globalCompositeOperation='lighter';glowAt(x,y-30,14,'255,236,170',.25+.1*Math.sin(now*2+i));g.globalCompositeOperation='source-over'}}});
+  ghSolList(H,now).forEach(o=>{const{k,x,y,i,px}=o;if(!inView(x,y-20,60))return;g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x,y+13,9,3.5,0,0,7);g.fill();g.save();g.translate(x,y);
+    try{if(k==='sp')drawKnight({x,y,px:o.mx!=null?x-o.mx:x,py:y,gd:o.fx<0?2:0});else if(k==='ar')drawFortArcher({x,y,aimX:x+(o.fx<0?-60:60),shT:o.sh||0});else{g.scale(.85,.85);drawChar(0,0,'sup',o.fx<0?-1:1,0,0,now+i,0)}}catch(e){}g.restore();
+    if(o.hp!=null&&o.hp<100){g.fillStyle='#000';g.fillRect(x-10,y-38,20,3);g.fillStyle='#6fd06a';g.fillRect(x-10,y-38,20*o.hp/100,3)}
+    if(k==='pr'){g.globalCompositeOperation='lighter';glowAt(x,y-30,14,'255,236,170',.25+.1*Math.sin(now*2+i));g.globalCompositeOperation='source-over'}});
 }
 ghDraw2=(f=>function(t,col,now){const r=f.apply(this,arguments);try{ghDraw3(t,now)}catch(e){}return r})(ghDraw2);
 /* กันชนป้อมที่สร้างแล้ว */
