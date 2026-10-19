@@ -13583,15 +13583,15 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v448';
+const WNV='v449';
 const WNL=[
+  ['⌨️','เล่นบนคอมเดินด้วยคีย์บอร์ด','กด W A S D หรือปุ่มลูกศรเพื่อเดิน กดทแยงได้ · แป้นภาษาไทยก็ใช้ได้ ไม่ต้องสลับภาษา · Space/Shift = หลบ'],
   ['🔨','หัวหน้ามอนแบบใหม่','🔨 ทุบพื้น: วงแดงเต็มแล้วทุบ — ออกจากวงให้ทัน · 🏹 ยิงกระจาย: เส้นแดงเป็นพัดแล้วยิงจริง — หลบเข้าช่องว่าง · หัวหน้ามอนโผล่บ่อยขึ้น · กดหลบตอนโดนพอดี = หลบสมบูรณ์!'],
   ['🅰️','แรงค์สไตล์ D→S','กดสกิลเองสลับไปมา ฆ่ารวด หลบสมบูรณ์ แรงค์จะไต่ขึ้น (ป้ายซ้ายจอ) · แรงค์สูงได้ทอง/EXP สูงสุด +35% · โดนตีแรงหรือยืนเฉยแรงค์ตก · ปล่อยออโต้ได้แต้มน้อย'],
   ['💥','ทุบบอสให้ล้ม','บอสทุกตัวมีเกจล้มใต้แถบเลือด · ตีและใช้สกิลใส่จนเต็ม บอสทรุด 6 วิ หยุดโจมตี รับดาเมจ ×1.5 · ทั้งปาร์ตี้ช่วยกันเติม รีบรุมตอนล้ม!'],
   ['⚔️','ฟันหนักมือขึ้น','นักดาบ/มือสังหาร: รอยฟันใหญ่ขึ้น สลับซ้าย-ขวา · ตีครั้งที่ 3 เป็นฟันปิดท้าย มีแรงกระแทก · ทุกจุดที่โดนมีประกายและสะเก็ด มอนสะท้าน · ตอนร่ายเวทแสงไม่กลบตัวละครแล้ว'],
   ['🎨','ภาพคมชัดขึ้น','มอนมีเส้นขอบเข้ม เห็นชัดบนพื้นหญ้า/หิน · แมพมืดและใต้ดินไม่ซีดขาวแล้ว · ไอคอนเมนูทั้งเกมเปลี่ยนเป็นชุดทองแบบเดียวกัน'],
-  ['🔨','เตาหลอมโฉมใหม่','ตีบวกมีจังหวะค้อน (เป๊ะ = โอกาส ×1.2) · ไฟเตาสะสมเมื่อพลาด ช่วยครั้งถัดไป · ลุ้นสุดยอด +2 · ตีถึง +15 ประกาศทั้งเซิร์ฟ'],
-  ['🎬','คัตซีนเนื้อเรื่อง','ฉากเปิด-ปิดของทั้ง 7 ภาคเล่นเป็นคัตซีน กล้องเคลื่อน มีเอฟเฟกต์และการ์ดชื่อภาค · บทสนทนาอื่นกล้องหันหาคนพูด · ดูซ้ำได้ที่เมนู 📜 เนื้อเรื่อง']];
+  ['🔨','เตาหลอมโฉมใหม่','ตีบวกมีจังหวะค้อน (เป๊ะ = โอกาส ×1.2) · ไฟเตาสะสมเมื่อพลาด ช่วยครั้งถัดไป · ลุ้นสุดยอด +2 · ตีถึง +15 ประกาศทั้งเซิร์ฟ']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -15463,6 +15463,30 @@ FXB.u62vx=(f,p,x,y)=>{const L=f.len||U62.VL,d=Math.min(L,U62.VSPD*p*(FXD.u62vx||
     const lg=g.createLinearGradient(x+ca*tl,y+sa*tl,hx,hy);lg.addColorStop(0,'rgba(255,60,120,0)');lg.addColorStop(1,'rgba(255,150,190,'+(.9*a0)+')');g.strokeStyle=lg;g.lineWidth=5;g.beginPath();g.moveTo(x+ca*tl,y+sa*tl);g.lineTo(hx,hy);g.stroke();
     glowAt(hx,hy,14,'255,120,170',.7*a0);g.fillStyle='rgba(255,240,250,'+a0+')';g.beginPath();g.arc(hx,hy,3,0,7);g.fill()}
   g.restore()};
+
+/* ===== v449 · เดินด้วยคีย์บอร์ดบน PC (WASD / ปุ่มลูกศร) =====
+   - ใช้ e.code (ตำแหน่งปุ่มจริง) → แป้นพิมพ์ภาษาไทยก็ใช้ได้ ไม่ต้องสลับเป็นภาษาอังกฤษ
+   - ทำงานเป็น «จอยเสมือน» (joy.kb) ตัวเดียวกับจอยบนจอ → ทุกระบบที่ฟังจอยอยู่แล้วทำงานเหมือนกัน
+     (ยกเลิกจุดล่าออโต้ · กระโดดลงจากคอ/หลังสัตว์ · หันหน้า · ปุ่มจอยบนจอขยับตาม)
+   - กดทแยงได้ (ความเร็วเท่าเดิม) · ถ้ากำลังลากจอยด้วยเมาส์/นิ้ว จอยนั้นมาก่อน
+   - ไม่ทำงานตอนพิมพ์แชท/ช่องกรอก · ตอนเปิดหน้าต่างเมนู · สลับหน้าต่างแล้วปุ่มค้างจะถูกล้าง */
+const U63={k:{},tip:0};
+const U63MAP={KeyW:[0,-1],KeyS:[0,1],KeyA:[-1,0],KeyD:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
+function u63Typing(){const a=document.activeElement;return!!(a&&(/INPUT|TEXTAREA|SELECT/.test(a.tagName)||a.isContentEditable))}
+function u63Clear(){U63.k={};try{if(joy&&joy.kb)joy=null}catch(e){}}
+addEventListener('keydown',e=>{if(!U63MAP[e.code]||e.ctrlKey||e.metaKey||e.altKey)return;if(u63Typing())return;U63.k[e.code]=1;
+  try{if(run&&me.cls&&e.code.indexOf('Arrow')===0)e.preventDefault()}catch(x){}});
+addEventListener('keyup',e=>{if(U63MAP[e.code])delete U63.k[e.code]});
+addEventListener('blur',u63Clear);document.addEventListener('visibilitychange',()=>{if(document.hidden)u63Clear()});
+function u63Apply(){let dx=0,dy=0;for(const c in U63.k){const v=U63MAP[c];if(v){dx+=v[0];dy+=v[1]}}dx=Math.sign(dx);dy=Math.sign(dy);
+  const kbj=joy&&joy.kb;
+  if((!dx&&!dy)||u63Typing()||!run||!me.cls||(typeof ov!=='undefined'&&!ov.hidden)){if(kbj)joy=null;if(u63Typing()||(typeof ov!=='undefined'&&!ov.hidden))U63.k={};return}
+  if(joy&&!joy.kb)return;
+  const n=(dx&&dy)?40/Math.SQRT2:40;joy={ox:JB.x,oy:JB.y,dx:dx*n,dy:dy*n,t0:kbj?joy.t0:performance.now(),mv:1,kb:1}}
+updateMe=(f=>function(dt){try{u63Apply()}catch(e){}return f.apply(this,arguments)})(updateMe);
+/* แนะนำครั้งเดียวบนเครื่องที่ใช้เมาส์ */
+setInterval(()=>{try{if(U63.tip||!run||!me.cls)return;U63.tip=1;if(localStorage.getItem('refugee_kbtip'))return;if(!(window.matchMedia&&matchMedia('(pointer:fine)').matches))return;
+  localStorage.setItem('refugee_kbtip','1');sysMsg('⌨️ เล่นบนคอม: เดินด้วย W A S D หรือปุ่มลูกศร · Space/Shift = หลบ')}catch(e){}},3000);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
