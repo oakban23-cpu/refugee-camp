@@ -173,7 +173,7 @@ function ghBuild(t,col,em){const S=(typeof LOWQ!=='undefined'&&LOWQ)?.85:1.2,X0=
   if(t>=3){tower(-600,438,t>=4?66:54,WH+(t>=4?40:26),t===5);tower(600,438,t>=4?66:54,WH+(t>=4?40:26),t===5)}
   return{cv,S,X0,Y0,WD,HT}}
 /* ---------- วาดแต่ละเฟรม ---------- */
-function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'#e8b54a',em=G?G.e:'🏰',k=t+'|'+col+'|'+em+'|'+((typeof LOWQ!=='undefined'&&LOWQ)?1:0);
+function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'#e8b54a',em=G?G.e:'🏰',k=t+'|'+col+'|'+em+'|'+((typeof LOWQ!=='undefined'&&LOWQ)?1:0)+'|'+((typeof ghHDok==='function'&&ghHDok())?'hd':'v');
   if(GHS.ck!==k||!GHS.C){GHS.C=ghBuild(t,col,em);GHS.ck=k}const C=GHS.C,ox=1600+C.X0,oy=1600+C.Y0;
   const vx0=Math.max(ox,cam.x-40),vy0=Math.max(oy,cam.y-40),vx1=Math.min(ox+C.WD,cam.x+W+40),vy1=Math.min(oy+C.HT,cam.y+H+40);
   if(vx1>vx0&&vy1>vy0)g.drawImage(C.cv,(vx0-ox)*C.S,(vy0-oy)*C.S,(vx1-vx0)*C.S,(vy1-vy0)*C.S,vx0,vy0,vx1-vx0,vy1-vy0);
@@ -183,7 +183,8 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
     const fw=t>=4?62:50,fh=t>=4?40:32,dir=i?-1:1;g.beginPath();g.moveTo(x+2*dir,y-hh+2);for(let s=0;s<=10;s++){const u=s/10;g.lineTo(x+2*dir+dir*u*fw,y-hh+2+Math.sin(now*3.2+u*4+i)*4*u)}for(let s=10;s>=0;s--){const u=s/10;g.lineTo(x+2*dir+dir*u*fw,y-hh+2+fh+Math.sin(now*3.2+u*4+i)*4*u)}g.closePath();g.fillStyle=col;g.fill();g.strokeStyle=O;g.lineWidth=.8;g.stroke();
     g.font='bold '+Math.round(fh*.55)+'px system-ui';g.textAlign='center';g.textBaseline='middle';g.fillText(em,x+dir*fw*.5,y-hh+2+fh*.5+Math.sin(now*3.2+2+i)*2);g.textBaseline='alphabetic'});
   /* กองไฟ (1–2) / น้ำพุ (3–5) */
-  if(t<=2){const x=X,y=Y+22;for(let k=0;k<10;k++){const a=k/10*6.283;g.fillStyle=k%2?'#7c766a':'#8f897c';g.beginPath();g.ellipse(x+Math.cos(a)*26,y+Math.sin(a)*14,6,4,0,0,7);g.fill()}g.fillStyle='#4a3018';g.fillRect(x-16,y-3,32,5);g.fillRect(x-3,y-10,6,16);
+  if(GHS.hd){}
+  else if(t<=2){const x=X,y=Y+22;for(let k=0;k<10;k++){const a=k/10*6.283;g.fillStyle=k%2?'#7c766a':'#8f897c';g.beginPath();g.ellipse(x+Math.cos(a)*26,y+Math.sin(a)*14,6,4,0,0,7);g.fill()}g.fillStyle='#4a3018';g.fillRect(x-16,y-3,32,5);g.fillRect(x-3,y-10,6,16);
     g.globalCompositeOperation='lighter';glowAt(x,y-8,60,'255,150,60',.55+.12*Math.sin(now*9));g.globalCompositeOperation='source-over';
     for(let k=0;k<3;k++){const f=Math.sin(now*12+k*2)*3;g.fillStyle=['#ff6a20','#ffa040','#ffe070'][k];g.beginPath();g.moveTo(x-12+k*4,y);g.quadraticCurveTo(x-6+k*3+f,y-20-k*4,x+f*.5,y-34+k*8);g.quadraticCurveTo(x+6-k*3+f,y-20-k*4,x+12-k*4,y);g.closePath();g.fill()}
     [[-62,30],[62,30],[0,-34]].forEach(([a,b])=>{g.fillStyle='#6a4628';g.fillRect(x+a-18,y+b-4,36,8);g.strokeStyle=O;g.lineWidth=.6;g.strokeRect(x+a-18,y+b-4,36,8)})}
@@ -192,7 +193,7 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
     g.fillStyle=sc;g.fillRect(x-7,y-40,14,38);g.beginPath();g.ellipse(x,y-40,20,8,0,0,7);g.fill();g.stroke();if(K){g.fillStyle='#e8c060';g.beginPath();g.arc(x,y-58,9,0,7);g.fill();g.font='bold 12px system-ui';g.textAlign='center';g.textBaseline='middle';g.fillText(em,x,y-58);g.textBaseline='alphabetic'}
     g.globalCompositeOperation='lighter';for(let k=0;k<14;k++){const q=(now*1.4+k/14)%1,a=k/14*6.283,r=q*34;g.fillStyle='rgba(180,230,255,'+(.55*(1-q))+')';g.beginPath();g.arc(x+Math.cos(a)*r,y-44+q*q*40-(1-q)*q*30+Math.sin(a)*r*.35,2,0,7);g.fill()}g.globalCompositeOperation='source-over'}
   /* คบไฟ */
-  {const L=t<=1?[[-70,300],[70,300],[-70,-200],[70,-200]]:[[-70,360],[70,360],[-70,190],[70,190],[-70,-200],[70,-200],[-330,-60],[330,-60]];
+  if(!GHS.hd){const L=t<=1?[[-70,300],[70,300],[-70,-200],[70,-200]]:[[-70,360],[70,360],[-70,190],[70,190],[-70,-200],[70,-200],[-330,-60],[330,-60]];
     L.forEach(([a,b],i)=>{const x=X+a,y=Y+b;if(!inView(x,y,60))return;g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x,y+2,6,2.5,0,0,7);g.fill();g.fillStyle=t>=3?'#4a4a52':'#5a3a1e';g.fillRect(x-2,y-34,4,34);g.fillStyle='#3a2a1a';g.fillRect(x-5,y-38,10,5);
       const fl=Math.sin(now*11+i*1.7)*1.6;g.fillStyle='#ffb040';g.beginPath();g.moveTo(x-4,y-38);g.quadraticCurveTo(x+fl,y-54,x+4,y-38);g.fill();g.globalCompositeOperation='lighter';glowAt(x,y-44,34,'255,170,80',.42+.1*Math.sin(now*7+i));g.globalCompositeOperation='source-over'})}
   /* ควันปล่อง (ขั้น 3) */
@@ -202,7 +203,7 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
     g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x,y+13,11,4,0,0,7);g.fill();try{drawChar(x,y,'merchant',fx,0,0,now,0)}catch(e){}
     g.font='11px system-ui';g.textAlign='center';g.fillStyle='#ffe0a0';g.fillText(GHN.n,x,y-36);g.font='bold 10px system-ui';g.fillStyle='#ffd84a';g.fillText('💰 คลังกิลด์',x,y-48);try{npcSay('ghq',x,y,GHSAY,200,62)}catch(e){}}}
   /* กระดานกิลด์: ประกาศ */
-  {const x=X+GHBD.x,y=Y+GHBD.y;if(inView(x,y,80)){const nt=(G&&G.nt)||'ยังไม่มีประกาศ';g.font='7px system-ui';g.textAlign='left';g.fillStyle='#3a2410';const w=[...nt];let ln='',yy=y-50;for(let i=0;i<w.length&&yy<y-30;i++){ln+=w[i];if(g.measureText(ln).width>46||i===w.length-1){g.fillText(ln,x-24,yy);ln='';yy+=8}}
+  {const x=X+GHBD.x,y=Y+GHBD.y;if(inView(x,y,80)&&!GHS.hd){const nt=(G&&G.nt)||'ยังไม่มีประกาศ';g.font='7px system-ui';g.textAlign='left';g.fillStyle='#3a2410';const w=[...nt];let ln='',yy=y-50;for(let i=0;i<w.length&&yy<y-30;i++){ln+=w[i];if(g.measureText(ln).width>46||i===w.length-1){g.fillText(ln,x-24,yy);ln='';yy+=8}}
     g.font='bold 10px system-ui';g.textAlign='center';g.fillStyle='#ffe0a0';g.fillText('📜 กระดานกิลด์',x,y-80)}}
   try{ghDraw2(t,col,now)}catch(e){}
   /* ป้ายหน้าประตู + ป้ายฟาร์ม/ค่ายทหาร */
