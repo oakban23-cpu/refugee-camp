@@ -6,7 +6,10 @@
    - ใช้เมื่อเปิดภาพ HD และไม่ใช่โหมดประหยัด · ไม่งั้นใช้ภาพเวกเตอร์เดิม */
 try{GHTP.forEach(p=>{if(p[1]===112)p[1]=100})}catch(e){}
 const ghHDok=()=>{try{return HDI.on&&!LOWQ&&HDI.ok===1&&HDI.ok2===1&&FHI.ok===1&&CHI.ok===1}catch(e){return false}};
-function ghHDload(){try{if(!HDI.on||LOWQ)return;hdLoad();hdbLoad();fhdLoad();chdLoad()}catch(e){}}
+/* v457 · ตึกหลักบ้านกิลด์ภาพวาดใหม่ (hd-guild) ขั้น 1–5 · ธงขาวย้อมเป็นสีกิลด์ (มาสก์ _m คูณสี) */
+const GQD={src:"hd-guild.webp",f:{"h4":[0,0,600,744],"h5":[602,0,920,728],"h2":[1524,0,520,481],"h3":[0,746,720,458],"h4_m":[722,746,300,372],"h1":[1024,746,580,371],"h5_m":[0,1206,460,364],"h2_m":[462,1206,260,240],"h3_m":[724,1206,360,229],"h1_m":[1086,1206,290,185]}};const GQI={img:null,ok:0};
+function gqLoad(){if(GQI.img)return;const im=new Image();im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{GQI.ok=1})};im.onerror=()=>{GQI.ok=-1};im.src=GQD.src;GQI.img=im}
+function ghHDload(){try{if(!HDI.on||LOWQ)return;hdLoad();hdbLoad();fhdLoad();chdLoad();gqLoad()}catch(e){}}
 const GHLP=t=>t<=1?[[-70,300],[70,300],[-70,-200],[70,-200]]:[[-70,360],[70,360],[-70,190],[70,190],[-70,-200],[70,-200],[-330,-60],[330,-60]];
 const GHDEC=t=>{const L=[];if(t>=3)L.push([-175,120,16],[175,120,16]);if(t>=4)L.push([-232,150,24],[232,150,24]);if(t>=5)L.push([-150,322,20],[150,322,20]);return L};
 function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
@@ -20,6 +23,8 @@ function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
   const soft=(x,y,rx,ry,a)=>{c.save();c.translate(x,y);c.scale(1,ry/rx);const gr=c.createRadialGradient(0,0,rx*.2,0,0,rx);gr.addColorStop(0,'rgba(10,6,16,'+(a||.38)+')');gr.addColorStop(1,'rgba(10,6,16,0)');c.fillStyle=gr;c.beginPath();c.arc(0,0,rx,0,7);c.fill();c.restore()};
   const AT={a:[HDI.img,AHD.f],b:[HDI.img2,AHB.f],f:[FHI.img,FHD.f],c:[CHI.img,CHD.f]};
   const spr=(at,id,x,by,w,fl)=>{const A=AT[at],q=A[1][id];if(!q)return 0;const h=w*q[3]/q[2];if(fl){c.save();c.translate(x,by);c.scale(-1,1);c.drawImage(A[0],q[0],q[1],q[2],q[3],-w/2,-h,w,h);c.restore()}else c.drawImage(A[0],q[0],q[1],q[2],q[3],x-w/2,by-h,w,h);return h};
+  GHS.gq=0;const GQ=(i,x,by,w)=>{const q=GQD.f['h'+i],m=GQD.f['h'+i+'_m'];if(!q)return;GHS.gq=1;add(by,()=>{const h=w*q[3]/q[2];soft(x+w*.03,by-4,w*.5,w*.11,.42);c.drawImage(GQI.img,q[0],q[1],q[2],q[3],x-w/2,by-h,w,h);
+    if(m){try{const tc=document.createElement('canvas');tc.width=Math.ceil(w*S);tc.height=Math.ceil(h*S);const x2=tc.getContext('2d');x2.drawImage(GQI.img,m[0],m[1],m[2],m[3],0,0,tc.width,tc.height);x2.globalCompositeOperation='source-in';x2.fillStyle=ghShade(col,.25);x2.fillRect(0,0,tc.width,tc.height);c.save();c.globalCompositeOperation='multiply';c.drawImage(tc,x-w/2,by-h,w,h);c.restore()}catch(e){}}})};
   const L=[],add=(by,fn)=>L.push([by,fn]),SP=(at,id,x,by,w,o)=>{o=o||{};add(by,()=>{if(o.sh!==0)soft(x+w*.04,by-3,w*(o.sh||.46),w*.12,o.sa);if(o.flt){try{c.filter=o.flt}catch(e){}}spr(at,id,x,by,w,o.fl);if(o.flt){try{c.filter='none'}catch(e){}}})};
   const stone=t>=3,WH=[0,26,50,46,62,68][t],WF=t===5?'#cfc6b0':t===4?'#8a857c':'#918a79',WT=t===5?'#ebe3ce':t===4?'#a8a399':'#aea795';
   /* ================= พื้น ================= */
@@ -117,7 +122,10 @@ function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
       const gb=c.createLinearGradient(-16,0,16,0);gb.addColorStop(0,cD);gb.addColorStop(.5,cL);gb.addColorStop(1,cD);c.fillStyle=gb;P([-16,y-20,16,y-20,16,y+16,0,y+8,-16,y+16],null);c.fill();c.strokeStyle='#e8c060';c.lineWidth=1.3;c.stroke();c.font='bold 13px system-ui';c.textAlign='center';c.textBaseline='middle';c.fillText(em,0,y-3);c.textBaseline='alphabetic'})}
   else SP('f','sgate',0,458,268,{sh:.5});
   /* ================= อาคารหลัก ================= */
-  if(t===1){SP('c','command_tent',0,-296,260);SP('c','family_tent',-205,-312,128);SP('c','family_tent',205,-312,128,{fl:1});SP('c','crates',-122,-292,52);SP('c','barrels',128,-288,44);SP('c','lantern_post',-150,-262,32);SP('c','lantern_post',150,-262,32,{fl:1})}
+  if(GQI.ok===1&&GQI.img){if(t===1){GQ(1,0,-292,290);SP('c','family_tent',-238,-316,118);SP('c','family_tent',238,-316,118,{fl:1});SP('c','lantern_post',-168,-262,32);SP('c','lantern_post',168,-262,32,{fl:1})}
+    else if(t===2){GQ(2,0,-290,262);SP('c','barrels',-170,-288,42);SP('c','crates',172,-290,46);SP('c','firewood',-205,-300,56)}
+    else if(t===3)GQ(3,0,-290,372);else if(t===4)GQ(4,0,-288,300);else GQ(5,0,-286,470)}
+  else if(t===1){SP('c','command_tent',0,-296,260);SP('c','family_tent',-205,-312,128);SP('c','family_tent',205,-312,128,{fl:1});SP('c','crates',-122,-292,52);SP('c','barrels',128,-288,44);SP('c','lantern_post',-150,-262,32);SP('c','lantern_post',150,-262,32,{fl:1})}
   else if(t===2){SP('f','inn',0,-294,300);TW(-205,-292,64);TW(205,-292,64);SP('c','barrels',-140,-288,42);SP('c','crates',146,-290,46)}
   else if(t===3){SP('f','barracks',0,-294,372);TW(-232,-290,82);TW(232,-290,82);SP('a','star_banner',-150,-286,22);SP('a','star_banner',150,-286,22)}
   else if(t===4){SP('b','palace',0,-292,336,{sh:.5});TW(-215,-288,88);TW(215,-288,88)}
@@ -172,3 +180,6 @@ ghDraw2=(f=>function(t,col,now){try{ghLiveHD(t,now)}catch(e){}return f.apply(thi
 /* โหลดภาพเมื่อเข้าบ้าน */
 ghEnter=(f=>function(){ghHDload();return f.apply(this,arguments)})(ghEnter);
 setInterval(()=>{try{if(ghHere()&&!ghHDok())ghHDload()}catch(e){}},2000);
+
+/* ภาพตึกกิลด์โหลดเสร็จทีหลัง → สร้างแคชใหม่ */
+setInterval(()=>{try{if(ghHere()&&GHS.hd&&GQI.ok===1&&!GHS.gq)GHS.C=null}catch(e){}},700);
