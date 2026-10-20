@@ -40,7 +40,7 @@ function gdBtn(){let b=$('gdb');if(b)return b;const ref=$('frb')||$('pb');if(!re
   b.onclick=()=>{if(me.cls&&run){GDS.rd=GDS.tab==='ch'?0:GDS.rd;gdUI();gdEmit('q')}};return b}
 function gdBadge(){const b=gdBtn();if(!b)return;const n=(GDS.inv.length|0)+(GDS.rd|0)+(GDS.g&&GDS.g.wk&&GDS.g.wk.done&&!GDS.g.wk.cl?1:0)+gbBadgeN(),e=b.querySelector('.bd');if(e)e.textContent=n?String(n):''}
 /* ---- หน้าต่างกิลด์ ---- */
-function gdBar(v,m,col){const p=Math.min(1,v/Math.max(1,m));return'<div style="height:7px;border-radius:4px;background:rgba(0,0,0,.4);overflow:hidden"><i style="display:block;height:100%;width:'+(p*100).toFixed(1)+'%;background:'+col+'"></i></div>'}
+function gdBar(v,m,col){const p=Math.min(1,v/Math.max(1,m));return'<div style="height:7px;border-radius:4px;background:rgba(0,0,0,.4);overflow:hidden"><i style="display:block;height:100%;width:'+(p*100).toFixed(1)+'%;background-color:'+col+'"></i></div>'}
 function gdUI(msg){if(!me.cls)return;ov.dataset.k='gd';ov.hidden=false;const G=GDS.g;
   let h=hdr('🏰','กิลด์',G?G.e+' '+esc(G.nm)+' ['+esc(G.tag)+'] · Lv '+G.lvl+' · '+G.mem.length+'/'+G.max+' คน':'รวมกลุ่มเพื่อนเล่นด้วยกัน · ภารกิจกิลด์รายสัปดาห์ · EXP โบนัส')+(msg?'<div class="note">'+msg+'</div>':'');
   if(!gdOnl()){h+='<div class="card hint">🏰 กิลด์ใช้ได้เมื่อเล่นออนไลน์บนเซิร์ฟเวอร์เท่านั้น</div>';ov.innerHTML='<div class="pn" data-pn="gd">'+h+'</div>';return}
