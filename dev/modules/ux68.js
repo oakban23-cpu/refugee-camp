@@ -8,7 +8,7 @@ const GHTW={ar:['🏹','ป้อมธนู','ยิงทีละตัว �
 const GHSO={sp:['🛡️','ทหารหอก','ยืนรับหน้าประตู · เลือดหนา',2],ar:['🏹','นักธนู','ยิงจากแนวกำแพง',2],pr:['✨','นักบวช','ฮีลทหารและผู้เล่น',4]};
 const GHTS=[[-330,-432],[330,-432],[-300,398],[300,398],[-575,-205],[575,70],[-575,330],[575,210]],GHBR={x:-450,y:262};
 const GHSP={sp:[[-58,372],[58,372],[-150,-258],[150,-258],[-60,300],[60,300],[-250,40],[250,40],[-160,394],[160,394],[-250,-150],[250,-150],[-60,200],[60,200],[-330,150],[330,150]],
-  ar:[[-210,404],[210,404],[-430,-440],[430,-440],[-560,60],[560,-40],[-260,404],[260,404],[-500,-440],[500,-440],[-560,180],[560,150],[-150,-440],[150,-440],[-560,-60],[560,250]],
+  ar:[[-214,424],[214,424],[-450,-486],[450,-486],[-600,60],[600,-40],[-276,424],[276,424],[-520,-486],[520,-486],[-600,180],[600,150],[-300,-486],[300,-486],[-600,-60],[600,250]], /* v464: นักธนูยืนบนเชิงเทิน */
   pr:[[-395,266],[-505,266],[-90,92],[90,92],[-450,300],[-340,200],[-130,40],[130,40],[-560,250],[-380,320],[0,160],[-200,250],[200,250],[-80,-200],[80,-200],[0,-160]]};
 const GH3={cf:''};
 const ghCostTx=C=>C?'💰 '+ghF(C.g)+(C.w?' + 🪵 '+C.w:''):'';
@@ -64,10 +64,11 @@ function ghDraw3(t,now){const H=GDS.g&&GDS.g.hq;if(!H)return;const X=1600,Y=1600
   for(let i=0;i<N;i++){const[a,b]=GHTS[i],x=X+a,y=Y+b;if(!inView(x,y-40,90))continue;const T=(H.tw||[])[i];
     if(T)ghTower(x,y,T.k,T.lv,t,now,i);else{g.save();g.strokeStyle='rgba(255,230,170,.55)';g.lineWidth=1.5;g.setLineDash([5,5]);g.lineDashOffset=-now*8;g.beginPath();g.ellipse(x,y,20,9,0,0,7);g.stroke();g.setLineDash([]);g.font='bold 14px system-ui';g.textAlign='center';g.fillStyle='rgba(255,230,170,.7)';g.fillText('+',x,y+5);
       if(Math.hypot(me.x-x,me.y-y)<160){g.font='9px system-ui';g.fillText('ช่องป้อม '+(i+1),x,y-14)}g.restore()}}
-  ghSolList(H,now).forEach(o=>{const{k,x,y,i,px}=o;if(!inView(x,y-20,60))return;g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x,y+13,9,3.5,0,0,7);g.fill();g.save();g.translate(x,y);
+  ghSolList(H,now).forEach(o=>{const{k,x,i,px}=o;let y=o.y,WR=null;try{WR=ghWReg(x-1600,y-1600,t);if(WR)y-=WR.l}catch(e){}if(!inView(x,y-20,60))return;g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x,y+13,9,3.5,0,0,7);g.fill();g.save();g.translate(x,y);
     try{if(k==='sp')drawKnight({x,y,px:o.mx!=null?x-o.mx:x,py:y,gd:o.fx<0?2:0});else if(k==='ar')drawFortArcher({x,y,aimX:x+(o.fx<0?-60:60),shT:o.sh||0});else{g.scale(.85,.85);drawChar(0,0,'sup',o.fx<0?-1:1,0,0,now+i,0)}}catch(e){}g.restore();
     if(o.hp!=null&&o.hp<100){g.fillStyle='#000';g.fillRect(x-10,y-38,20,3);g.fillStyle='#6fd06a';g.fillRect(x-10,y-38,20*o.hp/100,3)}
-    if(k==='pr'){g.globalCompositeOperation='lighter';glowAt(x,y-30,14,'255,236,170',.25+.1*Math.sin(now*2+i));g.globalCompositeOperation='source-over'}});
+    if(k==='pr'){g.globalCompositeOperation='lighter';glowAt(x,y-30,14,'255,236,170',.25+.1*Math.sin(now*2+i));g.globalCompositeOperation='source-over'}
+    if(WR&&WR.k==='s'){try{ghParPatch(x,t)}catch(e){}}});
 }
 ghDraw2=(f=>function(t,col,now){const r=f.apply(this,arguments);try{ghDraw3(t,now)}catch(e){}return r})(ghDraw2);
 /* กันชนป้อมที่สร้างแล้ว */

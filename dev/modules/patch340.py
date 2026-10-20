@@ -565,6 +565,7 @@ R("fxs.push({x:me.x,y:me.y-4,r:25,k:'swipe',t:.2,d:.2,a:me.face,len:me.cls==='as
 R("while(LFD.length>6)LFD.shift()","while(LFD.length>4)LFD.shift()")
 R("EKR=15;","EKR=25;")
 R(">>>11)%4}",">>>11)%6}")
+R("by=p.y-(p===me?(me.title?76:64):(p.tt?76:64))","by=p.y-(typeof ghLiftOf==='function'?ghLiftOf(p.x,p.y):0)-(p===me?(me.title?76:64):(p.tt?76:64))")
 exec(open('camp_warp.py').read())
 open(P,'w').write(s)
 print('ok')
