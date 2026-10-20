@@ -208,7 +208,7 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
   try{ghDraw2(t,col,now)}catch(e){}
   /* ป้ายหน้าประตู + ป้ายฟาร์ม/ค่ายทหาร */
   {const lab=(x,y,s,c2)=>{if(!inView(x,y,120))return;g.font='bold 11px system-ui';g.textAlign='center';const tw=g.measureText(s).width+16;g.fillStyle='rgba(30,20,10,.78)';g.beginPath();g.roundRect(x-tw/2,y-12,tw,17,8);g.fill();g.strokeStyle=c2||'rgba(255,220,150,.5)';g.lineWidth=1;g.stroke();g.fillStyle='#ffe6b0';g.fillText(s,x,y+1)};
-    lab(X,Y+262,(G?G.e+' ['+G.tag+'] ':'')+'ขั้น '+t+' · '+GHT[t].n+(G&&G.hq&&G.hq.wl?' · 🧱'+G.hq.wl+' 🚪'+G.hq.gl:''),col);lab(X+448,Y-290,'🌱 ฟาร์มกิลด์');lab(X-450,Y+150,'⚔️ ค่ายทหาร');if(t<3)lab(X-500,Y+50,'🌳 สวนผลไม้ · บ้านขั้น 3');
+    lab(X,Y+(GHS.gq?[0,228,228,150,150,178][t]:262),(G?G.e+' ['+G.tag+'] ':'')+'ขั้น '+t+' · '+GHT[t].n+(G&&G.hq&&G.hq.wl?' · 🧱'+G.hq.wl+' 🚪'+G.hq.gl:''),col);lab(X+448,Y-290,'🌱 ฟาร์มกิลด์');lab(X-450,Y+(GHS.gq?(t<=2?66:132):150),'⚔️ ค่ายทหาร');if(t<3)lab(X-500,Y+50,'🌳 สวนผลไม้ · บ้านขั้น 3');
     if(Math.hypot(me.x-X,me.y-(Y+430))<220)lab(X,Y+452,'🚪 ทางออก → ค่ายผู้อพยพ')}
   g.restore();
   /* พลุฉลองขยายบ้าน */
