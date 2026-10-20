@@ -51,7 +51,10 @@ async def main():
         await A.ev("()=>{ov.hidden=true}")
         await A.wait(4500)
         w1=await H0.ev("()=>({ph:GRD.ph,w:GRD.w,n:mons.filter(m=>m.id>=900000).length,sol:(GRD.sol||[]).length})")
-        w2=await N0.ev("()=>({ph:GRD.ph,w:GRD.w,n:mons.filter(m=>m.id>=900000).length,so:(GRD.so||[]).length})")
+        for _ in range(12):
+            w2=await N0.ev("()=>({ph:GRD.ph,w:GRD.w,n:mons.filter(m=>m.id>=900000).length,so:(GRD.so||[]).length})")
+            if w2['n']>0: break
+            await A.wait(1500)  # v465: มอนเกิดไกลที่ชายป่า อีกเครื่องเห็นเมื่อเข้าระยะ
         rep('นับถอยหลังจบ → โฮสต์ปล่อยคลื่น 1 · อีกเครื่องเห็นมอน + สถานะ (คลื่น/ทหาร)',w1['ph']=='run' and w1['w']==1 and w1['n']>0 and w1['sol']==4 and w2['w']==1 and w2['n']>0 and w2['so']==4,json.dumps([w1,w2]))
         await A.wait(9000)
         g1=await H0.ev("()=>({gate:GRD.gate,wall:GRD.wall,hurt:mons.filter(m=>m.id>=900000&&m.hp<m.mh).length,fx:fxs.filter(f=>/^ght/.test(f.k)).length,near:mons.filter(m=>m.id>=900000&&m.y>1600+440&&m.y<1600+480).length})")

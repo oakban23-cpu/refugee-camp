@@ -65,3 +65,39 @@ function ghBoardHD(t,now){if(!(GHS.hd&&GHS.gq))return;const G=GDS.g,X=1600+GHBD.
   if(Math.hypot(me.x-X,me.y-Y)>130)return;const nt=String((G&&G.nt)||'ยังไม่มีประกาศจากหัวหน้ากิลด์');g.save();g.font='11px system-ui';const L=[];let ln='';for(const ch of nt){const tt=ln+ch;if(g.measureText(tt).width>190&&ln){L.push(ln);ln=ch;if(L.length>=5)break}else ln=tt}if(ln&&L.length<6)L.push(ln);
   const bw=214,bh=30+L.length*15,bx=X-bw/2,by=y0-bh-10;g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.roundRect(bx+3,by+4,bw,bh,6);g.fill();const gr=g.createLinearGradient(0,by,0,by+bh);gr.addColorStop(0,'#f2e4c2');gr.addColorStop(1,'#d8c49a');g.fillStyle=gr;g.beginPath();g.roundRect(bx,by,bw,bh,6);g.fill();g.strokeStyle='#5a3a1e';g.lineWidth=1.6;g.stroke();
   g.fillStyle='#5a3a1e';g.beginPath();g.moveTo(X-7,by+bh);g.lineTo(X+7,by+bh);g.lineTo(X,by+bh+8);g.closePath();g.fill();g.textAlign='center';g.font='bold 11px system-ui';g.fillStyle='#4a2a10';g.fillText('📜 ประกาศกิลด์'+(G?' ['+G.tag+']':''),X,by+16);g.font='11px system-ui';g.fillStyle='#3a2410';L.forEach((s2,i)=>g.fillText(s2,X,by+32+i*15));g.restore()}
+/* ---------- v465 · ทุ่งรบด้านใต้ (นอกกำแพง) ----------
+   ภาพแคชแยก (x −920..920 · y 440..1200) วาดก่อนภาพบ้าน: หญ้า · ลานดินที่ถูกเหยียบหน้ากำแพง · ถนนจากประตู · หิน/หญ้า/รอยไหม้
+   · แนวรั้วไม้แหลมกันม้า · ชายป่าด้านใต้และด้านข้าง (มอนโผล่จากป่า) */
+const GHF={cv:null,k:''};
+function ghFieldBuild(t){const X0=-920,Y0=440,WD=1840,HT=920,cv=document.createElement('canvas');cv.width=WD;cv.height=HT;const c=cv.getContext('2d');c.translate(-X0,-Y0);
+  let sd=4242+t*7;const rn=()=>(sd=(sd*16807)%2147483647)/2147483647,RR=(a,b)=>a+rn()*(b-a),OL='#1e2414';
+  const blob=(x,y,r,rgb,a)=>{const gr=c.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,'rgba('+rgb+','+a+')');gr.addColorStop(1,'rgba('+rgb+',0)');c.fillStyle=gr;c.fillRect(x-r,y-r,r*2,r*2)};
+  c.fillStyle='#4b6a33';c.fillRect(X0,Y0,WD,HT);
+  for(let i=0;i<160;i++)blob(RR(X0,X0+WD),RR(Y0,Y0+HT),RR(40,140),rn()<.5?'120,150,70':'26,40,18',RR(.05,.12));
+  /* ลานดินที่ถูกเหยียบหน้ากำแพง + รอยไหม้ */
+  for(let i=0;i<70;i++){const x=RR(-640,640),y=RR(455,640);blob(x,y,RR(30,90),'110,88,58',RR(.18,.32))}
+  for(let i=0;i<14;i++){const x=RR(-780,780),y=RR(500,1000);blob(x,y,RR(18,40),'20,14,10',RR(.25,.4))}
+  /* ถนนจากประตู */
+  c.save();c.lineCap='round';c.lineJoin='round';const road=[0,446,6,600,-14,760,10,920,-6,1080,0,1220];const path=(w,col,a)=>{c.globalAlpha=a;c.strokeStyle=col;c.lineWidth=w;c.beginPath();c.moveTo(road[0],road[1]);for(let i=2;i<road.length;i+=2)c.lineTo(road[i],road[i+1]);c.stroke()};
+  path(124,'#3a2c1a',.35);path(108,'#8a7452',1);path(60,'#a08a64',.45);c.globalAlpha=1;c.strokeStyle='rgba(60,44,26,.4)';c.lineWidth=3;[-22,22].forEach(dx=>{c.beginPath();for(let y=450;y<1210;y+=12){const x=dx+Math.sin(y*.02)*3;y===450?c.moveTo(x,y):c.lineTo(x,y)}c.stroke()});c.restore();
+  /* หินกับหญ้า (เส้นขอบเข้มแบบเดียวกับอาคาร) */
+  const peb=(x,y,r)=>{c.fillStyle=ghShade('#7a7c7a',RR(-.15,.12));c.strokeStyle='#22201c';c.lineWidth=1.1;c.beginPath();c.ellipse(x,y,r,r*.62,0,0,7);c.fill();c.stroke();c.fillStyle='rgba(255,255,255,.25)';c.beginPath();c.ellipse(x-r*.3,y-r*.25,r*.42,r*.2,0,0,7);c.fill()};
+  const tuft=(x,y,s)=>{const G=['#5d8c36','#6fa042','#4a7a2c','#86b452'];c.lineCap='round';for(let k=0;k<5;k++){const bx=x+(k-2)*1.7*s,tx=x+(k-2)*2.8*s+RR(-1,1)*s,ty=y-RR(6,12)*s;c.strokeStyle=OL;c.lineWidth=2.4*s;c.beginPath();c.moveTo(bx,y);c.quadraticCurveTo(bx,y-4*s,tx,ty);c.stroke();c.strokeStyle=G[k%4];c.lineWidth=1.2*s;c.beginPath();c.moveTo(bx,y);c.quadraticCurveTo(bx,y-4*s,tx,ty);c.stroke()}};
+  for(let i=0;i<120;i++){const x=RR(-900,900),y=RR(470,1150);if(Math.abs(x)<70)continue;peb(x,y,RR(2.5,7))}
+  for(let i=0;i<420;i++){const x=RR(-910,910),y=RR(460,1170);if(Math.abs(x)<64)continue;tuft(x,y,RR(.7,1.3))}
+  /* รั้วไม้แหลมกันม้า (ของแต่ง ไม่ชน) */
+  const stake=(x,y)=>{c.save();c.translate(x,y);c.fillStyle='rgba(0,0,0,.3)';c.beginPath();c.ellipse(0,4,34,6,0,0,7);c.fill();c.fillStyle='#5a3a1e';c.strokeStyle='#1e140c';c.lineWidth=1.4;c.fillRect(-32,-6,64,7);c.strokeRect(-32,-6,64,7);
+    [-24,-8,8,24].forEach((dx,i)=>{const s=i%2?1:-1;c.save();c.translate(dx,-3);c.rotate(s*.6);c.fillStyle='#8a6038';c.fillRect(-3,-22,6,30);c.strokeRect(-3,-22,6,30);c.fillStyle='#c8a070';c.beginPath();c.moveTo(-3,-22);c.lineTo(0,-30);c.lineTo(3,-22);c.closePath();c.fill();c.stroke();c.restore()});c.restore()};
+  [[-560,720],[-330,760],[330,750],[560,710],[-720,860],[720,880],[-200,880],[220,900]].forEach(([x,y])=>stake(x,y));
+  /* ชายป่า: ด้านใต้ + ด้านข้าง (ต้นไม้ชุดบ้านกิลด์ถ้าโหลดแล้ว) */
+  c.fillStyle='#1c2814';c.fillRect(X0,1190,WD,180);const fg=c.createLinearGradient(0,1060,0,1200);fg.addColorStop(0,'rgba(10,16,8,0)');fg.addColorStop(1,'rgba(20,30,14,.85)');c.fillStyle=fg;c.fillRect(X0,1060,WD,140);
+  const TR=[];for(let x=-930;x<=930;x+=RR(52,74)){if(Math.abs(x)<80)continue;TR.push([x+RR(-10,10),1150+RR(-24,28),RR(.85,1.25)])}
+  for(let y=520;y<1150;y+=RR(56,80)){TR.push([-905+RR(-12,12),y,RR(.8,1.15)]);TR.push([905+RR(-12,12),y,RR(.8,1.15)])}
+  for(let x=-930;x<=930;x+=RR(46,66))TR.push([x+RR(-10,10),1230+RR(-20,30),RR(.9,1.3)]);for(let x=-930;x<=930;x+=RR(46,66))TR.push([x+RR(-10,10),1320+RR(-16,30),RR(.9,1.3)]);TR.sort((a,b)=>a[1]-b[1]);const ok=typeof GQI!=='undefined'&&GQI.ok===1&&GQI.img;
+  TR.forEach(([x,y,s],i)=>{c.fillStyle='rgba(0,0,0,.32)';c.beginPath();c.ellipse(x+4,y+2,30*s,8*s,0,0,7);c.fill();
+    if(ok){const q=GQD.f[i%3===0?'fm_oak':'fm_tree'];if(q){const w=100*s,h=w*q[3]/q[2];c.save();c.filter='brightness('+(y>1280?.4:y>1180?.5:y>1120?.62:.8)+') saturate(.85)';c.drawImage(GQI.img,q[0],q[1],q[2],q[3],x-w/2,y-h,w,h);c.restore();return}}
+    c.fillStyle='#4a3020';c.fillRect(x-5*s,y-34*s,10*s,34*s);c.fillStyle=y>1120?'#2a4020':'#3a5a2a';c.strokeStyle=OL;c.lineWidth=1.5;c.beginPath();c.arc(x,y-50*s,32*s,0,7);c.fill();c.stroke()});
+  return{cv,X0,Y0,WD,HT}}
+function ghFieldClear(){const inF=o=>o&&o.x>1600-960&&o.x<1600+960&&o.y>1600-520&&o.y<1600+1240;[typeof trees!=='undefined'?trees:null,typeof decor!=='undefined'?decor:null].forEach(A=>{if(!Array.isArray(A))return;let j=0;for(let i=0;i<A.length;i++){if(!inF(A[i]))A[j++]=A[i]}A.length=j})}
+ghEnter=(f=>function(){const r=f.apply(this,arguments);GHF.cl=0;return r})(ghEnter);
+ghDraw=(f=>function(){try{if(ghHere()){if(!GHF.cl){GHF.cl=1;try{ghFieldClear()}catch(e){}}const t=ghT(),k=t+'|'+((typeof GQI!=='undefined'&&GQI.ok===1)?1:0);if(GHF.k!==k||!GHF.cv){GHF.F=ghFieldBuild(t);GHF.cv=GHF.F.cv;GHF.k=k}const F=GHF.F,ox=1600+F.X0,oy=1600+F.Y0,sx=Math.max(0,cam.x-ox),sy=Math.max(0,cam.y-oy),sw=Math.min(F.WD-sx,W+2),sh=Math.min(F.HT-sy,H+2);if(sw>0&&sh>0)g.drawImage(GHF.cv,sx,sy,sw,sh,ox+sx,oy+sy,sw,sh)}}catch(e){}return f.apply(this,arguments)})(ghDraw);

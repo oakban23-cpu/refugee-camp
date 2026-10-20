@@ -4,6 +4,8 @@
    - ระหว่างศึก: ประตูปิด (ผู้เล่นเดินผ่านได้ มอนผ่านไม่ได้) · ออกไปสู้ในทุ่งด้านใต้ได้ · เขตปลอดภัยปิด
    - ป้อมยิงเอง (ธนู/ไฟเป็นวง/น้ำแข็งทำให้ช้า/หินยักษ์เน้นตัวใหญ่) · ทหารหอกออกไปรับ · นักธนูยิง · นักบวชฮีลทหาร+ผู้เล่น · ทหารที่ตายหายจากค่าย
    - โฮสต์ของแมพจำลองศึก ส่งสถานะผ่านเซิร์ฟเวอร์ทุก 0.3 วิ · โฮสต์หลุด → คนใหม่รับช่วงต่อจากสถานะล่าสุด */
+/* v465: ทุ่งรบด้านใต้กว้างขึ้น — ผู้เล่นออกไปสู้นอกกำแพงได้ไกล · มอนเกิดที่ชายป่าไกลออกไป */
+const GHFLD={xm:880,ym:1110,sp:930,bs:990};
 const GRD={id:'',ph:'',fin:0,nid:0,q:[],tc:{},sol:null,so:null,wt:0,sT:0,st:0,res:null,boss0:null,sr0:760,cf:''};
 const GHFX={x:0,y:-150};
 const ghrOn=()=>!!(GRD.id&&!GRD.fin&&(GRD.ph==='cd'||GRD.ph==='run'));
@@ -24,11 +26,11 @@ function ghrSolInit(){const H=GDS.g&&GDS.g.hq,L=GRD.L|0||30,t=GRD.t|0||2,S=[];co
   else if(H){['sp','ar','pr'].forEach(k=>{const n=Math.min(16,(H.sol&&H.sol[k])|0);for(let i=0;i<n;i++){const P=GHSP[k][i];if(!P)continue;S.push({k,i,x:1600+P[0],y:1600+P[1],px:1600+P[0],py:1600+P[1],mh:mh[k],hp:mh[k],cd:Math.random(),fx:P[0]<0?1:-1})}})}
   GRD.sol=S}
 function ghrSpawnWave(w){const t=GRD.t|0||2,np=Math.max(1,1+Object.keys(others).length),L=GRD.L|0||30,boss=w>=GRD.W;let n=Math.min(45,Math.round((6+2*w+3*t)*(.5+.25*np)));if(boss)n=Math.round(n*.6);
-  const now=performance.now();for(let i=0;i<n;i++){const r=Math.random(),tt=r<.1+.03*w?2:r<.45?1:0;GRD.q.push({at:now+i*(4000/n),t:tt,L,x:1600+(Math.random()*1120-560),y:1600+640+Math.random()*140})}
+  const now=performance.now();for(let i=0;i<n;i++){const r=Math.random(),tt=r<.1+.03*w?2:r<.45?1:0;GRD.q.push({at:now+i*(4000/n),t:tt,L,x:1600+(Math.random()*1600-800),y:1600+GHFLD.sp+Math.random()*150})}
   if(boss)GRD.q.push({at:now+1500,boss:1});
   try{fx({k:'msg',s:boss?'👹 คลื่นสุดท้าย! จอมทัพอสูรบุกมาแล้ว!':'⚔️ คลื่นที่ '+w+'/'+GRD.W+' กำลังบุก!'})}catch(e){}}
 function ghrPop(){const now=performance.now();while(GRD.q.length&&GRD.q[0].at<=now){const e=GRD.q.shift(),id=900000+(++GRD.nid);
-  if(e.boss){const B=BS(),hp=Math.round(B.hp);B.x=1600;B.y=2330;mons.push({id,x:B.x,y:B.y,tx:B.x,ty:B.y,t:3,L:B.L,p:1,hx:B.x,hy:B.y,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,a1:4,a2:9,tl:[],enr:0});try{sfx('boss')}catch(e2){}continue}
+  if(e.boss){const B=BS(),hp=Math.round(B.hp);B.x=1600;B.y=1600+GHFLD.bs;mons.push({id,x:B.x,y:B.y,tx:B.x,ty:B.y,t:3,L:B.L,p:1,hx:B.x,hy:B.y,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,a1:4,a2:9,tl:[],enr:0});try{sfx('boss')}catch(e2){}continue}
   const hp=mhp(e.t,e.L);mons.push({id,x:e.x,y:e.y,tx:e.x,ty:e.y,t:e.t,L:e.L,p:0,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,esc:1})}}
 function ghrStruct(m,dt,dmg,which){if(m.ac>0)return;m.ac=1;m.akN=((m.akN|0)+1)%100;m.akT=performance.now();
   if(which==='gate'){GRD.gate=Math.max(0,GRD.gate-dmg);const gl=(GDS.g&&GDS.g.hq&&GDS.g.hq.gl)|0;if(gl>=5){m.hp-=m.mh*.02*(gl-4);m.hitT=performance.now()}if(GRD.gate<=0&&GRD.bx==null){GRD.bx=0;try{fx({k:'msg',s:'💥 ประตูเมืองพังแล้ว! ปกป้องธงศึก!'})}catch(e){}}}
@@ -40,7 +42,7 @@ function ghrMon(m,dt,pl,spd){if(m.hp<=0)return true;const out=y=>y>1600+430,pre=
   /* ทหาร */
   if(GRD.sol){let b=null,bd=120;for(const s of GRD.sol){if(s.hp<=0)continue;const d=Math.hypot(s.x-m.x,s.y-m.y);if(d<bd){bd=d;b=s}}
     if(b){if(bd>34)moveTo(m,b.x,b.y,spd*dt);else if(m.ac<=0){m.ac=.9;m.akN=((m.akN|0)+1)%100;m.akT=performance.now();b.hp-=Math.round((4+2*m.L)*(m.dmx||1))}return true}}
-  if(GRD.bx==null){if(m.gx===undefined)m.gx=Math.max(-540,Math.min(540,Math.round(m.x-X)));const gate=Math.abs(m.gx)<170,tx=X+(gate?Math.max(-58,Math.min(58,m.gx)):m.gx),ty=Y+458;
+  if(GRD.bx==null){if(m.gx===undefined)m.gx=Math.max(-540,Math.min(540,Math.round((m.x-X)*.68)));const gate=Math.abs(m.gx)<170,tx=X+(gate?Math.max(-58,Math.min(58,m.gx)):m.gx),ty=Y+458;
     if(Math.hypot(tx-m.x,ty-m.y)>8)moveTo(m,tx,ty,spd*dt);else ghrStruct(m,dt,sd,gate?'gate':'wall');return true}
   const bx=X+GRD.bx;let tx,ty;if(m.y>Y+440&&Math.abs(m.x-bx)>14){tx=bx+(m.x<bx?-6:6)*0;ty=Y+452}else{tx=X+GHFX.x;ty=Y+GHFX.y+20}
   if(Math.hypot(tx-m.x,ty-m.y)>(ty<Y?30:6))moveTo(m,tx,ty,spd*dt);else if(ty<Y)ghrStruct(m,dt,sd*1.5,'flag');return true}
@@ -76,7 +78,7 @@ function ghrHost(dt){if(!ghrHere()||!isHost())return;const now=Date.now();if(GRD
 simHost=(f=>function(dt){const r=f.apply(this,arguments);try{ghrHost(dt)}catch(e){console.warn('ghr',e)}return r})(simHost);
 /* ---------- ผู้เล่น: เดินออกทุ่งได้ · ผ่านกำแพงได้เฉพาะประตู/รอยทะลุ ---------- */
 ghCollide=(f=>function(){if(!ghrHere())return f.apply(this,arguments);if(SR!==0)SR=0;
-  me.x=Math.max(1600-578,Math.min(1600+578,me.x));me.y=Math.max(1600-444,Math.min(1600+760,me.y));
+  {const XM=me.y>1600+452?GHFLD.xm:578;me.x=Math.max(1600-XM,Math.min(1600+XM,me.x));me.y=Math.max(1600-444,Math.min(1600+GHFLD.ym,me.y))}
   if(me.y>1600+410&&me.y<1600+452){const ok=Math.abs(me.x-1600)<64||(GRD.bx!=null&&Math.abs(me.x-1600-GRD.bx)<44);if(!ok)me.y=me.y<1600+431?1600+410:1600+452}
   if(me.y<1600+408)f.apply(this,arguments)})(ghCollide);
 /* ---------- วาด ---------- */
