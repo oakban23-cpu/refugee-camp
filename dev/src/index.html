@@ -13583,15 +13583,15 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v461';
+const WNV='v462';
 const WNL=[
+  ['🏰','เดินบนกำแพงบ้านกิลด์','บ้านขั้น 2 ขึ้นไปมีบันไดชิดกำแพงด้านเหนือ 2 ฝั่ง ขึ้นไปเดินรอบเชิงเทินได้ทั้งเหนือ ข้าง และใต้ ตอนศึกมอนบุก ยืนบนเชิงเทินได้ดาเมจ +25% มอนประชิดตีไม่ถึง แต่มอนข้างนอกยิงธนูขึ้นมาได้ และถ้ากำแพงทะลุตรงที่ยืนจะตกลงมา'],
   ['🧱','บ้านกิลด์เข้าชุดทั้งหลัง','เก็บของสไตล์เมืองหลวงออกจากบ้านกิลด์ ลานกลางเป็นกองไฟวงหินและน้ำพุหินชนวนขอบบรอนซ์ พื้นหินก้อนเล็กลง กำแพงสูงขึ้นมีเส้นขอบ เงาอาคารนุ่มลง ธงหน้าตึกมีแสงเงา ประตูไม้กลับมาสัดส่วนปกติ'],
   ['🗼','หอป้อมและประตูบ้านกิลด์ ภาพวาดใหม่','หอมุมกำแพงและป้อมยิงทุกแบบใช้ภาพใหม่ ขั้น 1–2 หอไม้ ขั้น 3 หอหินสี่เหลี่ยม ขั้น 4–5 หอหินกลม ประตูหน้าบ้านเป็นประตูรั้วไม้มีหอคู่ ซุ้มหินมีซี่ลูกกรง และซุ้มประตูหอคู่ (ขั้น 5) ธงที่ประตูเป็นสีกิลด์'],
   ['🪨','พื้นบ้านกิลด์แนบอาคาร','อาคารในบ้านกิลด์มีเงาทอดลงพื้นและเงาตรงจุดที่แตะพื้น มีหญ้ากับก้อนหินขึ้นรอบฐาน ไม่ดูลอยอีกต่อไป ขั้น 3 ขึ้นไปพื้นเป็นหินปูทรงไม่เท่ากันมีมอสตามร่อง กำแพงเป็นหินชนวนเข้าชุดกับตัวอาคาร'],
   ['🏚️','อาคารรองบ้านกิลด์ ภาพวาดใหม่','คลังสมบัติ โกดัง ครัว และค่ายทหารในบ้านกิลด์เปลี่ยนเป็นภาพชุดใหม่ ขั้น 1–2 เป็นเกวียน เพิงไม้ ครัวผ้าใบ เต็นท์ทหาร ขั้น 3 ขึ้นไปเป็นห้องนิรภัย ยุ้งฉาง เตาอบหิน คลังอาวุธ ธงทหารเป็นสีกิลด์'],
   ['🏯','ตึกหลักบ้านกิลด์ ภาพวาดใหม่','ตึกบัญชาการบ้านกิลด์เปลี่ยนเป็นชุดภาพใหม่ของกิลด์โดยเฉพาะ ไล่ขั้นตั้งแต่เต็นท์ บ้านไม้ ตึกหิน ป้อมประตูเหล็ก จนถึงปราสาท ธงบนตึกเป็นสีกิลด์ของคุณเอง'],
-  ['🏰','บ้านกิลด์โฉมใหม่ ภาพ HD','อาคารทุกหลังในบ้านกิลด์เป็นภาพวาด HD: เต็นท์บัญชาการ บ้านหลังคาม่วง โถงหลังคาน้ำเงิน จนถึงพระราชวังยอดแหลม · หอหินมุมกำแพง ประตูดาว น้ำพุคริสตัล · พื้นและกำแพงมีมิติแสงเงา · ต้นไม้ในสวนผลไม้วาดใหม่ (ตั้งค่า › ภาพ HD)'],
-  ['⚔️','ศึกมอนบุกบ้านกิลด์!','หัวหน้า/รองเปิดศึกได้วันละครั้ง (บ้านขั้น 2+ · ในบ้าน 3 คนขึ้นไป) · มอนบุกเป็นคลื่นจากทุ่งด้านใต้ ตีประตู/กำแพงแล้ววิ่งไปหาธงศึก · ป้อมยิงเอง ทหารออกรับ นักบวชฮีล · ออกไปสู้นอกประตูได้ · คลื่นสุดท้ายมีจอมทัพอสูร · ชนะได้รางวัล (3 ศึกแรก/สัปดาห์) + ขึ้นอันดับป้องกันเมือง']];
+  ['🏰','บ้านกิลด์โฉมใหม่ ภาพ HD','อาคารทุกหลังในบ้านกิลด์เป็นภาพวาด HD: เต็นท์บัญชาการ บ้านหลังคาม่วง โถงหลังคาน้ำเงิน จนถึงพระราชวังยอดแหลม · หอหินมุมกำแพง ประตูดาว น้ำพุคริสตัล · พื้นและกำแพงมีมิติแสงเงา · ต้นไม้ในสวนผลไม้วาดใหม่ (ตั้งค่า › ภาพ HD)']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -16306,6 +16306,16 @@ const ghHDok=()=>{try{return HDI.on&&!LOWQ&&HDI.ok===1&&HDI.ok2===1&&FHI.ok===1&
 const GQD={src:"hd-guild.webp",f:{"h4":[0,0,600,744],"h5":[602,0,920,728],"gt3":[0,746,600,582],"gt1":[602,746,600,524],"gt5":[1204,746,640,504],"h2":[0,1330,520,481],"h3":[522,1330,720,458],"h4_m":[1244,1330,300,372],"h1":[0,1813,580,371],"h5_m":[582,1813,460,364],"ki1":[1044,1813,350,358],"tr1":[1396,1813,380,349],"ki3":[0,2186,390,345],"ba1":[392,2186,420,327],"st1":[814,2186,380,326],"st3":[1196,2186,370,305],"tw4":[1568,2186,190,267],"tr3":[0,2533,400,258],"gt5_m":[402,2533,320,252],"h2_m":[724,2533,260,240],"tw1":[986,2533,200,230],"h3_m":[1188,2533,360,229],"tw3":[1550,2533,210,226],"h1_m":[0,2793,290,185],"ba3":[292,2793,500,185],"ba1_m":[794,2793,210,163],"ba3_m":[1006,2793,250,92]}};const GQFP={"h4":[[0.018,0.995],[0.054,0.997],[0.089,0.997],[0.125,0.999],[0.161,0.999],[0.196,0.997],[0.232,0.997],[0.268,0.991],[0.304,0.993],[0.339,0.995],[0.375,0.995],[0.411,0.987],[0.446,0.983],[0.482,0.983],[0.518,0.983],[0.554,0.983],[0.589,0.987],[0.625,0.995],[0.661,0.995],[0.696,0.995],[0.732,0.991],[0.768,0.997],[0.804,0.997],[0.839,0.999],[0.875,0.999],[0.911,0.997],[0.946,0.997],[0.982,0.995]],"h5":[[0.018,0.97],[0.054,0.971],[0.089,0.971],[0.125,0.966],[0.161,0.963],[0.196,0.975],[0.232,0.975],[0.268,0.974],[0.304,0.996],[0.339,0.997],[0.375,0.993],[0.411,0.99],[0.446,0.99],[0.482,0.99],[0.518,0.99],[0.554,0.99],[0.589,0.99],[0.625,0.993],[0.661,0.997],[0.696,0.996],[0.732,0.974],[0.768,0.975],[0.804,0.975],[0.839,0.964],[0.875,0.966],[0.911,0.971],[0.946,0.971],[0.982,0.97]],"gt3":[[0.018,0.995],[0.054,0.998],[0.089,0.991],[0.125,0.991],[0.161,0.998],[0.196,0.993],[0.232,0.986],[0.268,0.978],[0.304,0.978],[0.339,0.962],[0.661,0.96],[0.696,0.978],[0.732,0.978],[0.768,0.986],[0.804,0.99],[0.839,0.998],[0.875,0.991],[0.911,0.991],[0.946,0.998],[0.982,0.995]],"gt1":[[0.018,0.977],[0.054,0.985],[0.089,0.987],[0.125,0.99],[0.161,0.996],[0.196,0.998],[0.232,0.996],[0.268,0.998],[0.304,0.989],[0.696,0.987],[0.732,0.998],[0.768,0.996],[0.804,0.998],[0.839,0.996],[0.875,0.99],[0.911,0.989],[0.946,0.985],[0.982,0.977]],"gt5":[[0.018,0.986],[0.054,0.992],[0.089,0.996],[0.125,0.986],[0.161,0.986],[0.196,0.996],[0.232,0.996],[0.268,0.986],[0.304,0.996],[0.339,0.99],[0.661,0.99],[0.696,0.996],[0.732,0.986],[0.768,0.996],[0.804,0.996],[0.839,0.986],[0.875,0.986],[0.911,0.996],[0.946,0.992],[0.982,0.986]],"h2":[[0.089,0.988],[0.125,0.988],[0.161,0.985],[0.196,0.988],[0.232,0.988],[0.268,0.985],[0.304,0.99],[0.339,0.994],[0.375,0.994],[0.411,0.994],[0.446,0.994],[0.482,0.994],[0.518,0.998],[0.554,0.996],[0.589,0.996],[0.625,0.994],[0.661,0.994],[0.696,0.992],[0.732,0.985],[0.768,0.988],[0.804,0.988],[0.839,0.985],[0.875,0.988],[0.911,0.988]],"h3":[[0.018,0.991],[0.054,0.991],[0.089,0.993],[0.125,0.993],[0.161,0.993],[0.196,0.989],[0.232,0.985],[0.268,0.985],[0.304,0.993],[0.339,0.996],[0.375,0.998],[0.411,0.991],[0.446,0.987],[0.482,0.985],[0.518,0.985],[0.554,0.985],[0.589,0.991],[0.625,0.998],[0.661,0.996],[0.696,0.993],[0.732,0.985],[0.768,0.985],[0.804,0.989],[0.839,0.993],[0.875,0.993],[0.911,0.993],[0.946,0.991],[0.982,0.991]],"h1":[[0.018,0.992],[0.054,0.995],[0.089,0.995],[0.125,0.989],[0.161,0.989],[0.196,0.989],[0.232,0.989],[0.268,0.989],[0.304,0.989],[0.339,0.997],[0.375,0.997],[0.411,0.995],[0.446,0.989],[0.482,0.989],[0.518,0.989],[0.554,0.989],[0.589,0.989],[0.625,0.997],[0.661,0.997],[0.696,0.989],[0.732,0.989],[0.768,0.989],[0.804,0.989],[0.839,0.989],[0.875,0.989],[0.911,0.995],[0.946,0.995],[0.982,0.992]],"ki1":[[0.232,0.872],[0.268,0.911],[0.304,0.919],[0.339,0.913],[0.375,0.927],[0.411,0.941],[0.446,0.941],[0.482,0.992],[0.518,0.994],[0.554,0.989],[0.589,0.941],[0.625,0.93],[0.661,0.922],[0.696,0.894],[0.732,0.905],[0.768,0.95],[0.804,0.941],[0.839,0.98],[0.875,0.98],[0.911,0.947],[0.946,0.908]],"tr1":[[0.018,0.883],[0.054,0.994],[0.089,0.997],[0.125,0.994],[0.161,0.96],[0.196,0.957],[0.232,0.948],[0.268,0.948],[0.304,0.946],[0.339,0.946],[0.375,0.948],[0.411,0.951],[0.446,0.951],[0.482,0.951],[0.518,0.948],[0.554,0.946],[0.589,0.946],[0.625,0.943],[0.661,0.946],[0.696,0.946],[0.732,0.946],[0.768,0.946],[0.804,0.948],[0.839,0.954],[0.875,0.986],[0.911,0.986],[0.946,0.986],[0.982,0.931]],"ki3":[[0.018,0.722],[0.054,0.986],[0.089,0.988],[0.125,0.988],[0.161,0.988],[0.196,0.986],[0.232,0.986],[0.268,0.986],[0.304,0.977],[0.339,0.98],[0.375,0.98],[0.411,0.98],[0.446,0.98],[0.482,0.986],[0.518,0.983],[0.554,0.991],[0.589,0.994],[0.625,0.997],[0.661,0.997],[0.696,0.988],[0.732,0.988],[0.768,0.986],[0.804,0.988],[0.839,0.991],[0.875,0.994],[0.911,0.997],[0.946,0.991]],"ba1":[[0.018,0.89],[0.054,0.859],[0.089,0.878],[0.125,0.881],[0.161,0.878],[0.196,0.881],[0.232,0.905],[0.268,0.994],[0.304,0.997],[0.339,0.969],[0.375,0.948],[0.411,0.948],[0.446,0.948],[0.482,0.948],[0.518,0.948],[0.554,0.948],[0.589,0.948],[0.625,0.948],[0.661,0.948],[0.696,0.982],[0.732,0.997],[0.768,0.991],[0.804,0.881],[0.839,0.878],[0.875,0.881],[0.911,0.878],[0.946,0.859],[0.982,0.89]],"st1":[[0.054,0.997],[0.089,0.997],[0.125,0.997],[0.161,0.985],[0.196,0.982],[0.232,0.979],[0.268,0.975],[0.304,0.985],[0.339,0.985],[0.375,0.982],[0.411,0.972],[0.446,0.972],[0.482,0.972],[0.518,0.972],[0.554,0.972],[0.589,0.972],[0.625,0.982],[0.661,0.985],[0.696,0.985],[0.732,0.975],[0.768,0.979],[0.804,0.979],[0.839,0.985],[0.875,0.997],[0.911,0.997],[0.946,0.994]],"st3":[[0.054,0.944],[0.089,0.948],[0.125,0.951],[0.161,0.951],[0.196,0.954],[0.232,0.954],[0.268,0.954],[0.304,0.961],[0.339,0.964],[0.375,0.97],[0.411,0.977],[0.446,0.977],[0.482,0.98],[0.518,0.984],[0.554,0.987],[0.589,0.993],[0.625,0.997],[0.661,0.99],[0.696,0.98],[0.732,0.974],[0.768,0.964],[0.804,0.957],[0.839,0.951],[0.875,0.944],[0.911,0.941]],"tw4":[[0.054,0.959],[0.089,0.966],[0.125,0.974],[0.161,0.981],[0.196,0.985],[0.232,0.985],[0.268,0.989],[0.304,0.993],[0.339,0.993],[0.375,0.996],[0.411,0.993],[0.446,0.996],[0.482,0.996],[0.518,0.996],[0.554,0.996],[0.589,0.993],[0.625,0.996],[0.661,0.993],[0.696,0.993],[0.732,0.989],[0.768,0.985],[0.804,0.985],[0.839,0.981],[0.875,0.978],[0.911,0.97],[0.946,0.963],[0.982,0.948]],"tr3":[[0.018,0.864],[0.054,0.88],[0.089,0.884],[0.125,0.903],[0.161,0.919],[0.196,0.953],[0.232,0.973],[0.268,0.988],[0.304,0.992],[0.339,0.992],[0.375,0.988],[0.411,0.984],[0.446,0.981],[0.482,0.965],[0.518,0.965],[0.554,0.961],[0.589,0.95],[0.625,0.95],[0.661,0.946],[0.696,0.938],[0.732,0.942],[0.768,0.942],[0.804,0.942],[0.839,0.942],[0.875,0.946],[0.911,0.946],[0.946,0.926],[0.982,0.922]],"tw1":[[0.018,0.987],[0.054,0.996],[0.089,0.996],[0.125,0.991],[0.161,0.983],[0.196,0.983],[0.232,0.987],[0.268,0.983],[0.304,0.991],[0.339,0.996],[0.375,0.996],[0.411,0.991],[0.446,0.996],[0.482,0.996],[0.518,0.996],[0.554,0.996],[0.589,0.991],[0.625,0.991],[0.661,0.996],[0.696,0.996],[0.732,0.983],[0.768,0.987],[0.804,0.983],[0.839,0.983],[0.875,0.991],[0.911,0.996],[0.946,0.996],[0.982,0.987]],"tw3":[[0.018,0.969],[0.054,0.987],[0.089,0.987],[0.125,0.987],[0.161,0.987],[0.196,0.987],[0.232,0.987],[0.268,0.987],[0.304,0.987],[0.339,0.996],[0.375,0.991],[0.411,0.982],[0.446,0.982],[0.482,0.982],[0.518,0.982],[0.554,0.982],[0.589,0.982],[0.625,0.991],[0.661,0.996],[0.696,0.987],[0.732,0.987],[0.768,0.987],[0.804,0.987],[0.839,0.987],[0.875,0.987],[0.911,0.987],[0.946,0.987],[0.982,0.978]],"ba3":[[0.018,0.881],[0.054,0.892],[0.089,0.908],[0.125,0.919],[0.161,0.935],[0.196,0.935],[0.232,0.935],[0.268,0.935],[0.304,0.935],[0.339,0.935],[0.375,0.93],[0.411,0.968],[0.446,0.995],[0.482,0.957],[0.518,0.984],[0.554,0.93],[0.589,0.914],[0.625,0.908],[0.661,0.924],[0.696,0.924],[0.732,0.957],[0.768,0.968],[0.804,0.957],[0.839,0.908],[0.875,0.908],[0.911,0.908],[0.946,0.908],[0.982,0.908]]};const GQI={img:null,ok:0};
 function gqLoad(){if(GQI.img)return;const im=new Image();im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{GQI.ok=1})};im.onerror=()=>{GQI.ok=-1};im.src=GQD.src;GQI.img=im}
 function ghHDload(){try{if(!HDI.on||LOWQ)return;hdLoad();hdbLoad();fhdLoad();chdLoad();gqLoad()}catch(e){}}
+/* v462 · ทางเดินบนกำแพง (ขั้น 2+) — ตำแหน่งบนกำแพงอนุมานจากพิกัด: แถบทางเดินอยู่นอกเขตพื้นที่เดินได้ปกติ จึงรู้ได้ทุกเครื่องว่าใครอยู่บนกำแพง */
+const ghWH=t=>[0,26,50,70,80,86][t]||50;
+const ghWL=t=>t===2?{n:51,s:61,e:55}:{n:ghWH(t)+11,s:ghWH(t)+21,e:ghWH(t)+15}; /* +15 = เท้าตัวละครอยู่ต่ำกว่าพิกัด ~15px */
+const ghHWd=t=>[0,0,140,196,160,245][t]||200;
+function ghWReg(lx,ly,t){if(!(t>=2))return null;const L=ghWL(t),ax=Math.abs(lx);
+  if(ly>=-498&&ly<=-474&&ax<=612&&ax>=ghHWd(t))return{k:'n',l:L.n};
+  if(ax>=586&&ax<=614&&ly>=-498&&ly<=436)return{k:'e',l:L.e};
+  if(ly>=412&&ly<=436&&ax>=170&&ax<=612)return{k:'s',l:L.s};
+  if(ax>=368&&ax<=408&&ly>=-474&&ly<=-392)return{k:'st',l:Math.max(0,(-392-ly)/82*L.n)};
+  return null}
 const GHLP=t=>t<=1?[[-70,300],[70,300],[-70,-200],[70,-200]]:[[-70,360],[70,360],[-70,190],[70,190],[-70,-200],[70,-200],[-330,-60],[330,-60]];
 const GHDEC=t=>{const L=[];if(t>=3)L.push([-175,120,16],[175,120,16]);const nw=GQI.ok===1;if(t>=4&&!nw)L.push([-232,150,24],[232,150,24]);if(t>=5&&!nw)L.push([-150,322,20],[150,322,20]);return L};
 function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
@@ -16421,16 +16431,24 @@ function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
       [y-18,y-9].forEach(ry=>{const gr=c.createLinearGradient(0,ry,0,ry+4);gr.addColorStop(0,'#b0844f');gr.addColorStop(1,'#6a4626');c.fillStyle=gr;c.fillRect(xa,ry,xb-xa,4)});
       for(let x=xa;x<=xb;x+=26){logV(x-3.5,y-WH,y,7,'#7a5232');P([x-3.5,y-WH,x,y-WH-5,x+3.5,y-WH],'#a07448');c.fillStyle='#c8a070';c.beginPath();c.ellipse(x,y-WH-.5,3.2,1.3,0,0,7);c.fill();c.strokeStyle='#d8c090';c.lineWidth=1;c.beginPath();c.moveTo(x-4,y-15);c.lineTo(x+4,y-12);c.stroke()}return}
     soft((xa+xb)/2,y+4,(xb-xa)/2+8,10,.32);
+    const plk=()=>{if(!GQs)return;const yt=y-WH-14,OL='#1e140c';if(y<0)for(let x=xa+20;x<xb;x+=64){logV(x-3,yt+20,y-2,6,'#5a3a1e')}c.fillStyle='#3a2414';c.fillRect(xa,yt,xb-xa,24);for(let r=0;r<3;r++){let x=xa;while(x<xb){const w=RR(30,60),x1=Math.min(xb,x+w);const k=RR(-.08,.08);c.fillStyle=ghShade('#8a6038',k);c.fillRect(x+.6,yt+r*8+.6,x1-x-1.2,6.8);c.fillStyle=ghShade('#8a6038',k+.2);c.fillRect(x+.6,yt+r*8+.6,x1-x-1.2,1.2);c.fillStyle='#2a1a0c';c.fillRect(x1-1,yt+r*8+2,1,4);x=x1}}c.strokeStyle=OL;c.lineWidth=1.4;c.strokeRect(xa,yt,xb-xa,24)};
+    if(t===2&&y>0)plk();
     if(t===2){for(let x=xa;x<xb;x+=12){const hh=WH+RR(-3,4);logV(x,y-hh+5,y,12,rn()<.5?'#7a5232':'#6c4829');c.fillStyle='#b58a5a';P([x,y-hh+5,x+6,y-hh-6,x+12,y-hh+5],null);c.fill();c.fillStyle='rgba(255,220,170,.35)';P([x+2,y-hh+4,x+6,y-hh-4,x+6,y-hh+5],null);c.fill();
         c.strokeStyle='rgba(30,16,6,.35)';c.lineWidth=.7;for(let k=0;k<2;k++){const bx=x+RR(2,10);c.beginPath();c.moveTo(bx,y-hh+10);c.lineTo(bx+RR(-1,1),y-hh+RR(20,40));c.stroke()}}
-      [y-WH*.38,y-WH*.78].forEach(ry=>{const gr=c.createLinearGradient(0,ry,0,ry+5);gr.addColorStop(0,'#5a4a3a');gr.addColorStop(.5,'#9a8a74');gr.addColorStop(1,'#3a2e22');c.fillStyle=gr;c.fillRect(xa,ry,xb-xa,5);for(let x=xa+6;x<xb;x+=24){c.fillStyle='#c8b896';c.beginPath();c.arc(x,ry+2.5,1.2,0,7);c.fill()}});return}
+      [y-WH*.38,y-WH*.78].forEach(ry=>{const gr=c.createLinearGradient(0,ry,0,ry+5);gr.addColorStop(0,'#5a4a3a');gr.addColorStop(.5,'#9a8a74');gr.addColorStop(1,'#3a2e22');c.fillStyle=gr;c.fillRect(xa,ry,xb-xa,5);for(let x=xa+6;x<xb;x+=24){c.fillStyle='#c8b896';c.beginPath();c.arc(x,ry+2.5,1.2,0,7);c.fill()}});if(y<0)plk();return}
     if(GQs){const y0=y-WH,OL='#24242a';c.fillStyle='#2b2b30';c.fillRect(xa,y0,xb-xa,WH);
       for(let yy=y0,r=0;yy<y;yy+=15,r++){let x=xa-(r%2?RR(8,20):0);while(x<xb){const w=RR(24,44),x0=Math.max(xa,x)+1,x1=Math.min(xb,x+w)-1,hh=Math.min(15,y-yy)-2;if(x1-x0>4&&hh>3){const k=RR(-.08,.08);c.fillStyle=ghShade(WF,k);c.beginPath();c.roundRect(x0,yy+1,x1-x0,hh,2.5);c.fill();
           c.fillStyle=ghShade(WF,k+.2);c.fillRect(x0+2,yy+2,x1-x0-4,1.4);c.fillStyle=ghShade(WF,k-.28);c.fillRect(x0+2,yy+hh-.6,x1-x0-4,1.4);
           if(yy>y-34&&rn()<.3){c.fillStyle=rn()<.5?'#4a6630':'#5a7a38';for(let q=0;q<4;q++){c.beginPath();c.arc(x0+RR(2,x1-x0-2),yy+hh-RR(0,3),RR(1.2,2.6),0,7);c.fill()}}}x+=w}}
       {const gr=c.createLinearGradient(0,y0,0,y);gr.addColorStop(0,'rgba(255,255,255,.04)');gr.addColorStop(1,'rgba(8,8,12,.32)');c.fillStyle=gr;c.fillRect(xa,y0,xb-xa,WH)}
-      c.fillStyle=ghShade(WT,-.05);c.fillRect(xa,y0-11,xb-xa,11);c.fillStyle=ghShade(WT,.18);c.fillRect(xa,y0-11,xb-xa,2);c.fillStyle='rgba(0,0,0,.35)';c.fillRect(xa,y0-2,xb-xa,2);c.strokeStyle=OL;c.lineWidth=1.5;c.strokeRect(xa,y0-11,xb-xa,11);
-      for(let x=xa+5;x<xb-12;x+=24){c.fillStyle=ghShade(WT,RR(-.06,.04));c.beginPath();c.roundRect(x,y0-25,14,15,2);c.fill();c.fillStyle=ghShade(WT,.2);c.fillRect(x+1.5,y0-24,11,1.6);c.strokeStyle=OL;c.lineWidth=1.3;c.stroke()}
+      /* ทางเดินบนกำแพง */
+      c.fillStyle='#2b2722';c.fillRect(xa,y0-24,xb-xa,24);
+      {let x=xa;while(x<xb){const w=RR(18,30),x1=Math.min(xb,x+w),k=RR(-.07,.07);c.fillStyle=ghShade('#78726a',k);c.fillRect(x+1,y0-23,x1-x-2,22);c.fillStyle=ghShade('#78726a',k+.15);c.fillRect(x+1,y0-23,x1-x-2,1.4);if(rn()<.12){c.fillStyle=rn()<.5?'#4a6630':'#5a7a38';c.beginPath();c.arc(x+RR(3,w-3),y0-RR(3,20),RR(1.2,2.4),0,7);c.fill()}x=x1}}
+      if(y<0){const gs=c.createLinearGradient(0,y0-24,0,y0-11);gs.addColorStop(0,'rgba(0,0,0,.42)');gs.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=gs;c.fillRect(xa,y0-24,xb-xa,13)}
+      c.strokeStyle=OL;c.lineWidth=1.5;c.strokeRect(xa,y0-24,xb-xa,24);
+      const mer=(yt,h)=>{for(let x=xa+5;x<xb-12;x+=24){c.fillStyle=ghShade(WT,RR(-.06,.04));c.beginPath();c.roundRect(x,yt,14,h,2);c.fill();c.fillStyle=ghShade(WT,.2);c.fillRect(x+1.5,yt+1,11,1.6);c.strokeStyle=OL;c.lineWidth=1.3;c.stroke()}};
+      if(y<0){c.fillStyle=ghShade(WT,-.14);c.fillRect(xa,y0-31,xb-xa,8);c.strokeStyle=OL;c.lineWidth=1.4;c.strokeRect(xa,y0-31,xb-xa,8);mer(y0-45,15);c.fillStyle=ghShade(WT,.16);c.fillRect(xa,y0-3,xb-xa,3)}
+      else{c.fillStyle=ghShade(WT,-.12);c.fillRect(xa,y0-27,xb-xa,4);c.fillStyle=ghShade(WT,-.04);c.fillRect(xa,y0-7,xb-xa,8);c.strokeStyle=OL;c.lineWidth=1.4;c.strokeRect(xa,y0-7,xb-xa,8);mer(y0-19,13)}
       c.strokeStyle=OL;c.lineWidth=1.6;c.beginPath();c.moveTo(xa,y);c.lineTo(xb,y);c.stroke();
       for(let x=xa+70;x<xb-50;x+=170){const bx=x,by=y0+2,bw=26,bh=WH-18;c.fillStyle='#3a2a18';c.fillRect(bx-bw/2-4,by-3,bw+8,4);const gb=c.createLinearGradient(bx-bw/2,0,bx+bw/2,0);gb.addColorStop(0,cD);gb.addColorStop(.45,cL);gb.addColorStop(1,cD);c.fillStyle=gb;
         c.beginPath();c.moveTo(bx-bw/2,by);c.lineTo(bx+bw/2,by);c.lineTo(bx+bw/2,by+bh);c.lineTo(bx,by+bh-8);c.lineTo(bx-bw/2,by+bh);c.closePath();c.fill();c.strokeStyle=OL;c.lineWidth=1.5;c.stroke();c.strokeStyle='#b8873c';c.lineWidth=1;c.beginPath();c.moveTo(bx-bw/2+3,by+3);c.lineTo(bx-bw/2+3,by+bh-4);c.moveTo(bx+bw/2-3,by+3);c.lineTo(bx+bw/2-3,by+bh-4);c.stroke();
@@ -16447,11 +16465,13 @@ function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
         c.beginPath();c.moveTo(bx-bw/2,by);c.lineTo(bx+bw/2,by);c.lineTo(bx+bw/2,by+bh);c.lineTo(bx,by+bh-8);c.lineTo(bx-bw/2,by+bh);c.closePath();c.fill();c.strokeStyle='#e8c060';c.lineWidth=1.4;c.stroke();c.font='bold 14px system-ui';c.textAlign='center';c.textBaseline='middle';c.fillText(em,bx,by+bh*.42);c.textBaseline='alphabetic'}}};
   const vWall=(x,ya,yb)=>{if(t===1){for(let y=ya;y<=yb;y+=26){soft(x,y+1,6,2,.25);logV(x-3.5,y-WH,y,7,'#7a5232');c.fillStyle='#c8a070';c.beginPath();c.ellipse(x,y-WH,3.2,1.3,0,0,7);c.fill()}logV(x-2,ya-18,yb-18,4,'#9a6e42');return}
     const tw=t===2?14:22;c.fillStyle='rgba(10,6,4,.22)';c.fillRect(x+(x<0?tw/2:-tw/2-14),ya,14,yb-ya);
-    if(t===2){logV(x-tw/2,ya-WH,yb-WH,tw,'#6a4628');for(let y=ya-WH;y<yb-WH;y+=12){const gr=c.createRadialGradient(x-1,y+5,1,x,y+6,6.5);gr.addColorStop(0,'#d2a874');gr.addColorStop(.6,'#a87c4c');gr.addColorStop(1,'#5a3a1e');c.fillStyle=gr;c.beginPath();c.ellipse(x,y+6,tw/2-.5,5.6,0,0,7);c.fill();c.strokeStyle='rgba(90,60,30,.5)';c.lineWidth=.6;c.beginPath();c.ellipse(x,y+6,3,2.4,0,0,7);c.stroke()}logV(x-tw/2,yb-WH,yb,tw,'#6a4628');return}
-    if(GQs){const OL='#24242a';c.fillStyle='rgba(10,8,8,.26)';c.fillRect(x+(x<0?tw/2:-tw/2-16),ya,16,yb-ya);c.fillStyle=ghShade(WT,-.08);c.fillRect(x-tw/2,ya-WH-10,tw,yb-ya);
-      for(let y=ya-WH-6;y<yb-WH-10;y+=16){c.fillStyle=ghShade(WT,RR(-.06,.06));c.fillRect(x-tw/2+2,y,tw-4,14);c.fillStyle='rgba(0,0,0,.28)';c.fillRect(x-tw/2,y+14,tw,1.4)}
-      c.strokeStyle=OL;c.lineWidth=1.5;c.strokeRect(x-tw/2,ya-WH-10,tw,yb-ya);
-      for(let y=ya-WH;y<yb-WH-16;y+=24){[x-tw/2-2,x+tw/2-6].forEach(mx=>{c.fillStyle=ghShade(WT,.05);c.beginPath();c.roundRect(mx,y,8,12,1.5);c.fill();c.strokeStyle=OL;c.lineWidth=1.1;c.stroke()})}return}
+    if(t===2){logV(x-tw/2,ya-WH,yb-WH,tw,'#6a4628');for(let y=ya-WH;y<yb-WH;y+=12){const gr=c.createRadialGradient(x-1,y+5,1,x,y+6,6.5);gr.addColorStop(0,'#d2a874');gr.addColorStop(.6,'#a87c4c');gr.addColorStop(1,'#5a3a1e');c.fillStyle=gr;c.beginPath();c.ellipse(x,y+6,tw/2-.5,5.6,0,0,7);c.fill();c.strokeStyle='rgba(90,60,30,.5)';c.lineWidth=.6;c.beginPath();c.ellipse(x,y+6,3,2.4,0,0,7);c.stroke()}logV(x-tw/2,yb-WH,yb,tw,'#6a4628');if(GQs){const y1=ya-68,y2=yb-34;c.fillStyle='#3a2414';c.fillRect(x-15,y1,30,y2-y1);for(let y=y1+1;y<y2-1;y+=8){const k=RR(-.08,.08);c.fillStyle=ghShade('#8a6038',k);c.fillRect(x-14,y,28,6.6);c.fillStyle=ghShade('#8a6038',k+.2);c.fillRect(x-14,y,28,1.1)}c.strokeStyle='#1e140c';c.lineWidth=1.4;c.strokeRect(x-15,y1,30,y2-y1)}return}
+    if(GQs){const OL='#24242a',tw2=32,ot=x<0?-1:1,y1=ya-WH-28,y2=yb-WH+6;c.fillStyle='rgba(10,8,8,.26)';c.fillRect(x+(x<0?tw2/2:-tw2/2-16),ya,16,yb-ya);c.fillStyle='#2b2b30';c.fillRect(x-tw2/2,y1,tw2,y2-y1);
+      c.fillStyle='#2b2722';c.fillRect(x-tw2/2,y1,tw2,y2-y1);for(let y=y1+1;y<y2-2;y+=RR(16,26)){const k=RR(-.07,.07),hh=Math.min(y2-1-y,24);c.fillStyle=ghShade('#78726a',k);c.fillRect(x-tw2/2+1,y,tw2-2,hh-2);c.fillStyle=ghShade('#78726a',k+.15);c.fillRect(x-tw2/2+1,y,tw2-2,1.3)}
+      {const gs=c.createLinearGradient(ot<0?x-tw2/2:x+tw2/2,0,ot<0?x-tw2/2+10:x+tw2/2-10,0);gs.addColorStop(0,'rgba(0,0,0,.38)');gs.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=gs;c.fillRect(ot<0?x-tw2/2:x+tw2/2-10,y1,10,y2-y1)}
+      c.strokeStyle=OL;c.lineWidth=1.5;c.strokeRect(x-tw2/2,y1,tw2,y2-y1);
+      const mx=ot<0?x-tw2/2-3:x+tw2/2-6;c.fillStyle=ghShade(WT,-.14);c.fillRect(ot<0?x-tw2/2-4:x+tw2/2-3,y1,7,y2-y1);c.strokeRect(ot<0?x-tw2/2-4:x+tw2/2-3,y1,7,y2-y1);
+      for(let y=y1+4;y<y2-14;y+=24){c.fillStyle=ghShade(WT,.05);c.beginPath();c.roundRect(mx,y,9,13,1.5);c.fill();c.strokeStyle=OL;c.lineWidth=1.1;c.stroke()}return}
     const gr=c.createLinearGradient(x-tw/2,0,x+tw/2,0);gr.addColorStop(0,ghShade(WT,-.15));gr.addColorStop(.5,WT);gr.addColorStop(1,ghShade(WT,-.2));c.fillStyle=gr;c.fillRect(x-tw/2,ya-WH-10,tw,yb-ya);
     for(let y=ya-WH;y<yb-WH-10;y+=14){c.fillStyle='rgba(40,34,26,.25)';c.fillRect(x-tw/2,y,tw,1)}
     for(let y=ya-WH;y<yb-WH-16;y+=22){[x-tw/2-1,x+tw/2-6].forEach(mx=>{Rc(mx,y,7,11,ghShade(WT,.05));c.fillStyle='rgba(0,0,0,.25)';c.fillRect(mx,y+10,7,1.2)})}
@@ -16463,6 +16483,13 @@ function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
     c.fillStyle='rgba(255,200,120,.65)';c.fillRect(x-4,y-h-20,8,8)});
   /* กำแพงเหนือ + ข้าง (วาดก่อนของทุกชิ้น) */
   hWall(-600,600,-470);vWall(-600,-470,430);vWall(600,-470,430);
+  /* บันไดขึ้นกำแพง (ชิดกำแพงเหนือ 2 ฝั่ง) */
+  if(GQs&&t>=2){const Ln=ghWL(t).n-15,N=9,OL=t===2?'#1e140c':'#24242a';[-1,1].forEach(sg=>{const x0=sg<0?-408:368,x1=x0+40;add(-392,()=>{soft((x0+x1)/2,-392,30,7,.35);
+      const sy=ly=>ly-Math.max(0,(-392-ly)/82*Ln);const top=sy(-474);
+      c.fillStyle=t===2?'#3a2414':'#34343a';c.fillRect(x0-4,top,x1-x0+8,-392-top);
+      for(let k=N-1;k>=0;k--){const la=-392-k*82/N,lb=-392-(k+1)*82/N,ya2=sy(la),yb2=sy(lb),rz=Ln/N;const tr=t===2?ghShade('#8a6038',(k%2?.06:-.04)):ghShade(WT,(k%2?.04:-.04)),rs=t===2?'#5a3a1e':ghShade(WF,-.18);
+        c.fillStyle=rs;c.fillRect(x0,ya2-rz,x1-x0,rz);c.fillStyle=tr;c.fillRect(x0,yb2,x1-x0,ya2-rz-yb2);c.fillStyle='rgba(255,255,255,.18)';c.fillRect(x0,yb2,x1-x0,1.2);c.strokeStyle=OL;c.lineWidth=1.1;c.strokeRect(x0,yb2,x1-x0,ya2-yb2)}
+      [x0-4,x1].forEach(rx=>{c.fillStyle=t===2?'#6a4628':ghShade(WT,-.1);c.fillRect(rx,top-6,4,-392-top+6);c.strokeStyle=OL;c.lineWidth=1.2;c.strokeRect(rx,top-6,4,-392-top+6)})})})}
   /* ================= หอคอย/ประตู ================= */
   const TW=(x,by,w)=>GQs?GQ(t===3?'tw3':'tw4',x,by+4,t===3?w*.98:w*.86):SP('f','tower',x,by,w,{sh:.55});
   if(t>=3){const w=t>=4?100:90;TW(-600,-440,w);TW(600,-440,w);TW(-600,456,w);TW(600,456,w);if(t>=4){TW(-600,20,w*.9);TW(600,20,w*.9)}}
@@ -16567,6 +16594,55 @@ setInterval(()=>{try{if(ghHere()&&!ghHDok())ghHDload()}catch(e){}},2000);
 
 /* ภาพตึกกิลด์โหลดเสร็จทีหลัง → สร้างแคชใหม่ */
 setInterval(()=>{try{if(ghHere()&&GHS.hd&&GQI.ok===1&&!GHS.gq)GHS.C=null}catch(e){}},700);
+/* ===== v462 · เดินบนกำแพงบ้านกิลด์ (ขั้น 2+) =====
+   - บันได 2 ฝั่งชิดกำแพงเหนือ (x ±368..408) ขึ้นได้จากปลายล่างเท่านั้น → ทางเดินกำแพงเหนือ (เว้นช่วงหลังตึกหลัก) · กำแพงข้าง · กำแพงใต้ (เว้นช่วงประตู)
+   - ตำแหน่งบนกำแพงอนุมานจากพิกัด (ghWReg ใน ux70) → ทุกเครื่องวาดคนบนกำแพงยกสูงตรงกัน โดยไม่ต้องส่งข้อมูลเพิ่ม
+   - ศึกมอนบุก: บนเชิงเทินได้ดาเมจ +25% · มอนประชิดตีไม่ถึง (ไม่เล็งคนบนกำแพง) · มอนหัวหน้า/ยักษ์ด้านนอกยิงธนูใส่ได้ · บอสยังโจมตีโดน · กำแพงทะลุตรงไหน คนที่ยืนตรงนั้นตกลงมา */
+const GWW={on:0,lx:0,ly:0,tip:0,wq:[]};
+const ghWOn=p=>{try{if(!ghHere())return null;const R=ghWReg(p.x-1600,p.y-1600,ghT());return R&&(R.k!=='st'||R.l>18)?R:null}catch(e){return null}};
+ghEnter=(f=>function(){GWW.on=0;GWW.wq=[];return f.apply(this,arguments)})(ghEnter);
+ghCollide=(f=>function(){
+  if(!ghHere()){GWW.on=0;return f.apply(this,arguments)}
+  const t=ghT();
+  if(t<2||!GHS.hd||!GHS.gq){if(GWW.on){GWW.on=0;me.x=1600+388*(me.x<1600?-1:1);me.y=1600-380}return f.apply(this,arguments)}
+  let lx=me.x-1600,ly=me.y-1600;
+  if(GWW.on&&Math.hypot(lx-GWW.lx,ly-GWW.ly)>90)GWW.on=0;
+  if(GWW.on){try{if(ghrHere()&&SR!==0)SR=0}catch(e){}let R=ghWReg(lx,ly,t);
+    if(!R){const px=GWW.lx,py=GWW.ly,pR=ghWReg(px,py,t);
+      if(pR&&pR.k==='st'&&ly>-392&&Math.abs(Math.abs(lx)-388)<=20){GWW.on=0;f.apply(this,arguments);GWW.lx=me.x-1600;GWW.ly=me.y-1600;return}
+      if(ghWReg(lx,py,t))me.y=1600+py;else if(ghWReg(px,ly,t))me.x=1600+px;else{me.x=1600+px;me.y=1600+py}
+      lx=me.x-1600;ly=me.y-1600;R=ghWReg(lx,ly,t)}
+    if(R&&R.k==='s'&&ghrHere()&&GRD.bx!=null&&Math.abs(lx-GRD.bx)<58){GWW.on=0;me.y=1600+402;try{me.hp=Math.max(1,me.hp-Math.round(me.mh*.05))}catch(e){}try{fx({k:'msg',s:'💥 กำแพงตรงนี้พัง! ตกลงมาข้างล่าง'})}catch(e){}}
+    GWW.lx=me.x-1600;GWW.ly=me.y-1600;return}
+  f.apply(this,arguments);
+  lx=me.x-1600;ly=me.y-1600;const R=ghWReg(lx,ly,t);
+  if(R&&R.k==='st'){if(ly>-412&&GWW.ly>=-414){GWW.on=1;if(!GWW.tip){GWW.tip=1;try{fx({k:'msg',s:'🏰 ขึ้นเชิงเทิน · ตอนศึกมอนบุกได้ดาเมจ +25% มอนประชิดตีไม่ถึง ระวังธนูจากข้างนอก'})}catch(e){}}}
+    else{const sg=lx<0?-1:1,ax=Math.abs(lx);me.x=1600+sg*(ax<388?366:410)}}
+  else if(R){me.x=1600+GWW.lx;me.y=1600+GWW.ly}
+  GWW.lx=me.x-1600;GWW.ly=me.y-1600})(ghCollide);
+/* ---------- วาดคนบนกำแพงยกสูง + ใบเสมาบังเท้า (กำแพงใต้) ---------- */
+function ghParPatch(x,t){const y0=1600+430-ghWH(t),xa=x<1600?1000:1674,xb=x<1600?1526:2200,l=x-20,r=x+20;g.save();g.beginPath();g.rect(l,y0-20,40,t===2?28:22);g.clip();
+  if(t===2){for(let k=xa;k<xb;k+=12){if(k+12<l||k>r)continue;g.fillStyle='#6c4829';g.fillRect(k,y0-2,12,10);g.fillStyle='#b58a5a';g.beginPath();g.moveTo(k,y0-2);g.lineTo(k+6,y0-12);g.lineTo(k+12,y0-2);g.closePath();g.fill();g.strokeStyle='#1e140c';g.lineWidth=1;g.stroke();g.beginPath();g.moveTo(k,y0-2);g.lineTo(k,y0+8);g.moveTo(k+12,y0-2);g.lineTo(k+12,y0+8);g.stroke()}g.restore();return}
+  const WT=t===5?'#959ca4':t===4?'#8b9198':'#979996',OL='#24242a';g.fillStyle=ghShade(WT,-.04);g.fillRect(l,y0-7,40,8);g.strokeStyle=OL;g.lineWidth=1.4;g.beginPath();g.moveTo(l,y0-7);g.lineTo(r,y0-7);g.moveTo(l,y0+1);g.lineTo(r,y0+1);g.stroke();
+  for(let k=xa+5;k<xb-12;k+=24){if(k+14<l||k>r)continue;g.fillStyle=ghShade(WT,-.01);g.beginPath();g.roundRect(k,y0-19,14,13,2);g.fill();g.fillStyle=ghShade(WT,.2);g.fillRect(k+1.5,y0-18,11,1.6);g.strokeStyle=OL;g.lineWidth=1.3;g.stroke()}g.restore()}
+drawP=(f=>function(x,y){try{if(ghHere()){const t=ghT();if(t>=2){const R=ghWReg(x-1600,y-1600,t);if(R&&R.l>0){const a=Array.prototype.slice.call(arguments);a[1]=y-R.l;const r=f.apply(this,a);if(R.k==='s')ghParPatch(x,t);return r}}}}catch(e){}return f.apply(this,arguments)})(drawP);
+/* ป้ายบอกบันได */
+ghDraw2=(f=>function(t,col,now){const r=f.apply(this,arguments);try{if(GHS.hd&&GHS.gq&&t>=2&&!GWW.on)[-388,388].forEach(x=>{const X=1600+x,Y=1600-392;if(Math.hypot(me.x-X,me.y-Y)<230){g.font='bold 11px system-ui';g.textAlign='center';const s='🪜 ขึ้นกำแพง',w=g.measureText(s).width+14;g.fillStyle='rgba(30,20,10,.78)';g.beginPath();g.roundRect(X-w/2,Y+8,w,17,8);g.fill();g.fillStyle='#ffe6b0';g.fillText(s,X,Y+21)}})}catch(e){}return r})(ghDraw2);
+/* ---------- ศึก: ดาเมจบนเชิงเทิน ---------- */
+const ghWBuf=()=>{try{return ghrHere()&&GWW.on&&me.down<=0&&!!ghWOn(me)}catch(e){return false}};
+fdM=(f=>function(k){let v=f.apply(this,arguments);try{if(k==='dm'&&ghWBuf())v+=.25}catch(e){}return v})(fdM);
+buffList=(f=>function(){const L=f.apply(this,arguments);try{if(ghWBuf())L.push({k:'ghw',ic:'🏰',n:'บนเชิงเทิน',d:'ดาเมจ +25% · มอนประชิดตีไม่ถึง · ระวังธนู',t:0,mx:0,col:'#c8d0d8'})}catch(e){}return L})(buffList);
+/* ---------- ศึก: มอนไม่เล็งคนบนกำแพง · ยิงธนูขึ้นกำแพง ---------- */
+function ghWArrow(m,p,R){GWW.nf=(GWW.nf|0)+1;const lift=R.l,sx=m.x,sy=m.y-14,tx=p.x,ty=p.y-lift-14,a=Math.atan2(ty-sy,tx-sx),d=Math.hypot(tx-sx,ty-sy),spd=300,dur=d/spd,dmg=Math.round((4+2*(m.L|0))*.6*(m.dmx||1));
+  m.akN=((m.akN|0)+1)%100;m.akT=performance.now();GWW.wq.push({u:p.u,at:performance.now()+dur*1000,dmg});try{fx({k:'mproj',x:Math.round(sx),y:Math.round(sy),a:Math.round(a*1000)/1000,s:spd,d:Math.round(dur*100)/100,kd:'bolt',c:'255,214,150',big:0})}catch(e){}}
+ghrMon=(f=>function(m,dt,pl,spd){
+  const W=[],G=[];for(const p of pl){const R=ghWOn(p);if(R)W.push([p,R]);else G.push(p)}
+  if(GWW.wq.length){const now=performance.now();GWW.wq=GWW.wq.filter(q=>{if(q.at>now)return true;const p=pl.find(o=>o.u===q.u);if(p&&ghWOn(p)){try{dmgQ[q.u]=(dmgQ[q.u]||0)+q.dmg}catch(e){}}return false})}
+  if(W.length&&m.hp>0&&m.t!==3&&(m.t|0)>=1&&m.y>1600+440){m.rc=(m.rc||0)-dt;if(m.rc<=0){let b=null,bd=300;for(const q of W){const d=Math.hypot(q[0].x-m.x,q[0].y-m.y);if(d<bd){bd=d;b=q}}const pc=GWW.pc||(GWW.pc={}),nw=performance.now();if(b&&(nw-(pc[b[0].u]||0))>1000){pc[b[0].u]=nw;m.rc=2.2+Math.random()*1.6;ghWArrow(m,b[0],b[1])}else m.rc=.3}}
+  if(m.tg&&W.some(q=>q[0].u===m.tg)){m.tg=null;m.tt=0}
+  const r=f.call(this,m,dt,G,spd);
+  if(r===false){let b=null,bd=150;for(const p of G){const d=Math.hypot(p.x-m.x,p.y-m.y);if(d<bd){bd=d;b=p}}if(b){m.tg=b.u;m.tt=.6}else return true}
+  return r})(ghrMon);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();

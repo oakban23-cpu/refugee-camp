@@ -1,0 +1,49 @@
+/* ===== v462 · เดินบนกำแพงบ้านกิลด์ (ขั้น 2+) =====
+   - บันได 2 ฝั่งชิดกำแพงเหนือ (x ±368..408) ขึ้นได้จากปลายล่างเท่านั้น → ทางเดินกำแพงเหนือ (เว้นช่วงหลังตึกหลัก) · กำแพงข้าง · กำแพงใต้ (เว้นช่วงประตู)
+   - ตำแหน่งบนกำแพงอนุมานจากพิกัด (ghWReg ใน ux70) → ทุกเครื่องวาดคนบนกำแพงยกสูงตรงกัน โดยไม่ต้องส่งข้อมูลเพิ่ม
+   - ศึกมอนบุก: บนเชิงเทินได้ดาเมจ +25% · มอนประชิดตีไม่ถึง (ไม่เล็งคนบนกำแพง) · มอนหัวหน้า/ยักษ์ด้านนอกยิงธนูใส่ได้ · บอสยังโจมตีโดน · กำแพงทะลุตรงไหน คนที่ยืนตรงนั้นตกลงมา */
+const GWW={on:0,lx:0,ly:0,tip:0,wq:[]};
+const ghWOn=p=>{try{if(!ghHere())return null;const R=ghWReg(p.x-1600,p.y-1600,ghT());return R&&(R.k!=='st'||R.l>18)?R:null}catch(e){return null}};
+ghEnter=(f=>function(){GWW.on=0;GWW.wq=[];return f.apply(this,arguments)})(ghEnter);
+ghCollide=(f=>function(){
+  if(!ghHere()){GWW.on=0;return f.apply(this,arguments)}
+  const t=ghT();
+  if(t<2||!GHS.hd||!GHS.gq){if(GWW.on){GWW.on=0;me.x=1600+388*(me.x<1600?-1:1);me.y=1600-380}return f.apply(this,arguments)}
+  let lx=me.x-1600,ly=me.y-1600;
+  if(GWW.on&&Math.hypot(lx-GWW.lx,ly-GWW.ly)>90)GWW.on=0;
+  if(GWW.on){try{if(ghrHere()&&SR!==0)SR=0}catch(e){}let R=ghWReg(lx,ly,t);
+    if(!R){const px=GWW.lx,py=GWW.ly,pR=ghWReg(px,py,t);
+      if(pR&&pR.k==='st'&&ly>-392&&Math.abs(Math.abs(lx)-388)<=20){GWW.on=0;f.apply(this,arguments);GWW.lx=me.x-1600;GWW.ly=me.y-1600;return}
+      if(ghWReg(lx,py,t))me.y=1600+py;else if(ghWReg(px,ly,t))me.x=1600+px;else{me.x=1600+px;me.y=1600+py}
+      lx=me.x-1600;ly=me.y-1600;R=ghWReg(lx,ly,t)}
+    if(R&&R.k==='s'&&ghrHere()&&GRD.bx!=null&&Math.abs(lx-GRD.bx)<58){GWW.on=0;me.y=1600+402;try{me.hp=Math.max(1,me.hp-Math.round(me.mh*.05))}catch(e){}try{fx({k:'msg',s:'💥 กำแพงตรงนี้พัง! ตกลงมาข้างล่าง'})}catch(e){}}
+    GWW.lx=me.x-1600;GWW.ly=me.y-1600;return}
+  f.apply(this,arguments);
+  lx=me.x-1600;ly=me.y-1600;const R=ghWReg(lx,ly,t);
+  if(R&&R.k==='st'){if(ly>-412&&GWW.ly>=-414){GWW.on=1;if(!GWW.tip){GWW.tip=1;try{fx({k:'msg',s:'🏰 ขึ้นเชิงเทิน · ตอนศึกมอนบุกได้ดาเมจ +25% มอนประชิดตีไม่ถึง ระวังธนูจากข้างนอก'})}catch(e){}}}
+    else{const sg=lx<0?-1:1,ax=Math.abs(lx);me.x=1600+sg*(ax<388?366:410)}}
+  else if(R){me.x=1600+GWW.lx;me.y=1600+GWW.ly}
+  GWW.lx=me.x-1600;GWW.ly=me.y-1600})(ghCollide);
+/* ---------- วาดคนบนกำแพงยกสูง + ใบเสมาบังเท้า (กำแพงใต้) ---------- */
+function ghParPatch(x,t){const y0=1600+430-ghWH(t),xa=x<1600?1000:1674,xb=x<1600?1526:2200,l=x-20,r=x+20;g.save();g.beginPath();g.rect(l,y0-20,40,t===2?28:22);g.clip();
+  if(t===2){for(let k=xa;k<xb;k+=12){if(k+12<l||k>r)continue;g.fillStyle='#6c4829';g.fillRect(k,y0-2,12,10);g.fillStyle='#b58a5a';g.beginPath();g.moveTo(k,y0-2);g.lineTo(k+6,y0-12);g.lineTo(k+12,y0-2);g.closePath();g.fill();g.strokeStyle='#1e140c';g.lineWidth=1;g.stroke();g.beginPath();g.moveTo(k,y0-2);g.lineTo(k,y0+8);g.moveTo(k+12,y0-2);g.lineTo(k+12,y0+8);g.stroke()}g.restore();return}
+  const WT=t===5?'#959ca4':t===4?'#8b9198':'#979996',OL='#24242a';g.fillStyle=ghShade(WT,-.04);g.fillRect(l,y0-7,40,8);g.strokeStyle=OL;g.lineWidth=1.4;g.beginPath();g.moveTo(l,y0-7);g.lineTo(r,y0-7);g.moveTo(l,y0+1);g.lineTo(r,y0+1);g.stroke();
+  for(let k=xa+5;k<xb-12;k+=24){if(k+14<l||k>r)continue;g.fillStyle=ghShade(WT,-.01);g.beginPath();g.roundRect(k,y0-19,14,13,2);g.fill();g.fillStyle=ghShade(WT,.2);g.fillRect(k+1.5,y0-18,11,1.6);g.strokeStyle=OL;g.lineWidth=1.3;g.stroke()}g.restore()}
+drawP=(f=>function(x,y){try{if(ghHere()){const t=ghT();if(t>=2){const R=ghWReg(x-1600,y-1600,t);if(R&&R.l>0){const a=Array.prototype.slice.call(arguments);a[1]=y-R.l;const r=f.apply(this,a);if(R.k==='s')ghParPatch(x,t);return r}}}}catch(e){}return f.apply(this,arguments)})(drawP);
+/* ป้ายบอกบันได */
+ghDraw2=(f=>function(t,col,now){const r=f.apply(this,arguments);try{if(GHS.hd&&GHS.gq&&t>=2&&!GWW.on)[-388,388].forEach(x=>{const X=1600+x,Y=1600-392;if(Math.hypot(me.x-X,me.y-Y)<230){g.font='bold 11px system-ui';g.textAlign='center';const s='🪜 ขึ้นกำแพง',w=g.measureText(s).width+14;g.fillStyle='rgba(30,20,10,.78)';g.beginPath();g.roundRect(X-w/2,Y+8,w,17,8);g.fill();g.fillStyle='#ffe6b0';g.fillText(s,X,Y+21)}})}catch(e){}return r})(ghDraw2);
+/* ---------- ศึก: ดาเมจบนเชิงเทิน ---------- */
+const ghWBuf=()=>{try{return ghrHere()&&GWW.on&&me.down<=0&&!!ghWOn(me)}catch(e){return false}};
+fdM=(f=>function(k){let v=f.apply(this,arguments);try{if(k==='dm'&&ghWBuf())v+=.25}catch(e){}return v})(fdM);
+buffList=(f=>function(){const L=f.apply(this,arguments);try{if(ghWBuf())L.push({k:'ghw',ic:'🏰',n:'บนเชิงเทิน',d:'ดาเมจ +25% · มอนประชิดตีไม่ถึง · ระวังธนู',t:0,mx:0,col:'#c8d0d8'})}catch(e){}return L})(buffList);
+/* ---------- ศึก: มอนไม่เล็งคนบนกำแพง · ยิงธนูขึ้นกำแพง ---------- */
+function ghWArrow(m,p,R){GWW.nf=(GWW.nf|0)+1;const lift=R.l,sx=m.x,sy=m.y-14,tx=p.x,ty=p.y-lift-14,a=Math.atan2(ty-sy,tx-sx),d=Math.hypot(tx-sx,ty-sy),spd=300,dur=d/spd,dmg=Math.round((4+2*(m.L|0))*.6*(m.dmx||1));
+  m.akN=((m.akN|0)+1)%100;m.akT=performance.now();GWW.wq.push({u:p.u,at:performance.now()+dur*1000,dmg});try{fx({k:'mproj',x:Math.round(sx),y:Math.round(sy),a:Math.round(a*1000)/1000,s:spd,d:Math.round(dur*100)/100,kd:'bolt',c:'255,214,150',big:0})}catch(e){}}
+ghrMon=(f=>function(m,dt,pl,spd){
+  const W=[],G=[];for(const p of pl){const R=ghWOn(p);if(R)W.push([p,R]);else G.push(p)}
+  if(GWW.wq.length){const now=performance.now();GWW.wq=GWW.wq.filter(q=>{if(q.at>now)return true;const p=pl.find(o=>o.u===q.u);if(p&&ghWOn(p)){try{dmgQ[q.u]=(dmgQ[q.u]||0)+q.dmg}catch(e){}}return false})}
+  if(W.length&&m.hp>0&&m.t!==3&&(m.t|0)>=1&&m.y>1600+440){m.rc=(m.rc||0)-dt;if(m.rc<=0){let b=null,bd=300;for(const q of W){const d=Math.hypot(q[0].x-m.x,q[0].y-m.y);if(d<bd){bd=d;b=q}}const pc=GWW.pc||(GWW.pc={}),nw=performance.now();if(b&&(nw-(pc[b[0].u]||0))>1000){pc[b[0].u]=nw;m.rc=2.2+Math.random()*1.6;ghWArrow(m,b[0],b[1])}else m.rc=.3}}
+  if(m.tg&&W.some(q=>q[0].u===m.tg)){m.tg=null;m.tt=0}
+  const r=f.call(this,m,dt,G,spd);
+  if(r===false){let b=null,bd=150;for(const p of G){const d=Math.hypot(p.x-m.x,p.y-m.y);if(d<bd){bd=d;b=p}}if(b){m.tg=b.u;m.tt=.6}else return true}
+  return r})(ghrMon);
