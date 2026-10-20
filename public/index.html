@@ -15070,6 +15070,9 @@ S.forEach(([x,y],i)=>{const tw=.6+.4*Math.sin(T*3+i);glow(x,y+bob,r*.18,'220,230
 eye(-r*.1,-r*.92+bob,r*.06,r*.04,'#cfd8ff');eye(r*.1,-r*.92+bob,r*.06,r*.04,'#cfd8ff');return true}
 return false}
 drawMonC=(f=>function(t,r,T,E,Pg,Ln,eye,F,W,bob,sw,la,ra){try{const th=bTheme();if((th===29||th===30||th===31||th===33)&&t>=0&&t<=2&&drawMonN(th,t,r,T,E,Pg,Ln,eye,F,W,bob,sw,la,ra))return true}catch(e){}return f.apply(this,arguments)})(drawMonC);
+function palGateCollide(){try{const M=MAPS[curMap];if(!M||!M.gates)return;for(const G of M.gates){if(!G.pal||gHid(G))continue;
+const x1=G.x-70,x2=G.x+70,y1=G.y-172,y2=G.y-6;if(me.x>x1&&me.x<x2&&me.y>y1&&me.y<y2){const L=[me.x-x1,x2-me.x,me.y-y1,y2-me.y],m=Math.min(...L);if(m===L[3])me.y=y2;else if(m===L[0])me.x=x1;else if(m===L[1])me.x=x2;else me.y=y1}}}catch(e){}}
+cityCollide=(f=>function(){const r=f.apply(this,arguments);palGateCollide();return r})(cityCollide);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
