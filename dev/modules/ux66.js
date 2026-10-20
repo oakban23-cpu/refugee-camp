@@ -223,6 +223,7 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
   if(GHS.fw>Date.now()&&Date.now()-GHS.fwT>260){GHS.fwT=Date.now();try{const a=Math.random()*6.283,r=120+Math.random()*260;burst(me.x+Math.cos(a)*r,me.y-120+Math.sin(a)*r*.5,[col,'#ffd84a','#ffffff'],26,170,1,{glow:1,g:30});if(Math.random()<.5)sfx('coin')}catch(e){}}}
 /* ประตูในค่าย */
 function ghCampGate(){if(curMap!==1||!inView(GHG.x,GHG.y,160))return;const x=GHG.x,y=GHG.y,now=performance.now()/1000,G=GDS.g,col=G?gdCol(G.col):'#c8a870',O='#1a120a';g.save();
+  if(cgOk()){cgGuild(x,y,col,now);if(Math.hypot(me.x-x,me.y-y)<300){g.font='bold 11px system-ui';g.textAlign='center';const lb=G?'🏰 บ้านกิลด์ ['+G.tag+'] · ขั้น '+ghT():'🏰 ประตูบ้านกิลด์',tw=g.measureText(lb).width+16;g.fillStyle='rgba(40,24,10,.82)';g.beginPath();g.roundRect(x-tw/2,y-128,tw,17,8);g.fill();g.strokeStyle=col;g.lineWidth=1;g.stroke();g.fillStyle='#ffe6b0';g.fillText(lb,x,y-115)}g.restore();return}
   g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x,y+4,74,12,0,0,7);g.fill();
   /* พื้นหินหน้าประตู */
   g.fillStyle='#8a8478';g.beginPath();g.ellipse(x,y+22,58,16,0,0,7);g.fill();g.strokeStyle='rgba(0,0,0,.25)';g.lineWidth=1;for(let k=-2;k<=2;k++){g.beginPath();g.moveTo(x+k*22,y+8);g.lineTo(x+k*24,y+36);g.stroke()}

@@ -2783,22 +2783,22 @@ function drawCitySky(t){if(cityCovers())return;const R0=CITY.R,O='#2a2018';
     skyIslet(Wi.x,Wi.y+6,1.25,0,1);g.fillStyle='#cfc6b4';g.beginPath();g.ellipse(Wi.x,Wi.y+4,54,16,0,0,7);g.fill();g.strokeStyle='#8a8070';g.stroke()}}}
 /* ---------- ประตูแสงดาว ---------- */
 function drawSkyGate(G){const t=performance.now()/1000,x=G.x,y=G.y,up=G.to===9;
-  g.save();const hdG=HD();if(hdG){hdSh(x,y+14,62,13,.3);hdSpr('gold_portal',x,y+24,114)}else{g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x,y+8,52,16,0,0,7);g.fill();
+  g.save();const hdG=HD();const cgS=curMap===1&&up&&typeof cgOk==='function'&&cgOk();if(cgS)cgStar(x,y);else if(hdG){hdSh(x,y+14,62,13,.3);hdSpr('gold_portal',x,y+24,114)}else{g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x,y+8,52,16,0,0,7);g.fill();
   g.fillStyle='#d8d0c0';g.beginPath();g.ellipse(x,y+4,48,15,0,0,7);g.fill();g.fillStyle='#b8ae9a';g.fillRect(x-48,y+4,96,7);g.beginPath();g.ellipse(x,y+11,48,15,0,0,Math.PI);g.fill();g.fillStyle='#e8e0d0';g.beginPath();g.ellipse(x,y+4,48,15,0,0,7);g.fill();g.strokeStyle='#5a5040';g.lineWidth=1.2;g.stroke();}
   g.globalCompositeOperation='lighter';const pu=.6+.4*Math.sin(t*2.4);
-  g.strokeStyle='rgba(255,215,110,'+(.7*pu+.2)+')';g.lineWidth=2.4;g.beginPath();g.ellipse(x,y+4,40,12.5,0,0,7);g.stroke();
+  g.save();if(cgS){g.translate(x,y+4);g.scale(1.35,2.05);g.translate(-x,-(y+4))}g.strokeStyle='rgba(255,215,110,'+(.7*pu+.2)+')';g.lineWidth=2.4;g.beginPath();g.ellipse(x,y+4,40,12.5,0,0,7);g.stroke();
   g.setLineDash([6,5]);g.lineDashOffset=-t*24;g.strokeStyle='rgba(140,220,255,.9)';g.lineWidth=1.6;g.beginPath();g.ellipse(x,y+4,30,9.4,0,0,7);g.stroke();g.setLineDash([]);
-  g.fillStyle='rgba(255,230,160,.9)';g.font='bold 9px system-ui';g.textAlign='center';for(let i=0;i<10;i++){const a=i/10*6.283+t*.5;g.fillText(['✦','✧','☉','✶','⟡'][i%5],x+Math.cos(a)*35,y+7+Math.sin(a)*11)}
+  g.fillStyle='rgba(255,230,160,.9)';g.font='bold 9px system-ui';g.textAlign='center';for(let i=0;i<10;i++){const a=i/10*6.283+t*.5;g.fillText(['✦','✧','☉','✶','⟡'][i%5],x+Math.cos(a)*35,y+7+Math.sin(a)*11)}g.restore();
   /* เสาแสง */
-  const H=300,w=26+5*Math.sin(t*3);const bg=g.createLinearGradient(x,y,x,y-H);bg.addColorStop(0,'rgba(255,240,190,.55)');bg.addColorStop(.6,'rgba(170,215,255,.25)');bg.addColorStop(1,'rgba(170,215,255,0)');g.fillStyle=bg;
+  const H=300,w=26+5*Math.sin(t*3);const bg=g.createLinearGradient(x,y,x,y-H);bg.addColorStop(0,cgS?'rgba(255,240,190,0)':'rgba(255,240,190,.55)');if(cgS)bg.addColorStop(.14,'rgba(255,240,190,.32)');bg.addColorStop(.6,'rgba(170,215,255,.25)');bg.addColorStop(1,'rgba(170,215,255,0)');g.fillStyle=bg;
   g.beginPath();g.moveTo(x-w,y+4);g.lineTo(x-w*.6,y-H);g.lineTo(x+w*.6,y-H);g.lineTo(x+w,y+4);g.closePath();g.fill();
-  const cg=g.createLinearGradient(x,y,x,y-H*.9);cg.addColorStop(0,'rgba(255,255,255,.85)');cg.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=cg;g.fillRect(x-3,y-H*.9,6,H*.9+4);
-  glowAt(x,y,70,'255,220,140',.35*pu);
+  const cg=g.createLinearGradient(x,y,x,y-H*.9);cg.addColorStop(0,cgS?'rgba(255,255,255,0)':'rgba(255,255,255,.85)');if(cgS)cg.addColorStop(.12,'rgba(255,255,255,.6)');cg.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=cg;g.fillRect(x-3,y-H*.9,6,H*.9+4);
+  glowAt(x,y,70,'255,220,140',(cgS?.12:.35)*pu);
   for(let i=0;i<18;i++){const q=((t*(up?.45:-.45)+i/18)%1+1)%1,px=x+Math.sin(i*2.3+t)*(10+i%3*6),py=y-q*H;g.fillStyle='rgba(255,'+(220+(i%3)*12)+',180,'+(.9*(1-q))+')';g.beginPath();g.arc(px,py,1.6+(i%2),0,7);g.fill()}
   for(let i=0;i<3;i++){const q=((t*.35+i/3)%1),ry=y+4-q*120;g.strokeStyle='rgba(255,230,160,'+(.5*(1-q))+')';g.lineWidth=1.5;g.beginPath();g.ellipse(x,ry,(28-q*10),(9-q*3),0,0,7);g.stroke()}
   g.globalCompositeOperation='source-over';
   for(let i=0;i<3;i++){const a=t*1.2+i*2.094,ox=x+Math.cos(a)*34,oy=y-36+Math.sin(a)*10+Math.sin(t*2+i)*4;g.fillStyle=i%2?'#9ad8ff':'#ffe08a';g.beginPath();g.moveTo(ox,oy-7);g.lineTo(ox+4,oy);g.lineTo(ox,oy+7);g.lineTo(ox-4,oy);g.closePath();g.fill();g.strokeStyle='rgba(60,50,30,.5)';g.lineWidth=.8;g.stroke()}
-  g.font='bold 11px system-ui';g.lineWidth=3;g.strokeStyle='rgba(20,16,10,.7)';const lb=(up?'☁️ ประตูแสงดาว → ':'⬇ ประตูแสงดาว → ')+(G.nm||MAPS[G.to].n)+(G.st&&!(me.sty&&me.sty.e)?' (จบภาค 1)':'');if(curMap===9)GLQ.push([lb,x,hdG?y-124:y-84]);else{g.strokeText(lb,x,y-78);g.fillStyle='#ffe8a8';g.fillText(lb,x,y-78)}g.restore()}
+  g.font='bold 11px system-ui';g.lineWidth=3;g.strokeStyle='rgba(20,16,10,.7)';const lb=(up?'☁️ ประตูแสงดาว → ':'⬇ ประตูแสงดาว → ')+(G.nm||MAPS[G.to].n)+(G.st&&!(me.sty&&me.sty.e)?' (จบภาค 1)':'');if(curMap===9)GLQ.push([lb,x,hdG?y-124:y-84]);else{const ly=cgS?y-112:y-78;g.strokeText(lb,x,ly);g.fillStyle='#ffe8a8';g.fillText(lb,x,ly)}g.restore()}
 /* ---------- เอฟเฟกต์ลอยขึ้น / ลงจอด ---------- */
 let SKL=null,SKA=null,SKT=0;
 function skyLift(G){if(SKL)return;SKL={t:0,G,x:G.x,y:G.y+2,oy:0,b:0};joy=null;sfx('gate');setTimeout(()=>{try{sfx('lvl')}catch(e){}},700)}
@@ -13583,15 +13583,15 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v465';
+const WNV='v466';
 const WNL=[
+  ['🌟','ประตูวาร์ปในค่ายโฉมใหม่','ประตูแสงดาวไปนครลอยฟ้าเป็นแท่นหินจันทร์มีเสาคริสตัลดาว และประตูบ้านกิลด์เป็นซุ้มหินมีหลังคาทองแดง โล่ดาบไขว้ โคมไฟ ธงเป็นสีกิลด์ของคุณ'],
   ['🌲','ทุ่งรบหน้าบ้านกิลด์','ตอนศึกมอนบุก ออกประตูไปสู้ในทุ่งด้านใต้ได้กว้างและลึกขึ้นมาก มีถนน รั้วไม้แหลม และชายป่าที่มอนโผล่ออกมา มอนเกิดไกลขึ้น สายประชิดมีเวลาออกไปสกัดก่อนถึงกำแพง'],
   ['🏹','นักธนูขึ้นเชิงเทิน · กระดานประกาศอ่านได้','นักธนูของกิลด์ย้ายขึ้นไปยืนยิงบนกำแพง มอนประชิดไล่ขึ้นไม่ถึงแต่โดนธนูสวนได้ เดินไปใกล้กระดานกิลด์จะขึ้นแผ่นประกาศจากหัวหน้าให้อ่าน โหมดประหยัดก็ขึ้นกำแพงได้แล้ว และกล่องแชตลอยตามตัวตอนอยู่บนกำแพง'],
   ['🌳','ของแต่งบ้านกิลด์ชุดใหม่','ลานกลางเป็นวงกองไฟมีโล่ (ขั้น 1–2) และน้ำพุรูปปั้นอัศวิน (ขั้น 3+) เสาอ่างไฟหน้าตึก โคม ลัง ถัง ม้านั่ง หุ่นซ้อม เป้าธนู ชั้นวางอาวุธ กระดานประกาศ หุ่นไล่กา ถังน้ำ และต้นไม้สวนผลไม้วาดใหม่ทั้งหมด ธงตามทางเดินเป็นสีกิลด์ แอปเปิลยังไม่สุกเป็นผลสีเขียว'],
   ['🏰','เดินบนกำแพงบ้านกิลด์','บ้านขั้น 2 ขึ้นไปมีบันไดชิดกำแพงด้านเหนือ 2 ฝั่ง ขึ้นไปเดินรอบเชิงเทินได้ทั้งเหนือ ข้าง และใต้ ตอนศึกมอนบุก ยืนบนเชิงเทินได้ดาเมจ +25% มอนประชิดตีไม่ถึง แต่มอนข้างนอกยิงธนูขึ้นมาได้ และถ้ากำแพงทะลุตรงที่ยืนจะตกลงมา'],
   ['🧱','บ้านกิลด์เข้าชุดทั้งหลัง','เก็บของสไตล์เมืองหลวงออกจากบ้านกิลด์ ลานกลางเป็นกองไฟวงหินและน้ำพุหินชนวนขอบบรอนซ์ พื้นหินก้อนเล็กลง กำแพงสูงขึ้นมีเส้นขอบ เงาอาคารนุ่มลง ธงหน้าตึกมีแสงเงา ประตูไม้กลับมาสัดส่วนปกติ'],
-  ['🗼','หอป้อมและประตูบ้านกิลด์ ภาพวาดใหม่','หอมุมกำแพงและป้อมยิงทุกแบบใช้ภาพใหม่ ขั้น 1–2 หอไม้ ขั้น 3 หอหินสี่เหลี่ยม ขั้น 4–5 หอหินกลม ประตูหน้าบ้านเป็นประตูรั้วไม้มีหอคู่ ซุ้มหินมีซี่ลูกกรง และซุ้มประตูหอคู่ (ขั้น 5) ธงที่ประตูเป็นสีกิลด์'],
-  ['🪨','พื้นบ้านกิลด์แนบอาคาร','อาคารในบ้านกิลด์มีเงาทอดลงพื้นและเงาตรงจุดที่แตะพื้น มีหญ้ากับก้อนหินขึ้นรอบฐาน ไม่ดูลอยอีกต่อไป ขั้น 3 ขึ้นไปพื้นเป็นหินปูทรงไม่เท่ากันมีมอสตามร่อง กำแพงเป็นหินชนวนเข้าชุดกับตัวอาคาร']];
+  ['🗼','หอป้อมและประตูบ้านกิลด์ ภาพวาดใหม่','หอมุมกำแพงและป้อมยิงทุกแบบใช้ภาพใหม่ ขั้น 1–2 หอไม้ ขั้น 3 หอหินสี่เหลี่ยม ขั้น 4–5 หอหินกลม ประตูหน้าบ้านเป็นประตูรั้วไม้มีหอคู่ ซุ้มหินมีซี่ลูกกรง และซุ้มประตูหอคู่ (ขั้น 5) ธงที่ประตูเป็นสีกิลด์']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -15847,6 +15847,7 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
   if(GHS.fw>Date.now()&&Date.now()-GHS.fwT>260){GHS.fwT=Date.now();try{const a=Math.random()*6.283,r=120+Math.random()*260;burst(me.x+Math.cos(a)*r,me.y-120+Math.sin(a)*r*.5,[col,'#ffd84a','#ffffff'],26,170,1,{glow:1,g:30});if(Math.random()<.5)sfx('coin')}catch(e){}}}
 /* ประตูในค่าย */
 function ghCampGate(){if(curMap!==1||!inView(GHG.x,GHG.y,160))return;const x=GHG.x,y=GHG.y,now=performance.now()/1000,G=GDS.g,col=G?gdCol(G.col):'#c8a870',O='#1a120a';g.save();
+  if(cgOk()){cgGuild(x,y,col,now);if(Math.hypot(me.x-x,me.y-y)<300){g.font='bold 11px system-ui';g.textAlign='center';const lb=G?'🏰 บ้านกิลด์ ['+G.tag+'] · ขั้น '+ghT():'🏰 ประตูบ้านกิลด์',tw=g.measureText(lb).width+16;g.fillStyle='rgba(40,24,10,.82)';g.beginPath();g.roundRect(x-tw/2,y-128,tw,17,8);g.fill();g.strokeStyle=col;g.lineWidth=1;g.stroke();g.fillStyle='#ffe6b0';g.fillText(lb,x,y-115)}g.restore();return}
   g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x,y+4,74,12,0,0,7);g.fill();
   /* พื้นหินหน้าประตู */
   g.fillStyle='#8a8478';g.beginPath();g.ellipse(x,y+22,58,16,0,0,7);g.fill();g.strokeStyle='rgba(0,0,0,.25)';g.lineWidth=1;for(let k=-2;k<=2;k++){g.beginPath();g.moveTo(x+k*22,y+8);g.lineTo(x+k*24,y+36);g.stroke()}
@@ -16693,6 +16694,21 @@ function ghFieldBuild(t){const X0=-920,Y0=440,WD=1840,HT=920,cv=document.createE
 function ghFieldClear(){const inF=o=>o&&o.x>1600-960&&o.x<1600+960&&o.y>1600-520&&o.y<1600+1240;[typeof trees!=='undefined'?trees:null,typeof decor!=='undefined'?decor:null].forEach(A=>{if(!Array.isArray(A))return;let j=0;for(let i=0;i<A.length;i++){if(!inF(A[i]))A[j++]=A[i]}A.length=j})}
 ghEnter=(f=>function(){const r=f.apply(this,arguments);GHF.cl=0;return r})(ghEnter);
 ghDraw=(f=>function(){try{if(ghHere()){if(!GHF.cl){GHF.cl=1;try{ghFieldClear()}catch(e){}}const t=ghT(),k=t+'|'+((typeof GQI!=='undefined'&&GQI.ok===1)?1:0);if(GHF.k!==k||!GHF.cv){GHF.F=ghFieldBuild(t);GHF.cv=GHF.F.cv;GHF.k=k}const F=GHF.F,ox=1600+F.X0,oy=1600+F.Y0,sx=Math.max(0,cam.x-ox),sy=Math.max(0,cam.y-oy),sw=Math.min(F.WD-sx,W+2),sh=Math.min(F.HT-sy,H+2);if(sw>0&&sh>0)g.drawImage(GHF.cv,sx,sy,sw,sh,ox+sx,oy+sy,sw,sh)}}catch(e){}return f.apply(this,arguments)})(ghDraw);
+/* ===== v466 · ประตูวาร์ปในค่ายภาพวาดใหม่ (hd-gate.webp) =====
+   - ประตูแสงดาว (ค่าย → นครลอยฟ้า): แท่นหินจันทร์วงรูน เสาคริสตัลดาว ซุ้มดาว · ลำแสง/วงแสงยังวาดสดเหมือนเดิม (ปรับวงให้เข้ามุมแท่น)
+   - ประตูบ้านกิลด์ในค่าย: ซุ้มหินชนวน+ไม้ หลังคาทองแดง โล่ดาบไขว้ โคม 2 ข้าง · ธงขาว 3 ผืนย้อมสีกิลด์ · แสงเรืองในช่องประตู */
+const CGD={src:"hd-gate.webp",f:{"star":[0,0,380,383],"guild":[382,0,340,310],"guild_m":[724,0,170,155]}},CGI={img:null,ok:0},CGTC={};
+function cgOk(){try{if(!HDI.on||LOWQ)return false;if(!CGI.img){const im=new Image();im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{CGI.ok=1})};im.onerror=()=>{CGI.ok=-1};im.src=CGD.src;CGI.img=im}return CGI.ok===1}catch(e){return false}}
+function cgStar(x,y){const q=CGD.f.star,w=164,h=w*q[3]/q[2];g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x+4,y+4+h*.3,w*.46,h*.16,0,0,7);g.fill();g.drawImage(CGI.img,q[0],q[1],q[2],q[3],x-w*.497,y+4-h*.58,w,h)}
+function cgGuildSpr(col){if(CGTC[col])return CGTC[col];const q=CGD.f.guild,m=CGD.f.guild_m,cv=document.createElement('canvas');cv.width=q[2];cv.height=q[3];const c=cv.getContext('2d');c.drawImage(CGI.img,q[0],q[1],q[2],q[3],0,0,q[2],q[3]);
+  if(m){const t=document.createElement('canvas');t.width=q[2];t.height=q[3];const x2=t.getContext('2d');x2.drawImage(CGI.img,m[0],m[1],m[2],m[3],0,0,q[2],q[3]);x2.globalCompositeOperation='source-in';x2.fillStyle=ghShade(col,.25);x2.fillRect(0,0,q[2],q[3]);c.globalCompositeOperation='multiply';c.drawImage(t,0,0);c.globalCompositeOperation='destination-in';c.drawImage(CGI.img,q[0],q[1],q[2],q[3],0,0,q[2],q[3]);c.globalCompositeOperation='source-over'}
+  return CGTC[col]=cv}
+function cgGuild(x,y,col,now){const q=CGD.f.guild,w=146,h=w*q[3]/q[2],top=y+8-h*.82;
+  g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x+3,y+12,w*.46,13,0,0,7);g.fill();
+  const gr=g.createLinearGradient(0,top+h*.33,0,y+8);gr.addColorStop(0,'rgba(255,230,160,.25)');gr.addColorStop(1,'rgba(255,210,120,.75)');g.fillStyle=gr;g.beginPath();g.moveTo(x-30,y+8);g.lineTo(x-30,top+h*.47);g.quadraticCurveTo(x,top+h*.26,x+30,top+h*.47);g.lineTo(x+30,y+8);g.closePath();g.fill();
+  g.save();g.globalCompositeOperation='lighter';glowAt(x,y-26,46,'255,210,120',.32+.12*Math.sin(now*2.5));for(let k=0;k<6;k++){const qq=(now*.4+k/6)%1;g.fillStyle='rgba(255,236,170,'+(.6*(1-qq))+')';g.beginPath();g.arc(x-24+((k*37)%48),y+2-qq*60,1.8,0,7);g.fill()}g.restore();
+  g.drawImage(cgGuildSpr(col),x-w/2,top,w,h);
+  g.save();g.globalCompositeOperation='lighter';[[-.455,.47],[.455,.47]].forEach(([fx,fy],i)=>glowAt(x+w*fx,top+h*fy,20,'255,190,90',.4+.12*Math.sin(now*6+i*2)));g.restore()}
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
