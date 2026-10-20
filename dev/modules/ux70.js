@@ -7,7 +7,7 @@
 try{GHTP.forEach(p=>{if(p[1]===112)p[1]=100})}catch(e){}
 const ghHDok=()=>{try{return HDI.on&&!LOWQ&&HDI.ok===1&&HDI.ok2===1&&FHI.ok===1&&CHI.ok===1}catch(e){return false}};
 /* v457 · ตึกหลักบ้านกิลด์ภาพวาดใหม่ (hd-guild) ขั้น 1–5 · ธงขาวย้อมเป็นสีกิลด์ (มาสก์ _m คูณสี) */
-const GQD={src:"hd-guild.webp",f:{"h4":[0,0,600,744],"h5":[602,0,920,728],"h2":[1524,0,520,481],"h3":[0,746,720,458],"h4_m":[722,746,300,372],"h1":[1024,746,580,371],"h5_m":[0,1206,460,364],"h2_m":[462,1206,260,240],"h3_m":[724,1206,360,229],"h1_m":[1086,1206,290,185]}};const GQI={img:null,ok:0};
+const GQD={src:"hd-guild.webp",f:{"h4":[0,0,600,744],"h5":[602,0,920,728],"h2":[1524,0,520,481],"h3":[0,746,720,458],"h4_m":[722,746,300,372],"h1":[1024,746,580,371],"h5_m":[0,1206,460,364],"ki1":[462,1206,350,358],"tr1":[814,1206,380,349],"ki3":[1196,1206,390,345],"ba1":[1588,1206,420,327],"st1":[0,1572,380,326],"st3":[382,1572,370,305],"tr3":[754,1572,400,258],"h2_m":[1156,1572,260,240],"h3_m":[1418,1572,360,229],"h1_m":[0,1900,290,185],"ba3":[292,1900,500,185],"ba1_m":[794,1900,210,163],"ba3_m":[1006,1900,250,92]}};const GQI={img:null,ok:0};
 function gqLoad(){if(GQI.img)return;const im=new Image();im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{GQI.ok=1})};im.onerror=()=>{GQI.ok=-1};im.src=GQD.src;GQI.img=im}
 function ghHDload(){try{if(!HDI.on||LOWQ)return;hdLoad();hdbLoad();fhdLoad();chdLoad();gqLoad()}catch(e){}}
 const GHLP=t=>t<=1?[[-70,300],[70,300],[-70,-200],[70,-200]]:[[-70,360],[70,360],[-70,190],[70,190],[-70,-200],[70,-200],[-330,-60],[330,-60]];
@@ -23,7 +23,7 @@ function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
   const soft=(x,y,rx,ry,a)=>{c.save();c.translate(x,y);c.scale(1,ry/rx);const gr=c.createRadialGradient(0,0,rx*.2,0,0,rx);gr.addColorStop(0,'rgba(10,6,16,'+(a||.38)+')');gr.addColorStop(1,'rgba(10,6,16,0)');c.fillStyle=gr;c.beginPath();c.arc(0,0,rx,0,7);c.fill();c.restore()};
   const AT={a:[HDI.img,AHD.f],b:[HDI.img2,AHB.f],f:[FHI.img,FHD.f],c:[CHI.img,CHD.f]};
   const spr=(at,id,x,by,w,fl)=>{const A=AT[at],q=A[1][id];if(!q)return 0;const h=w*q[3]/q[2];if(fl){c.save();c.translate(x,by);c.scale(-1,1);c.drawImage(A[0],q[0],q[1],q[2],q[3],-w/2,-h,w,h);c.restore()}else c.drawImage(A[0],q[0],q[1],q[2],q[3],x-w/2,by-h,w,h);return h};
-  GHS.gq=0;const GQ=(i,x,by,w)=>{const q=GQD.f['h'+i],m=GQD.f['h'+i+'_m'];if(!q)return;GHS.gq=1;add(by,()=>{const h=w*q[3]/q[2];soft(x+w*.03,by-4,w*.5,w*.11,.42);c.drawImage(GQI.img,q[0],q[1],q[2],q[3],x-w/2,by-h,w,h);
+  GHS.gq=0;GHS.ks=null;const GQ=(i,x,by,w)=>{const K=typeof i==='number'?'h'+i:i,q=GQD.f[K],m=GQD.f[K+'_m'];if(!q)return;GHS.gq=1;add(by,()=>{const h=w*q[3]/q[2];soft(x+w*.03,by-4,w*.5,w*.11,.42);c.drawImage(GQI.img,q[0],q[1],q[2],q[3],x-w/2,by-h,w,h);
     if(m){try{const tc=document.createElement('canvas');tc.width=Math.ceil(w*S);tc.height=Math.ceil(h*S);const x2=tc.getContext('2d');x2.drawImage(GQI.img,m[0],m[1],m[2],m[3],0,0,tc.width,tc.height);x2.globalCompositeOperation='source-in';x2.fillStyle=ghShade(col,.25);x2.fillRect(0,0,tc.width,tc.height);c.save();c.globalCompositeOperation='multiply';c.drawImage(tc,x-w/2,by-h,w,h);c.restore()}catch(e){}}})};
   const L=[],add=(by,fn)=>L.push([by,fn]),SP=(at,id,x,by,w,o)=>{o=o||{};add(by,()=>{if(o.sh!==0)soft(x+w*.04,by-3,w*(o.sh||.46),w*.12,o.sa);if(o.flt){try{c.filter=o.flt}catch(e){}}spr(at,id,x,by,w,o.fl);if(o.flt){try{c.filter='none'}catch(e){}}})};
   const stone=t>=3,WH=[0,26,50,46,62,68][t],WF=t===5?'#cfc6b0':t===4?'#8a857c':'#918a79',WT=t===5?'#ebe3ce':t===4?'#a8a399':'#aea795';
@@ -131,6 +131,12 @@ function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
   else if(t===4){SP('b','palace',0,-292,336,{sh:.5});TW(-215,-288,88);TW(215,-288,88)}
   else{SP('b','palace',0,-290,446,{sh:.5});SP('a','star_banner',-250,-292,30);SP('a','star_banner',250,-292,30);SP('f','tower',-292,-300,80);SP('f','tower',292,-300,80)}
   /* ================= คลัง / โกดัง / ครัว / ค่ายทหาร / กระดาน ================= */
+  if(GQI.ok===1&&GQI.img){const lo=t<=2;
+    if(lo){GQ('tr1',-430,-146,190);SP('c','crates',-316,-148,50)}else GQ('tr3',-430,-144,200);
+    if(lo){GQ('st1',470,100,190);SP('c','grain_sacks',360,104,42)}else{GQ('st3',470,100,185);SP(t>=4?'a':'c','barrels',368,104,t>=4?46:40);SP(t>=4?'a':'c','crates',572,104,t>=4?52:44)}
+    if(lo){GQ('ki1',470,340,175);SP('c','firewood',552,352,58);SP('c','barrels',388,350,38);GHS.ks=[467,262]}else{GQ('ki3',470,340,195);SP(t>=4?'a':'c','barrels',576,348,t>=4?44:38);GHS.ks=[515,172]}
+    if(lo)GQ('ba1',-450,240,210);else GQ('ba3',-450,238,250)}
+  else{
   if(t===1){SP('c','supply_cart',-450,-150,150);SP('c','crates',-360,-150,52)}
   else if(t===2){SP('c','supply_cart',-470,-150,140);SP('c','crates',-370,-152,58);SP('c','barrels',-332,-146,40)}
   else SP('b','rare_shop',-430,-148,t>=5?206:192,{sh:.5});
@@ -140,6 +146,7 @@ function ghBuildHD(t,col,em){const S=1.2,X0=-690,Y0=-800,WD=1380,HT=1310;
   else{SP('f','inn',476,340,184,{flt:'hue-rotate(150deg) saturate(1.15)'});SP(t>=4?'a':'c','barrels',560,346,t>=4?44:38)}
   if(t>=2){SP('c','cooking_pot',402,354,58);SP('c','firewood',372,372,46)}
   if(t<=2){SP('f','tent_t',-512,240,124);SP('f','tent_p',-390,240,124,{fl:1})}else if(t===3)SP('f','store',-450,244,196);else SP('f','barracks',-450,246,214);
+  }
   SP('c','training_dummy',-470,300,38);SP('c','training_dummy',-410,316,38);if(t>=2)SP('f','targets',-548,360,104);
   add(302,()=>{soft(-340,302,22,5,.3);for(let k=0;k<4;k++){logV(-354+k*9,262,300,2.6,'#c8ccd0')}logV(-362,296,300,46,'#6a4628');logV(-362,268,272,46,'#6a4628')});
   SP(t>=3?'a':'c','noticeboard',GHBD.x,GHBD.y,t>=3?86:72);
