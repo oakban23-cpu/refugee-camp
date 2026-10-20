@@ -179,7 +179,15 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
   if(vx1>vx0&&vy1>vy0)g.drawImage(C.cv,(vx0-ox)*C.S,(vy0-oy)*C.S,(vx1-vx0)*C.S,(vy1-vy0)*C.S,vx0,vy0,vx1-vx0,vy1-vy0);
   const now=performance.now()/1000,X=1600,Y=1600,O='#1a120a';g.save();
   /* ธงกิลด์ 2 ต้นหน้าอาคาร */
-  [[-112,-246],[112,-246]].forEach(([a,b],i)=>{const x=X+a,y=Y+b,hh=t>=4?130:t>=2?110:92;g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x,y+2,9,3.5,0,0,7);g.fill();g.fillStyle=t===5?'#e8c060':'#5a3a1e';g.fillRect(x-2,y-hh,4,hh);g.fillStyle='#e8c060';g.beginPath();g.arc(x,y-hh-3,4,0,7);g.fill();
+  if(GHS.gq&&GHS.hd)[[-112,-246],[112,-246]].forEach(([a,b],i)=>{const x=X+a,y=Y+b,hh=t>=4?130:t>=2?112:96,OL='#1c1a1e';if(!inView(x,y-hh/2,hh))return;g.fillStyle='rgba(0,0,0,.32)';g.beginPath();g.ellipse(x,y+2,10,4,0,0,7);g.fill();
+    g.fillStyle=OL;g.fillRect(x-3.2,y-hh-1,6.4,hh+1);const pg=g.createLinearGradient(x-2,0,x+2,0);pg.addColorStop(0,'#3a3a40');pg.addColorStop(.5,'#7a7c84');pg.addColorStop(1,'#2e2e34');g.fillStyle=pg;g.fillRect(x-2,y-hh,4,hh);
+    g.fillStyle='#8a5e26';g.fillRect(x-4,y-8,8,8);g.strokeStyle=OL;g.lineWidth=1.2;g.strokeRect(x-4,y-8,8,8);g.fillStyle='#b8873c';g.beginPath();g.moveTo(x,y-hh-14);g.lineTo(x+4,y-hh-3);g.lineTo(x-4,y-hh-3);g.closePath();g.fill();g.stroke();
+    const fw=t>=4?62:52,fh=t>=4?42:34,dir=i?-1:1,wv=u=>Math.sin(now*3.2+u*4+i)*4*u,top=[],bot=[];for(let s=0;s<=12;s++){const u=s/12;top.push([x+2*dir+dir*u*fw,y-hh+2+wv(u)]);bot.push([x+2*dir+dir*u*fw,y-hh+2+fh+wv(u)-(u>.86?(u-.86)*fh*2.2:0)])}
+    const tail=[x+2*dir+dir*fw*.93,y-hh+2+fh*.62+wv(1)];g.beginPath();g.moveTo(top[0][0],top[0][1]);top.forEach(p=>g.lineTo(p[0],p[1]));g.lineTo(tail[0],tail[1]);for(let s=bot.length-1;s>=0;s--)g.lineTo(bot[s][0],bot[s][1]);g.closePath();
+    g.fillStyle=col;g.fill();g.save();g.clip();for(let s=0;s<12;s++){const u=(s+.5)/12,sl=Math.cos(now*3.2+u*4+i);g.fillStyle=sl>0?'rgba(255,255,255,'+(.16*sl)+')':'rgba(0,0,0,'+(-.24*sl)+')';g.fillRect(Math.min(top[s][0],top[s+1][0]),y-hh-8,Math.abs(top[s+1][0]-top[s][0])+.6,fh+20)}
+    g.fillStyle='rgba(0,0,0,.22)';g.fillRect(Math.min(x,x+dir*fw)-2,y-hh+fh-5,fw+6,12);g.restore();g.strokeStyle=OL;g.lineWidth=1.6;g.stroke();g.strokeStyle='#b8873c';g.lineWidth=1.4;g.beginPath();g.moveTo(top[0][0],top[0][1]+3);top.forEach(p=>g.lineTo(p[0],p[1]+3));g.stroke();
+    g.font='bold '+Math.round(fh*.5)+'px system-ui';g.textAlign='center';g.textBaseline='middle';g.fillText(em,x+dir*fw*.46,y-hh+2+fh*.48+wv(.46));g.textBaseline='alphabetic'});
+  else [[-112,-246],[112,-246]].forEach(([a,b],i)=>{const x=X+a,y=Y+b,hh=t>=4?130:t>=2?110:92;g.fillStyle='rgba(0,0,0,.3)';g.beginPath();g.ellipse(x,y+2,9,3.5,0,0,7);g.fill();g.fillStyle=t===5?'#e8c060':'#5a3a1e';g.fillRect(x-2,y-hh,4,hh);g.fillStyle='#e8c060';g.beginPath();g.arc(x,y-hh-3,4,0,7);g.fill();
     const fw=t>=4?62:50,fh=t>=4?40:32,dir=i?-1:1;g.beginPath();g.moveTo(x+2*dir,y-hh+2);for(let s=0;s<=10;s++){const u=s/10;g.lineTo(x+2*dir+dir*u*fw,y-hh+2+Math.sin(now*3.2+u*4+i)*4*u)}for(let s=10;s>=0;s--){const u=s/10;g.lineTo(x+2*dir+dir*u*fw,y-hh+2+fh+Math.sin(now*3.2+u*4+i)*4*u)}g.closePath();g.fillStyle=col;g.fill();g.strokeStyle=O;g.lineWidth=.8;g.stroke();
     g.font='bold '+Math.round(fh*.55)+'px system-ui';g.textAlign='center';g.textBaseline='middle';g.fillText(em,x+dir*fw*.5,y-hh+2+fh*.5+Math.sin(now*3.2+2+i)*2);g.textBaseline='alphabetic'});
   /* กองไฟ (1–2) / น้ำพุ (3–5) */
@@ -208,7 +216,7 @@ function ghDraw(){if(!ghHere())return;const G=GDS.g,t=ghT(),col=G?gdCol(G.col):'
   try{ghDraw2(t,col,now)}catch(e){}
   /* ป้ายหน้าประตู + ป้ายฟาร์ม/ค่ายทหาร */
   {const lab=(x,y,s,c2)=>{if(!inView(x,y,120))return;g.font='bold 11px system-ui';g.textAlign='center';const tw=g.measureText(s).width+16;g.fillStyle='rgba(30,20,10,.78)';g.beginPath();g.roundRect(x-tw/2,y-12,tw,17,8);g.fill();g.strokeStyle=c2||'rgba(255,220,150,.5)';g.lineWidth=1;g.stroke();g.fillStyle='#ffe6b0';g.fillText(s,x,y+1)};
-    lab(X,Y+(GHS.gq?[0,228,228,150,150,178][t]:262),(G?G.e+' ['+G.tag+'] ':'')+'ขั้น '+t+' · '+GHT[t].n+(G&&G.hq&&G.hq.wl?' · 🧱'+G.hq.wl+' 🚪'+G.hq.gl:''),col);lab(X+448,Y-290,'🌱 ฟาร์มกิลด์');lab(X-450,Y+(GHS.gq?(t<=2?66:132):150),'⚔️ ค่ายทหาร');if(t<3)lab(X-500,Y+50,'🌳 สวนผลไม้ · บ้านขั้น 3');
+    lab(X,Y+(GHS.gq?[0,206,206,150,150,178][t]:262),(G?G.e+' ['+G.tag+'] ':'')+'ขั้น '+t+' · '+GHT[t].n+(G&&G.hq&&G.hq.wl?' · 🧱'+G.hq.wl+' 🚪'+G.hq.gl:''),col);lab(X+448,Y-290,'🌱 ฟาร์มกิลด์');lab(X-450,Y+(GHS.gq?(t<=2?66:132):150),'⚔️ ค่ายทหาร');if(t<3)lab(X-500,Y+50,'🌳 สวนผลไม้ · บ้านขั้น 3');
     if(Math.hypot(me.x-X,me.y-(Y+430))<220)lab(X,Y+452,'🚪 ทางออก → ค่ายผู้อพยพ')}
   g.restore();
   /* พลุฉลองขยายบ้าน */
