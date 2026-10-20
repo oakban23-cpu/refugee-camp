@@ -7,8 +7,8 @@ const LF_RX=/^(🃏 ได้|⭐ |🎒|💎 ผลึก|🌟|★ ดาว|�
 function lfIs(d){if(typeof d.v!=='string'||d.vx!==undefined||d.s||(d.c&&typeof d.c!=='string'))return false;const v=d.v;
   if(/^\+[\d,]+ \S/.test(v))return!/ฮีล|^\+[\d,]+ (HP|MP)$/.test(v);return LF_RX.test(v)}
 function lfPush(d){const v=d.v,m=/^\+([\d,]+) (.+?)( ×\d+)?$/.exec(v),col=typeof d.c==='string'?d.c:(d.col||(m&&m[2]==='ทอง'?'#ffd84a':m&&m[2]==='XP'?'#8ad8ff':m&&m[2].indexOf('★')>=0?'#e0b0ff':'#fff2d8'));
-  if(m){const n=+m[1].replace(/,/g,'')*(m[3]?+m[3].slice(2):1),u=m[2],e=LFD.find(q=>q.u===u&&q.t>.4);if(e){e.sum+=n;e.t=2.8;e.pop=.25;return}LFD.push({u,sum:n,col,t:2.8,a0:0,pop:.25});}
-  else{const e=LFD.find(q=>q.txt===v&&q.t>.4);if(e){e.n=(e.n||1)+1;e.t=2.8;e.pop=.25;return}LFD.push({txt:v,col,t:3.2,a0:0,pop:.25})}
+  if(m){const n=+m[1].replace(/,/g,'')*(m[3]?+m[3].slice(2):1),u=m[2],e=LFD.find(q=>q.u===u&&q.t>.4);if(e){e.sum+=n;e.t=2.2;e.pop=.25;return}LFD.push({u,sum:n,col,t:2.2,a0:0,pop:.25});}
+  else{const e=LFD.find(q=>q.txt===v&&q.t>.4);if(e){e.n=(e.n||1)+1;e.t=2.4;e.pop=.25;return}LFD.push({txt:v,col,t:2.6,a0:0,pop:.25})}
   while(LFD.length>6)LFD.shift()}
 function dnTidy(){const now=performance.now()/1000;
   for(const d of dn){if(d._td||!(d.t>0))continue;d._td=1;d._b=now;

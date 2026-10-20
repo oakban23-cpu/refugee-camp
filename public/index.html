@@ -9912,9 +9912,9 @@ const LF_RX=/^(🃏 ได้|⭐ |🎒|💎 ผลึก|🌟|★ ดาว|�
 function lfIs(d){if(typeof d.v!=='string'||d.vx!==undefined||d.s||(d.c&&typeof d.c!=='string'))return false;const v=d.v;
 if(/^\+[\d,]+ \S/.test(v))return!/ฮีล|^\+[\d,]+ (HP|MP)$/.test(v);return LF_RX.test(v)}
 function lfPush(d){const v=d.v,m=/^\+([\d,]+) (.+?)( ×\d+)?$/.exec(v),col=typeof d.c==='string'?d.c:(d.col||(m&&m[2]==='ทอง'?'#ffd84a':m&&m[2]==='XP'?'#8ad8ff':m&&m[2].indexOf('★')>=0?'#e0b0ff':'#fff2d8'));
-if(m){const n=+m[1].replace(/,/g,'')*(m[3]?+m[3].slice(2):1),u=m[2],e=LFD.find(q=>q.u===u&&q.t>.4);if(e){e.sum+=n;e.t=2.8;e.pop=.25;return}LFD.push({u,sum:n,col,t:2.8,a0:0,pop:.25});}
-else{const e=LFD.find(q=>q.txt===v&&q.t>.4);if(e){e.n=(e.n||1)+1;e.t=2.8;e.pop=.25;return}LFD.push({txt:v,col,t:3.2,a0:0,pop:.25})}
-while(LFD.length>4)LFD.shift()}
+if(m){const n=+m[1].replace(/,/g,'')*(m[3]?+m[3].slice(2):1),u=m[2],e=LFD.find(q=>q.u===u&&q.t>.4);if(e){e.sum+=n;e.t=2.2;e.pop=.25;return}LFD.push({u,sum:n,col,t:2.2,a0:0,pop:.25});}
+else{const e=LFD.find(q=>q.txt===v&&q.t>.4);if(e){e.n=(e.n||1)+1;e.t=2.4;e.pop=.25;return}LFD.push({txt:v,col,t:2.6,a0:0,pop:.25})}
+while(LFD.length>3)LFD.shift()}
 function dnTidy(){const now=performance.now()/1000;
 for(const d of dn){if(d._td||!(d.t>0))continue;d._td=1;d._b=now;
 if(lfIs(d)){lfPush(d);d.t=0;continue}
@@ -12282,15 +12282,15 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v467';
+const WNV='v468';
 const WNL=[
+['🧹','หน้าจอโล่งขึ้น','การ์ดเควสมุมซ้ายบนย่อเป็นบรรทัดเดียว กางเองสั้น ๆ ตอนเข้าแมพหรือเป้าหมายเปลี่ยน แตะการ์ดเพื่อกางดู ช่องแชทตอนสู้เหลือ 2 บรรทัด ตัวเลขรางวัลลอยทางขวาน้อยลงและหายเร็วขึ้น'],
 ['📋','ภารกิจกิลด์รายวัน','ทุกวันมี 4 ภารกิจ: แวะบ้านกิลด์ ช่วยงานฟาร์ม บริจาค และล่ามอน 60 ตัว รับทองกับแต้มกิลด์ที่ 📋 กระดานกิลด์ ทุกภารกิจที่สมาชิกทำเติมหลอดของกิลด์ เต็มหลอดแล้วทั้งกิลด์ได้บัฟ EXP/ทอง +5% ถึงเที่ยงคืน และรับหีบกิลด์ได้'],
 ['🌟','ประตูวาร์ปในค่ายโฉมใหม่','ประตูแสงดาวไปนครลอยฟ้าเป็นแท่นหินจันทร์มีเสาคริสตัลดาว และประตูบ้านกิลด์เป็นซุ้มหินมีหลังคาทองแดง โล่ดาบไขว้ โคมไฟ ธงเป็นสีกิลด์ของคุณ'],
 ['🌲','ทุ่งรบหน้าบ้านกิลด์','ตอนศึกมอนบุก ออกประตูไปสู้ในทุ่งด้านใต้ได้กว้างและลึกขึ้นมาก มีถนน รั้วไม้แหลม และชายป่าที่มอนโผล่ออกมา มอนเกิดไกลขึ้น สายประชิดมีเวลาออกไปสกัดก่อนถึงกำแพง'],
 ['🏹','นักธนูขึ้นเชิงเทิน · กระดานประกาศอ่านได้','นักธนูของกิลด์ย้ายขึ้นไปยืนยิงบนกำแพง มอนประชิดไล่ขึ้นไม่ถึงแต่โดนธนูสวนได้ เดินไปใกล้กระดานกิลด์จะขึ้นแผ่นประกาศจากหัวหน้าให้อ่าน โหมดประหยัดก็ขึ้นกำแพงได้แล้ว และกล่องแชตลอยตามตัวตอนอยู่บนกำแพง'],
 ['🌳','ของแต่งบ้านกิลด์ชุดใหม่','ลานกลางเป็นวงกองไฟมีโล่ (ขั้น 1–2) และน้ำพุรูปปั้นอัศวิน (ขั้น 3+) เสาอ่างไฟหน้าตึก โคม ลัง ถัง ม้านั่ง หุ่นซ้อม เป้าธนู ชั้นวางอาวุธ กระดานประกาศ หุ่นไล่กา ถังน้ำ และต้นไม้สวนผลไม้วาดใหม่ทั้งหมด ธงตามทางเดินเป็นสีกิลด์ แอปเปิลยังไม่สุกเป็นผลสีเขียว'],
-['🏰','เดินบนกำแพงบ้านกิลด์','บ้านขั้น 2 ขึ้นไปมีบันไดชิดกำแพงด้านเหนือ 2 ฝั่ง ขึ้นไปเดินรอบเชิงเทินได้ทั้งเหนือ ข้าง และใต้ ตอนศึกมอนบุก ยืนบนเชิงเทินได้ดาเมจ +25% มอนประชิดตีไม่ถึง แต่มอนข้างนอกยิงธนูขึ้นมาได้ และถ้ากำแพงทะลุตรงที่ยืนจะตกลงมา'],
-['🧱','บ้านกิลด์เข้าชุดทั้งหลัง','เก็บของสไตล์เมืองหลวงออกจากบ้านกิลด์ ลานกลางเป็นกองไฟวงหินและน้ำพุหินชนวนขอบบรอนซ์ พื้นหินก้อนเล็กลง กำแพงสูงขึ้นมีเส้นขอบ เงาอาคารนุ่มลง ธงหน้าตึกมีแสงเงา ประตูไม้กลับมาสัดส่วนปกติ']];
+['🏰','เดินบนกำแพงบ้านกิลด์','บ้านขั้น 2 ขึ้นไปมีบันไดชิดกำแพงด้านเหนือ 2 ฝั่ง ขึ้นไปเดินรอบเชิงเทินได้ทั้งเหนือ ข้าง และใต้ ตอนศึกมอนบุก ยืนบนเชิงเทินได้ดาเมจ +25% มอนประชิดตีไม่ถึง แต่มอนข้างนอกยิงธนูขึ้นมาได้ และถ้ากำแพงทะลุตรงที่ยืนจะตกลงมา']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -14948,6 +14948,16 @@ const gdqBuf=()=>GDQ.until>Date.now()&&!!GDS.g;
 fdM=(f=>function(k){let v=f.apply(this,arguments);try{if((k==='xp'||k==='gd')&&gdqBuf())v+=.05}catch(e){}return v})(fdM);
 buffList=(f=>function(){const L=f.apply(this,arguments);try{if(gdqBuf()&&me.cls&&run&&me.down<=0)L.push({k:'gdq',ic:'📋',n:'ขวัญกำลังใจกิลด์',d:'EXP +5% · ทอง +5% · ภารกิจกิลด์ครบหลอด',t:(GDQ.until-Date.now())/1000,mx:86400,col:'#9fe89f'})}catch(e){}return L})(buffList);
 ghEnter=(f=>function(){const r=f.apply(this,arguments);setTimeout(()=>{try{if(!ghHere())return;const Q=gdqOf();if(!Q||(Q.p.v|0)<1)gdEmit('hdv');const day=new Date(Date.now()+7*3600e3).toISOString().slice(0,10);if(Q&&GDQ.seen!==day){GDQ.seen=day;const n=GDQ.L.filter(([k])=>Q.c.includes(k)).length;if(n<4)banner={s:'📋 ภารกิจกิลด์วันนี้ '+n+'/4 · ดูที่ 📋 กระดานกิลด์',t:4}}}catch(e){}},1500);return r})(ghEnter);
+const HUDX={until:0,sig:'',map:-1};
+{const s=document.createElement('style');s.textContent='#clog.hx2{max-height:84px!important}#clog.hx2f{max-height:46px!important;opacity:.62;transition:opacity .3s}';document.head.appendChild(s)}
+function hudxSig(){let s='';try{['stq','rnq','rbq'].forEach(id=>{const e=$(id);if(e&&!e.hidden){const b=e.querySelector('b');s+=id+':'+((b&&b.textContent)||'').replace(/[\d,.:]+/g,'#').slice(0,60)+'|'}})}catch(e){}return s}
+vz3HudTick=(f=>function(){const T=$('topb');if(!T||!me.cls)return f.apply(this,arguments);const F=vz3Fight(),now=performance.now();
+if(HUDX.map!==curMap){HUDX.map=curMap;HUDX.until=now+6000}
+const sg=hudxSig();if(sg!==HUDX.sig){if(HUDX.sig)HUDX.until=Math.max(HUDX.until,now+6000);HUDX.sig=sg}
+const open=now<HUDX.until&&!F.fight;T.classList.toggle('vzhide',!!F.boss);T.classList.toggle('vzmin',!F.boss&&!open);
+const C=$('clog');if(C){C.classList.toggle('hx2f',F.fight);C.classList.toggle('hx2',!F.fight)}})(vz3HudTick);
+document.addEventListener('click',e=>{try{const T=$('topb');if(!T||!T.classList.contains('vzmin'))return;const c=e.target.closest&&e.target.closest('#stq,#rnq,#rbq');if(!c||!T.contains(c))return;if(c.id==='stq'&&c.classList.contains('min'))return;
+e.stopPropagation();e.preventDefault();HUDX.until=performance.now()+8000;T.classList.remove('vzmin');try{sfx('click')}catch(_){}}catch(_){}},true);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
