@@ -49,7 +49,7 @@ async def main():
             await ctx.close()
             # ---- 4) เอาไปวางบนเว็บคนอื่น ----
             ctx=await b.new_context(viewport={'width':390,'height':844});pg=await ctx.new_page()
-            await pg.route('http://copy-site.test/**',lambda r:r.fulfill(status=200,content_type='text/html; charset=utf-8',body=HTML))
+            await pg.route('http://copy-site.test/**',lambda r:r.fulfill(status=200,content_type='text/html; charset=utf-8',body=HTML) if r.request.resource_type=='document' else r.abort())
             await pg.goto('http://copy-site.test/');await pg.wait_for_timeout(2500)
             li=await lockinfo(pg)
             rep('วางบนเว็บอื่น: ล็อกทันที เกมไม่ทำงาน', li['lk'] and li['why']=='copy' and not li['game'], json.dumps(li))
@@ -57,7 +57,7 @@ async def main():
             # ---- 5) เปิดผ่าน localhost แต่ไม่มีเซิร์ฟเวอร์ของเรา → ไม่มีโหมดออฟไลน์ ----
             ctx=await b.new_context(viewport={'width':390,'height':844});pg=await ctx.new_page()
             await pg.add_init_script("window.__rfgWait=1500")
-            await pg.route('http://localhost:9/**',lambda r:r.fulfill(status=200,content_type='text/html; charset=utf-8',body=HTML))
+            await pg.route('http://localhost:9/**',lambda r:r.fulfill(status=200,content_type='text/html; charset=utf-8',body=HTML) if r.request.resource_type=='document' else r.abort())
             await pg.goto('http://localhost:9/');await pg.wait_for_timeout(800)
             l0=await lockinfo(pg)
             await pg.wait_for_timeout(2200)
@@ -75,7 +75,7 @@ async def main():
                 else:
                     await ws.close()
             await pg.route_web_socket('wss://refugee-camp.onrender.com/ws',wsh)
-            await pg.route('https://refugee-camp.onrender.com/**',lambda r:r.fulfill(status=200,content_type='text/html; charset=utf-8',body=HTML))
+            await pg.route('https://refugee-camp.onrender.com/**',lambda r:r.fulfill(status=200,content_type='text/html; charset=utf-8',body=HTML) if r.request.resource_type=='document' else r.abort())
             await pg.goto('https://refugee-camp.onrender.com/');await pg.wait_for_timeout(3000)
             li=await lockinfo(pg)
             rep('เว็บทางการ ต่อไม่ติด: ขึ้น «กำลังเชื่อมต่อเซิร์ฟเวอร์…» (ไม่ใช่หน้าว่าก๊อป)', li['lk'] and li['why']=='down' and li['game'], json.dumps(li))

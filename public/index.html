@@ -496,7 +496,7 @@ let GQ=(()=>{try{return localStorage.getItem('refugee_gq')||'auto'}catch(e){retu
 const dprFor=()=>GQ==='high'?DPR0:LOWQ?Math.min(DPR0,1.5):Math.min(DPR0,LITEQ?1.75:2);
 function applyQ(){DPR=dprFor();cv.width=W*DPR;cv.height=H*DPR}
 function fitStage(){try{const vh=(window.visualViewport?visualViewport.height:innerHeight),top=cv.getBoundingClientRect().top+(window.scrollY||0),wpx=cv.clientWidth||360,avail=vh-top-10;
-const app=document.getElementById('app'),hd=document.getElementById('hud'),hdr=(hd&&!document.body.classList.contains('hudc')?hd.offsetHeight:0)+18,raw=Math.round(W*(vh-hdr)/wpx);if(raw<520){const need=hdr+520*wpx/W,sc=Math.max(.45,Math.min(1,vh/need));app.style.transformOrigin='top center';app.style.transform='scale('+sc.toFixed(3)+')';app.style.height=Math.round(vh/sc)+'px'}else if(app.style.transform){app.style.transform='';app.style.height=''}const nh=Math.max(520,Math.min(900,app.style.transform?520:Math.round(W*avail/wpx)));if(nh!==H){H=nh;if(typeof JB!=='undefined')JB.y=H-84;applyQ()}}catch(e){}audPos()}
+const app=document.getElementById('app'),hd=document.getElementById('hud'),hdr=(hd&&!document.body.classList.contains('hudc')?hd.offsetHeight:0)+18,raw=Math.round(W*(vh-hdr)/wpx);if(raw<520){const need=hdr+520*wpx/W,sc=Math.max(.45,Math.min(1,vh/need));app.style.transformOrigin='top center';app.style.transform='scale('+sc.toFixed(3)+')';app.style.height=Math.round(vh/sc)+'px'}else if(app.style.transform){app.style.transform='';app.style.height=''}const nh=Math.max(520,Math.min(900,app.style.transform?520:Math.round(W*avail/wpx)));if(nh!==H||Math.abs(cv.height-H*dprFor())>1.5){H=nh;applyQ();try{if(typeof JB!=='undefined')JB.y=H-84}catch(e){}}}catch(e){}audPos()}
 function audPos(){const a=document.getElementById('aud');if(a)a.style.top='calc('+(107/H*100).toFixed(3)+'% + 1px)';const p=document.getElementById('ptyhud');if(p)p.style.top=(142/H*100).toFixed(3)+'%';const cl=document.getElementById('clog');if(cl){cl.style.bottom=((175+8)/H*100).toFixed(3)+'%';logFit(cl)}}
 applyQ();addEventListener('resize',()=>setTimeout(fitStage,60));addEventListener('orientationchange',()=>setTimeout(fitStage,300));if(window.visualViewport)visualViewport.addEventListener('resize',()=>setTimeout(fitStage,60));setTimeout(fitStage,0);setTimeout(fitStage,500);
 {const P2=CanvasRenderingContext2D.prototype,d=Object.getOwnPropertyDescriptor(P2,'shadowBlur');if(d&&d.set)Object.defineProperty(P2,'shadowBlur',{set(v){d.set.call(this,LOWQ?0:v)},get(){return d.get.call(this)},configurable:true})}
@@ -1354,7 +1354,7 @@ function stReady(){const d=$('sdlg');d.classList.add('rd');if(SD.i===SD.q.length
 function stNext(){if(!SD.on)return;if(SD.typ){clearInterval(SD.typ);SD.typ=null;SD.ch=SD.tx.length;$('sdlg').querySelector('.sdt').textContent=SD.tx;stReady();return}
 if(SD.i===SD.q.length-1&&SD.choice)return;SD.i++;if(SD.i>=SD.q.length)stClose();else stLine()}
 function stClose(){clearInterval(SD.typ);SD.typ=null;SD.on=false;const d=$('sdlg');if(d){d.hidden=true;d.classList.remove('chs')}$('scine').classList.remove('on');const f=SD.done;SD.done=null;SD.choice=null;if(f)f()}
-function stCalm(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on)return false;if(typeof tutI!=='undefined'&&tutI>=0&&tutI<2)return false;return!mons.some(m=>Math.hypot(m.x-me.x,m.y-me.y)<320)}
+function stCalm(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on||window.PRO_ON||document.getElementById('procv'))return false;if(typeof tutI!=='undefined'&&tutI>=0&&tutI<2)return false;return!mons.some(m=>Math.hypot(m.x-me.x,m.y-me.y)<320)}
 function stGive(rw){if(!rw)return'';const p=[];for(const k in rw){const v=rw[k];if(k==='g'){me.gold+=v}else if(k==='rbs'){if(!me.rb){const S=rbSt();S.sh=Math.min(RBN,S.sh+v)}}else if(k==='twc'){me.twc=(me.twc||0)+v}else if(k==='hp'||k==='mp'){me.inv[k]=Math.min(POTMAX,(me.inv[k]|0)+v)}else{me.inv[k]=Math.min(999,(me.inv[k]|0)+v)}p.push('+'+v.toLocaleString()+' '+STRW[k])}
 sfx('coin');return p.join(' · ')}
 function stDone(){const st=stCur();if(!st)return;const q=me.sty;q.a=2;
@@ -2664,7 +2664,7 @@ p:['🗡️','มีดเงาพิฆาต','ทุก ~6 วิ มีด�
 a:['🌑','ร่างเงามรณะ',{dm:.3,cr:.25,red:.25},'190,110,255','ดาเมจ +30% · คริ +25% · ลดดาเมจ 25%',.15]}};
 const zcOf=()=>ZC[me.cls]||ZC.mage;
 setTimeout(()=>{for(const c in BR){if(ZC[c])BR[c].push([ZC[c].br[0],ZC[c].br[1],61]);BR[c].push(['เหนือฟ้า',[['w1','พลังเหนือฟ้า','ดาเมจ +3% ต่อขั้น','dm',.03,3],['w2','กายเหนือฟ้า','เลือดสูงสุด +4% ต่อขั้น','hp',.04,3],['w3','สายตาเหนือฟ้า','คริติคอล +2% ต่อขั้น','cr',.02,3]],71])}DT[9]={n:'ห้วงความทรงจำอาซาเอล',lv:63,L:46,bL:12,hp:650000,xp:15000,g:5000,dm:8,tn:6,sm:2,rm:4,lg:.5,tm:300,gold:15000,exp:40000}},0);
-function zcBanner(lv){const Z=zcOf();if(lv===61)return{s:'⭐ ปลดสายสกิล "'+Z.br[0]+'" แล้ว! (เมนู → สกิล)',t:5};if(lv===65)return{s:Z.p[0]+' ปลดพลัง "'+Z.p[1]+'" — ทำงานอัตโนมัติ',t:5};if(lv===70)return{s:Z.a[0]+' Lv 70! ปลดพลัง "'+Z.a[1]+'" — เลือดต่ำจะแปลงร่างอัตโนมัติ',t:6};return null}
+function zcBanner(lv){const Z=zcOf();if(lv===61)return{s:'⭐ ปลดสายสกิล "'+Z.br[0]+'" แล้ว! (เมนู → ตัวละคร → สกิล)',t:5};if(lv===65)return{s:Z.p[0]+' ปลดพลัง "'+Z.p[1]+'" — ทำงานอัตโนมัติ',t:5};if(lv===70)return{s:Z.a[0]+' Lv 70! ปลดพลัง "'+Z.a[1]+'" — เลือดต่ำจะแปลงร่างอัตโนมัติ',t:6};return null}
 let ZST=[];
 const zHit=(x,y,r,d)=>{let n=0;mons.forEach(m=>{if(!m.wb&&Math.hypot(m.x-x,m.y-y)<r+bigR(m)){const cr=Math.random()<crC();addHit(m,d*(cr?crD():1),cr);n++}});return n};
 function starTick(dt){if(!me.cls||me.down>0||SKL||SKA)return;if(me.zcC!==me.cls){me.zcC=me.cls;me.zaCd=0;me.zaT=0;me.zsT=3;ZST=[]}const Z=zcOf(),P=Z.p,zs=M('zst');
@@ -4967,7 +4967,7 @@ g.restore();return true}
 function palChunk(cx,cy,r){const S=PALC.S,cv=document.createElement('canvas');cv.width=cv.height=Math.ceil(S*r);const c=cv.getContext('2d');c.setTransform(r,0,0,r,-cx*S*r,-cy*S*r);c.beginPath();c.rect(cx*S,cy*S,S,S);c.clip();c.lineJoin='round';c.lineCap='round';palPaint(c,cx*S,cy*S,S);return cv}
 function palPaint(c,ox,oy,S){if(MAPS[curMap]&&MAPS[curMap].hfg)return hfgPaint(c,ox,oy,S);if(MAPS[curMap]&&MAPS[curMap].qsh)return qshPaint(c,ox,oy,S);if(MAPS[curMap]&&MAPS[curMap].mdf)return mdfPaint(c,ox,oy,S);if(MAPS[curMap]&&MAPS[curMap].vsp)return vspPaint(c,ox,oy,S);if(MAPS[curMap]&&MAPS[curMap].clk)return clkPaint(c,ox,oy,S);if(typeof ESCI==='function'&&ESCI())return escPaint(c,ox,oy,S);if(curMap===36)return obPaint(c,ox,oy,S);if(curMap===35)return kmPaint(c,ox,oy,S);if(curMap===34)return sfPaint(c,ox,oy,S);if(curMap===33)return hpPaint(c,ox,oy,S);if(curMap===32)return arPaint(c,ox,oy,S);if(curMap===31)return mktPaint(c,ox,oy,S);if(curMap===30)return brgPaint(c,ox,oy,S);if(curMap===28)return gardPaint(c,ox,oy,S);if(curMap===29)return thrPaint(c,ox,oy,S);const X1=ox+S,Y1=oy+S;c.fillStyle='#0e0b14';c.fillRect(ox,oy,S,S);
 for(const z of PALZ){const x0=Math.max(ox,z[1]),y0=Math.max(oy,z[2]),x1=Math.min(X1,z[3]),y1=Math.min(Y1,z[4]);if(x1<=x0||y1<=y0)continue;c.save();c.beginPath();c.rect(x0,y0,x1-x0,y1-y0);c.clip();PALF[z[0]](c,x0,y0,x1,y1);c.restore()}
-for(const d of PAL.dec){const b=d.b;if(b[0]<X1&&b[2]>ox&&b[1]<Y1&&b[3]>oy){c.save();try{PALD[d.k](c,d,ox,oy,X1,Y1)}catch(e){}c.restore()}}}
+for(const d of PAL.dec){const b=d.b;if(b[0]<X1&&b[2]>ox&&b[1]<Y1&&b[3]>oy){c.save();try{const f=PALD[d.k];if(f)f(c,d,ox,oy,X1,Y1)}catch(e){}c.restore()}}}
 const palGrid=(x0,y0,x1,y1,sw,sh,stag,fn)=>{for(let j=Math.floor(y0/sh)-1;j*sh<y1;j++){const off=stag?((j&1)?sw/2:0):0;for(let i=Math.floor((x0-off)/sw)-1;i*sw+off<x1;i++)fn(i*sw+off,j*sh,i,j)}};
 const PALF={
 nave(c,x0,y0,x1,y1){const s=120;palGrid(x0,y0,x1,y1,s,s,0,(x,y,i,j)=>{const h=palH(i,j,1),v=222-h*20|0;c.fillStyle='rgb('+v+','+(v-7)+','+(v-20)+')';c.fillRect(x,y,s,s);
@@ -10304,7 +10304,7 @@ function sgSetSum(l){return SGK.map(k=>(l&&l[k]||[]).map(id=>SGD[id]?SGD[id][0]:
 function sgSetLoad(i){const X=sgSt(),S=X.sv[i];if(!S||!S.l)return'ชุดนี้ยังว่าง';const av={};Object.keys(X.i).forEach(id=>av[id]=X.i[id]|0);const nl={},miss=[],cn={};
 SGK.forEach(k=>{const A=[];(S.l[k]||[]).forEach(id=>{if(!SGD[id]||A.indexOf(id)>=0)return;if(!sgOk(id,k)||(av[id]|0)<=0||(cn[id]|0)>=SGMAX){miss.push(SGD[id][0]+SGD[id][1]+((cn[id]|0)>=SGMAX?' (เกิน '+SGMAX+' สกิล)':''));return}av[id]--;cn[id]=(cn[id]|0)+1;A.push(id)});if(A.length)nl[k]=A});
 X.l=nl;X.cur=i;SGSEL=null;try{sfx('equip')}catch(e){}return'🔗 ใช้ชุดลิงก์ '+(i+1)+' แล้ว'+(miss.length?' · ขาด: '+miss.join(', '):'')}
-function sgSetsCard(save){const X=sgSt(),N=sgSockN();if(!N)return'';let h='<div class="card" style="text-align:left;padding:9px 10px"><b style="font-size:13px">💾 ชุดลิงก์รูนเสริม</b> <small style="opacity:.75">'+(save?'บันทึกชุดที่ตั้งไว้ แล้วสลับได้ทุกที่ (เมนู ✨ สกิล → หน้าตัวละคร)':'สลับได้ทุกที่ · แก้ลิงก์ได้ที่ช่างรูนไอริสในค่าย')+'</small>';
+function sgSetsCard(save){const X=sgSt(),N=sgSockN();if(!N)return'';let h='<div class="card" style="text-align:left;padding:9px 10px"><b style="font-size:13px">💾 ชุดลิงก์รูนเสริม</b> <small style="opacity:.75">'+(save?'บันทึกชุดที่ตั้งไว้ แล้วสลับได้ทุกที่ (เมนู → ตัวละคร)':'สลับได้ทุกที่ · แก้ลิงก์ได้ที่ช่างรูนไอริสในค่าย')+'</small>';
 for(let i=0;i<3;i++){const S=X.sv[i],on=X.cur===i;h+='<div style="display:flex;align-items:center;gap:6px;margin-top:6px;padding:6px 8px;border-radius:10px;background:'+(on?'rgba(200,160,255,.18)':'rgba(255,255,255,.05)')+';border:1px solid '+(on?'#c8a0ff':'transparent')+'"><b style="font-size:12px;white-space:nowrap">ชุด '+(i+1)+(on?' ✓':'')+'</b><span style="flex:1;font-size:13px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">'+sgSetSum(S&&S.l)+'</span>'+
 '<button data-sgsl="'+i+'"'+(S?'':' disabled')+' style="font-size:11.5px;padding:5px 9px">ใช้</button>'+(save?'<button data-sgss="'+i+'" style="font-size:11.5px;padding:5px 9px">บันทึก</button>':'')+'</div>'}
 return h+'</div>'}
@@ -12282,15 +12282,15 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v474';
+const WNV='v475';
 const WNL=[
+['🛠️','ตรวจและแก้บัคทั้งเกม','สนามเกมเต็มจอทันทีที่เข้าเกม (รุ่นก่อนบางครั้งสนามค้างที่ความสูงเดิม เห็นที่ว่างด้านล่าง ปุ่มเบียดกัน และจอยเดินหาย) · ตัวละครใหม่ได้ดูฉากบทนำจนจบก่อน แล้วค่อยเข้าเนื้อเรื่องในค่าย · จบภาค 5 แล้ว แตะปุ่มประตูแสงดาวจะมีให้เลือก «ลิฟต์แสงดาว» หรือ «เดินสะพานรุ่งอรุณ» (เดิมขึ้นลิฟต์ทันที) · เซิร์ฟเวอร์พร้อมให้เข้าเล่นเร็วขึ้นมากหลังอัปเดตหรือหลังเซิร์ฟเวอร์หลับ · ข้อความแนะนำที่ยังบอกให้กดปุ่ม «สกิล» เปลี่ยนเป็น «ตัวละคร» ตามเมนูใหม่'],
 ['📱','แถบสถานะเล็กลง จอเกมกว้างขึ้น','เลือด มานา EXP ทอง และเลเวล ย้ายไปอยู่ในการ์ดเล็กมุมซ้ายบน สนามเกมยืดขึ้นไปถึงขอบจอ เห็นรอบตัวได้มากขึ้น แตะรูปตัวละครบนการ์ดเพื่อเปิดหน้าตัวละคร ถ้าชอบแบบเดิม ไปที่ เมนู › ตั้งค่า › แถบสถานะ › แถบเต็มด้านบน'],
 ['🧭','เมนูอ่านง่ายขึ้น','เมนูหลักแบ่งเป็น 5 หมวด (ตัวละคร · ผจญภัย · เพื่อนและกิลด์ · ชีวิตในค่าย · ระบบ) ใต้ปุ่มบอกค่าสด เช่น กระเป๋า 14/120 หรือจดหมายที่ยังไม่อ่าน ปุ่ม «สกิล» เปลี่ยนชื่อเป็น «ตัวละคร» หน้าดันเจี้ยน ปาร์ตี้ อุปกรณ์ และสัตว์ขี่ จัดใหม่ให้อ่านง่าย รางวัลกับเงื่อนไขเป็นป้ายสั้น ๆ คำอธิบายยาวพับเก็บไว้ แตะ ⓘ หรือ «อ่านต่อ» เพื่อดูเต็ม'],
 ['🌹','บอสใหม่ 2 ตัวในวังอัสตรา','สวนลอยแห่งราชินีมี «โรซาลีน พฤกษาหนามเงิน» กลางเขาวงกตกุหลาบ และห้องบัลลังก์ดาวมี «ราชาหุ่นเชิดองค์สุดท้าย» ในสุสานราชาหุ่นเชิด เกิดตามรอบเหมือนบอสแมพอื่น ล้มแล้วได้ทอง ค่าประสบการณ์ และของดรอปบอส'],
 ['👾','มอนแมพปลายเกมโฉมใหม่','ห้องบัลลังก์ดาว สะพานรุ่งอรุณ ย่านวงแหวนล่าง และหลุมหัวใจว่าง ไม่ใช้มอนซ้ำกับแมพอื่นแล้ว แต่ละแมพมีมอน 3 แบบของตัวเองตามเนื้อเรื่อง เช่นองครักษ์หุ่นเชิด เงาโคมแดง และผู้ถักโซ่'],
 ['🧹','หน้าจอโล่งขึ้น','การ์ดเควสมุมซ้ายบนย่อเป็นบรรทัดเดียว กางเองสั้น ๆ ตอนเข้าแมพหรือเป้าหมายเปลี่ยน แตะการ์ดเพื่อกางดู ช่องแชทตอนสู้เหลือ 2 บรรทัด ตัวเลขรางวัลลอยทางขวาน้อยลงและหายเร็วขึ้น'],
-['📋','ภารกิจกิลด์รายวัน','ทุกวันมี 4 ภารกิจ: แวะบ้านกิลด์ ช่วยงานฟาร์ม บริจาค และล่ามอน 60 ตัว รับทองกับแต้มกิลด์ที่ 📋 กระดานกิลด์ ทุกภารกิจที่สมาชิกทำเติมหลอดของกิลด์ เต็มหลอดแล้วทั้งกิลด์ได้บัฟ EXP/ทอง +5% ถึงเที่ยงคืน และรับหีบกิลด์ได้'],
-['🌟','ประตูวาร์ปในค่ายโฉมใหม่','ประตูแสงดาวไปนครลอยฟ้าเป็นแท่นหินจันทร์มีเสาคริสตัลดาว และประตูบ้านกิลด์เป็นซุ้มหินมีหลังคาทองแดง โล่ดาบไขว้ โคมไฟ ธงเป็นสีกิลด์ของคุณ']];
+['📋','ภารกิจกิลด์รายวัน','ทุกวันมี 4 ภารกิจ: แวะบ้านกิลด์ ช่วยงานฟาร์ม บริจาค และล่ามอน 60 ตัว รับทองกับแต้มกิลด์ที่ 📋 กระดานกิลด์ ทุกภารกิจที่สมาชิกทำเติมหลอดของกิลด์ เต็มหลอดแล้วทั้งกิลด์ได้บัฟ EXP/ทอง +5% ถึงเที่ยงคืน และรับหีบกิลด์ได้']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -15558,7 +15558,7 @@ let ONB={dt:0};
 function onbAutoEq(it){if(!me.cls||me.lv>=20||!it||it.lk)return;const cur=me.eq[it.sl];if(cur&&(cur.ss||cur.lg||cur.lk))return;if(cur&&!(gScore(it)>gScore(cur)+.004))return;
 const i=me.bag.indexOf(it);if(i<0)return;me.eq[it.sl]=it;if(cur)me.bag[i]=cur;else me.bag.splice(i,1);try{recalc()}catch(e){}try{sfx('equip')}catch(e){}
 setTimeout(()=>dn.push({x:me.x,y:me.y-58,v:'⚔️ สวมอัตโนมัติ: '+itemName(it),t:1.6,col:'#9af0a8'}),250)}
-function onbDeathTip(){ONB.dt=(ONB.dt|0)+1;if(ONB.dt>3)return;const tips=['💡 ตายไม่เป็นไร! ผู้เริ่มต้นไม่เสีย EXP · กดปุ่มยา ❤️ เมื่อเลือดเหลือน้อย','💡 เลือดฟื้นเร็วในวงค่าย · มอนตัวใหญ่สีม่วงอึดกว่า ระวังโดนรุม','💡 อัปเลเวลแล้วอย่าลืมกด เมนู → สกิล เพื่อเพิ่มพลัง'];setTimeout(()=>{banner={s:tips[(ONB.dt-1)%3],t:6}},1200)}
+function onbDeathTip(){ONB.dt=(ONB.dt|0)+1;if(ONB.dt>3)return;const tips=['💡 ตายไม่เป็นไร! ผู้เริ่มต้นไม่เสีย EXP · กดปุ่มยา ❤️ เมื่อเลือดเหลือน้อย','💡 เลือดฟื้นเร็วในวงค่าย · มอนตัวใหญ่สีม่วงอึดกว่า ระวังโดนรุม','💡 อัปเลเวลแล้วอย่าลืมกด เมนู → ตัวละคร เพื่อลงแต้ม'];setTimeout(()=>{banner={s:tips[(ONB.dt-1)%3],t:6}},1200)}
 function onbArrow(px,py){if(curMap!==1||me.lv>=6||me.down>0||!run||SD.on||!ov.hidden)return;let b=null,bd=1e9;
 for(const m of mons){if(m.hp<=0||m.t>=3||m.dum||m.pv)continue;const d=Math.hypot(m.x-me.x,m.y-me.y);if(d<bd){bd=d;b=m}}
 if(!b||bd<230)return;let tx=b.x,ty=b.y;const dc=Math.hypot(me.x-CX,me.y-CY);
@@ -20992,7 +20992,7 @@ if(G.st&&!(me.sty&&me.sty.e)){dn.push({x:me.x,y:me.y-40,v:'ต้องจบเ
 if(G.p4&&!stP4ok()){dn.push({x:me.x,y:me.y-40,v:'ทหารยังเฝ้าปากหลุมอยู่ · จบภาค 4 บทที่ 2 (คืนรากดำ) ก่อน',t:2});return}
 if(G.p5&&!stP5ok()){dn.push({x:me.x,y:me.y-40,v:'ประตูถูกปิดตาย · เข้าเฝ้าราชินีเอลิราก่อน (หลังจบภาค 4)',t:2});return}
 if(G.p3&&!stP3ok()){dn.push({x:me.x,y:me.y-40,v:'ประตูยังผนึกอยู่ · รับเนื้อเรื่องภาค 3 จากราชินีเอลิราก่อน',t:2});return}
-if(G.alias){sfx('gate');enterMap(G.to,G.arr);return}if(G.sky&&!GW&&typeof gP5end==='function'&&gP5end()){brgChoose(G);return}if(G.sky||G.shd){skyLift(G);return}sfx('gate');enterMap(G.to,G.arr)}
+if(G.alias){sfx('gate');enterMap(G.to,G.arr);return}if(G.sky&&!(GW&&GW.to!==undefined)&&typeof gP5end==='function'&&gP5end()){brgChoose(G);return}if(G.sky||G.shd){skyLift(G);return}sfx('gate');enterMap(G.to,G.arr)}
 let drops=[];
 const SHOP=[{k:'hp',n:'ยาฟื้นเลือด',d:'ฟื้น HP 40% ของสูงสุด',p:25},{k:'mp',n:'ยาฟื้นมานา',d:'ฟื้น MP 50% ของสูงสุด',p:30}];
 function dropLoot(x,y,g,pz,gl){
@@ -21799,7 +21799,7 @@ const TUT=[['🕹️','ลากจอยสติ๊กมุมซ้ายล
 ['✨','กดปุ่มสกิลมุมขวาล่างเพื่อใช้ท่าพิเศษ (ใช้ MP ซึ่งฟื้นเร็วขึ้นในค่าย)',()=>me.sk[0]>0||me.sk[1]>0||tutT>30],
 ['🧪','HP ใกล้หมดให้กดปุ่มยา หรือกลับเข้าวงค่ายเพื่อฟื้นเลือด',()=>tutT>7],
 ['🎒','อุปกรณ์ที่ดีกว่าจะสวมให้อัตโนมัติ (ถึง Lv 20) · เปิด เมนู → อุปกรณ์ เพื่อดูและอัปเกรด',()=>(!ov.hidden&&ov.dataset.k==='gear')||tutT>18],
-['⭐','เลเวลอัปได้แต้มสกิลและสเตตัส เปิด เมนู → สกิล เพื่ออัปเกรด',()=>(me.lv>1&&!ov.hidden&&ov.dataset.k==='char')||tutT>18],
+['⭐','เลเวลอัปได้แต้มสกิลและสเตตัส เปิด เมนู → ตัวละคร เพื่ออัปเกรด',()=>(me.lv>1&&!ov.hidden&&ov.dataset.k==='char')||tutT>18],
 ['📜','รับเควสได้ที่พ่อค้าในค่าย ทำเควสได้ทองและอุปกรณ์',()=>me.qs.length>0||tutT>25]];
 let tutI=-1,tutT=0,tutD=0,tutPX=0,tutPY=0,tutLast=0;
 function tutStart(){try{if(localStorage.getItem('refugee_tut')==='1')return}catch(e){}if(me.lv>3)return;tutI=0;tutT=0;tutD=0;tutPX=me.x;tutPY=me.y;tutShow()}

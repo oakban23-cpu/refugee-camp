@@ -19,7 +19,7 @@ async def main():
         for c in (A, L):
             await c.ev(CLOSE); await c.ev("()=>{try{gmSet(false,1)}catch(e){}}")
         await A.ev("()=>{for(let i=0;i<9;i++)me.bag.push(genItem(20+i,SLOTS[i%5],2,2));MLN=3}")
-        await A.wait(800)
+        await A.wait(1800)
         # ---------- ① เมนูหลัก ----------
         await tap(A, '#mn'); await A.wait(500)
         m = await A.ev("""()=>{const M=$('mnp');const secs=[...M.querySelectorAll(':scope>.ui8s')].map(s=>({h:s.querySelector('.ui8h').textContent,hid:s.hidden,ids:[...s.querySelectorAll('.ui8g>button')].filter(b=>getComputedStyle(b).display!=='none').map(b=>b.id)}));

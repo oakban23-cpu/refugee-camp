@@ -54,6 +54,11 @@ async def seg(b,steps,tag,res):
     await A.ctx.close()
 async def main():
     p=start_server()
+    try:
+        await _main(p)
+    finally:
+        p.terminate()
+async def _main(p):
     async with async_playwright() as pw:
         b=await pw.chromium.launch()
         A=await new_client(b,'Qx','melee',99);n=await A.ev("()=>STY.length");await A.ctx.close()

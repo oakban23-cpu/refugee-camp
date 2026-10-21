@@ -585,6 +585,22 @@ R("by=FEVC?48:12,f=","by=(FEVC?48:12)+hudTY(),f=")
 R("FEVC?48:12)+32,br=","FEVC?48:12)+32+hudTY(),br=")
 R("FEVC?48:12)+56;","FEVC?48:12)+56+hudTY();")
 R("g.translate(W/2,isDg()?78:64)","g.translate(W/2,(isDg()?78:64)+hudTY())")
+# v475 · ข้อความเก่าที่ยังชี้ไปปุ่ม «สกิล» (ปุ่มนี้กลายเป็น «ตัวละคร» ตั้งแต่ v473)
+R("(เมนู → สกิล)'","(เมนู → ตัวละคร → สกิล)'")
+R("(เมนู ✨ สกิล → หน้าตัวละคร)","(เมนู → ตัวละคร)")
+R("อัปเลเวลแล้วอย่าลืมกด เมนู → สกิล เพื่อเพิ่มพลัง","อัปเลเวลแล้วอย่าลืมกด เมนู → ตัวละคร เพื่อลงแต้ม")
+R("เปิด เมนู → สกิล เพื่ออัปเกรด","เปิด เมนู → ตัวละคร เพื่ออัปเกรด")
+# v475 · สนามเกมค้างที่ความสูงเริ่มต้น (520) หลังเปิดเกม: v474 เรียก fitStage ระหว่างสคริปต์ยังโหลดไม่จบ → แตะ JB ก่อนประกาศ (TDZ) → H เปลี่ยนแต่ไม่ได้ applyQ
+#   แก้: applyQ ก่อนแตะ JB · กัน JB ด้วย try · ถ้าขนาด canvas ไม่ตรง H ให้ปรับใหม่ทุกครั้งที่ fitStage ทำงาน (ซ่อมตัวเองได้)
+R("if(nh!==H){H=nh;if(typeof JB!=='undefined')JB.y=H-84;applyQ()}","if(nh!==H||Math.abs(cv.height-H*dprFor())>1.5){H=nh;applyQ();try{if(typeof JB!=='undefined')JB.y=H-84}catch(e){}}")
+# v475 · พื้นวัง: ของตั้งพื้น (เสา/โคม/รูปปั้น) ไม่มีตัววาดพื้น → เดิมโยน error ทุกชิ้นแล้วกลืนไว้ตอนสร้างแคช · เช็กก่อนเรียก
+R("try{PALD[d.k](c,d,ox,oy,X1,Y1)}catch(e){}","try{const f=PALD[d.k];if(f)f(c,d,ox,oy,X1,Y1)}catch(e){}")
+# v475 · ตัวละครใหม่: เนื้อเรื่องเปิดค่าย (คัตซีน) เด้งแทรกระหว่างฉากบทนำ — stTick วิ่งทุก 0.4 วิแยกจากลูปเกม (ลูปเกมหยุดตอนบทนำ แต่ stTick ไม่หยุด)
+#   คัตซีนซ่อนลูกของ body ทั้งหมด → ฉากบทนำถูกซ่อนกลางคัน แล้วโผล่กลับมาหลังคัตซีนจบ (ลำดับกลับหัว) · แก้: ระหว่างบทนำ (PRO_ON หรือยังมี #procv) ถือว่ายังไม่สงบ
+R("function stCalm(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on)return false;","function stCalm(){if(!me.cls||!run||me.down>0||!ov.hidden||SD.on||window.PRO_ON||document.getElementById('procv'))return false;")
+# v475 · ประตูแสงดาว (ค่าย/เมืองหลวง) หลังจบภาค 5: แตะปุ่มประตูแล้วไม่ขึ้นหน้าเลือก «ลิฟต์ / เดินสะพานรุ่งอรุณ»
+#   ปุ่ม #gtb ส่ง MouseEvent เข้ามาเป็น GW → !GW เป็นเท็จเสมอ → ขึ้นลิฟต์ทันที (เดินสะพานได้แค่ทางออโต้เควส) · แก้: นับเป็นประตูเฉพาะของที่มี .to
+R("if(G.sky&&!GW&&typeof gP5end==='function'&&gP5end()){brgChoose(G);return}","if(G.sky&&!(GW&&GW.to!==undefined)&&typeof gP5end==='function'&&gP5end()){brgChoose(G);return}")
 exec(open('camp_warp.py').read())
 open(P,'w').write(s)
 print('ok')

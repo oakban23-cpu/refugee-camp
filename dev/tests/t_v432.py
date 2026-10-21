@@ -17,7 +17,7 @@ async def main():
         v2=await A.ev("()=>VZ3.vil.V.filter(v=>v.k==='w').map(v=>Math.round(v.x)+','+Math.round(v.y)).join('|')")
         rep('ค่ายมีชาวค่าย เด็ก ไก่ หมา และเดินไปมาจริง',v['n']==15 and set(v['k'])=={'w','s','kid','hen','dog'} and v['mv']!=v2,json.dumps(v['k']))
         idle=await A.ev("()=>new Promise(r=>setTimeout(()=>r($('topb').className),2300))")
-        rep('ยืนนิ่งในค่าย: แผงเควสแสดงเต็ม','vzmin' not in idle and 'vzhide' not in idle,idle)
+        rep('ยืนนิ่งในค่าย: แผงเควสไม่ถูกซ่อน (ตั้งแต่ v468 ย่อเป็นบรรทัดเดียวตามปกติ)','vzhide' not in idle,idle)
         await A.ev("()=>{enterMap(2,{x:900,y:1600})}");await A.wait(1500)
         mv=await A.ev("()=>new Promise(r=>{const m=mons.find(q=>q.t<3&&q.hp>0);if(m){m.x=me.x+80;m.y=me.y}setTimeout(()=>r($('topb').className),600)})")
         rep('มีมอนใกล้ตัว: แผงเควสย่อบรรทัดเดียว','vzmin' in mv,mv)

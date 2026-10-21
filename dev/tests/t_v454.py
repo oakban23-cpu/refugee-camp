@@ -9,7 +9,7 @@ GQ="()=>{gdEmit('q')}"
 def restart():
     env = dict(os.environ, PORT=str(PORT), DATA_DIR=DD, MVP_FAST='1', GD_FAST='1')
     q = subprocess.Popen(['node', 'server.js'], cwd=SRV, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-    for _ in range(60):
+    for _ in range(240):
         time.sleep(.3)
         try:
             import urllib.request; urllib.request.urlopen(URL + 'health', timeout=1); break

@@ -14,14 +14,18 @@ const server=http.createServer((req,res)=>{
   const P=getPage();if(!P){res.writeHead(500);return res.end('missing index.html')}
   if(req.headers['if-none-match']===P.etag){res.writeHead(304,{'ETag':P.etag,'Cache-Control':'no-cache'});return res.end()}
   const ae=String(req.headers['accept-encoding']||''),h={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache','ETag':P.etag,'Vary':'Accept-Encoding'};
-  let body=P.raw;if(/\bbr\b/.test(ae)){body=P.br;h['Content-Encoding']='br'}else if(/\bgzip\b/.test(ae)){body=P.gz;h['Content-Encoding']='gzip'}
+  let body=P.raw;if(P.br&&/\bbr\b/.test(ae)){body=P.br;h['Content-Encoding']='br'}else if(/\bgzip\b/.test(ae)){body=P.gz;h['Content-Encoding']='gzip'}
   h['Content-Length']=body.length;bytesOut+=body.length;res.writeHead(200,h);res.end(body);
 });
-/* หน้าเกมบีบอัดไว้ล่วงหน้า (br/gzip) + ETag ให้เบราว์เซอร์ใช้ของเดิมถ้าไม่เปลี่ยน */
+/* หน้าเกมบีบอัดไว้ล่วงหน้า (gzip ทันที · br ทำเบื้องหลัง) + ETag ให้เบราว์เซอร์ใช้ของเดิมถ้าไม่เปลี่ยน
+   v475: เดิมบีบ br ระดับ 10 แบบรอจนเสร็จก่อนเปิดพอร์ต (หน้าเกม ~4.8MB ใช้ CPU นานมาก → เซิร์ฟเวอร์ฟรีเปิดช้า/ตื่นช้าเป็นนาที)
+         ตอนนี้: gzip ระดับ 6 (ไว · ขนาดต่างจากระดับ 9 ไม่ถึง 0.3%) แล้วเปิดพอร์ตเลย · br ระดับ 9 ทำในเธรดเบื้องหลัง เสร็จแล้วค่อยเริ่มส่ง br */
 let PG=null;
 function getPage(){try{const st=fs.statSync(page);if(PG&&PG.mt===st.mtimeMs)return PG;const raw=fs.readFileSync(page);
-  PG={mt:st.mtimeMs,raw,gz:zlib.gzipSync(raw,{level:9}),br:zlib.brotliCompressSync(raw,{params:{[zlib.constants.BROTLI_PARAM_QUALITY]:10,[zlib.constants.BROTLI_PARAM_SIZE_HINT]:raw.length}}),etag:'"'+crypto.createHash('sha1').update(raw).digest('base64').slice(0,16)+'"'};
-  console.log('page '+raw.length+' → gzip '+PG.gz.length+' · br '+PG.br.length);return PG}catch(e){return PG}}
+  const P={mt:st.mtimeMs,raw,gz:zlib.gzipSync(raw,{level:6}),br:null,etag:'"'+crypto.createHash('sha1').update(raw).digest('base64').slice(0,16)+'"'};PG=P;
+  console.log('page '+raw.length+' → gzip '+P.gz.length);
+  zlib.brotliCompress(raw,{params:{[zlib.constants.BROTLI_PARAM_QUALITY]:9,[zlib.constants.BROTLI_PARAM_SIZE_HINT]:raw.length}},(e,b)=>{if(e||!b)return;P.br=b;console.log('page br '+b.length)});
+  return PG}catch(e){return PG}}
 getPage();
 const clients=new Set(),byUid=new Map();let nextId=1,hostByMap={},countByMap={},bytesOut=0,msgsOut=0;
 function frame(op,buf,z){const n=buf.length,b0=0x80|op|(z?0x40:0);let h;
@@ -454,7 +458,7 @@ function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();
   if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
     W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
 }
-const SRV_V='v474';
+const SRV_V='v475';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
