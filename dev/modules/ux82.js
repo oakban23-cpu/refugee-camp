@@ -92,7 +92,7 @@ ptMsg=(f=>function(d){try{if(d&&d.to===uid&&typeof d.from==='string'&&(d.op==='t
 
 /* ---------- ตามหา · ขุด (ต่อเฟรม) ---------- */
 function tmHud(o,S,d){let e=$('tmh');const app=$('app');if(!o){if(e)e.hidden=true;return}if(!e){e=document.createElement('div');e.id='tmh';e.innerHTML='<canvas width="96" height="70"></canvas><span></span>';(app||document.body).appendChild(e);e.onclick=()=>{const a=tmActive();tmUI(null,a&&a.id)};tmCSS()}
-  const nw=performance.now();if(!(e.__pt>nw-600)||e.hidden){e.__pt=nw;const r=cv.getBoundingClientRect(),ar=(app||document.body).getBoundingClientRect(),k=r.width/W;e.style.top=Math.round(r.top-ar.top+(20+40*2+8)*k+40)+'px';e.style.right=Math.round(ar.right-r.right+6)+'px'}e.hidden=false;
+  const nw=performance.now();if(!(e.__pt>nw-600)||e.hidden){e.__pt=nw;const r=cv.getBoundingClientRect(),ar=(app||document.body).getBoundingClientRect(),u=r.width/(cv.offsetWidth||r.width)||1,k=(cv.offsetWidth||r.width)/SW0;e.style.top=Math.round((r.top-ar.top)/u+(20+40*2+8)*k+40)+'px';e.style.right=Math.round((ar.right-r.right)/u+6)+'px'}e.hidden=false;
   const tp=tmTemp(d),sp=e.querySelector('span'),tx=tp[0]+' '+tp[1]+'<small>'+TMQ[o.q].n+(o.o?' · ของ'+o.n:'')+'</small>';if(sp.innerHTML!==tx){sp.innerHTML=tx;sp.style.color=tp[2]}
   if(e.dataset.id!==o.id||e.dataset.ok!==String(TMA.ok)){e.dataset.id=o.id;e.dataset.ok=String(TMA.ok);tmSketch(e.querySelector('canvas'),o)}}
 function tmTick(dt){if(!me.cls||!run)return;const now=performance.now();
