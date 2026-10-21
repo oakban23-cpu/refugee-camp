@@ -5,7 +5,7 @@ from h import *
 R=[]
 def rep(name, ok, info=''):
     R.append((name, ok, info)); print(('PASS ' if ok else 'FAIL ') + name, info, flush=True)
-FIT="()=>{const c=document.getElementById('c');return{H,ch:c.height,dpr:DPR,cssH:Math.round(c.getBoundingClientRect().height),exp:Math.round(H*c.clientWidth/W),JBy:JB.y}}"
+FIT="()=>{const c=document.getElementById('c');return{H,ch:c.height,dpr:DPR,cssH:Math.round(c.getBoundingClientRect().height),exp:Math.round(H*c.getBoundingClientRect().width/W),JBy:JB.y}}"
 ST="""()=>{const pc=document.getElementById('procv');return{pro:window.PRO_ON|0,proCv:pc?getComputedStyle(pc).visibility:null,sd:!!(SD&&SD.on),cz:!!(typeof CZ!=='undefined'&&CZ.on),tutI}}"""
 async def main():
     # ---- เซิร์ฟเวอร์เปิดไว (ไม่รอบีบอัด br) ----
