@@ -622,6 +622,12 @@ R("const near=[me,...(room.allPlayers?room.allPlayers.map(([u,x,y])=>({x,y})):Ob
 R("near.some(p=>Math.abs(p.x-m.x)<560&&Math.abs(p.y-m.y)<560)","near.some(p=>{const b=p.r>480?p.r+80:560;return Math.abs(p.x-m.x)<b&&Math.abs(p.y-m.y)<b})")
 # v479b จอเตี้ย: ป้ายแรงค์สไตล์ (วาดบนแคนวาส มุมซ้ายใต้การ์ดเควส) ทับจอยสติ๊ก → ย้ายไปซ้ายของปุ่มสกิล แถวล่าง
 R("const x=14,y=u61Y(),","const x=(VW.on&&VW.sh)?vwStyX():14,y=u61Y(),")
+# v479c จอกว้าง: แถบเลือดบอส + เกจทุบล้ม (ux60) กว้างเต็มจอ (W-172) ทับปุ่ม → กลางบน ระหว่างการ์ดสถานะกับแผนที่เล็ก กว้างไม่เกิน 460
+R("if(dd<650){const x0=72,bw=Math.max(150,W-172),by=(FEVC?48:12)+hudTY(),f=","if(dd<650){const BB=vwBossBar(),x0=BB?BB[0]:72,bw=BB?BB[1]:Math.max(150,W-172),by=BB?BB[2]:(FEVC?48:12)+hudTY(),f=")
+R("if(bo){const x0=72,bw=Math.max(150,W-172),by=(typeof FEVC!=='undefined'&&FEVC?48:12)+32+hudTY(),","if(bo){const BB=vwBossBar(),x0=BB?BB[0]:72,bw=BB?BB[1]:Math.max(150,W-172),by=BB?BB[2]+32:(typeof FEVC!=='undefined'&&FEVC?48:12)+32+hudTY(),")
+# v479c จอกว้าง: ป้ายของที่เก็บได้ (ux12 lfDraw · ชิดขวา W-8 ที่ H×0.33) ทับปุ่มสกิล/แถบปาร์ตี้ → ซ้ายของปุ่มสกิล (จอเตี้ย) / ซ้ายของคอลัมน์ขวา (จอสูง)
+R("let y=Math.round(H*.33);\n  for(let i=LFD.length-1;","let y=Math.round(VW.on?vwLfY():H*.33);\n  for(let i=LFD.length-1;")
+R("x=W-8-(1-e.a0)*30;g.globalAlpha=a;","x=(VW.on?vwLfX():W-8)-(1-e.a0)*30;g.globalAlpha=a;")
 exec(open('cgfast.py').read())
 exec(open('camp_warp.py').read())
 open(P,'w').write(s)

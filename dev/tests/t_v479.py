@@ -15,6 +15,9 @@ BOX="""()=>{const o={};const add=(k,e)=>{if(!e||e.hidden)return;const cs=getComp
   const c=cv.getBoundingClientRect(),k=c.width/W,jx=c.left+JB.x*k,jy=c.top+JB.y*k,jr=46*k;o.joy=[Math.round(jx-jr),Math.round(jy-jr),Math.round(jx+jr),Math.round(jy+jr)];
   const R=40,mx=c.left+(W-R-8)*k,my=c.top+(R+20)*k,mr=(R+6)*k;o.mini=[Math.round(mx-mr),Math.round(my-mr-6*k),Math.round(mx+mr),Math.round(my+mr)];
   try{if(U61.p>0){const sx=(VW.on&&VW.sh)?vwStyX():14,sy=u61Y(),kk=c.width/SW0;o.sty=[Math.round(c.left+sx*kk),Math.round(c.top+sy*kk),Math.round(c.left+(sx+62)*kk),Math.round(c.top+(sy+58)*kk)]}}catch(e){}
+  try{const bo=mons.find(m=>m.t===3);if(bo&&Math.hypot(bo.x-me.x,bo.y-me.y)<650){const kk=c.width/SW0,BB=VW.on?vwBossBar():null,x0=BB?BB[0]:72,bw=BB?BB[1]:Math.max(150,W-172),by=BB?BB[2]:12+hudTY();
+    o.boss=[Math.round(c.left+(x0-2)*kk),Math.round(c.top+(by-2)*kk),Math.round(c.left+(x0+bw+2)*kk),Math.round(c.top+(by+45)*kk)]}}catch(e){o.bossErr=String(e)}
+  try{if(LFD.length){const kk=c.width/SW0,x=VW.on?vwLfX():W-8,y=VW.on?vwLfY():Math.round(H*.33);o.loot=[Math.round(c.left+(x-120)*kk),Math.round(c.top+(y-11)*kk),Math.round(c.left+x*kk),Math.round(c.top+(y+9+24*(LFD.length-1))*kk)]}}catch(e){}
   return {o,vw:innerWidth,vh:innerHeight,W,H,k:VW.k}}"""
 def overlaps(b):
     o=b['o'];bad=[];ks=list(o)
@@ -53,6 +56,14 @@ async def main():
         await A.wait(2500);await A.ev("()=>{ov.hidden=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};for(const m of mons)m.x=-9999}");await A.wait(1000)
         bx=await A.ev(BOX);bad,out=overlaps(bx)
         rep('จอเตี้ยมาก 788×288 (แมพสนาม + ปาร์ตี้ + ติดตามแผนที่สมบัติ): ไม่ทับกัน', not bad and not out and all(k in bx['o'] for k in ('ptyhud','tmh','fvg','sk','joy')), {'bad':bad,'out':out,'keys':list(bx['o'])})
+        # บอส: แถบเลือด + เกจทุบล้ม อยู่กลางแถวบน ไม่ยาวเต็มจอทับปุ่ม · ป้ายของที่เก็บได้ไม่ทับปุ่มสกิล
+        await A.ev("""()=>{PTY=null;setInterval(()=>{fillT=1e9;sp=1e9;bossCd=1e9;mons=mons.filter(m=>m.__t);for(const m of mons){m.x=m.tx=m.__t[0];m.y=m.ty=m.__t[1];m.hp=Math.max(m.hp,m.mh*.62)}},50);
+          const x=me.x+170,y=me.y-20;mons.push({id:++mid,x,y,tx:x,ty:y,t:3,L:60,p:1,hx:x,hy:y,hp:6e5,mh:1e6,tg:null,tt:0,ac:0,w:null,lg:0,__t:[x,y]});
+          const L=['+1,276 ทอง','+3,400 XP','+1 หินตีบวก'];let i=0;window.__lf=setInterval(()=>{try{lfPush({v:L[i++%3]})}catch(e){}},600)}""")
+        await A.wait(6500)
+        bx=await A.ev(BOX);bad,out=overlaps(bx);bb=bx['o'].get('boss')
+        rep('จอเตี้ย: แถบเลือดบอส + เกจทุบล้มอยู่กลางแถวบน กว้าง ≤460 หน่วย ไม่ทับการ์ดสถานะ/ปุ่ม · ป้ายของที่เก็บได้ไม่ทับปุ่มสกิล', bb and not bad and not out and 'loot' in bx['o'] and bb[0]>=bx['o']['hud'][2] and (bb[2]-bb[0])<=470*bx['k']+4, {'bad':bad,'out':out,'boss':bb,'hud':bx['o'].get('hud')})
+        await A.ev("()=>{clearInterval(window.__lf);mons=[]}")
         await A.ev("()=>{PTY=null;clearInterval(window.__fv)}")
         await A.pg.set_viewport_size({'width':844,'height':390});await A.wait(900)
         rep('แตะจอแนวนอน: พิกัดแตะตรงกับสนาม (กลางจอ = กลางสนาม)', abs(r[0]-r[4]/2)<=2 and abs(r[1]-r[5]/2)<=2 and abs(r[2]-r[4]*.25)<=2 and abs(r[3]-r[5]*.75)<=2, r)
@@ -79,6 +90,11 @@ async def main():
         await P.wait(1500)
         vr=await P.ev("()=>[window.lastPres&&lastPres.vr,vwVR()]")
         rep('ส่งรัศมีที่จอเห็น (vr) ไปกับ presence', vr[0] and 600<=vr[0]<=800 and vr[0]==vr[1], vr)
+        await P.ev("""()=>{const x=me.x+170,y=me.y-20;const bo={id:++mid,x,y,tx:x,ty:y,t:3,L:60,p:1,hx:x,hy:y,hp:6e5,mh:1e6,tg:null,tt:0,ac:0,w:null,lg:0};mons.push(bo);window.__bo=setInterval(()=>{if(!mons.includes(bo))mons.push(bo);bo.x=bo.tx=x;bo.y=bo.ty=y;bo.hp=6e5},50)}""")
+        await P.wait(6500)
+        bx=await P.ev(BOX);bad,out=overlaps(bx);bb=bx['o'].get('boss')
+        await P.ev("()=>{clearInterval(window.__bo);mons=mons.filter(m=>m.t!==3)}")
+        rep('PC: แถบเลือดบอสกลางบน (ไม่ยาวเต็มจอ) ไม่ทับปุ่ม', bb and not bad and not out and (bb[2]-bb[0])<=470*bx['k']+4 and abs((bb[0]+bb[2])/2-bx['vw']/2)<bx['vw']*.2, {'bad':bad,'boss':bb})
         await P.ev("()=>btyUI()");await P.wait(500)
         o=await P.ev("()=>{const r=ov.getBoundingClientRect(),x=$('ovx').getBoundingClientRect(),bd=$('vwbd');return [Math.round(r.left),Math.round(r.right),Math.round(x.left),Math.round(x.right),bd?getComputedStyle(bd).display:'',innerWidth]}")
         rep('PC: หน้าต่าง (ค่าหัว) อยู่กลางจอ กว้าง ≤600 · ปุ่ม ✕ อยู่ในหน้าต่าง · พื้นหลังมืด', o[1]-o[0]<=601 and abs((o[0]+o[1])/2-o[5]/2)<=2 and o[0]<o[2] and o[3]<=o[1] and o[4]=='block', o)

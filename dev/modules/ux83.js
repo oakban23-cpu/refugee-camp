@@ -51,7 +51,7 @@ function vwPos(){if(!VW.on)return;const k=VW.k/VW.uz,hL=VW.ch/VW.uz,Rs=document.
     const ft=at+28*k+8;Rs.setProperty('--vwfgt',px(ft));Rs.setProperty('--vwfgr',px(mmR));
     const top=Math.max(104*k,ft+15)+6,sc=Math.max(.58,Math.min(.9,(hL-12-top)/240));
     if(sk){sk.style.transform='scale('+sc.toFixed(3)+')';sk.style.transformOrigin='100% 100%'}
-    Rs.setProperty('--vwskw',px(240*sc+10));VW.skL=(VW.cw/VW.uz-(240*sc+10))/k;Rs.setProperty('--vwskh',px(240*sc+12));
+    Rs.setProperty('--vwskw',px(240*sc+10));VW.skL=(VW.cw/VW.uz-(240*sc+10))/k;VW.skT=(hL-12-240*sc)/k;Rs.setProperty('--vwskh',px(240*sc+12));
     if(p){p.style.top='';p.style.right=''}
     if(cl){cl.style.bottom=''}
   }else{const at=107*k+1;
@@ -62,6 +62,18 @@ function vwPos(){if(!VW.on)return;const k=VW.k/VW.uz,hL=VW.ch/VW.uz,Rs=document.
     if(cl){cl.style.bottom=px(183*k)}}
   if(cl)try{logFit(cl)}catch(e){}
   vwStq()}
+/* v479c แถบเลือดบอส (+เกจทุบล้มใต้แถบ) ในจอกว้าง: กลางแถบบน ระหว่างการ์ดสถานะกับกลุ่มขวาบน (แผนที่เล็ก/ปุ่มเสียงแถวบน/ป้าย)
+   กว้างไม่เกิน 460 หน่วย · ตอนแถบขึ้นในจอเตี้ย ป้ายเควสย่อ/แถบปาร์ตี้ที่อยู่แถวบนเลื่อนลง (body.vwbb) */
+function vwBB(){if(!VW.on){VW.bb=null;return}const c=cv.getBoundingClientRect();if(!c.width)return;const kv=c.width/SW0;let l=8;const h=$('hud');
+  if(h){const r=h.getBoundingClientRect();if(r.width)l=(r.right-c.left)/kv}let rr=SW0-96;
+  for(const id of['aud','u64b','tmh']){const e=$(id);if(!e||e.hidden)continue;const r=e.getBoundingClientRect();if(!r.width||r.top-c.top>60*kv)continue;rr=Math.min(rr,(r.left-c.left)/kv)}
+  VW.bb={l:l+8,r:rr-8}}
+function vwBossBar(){if(!VW.on)return null;if(!VW.bb)vwBB();const B=VW.bb||{l:80,r:SW0-100},av=B.r-B.l;if(av<130)return null;const bw=Math.min(460,av);
+  VW.bbT=performance.now();if(!VW.bbOn){VW.bbOn=1;document.body.classList.add('vwbb')}return[Math.round(B.l+(av-bw)/2),Math.round(bw),8]}
+setInterval(()=>{try{if(VW.on)vwBB();if(VW.bbOn&&(!VW.on||performance.now()-VW.bbT>700)){VW.bbOn=0;document.body.classList.remove('vwbb')}}catch(e){}},300);
+/* ป้ายของที่เก็บได้ (ux12 lfDraw): จอเตี้ย = ซ้ายของกลุ่มปุ่มสกิล เริ่มที่ขอบบนกลุ่ม · จอสูง = ซ้ายของคอลัมน์ขวา (ปุ่มเสียง/ปาร์ตี้) ที่ H×0.33 */
+function vwLfX(){return VW.sh?Math.round((VW.skL||SW0-230)-8):Math.round(SW0-6-130*VW.uz/VW.k)}
+function vwLfY(){const h=ZM.on?ZM.h0:H;return VW.sh?Math.round((VW.skT||h*.33)+14):Math.round(h*.33)}
 /* ป้ายแรงค์สไตล์ (ux61 · กล่อง 62×58 หน่วย) ในจอเตี้ย: ซ้ายของกลุ่มปุ่มสกิล ชิดล่าง */
 function vwStyX(){return Math.max(140,Math.round((VW.skL||SW0-230)-72))}
 u61Y=(f=>function(){if(VW.on&&VW.sh)return Math.round((ZM.on?ZM.h0:H)-84);return f.apply(this,arguments)})(u61Y);
@@ -99,6 +111,7 @@ function vwCSS(){vwBd();if($('vwcss'))return;const st=document.createElement('st
  'body.vw #fvg{top:var(--vwfgt,142px)!important;right:var(--vwfgr,10px)!important}body.vw #tmh{top:var(--vwtmt)!important;right:var(--vwtmr)!important}'+
  'body.vws #u64b{top:var(--vwu6t)!important;right:var(--vwu6r)!important}body.vws #tmh{transform:scale(.85);transform-origin:100% 0}'+
  'body.vws #ptyhud{left:238px!important;right:auto!important;top:72px!important;transform:scale(.82);transform-origin:0 0}'+
+ 'body.vws.vwbb #rbq{top:44px!important}body.vws.vwbb #rnq{top:74px!important}body.vws.vwbb #ptyhud{top:106px!important}'+
  'body.vws #stq[style*="max-height"]{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 12px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 12px),transparent)}'+
  'body.vws #rdb{right:calc(var(--vwskw) + 8px)!important;bottom:12px!important;left:auto!important}'+
  'body.vws #skl{right:calc(var(--vwskw) + 8px)!important;bottom:58px!important}body.vws #peb{right:calc(var(--vwskw) + 8px)!important;bottom:104px!important}'+
