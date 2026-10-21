@@ -9,11 +9,13 @@ ST="""()=>{const r=cv.getBoundingClientRect(),a=$('app'),rt=$('rot');return {on:
   r:[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)],tf:a.style.transform,aw:a.style.width,cvw:cv.style.width,
   rot:rt?getComputedStyle(rt).display:'none',body:document.body.className,vr:vwVR(),iw:innerWidth,ih:innerHeight}}"""
 # กล่องของปุ่ม/แผงหลักที่ต้องไม่ทับกัน (พิกัดจอจริง)
-BOX="""()=>{const o={};const add=(k,e)=>{if(!e||e.hidden)return;const cs=getComputedStyle(e);if(cs.display==='none'||cs.visibility==='hidden')return;const r=e.getBoundingClientRect();if(r.width<4||r.height<4)return;o[k]=[r.left,r.top,r.right,r.bottom]};
-  add('hud',$('hud'));add('mn',$('mn'));add('evt',$('evt'));add('cht',$('cht'));add('emb',$('emb'));add('stq',$('stq'));add('aud',$('aud'));add('rnq',$('rnq'));add('rbq',$('rbq'));
-  const sk=$('sk');if(sk){let L=1e9,T=1e9,Rr=-1e9,B=-1e9;for(const b of sk.querySelectorAll('button')){if(b.hidden||getComputedStyle(b).display==='none')continue;const r=b.getBoundingClientRect();if(r.width<4)continue;L=Math.min(L,r.left);T=Math.min(T,r.top);Rr=Math.max(Rr,r.right);B=Math.max(B,r.bottom)}if(Rr>L)o.sk=[L,T,Rr,B]}
-  const c=cv.getBoundingClientRect(),k=c.width/W,jx=c.left+JB.x*k,jy=c.top+JB.y*k,jr=46*k;o.joy=[jx-jr,jy-jr,jx+jr,jy+jr];
-  return {o,vw:innerWidth,vh:innerHeight}}"""
+BOX="""()=>{const o={};const add=(k,e)=>{if(!e||e.hidden)return;const cs=getComputedStyle(e);if(cs.display==='none'||cs.visibility==='hidden')return;const r=e.getBoundingClientRect();if(r.width<4||r.height<4)return;o[k]=[Math.round(r.left),Math.round(r.top),Math.round(r.right),Math.round(r.bottom)]};
+  for(const id of['hud','mn','evt','cht','emb','stq','bfb','aud','rnq','rbq','fvg','u64b','tmh','ptyhud','rdb'])add(id,$(id));
+  const sk=$('sk');if(sk){let L=1e9,T=1e9,Rr=-1e9,B=-1e9;for(const b of sk.querySelectorAll('button')){if(b.hidden||getComputedStyle(b).display==='none')continue;const r=b.getBoundingClientRect();if(r.width<4)continue;L=Math.min(L,r.left);T=Math.min(T,r.top);Rr=Math.max(Rr,r.right);B=Math.max(B,r.bottom)}if(Rr>L)o.sk=[Math.round(L),Math.round(T),Math.round(Rr),Math.round(B)]}
+  const c=cv.getBoundingClientRect(),k=c.width/W,jx=c.left+JB.x*k,jy=c.top+JB.y*k,jr=46*k;o.joy=[Math.round(jx-jr),Math.round(jy-jr),Math.round(jx+jr),Math.round(jy+jr)];
+  const R=40,mx=c.left+(W-R-8)*k,my=c.top+(R+20)*k,mr=(R+6)*k;o.mini=[Math.round(mx-mr),Math.round(my-mr-6*k),Math.round(mx+mr),Math.round(my+mr)];
+  try{if(U61.p>0){const sx=(VW.on&&VW.sh)?vwStyX():14,sy=u61Y(),kk=c.width/SW0;o.sty=[Math.round(c.left+sx*kk),Math.round(c.top+sy*kk),Math.round(c.left+(sx+62)*kk),Math.round(c.top+(sy+58)*kk)]}}catch(e){}
+  return {o,vw:innerWidth,vh:innerHeight,W,H,k:VW.k}}"""
 def overlaps(b):
     o=b['o'];bad=[];ks=list(o)
     for i in range(len(ks)):
@@ -41,6 +43,18 @@ async def main():
         bx=await A.ev(BOX);bad,out=overlaps(bx)
         rep('มือถือแนวนอน: ปุ่ม/การ์ด/จอยสติ๊กไม่ทับกันและอยู่ในจอ', not bad and not out and 'joy' in bx['o'] and 'sk' in bx['o'], {'bad':bad,'out':out,'keys':list(bx['o'])})
         r=await A.ev(PTC)
+        # จอเตี้ยมาก (มือถือ Android แนวนอน มีแถบที่อยู่เว็บ ~788×288): เกจคลั่ง · ปุ่มเดินไวในค่าย · แรงค์สไตล์ · ปาร์ตี้
+        await A.pg.set_viewport_size({'width':788,'height':288});await A.wait(900)
+        await A.ev("()=>{window.__fv=setInterval(()=>{try{FV.g=Math.max(FV.g,41);fvHud();U61.p=Math.max(U61.p,120);U61.r=Math.max(U61.r,1);U61.act=performance.now()}catch(e){}},100)}");await A.wait(900)
+        bx=await A.ev(BOX);bad,out=overlaps(bx)
+        rep('จอเตี้ยมาก 788×288 (ในค่าย): เกจคลั่ง/ปุ่มเดินไว/ปุ่มเสียง/แผนที่เล็ก/ปุ่มสกิล/แรงค์สไตล์/การ์ดเควส/จอยไม่ทับกัน', not bad and not out and all(k in bx['o'] for k in ('fvg','u64b','sk','joy','sty','aud')), {'bad':bad,'out':out,'keys':list(bx['o'])})
+        await A.ev("""()=>{tmGive(2,'t');const T=tmSt();const o=T.L[T.L.length-1];T.a=o.id;const t=Date.now()+9e8;
+          PTY={id:'zz',lead:uid,mem:[{u:uid,n:myName,hp:1,mh:1,mp:o.mp,s:t,cls:me.cls,lv:60},{u:'a1',n:'เพื่อนหนึ่ง',hp:50,mh:100,mp:o.mp,s:t,cls:'mage',lv:60},{u:'a2',n:'เพื่อนสอง',hp:90,mh:100,mp:o.mp,s:t,cls:'archer',lv:60},{u:'a3',n:'เพื่อนสาม',hp:20,mh:100,mp:o.mp,s:t,cls:'melee',lv:60}]};enterMap(o.mp,{x:CX,y:CY})}""")
+        await A.wait(2500);await A.ev("()=>{ov.hidden=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};for(const m of mons)m.x=-9999}");await A.wait(1000)
+        bx=await A.ev(BOX);bad,out=overlaps(bx)
+        rep('จอเตี้ยมาก 788×288 (แมพสนาม + ปาร์ตี้ + ติดตามแผนที่สมบัติ): ไม่ทับกัน', not bad and not out and all(k in bx['o'] for k in ('ptyhud','tmh','fvg','sk','joy')), {'bad':bad,'out':out,'keys':list(bx['o'])})
+        await A.ev("()=>{PTY=null;clearInterval(window.__fv)}")
+        await A.pg.set_viewport_size({'width':844,'height':390});await A.wait(900)
         rep('แตะจอแนวนอน: พิกัดแตะตรงกับสนาม (กลางจอ = กลางสนาม)', abs(r[0]-r[4]/2)<=2 and abs(r[1]-r[5]/2)<=2 and abs(r[2]-r[4]*.25)<=2 and abs(r[3]-r[5]*.75)<=2, r)
         # เมนูเต็มความสูงจอเตี้ย
         await A.ev("()=>{try{menuToggle(true)}catch(e){$('mn').click()}}");await A.wait(500)

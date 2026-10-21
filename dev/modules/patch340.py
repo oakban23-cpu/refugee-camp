@@ -620,6 +620,8 @@ R("presence:p=>{st.pres=p;","presence:p=>{try{if(window.vwVR){const v=vwVR();if(
 # โฮสต์ส่งมอนในกรอบรอบผู้เล่นแต่ละคนตามรัศมีจอ (all[4] = vr จากเซิร์ฟเวอร์) แทนกรอบ 560 คงที่
 R("const near=[me,...(room.allPlayers?room.allPlayers.map(([u,x,y])=>({x,y})):Object.values(others))];","const near=[me,...(room.allPlayers?room.allPlayers.map(([u,x,y,d,r])=>({x,y,r:r|0})):Object.values(others))];")
 R("near.some(p=>Math.abs(p.x-m.x)<560&&Math.abs(p.y-m.y)<560)","near.some(p=>{const b=p.r>480?p.r+80:560;return Math.abs(p.x-m.x)<b&&Math.abs(p.y-m.y)<b})")
+# v479b จอเตี้ย: ป้ายแรงค์สไตล์ (วาดบนแคนวาส มุมซ้ายใต้การ์ดเควส) ทับจอยสติ๊ก → ย้ายไปซ้ายของปุ่มสกิล แถวล่าง
+R("const x=14,y=u61Y(),","const x=(VW.on&&VW.sh)?vwStyX():14,y=u61Y(),")
 exec(open('cgfast.py').read())
 exec(open('camp_warp.py').read())
 open(P,'w').write(s)
