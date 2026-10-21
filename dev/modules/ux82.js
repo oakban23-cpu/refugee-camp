@@ -92,7 +92,7 @@ ptMsg=(f=>function(d){try{if(d&&d.to===uid&&typeof d.from==='string'&&(d.op==='t
 
 /* ---------- ตามหา · ขุด (ต่อเฟรม) ---------- */
 function tmHud(o,S,d){let e=$('tmh');const app=$('app');if(!o){if(e)e.hidden=true;return}if(!e){e=document.createElement('div');e.id='tmh';e.innerHTML='<canvas width="96" height="70"></canvas><span></span>';(app||document.body).appendChild(e);e.onclick=()=>{const a=tmActive();tmUI(null,a&&a.id)};tmCSS()}
-  const nw=performance.now();if(!(e.__pt>nw-600)||e.hidden){e.__pt=nw;const r=cv.getBoundingClientRect(),ar=(app||document.body).getBoundingClientRect(),k=r.width/W;e.style.top=Math.round(r.top-ar.top+(20+40*2+14)*k)+'px';e.style.right=Math.round(ar.right-r.right+6)+'px'}e.hidden=false;
+  const nw=performance.now();if(!(e.__pt>nw-600)||e.hidden){e.__pt=nw;const r=cv.getBoundingClientRect(),ar=(app||document.body).getBoundingClientRect(),k=r.width/W;e.style.top=Math.round(r.top-ar.top+(20+40*2+8)*k+40)+'px';e.style.right=Math.round(ar.right-r.right+6)+'px'}e.hidden=false;
   const tp=tmTemp(d),sp=e.querySelector('span'),tx=tp[0]+' '+tp[1]+'<small>'+TMQ[o.q].n+(o.o?' · ของ'+o.n:'')+'</small>';if(sp.innerHTML!==tx){sp.innerHTML=tx;sp.style.color=tp[2]}
   if(e.dataset.id!==o.id||e.dataset.ok!==String(TMA.ok)){e.dataset.id=o.id;e.dataset.ok=String(TMA.ok);tmSketch(e.querySelector('canvas'),o)}}
 function tmTick(dt){if(!me.cls||!run)return;const now=performance.now();
@@ -110,7 +110,7 @@ function tmDigStop(m){TMS.dig=null;const e=$('tmdg');if(e)e.remove();if(m)banner
 function tmDigStart(){const o=tmActive(),S=o&&tmSpot(o);if(!S||curMap!==o.mp||TMS.dig)return;if(Math.hypot(me.x-S.x,me.y-S.y)>TMDR+8)return;
   TMS.dig={id:o.id,o:o.o||'',q:o.q,mp:o.mp,x:me.x,y:me.y,sx:S.x,sy:S.y,t0:performance.now()};let e=$('tmdg');if(!e){e=document.createElement('div');e.id='tmdg';($('app')||document.body).appendChild(e)}e.innerHTML='⛏️ กำลังขุด…<i><b></b></i>';tmCSS();try{sfx('hit')}catch(e){}}
 try{bars=(f=>function(){const r=f.apply(this,arguments);try{TMS.near=0;TMS.vn=0;if(me.cls&&ov.hidden&&!SD.on&&!(typeof BTYN!=='undefined'&&BTYN.near)){const b=$('npcb');
-  if(TMV){const d=Math.hypot(me.x-CX,me.y-(CY+330));if(d<60){b.textContent='🚪 ออกจากห้องทองคำ';b.style.display='block';TMS.vn=2}}
+  if(TMV){const d=Math.hypot(me.x-CX,me.y-(CY+345));if(d<60){b.textContent='🚪 ออกจากห้องทองคำ';b.style.display='block';TMS.vn=2}}
   else{const o=tmActive(),S=o&&curMap===o.mp?tmSpot(o):null;if(S&&!TMS.dig&&Math.hypot(me.x-S.x,me.y-S.y)<TMDR){b.textContent='⛏️ ขุดสมบัติตรงนี้';b.style.display='block';TMS.near=1}
     else if(TMS.vp&&TMS.vp.mp===curMap&&performance.now()<TMS.vp.until&&Math.hypot(me.x-TMS.vp.x,me.y-TMS.vp.y)<70){b.textContent='🌀 เข้าห้องทองคำ';b.style.display='block';TMS.vn=1}}}}catch(e){}return r})(bars)}catch(e){}
 setTimeout(()=>{const b=$('npcb');if(b)b.addEventListener('click',e=>{if(TMS.near||TMS.vn){e.stopImmediatePropagation();e.preventDefault();if(TMS.near)tmDigStart();else if(TMS.vn===1)tmVaultEnter(TMS.vp);else tmVaultExit()}},true)},0);
@@ -118,10 +118,10 @@ setTimeout(()=>{const b=$('npcb');if(b)b.addEventListener('click',e=>{if(TMS.nea
 /* ---------- ผลการขุด ---------- */
 function tmDug(D){const T=tmSt(),own=T.L.find(q=>q.id===D.id);
   if(own){T.L=T.L.filter(q=>q.id!==D.id);if(T.a===D.id)T.a=T.L[0]?T.L[0].id:''}else if(D.o){try{ptOut(D.o,'tmx',{id:D.id})}catch(e){}delete TMS.pt[D.o]}
-  T.n.d++;const P=TMOUT[D.q]||TMOUT[1],r=Math.random(),k=r<P[0]?'c':r<P[0]+P[1]?'g':'v';const L=Math.max(1,(WMLV[curMap]?WMLV[curMap][1]:me.lv)|0);
+  T.n.d++;const P=TMOUT[D.q]||TMOUT[1],r=typeof window.__tmR==='number'?window.__tmR:Math.random(),k=r<P[0]?'c':r<P[0]+P[1]?'g':'v';const L=Math.max(1,(WMLV[curMap]?WMLV[curMap][1]:me.lv)|0);
   fx({k:'tmdg',x:Math.round(D.sx),y:Math.round(D.sy),r:40,q:D.q,o:k,L,pu:PTY&&PTY.mem.length>1?PTY.id:''});
   if(k==='g'){T.n.g++;fx({k:'tmsum',mp:curMap,x:Math.round(D.sx),y:Math.round(D.sy),q:D.q,o:uid,pu:PTY&&PTY.mem.length>1?PTY.id:'',L});banner={s:'👹 ผู้พิทักษ์สมบัติโผล่ออกมาจากหลุม! ล้มมันเพื่อเปิดหีบ',t:4}}
-  else if(k==='v'){T.n.v++;const vid=80001+hseed('vault'+uid+':'+D.id)%9998;TMS.vp={vid,x:D.sx,y:D.sy,q:D.q,L,mp:curMap,o:uid,until:performance.now()+15000};fx({k:'tmvp',x:Math.round(D.sx),y:Math.round(D.sy),r:46,vid,q:D.q,L,o:uid,pu:PTY&&PTY.mem.length>1?PTY.id:'',dur:15});banner={s:'🌀 ประตูลับสู่ห้องทองคำเปิดแล้ว! เดินเข้าประตูภายใน 15 วิ',t:5}}
+  else if(k==='v'){T.n.v++;const vid=100001+hseed('vault'+uid+':'+D.id)%9998;TMS.vp={vid,x:D.sx,y:D.sy,q:D.q,L,mp:curMap,o:uid,until:performance.now()+15000};fx({k:'tmvp',x:Math.round(D.sx),y:Math.round(D.sy),r:46,vid,q:D.q,L,o:uid,pu:PTY&&PTY.mem.length>1?PTY.id:'',dur:15});banner={s:'🌀 ประตูลับสู่ห้องทองคำเปิดแล้ว! เดินเข้าประตูภายใน 15 วิ',t:5}}
   else{T.n.c++;banner={s:'📦 เจอหีบสมบัติ!',t:3}}
   try{writeSave()}catch(e){}}
 function tmPartyOK(pu,o){return o===uid||(!!pu&&PTY&&PTY.id===pu)}
@@ -146,11 +146,11 @@ function tmGuardSpawn(o){if(!nmOK())return;if(mons.some(m=>m.nm&&(m.nm&TMGB)&&m.
   fx({k:'nmbs',x:Math.round(x),y:Math.round(y),r:90,c,L})}
 nmKill=(f=>function(o){const r=f.apply(this,arguments);try{if(((o.c|0)&TMGB)&&me.cls&&me.down<=0&&Math.hypot(me.x-(+o.x||0),me.y-(+o.y||0))<=560&&tmPartyOK(o.pu,o.o)){const q=Math.max(1,Math.min(3,o.q|0));tmChest(q,Math.max(1,o.L|0),+o.x,+o.y,1);if(o.o===uid)tmSt().n.c++}}catch(e){}return r})(nmKill);
 
-/* ---------- ห้องทองคำ (แมพแยกต่อการขุด 80001–89998) ---------- */
+/* ---------- ห้องทองคำ (แมพแยกต่อการขุด 100001–109998 · พ้นช่วงดันเจี้ยน 10000–89999 และเต็นท์ 90001–99998 · เซิร์ฟเวอร์รับ mp ถึง 199999) ---------- */
 function tmVaultMap(vid,q,L){return MAPS[vid]={n:'ห้องทองคำ',sx:CX,sy:CY+300,sr:0,seed:91,bg:'#120a02',tile:'#120a02',safe:'#120a02',ring:'rgba(0,0,0,0)',t1:'#120a02',t2:'#120a02',d1:'#120a02',d2:'#120a02',nests:[],hub:1,vault:{q,L},
   gates:[],qk:1,ql:1,npc:{x:-9999,y:-9999,n:'',L:1},boss:{x:-9999,y:-9999,n:'-',hp:1,xp:0,L:1,rm:0,g:0,dm:1,tn:1,sm:0,col:'#6a4a98',bar:'#6a4a9a',ln:'#c8a8ff',rec:'',pos:''}}}
 function tmVaultEnter(V){if(!V||!me.cls||me.down>0)return;const q=Math.max(1,Math.min(3,V.q|0)),L=Math.max(1,V.L|0),back={mp:curMap,x:V.x,y:V.y+50},tr=Math.max(1,tierRw());tmVaultMap(V.vid,q,L);TMS.vp=null;
-  try{FS.open&&fsClose()}catch(e){}try{WP&&wpCancel()}catch(e){}ov.hidden=true;try{sfx('gate')}catch(e){}enterMap(V.vid,{x:CX,y:CY+290});
+  try{FS.open&&fsClose()}catch(e){}try{WP&&wpCancel()}catch(e){}ov.hidden=true;try{sfx('gate')}catch(e){}enterMap(V.vid,{x:CX,y:CY+190});try{trees.length=0}catch(e){}
   TMV={vid:V.vid,q,L,back,until:performance.now()+60000,ch:[[CX-230,CY-120,0],[CX+230,CY-120,0],[CX,CY-280,0]],gs:0};
   const n=22+q*4,gv=Math.max(5,Math.round(14*L*q*tr));for(let i=0;i<n;i++){const a=i*2.399,rr=90+(i*53)%250;drops.push({x:CX+Math.cos(a)*rr,y:CY+Math.sin(a)*rr*.8,k:'g',v:gv,t:70})}
   banner={s:'🪙 ห้องทองคำ! เก็บทองให้ได้มากที่สุดใน 60 วิ · หีบ 3 ใบ · ไล่จับก็อบลินถุงทอง',t:5};try{sfx('lvl')}catch(e){}}
@@ -160,7 +160,7 @@ function tmVaultTick(dt,now){const V=TMV,left=Math.max(0,Math.ceil((V.until-now)
   if(isHost())for(const m of mons){const dx=m.x-CX,dy=(m.y-CY)/.82,d=Math.hypot(dx,dy);if(d>380){m.x=CX+dx/d*380;m.y=CY+dy/d*380*.82}}
   for(const c of V.ch){if(!c[2]&&Math.hypot(me.x-c[0],me.y-c[1])<40){c[2]=1;tmChest(V.q,V.L,c[0],c[1]+20,0);try{fxs.push({k:'tmch',x:c[0],y:c[1],r:30,t:1,d:1,s:0})}catch(e){}}}
   if(now>=V.until){banner={s:'🪙 หมดเวลาห้องทองคำ — กลับสู่โลกภายนอก',t:3};tmVaultExit()}}
-try{tentCollide=(f=>function(){const r=f.apply(this,arguments);try{const M=MAPS[curMap];if(M&&M.vault){const dx=me.x-CX,dy=(me.y-CY)/.82,d=Math.hypot(dx,dy),R=400;if(d>R){me.x=CX+dx/d*R;me.y=CY+dy/d*R*.82}}}catch(e){}return r})(tentCollide)}catch(e){}
+try{tentCollide=(f=>function(){const r=f.apply(this,arguments);try{const M=MAPS[curMap];if(M&&M.vault){const dx=me.x-CX,dy=(me.y-CY)/.82,d=Math.hypot(dx,dy),R=430;if(d>R){me.x=CX+dx/d*R;me.y=CY+dy/d*R*.82}}}catch(e){}return r})(tentCollide)}catch(e){}
 drawTent=(f=>function(){const M=MAPS[curMap];if(M&&M.vault){try{tmVaultDraw(M)}catch(e){}return}return f.apply(this,arguments)})(drawTent);
 function tmVaultDraw(M){const t=performance.now()/1000,R=440;g.save();g.fillStyle='#0c0702';g.fillRect(cam.x-30,cam.y-30,W+60,H+60);
   /* พื้นหินอ่อนทอง */const gr=g.createRadialGradient(CX,CY,40,CX,CY,R);gr.addColorStop(0,'#8a6420');gr.addColorStop(.6,'#5a3e12');gr.addColorStop(1,'#2a1a06');g.fillStyle=gr;g.beginPath();g.ellipse(CX,CY,R,R*.82,0,0,7);g.fill();
@@ -172,7 +172,7 @@ function tmVaultDraw(M){const t=performance.now()/1000,R=440;g.save();g.fillStyl
   /* เสา */for(let i=0;i<8;i++){const a=i*.785+.39,x=CX+Math.cos(a)*(R+6),y=CY+Math.sin(a)*(R+6)*.82;g.fillStyle='#3a2810';g.fillRect(x-9,y-70,18,74);g.fillStyle='#c8a050';g.fillRect(x-11,y-74,22,6);g.fillRect(x-11,y,22,5);glowAt(x,y-80,12,'255,190,90',.5+.2*Math.sin(t*3+i))}
   /* หีบ */for(const c of (TMV?TMV.ch:[])){const [x,y,o]=c;g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+12,20,6,0,0,7);g.fill();g.fillStyle=o?'#5a3a18':'#8a5a24';g.fillRect(x-17,y-8,34,20);g.fillStyle='#d8a838';g.fillRect(x-17,y-2,34,3);g.fillRect(x-2,y-8,4,20);
     if(!o){g.fillStyle='#a8702c';g.beginPath();g.moveTo(x-17,y-8);g.quadraticCurveTo(x,y-22,x+17,y-8);g.closePath();g.fill();glowAt(x,y-8,22,'255,220,120',.35+.15*Math.sin(t*4))}else{g.fillStyle='#3a240c';g.fillRect(x-17,y-14,34,6)}}
-  /* ประตูออก */{const x=CX,y=CY+330;g.save();g.globalCompositeOperation='lighter';const pu=.5+.5*Math.sin(t*3);g.strokeStyle='rgba(150,220,255,'+(.5+.3*pu)+')';g.lineWidth=3;g.beginPath();g.ellipse(x,y,30,11,0,0,7);g.stroke();glowAt(x,y-20,36,'140,200,255',.45);g.restore();
+  /* ประตูออก */{const x=CX,y=CY+345;g.save();g.globalCompositeOperation='lighter';const pu=.5+.5*Math.sin(t*3);g.strokeStyle='rgba(150,220,255,'+(.5+.3*pu)+')';g.lineWidth=3;g.beginPath();g.ellipse(x,y,30,11,0,0,7);g.stroke();glowAt(x,y-20,36,'140,200,255',.45);g.restore();
     g.font='bold 10px system-ui';g.textAlign='center';g.fillStyle='#cfe8ff';g.fillText('🚪 ทางออก',x,y+26)}
   /* ประกายลอย */g.save();g.globalCompositeOperation='lighter';for(let i=0;i<(LOWQ?10:26);i++){const q=(t*.2+i*.137)%1,x=CX+Math.sin(i*12.9)*R*.85,y=CY+Math.cos(i*7.3)*R*.6-q*80;g.fillStyle='rgba(255,230,150,'+(.7*(1-q))+')';g.fillRect(x,y,2,2)}g.restore();g.restore()}
 

@@ -32,12 +32,12 @@ const NMR=60,NMCD=150,NMREF=1<<17,BTYLV=15;
 const NMG={cd:20,bk:{},seen:new Set(),ann:new Set(),F:[],B:[],rfT:0,sumT:0,lm:-1,ent:0,enter:0};
 const nmSt=c=>(c>>15)&3,nmSd=c=>(c>>9)&63;
 function nmAfl(c){const L=[];for(let i=0;i<NMA.length;i++)if((c>>i)&1)L.push(i);return L}
-function nmName(c){const a=nmAfl(c);return NMPF[nmSd(c)&15]+(a.length?NMSF[a[0]]:'')}
-function nmHpK(c,t){const st=nmSt(c);return(st?[0,3,4.5,6][st]:2.5)/((MT[t]&&MT[t].hp)||1)}
+function nmName(c){const a=nmAfl(c);return((c>>18)&1?'ผู้พิทักษ์':NMPF[nmSd(c)&15])+(a.length?NMSF[a[0]]:'')}
+function nmHpK(c,t){const st=nmSt(c);return((c>>18)&1?3.5:st?[0,3,4.5,6][st]:2.5)/((MT[t]&&MT[t].hp)||1)}
 function nmDmK(c){return[1.15,1.15,1.25,1.35][nmSt(c)]}
 function nmOn(m,i){return!!(m&&m.nm&&((m.nm>>i)&1))}
 function nmRefOn(m){if(!m||!m.nm||!nmOn(m,3))return false;return isHost()?!!m.nmRf:!!(m.nmr||(m.nmrT||0)>performance.now())}
-function nmCode(m){return(m.nm&0x1ffff)|(m.nmRf?NMREF:0)}
+function nmCode(m){return(m.nm&0x5ffff)|(m.nmRf?NMREF:0)}
 function nmOK(mp){mp=mp==null?curMap:mp;const M=MAPS[mp];try{if(mp===curMap&&isDg())return false}catch(e){}return!!(M&&mp!==1&&mp<10000&&WMLV[mp]&&!M.hub&&!M.dg&&!M.pvp&&NMLR[mp])}
 function nmRng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 function nmPick(r,n){const L=NMA.map((_,i)=>i),o=[];while(o.length<n&&L.length)o.push(L.splice(Math.floor(r()*L.length),1)[0]);return o}
@@ -51,7 +51,7 @@ function nmTipOf(c){const a=nmAfl(c);return a.length?NMA[a[0]][1]+' '+NMA[a[0]][
 function nmElig(m){try{return!!(m&&m.p&&m.t<3&&!m.pv&&!m.wb&&!m.tgb&&!m.mn&&!m.mir&&!m.dum&&!m.bt&&!m.nest&&!m.fv&&!m.nm&&!shOf(m))}catch(e){return false}}
 function nmMake(m,c){if(!m.el){m.el=1+((Math.imul(m.id^0x2f1b,0x9e3779b1)>>>0)%6);m.hp*=EKHP;m.mh*=EKHP;m.dmx=(m.dmx||1)*1.5}
   const k=nmHpK(c,m.t);m.hp*=k;m.mh*=k;m.dmx=(m.dmx||1)*nmDmK(c);m.nm=c;m.nmb=1;m.elb=1;m.nmT={g:1.4+Math.random()}}
-shTick=(f=>function(){const r=f.apply(this,arguments);try{if(isHost()&&run&&me.cls){const ok=nmOK();let alive=ok&&mons.some(m=>m.nm&&m.hp>0&&!nmSt(m.nm));
+shTick=(f=>function(){const r=f.apply(this,arguments);try{if(isHost()&&run&&me.cls){const ok=nmOK();let alive=ok&&mons.some(m=>m.nm&&m.hp>0&&!nmSt(m.nm)&&!((m.nm>>18)&1));
   for(const m of mons){if(m.nmb||!m.elb)continue;m.nmb=1;if(!ok||alive||NMG.cd>0||!nmElig(m))continue;
     if((Math.imul(m.id^0x51ed27,0x2c1b3c6d)>>>0)%10000>=NMR)continue;
     const R=nmRng(m.id*7919+(Date.now()%100000)),af=nmPick(R,R()<.6?1:2);let c=0;af.forEach(i=>c|=1<<i);c|=Math.floor(R()*64)<<9;nmMake(m,c);alive=true;NMG.cd=NMCD;
@@ -106,11 +106,11 @@ function nmDead(m,pl){if(m.nmD)return;m.nmD=1;const st=nmSt(m.nm),X=v=>Math.roun
   if(nmOn(m,5)){for(let i=0;i<3;i++){const a=i*2.094+Math.random()*.6,x=m.x+Math.cos(a)*38,y=m.y+Math.sin(a)*38,hp=mhp(m.t,m.L);
       mons.push({id:++mid,x,y,tx:x,ty:y,t:m.t,L:m.L,p:1,hx:m.hx||m.x,hy:m.hy||m.y,hp,mh:hp,tg:null,tt:3,ac:.8,w:null,lg:0,mn:1,nmb:1})}fx({k:'nmsp',x:X(m.x),y:X(m.y),r:60})}
   if(st)NMG.bk[st]=performance.now();else NMG.cd=NMCD;
-  fx({k:'nmk',x:X(m.x),y:X(m.y),c:m.nm&0x1ffff,L:m.L|0,el:m.el|0})}
+  fx({k:'nmk',x:X(m.x),y:X(m.y),c:m.nm&0x5ffff,L:m.L|0,el:m.el|0,o:m.tmo||'',pu:m.tmp||'',q:m.tmq|0})}
 
 /* ---------- เครื่องลูก: รับรหัสมอนดังจาก world ---------- */
 applyWorld=(f=>function(d){const r=f.apply(this,arguments);try{const by={};mons.forEach(m=>{by[m.id]=m;m.nmb=1});if(d&&Array.isArray(d.m))d.m.forEach(e=>{if(!Array.isArray(e)||e[4]>=3)return;const m=by[e[0]];if(!m)return;
-  const c=e.length>10?e[10]|0:0;if(c){m.nm=c&0x1ffff;m.nmr=(c&NMREF)?1:0;m.mh*=nmHpK(m.nm,m.t)}else if(m.nm){m.nm=0;m.nmr=0}})}catch(e){}return r})(applyWorld);
+  const c=e.length>10?e[10]|0:0;if(c){m.nm=c&0x5ffff;m.nmr=(c&NMREF)?1:0;m.mh*=nmHpK(m.nm,m.t)}else if(m.nm){m.nm=0;m.nmr=0}})}catch(e){}return r})(applyWorld);
 
 /* ---------- เหรียญ · ใบประกาศ ---------- */
 function btyDay(){const d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate()}
@@ -193,7 +193,7 @@ drawEkTag=(f=>function(m,br){if(!m||!m.nm)return f.apply(this,arguments);try{nmT
 function nmTag(m,br){const st=nmSt(m.nm),y=m.y-br*1.3-12,w=58,fr=Math.max(0,Math.min(1,m.hp/(m.mh||1)));g.save();
   g.fillStyle='rgba(0,0,0,.88)';g.fillRect(m.x-w/2-1,y-1,w+2,6);const gr=g.createLinearGradient(m.x-w/2,0,m.x+w/2,0);gr.addColorStop(0,st?'#ff5a3a':'#ffc030');gr.addColorStop(1,st?'#ffb060':'#fff0a0');g.fillStyle=gr;g.fillRect(m.x-w/2,y,w*fr,4);
   if(m.el===3){const sp=ekShP(m);g.fillStyle='rgba(0,0,0,.8)';g.fillRect(m.x-w/2-1,y+5,w+2,3);g.fillStyle='#bff0ff';g.fillRect(m.x-w/2,y+5.5,w*sp,2)}
-  g.textAlign='center';g.lineJoin='round';g.font='900 11px system-ui';g.lineWidth=3.6;g.strokeStyle='rgba(24,10,0,.92)';const nm=(st?'🎯 ':'👑 ')+'«'+nmName(m.nm)+'»';g.strokeText(nm,m.x,y-17);g.fillStyle=st?'#ffb48a':'#ffe27a';g.fillText(nm,m.x,y-17);
+  g.textAlign='center';g.lineJoin='round';g.font='900 11px system-ui';g.lineWidth=3.6;g.strokeStyle='rgba(24,10,0,.92)';const nm=((m.nm>>18)&1?'🗝️ ':st?'🎯 ':'👑 ')+'«'+nmName(m.nm)+'»';g.strokeText(nm,m.x,y-17);g.fillStyle=st?'#ffb48a':'#ffe27a';g.fillText(nm,m.x,y-17);
   const ic=(EKIC[m.el]||'')+nmAfl(m.nm).map(i=>NMA[i][1]).join('')+(st?' '+'★'.repeat(st):'')+' Lv'+m.L;g.font='bold 9.5px system-ui';g.lineWidth=3;g.strokeText(ic,m.x,y-5);g.fillStyle='#fff6e0';g.fillText(ic,m.x,y-5);g.restore()}
 drawEkAura=(f=>function(m){const r=f.apply(this,arguments);if(m&&m.nm)try{nmAura(m)}catch(e){}return r})(drawEkAura);
 function nmAura(m){const t=performance.now()/1000,r=mR(m)*1.3,st=nmSt(m.nm),gy=m.y+r*.85,rc=st?'255,110,70':'255,205,80';g.save();g.globalCompositeOperation='lighter';

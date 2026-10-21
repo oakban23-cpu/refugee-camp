@@ -44,7 +44,7 @@ function send(c,str,droppable){if(c.dead||!c.sock.writable)return;
 function kill(c){if(c.dead)return;c.dead=true;clients.delete(c);if(c.uid&&byUid.get(c.uid)===c)byUid.delete(c.uid);if(c.mid&&byMid.get(c.mid)===c)byMid.delete(c.mid);try{c.sock.destroy()}catch(e){}}
 const num=(v,a,b,d)=>Number.isFinite(v)?Math.max(a,Math.min(b,v)):d;
 function cleanPresence(p){return{uid:String(p.uid||'').slice(0,12),x:num(p.x,0,20000,0),y:num(p.y,0,20000,0),hp:num(p.hp,0,1e6,0),mh:num(p.mh,1,1e6,1),
-  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,rb:num(p.rb|0,0,2,0),mp:num(p.mp|0,1,99999,1),hd:num(p.hd|0,0,399,0),bt:num(p.bt|0,0,399,0),wp:num(p.wp|0,0,399,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,399,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),aw:p.aw?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,30,0),sw:p.sw?1:0,as:num(p.as|0,0,200,0),rw:p.rw?1:0,sd:num(p.sd|0,0,9,0),zz:p.zz?1:0,fa:num(p.fa|0,0,40,0),rp:/^[a-z0-9]{1,24}$/i.test(String(p.rp||''))?String(p.rp):'',sk:/^[a-z0-9]{1,32}$/i.test(String(p.sk||''))?String(p.sk):'',dy:num(p.dy|0,0,65535,0)}}
+  cls:String(p.cls||'').slice(0,8),n:String(p.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24),lv:num(p.lv|0,1,99,1),sl:p.sl?1:0,rb:num(p.rb|0,0,2,0),mp:num(p.mp|0,1,199999,1),hd:num(p.hd|0,0,399,0),bt:num(p.bt|0,0,399,0),wp:num(p.wp|0,0,399,0),wu:num(p.wu|0,0,30,0),im:num(p.im|0,0,3,0),ar:num(p.ar|0,0,399,0),tt:String(p.tt||'').replace(/[^a-z0-9]/gi,'').slice(0,8),c2:num(p.c2|0,0,2,0),aw:p.aw?1:0,at:num(p.at|0,0,99,0),mt:num(p.mt|0,0,9,0),pt:num(p.pt|0,0,30,0),sw:p.sw?1:0,as:num(p.as|0,0,200,0),rw:p.rw?1:0,sd:num(p.sd|0,0,9,0),zz:p.zz?1:0,fa:num(p.fa|0,0,40,0),rp:/^[a-z0-9]{1,24}$/i.test(String(p.rp||''))?String(p.rp):'',sk:/^[a-z0-9]{1,32}$/i.test(String(p.sk||''))?String(p.sk):'',dy:num(p.dy|0,0,65535,0)}}
 const inMap=mp=>{const a=[];for(const c of clients)if(c.p&&c.p.mp===mp)a.push(c);return a};
 /* เลือก host ต่อแมพ: คงคนเดิมไว้ถ้ายังใช้ได้ · ข้ามคนที่พับจอ/ไม่ส่ง world · เลือกคนที่อยู่ในแมพนานสุด */
 function okHost(c,now){return c.p&&!c.dead&&!c.p.aw&&!(c.badUntil>now)}
@@ -213,7 +213,7 @@ function onEmit(c,m){
     for(const [o,arr] of by)send(o,wrap(arr));return}
   if(k==='xp'){if(host!==c||!Array.isArray(d))return;
     for(const o of inMap(mp)){if(o===c)continue;const arr=d.filter(e=>Array.isArray(e)&&d2(e[0],e[1],o.p.x,o.p.y)<R_XP*R_XP);if(arr.length)send(o,wrap(arr))}return}
-  if(k==='fx'){if(!d||typeof d!=='object')return;if(d.k==='tb'&&c!==host)return;if((d.k==='ggs'||d.k==='ggd'||d.k==='ggx')&&c!==host)return;const s=wrap(d),all=d.k==='msg'||d.k==='tb'||d.k==='ggs'||d.k==='ggd'||d.k==='ggx'||d.k==='ggh'||d.k==='nmap',hostOnly=d.k==='nmsum'||d.k==='taunt'||d.k==='fog'||d.k==='frost'||d.k==='pin'||d.k==='tstop'||d.k==='mtrapx'||d.k==='rift'||d.k==='stun';
+  if(k==='fx'){if(!d||typeof d!=='object')return;if(d.k==='tb'&&c!==host)return;if((d.k==='ggs'||d.k==='ggd'||d.k==='ggx')&&c!==host)return;const s=wrap(d),all=d.k==='msg'||d.k==='tb'||d.k==='ggs'||d.k==='ggd'||d.k==='ggx'||d.k==='ggh'||d.k==='nmap',hostOnly=d.k==='nmsum'||d.k==='tmsum'||d.k==='taunt'||d.k==='fog'||d.k==='frost'||d.k==='pin'||d.k==='tstop'||d.k==='mtrapx'||d.k==='rift'||d.k==='stun';
     for(const o of inMap(mp)){if(o===c)continue;
       if(all||(hostOnly&&o===host)||d2(d.x,d.y,o.p.x,o.p.y)<R_FX*R_FX)send(o,s)}return}
   if(k==='reset'){const now=Date.now();RSTT[mp]=RSTT[mp]||0;if(now-RSTT[mp]<20000)return;RSTT[mp]=now}
@@ -458,7 +458,7 @@ function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();
   if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
     W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
 }
-const SRV_V='v477';
+const SRV_V='v478';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
