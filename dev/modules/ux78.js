@@ -119,12 +119,12 @@ window.ui8chip=chip;
 /* ================= ① เมนูหลัก ================= */
 const SEC=[
   ['ตัวละคร','🧍',['tb','gb','cdm','rxm','mtm','ptm']],
-  ['ผจญภัย','🗺️',['qb','dgm','wmm','evm']],
+  ['ผจญภัย','🗺️',['qb','dgm','wmm','byb','evm']],
   ['เพื่อนและกิลด์','🤝',['pb','frb','gdb','mlb','cb','ivm']],
   ['ชีวิตในค่าย','⛺',['tnm','fsm','gtm']],
   ['ระบบ','⚙️',['gqb','aum','wnb','chm','hdb','pfb','gmb']]];
 const DESC={tb:'สเตตัส · สกิล · ดาว',gb:'สวมใส่ · กระเป๋า',cdm:'สะสมการ์ด',rxm:'คอมโบธาตุ',mtm:'ขี่แล้ววิ่งไว',ptm:'คู่หูติดตาม',
-  qb:'เควสของฉัน',dgm:'ลงดันกับเพื่อน',wmm:'วาร์ปไปแมพ',evm:'กิจกรรมพิเศษ',
+  qb:'เควสของฉัน',dgm:'ลงดันกับเพื่อน',wmm:'วาร์ปไปแมพ',byb:'ล่ามอนดัง',evm:'กิจกรรมพิเศษ',
   pb:'เล่นเป็นทีม',frb:'รายชื่อเพื่อน',gdb:'บ้านกิลด์',mlb:'จดหมายถึงคุณ',ivm:'ได้ของทั้งคู่',
   tnm:'บ้านของคุณ',fsm:'ปลา · อาหาร',gtm:'ขุดแร่ · ปรุงยา',
   gqb:'ภาพ · เสียง',aum:'ใช้สกิลให้เอง',wnb:'ของใหม่ในเกม',chm:'สลับตัวละคร',cb:'คุยกับทุกคน',hdb:'ภาพเมือง HD',pfb:'วัดความลื่น',gmb:'เฉพาะแอดมิน'};
@@ -142,6 +142,7 @@ function dyn(id){try{
   if(id==='gdb'){const G=typeof GDS!=='undefined'&&GDS&&GDS.g;return G&&G.tag?['กิลด์ ['+G.tag+']',0]:null}
   if(id==='aum')return[AUTO&&AUTO.on?'เปิดอยู่':'ปิดอยู่',0];
   if(id==='wnb')return typeof WNV!=='undefined'?['อัปเดต '+WNV,0]:null;
+  if(id==='byb'){if(typeof btyBoard!=='function')return null;if(me.lv<15)return['เปิดที่ Lv 15',0];const L=btyBoard(),B=btySt(),n=L.filter(S=>B.cl[S.bid]).length;if(btyAllDone()&&!B.ch)return['รับหีบนักล่าได้!',1];return['วันนี้ '+n+'/'+L.length+' · 🎯'+B.c,0]}
 }catch(e){}return null}
 function tileOf(b){if(!b||b.id==='ui8x')return;let lab=b.querySelector(':scope>span');if(LABEL[b.id]&&lab&&lab.textContent!==LABEL[b.id])lab.textContent=LABEL[b.id];
   let em=b.querySelector(':scope>em.ui8d');if(!em){em=document.createElement('em');em.className='ui8d';const bd=b.querySelector(':scope>.bd');if(bd)b.insertBefore(em,bd);else b.appendChild(em)}

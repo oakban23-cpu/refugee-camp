@@ -213,7 +213,7 @@ function onEmit(c,m){
     for(const [o,arr] of by)send(o,wrap(arr));return}
   if(k==='xp'){if(host!==c||!Array.isArray(d))return;
     for(const o of inMap(mp)){if(o===c)continue;const arr=d.filter(e=>Array.isArray(e)&&d2(e[0],e[1],o.p.x,o.p.y)<R_XP*R_XP);if(arr.length)send(o,wrap(arr))}return}
-  if(k==='fx'){if(!d||typeof d!=='object')return;if(d.k==='tb'&&c!==host)return;if((d.k==='ggs'||d.k==='ggd'||d.k==='ggx')&&c!==host)return;const s=wrap(d),all=d.k==='msg'||d.k==='tb'||d.k==='ggs'||d.k==='ggd'||d.k==='ggx'||d.k==='ggh',hostOnly=d.k==='taunt'||d.k==='fog'||d.k==='frost'||d.k==='pin'||d.k==='tstop'||d.k==='mtrapx'||d.k==='rift'||d.k==='stun';
+  if(k==='fx'){if(!d||typeof d!=='object')return;if(d.k==='tb'&&c!==host)return;if((d.k==='ggs'||d.k==='ggd'||d.k==='ggx')&&c!==host)return;const s=wrap(d),all=d.k==='msg'||d.k==='tb'||d.k==='ggs'||d.k==='ggd'||d.k==='ggx'||d.k==='ggh'||d.k==='nmap',hostOnly=d.k==='nmsum'||d.k==='taunt'||d.k==='fog'||d.k==='frost'||d.k==='pin'||d.k==='tstop'||d.k==='mtrapx'||d.k==='rift'||d.k==='stun';
     for(const o of inMap(mp)){if(o===c)continue;
       if(all||(hostOnly&&o===host)||d2(d.x,d.y,o.p.x,o.p.y)<R_FX*R_FX)send(o,s)}return}
   if(k==='reset'){const now=Date.now();RSTT[mp]=RSTT[mp]||0;if(now-RSTT[mp]<20000)return;RSTT[mp]=now}
@@ -458,7 +458,7 @@ function gdOp(c,d){if(!d||typeof d!=='object'||!c.p)return;const now=Date.now();
   if(op==='wkc'){const W=gdWk(G);if(!W.done)return no('ภารกิจกิลด์สัปดาห์นี้ยังไม่ครบ');if(W.cl[mid])return no('รับรางวัลสัปดาห์นี้ไปแล้ว');if((W.ct[mid]|0)<GDMIN)return no('ต้องช่วยภารกิจกิลด์สัปดาห์นี้ก่อน (แต้มช่วยอย่างน้อย '+GDMIN+')');
     W.cl[mid]=1;gdDirty=true;gdSend(c,'gdn',{t:'wkc',ok:1,lvl:G.lvl,k:W.k});gdSend(c,'gdr',{g:gdView(G,mid),inv:[]});return}
 }
-const SRV_V='v476';
+const SRV_V='v477';
 function onMsg(c,raw){
   let m;try{m=JSON.parse(raw)}catch(e){return}
   if(!m||typeof m!=='object')return;
