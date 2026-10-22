@@ -193,4 +193,9 @@ q8Recv=(f=>function(o){f.apply(this,arguments);if(!o||typeof o.k!=='string')retu
   else if(o.k==='q8gsw'){if(q8Near2(o))setTimeout(()=>{try{sBoom(70,.6,o.u==='s'?.3:.5,0);sMetal(500,.5,.08,.02);sCrack(.4,.04,1400)}catch(e){}},480)}
   else if(o.k==='q8dive'&&typeof o.by==='string'){Q8HK[o.by+':'+(o.u||'0')]=n+500;if(q8Near2(o,420))try{sO('triangle',2800,1800,.12,.035);setTimeout(()=>{try{sN(.12,.08,{ft:'highpass',f0:2500})}catch(e){}},210)}catch(e){}}
   else if(o.k==='q8shk'){if(q8Near2(o,420))try{sBoom(110,.25,.2,0)}catch(e){}}})(q8Recv);
-setTimeout(()=>{try{drawP=(f=>function(x,y){const u=arguments[13]&&arguments[13].u,J=u&&Q8J[u];if(J){const e=(performance.now()-J.t0)/J.T;if(e>=0&&e<1){const a=Array.prototype.slice.call(arguments);a[1]=y-Math.sin(e*Math.PI)*62;return f.apply(this,a)}if(e>=1.5)delete Q8J[u]}return f.apply(this,arguments)})(drawP)}catch(e){}},1800);
+/* ตัวลอย: กระโดด (โค้งขึ้นลง) · v486 เหินฟ้า (k='h' ลอยค้าง) · ร่างอสูร (Q8AV ตัวใหญ่ขึ้น) */
+function q8LiftH(J,n){const et=n-J.t0;if(et<0||et>J.T)return 0;if(J.k==='h'){const k=Math.min(1,et/300,(J.T-et)/300);return 74*q8io(Math.max(0,k))+Math.sin(et/170)*3*k}return Math.sin(et/J.T*Math.PI)*62}
+setTimeout(()=>{try{drawP=(f=>function(x,y){const u=arguments[13]&&arguments[13].u,J=u&&Q8J[u],n=performance.now();let a=null;
+  if(J){const h=q8LiftH(J,n);if(h>0){a=Array.prototype.slice.call(arguments);a[1]=y-h}else if(n-J.t0>J.T*1.5+500)delete Q8J[u]}
+  const av=u&&typeof Q8AV!=='undefined'&&Q8AV[u]>n;if(av){const e=Math.min(1,(Q8AV[u]-n)/250),s=1+.4*e*Math.min(1,(n-(Q8AV[u]-8000))/250);g.save();g.translate(x,y);g.scale(s,s);g.translate(-x,-y);try{return f.apply(this,a||arguments)}finally{g.restore()}}
+  return f.apply(this,a||arguments)})(drawP)}catch(e){}},1800);
