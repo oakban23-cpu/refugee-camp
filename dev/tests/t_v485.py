@@ -129,8 +129,8 @@ async def main():
         # ===== หน้าคลังสกิล =====
         ui=await A.ev("""()=>{q8Open();const r={cards:ov.querySelectorAll('.q8c').length,on:ov.querySelectorAll('.q8c.on').length,lk:ov.querySelectorAll('.q8c.lk').length,h:[...ov.querySelectorAll('.q8h')].map(e=>e.textContent).join('|')};
            const b=ov.querySelector('[data-q8="3:0"]');if(b)b.click();r.after=CL.melee.s[3];me.cls2=0;q8Apply(true);q8Open();r.lk2=ov.querySelectorAll('.q8c.lk').length;r.n4=CL.melee.s[4];ov.hidden=true;me.cls2=1;q8Apply(true);r.n4b=CL.melee.s[4];return r}""")
-        rep('หน้าคลังสกิล: การ์ด 10 ใบ (ปุ่ม 1–4 + อัลติ · v486) · กดใช้แล้วสลับทันที · ไม่ตื่นพลัง = การ์ดปุ่ม 4 ล็อก และสกิลทางเลือกปุ่ม 4 ไม่ทำงาน',
-            ui['cards']==10 and ui['on']==5 and ui['lk']==1 and 'ปุ่มสกิล 3' in ui['h'] and 'ปุ่มสกิล 4' in ui['h'] and ui['after']=='โทสะอสูร' and ui['lk2']==2 and ui['n4']=='คำรามโลหิต' and ui['n4b']=='ดาบเทพตกฟ้า', ui)
+        rep('หน้าคลังสกิล: การ์ด 12 ใบ (ปุ่ม 1–4 + 6 + อัลติ · v488) · กดใช้แล้วสลับทันที · ไม่ตื่นพลัง = การ์ดปุ่ม 4 ล็อก และสกิลทางเลือกปุ่ม 4 ไม่ทำงาน',
+            ui['cards']==12 and ui['on']==6 and ui['lk']==2 and 'ปุ่มสกิล 3' in ui['h'] and 'ปุ่มสกิล 4' in ui['h'] and ui['after']=='โทสะอสูร' and ui['lk2']==3 and ui['n4']=='คำรามโลหิต' and ui['n4b']=='ดาบเทพตกฟ้า', ui)
         errs=[e for c in (A,B) for e in c.errs if 'ERR_TUNNEL' not in e and 'Failed to load resource' not in e]
         rep('ไม่มี error ทั้งสองเครื่อง', not errs, errs[:4])
     finally:

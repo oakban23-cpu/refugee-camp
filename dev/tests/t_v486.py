@@ -61,7 +61,7 @@ async def main():
         # ===== ร่างอสูร: นับเป็นอัลติ · เพื่อนเห็นตัวใหญ่ · ลดดาเมจ · คลื่นทุกการโจมตี =====
         av=await A.ev("""async()=>{me.sk[2]=0;me.mp=me.mm;__H.length=0;__FL.length=0;const u0=me.stt.ult|0;me.manT=performance.now();useSkill(2);const r={ult:(me.stt.ult|0)-u0,win:ultWin>performance.now()+5000,on:me.q8av>performance.now(),cd:Math.round(me.sk[2])};
            await new Promise(res=>setTimeout(res,300));const h0=__H.length;gmGod=false;me.inv3=0;me.shv=0;const hp0=me.hp;hurt(200);const l1=hp0-me.hp;me.hp=me.mh;const s=me.q8av;me.q8av=0;const hp1=me.hp;hurt(200);const l2=hp1-me.hp;me.hp=me.mh;me.q8av=s;gmGod=true;
-           r.red=Math.round(l1/l2*100);await new Promise(res=>setTimeout(res,350));const h1=__H.length;me.atkN=(me.atkN|0)+1;await new Promise(res=>setTimeout(res,500));r.wave=__FL.filter(q=>q[0]==='q8cone').length;r.wh=__H.slice(h1).filter(h=>h[2]==='melee').length;r.roar=h0;return r}""")
+           r.red=Math.round(l1/l2*100);await new Promise(res=>setTimeout(res,350));const h1=__H.length;{const t=mons.filter(m=>m.hp>0).sort((a,b)=>Math.hypot(a.x-me.x,a.y-me.y)-Math.hypot(b.x-me.x,b.y-me.y))[0];if(t)me.face=Math.atan2(t.y-me.y,t.x-me.x)}me.atkN=(me.atkN|0)+1;await new Promise(res=>setTimeout(res,500));r.wave=__FL.filter(q=>q[0]==='q8cone').length;r.wh=__H.slice(h1).filter(h=>h[2]==='melee').length;r.roar=h0;return r}""")
         ab=await waitc(B,"(u)=>(Q8AV[u]||0)>performance.now()+3000",A.uid,ms=1500,step=30)
         rep('ร่างอสูรสงคราม: นับเป็นอัลติ (สถิติ + สรุปดาเมจ) · คำรามโดนมอน · รับดาเมจ −25% · โจมตีแล้วปล่อยคลื่น · อีกเครื่องเห็นร่างใหญ่',
             av['ult']==1 and av['win'] and av['on'] and av['cd']>=25 and av['roar']>=1 and av['red']==75 and av['wave']>=1 and av['wh']>=1 and ab, [av,ab])
@@ -102,8 +102,8 @@ async def main():
         ui=await A.ev("""()=>{q8Open();const r={cards:ov.querySelectorAll('.q8c').length,on:ov.querySelectorAll('.q8c.on').length,h:[...ov.querySelectorAll('.q8h')].map(e=>e.textContent).join('|')};
            const b=ov.querySelector('[data-q8="2:0"]');if(b)b.click();r.after=skName(2);r.note=(ov.querySelector('.q8p .note')||{}).textContent||'';ov.hidden=true;
            ov.dataset.k='rune';try{runeUI()}catch(e){}r.rl=[...ov.querySelectorAll('[data-pn="rune"] .card b[style*="nowrap"]')].map(e=>e.textContent).join(',');ov.hidden=true;return r}""")
-        rep('หน้าคลังสกิล: 10 การ์ด (ปุ่ม 1–4 + อัลติ) · กดใช้อัลติเดิมแล้วสลับทันที · ข้อความ/ป้ายช่างรูนบอกปุ่มถูก (ปุ่ม 3/ปุ่ม 4/อัลติ)',
-            ui['cards']==10 and ui['on']==5 and 'ปุ่มอัลติ' in ui['h'] and ui['after']=='ฟันแยกปฐพี' and 'ปุ่มอัลติ' in ui['note'] and ui['rl']=='ปุ่ม 1,ปุ่ม 2,ปุ่ม 3,ปุ่ม 4,อัลติ', ui)
+        rep('หน้าคลังสกิล: 12 การ์ด (ปุ่ม 1–4 + 6 + อัลติ) · กดใช้อัลติเดิมแล้วสลับทันที · ข้อความ/ป้ายช่างรูนบอกปุ่มถูก (ปุ่ม 3/ปุ่ม 4/อัลติ)',
+            ui['cards']==12 and ui['on']==6 and 'ปุ่มอัลติ' in ui['h'] and ui['after']=='ฟันแยกปฐพี' and 'ปุ่มอัลติ' in ui['note'] and ui['rl']=='ปุ่ม 1,ปุ่ม 2,ปุ่ม 3,ปุ่ม 4,ปุ่ม 6,อัลติ', ui)
         errs=[e for c in (A,B) for e in c.errs if 'ERR_TUNNEL' not in e and 'Failed to load resource' not in e]
         rep('ไม่มี error ทั้งสองเครื่อง', not errs, errs[:4])
     finally:

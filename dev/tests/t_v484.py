@@ -109,7 +109,7 @@ async def main():
         # ===== หน้าคลังสกิล =====
         ui=await A.ev("""()=>{q8Open();const h=ov.innerHTML,r={tab:h.includes('data-sksub="pool"'),cards:ov.querySelectorAll('.q8c').length,on:ov.querySelectorAll('.q8c.on').length};
            const b=ov.querySelector('[data-q8="0:0"]');if(b)b.click();r.after=CL.melee.s[0];r.note=(ov.querySelector('.q8p .note')||{}).textContent||'';ov.hidden=true;return r}""")
-        rep('หน้าคลังสกิล: แท็บใหม่ · การ์ด 10 ใบ (ปุ่ม 1–4 + อัลติ × เดิม/ทางเลือก · v486) · กดใช้แล้วสลับทันทีพร้อมข้อความ', ui['tab'] and ui['cards']==10 and ui['on']==5 and ui['after']=='วังวนดาบ' and 'วังวนดาบ' in ui['note'], ui)
+        rep('หน้าคลังสกิล: แท็บใหม่ · การ์ด 12 ใบ (ปุ่ม 1–4 + 6 + อัลติ × เดิม/ทางเลือก · v488) · กดใช้แล้วสลับทันทีพร้อมข้อความ', ui['tab'] and ui['cards']==12 and ui['on']==6 and ui['after']=='วังวนดาบ' and 'วังวนดาบ' in ui['note'], ui)
         errs=[e for c in (A,B) for e in c.errs if 'ERR_TUNNEL' not in e and 'Failed to load resource' not in e]
         rep('ไม่มี error ทั้งสองเครื่อง', not errs, errs[:4])
     finally:

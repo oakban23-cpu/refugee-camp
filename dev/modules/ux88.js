@@ -6,13 +6,13 @@
    วิธีต่อเข้าระบบเดิม: สลับข้อมูลของช่องนั้น (ชื่อ คูลดาวน์ MP คำอธิบาย ไอคอน แท็ก รูน ท่า เสียง) แบบเดียวกับที่สกิล 4 สลับตามสาย (applyBr)
    แล้วให้ useSkill0 ของช่อง 1–2 เรียกกลไกของสกิลใหม่ (ห่อก่อนระบบรูนเสริม → ลิงก์/ร่ายซ้ำ/ทอเท็มใช้กับสกิลใหม่ได้)
    ภาพทุกอันส่งผ่าน fx() → เพื่อนเห็น · ดาเมจคิดฝั่งคนร่ายผ่าน addHit เดิม (ใช้ได้กับลานประลองด้วย) */
-const Q8LV={0:8,1:16,3:25,4:50,2:35},Q8K=[0,1,3,4,2],Q8Z=[],Q8P=[],Q8HW={},Q8RU4={};let Q8A={sig:''},Q8O=null,Q8DK=null,Q8LK=-1;
+const Q8LV={0:8,1:16,3:25,4:50,2:35,5:70},Q8K=[0,1,3,4,5,2],Q8Z=[],Q8P=[],Q8HW={},Q8RU4={};let Q8A={sig:''},Q8O=null,Q8DK=null,Q8LK=-1;
 /* v485: ปุ่ม 3 ปลดที่ Lv 25 · ปุ่ม 4 ปลดเมื่อตื่นพลัง (อาชีพขั้น 2) */
 function sp8(){if(!me.sp8||typeof me.sp8!=='object')me.sp8={e:{},r:{},n:{}};const P=me.sp8;P.e=P.e||{};P.r=P.r||{};P.n=P.n||{};return P}
 function q8Clean(o){if(!o||typeof o!=='object')return null;const r={e:{},r:{},n:{}};Q8K.forEach(k=>{if(o.e&&+o.e[k]===1)r.e[k]=1;if(o.n&&o.n[k])r.n[k]=1;if(o.n&&o.n['d'+k])r.n['d'+k]=1;
     if(o.r&&typeof o.r==='object'){[k+'o',k+'x'].forEach(q=>{if(o.r[q]==='a'||o.r[q]==='b')r.r[q]=o.r[q]});if(o.r['t'+k])r.r['t'+k]=1;if(o.r['td'+k])r.r['td'+k]=1}});return r}
-function q8Unl(k){if(!me.cls)return false;if((me.rb|0)>0)return true;if(k===4)return !!me.cls2;return (me.lv|0)>=(Q8LV[k]||99)}
-function q8LkTx(k){return k===4?'ปลดเมื่อตื่นพลัง (อาชีพขั้น 2)':'ปลดที่ Lv '+Q8LV[k]}
+function q8Unl(k){if(!me.cls)return false;if(k===5){try{return s6Open()}catch(e){return false}}if((me.rb|0)>0)return true;if(k===4)return !!me.cls2;return (me.lv|0)>=(Q8LV[k]||99)}
+function q8LkTx(k){return k===5?'ปลดพร้อมสกิลคลาส 3 (จุติแล้ว Lv 70)':k===4?'ปลดเมื่อตื่นพลัง (อาชีพขั้น 2)':'ปลดที่ Lv '+Q8LV[k]}
 /* v486: ชื่อปุ่มสำหรับข้อความ (ปุ่ม 3 = k3 · ปุ่ม 4 = k4 · อัลติ = k2) */
 function q8KN(k,sh){return k===2?(sh?'อัลติ':'ปุ่มอัลติ'):(sh?'ปุ่ม ':'ปุ่มสกิล ')+(k===3?3:k===4?4:k+1)}
 function q8UT(){try{if(typeof u3Open==='function'&&u3Open())return 3.6}catch(e){}return me.cls2?1.9:1}
@@ -128,20 +128,21 @@ const Q8F={
    else if(r==='b')slam(X,Y,120,2.6,1,'b',0);else slam(X,Y,80,3,1,'',0);return true}};
 /* v487: สายทมิฬมีสกิลทางเลือกของตัวเอง (ปุ่ม 4 ตามสายตื่นพลัง · อัลติตามสายตื่นพลัง หรือสายจุติเมื่อใช้อัลติจุติ) */
 const Q8DB={melee:{},archer:{},mage:{},assn:{},sup:{}};
-function q8Dk(k){try{if(!me.cls)return false;if(k===4)return BR2();if(k===2){if(typeof u3Open==='function'&&u3Open())return s6B()===1;return BR2()}}catch(e){}return false}
-function q8DkOn(c,k){return c===me.cls&&(k===2||k===4)&&q8Dk(k)&&!!(Q8DB[c]&&Q8DB[c][k])}
+function q8Dk(k){try{if(!me.cls)return false;if(k===4)return BR2();if(k===5)return !!me.rb&&s6B()===1;if(k===2){if(typeof u3Open==='function'&&u3Open())return s6B()===1;return BR2()}}catch(e){}return false}
+function q8DkOn(c,k){return c===me.cls&&(k===2||k===4||k===5)&&q8Dk(k)&&!!(Q8DB[c]&&Q8DB[c][k])}
 function q8SK(k){return(q8DkOn(me.cls,k)?'td':'t')+k}
 function q8Def(c,k){const C=Q8D[c];if(q8DkOn(c,k))return Q8DB[c][k];return C&&C[k]||null}
-function q8Cast(k,free){if(!run||me.down>0||me.sk[k]>0)return;if(k===4&&!me.cls2&&!(me.rb>0))return;const D=q8Def(me.cls,k);if(!D||!Q8F[D.id])return;
+function q8Cast(k,free){if(!run||me.down>0||me.sk[k]>0)return;if(k===4&&!me.cls2&&!(me.rb>0))return;if(k===5&&!q8Unl(5))return;const D=q8Def(me.cls,k);if(!D||!Q8F[D.id])return;
   let P=1+M('s'+k+'p')+skPow(k);const cost=free?0:mcOf(k);if(me.mp<cost){dn.push({x:me.x,y:me.y-40,v:'MP ไม่พอ',t:.8});return}
   const r=rnOf(k);if(r)P*=rnPow(k);if(k===2)P*=q8UT();try{Q8F[D.id](k,P,cost,r)}catch(e){console.warn('q8',e)}}
 /* ห่อก่อนระบบรูนเสริม (ux15 ติดตั้งที่ 300ms) → ลิงก์/ร่ายซ้ำ/ทอเท็มใช้กับสกิลทางเลือกได้ */
 try{useSkill0=(f=>function(k,free){if(Q8K.indexOf(k)>=0&&q8On(k))return q8Cast(k,free);return f.apply(this,arguments)})(useSkill0)}catch(e){}
 /* ---------- สลับข้อมูลของช่อง (แบบเดียวกับ applyBr ของสกิล 4) ---------- */
 /* ปุ่ม 3 ใช้ข้อมูลจาก SK3 · ปุ่ม 4 จาก SK4/SK4B (สายแสง/ทมิฬ) ไอคอน SKI4B เสียง s4/s4b · รูนปุ่ม 4 เป็น getter ตามสาย → ครอบ getter อีกชั้น */
-function q8Snap(){if(Q8O)return;Q8O={};for(const c in Q8D){Q8O[c]={};for(const k of Q8K){if(!Q8D[c][k])continue;const sp={};[k,k+'a',k+'b'].concat(k===4?['4B','4Ba','4Bb']:k===2?['2B','2Ba','2Bb']:[]).forEach(q=>{sp[q]=SKP[c]?SKP[c][q]:undefined});
-  const O=Q8O[c][k]={s:CL[c].s[k],cd:CL[c].cds[k],mc:CL[c].mc[k],d:k<2?(SK12D[c]||[])[k]:k===3?SK3[c][1]:k===2?ULT[c][1]:SK4[c][1],ic:SKI[c][k],tg:(SGT[c]||{})[k],ru:k===4?null:RUNES[c]&&RUNES[c][k],sp,sf:SKS[c]&&SKS[c][k]};
+function q8Snap(){if(Q8O)return;Q8O={};for(const c in Q8D){Q8O[c]={};for(const k of Q8K){if(!Q8D[c][k])continue;const sp={};[k,k+'a',k+'b'].concat(k===4?['4B','4Ba','4Bb']:k===2?['2B','2Ba','2Bb']:k===5?['50','50a','50b','51','51a','51b']:[]).forEach(q=>{sp[q]=SKP[c]?SKP[c][q]:undefined});
+  const O=Q8O[c][k]={s:CL[c].s[k],cd:CL[c].cds[k],mc:CL[c].mc[k],d:k<2?(SK12D[c]||[])[k]:k===3?SK3[c][1]:k===2?ULT[c][1]:k===5?SK6[c][0][1]:SK4[c][1],ic:SKI[c][k],tg:(SGT[c]||{})[k],ru:k===4?null:RUNES[c]&&RUNES[c][k],sp,sf:SKS[c]&&SKS[c][k]};
   if(k===3)O.sk3=SK3[c].slice(0,4);
+  if(k===5){O.s6=[SK6[c][0].slice(0,4),SK6[c][1].slice(0,4)];O.i6=SKI6[c].slice(0,2);try{O.r27=[R27[c][0],R27[c][1]];O.t29=[R29T[c][0],R29T[c][1]]}catch(e){}}
   if(k===2){const cp=a=>a?a.slice(0,4):null;O.u0=cp(ULT[c]);O.u2=cp(ULT2[c]);O.ub=cp(ULT2B[c]);try{O.u3=ULT3[c]?ULT3[c].map(cp):null}catch(e){O.u3=null}
     try{O.i2=SKI2[c];O.i2b=SKI2B[c];O.i3=SKI3U[c]?SKI3U[c].slice():null}catch(e){}O.su={};['u','u2','ub'].forEach(q=>{O.su[q]=SKS[c]?SKS[c][q]:undefined})}
   if(k===4){O.sk4=SK4[c].slice(0,4);O.sk4b=SK4B[c]?SK4B[c].slice(0,4):null;O.ic4b=SKI4B[c];O.sf4=SKS[c]&&SKS[c].s4;O.sf4b=SKS[c]&&SKS[c].s4b;
@@ -149,6 +150,8 @@ function q8Snap(){if(Q8O)return;Q8O={};for(const c in Q8D){Q8O[c]={};for(const k
       else{const v0=RUNES[c][4];Object.defineProperty(RUNES[c],4,{configurable:true,enumerable:true,get(){return Q8RU4[c]||v0},set(v){}})}}catch(e){console.warn('q8 ru4',e)}}}}}
 function q8AltData(c,k){const D=q8Def(c,k),sp={};sp[k]=D.po[0];sp[k+'a']=D.po.a;sp[k+'b']=D.po.b;if(k===4){sp['4B']=undefined;sp['4Ba']=undefined;sp['4Bb']=undefined}if(k===2){sp['2B']=undefined;sp['2Ba']=undefined;sp['2Bb']=undefined}
   const X={s:D.n,cd:D.cd,mc:D.mc,d:D.d,ic:Q8IMG[D.id],tg:D.tg,ru:{a:D.R.a,b:D.R.b},sp,sf:Q8SFX[D.id]};const A=[D.n,D.d,D.cd,D.mc];
+  if(k===5){const DL=Q8D[c][5],DD=(Q8DB[c]&&Q8DB[c][5])||DL,Q=D=>[D.n,D.d,D.cd,D.mc];X.s6=[Q(DL),Q(DD)];X.i6=[Q8IMG[DL.id],Q8IMG[DD.id]];X.r27=[{a:DL.R.a,b:DL.R.b},{a:DD.R.a,b:DD.R.b}];X.t29=[DL.tg,DD.tg];
+    ['50','50a','50b'].forEach((q,i)=>{sp[q]=[DL.po[0],DL.po.a,DL.po.b][i]});['51','51a','51b'].forEach((q,i)=>{sp[q]=[DD.po[0],DD.po.a,DD.po.b][i]});X.sf=function(){try{const E=q8Def(me.cls,5),f=E&&Q8SFX[E.id];if(f)f()}catch(e){}}}
   if(k===3)X.sk3=A;if(k===2){X.u0=A;X.u2=A;X.ub=A;X.u3=[A,A];X.i2=X.ic;X.i2b=X.ic;X.i3=[X.ic,X.ic];X.su={u:X.sf,u2:X.sf,ub:X.sf}}if(k===4){X.sk4=A;X.sk4b=A;X.ic4b=Q8IMG[D.id];X.sf4=Q8SFX[D.id];X.sf4b=Q8SFX[D.id];X.alt=1}return X}
 function q8Set(c,k,X){if(!X||!CL[c])return;CL[c].s[k]=X.s;CL[c].cds[k]=X.cd;CL[c].mc[k]=X.mc;try{if(k<2&&SK12D[c])SK12D[c][k]=X.d}catch(e){}try{SKI[c][k]=X.ic}catch(e){}
   try{if(SGT[c])SGT[c][k]=X.tg}catch(e){}try{if(k!==4&&RUNES[c]&&X.ru)RUNES[c][k]=X.ru}catch(e){}try{if(SKP[c])for(const q in X.sp){if(X.sp[q]===undefined)delete SKP[c][q];else SKP[c][q]=X.sp[q]}}catch(e){}
@@ -157,6 +160,8 @@ function q8Set(c,k,X){if(!X||!CL[c])return;CL[c].s[k]=X.s;CL[c].cds[k]=X.cd;CL[c
     try{if(X.i2)SKI2[c]=X.i2;if(X.i2b&&SKI2B[c])SKI2B[c]=X.i2b;if(X.i3&&SKI3U[c])X.i3.forEach((v,i)=>{SKI3U[c][i]=v})}catch(e){}
     try{if(SKS[c]&&X.su)for(const q in X.su){if(X.su[q])SKS[c][q]=X.su[q];else delete SKS[c][q]}}catch(e){}}
   if(k===3&&X.sk3)try{for(let i=0;i<4;i++)SK3[c][i]=X.sk3[i]}catch(e){}
+  if(k===5){try{if(X.s6)for(let b=0;b<2;b++)for(let i=0;i<4;i++)SK6[c][b][i]=X.s6[b][i]}catch(e){}try{if(X.i6)for(let b=0;b<2;b++)SKI6[c][b]=X.i6[b]}catch(e){}try{if(X.r27)for(let b=0;b<2;b++)R27[c][b]=X.r27[b]}catch(e){}try{if(X.t29)for(let b=0;b<2;b++)R29T[c][b]=X.t29[b]}catch(e){}
+    try{if(c===me.cls)applyS6()}catch(e){}}
   if(k===4){try{for(let i=0;i<4;i++)SK4[c][i]=X.sk4[i];if(SK4B[c]&&X.sk4b)for(let i=0;i<4;i++)SK4B[c][i]=X.sk4b[i]}catch(e){}try{if(X.ic4b)SKI4B[c]=X.ic4b}catch(e){}
     try{if(SKS[c]){if(X.sf4)SKS[c].s4=X.sf4;else delete SKS[c].s4;if(X.sf4b)SKS[c].s4b=X.sf4b;else delete SKS[c].s4b}}catch(e){}Q8RU4[c]=X.alt?X.ru:null;
     try{if(c===me.cls)applyBr()}catch(e){}}}
@@ -199,19 +204,20 @@ function q8Recv(o){if(!o||typeof o.k!=='string'||o.k.slice(0,2)!=='q8')return;co
  '.sk2tab:has([data-sksub="pool"]){grid-template-columns:repeat(3,minmax(0,1fr))}.sk2tab:has([data-sksub="pool"]) button{font-size:13px;padding-left:4px;padding-right:4px;white-space:nowrap}'+
  '@media (max-width:380px){.q8r{grid-template-columns:1fr}.sk2tab:has([data-sksub="pool"]) button{font-size:12px}}';(document.head||document.documentElement).appendChild(st)})();
 function q8Orig(c,k){const O=Q8O&&Q8O[c]&&Q8O[c][k];if(!O)return null;
+  if(k===5&&O.s6){let b=0;try{b=me.rb?s6B():0}catch(e){}const u=O.s6[b];return Object.assign({},O,{s:u[0],d:u[1],cd:u[2],mc:u[3],ic:O.i6[b]||O.ic,ru:O.r27?O.r27[b]:O.ru,tg:O.t29?O.t29[b]:O.tg})}
   if(k===2){let u=O.u0,ic=O.ic;try{if(typeof u3Open==='function'&&u3Open()&&O.u3){const b=s6B();u=O.u3[b]||u;ic=O.i3&&O.i3[b]||ic}else if(me.cls2){if(BR2()&&O.ub){u=O.ub;ic=O.i2b||ic}else if(O.u2){u=O.u2;ic=O.i2||ic}}}catch(e){}return Object.assign({},O,{s:u[0],d:u[1],cd:u[2],mc:u[3],ic})}
   if(k!==4)return O;let b=false;try{b=BR2()}catch(e){}if(!b||!O.sk4b)return Object.assign({},O,{ru:R26A&&R26A[c]||O.ru});
   let ru=null;try{ru=RUNESB[c]||null}catch(e){}return Object.assign({},O,{s:O.sk4b[0],d:O.sk4b[1],cd:O.sk4b[2],mc:O.sk4b[3],ic:O.ic4b||O.ic,ru,tg:O.tg+(c==='assn'?' move':'')})}
 function q8Card(k,alt){const c=me.cls,X=alt?q8AltData(c,k):q8Orig(c,k),D=q8Def(c,k);if(!X||!D)return'';const on=(q8On(k)?1:0)===(alt?1:0),lk=alt&&!q8Unl(k);
   const tags=String(X.tg||'').split(' ').filter(Boolean).map(t=>(typeof SGTN!=='undefined'&&SGTN[t])||t).join(' · ');
   const ru=X.ru?['a','b'].map(e=>X.ru[e]?X.ru[e][1]+' '+X.ru[e][2]:'').filter(Boolean).join(' · '):'';
-  const isNew=alt&&!lk&&!(me.sp8&&me.sp8.r&&me.sp8.r[q8SK(k)]);const dk=alt&&q8DkOn(c,k),oth=alt&&(k===2||k===4)&&Q8DB[c]&&Q8DB[c][k]?(dk?Q8D[c][k]:Q8DB[c][k]):null;
+  const isNew=alt&&!lk&&!(me.sp8&&me.sp8.r&&me.sp8.r[q8SK(k)]);const dk=alt&&q8DkOn(c,k),oth=alt&&(k===2||k===4||k===5)&&Q8DB[c]&&Q8DB[c][k]?(dk?Q8D[c][k]:Q8DB[c][k]):null;
   return'<div class="q8c'+(on?' on':'')+(lk?' lk':'')+'"><div class="q8n"><img src="'+X.ic+'" alt=""><b>'+X.s+(alt?' <span style="font-size:10px;color:'+(dk?'#ff8aa8':'#c8a0ff')+'">ทางเลือก'+(dk?'สายทมิฬ':'')+'</span>':'')+(isNew?'<span class="q8new">ใหม่</span>':'')+'</b></div><small>'+X.d+'</small>'+
     '<div class="q8m">⏱ '+X.cd+' วิ · 💧 '+X.mc+(tags?' · '+tags:'')+'</div>'+(oth?'<div class="q8m" style="color:#d8c0a0">🔁 ถ้าเป็นสาย'+(dk?'แสง':'ทมิฬ')+' ทางเลือกจะเป็น «'+oth.n+'»</div>':'')+(ru?'<div class="q8rn">รูนหลัก: '+ru+'</div>':'')+
     (on?'<div class="q8ok">✓ ใช้อยู่</div>':lk?'<div class="q8lk">🔒 '+q8LkTx(k)+'</div>':'<button class="pri" data-q8="'+k+':'+(alt?1:0)+'">ใช้สกิลนี้</button>')+'</div>'}
 function q8PoolH(msg){if(!me.cls||!Q8D[me.cls])return'';let h='<div class="q8p">'+(msg?'<div class="note">'+msg+'</div>':'')+
   '<div class="q8i">📚 ปุ่มสกิล 1–4 และอัลติ เลือกได้ว่าจะใช้สกิลไหน · สลับได้ทุกที่ (ช่องที่สลับติดคูลดาวน์ของสกิลใหม่) · สกิลทางเลือกมีรูนหลัก A/B ของตัวเอง สร้างที่ช่างรูนไอริสตอนเลือกใช้สกิลนั้นอยู่ · แต้มผังสกิลที่เพิ่มพลัง/ลดคูลดาวน์ปุ่มเดียวกันใช้กับสกิลทางเลือกด้วย · ปุ่ม 4 ทางเลือกใช้แทนสกิล 4 ได้ทั้งสายแสงและสายทมิฬ</div>';
-  for(const k of Q8K){if(!q8Def(me.cls,k))continue;h+='<div class="q8s"><div class="q8h">'+q8KN(k)+(k===2?' <small style="opacity:.7">(ปุ่มใหญ่)</small>':k===3?' <small style="opacity:.7">(ปุ่มสีฟ้า)</small>':k===4?' <small style="opacity:.7">(ปุ่มสีม่วงทอง)</small>':'')+'</div><div class="q8r">'+q8Card(k,0)+q8Card(k,1)+'</div></div>'}return h+'</div>'}
+  for(const k of Q8K){if(!q8Def(me.cls,k))continue;h+='<div class="q8s"><div class="q8h">'+q8KN(k)+(k===2?' <small style="opacity:.7">(ปุ่มใหญ่)</small>':k===3?' <small style="opacity:.7">(ปุ่มสีฟ้า)</small>':k===4?' <small style="opacity:.7">(ปุ่มสีม่วงทอง)</small>':k===5?' <small style="opacity:.7">(สกิลคลาส 3)</small>':'')+'</div><div class="q8r">'+q8Card(k,0)+q8Card(k,1)+'</div></div>'}return h+'</div>'}
 function q8Seen(){try{const P=sp8();for(const k of Q8K)if(q8Unl(k)&&q8Def(me.cls,k))P.r[q8SK(k)]=1}catch(e){}}
 function q8Open(){try{charTab='tr';skSub='pool';treeUI();ov.hidden=false}catch(e){}}
 /* ---------- ติดตั้ง (หลังโมดูลอื่นห่อเสร็จ) ---------- */
@@ -233,7 +239,7 @@ setTimeout(()=>{
   /* ช่างรูน: การ์ดสลับสกิลด้านบน (สร้างรูนของสกิลทางเลือกได้เมื่อเลือกใช้อยู่) */
   try{runeUI=(f=>function(msg){const r=f.apply(this,arguments);try{if(me.cls&&Q8D[me.cls]&&ov&&ov.dataset.k==='rune'){const pn=ov.querySelector('[data-pn="rune"]');if(pn){const d=document.createElement('div');d.className='card';d.style.cssText='text-align:left;padding:9px 10px';
         d.innerHTML='<b style="font-size:13px">📚 คลังสกิล</b> <small style="opacity:.8">รูนด้านล่างเปลี่ยนตามสกิลที่เลือกใช้อยู่ในแต่ละปุ่ม</small>'+Q8K.filter(k=>q8Def(me.cls,k)).map(k=>{const o=q8Orig(me.cls,k),a=q8Def(me.cls,k),on=q8On(k),u=q8Unl(k);
-          return'<div style="display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12px"><b style="white-space:nowrap">'+q8KN(k,1)+'</b><button data-q8="'+k+':0" style="flex:1;font-size:11.5px;padding:5px 6px'+(on?'':';border-color:#ffd66a;background:rgba(255,214,106,.18)')+'">'+(on?'':'✓ ')+o.s+'</button><button data-q8="'+k+':1"'+(u?'':' disabled')+' style="flex:1;font-size:11.5px;padding:5px 6px'+(on?';border-color:#ffd66a;background:rgba(255,214,106,.18)':'')+'">'+(on?'✓ ':'')+(u?a.n:'🔒 '+(k===4?'ตื่นพลัง':'Lv '+Q8LV[k]))+'</button></div>'}).join('');
+          return'<div style="display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12px"><b style="white-space:nowrap">'+q8KN(k,1)+'</b><button data-q8="'+k+':0" style="flex:1;font-size:11.5px;padding:5px 6px'+(on?'':';border-color:#ffd66a;background:rgba(255,214,106,.18)')+'">'+(on?'':'✓ ')+o.s+'</button><button data-q8="'+k+':1"'+(u?'':' disabled')+' style="flex:1;font-size:11.5px;padding:5px 6px'+(on?';border-color:#ffd66a;background:rgba(255,214,106,.18)':'')+'">'+(on?'✓ ':'')+(u?a.n:'🔒 '+(k===4?'ตื่นพลัง':k===5?'จุติ Lv 70':'Lv '+Q8LV[k]))+'</button></div>'}).join('');
         const ph=pn.querySelector('.ph');if(ph&&ph.nextSibling)pn.insertBefore(d,ph.nextSibling);else pn.prepend(d)}}}catch(e){}return r})(runeUI)}catch(e){}
   document.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('[data-q8]');if(!b||!me.cls)return;e.stopPropagation();e.preventDefault();
     const [k,a]=b.dataset.q8.split(':').map(Number),m=q8Swap(k,!!a);try{if(ov.dataset.k==='rune')runeUI(m||undefined);else{Q8A.msg=m;treeUI()}}catch(x){}},true);
