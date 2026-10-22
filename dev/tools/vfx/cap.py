@@ -3,7 +3,7 @@ sys.path.insert(0,'/tmp/claude-0/-home-claude/552bdb98-0d0b-5b28-ae92-36a4731379
 from h import *
 from PIL import Image,ImageDraw,ImageFont
 # v489: ถ่ายภาพเอฟเฟกต์จากในเกมจริง (ร่ายสกิลแล้วเก็บภาพตามเวลา) · ENV: G=กลุ่ม · TAG=ชื่อไฟล์ · ONLY=ชื่อแถว
-OUT='/tmp/claude-0/-home-claude/552bdb98-0d0b-5b28-ae92-36a473137925/scratchpad/v489/'
+OUT='/tmp/claude-0/-home-claude/552bdb98-0d0b-5b28-ae92-36a473137925/scratchpad/v490/'
 FONT='/usr/share/fonts/opentype/tlwg/Loma-Bold.otf'
 # แถว: (ชื่อ, อาชีพ, ขั้น, ปุ่ม, รูน, เวลา[วิ], ครอป(dx,dy,w,h))
 C0=(-150,-235,620,350);CW=(-260,-260,760,420)
@@ -36,14 +36,30 @@ GROUPS={
         ('ดาวกระจาย','assn','base',0,'',[.03,.08,.14,.2,.3,.45],C0),('ตะขอเงา','assn','base',1,'',[.05,.12,.2,.3,.45,.7],C0),
         ('โล่แสง','sup','base',0,'',[.05,.2,.5,1,2,3],C0),('ค้อนพิพากษา','sup','base',1,'',[.1,.3,.5,.7,1,1.4],C0)],
 }
+
+TB=[.05,.15,.3,.5,.8,1.2];TU=[.1,.4,.8,1.3,2,3]
+for _c,_n in [('melee',['วังวนดาบ','พุ่งฟัน','โทสะอสูร','ฟันแยกปฐพี']),('archer',['ห่าธนู','ถอยกระโดด','ธนูตรึงเงา','ธนูทะลวงสวรรค์']),('mage',['ลูกไฟระเบิด','ผนึกน้ำแข็ง','โซ่สายฟ้า','พายุอุกกาบาต']),('assn',['ก้าวเงา','หมอกพิษ','ตราประทับมรณะ','ร่างเงาพันคม']),('sup',['แสงเยียวยา','บทสวดพลัง','ทัณฑ์แห่งแสง','ปาฏิหาริย์'])]:
+    GROUPS.setdefault('ob',[]).extend([(_n[0],_c,'base',0,'',TB,C0,0),(_n[1],_c,'base',1,'',TB,C0,0),(_n[2],_c,'base',3,'',TB,C0,0),(_n[3],_c,'base',2,'',TU,CW,0)])
+GROUPS['oa']=[('คำรามโลหิต','melee','aw',4,'',TB,C0,0),('ปฐพีโลหิต','melee','aw',2,'',TU,CW,0),('กับดักจันทรา','archer','aw',4,'',[.1,.4,.8,1.2,1.8,2.6],C0,0),('ศรจันทราแตก','archer','aw',2,'',TU,CW,0),
+  ('รอยแยกกาลเวลา','mage','aw',4,'',[.1,.5,1,2,3,3.4],C0,0),('อุกกาบาตหยุดกาล','mage','aw',2,'',TU,CW,0),('ร่างแยกเงา','assn','aw',4,'',[.1,.4,.8,1.3,1.8,2.4],C0,0),('สุริยคราสพันเงา','assn','aw',2,'',TU,CW,0),
+  ('วงอรุณศักดิ์สิทธิ์','sup','aw',4,'',[.1,.4,.8,1.3,2,3],CW,0),('อรุณรุ่งนิรันดร์','sup','aw',2,'',TU,CW,0)]
+GROUPS['od']=[('ทุบโล่สะท้าน','melee','dk',4,'',TB,C0,0),('ป้อมปราการนิรันดร์','melee','dk',2,'',TU,CW,0),('พายุหมุน','archer','dk',4,'',[.1,.4,.8,1.5,2.2,3],C0,0),('พายุอสนี','archer','dk',2,'',TU,CW,0),
+  ('อัญเชิญโกเลมลาวา','mage','dk',4,'',[.1,.5,1,2,3,4],C0,0),('ประตูนรก','mage','dk',2,'',TU,CW,0),('ระบำพันใบมีด','assn','dk',4,'',[.05,.2,.5,1,2,3],C0,0),('พายุใบมีดราตรี','assn','dk',2,'',TU,CW,0),
+  ('ตราประทับวิญญาณ','sup','dk',4,'',[.1,.5,1,2,3,4],C0,0),('ระฆังวิญญาณ','sup','dk',2,'',TU,CW,0)]
+GROUPS['ou']=[('ดาบพิพากษาสวรรค์','melee','u3',2,'',[.2,.5,.8,1.2,1.8,2.4],CW,0),('ป้อมปราการเทวะ','melee','u3d',2,'',[.2,.5,.8,1.2,1.8,2.4],CW,0),('ห่าดาวล้างนภา','archer','u3',2,'',[.2,.6,1,1.5,2.2,3],CW,0),('พายุเทวะอสนีบาต','archer','u3d',2,'',[.2,.6,1,1.5,2.2,3],CW,0),
+  ('สิ้นสุดกาลอวกาศ','mage','u3',2,'',[.2,.6,1.2,2,2.6,3.2],CW,0),('ราชาปีศาจจุติ','mage','u3d',2,'',[.2,.6,1,1.6,2.4,3.2],CW,0),('คืนไร้จันทร์','assn','u3',2,'',[.2,.6,1,1.5,2.2,3],CW,0),('ระบำสุดท้ายพันดาบ','assn','u3d',2,'',[.2,.6,1,1.6,2.4,3.4],CW,0),
+  ('สวรรค์ลงมาโปรด','sup','u3',2,'',[.2,.6,1,1.5,2.2,3],CW,0),('พิพากษายมโลก','sup','u3d',2,'',[.2,.6,1,1.5,2.2,3],CW,0)]
+GROUPS['o6']=[('พายุดาบพันเงา','melee','u3',5,'',[.1,.4,.8,1.4,2,2.6],C0,0),('โล่สวรรค์สะท้อน','melee','u3d',5,'',[.1,.4,.8,1.4,2.4,4],C0,0),('ธนูดาวไล่ล่า','archer','u3',5,'',[.1,.3,.5,.8,1.1,1.5],C0,0),('ศรอัสนีโซ่','archer','u3d',5,'',[.05,.15,.3,.5,.8,1.2],C0,0),
+  ('ลูกแก้วอัสนี','mage','u3',5,'',[.2,.8,1.6,3,5,7],C0,0),('ฝูงอิมป์คลั่ง','mage','u3d',5,'',[.1,.4,.8,1.2,1.8,2.6],C0,0),('เงาแยกร่าง','assn','u3',5,'',[.05,.15,.3,.45,.6,.8],C0,0),('วงล้อพันดาบ','assn','u3d',5,'',[.2,.8,1.6,3,4.5,5.8],C0,0),
+  ('วงแหวนพิทักษ์','sup','u3',5,'',[.2,.8,1.6,3,4.5,5.8],CW,0),('โซ่วิญญาณสาป','sup','u3d',5,'',[.2,.8,1.6,3,4,4.8],C0,0)]
 G=os.environ.get('G','s6l');ROWS=GROUPS[G];ONLY=os.environ.get('ONLY','');TAG=os.environ.get('TAG','now')
 if ONLY: ROWS=[r for r in ROWS if r[0] in ONLY.split(',')]
 PREP="""()=>{try{propsHit=function(){};propsFx=function(){}}catch(e){};if(!window.__hk){window.__hk=1;
   setInterval(()=>{if(!window.__BX)return;let i=0;for(const m of mons){if(m.t>=3||m.pv){m.x=-9999;m.y=-9999;continue}if(i>=8){m.x=-9999;m.y=-9999;continue}const P=[[95,-22],[120,20],[160,-12],[195,18],[235,-16],[270,10],[-80,10],[20,80]][i];m.x=__BX+P[0];m.y=__BY+P[1];m.tx=m.x;m.ty=m.y;m.hp=Math.max(m.hp,m.mh*.9);m.atkT=1e12;m.cd=99;if(window.__MT!==undefined&&m.t!==__MT)m.t=__MT;i++}},20)}
   return mons.length}"""
-SHOT="""async([k,e,times,cr])=>{fxs.length=0;try{Q8Z.length=0;Q8P.length=0;Q8S.length=0;Q8B.length=0}catch(x){}try{P9.p.length=0;P9.o.length=0}catch(x){}try{GX.dec.length=0;GX.sw.length=0;GX.pil.length=0;GX.fl.length=0;parts.length=0}catch(x){}
+SHOT="""async([k,e,times,cr,alt])=>{fxs.length=0;try{Q8Z.length=0;Q8P.length=0;Q8S.length=0;Q8B.length=0}catch(x){}try{P9.p.length=0;P9.o.length=0}catch(x){}try{GX.dec.length=0;GX.sw.length=0;GX.pil.length=0;GX.fl.length=0;parts.length=0}catch(x){}
   me.x=1100;me.y=1900;me.face=0;window.__BX=1100;window.__BY=1900;banner=null;me.hp=me.mh;me.mp=me.mm;for(let i=0;i<6;i++)me.sk[i]=0;me.q8bk=0;me.stealth=0;me.cd=99;
-  const P=sp8();P.e[k]=1;q8Apply(true);const S=rnSt();for(const kk of[0,1,2,3,4,5]){const R=RUNES[me.cls][kk];if(!R)continue;['a','b'].forEach(q=>{if(R[q])S.u[R[q][0]]=1})}for(let i=0;i<6;i++)delete S.e[i];if(e)S.e[k]=e;lockId=null;AUTO.on=false;
+  const P=sp8();if(alt)P.e[k]=1;else delete P.e[k];q8Apply(true);const S=rnSt();for(const kk of[0,1,2,3,4,5]){const R=RUNES[me.cls][kk];if(!R)continue;['a','b'].forEach(q=>{if(R[q])S.u[R[q][0]]=1})}for(let i=0;i<6;i++)delete S.e[i];if(e)S.e[k]=e;lockId=null;AUTO.on=false;
   await new Promise(r=>setTimeout(r,250));const f=mons.filter(m=>m.x>me.x+20&&m.t<3).sort((a,b)=>Math.hypot(a.x-me.x,a.y-me.y)-Math.hypot(b.x-me.x,b.y-me.y))[0];lockId=f?f.id:null;
   const t0=performance.now();me.manT=t0;useSkill(k);const out=[];const [dx,dy,Wd,Hd]=cr;
   for(const t of times){const w=t0+t*1000-performance.now();if(w>0)await new Promise(r=>setTimeout(r,w));await new Promise(r=>requestAnimationFrame(()=>r()));
@@ -56,7 +72,8 @@ async def main():
       async with async_playwright() as pw:
         b=await pw.chromium.launch()
         cur=None;pg=None;ctx=None
-        for (nm,cls,tier,k,e,times,cr) in ROWS:
+        for row in ROWS:
+            (nm,cls,tier,k,e,times,cr)=row[:7];alt=row[7] if len(row)>7 else 1
             if cur!=(cls,tier):
                 if ctx: await ctx.close()
                 ctx=await b.new_context(viewport={'width':1100,'height':760});pg=await ctx.new_page();E=[];pg.on('pageerror',lambda x:errs.append(str(x)[:300]))
@@ -67,7 +84,7 @@ async def main():
                 await pg.wait_for_timeout(3500)
                 await pg.evaluate("()=>{try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};ov.hidden=true;try{if(CZ.on)czSkip()}catch(e){};banner=null;try{camZoomT=()=>1}catch(e){};dn.length=0;dn.push=()=>0;window.DNH=12;try{setGQ('high');LITEQ=0;lqSet=()=>{}}catch(e){};try{wxNow=()=>0;vzWxTick=()=>{};VZ.wx=null}catch(e){}}")
                 await pg.evaluate('(t)=>{window.__MT=t}',int(os.environ.get('MT','0')));await pg.evaluate(PREP);await pg.wait_for_timeout(800);cur=(cls,tier)
-            fr=await pg.evaluate(SHOT,[k,e,times,list(cr)])
+            fr=await pg.evaluate(SHOT,[k,e,times,list(cr),alt])
             ims=[Image.open(io.BytesIO(base64.b64decode(u.split(',')[1]))).convert('RGB') for u in fr]
             sheet.append((nm,cls,times,ims));[im.save(OUT+f'raw/{G}_{TAG}_{len(sheet)-1}_{i}.jpg',quality=90) for i,im in enumerate(ims)];print('ok',nm,flush=True)
             await pg.wait_for_timeout(900)

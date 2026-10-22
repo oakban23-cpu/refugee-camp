@@ -115,7 +115,12 @@ function p9C(f,p,x,y,r,now,k){const D=f.d||(FXD&&FXD[k])||.5,t=p*D,tn=performanc
   return {f,t,D,x,y,r,now,dt,mine:f.by===uid,E:(n,at)=>{if(ev[n]||t<at)return false;ev[n]=1;return true},R:(n,per,st,en)=>{if(t<(st||0)||(en!=null&&t>en))return false;const c=Math.floor((t-(st||0))/per);if(ev[n]===undefined||c>ev[n]){ev[n]=c;return true}return false},
     A:(n,rate)=>{const kk='_a'+n;ev[kk]=(ev[kk]||0)+rate*dt*p9Q();const m=Math.floor(ev[kk]);ev[kk]-=m;return m}}}
 function p9Err(k,e){P9.en=(P9.en||0)+1;if(!P9.er)P9.er=k+': '+String(e&&e.message||e).slice(0,120)}
-function p9Wrap(){Object.keys(Object.assign({},P9X,P9U)).forEach(k=>{const o=FXB[k];if(!o||o.__p9)return;const fn=function(f,p,x,y,r,now){let C=null;
+function p9Wrap(){Object.keys(Object.assign({},P9X,P9U)).forEach(k=>{const o=FXB[k];if(!o||o.__p9)return;const fn=function(f,p,x,y,r,now){if(!f||f.k!==k)return o(f,p,x,y,r,now);let C=null;
     if(P9U[k]&&p9Q()){try{C=p9C(f,p,x,y,r,now,k);P9U[k](C)}catch(e){p9Err(k,e)}}o(f,p,x,y,r,now);if(P9X[k]&&p9Q()){try{if(!C)C=p9C(f,p,x,y,r,now,k);P9X[k](C)}catch(e){p9Err(k,e)}}};fn.__p9=1;fn.__o=o;FXB[k]=fn})}
+/* เอฟเฟกต์ที่วาดใน switch ของ drawFx (ไม่อยู่ใน FXB) */
+try{drawFx=(F=>function(f){const k=f&&f.k;if(!k||!(P9X[k]||P9U[k])||(FXB[k]&&f.vx!==1)||!p9Q())return F.apply(this,arguments);
+  const d=f.d||.5,p=Math.min(1,Math.max(0,1-f.t/d)),x=f.x,y=f.y,r=f.r||40,now=performance.now()/1000;let C=null;
+  if(P9U[k]){try{C=p9C(f,p,x,y,r,now,k);P9U[k](C)}catch(e){p9Err(k,e)}}const res=F.apply(this,arguments);
+  if(P9X[k]){try{if(!C)C=p9C(f,p,x,y,r,now,k);P9X[k](C)}catch(e){p9Err(k,e)}}return res})(drawFx)}catch(e){}
 try{drawParts=(f=>function(){const r=f.apply(this,arguments);try{p9Draw()}catch(e){}return r})(drawParts)}catch(e){}
 try{gxGroundFx=(f=>function(){try{p9Ground()}catch(e){}return f.apply(this,arguments)})(gxGroundFx)}catch(e){}

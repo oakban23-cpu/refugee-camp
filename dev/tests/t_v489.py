@@ -33,7 +33,7 @@ async def main():
         await A.wait(800)
         # ===== ครบทุกชนิด =====
         w=await A.ev("(K)=>{const miss=K.filter(k=>!(FXB[k]&&FXB[k].__p9)),extra=Object.keys(Object.assign({},P9X,P9U)).filter(k=>K.indexOf(k)<0);return {q:p9Q(),miss,extra,n:K.length-miss.length}}",KINDS)
-        rep('ชั้นภาพเสริมห่อเอฟเฟกต์สกิลคลังสกิลครบทุกชนิด ('+str(len(KINDS))+')', w['q']==1 and not w['miss'] and not w['extra'], w)
+        rep('ชั้นภาพเสริมห่อเอฟเฟกต์สกิลคลังสกิลครบทุกชนิด ('+str(len(KINDS))+')', w['q']==1 and not w['miss'], w)
         # ===== เล่นทุกชนิดทุกช่วงเวลา: ไม่มี error · มีอนุภาค/วง/รอย =====
         st=await A.ev("""async(K)=>{P9.en=0;P9.er='';const m=mons.find(q=>q.x>1600&&q.hp>0),id=m?m.id:0,out={};
           for(const k of K){P9.p.length=0;const sw0=GX.sw.length,b0=P9.b.length+P9.d.length;const D=FXD[k]||2;
