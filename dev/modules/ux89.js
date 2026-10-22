@@ -48,7 +48,7 @@ Object.assign(FXB,{
    for(let i=0;i<n;i++){const an=f.a+(n>1?(i/(n-1)-.5)*sp:0),st=f.st&&f.st[i];if(st!=null&&d>st+4)continue;q8Arrow(x+Math.cos(an)*d,y-10+Math.sin(an)*d,an,Math.min(30,d),col,al)}
    g.restore()},
  /* ระเบิดเล็ก (u='i' = น้ำแข็ง) */
- q8pop:(f,p,x,y,r,now)=>{const C=f.u==='i'?['170,230,255','220,245,255']:f.u==='h'?['255,215,110','255,248,210']:['255,150,60','255,220,150'],k=1-p;g.save();g.globalCompositeOperation='lighter';glowAt(x,y-6,r*(.6+p),C[0],.7*k);
+ q8pop:(f,p,x,y,r,now)=>{const C=f.u==='i'?['170,230,255','220,245,255']:f.u==='h'?['255,215,110','255,248,210']:f.u==='v'?['170,110,255','230,215,255']:['255,150,60','255,220,150'],k=1-p;g.save();g.globalCompositeOperation='lighter';glowAt(x,y-6,r*(.6+p),C[0],.7*k);
    g.strokeStyle='rgba('+C[1]+','+k+')';g.lineWidth=2*k+.5;g.beginPath();g.ellipse(x,y,r*(.3+.8*p),r*(.3+.8*p)*.55,0,0,7);g.stroke();
    for(let i=0;i<7;i++){const an=fxR(f,i,1)*6.283,dd=r*.9*q8eo(p);g.fillStyle='rgba('+C[1]+','+k+')';g.beginPath();g.arc(x+Math.cos(an)*dd,y-6+Math.sin(an)*dd*.6-10*p,1.9*k+.4,0,7);g.fill()}g.restore()},
  /* ธงล่าเหยื่อ: ปักธงลงพื้น วงเขตรอบธง (u='a' อัสนี · 'b' ลมกรด) */
