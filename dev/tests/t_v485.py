@@ -52,8 +52,8 @@ async def main():
            me.br=1;const L0=O();me.br=2;const D0=O();me.br=1;me.sk[4]=0;q8Swap(4,1);const L1=O();me.br=2;const D1=O();q8Swap(4,0);const D2=O();me.br=1;const L2=O();return {L0,D0,L1,D1,D2,L2}}""")
         rep('ปุ่ม 4 สายแสง: สลับเป็น «ดาบเทพตกฟ้า» (ชื่อ/คูล/รูน/แท็ก/ท่า) · สลับกลับได้ของเดิม',
             s4['L1']['n']=='ดาบเทพตกฟ้า' and s4['L1']['cd']==15 and s4['L1']['ru']=='qm4a' and s4['L1']['tg']=='atk aoe' and s4['L1']['po']=='rage' and s4['L2']==s4['L0'], s4)
-        rep('ปุ่ม 4 สายทมิฬ: สกิลทางเลือกแทนสกิลสายทมิฬได้ด้วย (ไม่ใช้ท่า/รูนสายทมิฬ) · สลับกลับได้สกิลสายทมิฬเดิม',
-            s4['D0']['br2'] and s4['D0']['n']!=s4['L0']['n'] and s4['D1']['n']=='ดาบเทพตกฟ้า' and s4['D1']['ru']=='qm4a' and not s4['D1']['b4'] and s4['D2']==s4['D0'], s4)
+        rep('ปุ่ม 4 สายทมิฬ: สายทมิฬได้สกิลทางเลือกของตัวเอง (v487 · ไม่ใช้ท่า/รูนสายทมิฬเดิม) · สลับกลับได้สกิลสายทมิฬเดิม',
+            s4['D0']['br2'] and s4['D0']['n']!=s4['L0']['n'] and s4['D1']['n']=='ปราการสะท้อนแค้น' and s4['D1']['ru']=='rm4a' and not s4['D1']['b4'] and s4['D2']==s4['D0'], s4)
         # ===== รูนแยกตามสกิล (ปุ่ม 3 และ 4) =====
         rr=await A.ev("""()=>{const S=rnSt();const o3=RUNES.melee[3].a[0],o4=RUNES.melee[4].b[0];S.u[o3]=1;S.u[o4]=1;S.u.qm3b=1;S.u.qm4a=1;S.e[3]='a';S.e[4]='b';const r={};
            r.o=[rnOf(3),rnOf(4)];q8Swap(3,1);q8Swap(4,1);r.x1=[rnOf(3),rnOf(4)];S.e[3]='b';S.e[4]='a';r.id=[rnIdOf(3),rnIdOf(4)];q8Swap(3,0);q8Swap(4,0);r.o2=[rnOf(3),rnOf(4)];q8Swap(3,1);q8Swap(4,1);r.x3=[rnOf(3),rnOf(4)];return r}""")
@@ -73,7 +73,7 @@ async def main():
         rep('กระโดดทุบพสุธา: ตัวพุ่งไปถึงเป้า (เหลือ <40) · โดนมอนในวง · อีกเครื่องเห็นภาพ + ตัวลอย', lp['d0']>=60 and 0<=lp['d1']<40 and lp['h']>=2 and lb, [lp,lb])
         await A.ev("()=>{window.__free=0;me.x=1600;me.y=1600}");await A.wait(300)
         # ===== ดาบเทพตกฟ้า: ดาบตกหลัง 0.5 วิ แล้วปล่อยพลังซ้ำ =====
-        sw=await A.ev("async()=>{me.sk[4]=0;me.mp=me.mm;__H.length=0;lockId=null;const t0=performance.now();me.manT=t0;useSkill(4);await new Promise(r=>setTimeout(r,400));const e=__H.length;await new Promise(r=>setTimeout(r,2200));return {early:e,h:__H.length,first:__H.length?__H[0][3]-t0:-1,cd:Math.round(me.sk[4])}}")
+        sw=await A.ev("async()=>{me.cd=99;me.sk[4]=0;me.mp=me.mm;__H.length=0;lockId=null;const t0=performance.now();me.manT=t0;useSkill(4);await new Promise(r=>setTimeout(r,400));const e=__H.length;await new Promise(r=>setTimeout(r,2200));return {early:e,h:__H.length,first:__H.length?__H[0][3]-t0:-1,cd:Math.round(me.sk[4])}}")
         gb=await waitc(B,"(u)=>__FL.some(q=>q[0]==='q8gsw'&&q[1]===u)",A.uid,ms=800,step=30)
         rep('ดาบเทพตกฟ้า: ยังไม่โดนก่อนดาบตก · ตกแล้วโดนวง + ปล่อยพลังซ้ำ · อีกเครื่องเห็นดาบ', sw['early']==0 and sw['first']>=450 and sw['h']>=8 and sw['cd']>=11 and gb, [sw,gb])
         # ===== กลไกอื่น (เรียกตรงจากเครื่อง A เพื่อทดสอบกลไก) =====

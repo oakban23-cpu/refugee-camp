@@ -48,8 +48,8 @@ async def main():
         await A.ev("()=>{q8Swap(2,0)}")
         b_=await A.ev(TJS)
         names=[a_[t]['n'] for t in 'badu']
-        rep('สลับอัลติเป็น «ร่างอสูรสงคราม»: ชื่อ/คูล/ไอคอนเปลี่ยนทุกขั้น (ปกติ · ตื่นพลัง · สายทมิฬ · จุติ) · รูน/แท็ก/ท่าเปลี่ยนตาม',
-            names==['ร่างอสูรสงคราม']*4 and all(a_[t]['cd']==30 for t in 'badu') and all(a_[t]['img']!=o[t]['img'] for t in 'badu') and a_['ru']=='qm2a' and a_['tg']=='atk aoe dur melee' and a_['po']=='roar', [names,a_])
+        rep('สลับอัลติเป็น «ร่างอสูรสงคราม»: ชื่อ/คูล/ไอคอนเปลี่ยนทุกขั้น (ปกติ · ตื่นพลัง · จุติ · สายทมิฬได้อัลติทางเลือกของตัวเอง v487) · รูน/แท็ก/ท่าเปลี่ยนตาม',
+            names==['ร่างอสูรสงคราม','ร่างอสูรสงคราม','กองทัพวิญญาณเหล็ก','ร่างอสูรสงคราม'] and all(a_[t]['cd']==(32 if t=='d' else 30) for t in 'badu') and all(a_[t]['img']!=o[t]['img'] for t in 'badu') and a_['ru']=='qm2a' and a_['tg']=='atk aoe dur melee' and a_['po']=='roar', [names,a_])
         rep('สลับกลับ = อัลติเดิมของทุกขั้นคืนครบ (ชื่อ คูล ไอคอน รูน)', all(b_[t]==o[t] for t in 'badu') and b_['ru']==o['ru'] and b_['tg']==o['tg'], [o,b_])
         rep('พลังอัลติทางเลือกเพิ่มตามขั้น: ปกติ ×1 · ตื่นพลัง ×1.9 · จุติ ×3.6', [a_[t]['ut'] for t in 'badu']==[1,1.9,1.9,3.6], [a_[t]['ut'] for t in 'badu'])
         # ===== รูนแยกตามสกิล · เซฟ =====

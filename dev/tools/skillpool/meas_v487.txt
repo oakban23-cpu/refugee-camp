@@ -1,0 +1,46 @@
+# v487 ผลวัดสกิลทางเลือกสายทมิฬ (มอน 10 ตัวเกาะกลุ่ม · ดาเมจรวม ÷ พลังโจมตี ต่อการร่าย 1 ครั้ง) · ปุ่ม 4 (k4) สายทมิฬ เดิม vs ทางเลือก · อัลติ (k2) ขั้นสายทมิฬ (dk ×1.9) ทางเลือก — อัลติทมิฬเดิมดูใน meas_v486.txt
+melee   k4 old - ทุบโล่สะท้าน           dmg  13.18 hits   4 mons  4 cd 12 mp 30 move 0,0 shv 0 pose lunge
+melee   k4 old a ทุบโล่สะท้าน           dmg  14.83 hits   6 mons  6 cd 12 mp 30 move 0,0 shv 0 pose spin2
+melee   k4 old b ทุบโล่สะท้าน           dmg  13.18 hits   4 mons  4 cd 12 mp 30 move 0,0 shv 0 pose rage
+archer  k4 old - พายุหมุน               dmg  27.13 hits  37 mons  8 cd 13 mp 35 move 0,0 shv 0 pose snipe
+archer  k4 old a พายุหมุน               dmg  25.35 hits  49 mons  8 cd 13 mp 35 move 0,0 shv 0 pose rapid
+archer  k4 old b พายุหมุน               dmg  23.62 hits  58 mons  4 cd 13 mp 35 move 0,0 shv 0 pose plant
+mage    k4 old - อัญเชิญโกเลมลาวา       dmg  20.83 hits  18 mons  6 cd 16 mp 45 move 0,0 shv 0 pose summon
+mage    k4 old a อัญเชิญโกเลมลาวา       dmg  45.11 hits  31 mons  8 cd 20 mp 45 move 0,0 shv 0 pose stomp
+mage    k4 old b อัญเชิญโกเลมลาวา       dmg  29.81 hits  38 mons  6 cd 16 mp 45 move 0,0 shv 0 pose summon
+assn    k4 old - ระบำพันใบมีด           dmg     27 hits  39 mons  5 cd 10 mp 30 move 174,-45 shv 0 pose spindash
+assn    k4 old a ระบำพันใบมีด           dmg  44.14 hits  76 mons  8 cd 10 mp 30 move 174,-47 shv 0 pose spindash
+assn    k4 old b ระบำพันใบมีด           dmg  20.51 hits  29 mons  5 cd 0.3 mp 30 move 174,-45 shv 0 pose spindash
+sup     k4 old - ตราประทับวิญญาณ        dmg      0 hits   0 mons  0 cd 14 mp 40 move 0,0 shv 0 pose plant
+sup     k4 old a ตราประทับวิญญาณ        dmg  19.78 hits  48 mons  8 cd 14 mp 40 move 0,0 shv 0 pose pray2
+sup     k4 old b ตราประทับวิญญาณ        dmg  21.63 hits   5 mons  5 cd 14 mp 40 move 0,0 shv 0 pose smite
+melee   k4 ALT - ปราการสะท้อนแค้น       dmg  15.45 hits   6 mons  6 cd 14 mp 35 move 0,0 shv 0 pose rage
+melee   k4 ALT a ปราการสะท้อนแค้น       dmg  15.45 hits   6 mons  6 cd 14 mp 35 move 0,0 shv 0 pose rage
+melee   k4 ALT b ปราการสะท้อนแค้น       dmg  15.45 hits   6 mons  6 cd 14 mp 35 move 0,0 shv 0 pose rage
+archer  k4 ALT - ศรลมกรดสะท้อน          dmg  20.83 hits  14 mons  6 cd 12 mp 30 move 0,0 shv 0 pose rapid
+archer  k4 ALT a ศรลมกรดสะท้อน          dmg  20.83 hits  16 mons  8 cd 12 mp 30 move 0,0 shv 0 pose rapid
+archer  k4 ALT b ศรลมกรดสะท้อน          dmg  18.43 hits  12 mons  6 cd 12 mp 30 move 0,0 shv 0 pose rapid
+mage    k4 ALT - ทูตอสูรเพลิง           dmg  10.95 hits  14 mons  2 cd 16 mp 45 move 0,0 shv 0 pose summon
+mage    k4 ALT a ทูตอสูรเพลิง           dmg  11.02 hits  17 mons  2 cd 16 mp 45 move 0,0 shv 0 pose summon
+mage    k4 ALT b ทูตอสูรเพลิง           dmg  13.56 hits  26 mons  2 cd 16 mp 45 move 0,0 shv 0 pose summon
+assn    k4 ALT - วงใบมีดระบำ            dmg  25.54 hits  62 mons  3 cd 14 mp 35 move 0,0 shv 0 pose spin2
+assn    k4 ALT a วงใบมีดระบำ            dmg  24.41 hits  79 mons  4 cd 14 mp 35 move 0,0 shv 0 pose spin2
+assn    k4 ALT b วงใบมีดระบำ            dmg  25.96 hits  63 mons  3 cd 14 mp 35 move 0,0 shv 0 pose spin2
+sup     k4 ALT - ตุ๊กตาคำสาป            dmg  31.89 hits 108 mons  4 cd 14 mp 40 move 0,0 shv 0 pose plant
+sup     k4 ALT a ตุ๊กตาคำสาป            dmg  45.77 hits 118 mons  7 cd 14 mp 40 move 0,0 shv 0 pose plant
+sup     k4 ALT b ตุ๊กตาคำสาป            dmg  25.04 hits  64 mons  3 cd 14 mp 40 move 0,0 shv 0 pose plant
+dk   melee   k2 ALT - กองทัพวิญญาณเหล็ก      dmg  46.97 hits  15 mons  3 cd 32 mp 55 move 0,0 shv 0 pose roar
+dk   melee   k2 ALT a กองทัพวิญญาณเหล็ก      dmg  58.71 hits  25 mons  3 cd 32 mp 55 move 0,0 shv 0 pose roar
+dk   melee   k2 ALT b กองทัพวิญญาณเหล็ก      dmg  46.97 hits  15 mons  4 cd 32 mp 55 move 0,0 shv 0 pose roar
+dk   archer  k2 ALT - นักล่าลมกรด            dmg  70.14 hits  31 mons  6 cd 30 mp 50 move 0,0 shv 0 pose skyshot
+dk   archer  k2 ALT a นักล่าลมกรด            dmg  85.79 hits  48 mons  6 cd 30 mp 50 move 0,0 shv 0 pose skyshot
+dk   archer  k2 ALT b นักล่าลมกรด            dmg  83.42 hits  31 mons  8 cd 30 mp 50 move 0,0 shv 0 pose skyshot
+dk   mage    k2 ALT - หัตถ์ปีศาจ             dmg 129.63 hits  45 mons  8 cd 32 mp 70 move 0,0 shv 0 pose summon
+dk   mage    k2 ALT a หัตถ์ปีศาจ             dmg 182.18 hits  88 mons 10 cd 32 mp 70 move 0,0 shv 0 pose summon
+dk   mage    k2 ALT b หัตถ์ปีศาจ             dmg 133.63 hits  61 mons  8 cd 32 mp 70 move 0,0 shv 0 pose summon
+dk   assn    k2 ALT - ระบำเงาสะท้อน          dmg  36.79 hits  12 mons  3 cd 28 mp 45 move 0,0 shv 0 pose flurry
+dk   assn    k2 ALT a ระบำเงาสะท้อน          dmg  52.84 hits  18 mons  3 cd 28 mp 45 move 0,0 shv 0 pose flurry
+dk   assn    k2 ALT b ระบำเงาสะท้อน          dmg  75.93 hits  22 mons  6 cd 28 mp 45 move 0,0 shv 0 pose flurry
+dk   sup     k2 ALT - พิธีสาปแช่ง            dmg  75.34 hits  58 mons  9 cd 32 mp 60 move 0,0 shv 0 pose pray2
+dk   sup     k2 ALT a พิธีสาปแช่ง            dmg  73.58 hits  56 mons  8 cd 32 mp 60 move 0,0 shv 0 pose pray2
+dk   sup     k2 ALT b พิธีสาปแช่ง            dmg  87.67 hits  72 mons  8 cd 32 mp 60 move 0,0 shv 0 pose pray2

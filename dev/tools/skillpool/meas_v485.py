@@ -35,8 +35,8 @@ async def main():
             await pg.wait_for_timeout(3500)
             await pg.evaluate("()=>{try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};ov.hidden=true;try{if(CZ.on)czSkip()}catch(e){};banner=null;try{camZoomT=()=>1}catch(e){}}")
             n=await pg.evaluate(PREP);await pg.evaluate('()=>{window.__dbg=1}') if os.environ.get('DBG') else None;await pg.wait_for_timeout(600)
-            for k in (3,4):
-                for alt in (0,1):
+            for k in [int(a) for a in os.environ.get('KS','3,4').split(',')]:
+                for alt in [int(a) for a in os.environ.get('ALTS','0,1').split(',')]:
                     for e in ('','a','b'):
                         if ONLY and ONLY!=f'{k}{alt}{e}':continue
                         wait=WT[k][cls]
