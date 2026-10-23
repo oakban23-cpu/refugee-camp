@@ -1,7 +1,7 @@
 /* ---------- v498 ภาค 8 บทที่ 2 · ราคาของการเปิดประตู ----------
    ที่ค่าย: สภาค่ายถกเรื่องรับกองเรือ (แยกบทพูด p7m · e7)
    ผาท่าเรือเมฆ (38): กองเรือมาเทียบท่า 4 ลำ + ลอยรอ · คลังเสบียง (ส่งสมุนไพร/แร่/ปลาจากระบบเก็บวัตถุดิบ) · ซ่อมเรือ (ตอกหมุดตามจังหวะ)
-   ดันเจี้ยนป้องกันท่าเรือ (ห้อง 86000–86999 · DT[25]): ปกป้องเครื่องดาว 3 เครื่อง · 3 คลื่น · บอสคราเคนเมฆ (หนวดฟาดสะพาน · รัดเครื่องดาว · เรียกฉลาม)
+   ดันเจี้ยนป้องกันท่าเรือ (ห้อง 72000–72999 · DT[25] · v502 ย้ายจาก 86xxx ที่ชนลานบอสโลก): ปกป้องเครื่องดาว 3 เครื่อง · 3 คลื่น · บอสคราเคนเมฆ (หนวดฟาดสะพาน · รัดเครื่องดาว · เรียกฉลาม)
    ทางเลือก p8g: 1 เปิดท่าให้ทุกลำรวมเรือดำ · 2 รับเฉพาะเรือที่วางอาวุธ (ตัวกรองบทพูด L[8])
    ปลดล็อก ⛵ เรือเหาะ: วาปแผนที่โลกระหว่าง ค่าย · นครอัสตรา · ซากอารัณยา · ผาท่าเรือเมฆ ไม่ต้องรอคูลดาวน์ */
 const PHDEP={x:1880,y:1330};
@@ -92,7 +92,7 @@ Object.assign(PALK,{
 /* ซ่อนแผงเมื่อออกจากแมพ */setInterval(()=>{try{if(curMap!==38){if(P8RP.on>=0){P8RP.on=-1;p8RpUI()}const b=$('p8sp');if(b&&!b.hidden)b.hidden=true}}catch(e){}},500);
 /* กองเรือที่ลอยรอ: ตั้งแต่กองเรือมาถึง (เดิมเห็นหลังจุดประภาคาร) · เรือดำลอยมืดถ้าเลือกข้อ 2 */
 {const _g=phGroundFx;window.phGroundFx=phGroundFx=function(){_g();try{if(gP8g()===2&&palVis(3060,760,200)){const T=performance.now()/1000;phShipD(3060,760,T,{f:-1,dark:1})}}catch(e){}}}
-/* ---------- ดันเจี้ยนป้องกันท่าเรือ (ห้อง 86000–86999) ---------- */
+/* ---------- ดันเจี้ยนป้องกันท่าเรือ (ห้อง 72000–72999) ---------- */
 setTimeout(()=>{DT[25]={n:'ศึกป้องกันท่าเรือเมฆ',lv:1,L:136,bL:22,hp:7800000,xp:850000,g:115000,dm:66,tn:10,sm:2,rm:4,lg:1,tm:900,gold:780000,exp:6800000}},0);
 const HDFI=()=>!!(MAPS[curMap]&&MAPS[curMap].hdf),hdfBack=()=>({x:2050,y:1820});
 const HDEA=[-1.5708,.5236,2.618],hdE=()=>HDEA.map(a=>[CX+Math.cos(a)*230,CY+Math.sin(a)*230]);
@@ -107,7 +107,7 @@ function hdfMap(id){if(MAPS[id])return MAPS[id];const D=DT[25];hdfReset();
   return MAPS[id]={n:'ศึกป้องกันท่าเรือเมฆ',dg:25,hdf:1,th:38,bth:38,sx:CX,sy:CY+400,sr:0,seed:381,bg:'#c9d8e8',tile:'#8a6440',safe:'#946c46',ring:'#ffe0a0',t1:'#3a2414',t2:'#5a3c24',d1:'#9ab0c8',d2:'#ffffff',nests:[],
     gates:[{x:CX-170,y:CY+420,to:38,req:1,ars:1,nm:'ผาท่าเรือเมฆ',arr:hdfBack()}],qk:1,ql:22,npc:{x:-9999,y:-9999,n:'',L:1},
     boss:{x:CX,y:CY-420,n:'คราเคนเมฆ',hp:D.hp,xp:D.xp,L:D.bL,rm:D.rm,lg:D.lg,g:D.g,dm:D.dm,tn:D.tn,sm:D.sm,sL:136,col:'#c8b8ff',bar:'#5a4a9a',ln:'#efe8ff',rec:'เล่นเดี่ยวได้ · ปาร์ตี้แนะนำ',pos:'ทะเลเมฆฝั่งเหนือ',dg:1}}}
-function hdfEnter(){if(!me.cls||me.down>0||isDg())return;const id=86000+(Math.random()*999|0);if(!dgMap(id))return;
+function hdfEnter(){if(!me.cls||me.down>0||isDg())return;const id=72000+(Math.random()*999|0);if(!dgMap(id))return;
   if(typeof PTY!=='undefined'&&PTY){const t='⚓ เปิดศึกป้องกันท่าเรือเมฆ รหัส '+id+' มาช่วยกันเฝ้าเครื่องดาวจนรุ่งเช้า!';emitM('dinv',{id,n:myName});addChat(myName,t,uid);if(room)room.emit('chat',{u:uid,n:myName,t})}
   hdfReset();ov.hidden=true;try{sfx('gate')}catch(e){}enterMap(id,{x:CX+60,y:CY+380});setTimeout(()=>{if(HDFI()&&dg.ph==='lobby')banner={s:'⚓ ศึกป้องกันท่าเรือเมฆ · พร้อมเมื่อไหร่กด "เริ่ม" (เล่นคนเดียวได้)',t:5}},700)}
 function hdfStart(){if(!HDFI()||dg.ph!=='lobby')return;const D=DT[25];stSay(HDF_IN,()=>{if(!HDFI()||dg.ph!=='lobby')return;dg={ph:'run',w:0,tl:D.tm*DGTX,nx:0};SR=0;mons=[];teles=[];bossCd=1e9;hdfReset();HDF.st='brk';HDF.nt=4;
@@ -273,7 +273,7 @@ const STEND9=[null,
 setTimeout(()=>{
   try{DGTH[25]='harbor'}catch(e){}
   try{const _q=arAqT;window.arAqT=arAqT=function(st){if(st.p8sp||st.p8rp)return p8AqT(st);return _q(st)}}catch(e){}
-  try{const _dm=dgMap;window.dgMap=dgMap=function(id){if(id>=86000&&id<87000)return hdfMap(id);return _dm(id)}}catch(e){}
+  try{const _dm=dgMap;window.dgMap=dgMap=function(id){if(id>=72000&&id<73000)return hdfMap(id);return _dm(id)}}catch(e){}
   try{const _ds=dgStart;window.dgStart=dgStart=function(){if(HDFI())return hdfStart();return _ds()}}catch(e){}
   try{const _sm=dgSim;window.dgSim=dgSim=function(dt){if(HDFI())return hdfSim(dt);return _sm(dt)}}catch(e){}
   try{const _dr=dgReward;window.dgReward=dgReward=function(){if(HDFI()){try{rnShard(3)}catch(e){}try{if(!dg.rbr){dg.rbr=1;rbRoll('บอสดันเจี้ยนเนื้อเรื่อง',.35)}}catch(e){}return hdfReward()}return _dr()}}catch(e){}
