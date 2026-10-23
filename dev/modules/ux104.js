@@ -43,8 +43,8 @@ try{cfgUI=(f=>function(){const r=f.apply(this,arguments);try{const cap=[...ov.qu
 function fsChg(){fsSync();try{setTimeout(fitStage,80);setTimeout(fitStage,400)}catch(e){}if(fsEl()){FSV.arm=false;return}
   setTimeout(()=>{if(fsEl())return;if(document.visibilityState==='hidden'){if(fsPref())FSV.arm=true;return}if(performance.now()-FSV.t>600&&!FSV.arm)fsPrefSet(0)},350)}
 document.addEventListener('fullscreenchange',fsChg);document.addEventListener('webkitfullscreenchange',fsChg);
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&fsPref()&&!fsEl()&&fsCan())FSV.arm=true});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&fsPref()&&!fsEl()&&fsCan()&&!fsStand())FSV.arm=true});
 /* แตะครั้งแรกหลังเปิดเกม/กลับมา → เข้าเต็มจอ (ถ้าเคยเปิดไว้) · ไม่นับการแตะปุ่ม ⛶ เอง */
-document.addEventListener('pointerdown',e=>{if(!FSV.arm||fsEl()||!fsCan())return;if(e.target&&e.target.closest&&e.target.closest('#fsb,[data-fsrow]'))return;FSV.arm=false;fsEnter()},true);
-if(fsPref()&&fsCan())FSV.arm=true;
+document.addEventListener('pointerdown',e=>{if(!FSV.arm||fsEl()||!fsCan()||fsStand())return;if(e.target&&e.target.closest&&e.target.closest('#fsb,[data-fsrow]'))return;FSV.arm=false;fsEnter()},true);
+if(fsPref()&&fsCan()&&!fsStand())FSV.arm=true;
 setTimeout(fsBtn,0);setInterval(()=>{if(!$('fsb'))fsBtn();else{const b=$('fsb');if(!b.firstChild)fsSync()}},2000);
