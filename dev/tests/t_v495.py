@@ -22,7 +22,7 @@ async def main():
         B=await new_client(b,'Nb'+str(random.randint(100,999)),'melee',99)
         i0=await A.ev("()=>STY.findIndex(x=>x.c===STCH.indexOf('ภาค 8 · บทที่ 1 · เสียงตอบจากทะเลเมฆ'))")
         last7=await A.ev("()=>STY.findIndex(x=>x.p7c5)")
-        rep('ภาค 8 บทที่ 1 ต่อจากบทสุดท้ายของภาค 7 พอดี (7 ขั้น)',i0==last7+1 and await A.ev("()=>STY.length")-i0==7,[i0,last7])
+        rep('ภาค 8 บทที่ 1 ต่อจากบทสุดท้ายของภาค 7 พอดี (7 ขั้น)',i0==last7+1 and await A.ev("()=>STY.filter(x=>x.c===STY[STY.findIndex(y=>y.p8s)].c).length")==7,[i0,last7])
         for C,e7 in ((A,1),(B,2)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0-1},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:{e7},p7m:1}};ov.hidden=true;enterMap(1,{{x:1600,y:1600}})}}")
         await A.wait(2500)
@@ -115,8 +115,8 @@ async def main():
         # ===== ขั้น 7: นาวิน =====
         qn=await A.ev("()=>{const N=MAPS[38].npc2;npcSel=2;me.x=N.x;me.y=N.y+40;const k=stTalkKey();stNpcClick();return [k,SD.q.length]}")
         await adv(A);await A.ev("()=>{achCheck()}")
-        s7=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!(me.ach&&me.ach.stN1),(typeof TITLES!=='undefined')]")
-        rep('คุยนาวิน → จบภาค 8 บทที่ 1 · ได้ฉายา «ผู้ได้ยินเสียงตอบ» · ข้อความรอบทต่อไป',qn[0]=='navin' and s7[0]==s7[1] and 'จบภาค 8 บทที่ 1' in s7[2] and s7[3],[qn,s7])
+        s7=await A.ev("()=>[me.sty.s,STY.findIndex(x=>x.p8c1)+1,stTxt(),!!(me.ach&&me.ach.stN1),(typeof TITLES!=='undefined')]")
+        rep('คุยนาวิน → จบภาค 8 บทที่ 1 · ได้ฉายา «ผู้ได้ยินเสียงตอบ» · ต่อด้วยบทที่ 2 (สภาค่าย)',qn[0]=='navin' and s7[0]==s7[1] and 'สภาค่าย' in s7[2] and s7[3],[qn,s7])
         # ===== B (e7=2): ซาราพูดถึงหัวใจกลางเมือง =====
         await B.ev(f"()=>{{me.sty.s={i0+4};me.sty.a=0;enterMap(38,{{x:2000,y:1900}})}}");await B.wait(2600)
         qb=await B.ev("()=>{const N=MAPS[38].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick();return SD.q.map(l=>l[1]).join('|')}")
