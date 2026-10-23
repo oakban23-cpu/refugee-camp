@@ -12819,7 +12819,7 @@ function mCorpseDraw(Q,now){const e=(now-Q.t0)/1000/Q.D;if(e>=1)return false;con
   if(Q.mat==='sand'){sy*=1-.35*c(e,.5,1);}
   try{gxShadow(m.x+ox+(Q.st==='drop'?0:Math.sin(rot)*r*.8),gy-r*.05,r*(1+.25*Math.abs(Math.sin(rot))),r*.3,.55*Math.max(0,a))}catch(err){}MSHOFF=1;
   const pv=Q.st==='drop'?m.y-r*.45:gy;g.save();g.globalAlpha=Math.max(0,a);g.translate(m.x+ox,pv+oy);g.rotate(rot);g.scale(sx*(Q.sc||1),sy*(Q.sc||1));g.translate(-m.x,-pv);
-  const M0=MON_CUR;MON_CUR=m;try{drawMon(m.x,m.y,m.t,(m._an&&m._an.ck)||T,m.fx,0,hf)}catch(err){}finally{MON_CUR=M0;MSHOFF=0}g.restore();
+  const M0=MON_CUR;MON_CUR=m;try{if(!mpcMon(m,(m._an&&m._an.ck)||T,m.fx||1,0,hf,1))drawMon(m.x,m.y,m.t,(m._an&&m._an.ck)||T,m.fx,0,hf)}catch(err){}finally{MON_CUR=M0;MSHOFF=0}g.restore();
   return true}
 function mCorpseTick(){const now=performance.now();if(MLMAP!==curMap){MLMAP=curMap;MCORP.length=0;for(const k in MLAST)delete MLAST[k]}
   let ids=null;for(const k in MLAST){const L=MLAST[k];if(now-L.seen<120)continue;if(!ids){ids=new Set();for(const q of mons)ids.add(q.id)}
@@ -13590,15 +13590,15 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v499';
+const WNV='v500';
 const WNL=[
+  ['✨','มอนทุกตัวมีมิติขึ้น','มอนทุกแมพได้แสงเงาเต็มชุดทุกตัว (เดิมได้แค่ 5 ตัวต่อจอ และโหมดประหยัดไม่ได้เลย): ส่วนตัวกลม ๆ มีไฮไลต์ด้านรับแสง เงาด้านหลังแสง · แขนขาเป็นทรงกระบอก · แสงขอบตามสีแมพ · แสงเรือง (ตา/ผลึก/ไฟ) ยังสว่างแบบเดิม · คุณภาพปกติ: มอนแต่ละตัววาดลงภาพของตัวเองแล้วใช้ซ้ำ ไม่วาดใหม่ทุกเฟรม · โหมดประหยัด: วาดตรงพร้อมแสงเงาส่วน · ถ้าเครื่องเริ่มหน่วง ระบบถอยกลับวิธีเดิมเองอัตโนมัติ'],
   ['🎨','ผาท่าเรือเมฆสวยขึ้นทั้งแมพ','วาดใหม่ทั้งฉาก: ทะเลเมฆเป็นก้อนเมฆฟูมีมิติ · ขอบผาเป็นหน้าผาหินมีชั้นหิน รอยแตก ตะไคร่ และไอเมฆเกาะตีนผา · ลานท่าเรือเป็นแผ่นไม้มีลายไม้ ตะปู กำแพงหินขอบท่า · ทุ่งหญ้ามีกอหญ้าลู่ลม ดอกไม้ ก้อนกรวดตามทาง · เรือเหาะ ประภาคาร บ้านท่าเรือ เต็นท์พยาบาล คลังเสบียง เครน สมอ ซากเรือฟ้าเที่ยง ต้นไม้ หิน วาดใหม่ละเอียดขึ้น · ฉลามเมฆตัวใหม่ · บอสคราเคนเมฆโฉมใหม่ หนวดเรียวมีปุ่มดูด ตาเรืองแสง · ลานศึกป้องกันท่าเรือมีพื้นไม้ เข็มทิศทองเหลือง และเครื่องดาวทองเหลืองโดมแก้ว · ภาพละเอียดขึ้นแต่วาดต่อเฟรมน้อยลง (เก็บภาพไว้ใช้ซ้ำ)'],
   ['⛵','ภาค 8 บทที่ 2 · ราคาของการเปิดประตู','กองเรือนาวาเมฆมาถึงแล้ว · คุยผู้บัญชาการเรนน์ (สภาค่ายถกเรื่องรับกองเรือ) → ส่งเสบียง สมุนไพร/แร่/ปลา ที่คลังเสบียงท่าเรือ → ซ่อมเรือ 4 ลำ (ตอกหมุดตามจังหวะ) → ดันเจี้ยนใหม่ «ศึกป้องกันท่าเรือเมฆ» ปกป้องเครื่องดาว 3 เครื่อง สู้บอสคราเคนเมฆ → ตัดสินว่าท่าเรือจะเปิดให้ใคร · ปลดล็อก ⛵ เรือเหาะ: วาปแผนที่โลกระหว่าง ค่าย · อัสตรา · อารัณยา · ผาท่าเรือ ไม่ต้องรอคูลดาวน์ · ฉายาใหม่ «ผู้ถือกุญแจท่าเรือ»'],
   ['💗','ดูดเลือดทุก % มีความหมายแล้ว','เดิมเลือดที่ดูดได้ถูกจำกัดไว้ 4% ของเลือดสูงสุดต่อวินาที (ตีแรงแค่ดูดเลือด 3–5% ก็ชนแล้ว) · ตอนนี้ลิมิตโตตามค่าดูดเลือด: 4% + ดูดเลือด×0.1 สูงสุด 10%/วิ (ดูดเลือด 30% → 7%/วิ · 60% ขึ้นไป → 10%/วิ) · ส่วนที่เกินเพดาน 30% ก็ยังนับเพิ่มลิมิต · ดูได้ที่ หน้าตัวละคร → สเตตัส → 💗 ฟื้นจากดูดเลือด'],
   ['🔒','สเตตัสเกินเพดานไม่เสียเปล่าแล้ว','ลดดาเมจที่ได้รับเกิน 60% → แปลงเป็นเลือดสูงสุด 1:1 · คริเกิน 100% → ดาเมจคริ 40% ของส่วนเกิน (เดิม 15%) · ความเร็วโจมตีเพดาน +300% ส่วนเกินแปลงเป็นแรงตีปกติ ดาเมจต่อวินาทีเท่าเดิม · ความเร็วเดินเกิน +100% ได้ครึ่งเดียว · หน้าตัวละคร → สเตตัส แสดงลดดาเมจ/ดูดเลือด และบอกว่าค่าไหนชนเพดาน · ฉายาทอง 4 อัน (นักสำรวจแผ่นดินเงา · รากพิภพ · ฟ้าตะวันตก · ผู้จุดดาว) ได้เลือด/ลดดาเมจ/ความเร็วเดินจริงแล้ว'],
   ['⚓','ภาค 8 เปิดแล้ว · ทะเลเมฆไร้ฝั่ง','จบภาค 7 แล้วคุยกับผู้บัญชาการเรนน์ที่ค่าย · แสงโคมนับร้อยบนขอบฟ้า และเรือเหาะลำหนึ่งตกที่ «ผาท่าเรือเมฆ» (ประตูตะวันออกเฉียงใต้ของค่าย · มอน Lv 134–138: ฉลามเมฆ นางนวลพายุ ยักษ์เพรียงหิน) · ช่วยลูกเรือที่ควันแดงพาไปเต็นท์พยาบาล · จุดประภาคารผาเหนือให้กองเรือนาวาเมฆ · ฉายาใหม่ «ผู้ได้ยินเสียงตอบ» · ตกปลาเมฆได้ที่ปลายสะพานกลาง'],
-  ['🔐','iPhone: ผูกบัญชีก่อนเพิ่มเกมไปหน้าจอโฮม','บน iPhone/iPad แอปที่เพิ่มไว้บนหน้าจอโฮมแยกที่เก็บข้อมูลจาก Safari · ถ้ายังไม่ผูกบัญชี การ์ดติดตั้งจะเตือนและมีปุ่ม «🔐 ไปผูกบัญชีก่อน» (บันทึกแล้วพาไปกล่องผูกบัญชีที่หน้าเลือกตัวละคร) · เปิดจากไอคอนแล้วให้ล็อกอินชื่อบัญชีกับ PIN เดิม ตัวละครจะตามมาครบ'],
-  ['🎞️','มือถือลื่นขึ้น (โหมดประหยัด)','จำกัดเฟรมที่ 60 บนมือถือ (จอ 120Hz เคยวาดถี่เกินจนสะดุด) · ตั้งค่า → คุณภาพภาพ → 🎞️ อัตราเฟรม เลือก 30 ได้ ลื่นสม่ำเสมอ ประหยัดแบต · โหมดประหยัดใช้ภาพ HD ของเมืองหลวง/ค่าย/บ้านกิลด์ต่อ (เบากว่าวาดเส้น) · ไม่วาดทหารยาม/ชาวค่ายที่อยู่นอกจอ · ดอกไม้หญ้าหินในทุ่งวาดครั้งเดียวแล้วใช้ซ้ำ · แถบ HP/MP ไม่เขียนหน้าจอใหม่ทุกเฟรม · งานวาดต่อเฟรมลด 24–65% แล้วแต่ฉาก']];
+  ['🔐','iPhone: ผูกบัญชีก่อนเพิ่มเกมไปหน้าจอโฮม','บน iPhone/iPad แอปที่เพิ่มไว้บนหน้าจอโฮมแยกที่เก็บข้อมูลจาก Safari · ถ้ายังไม่ผูกบัญชี การ์ดติดตั้งจะเตือนและมีปุ่ม «🔐 ไปผูกบัญชีก่อน» (บันทึกแล้วพาไปกล่องผูกบัญชีที่หน้าเลือกตัวละคร) · เปิดจากไอคอนแล้วให้ล็อกอินชื่อบัญชีกับ PIN เดิม ตัวละครจะตามมาครบ']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -14124,8 +14124,8 @@ function gbDrawHall(){if(!(GBS.go&&isWB()))return;const t=performance.now()/1000
 /* ---- บอส: อสูรเกราะศึก ---- */
 function drawGuildBoss(m,T,hf){const x=m.x,y=m.y,O='#0c0a0e',W2=hf>.35,now=performance.now()/1000,br=Math.sin(now*1.4),A=wbAnim(),TI=gbTier(),gc=gbGC(),rc=h2r(gc),
     ro=dg.ph==='boss'?A.ro:((now%8)>6.8?Math.sin(((now%8)-6.8)/1.2*Math.PI):0),F=c=>W2?'#ffece0':c;
-  const E=(cx,cy,rx,ry,c,st,r)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),r||0,0,7);g.fillStyle=c;g.fill();if(st){g.lineWidth=2.4;g.strokeStyle=O;g.stroke()}};
-  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();g.fillStyle=c;g.fill();if(st){g.lineWidth=2.4;g.strokeStyle=O;g.stroke()}};
+  const E=(cx,cy,rx,ry,c,st,r)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),r||0,0,7);const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?chSh(c,cy-ry,cy+ry):c;g.fill();if(st){g.lineWidth=2.4;g.strokeStyle=O;g.stroke()}if(mb&&!g.shadowBlur)mvE(cx,cy,rx,ry,r)};
+  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?mvSh(p,c):c;g.fill();if(st){g.lineWidth=2.4;g.strokeStyle=O;g.stroke()}if(mb)mvP(p)};
   const trim=(p,w)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.strokeStyle=W2?'#fff':TI.tr;g.lineWidth=w||2;g.stroke()};
   try{gbDrawThrone(now)}catch(e){}
   g.save();
@@ -17049,9 +17049,9 @@ RB2N['ราชาหุ่นเชิดองค์สุดท้าย']=gx
 /* ---------- ต่อเข้า drawBoss (ตัวเลือกตามชื่อบอส · โครงเดียวกับต้นฉบับ: ออร่าคลั่ง/ร่าย/เงา) ---------- */
 drawBoss=(f=>function(x,y,T,B,hf,cf,er){const fn=B&&RB2N[B.n];if(!fn)return f.apply(this,arguments);cf=cf||0;BXY[0]=x;BXY[1]=y;
   const O='#120c0a',W=hf>.3,F=c=>W?'#ffffff':c,tc=BTR[MAPS[curMap]&&MAPS[curMap].bth]||BTR[10];
-  const E=(cx,cy,rx,ry,c,st,rot)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),rot||0,0,7);g.fillStyle=c;g.fill();if(st){g.lineWidth=1.4;g.strokeStyle=O;g.stroke()}};
-  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();g.fillStyle=c;g.fill();if(st){g.lineWidth=1.4;g.strokeStyle=O;g.stroke()}};
-  const Ln=(p,c,w)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.strokeStyle=c;g.lineWidth=w;g.stroke()};
+  const E=(cx,cy,rx,ry,c,st,rot)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),rot||0,0,7);const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?chSh(c,cy-ry,cy+ry):c;g.fill();if(st){g.lineWidth=1.4;g.strokeStyle=O;g.stroke()}if(mb&&!g.shadowBlur)mvE(cx,cy,rx,ry,rot)};
+  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?mvSh(p,c):c;g.fill();if(st){g.lineWidth=1.4;g.strokeStyle=O;g.stroke()}if(mb)mvP(p)};
+  const Ln=(p,c,w)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.strokeStyle=c;g.lineWidth=w;g.stroke();if(MVB.on()&&!mvW(c))mvL(p,w)};
   const eye=(ex,ey,w,h,c,rot)=>{g.shadowColor=c;g.shadowBlur=W?0:12;E(ex,ey,w,h,W?'#fff':c,0,rot);g.shadowBlur=0};
   const glowOrb=(ox,oy,rad,c,a)=>{const gr=g.createRadialGradient(ox,oy,0,ox,oy,rad);gr.addColorStop(0,'rgba(255,255,255,'+a+')');gr.addColorStop(.35,'rgba('+c+','+a+')');gr.addColorStop(1,'rgba('+c+',0)');g.fillStyle=gr;g.beginPath();g.arc(ox,oy,rad,0,7);g.fill()};
   const br=Math.sin(T*2)*2.4,sw=Math.sin(T*3),up=cf*14+Math.sin(T*2.3)*2.6;
@@ -21872,6 +21872,84 @@ PALK.hdeng=function(t,T){const i=t.v,x=t.x,y=t.y,h=HDF.e[i],dead=h<=0,hit=perfor
 PALK.hdlad=function(t,T){const x=t.x,y=t.y;phSpr('lad',x,y,[-14,-34,28,78],()=>{for(const s of[-9,9]){g.strokeStyle='#5a4220';g.lineWidth=3.4;g.beginPath();g.moveTo(s,-30);g.lineTo(s,40);g.stroke();g.strokeStyle='#c8a870';g.lineWidth=2;g.setLineDash([3,2]);g.stroke();g.setLineDash([])}
   for(let k=-24;k<40;k+=12){const rg=g.createLinearGradient(0,k-2,0,k+2);rg.addColorStop(0,'#a07a4a');rg.addColorStop(1,'#5a3a1e');g.fillStyle=rg;g.fillRect(-10,k-2,20,4);g.fillStyle='#c8a870';g.fillRect(-11,k-2.5,3,5);g.fillRect(8,k-2.5,3,5)}});
   if(HDF.st==='wave'||HDF.st==='boss'){g.save();g.globalCompositeOperation='lighter';glowAt(x,y+10,30,'255,120,90',.15+.1*Math.sin(T*4+t.v));g.restore()}};
+/* ---------- v500 มอนมีมิติ: วาดมอนแต่ละตัวลงภาพของตัวเอง (อัปเดตหลายครั้งต่อวินาที) + ลงแสงเต็มชุด ----------
+   ทำไม: ระบบแสงเดิม (monLit) ลงแสงได้แค่ 5 ตัวต่อเฟรม และไม่ทำงานในโหมดประหยัด → มอนส่วนใหญ่แบน
+   วิธี: วาดมอนแบบเวกเตอร์ (คุณภาพเต็ม) ลงแคนวาสส่วนตัวตามจังหวะท่า (ck) แล้วลงแสง: ไล่แสงทั้งตัว · เงาด้านหลังแสง 2 ชั้น ·
+   แสงขอบด้านรับแสง · แสงสะท้อนขอบหลัง · เส้นขอบหนาขึ้น → ทุกเฟรมแค่วาดเงาพื้น + drawImage */
+const MPC={on:1,auto:1,rich0:1,ck:{t:0,bad:0},base:[0,0,1],wm:new WeakMap(),bb:{},cap:null,rich:0,tmp:null,tx:null,n:0,nf:0,fr:-1,stat:{r:0,b:0,s:0}};
+{const _sh=gxShadow;gxShadow=function(x,y,rx,ry,a){if(MPC.cap){const M=g.getTransform(),B=MPC.base,dx=M.a*x+M.c*y+M.e,dy=M.b*x+M.d*y+M.f;MPC.cap.push([(dx-B[0])/B[2],(dy-B[1])/B[2],rx*Math.hypot(M.a,M.b)/B[2],ry*Math.hypot(M.c,M.d)/B[2],a]);return}return _sh.apply(this,arguments)}}
+/* แยกแสงเรือง ('lighter') ออกจากตัวมอน: รอบ 1 วาดเฉพาะตัว (ไม่เอา lighter) · รอบ 2 วาดเฉพาะแสงเรือง → ลงแสงเฉพาะตัว แล้ววาดแสงเรืองแบบบวกแสงบนจอ */
+const MPCF=['fill','stroke','fillRect','strokeRect','drawImage','fillText','strokeText'];
+function mpcHook(x){if(x.__mpc)return;x.__mpc=1;const P=CanvasRenderingContext2D.prototype;for(const k of MPCF){const f=P[k];x[k]=function(){const ps=MPC.pass;if(ps){const lit=this.globalCompositeOperation==='lighter';if((ps===1&&lit)||(ps===2&&!lit))return;if(ps===2)MPC.gl=1}return f.apply(this,arguments)}}}
+function mpcTmp(w,h){let c=MPC.tmp;if(!c){c=MPC.tmp=document.createElement('canvas');c.width=c.height=128;MPC.tx=c.getContext('2d')}
+  if(c.width<w||c.height<h){c.width=Math.max(c.width,w);c.height=Math.max(c.height,h);MPC.tx=c.getContext('2d')}return MPC.tx}
+/* วาดมอน 1 ท่าลงบริบท x (พิกัดท้องถิ่น: จุดเท้ามอนอยู่ที่ 0,0) */
+function mpcRender(x,m,ck,fx,sl,hf,B,pass){MPC.base=B;const G0=g,L0=LOWQ,k0=m.__u59k,MC=MON_CUR,cap=MPC.cap,R0=Math.random;g=x;LOWQ=false;m.__u59k=null;MON_CUR=m;MPC.cap=[];MPC.rich=1;MPC.pass=pass||0;
+  /* สุ่มแบบคงที่ต่อท่า: รอบตัว/รอบแสงเรืองได้ผลเหมือนกัน */let sd=(Math.floor(ck*97)*2654435761+(m.id|0)*40503)>>>0;Math.random=()=>{sd=(sd*1664525+1013904223)>>>0;return sd/4294967296};let sh=null;
+  try{drawMon(0,0,m.t,ck,fx,sl,hf)}catch(e){}finally{sh=MPC.cap;MPC.cap=cap;MPC.rich=0;MPC.pass=0;Math.random=R0;g=G0;LOWQ=L0;m.__u59k=k0;MON_CUR=MC}return sh}
+/* กรอบภาพต่อชนิดมอน: วัดจริงครั้งเดียว (3 ท่า หันซ้าย-ขวา) */
+function mpcVar(m){return (m.tgb?'g':'')+(m.hdg>=0?'h':'')+(m.vsa?'v':'')}
+function mpcBB(m){const k=curMap+'|'+bTheme()+'|'+m.t+'|'+mpcVar(m);let b=MPC.bb[k];if(b)return b;
+  const N=640,c=document.createElement('canvas');c.width=c.height=N;const x=c.getContext('2d');let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  for(const[T,f]of[[.4,1],[1.3,-1],[2.9,1],[4.4,-1]]){x.setTransform(1,0,0,1,N/2,N*.62);x.clearRect(-N,-N,N*2,N*2);mpcRender(x,m,T,f,0,0,[N/2,N*.62,1]);
+    const d=x.getImageData(0,0,N,N).data;for(let yy=0;yy<N;yy+=2)for(let xx=0;xx<N;xx+=2){if(d[(yy*N+xx)*4+3]>8){const lx=xx-N/2,ly=yy-N*.62;if(lx<x0)x0=lx;if(lx>x1)x1=lx;if(ly<y0)y0=ly;if(ly>y1)y1=ly}}}
+  if(x1<x0){x0=-30;x1=30;y0=-60;y1=14}
+  const hw=Math.max(Math.abs(x0),Math.abs(x1)),pw=hw*.18+8,ph=(y1-y0)*.16+8;
+  b=MPC.bb[k]={x:-hw-pw,y:y0-ph,w:(hw+pw)*2,h:(y1-y0)+ph*2};return b}
+/* ลงแสงบนภาพมอน (พิกัดพิกเซลจริง) */
+function mpcLight(c,x,w,h,q){const A=gxAmb(),rim=gxRimCol(),t=mpcTmp(w+4,h+4),nt=(()=>{try{return isNight()&&!isDg()}catch(e){return false}})();
+  x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.shadowBlur=0;
+  /* 1) ไล่แสงทั้งตัว: บนซ้ายสว่าง ล่างขวามืด */x.globalCompositeOperation='source-atop';const gr=x.createLinearGradient(w*.18,h*.05,w*.78,h*.98);gr.addColorStop(0,'rgba(255,248,222,.16)');gr.addColorStop(.5,'rgba(0,0,0,0)');gr.addColorStop(1,A[1].replace(/,([\d.]+)\)$/,(z,a)=>','+(+a*.62).toFixed(2)+')'));x.fillStyle=gr;x.fillRect(0,0,w,h);
+  const band=(dx,dy,col,a,op)=>{t.setTransform(1,0,0,1,0,0);t.globalAlpha=1;t.globalCompositeOperation='source-over';t.clearRect(0,0,w+4,h+4);t.drawImage(c,0,0,w,h,0,0,w,h);
+    t.globalCompositeOperation='destination-out';t.drawImage(c,0,0,w,h,dx,dy,w,h);t.globalCompositeOperation='source-in';t.fillStyle=col;t.fillRect(0,0,w,h);
+    x.globalCompositeOperation=op||'source-atop';x.globalAlpha=a;x.drawImage(t.canvas,0,0,w,h,0,0,w,h);x.globalAlpha=1};
+  const k=Math.max(1.5,2.4*q);
+  /* 2) เงาด้านหลังแสง */band(-k,-k*.85,nt?'rgb(6,10,40)':'rgb(26,12,44)',.24);
+  /* 3) แสงขอบด้านรับแสง */band(Math.max(1,q*.85),Math.max(1,q*.95),'rgb('+rim+')',nt?.32:.42);
+  x.globalCompositeOperation='source-over'}
+/* วาดมอนจากภาพแคช · คืน true ถ้าวาดแล้ว */
+/* เฝ้าความลื่น: ถ้าเฟรมช้ากว่าเป้าต่อเนื่อง → เลิกใช้ภาพแคช (กลับไปวาดตรงแบบมีแสงเงาส่วน) */
+function mpcWatch(){const n=performance.now();if(n-MPC.ck.t<3000)return;MPC.ck.t=n;if(typeof FQ==='undefined'||!(FQ.avg>0))return;const thr=Math.max(26,1000/mvTg()*1.22);
+  if(FQ.avg>thr){if(++MPC.ck.bad>=2){MPC.auto=0;MPC.offAt=n}}else MPC.ck.bad=0}
+function mpcMon(m,ck,fx,sl,hf,direct){if(!m||m.t>=3||!MT[m.t])return false;
+  if(MPC.mp!==curMap){MPC.mp=curMap;MPC.auto=1;MPC.ck.bad=0;MPC.ck.t=performance.now()}if(!MPC.auto)return false;mpcWatch();
+  if(!MPC.on||LOWQ){if(!MPC.rich0)return false;/* วาดตรง + แสงเงาทรงกลม/ทรงกระบอกต่อส่วน */MPC.rich=1;try{if(direct)drawMon(m.x,m.y,m.t,ck,fx,sl,hf);else monLit(m,()=>drawMon(m.x,m.y,m.t,ck,fx,sl,hf))}finally{MPC.rich=0}return true}
+  const M=g.getTransform(),sc=Math.hypot(M.a,M.b);if(!(sc>0))return false;
+  let S=MPC.wm.get(m);const b=mpcBB(m),W=hf>.3,rate=LOWQ?10:16,step=Math.floor(ck*rate),qm=LOWQ?2:3;
+  let q=Math.max(.5,Math.min(qm,Math.round(sc*4)/4));if(S&&Math.abs(S.q-q)/S.q<.3)q=S.q;
+  const key=step+'|'+(fx<0?1:0)+'|'+(W?1:0)+'|'+(sl>0?1:0)+'|'+(hf>0?Math.round(hf*3):0)+'|'+mpcVar(m)+'|'+bTheme();
+  const fr=typeof FL!=='undefined'&&FL.pt?FL.pt:Math.floor(performance.now()/16);if(fr!==MPC.fr){MPC.fr=fr;MPC.nf=0}
+  const need=!S||S.key!==key||S.q!==q||S.b!==b;
+  if(need&&(!S||S.b!==b||S.q!==q||MPC.nf<((typeof FQ!=='undefined'&&FQ.avg>22)?2:LOWQ?3:6))){MPC.nf++;MPC.stat.r++;
+    const w=Math.max(2,Math.ceil(b.w*q)),h=Math.max(2,Math.ceil(b.h*q));
+    if(!S){S={c:document.createElement('canvas'),gc:document.createElement('canvas')};S.x=S.c.getContext('2d');S.gx=S.gc.getContext('2d');MPC.wm.set(m,S)}
+    if(S.c.width!==w||S.c.height!==h){S.c.width=w;S.c.height=h;S.x=S.c.getContext('2d');S.gc.width=w;S.gc.height=h;S.gx=S.gc.getContext('2d')}
+    mpcHook(S.x);mpcHook(S.gx);const B=[-b.x*q,-b.y*q,q],prep=x=>{x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.shadowBlur=0;x.clearRect(0,0,w,h);x.setTransform(q,0,0,q,B[0],B[1]);x.lineCap='butt';x.lineJoin='miter';x.setLineDash([])};
+    const x=S.x;prep(x);S.sh=mpcRender(x,m,ck,fx,sl,hf,B,1);if(!W)try{mpcLight(S.c,x,w,h,q)}catch(e){}
+    const gk=b;gk.gn=(gk.gn|0)+1;if(gk.hg!==0||gk.gn%40===0){MPC.gl=0;prep(S.gx);mpcRender(S.gx,m,ck,fx,sl,hf,B,2);S.hg=MPC.gl;if(MPC.gl)gk.hg=1;else if(gk.gn>=30&&gk.hg!==1)gk.hg=0;MPC.gl=0}else S.hg=0;S.key=key;S.q=q;S.b=b}
+  else MPC.stat.s++;
+  if(!S)return false;
+  /* วาดจริง: เงาพื้น → ตัวมอน (แรงผลักถอยหลังขยับนอกภาพ ลื่นทุกเฟรม) */
+  let ox=0,oy=0;const kk=m.__u59k;if(kk){const e=(performance.now()-kk.t0)/150;if(e<1){const o=(1-e)*(1-e)*5*kk.pw;ox=Math.cos(kk.a)*o;oy=Math.sin(kk.a)*o*.6}else m.__u59k=null}
+  for(const s of S.sh||[])gxShadow(m.x+ox+s[0],m.y+oy+s[1],s[2],s[3],s[4]);
+  g.drawImage(S.c,0,0,S.c.width,S.c.height,m.x+ox+S.b.x,m.y+oy+S.b.y,S.b.w,S.b.h);
+  if(S.hg){const op=g.globalCompositeOperation;g.globalCompositeOperation='lighter';g.drawImage(S.gc,0,0,S.gc.width,S.gc.height,m.x+ox+S.b.x,m.y+oy+S.b.y,S.b.w,S.b.h);g.globalCompositeOperation=op}MPC.stat.b++;return true}
+/* ---------- ตอนวาดลงภาพแคช: ส่วนรูปไข่/รูปหลายเหลี่ยม/แขนขา ได้แสงเงาทรงกลม/ทรงกระบอก ---------- */
+const MVG=new WeakMap();
+function mvG(x){let o=MVG.get(x);if(o)return o;const mk=sx=>{const r=x.createRadialGradient(-.36*sx,-.44,0,-.1*sx,-.12,1.18);r.addColorStop(0,'rgba(255,255,255,.42)');r.addColorStop(.2,'rgba(255,255,255,.16)');r.addColorStop(.48,'rgba(255,255,255,0)');r.addColorStop(.78,'rgba(0,0,0,.09)');r.addColorStop(1,'rgba(18,0,36,.36)');return r};
+  o=[mk(1),mk(-1)];MVG.set(x,o);return o}
+const mvFlip=()=>{const M=g.getTransform();return (M.a*M.d-M.b*M.c)<0?1:0};
+function mvE(cx,cy,rx,ry,rot){if(rx<2.6||ry<2.6)return;const G=mvG(g)[mvFlip()];g.save();g.translate(cx,cy);if(rot)g.rotate(rot);g.scale(rx,ry);g.beginPath();g.arc(0,0,1,0,7);g.fillStyle=G;g.fill();g.restore()}
+function mvP(p){let x0=p[0],x1=p[0],y0=p[1],y1=p[1];for(let i=2;i<p.length;i+=2){const a=p[i],b=p[i+1];if(a<x0)x0=a;if(a>x1)x1=a;if(b<y0)y0=b;if(b>y1)y1=b}const w=x1-x0,h=y1-y0;if(w<5||h<5)return;
+  const cx=(x0+x1)/2,cy=(y0+y1)/2,sx=w/2,sy=h/2,G=mvG(g)[mvFlip()];g.save();g.translate(cx,cy);g.scale(sx,sy);g.beginPath();g.moveTo((p[0]-cx)/sx,(p[1]-cy)/sy);for(let i=2;i<p.length;i+=2)g.lineTo((p[i]-cx)/sx,(p[i+1]-cy)/sy);g.closePath();g.fillStyle=G;g.fill();g.restore()}
+function mvL(p,w){if(!(w>=2.2)||p.length<4)return;const f=mvFlip()?-1:1,lc=g.lineCap;g.lineCap='round';
+  const path=(dx,dy)=>{g.beginPath();g.moveTo(p[0]+dx,p[1]+dy);for(let i=2;i<p.length;i+=2)g.lineTo(p[i]+dx,p[i+1]+dy)};
+  path(w*.16*f,w*.2);g.strokeStyle='rgba(0,0,0,.2)';g.lineWidth=w*.34;g.stroke();path(-w*.18*f,-w*.2);g.strokeStyle='rgba(255,255,255,.22)';g.lineWidth=w*.28;g.stroke();g.lineCap=lc}
+/* บอส: เดิมเทสีเรียบ → ไล่สีบน-ล่าง + แสงเงาทรงกลม/ทรงกระบอก (วาดตรงทุกเฟรม · บอสมีทีละตัว) */
+const mvTg=()=>{let t=60;try{t=flTarget()||60}catch(e){}return t};
+const MVB={on:()=>MPC.rich0&&!(typeof FQ!=='undefined'&&FQ.avg>Math.max(30,1000/mvTg()*1.3))};
+const mvW=c=>typeof c!=='string'||c==='#ffffff'||c==='#fff'||c==='#ffe8d8';
+function mvSh(p,c){let y0=p[1],y1=p[1];for(let i=3;i<p.length;i+=2){if(p[i]<y0)y0=p[i];if(p[i]>y1)y1=p[i]}return chSh(c,y0,y1)}
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -25226,8 +25304,8 @@ function drawWBScreen(){const now=performance.now()/1000;g.save();g.textAlign='c
   g.restore()}
 /* ---------- โมเดลบอสโลก: อสูรยักษ์โลกันตร์ (ครึ่งตัวโผล่จากบ่อลาวา) ---------- */
 function drawWorldBoss(m,T,hf){const x=m.x,y=m.y,O='#120806',W2=hf>.35,F=c=>W2?'#ffe8d8':c,now=performance.now()/1000,br=Math.sin(now*1.6),A=wbAnim(),ro=dg.ph==='boss'?A.ro:((now%9)>7.6?Math.sin(((now%9)-7.6)/1.4*Math.PI):0);
-  const E=(cx,cy,rx,ry,c,st,r)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),r||0,0,7);g.fillStyle=c;g.fill();if(st){g.lineWidth=2;g.strokeStyle=O;g.stroke()}};
-  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();g.fillStyle=c;g.fill();if(st){g.lineWidth=2;g.strokeStyle=O;g.stroke()}};
+  const E=(cx,cy,rx,ry,c,st,r)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),r||0,0,7);const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?chSh(c,cy-ry,cy+ry):c;g.fill();if(st){g.lineWidth=2;g.strokeStyle=O;g.stroke()}if(mb&&!g.shadowBlur)mvE(cx,cy,rx,ry,r)};
+  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?mvSh(p,c):c;g.fill();if(st){g.lineWidth=2;g.strokeStyle=O;g.stroke()}if(mb)mvP(p)};
   const crack=(pts,w)=>{g.save();g.globalCompositeOperation='lighter';g.strokeStyle='rgba(255,'+(110+Math.round(60*Math.sin(now*3)))+',30,'+(W2?1:.85)+')';g.lineWidth=w;g.lineCap='round';g.lineJoin='round';g.beginPath();g.moveTo(x+pts[0],y+pts[1]);for(let i=2;i<pts.length;i+=2)g.lineTo(x+pts[i],y+pts[i+1]);g.stroke();g.restore()};
   g.save();
   /* บ่อลาวา */
@@ -29397,9 +29475,9 @@ const MNF={sk:'#ffffff',skD:'#ffe6dc',horn:'#ffd8c8',eye:'#ffffff',fang:'#ffffff
 /* ---------- มอนสเตอร์ประจำแผนที่ (5 ธีม x 3 ชนิด) ---------- */
 function drawMonT(x,y,t,T,fx,sl,hf,th){
   const r=MT[t].r,O='#140e0c',W=hf>.3,F=c=>W?'#ffffff':c;
-  const E=(cx,cy,rx,ry,c,st)=>{rx=Math.max(.1,rx);ry=Math.max(.1,ry);g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,7);g.fillStyle=chSh(c,cy-ry,cy+ry);g.fill();if(st){g.lineWidth=1;g.strokeStyle=O;g.stroke()}if(st&&!W&&rx>3.5&&ry>3.5&&!LOWQ){g.fillStyle='rgba(255,255,255,.16)';g.beginPath();g.ellipse(cx-rx*.32,cy-ry*.42,rx*.34,ry*.2,-.4,0,7);g.fill()}};
-  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);let y0=p[1],y1=p[1];for(let i=2;i<p.length;i+=2){g.lineTo(p[i],p[i+1]);if(p[i+1]<y0)y0=p[i+1];if(p[i+1]>y1)y1=p[i+1]}g.closePath();g.fillStyle=chSh(c,y0,y1);g.fill();if(st){g.lineWidth=1;g.strokeStyle=O;g.stroke()}};
-  const Ln=(pts,c,w)=>{g.beginPath();g.moveTo(pts[0],pts[1]);for(let i=2;i<pts.length;i+=2)g.lineTo(pts[i],pts[i+1]);g.strokeStyle=c;g.lineWidth=w;g.stroke()};
+  const E=(cx,cy,rx,ry,c,st)=>{rx=Math.max(.1,rx);ry=Math.max(.1,ry);g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,7);g.fillStyle=chSh(c,cy-ry,cy+ry);g.fill();if(st){g.lineWidth=1;g.strokeStyle=O;g.stroke()}if(MPC.rich&&c!=='#ffffff')mvE(cx,cy,rx,ry);if(st&&!W&&rx>3.5&&ry>3.5&&!LOWQ){g.fillStyle='rgba(255,255,255,.16)';g.beginPath();g.ellipse(cx-rx*.32,cy-ry*.42,rx*.34,ry*.2,-.4,0,7);g.fill()}};
+  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);let y0=p[1],y1=p[1];for(let i=2;i<p.length;i+=2){g.lineTo(p[i],p[i+1]);if(p[i+1]<y0)y0=p[i+1];if(p[i+1]>y1)y1=p[i+1]}g.closePath();g.fillStyle=chSh(c,y0,y1);g.fill();if(st){g.lineWidth=1;g.strokeStyle=O;g.stroke()}if(MPC.rich&&c!=='#ffffff')mvP(p)};
+  const Ln=(pts,c,w)=>{g.beginPath();g.moveTo(pts[0],pts[1]);for(let i=2;i<pts.length;i+=2)g.lineTo(pts[i],pts[i+1]);g.strokeStyle=c;g.lineWidth=w;g.stroke();if(MPC.rich&&c!=='#ffffff'&&typeof c==='string')mvL(pts,w)};
   const eye=(ex,ey,w,h,c)=>{g.shadowColor=c;g.shadowBlur=W?0:7;g.fillStyle=W?'#fff':c;g.beginPath();g.ellipse(ex,ey,w,h,0,0,7);g.fill();g.shadowBlur=0;if(!W&&w>=1.1&&h>=1.1){g.fillStyle='rgba(255,255,255,.9)';g.beginPath();g.arc(ex-w*.3,ey-h*.35,Math.min(w,h)*.32,0,7);g.fill()}};
   const slow=sl>0,sp=slow?.4:1,sw=Math.sin(T*7*sp),bob=Math.sin(T*4*sp)*1.2,la=Math.max(0,sw)*2.2,ra=Math.max(0,-sw)*2.2;
   if(hf>0)x+=Math.sin(T*90)*hf*3;
@@ -29581,7 +29659,7 @@ function drawMonAnim(m,T,hf){const now=performance.now()/1000,r=(MT[m.t]&&MT[m.t
   if(A>0){if(A<.3){const q=A/.3;sx+=.14*q;sy-=.14*q;rot-=.22*q*fd;ox-=3*q*fd}else if(A<.6){const q=(A-.3)/.3;sx-=.12*q;sy+=.16*q;rot+=.3*fd;ox+=r*.75*Math.sin(q*Math.PI*.5)*fd;oy-=2}
     else{const q=(A-.6)/.4;sx+=-.12+.12*q;sy+=.16-.16*q;rot+=.3*fd*(1-q);ox+=r*.75*(1-q)*fd}}
   if(hf>0)ox+=Math.sin(now*90)*hf*3;if(MHS){sx+=MHS.sx;sy+=MHS.sy;rot+=MHS.r;ox+=MHS.ox}const gy=m.y+r*.85;g.save();g.translate(m.x+ox,gy+oy);g.rotate(rot);g.scale(sx,sy);g.translate(-m.x,-gy);
-  const NTm=ntOf(m),SHm=shOf(m);if(NTm||SHm){const _g=g;g=GX.g0||g;try{if(NTm)drawNtAura(m);if(SHm)drawShAura(m)}finally{g=_g}}if(SHm){g.translate(m.x,gy);g.scale(1.35,1.35);g.translate(-m.x,-gy)}if(m.el){const _g=g;g=GX.g0||g;try{drawEkAura(m)}catch(e){}finally{g=_g}g.translate(m.x,gy);g.scale(m.nm?1.5:1.3,m.nm?1.5:1.3);g.translate(-m.x,-gy)}{const zs=szOf(m);if(zs!==1){g.translate(m.x,gy);g.scale(zs,zs);g.translate(-m.x,-gy)}}MON_CUR=m;if(SHm&&SHF&&!LOWQ)shFilterDraw(m,()=>drawMon(m.x,m.y,m.t,st.ck,m.fx||1,m.sl,hf));else monLit(m,()=>drawMon(m.x,m.y,m.t,st.ck,m.fx||1,m.sl,hf));MON_CUR=null;g.restore();if(NTm)drawNtTag(m);if(SHm)drawShTag(m,NTm);
+  const NTm=ntOf(m),SHm=shOf(m);if(NTm||SHm){const _g=g;g=GX.g0||g;try{if(NTm)drawNtAura(m);if(SHm)drawShAura(m)}finally{g=_g}}if(SHm){g.translate(m.x,gy);g.scale(1.35,1.35);g.translate(-m.x,-gy)}if(m.el){const _g=g;g=GX.g0||g;try{drawEkAura(m)}catch(e){}finally{g=_g}g.translate(m.x,gy);g.scale(m.nm?1.5:1.3,m.nm?1.5:1.3);g.translate(-m.x,-gy)}{const zs=szOf(m);if(zs!==1){g.translate(m.x,gy);g.scale(zs,zs);g.translate(-m.x,-gy)}}MON_CUR=m;if(SHm&&SHF&&!LOWQ)shFilterDraw(m,()=>drawMon(m.x,m.y,m.t,st.ck,m.fx||1,m.sl,hf));else if(!mpcMon(m,st.ck,m.fx||1,m.sl,hf))monLit(m,()=>drawMon(m.x,m.y,m.t,st.ck,m.fx||1,m.sl,hf));MON_CUR=null;g.restore();if(NTm)drawNtTag(m);if(SHm)drawShTag(m,NTm);
   if(A>.3&&A<.75){const q=(A-.3)/.45,ax=m.x+fd*r*1.5,ay=m.y-r*.2;g.save();g.globalCompositeOperation='lighter';g.strokeStyle='rgba(255,235,200,'+(.7*(1-q))+')';g.lineWidth=2.5;g.beginPath();g.arc(ax-fd*r*.6,ay,r*1.1,fd>0?-1.1+q*.6:Math.PI+1.1-q*.6,fd>0?.4+q*.6:Math.PI-.4-q*.6,fd<0);g.stroke();g.restore()}}
 function drawMon(x,y,t,T,fx,sl,hf){
   if(t!==4&&drawMonT(x,y,t,T,fx,sl,hf,bTheme()))return;
@@ -29592,8 +29670,8 @@ function drawMon(x,y,t,T,fx,sl,hf){
     g.fillStyle=hf>.3?'#ffffff':'#d8c8ff';g.beginPath();g.moveTo(0,8);g.lineTo(0,-34);g.lineTo(9,-16);g.lineTo(8,8);g.closePath();g.fill();g.shadowBlur=0;
     g.strokeStyle='rgba(255,255,255,.7)';g.lineWidth=1.2;g.beginPath();g.moveTo(-4,-8);g.lineTo(-5,-20);g.stroke();g.restore();return}
   const s=MT[t],O='#140e0c',P=hf>.3?MNF:(MN[t]||MN[0]),r=s.r;if(hf>0)x+=Math.sin(T*90)*hf*3;
-  const E=(cx,cy,rx,ry,c,st)=>{g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,7);g.fillStyle=chSh(c,cy-ry,cy+ry);g.fill();if(st){g.lineWidth=1;g.strokeStyle=O;g.stroke()}if(st&&hf<=.3&&rx>3.5&&ry>3.5&&!LOWQ){g.fillStyle='rgba(255,255,255,.16)';g.beginPath();g.ellipse(cx-rx*.32,cy-ry*.42,rx*.34,ry*.2,-.4,0,7);g.fill()}};
-  const Pg=(pts,c,st)=>{g.beginPath();g.moveTo(pts[0],pts[1]);let y0=pts[1],y1=pts[1];for(let i=2;i<pts.length;i+=2){g.lineTo(pts[i],pts[i+1]);if(pts[i+1]<y0)y0=pts[i+1];if(pts[i+1]>y1)y1=pts[i+1]}g.closePath();g.fillStyle=chSh(c,y0,y1);g.fill();if(st){g.lineWidth=1;g.strokeStyle=O;g.stroke()}};
+  const E=(cx,cy,rx,ry,c,st)=>{g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,7);g.fillStyle=chSh(c,cy-ry,cy+ry);g.fill();if(st){g.lineWidth=1;g.strokeStyle=O;g.stroke()}if(MPC.rich&&c!=='#ffffff')mvE(cx,cy,rx,ry);if(st&&hf<=.3&&rx>3.5&&ry>3.5&&!LOWQ){g.fillStyle='rgba(255,255,255,.16)';g.beginPath();g.ellipse(cx-rx*.32,cy-ry*.42,rx*.34,ry*.2,-.4,0,7);g.fill()}};
+  const Pg=(pts,c,st)=>{g.beginPath();g.moveTo(pts[0],pts[1]);let y0=pts[1],y1=pts[1];for(let i=2;i<pts.length;i+=2){g.lineTo(pts[i],pts[i+1]);if(pts[i+1]<y0)y0=pts[i+1];if(pts[i+1]>y1)y1=pts[i+1]}g.closePath();g.fillStyle=chSh(c,y0,y1);g.fill();if(st){g.lineWidth=1;g.strokeStyle=O;g.stroke()}if(MPC.rich&&c!=='#ffffff')mvP(pts)};
   g.save();g.translate(x,y);g.scale(fx<0?-1:1,1);g.lineJoin='round';
   const slow=sl>0,spd=slow?.4:1,bob=Math.sin(T*4*spd)*(t===2?.8:1.3),sw=Math.sin(T*7*spd);
   if(t===2){ /* อสูรม่วง - ตัวใหญ่หนัก */
@@ -29648,9 +29726,9 @@ const twBI=f=>((Math.max(10,f)/10|0)-1)%10;
 const TB_SC=2;
 function drawTowerBoss(x,y,T,f,hf,cf,er){cf=cf||0;const bi=twBI(f),cyc=Math.floor((Math.max(10,f)-10)/100);
   const O='#120c0a',W=hf>.3,F=c=>W?'#ffffff':c;
-  const E=(cx,cy,rx,ry,c,st,rot)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),rot||0,0,7);g.fillStyle=c;g.fill();if(st){g.lineWidth=1.3;g.strokeStyle=O;g.stroke()}};
-  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();g.fillStyle=c;g.fill();if(st){g.lineWidth=1.3;g.strokeStyle=O;g.stroke()}};
-  const Ln=(p,c,w)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.strokeStyle=c;g.lineWidth=w;g.stroke()};
+  const E=(cx,cy,rx,ry,c,st,rot)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),rot||0,0,7);const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?chSh(c,cy-ry,cy+ry):c;g.fill();if(st){g.lineWidth=1.3;g.strokeStyle=O;g.stroke()}if(mb&&!g.shadowBlur)mvE(cx,cy,rx,ry,rot)};
+  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?mvSh(p,c):c;g.fill();if(st){g.lineWidth=1.3;g.strokeStyle=O;g.stroke()}if(mb)mvP(p)};
+  const Ln=(p,c,w)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.strokeStyle=c;g.lineWidth=w;g.stroke();if(MVB.on()&&!mvW(c))mvL(p,w)};
   const LnO=(p,c,w)=>{Ln(p,O,w+2);Ln(p,c,w)};
   const eye=(ex,ey,w,h,c,rot)=>{g.shadowColor=c;g.shadowBlur=W?0:10;E(ex,ey,w,h,W?'#fff':c,0,rot);g.shadowBlur=0};
   const orb=(ox,oy,rad,c,a)=>{const gr=g.createRadialGradient(ox,oy,0,ox,oy,Math.max(.1,rad));gr.addColorStop(0,'rgba(255,255,255,'+a+')');gr.addColorStop(.35,'rgba('+c+','+a+')');gr.addColorStop(1,'rgba('+c+',0)');g.fillStyle=gr;g.beginPath();g.arc(ox,oy,Math.max(.1,rad),0,7);g.fill()};
@@ -29818,9 +29896,9 @@ function drawBossAnim(m,T,hf,cf,er){const tw=isTw(),S=tw?2:1,now=performance.now
   g.restore();if(m.mvp)drawMvCrown(m);BWK.mv=0;BWK.ph=0;BWK.hpf=1}
 function drawBoss(x,y,T,B,hf,cf,er){cf=cf||0;BXY[0]=x;BXY[1]=y;
   const O='#120c0a',W=hf>.3,F=c=>W?'#ffffff':c,mp=(MAPS[curMap]&&MAPS[curMap].bth)||bTheme(),tc=BTR[mp]||BTR[10];
-  const E=(cx,cy,rx,ry,c,st,rot)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),rot||0,0,7);g.fillStyle=c;g.fill();if(st){g.lineWidth=1.4;g.strokeStyle=O;g.stroke()}};
-  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();g.fillStyle=c;g.fill();if(st){g.lineWidth=1.4;g.strokeStyle=O;g.stroke()}};
-  const Ln=(p,c,w)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.strokeStyle=c;g.lineWidth=w;g.stroke()};
+  const E=(cx,cy,rx,ry,c,st,rot)=>{g.beginPath();g.ellipse(cx,cy,Math.max(.1,rx),Math.max(.1,ry),rot||0,0,7);const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?chSh(c,cy-ry,cy+ry):c;g.fill();if(st){g.lineWidth=1.4;g.strokeStyle=O;g.stroke()}if(mb&&!g.shadowBlur)mvE(cx,cy,rx,ry,rot)};
+  const Pg=(p,c,st)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.closePath();const mb=MVB.on()&&!mvW(c);g.fillStyle=mb?mvSh(p,c):c;g.fill();if(st){g.lineWidth=1.4;g.strokeStyle=O;g.stroke()}if(mb)mvP(p)};
+  const Ln=(p,c,w)=>{g.beginPath();g.moveTo(p[0],p[1]);for(let i=2;i<p.length;i+=2)g.lineTo(p[i],p[i+1]);g.strokeStyle=c;g.lineWidth=w;g.stroke();if(MVB.on()&&!mvW(c))mvL(p,w)};
   const eye=(ex,ey,w,h,c,rot)=>{g.shadowColor=c;g.shadowBlur=W?0:12;E(ex,ey,w,h,W?'#fff':c,0,rot);g.shadowBlur=0};
   const glowOrb=(ox,oy,rad,c,a)=>{const gr=g.createRadialGradient(ox,oy,0,ox,oy,rad);gr.addColorStop(0,'rgba(255,255,255,'+a+')');gr.addColorStop(.35,'rgba('+c+','+a+')');gr.addColorStop(1,'rgba('+c+',0)');g.fillStyle=gr;g.beginPath();g.arc(ox,oy,rad,0,7);g.fill()};
   const br=Math.sin(T*2)*2.4,sw=Math.sin(T*3),up=cf*14+Math.sin(T*2.3)*2.6;
