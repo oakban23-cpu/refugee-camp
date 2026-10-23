@@ -69,8 +69,8 @@ async def main():
         await A.wait(1200)
         await A.pg.screenshot(path=OUT+'/s_wall_south.png')
         await B.wait(300);await B.pg.screenshot(path=OUT+'/s_wall_north.png')
-        lq=await B.ev("()=>{LOWQ=true;GHS.ck='';return new Promise(r=>setTimeout(()=>{me.x=1600+388;me.y=1600-360;GWW.on=0;ghCollide();GWW.lx=388;GWW.ly=-360;for(let i=0;i<30;i++){me.y-=4;ghCollide()}const res={hd:GHS.hd,on:GWW.on,k:(ghWReg(me.x-1600,me.y-1600,ghT())||{}).k,lift:Math.round(ghLiftOf(me.x,me.y))};for(let i=0;i<30;i++){me.y+=4;ghCollide()}LOWQ=false;GHS.ck='';r(res)},400))}")
-        rep('โหมดประหยัด (ไม่ใช้ภาพ HD) ก็ขึ้นกำแพงได้ · กล่องแชตยกตามตัว',lq['hd']==0 and lq['on']==1 and lq['k']=='n' and lq['lift']>60,json.dumps(lq))
+        lq=await B.ev("()=>{LOWQ=true;window.__hl=hdLowOK;hdLowOK=()=>false;GHS.ck='';return new Promise(r=>setTimeout(()=>{me.x=1600+388;me.y=1600-360;GWW.on=0;ghCollide();GWW.lx=388;GWW.ly=-360;for(let i=0;i<30;i++){me.y-=4;ghCollide()}const res={hd:GHS.hd,on:GWW.on,k:(ghWReg(me.x-1600,me.y-1600,ghT())||{}).k,lift:Math.round(ghLiftOf(me.x,me.y))};for(let i=0;i<30;i++){me.y+=4;ghCollide()}LOWQ=false;hdLowOK=window.__hl;GHS.ck='';r(res)},400))}")
+        rep('โหมดประหยัดบนเครื่อง RAM น้อย (ไม่ใช้ภาพ HD) ก็ขึ้นกำแพงได้ · กล่องแชตยกตามตัว',lq['hd']==0 and lq['on']==1 and lq['k']=='n' and lq['lift']>60,json.dumps(lq))
         # ---------- ศึก ----------
         await A.ev("()=>{gmGod=false;me.hp=me.mh}")
         await B.ev("()=>{GWW.on=0;me.x=1600+60;me.y=1600+300;GWW.lx=60;GWW.ly=300}")
