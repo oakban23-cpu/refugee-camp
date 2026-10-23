@@ -13,7 +13,7 @@ function pwaAskGet(){try{return JSON.parse(localStorage.getItem('refugee_pwa_ask
 function pwaAskSet(o){try{localStorage.setItem('refugee_pwa_ask',JSON.stringify(o))}catch(e){}}
 function pwaIOS(){try{return fsIOS()}catch(e){return false}}
 function pwaCSS(){if($('pwacss'))return;const s=document.createElement('style');s.id='pwacss';s.textContent=
-  '.pwac{position:fixed;left:50%;top:16%;transform:translateX(-50%);z-index:60;width:min(320px,88vw);padding:14px 16px 12px;border-radius:14px;background:linear-gradient(180deg,#1e2842,#0e1322);border:1.5px solid #c9a050;color:#f3e2b8;font:14px/1.5 system-ui,sans-serif;display:flex;flex-direction:column;gap:3px;box-shadow:0 8px 26px rgba(0,0,0,.65);animation:pwaIn .35s ease-out}'+
+  '.pwac{position:fixed;left:50%;top:16%;transform:translateX(-50%);z-index:79;width:min(320px,88vw);padding:14px 16px 12px;border-radius:14px;background:linear-gradient(180deg,#1e2842,#0e1322);border:1.5px solid #c9a050;color:#f3e2b8;font:14px/1.5 system-ui,sans-serif;display:flex;flex-direction:column;gap:3px;box-shadow:0 8px 26px rgba(0,0,0,.65);animation:pwaIn .35s ease-out}'+
   '.pwac .hd{display:flex;align-items:center;gap:10px;margin-bottom:4px}.pwac .hd img{width:44px;height:44px;border-radius:10px;border:1.5px solid #c9a050;flex:0 0 auto}.pwac .hd b{font-size:15px;color:#ffe08a;line-height:1.3}.pwac .hd small{display:block;font-size:11.5px;opacity:.75;font-weight:400;color:#f3e2b8}'+
   '.pwac span{font-size:13px}.pwac .bt{display:flex;gap:8px;justify-content:center;margin-top:9px}.pwac button{padding:7px 16px;border-radius:999px;border:1.5px solid #c9a050;background:#2a3656;color:#f3e2b8;font:600 14px system-ui,sans-serif}'+
   '.pwac button.go{background:linear-gradient(180deg,#ffe29a,#c99a40);color:#24170a;border-color:#ffe29a;font-weight:800}@keyframes pwaIn{0%{opacity:0;transform:translate(-50%,-10px)}100%{opacity:1;transform:translate(-50%,0)}}'+
@@ -45,7 +45,7 @@ function pwaCoarse(){try{return matchMedia('(pointer:coarse)').matches}catch(e){
 function pwaAskNow(){if(PWA.card||PWA.ok||pwaStand()||!(PWA.ev||pwaIOS()))return false;if(!pwaCoarse())return false;
   try{if(!me.cls||curMap!==1||!ov.hidden||SD.on||me.down>0||(typeof run!=='undefined'&&!run))return false}catch(e){return false}
   if(performance.now()-PWA.t0<150000)return false;const a=pwaAskGet();if((a.n|0)>=3||Date.now()-(a.t||0)<3*864e5)return false;
-  if(document.querySelector('.pwac,#fsios,#ttl:not(.out)'))return false;
+  if(document.querySelector('.pwac,#fsios,#wnp,#ttl:not(.out)'))return false;
   a.n=(a.n|0)+1;a.t=Date.now();pwaAskSet(a);pwaCard(PWA.ev?'ask':'ios');return true}
 setInterval(()=>{try{pwaAskNow()}catch(e){}},5000);
 /* service worker: เฉพาะหน้าเกมจริง (https หรือ localhost · ไม่ใช่ในกรอบหน้าอื่น) · รอเกมโหลดเสร็จก่อน */

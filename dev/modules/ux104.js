@@ -29,7 +29,7 @@ function fsSync(){const on=!!fsEl(),b=$('fsb');if(b){b.innerHTML=fsSvg(on);b.set
 /* ปุ่มใต้แผนที่เล็ก: ต่อท้ายกล่องปุ่มเสียง (#aud) · ขยายกล่องให้พอ 3 ปุ่ม */
 function fsBtn(){const a=$('aud');if(!a||$('fsb'))return;const b=document.createElement('button');b.id='fsb';b.type='button';b.onclick=e=>{e.stopPropagation();fsToggle()};a.appendChild(b);
   if(!$('fscss')){const st=document.createElement('style');st.id='fscss';st.textContent='#aud.fs3{width:calc(108/360*100%)}.setl .fsxic{width:1.15em;height:1.15em;vertical-align:-.2em}#fsb[hidden]{display:none}'+
-    '#fsios{position:fixed;left:50%;top:18%;transform:translateX(-50%);z-index:60;width:min(300px,86vw);padding:14px 16px;border-radius:14px;background:linear-gradient(180deg,#1e2842,#0e1322);border:1.5px solid #c9a050;color:#f3e2b8;font:14px/1.5 system-ui;display:flex;flex-direction:column;gap:4px;box-shadow:0 8px 24px rgba(0,0,0,.6)}'+
+    '#fsios{position:fixed;left:50%;top:18%;transform:translateX(-50%);z-index:79;width:min(300px,86vw);padding:14px 16px;border-radius:14px;background:linear-gradient(180deg,#1e2842,#0e1322);border:1.5px solid #c9a050;color:#f3e2b8;font:14px/1.5 system-ui;display:flex;flex-direction:column;gap:4px;box-shadow:0 8px 24px rgba(0,0,0,.6)}'+
     '#fsios b{font-size:15px;color:#ffe08a;margin-bottom:2px}#fsios button{margin-top:8px;align-self:center;padding:6px 18px;border-radius:999px;border:1.5px solid #c9a050;background:#2a3656;color:#f3e2b8;font:600 14px system-ui}';document.head.appendChild(st)}
   fsSync();try{if(VW.on)vwPos()}catch(e){}}
 /* จอแนวนอน (ux83 vwPos ตั้งความกว้างกล่องเป็น 72 หน่วยตรง ๆ) → 108 หน่วยเมื่อมีปุ่มที่สาม · จอเตี้ย: ปุ่มเดินไว/ป้ายแผนที่สมบัติที่อยู่ซ้ายของกล่องเลื่อนตาม */
