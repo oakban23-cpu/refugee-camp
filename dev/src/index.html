@@ -2726,7 +2726,7 @@ const ttGr=id=>(TTB[id]&&TTB[id].gr)||'w';
 const ttTxt=id=>{const T=TTB[id];if(!T)return'';return Object.keys(T.b).map(k=>TSN[k]+' +'+(T.gr==='w'?T.b[k]:Math.round(T.b[k]*1000)/10+'%')).join(' · ')};
 let TTBC={k:'',v:{f:{},p:{},s:{}}};
 function ttAgg(){const k=(me.cls||'')+':'+Object.keys(me.ach||{}).filter(i=>me.ach[i]).join(',');if(TTBC.k===k)return TTBC.v;const r={f:{},p:{},s:{}};
-  if(me.cls)for(const id in TTB){if(!me.ach||!me.ach[id])continue;const T=TTB[id],bk=T.gr==='w'?r.f:T.gr==='g'?r.p:r.s;for(const q in T.b)(q==='all'?['str','vit','int','agi','luk']:[q]).forEach(z=>{bk[z]=(bk[z]||0)+T.b[q]})}
+  if(me.cls)for(const id in TTB){if(!me.ach||!me.ach[id])continue;const T=TTB[id];for(const q in T.b){const bk=T.gr==='w'?r.f:T.gr==='g'&&/^(str|vit|int|agi|luk|all)$/.test(q)?r.p:r.s;(q==='all'?['str','vit','int','agi','luk']:[q]).forEach(z=>{bk[z]=(bk[z]||0)+T.b[q]})}}
   TTBC={k,v:r};return r}
 const abV=id=>{const r=ttAgg();return Math.floor(((me.ab&&me.ab[id]||0)+(r.f[id]||0))*(1+(r.p[id]||0)))};
 const titleM=k=>ttAgg().s[k]||0;
@@ -13590,15 +13590,15 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v495';
+const WNV='v496';
 const WNL=[
+  ['🔒','สเตตัสเกินเพดานไม่เสียเปล่าแล้ว','ลดดาเมจที่ได้รับเกิน 60% → แปลงเป็นเลือดสูงสุด 1:1 · คริเกิน 100% → ดาเมจคริ 40% ของส่วนเกิน (เดิม 15%) · ความเร็วโจมตีเพดาน +300% ส่วนเกินแปลงเป็นแรงตีปกติ ดาเมจต่อวินาทีเท่าเดิม · ความเร็วเดินเกิน +100% ได้ครึ่งเดียว · หน้าตัวละคร → สเตตัส แสดงลดดาเมจ/ดูดเลือด และบอกว่าค่าไหนชนเพดาน · ฉายาทอง 4 อัน (นักสำรวจแผ่นดินเงา · รากพิภพ · ฟ้าตะวันตก · ผู้จุดดาว) ได้เลือด/ลดดาเมจ/ความเร็วเดินจริงแล้ว'],
   ['⚓','ภาค 8 เปิดแล้ว · ทะเลเมฆไร้ฝั่ง','จบภาค 7 แล้วคุยกับผู้บัญชาการเรนน์ที่ค่าย · แสงโคมนับร้อยบนขอบฟ้า และเรือเหาะลำหนึ่งตกที่ «ผาท่าเรือเมฆ» (ประตูตะวันออกเฉียงใต้ของค่าย · มอน Lv 134–138: ฉลามเมฆ นางนวลพายุ ยักษ์เพรียงหิน) · ช่วยลูกเรือที่ควันแดงพาไปเต็นท์พยาบาล · จุดประภาคารผาเหนือให้กองเรือนาวาเมฆ · ฉายาใหม่ «ผู้ได้ยินเสียงตอบ» · ตกปลาเมฆได้ที่ปลายสะพานกลาง'],
   ['🔐','iPhone: ผูกบัญชีก่อนเพิ่มเกมไปหน้าจอโฮม','บน iPhone/iPad แอปที่เพิ่มไว้บนหน้าจอโฮมแยกที่เก็บข้อมูลจาก Safari · ถ้ายังไม่ผูกบัญชี การ์ดติดตั้งจะเตือนและมีปุ่ม «🔐 ไปผูกบัญชีก่อน» (บันทึกแล้วพาไปกล่องผูกบัญชีที่หน้าเลือกตัวละคร) · เปิดจากไอคอนแล้วให้ล็อกอินชื่อบัญชีกับ PIN เดิม ตัวละครจะตามมาครบ'],
   ['🎞️','มือถือลื่นขึ้น (โหมดประหยัด)','จำกัดเฟรมที่ 60 บนมือถือ (จอ 120Hz เคยวาดถี่เกินจนสะดุด) · ตั้งค่า → คุณภาพภาพ → 🎞️ อัตราเฟรม เลือก 30 ได้ ลื่นสม่ำเสมอ ประหยัดแบต · โหมดประหยัดใช้ภาพ HD ของเมืองหลวง/ค่าย/บ้านกิลด์ต่อ (เบากว่าวาดเส้น) · ไม่วาดทหารยาม/ชาวค่ายที่อยู่นอกจอ · ดอกไม้หญ้าหินในทุ่งวาดครั้งเดียวแล้วใช้ซ้ำ · แถบ HP/MP ไม่เขียนหน้าจอใหม่ทุกเฟรม · งานวาดต่อเฟรมลด 24–65% แล้วแต่ฉาก'],
   ['📲','ติดตั้งเกมเป็นแอปได้แล้ว','Android/คอม: ตั้งค่า → คุณภาพภาพ → 📲 ติดตั้งเป็นแอป (หรือเมนู ⋮ ของ Chrome → ติดตั้งแอป) · ได้ไอคอน REFUGEE บนหน้าจอโฮม เปิดแล้วเต็มจอทันที ไม่มีแถบเบราว์เซอร์ · ตัวละครและเซฟเดิมใช้ต่อได้เลย · iPhone/iPad: Safari กดแชร์ ⬆️ → เพิ่มไปยังหน้าจอโฮม · ต้องต่อเน็ตเหมือนเดิม (เกมออนไลน์)'],
   ['📺','ปุ่มเต็มจอ','ปุ่มใหม่รูปมุมสี่มุมข้างปุ่มเสียงใต้แผนที่เล็ก กดแล้วเกมเต็มจอ ไม่มีแถบเบราว์เซอร์บังจอ กดอีกทีเพื่อออก (หรือกด Esc บนคอม) · เกมจำไว้ว่าเปิดเต็มจอ ครั้งหน้าแตะจอครั้งแรกก็เต็มจอให้เอง · เปิด/ปิดในหน้าตั้งค่า (หัวข้อคุณภาพภาพ) ได้ด้วย · iPhone: Safari ไม่ให้หน้าเว็บเต็มจอ ให้กดแชร์ ⬆️ → «เพิ่มไปยังหน้าจอโฮม» แล้วเปิดเกมจากไอคอน จะเต็มจอเหมือนแอป'],
-  ['💥','สกิลประจำอาชีพเดิมก็อลังการแล้ว','สกิลเดิมทุกอาชีพทุกขั้น (ปกติ · ตื่นพลังแสง/ทมิฬ · จุติ) ได้ภาพใหม่แบบเดียวกับคลังสกิล: วังวนดาบมีประกายตามวงดาบ ลูกไฟตกพร้อมหางไฟแล้วระเบิดหินกระจาย ธนูทะลวงสวรรค์มีประกายไหลตามลำ ป้อมปราการมีเสาแสงรอบวง พายุอสนีมีฝนและฟ้าผ่า ประตูนรก/สุริยคราสทำให้ฟ้ามืดลง อัลติจุติกระแทกหนักขึ้น · เพื่อนเห็นด้วย · ปิดได้ที่ ตั้งค่า → เอฟเฟกต์สกิลแบบเต็ม'],
-  ['🎆','เอฟเฟกต์สกิลทางเลือกอลังการขึ้น','สกิลจากคลังสกิลทุกปุ่มมีภาพใหม่: แสงลำจากฟ้า เศษหินกระเด็นแล้วเด้งพื้น ฝุ่นม้วน ประกายไฟ รอยแตก/รอยไหม้บนพื้น และจอสั่นตอนกระทบ · อัลติกับสกิลที่ 6 มีจังหวะใหญ่ เช่น ฟ้ามืดแล้วดาวตก จันทร์ยักษ์ลอยขึ้น พื้นหมดสีตอนหยุดเวลา · เพื่อนเห็นด้วย · ถ้าเครื่องช้า ปิดได้ที่ ตั้งค่า → เอฟเฟกต์สกิลแบบเต็ม']];
+  ['💥','สกิลประจำอาชีพเดิมก็อลังการแล้ว','สกิลเดิมทุกอาชีพทุกขั้น (ปกติ · ตื่นพลังแสง/ทมิฬ · จุติ) ได้ภาพใหม่แบบเดียวกับคลังสกิล: วังวนดาบมีประกายตามวงดาบ ลูกไฟตกพร้อมหางไฟแล้วระเบิดหินกระจาย ธนูทะลวงสวรรค์มีประกายไหลตามลำ ป้อมปราการมีเสาแสงรอบวง พายุอสนีมีฝนและฟ้าผ่า ประตูนรก/สุริยคราสทำให้ฟ้ามืดลง อัลติจุติกระแทกหนักขึ้น · เพื่อนเห็นด้วย · ปิดได้ที่ ตั้งค่า → เอฟเฟกต์สกิลแบบเต็ม']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -20745,6 +20745,39 @@ try{fsHelp=(f=>function(){const r=f.apply(this,arguments);try{const c=$('fsios')
 try{pwaSync=(f=>function(){const r=f.apply(this,arguments);try{const row=document.querySelector('#ov [data-pwarow]');if(row&&!PWA.ev&&!PWA.ok&&pwaIOS()&&pwaNeedAcc()){const s=row.querySelector('small');if(s)s.textContent='iPhone/iPad: ผูกบัญชีก่อน แล้วแชร์ ⬆️ → เพิ่มไปยังหน้าจอโฮม'}}catch(e){}return r})(pwaSync)}catch(e){}
 /* ② เปิดจากหน้าจอโฮมบน iOS ยังไม่ล็อกอิน */
 try{accBox=(f=>function(){let h=f.apply(this,arguments);try{if(h&&!ACC&&pwaStand()&&pwaIOS()){pwaWCSS();h=h.replace('<b>🔐 ผูกบัญชี / ล็อกอิน (กันตัวละครหาย)</b>','<b>🔐 ผูกบัญชี / ล็อกอิน (กันตัวละครหาย)</b><p class="pwaw2">📱 เปิดจากหน้าจอโฮม: ข้อมูลแยกจาก Safari · ถ้าเคยผูกบัญชีไว้ ล็อกอินชื่อบัญชีกับ PIN เดิมที่นี่ ตัวละครจะกลับมา</p>')}}catch(e){}return h})(accBox)}catch(e){}
+/* ---------- v496 เพดานสเตตัส: ส่วนเกินไม่เสียเปล่า ----------
+   · ลดดาเมจที่ได้รับ เพดาน 60% → ส่วนเกินแปลงเป็นเลือดสูงสุด 1:1 (เกิน 10% = เลือด +10%)
+   · คริ เพดาน 100% → ส่วนเกินแปลงเป็นดาเมจคริ 40% (เดิม 15%) + ดาเมจสุดท้าย 6% เท่าเดิม (R-patch crD)
+   · ความเร็วโจมตี เพดาน +300% (ตีปกติเร็วสุด 4 เท่าของพื้นฐาน) → ส่วนเกินแปลงเป็นแรงตีปกติ ดาเมจต่อวินาทีเท่าเดิม (R-patch การตีปกติ)
+   · ความเร็วเดิน เพดานนุ่ม: ส่วนที่เกิน +100% ได้ครึ่งเดียว
+   · หน้าตัวละคร → สเตตัส แสดงลดดาเมจ/ดูดเลือด + ป้ายชนเพดาน + บรรทัดบอกส่วนเกินแปลงเป็นอะไร
+   · ฉายาทองที่ให้เลือด/ลดดาเมจ/ความเร็วเดินตรง ๆ (นักสำรวจแผ่นดินเงา · นักสำรวจรากพิภพ · ผู้จุดดาว · นักสำรวจฟ้าตะวันตก) มีผลจริงแล้ว (R-patch ttAgg) */
+const CAPS={red:.6,ls:.3,cr:1,as:3,spSoft:1,crOv:.4};
+const mRaw=k=>{try{return CAPS.M0?CAPS.M0(k):0}catch(e){return 0}};
+const redRaw=()=>mRaw('red'),redOv=()=>Math.max(0,redRaw()-CAPS.red);
+const asRaw=()=>mRaw('as'),asV=()=>Math.min(CAPS.as,asRaw()),asOvM=()=>{const r=asRaw();return r>CAPS.as?(1+r)/(1+CAPS.as):1};
+const spRaw=()=>mRaw('sp'),spV=()=>{const s=spRaw();return s>CAPS.spSoft?CAPS.spSoft+(s-CAPS.spSoft)*.5:s};
+{const _M=M;CAPS.M0=_M;window.M=M=function(k){
+  if(k==='as'){const v=_M(k);return v>CAPS.as?CAPS.as:v}
+  if(k==='sp'){const s=_M(k);return s>CAPS.spSoft?CAPS.spSoft+(s-CAPS.spSoft)*.5:s}
+  if(k==='hp'){const v=_M(k);if(!me.cls)return v;return v+Math.max(0,_M('red')-CAPS.red)}
+  return _M(k)}}
+/* ค่าดูดเลือดก่อนเพดาน (ใน M เดิมตัดที่ 30% ไปแล้ว) — คิดเฉพาะเพื่อแสดงผล */
+function lsUncapped(){if(!me.cls)return 0;let t=0;try{nodes().forEach(n=>{if(n.k==='ls')t+=(me.tr[n.id]||0)*n.v});if(me.rage>0&&!(me.rnBlood>0||me.rnRock>0))t+=.1;
+  t+=fdM('ls')+G('ls')+A('ls')+setB('ls')+petV('ls')+cardM('ls')+titleM('ls')+cmpM('ls')+starM('ls')+astM('ls')+brM('ls')+blM('ls')}catch(e){}return t}
+const pc1=v=>Math.round(v*1000)/10;
+function capChips(){if(!me.cls)return'';const rr=redRaw(),rv=Math.min(CAPS.red,Math.max(0,rr)),lsu=lsUncapped(),lsv=Math.min(CAPS.ls,Math.max(0,lsu));
+  const lk=(on)=>on?' <i class="capk">🔒</i>':'';
+  return'<span class="ch'+(rr>=CAPS.red?' capx':'')+'">🛡️ ลดดาเมจ <b>'+pc1(rv)+'%</b>'+lk(rr>=CAPS.red)+'</span>'+(lsu>0?'<span class="ch'+(lsu>=CAPS.ls?' capx':'')+'">🩸 ดูดเลือด <b>'+pc1(lsv)+'%</b>'+lk(lsu>=CAPS.ls)+'</span>':'')}
+function capNote(){if(!me.cls)return'';const o=[];
+  const ro=redOv();if(ro>.0005)o.push('🛡️ ลดดาเมจเกินเพดาน 60% อยู่ '+pc1(ro)+'% → <b>เลือดสูงสุด +'+pc1(ro)+'%</b>');
+  const cr=crRaw();if(cr>1.0005)o.push('🎯 คริเกิน 100% อยู่ '+pc1(cr-1)+'% → <b>ดาเมจคริ +'+pc1((cr-1)*CAPS.crOv)+'%</b> · ดาเมจสุดท้าย +'+pc1((cr-1)*.06)+'%');
+  const ar=asRaw();if(ar>CAPS.as+.0005)o.push('⚡ ความเร็วโจมตีเกิน +300% อยู่ '+pc1(ar-CAPS.as)+'% → <b>ตีปกติแรงขึ้น ×'+(Math.round(asOvM()*100)/100)+'</b> (ดาเมจต่อวินาทีเท่าเดิม)');
+  const sr=spRaw();if(sr>CAPS.spSoft+.0005)o.push('👟 ความเร็วเดินเกิน +100% อยู่ '+pc1(sr-CAPS.spSoft)+'% → ได้ครึ่งเดียว (+'+pc1((sr-CAPS.spSoft)*.5)+'%)');
+  const lu=lsUncapped();if(lu>CAPS.ls+.0005)o.push('🩸 ดูดเลือดเกินเพดาน 30% อยู่ '+pc1(lu-CAPS.ls)+'% (ส่วนเกินไม่มีผล)');
+  try{const gc=[['cdr','ลดคูลดาวน์',.25],['mcr','ลดมานาสกิล',.25],['spw','พลังสกิลจากอุปกรณ์',.4],['hpw','พลังฮีลจากอุปกรณ์',.4]].filter(([k,,c])=>CAPS.M0(k)>c+.0005).map(([,n])=>n);if(gc.length)o.push('🧰 '+gc.join(' · ')+' ชนเพดานแล้ว (ส่วนที่ตีบวกเกินไม่มีผล)')}catch(e){}
+  return o.length?'<div class="capn"><b>🔒 ค่าที่ชนเพดาน</b>'+o.map(t=>'<div>'+t+'</div>').join('')+'</div>':''}
+(()=>{const st=document.createElement('style');st.textContent='.sk2top .tot .ch.capx{background:rgba(255,196,80,.16);color:#ffd48a;box-shadow:inset 0 0 0 1px rgba(255,196,80,.35)}.capk{font-style:normal;font-size:10px}.capn{grid-column:1/-1;margin-top:4px;padding:6px 9px;border-radius:10px;background:rgba(255,196,80,.08);border:1px solid rgba(255,196,80,.28);font-size:11.5px;line-height:1.5;color:var(--u-mute,#c8c0b0)}.capn b{color:#ffd48a}.capn>b:first-child{display:block;font-size:12px;margin-bottom:1px}';document.head.appendChild(st)})();
 /* ---------- v495 ภาค 8 บทที่ 1 · เสียงตอบจากทะเลเมฆ (แมพ 38 · ผาท่าเรือเมฆ) ----------
    แมพ 38 (37 ใช้เป็นธีมมอนดันเจี้ยนเตาหลอมอยู่แล้ว): หน้าผาริมทะเลเมฆทางตะวันออกเฉียงใต้ของค่าย · แผ่นดินฝั่งตะวันตก ขอบผาคดเคี้ยว
    สะพานไม้ 3 สายยื่นออกไปกลางเมฆ · ประภาคารบนแหลมเหนือ · ซากเรือเหาะที่แหลมใต้ · ลานไม้ท่าเรือ + เต็นท์พยาบาล
@@ -26822,7 +26855,7 @@ function updateMe(dt){
   me.mp=Math.min(me.mm,me.mp+(C.mr*(Math.hypot(me.x-SX,me.y-SY)<SR?3:1)+mprV())*dt);
   const rgMove=me.riding||((me.cls==='archer'&&!stormR())||me.cls==='mage')&&joy&&Math.hypot(joy.dx,joy.dy)>6;mountTick(dt);autoTick(dt);petTick(dt);ptTick(dt);{const ab=$('atb'),hb=$('ahb');const sh=!!(me.cls&&run);if(ab&&ab.hidden===sh)ab.hidden=!sh;if(hb&&hb.hidden===sh)hb.hidden=!sh}
   if(me.cd<=0&&!rgMove&&!(me.rsp>0)&&!SKB0&&!SKF){const t=pickTarget(C.rg+M('rg'));
-    if(t){me.cd=C.cd/(1+M('as'));me.atkT=performance.now();me.atkN=((me.atkN|0)+1)%100;me.face=Math.atan2(t.y-me.y,t.x-me.x);const cr=me.stealth>0||Math.random()<crC();if(me.stealth>0)me.stealth=0;const d=pd()*(me.atk>0?1+me.atk/20:1)*(cr?crD():1)*(stormR()&&joy&&Math.hypot(joy.dx,joy.dy)>6?.75:1);
+    if(t){me.cd=C.cd/(1+M('as'));me.atkT=performance.now();me.atkN=((me.atkN|0)+1)%100;me.face=Math.atan2(t.y-me.y,t.x-me.x);const cr=me.stealth>0||Math.random()<crC();if(me.stealth>0)me.stealth=0;const d=pd()*asOvM()*(me.atk>0?1+me.atk/20:1)*(cr?crD():1)*(stormR()&&joy&&Math.hypot(joy.dx,joy.dy)>6?.75:1);
       sfx(C.melee?'slash':(me.cls==='archer'?'bow':'magic'));if(C.melee){addHit(t,d,cr);try{u59Atk(t,cr)}catch(e){fxs.push({x:me.x,y:me.y-4,r:25,k:'swipe',t:.2,d:.2,a:me.face,len:me.cls==='assn'?2:1,s:0})}}else{const mn=br1()&&me.cls==='archer'&&(me.shotN=(me.shotN||0)+1)%5===0;bolts.push({x:me.x,y:me.y-8,vx:Math.cos(me.face)*430,vy:Math.sin(me.face)*430,c:me.cls==='mage'?'#8fd8ff':null,k:me.cls,d:mn?d*1.5:d,cr,l:(C.rg+M('rg'))/430*(mn?1.3:1),pc:mn?3:0,hit:mn?[]:null,wb:stormR()&&(me.shotW=(me.shotW||0)+1)%4===0})}}}
   bolts.forEach(b=>{b.x+=b.vx*dt;b.y+=b.vy*dt;b.l-=dt;for(const m of mons){if(Math.hypot(m.x-b.x,m.y-b.y)<mR(m)+4){if(b.pc){if(b.hit.includes(m.id))continue;b.hit.push(m.id);addHit(m,b.d,b.cr,1,'archer');if(--b.pc<=0){b.l=0;break}continue}addHit(m,b.d,b.cr);if(b.wb)windBlade(m,b.d);b.l=0;break}}});
   bolts=bolts.filter(b=>b.l>0);
@@ -26849,16 +26882,16 @@ Object.keys(BR).forEach(c=>BR[c].push(['จุติ 🌅',[['j1','พลัง�
 const nodeOf=a=>({id:a[0],n:a[1],d:a[2],k:a[3],v:a[4],max:a[5]||2});
 const nodes=()=>[...SH,...BR[me.cls].flatMap(([,ns])=>ns.map(nodeOf))];
 const AB=[['str','พลังโจมตี (STR)','ดาเมจทุกการโจมตี +2% ต่อแต้ม · ทุก 10 แต้ม ดาเมจอีก +3%',{dm:.02}],
- ['vit','ความอึด (VIT)','เลือดสูงสุด +2.5% และลดดาเมจที่ได้รับ +0.2% ต่อแต้ม · ทุก 10 แต้ม เลือดสูงสุดอีก +4%',{hp:.025,red:.002}],
+ ['vit','ความอึด (VIT)','เลือดสูงสุด +2.5% และลดดาเมจที่ได้รับ +0.2% ต่อแต้ม · ทุก 10 แต้ม เลือดสูงสุดอีก +4% · ลดดาเมจรวมเกินเพดาน 60% แปลงเป็นเลือดสูงสุด',{hp:.025,red:.002}],
  ['int','สติปัญญา (INT)','มานาสูงสุด +3% พลังทุกสกิล +1.5% ต่อแต้ม · จอมเวทและนักสวดได้ดาเมจเวท +2% ต่อแต้ม · ทุก 10 แต้ม พลังทุกสกิลอีก +3%',{mp:.03,s0p:.015,s1p:.015,s2p:.015,s3p:.015,s4p:.015}],
- ['agi','ความคล่อง (AGI)','ความเร็วโจมตี +0.6% ต่อแต้ม · ทุก 10 แต้ม โบนัสความเร็วโจมตีอีก +3%',{as:.006}],
- ['luk','โชค (LUK)','โอกาสติดคริติคอล +0.5% ต่อแต้ม (ทั้งตีปกติและสกิล) · ทุก 10 แต้ม ดาเมจคริติคอลอีก +10% (พื้นฐาน x2)',{cr:.005}]];
+ ['agi','ความคล่อง (AGI)','ความเร็วโจมตี +0.6% ต่อแต้ม · ทุก 10 แต้ม โบนัสความเร็วโจมตีอีก +3% · ความเร็วโจมตีรวมเกินเพดาน +300% แปลงเป็นแรงตีปกติ (ดาเมจต่อวินาทีเท่าเดิม)',{as:.006}],
+ ['luk','โชค (LUK)','โอกาสติดคริติคอล +0.5% ต่อแต้ม (ทั้งตีปกติและสกิล) · ทุก 10 แต้ม ดาเมจคริติคอลอีก +10% (พื้นฐาน x2) · คริรวมเกิน 100% แปลงเป็นดาเมจคริ 40% ของส่วนเกิน',{cr:.005}]];
 const abSum=ab=>Object.values(ab).reduce((a,b)=>a+b,0);
 const spts=()=>(me.lv-1)*(me.rb?4:3)-abSum(me.ab);
 function A(k){let t=0;AB.forEach(([id,,,e])=>{if(e[k])t+=abV(id)*e[k]});if(k==='dm'&&(me.cls==='mage'||me.cls==='sup'))t+=abV('int')*.02;if(k==='as')t+=Math.floor(abV('agi')/10)*.03;if(k==='dm')t+=Math.floor(abV('str')/10)*.03;if(k==='hp')t+=Math.floor(abV('vit')/10)*.04;if(/^s[0-4]p$/.test(k))t+=Math.floor(abV('int')/10)*.03;if(k==='cdm')t+=Math.floor(abV('luk')/10)*.1;return t}
-/* บาลานซ์: คริติคอลสูงสุด 100% ส่วนเกินแปลงเป็นดาเมจคริ 15% · ดูดเลือดสูงสุด 30% (45% ตอนเลือดต่ำของสายโลหิต) */
+/* บาลานซ์: คริติคอลสูงสุด 100% ส่วนเกินแปลงเป็นดาเมจคริ 40% (v496 · เดิม 15%) · ดูดเลือดสูงสุด 30% (45% ตอนเลือดต่ำของสายโลหิต) */
 function FDv(){if(!me.cls)return 0;return Math.min(.6,Math.max(0,M('fd'))+Math.max(0,crRaw()-1)*.06)}
-const crRaw=()=>me.cls?M('cr')+(CL[me.cls].cr||0)+(me.rcrT>0?.15:0):0,crC=()=>Math.min(1,crRaw()),crD=()=>2+M('cdm')+Math.max(0,crRaw()-1)*.15;
+const crRaw=()=>me.cls?M('cr')+(CL[me.cls].cr||0)+(me.rcrT>0?.15:0):0,crC=()=>Math.min(1,crRaw()),crD=()=>2+M('cdm')+Math.max(0,crRaw()-1)*.4;
 const supSolo=()=>!Object.values(others).some(o=>inPty(o.u)&&Math.hypot(o.x-me.x,o.y-me.y)<450);
 function M(k){if(!me.cls)return 0;let t=0;if(k==='as'&&me.lgAs>0)t+=.25;if(k==='as'&&me.rasT>0)t+=.3;if(me.shrB&&me.shrB.k===k&&(k==='as'||k==='sp'))t+=.2;nodes().forEach(n=>{if(n.k===k)t+=(me.tr[n.id]||0)*n.v});if(me.rage>0){if(k==='as')t+=.4*(me.rgP||1);else if(k==='ls'&&!(me.rnBlood>0||me.rnRock>0))t+=.1}const bl=br1()&&me.cls==='melee'&&me.hp<me.mh*.4;if(me.cls2){if(k==='hp')t+=.1;else if(k==='dm')t+=.12+(bl?.3:0)}if(k==='dm'&&me.stillT>=.4&&(me.cls==='archer'||me.cls==='mage'))t+=.2;const rv=t+(k==='dm'||k==='hp'?0:fdM(k))+G(k)+A(k)+setB(k)+petV(k)+cardM(k)+titleM(k)+cmpM(k)+starM(k)+astM(k)+brM(k)+blM(k);return k==='ls'?Math.min(bl?.45:.3,bl?rv*2:rv):rv}
 const pts=()=>me.lv-1-Object.values(me.tr).reduce((a,b)=>a+b,0);
@@ -27238,7 +27271,7 @@ function ab2Eff(id,v){const f=x=>Math.round(x*10)/10,b=Math.floor(v/10),mg=me.cl
   if(id==='agi')return[['ความเร็วโจมตี',f(v*.6+b*3)+'%']];return[['คริติคอล',f(v*.5)+'%'],['ดาเมจคริ',f(b*10)+'%']]}
 function ab2TabH(){const C=CL[me.cls],p=spts();let h='';
   h+='<div class="sk2top"><div class="pt"><small>แต้มสเตตัสเหลือ</small><b'+(p>0?' class="hv"':'')+'>'+p+'</b></div><div class="bt">'+(p>0?'<button data-abauto="1" class="pri">✨ แนะนำ</button>':'')+'<button id="abreset">🔄 รีเซ็ต</button></div>'+
-    '<div class="tot"><span class="ch">❤️ <b>'+me.mh+'</b></span><span class="ch">💧 <b>'+me.mm+'</b></span><span class="ch">⚔️ <b>'+Math.round(pd())+'</b></span><span class="ch">🎯 คริ <b>'+Math.round(crC()*1000)/10+'%</b></span><span class="ch">💥 x<b>'+(Math.round(crD()*100)/100)+'</b></span><span class="ch">⚡ <b>'+(Math.round((1+M('as'))/C.cd*100)/100)+'</b>/วิ</span><span class="ch">👟 <b>'+Math.round(C.sp*(1+M('sp')))+'</b></span>'+(FDv()>0?'<span class="ch">🔥 <b>+'+Math.round(FDv()*1000)/10+'%</b></span>':'')+'</div></div>';
+    '<div class="tot"><span class="ch">❤️ <b>'+me.mh+'</b></span><span class="ch">💧 <b>'+me.mm+'</b></span><span class="ch">⚔️ <b>'+Math.round(pd())+'</b></span><span class="ch">🎯 คริ <b>'+Math.round(crC()*1000)/10+'%</b></span><span class="ch">💥 x<b>'+(Math.round(crD()*100)/100)+'</b></span><span class="ch">⚡ <b>'+(Math.round((1+M('as'))/C.cd*100)/100)+'</b>/วิ</span><span class="ch">👟 <b>'+Math.round(C.sp*(1+M('sp')))+'</b></span>'+(FDv()>0?'<span class="ch">🔥 <b>+'+Math.round(FDv()*1000)/10+'%</b></span>':'')+capChips()+'</div>'+capNote()+'</div>';
   const W=AB2W[me.cls]||{};
   h+=AB.map(([id,nm,d])=>{const m=nm.match(/^(.*?) \((.*)\)$/)||[0,nm,''],base=me.ab[id]||0,v=abV(id),ex=v-base,E0=ab2Eff(id,v),E1=ab2Eff(id,v+1),toB=10-v%10,rec=(W[id]||0)>=3;
     const eff=E0.map((e,i)=>'<span>'+e[0]+' <em>+'+e[1]+'</em>'+(p>0&&E1[i][1]!==e[1]?' → <b>+'+E1[i][1]+'</b>':'')+'</span>').join('');
