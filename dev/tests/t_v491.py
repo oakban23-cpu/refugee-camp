@@ -88,6 +88,7 @@ async def main():
         for vp in ({'width':844,'height':390},{'width':788,'height':288},{'width':1440,'height':900}):
             await A.pg.set_viewport_size(vp);await A.wait(900)
             await A.ev("()=>{try{const b=$('u64b');if(b)b.hidden=false}catch(e){}}")
+            await A.wait(700)
             q=await A.ev(BOX);mm=None
             if q['cv']:
                 kk=(q['cv'][2]-q['cv'][0])/await A.ev("()=>SW0")
