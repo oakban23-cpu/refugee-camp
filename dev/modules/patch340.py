@@ -738,6 +738,14 @@ R("const id=tr*10000+1000+(Math.random()*9000|0)","const id=tr===7?71000+(Math.r
 R("{const need=id>=76000&&id<77000?68:","{const need=id>=72000&&id<73000?130:id>=76000&&id<77000?68:")
 R("tx=qi?'👑 '+dInv.n+' ชวนบุกศึกปิดรอยแยก (Lv 68+) แตะเพื่อเข้าร่วม':'⚔️ '+dInv.n+' ชวนลง'+DT[dInv.tr].n+' (Lv '+DT[dInv.tr].lv+'+) แตะเพื่อเข้าร่วม'","tx=qi?'👑 '+dInv.n+' ชวนบุกศึกปิดรอยแยก (Lv 68+) แตะเพื่อเข้าร่วม':'⚔️ '+dInv.n+' ชวนลง'+dgRmName(dInv.id)+' แตะเพื่อเข้าร่วม'")
 
+# ---- v503 ไล่เช็กวาร์ปทุกดัน: ลานประลองชนเลขห้องเต็นท์ · รหัสห้องบอสกิลด์ ----
+R("function tentId(u){return 90001+hseed('tent'+u)%9998}","function tentId(u){return 120000+hseed('tent'+u)%80000}")
+R("function pvStart(id,opp,oppN,side){dgMap(id)||pvMap(id);","function pvStart(id,opp,oppN,side){pvMap(id);")
+R("function friMapN(mp){mp=mp|0;if(mp>90000)return'🏠 ในเต็นท์';","function friMapN(mp){mp=mp|0;if(mp>=120000)return'🏠 ในเต็นท์';if(mp>=100000)return'💰 ในห้องทองคำ';if(mp>=90000)return'⚔️ ในลานประลอง';")
+R("const mp=s.mp|0;if(mp>90000)return n+' อยู่ในเต็นท์","const mp=s.mp|0;if(mp>=90000&&mp<120000)return n+(mp<100000?' กำลังดวลอยู่ที่ลานประลอง':' อยู่ในห้องทองคำ')+' — รอให้ออกมาก่อนค่อยวาป';if(mp>=120000)return n+' อยู่ในเต็นท์")
+R("const mp=m.mp|0;if(mp>90000)return m.n+' อยู่ในเต็นท์","const mp=m.mp|0;if(mp>=90000&&mp<120000)return m.n+(mp<100000?' กำลังดวลอยู่ที่ลานประลอง':' อยู่ในห้องทองคำ')+' — รอให้ออกมาก่อนค่อยวาป';if(mp>=120000)return m.n+' อยู่ในเต็นท์")
+R("if(!((id>=11000&&id<40000&&id%10000>=1000)||(id>=50000&&id<60000)||(id>=71000&&id<86000))||!DT[tr])","if(!((id>=11000&&id<40000&&id%10000>=1000)||(id>=50000&&id<60000)||(id>=71000&&id<86000&&!(id>=82000&&id<83000)))||!DT[tr])")
+
 open(P,'w').write(s)
 print('ok')
 import subprocess

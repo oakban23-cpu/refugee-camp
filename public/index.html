@@ -1972,7 +1972,7 @@ lbFetch();const rows=(lbData&&lbData.pv)||[];
 h+='<div class="card"><div class="cap">🏆 อันดับผู้ชนะ PvP</div>'+(rows.length?rows.map((r,i)=>'<div class="lbr'+(r[0]===myName&&r[1]===me.cls?' me':'')+'"><span class="rk">'+(['🥇','🥈','🥉'][i]||(i+1))+'</span><span class="nm2"><b>'+esc(r[0])+'</b><small>'+esc((CL[r[1]]||{n:'-'}).n)+' Lv'+(r[2]|0)+'</small></span><b class="tm">'+Math.round(+r[3])+' ชนะ</b></div>').join(''):'<small style="opacity:.7">ยังไม่มีอันดับ</small>')+'</div>';
 ov.innerHTML='<div class="pn" data-pn="pvp">'+h+'</div>'}
 function pvChallenge(u){const o=others[u];if(!o)return pvpUI('ไม่พบผู้เล่นคนนี้');PVPEND={to:u,n:o.n,until:Date.now()+20000};pvOut('pvc',{to:u,n:myName,cls:me.cls,lv:me.lv});pvpUI('⏳ ส่งคำท้าถึง '+esc(o.n)+' แล้ว รอตอบรับ...')}
-function pvStart(id,opp,oppN,side){dgMap(id)||pvMap(id);PVPEND=null;ov.hidden=true;if(SD.on)stClose();enterMap(id,{x:CX+(side?80:-80),y:CY});me.hp=me.mh;me.mp=me.mm;me.sk=me.sk.map(()=>0);me.down=0;
+function pvStart(id,opp,oppN,side){pvMap(id);PVPEND=null;ov.hidden=true;if(SD.on)stClose();enterMap(id,{x:CX+(side?80:-80),y:CY});me.hp=me.mh;me.mp=me.mm;me.sk=me.sk.map(()=>0);me.down=0;
 PV={id,opp,oppN,ph:'cd',t:3,tl:PVDUR,miss:0,res:null};banner={s:'⚔️ ดวลกับ '+oppN+'!',t:3};sfx('boss')}
 function pvEnd(res){if(!PV||PV.ph==='end')return;PV.ph='end';PV.res=res;me.pvp=me.pvp||{w:0,l:0};
 if(res==='w'){me.pvp.w++;banner={s:'🏆 ชนะการดวล!',t:5};sfx('lvl');burst(me.x,me.y-20,['#ffd84a','#ffffff','#ff9a3a'],40,160,1,{glow:1,g:-40});try{if(!gmUsed&&room&&room.url)emitM('lbs',{k:'pv',t:me.pvp.w,n:myName,cls:me.cls,lv:me.lv,pc:1})}catch(e){}}
@@ -10384,7 +10384,7 @@ function friHas(n){return friSt().L.some(f=>f.n===n)}
 function friSrv(){return!!(room&&room.url)}
 function friSend(k,d){try{if(room)emitM(k,d)}catch(e){}}
 function friOn(n){const s=FRIS[n];return!!(s&&Date.now()-s.t<40000)}
-function friMapN(mp){mp=mp|0;if(mp>90000)return'🏠 ในเต็นท์';if(mp>=10000)return'🏰 ในดันเจี้ยน/หอคอย';const M=MAPS[mp];return M?M.n:'แมพ '+mp}
+function friMapN(mp){mp=mp|0;if(mp>=120000)return'🏠 ในเต็นท์';if(mp>=100000)return'💰 ในห้องทองคำ';if(mp>=90000)return'⚔️ ในลานประลอง';if(mp>=10000)return'🏰 ในดันเจี้ยน/หอคอย';const M=MAPS[mp];return M?M.n:'แมพ '+mp}
 function friAgo(t){if(!t)return'ยังไม่เคยเห็นออนไลน์';const s=(Date.now()-t)/1000;return s<3600?'เห็นล่าสุด '+Math.max(1,Math.round(s/60))+' นาทีที่แล้ว':s<86400?'เห็นล่าสุด '+Math.round(s/3600)+' ชม.ที่แล้ว':'เห็นล่าสุด '+Math.round(s/86400)+' วันที่แล้ว'}
 function friUid(n){const s=FRIS[n];if(s&&s.u&&friOn(n))return s.u;for(const k in others)if(others[k]&&others[k].n===n)return k;return''}
 function friReq(n,u){if(!me.cls)return;n=String(n||'').trim().slice(0,24);if(!n){friUI('ใส่ชื่อตัวละครก่อน');return}if(n===myName){friUI('เพิ่มตัวเองเป็นเพื่อนไม่ได้');return}
@@ -10403,7 +10403,7 @@ function friPtInv(n){const u=friUid(n);if(!u){sysMsg('👥 '+n+' ออฟไล
 if(PTY&&PTY.mem.length>1&&PTY.lead!==uid){sysMsg('เฉพาะหัวหน้าปาร์ตี้เท่านั้นที่เชิญได้');return}if(PTY&&PTY.mem.length>=PTMAX){sysMsg('ปาร์ตี้เต็มแล้ว ('+PTMAX+' คน)');return}
 if(Date.now()-(ptLastInv[u]||0)<5000){sysMsg('เพิ่งเชิญไป รอสักครู่');return}ptLastInv[u]=Date.now();if(!PTY)ptPid=ptPid||ptNew();ptOut(u,'inv',{n:myName,cls:me.cls,lv:me.lv});sysMsg('👥 ส่งคำเชิญเข้าปาร์ตี้ถึง '+n+' แล้ว');try{sfx('item')}catch(e){}}
 function friWarpWhy(n){const s=FRIS[n];if(!friOn(n)||!s)return n+' ออฟไลน์อยู่';if(!me.cls||!run||me.down>0||SD.on)return'ตอนนี้วาปไม่ได้';if(!wpMapOk(curMap))return'ออกจากดันเจี้ยน/หอคอย/ลานประลอง/เต็นท์ก่อนถึงจะวาปได้';
-const mp=s.mp|0;if(mp>90000)return n+' อยู่ในเต็นท์ — ไปเยี่ยมได้จากปุ่ม 🏠 (ต้องอยู่ในค่าย)';if(!wpMapOk(mp))return n+' อยู่ในดันเจี้ยนหรือหอคอย — ขอรหัสห้องแล้วเข้าร่วมทางเมนูดันเจี้ยนแทน';
+const mp=s.mp|0;if(mp>=90000&&mp<120000)return n+(mp<100000?' กำลังดวลอยู่ที่ลานประลอง':' อยู่ในห้องทองคำ')+' — รอให้ออกมาก่อนค่อยวาป';if(mp>=120000)return n+' อยู่ในเต็นท์ — ไปเยี่ยมได้จากปุ่ม 🏠 (ต้องอยู่ในค่าย)';if(!wpMapOk(mp))return n+' อยู่ในดันเจี้ยนหรือหอคอย — ขอรหัสห้องแล้วเข้าร่วมทางเมนูดันเจี้ยนแทน';
 try{const a=wpAccess(mp);if(a)return a}catch(e){}if(typeof wpCd!=='undefined'&&wpCd>0)return'วาปได้อีกครั้งใน '+Math.ceil(wpCd)+' วิ';return''}
 function friWarp(n){const why=friWarpWhy(n);if(why){friUI('🌀 '+why);return}ov.hidden=true;FRIX.wp={n,t:1.5,x0:me.x,y0:me.y};banner={s:'🌀 กำลังวาปไปหา '+n+'… (ขยับตัวเพื่อยกเลิก)',t:1.8};try{sfx('ek_summon')}catch(e){}}
 function friTick(dt){const W=FRIX.wp;if(!W)return;if(me.down>0||Math.hypot(me.x-W.x0,me.y-W.y0)>10){FRIX.wp=null;dn.push({x:me.x,y:me.y-46,v:'🌀 ขยับตัว — ยกเลิกการวาป',t:1.3,col:'#c8d8ff'});return}
@@ -12289,15 +12289,15 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v502';
+const WNV='v503';
 const WNL=[
+['🧭','ไล่เช็กวาร์ปทุกดันเจี้ยน','เช็กครบ 24 ดัน (สุ่มเลขห้องหัว-กลาง-ท้าย) เข้าถูกดันทุกครั้ง และออกแล้วกลับไปจุดเดิมของดันนั้นถูกหมด · แก้ลานประลองดวล 1:1 ที่เลขห้องชนกับเต็นท์ผู้เล่น (นาน ๆ ทีจะไปโผล่ในเต็นท์คนอื่น/เจอคนแปลกหน้าในเต็นท์) → ย้ายเต็นท์ไปช่วงเลขใหม่ที่กว้างขึ้น 8 เท่า · รหัสห้องบอสกิลด์ใส่เข้าทางเมนูดันเจี้ยนไม่ได้แล้ว (เข้าได้เฉพาะคนในกิลด์) · รายชื่อเพื่อนบอกถูกว่าอยู่ลานประลอง/ห้องทองคำ/เต็นท์'],
 ['🛠️','แก้วาร์ปบอสโลกไปโผล่ดันอื่น','กดวาร์ปไปลานบอสโลกแล้วไปโผล่ศึกป้องกันท่าเรือเมฆ (เลขห้องชนกัน) → แก้แล้ว เข้าลานบอสโลกทุกครั้ง · ศึกท่าเรือย้ายไปใช้ห้อง 72xxx · เปิดเรดห้วงลึกแล้วบางทีไปโผล่ดันเนื้อเรื่อง (เลขห้องสุ่มกว้างเกิน) → แก้แล้ว · ป้ายชวนเข้าห้องบอกชื่อดันจริง (เดิมขึ้นชื่อเรด/บอสโลกผิด)'],
 ['🎨','มอนวาดใหม่ 29 ตัว','แมพ 1–8 วาดใหม่ทุกตัวให้ละเอียดขึ้น (กูลป่า ค้างคาวพิษ ยักษ์ไม้ผุมีเห็ด · ทหารกระดูกหมวกเหล็ก กะโหลกไฟวิญญาณ อัศวินกระดูกขวาน · อิมป์เพลิง ภูตไฟ ยักษ์ลาวารอยแตกเรือง · ภูตหิมะ นกผลึก โกเลมน้ำแข็งโปร่งแสง · ศพจมน้ำเสื้อกะลาสี ปลาไหลเรืองแสง ปูเปลือกหอยปะการัง · ก็อบลินหมวกตะเกียง ค้างคาวทอง โกเลมเส้นแร่ทอง · มัมมี่ผ้าปลิว แมงป่องหางโค้ง ทหารอนูบิส) · ตัวที่หน้าตาซ้ำกันได้แบบใหม่: ดันเจี้ยนสุสาน «ผู้เฝ้าสุสานถือโคม» · แกนพิภพ «ซาลาแมนเดอร์ลาวา» «อสูรเตาหลอม» · เหมืองดาวคาร์น «ตุ่นเจาะแร่» «หุ่นรถแร่» · ผาท่าเรือเมฆ «ยักษ์ซากเรือ»'],
 ['✨','มอนทุกตัวมีมิติขึ้น','มอนทุกแมพได้แสงเงาเต็มชุดทุกตัว (เดิมได้แค่ 5 ตัวต่อจอ และโหมดประหยัดไม่ได้เลย): ส่วนตัวกลม ๆ มีไฮไลต์ด้านรับแสง เงาด้านหลังแสง · แขนขาเป็นทรงกระบอก · แสงขอบตามสีแมพ · แสงเรือง (ตา/ผลึก/ไฟ) ยังสว่างแบบเดิม · คุณภาพปกติ: มอนแต่ละตัววาดลงภาพของตัวเองแล้วใช้ซ้ำ ไม่วาดใหม่ทุกเฟรม · โหมดประหยัด: วาดตรงพร้อมแสงเงาส่วน · ถ้าเครื่องเริ่มหน่วง ระบบถอยกลับวิธีเดิมเองอัตโนมัติ'],
 ['🎨','ผาท่าเรือเมฆสวยขึ้นทั้งแมพ','วาดใหม่ทั้งฉาก: ทะเลเมฆเป็นก้อนเมฆฟูมีมิติ · ขอบผาเป็นหน้าผาหินมีชั้นหิน รอยแตก ตะไคร่ และไอเมฆเกาะตีนผา · ลานท่าเรือเป็นแผ่นไม้มีลายไม้ ตะปู กำแพงหินขอบท่า · ทุ่งหญ้ามีกอหญ้าลู่ลม ดอกไม้ ก้อนกรวดตามทาง · เรือเหาะ ประภาคาร บ้านท่าเรือ เต็นท์พยาบาล คลังเสบียง เครน สมอ ซากเรือฟ้าเที่ยง ต้นไม้ หิน วาดใหม่ละเอียดขึ้น · ฉลามเมฆตัวใหม่ · บอสคราเคนเมฆโฉมใหม่ หนวดเรียวมีปุ่มดูด ตาเรืองแสง · ลานศึกป้องกันท่าเรือมีพื้นไม้ เข็มทิศทองเหลือง และเครื่องดาวทองเหลืองโดมแก้ว · ภาพละเอียดขึ้นแต่วาดต่อเฟรมน้อยลง (เก็บภาพไว้ใช้ซ้ำ)'],
 ['⛵','ภาค 8 บทที่ 2 · ราคาของการเปิดประตู','กองเรือนาวาเมฆมาถึงแล้ว · คุยผู้บัญชาการเรนน์ (สภาค่ายถกเรื่องรับกองเรือ) → ส่งเสบียง สมุนไพร/แร่/ปลา ที่คลังเสบียงท่าเรือ → ซ่อมเรือ 4 ลำ (ตอกหมุดตามจังหวะ) → ดันเจี้ยนใหม่ «ศึกป้องกันท่าเรือเมฆ» ปกป้องเครื่องดาว 3 เครื่อง สู้บอสคราเคนเมฆ → ตัดสินว่าท่าเรือจะเปิดให้ใคร · ปลดล็อก ⛵ เรือเหาะ: วาปแผนที่โลกระหว่าง ค่าย · อัสตรา · อารัณยา · ผาท่าเรือ ไม่ต้องรอคูลดาวน์ · ฉายาใหม่ «ผู้ถือกุญแจท่าเรือ»'],
-['💗','ดูดเลือดทุก % มีความหมายแล้ว','เดิมเลือดที่ดูดได้ถูกจำกัดไว้ 4% ของเลือดสูงสุดต่อวินาที (ตีแรงแค่ดูดเลือด 3–5% ก็ชนแล้ว) · ตอนนี้ลิมิตโตตามค่าดูดเลือด: 4% + ดูดเลือด×0.1 สูงสุด 10%/วิ (ดูดเลือด 30% → 7%/วิ · 60% ขึ้นไป → 10%/วิ) · ส่วนที่เกินเพดาน 30% ก็ยังนับเพิ่มลิมิต · ดูได้ที่ หน้าตัวละคร → สเตตัส → 💗 ฟื้นจากดูดเลือด'],
-['🔒','สเตตัสเกินเพดานไม่เสียเปล่าแล้ว','ลดดาเมจที่ได้รับเกิน 60% → แปลงเป็นเลือดสูงสุด 1:1 · คริเกิน 100% → ดาเมจคริ 40% ของส่วนเกิน (เดิม 15%) · ความเร็วโจมตีเพดาน +300% ส่วนเกินแปลงเป็นแรงตีปกติ ดาเมจต่อวินาทีเท่าเดิม · ความเร็วเดินเกิน +100% ได้ครึ่งเดียว · หน้าตัวละคร → สเตตัส แสดงลดดาเมจ/ดูดเลือด และบอกว่าค่าไหนชนเพดาน · ฉายาทอง 4 อัน (นักสำรวจแผ่นดินเงา · รากพิภพ · ฟ้าตะวันตก · ผู้จุดดาว) ได้เลือด/ลดดาเมจ/ความเร็วเดินจริงแล้ว']];
+['💗','ดูดเลือดทุก % มีความหมายแล้ว','เดิมเลือดที่ดูดได้ถูกจำกัดไว้ 4% ของเลือดสูงสุดต่อวินาที (ตีแรงแค่ดูดเลือด 3–5% ก็ชนแล้ว) · ตอนนี้ลิมิตโตตามค่าดูดเลือด: 4% + ดูดเลือด×0.1 สูงสุด 10%/วิ (ดูดเลือด 30% → 7%/วิ · 60% ขึ้นไป → 10%/วิ) · ส่วนที่เกินเพดาน 30% ก็ยังนับเพิ่มลิมิต · ดูได้ที่ หน้าตัวละคร → สเตตัส → 💗 ฟื้นจากดูดเลือด']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -19896,7 +19896,7 @@ function tComfort(d){let c=0;for(const k in d){const D=TDECO[d[k]];if(D)c+=D[4]}
 function tRest(c){return{xp:.05+c*.0025,gd:c*.002,hp:.03+c*.001}}
 function rbM(k){const S=me.tent;if(!S||!(S.rb>0))return 0;const R=tRest(tComfort(S.d||{}));return R[k]||0}
 function tRank(c){return c>=24?'👑 ราชวัง':c>=14?'✨ หรูหรา':c>=6?'🏡 อบอุ่น':'⛺ เรียบง่าย'}
-function tentId(u){return 90001+hseed('tent'+u)%9998}
+function tentId(u){return 120000+hseed('tent'+u)%80000}
 const tentHere=()=>!!(MAPS[curMap]&&MAPS[curMap].tent),tentMine=()=>tentHere()&&MAPS[curMap].tent.u===uid;
 function tentMap(id,T){return MAPS[id]={n:'เต็นท์ของ '+T.o,sx:CX,sy:CY+120,sr:0,seed:77,bg:'#120c08',tile:'#120c08',safe:'#120c08',ring:'rgba(0,0,0,0)',t1:'#120c08',t2:'#120c08',d1:'#120c08',d2:'#120c08',nests:[],hub:1,tent:T,
 gates:[],qk:1,ql:1,npc:{x:-9999,y:-9999,n:'',L:1},boss:{x:-9999,y:-9999,n:'-',hp:1,xp:0,L:1,rm:0,g:0,dm:1,tn:1,sm:0,col:'#6a4a98',bar:'#6a4a9a',ln:'#c8a8ff',rec:'',pos:''}}}
@@ -20027,7 +20027,7 @@ let req=0;for(const k in MAPS){const M=MAPS[k];if(M&&M.gates&&+k<10000)M.gates.f
 const N=MAPS[id].n;return req>me.lv?'ต้องเลเวล '+req+' ขึ้นไปถึงจะไป'+N+'ได้':'คุณยังปลดล็อกทางไป'+N+'ไม่ได้ (ต้องเดินเนื้อเรื่อง/เลเวลถึงก่อน)'}
 function wpCheck(u){const m=PTY&&PTY.mem.find(x=>x.u===u);if(!m||u===uid)return'ไม่พบเพื่อนคนนี้ในปาร์ตี้';if(Date.now()-m.s>8000)return m.n+' ออฟไลน์อยู่';
 if(!me.cls||!run||me.down>0)return'ตอนนี้วาปไม่ได้';if(SD.on||SKL||SKA)return'ตอนนี้วาปไม่ได้';
-if(!wpMapOk(curMap))return'ออกจากดันเจี้ยน/หอคอย/ลานประลอง/เต็นท์ก่อนถึงจะวาปได้';const mp=m.mp|0;if(mp>90000)return m.n+' อยู่ในเต็นท์ — ไปเยี่ยมได้จากเมนู 🏠 เต็นท์ (ต้องอยู่ในค่าย)';if(!wpMapOk(mp))return m.n+' อยู่ในดันเจี้ยนหรือหอคอย — ขอรหัสห้องแล้วเข้าร่วมทางเมนูดันเจี้ยนแทน';
+if(!wpMapOk(curMap))return'ออกจากดันเจี้ยน/หอคอย/ลานประลอง/เต็นท์ก่อนถึงจะวาปได้';const mp=m.mp|0;if(mp>=90000&&mp<120000)return m.n+(mp<100000?' กำลังดวลอยู่ที่ลานประลอง':' อยู่ในห้องทองคำ')+' — รอให้ออกมาก่อนค่อยวาป';if(mp>=120000)return m.n+' อยู่ในเต็นท์ — ไปเยี่ยมได้จากเมนู 🏠 เต็นท์ (ต้องอยู่ในค่าย)';if(!wpMapOk(mp))return m.n+' อยู่ในดันเจี้ยนหรือหอคอย — ขอรหัสห้องแล้วเข้าร่วมทางเมนูดันเจี้ยนแทน';
 const a=wpAccess(mp);if(a)return a;if(mp===curMap){const o=others[u];if(o&&Math.hypot(o.x-me.x,o.y-me.y)<160)return'อยู่ใกล้ '+m.n+' แล้ว'}
 if(wpCd>0)return'วาปได้อีกครั้งใน '+Math.ceil(wpCd)+' วิ';return''}
 function ptWarp(u){if(WP){wpCancel('ยกเลิกการวาป');return}const why=wpCheck(u);if(why){dn.push({x:me.x,y:me.y-46,v:why,t:1.8,col:'#ffb0a0'});try{sfx('err')}catch(e){}return}
@@ -22944,7 +22944,7 @@ function dgEnter(id){if(!dgMap(id))return false;ov.hidden=true;dInv=null;sfx('ga
 function dgCreate(tr){const D=DT[tr];if(!D||me.lv<D.lv||!run||me.down>0)return;const id=tr===7?71000+(Math.random()*999|0):tr*10000+1000+(Math.random()*9000|0),t='เปิดดันเจี้ยน '+D.n+' รหัส '+id+' มาช่วยกันหน่อย!';
 emitM('dinv',{id,n:myName});addChat(myName,t,uid);if(room)room.emit('chat',{u:uid,n:myName,t});dgEnter(id)}
 function dgJoin(v){const id=parseInt(String(v).replace(/[^0-9]/g,''),10),tr=Math.floor(id/10000);
-if(!((id>=11000&&id<40000&&id%10000>=1000)||(id>=50000&&id<60000)||(id>=71000&&id<86000))||!DT[tr]){dungeonUI('รหัสห้องไม่ถูกต้อง (ตัวเลข 5 หลัก)');return}
+if(!((id>=11000&&id<40000&&id%10000>=1000)||(id>=50000&&id<60000)||(id>=71000&&id<86000&&!(id>=82000&&id<83000)))||!DT[tr]){dungeonUI('รหัสห้องไม่ถูกต้อง (ตัวเลข 5 หลัก)');return}
 {const need=id>=72000&&id<73000?130:id>=76000&&id<77000?68:id>=75000&&id<76000?94:id>=74000&&id<75000?95:id>=73000&&id<74000?99:DT[tr].lv;if(me.lv<need){dungeonUI('ดันเจี้ยนนี้ต้องเลเวล '+need+' ขึ้นไป');return}}if(me.down>0||!run)return;dgEnter(id)}
 function dgLeave(){ov.hidden=true;sfx('gate');if(RTEI())enterMap(26,rteBack());else if(ROOTI())enterMap(1,rootBack());else if(NYXI())enterMap(22,{x:1600,y:420});else if(QUEEN())enterMap(10,{x:420,y:1560});else if(EYE())enterMap(11,{x:330,y:1590});else if(SIEGE())enterMap(9,{x:1600,y:1420});else if(ECHO())enterMap(10,{x:420,y:1560});else if(isWB())enterMap(1,{x:WBP.x,y:WBP.y+70});else if(isTrial()||isRaid())enterMap(6,{x:1640,y:300});else if(isTw())enterMap(5,{x:TWDOOR.x,y:TWDOOR.y+60});else enterMap(1,{x:CX,y:CY+60})}
 function dgReqStart(){if(!isDg()||(dg.ph!=='lobby'&&!(isTw()&&dg.ph==='clear')))return;ov.hidden=true;if(isHost())dgStart();else{emitM('dgo',{});dn.push({x:me.x,y:me.y-40,v:'ส่งคำขอเริ่มแล้ว',t:1})}}
