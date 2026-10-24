@@ -3,7 +3,7 @@
    ดักใน drawBoss ตามชื่อบอส (BV1[ชื่อ]) ก่อนตัวเลือกเดิม · ตัวใหญ่ขึ้น ~1.35 เท่า สัดส่วนผู้ใหญ่ (หัวเล็กลง ไหล่กว้าง)
    ใช้เครื่องมือวาดของ v501 (vS ไล่สี + แสงเงาทรงกลม · vLimb · vBone · vFlame · vEye · vGlow) · พื้นอยู่ที่ y=30 */
 const BV={O:'#120c0a'};
-const BV1={},BVS={};
+const BV1={},BVS={},BVWD={};
 const bvKey=n=>n&&(BV1[n]?n:n.indexOf('ทูตแห่งความหิว')===0?'ทูตแห่งความหิว · ผู้กลืนดาว':n);
 function drawBossV(bn,T,W,br,sw,up,cf){const f=BV1[bvKey(bn)];if(!f||BV1.off)return false;const r0=MPC.rich,o0=V1.O;MPC.rich=0;/* แสงเงาทั้งตัวมาจากเลเยอร์มอน (gxLayerMark) · ไม่ลงแสงรายชิ้นเพราะบอสตัวใหญ่ราคาสูง (~5 ms/เฟรมบน CPU) */const k=BVS[bvKey(bn)];if(k){g.translate(0,30);g.scale(k,k);g.translate(0,-30)}V1.O=BV.O;g.save();
   try{f(T,W,br,sw,up,cf||0);return true}catch(e){BV1.err=String(e&&e.stack||e).slice(0,300);return false}finally{g.restore();MPC.rich=r0;V1.O=o0}}
@@ -205,7 +205,8 @@ BV1['จักรพรรดิน้ำแข็งนิรันดร์']=
 };
 
 /* ================= 6 · ราชันย์ห้วงลึก ================= */
-BV1['ราชันย์ห้วงลึก']=(T,W,br,sw,up,cf)=>{const b=br,SK='#2f918a',SKD='#185650',SKL='#5fc3b3',BL='#a4dccb',FIN='#35a898',MEM='#86e2d2',COR='#ff7a5a',GD='#dcb44c',LU='120,250,255';bvShadow(60,15);
+const BVAB={SK:'#2f918a',SKD:'#185650',SKL:'#5fc3b3',BL:'#a4dccb',FIN:'#35a898',MEM:'#86e2d2',COR:'#ff7a5a',GD:'#dcb44c',LU:'120,250,255'};
+function bvAbyss(T,W,br,sw,up,cf,P){const b=br,{SK,SKD,SKL,BL,FIN,MEM,COR,GD,LU}=P;bvShadow(60,15);
   
   const bub=front=>{if(W)return;for(let i=0;i<7;i++){const ph=(T*.35+i*.143)%1,x=Math.sin(i*4.7+T*.8)*(40+i*3),y=22-ph*140,r=1.6+(i%3);if((i%2===0)!==front)continue;g.globalAlpha=Math.min(1,(1-ph)*1.6);g.strokeStyle='rgba(200,255,250,.8)';g.lineWidth=1;g.beginPath();g.arc(x,y,r,0,7);g.stroke();g.fillStyle='rgba(255,255,255,.7)';g.beginPath();g.arc(x-r*.35,y-r*.35,r*.3,0,7);g.fill();g.globalAlpha=1}};
   bub(false);
@@ -256,7 +257,8 @@ BV1['ราชันย์ห้วงลึก']=(T,W,br,sw,up,cf)=>{const b=br
     const sx=Math.sin(T*1.7)*4,bx=10+sx,by=hy-42;vK(W,[[0,hy-20],['q',4,hy-34,bx,by+4]],SKD,2.4);vK(W,[[0,hy-20],['q',4,hy-34,bx,by+4]],FIN,1.2);
     bvAdd(W,()=>{const pu=.75+.25*Math.sin(T*5);glowAt(bx,by,16*pu+cf*8,LU,.7);glowAt(bx,by,5,'240,255,255',.95)});bvE(W,bx,by,3.4,3.4,'#cffcff',.8)}
   bub(true);
-};
+}
+BV1['ราชันย์ห้วงลึก']=(T,W,br,sw,up,cf)=>bvAbyss(T,W,br,sw,up,cf,BVAB);
 
 /* ================= 7 · ราชาก็อบลินถุงทอง ================= */
 BV1['ราชาก็อบลินถุงทอง']=(T,W,br,sw,up,cf)=>{const b=br,SK='#78b450',SKD='#416f2e',SKL='#a8d878',RO='#b3252e',FUR='#f4eedc',GD='#f2c240',GDD='#a87818',SA='#9c7244';
@@ -432,5 +434,5 @@ BV1['ผู้คุมสุสาน']=(T,W,br,sw,up,cf)=>{const b=br,IR='#4e4
 
 /* ความสูงถึงยอดหัว (ไว้วางแถบเลือด/ป้ายเลเวลเหนือหัวบอสที่ตัวสูงขึ้น) */
 const BVH={'ราชากระดูกโบราณ':140,'จอมมารเพลิงนรก':134,'จักรพรรดิน้ำแข็งนิรันดร์':140,'ราชันย์ห้วงลึก':140,'ราชาก็อบลินถุงทอง':124,'ฟาโรห์อมตะ เนเฟอร์ราห์':128,'ผู้คุมสุสาน':140};
-function bvBox(m){if(BV1.off||isTw()||m.wb)return;const B=BS(),h=B&&BVH[bvKey(B.n)];if(!h)return;const k=m.mvp?1.3:1,top=30-(30+h+22)*k,bot=30+14*k;gxLayerBox(m.x,m.y+(top+bot)/2,2*112*k,bot-top)}
+function bvBox(m){if(BV1.off||isTw()||m.wb)return;const B=BS(),h=B&&BVH[bvKey(B.n)];if(!h)return;const k=m.mvp?1.3:1,top=30-(30+h+22)*k,bot=30+14*k;gxLayerBox(m.x,m.y+(top+bot)/2,2*(BVWD[bvKey(B.n)]||112)*k,bot-top)}
 function bvTop(m){try{if(BV1.off||isTw()||(m&&m.wb))return 82;const B=BS(),h=B&&BVH[bvKey(B.n)];if(!h)return 82;return Math.round(m&&m.mvp?(h+30)*1.3-30:h)}catch(e){return 82}}
