@@ -41,8 +41,8 @@ async def main():
           const imgs=bag.map(c=>!!c.querySelector('img'));const emo=bag.filter(c=>/[🥾💍]/u.test(c.textContent)).length;
           const eqB=cells.find(c=>(c.dataset.gp||'')==='eq:b'||/data-gp="eq:b"/.test(c.outerHTML));
           const h=itIcoH(null,'b'),hw=itIcoH(me.bag[3],'w'),hh=itIcoH(me.bag[4],'h');
-          return {n:bag.length,imgs:imgs.filter(Boolean).length,emo,eqB:eqB?eqB.innerHTML.slice(0,80):'',empty:h.indexOf('opacity:.6')>0,w:hw.indexOf(weaponIcon(me.bag[3]))>0,h:hh.indexOf(helmIcon(me.bag[4]))>0,err:ITI.err}}""")
-        rep('หน้าอุปกรณ์: ทุกชิ้นในกระเป๋าเป็นภาพวาด ไม่มีอีโมจิ 🥾💍 · ช่องว่างเป็นเงาจาง · อาวุธ/หมวกใช้ภาพเดิม',r['n']==6 and r['imgs']==6 and r['emo']==0 and r['empty'] and r['w'] and r['h'] and '<img' in r['eqB'] and not r['err'],json.dumps(r,ensure_ascii=False))
+          return {n:bag.length,imgs:imgs.filter(Boolean).length,emo,eqB:eqB?eqB.innerHTML.slice(0,80):'',empty:h.indexOf('opacity:.6')>0,w:hw.indexOf('<img')===0,h:hh.indexOf(helmIcon(me.bag[4]))>0,err:ITI.err}}""")
+        rep('หน้าอุปกรณ์: ทุกชิ้นในกระเป๋าเป็นภาพวาด ไม่มีอีโมจิ 🥾💍 · ช่องว่างเป็นเงาจาง · หมวกใช้ภาพเดิม',r['n']==6 and r['imgs']==6 and r['emo']==0 and r['empty'] and r['w'] and r['h'] and '<img' in r['eqB'] and not r['err'],json.dumps(r,ensure_ascii=False))
         # วัตถุดิบ
         r=await A.ev("""async()=>{for(const o of GOODS)try{gdSet(o.k,o.k==='twc'?1234:5)}catch(e){}ov.hidden=false;gearUI();await new Promise(r=>setTimeout(r,60));const c=[...ov.querySelectorAll('.cell[data-gd]')];
           const known=c.filter(e=>MATI[e.dataset.gd]);const miss=known.filter(e=>!e.querySelector('img[data-iti]')).map(e=>e.dataset.gd);
@@ -55,7 +55,7 @@ async def main():
         r=await A.ev("""async()=>{ov.hidden=true;const it=genItem(60,'c',5,5);it.ss=5;VZ3.show=[];VZ3.showing=0;vz3Show(it);await new Promise(r=>setTimeout(r,120));const t=document.querySelector('#vzs .ic');const toast=!!(t&&t.querySelector('img'));
           const k=Object.keys(saves.chars)[0],sv=saves.chars[k];sv.eq=sv.eq||{};sv.eq.a=genItem(60,'a',4,4);sv.eq.c=genItem(60,'c',2,2);sv.eq.b=null;saves.last=k;ov.hidden=false;intro();await new Promise(r=>setTimeout(r,200));
           const eq=[...ov.querySelectorAll('.cs-eq > div')];const csI=eq.filter(d=>d.querySelector('img')).length;const e0=eq.filter(d=>d.classList.contains('e0')&&d.querySelector('img')).length;
-          const sb=itSetIco(4,'b'),sw=itSetIco(4,'w');ov.hidden=true;return {toast,csN:eq.length,csI,e0,sb:sb.indexOf('<img')===0,sw:sw===SI.w}}""")
+          const sb=itSetIco(4,'b'),sw=itSetIco(4,'w');ov.hidden=true;return {toast,csN:eq.length,csI,e0,sb:sb.indexOf('<img')===0,sw:sw.indexOf('<img')===0}}""")
         rep('ป้ายของดรอปใช้ภาพวาด · การ์ดเลือกตัวละครโชว์เกราะ/ประดับ/ช่องว่าง · ปุ่มตีชุดเซ็ตมีไอคอนสีชุด',r['toast'] and r['csI']>=3 and r['e0']>=1 and r['sb'] and r['sw'],json.dumps(r,ensure_ascii=False))
         # error → อีโมจิเดิม
         r=await A.ev("""()=>{const o={};const c0=ITI.c;ITI.c={};const sv=window.itArmorHeavy;window.itArmorHeavy=function(){throw new Error('x')};ITI.err='';const it=genItem(60,'a',3,3);me.cls='melee';

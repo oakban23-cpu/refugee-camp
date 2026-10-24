@@ -134,25 +134,27 @@ function itEquipURL(sl,T,fam,setId,up,ghost){up=up|0;const key=[sl,T,fam,setId|0
   if(!ghost&&(T>=3||setId))itGlow(x,32,32,30,setId?P.m:ITP[T].g||'#ffffff',T>=5||setId?.42:.3);
   if(setId&&!ghost)itSetBack(x,setId,P);
   const[cv2,y]=up&&!ghost?mk():[cv,x];
-  if(sl==='a'){(fam==='l'?itArmorLight:fam==='r'?itArmorRobe:itArmorHeavy)(y,T,P)}else if(sl==='c')itAcc(y,T,P);else itBoots(y,T,P);
+  if(sl==='a'){(fam==='l'?itArmorLight:fam==='r'?itArmorRobe:itArmorHeavy)(y,T,P)}else if(sl==='c')itAcc(y,T,P);else if(sl==='w')itWeapon(y,T,P,fam);else itBoots(y,T,P);
   if(cv2!==cv){/* ขอบเรืองตีบวก +7 / +10 / +15 */const gc=ITUPC[up];x.save();x.setTransform(1,0,0,1,0,0);x.shadowColor=gc;x.shadowOffsetX=400;
     x.shadowBlur=up>=2?18:13;x.drawImage(cv2,-400,0);x.shadowBlur=5;x.drawImage(cv2,-400,0);if(up>=2){x.shadowBlur=26;x.drawImage(cv2,-400,0)}x.shadowColor='rgba(0,0,0,0)';x.shadowOffsetX=0;x.drawImage(cv2,0,0);x.restore()}
   if(!ghost)itFinish(x,setId?6:T,P,up);
   if(ghost){x.globalCompositeOperation='source-atop';x.fillStyle='rgba(160,150,140,.75)';x.fillRect(0,0,64,64)}
   ITI.n++;return ITI.c[key]=cv.toDataURL()}
-function itIcoURL(it,sl,cls){sl=sl||(it&&it.sl);if(sl!=='a'&&sl!=='c'&&sl!=='b')return null;const fam=ITFAM[cls||(typeof me!=='undefined'&&me&&me.cls)]||'h';if(!it)return itEquipURL(sl,0,fam,0,0,1);return itEquipURL(sl,itTier(it),fam,it.ss|0,itUpLv(it.u),0)}
+function itIcoURL(it,sl,cls){sl=sl||(it&&it.sl);cls=cls||(typeof me!=='undefined'&&me&&me.cls);
+  if(sl==='w'){if(!WPI.on||!CL[cls])return null;if(!it)return itEquipURL('w',0,cls+':0',0,0,1);return itEquipURL('w',itTier(it),cls+':'+wpStyle(it),it.ss|0,itUpLv(it.u),0)}
+  if(sl!=='a'&&sl!=='c'&&sl!=='b')return null;const fam=ITFAM[cls]||'h';if(!it)return itEquipURL(sl,0,fam,0,0,1);return itEquipURL(sl,itTier(it),fam,it.ss|0,itUpLv(it.u),0)}
 /* HTML ไอคอนในช่องกระเป๋า/ช่องสวม (แทนนิพจน์เดิมใน cellH) */
 function itIcoH(it,slot){const sl=slot||(it&&it.sl);
   if(it&&it.sl==='h')return'<img src="'+helmIcon(it)+'" alt="" style="width:34px;height:34px;display:block;margin:auto;pointer-events:none">';
-  if(it&&it.sl==='w'&&CL[me.cls])return'<img src="'+weaponIcon(it)+'" alt="" style="width:36px;height:36px;display:block;margin:auto;pointer-events:none">';
   if(ITI.on)try{const u=itIcoURL(it,sl);if(u)return'<img src="'+u+'" alt="" style="width:38px;height:38px;display:block;margin:auto;pointer-events:none'+(it?'':';opacity:.6')+'">'}catch(e){ITI.err=String(e&&e.stack||e).slice(0,300)}
+  if(it&&it.sl==='w'&&CL[me.cls])return'<img src="'+weaponIcon(it)+'" alt="" style="width:36px;height:36px;display:block;margin:auto;pointer-events:none">';
   return SI[slot||it.sl]}
 /* ปุ่มสร้างชุดเซ็ต: ไอคอนสีชุด (เกราะ/เครื่องประดับ/รองเท้า) */
-function itSetIco(id,sl){try{if(ITI.on&&(sl==='a'||sl==='c'||sl==='b')){const fam=ITFAM[typeof me!=='undefined'&&me&&me.cls]||'h';return'<img src="'+itEquipURL(sl,6,fam,+id||1,0,0)+'" alt="" style="width:26px;height:26px;vertical-align:middle;pointer-events:none">'}}catch(e){ITI.err=String(e&&e.stack||e).slice(0,300)}return SI[sl]}
+function itSetIco(id,sl){try{if(ITI.on&&sl==='w'&&WPI.on&&CL[me.cls]){id=+id||1;return'<img src="'+itEquipURL('w',6,me.cls+':'+(id===5?1:id===4?2:0),id,0,0)+'" alt="" style="width:26px;height:26px;vertical-align:middle;pointer-events:none">'}if(ITI.on&&(sl==='a'||sl==='c'||sl==='b')){const fam=ITFAM[typeof me!=='undefined'&&me&&me.cls]||'h';return'<img src="'+itEquipURL(sl,6,fam,+id||1,0,0)+'" alt="" style="width:26px;height:26px;vertical-align:middle;pointer-events:none">'}}catch(e){ITI.err=String(e&&e.stack||e).slice(0,300)}return SI[sl]}
 /* ช่องว่างในการ์ดเลือกตัวละคร */
 function itEmptyH(sl,cls){try{if(ITI.on){const u=itIcoURL(null,sl,cls);if(u)return'<img src="'+u+'" alt="">'}}catch(e){}return SI[sl]||''}
-function itIcoImg(it,sl,px){sl=sl||(it&&it.sl);try{if(!it)return'';if(sl==='h')return'<img src="'+helmIcon(it)+'" alt=""'+(px?' style="width:'+px+'px;height:'+px+'px;vertical-align:middle"':'')+'>';if(sl==='w'&&CL[me.cls])return'<img src="'+weaponIcon(it)+'" alt=""'+(px?' style="width:'+px+'px;height:'+px+'px;vertical-align:middle"':'')+'>';
-  if(!ITI.on)return'';const u=itIcoURL(it,sl);return u?'<img src="'+u+'" alt=""'+(px?' style="width:'+px+'px;height:'+px+'px;vertical-align:middle"':'')+'>':''}catch(e){ITI.err=String(e&&e.stack||e).slice(0,300);return''}}
+function itIcoImg(it,sl,px){sl=sl||(it&&it.sl);try{if(!it)return'';if(sl==='h')return'<img src="'+helmIcon(it)+'" alt=""'+(px?' style="width:'+px+'px;height:'+px+'px;vertical-align:middle"':'')+'>';const u=ITI.on?(()=>{try{return itIcoURL(it,sl)}catch(e){ITI.err=String(e&&e.stack||e).slice(0,300);return null}})():null;if(u)return'<img src="'+u+'" alt=""'+(px?' style="width:'+px+'px;height:'+px+'px;vertical-align:middle"':'')+'>';
+  if(sl==='w'&&CL[me.cls])return'<img src="'+weaponIcon(it)+'" alt=""'+(px?' style="width:'+px+'px;height:'+px+'px;vertical-align:middle"':'')+'>';return''}catch(e){ITI.err=String(e&&e.stack||e).slice(0,300);return''}}
 
 /* ---------- วัตถุดิบ / ของใช้ ---------- */
 function itBottle(x,c,c2,rain){/* ขวดสีย้อมจุกไม้ */itFill(x,[[27,12],[37,12],[37,22],['q',50,28,48,44],['q',46,56,32,56],['q',18,56,16,44],['q',14,28,27,22]],['rgba(255,255,255,.9)','rgba(220,232,245,.75)'],1.6,[0,12,0,56]);
