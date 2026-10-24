@@ -3,8 +3,9 @@
    ดักใน drawBoss ตามชื่อบอส (BV1[ชื่อ]) ก่อนตัวเลือกเดิม · ตัวใหญ่ขึ้น ~1.35 เท่า สัดส่วนผู้ใหญ่ (หัวเล็กลง ไหล่กว้าง)
    ใช้เครื่องมือวาดของ v501 (vS ไล่สี + แสงเงาทรงกลม · vLimb · vBone · vFlame · vEye · vGlow) · พื้นอยู่ที่ y=30 */
 const BV={O:'#120c0a'};
-const BV1={};
-function drawBossV(bn,T,W,br,sw,up,cf){const f=BV1[bn];if(!f||BV1.off)return false;const r0=MPC.rich,o0=V1.O;MPC.rich=0;/* แสงเงาทั้งตัวมาจากเลเยอร์มอน (gxLayerMark) · ไม่ลงแสงรายชิ้นเพราะบอสตัวใหญ่ราคาสูง (~5 ms/เฟรมบน CPU) */V1.O=BV.O;g.save();
+const BV1={},BVS={};
+const bvKey=n=>n&&(BV1[n]?n:n.indexOf('ทูตแห่งความหิว')===0?'ทูตแห่งความหิว · ผู้กลืนดาว':n);
+function drawBossV(bn,T,W,br,sw,up,cf){const f=BV1[bvKey(bn)];if(!f||BV1.off)return false;const r0=MPC.rich,o0=V1.O;MPC.rich=0;/* แสงเงาทั้งตัวมาจากเลเยอร์มอน (gxLayerMark) · ไม่ลงแสงรายชิ้นเพราะบอสตัวใหญ่ราคาสูง (~5 ms/เฟรมบน CPU) */const k=BVS[bvKey(bn)];if(k){g.translate(0,30);g.scale(k,k);g.translate(0,-30)}V1.O=BV.O;g.save();
   try{f(T,W,br,sw,up,cf||0);return true}catch(e){BV1.err=String(e&&e.stack||e).slice(0,300);return false}finally{g.restore();MPC.rich=r0;V1.O=o0}}
 /* วงรีแบบเติมไล่สี + แสงเงา */
 function bvE(W,x,y,rx,ry,c,lw,st){const k=.5523;return vS(W,[[x-rx,y],['c',x-rx,y-ry*k,x-rx*k,y-ry,x,y-ry],['c',x+rx*k,y-ry,x+rx,y-ry*k,x+rx,y],['c',x+rx,y+ry*k,x+rx*k,y+ry,x,y+ry],['c',x-rx*k,y+ry,x-rx,y+ry*k,x-rx,y]],c,st===0?0:1,lw||1.2)}
@@ -431,5 +432,5 @@ BV1['ผู้คุมสุสาน']=(T,W,br,sw,up,cf)=>{const b=br,IR='#4e4
 
 /* ความสูงถึงยอดหัว (ไว้วางแถบเลือด/ป้ายเลเวลเหนือหัวบอสที่ตัวสูงขึ้น) */
 const BVH={'ราชากระดูกโบราณ':140,'จอมมารเพลิงนรก':134,'จักรพรรดิน้ำแข็งนิรันดร์':140,'ราชันย์ห้วงลึก':140,'ราชาก็อบลินถุงทอง':124,'ฟาโรห์อมตะ เนเฟอร์ราห์':128,'ผู้คุมสุสาน':140};
-function bvBox(m){if(BV1.off||isTw()||m.wb)return;const B=BS();if(!B||!BVH[B.n])return;const k=m.mvp?1.3:1,top=30-(30+BVH[B.n]+22)*k,bot=30+14*k;gxLayerBox(m.x,m.y+(top+bot)/2,2*112*k,bot-top)}
-function bvTop(m){try{if(BV1.off||isTw()||(m&&m.wb))return 82;const B=BS(),h=B&&BVH[B.n];if(!h)return 82;return Math.round(m&&m.mvp?(h+30)*1.3-30:h)}catch(e){return 82}}
+function bvBox(m){if(BV1.off||isTw()||m.wb)return;const B=BS(),h=B&&BVH[bvKey(B.n)];if(!h)return;const k=m.mvp?1.3:1,top=30-(30+h+22)*k,bot=30+14*k;gxLayerBox(m.x,m.y+(top+bot)/2,2*112*k,bot-top)}
+function bvTop(m){try{if(BV1.off||isTw()||(m&&m.wb))return 82;const B=BS(),h=B&&BVH[bvKey(B.n)];if(!h)return 82;return Math.round(m&&m.mvp?(h+30)*1.3-30:h)}catch(e){return 82}}
