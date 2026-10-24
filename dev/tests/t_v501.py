@@ -7,7 +7,7 @@ def rep(name, ok, info=''):
     R.append((name, ok, info)); print(('PASS ' if ok else 'FAIL ') + name, str(info)[:700], flush=True)
 ALL="""()=>{const out={err:[],empty:[],ratio:{},n:0};const N=360,c=document.createElement('canvas');c.width=c.height=N;const x=c.getContext('2d');const G0=g,L0=LOWQ;
   const area=()=>{const d=x.getImageData(0,0,N,N).data;let n=0;for(let i=3;i<d.length;i+=4)if(d[i]>150)n++;return n};
-  for(const k of Object.keys(MV1D).map(Number).filter(k=>!(k>=100&&k<190))){const th=Math.floor(k/10),t=k%10;
+  for(const k of Object.keys(MV1D).map(Number).filter(k=>k<100||[260,262,350,352,382].includes(k))){const th=Math.floor(k/10),t=k%10;
     for(const[T,fx,hf,lq]of[[.4,1,0,false],[1.7,-1,0,false],[2.9,1,.6,false],[1.1,1,0,true]]){x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,N,N);x.setTransform(3,0,0,3,N/2,N*.66);g=x;LOWQ=lq;MPC.rich=1;let ok=true;
       try{ok=drawMonV(th,t,(MT[t]&&MT[t].r)||12,T,null,null,null,null,c=>hf>.3?'#fff':c,hf>.3,Math.sin(T*4),Math.sin(T*7),1,0)}catch(e){out.err.push([k,String(e).slice(0,60)])}finally{g=G0;LOWQ=L0;MPC.rich=0}
       const a=area();if(!ok||a<300)out.empty.push([k,T,a]);out.n++;if(T===.4)out.ratio[k]=a}}return out}"""
@@ -30,7 +30,7 @@ async def main():
             cnt[mp]=r
         want={1:['10','11','12'],2:['20','21','22'],3:['30','31','32'],4:['40','41','42'],6:['60','61','62'],7:['70','71','72'],8:['80','81','82'],26:['260','262'],35:['350','352'],38:['382']}
         ok=all(all(k in cnt[mp][1] for k in ks) for mp,ks in want.items())
-        rep('ในแมพจริง: มอนแมพ 1–8 · 26 · 35 · 38 ใช้แบบใหม่ (แต่ตัวที่ไม่ได้วาดใหม่ยังใช้แบบเดิม)',ok and '381' not in cnt[38][1] and '261' not in cnt[26][1],{k:v for k,v in cnt.items()})
+        rep('ในแมพจริง: มอนแมพ 1–8 · 26 · 35 · 38 ใช้แบบใหม่ (ตัวที่เหลือของแมพ 26/38 วาดใหม่ในชุด v509/v510)',ok,{k:v for k,v in cnt.items()})
         d=await A.ev("""async()=>{dgEnter(11234);await new Promise(r=>setTimeout(r,2500));let n=0;const f=MV1D[50];MV1D[50]=function(){n++;return f.apply(this,arguments)};
           const c=document.createElement('canvas');c.width=c.height=320;const x=c.getContext('2d');const G0=g;const m={id:991000,x:0,y:0,t:0,L:10,p:0,hp:1,mh:1,fx:1};x.setTransform(2.4,0,0,2.4,160,220);g=x;try{mpcMon(m,1.3,1,0,0)}finally{g=G0;MV1D[50]=f}return [curMap,bTheme(),n]}""")
         rep('ดันเจี้ยนสุสานต้องสาป: ตัวธรรมดาเป็น «ผู้เฝ้าสุสานถือโคม» (ไม่ซ้ำมัมมี่แมพ 8)',d[1]==5 and d[2]>0,d)
