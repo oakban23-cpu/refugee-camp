@@ -46,8 +46,8 @@ async def main():
         fails=[]
         for mp in [28,31,35,36,38]:
             r=await A.ev("""async(mp)=>{NPV.err='';const N=mp===38?MAPS[38].npc2:MAPS[mp].npc;enterMap(mp,{x:N.x,y:N.y+150});await new Promise(r=>setTimeout(r,2500));try{SD.on&&stClose()}catch(e){};ov.hidden=true;
-              const k=setInterval(()=>{me.x=N.x;me.y=N.y+150;FQ.avg=12},30);const n0=NPV.n;await new Promise(r=>setTimeout(r,1200));clearInterval(k);return {map:curMap,d:NPV.n-n0,err:NPV.err}}""",mp)
-            if r['map']!=mp or r['d']<8 or r['err']: fails.append([mp,r])
+              const k=setInterval(()=>{me.x=N.x;me.y=N.y+150;FQ.avg=12},30);let fr=0;const dg0=drawGate;window.drawGate=drawGate=function(){fr++;return dg0.apply(this,arguments)};const n0=NPV.n;await new Promise(r=>setTimeout(r,1200));clearInterval(k);window.drawGate=drawGate=dg0;return {map:curMap,d:NPV.n-n0,fr,err:NPV.err}}""",mp)
+            if r['map']!=mp or r['fr']<3 or r['d']<r['fr']*.8 or r['err']: fails.append([mp,r])
         rep('ในเกม (แมพ 28 · 31 · 35 · 36 · 38): NPC แบบใหม่ถูกวาดทุกเฟรม ไม่มี error',not fails,json.dumps(fails,ensure_ascii=False))
         er=[e for e in A.errs if 'ERR_' not in e and 'favicon' not in e]
         rep('ไม่มี error',not er,json.dumps(er[:5],ensure_ascii=False))
