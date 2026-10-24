@@ -40,7 +40,7 @@ function vz3Beams(){const t=performance.now()/1000;try{for(const d of drops){if(
 function vz3Show(it){VZ3.show.push(it);if(!VZ3.showing)vz3Next()}
 function vz3Next(){const it=VZ3.show.shift();if(!it){VZ3.showing=0;return}VZ3.showing=1;vz3CSS();let e=$('vzs');if(!e){e=document.createElement('div');e.id='vzs';document.body.appendChild(e)}
   let col=RCL[it.r]||'#ffd84a',rk=(RN[it.r]||'').split('·')[0].trim(),ds='';try{if(it.lg&&LGD[it.lg]){col=LGD[it.lg].c||'#ffd84a';rk='★ ตำนาน · '+rk;ds=LGD[it.lg].i+' '+LGD[it.lg].d}else if(it.ss&&SETS[it.ss]){col='#ff7ad9';rk='ชุดเซ็ต · '+rk;ds=SETS[it.ss].n||''}}catch(_){}
-  let ic='🎁';try{ic=SI[it.sl]||ic}catch(_){}let nm='';try{nm=itemName(it)}catch(_){}
+  let ic='🎁';try{ic=SI[it.sl]||ic;const h=itIcoImg(it,it.sl,50);if(h)ic=h}catch(_){}let nm='';try{nm=itemName(it)}catch(_){}
   e.style.setProperty('--vc',col);e.innerHTML='<div class="cd"><div class="ic">'+ic+'</div><div class="rk">'+rk+'</div><div class="nm">'+String(nm).replace(/</g,'&lt;')+'</div>'+(ds?'<div class="ds">'+String(ds).replace(/</g,'&lt;')+'</div>':'')+'</div>';
   e.classList.remove('on');void e.offsetWidth;e.classList.add('on');setTimeout(vz3Next,3700)}
 /* ---------- ③ เปิดตัวบอส ---------- */
