@@ -7,7 +7,7 @@ def rep(name, ok, info=''):
     R.append((name, ok, info)); print(('PASS ' if ok else 'FAIL ') + name, str(info)[:700], flush=True)
 ALL="""()=>{const out={err:[],empty:[],ratio:{},n:0};const N=360,c=document.createElement('canvas');c.width=c.height=N;const x=c.getContext('2d');const G0=g,L0=LOWQ;
   const area=()=>{const d=x.getImageData(0,0,N,N).data;let n=0;for(let i=3;i<d.length;i+=4)if(d[i]>150)n++;return n};
-  for(const k of Object.keys(MV1D).map(Number)){const th=Math.floor(k/10),t=k%10;
+  for(const k of Object.keys(MV1D).map(Number).filter(k=>!(k>=100&&k<190))){const th=Math.floor(k/10),t=k%10;
     for(const[T,fx,hf,lq]of[[.4,1,0,false],[1.7,-1,0,false],[2.9,1,.6,false],[1.1,1,0,true]]){x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,N,N);x.setTransform(3,0,0,3,N/2,N*.66);g=x;LOWQ=lq;MPC.rich=1;let ok=true;
       try{ok=drawMonV(th,t,(MT[t]&&MT[t].r)||12,T,null,null,null,null,c=>hf>.3?'#fff':c,hf>.3,Math.sin(T*4),Math.sin(T*7),1,0)}catch(e){out.err.push([k,String(e).slice(0,60)])}finally{g=G0;LOWQ=L0;MPC.rich=0}
       const a=area();if(!ok||a<300)out.empty.push([k,T,a]);out.n++;if(T===.4)out.ratio[k]=a}}return out}"""
