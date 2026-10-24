@@ -6149,7 +6149,7 @@ g.strokeStyle='rgba(138,122,90,.6)';g.lineWidth=1;for(const k of[-16,0,16]){g.be
 g.fillStyle='#b88a5a';g.fillRect(x+8,y-34,10,9);g.fillStyle='#7a9ac0';g.fillRect(x-20,y-28,9,8);
 g.fillStyle='#2a4a9a';g.fillRect(x-31,y-22,62,6);g.fillStyle='#e0b050';g.fillRect(x-31,y-17,62,2);
 {const fx2=x-26,fy=y-30,w=Math.sin(T*4)*3;g.strokeStyle='#5a3a1a';g.lineWidth=2;g.beginPath();g.moveTo(fx2,fy);g.lineTo(fx2,fy-52);g.stroke();g.fillStyle='#2a4a9a';g.beginPath();g.moveTo(fx2,fy-52);g.lineTo(fx2-22,fy-48+w);g.lineTo(fx2-18,fy-40+w*.5);g.lineTo(fx2-22,fy-32+w);g.lineTo(fx2,fy-36);g.closePath();g.fill();g.fillStyle='#e0b050';PST(g,fx2-9,fy-44+w*.5,4,1.6,5,0);g.fill()}
-campFolk(x+6,y-52,{c:'#8a6a3a',sh:'#d84a3a',hair:'#3a2414',f:1,k:9,sit:1,s:1,arm:Math.sin(T*4)*.8-.6},T);
+escTil(x+6,y-52,T);
 g.strokeStyle='#5a3a1a';g.lineWidth=2;g.beginPath();g.moveTo(x+27,y-14);g.lineTo(x+34,y-60);g.lineTo(x+40,y-60);g.stroke();{const lx=x+40,ly=y-54+Math.sin(T*3)*1.5;g.fillStyle='#c8a040';g.fillRect(lx-4,ly-6,8,10);g.fillStyle='#fff4d0';g.fillRect(lx-2.5,ly-4,5,6);g.save();g.globalCompositeOperation='lighter';glowAt(lx,ly-1,28,'255,210,130',.6+.15*Math.sin(T*5));g.restore()}
 if(hit){g.fillStyle='rgba(255,60,40,.35)';g.fillRect(x-31,y-44,62,62)}g.restore();
 if(mv&&!LOWQ){g.save();g.globalCompositeOperation='lighter';for(let i=0;i<6;i++){const q=(T*.9+i/6)%1;glowAt(x+Math.sin(i*2.3+T)*24,y+30+q*70,2.4,'255,230,160',.7*(1-q))}g.restore()}
@@ -12289,15 +12289,15 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v516';
+const WNV='v517';
 const WNL=[
+['🪶','ตัวละครในดัน/ฉากวาดใหม่','ยายเมฆา ผู้เล่าเรื่องแห่งนาวาเมฆ (ท่าเรือเมฆ ภาค 8) นั่งบนลังไม้ ผมขาวเปียยาว ปักขนนกฟ้า ผ้าคลุมไหล่ลายเมฆ ดีดพิณเมฆร้องเพลงกล่อม · ทิลนั่งห้อยขาโบกมือบนหลังคาเกวียนในดันคุ้มกันขบวนผู้อพยพ (แบบเดียวกับทิลในแมพ)'],
 ['🔭','NPC ตามเหตุการณ์ + ช่างหลอมออปชั่น วาดใหม่','เซเลสต์ นักดาราศาสตร์หลวง (ผมเงินยาว แว่นข้างเดียว เสื้อคลุมครามปักกลุ่มดาว ไม้เท้าโคมดาว ดาวลอยวน) · ลอร์ดเฮเดรียน (หมวกทรงสูงคาดทอง โค้ทหางยาวปักทอง สายสะพายสภา ไม้เท้าหัวทอง แว่นข้างเดียว — ยืนข้างยายเอดาด้วยถ้าเลือกชวนเดินดูตลาด) · เวสเปอร์ร่าง NPC ใช้แบบเดียวกับตอนเป็นบอส · ช่างหลอมออปชั่นที่ป้อมใต้เมฆ (แว่นหลอม ผ้ากันเปื้อนหนัง คีมคีบผลึกรูน เบ้าหลอมวงอักขระเรือง)'],
 ['🧑‍🤝‍🧑','NPC ภาค 6–8 วาดใหม่','NPC เนื้อเรื่องช่วงหลังตัวใหญ่ขึ้นเท่า NPC ในค่าย มีของประจำตัว: ลิเรีย (ชุดลาเวนเดอร์ ผ้ากันเปื้อนลูกไม้ ตะกร้ากุหลาบ ร้องเพลงกล่อม) · ทิล (แว่นนักบิน เป้ใหญ่ ดาบไม้ โบกมือ / ถือเข็มทิศดาวเรือง) · ยายเอดา (ผมขาวมวย แว่นกลม ผ้าคลุมไหล่ทอลาย ไม้เท้า แผงผ้าทอ / โคมนำทาง) · บรอม (หมวกเหมืองไฟส่อง เคราแดง อีเต้อ ผลึกดาว) · ออร์รี (หุ่นทองเหลืองผ้าพันคอแดง กวาดหิมะ) · กัปตันซารา (หมวกสามมุมขนนกแดง โค้ทน้ำเงิน เข็มทิศเมฆ) · นาวิน (เสื้อลายทาง ขนนกทอง ส่องกล้อง)'],
 ['🌋','ผู้กลืนรากวาดใหม่','ผู้กลืนราก (ห้องแกนพิภพ ภาค 4) เป็นก้อนหัวใจแกนพิภพยักษ์ห่อเปลือกหินบะซอลต์ มีเส้นเลือดลาวาเต้นตามจังหวะ ปากแนวตั้งฟันลาวาพร้อมเขี้ยวหนีบสองข้าง ตาบนก้านราก 5 ดวงและตาฝังรอบปาก หนวดรากปลายหลอมเหลว 8 เส้น มือรากกำหัวใจครึ่งดวงสีทองไว้ ร่ายสกิลจะยกหัวใจขึ้นป้อนปาก · ช่วงแปลงร่าง เปลือกร้าวเรือง แตกปลิวเป็นเศษหิน เผยร่างแกนหลอมเหลวพร้อมมงกุฎเปลวไฟ · ร่างอวตารเฟส 3 คงแบบเดิม'],
 ['⚔️','บอสโลก · บอสกิลด์ วาดใหม่','บอสโลก «อสูรยักษ์โลกันตร์» ร่างอกกว้างโผล่จากบ่อลาวา เขาใหญ่ หน้าดุ ขากรรไกรอ้าตอนพ่นไฟ ซี่โครงหินรอบแกนลาวาเปิดออกตอนโนวา แขนกรงเล็บยกทุบ · บอสกิลด์ «อสูรเกราะศึก» อัศวินเกราะยักษ์ถือโล่หอคอยสีกิลด์และค้อนศึก ผ้าคลุม ธง และขนนกหมวกเป็นสีกิลด์ เกราะเปลี่ยนสีตามขั้น ไฟวิญญาณลอดช่องเกราะ'],
 ['🌑','ความหิวของดาว · คราเคนเมฆ วาดใหม่','ความหิวของดาว (เปลหัวใจ ภาค 7) เป็นดาวมืดสุริยคราส เปลวโคโรนาม่วงรอบตัว ปากฟันสองวงหมุนสวนทาง ดาวถูกดูดหมุนเข้าปาก ตา 6 ดวงรอบขอบ แขนกรงเล็บยาว มงกุฎดาวดับ · ตอนยื่นสายกลืนไฟแขนยืดยาวมีไฟวิ่ง ตอนสูดกลืนฟ้าเปลวโคโรนาถูกดูดเข้า · เลือดต่ำกว่าครึ่งร้าวแสงทอง เป็นสีชมพู · คราเคนเมฆ (ภาค 8) แมนเทิลยาวครีบปลายทรงหัวลูกศร เพรียงเกาะ แผลเป็น ตาโตขมวดคิ้ว จะงอยปากอ้าตอนร่าย · เลือดต่ำกว่าครึ่งเป็นสีม่วงชมพูมีฟ้าแลบ · แถบเลือดยกเหนือหัวทั้งสองตัว'],
-['👑','ราชินีผู้กลืนดาว · ราชินีที่เหลือแต่เปลือก วาดใหม่','ราชินีร่างสูงลอยในชุดราตรีผลึก ปีกม่านห้วงดาว 4 ปีกมีดาวระยิบ ผมห้วงดาวยาว หน้ากากกระเบื้องเบ้าตาบอดน้ำตาแสงชมพู มงกุฎดาวดับ ปากกลางอกมีดาวที่ถูกกลืนหมุนวน · ท่าตามกลไก: ตอน «เอียงหัวฟังเสียง» นางเอียงหัวป้องหูมีคลื่นเสียง · ตอน «ลืมตาที่ไม่มีอยู่จริง» ตาที่สามกลางหน้าผากลืมเรืองชมพู · ร่างเปลือก (ภาค 7) สีซีดร้าวมีรูทะลุ เศษเปลือกลอยวน หลุมดำกลางอกโตตามดาวที่กลืนสะสม ตอนสูดลมปีกกับผมถูกดูดเข้าหาตัว · แถบเลือดยกขึ้นเหนือมงกุฎ'],
-['🌹','มอนธรรมดาวาดใหม่ ชุด 4 · แมพ 28–38 (30 ตัว) · ครบทุกแมพแล้ว','สวนราชินี: ภูตเถาหนามเงินหัวกุหลาบ · ผีเสื้อคราสลายจันทร์เสี้ยว · อัศวินพุ่มไม้ตัดแต่งดอกกุหลาบ · บัลลังก์ดาว: องครักษ์หุ่นเชิดเชือกแสง · ดาวทองล่ามโซ่ · ผู้คุมกลุ่มดาว · สะพานรุ่งอรุณ: เงาโผล่จากเมฆชมพูทอง · นกเงาปีกแสงสนธยา · ยักษ์แบกเฟืองสำริด · วงแหวนล่าง: ภูตเถ้ารอยร้าวฟ้าคลุมผ้าแผงตลาด · หนูเงากระโจน · เงาหัวโคมแดง · ซากอารัณยา: ทหารหน้ากากตะวัน · เงาไต่ตาหลายดวง · ผู้ถือระฆังคลื่นเสียง · หลุมหัวใจว่าง: เงาผู้รอคอยโซ่ขาด · โซ่แสงหัวกุญแจ · ผู้ถักโซ่ 4 แขน · ที่ราบดาวตก: หมาป่าคลั่งผลึกระเบิด · ภูตเศษดาวหาง · ยักษ์อุกกาบาตหลุมหลอมเหลว · เหมืองคาร์น: ค้างคาวปีกปลายผลึก · ยอดเขา: จิ้งจอกหางดาว · นกฮูกดาวน้ำแข็ง · อัศวินเกราะกระจก · ธีมความหิว: เงาหิวปากใหญ่ · ปากดาวลอย · ยักษ์อกหลุมดำดูดแสง · ผาท่าเรือ: ฉลามเมฆ · นางนวลพายุ']];
+['👑','ราชินีผู้กลืนดาว · ราชินีที่เหลือแต่เปลือก วาดใหม่','ราชินีร่างสูงลอยในชุดราตรีผลึก ปีกม่านห้วงดาว 4 ปีกมีดาวระยิบ ผมห้วงดาวยาว หน้ากากกระเบื้องเบ้าตาบอดน้ำตาแสงชมพู มงกุฎดาวดับ ปากกลางอกมีดาวที่ถูกกลืนหมุนวน · ท่าตามกลไก: ตอน «เอียงหัวฟังเสียง» นางเอียงหัวป้องหูมีคลื่นเสียง · ตอน «ลืมตาที่ไม่มีอยู่จริง» ตาที่สามกลางหน้าผากลืมเรืองชมพู · ร่างเปลือก (ภาค 7) สีซีดร้าวมีรูทะลุ เศษเปลือกลอยวน หลุมดำกลางอกโตตามดาวที่กลืนสะสม ตอนสูดลมปีกกับผมถูกดูดเข้าหาตัว · แถบเลือดยกขึ้นเหนือมงกุฎ']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -22160,14 +22160,16 @@ P([-6.4,hy-6.4,-4.8,hy-8.4,-3.2,hy-6.4,-4.8,hy-5],'#f6e0ff',O,.4);P([-3.2,hy-6.4
 {const sx=3.2,sy=hy-6.4;g.fillStyle='#ffe07a';g.beginPath();for(let k=0;k<10;k++){const r=k%2?.8:2,a=k*.628-1.57;g.lineTo(sx+Math.cos(a)*r,sy+Math.sin(a)*r)}g.closePath();g.fill();g.strokeStyle=O;g.lineWidth=.35;g.stroke();if(!LOWQ)glow(sx,sy,5,'255,230,150',.45+.2*Math.sin(t*3))}
 if(!LOWQ&&(t%7)<4){const q=((t%7)/4);g.globalAlpha=Math.sin(q*Math.PI);g.fillStyle='#fff0ff';g.font='bold 6px system-ui';g.textAlign='center';g.fillText(q<.5?'♪':'♫',8+q*6,hy-6-q*12);g.globalAlpha=1}
 g.restore()}
-function tilV(x,y,f,t,comp,sc){const{O,LG,P,E,R,glow}=NPK,S=sc||1.16,hop=comp?0:Math.pow(Math.max(0,Math.sin(t*2.6)),3)*2.2,br=Math.sin(t*2.2)*.35;NPK.sh(x,y+16,12*S/1.16);g.save();g.translate(x,y-hop*S);g.scale(f*S,S);g.lineJoin='round';g.lineCap='round';
+function tilV(x,y,f,t,comp,sc,sit){const{O,LG,P,E,R,glow}=NPK,S=sc||1.16,hop=comp||sit?0:Math.pow(Math.max(0,Math.sin(t*2.6)),3)*2.2,br=Math.sin(t*2.2)*.35;if(!sit)NPK.sh(x,y+16,12*S/1.16);g.save();g.translate(x,y-hop*S);g.scale(f*S,S);g.lineJoin='round';g.lineCap='round';
 const hy=-15+br*.4;
 g.save();g.translate(-6.4,-4);g.rotate(.08);g.strokeStyle='#8a6a40';g.lineWidth=1.3;g.beginPath();g.moveTo(-1,-6);g.lineTo(4,-17);g.stroke();P([2.4,-15.6,5.6,-14,4.2,-12.6],'#c8a070',O,.4);R(.6,-12.8,4.4,1.3,.4,'#6a4424',O);
 R(-5,-8,8,13,2,LG(0,-8,0,5,['#a07040','#6a4424']),O);R(-4.4,-2,6.8,4.6,1.2,LG(0,-2,0,3,['#b88050','#7a5030']),O);E(-1,.2,.9,.9,'#e8c060',O,.3);
 E(-1,-9.4,4.8,2.2,LG(0,-11.6,0,-7.2,['#5a8a5a','#2e5a34']),O,.6);g.strokeStyle='rgba(255,255,255,.25)';g.lineWidth=.4;g.beginPath();g.moveTo(-4,-9.6);g.lineTo(2,-9.6);g.stroke();
 R(-5.6,-1,1.6,4,.6,'#c84a3a',O);g.restore();
-for(const s of[-1,1]){R(s*2.4-1.4,8,2.8,5,1,'#f0c49c',O);R(s*2.4-1.6,11.2,3.2,1.6,.5,'#e8e0d0');R(s*2.4-2.1,12.2,4.4,3,1.2,LG(0,12,0,15,['#9a6234','#4a2e18']),O)}
-P([-5,3.6,5,3.6,5.4,9.4,.6,9.4,0,7.4,-.6,9.4,-5.4,9.4],LG(0,3,0,9.5,['#6a7a9a','#3e4a64']),O,.7);
+if(sit){for(let k=1;k>=0;k--){const sw=Math.sin(t*3.2+k*1.6)*1.8,kx=7.6+k*.8,ky=6.2+k*1.2;g.strokeStyle=O;g.lineWidth=3.6;g.beginPath();g.moveTo(kx,ky);g.lineTo(kx+sw,ky+6);g.stroke();g.strokeStyle='#f0c49c';g.lineWidth=2.6;g.beginPath();g.moveTo(kx,ky);g.lineTo(kx+sw,ky+6);g.stroke();E(kx+sw+.8,ky+7,2.2,1.4,LG(0,ky+5.6,0,ky+8.4,['#9a6234','#4a2e18']),O,.5)}
+P([-5,3.6,5,3.6,9.2,4.6,9.2,8.6,-5.4,8.6],LG(0,3,0,9,['#6a7a9a','#3e4a64']),O,.7)}
+else{for(const s of[-1,1]){R(s*2.4-1.4,8,2.8,5,1,'#f0c49c',O);R(s*2.4-1.6,11.2,3.2,1.6,.5,'#e8e0d0');R(s*2.4-2.1,12.2,4.4,3,1.2,LG(0,12,0,15,['#9a6234','#4a2e18']),O)}
+P([-5,3.6,5,3.6,5.4,9.4,.6,9.4,0,7.4,-.6,9.4,-5.4,9.4],LG(0,3,0,9.5,['#6a7a9a','#3e4a64']),O,.7)}
 P([-5,-9.6+br*.3,5,-9.6+br*.3,5.6,4.4,-5.6,4.4],LG(0,-10,0,4,['#f6eedc','#d8c8a8']),O,.7);
 P([-5.2,-9.4+br*.3,-1.2,-9.4+br*.3,-.6,4.2,-5.8,4.2],LG(0,-10,0,4,['#c89a5a','#8a6232']),O,.6);P([1.2,-9.4+br*.3,5.2,-9.4+br*.3,5.8,4.2,.6,4.2],LG(0,-10,0,4,['#c89a5a','#8a6232']),O,.6);
 R(-4.6,-2.4,2.6,2.6,.3,'#6a8a5a',O);g.strokeStyle='rgba(255,240,200,.7)';g.lineWidth=.3;g.setLineDash([.6,.5]);g.strokeRect(-4.3,-2.1,2,2);g.setLineDash([]);
@@ -22312,7 +22314,15 @@ g.strokeStyle='#ffd860';g.lineWidth=.7;g.beginPath();g.moveTo(-8.4,hb+.6);g.line
 P([-.8,hb-3,1.6,hb-5.4,2.2,hb-3.2],'#ffd860',O,.35);
 g.save();g.translate(-3.4,hb-5);g.rotate(-.8+wd*.08);P([0,0,-3,-3,-9,-4.4+wd2*.6,-6,-1.6,-1,1.2],LG(-9,-4,0,0,['#ff8a6a','#d8302a']),O,.5);g.strokeStyle='rgba(120,20,20,.7)';g.lineWidth=.3;g.beginPath();g.moveTo(-.4,.2);g.lineTo(-8,-3.6+wd2*.5);g.stroke();g.restore()}
 g.restore()}
-function npvW(fn,old){const W=function(x,y,f,t){if(NPV.on){const r0=typeof MPC!=='undefined'?MPC.rich:0;g.save();let ok=0;try{fn(x,y,f,t);ok=1;NPV.n++}catch(e){NPV.err=String(e&&e.stack||e).slice(0,300)}finally{g.restore();if(typeof MPC!=='undefined')MPC.rich=r0}if(ok)return}if(old)return old.apply(this,arguments)};W.npv=1;W.old=old;return W}
+const NPVC={on:1,fps:12,r:0,bb:[-78,78,-128,36]};
+function npvW(fn,old,after,bb){const C={cv:null,k:''};bb=bb||NPVC.bb;const W=function(x,y,f,t){if(NPV.on){const r0=typeof MPC!=='undefined'?MPC.rich:0;g.save();let ok=0;
+try{if(NPVC.on){const m=g.getTransform(),s=Math.max(.5,Math.min(4,Math.hypot(m.a,m.b))),sq=Math.round(s*20)/20,key=f+'|'+sq+'|'+Math.floor(t*NPVC.fps)+'|'+(LOWQ?1:0),[x0,x1,y0,y1]=bb;
+if(C.k!==key){const w=Math.ceil((x1-x0)*sq),h=Math.ceil((y1-y0)*sq);if(!C.cv)C.cv=document.createElement('canvas');const c=C.cv;if(c.width!==w||c.height!==h){c.width=w;c.height=h}const cx=c.getContext('2d');cx.setTransform(1,0,0,1,0,0);cx.globalAlpha=1;cx.globalCompositeOperation='source-over';cx.clearRect(0,0,w,h);cx.setTransform(sq,0,0,sq,-x0*sq,-y0*sq);cx.lineJoin='round';cx.lineCap='round';
+C.k='';const G0=g;g=cx;try{fn(0,0,f,t)}finally{g=G0}C.k=key;NPVC.r++}
+g.drawImage(C.cv,x+x0,y+y0,x1-x0,y1-y0)}
+else fn(x,y,f,t);
+ok=1;NPV.n++}catch(e){NPV.err=String(e&&e.stack||e).slice(0,300);C.k=''}finally{g.restore();if(typeof MPC!=='undefined')MPC.rich=r0}
+if(ok){if(after)try{after(x,y,f,t)}catch(e){}return}}if(old)return old.apply(this,arguments)};W.npv=1;W.old=old;W.cache=C;return W}
 function npvInstall(){try{if(typeof NPC3==='undefined')return false;const ok=k=>NPC3[k]&&NPC3[k].d&&!NPC3[k].d.npv;
 if(ok(27)){const o=NPC3[27].d;NPC3[27].d=npvW((x,y,f,t)=>{if(String(MAPS[27].npc.n).indexOf('ราชินี')===0)o(x,y,f,t);else lirV(x,y,f,t)},o)}
 if(ok(28)){NPC3[28].d=npvW(lirV,NPC3[28].d);NPC3[28].hy=54}
@@ -22396,10 +22406,10 @@ R(-5.8,hy-5.4,12.6,1.4,.5,'#3a2a24');for(const ex of[.8,4.4])E(ex,hy-4.8,2,1.7,L
 g.restore()}
 function npvLbl(n,x,y,c){g.save();g.font='bold 11px system-ui';g.textAlign='center';g.lineWidth=3;g.strokeStyle='rgba(10,10,24,.8)';g.strokeText(n,x,y);g.fillStyle=c;g.fillText(n,x,y);g.restore()}
 function npv2Install(){try{
-if(typeof celD==='function'&&!celD.npv){const o=celD;const w=npvW((x,y,f,t)=>{celV(x,y,f,t);npvLbl('เซเลสต์ · นักดาราศาสตร์หลวง',x,y-58,'#d8e4ff')},(x,y,f,T)=>o(x,y,T,f));celD=function(x,y,T,f){return w(x,y,f,T)};celD.npv=1}
+if(typeof celD==='function'&&!celD.npv){const o=celD;const w=npvW((x,y,f,t)=>celV(x,y,f,t),(x,y,f,T)=>o(x,y,T,f),(x,y)=>npvLbl('เซเลสต์ · นักดาราศาสตร์หลวง',x,y-58,'#d8e4ff'));celD=function(x,y,T,f){return w(x,y,f,T)};celD.npv=1}
 if(typeof PALK!=='undefined'){
-if(PALK.mhed&&!PALK.mhed.npv){const o=PALK.mhed;const W=function(t,T){const N=MAPS[31].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;npvW((x,y,ff,TT)=>{hedV(x,y,ff,TT);npvLbl(N.n,x,y-50,'#ffe0a0')},()=>o.call(PALK,t,T))(N.x,N.y,f,T)};W.npv=1;PALK.mhed=W}
-if(PALK.aves&&!PALK.aves.npv){const o=PALK.aves;const W=function(t,T){const N=MAPS[32].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;npvW((x,y,ff,TT)=>{vesNpcV(x,y,ff,TT);npvLbl(N.n,x,y-92,'#e0d0ff')},()=>o.call(PALK,t,T))(N.x,N.y,f,T)};W.npv=1;PALK.aves=W}}
+if(PALK.mhed&&!PALK.mhed.npv){const o=PALK.mhed;let cur=null;const nw=npvW((x,y,f,t)=>hedV(x,y,f,t),()=>o.call(PALK,cur[0],cur[1]),(x,y)=>npvLbl(MAPS[31].npc2.n,x,y-50,'#ffe0a0'));const W=function(t,T){const N=MAPS[31].npc2;if(!N||N.x<0)return;cur=[t,T];nw(N.x,N.y,me.x<N.x?-1:1,T)};W.npv=1;W.nw=nw;PALK.mhed=W}
+if(PALK.aves&&!PALK.aves.npv){const o=PALK.aves;let cur=null;const nw=npvW((x,y,f,t)=>vesNpcV(x,y,f,t),()=>o.call(PALK,cur[0],cur[1]),(x,y)=>npvLbl(MAPS[32].npc2.n,x,y-92,'#e0d0ff'),[-90,90,-140,36]);const W=function(t,T){const N=MAPS[32].npc2;if(!N||N.x<0)return;cur=[t,T];nw(N.x,N.y,me.x<N.x?-1:1,T)};W.npv=1;W.nw=nw;PALK.aves=W}}
 if(typeof drawFortNpc==='function'&&!drawFortNpc.npv){const o=drawFortNpc;drawFortNpc=function(){if(!NPV.on||curMap!==19)return o.apply(this,arguments);const N=MAPS[19].npc2;if(!N)return o.apply(this,arguments);const ox=N.x,oy=N.y;N.x=-9999;N.y=-9999;try{o.apply(this,arguments)}finally{N.x=ox;N.y=oy}
 if(!inView(N.x,N.y,90))return;const t=performance.now()/1000,f=me.x<N.x?-1:1;let ok=0;g.save();try{optV(N.x,N.y,f,t);ok=1;NPV.n++}catch(e){NPV.err=String(e&&e.stack||e).slice(0,300)}finally{g.restore()}
 if(!ok){if(!npcModel({k:'msm',x:N.x,y:N.y},t,f))campFolk(N.x,N.y,{c:'#3a2e4a',sh:'#c8b0ff',hair:'#d8d8e8',hat:'#5a3a8a',f,s:1.15},t)}
@@ -22410,6 +22420,32 @@ function vesNpcV(x,y,f,T){const fn=BV1['เวสเปอร์ · ผู้พ
 {const iv=setInterval(()=>{if(typeof NPC3!=='undefined'&&NPC3[32]&&NPC3[32].d&&NPC3[32].d.npv&&typeof PALK!=='undefined'&&PALK.aves){clearInterval(iv);npv2Install();
 const edaL2=(x,y,f,t)=>{tilV(x-f*26,y+6,f,t,0,1.02);edaV(x,y,f,t,'lamp');try{if(me.sty&&me.sty.p6h===2)hedV(x+f*36,y-8,f,t)}catch(e){}};
 for(const k of[32,33]){const o=NPC3[k].d.old;NPC3[k].d=npvW(edaL2,o)}}},120);setTimeout(()=>clearInterval(iv),20000)}
+function mekV(x,y,T){const{O,LG,P,E,R,glow}=NPK,t=T,br=Math.sin(t*1.2)*.35,pl=Math.sin(t*5);NPK.sh(x+2,y+16,15);g.save();g.translate(x,y);g.scale(1.3,1.3);g.lineJoin='round';g.lineCap='round';
+const hy=-12+br*.4;
+for(let i=0;i<6;i++){const by=hy+2+i*2.5,bx=-5.6-i*.5+Math.sin(t*1.2+i*.5)*.2;E(bx,by,1.8-i*.1,1.5,LG(0,by-1.5,0,by+1.5,['#ffffff','#c8c4d0']),O,.45)}E(-8.8,hy+16.8,1,1.1,'#8aa8e0',O,.35);
+R(-8,3.4,13,12,1.2,LG(0,3,0,15,['#b88a54','#7a5430']),O);g.strokeStyle='rgba(60,36,18,.6)';g.lineWidth=.5;g.beginPath();g.moveTo(-8,9.4);g.lineTo(5,9.4);g.moveTo(-1.5,3.6);g.lineTo(-1.5,15.2);g.stroke();
+g.fillStyle='rgba(255,240,210,.35)';g.fillRect(-7.4,4,11.8,.8);
+for(let k=1;k>=0;k--){const kx=7+k*.6,ky=6+k*1.2;g.strokeStyle=O;g.lineWidth=3.4;g.beginPath();g.moveTo(kx,ky);g.lineTo(kx+.6,ky+8);g.stroke();g.strokeStyle='#4a3a5e';g.lineWidth=2.4;g.beginPath();g.moveTo(kx,ky);g.lineTo(kx+.6,ky+8);g.stroke();E(kx+1.6,ky+8.8,2.4,1.4,LG(0,ky+7.4,0,ky+10.2,['#7a5a3a','#3a2414']),O,.5)}
+P([-6,-1,4.6,-1,10.4,4.4,10,9,-6.6,8.4],LG(0,-1,0,9,['#6a5ab0','#463a84']),O,.8);g.strokeStyle='#e8d8ff';g.lineWidth=.45;g.beginPath();g.moveTo(-6.4,7.4);g.lineTo(9.8,8);g.stroke();
+P([-5.4,-10+br*.3,4.8,-10+br*.3,5.6,.4,-5.8,.4],LG(0,-10,0,0,['#8a7ac8','#5a4a98']),O,.8);
+{const sy=-10.4+br*.3;P([-6.4,sy,6,sy,6.8,sy+4.4,.2,sy+8.6,-7,sy+4.4],LG(0,sy,0,sy+8.6,['#c8dcff','#8aa8e0']),O,.7);g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=.45;for(const[cx,cy]of[[-3.6,sy+3],[2.4,sy+3.4],[-.6,sy+6]]){g.beginPath();g.arc(cx,cy,1,Math.PI,0);g.arc(cx+1.7,cy,.8,Math.PI,0);g.stroke()}
+g.strokeStyle='#e8d8ff';g.lineWidth=.4;for(let i=0;i<6;i++){const q=i/5,xx=-6.6+q*6.6,yy=sy+4.6+q*4;g.beginPath();g.moveTo(xx,yy);g.lineTo(xx-.2,yy+1.4);g.stroke()}}
+{const hx=4.4,hyy=3.4;g.save();g.translate(hx,hyy);g.scale(.82,.82);g.translate(-hx,-hyy);P([hx-3.4,hyy+3,hx-4.2,hyy-5,hx-2.4,hyy-7.4,hx-1.6,hyy-4.4,hx+2.4,hyy-4.4,hx+3.2,hyy-7.4,hx+5,hyy-5,hx+4.2,hyy+3],LG(0,hyy-7,0,hyy+3,['#ffe9a0','#c8902a']),O,.5);
+g.strokeStyle='rgba(255,255,240,'+(.6+.3*pl)+')';g.lineWidth=.3;for(let k=0;k<4;k++){const sx=hx-1.8+k*1.4;g.beginPath();g.moveTo(sx,hyy-4.2);g.lineTo(sx+Math.sin(t*20+k)*.2*(pl>0?1:0),hyy+2.6);g.stroke()}
+E(hx+.4,hyy+3.2,4.4,1.3,LG(0,hyy+2,0,hyy+4.4,['#ffffff','#c8d8f0']),O,.4);g.restore();
+NP3.arm(-5,-8+br*.3,-6.4,-2,hx-3,hyy-.6,'#6a5aa8','#f0d4bc');NP3.arm(4.8,-8+br*.3,8.4,-3,hx+2+pl*.4,hyy-1.4,'#6a5aa8','#f0d4bc')}
+NP3.face(hy,['#f6dcc6','#e4b89c','#b88a72'],{noEye:1,mouth:false});
+g.strokeStyle='rgba(60,30,20,.85)';g.lineWidth=.55;for(const ex of[2.6,5.2]){g.beginPath();g.arc(ex,hy-.2,.9,.2,Math.PI-.2);g.stroke()}
+const sing=(t%5)<3;g.strokeStyle='rgba(120,50,40,.75)';g.lineWidth=.45;if(sing){g.beginPath();g.ellipse(3.8,hy+2.6,.7,.9,0,0,7);g.stroke()}else{g.beginPath();g.arc(3.8,hy+2,1.1,.3,Math.PI-.3);g.stroke()}
+g.strokeStyle='rgba(120,60,40,.45)';g.lineWidth=.35;g.beginPath();g.moveTo(1,hy+1.2);g.lineTo(1.4,hy+2.2);g.moveTo(6.6,hy+1.2);g.lineTo(6.2,hy+2.2);g.stroke();g.fillStyle='rgba(255,140,140,.3)';g.beginPath();g.arc(6,hy+1.8,.9,0,7);g.fill();
+g.beginPath();g.moveTo(-5.4,hy+3);g.quadraticCurveTo(-6.6,hy-6.6,.6,hy-6.8);g.quadraticCurveTo(6.6,hy-6.6,6.4,hy-2.4);g.quadraticCurveTo(3.6,hy-4.6,.6,hy-4);g.quadraticCurveTo(-3,hy-3.4,-3.4,hy+3);g.closePath();g.fillStyle=LG(0,hy-7,0,hy+3,['#ffffff','#e4e0ea','#b4aec0']);g.fill();g.strokeStyle=O;g.lineWidth=.7;g.stroke();
+g.save();g.translate(-4.4,hy-5.6);g.rotate(-.7+Math.sin(t*1.5)*.06);if(!LOWQ)glow(0,-3,5,'170,210,255',.35);P([0,1,-1.3,-2.6,-.4,-7,1.2,-3,.6,1],LG(0,-7,0,1,['#e8f4ff','#7aa8e8','#3a6ab8']),O,.4);g.strokeStyle='rgba(30,60,120,.6)';g.lineWidth=.3;g.beginPath();g.moveTo(.2,.6);g.lineTo(-.2,-6);g.stroke();g.restore();
+if(!LOWQ&&sing)for(let k=0;k<2;k++){const q=((t*.45)+k*.5)%1;g.globalAlpha=Math.sin(q*Math.PI)*.9;g.fillStyle=k?'#cfe0ff':'#e8d8ff';g.font='bold 5.5px system-ui';g.textAlign='center';g.fillText(k?'♫':'♪',9+q*5+k*3,hy-4-q*12);g.globalAlpha=1}
+g.restore()}
+function mekLbl(x,y){g.save();g.font='bold 10px system-ui';g.textAlign='center';g.lineWidth=3;g.strokeStyle='rgba(10,14,24,.85)';g.strokeText('ยายเมฆา',x,y-40);g.fillStyle='#e8d8ff';g.fillText('ยายเมฆา',x,y-40);g.restore()}
+const escTilOld=(x,y,f,T)=>campFolk(x+2,y+6,{c:'#8a6a3a',sh:'#d84a3a',hair:'#3a2414',f:1,k:9,sit:1,s:1,arm:Math.sin(T*4)*.8-.6},T);let escTilW=null;
+function escTil(x,y,T){if(typeof tilV!=='function'||typeof npvW!=='function')return escTilOld(x-2,y-6,1,T);if(!escTilW)escTilW=npvW((xx,yy,ff,tt)=>tilV(xx,yy,ff,tt,0,.98,1),escTilOld,null,[-40,40,-60,30]);escTilW(x-2,y-6,1,T)}
+{const iv=setInterval(()=>{if(typeof phMekD==='function'&&typeof npvW==='function'){clearInterval(iv);if(!phMekD.npv){const o=phMekD;const w=npvW((x,y,f,T)=>mekV(x,y,T),(x,y,f,T)=>o(x,y,T),(x,y)=>mekLbl(x,y));phMekD=function(x,y,T){return w(x,y,1,T)};phMekD.npv=1}}},120);setTimeout(()=>clearInterval(iv),20000)}
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();

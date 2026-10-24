@@ -43,16 +43,18 @@ function lirV(x,y,f,t){const{O,LG,P,E,R,glow}=NPK,br=Math.sin(t*1.5)*.4,sw=Math.
   g.restore()}
 
 /* ---------- ทิล เด็กจากค่าย: ผมยุ่ง แว่นนักบินคาดหัว ผ้าพันคอแดง เสื้อกั๊กปะ กางเกงขาสั้น เป้ใหญ่+ม้วนนอน+ดาบไม้ · comp = เข็มทิศดาว ---------- */
-function tilV(x,y,f,t,comp,sc){const{O,LG,P,E,R,glow}=NPK,S=sc||1.16,hop=comp?0:Math.pow(Math.max(0,Math.sin(t*2.6)),3)*2.2,br=Math.sin(t*2.2)*.35;NPK.sh(x,y+16,12*S/1.16);g.save();g.translate(x,y-hop*S);g.scale(f*S,S);g.lineJoin='round';g.lineCap='round';
+function tilV(x,y,f,t,comp,sc,sit){const{O,LG,P,E,R,glow}=NPK,S=sc||1.16,hop=comp||sit?0:Math.pow(Math.max(0,Math.sin(t*2.6)),3)*2.2,br=Math.sin(t*2.2)*.35;if(!sit)NPK.sh(x,y+16,12*S/1.16);g.save();g.translate(x,y-hop*S);g.scale(f*S,S);g.lineJoin='round';g.lineCap='round';
   const hy=-15+br*.4;
   /* เป้ใหญ่ + ม้วนนอน + ดาบไม้ */
   g.save();g.translate(-6.4,-4);g.rotate(.08);g.strokeStyle='#8a6a40';g.lineWidth=1.3;g.beginPath();g.moveTo(-1,-6);g.lineTo(4,-17);g.stroke();P([2.4,-15.6,5.6,-14,4.2,-12.6],'#c8a070',O,.4);R(.6,-12.8,4.4,1.3,.4,'#6a4424',O);
     R(-5,-8,8,13,2,LG(0,-8,0,5,['#a07040','#6a4424']),O);R(-4.4,-2,6.8,4.6,1.2,LG(0,-2,0,3,['#b88050','#7a5030']),O);E(-1,.2,.9,.9,'#e8c060',O,.3);
     E(-1,-9.4,4.8,2.2,LG(0,-11.6,0,-7.2,['#5a8a5a','#2e5a34']),O,.6);g.strokeStyle='rgba(255,255,255,.25)';g.lineWidth=.4;g.beginPath();g.moveTo(-4,-9.6);g.lineTo(2,-9.6);g.stroke();
     R(-5.6,-1,1.6,4,.6,'#c84a3a',O);g.restore();
-  /* ขา + รองเท้า */
-  for(const s of[-1,1]){R(s*2.4-1.4,8,2.8,5,1,'#f0c49c',O);R(s*2.4-1.6,11.2,3.2,1.6,.5,'#e8e0d0');R(s*2.4-2.1,12.2,4.4,3,1.2,LG(0,12,0,15,['#9a6234','#4a2e18']),O)}
-  P([-5,3.6,5,3.6,5.4,9.4,.6,9.4,0,7.4,-.6,9.4,-5.4,9.4],LG(0,3,0,9.5,['#6a7a9a','#3e4a64']),O,.7);
+  /* ขา + รองเท้า (นั่ง = ขาห้อยแกว่ง) */
+  if(sit){for(let k=1;k>=0;k--){const sw=Math.sin(t*3.2+k*1.6)*1.8,kx=7.6+k*.8,ky=6.2+k*1.2;g.strokeStyle=O;g.lineWidth=3.6;g.beginPath();g.moveTo(kx,ky);g.lineTo(kx+sw,ky+6);g.stroke();g.strokeStyle='#f0c49c';g.lineWidth=2.6;g.beginPath();g.moveTo(kx,ky);g.lineTo(kx+sw,ky+6);g.stroke();E(kx+sw+.8,ky+7,2.2,1.4,LG(0,ky+5.6,0,ky+8.4,['#9a6234','#4a2e18']),O,.5)}
+    P([-5,3.6,5,3.6,9.2,4.6,9.2,8.6,-5.4,8.6],LG(0,3,0,9,['#6a7a9a','#3e4a64']),O,.7)}
+  else{for(const s of[-1,1]){R(s*2.4-1.4,8,2.8,5,1,'#f0c49c',O);R(s*2.4-1.6,11.2,3.2,1.6,.5,'#e8e0d0');R(s*2.4-2.1,12.2,4.4,3,1.2,LG(0,12,0,15,['#9a6234','#4a2e18']),O)}
+  P([-5,3.6,5,3.6,5.4,9.4,.6,9.4,0,7.4,-.6,9.4,-5.4,9.4],LG(0,3,0,9.5,['#6a7a9a','#3e4a64']),O,.7)}
   /* เสื้อ + เสื้อกั๊กปะ */
   P([-5,-9.6+br*.3,5,-9.6+br*.3,5.6,4.4,-5.6,4.4],LG(0,-10,0,4,['#f6eedc','#d8c8a8']),O,.7);
   P([-5.2,-9.4+br*.3,-1.2,-9.4+br*.3,-.6,4.2,-5.8,4.2],LG(0,-10,0,4,['#c89a5a','#8a6232']),O,.6);P([1.2,-9.4+br*.3,5.2,-9.4+br*.3,5.8,4.2,.6,4.2],LG(0,-10,0,4,['#c89a5a','#8a6232']),O,.6);
@@ -254,7 +256,16 @@ function saraV(x,y,f,t){const{O,LG,P,E,R,glow}=NPK,br=Math.sin(t*1.3)*.4,wd=Math
   g.restore()}
 
 /* ---------- ต่อเข้าเกม ---------- */
-function npvW(fn,old){const W=function(x,y,f,t){if(NPV.on){const r0=typeof MPC!=='undefined'?MPC.rich:0;g.save();let ok=0;try{fn(x,y,f,t);ok=1;NPV.n++}catch(e){NPV.err=String(e&&e.stack||e).slice(0,300)}finally{g.restore();if(typeof MPC!=='undefined')MPC.rich=r0}if(ok)return}if(old)return old.apply(this,arguments)};W.npv=1;W.old=old;return W}
+/* แคชภาพ NPC: วาดลงแคนวาสแยกที่สเกลจริงของจอ 12 ครั้ง/วิ แล้วแปะทุกเฟรม (ลดคำสั่งวาด ~6 เท่า) · after = วาดสดหลังภาพ (ป้ายชื่อ) */
+const NPVC={on:1,fps:12,r:0,bb:[-78,78,-128,36]};
+function npvW(fn,old,after,bb){const C={cv:null,k:''};bb=bb||NPVC.bb;const W=function(x,y,f,t){if(NPV.on){const r0=typeof MPC!=='undefined'?MPC.rich:0;g.save();let ok=0;
+    try{if(NPVC.on){const m=g.getTransform(),s=Math.max(.5,Math.min(4,Math.hypot(m.a,m.b))),sq=Math.round(s*20)/20,key=f+'|'+sq+'|'+Math.floor(t*NPVC.fps)+'|'+(LOWQ?1:0),[x0,x1,y0,y1]=bb;
+        if(C.k!==key){const w=Math.ceil((x1-x0)*sq),h=Math.ceil((y1-y0)*sq);if(!C.cv)C.cv=document.createElement('canvas');const c=C.cv;if(c.width!==w||c.height!==h){c.width=w;c.height=h}const cx=c.getContext('2d');cx.setTransform(1,0,0,1,0,0);cx.globalAlpha=1;cx.globalCompositeOperation='source-over';cx.clearRect(0,0,w,h);cx.setTransform(sq,0,0,sq,-x0*sq,-y0*sq);cx.lineJoin='round';cx.lineCap='round';
+          C.k='';const G0=g;g=cx;try{fn(0,0,f,t)}finally{g=G0}C.k=key;NPVC.r++}
+        g.drawImage(C.cv,x+x0,y+y0,x1-x0,y1-y0)}
+      else fn(x,y,f,t);
+      ok=1;NPV.n++}catch(e){NPV.err=String(e&&e.stack||e).slice(0,300);C.k=''}finally{g.restore();if(typeof MPC!=='undefined')MPC.rich=r0}
+    if(ok){if(after)try{after(x,y,f,t)}catch(e){}return}}if(old)return old.apply(this,arguments)};W.npv=1;W.old=old;W.cache=C;return W}
 function npvInstall(){try{if(typeof NPC3==='undefined')return false;const ok=k=>NPC3[k]&&NPC3[k].d&&!NPC3[k].d.npv;
   if(ok(27)){const o=NPC3[27].d;NPC3[27].d=npvW((x,y,f,t)=>{if(String(MAPS[27].npc.n).indexOf('ราชินี')===0)o(x,y,f,t);else lirV(x,y,f,t)},o)}
   if(ok(28)){NPC3[28].d=npvW(lirV,NPC3[28].d);NPC3[28].hy=54}

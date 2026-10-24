@@ -99,10 +99,10 @@ function optV(x,y,f,t){const{O,LG,P,E,R,glow}=NPK,br=Math.sin(t*1.5)*.4,pu=.5+.5
 /* ---------- ต่อเข้าเกม ---------- */
 function npvLbl(n,x,y,c){g.save();g.font='bold 11px system-ui';g.textAlign='center';g.lineWidth=3;g.strokeStyle='rgba(10,10,24,.8)';g.strokeText(n,x,y);g.fillStyle=c;g.fillText(n,x,y);g.restore()}
 function npv2Install(){try{
-  if(typeof celD==='function'&&!celD.npv){const o=celD;const w=npvW((x,y,f,t)=>{celV(x,y,f,t);npvLbl('เซเลสต์ · นักดาราศาสตร์หลวง',x,y-58,'#d8e4ff')},(x,y,f,T)=>o(x,y,T,f));celD=function(x,y,T,f){return w(x,y,f,T)};celD.npv=1}
+  if(typeof celD==='function'&&!celD.npv){const o=celD;const w=npvW((x,y,f,t)=>celV(x,y,f,t),(x,y,f,T)=>o(x,y,T,f),(x,y)=>npvLbl('เซเลสต์ · นักดาราศาสตร์หลวง',x,y-58,'#d8e4ff'));celD=function(x,y,T,f){return w(x,y,f,T)};celD.npv=1}
   if(typeof PALK!=='undefined'){
-    if(PALK.mhed&&!PALK.mhed.npv){const o=PALK.mhed;const W=function(t,T){const N=MAPS[31].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;npvW((x,y,ff,TT)=>{hedV(x,y,ff,TT);npvLbl(N.n,x,y-50,'#ffe0a0')},()=>o.call(PALK,t,T))(N.x,N.y,f,T)};W.npv=1;PALK.mhed=W}
-    if(PALK.aves&&!PALK.aves.npv){const o=PALK.aves;const W=function(t,T){const N=MAPS[32].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;npvW((x,y,ff,TT)=>{vesNpcV(x,y,ff,TT);npvLbl(N.n,x,y-92,'#e0d0ff')},()=>o.call(PALK,t,T))(N.x,N.y,f,T)};W.npv=1;PALK.aves=W}}
+    if(PALK.mhed&&!PALK.mhed.npv){const o=PALK.mhed;let cur=null;const nw=npvW((x,y,f,t)=>hedV(x,y,f,t),()=>o.call(PALK,cur[0],cur[1]),(x,y)=>npvLbl(MAPS[31].npc2.n,x,y-50,'#ffe0a0'));const W=function(t,T){const N=MAPS[31].npc2;if(!N||N.x<0)return;cur=[t,T];nw(N.x,N.y,me.x<N.x?-1:1,T)};W.npv=1;W.nw=nw;PALK.mhed=W}
+    if(PALK.aves&&!PALK.aves.npv){const o=PALK.aves;let cur=null;const nw=npvW((x,y,f,t)=>vesNpcV(x,y,f,t),()=>o.call(PALK,cur[0],cur[1]),(x,y)=>npvLbl(MAPS[32].npc2.n,x,y-92,'#e0d0ff'),[-90,90,-140,36]);const W=function(t,T){const N=MAPS[32].npc2;if(!N||N.x<0)return;cur=[t,T];nw(N.x,N.y,me.x<N.x?-1:1,T)};W.npv=1;W.nw=nw;PALK.aves=W}}
   if(typeof drawFortNpc==='function'&&!drawFortNpc.npv){const o=drawFortNpc;drawFortNpc=function(){if(!NPV.on||curMap!==19)return o.apply(this,arguments);const N=MAPS[19].npc2;if(!N)return o.apply(this,arguments);const ox=N.x,oy=N.y;N.x=-9999;N.y=-9999;try{o.apply(this,arguments)}finally{N.x=ox;N.y=oy}
       if(!inView(N.x,N.y,90))return;const t=performance.now()/1000,f=me.x<N.x?-1:1;let ok=0;g.save();try{optV(N.x,N.y,f,t);ok=1;NPV.n++}catch(e){NPV.err=String(e&&e.stack||e).slice(0,300)}finally{g.restore()}
       if(!ok){if(!npcModel({k:'msm',x:N.x,y:N.y},t,f))campFolk(N.x,N.y,{c:'#3a2e4a',sh:'#c8b0ff',hair:'#d8d8e8',hat:'#5a3a8a',f,s:1.15},t)}

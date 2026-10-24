@@ -40,11 +40,11 @@ async def main():
                 r=await A.ev(MEAS,[k,1,lq,T,0])
                 if r['err'] or r['nerr'] or r['n']<2000: fails.append([k,lq,T,r])
         rep('ทุกเวลา + โหมดประหยัด วาดได้ครบ',not fails,json.dumps(fails,ensure_ascii=False)[:800])
-        a=await A.ev(MEAS,['eda32',1,1,10.4,0]);h2=await A.ev(MEAS,['eda32h',1,1,10.4,0])
+        a=await A.ev(MEAS,['eda32',1,1,10.4,0]);h2=await A.ev(MEAS,['eda32h',1,1,10.55,0])
         rep('แมพ 32: เลือก «ชวนเดินดูตลาด» → ลอร์ดเฮเดรียนแบบใหม่ยืนข้างยายเอดา',h2['n']>a['n']+1500 and not h2['nerr'],json.dumps([a['n'],h2['n']]))
         fails=[]
         for k in ['cel','hed','ves']:
-            o=await A.ev(MEAS,[k,0,1,10.4,0]);f=await A.ev(MEAS,[k,1,1,10.4,1])
+            o=await A.ev(MEAS,[k,0,1,10.4,0]);f=await A.ev(MEAS,[k,1,1,11.37,1])
             if not f['nerr'] or f['err'] or f['n']<o['n']*.8: fails.append([k,o['n'],f['n'],f['nerr'][:40],f['err']])
         rep('error → กลับไปวาดแบบเดิม (บันทึก NPV.err)',not fails,json.dumps(fails,ensure_ascii=False))
         r=await A.ev("""async()=>{NPV.err='';const M=MAPS[19],N=M.npc2;enterMap(19,{x:N.x,y:N.y+150});await new Promise(r=>setTimeout(r,2500));try{SD.on&&stClose()}catch(e){};ov.hidden=true;
