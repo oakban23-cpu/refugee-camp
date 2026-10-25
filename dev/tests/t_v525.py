@@ -50,9 +50,9 @@ async def main():
         rep('ไอคอนในคอกสัตว์ใช้ภาพใหม่',all(a and b2 for a,b2 in r),json.dumps(r))
         f=await A.ev(DRAW,[1,1,0,0,1,11.3,'mtSaddle']);o=await A.ev(DRAW,[1,0,0,0,1,11.3,''])
         rep('error → วาดพาหนะแบบเดิมเฟรมนั้น',bool(f['merr']) and not f['err'] and dif(f,o)<.03,json.dumps([f['merr'][:60],dif(f,o)]))
-        r=await A.ev("""()=>{const cv=document.createElement('canvas');cv.width=cv.height=300;const G0=g;g=cv.getContext('2d');const run=on=>{MTV.on=on;const t0=performance.now();for(let i=0;i<1800;i++)drawMount(1+i%6,150,150,1,i%2?0:i*.1,i*.01,1.22);return performance.now()-t0};run(1);run(0);let a=0,b2=0;for(let k=0;k<3;k++){a+=run(0);b2+=run(1)}
-          const lq=LOWQ;LOWQ=true;let c2=0;for(let k=0;k<3;k++)c2+=run(1);LOWQ=lq;MTV.on=1;g=G0;return {old:a/5400,nw:b2/5400,lowq:c2/5400}}""")
-        rep('ความเร็ว: วาดพาหนะ 1 ตัว < 0.6 ms (เฉพาะคนที่ขี่อยู่) · โหมดประหยัดไม่หนักกว่า',r['nw']<.6 and r['lowq']<=r['nw']*1.15,json.dumps(r))
+        r=await A.ev("""()=>{const cv=document.createElement('canvas');cv.width=cv.height=300;const G0=g,L0=LOWQ;g=cv.getContext('2d',{willReadFrequently:true});const run=(on,lq)=>{MTV.on=on;LOWQ=lq;const t0=performance.now();for(let i=0;i<600;i++)drawMount(1+i%6,150,150,1,i%2?0:i*.1,i*.01,1.22);g.getImageData(0,0,1,1);return (performance.now()-t0)/600};run(1,0);run(0,0);run(1,1);let a=9,b2=9,c2=9;for(let k=0;k<6;k++){a=Math.min(a,run(0,0));b2=Math.min(b2,run(1,0));c2=Math.min(c2,run(1,1))}
+          LOWQ=L0;MTV.on=1;g=G0;return {old:a,nw:b2,lowq:c2}}""")
+        rep('ความเร็ว (วาดด้วย CPU): วาดพาหนะ 1 ตัว < 0.6 ms (เฉพาะคนที่ขี่อยู่) · โหมดประหยัดไม่หนักกว่า',r['nw']<.6 and r['lowq']<=r['nw']*1.1,json.dumps(r))
         er=[e for e in A.errs if 'ERR_' not in e and 'favicon' not in e]
         rep('ไม่มี error',not er,json.dumps(er[:5],ensure_ascii=False))
         await b.close()
