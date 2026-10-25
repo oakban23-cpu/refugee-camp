@@ -13590,15 +13590,15 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v526';
+const WNV='v527';
 const WNL=[
+  ['🌙','แมพมืด/กลางคืนมองเห็นชัดขึ้น','ตอนกลางคืน (และแมพมืดถาวร เช่น ป่าเห็ด บึงหมอกม่วง ห้วงบัลลังก์เงา) มอน บอส ผู้เล่นอื่น และประตูวาร์ปมีแสงนุ่ม ๆ รอบตัว สีจริงกลับมา ไม่เป็นเงาดำกลืนพื้นอีก · พื้นที่ไกล ๆ ยังมืดบรรยากาศเดิม · มอนจับกลุ่มไม่สว่างจ้า · คนที่ล่องหนและมอนที่ซ่อนตัวไม่ถูกส่อง'],
   ['🐾','สัตว์เลี้ยงวาดใหม่ทั้ง 12 ตัว','หัวโต ตาโตมีประกาย ขาโค้งมนมีอุ้งเท้า มีแสงเงาทุกตัว · ลูกหมา (ผ้าพันคอ หางกระดิก แลบลิ้นตอนวิ่ง) · แมวดำ (ตาเขียวม่านตาเรียว หนวด กระดิ่งทอง ขอบตัวสว่างเห็นชัดในที่มืด) · นกฮูกปราชญ์ (แว่นทอง) · สไลม์ (มีต้นอ่อนบนหัว ฟองอากาศข้างใน) · ภูติไฟ (เปลวไฟ 3 ชั้น มีมือจิ๋ว) · มังกรน้อย (ปีกมีกระดูก หางปลายหัวลูกศร) · ปลาทอง (หางพู่ในฟองน้ำ) · จิ้งจอกเพลิง (หางฟูลุกเป็นไฟ ถุงเท้าดำ) · เต่าน้ำแข็ง (ขาจริง กระดองลายหกเหลี่ยม ผลึกน้ำแข็ง) · ผีน้อย (โคมไฟมีโครง) · เห็ดเรืองแสง (มีแขน สปอร์ลอย) · ฟีนิกซ์ (ปีกขนนกซ้อน หางยาวมีดวงตาขน หงอนไฟ) · ไอคอนในหน้าสัตว์เลี้ยงจัดพอดีกรอบ'],
   ['🐎','พาหนะวาดใหม่ทั้ง 6 ตัว','ม้าศึก (แผงคอ หางพลิ้ว ถุงเท้าขาว บังเหียน) · หมาป่าเงา (ขนหลังตั้ง หางพวง ตาเรืองฟ้า เขี้ยว ควันเงาตอนวิ่ง) · หมูป่าเกราะ (เกราะหลังหมุดย้ำ หน้ากากเหล็ก งา ตาแดง) · เสือขาว (ลายดำ หูชมพู ตาฟ้า หนวด หางลายวง) · กวางวิญญาณ (เขาแตกกิ่งเรือง จุดแสง ออร่า) · อาชาเพลิงนรก (รอยร้าวลาวา แผงคอ/หางไฟ เกราะหน้า กีบไฟ) · ลำตัวมีมิติ ขา 2 ท่อนก้าวตามจังหวะ อานหนัง+ผ้ารอง+โกลน · ไอคอนในคอกสัตว์ใช้ภาพใหม่'],
   ['🦇','ร่างตื่นรู้ + อาชีพขั้น 3 สวยขึ้น','ผ้าคลุมหลังร่างตื่นรู้/สายทมิฬ/ขั้น 3 มีเงาพับผ้า แสงขอบ ซับในชาย (เดิมเป็นแผ่นสีเดียว) · ปีกค้างคาว (นักรบ/ซัพขั้น 3) มีกระดูกปีก เยื่อปีก กรงเล็บ · ปีกขนนกมีไล่สี ขอบ แกนขน · เขา (นักรบตื่นรู้ · เวทสายทมิฬ · เวทขั้น 3) ไล่สีมีปล้อง ปลายเรือง · หมวกอัศวินสายทมิฬ มงกุฎนักรบ/ซัพขั้น 3 และปีกบนหัวนักรบขั้น 3 วาดใหม่ — ครบทุกช่วงของตัวละครผู้เล่นแล้ว'],
   ['🥾','รองเท้าวาดใหม่ + Ancient แดงครบชุด','รองเท้าบนตัวละครเป็นบูตข้อสูงมีหัวรองเท้า พื้น ขอบปาก สนับแข้ง ไล่ 7 ระดับ (Basic เชือกผูก · Elite อัญมณี · Mystic อักขระเรือง · Relic ปีกข้อเท้า · Ancient หนามส้นสีแดงชาด · Cosmic ดาว) · ชุดเซ็ตมีลายของตัวเอง (เกล็ด · แผ่นเกราะ · ปีกขาว · ปีกขนนกมีประกายไฟฟ้า · ควันม่วง · เปลือกไม้+ใบ) · อาวุธในมือ Ancient เป็นแดงชาด-ทองแล้ว (เดิมทองเหมือน Relic) และเรืองตีบวกสีแดง → ใส่ Ancient ครบชุดเป็นแดงทั้งตัว · สีย้อมยังใช้ได้ · โหมดประหยัดวาดแบบย่อให้ลื่นเมื่อคนเยอะ'],
   ['⛑️','หมวกวาดใหม่ทั้งหมด','หมวกทุกแบบมีแสงเงา ขอบ หมุด อัญมณีชัดขึ้น (คงทรงเดิม: หมวกหนัง ผ้าโพก หมวกฟาง · หมวกเหล็ก หมวกกระทะ หมวกหน้ากาก · ขนนก ปีก เขาสัตว์ · มงกุฎหนาม ผ้าคลุมเวท อัศวินมืด · มงกุฎรัศมี ขนนกเพลิง มงกุฎดาว) · Ancient มีแบบของตัวเองแล้ว: มงกุฎเลือด หมวกปีศาจเขาคู่ มงกุฎเปลวถ่าน · Cosmic: มงกุฎผลึกดาว หมวกเนบิวลาหางดาวหาง มงกุฎกาแล็กซีมีดาวโคจร · หมวกชุดเซ็ต: มงกุฎปะการัง หมวกครีบ มงกุฎปีกรุ่งอรุณ · ไอคอนหมวกในกระเป๋าใช้ภาพเดียวกัน'],
-  ['🙂','หน้าตาตัวละครวาดใหม่','ตาใหญ่ขึ้นมีขนตาบน ม่านตาไล่สี ประกายตา 2 จุด · มีปากแล้ว (ปกติยิ้มบาง ๆ · ดีใจยิ้มกว้าง · เจ็บอ้าปาก · เลือดน้อยปากเบ้ · ร่ายเวทปากจู๋) · แก้มชมพูนุ่ม · ฮู้ด (ธนู/นักฆ่า/ซัพ) มีซับในเข้มรอบหน้า ขอบฮู้ด หน้าม้าเป็นปอย · ผมนักรบมีชั้นเงา ปอยข้างหู · ผมนักเวทมีหน้าม้า ปอยข้างยาว · มีหู เงาใต้คาง ข้อมือเสื้อ และรองเท้าตอนไม่ได้ใส่รองเท้า'],
-  ['🛡️','ชุดเกราะบนตัวละครวาดใหม่','เกราะที่ใส่อยู่บนตัวละครเปลี่ยนตามสายอาชีพแล้ว (เดิมทุกสายใส่บ่าเกราะกลมแบบเดียวกัน): นักรบ เกราะหนัก บ่าเกราะซ้อน 3 ชั้น แผงอกมีสัน กระโปรงเกราะ ผ้าห้อยหน้าสีตามระดับ · ธนู/นักฆ่า เกราะเบาลายเกล็ด ปกตั้ง สายคาดไขว้ กระเป๋าคาดเอว · เวท/ซัพ ผ้าคลุมไหล่ขอบหยัก แถบผ้ายาวถึงชาย ชายเสื้อสีตามระดับ เข็มกลัดอัญมณี · 7 ระดับสีเดียวกับไอคอน และ Ancient (แดงชาด) แยกจาก Relic (ทอง) แล้ว · ชุดเซ็ตมีลายประจำชุดบนอก · ผู้เล่นอื่นเห็นแบบเดียวกัน']];
+  ['🙂','หน้าตาตัวละครวาดใหม่','ตาใหญ่ขึ้นมีขนตาบน ม่านตาไล่สี ประกายตา 2 จุด · มีปากแล้ว (ปกติยิ้มบาง ๆ · ดีใจยิ้มกว้าง · เจ็บอ้าปาก · เลือดน้อยปากเบ้ · ร่ายเวทปากจู๋) · แก้มชมพูนุ่ม · ฮู้ด (ธนู/นักฆ่า/ซัพ) มีซับในเข้มรอบหน้า ขอบฮู้ด หน้าม้าเป็นปอย · ผมนักรบมีชั้นเงา ปอยข้างหู · ผมนักเวทมีหน้าม้า ปอยข้างยาว · มีหู เงาใต้คาง ข้อมือเสื้อ และรองเท้าตอนไม่ได้ใส่รองเท้า']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -26587,6 +26587,30 @@ function ptIcon(id){const W=220,c=document.createElement('canvas');c.width=c.hei
   if(!bb)return '';const k=Math.min(56/(bb[2]-bb[0]+1),56/(bb[3]-bb[1]+1),.8),o=document.createElement('canvas');o.width=o.height=64;
   g=o.getContext('2d');try{drawPet(id,32-((bb[0]+bb[2])/2-W/2)*k,32-((bb[1]+bb[3])/2-W*.72)*k,1,.9,0,4*k,1)}finally{g=g0}return o.toDataURL()}
 {const old=petIcon;petIcon=function(id){if(PTV.on&&PETS[id]&&!PTI[id]){PTV.ico=1;try{const n0=PTV.n,u=ptIcon(id);if(u&&PTV.n>n0)return PTI[id]=u}catch(e){PTV.err='icon '+String(e).slice(0,200)}finally{PTV.ico=0}}return old.apply(this,arguments)};PTV.oldIcon=old}
+/* ===== v527 แมพมืดอ่านง่าย — กลางคืน (และแมพมืดถาวร 19–22) ยกแสงคืนนุ่ม ๆ รอบตัวเรา ผู้เล่นอื่น มอน บอส ประตูวาร์ป
+   เดิม: ความมืดทาทับทั้งจอเท่ากัน → มอน/คนอื่นกลืนกับพื้นมืด (แมพ 22 · 35 · 26 · 3 · 11 · 7 ตอนกลางคืนเห็นแต่เงาดำ)
+   ใหม่: หลังทาความมืดแบบเดิม วาดดวงแสง color-dodge (หารคืนความมืด = สีและคอนทราสต์ตัวละครกลับมา ไม่ซีดขาวแบบแสงบวก)
+   ความแรงคำนวณจากความมืดจริงของแมพ/เวลา · แมพย้อมแสงจันทร์ (multiply: 9 · 35 · 36 · 38) ใช้สีชดเชยรายช่องสี
+   ไม่ส่องคนล่องหน/มอนที่ซ่อน · สูงสุด 12 คน 28 มอนในจอ (โหมดประหยัด 6/14) · error → ความมืดแบบเดิม (NLH.on=0 ปิด) ===== */
+const NLH={on:1,err:'',n:0,h:0,sp:{},ns:0};
+function nlSprite(col){let c=NLH.sp[col];if(c)return c;if(++NLH.ns>40){NLH.sp={};NLH.ns=1}
+  c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),gr=x.createRadialGradient(32,32,0,32,32,32);
+  gr.addColorStop(0,'rgba('+col+',1)');gr.addColorStop(.4,'rgba('+col+',.82)');gr.addColorStop(.75,'rgba('+col+',.28)');gr.addColorStop(1,'rgba('+col+',0)');x.fillStyle=gr;x.fillRect(0,0,64,64);return NLH.sp[col]=c}
+/* สีที่ใช้ dodge: มืดแบบทาทับ (alpha a) → เทา a·0.82 · แบบ multiply สี c → (1−c)·0.8 รายช่อง (ปัดเป็นขั้นให้แคชได้)
+   ดวงแสงที่ซ้อนกันใกล้ ๆ (มอนจับกลุ่ม) ข้าม → ไม่ทบจนขาวโพลน · ตัวเราแสงอ่อนกว่า (มีแสงตะเกียงเดิมอยู่แล้ว) */
+function nlCol(mode,fill){if(mode==='m'){const m=/rgb\((\d+),\s*(\d+),\s*(\d+)\)/.exec(fill);if(!m)return '';return [1,2,3].map(i=>Math.round((255-(+m[i]))*.8/4)*4).join(',')}
+  const m=/,\s*([\d.]+)\)\s*$/.exec(fill);if(!m)return '';const a=+m[1];if(!(a>.02))return '';const v=Math.round(Math.min(.55,a*.82)*255/4)*4;return v+','+v+','+v}
+function nlLift(mode,fill){if(!NLH.on)return false;let sv=false;
+  try{const col=nlCol(mode,fill);if(!col)return false;const sp=nlSprite(col),z=ZM.z||1,vx=cam.x,vy=cam.y,vw=W/z,vh=H/z;g.save();sv=true;g.globalCompositeOperation='color-dodge';let n=0;
+    const P=[],L=(wx,wy,r,al)=>{r=Math.min(150,r);if(wx<vx-r||wx>vx+vw+r||wy<vy-r||wy>vy+vh+r)return false;for(const q of P){if(Math.abs(q[0]-wx)<q[2]&&Math.abs(q[1]-wy)<q[2])return false}P.push([wx,wy,r*.55]);g.globalAlpha=al;g.drawImage(sp,wx-r,wy-r,r*2,r*2);n++;return true};
+    if(me.cls&&me.hp>0)L(me.x,me.y-14,64,.55);
+    let p=0;for(const id in others){const o=others[id];if(!o||!(o.hp>0)||o.sl>0||o.stealth>0)continue;if(L(o.x,o.y-14,54,.7)&&++p>=(LOWQ?6:12))break}
+    try{const M0=MAPS[curMap];if(M0&&M0.gates)for(const G0 of M0.gates){if(!gHid(G0))L(G0.x,G0.y-12,72,.6)}}catch(e){}
+    let k=0;for(const m of mons){if(!m||!(m.hp>0)||m.hidden||m.dum)continue;let r=18;try{r=mR(m)||18}catch(e){}
+      if(L(m.x,m.y-r*.7,Math.max(40,r*2.3),r>40?.78:.72)&&++k>=(LOWQ?14:28))break}
+    NLH.n++;NLH.h=n;return true}
+  catch(e){NLH.err=String(e&&e.stack||e).slice(0,300);return false}
+  finally{if(sv)g.restore()}}
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -26995,7 +27019,7 @@ function nightLayer(mul,fill,col){const x=devCanvas(NVL),key=mul+fill+'|'+col+'|
 function worldLight(){if(isDg()||isArena()||curMap===1||(MAPS[curMap]&&MAPS[curMap].tent)){VIG.pend='';return}const S=dnState(),t=performance.now()/1000,vx=cam.x,vy=cam.y,w=wxNow();g.save();
   if(S.tint){g.fillStyle='rgba('+S.tint[0]+','+S.tint[1]+')';g.fillRect(vx,vy,W,H)}
   const dk=Math.min(.56,S.dk*.85+(w?.07:0));
-  if(dk>0){const vp=VIG.pend;VIG.pend='';if(curMap===9||curMap===35||curMap===36||curMap===38){/* นครยามค่ำ: ย้อมแสงจันทร์น้ำเงิน (multiply) คงคอนทราสต์ครีม-กรมท่า */const q=Math.min(1,dk/.42),f=LOWQ?1:1-.12*q,c=[Math.round((255-(255-78)*q)*f),Math.round((255-(255-96)*q)*f),Math.round((255-(255-176)*q)*f)];g.globalCompositeOperation='multiply';if(vp)devBlit(nightLayer('m','rgb('+c+')',vp),0,0,'multiply');else{g.fillStyle='rgb('+c+')';g.fillRect(vx,vy,W,H)}g.globalCompositeOperation='source-over'}else{const fs='rgba(10,14,40,'+(Math.round(dk*100)/100)+')';if(vp)devBlit(nightLayer('s',fs,vp),0,0);else{g.fillStyle=fs;g.fillRect(vx,vy,W,H)}}
+  if(dk>0){const vp=VIG.pend;VIG.pend='';if(curMap===9||curMap===35||curMap===36||curMap===38){/* นครยามค่ำ: ย้อมแสงจันทร์น้ำเงิน (multiply) คงคอนทราสต์ครีม-กรมท่า */const q=Math.min(1,dk/.42),f=LOWQ?1:1-.12*q,c=[Math.round((255-(255-78)*q)*f),Math.round((255-(255-96)*q)*f),Math.round((255-(255-176)*q)*f)];g.globalCompositeOperation='multiply';if(vp)devBlit(nightLayer('m','rgb('+c+')',vp),0,0,'multiply');else{g.fillStyle='rgb('+c+')';g.fillRect(vx,vy,W,H)}g.globalCompositeOperation='source-over';if(typeof nlLift==='function')nlLift('m','rgb('+c+')')}else{const fs='rgba(10,14,40,'+(Math.round(dk*100)/100)+')';if(vp)devBlit(nightLayer('s',fs,vp),0,0);else{g.fillStyle=fs;g.fillRect(vx,vy,W,H)}if(typeof nlLift==='function')nlLift('s',fs);}
     if(S.dk>0){g.globalCompositeOperation='lighter';const k=Math.min(1.3,S.dk/.42),L=(x,y,r,c,a)=>{if(x<vx-r||x>vx+W+r||y<vy-r||y>vy+H+r)return;a=ntBud(x,y,r,a);if(a>.004)glowAt(x,y,r,c,a)};NTB.length=0;
       if(me.cls){L(me.x,me.y-10,200,'255,230,190',.1*k);L(me.x,me.y-12,70,'255,220,170',.06*k)}try{nightFxLights(L,k)}catch(e){}Object.values(others).forEach(o=>{if(o)L(o.x,o.y-10,80,'255,230,190',.06*k)});
       (MAPS[curMap].gates||[]).forEach(G=>L(G.x,G.y-10,90,G.sky?'255,220,140':'140,190,255',.35*k));
