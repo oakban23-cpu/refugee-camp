@@ -20,7 +20,7 @@ async def main():
         b=await pw.chromium.launch()
         A=await new_client(b,'Pa'+str(random.randint(100,999)),'mage',99)
         B=await new_client(b,'Pb'+str(random.randint(100,999)),'melee',99)
-        i0=await A.ev("()=>STY.findIndex(x=>x.p8k)");n7=await A.ev("()=>STY.length-STY.findIndex(x=>x.p8k)")
+        i0=await A.ev("()=>STY.findIndex(x=>x.p8k)");n7=await A.ev("()=>STY.findIndex(x=>x.p8c2)-STY.findIndex(x=>x.p8k)+1")
         rep('ภาค 8 บทที่ 2 ต่อจากบทที่ 1 (7 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p8c1)")+1 and n7==7,[i0,n7])
         for C,e7,pm in ((A,2,2),(B,1,1)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:{e7},p7m:{pm},p8rs:31}};me.wv=[1,9,32,38,2,3];ov.hidden=true;enterMap(1,{{x:1600,y:1600}})}}")
@@ -98,14 +98,15 @@ async def main():
         qn=await A.ev("()=>{const N=MAPS[38].npc2;npcSel=2;me.x=N.x;me.y=N.y+40;stNpcClick();return SD.q.map(l=>l[1]).join('|')}")
         await adv(A);await A.ev("()=>{achCheck()}")
         en=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stN2]")
-        rep('คุยนาวิน (บทพูดตามทางเลือก: เรือดำจุดโคม) → จบบทที่ 2 · ได้ฉายา «ผู้ถือกุญแจท่าเรือ»','จุดโคมแล้ว' in qn and 'ลอยมืดอยู่ข้างนอก' not in qn and en[0]==en[1] and 'จบภาค 8 บทที่ 2' in en[2] and en[3],[en])
+        rep('คุยนาวิน (บทพูดตามทางเลือก: เรือดำจุดโคม) → จบบทที่ 2 · ได้ฉายา «ผู้ถือกุญแจท่าเรือ»','จุดโคมแล้ว' in qn and 'ลอยมืดอยู่ข้างนอก' not in qn and en[0]==await A.ev("()=>STY.findIndex(x=>x.p8s3)") and 'ซารา' in en[2] and en[3],[en])
         await A.ev("()=>{me.x=2700;me.y=1000;PHS.lx=me.x;PHS.ly=me.y;mons=[];PALG.title=null;PALG.card=null}");await A.wait(1300);await A.pg.screenshot(path=SH+'t_end.jpg',quality=78)
         # ===== เรือเหาะ =====
         sh=await A.ev("()=>{wmCd=15;const r=[wmWhy(1),wmWhy(9),wmWhy(32),wmWhy(2)];wmUI(1);const btn=ov.querySelector('[data-wmgo]');const t=btn?btn.textContent:'';const note=!!ov.querySelector('.p8wm');ov.hidden=true;return {r,t,note}}")
         rep('⛵ เรือเหาะ: วาประหว่างท่า (ค่าย/อัสตรา/อารัณยา) ไม่ติดคูลดาวน์ · แมพอื่นยังติด · ปุ่มเขียน «ขึ้นเรือเหาะ»',sh['r'][0]=='' and sh['r'][1]=='' and sh['r'][2]=='' and 'วาปได้อีกครั้ง' in sh['r'][3] and 'เรือเหาะ' in sh['t'] and sh['note'],sh)
         # ===== เล่นซ้ำ =====
+        await A.ev("()=>{const N=MAPS[38].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick()}");await adv(A)
         rp=await A.ev("()=>{const N=MAPS[38].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick();const c=SD.choice?SD.choice.map(c=>c[0]).join('|'):'';stClose();return c}")
-        rep('จบบทแล้วคุยซาราเล่นศึกป้องกันท่าเรือซ้ำได้',('เฝ้าท่าเรือ' in rp),rp)
+        rep('จบบทแล้ว (เริ่มบทที่ 3 กับซาราก่อน) คุยซาราเล่นศึกป้องกันท่าเรือซ้ำได้',('เฝ้าท่าเรือ' in rp),rp)
         E=[e for e in A.errs+B.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม',not E,E[:4])
     finally: p.terminate()
