@@ -22,7 +22,7 @@ async def main():
         await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}");await A.wait(1500)
         r=await A.ev("""()=>{const mk=(sl,r,ss)=>{const it=genItem(60,sl,r,r);if(ss)it.ss=ss;return it};const a4=lkc(mk('a',4)),a5=lkc(mk('a',5)),h5=lkc(mk('h',5)),b5=lkc(mk('b',5)),w5=lkc(mk('w',5)),s5=lkc(mk('a',5,1));
           return {wrap:!!drawArmorLook0.old,a4:a4%20,a5,a5b:lkB(a5),h5:Math.floor(h5/20)<3,b5,w5:Math.floor(w5/20)<3,s5,d4:JSON.stringify(alDec(a4)),d5:JSON.stringify(alDec(a5))}}""")
-        rep('ติดตั้ง: แทน drawArmorLook0 · รหัสชุดเกราะ Ancient = Relic+40 (หมวก/รองเท้า/อาวุธ/ชุดเซ็ต ไม่เปลี่ยน)',r['wrap'] and r['a4']==5 and r['a5'] in(45,55) and r['a5b']==5 and r['h5'] and r['b5']<20 and r['w5'] and r['s5']<20 and '"T":4' in r['d4'] and '"T":5' in r['d5'],json.dumps(r))
+        rep('ติดตั้ง: แทน drawArmorLook0 · รหัสชุดเกราะ Ancient = Relic+40 (ชุดเซ็ตไม่เปลี่ยน)',r['wrap'] and r['a4']==5 and r['a5'] in(45,55) and r['a5b']==5 and r['s5']<20 and '"T":4' in r['d4'] and '"T":5' in r['d5'],json.dumps(r))
         r=await A.ev("""()=>{const bad=[];const exp={};for(let r=0;r<=6;r++){for(const u of[0,8]){const it=genItem(60,'a',r,r);it.u=u;const D=alDec(lkc(it));if(!D||D.T!==r||D.set)bad.push(['r',r,u,D])}}
           for(let s=1;s<=6;s++){const it=genItem(60,'a',6,6);it.ss=s;const D=alDec(lkc(it));if(!D||D.set!==s)bad.push(['s',s,D])}
           const wd=WDR.map(o=>[o.id,o.a,alDec(o.a)]).filter(x=>!x[2]);return {bad,wd}}""")

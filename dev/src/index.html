@@ -13590,15 +13590,15 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v522';
+const WNV='v523';
 const WNL=[
+  ['🥾','รองเท้าวาดใหม่ + Ancient แดงครบชุด','รองเท้าบนตัวละครเป็นบูตข้อสูงมีหัวรองเท้า พื้น ขอบปาก สนับแข้ง ไล่ 7 ระดับ (Basic เชือกผูก · Elite อัญมณี · Mystic อักขระเรือง · Relic ปีกข้อเท้า · Ancient หนามส้นสีแดงชาด · Cosmic ดาว) · ชุดเซ็ตมีลายของตัวเอง (เกล็ด · แผ่นเกราะ · ปีกขาว · ปีกขนนกมีประกายไฟฟ้า · ควันม่วง · เปลือกไม้+ใบ) · อาวุธในมือ Ancient เป็นแดงชาด-ทองแล้ว (เดิมทองเหมือน Relic) และเรืองตีบวกสีแดง → ใส่ Ancient ครบชุดเป็นแดงทั้งตัว · สีย้อมยังใช้ได้ · โหมดประหยัดวาดแบบย่อให้ลื่นเมื่อคนเยอะ'],
   ['⛑️','หมวกวาดใหม่ทั้งหมด','หมวกทุกแบบมีแสงเงา ขอบ หมุด อัญมณีชัดขึ้น (คงทรงเดิม: หมวกหนัง ผ้าโพก หมวกฟาง · หมวกเหล็ก หมวกกระทะ หมวกหน้ากาก · ขนนก ปีก เขาสัตว์ · มงกุฎหนาม ผ้าคลุมเวท อัศวินมืด · มงกุฎรัศมี ขนนกเพลิง มงกุฎดาว) · Ancient มีแบบของตัวเองแล้ว: มงกุฎเลือด หมวกปีศาจเขาคู่ มงกุฎเปลวถ่าน · Cosmic: มงกุฎผลึกดาว หมวกเนบิวลาหางดาวหาง มงกุฎกาแล็กซีมีดาวโคจร · หมวกชุดเซ็ต: มงกุฎปะการัง หมวกครีบ มงกุฎปีกรุ่งอรุณ · ไอคอนหมวกในกระเป๋าใช้ภาพเดียวกัน'],
   ['🙂','หน้าตาตัวละครวาดใหม่','ตาใหญ่ขึ้นมีขนตาบน ม่านตาไล่สี ประกายตา 2 จุด · มีปากแล้ว (ปกติยิ้มบาง ๆ · ดีใจยิ้มกว้าง · เจ็บอ้าปาก · เลือดน้อยปากเบ้ · ร่ายเวทปากจู๋) · แก้มชมพูนุ่ม · ฮู้ด (ธนู/นักฆ่า/ซัพ) มีซับในเข้มรอบหน้า ขอบฮู้ด หน้าม้าเป็นปอย · ผมนักรบมีชั้นเงา ปอยข้างหู · ผมนักเวทมีหน้าม้า ปอยข้างยาว · มีหู เงาใต้คาง ข้อมือเสื้อ และรองเท้าตอนไม่ได้ใส่รองเท้า'],
   ['🛡️','ชุดเกราะบนตัวละครวาดใหม่','เกราะที่ใส่อยู่บนตัวละครเปลี่ยนตามสายอาชีพแล้ว (เดิมทุกสายใส่บ่าเกราะกลมแบบเดียวกัน): นักรบ เกราะหนัก บ่าเกราะซ้อน 3 ชั้น แผงอกมีสัน กระโปรงเกราะ ผ้าห้อยหน้าสีตามระดับ · ธนู/นักฆ่า เกราะเบาลายเกล็ด ปกตั้ง สายคาดไขว้ กระเป๋าคาดเอว · เวท/ซัพ ผ้าคลุมไหล่ขอบหยัก แถบผ้ายาวถึงชาย ชายเสื้อสีตามระดับ เข็มกลัดอัญมณี · 7 ระดับสีเดียวกับไอคอน และ Ancient (แดงชาด) แยกจาก Relic (ทอง) แล้ว · ชุดเซ็ตมีลายประจำชุดบนอก · ผู้เล่นอื่นเห็นแบบเดียวกัน'],
   ['⚔️','ไอคอนอาวุธวาดใหม่','อาวุธในกระเป๋า/ช่องสวมใส่เปลี่ยนเป็นภาพวาดใหญ่ชัด ตรงกับทรงที่ตัวละครถือจริง 3 ทรงต่อสาย: นักรบ ดาบ · ขวาน · ดาบโค้ง — ธนู ธนูยาว · ธนูโค้งกลับ · หน้าไม้ — เวท คทาลูกแก้ว · คทาผลึก · คทาจันทร์เสี้ยว — ซัพ คทาดอกบัว · คทากางเขน · คทาตะเกียง — นักฆ่า มีดคู่ · กรงเล็บ · มีดโค้งคู่ · ไล่ 7 ระดับเหมือนชุดเกราะ (เหล็กสนิม → เหล็กกล้า → เงิน → อักขระม่วงเรือง → ทองปีกการ์ด → แดงชาดฟันเลื่อย → ห้วงดาว) · ชุดเซ็ตมีลายประจำชุด · ตีบวก +7/+10/+15 ขอบเรือง · ช่องอาวุธว่างและการ์ดเลือกตัวละครไม่เป็นอีโมจิ ⚔️ แล้ว'],
   ['🎒','ไอคอนไอเทมวาดใหม่','เกราะ เครื่องประดับ รองเท้า เปลี่ยนจากอีโมจิเป็นภาพวาด ไล่ระดับ 7 ขั้นตามความหายาก (หนัง → เหล็ก → เงินกล้า → ม่วงเวท → ทอง → แดงชาด → ห้วงดาว) · เกราะ 3 แบบตามสายอาชีพ: นักรบเกราะหนัก ธนู/นักฆ่าเกราะเบามีฮู้ด สายเวท/ซัพชุดคลุมยาว · ชุดเซ็ตมีลายประจำชุด (คลื่นห้วงลึก · โล่ผู้พิทักษ์ · ปีกรุ่งอรุณ · วงลมพายุ · ใยเงา · รากพิภพ) · ตีบวก +7 / +10 / +15 ขอบเรืองทอง → ส้ม → แดงชมพู · ของใช้ & วัตถุดิบ 31 ชนิด (แร่ สมุนไพร สีย้อม ขนนก เหรียญ ฯลฯ) วาดใหม่ทั้งหมด · ใช้ทั้งหน้าอุปกรณ์ หน้าเลือกตัวละคร ป้ายของดรอป และปุ่มตีชุดเซ็ต'],
-  ['🪶','ตัวละครในดัน/ฉากวาดใหม่','ยายเมฆา ผู้เล่าเรื่องแห่งนาวาเมฆ (ท่าเรือเมฆ ภาค 8) นั่งบนลังไม้ ผมขาวเปียยาว ปักขนนกฟ้า ผ้าคลุมไหล่ลายเมฆ ดีดพิณเมฆร้องเพลงกล่อม · ทิลนั่งห้อยขาโบกมือบนหลังคาเกวียนในดันคุ้มกันขบวนผู้อพยพ (แบบเดียวกับทิลในแมพ)'],
-  ['🔭','NPC ตามเหตุการณ์ + ช่างหลอมออปชั่น วาดใหม่','เซเลสต์ นักดาราศาสตร์หลวง (ผมเงินยาว แว่นข้างเดียว เสื้อคลุมครามปักกลุ่มดาว ไม้เท้าโคมดาว ดาวลอยวน) · ลอร์ดเฮเดรียน (หมวกทรงสูงคาดทอง โค้ทหางยาวปักทอง สายสะพายสภา ไม้เท้าหัวทอง แว่นข้างเดียว — ยืนข้างยายเอดาด้วยถ้าเลือกชวนเดินดูตลาด) · เวสเปอร์ร่าง NPC ใช้แบบเดียวกับตอนเป็นบอส · ช่างหลอมออปชั่นที่ป้อมใต้เมฆ (แว่นหลอม ผ้ากันเปื้อนหนัง คีมคีบผลึกรูน เบ้าหลอมวงอักขระเรือง)']];
+  ['🪶','ตัวละครในดัน/ฉากวาดใหม่','ยายเมฆา ผู้เล่าเรื่องแห่งนาวาเมฆ (ท่าเรือเมฆ ภาค 8) นั่งบนลังไม้ ผมขาวเปียยาว ปักขนนกฟ้า ผ้าคลุมไหล่ลายเมฆ ดีดพิณเมฆร้องเพลงกล่อม · ทิลนั่งห้อยขาโบกมือบนหลังคาเกวียนในดันคุ้มกันขบวนผู้อพยพ (แบบเดียวกับทิลในแมพ)']];
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function wnCSS(){if($('wncss'))return;const st=document.createElement('style');st.id='wncss';
@@ -25907,10 +25907,11 @@ function alDec(c){c=c|0;if(!c)return null;const X=lkX(c);if(X)return{T:6,set:X==
 /* เส้นทาง: [x,y] หรือ ['q',cx,cy,x,y] · เติมไล่เฉดแนวตั้ง (chSh แคชไว้แล้ว) + เส้นขอบ */
 function alPath(P){g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.closePath()}
 function alF(P,c,y0,y1,st){alPath(P);g.fillStyle=chSh(c,y0,y1);g.fill();if(st!==0){g.lineWidth=st||1;g.strokeStyle=O0;g.stroke()}}
-function alL(P,c,w){g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.strokeStyle=c;g.lineWidth=w;g.stroke()}
+function alL(P,c,w){if(LOWQ&&w<=.8)return;g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.strokeStyle=c;g.lineWidth=w;g.stroke()}
 function alE(cx,cy,rx,ry,c,st){g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,7);g.fillStyle=chSh(c,cy-ry,cy+ry);g.fill();if(st!==0){g.lineWidth=st||1;g.strokeStyle=O0;g.stroke()}}
-let ALH=null;function alBevel(P,x0,x1,y0,y1){if(LOWQ)return;g.save();alPath(P);g.clip();if(!ALH){ALH=g.createLinearGradient(-7,0,7,0);ALH.addColorStop(0,'rgba(255,255,255,.34)');ALH.addColorStop(.32,'rgba(255,255,255,0)');ALH.addColorStop(.62,'rgba(0,0,0,0)');ALH.addColorStop(1,'rgba(0,0,0,.3)')}g.fillStyle=ALH;g.fillRect(x0,y0,x1-x0,y1-y0);g.restore()}
-function alGem(x,y,r,c,gw){if(!c)return;if(gw&&!LOWQ){g.shadowColor=c;g.shadowBlur=7}g.beginPath();g.moveTo(x,y-r);g.lineTo(x+r*.86,y-r*.2);g.lineTo(x+r*.5,y+r);g.lineTo(x-r*.5,y+r);g.lineTo(x-r*.86,y-r*.2);g.closePath();g.fillStyle=c;g.fill();g.shadowBlur=0;g.lineWidth=.7;g.strokeStyle=O0;g.stroke();g.fillStyle='rgba(255,255,255,.85)';g.fillRect(x-r*.45,y-r*.55,r*.4,r*.4)}
+let ALH=null;function alHG(){if(!ALH){ALH=g.createLinearGradient(-7,0,7,0);ALH.addColorStop(0,'rgba(255,255,255,.34)');ALH.addColorStop(.32,'rgba(255,255,255,0)');ALH.addColorStop(.62,'rgba(0,0,0,0)');ALH.addColorStop(1,'rgba(0,0,0,.3)')}return ALH}
+function alBevel(P,x0,x1,y0,y1){if(LOWQ)return;alPath(P);g.fillStyle=alHG();g.fill()}
+function alGem(x,y,r,c,gw){if(!c)return;if(LOWQ){g.fillStyle=c;g.beginPath();g.arc(x,y,r*.85,0,7);g.fill();return}if(gw&&!LOWQ){g.globalAlpha=.35;g.fillStyle=c;g.beginPath();g.arc(x,y,r*2.1,0,7);g.fill();g.globalAlpha=.6;g.beginPath();g.arc(x,y,r*1.45,0,7);g.fill();g.globalAlpha=1}g.beginPath();g.moveTo(x,y-r);g.lineTo(x+r*.86,y-r*.2);g.lineTo(x+r*.5,y+r);g.lineTo(x-r*.5,y+r);g.lineTo(x-r*.86,y-r*.2);g.closePath();g.fillStyle=c;g.fill();g.lineWidth=.7;g.strokeStyle=O0;g.stroke();g.fillStyle='rgba(255,255,255,.85)';g.fillRect(x-r*.45,y-r*.55,r*.4,r*.4)}
 function alStar(x,y,r,c){g.fillStyle=c;g.beginPath();for(let k=0;k<8;k++){const rr=k%2?r*.35:r,a=k*.785-1.571;g.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}g.closePath();g.fill()}
 function alSpike(x,y,dx,dy,w,c){g.beginPath();g.moveTo(x-w,y);g.lineTo(x+dx,y+dy);g.lineTo(x+w,y);g.closePath();g.fillStyle=c;g.fill();g.lineWidth=.7;g.strokeStyle=O0;g.stroke()}
 /* ลวดลายประจำชุดเซ็ตบนอก */
@@ -25952,7 +25953,7 @@ function alHeavy(T,P,y,D,cls){const base=T===0&&!P.set,M=P,tr=T>=4||P.set?P.t:P.
 function alLight(T,P,y,D,cls){const base=T===0&&!P.set,tr=T>=4||P.set?P.t:P.l;
   const pl=[[-6.2,-8.8+y],[-2.2,-8.8+y],[0,-6.4+y],[2.2,-8.8+y],[6.2,-8.8+y],[5.9,3.2+y],[-5.9,3.2+y]];
   alF(pl,base?'#7a5030':P.m,-8.8+y,3.2+y,1);
-  if(!base&&!LOWQ){g.save();alPath(pl);g.clip();g.strokeStyle=chAdj(P.d,-.1);g.globalAlpha=.55;g.lineWidth=.55;for(let r=0;r<5;r++)for(let i=-3;i<=3;i++){g.beginPath();g.arc(i*2.1+(r%2)*1.05,-7.2+r*2.3+y,1.15,0,Math.PI);g.stroke()}g.restore()}
+  if(!base&&!LOWQ){g.strokeStyle=chAdj(P.d,-.1);g.globalAlpha=.55;g.lineWidth=.55;g.beginPath();for(let r=0;r<5;r++)for(let i=-2;i<=2;i++){const cx=i*2.1+(r%2)*1.05,cy=-7.2+r*2.3+y;if(cx>4.6)continue;g.moveTo(cx+1.15,cy);g.arc(cx,cy,1.15,0,Math.PI)}g.stroke();g.globalAlpha=1}
   alBevel(pl,-7,7,-9+y,3.4+y);
   if(base){g.strokeStyle='rgba(255,220,170,.5)';g.lineWidth=.5;g.setLineDash([.8,.8]);g.beginPath();g.moveTo(-5,-7.6+y);g.lineTo(-4.6,2.4+y);g.moveTo(5,-7.6+y);g.lineTo(4.6,2.4+y);g.stroke();g.setLineDash([])}
   /* ปกตั้ง */alF([[-2.6,-9.4+y],[2.6,-9.4+y],[1.6,-7.4+y],[0,-6.4+y],[-1.6,-7.4+y]],base?'#5a3a1e':P.d,-9.4+y,-6.4+y,.8);
@@ -25994,10 +25995,10 @@ function alV(cls,c,br,E,Pg){const D=alDec(c);if(!D)return;D.c=c;const P=D.set?it
    ข้อมือแขนหลัง · รองเท้าพื้นฐานตอนไม่ใส่รองเท้า · ทุกจุด error → แบบเดิม (PCV.on=0 ปิด) ===== */
 const PCV={on:1,err:'',n:0};
 function pcErr(e){PCV.err=String(e&&e.stack||e).slice(0,300)}
-const PCHOOD={archer:1,assn:1,sup:1,merchant:1};
+const PCHOOD={archer:1,assn:1,sup:1,merchant:1},PCHG={};
 function pcP(P){g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.closePath()}
 function pcF(P,c,y0,y1,st){pcP(P);g.fillStyle=chSh(c,y0,y1);g.fill();if(st){g.lineWidth=st;g.strokeStyle=O0;g.stroke()}}
-function pcL(P,c,w){g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.strokeStyle=c;g.lineWidth=w;g.stroke()}
+function pcL(P,c,w){if(LOWQ&&w<=.8)return;g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.strokeStyle=c;g.lineWidth=w;g.stroke()}
 /* ---------- ฮู้ด (หลังหัว) ---------- */
 function pcHood(cls,hy,P){try{if(!PCV.on||!PCHOOD[cls])return false;const sup=cls==='sup',pt=cls==='archer'||cls==='assn';
   const back=[[-9.6,hy+7],['q',-11.4,hy-2,-7.2,hy-8.6],pt?['q',-6,hy-12.6,-1.4,hy-11.2]:['q',-4.6,hy-11.6,1,hy-11.2],['q',8.4,hy-10.6,10.2,hy-3.6],['q',11,hy+3,7.6,hy+8.4],['q',0,hy+10,-9.6,hy+7]];
@@ -26009,7 +26010,7 @@ function pcHood(cls,hy,P){try{if(!PCV.on||!PCHOOD[cls])return false;const sup=cl
 /* ---------- หัว: เงา + หู ---------- */
 function pcNeck(hy){if(!PCV.on||LOWQ)return;try{g.beginPath();g.ellipse(1.2,hy+7.6,4.6,1.7,0,0,7);g.fillStyle='rgba(0,0,0,.24)';g.fill()}catch(e){pcErr(e)}}
 function pcHead(cls,hy,P,HH){if(!PCV.on)return;try{
-  if(!LOWQ){g.save();g.beginPath();g.ellipse(.8,hy,7.6,7.4,0,0,7);g.clip();g.fillStyle='rgba(150,70,50,.13)';g.beginPath();g.ellipse(-4.6,hy+2.4,5,8.4,0,0,7);g.fill();g.fillStyle='rgba(150,70,50,.1)';g.beginPath();g.ellipse(2.4,hy+8,7.4,2.6,0,0,7);g.fill();g.fillStyle='rgba(255,255,255,.14)';g.beginPath();g.ellipse(3.4,hy-3.6,3.6,2.2,-.3,0,7);g.fill();g.restore()}
+  if(!LOWQ){const k=Math.round(hy*10);let G=PCHG[k];if(!G){G=g.createRadialGradient(3.2,hy-3.4,.5,1.4,hy+.6,9.4);G.addColorStop(0,'rgba(255,255,255,.2)');G.addColorStop(.35,'rgba(255,255,255,0)');G.addColorStop(.72,'rgba(150,70,50,0)');G.addColorStop(1,'rgba(150,70,50,.26)');PCHG[k]=G}g.beginPath();g.ellipse(.8,hy,7.6,7.4,0,0,7);g.fillStyle=G;g.fill()}
   if(!PCHOOD[cls]&&cls!=='mage'){g.beginPath();g.ellipse(-5.6,hy+1.6,1.7,2.3,-.15,0,7);g.fillStyle=chSh(P.skin,hy-.7,hy+3.9);g.fill();g.lineWidth=.9;g.strokeStyle=O0;g.stroke();pcL([[-5.2,hy+.4],['q',-6.2,hy+1.6,-5.2,hy+2.8]],'rgba(150,70,50,.55)',.55)}
   }catch(e){pcErr(e)}}
 /* ---------- ผม ---------- */
@@ -26039,11 +26040,11 @@ function pcHairT(cls,hy,hs,t,P){if(!PCV.on)return false;try{
   return false}catch(e){pcErr(e);return false}}
 /* ---------- ตา (ทั้งปกติและตามสีหน้า) ---------- */
 function pcEye1(ex,hy,ec,bl,lx,ly,glow,O){g.fillStyle='#ffffff';g.beginPath();g.ellipse(ex,hy+.15,1.55,2.1*bl,0,0,7);g.fill();
-  if(bl>.5){g.save();g.beginPath();g.ellipse(ex,hy+.15,1.55,2.1,0,0,7);g.clip();if(glow){g.shadowColor=glow;g.shadowBlur=5}
-    g.fillStyle=ec;g.beginPath();g.ellipse(ex+.25+lx,hy+.45+ly,1.22,1.66,0,0,7);g.fill();g.shadowBlur=0;
-    if(!LOWQ){g.fillStyle=chAdj(ec,-.42);g.fillRect(ex-1.6+lx,hy-1.5+ly,3.4,1.5);g.fillStyle=chAdj(ec,.45);g.globalAlpha=.75;g.beginPath();g.ellipse(ex+.3+lx,hy+1.45+ly,.85,.42,0,0,7);g.fill();g.globalAlpha=1}
+  if(bl>.5){lx*=.6;ly*=.6;if(glow&&!LOWQ){g.shadowColor=glow;g.shadowBlur=5}
+    g.fillStyle=ec;g.beginPath();g.ellipse(ex+.22+lx,hy+.45+ly,1.2,1.62,0,0,7);g.fill();g.shadowBlur=0;
+    if(!LOWQ){g.fillStyle=chAdj(ec,-.42);g.beginPath();g.ellipse(ex+.22+lx,hy+.45+ly,1.2,1.62,0,Math.PI,0);g.lineTo(ex+1.42+lx,hy-.15+ly);g.lineTo(ex-.98+lx,hy-.15+ly);g.fill();g.fillStyle=chAdj(ec,.45);g.globalAlpha=.75;g.beginPath();g.ellipse(ex+.3+lx,hy+1.45+ly,.8,.38,0,0,7);g.fill();g.globalAlpha=1}
     g.fillStyle=O;g.beginPath();g.ellipse(ex+.3+lx,hy+.55+ly,.58,.92,0,0,7);g.fill();
-    g.fillStyle='#ffffff';g.beginPath();g.ellipse(ex-.3+lx,hy-.55+ly,.48,.55,0,0,7);g.fill();g.beginPath();g.arc(ex+.75+lx,hy+1.25+ly,.24,0,7);g.fill();g.restore();
+    g.fillStyle='#ffffff';g.beginPath();g.ellipse(ex-.3+lx,hy-.55+ly,.48,.55,0,0,7);g.fill();g.beginPath();g.arc(ex+.75+lx,hy+1.25+ly,.24,0,7);g.fill();
     g.strokeStyle=O;g.lineWidth=1.05;g.beginPath();g.moveTo(ex-1.75,hy-.9);g.quadraticCurveTo(ex-.2,hy-2.35,ex+1.7,hy-1.35);g.stroke();
     g.lineWidth=.5;g.beginPath();g.moveTo(ex+1.55,hy-1.4);g.lineTo(ex+2.15,hy-1.9);g.stroke()}
   else{g.strokeStyle=O;g.lineWidth=.9;g.beginPath();g.moveTo(ex-1.5,hy+.3);g.quadraticCurveTo(ex,hy+1.1,ex+1.5,hy+.3);g.stroke()}}
@@ -26086,22 +26087,22 @@ const hL=pcL;
 function hDome(hy,c,o){o=o||{};const rx=o.rx||8.7,ry=o.ry||7.8,cy=o.cy!=null?o.cy:hy-1.4,y1=o.y1!=null?o.y1:hy+.9;
   const path=()=>{g.beginPath();g.ellipse(.8,cy,rx,ry,0,Math.PI,0);g.lineTo(.8+rx+.6,y1);g.quadraticCurveTo(.8,y1+.9,.8-rx-.6,y1);g.closePath()};
   path();g.fillStyle=chSh(c,cy-ry,y1);g.fill();
-  if(!LOWQ){g.save();path();g.clip();g.fillStyle='rgba(255,255,255,.3)';g.beginPath();g.ellipse(-2.4,cy-ry*.5,rx*.42,ry*.32,-.35,0,7);g.fill();g.fillStyle='rgba(0,0,0,.2)';g.beginPath();g.ellipse(.8+rx*.85,cy+ry*.15,rx*.45,ry*.95,0,0,7);g.fill();g.restore()}
+  if(!LOWQ){path();g.fillStyle=alHG();g.fill();g.fillStyle='rgba(255,255,255,.3)';g.beginPath();g.ellipse(-2,cy-ry*.45,rx*.38,ry*.28,-.35,0,7);g.fill()}
   path();g.lineWidth=1.1;g.strokeStyle=O0;g.stroke()}
 function hBand(c,y0,h){h=h||2.6;hF([[-8.3,y0+.3],['q',.8,y0-.7,9.9,y0+.3],[9.9,y0+h],['q',.8,y0+h-.7,-8.3,y0+h]],c,y0,y0+h,.9);hL([[-7.8,y0+.75],['q',.8,y0-.15,9.4,y0+.75]],'rgba(255,255,255,.45)',.5)}
-function hRiv(L,c){for(const[a,b]of L){g.beginPath();g.arc(a,b,.55,0,7);g.fillStyle=c||'#eef2f6';g.fill();g.lineWidth=.4;g.strokeStyle=O0;g.stroke()}}
-function hHalo(hy,c,t,h){const cy=hy-(h||15)+Math.sin(t*2)*.7;if(!LOWQ){g.shadowColor=c;g.shadowBlur=8}g.strokeStyle=c;g.lineWidth=1.7;g.beginPath();g.ellipse(.8,cy,7,2.1,0,0,7);g.stroke();g.shadowBlur=0;g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=.6;g.beginPath();g.ellipse(.8,cy-.3,6.3,1.6,0,Math.PI*1.1,Math.PI*1.9);g.stroke()}
-function hPlume(x0,y0,c,t,len){const sw=Math.sin(t*3)*1.1;for(let k=0;k<4;k++){const L=len-k*1.7,yy=y0+k*1.3,cc=k%2?chAdj(c,-.18):c;hF([[x0,yy],['q',x0-L*.35,yy-L*.8+sw,x0-L,yy-L*.38+sw*1.4],['q',x0-L*.5,yy-L*.18,x0+1.4,yy+2.2]],cc,yy-L*.8,yy+2.2,k?0.6:1)}hL([[x0-1,y0],['q',x0-len*.3,y0-len*.62+sw,x0-len*.85,y0-len*.36+sw*1.3]],'rgba(255,255,255,.5)',.6)}
-function hWing(sd,x,y,c,t,k){k=k||1;const fl=Math.sin(t*3)*.6;for(let i=2;i>=0;i--){const L=(8.4-i*2)*k;hF([[x,y+i*1.3],['q',x+sd*L*.55,y-L*.95-i+fl,x+sd*L,y-L*.9-i*.7+fl],['q',x+sd*L*.75,y-L*.3+i*.4,x+sd*1.4,y+2.4+i]],i?chAdj(c,-.06*i):c,y-L-1,y+3,.7)}hL([[x+sd*1.4,y],['q',x+sd*4*k,y-5.4*k+fl,x+sd*7.4*k,y-7*k+fl]],'rgba(255,255,255,.7)',.5)}
+function hRiv(L,c){if(LOWQ)return;for(const[a,b]of L){g.beginPath();g.arc(a,b,.55,0,7);g.fillStyle=c||'#eef2f6';g.fill();g.lineWidth=.4;g.strokeStyle=O0;g.stroke()}}
+function hHalo(hy,c,t,h){const cy=hy-(h||15)+Math.sin(t*2)*.7;g.strokeStyle=c;if(!LOWQ){g.globalAlpha=.3;g.lineWidth=4;g.beginPath();g.ellipse(.8,cy,7,2.1,0,0,7);g.stroke();g.globalAlpha=1}g.lineWidth=1.7;g.beginPath();g.ellipse(.8,cy,7,2.1,0,0,7);g.stroke();g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=.6;g.beginPath();g.ellipse(.8,cy-.3,6.3,1.6,0,Math.PI*1.1,Math.PI*1.9);g.stroke()}
+function hPlume(x0,y0,c,t,len){const sw=Math.sin(t*3)*1.1;for(let k=0;k<(LOWQ?2:4);k++){const L=len-k*1.7,yy=y0+k*1.3,cc=k%2?chAdj(c,-.18):c;hF([[x0,yy],['q',x0-L*.35,yy-L*.8+sw,x0-L,yy-L*.38+sw*1.4],['q',x0-L*.5,yy-L*.18,x0+1.4,yy+2.2]],cc,yy-L*.8,yy+2.2,k?0.6:1)}hL([[x0-1,y0],['q',x0-len*.3,y0-len*.62+sw,x0-len*.85,y0-len*.36+sw*1.3]],'rgba(255,255,255,.5)',.6)}
+function hWing(sd,x,y,c,t,k){k=k||1;const fl=Math.sin(t*3)*.6;for(let i=LOWQ?0:2;i>=0;i--){const L=(8.4-i*2)*k;hF([[x,y+i*1.3],['q',x+sd*L*.55,y-L*.95-i+fl,x+sd*L,y-L*.9-i*.7+fl],['q',x+sd*L*.75,y-L*.3+i*.4,x+sd*1.4,y+2.4+i]],i?chAdj(c,-.06*i):c,y-L-1,y+3,.7)}hL([[x+sd*1.4,y],['q',x+sd*4*k,y-5.4*k+fl,x+sd*7.4*k,y-7*k+fl]],'rgba(255,255,255,.7)',.5)}
 function hHorn(sd,x,y,c,len,tip){const P=[[x,y],['q',x+sd*len*.95,y-len*.05,x+sd*len*.78,y-len],['q',x+sd*len*.5,y-len*.42,x-sd*1.8,y-2.6]];hF(P,c,y-len,y,.9);
-  if(tip){g.save();pcP(P);g.clip();g.fillStyle=tip;g.beginPath();g.arc(x+sd*len*.78,y-len,len*.38,0,7);g.fill();g.restore();pcP(P);g.lineWidth=.9;g.strokeStyle=O0;g.stroke()}
+  if(tip){const gr=g.createLinearGradient(x,y,x+sd*len*.78,y-len);gr.addColorStop(0,c);gr.addColorStop(.55,c);gr.addColorStop(1,tip);pcP(P);g.fillStyle=gr;g.fill();g.lineWidth=.9;g.strokeStyle=O0;g.stroke()}
   for(let i=1;i<4;i++){const q=i/4.4;hL([[x+sd*len*.5*q*1.6-sd*.6,y-len*q*.55],[x+sd*len*.5*q*1.6+sd*1.6,y-len*q*.55-1.2]],'rgba(0,0,0,.3)',.5)}}
 function hCrown(y0,c,tipC,o){o=o||{};const H=o.h||1,P=[[-7.4,y0+1],[-8.1,y0-6*H],[-4.6,y0-3.4*H],[-2.2,y0-9*H],[.8,y0-4.4*H],[3.8,y0-9*H],[6.2,y0-3.4*H],[9.7,y0-6*H],[9,y0+1]];
-  hF(P,c,y0-9*H,y0+1,1);if(!LOWQ){g.save();pcP(P);g.clip();g.fillStyle='rgba(255,255,255,.3)';g.fillRect(-8,y0-10*H,6,12);g.fillStyle='rgba(0,0,0,.18)';g.fillRect(5,y0-10*H,6,12);g.restore()}
+  hF(P,c,y0-9*H,y0+1,1);if(!LOWQ){pcP(P);g.fillStyle=alHG();g.fill()}
   hF([[-7.6,y0-1.4],[9.2,y0-1.4],[9.2,y0+1.2],[-7.6,y0+1.2]],chAdj(c.length===7?c:'#c8961e',-.15),y0-1.4,y0+1.2,.8);
   if(tipC)for(const[a,b]of[[-8.1,y0-6*H],[-2.2,y0-9*H],[3.8,y0-9*H],[9.7,y0-6*H]]){g.beginPath();g.arc(a,b,.9,0,7);g.fillStyle=tipC;g.fill();g.lineWidth=.5;g.strokeStyle=O0;g.stroke()}}
-function hStars(hy,t,n,r,c){for(let i=0;i<n;i++){const a=t*1.8+i*6.283/n,sx=.8+Math.cos(a)*(r||11),sy=hy-8+Math.sin(a)*3.4;alStar(sx,sy,1.5,c||'rgba(225,240,255,.95)')}}
-function hEmber(hy,t,n){for(let i=0;i<n;i++){const q=(t*.7+i/n)%1,a=i*2.4;g.fillStyle='rgba(255,'+(120+q*100|0)+',40,'+(.85*(1-q))+')';g.beginPath();g.arc(.8+Math.cos(a)*8,hy-6-q*10,1.1*(1-q)+.4,0,7);g.fill()}}
+function hStars(hy,t,n,r,c){if(LOWQ)n=Math.min(n,1);for(let i=0;i<n;i++){const a=t*1.8+i*6.283/n,sx=.8+Math.cos(a)*(r||11),sy=hy-8+Math.sin(a)*3.4;alStar(sx,sy,1.5,c||'rgba(225,240,255,.95)')}}
+function hEmber(hy,t,n){if(LOWQ)return;for(let i=0;i<n;i++){const q=(t*.7+i/n)%1,a=i*2.4;g.fillStyle='rgba(255,'+(120+q*100|0)+',40,'+(.85*(1-q))+')';g.beginPath();g.arc(.8+Math.cos(a)*8,hy-6-q*10,1.1*(1-q)+.4,0,7);g.fill()}}
 /* ---------- ระดับ 0 Basic ---------- */
 function hm0(hy,s,t){
   if(s===1){/* ผ้าโพกหัวแดง */const w=Math.sin(t*4);hF([[-7.6,hy-4],[-12.4,hy-6.4+w],[-12.6,hy-2.2+w],[-9.6,hy-3]],'#a8322a',hy-6.4,hy-2,.8);hF([[-7.6,hy-3],[-11,hy+1.6+w*.6],[-9.2,hy+2.6+w*.6],[-7,hy-1.6]],'#8a2820',hy-3,hy+2.6,.8);
@@ -26138,10 +26139,10 @@ function hm3(hy,s,t,P){
   if(s===2){/* อัศวินมืด */const dk='#3a3448';hF([[-3,hy-8.2],[-1,hy-14.4],[1.4,hy-8.4]],'#5a5070',hy-14.4,hy-8.2,.8);hF([[-7.8,hy-3],[-12.6,hy-8.4],[-8.4,hy+1]],'#5a5070',hy-8.4,hy+1,.8);
     g.beginPath();g.ellipse(.8,hy-.4,8.9,8.5,0,0,7);g.fillStyle=chSh(dk,hy-8.9,hy+8.1);g.fill();g.lineWidth=1.1;g.strokeStyle=O0;g.stroke();
     if(!LOWQ){g.fillStyle='rgba(255,255,255,.18)';g.beginPath();g.ellipse(-2.6,hy-5,3.6,2.2,-.4,0,7);g.fill()}
-    g.fillStyle='#0c0a10';g.fillRect(1.2,hy-2.6,8.8,2.1);g.fillRect(4.4,hy-2.6,2.2,7.2);if(!LOWQ){g.shadowColor='#c070ff';g.shadowBlur=7}g.fillStyle='#e8b8ff';g.fillRect(2,hy-2.2,2.2,1.2);g.fillRect(7,hy-2.2,2.2,1.2);g.shadowBlur=0;
+    g.fillStyle='#0c0a10';g.fillRect(1.2,hy-2.6,8.8,2.1);g.fillRect(4.4,hy-2.6,2.2,7.2);g.fillStyle='#e8b8ff';g.fillRect(2,hy-2.2,2.2,1.2);g.fillRect(7,hy-2.2,2.2,1.2);g.shadowBlur=0;
     hRiv([[-5.6,hy+1],[-6.6,hy-3],[-3.2,hy-6.4]],'#8a7aa8');return}
   /* หมวกยอดหนาม */for(let i=0;i<5;i++){const x=-5.6+i*3.4,h=5.6-Math.abs(i-2)*1.3;alSpike(x,hy-7.4+Math.abs(i-2)*.9,0,-h,1.2,P.l)}
-  hDome(hy,P.m);hBand(P.d,hy-2,2.6);alGem(5,hy-.7,1.3,'#ffd84a',0);if(!LOWQ){g.shadowColor=P.g;g.shadowBlur=6}hF([[8.8,hy-1.4],[12.2,hy+3.2],[8.2,hy+2]],'#c070ff',hy-1.4,hy+3.2,.7);g.shadowBlur=0}
+  hDome(hy,P.m);hBand(P.d,hy-2,2.6);alGem(5,hy-.7,1.3,'#ffd84a',0);hF([[8.8,hy-1.4],[12.2,hy+3.2],[8.2,hy+2]],'#c070ff',hy-1.4,hy+3.2,.7);g.shadowBlur=0}
 /* ---------- ระดับ 4 Relic (ทอง) ---------- */
 function hm4(hy,s,t,P){
   if(s===1){/* หมวกขนนกเพลิง */for(let i=4;i>=0;i--){const w=Math.sin(t*5+i)*1.3,bx=-.6-i*1.9,L=9-i*.8;const F=[[bx+2.6,hy-7.6+i*.3],['q',bx-1.6,hy-11-L*.5+w,bx-L*.75,hy-11.6-i*.4+w],['q',bx-1.8,hy-9.4+i*.2,bx+.8,hy-5.6+i*.3]];
@@ -26149,34 +26150,34 @@ function hm4(hy,s,t,P){
     hDome(hy,P.m);hBand('#c2352b',hy-2,2.6);hF([[9.4,hy-1.2],[13,hy+.6],[9.2,hy+1.8]],P.l,hy-1.2,hy+1.8,.7);alGem(.8,hy-.7,1.5,P.g,1);hL([[-6,hy-4.4],['q',.8,hy-7.4,7.6,hy-4.4]],P.t,.6);return}
   if(s===2){/* มงกุฎดาว */const y0=hy-4.8;hL([[-7.6,y0+1.4],['q',.8,y0-2,9.6,y0+1.2]],O0,3.4);hL([[-7.6,y0+1.4],['q',.8,y0-2,9.6,y0+1.2]],'#e8b444',2);hL([[-7.2,y0+.9],['q',.8,y0-2.4,9.2,y0+.7]],'#fff2a8',.6);
     for(const sd of[-1,1])hF([[.8+sd*2.2,y0-1],[.8+sd*6.4,y0-4.6],[.8+sd*5,y0-.4]],'#fff2a8',y0-4.6,y0,.6);
-    if(!LOWQ){g.shadowColor='#bfe4ff';g.shadowBlur=8}alStar(.8,y0-2.8,3.2,'#f0f8ff');g.shadowBlur=0;alGem(.8,y0-2.6,1,'#5ad0ff',0);hStars(hy,t,3,11);return}
+    alStar(.8,y0-2.8,3.2,'#f0f8ff');g.shadowBlur=0;alGem(.8,y0-2.6,1,'#5ad0ff',0);hStars(hy,t,3,11);return}
   /* มงกุฎ + รัศมี */hHalo(hy,'#ffe08a',t,15.5);hCrown(hy-3.4,'#f0c040','#5ad0ff');alGem(.8,hy-5.6,1.5,'#ff5a3a',1);g.fillStyle='#ff5a3a';for(const a of[-5,6.6]){g.beginPath();g.arc(a,hy-3.2,.6,0,7);g.fill()}}
 /* ---------- ระดับ 5 Ancient (แดงชาด + ทอง) ---------- */
 function hm5(hy,s,t,P){
   if(s===1){/* หมวกปีศาจเขาคู่ */hHorn(-1,-5,hy-4.6,'#1e0a0e',11,'#e2585c');hDome(hy,P.m);hHorn(1,7,hy-4.8,'#1e0a0e',10,'#e2585c');hBand(P.t,hy-2,2.6);
-    const V=[[2,hy-4.6],[10.4,hy-5],['q',11.4,hy-1,10.6,hy+3],[2.4,hy+3.2]];hF(V,P.d,hy-5,hy+3.2,1);if(!LOWQ){g.shadowColor='#ff3b4a';g.shadowBlur=7}g.fillStyle='#ff6a5a';g.fillRect(3.2,hy-2.4,6.8,1.2);g.shadowBlur=0;
+    const V=[[2,hy-4.6],[10.4,hy-5],['q',11.4,hy-1,10.6,hy+3],[2.4,hy+3.2]];hF(V,P.d,hy-5,hy+3.2,1);g.fillStyle='#ff6a5a';g.fillRect(3.2,hy-2.4,6.8,1.2);g.shadowBlur=0;
     alSpike(.8,hy-8.4,0,-3.4,1.1,P.t);return}
   if(s===2){/* มงกุฎเปลวถ่าน */const y0=hy-4.8;for(const sd of[-1,1]){if(!LOWQ){g.save();g.globalCompositeOperation='lighter'}for(let i=0;i<3;i++){const w=Math.sin(t*5+i+sd)*1;g.fillStyle='rgba(255,'+(80+i*50)+',30,.8)';g.beginPath();g.moveTo(.8+sd*6,y0);g.quadraticCurveTo(.8+sd*(9+i*1.6),y0-5-i*1.6+w,.8+sd*(11+i),y0-8-i+w);g.quadraticCurveTo(.8+sd*(8+i),y0-3,.8+sd*4.6,y0+1);g.fill()}if(!LOWQ)g.restore()}
     hL([[-7.6,y0+1.4],['q',.8,y0-2,9.6,y0+1.2]],O0,3.6);hL([[-7.6,y0+1.4],['q',.8,y0-2,9.6,y0+1.2]],'#a87a1e',2.2);hL([[-7.2,y0+.9],['q',.8,y0-2.4,9.2,y0+.7]],'#ffd27a',.6);
     alGem(.8,y0-1.8,2,P.g,1);hEmber(hy,t,5);return}
   /* มงกุฎเลือด */hEmber(hy,t,3);for(const sd of[-1,1])hHorn(sd,.8+sd*6,hy-4.6,'#2a0a10',4.6,P.l);
   const y0=hy-3.4,C=[[-7.4,y0+1],[-8.4,y0-5],[-6,y0-3],[-4.8,y0-8.4],[-2.4,y0-3.6],[.8,y0-10.6],[4,y0-3.6],[6.4,y0-8.4],[7.6,y0-3],[10,y0-5],[9,y0+1]];hF(C,P.m,y0-10.6,y0+1,1);
-  if(!LOWQ){g.save();pcP(C);g.clip();g.fillStyle='rgba(255,255,255,.22)';g.fillRect(-8,y0-11,6,13);g.restore()}hF([[-7.6,y0-1.4],[9.2,y0-1.4],[9.2,y0+1.2],[-7.6,y0+1.2]],P.t,y0-1.4,y0+1.2,.8);alGem(.8,y0-4.4,1.8,P.g,1)}
+  if(!LOWQ){pcP(C);g.fillStyle=alHG();g.fill()}hF([[-7.6,y0-1.4],[9.2,y0-1.4],[9.2,y0+1.2],[-7.6,y0+1.2]],P.t,y0-1.4,y0+1.2,.8);alGem(.8,y0-4.4,1.8,P.g,1)}
 /* ---------- ระดับ 6 Cosmic (ห้วงดาว) ---------- */
 function hm6(hy,s,t,P){
   if(s===1){/* หมวกเนบิวลา + หางดาวหาง */const sw=Math.sin(t*3)*1.2;if(!LOWQ){g.save();g.globalCompositeOperation='lighter'}for(let k=0;k<3;k++){g.fillStyle=k===0?'rgba(255,140,220,.75)':k===1?'rgba(170,120,255,.6)':'rgba(255,255,255,.7)';g.beginPath();g.moveTo(-1,hy-7.6+k);g.quadraticCurveTo(-7-k*2,hy-15+sw-k,-15+k*2,hy-10+sw*1.4);g.quadraticCurveTo(-7,hy-8.6+k,-1,hy-5.4);g.fill()}if(!LOWQ)g.restore();
-    hDome(hy,P.m);if(!LOWQ){g.save();g.beginPath();g.ellipse(.8,hy-1.4,8.7,7.8,0,Math.PI,0);g.closePath();g.clip();g.fillStyle='#fff';for(const[a,b,r]of[[-3,hy-6,.6],[2,hy-8,.5],[5,hy-4,.7],[-5.6,hy-2.6,.4],[0,hy-3.4,.45]]){g.beginPath();g.arc(a,b,r,0,7);g.fill()}g.restore()}
+    hDome(hy,P.m);if(!LOWQ){g.save();g.fillStyle='#fff';for(const[a,b,r]of[[-3,hy-6,.6],[2,hy-8,.5],[5,hy-4,.7],[-5.6,hy-2.6,.4],[0,hy-3.4,.45]]){g.beginPath();g.arc(a,b,r,0,7);g.fill()}g.restore()}
     hBand(P.l,hy-2,2.4);alStar(.8,hy-.8,1.8,'#ffffff');return}
   if(s===2){/* มงกุฎกาแล็กซี */const y0=hy-4.8;hL([[-7.6,y0+1.4],['q',.8,y0-2,9.6,y0+1.2]],O0,3.4);hL([[-7.6,y0+1.4],['q',.8,y0-2,9.6,y0+1.2]],'#ffd2f0',2);
     g.save();g.translate(.8,hy-9);g.rotate(-.25);g.strokeStyle='rgba(255,180,240,.85)';g.lineWidth=1;g.beginPath();g.ellipse(0,0,11.5,3.2,0,0,7);g.stroke();g.restore();
-    if(!LOWQ){g.shadowColor='#ff7ad9';g.shadowBlur=9}alStar(.8,y0-2.8,3.4,'#fff0fb');g.shadowBlur=0;for(let i=0;i<3;i++){const a=t*1.5+i*2.09,c=Math.cos(.25),sn=Math.sin(-.25),px=Math.cos(a)*11.5,py=Math.sin(a)*3.2;g.beginPath();g.arc(.8+px*c-py*sn,hy-9+px*sn+py*c,1+(i===0?.5:0),0,7);g.fillStyle=['#7ae0ff','#ffd27a','#ff9ad8'][i];g.fill()}return}
+    alStar(.8,y0-2.8,3.4,'#fff0fb');g.shadowBlur=0;for(let i=0;i<3;i++){const a=t*1.5+i*2.09,c=Math.cos(.25),sn=Math.sin(-.25),px=Math.cos(a)*11.5,py=Math.sin(a)*3.2;g.beginPath();g.arc(.8+px*c-py*sn,hy-9+px*sn+py*c,1+(i===0?.5:0),0,7);g.fillStyle=['#7ae0ff','#ffd27a','#ff9ad8'][i];g.fill()}return}
   /* มงกุฎผลึกดาว */hHalo(hy,'#ff9ad8',t,16);const y0=hy-3.4;for(const[x,h,w]of[[-6.4,6,1.5],[-3.2,8.4,1.7],[.8,11,2.1],[4.8,8.4,1.7],[8,6,1.5]])hF([[x-w,y0],[x-w*.8,y0-h*.7],[x,y0-h],[x+w*.8,y0-h*.7],[x+w,y0]],'#c890ff',y0-h,y0,.7);
   if(!LOWQ){g.fillStyle='rgba(255,255,255,.55)';for(const[x,h]of[[-3.2,8.4],[.8,11],[4.8,8.4]]){g.beginPath();g.moveTo(x-.3,y0-h+1);g.lineTo(x-1,y0-h*.6);g.lineTo(x-.3,y0-2);g.closePath();g.fill()}}
   hF([[-7.6,y0-1.2],[9.2,y0-1.2],[9.2,y0+1.2],[-7.6,y0+1.2]],'#ffd2f0',y0-1.2,y0+1.2,.8);alStar(.8,y0,1.6,'#ffffff')}
 /* ---------- ชุดเซ็ต 1–3 ---------- */
 function hmSet(hy,id,t,P){
   if(id===1){/* มงกุฎปะการัง (ราชันห้วงลึก) */hBand('#18887e',hy-4,3);for(const[x,h,sd]of[[-6,6,-1],[-2.6,9,1],[.8,12,-1],[4.2,9,1],[7.6,6,-1]]){hL([[x,hy-4],['q',x+sd*1.4,hy-4-h*.5,x,hy-4-h]],O0,2.4);hL([[x,hy-4],['q',x+sd*1.4,hy-4-h*.5,x,hy-4-h]],'#e88a78',1.3);hL([[x+sd*.6,hy-4-h*.5],[x+sd*2.6,hy-4-h*.75]],'#e88a78',.9);g.beginPath();g.arc(x,hy-4-h,.8,0,7);g.fillStyle='#ffc8b8';g.fill()}
-    if(!LOWQ){g.shadowColor='#8ffff0';g.shadowBlur=8}g.beginPath();g.arc(.8,hy-2.5,1.6,0,7);g.fillStyle='#f4fffd';g.fill();g.shadowBlur=0;g.lineWidth=.6;g.strokeStyle=O0;g.stroke();return}
+    g.beginPath();g.arc(.8,hy-2.5,1.6,0,7);g.fillStyle='#f4fffd';g.fill();g.shadowBlur=0;g.lineWidth=.6;g.strokeStyle=O0;g.stroke();return}
   if(id===2){/* หมวกครีบ (ผู้พิทักษ์ห้วงลึก) */hF([[-4,hy-8],['q',-2,hy-15.4,4.6,hy-15],['q',2.4,hy-12,5.4,hy-8.6]],'#d8e6ff',hy-15.4,hy-8,.9);hDome(hy,P.m);
     g.strokeStyle='rgba(216,230,255,.85)';g.lineWidth=.7;for(let i=-2;i<=2;i++){g.beginPath();g.moveTo(.8,hy-8.6);g.lineTo(.8+i*3.6,hy-.4);g.stroke()}hBand('#c8b080',hy-2,2.4);alGem(.8,hy-.8,1.3,'#cfe4ff',1);return}
   /* มงกุฎปีกรุ่งอรุณ */hHalo(hy,'#ffdc8c',t,14.5);hWing(-1,-6.4,hy-3.6,'#ffffff',t,.95);hWing(1,8,hy-3.6,'#ffffff',t,.95);hCrown(hy-3,'#ffd060','#ffffff',{h:.9});alGem(.8,hy-5.6,1.5,'#ff9a3a',1)}
@@ -26190,6 +26191,42 @@ function itHelmIco(x,T,P,fam,setId){const s=(+String(fam).slice(1)||0)%3,code=se
     drawHelmCode(0,code,1.2)}finally{x.restore();g=g0}}
 /* helmIcon เดิม (การ์ดเลือกตัวละคร ฯลฯ) → ภาพใหม่ */
 {const old=helmIcon;helmIcon=function(it){if(HM.on&&ITI.on&&it)try{const u=itIcoURL(it,'h');if(u)return u}catch(e){HM.err=String(e&&e.stack||e).slice(0,300)}return old.apply(this,arguments)};helmIcon.old=old}
+/* ===== v523 ตัวละครผู้เล่น ช่วง 4: รองเท้าวาดใหม่ 7 ระดับ + ชุดเซ็ต · อาวุธในมือ Ancient สีแดงชาด
+   รองเท้า: ข้อสูงคลุมแข้ง หัวรองเท้า พื้น ขอบปาก สนับแข้ง · Basic เชือกผูก · Elite+ อัญมณี · Mystic อักขระเรือง · Relic+ ปีกข้อเท้า · Ancient หนามส้น · Cosmic ดาว
+   ชุดเซ็ต: ราชันห้วงลึก (เกล็ด) · ผู้พิทักษ์ (แผ่นเกราะ) · รุ่งอรุณ (ปีกขาว) · พายุ (ปีกขนนก+ประกายไฟฟ้า) · เงา (ควันม่วง) · ราก (เปลือกไม้+ใบ)
+   รหัสรองเท้า Ancient = +40 (เหมือนชุดเกราะ) · ถอดด้วย alDec · boots2 ห่อทางชื่อ (สีย้อม dyWrap ห่อชั้นนอก → ยังย้อมได้)
+   อาวุธ Ancient: รหัส = หลัก 6 + (ทรง+1)×20 (เหมือนหมวก) → วาดด้วยทรง/เอฟเฟกต์ Relic แต่สลับชุดสีเป็นแดงชาด-ทอง · error → แบบเดิม ===== */
+const BTV={on:1,err:'',n:0};
+function btBoot(bx,l,T,P,gw,front,set,t){const base=T===0&&!set,c=base?'#7a5030':P.m,tr=T>=4||set?P.t:(base?'#c8a070':P.l),top=8.6-l,w=5.2,toe=front?2:1.2,y1=15-l;
+  if(LOWQ){g.beginPath();g.moveTo(bx,top);g.lineTo(bx+w,top);g.lineTo(bx+w,11.6-l);g.lineTo(bx+w+toe,13-l);g.lineTo(bx+w+toe,y1);g.lineTo(bx-.3,y1);g.closePath();g.fillStyle=c;g.fill();g.lineWidth=.95;g.strokeStyle=O0;g.stroke();g.fillStyle=base?'#c8a070':tr;g.fillRect(bx-.4,top-.6,w+.8,1.8);if(T>=4||set)g.fillRect(bx-2.6,top+.6,2.4,1.2);return}
+  const B=[[bx,top],[bx+w,top],[bx+w-.1,11.4-l],['q',bx+w+toe+.8,11.6-l,bx+w+toe,13.8-l],[bx+w+toe,y1],[bx-.3,y1],[bx-.4,12.6-l]];
+  /* ปีกข้อเท้า / หนาม (หลังขา) */
+  if(T>=4||set===3||set===4){const wc=set===4?'#e8f4ff':set===3?'#ffffff':tr,fl=Math.sin(t*3+bx)*.5;for(let i=2;i>=0;i--){const L=5.6-i*1.1;g.beginPath();g.moveTo(bx+.8,top+1.8+i*1.1);g.quadraticCurveTo(bx-L*.35,top-3+i*.8+fl,bx-L,top-2.4+i*1.5+fl);g.quadraticCurveTo(bx-L*.65,top+2.6+i*1.1,bx+.6,top+4+i*1.1);g.closePath();g.fillStyle=chSh(i?chAdj(wc.length===7?wc:'#ffffff',-.1*i):wc,top-2,top+5);g.fill();g.lineWidth=.55;g.strokeStyle=set===4?'#3a6ab8':O0;g.stroke()}}
+  if(T===5&&!set)for(let k=0;k<2;k++)alSpike(bx+.2,top+1.4+k*2.4,-2.2,-.8,.7,P.t);
+  if(gw&&!LOWQ){g.shadowColor=set?P.g:(P.g||'#ffe8a0');g.shadowBlur=6}
+  pcP(B);g.fillStyle=chSh(c,top,y1);g.fill();g.shadowBlur=0;
+  g.lineWidth=.95;g.strokeStyle=O0;g.stroke();if(!LOWQ){g.lineWidth=1;g.strokeStyle='rgba(255,255,255,.28)';g.beginPath();g.moveTo(bx+.6,top+1.2);g.lineTo(bx+.4,12.6-l);g.stroke()}
+  /* พื้นรองเท้า */g.fillStyle=base?'#3a2414':chAdj(P.d,-.3);g.fillRect(bx-.25,y1-1.1,w+toe+.2,1.1);
+  /* ขอบปาก */g.beginPath();g.roundRect(bx-.5,top-.7,w+1,2,.8);g.fillStyle=chSh(base?'#c8a070':tr,top-.7,top+1.3);g.fill();g.lineWidth=.7;g.strokeStyle=O0;g.stroke();
+  if(base){g.strokeStyle='#e8d0a0';g.lineWidth=.45;for(let k=0;k<2;k++){const yy=top+2.2+k*1.6;g.beginPath();g.moveTo(bx+1.6,yy);g.lineTo(bx+3.6,yy+1);g.moveTo(bx+3.6,yy);g.lineTo(bx+1.6,yy+1);g.stroke()}return}
+  /* สนับแข้ง + หัวรองเท้า */
+  if(set===6){g.strokeStyle='#2a1808';g.lineWidth=.6;for(const xx of[bx+1.2,bx+3])pcL([[xx,top+1.4],['q',xx+.6,top+3.4,xx-.2,11.6-l]],'#2a1808',.6);g.fillStyle='#7ac850';g.beginPath();g.ellipse(bx+w,top+.6,1.4,.7,-.5,0,7);g.fill();return}
+  const sp=[[bx+1,top+1.5],[bx+w-.5,top+1.5],[bx+w-.7,11.2-l],['q',bx+w*.5,12-l,bx+1.1,11.2-l]];pcP(sp);g.fillStyle=set===5?'#2a1a40':chAdj(c,.28);g.fill();g.lineWidth=.55;g.strokeStyle=O0;g.stroke();
+  g.beginPath();g.ellipse(bx+w+toe-.8,y1-1.9,1.5,1,0,0,7);g.fillStyle=set===5?'#2a1a40':chAdj(c,.28);g.fill();
+  if(set===1&&!LOWQ){g.strokeStyle='rgba(10,70,70,.55)';g.lineWidth=.45;for(let r=0;r<2;r++)for(let i=0;i<2;i++){g.beginPath();g.arc(bx+1.9+i*1.6+(r%2)*.8,top+2.6+r*1.5,.75,0,Math.PI);g.stroke()}}
+  if(T>=2||set){const gc=set===5?'#c070ff':P.g;if(gc)alGem(bx+w*.5+.1,top+3,.9,gc,0)}
+  if(T===3&&!set&&!LOWQ){g.strokeStyle='rgba(230,190,255,.85)';g.lineWidth=.45;g.beginPath();g.moveTo(bx+2,top+4.6);g.lineTo(bx+2.8,top+5.6);g.lineTo(bx+2,top+6.4);g.stroke()}
+  if(T>=6&&!set)alStar(bx+w*.5,top+5.4,1,'#ffffff');
+  if(set===4&&Math.sin(t*9+bx*3)>.75){g.strokeStyle='rgba(200,240,255,.95)';g.lineWidth=.7;g.beginPath();g.moveTo(bx+2,top+1);g.lineTo(bx+3.4,top-.4);g.lineTo(bx+2.6,top-.6);g.lineTo(bx+4,top-2.2);g.stroke()}
+  if(set===5&&!LOWQ){g.strokeStyle='rgba(190,120,255,.75)';g.lineWidth=.8;g.beginPath();g.moveTo(bx,y1-1);g.quadraticCurveTo(bx-3,y1-2+Math.sin(t*5+bx)*.8,bx-6,y1-.5+Math.sin(t*4+bx));g.stroke()}}
+function btV(la,ra,c){const D=alDec(c);if(!D)return false;const P=D.set?itSetPal(D.set):ITP[D.T],t=performance.now()/1000;
+  btBoot(-5.9-BSX,la,D.T,P,D.gw,0,D.set,t);btBoot(.8+BSX,ra,D.T,P,D.gw,1,D.set,t);BTV.n++;return true}
+{const old=boots2;boots2=function(la,ra,r,gw,c){if(BTV.on&&c){g.save();try{if(btV(la,ra,c)){g.restore();return}}catch(e){BTV.err=String(e&&e.stack||e).slice(0,300)}g.restore()}return old.apply(this,arguments)};BTV.old=old}
+/* ---------- อาวุธในมือ: Ancient แดงชาด ---------- */
+const WPA={on:1,n:0,P:{m:'#d0384a',e:'#ffd6cc',h:'#2a0a10',gd:'#e8b444',gem:'#ff3b4a',gl:'255,70,60'}};
+function wpLkStyle(c){c=c|0;const A=hmAnc(c);if(A)return A.s;return lkS(c)?1:lkX(c)===2?2:lkX(c)===3?0:Math.floor(c/20)}
+{const old=drawWeapon;drawWeapon=function(cls,c,ay,t,skin,Pg,E,ak){const A=WPA.on&&hmAnc(c);if(!A)return old.apply(this,arguments);
+  const c2=5+(A.gw?10:0)+A.s*20,sv=TPAL[5];TPAL[5]=WPA.P;WPA.n++;try{return old.call(this,cls,c2,ay,t,skin,Pg,E,ak)}finally{TPAL[5]=sv}};WPA.old=old}
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -33274,7 +33311,7 @@ $('tutx').onclick=()=>tutEnd(0);
 
 /* ---------- รูปลักษณ์อุปกรณ์บนตัวละคร ---------- */
 /* โค้ดรูปลักษณ์: 0 ไม่มี · 1-5 Basic→Relic · 6-8 ชุดเซ็ต (Ancient) · 9 Cosmic (ทรง Relic สีชมพู) · +10 = ตีบวก +7 ขึ้นไป (เรืองแสง) */
-const lkX=c=>(c|0)>=100?Math.floor((c|0)/100):0,lkS=c=>lkX(c)===1,lkc=it=>!it?0:it.ss===6?314:it.ss===5?114:it.ss===4?214:(it.ss?(it.ss>=3?8:5+it.ss):it.r>=6?9:Math.min(4,it.r)+1)+((it.u|0)>=7||it.ss>=3?10:0)+(it.sl==='h'&&!it.ss?hStyle(it)*20:0)+(it.sl==='w'&&!it.ss?wStyle(it)*20:0)+(it.sl==='a'&&!it.ss&&it.r===5?40:0)+(it.sl==='h'&&!it.ss&&it.r===5?21:0),lkB=c=>{const b=(c|0)%10;return b>8?5:b},lkG=c=>(c|0)%20>=10,lkT=c=>(c|0)%10;
+const lkX=c=>(c|0)>=100?Math.floor((c|0)/100):0,lkS=c=>lkX(c)===1,lkc=it=>!it?0:it.ss===6?314:it.ss===5?114:it.ss===4?214:(it.ss?(it.ss>=3?8:5+it.ss):it.r>=6?9:Math.min(4,it.r)+1)+((it.u|0)>=7||it.ss>=3?10:0)+(it.sl==='h'&&!it.ss?hStyle(it)*20:0)+(it.sl==='w'&&!it.ss?wStyle(it)*20:0)+(it.sl==='a'&&!it.ss&&it.r===5?40:0)+(it.sl==='h'&&!it.ss&&it.r===5?21:0)+(it.sl==='w'&&!it.ss&&it.r===5?21:0)+(it.sl==='b'&&!it.ss&&it.r===5?40:0),lkB=c=>{const b=(c|0)%10;return b>8?5:b},lkG=c=>(c|0)%20>=10,lkT=c=>(c|0)%10;
 const TPAL={1:{m:'#8a8f96',e:'#c9ced4',h:'#6a4526',gd:'#7a5a3a',gem:null,gl:null},2:{m:'#b8c2cc',e:'#f2f6fa',h:'#3a2a20',gd:'#9aa4ae',gem:'#6fd06a',gl:null},
  3:{m:'#9cc8f0',e:'#f4faff',h:'#24365a',gd:'#5a8ac8',gem:'#4aa8ff',gl:'90,170,255'},4:{m:'#b890f0',e:'#f6ecff',h:'#3a2058',gd:'#8a50d0',gem:'#e070ff',gl:'190,120,255'},
  5:{m:'#ffd86a',e:'#fffbe0',h:'#7a4a10',gd:'#e8a820',gem:'#ff5a3a',gl:'255,200,80'},6:{m:'#2ad0c0',e:'#e0fffb',h:'#0e4a50',gd:'#e07a6a',gem:'#8ffff0',gl:'60,230,210'},
@@ -33297,7 +33334,7 @@ const WNM={melee:['ดาบยาว','ขวานศึก','ดาบโค�
 /* ---------- ออร่าอาวุธตามระดับตีบวก (+10 เรือง · +15 ประกายวิ่ง · +20 เปลว · +25 อนุภาครอบตัว) ---------- */
 let WFX=null;
 function wfxPt(x,y,k){if(WFX[k])return;const p=g.getTransform().transformPoint(new DOMPoint(x,y));WFX[k]=[p.x,p.y]}
-const upCol=c=>{const b=lkB(c);if(lkS(c))return'190,120,255';if(lkX(c)===2)return'130,210,255';if(lkX(c)===3)return'255,180,70';if(lkT(c)===9)return'255,120,220';return b===8?'255,214,120':b>=6?'255,106,200':h2r(RC[Math.max(0,Math.min(4,b-1))])};
+const upCol=c=>{if(hmAnc(c))return'255,70,70';const b=lkB(c);if(lkS(c))return'190,120,255';if(lkX(c)===2)return'130,210,255';if(lkX(c)===3)return'255,180,70';if(lkT(c)===9)return'255,120,220';return b===8?'255,214,120':b>=6?'255,106,200':h2r(RC[Math.max(0,Math.min(4,b-1))])};
 function upStar(x,y,r,col,a){g.globalAlpha=a;g.fillStyle='rgba(255,255,255,1)';g.beginPath();g.moveTo(x,y-r);g.lineTo(x+r*.22,y-r*.22);g.lineTo(x+r,y);g.lineTo(x+r*.22,y+r*.22);g.lineTo(x,y+r);g.lineTo(x-r*.22,y+r*.22);g.lineTo(x-r,y);g.lineTo(x-r*.22,y-r*.22);g.closePath();g.fill();g.globalAlpha=1;glowAt(x,y,r*1.6,col,a*.8)}
 function upAura(F,u,wc,C,s){if(!F||u<10||!F.b)return;const t=performance.now()/1000,col=upCol(wc),B=F.b,T=F.t||[B[0],B[1]-s*14],L=(q)=>[B[0]+(T[0]-B[0])*q,B[1]+(T[1]-B[1])*q],lo=LOWQ;
   g.save();g.setTransform(1,0,0,1,0,0);g.globalCompositeOperation='lighter';
@@ -33605,7 +33642,7 @@ function drawChar(x,y,cls,fx,ph,hd,T,bt,wl,al,c2,ak){let b2=c2===2&&!!CHR3[cls];
   g.fillStyle=chSh(P.leg,5-ra,14-ra);g.beginPath();g.roundRect(1+lsx,5-ra,4.5,9,1.5);g.fill();g.stroke();}
   /* แขนหลังแกว่งตามจังหวะเดิน */
   if(cls!=='assn'&&!R24B()){const bx=-6.5-(ph?sw*2.2:Math.sin(t*2.2)*.4),by=-1+br*.3;g.save();g.translate(-5.5,-7+br*.3);g.rotate(ph?-sw*.42+.05*(1-A):.05);Pg([-2,0,2,0,1.6,7,-1.6,7],P.bodyL,1);pcCuff(P);g.restore();E(bx+.6,by+1,2.1,2.1,P.skin,1)}
-  if(!bt&&!CHSIT)pcShoes(la,ra);if(bt&&!CHSIT)boots2(la,ra,lkX(bt)?8+lkX(bt):lkT(bt)===9?8:lkB(bt)-1,lkG(bt));
+  if(!bt&&!CHSIT)pcShoes(la,ra);if(bt&&!CHSIT)boots2(la,ra,lkX(bt)?8+lkX(bt):lkT(bt)===9?8:lkB(bt)-1,lkG(bt),bt);
   /* ลำตัว */
   const robe=cls==='sup'||cls==='mage';
   if(robe)Pg([-6,-9+br*.3,6,-9+br*.3,9,10,-9,10],P.body,1);

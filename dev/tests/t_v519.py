@@ -19,7 +19,7 @@ async def main():
         rep('ติดตั้ง: ช่องอาวุธใช้ไอคอนวาดใหม่ (ไม่ใช่ภาพย่อจากอาวุธในมือแบบเดิม)',r[0]=='function' and r[1]=='function' and all(r[2:]),json.dumps(r))
         r=await A.ev("""async()=>{const PX="""+PX+""";const o={dup:[],thin:[],n:0,min:1e9};const seen={};for(const cls of['melee','archer','mage','sup','assn'])for(let s=0;s<3;s++)for(let t=0;t<7;t++){const u=itEquipURL('w',t,cls+':'+s,0,0,0);o.n++;if(seen[u])o.dup.push([cls,s,t,seen[u]]);seen[u]=[cls,s,t];const n=await PX(u);o.min=Math.min(o.min,n);if(n<900)o.thin.push([cls,s,t,n])}return o}""")
         rep('5 สาย × 3 ทรง × 7 ระดับ = 105 แบบ ไม่ซ้ำกัน ไม่โหว่',r['n']==105 and not r['dup'] and not r['thin'],json.dumps(r))
-        r=await A.ev("""()=>{const bad=[];let n=0;const sty=c=>lkS(c)?1:lkX(c)===2?2:lkX(c)===3?0:Math.floor((c|0)/20);
+        r=await A.ev("""()=>{const bad=[];let n=0;const sty=c=>wpLkStyle(c);
           for(let i=0;i<120;i++){const it=genItem(10+i%60,'w',i%7,i%7);if(i%9===0)it.u=8;n++;const a=wpStyle(it),bb=sty(lkc(it));if(a!==bb)bad.push([i,a,bb])}
           for(let s=1;s<=6;s++){const it=genItem(60,'w',6,6);it.ss=s;n++;const a=wpStyle(it),bb=sty(lkc(it));if(a!==bb)bad.push(['set'+s,a,bb])}
           const cnt=[0,0,0];for(let i=0;i<120;i++)cnt[wpStyle(genItem(30,'w',2,2))]++;return {n,bad,cnt}}""")

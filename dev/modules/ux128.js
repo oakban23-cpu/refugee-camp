@@ -9,10 +9,11 @@ function alDec(c){c=c|0;if(!c)return null;const X=lkX(c);if(X)return{T:6,set:X==
 /* เส้นทาง: [x,y] หรือ ['q',cx,cy,x,y] · เติมไล่เฉดแนวตั้ง (chSh แคชไว้แล้ว) + เส้นขอบ */
 function alPath(P){g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.closePath()}
 function alF(P,c,y0,y1,st){alPath(P);g.fillStyle=chSh(c,y0,y1);g.fill();if(st!==0){g.lineWidth=st||1;g.strokeStyle=O0;g.stroke()}}
-function alL(P,c,w){g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.strokeStyle=c;g.lineWidth=w;g.stroke()}
+function alL(P,c,w){if(LOWQ&&w<=.8)return;g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<P.length;i++){const p=P[i];if(p[0]==='q')g.quadraticCurveTo(p[1],p[2],p[3],p[4]);else g.lineTo(p[0],p[1])}g.strokeStyle=c;g.lineWidth=w;g.stroke()}
 function alE(cx,cy,rx,ry,c,st){g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,7);g.fillStyle=chSh(c,cy-ry,cy+ry);g.fill();if(st!==0){g.lineWidth=st||1;g.strokeStyle=O0;g.stroke()}}
-let ALH=null;function alBevel(P,x0,x1,y0,y1){if(LOWQ)return;g.save();alPath(P);g.clip();if(!ALH){ALH=g.createLinearGradient(-7,0,7,0);ALH.addColorStop(0,'rgba(255,255,255,.34)');ALH.addColorStop(.32,'rgba(255,255,255,0)');ALH.addColorStop(.62,'rgba(0,0,0,0)');ALH.addColorStop(1,'rgba(0,0,0,.3)')}g.fillStyle=ALH;g.fillRect(x0,y0,x1-x0,y1-y0);g.restore()}
-function alGem(x,y,r,c,gw){if(!c)return;if(gw&&!LOWQ){g.shadowColor=c;g.shadowBlur=7}g.beginPath();g.moveTo(x,y-r);g.lineTo(x+r*.86,y-r*.2);g.lineTo(x+r*.5,y+r);g.lineTo(x-r*.5,y+r);g.lineTo(x-r*.86,y-r*.2);g.closePath();g.fillStyle=c;g.fill();g.shadowBlur=0;g.lineWidth=.7;g.strokeStyle=O0;g.stroke();g.fillStyle='rgba(255,255,255,.85)';g.fillRect(x-r*.45,y-r*.55,r*.4,r*.4)}
+let ALH=null;function alHG(){if(!ALH){ALH=g.createLinearGradient(-7,0,7,0);ALH.addColorStop(0,'rgba(255,255,255,.34)');ALH.addColorStop(.32,'rgba(255,255,255,0)');ALH.addColorStop(.62,'rgba(0,0,0,0)');ALH.addColorStop(1,'rgba(0,0,0,.3)')}return ALH}
+function alBevel(P,x0,x1,y0,y1){if(LOWQ)return;alPath(P);g.fillStyle=alHG();g.fill()}
+function alGem(x,y,r,c,gw){if(!c)return;if(LOWQ){g.fillStyle=c;g.beginPath();g.arc(x,y,r*.85,0,7);g.fill();return}if(gw&&!LOWQ){g.globalAlpha=.35;g.fillStyle=c;g.beginPath();g.arc(x,y,r*2.1,0,7);g.fill();g.globalAlpha=.6;g.beginPath();g.arc(x,y,r*1.45,0,7);g.fill();g.globalAlpha=1}g.beginPath();g.moveTo(x,y-r);g.lineTo(x+r*.86,y-r*.2);g.lineTo(x+r*.5,y+r);g.lineTo(x-r*.5,y+r);g.lineTo(x-r*.86,y-r*.2);g.closePath();g.fillStyle=c;g.fill();g.lineWidth=.7;g.strokeStyle=O0;g.stroke();g.fillStyle='rgba(255,255,255,.85)';g.fillRect(x-r*.45,y-r*.55,r*.4,r*.4)}
 function alStar(x,y,r,c){g.fillStyle=c;g.beginPath();for(let k=0;k<8;k++){const rr=k%2?r*.35:r,a=k*.785-1.571;g.lineTo(x+Math.cos(a)*rr,y+Math.sin(a)*rr)}g.closePath();g.fill()}
 function alSpike(x,y,dx,dy,w,c){g.beginPath();g.moveTo(x-w,y);g.lineTo(x+dx,y+dy);g.lineTo(x+w,y);g.closePath();g.fillStyle=c;g.fill();g.lineWidth=.7;g.strokeStyle=O0;g.stroke()}
 /* ลวดลายประจำชุดเซ็ตบนอก */
@@ -54,7 +55,7 @@ function alHeavy(T,P,y,D,cls){const base=T===0&&!P.set,M=P,tr=T>=4||P.set?P.t:P.
 function alLight(T,P,y,D,cls){const base=T===0&&!P.set,tr=T>=4||P.set?P.t:P.l;
   const pl=[[-6.2,-8.8+y],[-2.2,-8.8+y],[0,-6.4+y],[2.2,-8.8+y],[6.2,-8.8+y],[5.9,3.2+y],[-5.9,3.2+y]];
   alF(pl,base?'#7a5030':P.m,-8.8+y,3.2+y,1);
-  if(!base&&!LOWQ){g.save();alPath(pl);g.clip();g.strokeStyle=chAdj(P.d,-.1);g.globalAlpha=.55;g.lineWidth=.55;for(let r=0;r<5;r++)for(let i=-3;i<=3;i++){g.beginPath();g.arc(i*2.1+(r%2)*1.05,-7.2+r*2.3+y,1.15,0,Math.PI);g.stroke()}g.restore()}
+  if(!base&&!LOWQ){g.strokeStyle=chAdj(P.d,-.1);g.globalAlpha=.55;g.lineWidth=.55;g.beginPath();for(let r=0;r<5;r++)for(let i=-2;i<=2;i++){const cx=i*2.1+(r%2)*1.05,cy=-7.2+r*2.3+y;if(cx>4.6)continue;g.moveTo(cx+1.15,cy);g.arc(cx,cy,1.15,0,Math.PI)}g.stroke();g.globalAlpha=1}
   alBevel(pl,-7,7,-9+y,3.4+y);
   if(base){g.strokeStyle='rgba(255,220,170,.5)';g.lineWidth=.5;g.setLineDash([.8,.8]);g.beginPath();g.moveTo(-5,-7.6+y);g.lineTo(-4.6,2.4+y);g.moveTo(5,-7.6+y);g.lineTo(4.6,2.4+y);g.stroke();g.setLineDash([])}
   /* ปกตั้ง */alF([[-2.6,-9.4+y],[2.6,-9.4+y],[1.6,-7.4+y],[0,-6.4+y],[-1.6,-7.4+y]],base?'#5a3a1e':P.d,-9.4+y,-6.4+y,.8);
