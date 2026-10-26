@@ -46,7 +46,7 @@ function vzTitle(){const T=$('ttl');if(!T||VZT.on)return;const F=T.querySelector
     try{if(BG){const tf=getComputedStyle(BG).transform;cv.style.transform=tf==='none'?'':tf;cv.style.transformOrigin='50% 60%'}}catch(e){}
     ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
     /* แปลงตำแหน่งในภาพปก (0–1) → จุดบนจอ ตาม background-size:cover · center */
-    const sc=Math.max(w/720,h/1280),iw=720*sc,ih=1280*sc,ox=(w-iw)/2,oy=(h-ih)/2,P=(fx,fy)=>[ox+fx*iw,oy+fy*ih],S=v=>v*sc;
+    const WI=typeof cwWide==='function'&&cwWide(),IW=WI?1536:720,IH=WI?1024:1280,sc=Math.max(w/IW,h/IH),iw=IW*sc,ih=IH*sc,ox=(w-iw)*(WI?CWP[0]:.5),oy=(h-ih)*(WI?CWP[1]:.5),P=WI?(fx,fy)=>[ox+(fx-.22)*iw,oy+fy*ih]:(fx,fy)=>[ox+fx*iw,oy+fy*ih],S=v=>v*sc;
     const glow=(x,y,r,c,a)=>{const gr=ctx.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,'rgba('+c+','+a+')');gr.addColorStop(1,'rgba('+c+',0)');ctx.fillStyle=gr;ctx.fillRect(x-r,y-r,r*2,r*2)};
     ctx.globalCompositeOperation='lighter';
     /* ดาวระยิบ */
@@ -54,7 +54,8 @@ function vzTitle(){const T=$('ttl');if(!T||VZT.on)return;const F=T.querySelector
     /* ดาวตก */
     if(!VZT.ss&&Math.random()<dt/5)VZT.ss={x:.35+Math.random()*.4,y:.02+Math.random()*.08,t:0};if(VZT.ss){const q=VZT.ss;q.t+=dt/1.1;if(q.t>1)VZT.ss=null;else{const [x0,y0]=VZT.img?P(q.x,q.y):[q.x*w,q.y*h],x=x0-q.t*S(220),y=y0+q.t*S(110),a=Math.sin(q.t*Math.PI);
       const gr=ctx.createLinearGradient(x,y,x+S(70),y-S(35));gr.addColorStop(0,'rgba(255,255,240,'+a+')');gr.addColorStop(1,'rgba(255,220,160,0)');ctx.strokeStyle=gr;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+S(70),y-S(35));ctx.stroke()}}
-    if(VZT.img){
+    if(WI){try{cwFx(ctx,(fx,fy)=>[ox+fx*iw,oy+fy*ih],S,t,dt,glow)}catch(e){CWV.err=String(e&&e.stack||e).slice(0,300)}}
+    else if(VZT.img){
       /* ประตูมิติ */
       {const [x,y]=P(.9,.045);glow(x,y,S(70),'170,90,255',.28+.12*Math.sin(t*1.3));ctx.save();ctx.translate(x,y);ctx.scale(1,.35);ctx.rotate(t*.8);ctx.strokeStyle='rgba(220,170,255,.45)';ctx.lineWidth=S(3);for(let k=0;k<3;k++){ctx.beginPath();ctx.arc(0,0,S(28+k*14),k,k+2.2);ctx.stroke()}ctx.restore()}
       /* กองไฟกลางค่าย + ประกายไฟ */
