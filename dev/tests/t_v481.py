@@ -51,7 +51,7 @@ async def main():
         # ---- หน้าต่าง ----
         await pg.evaluate("()=>{tb.click()}");await pg.wait_for_timeout(500)
         c=await pg.evaluate(Q,['#ov','#ovx','#ov>.pn'])
-        rep('จอเตี้ย: หน้าต่างกว้าง 720 อยู่กลางจอ · ปุ่ม ✕ อยู่ในหน้าต่าง', c['#ov'] and 690<=c['#ov'][2]-c['#ov'][0]<=730 and abs((c['#ov'][0]+c['#ov'][2])/2-c['vw']/2)<=2 and c['#ovx'][2]<=c['#ov'][2] and c['#ovx'][1]>=0, c)
+        rep('จอเตี้ย: หน้าต่างกว้าง ≥ 720 (v531 หน้าต่างยาวขยายเต็มจอ) อยู่กลางจอ · ปุ่ม ✕ อยู่ในหน้าต่าง', c['#ov'] and 690<=c['#ov'][2]-c['#ov'][0]<=c['vw'] and abs((c['#ov'][0]+c['#ov'][2])/2-c['vw']/2)<=2 and c['#ovx'][2]<=c['#ov'][2] and c['#ovx'][1]>=0, c)
         await pg.evaluate("()=>{$('ovx').click()}");await pg.wait_for_timeout(300)
         # ---- ตอนล้ม ----
         await pg.evaluate("()=>{enterMap(13,{x:CX,y:CY})}");await pg.wait_for_timeout(2500)
