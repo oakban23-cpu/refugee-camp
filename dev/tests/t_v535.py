@@ -21,7 +21,7 @@ async def main():
         A=await new_client(b,'Qa'+str(random.randint(100,999)),'mage',99)
         B=await new_client(b,'Qb'+str(random.randint(100,999)),'melee',99)
         i0=await A.ev("()=>STY.findIndex(x=>x.p9s1)");n5=await A.ev("()=>STY.length-STY.findIndex(x=>x.p9s1)")
-        rep('ภาค 9 บทที่ 1 ต่อจากจบภาค 8 (5 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p8c5)")+1 and n5==5,[i0,n5])
+        rep('ภาค 9 บทที่ 1 ต่อจากจบภาค 8 (5 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p8c5)")+1 and await A.ev("()=>STY.findIndex(x=>x.p9s2)")==i0+5,[i0,n5])
         for C,e8 in ((A,1),(B,2)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:2,p7m:2,p8rs:31,p8g:1,e8:{e8}}};me.wv=[1,9,32,36,38,39,2,3];ov.hidden=true;enterMap(36,{{x:1600,y:2800}})}}")
         await A.wait(2600)
@@ -70,7 +70,7 @@ async def main():
         ql=await A.ev("()=>{const N=MAPS[40].npc;npcSel=1;me.x=N.x;me.y=N.y+40;const k=stTalkKey();stNpcClick();return [k,SD.q.map(l=>l[1]).join('|')]}")
         await adv(A);await A.ev("()=>{achCheck()}")
         en=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stQ1,MAPS[40].npc2.x>0]")
-        rep('ลูมิน่า: ตาข่ายดาวของโอเรียน → จบบทที่ 1 · ฉายา «ผู้ก้าวขึ้นบันไดดาว» · เซเลสต์อยู่ที่ลานบันได',ql[0]=='lum' and 'ตาข่ายดาว' in ql[1] and en[0]==en[1] and 'จบภาค 9 บทที่ 1' in en[2] and en[3] and en[4],[ql[0],ql[1][-100:],en])
+        rep('ลูมิน่า: ตาข่ายดาวของโอเรียน → จบบทที่ 1 · ฉายา «ผู้ก้าวขึ้นบันไดดาว» · เซเลสต์อยู่ที่ลานบันได',ql[0]=='lum' and 'ตาข่ายดาว' in ql[1] and en[0]==i0+5 and 'ลูมิน่า' in en[2] and en[3] and en[4],[ql[0],ql[1][-100:],en])
         E=[e for e in A.errs+B.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม',not E,E[:4])
     finally: p.terminate()

@@ -8,7 +8,7 @@ URL = f'http://localhost:{PORT}/'
 
 def start_server():
     shutil.rmtree(DD, ignore_errors=True); os.makedirs(DD)
-    env = dict(os.environ, PORT=str(PORT), DATA_DIR=DD, MVP_FAST='1')
+    env = dict(os.environ, PORT=str(PORT), DATA_DIR=DD, MVP_FAST='1', GD_FAST='1')
     p = subprocess.Popen(['node', 'server.js'], cwd=SRV, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     for _ in range(60):
         time.sleep(.3)
