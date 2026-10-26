@@ -970,7 +970,7 @@ R("&&!MP.gdl&&!MP.wbl&&!MP.wsk){const now=performance.now()/1000;","&&!MP.gdl&&!
 R("MAPS[curMap].gdl||MAPS[curMap].wbl||MAPS[curMap].wsk?BS().n:","MAPS[curMap].gdl||MAPS[curMap].wbl||MAPS[curMap].wsk||MAPS[curMap].ctw?BS().n:",2)
 R("||(typeof WSKI==='function'&&WSKI()));if(m.t===3&&RTEI())","||(typeof WSKI==='function'&&WSKI())||(typeof CTWI==='function'&&CTWI()));if(m.t===3&&RTEI())")
 R("||(typeof WSKI==='function'&&WSKI())?1.9:1;gxLayerMark","||(typeof WSKI==='function'&&WSKI())||(typeof CTWI==='function'&&CTWI())?1.9:1;gxLayerMark")
-R("ROOTM(curMap)||CASTM(curMap)?curMap:","ROOTM(curMap)||CASTM(curMap)?(curMap===40?42:curMap===41?43:curMap):")
+R("ROOTM(curMap)||CASTM(curMap)?curMap:","ROOTM(curMap)||CASTM(curMap)?(MAPS[curMap]&&MAPS[curMap].mth||curMap):")
 open(P,'w').write(s)
 print('ok')
 import subprocess

@@ -77,7 +77,7 @@ async def main():
         hd=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));gmGod=false;me.hp=me.mh;CT.tt=99;CT.gt=99;const[ah,am]=ctAng();const a=ah+.35*1.2;me.x=CX+Math.cos(a)*300;me.y=CY+Math.sin(a)*300;const k0=CT.hk|0;let t=0;while((CT.hk|0)===k0&&t<60){await w(60);t++;const[h2]=ctAng();if(ctOnHand(me.x,me.y,h2))break}await w(200);const k=(CT.hk|0)-k0;gmGod=true;me.hp=me.mh;return [k,t]}""")
         rep('เข็มนาฬิกากวาด: ยืนขวางเข็มโดนดาเมจ',hd[0]>=1,hd)
         ts=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));CT.gt=99;CT.tt=0;CT.ts=0;await w(400);const lit=CT.lit.slice(),s1=CT.ts;const P=CTMK[lit[0]];me.x=P[0];me.y=P[1];CT.tt=.1;await w(500);const s2=CT.ts;
-          const sx=me.x,sy=me.y;me.x+=60;await w(200);const free=Math.hypot(me.x-sx,me.y-sy)>30;me.x=CX;me.y=CY+200;await w(300);const fx0=me.x,fy0=me.y;me.x+=80;await w(200);const stuck=Math.hypot(me.x-fx0,me.y-fy0)<5;CT.tt=0;await w(300);return [s1,lit.length,s2,free,stuck,CT.ts]}""")
+          const sx=me.x,sy=me.y;me.x+=60;await w(200);const free=Math.hypot(me.x-sx,me.y-sy)>30;me.x=CX;me.y=CY+200;await w(300);const fx0=me.x,fy0=me.y;me.x+=80;await w(600);const stuck=Math.hypot(me.x-fx0,me.y-fy0)<5;CT.tt=0;await w(300);return [s1,lit.length,s2,free,stuck,CT.ts]}""")
         rep('หยุดเวลา: ขีดทองเรือง 3 ขีด → เวลาหยุด · ยืนบนขีดทองขยับได้ · นอกขีดค้าง',ts[0]==1 and ts[1]==3 and ts[2]==2 and ts[4],ts)
         gr=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));CT.ts=0;CT.tt=99;CT.lit=[];gmGod=false;me.hp=me.mh;me.x=CX+150;me.y=CY+250;const k0=CT.hk|0;CT.gt=0;await w(1900);const k=(CT.hk|0)-k0;gmGod=true;me.hp=me.mh;CT.gt=99;return k}""")
         rep('ฝนเฟือง: วงเตือนใต้เท้าแล้วเฟืองตก',gr>=1,gr)
