@@ -790,7 +790,7 @@ R("""const upCol=c=>{const b=lkB(c);""","""const upCol=c=>{if(hmAnc(c))return'25
 R("""if(vp)devBlit(nightLayer('m','rgb('+c+')',vp),0,0,'multiply');else{g.fillStyle='rgb('+c+')';g.fillRect(vx,vy,W,H)}g.globalCompositeOperation='source-over'""","""if(vp)devBlit(nightLayer('m','rgb('+c+')',vp),0,0,'multiply');else{g.fillStyle='rgb('+c+')';g.fillRect(vx,vy,W,H)}g.globalCompositeOperation='source-over';if(typeof nlLift==='function')nlLift('m','rgb('+c+')')""")
 R("""if(vp)devBlit(nightLayer('s',fs,vp),0,0);else{g.fillStyle=fs;g.fillRect(vx,vy,W,H)}""","""if(vp)devBlit(nightLayer('s',fs,vp),0,0);else{g.fillStyle=fs;g.fillRect(vx,vy,W,H)}if(typeof nlLift==='function')nlLift('s',fs);""")
 # v528 หน้าเลือกตัวละคร: ตัวละคร/แท่น/วงเวทขยายตามขนาดเวที (PS)
-R("""cx=W/2,fy=H*.8;""","""cx=W/2,fy=H*.8,PS=Math.min(Math.max(3.4,Math.min(W,H)*.0105),H*.44/40)/3.4;""")
+R("""cx=W/2,fy=H*.8;""","""cx=W/2,fy=H*(H>W*1.05?.74:.79),PS=Math.min(Math.max(3.4,Math.min(W,H)*.0105),H*.44/40)/3.4;""")
 R("""x.ellipse(cx,fy+8,W*.36,30,0,0,7)""","""x.ellipse(cx,fy+8,Math.min(W*.36,130*PS),30*PS,0,0,7)""")
 R("""x.ellipse(cx,fy,W*.34,24,0,0,7)""","""x.ellipse(cx,fy,Math.min(W*.34,123*PS),24*PS,0,0,7)""")
 R("""x.ellipse(cx,fy,W*.33,22,0,0,7)""","""x.ellipse(cx,fy,Math.min(W*.33,119*PS),22*PS,0,0,7)""")

@@ -38,7 +38,7 @@ body #ov>.csw.cs3{max-width:560px;width:100%;margin:0 auto;padding:calc(10px + e
 body:has(#ov:not([hidden])>.csw) #tipc,body:has(#ov:not([hidden])>.csw) #wnp{display:none!important}
 @media (orientation:landscape) and (min-width:600px){
   #ov:has(>.csw.cs3){overflow:hidden}
-  body #ov>.csw.cs3{max-width:1480px;height:100vh;height:100dvh;padding:calc(8px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px}
+  body #ov>.csw.cs3{max-width:1480px;height:100%;box-sizing:border-box;padding:calc(8px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px}
   .cs3 .cs-main{display:grid;grid-template-columns:minmax(150px,21%) minmax(0,1fr) minmax(270px,33%);gap:12px;min-height:0;height:100%}
   .cs3 .cs-stage{grid-column:2;grid-row:1;height:100%;min-height:0}
   .cs3 .cs-stage canvas{height:100%!important}

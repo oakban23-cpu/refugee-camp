@@ -24,7 +24,7 @@ async def main():
         rep('ติดตั้ง + แนวตั้ง: จัดเลย์เอาต์ใหม่ · ช่องว่างเหลือการ์ดเดียว · การ์ดบอกอาชีพครบ 4 ตัว',g['cs3'] and g['emp']==1 and g['cards']==4 and g['cl']==4 and not g['err'],json.dumps(g))
         rep('แนวตั้ง: เวทีกว้างเต็ม สูง ≥ 30% ของจอ · แถบตัวละครเรียงแนวนอนใต้เวที · ปุ่มเล่นอยู่ในจอ',g['stage'][2]>=330 and g['stage'][3]>=g['vh']*.3 and g['flex']=='row' and g['ro'][1]>g['stage'][1]+g['stage'][3]-4 and g['go'][1]+g['go'][3]<=g['vh'],json.dumps(g))
         rep('การ์ดคำแนะนำไม่ค้างทับหน้าเลือกตัวละคร',not g['tip'],json.dumps(g))
-        for vw,vh,nm in [(844,390,'มือถือแนวนอน'),(1180,820,'แท็บเล็ต'),(1440,900,'PC')]:
+        for vw,vh,nm in [(844,390,'มือถือแนวนอน'),(1180,820,'แท็บเล็ต'),(1440,900,'PC'),(1920,1080,'PC จอใหญ่ (หน้าเกมถูกขยาย)')]:
             await A.pg.set_viewport_size({'width':vw,'height':vh});await A.wait(700)
             g=await A.ev(GEO)
             three=g['ro'][0]+g['ro'][2]<=g['stage'][0]+2 and g['stage'][0]+g['stage'][2]<=g['sd'][0]+2

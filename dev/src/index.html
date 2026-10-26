@@ -26652,7 +26652,7 @@ body #ov>.csw.cs3{max-width:560px;width:100%;margin:0 auto;padding:calc(10px + e
 body:has(#ov:not([hidden])>.csw) #tipc,body:has(#ov:not([hidden])>.csw) #wnp{display:none!important}
 @media (orientation:landscape) and (min-width:600px){
   #ov:has(>.csw.cs3){overflow:hidden}
-  body #ov>.csw.cs3{max-width:1480px;height:100vh;height:100dvh;padding:calc(8px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px}
+  body #ov>.csw.cs3{max-width:1480px;height:100%;box-sizing:border-box;padding:calc(8px + env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));display:grid;grid-template-rows:auto minmax(0,1fr);gap:8px}
   .cs3 .cs-main{display:grid;grid-template-columns:minmax(150px,21%) minmax(0,1fr) minmax(270px,33%);gap:12px;min-height:0;height:100%}
   .cs3 .cs-stage{grid-column:2;grid-row:1;height:100%;min-height:0}
   .cs3 .cs-stage canvas{height:100%!important}
@@ -29160,7 +29160,7 @@ function csPortrait(k,sv){const L=csLook(sv),c2=csC2(k,sv),rb3=CSRB,key=k+c2+'r'
   return _csPt[key]=cv.toDataURL()}
 function csDraw(cv){const dpr=Math.min(2.5,window.devicePixelRatio||1),Wc=cv.clientWidth||360,Hc=cv.clientHeight||290;
   if(cv.width!==Math.round(Wc*dpr)||cv.height!==Math.round(Hc*dpr)){cv.width=Math.round(Wc*dpr);cv.height=Math.round(Hc*dpr)}
-  const EMP=csMode==='empty'||(csMode==='new'?!CL[csPick]:!saves.chars[csSel]),x=cv.getContext('2d'),k=csMode==='new'?csPick:EMP?'melee':scls(csSel),C=EMP?{c:'#8a7aa8'}:CL[k],sv=csMode===''?saves.chars[csSel]:null,L=csLook(sv),c2=csC2(k,sv),rb3=CSRB,t=performance.now()/1000,col=C.c,W=Wc,H=Hc,cx=W/2,fy=H*.8,PS=Math.min(Math.max(3.4,Math.min(W,H)*.0105),H*.44/40)/3.4;
+  const EMP=csMode==='empty'||(csMode==='new'?!CL[csPick]:!saves.chars[csSel]),x=cv.getContext('2d'),k=csMode==='new'?csPick:EMP?'melee':scls(csSel),C=EMP?{c:'#8a7aa8'}:CL[k],sv=csMode===''?saves.chars[csSel]:null,L=csLook(sv),c2=csC2(k,sv),rb3=CSRB,t=performance.now()/1000,col=C.c,W=Wc,H=Hc,cx=W/2,fy=H*(H>W*1.05?.74:.79),PS=Math.min(Math.max(3.4,Math.min(W,H)*.0105),H*.44/40)/3.4;
   x.setTransform(dpr,0,0,dpr,0,0);
   /* ฟ้า */
   let gr=x.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#140e22');gr.addColorStop(.6,'#1c1420');gr.addColorStop(1,'#0c0808');x.fillStyle=gr;x.fillRect(0,0,W,H);
