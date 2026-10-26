@@ -21,7 +21,7 @@ async def main():
         b=await pw.chromium.launch()
         A=await new_client(b,'Sa'+str(random.randint(100,999)),'mage',99)
         B=await new_client(b,'Sb'+str(random.randint(100,999)),'melee',99)
-        i0=await A.ev("()=>STY.findIndex(x=>x.p8s5)");n6=await A.ev("()=>STY.length-STY.findIndex(x=>x.p8s5)")
+        i0=await A.ev("()=>STY.findIndex(x=>x.p8s5)");n6=await A.ev("()=>STY.findIndex(x=>x.p9s1)-STY.findIndex(x=>x.p8s5)")
         rep('ภาค 8 บทที่ 5 ต่อจากบทที่ 4 (6 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p8c4)")+1 and n6==6,[i0,n6])
         for C,pg in ((A,1),(B,2)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:2,p7m:2,p8rs:31,p8g:{pg}}};me.ach=me.ach||{{}};me.ach.stN4=1;me.wv=[1,9,32,38,39,2,3];ov.hidden=true;enterMap(38,{{x:2000,y:1900}})}}")
@@ -95,7 +95,7 @@ async def main():
         ea=await A.ev(TALK,2);eb=await B.ev(TALK,2)
         await adv(A);await A.wait(900);await A.ev("()=>{achCheck()}")
         en=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stP8,(me.mts||[]).includes(7),MT_N,MOUNTS[7]&&MOUNTS[7].n]")
-        rep('บทส่งท้าย: นาวิน «ยายวาฬ» (e8=1) / ป้อมผนึก (e8=2) → จบภาค 8 · ฉายา «ผู้นำทางกองเรือเมฆ» · ได้เรือเหาะจิ๋ว',ea[0]=='navin' and 'ยายวาฬ' in ea[1] and 'ป้อมผนึก' not in ea[1] and 'ป้อมผนึก' in eb[1] and 'ยายวาฬ' not in eb[1] and en[0]==en[1] and 'จบภาค 8 ทะเลเมฆไร้ฝั่ง' in en[2] and en[3] and en[4] and en[5]==7 and en[6]=='เรือเหาะจิ๋ว',[ea[1][-80:],eb[1][-80:],en])
+        rep('บทส่งท้าย: นาวิน «ยายวาฬ» (e8=1) / ป้อมผนึก (e8=2) → จบภาค 8 · ฉายา «ผู้นำทางกองเรือเมฆ» · ได้เรือเหาะจิ๋ว',ea[0]=='navin' and 'ยายวาฬ' in ea[1] and 'ป้อมผนึก' not in ea[1] and 'ป้อมผนึก' in eb[1] and 'ยายวาฬ' not in eb[1] and en[0]==await A.ev("()=>STY.findIndex(x=>x.p9s1)") and 'ภาค 9' in en[2] and en[3] and en[4] and en[5]==7 and en[6]=='เรือเหาะจิ๋ว',[ea[1][-80:],eb[1][-80:],en])
         mt=await A.ev("""async()=>{const ic=mountIcon(7);me.mt=7;me.riding=1;await new Promise(r=>setTimeout(r,800));return {ic:typeof ic==='string'&&ic.length>200,ride:me.riding,sp:mtSp(),err:MTV.err||''}}""")
         await A.pg.screenshot(path=SH+'t_skiff.jpg',quality=78)
         mb=await B.ev("()=>{me.mts=[1];mountUI.st=1;mountUI('',true);const btn=ov.querySelector('button[data-mtb=\"7\"]'),txt=[...ov.querySelectorAll('.sr')].map(r=>r.textContent).find(t=>t.includes('เรือเหาะจิ๋ว'))||'';mountBuy(7);const got=(me.mts||[]).includes(7);ov.hidden=true;return [!!btn,txt.includes('จบภาค 8'),got]}")
