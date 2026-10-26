@@ -20,7 +20,7 @@ async def main():
         b=await pw.chromium.launch()
         A=await new_client(b,'Ra'+str(random.randint(100,999)),'mage',99)
         B=await new_client(b,'Rb'+str(random.randint(100,999)),'melee',99)
-        i0=await A.ev("()=>STY.findIndex(x=>x.p8s3)");n7=await A.ev("()=>STY.length-STY.findIndex(x=>x.p8s3)")
+        i0=await A.ev("()=>STY.findIndex(x=>x.p8s3)");n7=await A.ev("()=>STY.findIndex(x=>x.p8s4)-STY.findIndex(x=>x.p8s3)")
         rep('ภาค 8 บทที่ 3 ต่อจากบทที่ 2 (7 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p8c2)")+1 and n7==7,[i0,n7])
         for C,pg in ((A,1),(B,2)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:2,p7m:2,p8rs:31,p8g:{pg}}};me.wv=[1,9,32,38,2,3];ov.hidden=true;enterMap(38,{{x:2000,y:1900}})}}")
@@ -117,7 +117,7 @@ async def main():
         qg=await A.ev("()=>{const N=MAPS[39].npc2;npcSel=2;me.x=N.x;me.y=N.y+40;const k=stTalkKey();stNpcClick();return [k,SD.q.map(l=>l[1]).join('|')]}")
         await adv(A);await A.ev("()=>{achCheck()}")
         en=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stN3]")
-        rep('คุยกริฟ (p8g=1 ยื่นดาบ · ซาราต้อนรับกลับ) → จบบทที่ 3 · ฉายา «ผู้อ่านปูมเรือ»',qg[0]=='grif' and 'ยื่นด้าม' in qg[1] and 'โยนดาบ' not in qg[1] and en[0]==en[1] and 'จบภาค 8 บทที่ 3' in en[2] and en[3],[qg[0],qg[1][-120:],en])
+        rep('คุยกริฟ (p8g=1 ยื่นดาบ · ซาราต้อนรับกลับ) → จบบทที่ 3 · ฉายา «ผู้อ่านปูมเรือ» · ต่อบทที่ 4 (คุยกริฟ)',qg[0]=='grif' and 'ยื่นด้าม' in qg[1] and 'โยนดาบ' not in qg[1] and en[0]==await A.ev("()=>STY.findIndex(x=>x.p8s4)") and 'กริฟ' in en[2] and en[3],[qg[0],qg[1][-120:],en])
         rp=await A.ev("()=>{const N=MAPS[39].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick();const c=SD.choice?SD.choice.map(c=>c[0]).join('|'):'';stClose();return c}")
         rep('จบบทแล้วคุยนาวินเล่นดวลบนเรือดำซ้ำได้','ดวลบนเรือดำ' in rp,rp)
         wm=await A.ev("()=>[WMN[39]&&WMN[39][2],WMLV[39]]")
