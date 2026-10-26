@@ -20,7 +20,7 @@ async def main():
         b=await pw.chromium.launch()
         A=await new_client(b,'Wa'+str(random.randint(100,999)),'mage',99)
         B=await new_client(b,'Wb'+str(random.randint(100,999)),'melee',99)
-        i0=await A.ev("()=>STY.findIndex(x=>x.p8s4)");n5=await A.ev("()=>STY.length-STY.findIndex(x=>x.p8s4)")
+        i0=await A.ev("()=>STY.findIndex(x=>x.p8s4)");n5=await A.ev("()=>STY.findIndex(x=>x.p8s5)-STY.findIndex(x=>x.p8s4)")
         rep('ภาค 8 บทที่ 4 ต่อจากบทที่ 3 (5 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p8c3)")+1 and n5==5,[i0,n5])
         for C,pg in ((A,1),(B,2)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:2,p7m:2,p8rs:31,p8g:{pg}}};me.ach=me.ach||{{}};me.ach.stN3=1;me.wv=[1,9,32,38,39,2,3];ov.hidden=true;enterMap(39,{{x:620,y:1760}})}}")
@@ -93,7 +93,7 @@ async def main():
         qnb=await B.ev("()=>{const N=MAPS[39].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick();return SD.q.map(l=>l[1]).join('|')}")
         await adv(A);await A.ev("()=>{achCheck()}")
         en=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stN4]")
-        rep('คุยนาวิน: ไข่มุกดาว · ยายเมฆาร้องท่อนที่สี่ · กริฟแยกตาม p8g → จบบทที่ 4 · ฉายา «ผู้กลับออกมาจากท้องวาฬ»',qn[0]=='navin3' and 'ท่อนที่สี่' in qn[1] and 'ฟังคุ้น' in qn[1] and 'สิบปีเพื่อเรือลำเดียว' in qnb and 'ฟังคุ้น' not in qnb and en[0]==en[1] and 'จบภาค 8 บทที่ 4' in en[2] and en[3],[qn[0],qn[1][-120:],qnb[-80:],en])
+        rep('คุยนาวิน: ไข่มุกดาว · ยายเมฆาร้องท่อนที่สี่ · กริฟแยกตาม p8g → จบบทที่ 4 · ฉายา «ผู้กลับออกมาจากท้องวาฬ»',qn[0]=='navin3' and 'ท่อนที่สี่' in qn[1] and 'ฟังคุ้น' in qn[1] and 'สิบปีเพื่อเรือลำเดียว' in qnb and 'ฟังคุ้น' not in qnb and en[0]==await A.ev("()=>STY.findIndex(x=>x.p8s5)") and 'ซารา' in en[2] and en[3],[qn[0],qn[1][-120:],qnb[-80:],en])
         rp=await A.ev("()=>{const N=MAPS[39].npc2;npcSel=2;me.x=N.x;me.y=N.y+40;stNpcClick();const c=SD.choice?SD.choice.map(c=>c[0]).join('|'):'';stClose();return c}")
         rp2=await A.ev("()=>{const N=MAPS[39].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick();const c=SD.choice?SD.choice.map(c=>c[0]).join('|'):'';stClose();return c}")
         rep('จบบทแล้ว: คุยกริฟเล่นในท้องวาฬซ้ำ · คุยนาวินยังเล่นดวลบนเรือดำซ้ำ','ในท้องวาฬ' in rp and 'ดวลบนเรือดำ' in rp2,[rp,rp2])

@@ -21,7 +21,7 @@ async def main():
         A=await new_client(b,'Mt'+str(random.randint(100,999)),'archer',99)
         await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}");await A.wait(1500)
         r=await A.ev("()=>[!!MTV.old,MOUNTS.length-1]")
-        rep('ติดตั้ง: ห่อ drawMount · พาหนะ 6 ตัว',r[0] and r[1]==6,json.dumps(r))
+        rep('ติดตั้ง: ห่อ drawMount · พาหนะ 7 ตัว (v533 +เรือเหาะจิ๋ว)',r[0] and r[1]==7,json.dumps(r))
         R={}
         out=[]
         for i in range(1,7):
