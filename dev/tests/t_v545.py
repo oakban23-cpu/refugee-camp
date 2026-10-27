@@ -42,7 +42,7 @@ async def main():
         rep('แมวดาวหาง/ผีเสื้อราตรีดาว (เปลี่ยนจุดสี่เหลี่ยมเป็นประกายดาว) วาดได้',r=='',r)
         for mp in (39,40,41,42):
             r=await A.ev("""async(mp)=>{enterMap(mp,{x:MAPS[mp].sx,y:MAPS[mp].sy});await new Promise(r=>setTimeout(r,2600));ov.hidden=true;try{SD.on&&stClose()}catch(e){}
-              const th=MAPS[mp].mth||mp,L=mons.filter(m=>m.t<3);L.slice(0,9).forEach((m,i)=>{m.x=me.x-160+(i%3)*160;m.y=me.y-120+Math.floor(i/3)*110});MV9.err='';const n0=MV9.n;await new Promise(r=>setTimeout(r,1200));return [curMap,th,L.length,MV9.n-n0,MV9.err]}""",mp)
+              const th=MAPS[mp].mth||mp,L0=mons.filter(m=>m.t<3),L=[0,1,2].map(t=>L0.filter(m=>m.t===t).slice(0,3)).flat();L.slice(0,9).forEach((m,i)=>{m.x=me.x-160+(i%3)*160;m.y=me.y-120+Math.floor(i/3)*110});MV9.err='';const n0=MV9.n;await new Promise(r=>setTimeout(r,1200));return [curMap,th,L.length,MV9.n-n0,MV9.err]}""",mp)
             print('  ',r)
             need=0 if r[1]==43 and False else 1
             rep(f'ในเกมแมพ {mp} (ธีม {r[1]}): มอนแบบใหม่วาดทุกเฟรม ไม่ error',r[0]==mp and r[2]>0 and r[3]>=10 and not r[4],json.dumps(r,ensure_ascii=False))
