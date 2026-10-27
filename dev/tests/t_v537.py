@@ -25,7 +25,7 @@ async def main():
         A=await new_client(b,'Qa'+str(random.randint(100,999)),'mage',99)
         B=await new_client(b,'Qb'+str(random.randint(100,999)),'melee',99)
         i0=await A.ev("()=>STY.findIndex(x=>x.p9s3)");n7=await A.ev("()=>STY.length-STY.findIndex(x=>x.p9s3)")
-        rep('บทที่ 3 ต่อจากบทที่ 2 (7 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p9c2)")+1 and n7==7,[i0,n7])
+        rep('บทที่ 3 ต่อจากบทที่ 2 (7 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p9c2)")+1 and await A.ev("()=>STY.findIndex(x=>x.p9s5)")==i0+7,[i0,n7])
         for C in (A,B):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:2,p7m:2,p8rs:31,p8g:1,e8:1,p9sf:31,p9gr:15}};me.ach.stQ2=1;me.wv=[1,9,32,36,38,39,40,41,2,3];ov.hidden=true;enterMap(41,{{x:Q9D[0].x+60,y:Q9D[0].y}})}}")
         await A.wait(2600)
@@ -94,7 +94,7 @@ async def main():
             qc=await C.ev("()=>{const N=MAPS[42].npc2;npcSel=2;me.x=N.x;me.y=N.y+40;const k=stTalkKey();stNpcClick();return [k,SD.q.map(l=>l[1]).join('|')]}")
             await adv(C);await C.ev("()=>{achCheck()}")
             ends[e]=[qc[0],'กล้องใหญ่' in qc[1],'ยังหลับ' in qc[1],await C.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stQ3,wb9Free()]")]
-        rep('เซเลสต์: บทพูดแยกตาม q9 → จบบทที่ 3 · ฉายา «ผู้ปลดดาวจากตาข่าย» · ดาวหลุดหมดหลังจบบท',ends[1][0]=='cel42' and ends[1][1] and not ends[1][2] and ends[2][2] and not ends[2][1] and all(ends[e][3][0]==ends[e][3][1] and 'จบภาค 9 บทที่ 3' in ends[e][3][2] and ends[e][3][3] and ends[e][3][4] for e in (1,2)),ends)
+        rep('เซเลสต์: บทพูดแยกตาม q9 → จบบทที่ 3 · ฉายา «ผู้ปลดดาวจากตาข่าย» · ดาวหลุดหมดหลังจบบท',ends[1][0]=='cel42' and ends[1][1] and not ends[1][2] and ends[2][2] and not ends[2][1] and all(ends[e][3][0]==i0+7 and 'เสียงสะท้อน' in ends[e][3][2] and ends[e][3][3] and ends[e][3][4] for e in (1,2)),ends)
         E=[e for e in A.errs+B.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม',not E,E[:4])
     finally: p.terminate()
