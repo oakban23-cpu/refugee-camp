@@ -7,12 +7,12 @@ def rep(name, ok, info=''):
     R.append((name, ok, info)); print(('PASS ' if ok else 'FAIL ') + name, str(info)[:700], flush=True)
 ALL="""()=>{const out={err:[],empty:[],ratio:{},n:0};const N=360,c=document.createElement('canvas');c.width=c.height=N;const x=c.getContext('2d');const G0=g,L0=LOWQ;
   const area=()=>{const d=x.getImageData(0,0,N,N).data;let n=0;for(let i=3;i<d.length;i+=4)if(d[i]>150)n++;return n};
-  for(const k of Object.keys(MV1D).map(Number).filter(k=>k>=280&&![350,352,382].includes(k))){const th=Math.floor(k/10),t=k%10;
+  for(const k of Object.keys(MV1D).map(Number).filter(k=>k>=280&&k<390&&![350,352,382].includes(k))){const th=Math.floor(k/10),t=k%10;
     for(const[T,fx,hf,lq]of[[.4,1,0,false],[1.7,-1,0,false],[2.9,1,.6,false],[1.1,1,0,true]]){x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,N,N);x.setTransform(3,0,0,3,N/2,N*.66);g=x;LOWQ=lq;MPC.rich=1;let ok=true;
       try{ok=drawMonV(th,t,(MT[t]&&MT[t].r)||12,T,null,null,null,null,c=>hf>.3?'#fff':c,hf>.3,Math.sin(T*4),Math.sin(T*7),1,0)}catch(e){out.err.push([k,String(e).slice(0,60)])}finally{g=G0;LOWQ=L0;MPC.rich=0}
       const a=area();if(!ok||a<300)out.empty.push([k,T,a]);out.n++;if(T===.4)out.ratio[k]=a}}return out}"""
 BENCH="""()=>{const out={};const N=200,c=document.createElement('canvas');c.width=c.height=N;const x=c.getContext('2d');const G0=g,L0=LOWQ;
-  for(const k of Object.keys(MV1D).map(Number).filter(k=>k>=280&&![350,352,382].includes(k))){const th=Math.floor(k/10),t=k%10;const CM0=curMap;curMap=th;const res=[];
+  for(const k of Object.keys(MV1D).map(Number).filter(k=>k>=280&&k<390&&![350,352,382].includes(k))){const th=Math.floor(k/10),t=k%10;const CM0=curMap;curMap=th;const res=[];
     for(const on of[0,1]){let best=1e9;for(let rep=0;rep<3;rep++){const f=MV1D[k];if(!on)delete MV1D[k];x.setTransform(2,0,0,2,N/2,N*.66);g=x;LOWQ=false;MPC.rich=1;const t0=performance.now();let n=0;
       try{for(let i=0;i<20;i++){x.clearRect(-200,-200,400,400);drawMonT(0,0,t,i*.07,1,0,0,th);n++}}catch(e){}finally{g=G0;LOWQ=L0;MPC.rich=0;if(f)MV1D[k]=f}best=Math.min(best,(performance.now()-t0)/Math.max(1,n))}res.push(+best.toFixed(3))}
     curMap=CM0;out[k]=res}return out}"""
@@ -49,7 +49,7 @@ async def main():
         slow={k:v for k,v in bn.items() if v[1]>3}
         avg=sum(v[1] for v in bn.values())/len(bn);avg0=sum(v[0] for v in bn.values())/len(bn)
         rep('ความเร็ววาดตรง (ไม่ผ่านแคช): ทุกแบบ ≤ 3 ms/ครั้ง (ปกติวาดผ่านภาพแคช)',not slow,{'avg_new':round(avg,3),'avg_old':round(avg0,3),'slow':slow})
-        old=await A.ev("()=>{const n=Object.keys(MV1D).length;return [n,[10,11,12,20,30,40,50,60,70,80,81,82,260,262,350,352,382,100,121,152,182,190,222,261,272].every(k=>!!MV1D[k])]}")
+        old=await A.ev("()=>{const n=Object.keys(MV1D).map(Number).filter(k=>k<390).length;return [n,[10,11,12,20,30,40,50,60,70,80,81,82,260,262,350,352,382,100,121,152,182,190,222,261,272].every(k=>!!MV1D[k])]}")
         rep('แบบใหม่ชุดก่อนยังอยู่ครบ · รวมมอนธรรมดาวาดใหม่ทั้งหมด 111 แบบ (v501 29 · v508 27 · v509 25 · v510 30)',old[1] and old[0]==111,old)
         E=[e for e in A.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม',not E,E[:4])
