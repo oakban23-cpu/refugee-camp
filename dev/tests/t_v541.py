@@ -26,7 +26,7 @@ async def main():
         A=await new_client(b,'Ra'+str(random.randint(100,999)),'mage',99)
         B=await new_client(b,'Rb'+str(random.randint(100,999)),'melee',99)
         i0=await A.ev("()=>STY.findIndex(x=>x.p9s5)");n5=await A.ev("()=>STY.length-STY.findIndex(x=>x.p9s5)")
-        rep('บทที่ 4 ต่อจากบทที่ 3 (5 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p9c3)")+1 and n5==5,[i0,n5])
+        rep('บทที่ 4 ต่อจากบทที่ 3 (5 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p9c3)")+1 and await A.ev("()=>STY.findIndex(x=>x.p9s8)")==i0+5,[i0,n5])
         for C,q9,e8 in ((A,1,1),(B,2,2)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:2,p7m:2,p8rs:31,p8g:1,e8:{e8},p9sf:31,p9gr:15,p9st:63,q9:{q9}}};me.ach.stQ3=1;me.wv=[1,9,32,36,38,39,40,41,42,2,3];ov.hidden=true;enterMap(42,{{x:WB9LD.x+30,y:WB9LD.y-50}})}}")
         await A.wait(2600)
@@ -85,8 +85,8 @@ async def main():
             await until_a(C)
             qc=await C.ev(TALK,2);await adv(C);await C.ev("()=>{achCheck()}")
             ends[e]=[qc[0],'ต้องขึ้นไป' in qc[1],'ก่อนมันลืมตา' in qc[1],await C.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stQ4]")]
-        rep('เซเลสต์: คำพูดสุดท้ายของภาพสะท้อน แยกตาม q9 → จบบทที่ 4 · ฉายา «ผู้มองเห็นภาพสะท้อน»',ends[1][0]=='cel42' and ends[1][1] and not ends[1][2] and ends[2][2] and not ends[2][1] and all(ends[e][3][0]==ends[e][3][1] and 'จบภาค 9 บทที่ 4' in ends[e][3][2] and ends[e][3][3] for e in (1,2)),ends)
-        rp=await A.ev("()=>{const N=MAPS[42].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick();return SD.choice?SD.choice.map(c=>c[0]).join('|'):''}")
+        rep('เซเลสต์: คำพูดสุดท้ายของภาพสะท้อน แยกตาม q9 → จบบทที่ 4 · ฉายา «ผู้มองเห็นภาพสะท้อน»',ends[1][0]=='cel42' and ends[1][1] and not ends[1][2] and ends[2][2] and not ends[2][1] and all(ends[e][3][0]==i0+5 and 'ยอดหอ' in ends[e][3][2] and ends[e][3][3] for e in (1,2)),ends)
+        rp=await A.ev("()=>{me.sty.s=STY.findIndex(x=>x.p9tv)+1;const N=MAPS[42].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick();return SD.choice?SD.choice.map(c=>c[0]).join('|'):''}")
         rep('เล่นซ้ำใจกลางตาข่ายผ่านลูมิน่าหลังจบบท','ใจกลางตาข่าย' in rp,rp)
         E=[e for e in A.errs+B.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม',not E,E[:4])
