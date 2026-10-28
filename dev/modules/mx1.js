@@ -13,7 +13,7 @@ const mxSS=(a,b,v)=>{const t=Math.max(0,Math.min(1,(v-a)/(b-a)));return t*t*(3-2
 const mxRgb=(c,a)=>'rgba('+(c[0]|0)+','+(c[1]|0)+','+(c[2]|0)+','+(a===undefined?1:a)+')';
 const mxMix=(a,b,k)=>[a[0]+(b[0]-a[0])*k|0,a[1]+(b[1]-a[1])*k|0,a[2]+(b[2]-a[2])*k|0];
 const MXW=[255,255,255],MXK=[0,0,0];
-const MXC={},MXT={},MXU={},MXDC={},MXTR={},MXNS={},MXB={};
+const MXC={},MXT={},MXU={},MXDC={},MXTR={},MXNS={},MXB={},MXP={};
 
 /* ===== แปรงวาดลายพื้นไร้รอยต่อ (กระเบื้อง 256 หน่วย · ความละเอียด 2x) — สไตล์การ์ตูนคมชัด ===== */
 function mxTile(key,fn){if(MX.tile[key])return MX.tile[key];const S=256,c=document.createElement('canvas');c.width=c.height=S*2;const x=c.getContext('2d');x.scale(2,2);x.lineCap='round';x.lineJoin='round';
@@ -90,7 +90,7 @@ function mxTrees(){try{mxPrune()}catch(e){}const T=trees,n=T.length;let s=n*7+de
 
 /* ===== สนามต่อชังก์: ตารางหยาบ 12 หน่วย (ความสูง/วัสดุ/ทุ่ง/ละเอียด) ขยายเป็นตาราง 6 หน่วย + ป่า/เงาโคน/เงาพุ่มคิดที่ 6 หน่วย ===== */
 const MXSP=6;
-function mxField(cx,cy){const key=curMap+'|'+cx+'|'+cy;let F=MX.cg.get(key);if(F)return F;const C=MXC[curMap],CS=GX.CS,SP=MXSP,n=Math.round(CS/SP)+3,x0=cx*CS-SP,y0=cy*CS-SP,N=n*n,sd=curMap*977+13,sc=C.sc||640;
+function mxField(cx,cy){const key=curMap+'|'+cx+'|'+cy;let F=MX.cg.get(key);if(F)return F;const C=MXC[curMap]||MXP[curMap]||{},CS=GX.CS||384,SP=MXSP,n=Math.round(CS/SP)+3,x0=cx*CS-SP,y0=cy*CS-SP,N=n*n,sd=curMap*977+13,sc=C.sc||640;
   const SQ=SP*2,nq=Math.ceil(n/2)+1,NQ=nq*nq,Hq=new Float32Array(NQ),Mq=new Float32Array(NQ),Wq=new Float32Array(NQ),Qq=new Float32Array(NQ);
   for(let j=0;j<nq;j++)for(let i=0;i<nq;i++){const X=x0+i*SQ,Y=y0+j*SQ,o=j*nq+i,wx=X+240*(mxF(X/900,Y/900,sd+1,2)-.5),wy=Y+240*(mxF(X/900+7.3,Y/900-3.1,sd+2,2)-.5);
     Hq[o]=mxF(wx/sc,wy/sc,sd+3,4);Mq[o]=mxF(wx/300,wy/300,sd+4,3);Wq[o]=mxF(wx/180+3.3,wy/180-1.7,sd+6,3);Qq[o]=mxF(X/70,Y/70,sd+5,2)}
@@ -226,13 +226,13 @@ MXNS.def={rim:[70,56,44],sp:[150,140,124]};
 function mxCloudSpr(v){const k='cl'+v;if(MX[k])return MX[k];const W2=256,H2=170,c=document.createElement('canvas');c.width=W2;c.height=H2;const x=c.getContext('2d'),id=x.createImageData(W2,H2),D=id.data;
   for(let j=0;j<H2;j++)for(let i=0;i<W2;i++){const u=(i/W2-.5)*2,w2=(j/H2-.5)*2,e=1-Math.min(1,Math.hypot(u,w2*1.05)),n=mxF(i/46+v*9,j/46,900+v,4),a=mxSS(.32,.62,e*.9+n*.55-.28);D[(j*W2+i)*4+3]=a*255}
   x.putImageData(id,0,0);x.globalCompositeOperation='source-in';x.fillStyle='rgb(14,24,40)';x.fillRect(0,0,W2,H2);return MX[k]=c}
-function mxClouds(){const C=MXC[curMap];try{if(C.wfx)C.wfx(performance.now()/1000)}catch(e){}if(LOWQ||(typeof LITEQ!=='undefined'&&LITEQ)||C.cla===0)return;let h=12;try{h=dnHour()}catch(e){}if(h<6.3||h>18.7)return;const k=Math.min(1,(h-6.3)/1.2,(18.7-h)/1.2),a=(C.cla===undefined?.13:C.cla)*k;if(a<=0)return;
+function mxClouds(){const C=MXC[curMap]||MXP[curMap];if(!C)return;try{if(C.wfx)C.wfx(performance.now()/1000)}catch(e){}if(LOWQ||(typeof LITEQ!=='undefined'&&LITEQ)||C.cla===0)return;let h=12;try{h=dnHour()}catch(e){}if(h<6.3||h>18.7)return;const k=Math.min(1,(h-6.3)/1.2,(18.7-h)/1.2),a=(C.cla===undefined?.13:C.cla)*k;if(a<=0)return;
   const t=performance.now()/1000,sp=C.clv||9;g.save();
   for(let i=0;i<7;i++){const s=3.4+(i%3)*1.1,cw=256*s,ch=170*s,span=3200+cw,sx=((i*1013+t*sp)%span+span)%span-cw*.5,sy=(i*1597)%3400-200+(t*sp*.35)%3400,yy=((sy%(3400+ch))+3400+ch)%(3400+ch)-ch*.5;
     if(sx+cw*.5<cam.x||sx-cw*.5>cam.x+W||yy+ch*.5<cam.y||yy-ch*.5>cam.y+H)continue;g.globalAlpha=a;g.drawImage(mxCloudSpr(i%3),sx-cw*.5,yy-ch*.5,cw,ch)}g.restore()}
 
 /* ===== แสงแดดอุ่นบนซ้าย/เงาเย็นล่างขวา (จอ) ===== */
-function mxGrade(){if(!mxOn()||LOWQ||(typeof LITEQ!=='undefined'&&LITEQ))return;const C=MXC[curMap];if(C.gw===0)return;let h=12;try{h=dnHour()}catch(e){}const day=C.ind?1:Math.max(0,Math.min(1,(h-6)/1.5,(18.8-h)/1.5));if(day<=0)return;const wc=C.gwc||'255,236,180',cc=C.gcc||'30,50,90';
+function mxGrade(){if(!(mxOn()||(typeof mxCastOut==='function'&&mxCastOut()))||LOWQ||(typeof LITEQ!=='undefined'&&LITEQ))return;const C=MXC[curMap]||MXP[curMap];if(C.gw===0)return;let h=12;try{h=dnHour()}catch(e){}const day=C.ind?1:Math.max(0,Math.min(1,(h-6)/1.5,(18.8-h)/1.5));if(day<=0)return;const wc=C.gwc||'255,236,180',cc=C.gcc||'30,50,90';
   g.save();g.setTransform(DPR,0,0,DPR,0,0);g.globalCompositeOperation='soft-light';const gr=g.createLinearGradient(0,0,SW0*.7,H);gr.addColorStop(0,'rgba('+wc+','+(.34*day*(C.gw||1))+')');gr.addColorStop(.55,'rgba(128,128,128,0)');gr.addColorStop(1,'rgba('+cc+','+(.3*day*(C.gc||1))+')');g.fillStyle=gr;g.fillRect(0,0,SW0,H);g.restore()}
 
 
@@ -258,7 +258,7 @@ function mxOn(){if(!MX.on||!MXC[curMap])return false;try{if(isDg()||isTw()||isAr
 setTimeout(()=>{
   try{const _gg=gxGround;window.gxGround=gxGround=function(MP){const on=mxOn();window.MXDS=on&&MXC[curMap].dk?MXC[curMap].dk:null;if(on){try{return mxGround(MP)}catch(e){console.warn('mxGround',e)}}return _gg.apply(this,arguments)}}catch(e){}
   try{const _dp=depPaintF;window.depPaintF=depPaintF=function(c,f,th){if(f&&mxOn()){const C=MXC[curMap];if(f.k==='meadow'&&C.mr)return mxMeadow(c,f);if(C.dep&&C.dep[f.k])return C.dep[f.k](c,f,th)}return _dp.apply(this,arguments)}}catch(e){}
-  try{const _pg=plxGround;window.plxGround=plxGround=function(){if(mxOn())return mxClouds();return _pg.apply(this,arguments)}}catch(e){}
+  try{const _pg=plxGround;window.plxGround=plxGround=function(){if(mxOn()||(typeof mxCastOut==='function'&&mxCastOut()))return mxClouds();return _pg.apply(this,arguments)}}catch(e){}
   try{const _ga=gxAtmo;window.gxAtmo=gxAtmo=function(){const r=_ga.apply(this,arguments);try{mxGrade()}catch(e){}return r}}catch(e){}
   try{const _vg=vmGround;window.vmGround=vmGround=function(){if(mxOn()&&MXC[curMap].vm!==0&&VM.k===curMap&&VM.P){const P=VM.P,D=VM.D,y0=cam.y-60,y1=cam.y+H+60,x0=cam.x-50,x1=cam.x+W+50,L=[],LD=[];
       for(const o of P){if(o.y<y0)continue;if(o.y>y1)break;if(o.x<x0||o.x>x1)continue;if(MXVA[o.k]||!mxDoneAt(o.x,o.y))L.push(o)}
