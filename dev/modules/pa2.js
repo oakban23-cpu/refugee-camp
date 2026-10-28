@@ -280,7 +280,7 @@ STCH.push('ภาค 10 · บทที่ 2 · นครรากลึก');
 setTimeout(()=>{try{
     if(MAPS[43])MAPS[43].gates.push({x:1268,y:1700,to:44,req:1,pa2:1,pa:3,nm:'นครรากลึก',arr:{x:1600,y:440}});
     const Mb=MAPS[38];MAPS[44]=Object.assign({},Mb,{n:'นครรากลึก',mth:46,sx:1600,sy:440,sr:110,seed:441,bg:'#16110c',tile:'#3e3226',safe:'#56432e',ring:'#ffd8a0',t1:'#2a2018',t2:'#3e3226',d1:'#56432e',d2:'#ffe0b0',bth:46,fsw:[],
-      gates:[{x:1600,y:230,to:43,req:1,pa:4,nm:'ปากเหวแผ่นดินทรุด',arr:{x:1268,y:1640}}],npc:{x:PBKED.x,y:PBKED.y,n:'เฒ่าแก่นไม้ · ผู้นำนครรากลึก',L:22},npc2:{x:PBTHU.x,y:PBTHU.y,n:'ธุลี · เด็กคนรากลึก'},
+      gates:[{x:1600,y:230,to:43,req:1,pa:4,nm:'ปากเหวแผ่นดินทรุด',arr:{x:1268,y:1588}}],npc:{x:PBKED.x,y:PBKED.y,n:'เฒ่าแก่นไม้ · ผู้นำนครรากลึก',L:22},npc2:{x:PBTHU.x,y:PBTHU.y,n:'ธุลี · เด็กคนรากลึก'},
       boss:{x:-9999,y:-9999,n:'-',hp:1,xp:0,L:22,rm:0,g:0,dm:1,tn:1,sm:0,col:'#e8d0ff',bar:'#7a4ac0',ln:'#fff0c0',rec:'',pos:''},mvpOnly:1,
       nests:[[620,1460],[2620,1480],[700,1980],[2560,1990],[1240,2520],[1960,2580],[1180,640],[2040,660]]});
     FIELDM[44]=1;BTR[46]='255,200,110';GLOWC[44]='255,190,110';FXST[46]='root';BTC[46]=['#f4e8c8','#6a8a3a','#ffffff'];TIER[44]=[91,26,3.44];

@@ -281,7 +281,7 @@ STCH.push('ภาค 10 · บทที่ 4 · ราชินีกัดแ�
 setTimeout(()=>{try{
     if(MAPS[44])MAPS[44].gates.push({x:PZ44.x,y:PZ44.y,to:45,req:1,pa5:1,pa:5,nm:'ฐานแผ่นดิน',arr:{x:1600,y:2760}});
     const Mb=MAPS[38];MAPS[45]=Object.assign({},Mb,{n:'ฐานแผ่นดิน',mth:47,sx:1600,sy:2760,sr:110,seed:451,bg:'#08060c',tile:'#3a2c20',safe:'#4a3a2a',ring:'#e8d0ff',t1:'#1a1420',t2:'#3a2c20',d1:'#4a3a2a',d2:'#f0e0ff',bth:47,fsw:[],
-      gates:[{x:PZGATE.x,y:PZGATE.y,to:44,req:1,pa:6,nm:'นครรากลึก',arr:{x:PZ44.x,y:PZ44.y+64}}],npc:{x:PZNPC.x,y:PZNPC.y,n:'ธรณิน · ผู้แบกคนแรก',L:22},npc2:{x:-9999,y:-9999,n:'ธุลี · เด็กคนรากลึก'},
+      gates:[{x:PZGATE.x,y:PZGATE.y,to:44,req:1,pa:6,nm:'นครรากลึก',arr:{x:PZ44.x,y:PZ44.y+115}}],npc:{x:PZNPC.x,y:PZNPC.y,n:'ธรณิน · ผู้แบกคนแรก',L:22},npc2:{x:-9999,y:-9999,n:'ธุลี · เด็กคนรากลึก'},
       boss:{x:-9999,y:-9999,n:'-',hp:1,xp:0,L:22,rm:0,g:0,dm:1,tn:1,sm:0,col:'#e8d0ff',bar:'#7a4ac0',ln:'#fff0c0',rec:'',pos:''},mvpOnly:1,
       nests:[[790,2300],[2430,2310],[690,1540],[2510,1520],[1430,1930],[1770,1930]]});
     FIELDM[45]=1;BTR[47]='200,170,255';GLOWC[45]='200,170,255';FXST[47]='root';BTC[47]=['#f0e8ff','#6a5a8a','#ffffff'];TIER[45]=[94,26.6,3.52];

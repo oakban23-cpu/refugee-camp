@@ -161,7 +161,7 @@ STCH.push('ภาค 9 · บทที่ 2 · วงแหวนเฟือง
 setTimeout(()=>{try{
     MAPS[40].gates.push({x:2150,y:1560,to:41,req:1,p92:1,nm:'วงแหวนเฟือง (ประตูเฟือง)',arr:{x:Q9D[0].x+40,y:Q9D[0].y-40}});
     const Mb=MAPS[40];MAPS[41]=Object.assign({},Mb,{n:'วงแหวนเฟือง',mth:43,sx:Q9D[0].x+40,sy:Q9D[0].y-40,sr:100,seed:411,bg:'#0a0814',tile:'#b08a52',safe:'#c09a5e',ring:'#ffd890',t1:'#3a2816',t2:'#8a6a3e',d1:'#3a2a1a',d2:'#fff0d0',bth:43,fsw:[],
-      gates:[{x:Q9D[0].x-70,y:Q9D[0].y+60,to:40,req:1,nm:'ลานดาวลอย (ประตูเฟือง)',arr:{x:2100,y:1580}}],npc:{x:Q9D[0].x+120,y:Q9D[0].y-30,n:'ลูมิน่า · เด็กดาว',L:22},npc2:{x:Q9D[1].x+110,y:Q9D[1].y+60,n:'เซเลสต์ · นักดาราศาสตร์หลวง'},
+      gates:[{x:Q9D[0].x-70,y:Q9D[0].y+60,to:40,req:1,nm:'ลานดาวลอย (ประตูเฟือง)',arr:{x:2029,y:1608}}],npc:{x:Q9D[0].x+120,y:Q9D[0].y-30,n:'ลูมิน่า · เด็กดาว',L:22},npc2:{x:Q9D[1].x+110,y:Q9D[1].y+60,n:'เซเลสต์ · นักดาราศาสตร์หลวง'},
       boss:{x:-9999,y:-9999,n:'-',hp:1,xp:0,L:22,rm:0,g:0,dm:1,tn:1,sm:0,col:'#e8d0ff',bar:'#7a4ac0',ln:'#fff0c0',rec:'',pos:''},mvpOnly:1,
       nests:[0,1,2,3,4,5,6,7].map(k=>{const a=k/8*6.283+.39,r=740;return[Math.round(Q9C.x+Math.cos(a)*r),Math.round(Q9C.y+Math.sin(a)*r)]}).concat([[Math.round(Q9D[2].x),Math.round(Q9D[2].y)]])});
     FIELDM[41]=1;BTR[43]='255,200,140';GLOWC[41]='255,220,180';FXST[43]='cosmic';BTC[43]=['#fff0e0','#c89a4a','#ffffff'];TIER[41]=[82,24.2,3.2];WRG[41]={1:{rg:250,cd:2.1,spd:320,dm:.9,k:'zap',c:'255,220,150'},2:{rg:230,cd:2.6,spd:260,dm:1.2,k:'seed',c:'180,190,220',big:1}}}catch(e){console.warn('q9r map',e)}

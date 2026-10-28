@@ -171,6 +171,10 @@ setTimeout(()=>{
       SD.onChoose=e=>{q.e10=e;stClose();setTimeout(()=>stSay(STE10[e],()=>{_st();setTimeout(()=>{try{petGive(PETS.findIndex(P=>P&&P.sap10))}catch(_){}try{me.mts=me.mts||[];if(!me.mts.includes(9))me.mts.push(9)}catch(_){}try{sdGive(40,'จบภาค 10')}catch(_){}
         banner={s:(e===1?'🏡 บ้านที่ประตูไม่เคยปิด':'🌳 บ้านที่หยั่งรากลึก')+' · ฉายา «'+pa5EndName()+'» · สัตว์เลี้ยง «ต้นกล้าค้ำแผ่นดิน» · สัตว์ขี่ «ด้วงแบกฟ้า»',t:9};try{stFlash()}catch(_){}try{achCheck()}catch(_){}try{writeSave()}catch(_){}},600)},{cine:1}),250)}},200);return}
     return _st()}}catch(e){}
+  /* v552 ระหว่างขั้นดันฐานฟ้า ธุลีเป็นทั้งคนพาขึ้นฝ่ามือ (เนื้อเรื่อง) และคนพาลงรัง (เล่นซ้ำ) → ให้เลือก ไม่งั้นเล่นซ้ำรังกัดแผ่นดินไม่ได้จนจบเรื่อง */
+  try{const _nc=stNpcClick;window.stNpcClick=stNpcClick=function(){try{const st=stCur();if(curMap===45&&!isDg()&&!SD.on&&st&&st.pa5d&&(me.sty.n|0)<1&&me.ach&&me.ach.stR4&&stTalkKey()==='thu45'){
+    stSay([['thu45','จะปีนขึ้นฝ่ามือท่านธรณินเลยไหม… หรืออยากลงไปฝึกที่รังของราชินีก่อน? รังยังเปิดอยู่ใต้เท้าขวาของท่าน']],()=>{},{choice:[['🌍 ขึ้นฝ่ามือธรณิน (ดันสุดท้าย «ฐานฟ้า» · เนื้อเรื่อง)',1],['🪲 ลงรังกัดแผ่นดิน (เล่นซ้ำ)',2],['ไว้ก่อน',0]]});
+    SD.onChoose=e=>{stClose();if(e===1)setTimeout(()=>{try{_nc()}catch(er){}},200);else if(e===2)setTimeout(()=>{try{instRepeat('pnq')}catch(er){}},200)};return true}}catch(e){}return _nc.apply(this,arguments)}}catch(e){}
   /* ฐานแผ่นดิน: คนจากทุกเมือง + เรนน์ + ธรณินตามช่วงเรื่อง */
   try{const _pz=pzBuild;window.pzBuild=pzBuild=function(M){const r=_pz(M);try{pz5Build()}catch(e){}return r}}catch(e){}
   try{const _pg=pzGroundFx;window.pzGroundFx=pzGroundFx=function(){const r=_pg.apply(this,arguments);try{pz5Ground()}catch(e){}return r}}catch(e){}
