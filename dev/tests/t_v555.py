@@ -32,6 +32,11 @@ async def main():
             await A.wait(400)
             r=await A.ev("""()=>{const ks=[...GX.ch.keys()].filter(k=>k.indexOf('mx554|'+curMap+'|')===0).length;let nd=0;const o=mxNest;window.__nc=0;
               return {on:mxOn(),ks,jobs:[...MX.jobs.values()].filter(J=>J.vis).length,vsp:[...MX.vsp.keys()].filter(k=>k.indexOf(curMap+'|')===0).length,tile:Object.keys(MX.tile).length,tsp:Object.keys(MX.tsp).length,err:(window.__err||[]).slice(-3)}}""")
+            for _ in range(40):
+                if r['jobs']==0: break
+                await A.wait(150)
+                r=await A.ev("""()=>{const ks=[...GX.ch.keys()].filter(k=>k.indexOf('mx554|'+curMap+'|')===0).length;let nd=0;const o=mxNest;window.__nc=0;
+              return {on:mxOn(),ks,jobs:[...MX.jobs.values()].filter(J=>J.vis).length,vsp:[...MX.vsp.keys()].filter(k=>k.indexOf(curMap+'|')===0).length,tile:Object.keys(MX.tile).length,tsp:Object.keys(MX.tsp).length,err:(window.__err||[]).slice(-3)}}""")
             snaps[mp]=await A.ev(SNAP)
             res.append([mp,r])
         ok=all(r['on'] and r['ks']>=2 and r['jobs']==0 for _,r in res)
