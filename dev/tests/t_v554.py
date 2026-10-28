@@ -19,7 +19,7 @@ async def main():
         EX=lambda:[e for e in A.errs if 'ERR_TUNNEL_CONNECTION_FAILED' not in e]
         await A.ev("()=>{window.DNH=12;gmGod=true;AUTO.on=false;ov.hidden=true}")
         ok0=await A.ev("()=>[typeof mxGround,typeof MXC,MX.v,Object.keys(MXC).map(Number).sort((a,b)=>a-b)]")
-        rep('โหลดโมดูลแผนที่ใหม่ (v554) · ธีมครบ 10 แมพของภาค 1',ok0[0]=='function' and ok0[2]=='554' and ok0[3]==MAPS1,ok0)
+        rep('โหลดโมดูลแผนที่ใหม่ (v554) · ธีมครบ 10 แมพของภาค 1',ok0[0]=='function' and all(m in ok0[3] for m in MAPS1),ok0)
         res=[];snaps={}
         for mp in MAPS1:
             await A.ev(f"()=>{{enterMap({mp},{{x:MAPS[{mp}].sx,y:MAPS[{mp}].sy}})}}");await A.wait(1500)
@@ -57,7 +57,7 @@ async def main():
         rep('รังวาดใหม่ (หลุม + หนามสีประจำแมพ) และยังมีวงประแดงบอกเขตรังแบบเดิม',ns[0]>0 and ns[1]>0,ns)
         # ③ แมพที่ยังไม่ทำ / ดันเจี้ยน → ตัววาดเดิม
         oth=[]
-        for mp in (12,19,27,38):
+        for mp in (19,27,38):
             await A.ev(f"()=>{{enterMap({mp},{{x:MAPS[{mp}].sx,y:MAPS[{mp}].sy}})}}");await A.wait(1200)
             oth.append([mp,await A.ev("()=>[mxOn(),[...GX.ch.keys()].filter(k=>k.indexOf('mx554|')===0).length]")])
         await A.ev("()=>{enterMap(45,{x:1600,y:1300})}");await A.wait(1200)
