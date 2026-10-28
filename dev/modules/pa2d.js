@@ -41,7 +41,7 @@ function ptdSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=
   /* มุดดิน: เนินดินเคลื่อนไปหารากแก้ว แล้วโผล่ */if(PTW.bur>0){const B=mons.find(q=>q.t===3&&q.hp>0);PTW.bur-=dt;if(B&&PTW.bp){const u=Math.min(1,(PTW.bd-PTW.bur)/PTMV),p=ptdPath(PTW.bp,u);B.x=p[0];B.y=p[1];B.tx=B.x;B.ty=B.y}if(PTW.bur<=0){PTW.bur=0;ptdErupt(B)}}
   if(dg.ph==='run'){const np=Math.max(1,plCount());
     if(PTW.st==='brk'){PTW.nt-=dt;if(PTW.nt<=0){PTW.wv++;dg.w=PTW.wv;PTW.st='wave';PTW.q=Math.round((6+PTW.wv*3)*(.7+.45*np));PTW.qt=0;fx({k:'msg',s:'🪲 คลื่นที่ '+PTW.wv+'/3 · ฝูงกัดแผ่นดินมุดออกจากอุโมงค์!'});try{sfx('boss')}catch(e){}}}
-    else if(PTW.st==='wave'){PTW.qt-=dt;if(PTW.q>0&&PTW.qt<=0){const k=Math.min(3,PTW.q);ptdSpawn(k);PTW.q-=k;PTW.qt=2.4}
+    else if(PTW.st==='wave'){PTW.qt-=dt;if(PTW.q>0&&PTW.qt<=0){const k=Math.min(2+Math.min(4,np),PTW.q);ptdSpawn(k);PTW.q-=k;PTW.qt=2.4}
       if(PTW.q<=0&&!mons.some(m=>m.ptd&&m.hp>0)){if(PTW.wv>=3){dg.ph='boss';PTW.st='boss';bossCd=1e9;spawnBoss();dg.tl+=DGBOSS;const b=BS();fx({k:'ptdtl',p:[[b.x,b.y]],big:1});fx({k:'msg',s:'🪲 พื้นทั้งโพรงสั่น… ตัวกัดรากยักษ์มุดขึ้นมาจากอุโมงค์ฝั่งเหนือ!'});try{sfx('boss')}catch(e){}}
         else{PTW.st='brk';PTW.nt=6;fx({k:'msg',s:'✨ ฝูงถอยลงรูแล้ว! ยืนในวงทองเพื่อรดยางซ่อมราก'})}}}}
   PTW.bt-=dt;if(PTW.bt<=0){PTW.bt=.4;fx({k:'ptdv',e:PTW.e.map(v=>Math.round(v*10)/10),wv:PTW.wv,st:PTW.st,bur:Math.round(PTW.bur*10)/10,bi:PTW.bi})}}
@@ -51,13 +51,14 @@ function ptdMon(m,dt,pl,spd){if(!PTDI()||(dg.ph!=='run'&&dg.ph!=='boss'))return 
   if(m.ac<=0){m.ac=1;m.akN=((m.akN|0)+1)%100;m.akT=performance.now();PTW.e[bi]=Math.max(0,PTW.e[bi]-(m.t===2?1.6:m.t===0?1.3:1));PTW.hit[bi]=performance.now()}return true}
 function ptdBurrow(m,i){const[ex,ey]=ptDest(i),P=ptRoute(m.x,m.y,ex,ey);PTW.bur=PTW.bd=PTBD;PTW.bi=i;PTW.bp=P;m.tf=PTBD+.15;m.tl=[];
   fx({k:'ptdb',p:P.map(q=>[Math.round(q[0]),Math.round(q[1])]),d:PTBD,mv:PTMV,i});fx({k:'msg',s:'🕳️ ตัวกัดรากยักษ์มุดลงดิน… มันกำลังไปที่รากแก้ว '+'๑๒๓'[i]+'! ไปยืนขวางในวงเตือน (ตีเนินดินได้)'})}
+function ptdDmg(u,d){if(!(d>0))return;if(u===uid)hurt(d);else dmgOut.push([u,d])}
 function ptdErupt(B){const i=PTW.bi,P=PTW.bp,[ex,ey]=P?P[P.length-1]:(B?[B.x,B.y]:[CX,CY]),pl=escPl(),dm=BS().dm*bossX(),blk=pl.some(p=>Math.hypot(p.x-ex,p.y-ey)<PTBR);
-  pl.forEach(p=>{if(Math.hypot(p.x-ex,p.y-ey)<PTBR)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(110*dm)});
+  /* v553: ptdErupt ถูกเรียกจาก ptdSim (นอกรอบมอน · dmgQ ถูกล้างก่อนรอบมอน) → ลงตรง */pl.forEach(p=>{if(Math.hypot(p.x-ex,p.y-ey)<PTBR)ptdDmg(p.u,Math.round(60*dm))});
   if(i>=0&&PTW.e[i]>0){PTW.e[i]=Math.max(0,PTW.e[i]-(blk?3.5:7));PTW.hit[i]=performance.now()}
   if(B){B.tf=0;B.inv=0;B.x=ex;B.y=ey;B.tx=ex;B.ty=ey;B.hx=ex;B.hy=ey;if(blk)B.stun=2.5;B.w1=Math.max(B.w1||0,3)}
   PTW.bi=-1;PTW.bp=null;fx({k:'ptde',x:Math.round(ex),y:Math.round(ey),b:blk?1:0});fx({k:'msg',s:blk?'🛡️ ขวางไว้ได้! รากแก้วเสียหายแค่ครึ่งเดียว · ตัวกัดรากยักษ์มึนงง':'💥 ตัวกัดรากยักษ์โผล่ขึ้นมากัดรากแก้ว!'})}
 function ptdAI(m,dt,pl,enr,dm){if(m.t!==3)return;const f=m.hp/m.mh;
-  if(m.ql){m.ql.t-=dt;if(m.ql.t<=0){const L=m.ql.l;pl.forEach(p=>{if(L.some(l=>hdSegD(p.x,p.y,l)<46))dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(90*dm)});ptdE().forEach(([ex,ey],i)=>{if(PTW.e[i]>0&&L.some(l=>hdSegD(ex,ey,l)<60)){PTW.e[i]=Math.max(0,PTW.e[i]-5);PTW.hit[i]=performance.now()}});fx({k:'ptdls',l:L});m.ql=null}}
+  if(m.ql){m.ql.t-=dt;if(m.ql.t<=0){const L=m.ql.l;pl.forEach(p=>{if(L.some(l=>hdSegD(p.x,p.y,l)<46))dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(75*dm)});ptdE().forEach(([ex,ey],i)=>{if(PTW.e[i]>0&&L.some(l=>hdSegD(ex,ey,l)<60)){PTW.e[i]=Math.max(0,PTW.e[i]-5);PTW.hit[i]=performance.now()}});fx({k:'ptdls',l:L});m.ql=null}}
   if(m.stun>0||m.inv||PTW.bur>0)return;
   m.w1=(m.w1===undefined?5:m.w1)-dt;if(m.w1<=0&&!m.ql&&pl.length){m.w1=enr?8:11;const L=[],n=enr?3:2;for(let i=0;i<n;i++){const p=pl[(Math.random()*pl.length)|0];L.push(hdfLine(i?{x:CX+rnd(-200,200),y:CY+rnd(-200,200)}:p))}m.ql={t:1.5,l:L};fx({k:'ptdl',l:L,dur:1.5});fx({k:'msg',s:'🪲 ตัวกัดรากยักษ์ตะกุยดิน! ออกจากแนวรอยแยก'})}
   m.w2=(m.w2===undefined?12:m.w2)-dt;if(m.w2<=0&&!m.ql){m.w2=enr?12:16;const A=ptdAlive();if(A.length)ptdBurrow(m,A[(Math.random()*A.length)|0]);return}

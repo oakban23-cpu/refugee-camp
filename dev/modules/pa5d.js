@@ -72,7 +72,7 @@ function pfnSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=
   PFC.forEach(([cx,cy],i)=>{const blk=frag.some(m=>Math.hypot(m.x-cx,(m.y-cy)*1.2)<PFCR*.9),pp=pl.some(p=>Math.hypot(p.x-cx,(p.y-cy)*1.3)<PFCR),st=PFN.dis>0?-2:blk?-1:PFN.man[i]?2:pp?1:0;PFN.cs[i]=st;if(st>0)act++});
   const rate=(hf<.33?.8:.5)-PFN.red-act*.32*PFN.str;PFN.s=Math.max(0,Math.min(100,PFN.s+rate*dt));PFN.pr=rate;
   for(const w of PFN.wt){w.t-=dt;if(w.t<=0){w.dead=1;const p=pl.find(q=>q.u===w.u),px=p?p.x:w.x,py=p?p.y:w.y,inC=PFC.some(([cx,cy],i)=>PFN.cs[i]>0&&Math.hypot(px-cx,(py-cy)*1.3)<PFCR);
-      pl.forEach(q=>{if(Math.hypot(q.x-px,(q.y-py)*1.6)<90)pfnDmg(q.u,Math.round((inC?55:110)*dm))});if(!inC)PFN.s=Math.min(100,PFN.s+2.5);fx({k:'pfnwl',x:Math.round(px),y:Math.round(py),c:inC?1:0})}}PFN.wt=PFN.wt.filter(w=>!w.dead);
+      pl.forEach(q=>{if(Math.hypot(q.x-px,(q.y-py)*1.6)<90)pfnDmg(q.u,Math.round((inC?45:90)*dm))});if(!inC)PFN.s=Math.min(100,PFN.s+2.5);fx({k:'pfnwl',x:Math.round(px),y:Math.round(py),c:inC?1:0})}}PFN.wt=PFN.wt.filter(w=>!w.dead);
   if(PFN.ws>0){PFN.ws-=dt;if(B){B.tf=Math.max(B.tf||0,.3);if(PFN.wg-B.hp>=PFN.wk){PFN.ws=0;B.tf=0;B.stun=3;fx({k:'pfnws',s:'int'});fx({k:'msg',s:'💥 ขัดได้! เงาผู้แบกเงียบเสียงลง… วงยกยังสว่างอยู่'})}
       else if(PFN.ws<=0){PFN.ws=0;B.tf=0;PFN.dis=6;PFN.s=Math.min(100,PFN.s+4);fx({k:'pfnws',s:'done'});fx({k:'msg',s:'🌑 «วางลงเถิด…» วงยกทุกวงดับลง 6 วิ!'})}}else PFN.ws=0}
   PFN.at-=dt;if(PFN.at<=0&&PFN.al.length<PFAL.length){PFN.at=22;pfnAlly(PFN.al.length,B)}

@@ -130,16 +130,16 @@ async def main():
         gn=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const Bm=mons.find(m=>m.t===3&&m.hp>0);Bm.w1=999;Bm.w2=999;Bm.w3=999;Bm.stun=0;mons=mons.filter(m=>m.t===3);PNQ.f=100;PNQ.eggs=[];me.x=PNBR[0][0];me.y=PNBR[0][1];
           pnqGnaw(Bm);await w(1300);const a=[PNQ.gs,Math.round(Math.hypot(Bm.x-PNGN.x,Bm.y-PNGN.y)),PNQ.br.slice(),PNQ.gk>0];const f0=PNQ.f;await w(2000);const rate=(f0-PNQ.f)/2;
           Bm.hp-=PNQ.gk+10;await w(400);const b=[PNQ.gn,PNQ.gs,Bm.stun>0,PNQ.rk.length>0,PNRK.length>0,PNHB.some(h=>h.k==='int')];return {a,rate:Math.round(rate*100)/100,b}}""")
-        rep('ราชินีพุ่งไปกัดเท้าธรณิน · ยืนในวงยันเท้า = กัดเบาลง (×0.75 ต่อวง) · ตีถึงเกณฑ์ = ขัด + มึน + หินร่วงทั้งรัง',gn['a'][0]=='gnaw' and gn['a'][1]<6 and gn['a'][2]==[1,0] and gn['a'][3] and 1.5<=gn['rate']<=1.95 and gn['b'][0]==0 and gn['b'][1]=='' and gn['b'][2] and gn['b'][3] and gn['b'][4] and gn['b'][5],gn)
+        rep('ราชินีพุ่งไปกัดเท้าธรณิน · ยืนในวงยันเท้า = กัดเบาลง (2%/วิ ×0.75 ต่อวง) · ตีถึงเกณฑ์ = ขัด + มึน + หินร่วงทั้งรัง',gn['a'][0]=='gnaw' and gn['a'][1]<6 and gn['a'][2]==[1,0] and gn['a'][3] and 1.3<=gn['rate']<=1.7 and gn['b'][0]==0 and gn['b'][1]=='' and gn['b'][2] and gn['b'][3] and gn['b'][4] and gn['b'][5],gn)
         await A.pg.set_viewport_size({'width':1280,'height':720})
         ge=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const Bm=mons.find(m=>m.t===3&&m.hp>0);Bm.stun=0;Bm.w1=999;Bm.w2=999;Bm.w3=999;PNQ.rk=[];await w(300);mons=mons.filter(m=>m.t===3);me.x=CX+190;me.y=CY-30;const f0=PNQ.f;pnqGnaw(Bm);await w(2600);return f0}""")
         await A.ev(CLEAN);await A.pg.screenshot(path=SH+'t_gnaw.jpg',quality=82)
         ge2=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));await w(5200);const Bm=mons.find(m=>m.t===3&&m.hp>0);return [PNQ.gn,PNQ.gs,PNQ.f,PNQ.rk.length>0||PNRK.length>0,Bm&&Bm.tf<=0]}""")
         await A.pg.set_viewport_size({'width':390,'height':844})
         drop=ge-ge2[2]
-        rep('ไม่มีใครขัด/ยันเท้า = ราชินีกัดครบ 6 วิ (ธรณิน −13.8%) แล้วหินร่วง',ge2[0]==0 and ge2[1]=='' and 12.5<=drop<=15 and ge2[3] and ge2[4],[ge,ge2,drop])
+        rep('ไม่มีใครขัด/ยันเท้า = ราชินีกัดครบ 6 วิ (ธรณิน −12% · v553 เดิม −13.8%) แล้วหินร่วง',ge2[0]==0 and ge2[1]=='' and 10.8<=drop<=13.2 and ge2[3] and ge2[4],[ge,ge2,drop])
         ac=await A.ev("async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));"+GOD5+"const Bm=mons.find(m=>m.t===3&&m.hp>0);Bm.stun=0;Bm.ac2=null;Bm.w2=999;Bm.w3=999;PNQ.gn=0;PNQ.rk=[];mons=mons.filter(m=>m.t===3);me.x=Bm.x+150;me.y=Bm.y+40;Bm.w1=0;await w(300);const warn=PNAC.filter(e=>!e.s).length;await w(1300);const hit=me.hp<me.mh;"+UNGOD+"Bm.w1=999;return [warn,hit,PNAC.some(e=>e.s)]}")
-        rep('กรวยกรด: เตือนเป็นกรวยสีเขียว 1.1 วิ แล้วพ่น ยืนในกรวยโดน',ac[0]>=1 and ac[1] and ac[2],ac)
+        rep('กรวยกรด: เตือนเป็นกรวยสีเขียว 1.3 วิ แล้วพ่น ยืนในกรวยโดน',ac[0]>=1 and ac[1] and ac[2],ac)
         el=await A.ev("async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const Bm=mons.find(m=>m.t===3&&m.hp>0);PNQ.eggs=[];Bm.stun=0;Bm.w3=0;await w(400);const n=PNQ.eggs.length;Bm.w3=999;Bm.hp=Bm.mh*.45;await w(500);const r=[n,PNQ.mo,mons.filter(m=>m.pnq&&m.t===0&&m.hp>0).length];PNQ.eggs=[];return r}")
         rep('ราชินีวางไข่ 3 ฟองขึ้นไป · เลือดต่ำกว่า 50% = ลอกคราบ (เร็วขึ้น) + ลูกฝูง',el[0]>=3 and el[1]==1 and el[2]>=2,el)
         for i in range(30):

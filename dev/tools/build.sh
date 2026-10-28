@@ -12,7 +12,10 @@ html=open('/mnt/user-data/outputs/refugee-online/public/index.html',encoding='ut
 new,n=re.subn(r'<script>\n/\* ตัวเชื่อมออนไลน์.*?</script>\n','',html,count=1,flags=re.DOTALL)
 if n!=1:
     new,n=re.subn(r'<script>\nfunction localRoom\(H\)\{.*?</script>\n','',html,count=1,flags=re.DOTALL)
+if n!=1:
+    new,n=re.subn(r'<script>\nconst RFG_OFFU=.*?</script>\n','',html,count=1,flags=re.DOTALL)
 assert n==1
+assert 'rfgLock' not in new and 'RFG_SRV=1' not in new
 open('/mnt/user-data/outputs/refugee-camp.html','w',encoding='utf-8').write(new)
 PY
 for f in $SRC/hd-*.webp; do cp $f $OUT/refugee-online/public/; cp $f $OUT/; done

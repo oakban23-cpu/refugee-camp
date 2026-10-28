@@ -33,9 +33,11 @@ function pnqEggs(n){let k=0;for(let tr=0;tr<80&&k<n;tr++){const a=Math.random()*
 function pnqRocks(int){const pl=escPl(),np=Math.max(1,plCount()),n=5+np*2,L=[];for(const p of pl)L.push([p.x+rnd(-30,30),p.y+rnd(-20,20)]);for(let tr=0;tr<90&&L.length<n+pl.length;tr++){const a=Math.random()*6.283,d=Math.random()*(DR-60),x=CX+Math.cos(a)*d,y=CY+Math.sin(a)*d;if(pnqFootIn(x,y,20))continue;L.push([x,y])}
   const P=L.map(([x,y])=>[Math.round(x),Math.round(y)]);P.forEach(([x,y],i)=>PNQ.rk.push({x,y,t:1.5+i*.06}));fx({k:'pnqr',p:P,d:1.5});fx({k:'msg',s:int?'🪨 ราชินีสะบัดหัว… หินร่วงจากฝ่าเท้าธรณิน!':'🪨 เท้าธรณินสั่นสะท้าน… หินร่วงลงมาทั้งรัง!'})}
 function pnqGnaw(m){PNQ.gn=6.9;PNQ.gs='move';PNQ.gt=0;PNQ.gx=m.x;PNQ.gy=m.y;m.tf=7.4;m.tl=[];
-  /* เกณฑ์ขัด: ~3.6 วิของดาเมจเฉลี่ยของทีมใน 20 วิที่ผ่านมา (อย่างน้อย 1.2% · อย่างมาก 4% ของเลือดบอส) */const H=PNQ.hs,now=performance.now()/1000;let dps=0;if(H.length>1){const a=H[0],b=H[H.length-1];if(b[0]-a[0]>2)dps=Math.max(0,(a[1]-b[1])/(b[0]-a[0]))}
-  PNQ.gk=Math.round(Math.max(m.mh*.012,Math.min(m.mh*.04,dps*3.6||m.mh*.04)));
+  /* เกณฑ์ขัด: ~2.8 วิของดาเมจเฉลี่ยของทีมใน 20 วิที่ผ่านมา (อย่างน้อย 1.2% · อย่างมาก 4% ของเลือดบอส) · v553 เดิม 3.6 วิ */const H=PNQ.hs,now=performance.now()/1000;let dps=0;if(H.length>1){const a=H[0],b=H[H.length-1];if(b[0]-a[0]>2)dps=Math.max(0,(a[1]-b[1])/(b[0]-a[0]))}
+  PNQ.gk=Math.round(Math.max(m.mh*.012,Math.min(m.mh*.04,dps*2.8||m.mh*.04)));
   fx({k:'pnqg',s:'move'});fx({k:'msg',s:'🦷 ราชินีพุ่งไปกัดเท้าธรณิน! รุมตีให้มันปล่อย หรือเข้าไปยืนยันเท้าในวงทอง'})}
+/* v553: ดาเมจที่คิดใน pnqSim อยู่นอกรอบมอน (dmgQ ถูกล้างก่อนรอบมอน) → ลงตรง */
+function pnqDmg(u,d){if(!(d>0))return;if(u===uid)hurt(d);else dmgOut.push([u,d])}
 function pnqSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
   if(PNQ.f<=0){dgEnd(0,'ธรณินทรุดลงหนึ่งเข่า… เท้าของเขาแบกต่อไม่ไหว');return}
@@ -43,19 +45,19 @@ function pnqSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=
   /* มอนเดินทะลุเท้าไม่ได้ */for(const m of mons){if(m.hp<=0||(m.t===3&&PNQ.gn>0))continue;const dx=(m.x-PNF.x)/PNF.rx,dy=(m.y-PNF.y)/PNF.ry,d=Math.hypot(dx,dy);if(d<1&&d>.001){m.x=PNF.x+dx/d*PNF.rx;m.y=PNF.y+dy/d*PNF.ry}}
   /* ไข่: เหยียบ / ฟัก */if(PNQ.eggs.length){for(const e of PNQ.eggs){e.t-=dt;const on=pl.some(p=>Math.hypot(p.x-e.x,(p.y-e.y)*1.2)<40);e.c=on?e.c+dt:Math.max(0,e.c-dt*.5);
       if(e.c>=.8){e.dead=1;fx({k:'pnqcr',i:e.i,x:e.x,y:e.y})}else if(e.t<=0){e.dead=1;pnqSpawn(2,1,e.x,e.y);fx({k:'pnqht',i:e.i,x:e.x,y:e.y})}}PNQ.eggs=PNQ.eggs.filter(e=>!e.dead)}
-  /* หินร่วง (โฮสต์คิดดาเมจ) */if(PNQ.rk.length){for(const r of PNQ.rk){r.t-=dt;if(r.t<=0){r.dead=1;pl.forEach(p=>{if(Math.hypot(p.x-r.x,(p.y-r.y)*2)<58)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(70*dm)})}}PNQ.rk=PNQ.rk.filter(r=>!r.dead)}
+  /* หินร่วง (โฮสต์คิดดาเมจ) */if(PNQ.rk.length){for(const r of PNQ.rk){r.t-=dt;if(r.t<=0){r.dead=1;pl.forEach(p=>{if(Math.hypot(p.x-r.x,(p.y-r.y)*2)<58)pnqDmg(p.u,Math.round(60*dm))})}}PNQ.rk=PNQ.rk.filter(r=>!r.dead)}
   /* บันทึกเลือดบอส (ไว้คิดเกณฑ์ขัด) */if(B){PNQ.ht-=dt;if(PNQ.ht<=0){PNQ.ht=1;PNQ.hs.push([now,B.hp]);if(PNQ.hs.length>21)PNQ.hs.shift()}}
   /* วงยันเท้า */let nb=0;PNBR.forEach(([bx,by],i)=>{const o=pl.some(p=>Math.hypot(p.x-bx,(p.y-by)*1.3)<PNBRR)?1:0;PNQ.br[i]=o;nb+=o});
   /* กัดเท้า */if(PNQ.gn>0){PNQ.gn-=dt;PNQ.gt+=dt;
     if(!B){PNQ.gn=0;PNQ.gs=''}else if(PNQ.gn<=0&&PNQ.gs==='move'){PNQ.gn=0;PNQ.gs='';B.tf=0}
     else if(PNQ.gs==='move'){const u=Math.min(1,PNQ.gt/.9);B.x=PNQ.gx+(PNGN.x-PNQ.gx)*u;B.y=PNQ.gy+(PNGN.y-PNQ.gy)*u;B.tx=B.x;B.ty=B.y;B.tf=Math.max(B.tf||0,.4);if(u>=1){PNQ.gs='gnaw';PNQ.gh=B.hp;fx({k:'pnqg',s:'gnaw',gh:Math.round(B.hp),gk:PNQ.gk,t:+PNQ.gn.toFixed(2)})}}
-    else if(PNQ.gs==='gnaw'){const mul=nb>=2?.5:nb===1?.75:1;PNQ.f=Math.max(0,PNQ.f-2.3*mul*dt);PNQ.hit=performance.now();B.tf=Math.max(B.tf||0,.4);B.x=PNGN.x;B.y=PNGN.y;B.tx=B.x;B.ty=B.y;
+    else if(PNQ.gs==='gnaw'){const mul=nb>=2?.5:nb===1?.75:1;PNQ.f=Math.max(0,PNQ.f-2*mul*dt);PNQ.hit=performance.now();B.tf=Math.max(B.tf||0,.4);B.x=PNGN.x;B.y=PNGN.y;B.tx=B.x;B.ty=B.y;
       if(PNQ.gh-B.hp>=PNQ.gk){PNQ.gn=0;B.tf=0;B.stun=3;PNQ.gs='';fx({k:'pnqg',s:'int'});fx({k:'msg',s:'💥 ขัดได้! ราชินีปล่อยเท้าธรณินแล้วมึนงง'});pnqRocks(1)}
       else if(PNQ.gn<=0){PNQ.gs='';PNQ.gn=0;B.tf=0;fx({k:'pnqg',s:'end'});pnqRocks(0)}}}
   else if(nb>0&&PNQ.f<100&&!mons.some(m=>m.t!==3&&m.hp>0&&pnqFootIn(m.x,m.y,170))){PNQ.f=Math.min(100,PNQ.f+.6*nb*dt)}
   if(dg.ph==='run'){const np=Math.max(1,plCount());
     if(PNQ.st==='brk'){PNQ.nt-=dt;if(PNQ.nt<=0){PNQ.wv++;dg.w=PNQ.wv;PNQ.st='wave';PNQ.q=Math.round((5+PNQ.wv*3)*(.7+.45*np));PNQ.qt=0;pnqEggs(3+PNQ.wv+Math.min(2,np-1));fx({k:'msg',s:'🥚 คลื่นที่ '+PNQ.wv+'/2 · ไข่เต้นตุบ ๆ ทั่วรัง และฝูงมุดออกจากอุโมงค์!'});try{sfx('boss')}catch(e){}}}
-    else if(PNQ.st==='wave'){PNQ.qt-=dt;if(PNQ.q>0&&PNQ.qt<=0){const k=Math.min(3,PNQ.q);pnqSpawn(k);PNQ.q-=k;PNQ.qt=2.6}
+    else if(PNQ.st==='wave'){PNQ.qt-=dt;if(PNQ.q>0&&PNQ.qt<=0){const k=Math.min(2+Math.min(4,np),PNQ.q);pnqSpawn(k);PNQ.q-=k;PNQ.qt=2.6}
       if(PNQ.q<=0&&!PNQ.eggs.length&&!mons.some(m=>m.pnq&&m.hp>0)){if(PNQ.wv>=2){dg.ph='boss';PNQ.st='boss';bossCd=1e9;spawnBoss();dg.tl+=DGBOSS;const b=BS();fx({k:'pnqtl',p:[[b.x,b.y]],big:1});fx({k:'msg',s:'👑 ทั้งรังสั่น… ราชินีกัดแผ่นดินคลานขึ้นมาจากรัง!'});try{sfx('boss')}catch(e){}}
         else{PNQ.st='brk';PNQ.nt=6;fx({k:'msg',s:'✨ คลื่นแรกผ่านไปแล้ว! ยืนในวงยันเท้าเพื่อให้ธรณินพักแรง'})}}}}
   PNQ.bt-=dt;if(PNQ.bt<=0){PNQ.bt=.4;fx({k:'pnqv',f:Math.round(PNQ.f*10)/10,wv:PNQ.wv,st:PNQ.st,br:PNQ.br.slice(),mo:PNQ.mo,gn:Math.round(PNQ.gn*10)/10,gs:PNQ.gs,gh:Math.round(PNQ.gh),gk:PNQ.gk,e:PNQ.eggs.map(e=>[e.i,e.x,e.y,Math.round(e.t*10)/10,Math.round(e.c*100)/100])})}}
@@ -67,9 +69,9 @@ function pnqMon(m,dt,pl,spd){if(!PNQI()||(dg.ph!=='run'&&dg.ph!=='boss')||m.t===
 /* ท่าบอส (โฮสต์) */
 function pnqAI(m,dt,pl,enr,dm){if(m.t!==3)return;const f=m.hp/m.mh,sp=(PNQ.mo?.82:1)*(enr?.85:1);
   if(f<.5&&!PNQ.mo){PNQ.mo=1;fx({k:'pnqmo',x:Math.round(m.x),y:Math.round(m.y)});fx({k:'msg',s:'🪲 ราชินีลอกคราบ! เปลือกใหม่ยังนิ่ม แต่มันเร็วขึ้น'});pnqSpawn(2,1,m.x,m.y)}
-  if(m.ac2){m.ac2.t-=dt;if(m.ac2.t<=0){const A=m.ac2;pl.forEach(p=>{const dx=p.x-A.x,dy=p.y-A.y,d=Math.hypot(dx,dy);if(d<A.r&&Math.abs(Math.atan2(Math.sin(Math.atan2(dy,dx)-A.a),Math.cos(Math.atan2(dy,dx)-A.a)))<A.w)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(105*dm)});fx({k:'pnqas',x:A.x,y:A.y,a:+A.a.toFixed(3),r:A.r,w:A.w});m.ac2=null}}
+  if(m.ac2){m.ac2.t-=dt;if(m.ac2.t<=0){const A=m.ac2;pl.forEach(p=>{const dx=p.x-A.x,dy=p.y-A.y,d=Math.hypot(dx,dy);if(d<A.r&&Math.abs(Math.atan2(Math.sin(Math.atan2(dy,dx)-A.a),Math.cos(Math.atan2(dy,dx)-A.a)))<A.w)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round(75*dm)});fx({k:'pnqas',x:A.x,y:A.y,a:+A.a.toFixed(3),r:A.r,w:A.w});m.ac2=null}}
   if(m.stun>0||m.inv||PNQ.gn>0)return;
-  m.w1=(m.w1===undefined?5:m.w1)-dt;if(m.w1<=0&&!m.ac2&&pl.length){m.w1=(enr?7:9)*sp;const p=pl[(Math.random()*pl.length)|0],a=Math.atan2(p.y-m.y,p.x-m.x);m.ac2={t:1.1,x:Math.round(m.x),y:Math.round(m.y),a,r:340,w:.44};fx({k:'pnqa',x:m.ac2.x,y:m.ac2.y,a:+a.toFixed(3),r:340,w:.44,dur:1.1});fx({k:'msg',s:'🟢 ราชินีง้างคอ… กรดกำลังมา! หลบออกนอกกรวยสีเขียว'})}
+  m.w1=(m.w1===undefined?5:m.w1)-dt;if(m.w1<=0&&!m.ac2&&pl.length){m.w1=(enr?7:9)*sp;const p=pl[(Math.random()*pl.length)|0],a=Math.atan2(p.y-m.y,p.x-m.x);m.ac2={t:1.3,x:Math.round(m.x),y:Math.round(m.y),a,r:340,w:.44};fx({k:'pnqa',x:m.ac2.x,y:m.ac2.y,a:+a.toFixed(3),r:340,w:.44,dur:1.3});fx({k:'msg',s:'🟢 ราชินีง้างคอ… กรดกำลังมา! หลบออกนอกกรวยสีเขียว'})}
   m.w3=(m.w3===undefined?8:m.w3)-dt;if(m.w3<=0){m.w3=(enr?10:14)*sp;pnqEggs((enr?4:3)+(pl.length>2?1:0));fx({k:'msg',s:'🥚 ราชินีวางไข่! ไปยืนทับให้แตกก่อนฟัก'})}
   m.w2=(m.w2===undefined?16:m.w2)-dt;if(m.w2<=0&&!m.ac2){m.w2=(enr?14:20)*sp;pnqGnaw(m)}}
 function pnqFx(o){if(!o)return false;const n=performance.now(),own=isHost()&&PNQI();
