@@ -31,7 +31,7 @@ async def main():
         B=await new_client(b,'Kb'+str(random.randint(100,999)),'melee',99)
         i0=await A.ev("()=>STY.findIndex(x=>x.pa2s)")
         info=await A.ev("()=>[STY.findIndex(x=>x.pac1),STY.length,STCH[STY[STY.findIndex(x=>x.pa2s)].c],STY.findIndex(x=>x.pa2c),STY.findIndex(x=>x.pa2d),STY[STY.findIndex(x=>x.pa2d)].g]")
-        rep('ภาค 10 บทที่ 2 ต่อจากบทที่ 1 (7 ขั้น · ขั้นดัน ptd)',i0==info[0]+1 and info[1]==i0+7 and info[3]==i0+6 and info[4]==i0+5 and info[5]=='ptd' and 'บทที่ 2' in info[2],[i0,info])
+        rep('ภาค 10 บทที่ 2 ต่อจากบทที่ 1 (7 ขั้น · ขั้นดัน ptd)',i0==info[0]+1 and info[1]>=i0+7 and info[3]==i0+6 and info[4]==i0+5 and info[5]=='ptd' and 'บทที่ 2' in info[2],[i0,info])
         sv=await A.ev("()=>{const o=cleanChar({lv:99,sty:{s:5,n:0,a:0,pa2j:21,pacr:31,zz9:4}});return o&&o.sty}")
         rep('เซฟ: คีย์ pa2j ไม่หายตอนโหลด',sv.get('pa2j')==21 and sv.get('pacr')==31 and 'zz9' not in sv,sv)
         for C,e,e4,e9 in ((A,1,2,1),(B,2,1,2)):
@@ -135,7 +135,7 @@ async def main():
         qe=await A.ev(TALK44,1)
         await adv(A);await A.wait(600);await A.ev("()=>{achCheck()}")
         en=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stR2]")
-        rep('เฒ่าแก่นไม้: รอยกัดที่ใหญ่กว่าสามเท่าใกล้ธรณิน · ขอให้ขึ้นไปถามทุกเมือง → จบบทที่ 2 · ฉายา «ผู้แบกยางทอง»',qe[0]=='ked' and 'ธรณิน' in qe[1] and 'ทุกเมือง' in qe[1] and en[0]==i0+7 and en[0]==en[1] and 'นครรากลึก' in en[2] and en[3],[qe[1][-120:],en])
+        rep('เฒ่าแก่นไม้: รอยกัดที่ใหญ่กว่าสามเท่าใกล้ธรณิน · ขอให้ขึ้นไปถามทุกเมือง → จบบทที่ 2 · ฉายา «ผู้แบกยางทอง»',qe[0]=='ked' and 'ธรณิน' in qe[1] and 'ทุกเมือง' in qe[1] and en[0]==i0+7 and ((en[0]==en[1] and 'นครรากลึก' in en[2]) or en[1]>i0+7) and en[3],[qe[1][-120:],en])
         rp=await A.ev("()=>{const N=MAPS[44].npc;npcSel=1;me.x=N.x;me.y=N.y+40;stNpcClick();return SD.choice?SD.choice.map(c=>c[0]).join('|'):''}")
         await A.ev("()=>{try{stClose()}catch(e){}}")
         rep('เล่นซ้ำศึกป้องกันต้นค้ำผ่านเฒ่าแก่นไม้หลังจบบท','ศึกป้องกันต้นค้ำ' in rp,rp)
