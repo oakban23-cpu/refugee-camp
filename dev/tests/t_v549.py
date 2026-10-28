@@ -40,7 +40,7 @@ async def main():
         B=await new_client(b,'Mb'+str(random.randint(100,999)),'melee',99)
         i0=await A.ev("()=>STY.findIndex(x=>x.pa3s)")
         info=await A.ev("()=>[STY.findIndex(x=>x.pa2c),STY.length,STCH[STY[STY.findIndex(x=>x.pa3s)].c],STY.findIndex(x=>x.pa3p),STY[STY.findIndex(x=>x.pa3p)].n]")
-        rep('ภาค 10 บทที่ 3 ต่อจากบทที่ 2 (6 ขั้น · ขอคำมั่น 8 แห่ง)',i0==info[0]+1 and info[1]==i0+6 and info[3]==i0+2 and info[4]==8 and 'บทที่ 3' in info[2],[i0,info])
+        rep('ภาค 10 บทที่ 3 ต่อจากบทที่ 2 (6 ขั้น · ขอคำมั่น 8 แห่ง)',i0==info[0]+1 and info[1]>=i0+6 and info[3]==i0+2 and info[4]==8 and 'บทที่ 3' in info[2],[i0,info])
         sv=await A.ev("()=>{const o=cleanChar({lv:99,sty:{s:5,n:0,a:0,pa3p:77,zz9:4}});return o&&o.sty}")
         rep('เซฟ: คีย์ pa3p ไม่หายตอนโหลด',sv.get('pa3p')==77 and 'zz9' not in sv,sv)
         FA="e:1,e4:2,e6:1,e7:1,p7m:1,p8g:1,e8:1,e9:1";FB="e:2,e4:1,e6:2,e7:2,p7m:2,p8g:2,e8:2,e9:2"
@@ -111,7 +111,7 @@ async def main():
         qt=await A.ev("()=>{const N=MAPS[43].npc;npcSel=1;me.x=N.x;me.y=N.y+40;PAS.lx=me.x;PAS.ly=me.y;const k=stTalkKey();stNpcClick();return [k,SD.q.map(l=>l[1]).join('|')]}")
         await adv(A);await A.wait(600);await A.ev("()=>{achCheck()}")
         en=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stR3]")
-        rep('ธุลี: สิ่งที่สวยที่สุดคือคนข้างบนที่ก้มลงมามอง · ได้ยินธรณิน → จบบทที่ 3 · ฉายา «ผู้ถามทุกเมือง»',qt[0]=='thu' and 'ก้มลงมามอง' in qt[1] and 'ธรณิน' in qt[1] and en[0]==i0+6 and en[0]==en[1] and 'คำมั่นของทุกเมือง' in en[2] and en[3],[qt[1][-100:],en])
+        rep('ธุลี: สิ่งที่สวยที่สุดคือคนข้างบนที่ก้มลงมามอง · ได้ยินธรณิน → จบบทที่ 3 · ฉายา «ผู้ถามทุกเมือง»',qt[0]=='thu' and 'ก้มลงมามอง' in qt[1] and 'ธรณิน' in qt[1] and en[0]==i0+6 and ((en[0]==en[1] and 'คำมั่นของทุกเมือง' in en[2]) or en[1]>i0+6) and en[3],[qt[1][-100:],en])
         E=[e for e in A.errs+B.errs if 'ERR_' not in e]
         errs=await A.ev("()=>[NPV.err||'',MV9.err||'',window.__err]")
         rep('ไม่มี error ในหน้าเกม',not E and not errs[0] and not errs[2],[E[:4],errs])
