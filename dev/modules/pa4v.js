@@ -91,12 +91,13 @@ function thrSpr(){if(THRS.c)return THRS;const cv=document.createElement('canvas'
   /* ด้านบนจางหายในความมืด */c.globalCompositeOperation='destination-out';{const fg=c.createLinearGradient(0,-1080,0,-930);fg.addColorStop(0,'rgba(0,0,0,1)');fg.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=fg;c.fillRect(-THRS.bx,-THRS.by,THRS.W,170)}c.globalCompositeOperation='source-over';
   THRS.c=cv;return THRS}
 /* วาดธรณิน + ส่วนเคลื่อนไหว (หายใจ · ตา · รอยร้าวเรือง · ฝุ่นร่วงจากแผ่นหิน) */
-function thrDraw(x,y,T,o){o=o||{};const S=thrSpr(),br=Math.sin(T*.55)*3,tired=o.tired||0;g.drawImage(S.c,x-S.bx,y-S.by+br);
-  g.save();g.globalCompositeOperation='lighter';const pu=.55+.45*Math.sin(T*1.1);
-  for(const[dx,dy,rr]of[[-40,-540,60],[60,-470,46],[-150,-420,40],[150,-400,40],[170,-640,40],[-170,-650,40]])glowAt(x+dx,y+dy+br,rr,'255,160,60',(.1+.08*pu)*(1-tired*.6));
-  const bl=(T%6.4)>6.1?.15:1;for(const s of[-1,1]){glowAt(x+s*36,y-708+br,22,'255,180,80',(.5+.2*pu)*bl*(1-tired*.7));g.fillStyle='rgba(255,210,120,'+(.85*bl*(1-tired*.7))+')';g.beginPath();g.ellipse(x+s*36,y-708+br,9,3.4*bl,s*.15,0,7);g.fill()}
-  g.restore();
-  if(!LOWQ){for(let k=0;k<6;k++){const p=(T*.25+k/6)%1,dx=Math.sin(k*2.3)*420;g.fillStyle='rgba(150,130,100,'+(.6*(1-p))+')';g.fillRect(x+dx,y-870+p*400,2.4,2.4)}}}
+function thrDraw(x,y,T,o){o=o||{};const S=thrSpr(),sl=o.sleep?1:0,br=Math.sin(T*(sl?.32:.55))*3,tired=o.tired||0;g.drawImage(S.c,x-S.bx,y-S.by+br);
+  g.save();g.globalCompositeOperation='lighter';const pu=.55+.45*Math.sin(T*1.1),cg=sl?'255,200,110':'255,160,60';
+  for(const[dx,dy,rr]of[[-40,-540,60],[60,-470,46],[-150,-420,40],[150,-400,40],[170,-640,40],[-170,-650,40]])glowAt(x+dx,y+dy+br,rr,cg,(.1+.08*pu)*(1-tired*.6)*(sl?.7:1));
+  if(sl){g.restore();/* หลับ: เปลือกตาหินปิด · หายใจช้า · z ลอย */for(const s of[-1,1]){g.fillStyle='#5a5248';g.beginPath();g.ellipse(x+s*36,y-708+br,20,9,s*.15,0,7);g.fill();g.strokeStyle='rgba(24,16,10,.9)';g.lineWidth=3;g.beginPath();g.arc(x+s*36,y-713+br,13,.35,Math.PI-.35);g.stroke()}
+    if(!LOWQ){g.save();g.font='bold 22px system-ui';g.textAlign='center';for(let k=0;k<3;k++){const p=(T*.18+k/3)%1;g.globalAlpha=Math.sin(p*Math.PI)*.75;g.fillStyle='#f4e8cc';g.font='bold '+(16+p*18|0)+'px system-ui';g.fillText('z',x+70+p*70,y-770-p*90+br)}g.restore()}}
+  else{const bl=(T%6.4)>6.1?.15:1,cm=o.calm?1:0;for(const s of[-1,1]){glowAt(x+s*36,y-708+br,22,'255,180,80',(.5+.2*pu)*bl*(1-tired*.7));g.fillStyle=cm?'rgba(255,226,160,'+(.9*bl)+')':'rgba(255,210,120,'+(.85*bl*(1-tired*.7))+')';g.beginPath();g.ellipse(x+s*36,y-708+br,9,(cm?3:3.4)*bl,s*.15,0,7);g.fill()}g.restore()}
+  if(!LOWQ){for(let k=0;k<6;k++){const p=(T*.25+k/6)%1,dx=Math.sin(k*2.3)*420;g.fillStyle='rgba(150,130,100,'+(.6*(1-p)*(sl?.4:1))+')';g.fillRect(x+dx,y-870+p*400,2.4,2.4)}}}
 /* ---------- บอส: ราชินีกัดแผ่นดิน (ปลวกราชินียักษ์ · ท้องถุงไข่ใสเรืองอำพัน · อกเกราะดำ · มงกุฎหนามหิน · กรามคู่ใหญ่) ---------- */
 BV1['ราชินีกัดแผ่นดิน']=(T,W,br,sw,up,cf)=>{const b=br,pu=.55+.4*Math.sin(T*1.4),B=typeof mons!=='undefined'?mons.find(q=>q.t===3):null,hf=B&&B.mh?B.hp/B.mh:1,molt=hf<.5,gn=typeof PNQ!=='undefined'&&PNQ.gn>0;
   bvShadow(130,30,.38);

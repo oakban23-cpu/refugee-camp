@@ -80,14 +80,14 @@ async def main():
                 await C.wait(80)
                 if await C.ev("()=>!SD.on&&(me.sty.s>=STY.length||!!(stCur()&&stCur().pas1))"):break
             await C.wait(1200);await C.ev("()=>{achCheck()}")
-            ends[e]=[cs,'|'.join(seen),await C.ev("()=>[me.sty.e9,me.sty.s,STY.length,stTxt(),!!me.ach.stQ5a,!!me.ach.stQ5b,me.pets.includes(PT_N),PETS[PT_N].n,(me.mts||[]).includes(8),MOUNTS[8]&&MOUNTS[8].n]")]
+            ends[e]=[cs,'|'.join(seen),await C.ev("()=>[me.sty.e9,me.sty.s,STY.length,stTxt(),!!me.ach.stQ5a,!!me.ach.stQ5b,me.pets.includes(PETS.findIndex(P=>P&&P.star9)),PETS[PETS.findIndex(P=>P&&P.star9)].n,(me.mts||[]).includes(8),MOUNTS[8]&&MOUNTS[8].n]")]
         a1,a2=ends[1],ends[2]
         rep('ฉากจบ e9: ทางเลือก 2 ทาง · บทจบแยกตามทาง (ดาวกลับฟ้า / สะพานดาว · ออร์รีนับดาวครบ / นับคนขึ้นสะพาน)','คืนดาว' in a1[0] and 'สะพานดาว' in a1[0] and 'กระพริบสามครั้ง' in a1[1] and 'นับดาวครบ' in a1[1] and 'สะพานดาว' in a2[1] and 'นับคนที่เดินขึ้นไป' in a2[1] and 'นับดาวครบ' not in a2[1],[a1[1][-200:],a2[1][-200:]])
         rep('รางวัลจบภาค: ฉายาตามฉากจบ (ผู้คืนดาวสู่ฟ้า / ผู้ถักสะพานดาว) · สัตว์เลี้ยงดาวน้อย · สัตว์ขี่ดาวหางเงิน · ข้อความจบภาค 9',a1[2][0]==1 and a2[2][0]==2 and a1[2][4] and not a1[2][5] and a2[2][5] and not a2[2][4] and a1[2][6] and a1[2][7]=='ดาวน้อย' and a1[2][8] and a1[2][9]=='ดาวหางเงิน' and (a1[2][1]==a1[2][2] or 'ภาค 10' in a1[2][3]) and ('จบภาค 9 ห้วงดาวไร้ขอบ' in a1[2][3] or 'ภาค 10' in a1[2][3]),[a1[2],a2[2]])
         rp=await A.ev("()=>{const N=MAPS[42].npc2;npcSel=2;me.x=N.x;me.y=N.y+40;stNpcClick();return SD.choice?SD.choice.map(c=>c[0]).join('|'):''}")
         await A.ev("()=>{try{stClose()}catch(e){}}")
         rep('เล่นซ้ำยอดหอทอดาวผ่านเซเลสต์หลังจบภาค','ยอดหอทอดาว' in rp,rp)
-        dr=await A.ev("()=>{const c=document.createElement('canvas');c.width=300;c.height=150;const x=c.getContext('2d'),g0=g;let ok=1;try{g=x;drawPet(PT_N,60,100,1,1,0,2);drawMount(8,200,100,1,1,1,2);PALK.q9spire({x:150,y:140},1)}catch(e){ok=String(e)}finally{g=g0}return ok}")
+        dr=await A.ev("()=>{const c=document.createElement('canvas');c.width=300;c.height=150;const x=c.getContext('2d'),g0=g;let ok=1;try{g=x;drawPet(PETS.findIndex(P=>P&&P.star9),60,100,1,1,0,2);drawMount(8,200,100,1,1,1,2);PALK.q9spire({x:150,y:140},1)}catch(e){ok=String(e)}finally{g=g0}return ok}")
         rep('วาดสัตว์เลี้ยง/สัตว์ขี่/ยอดหอหลังจบภาคได้ไม่ error',dr==1,dr)
         E=[e for e in A.errs+B.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม',not E,E[:4])

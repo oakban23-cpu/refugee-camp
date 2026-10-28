@@ -129,7 +129,7 @@ function pzBuild(M){PAL={dec:[],wins:[],chand:[],veins:[],desks:[],fis:[],mirs:[
 Object.assign(PALK,{
  pzthr(t,T){const n=pzTiedN(),tr=p6Past('pa4c')?1:p6Past('pa4t')?.3:Math.max(.35,1-n*.13);try{thrDraw(t.x,t.y,T,{tired:tr})}catch(e){}
   /* เชือกคำมั่นที่ผูกแล้ว: แสงวิ่งขึ้นไปตามแขน */if(n>0&&!LOWQ){g.save();g.globalCompositeOperation='lighter';for(let k=0;k<n;k++){const u=(T*.18+k/n)%1,s=k%2?1:-1;glowAt(t.x+s*(240+u*100),t.y-590-u*300,14,'255,210,140',.35*Math.sin(u*Math.PI))}g.restore()}},
- pzthu(t,T){const N=MAPS[45]&&MAPS[45].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;try{NPC3[43].d(N.x,N.y,f,T)}catch(e){try{thuD0(N.x,N.y,f,T)}catch(e2){}}npvLbl(N.n,N.x,N.y-44,'#c8f0a8');try{npcSay('thu45',N.x,N.y,p6Past('pa4c')?PZTHU2:PZTHUSAY,190,50)}catch(e){}},
+ pzthu(t,T){const N=MAPS[45]&&MAPS[45].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;try{NPC3[43].d(N.x,N.y,f,T)}catch(e){try{thuD0(N.x,N.y,f,T)}catch(e2){}}npvLbl(N.n,N.x,N.y-44,'#c8f0a8');try{npcSay('thu45',N.x,N.y,(typeof pz5ThuL==='function'&&pz5ThuL())||(p6Past('pa4c')?PZTHU2:PZTHUSAY),190,50)}catch(e){}},
  pzlift(t,T){const x=t.x,y=t.y,sw=Math.sin(T*.8)*3,rg=g.createLinearGradient(0,y-300,0,y-40);rg.addColorStop(0,'rgba(120,90,60,0)');rg.addColorStop(.55,'rgba(120,90,60,.85)');rg.addColorStop(1,'rgba(120,90,60,.95)');g.strokeStyle=rg;g.lineWidth=3;for(const s of[-26,26]){g.beginPath();g.moveTo(x+s*.4,y-300);g.lineTo(x+s+sw,y-30);g.stroke()}
   g.fillStyle='#6a4c30';g.beginPath();g.moveTo(x-34+sw,y-32);g.lineTo(x+34+sw,y-32);g.lineTo(x+28+sw,y+4);g.lineTo(x-28+sw,y+4);g.closePath();g.fill();g.strokeStyle='#3a2616';g.lineWidth=1.6;g.stroke();
   g.strokeStyle='rgba(160,120,80,.8)';g.lineWidth=1.4;for(let k=0;k<4;k++){g.beginPath();g.moveTo(x-32+sw,y-26+k*8);g.lineTo(x+32+sw,y-26+k*8);g.stroke()}for(let k=0;k<7;k++){g.beginPath();g.moveTo(x-28+k*9.4+sw,y-32);g.lineTo(x-26+k*8.6+sw,y+4);g.stroke()}
@@ -276,7 +276,7 @@ STCH.push('ภาค 10 · บทที่ 4 · ราชินีกัดแ�
    ['thu45','ไม่! ข้างบนมีค่าย มีอัสตรา มีอารัณยา มีนครรากลึก มีทุกคน!'],
    ['nar','แขนข้างซ้ายของธรณินคลายลงหนึ่งคืบ… ทั้งตาข่ายรากครางเหมือนเชือกที่จะขาด และไกลขึ้นไปข้างบน ค่ายผู้อพยพทรุดลงอีกหนึ่งคืบ'],
    ['me','(…ไม่มีใครควรต้องแบกคนเดียว แต่ก็ไม่มีใครควรปล่อยมือ ตอนที่ทุกคนเพิ่งมาถึง)']],
-  post:[['nar','🌳 — จบภาค 10 บทที่ 4 · ราชินีกัดแผ่นดิน — บทต่อไป: แผ่นดินที่แบกฟ้า (บทสุดท้าย · เร็ว ๆ นี้)']],rw:{g:240000,s3:14}})}
+  post:[['nar','🌳 — จบภาค 10 บทที่ 4 · ราชินีกัดแผ่นดิน — บทต่อไป: แผ่นดินที่แบกฟ้า (บทสุดท้าย)']],rw:{g:240000,s3:14}})}
 /* ---------- ลงทะเบียน ---------- */
 setTimeout(()=>{try{
     if(MAPS[44])MAPS[44].gates.push({x:PZ44.x,y:PZ44.y,to:45,req:1,pa5:1,pa:5,nm:'ฐานแผ่นดิน',arr:{x:1600,y:2760}});
@@ -313,5 +313,5 @@ setTimeout(()=>{try{
     CZORD.push('pa4m','pa4k','pa4c');CZMAP=null}catch(e){console.warn('pz cz',e)}
   /* ธุลีตามลงมาหลังคุยเฒ่าแก่นไม้ · บทพูดลอย ๆ ของธรณินตามช่วงเรื่อง */
   setInterval(()=>{try{const N=MAPS[45]&&MAPS[45].npc2;if(N){if(p6Past('pa4s')){N.x=PZTHU.x;N.y=PZTHU.y}else{N.x=-9999;N.y=-9999}}
-    if(NPC3[45]){const L=p6Past('pa4c')?PZTHR3:p6Past('pa4t')?PZTHR2:PZTHR1;if(NPC3[45].s!==L)NPC3[45].s=L}}catch(e){}},600);
+    if(NPC3[45]){const L=(typeof pz5ThrL==='function'&&pz5ThrL())||(p6Past('pa4c')?PZTHR3:p6Past('pa4t')?PZTHR2:PZTHR1);if(NPC3[45].s!==L)NPC3[45].s=L}}catch(e){}},600);
 },0);
