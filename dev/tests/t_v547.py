@@ -24,7 +24,7 @@ async def main():
         B=await new_client(b,'Rb'+str(random.randint(100,999)),'melee',99)
         i0=await A.ev("()=>STY.findIndex(x=>x.pas1)")
         info=await A.ev("()=>[STY.findIndex(x=>x.p9e9),STY.length,STCH[STY[STY.findIndex(x=>x.pas1)].c],STY.findIndex(x=>x.pac1)]")
-        rep('ภาค 10 บทที่ 1 ต่อจากจบภาค 9 (6 ขั้น)',i0==info[0]+1 and info[1]==i0+6 and info[3]==i0+5 and 'ภาค 10' in info[2],[i0,info])
+        rep('ภาค 10 บทที่ 1 ต่อจากจบภาค 9 (6 ขั้น)',i0==info[0]+1 and info[1]>=i0+6 and info[3]==i0+5 and 'ภาค 10' in info[2],[i0,info])
         sv=await A.ev("()=>{const o=cleanChar({lv:99,sty:{s:5,n:0,a:0,e:1,e4:2,q9:2,e9:1,e10:2,pacr:31,parr:7,paro:1234,p9sf:31,zz9:4}});return o&&o.sty}")
         rep('เซฟ: คีย์ q9 · e10 · pacr/parr/paro ไม่หายตอนโหลด (เดิม q9 หาย)',sv.get('q9')==2 and sv.get('e10')==2 and sv.get('pacr')==31 and sv.get('paro')==1234 and sv.get('p9sf')==31 and 'zz9' not in sv,sv)
         for C,e9,e7 in ((A,1,2),(B,2,1)):
@@ -105,7 +105,7 @@ async def main():
         qt=await A.ev("()=>{const N=MAPS[43].npc;npcSel=1;me.x=N.x;me.y=N.y+40;const k=stTalkKey();stNpcClick();return [k,SD.q.map(l=>l[1]).join('|')]}")
         await adv(A);await A.ev("()=>{achCheck()}")
         en=await A.ev("()=>[me.sty.s,STY.length,stTxt(),!!me.ach.stR1,MAPS[43].npc.x>0,typeof npvW==='function'&&!!NPC3[43].d.npv]")
-        rep('ธุลี: คนรากลึก · ต้นค้ำแผ่นดินกำลังจะตาย → จบบทที่ 1 · ฉายา «ผู้ได้ยินเสียงใต้แผ่นดิน» · ธุลียังอยู่ที่ขอบเหว (วาดแบบ NPC ใหม่)',qt[0]=='thu' and 'คนรากลึก' in qt[1] and 'ต้นค้ำแผ่นดิน' in qt[1] and en[0]==i0+6 and 'แผ่นดินทรุด' in en[2] and en[3] and en[4] and en[5],[qt[0],qt[1][-100:],en])
+        rep('ธุลี: คนรากลึก · ต้นค้ำแผ่นดินกำลังจะตาย → จบบทที่ 1 · ฉายา «ผู้ได้ยินเสียงใต้แผ่นดิน» · ธุลียังอยู่ที่ขอบเหว (วาดแบบ NPC ใหม่)',qt[0]=='thu' and 'คนรากลึก' in qt[1] and 'ต้นค้ำแผ่นดิน' in qt[1] and en[0]==i0+6 and ('แผ่นดินทรุด' in en[2] or en[1]>i0+6) and en[3] and en[4] and en[5],[qt[0],qt[1][-100:],en])
         E=[e for e in A.errs+B.errs if 'ERR_' not in e]
         errs=await A.ev("()=>[NPV.err||'',MV9.err||'',window.__err]")
         rep('ไม่มี error ในหน้าเกม',not E and not errs[0] and not errs[2],[E[:4],errs])

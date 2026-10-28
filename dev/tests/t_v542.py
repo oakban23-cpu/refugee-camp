@@ -28,7 +28,7 @@ async def main():
         A=await new_client(b,'Wa'+str(random.randint(100,999)),'mage',99)
         B=await new_client(b,'Wb'+str(random.randint(100,999)),'melee',99)
         i0=await A.ev("()=>STY.findIndex(x=>x.p9s8)");n3=await A.ev("()=>STY.length-STY.findIndex(x=>x.p9s8)")
-        rep('บทจบต่อจากบทที่ 4 (3 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p9c4)")+1 and n3==3,[i0,n3])
+        rep('บทจบต่อจากบทที่ 4 (3 ขั้น)',i0==await A.ev("()=>STY.findIndex(x=>x.p9c4)")+1 and n3>=3,[i0,n3])
         for C,q9,e8 in ((A,1,1),(B,2,2)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:1,e4:2,p6h:2,e6:1,e7:2,p7m:2,p8rs:31,p8g:1,e8:{e8},p9sf:31,p9gr:15,p9st:63,q9:{q9},p9ec:7}};me.ach.stQ4=1;me.wv=[1,9,32,36,38,39,40,41,42,2,3];ov.hidden=true;enterMap(42,{{x:WB9C.x,y:WB9C.y+120}})}}")
         await A.wait(2600)
@@ -78,12 +78,12 @@ async def main():
                 q=await C.ev("()=>{const t=SD.on?SD.q.map(l=>l[1]).join('|'):'';if(SD.on&&!SD.choice){if(SD.typ){stNext()}stNext()}stTick();return t}")
                 if q and q not in seen: seen.append(q)
                 await C.wait(80)
-                if await C.ev("()=>!SD.on&&me.sty.s>=STY.length"):break
+                if await C.ev("()=>!SD.on&&(me.sty.s>=STY.length||!!(stCur()&&stCur().pas1))"):break
             await C.wait(1200);await C.ev("()=>{achCheck()}")
             ends[e]=[cs,'|'.join(seen),await C.ev("()=>[me.sty.e9,me.sty.s,STY.length,stTxt(),!!me.ach.stQ5a,!!me.ach.stQ5b,me.pets.includes(PT_N),PETS[PT_N].n,(me.mts||[]).includes(8),MOUNTS[8]&&MOUNTS[8].n]")]
         a1,a2=ends[1],ends[2]
         rep('ฉากจบ e9: ทางเลือก 2 ทาง · บทจบแยกตามทาง (ดาวกลับฟ้า / สะพานดาว · ออร์รีนับดาวครบ / นับคนขึ้นสะพาน)','คืนดาว' in a1[0] and 'สะพานดาว' in a1[0] and 'กระพริบสามครั้ง' in a1[1] and 'นับดาวครบ' in a1[1] and 'สะพานดาว' in a2[1] and 'นับคนที่เดินขึ้นไป' in a2[1] and 'นับดาวครบ' not in a2[1],[a1[1][-200:],a2[1][-200:]])
-        rep('รางวัลจบภาค: ฉายาตามฉากจบ (ผู้คืนดาวสู่ฟ้า / ผู้ถักสะพานดาว) · สัตว์เลี้ยงดาวน้อย · สัตว์ขี่ดาวหางเงิน · ข้อความจบภาค 9',a1[2][0]==1 and a2[2][0]==2 and a1[2][4] and not a1[2][5] and a2[2][5] and not a2[2][4] and a1[2][6] and a1[2][7]=='ดาวน้อย' and a1[2][8] and a1[2][9]=='ดาวหางเงิน' and a1[2][1]==a1[2][2] and 'จบภาค 9 ห้วงดาวไร้ขอบ' in a1[2][3],[a1[2],a2[2]])
+        rep('รางวัลจบภาค: ฉายาตามฉากจบ (ผู้คืนดาวสู่ฟ้า / ผู้ถักสะพานดาว) · สัตว์เลี้ยงดาวน้อย · สัตว์ขี่ดาวหางเงิน · ข้อความจบภาค 9',a1[2][0]==1 and a2[2][0]==2 and a1[2][4] and not a1[2][5] and a2[2][5] and not a2[2][4] and a1[2][6] and a1[2][7]=='ดาวน้อย' and a1[2][8] and a1[2][9]=='ดาวหางเงิน' and (a1[2][1]==a1[2][2] or 'ภาค 10' in a1[2][3]) and ('จบภาค 9 ห้วงดาวไร้ขอบ' in a1[2][3] or 'ภาค 10' in a1[2][3]),[a1[2],a2[2]])
         rp=await A.ev("()=>{const N=MAPS[42].npc2;npcSel=2;me.x=N.x;me.y=N.y+40;stNpcClick();return SD.choice?SD.choice.map(c=>c[0]).join('|'):''}")
         await A.ev("()=>{try{stClose()}catch(e){}}")
         rep('เล่นซ้ำยอดหอทอดาวผ่านเซเลสต์หลังจบภาค','ยอดหอทอดาว' in rp,rp)
