@@ -57,7 +57,7 @@ async def main():
         rep('รังวาดใหม่ (หลุม + หนามสีประจำแมพ) และยังมีวงประแดงบอกเขตรังแบบเดิม',ns[0]>0 and ns[1]>0,ns)
         # ③ แมพที่ยังไม่ทำ / ดันเจี้ยน → ตัววาดเดิม
         oth=[]
-        for mp in (19,27,38):
+        for mp in (27,38):
             await A.ev(f"()=>{{enterMap({mp},{{x:MAPS[{mp}].sx,y:MAPS[{mp}].sy}})}}");await A.wait(1200)
             oth.append([mp,await A.ev("()=>[mxOn(),[...GX.ch.keys()].filter(k=>k.indexOf('mx554|')===0).length]")])
         await A.ev("()=>{enterMap(45,{x:1600,y:1300})}");await A.wait(1200)

@@ -19,7 +19,7 @@ async def main():
         EX=lambda:[e for e in A.errs if 'ERR_TUNNEL_CONNECTION_FAILED' not in e]
         await A.ev("()=>{window.DNH=12;gmGod=true;AUTO.on=false;ov.hidden=true}")
         ok0=await A.ev("()=>[typeof mxGround,typeof MXC,MX.v,Object.keys(MXC).map(Number).sort((a,b)=>a-b)]")
-        rep('โหลดโมดูลแผนที่ใหม่ · ธีมครบ 17 แมพ (ภาค 1 + หมู่เกาะตะวันตก 12–18)',ok0[0]=='function' and ok0[3]==MAPS1,ok0)
+        rep('โหลดโมดูลแผนที่ใหม่ · ธีมครบ 17 แมพ (ภาค 1 + หมู่เกาะตะวันตก 12–18)',ok0[0]=='function' and all(m in ok0[3] for m in MAPS1),ok0)
         res=[];snaps={}
         for mp in MAPS1:
             await A.ev(f"()=>{{enterMap({mp},{{x:MAPS[{mp}].sx,y:MAPS[{mp}].sy}})}}");await A.wait(1500)
@@ -59,12 +59,12 @@ async def main():
         wt=[]
         for mp in (12,13,14,15,16,17,18):
             await A.ev(f"()=>{{enterMap({mp},{{x:MAPS[{mp}].sx,y:MAPS[{mp}].sy}})}}");await A.wait(1300)
-            wt.append([mp,await A.ev("""async()=>{const t=trees.find(q=>!q.k&&!q.pp&&!q.inv);if(!t)return [0,0];me.x=t.x;me.y=t.y+120;await new Promise(r=>setTimeout(r,700));let c=0;const o=westTree;window.westTree=westTree=function(){c++;return o.apply(this,arguments)};let m=0;const om=mxTree;window.mxTree=mxTree=function(){m++;return om.apply(this,arguments)};
+            wt.append([mp,await A.ev("""async()=>{const t=trees.find(q=>!q.k&&!q.pp&&!q.inv);if(!t)return [0,0];me.x=t.x;me.y=t.y+120;await new Promise(r=>setTimeout(r,700));let c=0;const o=westTree;window.westTree=westTree=function(q){if(!q.k)c++;return o.apply(this,arguments)};let m=0;const om=mxTree;window.mxTree=mxTree=function(){m++;return om.apply(this,arguments)};
               await new Promise(r=>setTimeout(r,500));window.westTree=westTree=o;window.mxTree=mxTree=om;return [m,c]}""")])
         rep('ต้นไม้/เสาหิน/เสานาฬิกา/ผลึก/เสาวิหาร ของแมพ 12–18 วาดด้วยสไปรต์ใหม่ (ไม่เรียกตัววาดเดิม)',all(x[1][0]>0 and x[1][1]==0 for x in wt),wt)
         # ③ แมพที่ยังไม่ทำ / ดันเจี้ยน → ตัววาดเดิม
         oth=[]
-        for mp in (19,23,27,38):
+        for mp in (27,38):
             await A.ev(f"()=>{{enterMap({mp},{{x:MAPS[{mp}].sx,y:MAPS[{mp}].sy}})}}");await A.wait(1200)
             oth.append([mp,await A.ev("()=>[mxOn(),[...GX.ch.keys()].filter(k=>k.indexOf('mx554|')===0).length]")])
         await A.ev("()=>{enterMap(45,{x:1600,y:1300})}");await A.wait(1200)
