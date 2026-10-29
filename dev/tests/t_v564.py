@@ -54,8 +54,8 @@ async def main():
           const b0=JSON.stringify(me.ngm.b);NFC.done=0;dgReward();await w(300);return {vo,same:JSON.stringify(me.ngm.b)===b0}}""")
         rep('มีผู้เล่นอื่นเข้าห้อง → ฝันร้ายรอบนั้นไม่นับ (เล่นแบบปกติ)', v['vo'] == 1 and v['same'], v)
         await A.ev(LEAVE); await A.wait(1000)
-        sv = await A.ev("""()=>{const nm0=me.nm;const s=snap();const c=cleanChar(JSON.parse(JSON.stringify(s)));const keep=JSON.stringify(me.ngm);me.ngm=null;applySave(c);
-          const ach=['nm1','nm2','nm3','nm4'].every(k=>ACH.some(a=>a[0]===k)&&TTB[k]);return {ok:JSON.stringify(me.ngm)===keep,has:!!s.ngm,name:me.nm===nm0&&typeof me.nm!=='object',ach}}""")
+        sv = await A.ev("""()=>{const nm0=me.nm;const s=snap();const c=cleanChar(JSON.parse(JSON.stringify(s)));const pk=o=>JSON.stringify([o.b,o.w,o.f,o.n]);const keep=pk(me.ngm);me.ngm=null;applySave(c);
+          const ach=['nm1','nm2','nm3','nm4'].every(k=>ACH.some(a=>a[0]===k)&&TTB[k]);return {ok:pk(me.ngm)===keep,has:!!s.ngm,name:me.nm===nm0&&typeof me.nm!=='object',ach}}""")
         rep('เซฟ/โหลดความคืบหน้าฝันร้าย (me.ngm) · ชื่อตัวละคร me.nm ไม่เปลี่ยน · ฉายาใหม่ 4 อัน', sv['ok'] and sv['has'] and sv['name'] and sv['ach'], sv)
         E = [e for e in A.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม', not E, E[:4])

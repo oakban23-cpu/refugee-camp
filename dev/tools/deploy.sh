@@ -18,6 +18,8 @@ cp $S/p6[a-f].js $S/p7[a-z].js $S/p8[a-z].js $S/p9[a-z].js $S/pa[0-9]*.js $S/ux[
 mkdir -p dev/tools/bal10 && cp $S/net/b10lib.py $S/net/b10bot.js $S/net/b10run.py $S/net/b10batch.sh $S/net/b10sum.py $S/net/b10dps.py $S/net/b10prof.py $S/net/b560.sh $S/net/b560sum.py dev/tools/bal10/ 2>/dev/null || true
 cp /home/claude/deploy.sh /home/claude/build.sh dev/tools/ 2>/dev/null || true
 for t in $S/net/t_*.py; do cp "$t" dev/tests/; done
+cp $S/net/h.py $S/net/runq.sh dev/tests/ 2>/dev/null || true
+cp $S/p5[6-9][0-9].py dev/modules/ 2>/dev/null || true
 for t in $S/net/t_*.json; do [ -f "$t" ] && cp "$t" dev/tests/; done
 cp $S/net/dashprobe.py dev/tools/ 2>/dev/null || true
 for f in server.js admin.html package.json render.yaml; do [ -f /home/claude/refugee-online/$f ] && cp /home/claude/refugee-online/$f $f; done
