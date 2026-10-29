@@ -18,6 +18,13 @@
 
 > `patch340.py` ต้องใช้ไฟล์ฐาน `index.before-v340.html` ซึ่งไม่ได้เก็บไว้ (ใหญ่และไม่จำเป็นแล้ว เพราะ `src/index.html` รวมทุกอย่างไว้แล้ว) — เก็บไว้เป็นบันทึกว่าแต่ละส่วนถูกแทรกตรงไหน
 
+## ตั้งเครื่องใหม่ (ทำครั้งแรกหลังเครื่องทำงานหาย · ใช้จริงตอน v565)
+1. `refugee-online/` = `server.js admin.html package.json render.yaml` + `public/*` จาก repo แล้วทับ `public/index.html` ด้วย `dev/src/index.html` (ฉบับอ่านง่าย)
+2. โมดูล `dev/modules/*` → โฟลเดอร์ scratchpad · ชุดทดสอบ `dev/tests/*` (รวม `h.py` `runq.sh`) และ `dev/tools/bal10/*` → `scratchpad/net/`
+3. `dev/tools/strip.js build.sh deploy.sh` → `/home/claude/tools/` และ `/home/claude/` · acorn: `npm i acorn` (ถ้า npm ต่อเน็ตไม่ได้ คัดลอกจาก `/opt/node-tools/node_modules/acorn`)
+4. ตรวจ: `bash build.sh` แล้วเทียบไฟล์ผลกับ `public/index.html` ใน repo ต้องเหมือนกันทุกไบต์
+- ตั้งแต่ v565 แก้เกมด้วยสคริปต์ `pNNN.py` ที่อ่านสำเนาต้นฉบับก่อนแก้ (`vNNN/index_pre.html`) แล้วแทรกโมดูล/แก้จุดลงต้นฉบับโดยตรง (`patch340.py` เป็นบันทึกเก่า รันไม่ได้แล้ว)
+
 ## รันชุดทดสอบ
 ต้องมี Node, Python 3, `pip install playwright pillow` และ Chromium ของ Playwright
 ```bash
