@@ -43,6 +43,8 @@ async def main():
                 for A in Cs[1:]:
                     await H.ev(f"()=>ptInvite('{A.uid}')"); await A.wait(1200); await A.ev("()=>ptAccept()"); await A.wait(1500)
                 res['pty'] = await H.ev("()=>PTY?PTY.mem.length:0")
+            if os.environ.get('NM'):
+                res['nm'] = await H.ev(f"()=>{{const c=nmArm('{DG}',{int(os.environ['NM'])});return c&&[c.L,c.mods,+c.hpf.toFixed(2),+c.dmf.toFixed(2)]}}")
             await H.ev(f"()=>{{{ENTER}()}}"); await H.wait(2500)
             rid = await H.ev("()=>curMap"); res['room'] = rid
             if os.environ.get('FIX66'):
@@ -79,6 +81,8 @@ async def main():
                 out.append(r)
             res['real'] = round(time.time() - t0); res['players'] = out
             res['end'] = out[0]['end']
+            if os.environ.get('NM'):
+                res['nmr'] = await H.ev("()=>({b:me.ngm&&me.ngm.b,w:me.ngm&&me.ngm.w,f:me.ngm&&Object.keys(me.ngm.f||{}),gold:me.gold,void:typeof NFC!=='undefined'&&NFC&&NFC.void})")
     finally:
         p.terminate()
     print('RESULT', json.dumps(res, ensure_ascii=False), flush=True)
