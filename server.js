@@ -26,6 +26,8 @@ let PG=null;
 function getPage(){try{const st=fs.statSync(page);if(PG&&PG.mt===st.mtimeMs)return PG;const raw=fs.readFileSync(page);
   const P={mt:st.mtimeMs,raw,gz:zlib.gzipSync(raw,{level:6}),br:null,etag:'"'+crypto.createHash('sha1').update(raw).digest('base64').slice(0,16)+'"'};PG=P;
   console.log('page '+raw.length+' → gzip '+P.gz.length);
+  /* v567 ใช้ไฟล์ br ที่บีบไว้ล่วงหน้าตอนบิลด์ (ระดับ 11 · เล็กกว่าระดับ 9 ราว 12% · ไม่ใช้ CPU ตอนเปิดเซิร์ฟเวอร์) ถ้าคลายแล้วตรงกับหน้าเกมทุกไบต์ */
+  try{const pb=fs.readFileSync(page+'.br');if(zlib.brotliDecompressSync(pb).equals(raw)){P.br=pb;console.log('page br (prebuilt) '+pb.length);return PG}}catch(e){}
   zlib.brotliCompress(raw,{params:{[zlib.constants.BROTLI_PARAM_QUALITY]:9,[zlib.constants.BROTLI_PARAM_SIZE_HINT]:raw.length}},(e,b)=>{if(e||!b)return;P.br=b;console.log('page br '+b.length)});
   return PG}catch(e){return PG}}
 getPage();

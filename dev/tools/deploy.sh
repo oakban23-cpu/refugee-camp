@@ -5,6 +5,7 @@ R=/home/claude/refugee-camp
 cd $R
 git fetch -q origin main && git reset -q --soft origin/main 2>/dev/null || true
 cp /mnt/user-data/outputs/refugee-online/public/index.html public/index.html
+cp /mnt/user-data/outputs/refugee-online/public/index.html.br public/index.html.br
 cp /home/claude/refugee-online/public/hd-*.webp public/
 cp /home/claude/refugee-online/public/cover.jpg public/cover.jpg
 cp /home/claude/refugee-online/public/cover-wide.webp public/ 2>/dev/null || true

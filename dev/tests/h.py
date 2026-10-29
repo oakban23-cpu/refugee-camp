@@ -17,7 +17,7 @@ def start_server():
         except Exception: pass
     return p
 
-SETUP = """([cls,nm,lv])=>{document.getElementById('ttl')&&document.getElementById('ttl').remove();localStorage.setItem('refugee_tut','1');if(!window.__keepWN){localStorage.setItem('refugee_wn','v566');localStorage.setItem('refugee_tips','["pty","base","ride","pair","dye","guild"]')}
+SETUP = """([cls,nm,lv])=>{document.getElementById('ttl')&&document.getElementById('ttl').remove();localStorage.setItem('refugee_tut','1');if(!window.__keepWN){localStorage.setItem('refugee_wn','v567');localStorage.setItem('refugee_tips','["pty","base","ride","pair","dye","guild"]')}
   pick(cls,'',nm);window.PRO_ON=0;const e=document.getElementById('procv');if(e)e.remove();ov.hidden=true;gmSetLv(lv);
   try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};me.sty={s:65,n:0,a:0,e:1};
   window.__err=[];window.addEventListener('error',e=>window.__err.push(String(e.message).slice(0,200)));
