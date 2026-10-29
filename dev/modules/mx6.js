@@ -71,25 +71,27 @@ function mxCastStep(J){if(J.st===0){const E=document.createElement('canvas');E.w
   if(J.st===1){mxCastClass(J.b,J);J.st=2;J.ks=['g','s','d','w'];return false}
   if(J.st===2){const k=J.ks.shift();if(k)mxCastLayer(J,k);if(!J.ks.length)J.st=3;return false}
   if(J.st===3){if(J.C.out&&!LOWQ)mxCastLight(J);J.st=4;return true}return true}
-function mxCastRun(budget){const t0=performance.now();while(performance.now()-t0<budget){let best=null;for(const J of MX.pj.values()){if(!best||J.vis>best.vis)best=J}if(!best)break;let done=false;const ts=performance.now();
-    try{done=mxCastStep(best)}catch(e){console.warn('mxCast',e);MX.pj.delete(best.k);continue}MX.bt+=performance.now()-ts;
+/* งานเติมรายละเอียด: รอให้ภาพพื้นเดิมวาดเสร็จก่อน (~0.25 วิ ไม่บังคับรอ GPU) · ประเมินเวลาขั้นถัดไป ไม่เริ่มขั้นที่เกินงบมาก */
+function mxCastRun(budget){const t0=performance.now(),E=MX.ce||(MX.ce={});let n=0;for(;;){const el=performance.now()-t0;if(el>=budget)break;let best=null;
+    for(const J of MX.pj.values()){if(J.st===0&&t0-(J.t||0)<250)continue;if(!best||J.vis>best.vis||(J.vis===best.vis&&J.st>best.st))best=J}if(!best)break;const sk=best.st;if(n&&el+(E[sk]||0)*.9>budget)break;let done=false;const ts=performance.now();
+    try{done=mxCastStep(best)}catch(e){console.warn('mxCast',e);MX.pj.delete(best.k);continue}const dt=performance.now()-ts;MX.bt+=dt;n++;E[sk]=E[sk]===undefined?dt:E[sk]*.75+dt*.25;
     if(done){MX.pj.delete(best.k);if(PALC.m.get(best.k)===best.b){PALC.m.set(best.k,best.E);MX.pb.set(best.k,{b:best.b,t:performance.now()})}MX.nb++;best.ex=null;best.M=null}}}
 /* วาดพื้นตระกูลวัง (แทน palGround เดิม: ลำดับ/งบสร้างชิ้นเหมือนเดิม + เติมรายละเอียดภายหลัง + จางเข้า) */
 function mxPalGround(_pg){const on=mxCastOn();if(!on){if(MX.pj&&MX.pj.size)MX.pj.clear();return _pg()}
   if(!MX.pj){MX.pj=new Map();MX.pb=new Map()}
-  const S=PALC.S,M=g.getTransform(),s=M.a,r=Math.min(2,Math.ceil(s*2-.001)/2),ex=M.e,ey=M.f,now=performance.now(),C=MXP[curMap],CC={...C,d:{...MXPD,...(C.d||{})}};
+  const S=PALC.S,M=g.getTransform(),s=M.a,r=mxRes(s),ex=M.e,ey=M.f,now=performance.now(),C=MXP[curMap],CC={...C,d:{...MXPD,...(C.d||{})}};
   if(PALC.r!==r||PALC.mp!==curMap){PALC.m.clear();PALC.r=r;PALC.mp=curMap;MX.pj.clear();MX.pb.clear()}const warm=PALC.warm;let bud=warm?99:(LOWQ?1:2);PALC.warm=0;
   const x0=Math.floor((cam.x-24)/S),x1=Math.floor((cam.x+W+24)/S),y0=Math.floor((cam.y-24)/S),y1=Math.floor((cam.y+H+24)/S);for(const J of MX.pj.values())J.vis=0;
   g.save();g.setTransform(1,0,0,1,0,0);g.imageSmoothingEnabled=true;
   for(let cy=Math.max(0,y0);cy<=y1;cy++)for(let cx=Math.max(0,x0);cx<=x1;cx++){if(cx*S>=WW||cy*S>=WH)continue;const key=cx+','+cy,X=Math.round(ex+cx*S*s),Y=Math.round(ey+cy*S*s),X2=Math.round(ex+(cx+1)*S*s),Y2=Math.round(ey+(cy+1)*S*s);let c=PALC.m.get(key);
     if(!c){if(bud<=0){g.fillStyle='#3a3446';g.fillRect(X,Y,X2-X,Y2-Y);continue}bud--;try{c=palChunk(cx,cy,r)}catch(e){console.warn('palChunk',e);continue}PALC.m.set(key,c);if(PALC.m.size>(LOWQ?16:26)){const k0=PALC.m.keys().next().value;PALC.m.delete(k0);MX.pj.delete(k0);MX.pb.delete(k0)}
-      MX.pj.set(key,{k:key,b:c,cx,cy,r,C:CC,st:0,vis:1})}
+      MX.pj.set(key,{k:key,b:c,cx,cy,r,C:CC,st:0,vis:1,t:now})}
     else{PALC.m.delete(key);PALC.m.set(key,c);const J=MX.pj.get(key);if(J)J.vis=1}
     const fb=MX.pb.get(key);if(fb){const a=Math.min(1,(now-fb.t)/260);if(a<1){g.drawImage(fb.b,X,Y,X2-X+.5,Y2-Y+.5);g.globalAlpha=a;g.drawImage(c,X,Y,X2-X+.5,Y2-Y+.5);g.globalAlpha=1;continue}MX.pb.delete(key)}
     g.drawImage(c,X,Y,X2-X+.5,Y2-Y+.5)}
   g.restore();
   for(const J of MX.pj.values())if(!J.vis&&(J.cx<x0-2||J.cx>x1+2||J.cy<y0-2||J.cy>y1+2))MX.pj.delete(J.k);
-  const lq=LOWQ||(typeof LITEQ!=='undefined'&&LITEQ);mxCastRun(warm?40:(lq?5:8));return true}
+  const lq=LOWQ||(typeof LITEQ!=='undefined'&&LITEQ);mxCastRun(warm?40:Math.min(lq?5:8,mxBud(1,lq)));return true}
 setTimeout(()=>{try{const _pl=palGround;window.palGround=palGround=function(){return mxPalGround(_pl)}}catch(e){}},0);
 
 /* ===================== ของธรรมชาติในแมพตระกูลวัง: วาดใหม่ให้มีมิติ (รูปทรง/ตำแหน่ง/สีเดิม) ===================== */
