@@ -40,20 +40,20 @@ function wblStart(){if(!WBLI()||dg.ph!=='lobby')return;const D=DT[27],np=Math.ma
 function wblHit(u,d){if(u===uid){WBQ.hk=(WBQ.hk|0)+1;try{hurt(d)}catch(e){}}else dmgOut.push([u,d])}
 function wblSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[27].dm/66,hard=B&&B.hp<B.mh*.4;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX(),hard=B&&B.hp<B.mh*.4;
   /* ช่วงเดิน: ปรสิตหมด → เยื่อเปิด · มีคนเข้าห้องหัวใจ → บอสตื่น */
   if(dg.ph==='run'){if(WBQ.mb&&!mons.some(m=>m.wr&&m.hp>0)){WBQ.mb=0;fx({k:'msg',s:'💗 เยื่อกั้นห้องหัวใจคลายออก… ได้ยินเสียงนาวินร้องเรียกจากข้างใน!'});fx({k:'wbm'})}
     if(!WBQ.mb&&pl.some(p=>p.x>WBXM+70&&wbInC(p.x,p.y,0))){dg.ph='boss';WBQ.at=Math.min(WBQ.at,7);spawnBoss();fx({k:'msg',s:'👁️ ผู้เฝ้าไข่มุกคลายหนวดออกจากหัวใจวาฬ… มันตื่นแล้ว!'});try{sfx('boss')}catch(e){}}}
   /* ผู้เฝ้าไข่มุก: ระลอกปรสิต + หดเข้าไข่มุกที่ 50% */
   if(B){const f=B.hp/B.mh;if(f<.7&&!WBQ.a7){WBQ.a7=1;wblAdds(3+Math.min(3,pl.length-1));fx({k:'msg',s:'🦠 ผู้เฝ้าไข่มุกพ่นสปอร์… ปรสิตแสงงอกขึ้นจากผนังห้อง!'})}
-    if(f<.5&&!WBQ.sh){WBQ.sh=1;B.shH=B.hp;B.shT=6;WBQ.ac=1;WBQ.at=2;fx({k:'wbs',d:6});fx({k:'msg',s:'🫧 ผู้เฝ้าไข่มุกหดเข้าไปในไข่มุก… หัวใจวาฬบีบตัว กรดกำลังท่วม! ขึ้นแท่นกระดูก!'})}
-    if(B.shT>0){B.shT-=dt;if(B.hp<B.shH)B.hp=B.shH;if(B.shT<=0){fx({k:'msg',s:'👁️ ไข่มุกแตกออก ผู้เฝ้าไข่มุกกลับมาแล้ว!'})}}
+    if(f<.5&&!WBQ.sh){WBQ.sh=1;B.wbpH=B.hp;B.wbpT=6;WBQ.ac=1;WBQ.at=2;fx({k:'wbs',d:6});fx({k:'msg',s:'🫧 ผู้เฝ้าไข่มุกหดเข้าไปในไข่มุก… หัวใจวาฬบีบตัว กรดกำลังท่วม! ขึ้นแท่นกระดูก!'})}
+    if(B.wbpT>0){B.wbpT-=dt;if(B.hp<B.wbpH)B.hp=B.wbpH;if(B.wbpT<=0){fx({k:'msg',s:'👁️ ไข่มุกแตกออก ผู้เฝ้าไข่มุกกลับมาแล้ว!'})}}
     if(f<.35&&!WBQ.a3){WBQ.a3=1;wblAdds(4+Math.min(3,pl.length-1));fx({k:'msg',s:'🦠 ปรสิตระลอกใหญ่! อย่าให้มันเกาะหัวใจวาฬ!'})}}
   /* กรดขึ้นลง: 0 ต่ำ → 1 เตือน → 2 ท่วม */
   WBQ.at-=dt;if(WBQ.at<=0){if(WBQ.ac===0){WBQ.ac=1;WBQ.at=2;fx({k:'msg',s:'🫧 ฟองกรดผุดขึ้นมา… ขึ้นซี่โครง/แท่นกระดูกเร็ว!'})}else if(WBQ.ac===1){WBQ.ac=2;WBQ.at=4.5;WBQ.tk=0}else{WBQ.ac=0;WBQ.at=hard?7:dg.ph==='boss'?8.5:9.5}}
-  if(WBQ.ac===2){WBQ.tk=(WBQ.tk||0)-dt;if(WBQ.tk<=0){WBQ.tk=.5;pl.forEach(p=>{if(wblIn(p.x,p.y,0)&&!wbSafe(p.x,p.y))wblHit(p.u,Math.round(30*dm))})}}
+  if(WBQ.ac===2){WBQ.tk=(WBQ.tk||0)-dt;if(WBQ.tk<=0){WBQ.tk=.5;pl.forEach(p=>{if(wblIn(p.x,p.y,0)&&!wbSafe(p.x,p.y))wblHit(p.u,Math.round(8*dm))})}}
   /* ผนังท้องบีบ */
-  if(WBQ.sq){WBQ.sk-=dt;if(WBQ.sk<=0){if(WBQ.sq===1){WBQ.sq=2;WBQ.sk=.6;pl.forEach(p=>{if(wbOuter(p.x,p.y))wblHit(p.u,Math.round(90*dm))});fx({k:'wbqx'})}else{WBQ.sq=0;WBQ.st=hard?12:16}}}
+  if(WBQ.sq){WBQ.sk-=dt;if(WBQ.sk<=0){if(WBQ.sq===1){WBQ.sq=2;WBQ.sk=.6;pl.forEach(p=>{if(wbOuter(p.x,p.y))wblHit(p.u,Math.round(45*dm))});fx({k:'wbqx'})}else{WBQ.sq=0;WBQ.st=hard?12:16}}}
   else{WBQ.st-=dt;if(WBQ.st<=0&&WBQ.ac!==2){WBQ.sq=1;WBQ.sk=1.6;fx({k:'wbq',d:1.6});fx({k:'msg',s:'💢 ผนังท้องวาฬกำลังบีบ! เข้าตรงกลาง'})}}
   WBQ.bt-=dt;if(WBQ.bt<=0){WBQ.bt=.4;fx({k:'wbv',ac:WBQ.ac,at:Math.round(WBQ.at*10)/10,mb:WBQ.mb,sq:WBQ.sq})}}
 function wblMon(m,dt,pl,spd){if(!WBLI())return false;if(WBQ.mb&&m.t!==3&&m.x>WBXM-30&&!wbInC(m.x,m.y,30))m.x=WBXM-30;if(!wblIn(m.x,m.y,20)){if(m.x>WBXM&&!wbInC(m.x,m.y,20)){const a=Math.atan2(m.y-CY,m.x-WBCX);m.x=WBCX+Math.cos(a)*(WBRX-40);m.y=CY+Math.sin(a)*(WBRY-40)}else{m.x=Math.max(WBX0+40,Math.min(WBXM,m.x));m.y=CY+Math.max(-wbHH(m.x)+30,Math.min(wbHH(m.x)-30,m.y-CY))}}return false}

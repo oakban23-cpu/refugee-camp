@@ -26,13 +26,13 @@ function gdlAdds(n){const D=DT[26],np=Math.max(1,plCount());for(let i=0;i<n;i++)
     mons.push({id:++mid,x,y,tx:x,ty:y,t,L,p:0,hx:x,hy:y,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,gdl:1})}}
 function gdlSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[26].dm/66;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX();
   /* ลูกเรือวิญญาณ */if(B){const f=B.hp/B.mh;if(f<.7&&!GDL.a7){GDL.a7=1;gdlAdds(3+Math.min(3,pl.length-1));fx({k:'msg',s:'👻 ลูกเรือวิญญาณของเรือดำปีนขึ้นมาจากกราบเรือ!'})}
     if(f<.35&&!GDL.a3){GDL.a3=1;gdlAdds(4+Math.min(3,pl.length-1));fx({k:'msg',s:'👻 กริฟเป่าแตรต้อนเมฆ… ลูกเรือวิญญาณขึ้นมาอีกระลอก!'})}}
   /* เรือเอียง */if(GDL.tl){GDL.tt-=dt;if(GDL.tt<=0){GDL.tl=0;GDL.nt=B&&B.hp<B.mh*.4?10:14}}
   else if(GDL.wn){GDL.wn-=dt;if(GDL.wn<=0){GDL.wn=0;GDL.tl=GDL.wd;GDL.tt=4.5;const ys=[];for(let k=0;k<3+Math.min(2,pl.length-1);k++)ys.push(Math.round(CY+rnd(-GDHH+50,GDHH-50)));GDL.br=ys.map((y,k)=>({y,t0:performance.now()+k*650,h:{}}));fx({k:'gdbr',y:ys,d:GDL.tl});fx({k:'msg',s:GDL.tl<0?'🌊 เรือเอียงซ้าย! ถังไม้กลิ้งมาจากหัวเรือ':'🌊 เรือเอียงขวา! ถังไม้กลิ้งมาจากท้ายเรือ'});try{sfx('boss')}catch(e){}}}
   else{GDL.nt-=dt;if(GDL.nt<=0){GDL.wd=Math.random()<.5?-1:1;GDL.wn=1.5;fx({k:'msg',s:'⚠️ ลมพายุตีกราบเรือ… เรือกำลังจะเอียง!'})}}
-  /* ถังไม้กลิ้ง: โฮสต์คิดดาเมจ */if(GDL.br.length&&GDL.tl){const n=performance.now();GDL.br.forEach((b,k)=>{const x=gdBrX(b,n,GDL.tl);if(x==null)return;pl.forEach(p=>{if(b.h[p.u])return;if(Math.abs(p.x-x)<34&&Math.abs(p.y-b.y)<30){b.h[p.u]=1;const v=Math.round(65*dm);if(p.u===uid){try{hurt(v)}catch(e){}}else dmgOut.push([p.u,v])}})})}
+  /* ถังไม้กลิ้ง: โฮสต์คิดดาเมจ */if(GDL.br.length&&GDL.tl){const n=performance.now();GDL.br.forEach((b,k)=>{const x=gdBrX(b,n,GDL.tl);if(x==null)return;pl.forEach(p=>{if(b.h[p.u])return;if(Math.abs(p.x-x)<34&&Math.abs(p.y-b.y)<30){b.h[p.u]=1;const v=Math.round(35*dm);if(p.u===uid){try{hurt(v)}catch(e){}}else dmgOut.push([p.u,v])}})})}
   GDL.bt-=dt;if(GDL.bt<=0){GDL.bt=.4;fx({k:'gdlv',tl:GDL.tl,tt:Math.round(GDL.tt*10)/10,wn:GDL.wn?GDL.wd:0})}}
 const gdBrX=(b,n,dir)=>{const t=(n-b.t0)/1000;if(t<0||t>4)return null;const x=(dir<0?GDX1-60:GDX0+30)+dir*t*360;return gdlIn(x,b.y,8)?x:null};
 function gdlMon(m,dt,pl,spd){if(!GDLI())return false;if(!gdlIn(m.x,m.y,20)){m.x=Math.max(GDX0+30,Math.min(GDX1-60,m.x));m.y=CY+Math.max(-gdHH(m.x)+30,Math.min(gdHH(m.x)-30,m.y-CY))}return false}

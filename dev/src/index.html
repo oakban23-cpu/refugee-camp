@@ -13590,8 +13590,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v559';
+const WNV='v560';
 const WNL=[
+  ['⚔️','ดันภาค 8–9 · กลไกฉากมีดาเมจจริง','เดิมกลไกของฉากใน 6 ดัน (เรือดำ · ท้องวาฬ · ตาพายุ · หอนาฬิกาดาว · ใจกลางตาข่าย · ยอดหอทอดาว) โดนแค่ 30–170 แทบไม่รู้สึก → ตอนนี้คิดจากพลังบอสเหมือนท่าบอส แต่เบากว่าภาค 10 หนึ่งขั้น: ถังไม้กลิ้งตอนเรือเอียง · กรดท่วมท้องวาฬ (ขึ้นซี่โครง/แท่นกระดูก) · ผนังบีบ · ดำลงเมฆ (ขึ้นเรือ) · กลืนฟ้า (เข้าวงเพลงทอง) · ฟ้าผ่า · หาง/ครีบวาฬ · เข็มนาฬิกากวาด (กลิ้งหลบหรือยืนชิดบอสได้) · หยุดเวลา (ยืนบนขีดทอง) · ฝนเฟือง · ซี่ใยกระตุก · เงาแห่งความกลัว (เข้าบ่อแสง) · เข็ม/ด้ายรัด/ดาวตกของผู้ทอ — ท่าเดียวแรงสุดราว 4–6 พัน · แก้บั๊กท้องวาฬ: ตีบอสตอนขึ้นโล่หลังช่วงไข่มุกแล้วเลือดบอสค้าง 50% ฆ่าไม่ตาย · แก้ติดนอกลาน: ใช้สกิลพุ่ง/ถอยกระโดดตอนชิดขอบ (เช่นนักธนูถอยกระโดดชิดกราบเรือ) แล้วหลุดออกนอกเรือ/นอกลาน กลับเข้าไม่ได้จนจบดัน → ตอนนี้ดึงกลับเข้าลานทันที'],
   ['📱','แผนที่ใหม่ลื่นขึ้นบนมือถือ','ภาพเหมือนเดิมทุกอย่าง แต่วาดเบาลง: แมพที่มีที่ราบ/หน้าผา (หมู่เกาะตะวันตก) เดิมสร้างพื้นซ้ำสองรอบต่อเฟรม → เหลือรอบเดียว และผิวบนที่ราบวาดเฉพาะบริเวณที่ราบ · งานสร้างพื้นแบ่งตามเวลาว่างที่เหลือในแต่ละเฟรม (เครื่องเร็วไม่กระตุกหลุดจังหวะจอ เครื่องช้าไม่เกินงบเดิม) · กล้องซูมเข้าใกล้บอสไม่ต้องสร้างพื้นใหม่ทั้งจอ · โหมดประหยัดอัตโนมัติใช้พื้นความละเอียดพอดีจอ (งานน้อยลงราว 1 ใน 4) · ใช้ภาพพื้นที่หลุดแคชซ้ำแทนการจองใหม่ · แมพตระกูลวังรอภาพพื้นเดิมเสร็จก่อนค่อยเติมรายละเอียด · ทดสอบจำลองมือถือรุ่นกลางตอนเดิน: งานสคริปต์ต่อเฟรมลดลง 9–35% เฟรมเรตดีขึ้นสูงสุด 29%'],
   ['🧹','แผนที่โฉมใหม่ · เก็บงานรอบสุดท้าย','ไล่ตรวจทุกแมพเทียบภาพเดิมอีกรอบ: เอาหย่อมหิมะ/ทรายขอบคมที่ดูเป็นคราบออกจากสะพานลมตะวันตกและนครจมบาดาล · หุบเหวลมหวนหญ้าแห้งบางลงไม่รก · หินชั้นพื้นในหุบเหวนุ่มขึ้น · ใบไม้ของต้นไม้ในผาท่าเรือ/ปากเหวละเอียดขึ้นแต่ไม่ลาย · รังมอนเข้มเป็นหลุมเหมือนเดิม'],
   ['🏰','แผนที่โฉมใหม่ ช่วงที่ 4 · แมพตระกูลวังอัสตรา (27–45)','แมพชุดนี้วาดพื้นเฉพาะตัวอยู่แล้ว จึงคงลวดลายเดิมทั้งหมด แล้วเติมรายละเอียดตามวัสดุ (เกรนหิน · เม็ดดิน/ทราย · ลายไม้) · แมพกลางแจ้ง (สวนลอย · สะพานรุ่งอรุณ · ย่านวงแหวนล่าง · เหมืองดาว · หอดูดาว · ผาท่าเรือเมฆ · สุสานเรือ · ปากเหว) ได้แสงเงาตามพื้นต่ำสูง ร่มเงาใต้ต้นไม้ และเงาเมฆลอย · ต้นไม้/พุ่ม/หินของสวนลอย หอดูดาว ผาท่าเรือ และปากเหว วาดใหม่เป็นพุ่มใบมีมิติ (ทรง/ตำแหน่ง/สีเดิม) · ดันเจี้ยนไม่ถูกแตะ'],
@@ -27047,13 +27048,13 @@ function gdlAdds(n){const D=DT[26],np=Math.max(1,plCount());for(let i=0;i<n;i++)
     mons.push({id:++mid,x,y,tx:x,ty:y,t,L,p:0,hx:x,hy:y,hp,mh:hp,tg:null,tt:0,ac:0,w:null,lg:0,gdl:1})}}
 function gdlSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[26].dm/66;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX();
   /* ลูกเรือวิญญาณ */if(B){const f=B.hp/B.mh;if(f<.7&&!GDL.a7){GDL.a7=1;gdlAdds(3+Math.min(3,pl.length-1));fx({k:'msg',s:'👻 ลูกเรือวิญญาณของเรือดำปีนขึ้นมาจากกราบเรือ!'})}
     if(f<.35&&!GDL.a3){GDL.a3=1;gdlAdds(4+Math.min(3,pl.length-1));fx({k:'msg',s:'👻 กริฟเป่าแตรต้อนเมฆ… ลูกเรือวิญญาณขึ้นมาอีกระลอก!'})}}
   /* เรือเอียง */if(GDL.tl){GDL.tt-=dt;if(GDL.tt<=0){GDL.tl=0;GDL.nt=B&&B.hp<B.mh*.4?10:14}}
   else if(GDL.wn){GDL.wn-=dt;if(GDL.wn<=0){GDL.wn=0;GDL.tl=GDL.wd;GDL.tt=4.5;const ys=[];for(let k=0;k<3+Math.min(2,pl.length-1);k++)ys.push(Math.round(CY+rnd(-GDHH+50,GDHH-50)));GDL.br=ys.map((y,k)=>({y,t0:performance.now()+k*650,h:{}}));fx({k:'gdbr',y:ys,d:GDL.tl});fx({k:'msg',s:GDL.tl<0?'🌊 เรือเอียงซ้าย! ถังไม้กลิ้งมาจากหัวเรือ':'🌊 เรือเอียงขวา! ถังไม้กลิ้งมาจากท้ายเรือ'});try{sfx('boss')}catch(e){}}}
   else{GDL.nt-=dt;if(GDL.nt<=0){GDL.wd=Math.random()<.5?-1:1;GDL.wn=1.5;fx({k:'msg',s:'⚠️ ลมพายุตีกราบเรือ… เรือกำลังจะเอียง!'})}}
-  /* ถังไม้กลิ้ง: โฮสต์คิดดาเมจ */if(GDL.br.length&&GDL.tl){const n=performance.now();GDL.br.forEach((b,k)=>{const x=gdBrX(b,n,GDL.tl);if(x==null)return;pl.forEach(p=>{if(b.h[p.u])return;if(Math.abs(p.x-x)<34&&Math.abs(p.y-b.y)<30){b.h[p.u]=1;const v=Math.round(65*dm);if(p.u===uid){try{hurt(v)}catch(e){}}else dmgOut.push([p.u,v])}})})}
+  /* ถังไม้กลิ้ง: โฮสต์คิดดาเมจ */if(GDL.br.length&&GDL.tl){const n=performance.now();GDL.br.forEach((b,k)=>{const x=gdBrX(b,n,GDL.tl);if(x==null)return;pl.forEach(p=>{if(b.h[p.u])return;if(Math.abs(p.x-x)<34&&Math.abs(p.y-b.y)<30){b.h[p.u]=1;const v=Math.round(35*dm);if(p.u===uid){try{hurt(v)}catch(e){}}else dmgOut.push([p.u,v])}})})}
   GDL.bt-=dt;if(GDL.bt<=0){GDL.bt=.4;fx({k:'gdlv',tl:GDL.tl,tt:Math.round(GDL.tt*10)/10,wn:GDL.wn?GDL.wd:0})}}
 const gdBrX=(b,n,dir)=>{const t=(n-b.t0)/1000;if(t<0||t>4)return null;const x=(dir<0?GDX1-60:GDX0+30)+dir*t*360;return gdlIn(x,b.y,8)?x:null};
 function gdlMon(m,dt,pl,spd){if(!GDLI())return false;if(!gdlIn(m.x,m.y,20)){m.x=Math.max(GDX0+30,Math.min(GDX1-60,m.x));m.y=CY+Math.max(-gdHH(m.x)+30,Math.min(gdHH(m.x)-30,m.y-CY))}return false}
@@ -27385,20 +27386,20 @@ function wblStart(){if(!WBLI()||dg.ph!=='lobby')return;const D=DT[27],np=Math.ma
 function wblHit(u,d){if(u===uid){WBQ.hk=(WBQ.hk|0)+1;try{hurt(d)}catch(e){}}else dmgOut.push([u,d])}
 function wblSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[27].dm/66,hard=B&&B.hp<B.mh*.4;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX(),hard=B&&B.hp<B.mh*.4;
   /* ช่วงเดิน: ปรสิตหมด → เยื่อเปิด · มีคนเข้าห้องหัวใจ → บอสตื่น */
   if(dg.ph==='run'){if(WBQ.mb&&!mons.some(m=>m.wr&&m.hp>0)){WBQ.mb=0;fx({k:'msg',s:'💗 เยื่อกั้นห้องหัวใจคลายออก… ได้ยินเสียงนาวินร้องเรียกจากข้างใน!'});fx({k:'wbm'})}
     if(!WBQ.mb&&pl.some(p=>p.x>WBXM+70&&wbInC(p.x,p.y,0))){dg.ph='boss';WBQ.at=Math.min(WBQ.at,7);spawnBoss();fx({k:'msg',s:'👁️ ผู้เฝ้าไข่มุกคลายหนวดออกจากหัวใจวาฬ… มันตื่นแล้ว!'});try{sfx('boss')}catch(e){}}}
   /* ผู้เฝ้าไข่มุก: ระลอกปรสิต + หดเข้าไข่มุกที่ 50% */
   if(B){const f=B.hp/B.mh;if(f<.7&&!WBQ.a7){WBQ.a7=1;wblAdds(3+Math.min(3,pl.length-1));fx({k:'msg',s:'🦠 ผู้เฝ้าไข่มุกพ่นสปอร์… ปรสิตแสงงอกขึ้นจากผนังห้อง!'})}
-    if(f<.5&&!WBQ.sh){WBQ.sh=1;B.shH=B.hp;B.shT=6;WBQ.ac=1;WBQ.at=2;fx({k:'wbs',d:6});fx({k:'msg',s:'🫧 ผู้เฝ้าไข่มุกหดเข้าไปในไข่มุก… หัวใจวาฬบีบตัว กรดกำลังท่วม! ขึ้นแท่นกระดูก!'})}
-    if(B.shT>0){B.shT-=dt;if(B.hp<B.shH)B.hp=B.shH;if(B.shT<=0){fx({k:'msg',s:'👁️ ไข่มุกแตกออก ผู้เฝ้าไข่มุกกลับมาแล้ว!'})}}
+    if(f<.5&&!WBQ.sh){WBQ.sh=1;B.wbpH=B.hp;B.wbpT=6;WBQ.ac=1;WBQ.at=2;fx({k:'wbs',d:6});fx({k:'msg',s:'🫧 ผู้เฝ้าไข่มุกหดเข้าไปในไข่มุก… หัวใจวาฬบีบตัว กรดกำลังท่วม! ขึ้นแท่นกระดูก!'})}
+    if(B.wbpT>0){B.wbpT-=dt;if(B.hp<B.wbpH)B.hp=B.wbpH;if(B.wbpT<=0){fx({k:'msg',s:'👁️ ไข่มุกแตกออก ผู้เฝ้าไข่มุกกลับมาแล้ว!'})}}
     if(f<.35&&!WBQ.a3){WBQ.a3=1;wblAdds(4+Math.min(3,pl.length-1));fx({k:'msg',s:'🦠 ปรสิตระลอกใหญ่! อย่าให้มันเกาะหัวใจวาฬ!'})}}
   /* กรดขึ้นลง: 0 ต่ำ → 1 เตือน → 2 ท่วม */
   WBQ.at-=dt;if(WBQ.at<=0){if(WBQ.ac===0){WBQ.ac=1;WBQ.at=2;fx({k:'msg',s:'🫧 ฟองกรดผุดขึ้นมา… ขึ้นซี่โครง/แท่นกระดูกเร็ว!'})}else if(WBQ.ac===1){WBQ.ac=2;WBQ.at=4.5;WBQ.tk=0}else{WBQ.ac=0;WBQ.at=hard?7:dg.ph==='boss'?8.5:9.5}}
-  if(WBQ.ac===2){WBQ.tk=(WBQ.tk||0)-dt;if(WBQ.tk<=0){WBQ.tk=.5;pl.forEach(p=>{if(wblIn(p.x,p.y,0)&&!wbSafe(p.x,p.y))wblHit(p.u,Math.round(30*dm))})}}
+  if(WBQ.ac===2){WBQ.tk=(WBQ.tk||0)-dt;if(WBQ.tk<=0){WBQ.tk=.5;pl.forEach(p=>{if(wblIn(p.x,p.y,0)&&!wbSafe(p.x,p.y))wblHit(p.u,Math.round(8*dm))})}}
   /* ผนังท้องบีบ */
-  if(WBQ.sq){WBQ.sk-=dt;if(WBQ.sk<=0){if(WBQ.sq===1){WBQ.sq=2;WBQ.sk=.6;pl.forEach(p=>{if(wbOuter(p.x,p.y))wblHit(p.u,Math.round(90*dm))});fx({k:'wbqx'})}else{WBQ.sq=0;WBQ.st=hard?12:16}}}
+  if(WBQ.sq){WBQ.sk-=dt;if(WBQ.sk<=0){if(WBQ.sq===1){WBQ.sq=2;WBQ.sk=.6;pl.forEach(p=>{if(wbOuter(p.x,p.y))wblHit(p.u,Math.round(45*dm))});fx({k:'wbqx'})}else{WBQ.sq=0;WBQ.st=hard?12:16}}}
   else{WBQ.st-=dt;if(WBQ.st<=0&&WBQ.ac!==2){WBQ.sq=1;WBQ.sk=1.6;fx({k:'wbq',d:1.6});fx({k:'msg',s:'💢 ผนังท้องวาฬกำลังบีบ! เข้าตรงกลาง'})}}
   WBQ.bt-=dt;if(WBQ.bt<=0){WBQ.bt=.4;fx({k:'wbv',ac:WBQ.ac,at:Math.round(WBQ.at*10)/10,mb:WBQ.mb,sq:WBQ.sq})}}
 function wblMon(m,dt,pl,spd){if(!WBLI())return false;if(WBQ.mb&&m.t!==3&&m.x>WBXM-30&&!wbInC(m.x,m.y,30))m.x=WBXM-30;if(!wblIn(m.x,m.y,20)){if(m.x>WBXM&&!wbInC(m.x,m.y,20)){const a=Math.atan2(m.y-CY,m.x-WBCX);m.x=WBCX+Math.cos(a)*(WBRX-40);m.y=CY+Math.sin(a)*(WBRY-40)}else{m.x=Math.max(WBX0+40,Math.min(WBXM,m.x));m.y=CY+Math.max(-wbHH(m.x)+30,Math.min(wbHH(m.x)-30,m.y-CY))}}return false}
@@ -27583,23 +27584,23 @@ function wskStart(){if(!WSKI()||dg.ph!=='lobby')return;const D=DT[28];stSay(WSK_
 function wskHit(u,d){if(u===uid){WSK.hk=(WSK.hk|0)+1;try{hurt(d)}catch(e){}}else dmgOut.push([u,d])}
 function wskSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[28].dm/66;if(!B)return;const f=B.hp/B.mh;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX();if(!B)return;const f=B.hp/B.mh;
   /* ครีบ */const fl=mons.filter(m=>(m.wsp==='fl'||m.wsp==='fr')&&m.hp>0).length;if(fl<WSK.fl){WSK.fl=fl;fx({k:'msg',s:fl?'✂️ ครีบข้างหนึ่งขาด! วาฬเสียหลัก':'✂️ ครีบทั้งสองข้างขาด! วาฬดำลงเมฆไม่ได้อีกแล้ว'});fx({k:'wsx',k2:'fin'})}
   /* ฝูงสัตว์เมฆ */if(f<.75&&!WSK.a75){WSK.a75=1;wskAdds(3+Math.min(3,pl.length-1));fx({k:'msg',s:'🦈 ฝูงสัตว์เมฆถูกพายุหอบมาเกาะเรือ!'})}
   if(f<.4&&!WSK.a40){WSK.a40=1;wskAdds(4+Math.min(3,pl.length-1));fx({k:'msg',s:'🦈 ฝูงสัตว์เมฆระลอกใหญ่! ปกป้องเรือไว้'})}
-  /* ดำลงเมฆ */if(WSK.dv){WSK.dt-=dt;if(WSK.dv===2){if(B.hp<B.dvH)B.hp=B.dvH;WSK.tk=(WSK.tk||0)-dt;if(WSK.tk<=0){WSK.tk=.5;pl.forEach(p=>{if(wskShip(p.x,p.y)<0)wskHit(p.u,Math.round(42*dm))})}}
+  /* ดำลงเมฆ */if(WSK.dv){WSK.dt-=dt;if(WSK.dv===2){if(B.hp<B.dvH)B.hp=B.dvH;WSK.tk=(WSK.tk||0)-dt;if(WSK.tk<=0){WSK.tk=.5;pl.forEach(p=>{if(wskShip(p.x,p.y)<0)wskHit(p.u,Math.round(8*dm))})}}
     if(WSK.dt<=0){if(WSK.dv===1){WSK.dv=2;WSK.dt=6;B.dvH=B.hp;fx({k:'msg',s:'🌊 วาฬดำลงเมฆ! ขึ้นเรือเดี๋ยวนี้'})}else{WSK.dv=0;WSK.nd=f<.4?15:19;fx({k:'msg',s:'🐋 วาฬโผล่กลับขึ้นมา!'})}}}
   else if(WSK.fl>0&&!WSK.sw){WSK.nd-=dt;if(WSK.nd<=0){WSK.dv=1;WSK.dt=2;fx({k:'msg',s:'⚠️ วาฬกำลังจะดำลงเมฆ… ไปยืนบนเรือ!'})}}
   /* กลืนฟ้า */if(!WSK.sw&&!WSK.dv&&((f<.66&&!WSK.a66)||(f<.33&&!WSK.a33))){if(f<.66)WSK.a66=1;if(f<.33)WSK.a33=1;WSK.sw=1;WSK.stw=3;const ks=[0,1,2,3,4,5].sort(()=>Math.random()-.5).slice(0,4);WSK.c=ks.map(k=>[Math.round(CX+Math.cos(WSSH[k])*450),Math.round(CY+Math.sin(WSSH[k])*450)]);fx({k:'wss',c:WSK.c,d:3});fx({k:'msg',s:'🌀 วาฬกลืนฟ้าสูดลมหายใจ… เข้าวงเพลงทองบนเรือ!'});try{sfx('boss')}catch(e){}}
-  if(WSK.sw){WSK.stw-=dt;if(WSK.sw===2){if(B.hp<B.swH)B.hp=B.swH;WSK.tk2=(WSK.tk2||0)-dt;if(WSK.tk2<=0){WSK.tk2=.5;pl.forEach(p=>{if(!WSK.c.some(([x,y])=>Math.hypot(p.x-x,p.y-y)<84))wskHit(p.u,Math.round(55*dm))})}}
+  if(WSK.sw){WSK.stw-=dt;if(WSK.sw===2){if(B.hp<B.swH)B.hp=B.swH;WSK.tk2=(WSK.tk2||0)-dt;if(WSK.tk2<=0){WSK.tk2=.5;pl.forEach(p=>{if(!WSK.c.some(([x,y])=>Math.hypot(p.x-x,p.y-y)<84))wskHit(p.u,Math.round(10*dm))})}}
     if(WSK.stw<=0){if(WSK.sw===1){WSK.sw=2;WSK.stw=4;B.swH=B.hp;fx({k:'msg',s:'🌀 วาฬกลืนฟ้า! อยู่ในวงเพลงไว้'})}else{WSK.sw=0;WSK.c=[];fx({k:'msg',s:'🎵 เพลงกล่อมต้านแรงดูดไว้ได้!'})}}}
   /* พายุ */if(f<.5){WSK.lt-=dt;if(WSK.lt<=0){WSK.lt=f<.25?5.5:7;const P=pl.map(p=>[Math.round(p.x),Math.round(p.y)]);WSK.lp={t:1.3,p:P};fx({k:'wsl',p:P,d:1.3})}
-    if(WSK.lp){WSK.lp.t-=dt;if(WSK.lp.t<=0){const P=WSK.lp.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<72))wskHit(p.u,Math.round(72*dm))});fx({k:'wslx',p:P});WSK.lp=null}}}
+    if(WSK.lp){WSK.lp.t-=dt;if(WSK.lp.t<=0){const P=WSK.lp.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<72))wskHit(p.u,Math.round(45*dm))});fx({k:'wslx',p:P});WSK.lp=null}}}
   WSK.bt-=dt;if(WSK.bt<=0){WSK.bt=.4;fx({k:'wsv',dv:WSK.dv,dt:Math.round(WSK.dt*10)/10,sw:WSK.sw,st:Math.round(WSK.stw*10)/10,c:WSK.c,fl:WSK.fl})}}
 /* ครีบ/หาง: อยู่กับที่ ฟาดตามจังหวะ (ข้ามการเดินปกติ) */
 function wskMon(m,dt,pl,spd){if(!WSKI())return false;
-  if(m.wsp){const[x,y]=WSPT[m.wsp];m.x=x;m.y=y;m.tx=x;m.ty=y;if(!isHost()||m.stun>0||!pl.length)return true;const dm=DT[28].dm/66,B=mons.find(q=>q.t===3&&q.hp>0);if(WSK.dv===2)return true;
-    if(m.sl0){m.sl0.t-=dt;if(m.sl0.t<=0){const A=m.sl0;pl.forEach(p=>{if(A.k==='tl'?(p.y>CY+110&&wskIn(p.x,p.y,0)):Math.hypot(p.x-A.x,(p.y-A.y)*1.2)<A.r)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round((A.k==='tl'?100:80)*dm)});fx({k:'wsfx',k2:A.k,x:A.x,y:A.y,r:A.r});m.sl0=null}}
+  if(m.wsp){const[x,y]=WSPT[m.wsp];m.x=x;m.y=y;m.tx=x;m.ty=y;if(!isHost()||m.stun>0||!pl.length)return true;const dm=BS().dm*bossX(),B=mons.find(q=>q.t===3&&q.hp>0);if(WSK.dv===2)return true;
+    if(m.sl0){m.sl0.t-=dt;if(m.sl0.t<=0){const A=m.sl0;pl.forEach(p=>{if(A.k==='tl'?(p.y>CY+110&&wskIn(p.x,p.y,0)):Math.hypot(p.x-A.x,(p.y-A.y)*1.2)<A.r)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round((A.k==='tl'?45:40)*dm)});fx({k:'wsfx',k2:A.k,x:A.x,y:A.y,r:A.r});m.sl0=null}}
     m.g1=(m.g1===undefined?(m.wsp==='tl'?9:m.wsp==='fl'?5:7):m.g1)-dt;if(m.g1<=0&&!m.sl0){if(m.wsp==='tl'){m.g1=13;m.sl0={k:'tl',t:1.8,x:CX,y:CY+300,r:0};fx({k:'wsf',k2:'tl',x:CX,y:CY+300,r:0,d:1.8});fx({k:'msg',s:'🐋 หางวาฬง้างขึ้น! ออกจากครึ่งล่างของวง'})}
       else{m.g1=8;const s=m.wsp==='fl'?-1:1,x=Math.round(CX+s*440),y=CY;m.sl0={k:m.wsp,t:1.5,x,y,r:190};fx({k:'wsf',k2:m.wsp,x,y,r:190,d:1.5})}}
     return true}
@@ -28264,16 +28265,16 @@ function ctOnHand(x,y,a){const dx=Math.cos(a),dy=Math.sin(a),px=x-CX,py=y-CY,t=p
 function ctSwept(x,y,a0,a1,L){const r=Math.hypot(x-CX,y-CY);if(r<60||r>L)return false;const w=(CTHW+12)/r,pa=Math.atan2(y-CY,x-CX),d0=Math.atan2(Math.sin(pa-a0),Math.cos(pa-a0)),sw=Math.atan2(Math.sin(a1-a0),Math.cos(a1-a0));if(Math.abs(d0)<w)return true;const lo=Math.min(0,sw)-w,hi=Math.max(0,sw)+w;return d0>=lo&&d0<=hi}
 function ctwSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[29].dm/66;if(!B)return;const f=B.hp/B.mh,hard=f<.4,now=performance.now();
-  /* เข็มกวาด (เช็กทั้งช่วงที่เข็มกวาดผ่านตั้งแต่รอบก่อน ไม่ให้ทะลุ) */const[ah,am]=ctAng(),pa=CT.pa||[ah,am];CT.pa=[ah,am];pl.forEach(p=>{if((CTH[p.u]||0)>now)return;if(ctSwept(p.x,p.y,pa[0],ah,CTHL*.82)||ctSwept(p.x,p.y,pa[1],am,CTHL)){CTH[p.u]=now+1200;ctHit(p.u,Math.round(70*dm))}});
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX();if(!B)return;const f=B.hp/B.mh,hard=f<.4,now=performance.now();
+  /* เข็มกวาด (เช็กทั้งช่วงที่เข็มกวาดผ่านตั้งแต่รอบก่อน ไม่ให้ทะลุ) */const[ah,am]=ctAng(),pa=CT.pa||[ah,am];CT.pa=[ah,am];pl.forEach(p=>{if((CTH[p.u]||0)>now)return;if(ctSwept(p.x,p.y,pa[0],ah,CTHL*.82)||ctSwept(p.x,p.y,pa[1],am,CTHL)){CTH[p.u]=now+1200;ctHit(p.u,Math.round(12*dm))}});
   /* สัตว์ดาว */if(f<.7&&!CT.a7){CT.a7=1;ctwAdds(3+Math.min(3,pl.length-1));fx({k:'msg',s:'🐈 สัตว์ดาวกระโจนออกมาจากตัวเลขบนหน้าปัด!'})}if(f<.35&&!CT.a3){CT.a3=1;ctwAdds(4+Math.min(3,pl.length-1));fx({k:'msg',s:'🦉 ฝูงนกฮูกเฟืองบินออกจากหอ!'})}
   /* ย้อนเวลา */if(f<.5&&!CT.a5){CT.a5=1;CT.hg=1;CT.hgt=10;ctwAdds(4,1);fx({k:'msg',s:'⏳ ผู้รักษาเวลาพลิกนาฬิกาทราย! ทุบให้แตกทั้ง 4 ใบใน 10 วิ ไม่งั้นมันจะย้อนเวลาตัวเอง'})}
   if(CT.hg){CT.hgt-=dt;const left=mons.filter(m=>m.hg&&m.hp>0).length;if(!left){CT.hg=0;fx({k:'msg',s:'💥 นาฬิกาทรายแตกหมด! ย้อนเวลาไม่สำเร็จ'})}else if(CT.hgt<=0){CT.hg=0;mons=mons.filter(m=>!m.hg);B.hp=Math.min(B.mh,B.hp+B.mh*.1);fx({k:'msg',s:'⏪ ทรายหมด… ผู้รักษาเวลาย้อนเวลาตัวเอง ฟื้นเลือด 10%!'});fx({k:'ctrw'})}}
   /* หยุดเวลา: 0 ปกติ → 1 เตือน (ขีดทองเรือง) → 2 หยุด */
   CT.tt-=dt;if(CT.tt<=0){if(CT.ts===0){CT.ts=1;CT.tt=2;CT.lit=[0,1,2,3,4,5,6,7,8,9,10,11].sort(()=>Math.random()-.5).slice(0,3);fx({k:'msg',s:'⏳ ขีดชั่วโมงทองเรือง… เวลากำลังจะหยุด ไปยืนบนขีดทอง!'})}else if(CT.ts===1){CT.ts=2;CT.tt=3.5;try{sfx('zap')}catch(e){}}else{CT.ts=0;CT.tt=hard?12:17;CT.lit=[]}}
-  if(CT.ts===2){CT.tk=(CT.tk||0)-dt;if(CT.tk<=0){CT.tk=.5;pl.forEach(p=>{if(!CT.lit.some(i=>Math.hypot(p.x-CTMK[i][0],p.y-CTMK[i][1])<62))ctHit(p.u,Math.round(25*dm))})}}
+  if(CT.ts===2){CT.tk=(CT.tk||0)-dt;if(CT.tk<=0){CT.tk=.5;pl.forEach(p=>{if(!CT.lit.some(i=>Math.hypot(p.x-CTMK[i][0],p.y-CTMK[i][1])<62))ctHit(p.u,Math.round(7*dm))})}}
   /* ฝนเฟือง */CT.gt=(CT.gt===undefined?6:CT.gt)-dt;if(CT.gt<=0&&CT.ts!==2){CT.gt=hard?6:8;const P=pl.slice(0,5).map(p=>[Math.round(p.x),Math.round(p.y)]);while(P.length<Math.min(5,pl.length+2)){const a=Math.random()*6.283,r=Math.random()*440;P.push([Math.round(CX+Math.cos(a)*r),Math.round(CY+Math.sin(a)*r)])}CT.gc={t:1.3,p:P};fx({k:'ctg',p:P,d:1.3})}
-  if(CT.gc&&CT.gc.t!==undefined){CT.gc.t-=dt;if(CT.gc.t<=0){const P=CT.gc.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<70))ctHit(p.u,Math.round(80*dm))});fx({k:'ctgx',p:P});CT.gc={}}}
+  if(CT.gc&&CT.gc.t!==undefined){CT.gc.t-=dt;if(CT.gc.t<=0){const P=CT.gc.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<70))ctHit(p.u,Math.round(50*dm))});fx({k:'ctgx',p:P});CT.gc={}}}
   CT.bt-=dt;if(CT.bt<=0){CT.bt=.4;const[a1,a2]=ctAng();fx({k:'ctv',ah:Math.round(a1*1000)/1000,am:Math.round(a2*1000)/1000,ts:CT.ts,tt:Math.round(CT.tt*10)/10,lit:CT.lit,hg:CT.hg,hgt:Math.round(CT.hgt*10)/10})}}
 function ctwMon(m,dt,pl,spd){if(!CTWI())return false;if(m.hg){m.x=m.hx;m.y=m.hy;return true}if(Math.hypot(m.x-CX,m.y-CY)>CTR-40){const a=Math.atan2(m.y-CY,m.x-CX);m.x=CX+Math.cos(a)*(CTR-40);m.y=CY+Math.sin(a)*(CTR-40)}return false}
 function ctwAI(m,dt,pl,enr,dm){if(m.t!==3)return;m.x=CX;m.y=CY}
@@ -28596,13 +28597,13 @@ function cwHit(u,d){if(u===uid){CWN.hk=(CWN.hk|0)+1;try{hurt(d)}catch(e){}}else 
 function cwOnSp(x,y,i){const a=CWSP[i],dx=Math.cos(a),dy=Math.sin(a),px=x-CX,py=y-CY,t=px*dx+py*dy;return t>70&&t<CWR+20&&Math.abs(px*dy-py*dx)<46}
 function cwnSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[30].dm/66,q9=(me.sty&&me.sty.q9)|0,e8=(me.sty&&me.sty.e8)|0;if(!B)return;if(!B.cwq){B.cwq=1;if(q9===1){B.mh*=1.15;B.hp=B.mh}else if(q9===2)B.hp=B.mh*.88}const f=B.hp/B.mh,hard=f<.4;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX(),q9=(me.sty&&me.sty.q9)|0,e8=(me.sty&&me.sty.e8)|0;if(!B)return;if(!B.cwq){B.cwq=1;if(q9===1){B.mh*=1.15;B.hp=B.mh}else if(q9===2)B.hp=B.mh*.88}const f=B.hp/B.mh,hard=f<.4;
   /* แมงมุม */if(f<.7&&!CWN.a7){CWN.a7=1;cwnAdds(3+Math.min(3,pl.length-1));fx({k:'msg',s:'🕷️ แมงมุมทอแสงไต่ลงมาจากความมืด!'})}if(f<.3&&!CWN.a3){CWN.a3=1;cwnAdds(4+Math.min(3,pl.length-1));fx({k:'msg',s:'🕷️ ผู้ทอส่งแมงมุมมาเพิ่ม!'})}
   /* กระจก 4 บาน (ล็อกเลือด 50%) */if(f<=.5&&!CWN.a5){CWN.a5=1;CWN.mr=1;cwnAdds(4,1);fx({k:'msg',s:'🪞 ภาพสะท้อนหลบเข้ากระจก! ทุบกระจกทั้ง 4 บาน มันถึงจะเจ็บอีกครั้ง'})}
   if(CWN.mr){if(B.hp<B.mh*.5)B.hp=B.mh*.5;if(!mons.some(m=>m.mr&&m.hp>0)){CWN.mr=0;B.hp=Math.min(B.hp,B.mh*.499);fx({k:'msg',s:'💥 กระจกแตกหมด! ภาพสะท้อนโอเรียนร้าวไปทั้งร่าง'});fx({k:'cwbr'})}}
-  /* ซี่ใยกระตุก */if(CWN.spt>0){CWN.spt-=dt;if(CWN.spt<=0){const S=CWN.sp;pl.forEach(p=>{if(S.some(i=>cwOnSp(p.x,p.y,i)))cwHit(p.u,Math.round(70*dm))});fx({k:'cwsx',s:S});CWN.sp=[]}}
+  /* ซี่ใยกระตุก */if(CWN.spt>0){CWN.spt-=dt;if(CWN.spt<=0){const S=CWN.sp;pl.forEach(p=>{if(S.some(i=>cwOnSp(p.x,p.y,i)))cwHit(p.u,Math.round(45*dm))});fx({k:'cwsx',s:S});CWN.sp=[]}}
   else{CWN.st-=dt;if(CWN.st<=0){CWN.st=(q9===1?6:9)*(hard?.75:1);const k0=(Math.random()*8)|0,S=[k0,(k0+3)%8,(k0+5)%8];if(pl[0]){const a=Math.atan2(pl[0].y-CY,pl[0].x-CX),kk=((Math.round(a/(Math.PI/4))%8)+8)%8;if(!S.includes(kk))S[0]=kk}CWN.sp=S;CWN.spt=1.4;fx({k:'cwsp',s:S,d:1.4})}}
-  /* เงาแห่งความกลัว */if(CWN.fs>0){CWN.fs-=dt;if(CWN.fs<=0){const P=CWN.fp;pl.forEach(p=>{if(!P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.3)<80))cwHit(p.u,Math.round(140*dm))});fx({k:'cwfx'});CWN.fp=[]}}
+  /* เงาแห่งความกลัว */if(CWN.fs>0){CWN.fs-=dt;if(CWN.fs<=0){const P=CWN.fp;pl.forEach(p=>{if(!P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.3)<80))cwHit(p.u,Math.round(70*dm))});fx({k:'cwfx'});CWN.fp=[]}}
   else{CWN.ft-=dt;if(CWN.ft<=0){CWN.ft=hard?16:20;const P=[];for(let i=0;i<3;i++){const a=i/3*6.283+Math.random()*1.5,r=180+Math.random()*230;P.push([Math.round(CX+Math.cos(a)*r),Math.round(CY+Math.sin(a)*r)])}CWN.fp=P;CWN.fs=2.6;fx({k:'cwfp',p:P,d:2.6})}}
   /* วาฬดาว (ปล่อยวาฬในภาค 8) */if(e8===1){CWN.wh-=dt;if(CWN.wh<=0){CWN.wh=22;fx({k:'cwwh'});setTimeout(()=>{if(!CWNI())return;CWN.sp=[];CWN.spt=0;fx({k:'cwsx',s:[],c:1});const B2=mons.find(m=>m.t===3&&m.hp>0);if(B2){const lo=CWN.mr?B2.mh*.5:1;B2.hp=Math.max(lo,B2.hp-B2.mh*.025);CWN.wk=(CWN.wk|0)+1}fx({k:'msg',s:'🐋 วาฬดาวพุ่งชนตาข่าย! ด้ายขาดเป็นแถบ ภาพสะท้อนเซ'})},1500)}}}
 function cwnMon(m,dt,pl,spd){if(!CWNI())return false;if(m.mr){m.x=m.hx;m.y=m.hy;return true}if(Math.hypot(m.x-CX,m.y-CY)>CWR-40){const a=Math.atan2(m.y-CY,m.x-CX);m.x=CX+Math.cos(a)*(CWR-40);m.y=CY+Math.sin(a)*(CWR-40)}return false}
@@ -28768,7 +28769,7 @@ const wvOnLine=(x,y,a)=>{const dx=Math.cos(a),dy=Math.sin(a),px=x-CX,py=y-CY,t=p
 const wvOnSp=(x,y,i)=>wvOnLine(x,y,i*Math.PI/4)&&Math.hypot(x-CX,y-CY)>70;
 function wvrSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[31].dm/66,q9=(me.sty&&me.sty.q9)|0,e8=(me.sty&&me.sty.e8)|0;if(!B)return;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX(),q9=(me.sty&&me.sty.q9)|0,e8=(me.sty&&me.sty.e8)|0;if(!B)return;
   if(!B.wvq){B.wvq=1;if(q9===1){B.mh*=1.1;B.hp=B.mh}}
   const f=B.hp/B.mh,ph=f>.66?1:f>.33?2:3;
   if(ph!==WVR.ph){WVR.ph=ph;WVR.tr=2;WVR.nd=null;WVR.rp=null;WVR.sp=[];WVR.spt=0;fx({k:'wvph',ph});
@@ -28776,13 +28777,13 @@ function wvrSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=
     if(ph===3){fx({k:'msg',s:'💜 เปลือกผู้ทอแตก แกนกลางเปิดออก! หมุดด้าย 3 หมุดผูกแกนไว้ ทำลายให้หมด'});wvrAdds(3,1);WVR.ank=1;wvrAdds(2+Math.min(3,pl.length-1))}}
   if(WVR.ank){if(B.hp<B.mh*.33)B.hp=B.mh*.33;if(!mons.some(m=>m.ank&&m.hp>0)){WVR.ank=0;B.hp=Math.min(B.hp,B.mh*.329);fx({k:'msg',s:'💥 หมุดด้ายขาดหมด! แกนกลางของผู้ทอสั่นไหว — ตีแกนได้แล้ว'});fx({k:'wvbr'})}}
   if(WVR.tr>0){WVR.tr-=dt;return}
-  /* ① เข็ม */if(ph===1){if(WVR.nd){WVR.nd.t-=dt;if(WVR.nd.t<=0){const A=WVR.nd.a;pl.forEach(p=>{if(A.some(a=>wvOnLine(p.x,p.y,a)))wvHit(p.u,Math.round(75*dm))});fx({k:'wvnx',a:A});WVR.nd=null}}
+  /* ① เข็ม */if(ph===1){if(WVR.nd){WVR.nd.t-=dt;if(WVR.nd.t<=0){const A=WVR.nd.a;pl.forEach(p=>{if(A.some(a=>wvOnLine(p.x,p.y,a)))wvHit(p.u,Math.round(50*dm))});fx({k:'wvnx',a:A});WVR.nd=null}}
     else{WVR.nt-=dt;if(WVR.nt<=0){WVR.nt=q9===1?2.8:q9===2?4.6:3.5;const A=pl.slice(0,3).map(p=>Math.round(Math.atan2(p.y-CY,p.x-CX)*1000)/1000);while(A.length<3)A.push(Math.round(Math.random()*6283)/1000);WVR.nd={t:1.2,a:A};fx({k:'wvnd',a:A,d:1.2})}}}
-  /* ② ด้ายรัด + ซี่ใย */if(ph===2){if(WVR.rp){WVR.rp.t-=dt;if(WVR.rp.t<=0){const P=WVR.rp.p,hit=[];pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.3)<70)){wvHit(p.u,Math.round(50*dm));hit.push(p.u)}});fx({k:'wvrx',p:P,u:hit});WVR.rp=null}}
+  /* ② ด้ายรัด + ซี่ใย */if(ph===2){if(WVR.rp){WVR.rp.t-=dt;if(WVR.rp.t<=0){const P=WVR.rp.p,hit=[];pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.3)<70)){wvHit(p.u,Math.round(35*dm));hit.push(p.u)}});fx({k:'wvrx',p:P,u:hit});WVR.rp=null}}
     else{WVR.rt-=dt;if(WVR.rt<=0){WVR.rt=6.5;const P=pl.slice(0,5).map(p=>[Math.round(p.x),Math.round(p.y)]);WVR.rp={t:1.4,p:P};fx({k:'wvrp',p:P,d:1.4})}}
-    if(WVR.spt>0){WVR.spt-=dt;if(WVR.spt<=0){const S=WVR.sp;pl.forEach(p=>{if(S.some(i=>wvOnSp(p.x,p.y,i)))wvHit(p.u,Math.round(65*dm))});fx({k:'wvsx',s:S});WVR.sp=[]}}
+    if(WVR.spt>0){WVR.spt-=dt;if(WVR.spt<=0){const S=WVR.sp;pl.forEach(p=>{if(S.some(i=>wvOnSp(p.x,p.y,i)))wvHit(p.u,Math.round(45*dm))});fx({k:'wvsx',s:S});WVR.sp=[]}}
     else{WVR.st-=dt;if(WVR.st<=0){WVR.st=9;const k0=(Math.random()*8)|0,S=[k0,(k0+3)%8,(k0+5)%8];WVR.sp=S;WVR.spt=1.4;fx({k:'wvsp',s:S,d:1.4})}}}
-  /* ③ ดาวตก */if(ph===3){if(WVR.mp){WVR.mp.t-=dt;if(WVR.mp.t<=0){const P=WVR.mp.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<72))wvHit(p.u,Math.round(85*dm))});fx({k:'wvmx',p:P});WVR.mp=null}}
+  /* ③ ดาวตก */if(ph===3){if(WVR.mp){WVR.mp.t-=dt;if(WVR.mp.t<=0){const P=WVR.mp.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<72))wvHit(p.u,Math.round(55*dm))});fx({k:'wvmx',p:P});WVR.mp=null}}
     else{WVR.mt-=dt;if(WVR.mt<=0){WVR.mt=4;const P=pl.slice(0,5).map(p=>[Math.round(p.x),Math.round(p.y)]);while(P.length<6){const a=Math.random()*6.283,r=Math.random()*470;P.push([Math.round(CX+Math.cos(a)*r),Math.round(CY+Math.sin(a)*r)])}WVR.mp={t:1.3,p:P};fx({k:'wvmp',p:P,d:1.3})}}}
   /* วาฬดาว */if(e8===1){WVR.wh-=dt;if(WVR.wh<=0){WVR.wh=20;fx({k:'cwwh'});setTimeout(()=>{if(!WVRI())return;WVR.nd=null;WVR.rp=null;WVR.sp=[];WVR.spt=0;WVR.mp=null;fx({k:'wvcl'});const B2=mons.find(m=>m.t===3&&m.hp>0);if(B2){const lo=WVR.ank?B2.mh*.33:1;B2.hp=Math.max(lo,B2.hp-B2.mh*.025);WVR.wk=(WVR.wk|0)+1}
       let s='🐋 วาฬดาวพุ่งชนตาข่าย! ท่าของผู้ทอขาดกลางคัน';if(WVR.ank&&!WVR.wa){const A=mons.find(m=>m.ank&&m.hp>0);if(A){A.hp=0;WVR.wa=1;s='🐋 วาฬดาวงับหมุดด้ายขาดไปหนึ่งหมุด!'}}fx({k:'msg',s})},1500)}}
@@ -28931,6 +28932,14 @@ setTimeout(()=>{
     if(e9===2){const pu=.6+.4*Math.sin(T*1.5);g.strokeStyle='rgba(255,230,170,'+(.5*pu)+')';g.lineWidth=10;g.beginPath();g.moveTo(x,y-470);g.quadraticCurveTo(x+600,y-900,x+1400,y+200);g.stroke();for(let k=0;k<12;k++){const u=k/12,bx=(1-u)*(1-u)*x+2*u*(1-u)*(x+600)+u*u*(x+1400),by=(1-u)*(1-u)*(y-470)+2*u*(1-u)*(y-900)+u*u*(y+200);glowAt(bx,by,14,'255,240,190',.7)}}
     else glowAt(x,y-470,40,'230,235,255',.4);g.restore()}}catch(e){}
 },0);
+/* v560 กันหลุดขอบลาน (ดันภาค 8–9): สกิลพุ่ง/ถอยกระโดด (dash) ย้ายตัวทีเดียว ~110 โดยไม่เช็กชน → ข้ามแนวกันชนขอบลาน แล้วตัวกันชนดันออกนอกลาน = ติดนอกเรือ/นอกลานจนจบดัน
+   6 ดันนี้ไม่ใช้วงจำกัดรัศมี DR ของดันทั่วไป → ถ้าออกนอกลานเมื่อไหร่ ดึงกลับจุดในลานที่ใกล้สุด (ก่อนและหลังอัปเดตตัวละครทุกเฟรม: ทันทั้งกดเองและออโต้สกิล) */
+function p89Keep(){try{if(!me.cls||me.down>0||!isDg())return;const M=MAPS[curMap];if(!M)return;
+  if(M.gdl){if(gdlIn(me.x,me.y,0))return;const x=Math.max(GDX0+30,Math.min(GDX1-60,me.x)),h=gdHH(x)-16;me.x=x;me.y=CY+Math.max(-h,Math.min(h,me.y-CY));return}
+  if(M.wbl){if(wblIn(me.x,me.y,0))return;const x1=Math.max(WBX0+30,Math.min(WBXM+20,me.x)),h=wbHH(x1)-16,y1=CY+Math.max(-h,Math.min(h,me.y-CY)),dx=me.x-WBCX,dy=me.y-CY,q=Math.max(1,Math.hypot(dx/(WBRX-16),dy/(WBRY-16))),x2=WBCX+dx/q,y2=CY+dy/q;
+    if(WBQ.mb||Math.hypot(me.x-x1,me.y-y1)<=Math.hypot(me.x-x2,me.y-y2)){me.x=x1;me.y=y1}else{me.x=x2;me.y=y2}return}
+  const R=M.wsk?WSAR:M.ctw?CTR:M.cwn?CWR:M.wvr?WVRR:0;if(!R)return;const d=Math.hypot(me.x-CX,me.y-CY);if(d<R)return;const k=(R-16)/d;me.x=CX+(me.x-CX)*k;me.y=CY+(me.y-CY)*k}catch(e){}}
+{const _u=updateMe;updateMe=function(dt){p89Keep();const r=_u.apply(this,arguments);p89Keep();return r}}
 /* ===== v538 หน้าสร้างตัวละคร «ค่ำคืนรอบกองไฟ» =====
    โหมดสร้างตัวละครใหม่ (csMode==='new'): เวทีเปลี่ยนเป็นลานค่ายกลางคืน · ตัวละครทุกอาชีพนั่งผิงไฟล้อมกองไฟ (หันเข้าหาไฟ)
    กดเลือก (ปุ่มอาชีพ หรือแตะตัวละครบนเวทีตรง ๆ) → ลำแสงส่องลงมาจากฟ้า · ตัวที่เลือกลุกขึ้นยืน หันออกมาหาผู้เล่น แล้วแสดงท่าวนไป

@@ -31,7 +31,7 @@ const wvOnLine=(x,y,a)=>{const dx=Math.cos(a),dy=Math.sin(a),px=x-CX,py=y-CY,t=p
 const wvOnSp=(x,y,i)=>wvOnLine(x,y,i*Math.PI/4)&&Math.hypot(x-CX,y-CY)>70;
 function wvrSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[31].dm/66,q9=(me.sty&&me.sty.q9)|0,e8=(me.sty&&me.sty.e8)|0;if(!B)return;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX(),q9=(me.sty&&me.sty.q9)|0,e8=(me.sty&&me.sty.e8)|0;if(!B)return;
   if(!B.wvq){B.wvq=1;if(q9===1){B.mh*=1.1;B.hp=B.mh}}
   const f=B.hp/B.mh,ph=f>.66?1:f>.33?2:3;
   if(ph!==WVR.ph){WVR.ph=ph;WVR.tr=2;WVR.nd=null;WVR.rp=null;WVR.sp=[];WVR.spt=0;fx({k:'wvph',ph});
@@ -39,13 +39,13 @@ function wvrSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=
     if(ph===3){fx({k:'msg',s:'💜 เปลือกผู้ทอแตก แกนกลางเปิดออก! หมุดด้าย 3 หมุดผูกแกนไว้ ทำลายให้หมด'});wvrAdds(3,1);WVR.ank=1;wvrAdds(2+Math.min(3,pl.length-1))}}
   if(WVR.ank){if(B.hp<B.mh*.33)B.hp=B.mh*.33;if(!mons.some(m=>m.ank&&m.hp>0)){WVR.ank=0;B.hp=Math.min(B.hp,B.mh*.329);fx({k:'msg',s:'💥 หมุดด้ายขาดหมด! แกนกลางของผู้ทอสั่นไหว — ตีแกนได้แล้ว'});fx({k:'wvbr'})}}
   if(WVR.tr>0){WVR.tr-=dt;return}
-  /* ① เข็ม */if(ph===1){if(WVR.nd){WVR.nd.t-=dt;if(WVR.nd.t<=0){const A=WVR.nd.a;pl.forEach(p=>{if(A.some(a=>wvOnLine(p.x,p.y,a)))wvHit(p.u,Math.round(75*dm))});fx({k:'wvnx',a:A});WVR.nd=null}}
+  /* ① เข็ม */if(ph===1){if(WVR.nd){WVR.nd.t-=dt;if(WVR.nd.t<=0){const A=WVR.nd.a;pl.forEach(p=>{if(A.some(a=>wvOnLine(p.x,p.y,a)))wvHit(p.u,Math.round(50*dm))});fx({k:'wvnx',a:A});WVR.nd=null}}
     else{WVR.nt-=dt;if(WVR.nt<=0){WVR.nt=q9===1?2.8:q9===2?4.6:3.5;const A=pl.slice(0,3).map(p=>Math.round(Math.atan2(p.y-CY,p.x-CX)*1000)/1000);while(A.length<3)A.push(Math.round(Math.random()*6283)/1000);WVR.nd={t:1.2,a:A};fx({k:'wvnd',a:A,d:1.2})}}}
-  /* ② ด้ายรัด + ซี่ใย */if(ph===2){if(WVR.rp){WVR.rp.t-=dt;if(WVR.rp.t<=0){const P=WVR.rp.p,hit=[];pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.3)<70)){wvHit(p.u,Math.round(50*dm));hit.push(p.u)}});fx({k:'wvrx',p:P,u:hit});WVR.rp=null}}
+  /* ② ด้ายรัด + ซี่ใย */if(ph===2){if(WVR.rp){WVR.rp.t-=dt;if(WVR.rp.t<=0){const P=WVR.rp.p,hit=[];pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.3)<70)){wvHit(p.u,Math.round(35*dm));hit.push(p.u)}});fx({k:'wvrx',p:P,u:hit});WVR.rp=null}}
     else{WVR.rt-=dt;if(WVR.rt<=0){WVR.rt=6.5;const P=pl.slice(0,5).map(p=>[Math.round(p.x),Math.round(p.y)]);WVR.rp={t:1.4,p:P};fx({k:'wvrp',p:P,d:1.4})}}
-    if(WVR.spt>0){WVR.spt-=dt;if(WVR.spt<=0){const S=WVR.sp;pl.forEach(p=>{if(S.some(i=>wvOnSp(p.x,p.y,i)))wvHit(p.u,Math.round(65*dm))});fx({k:'wvsx',s:S});WVR.sp=[]}}
+    if(WVR.spt>0){WVR.spt-=dt;if(WVR.spt<=0){const S=WVR.sp;pl.forEach(p=>{if(S.some(i=>wvOnSp(p.x,p.y,i)))wvHit(p.u,Math.round(45*dm))});fx({k:'wvsx',s:S});WVR.sp=[]}}
     else{WVR.st-=dt;if(WVR.st<=0){WVR.st=9;const k0=(Math.random()*8)|0,S=[k0,(k0+3)%8,(k0+5)%8];WVR.sp=S;WVR.spt=1.4;fx({k:'wvsp',s:S,d:1.4})}}}
-  /* ③ ดาวตก */if(ph===3){if(WVR.mp){WVR.mp.t-=dt;if(WVR.mp.t<=0){const P=WVR.mp.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<72))wvHit(p.u,Math.round(85*dm))});fx({k:'wvmx',p:P});WVR.mp=null}}
+  /* ③ ดาวตก */if(ph===3){if(WVR.mp){WVR.mp.t-=dt;if(WVR.mp.t<=0){const P=WVR.mp.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<72))wvHit(p.u,Math.round(55*dm))});fx({k:'wvmx',p:P});WVR.mp=null}}
     else{WVR.mt-=dt;if(WVR.mt<=0){WVR.mt=4;const P=pl.slice(0,5).map(p=>[Math.round(p.x),Math.round(p.y)]);while(P.length<6){const a=Math.random()*6.283,r=Math.random()*470;P.push([Math.round(CX+Math.cos(a)*r),Math.round(CY+Math.sin(a)*r)])}WVR.mp={t:1.3,p:P};fx({k:'wvmp',p:P,d:1.3})}}}
   /* วาฬดาว */if(e8===1){WVR.wh-=dt;if(WVR.wh<=0){WVR.wh=20;fx({k:'cwwh'});setTimeout(()=>{if(!WVRI())return;WVR.nd=null;WVR.rp=null;WVR.sp=[];WVR.spt=0;WVR.mp=null;fx({k:'wvcl'});const B2=mons.find(m=>m.t===3&&m.hp>0);if(B2){const lo=WVR.ank?B2.mh*.33:1;B2.hp=Math.max(lo,B2.hp-B2.mh*.025);WVR.wk=(WVR.wk|0)+1}
       let s='🐋 วาฬดาวพุ่งชนตาข่าย! ท่าของผู้ทอขาดกลางคัน';if(WVR.ank&&!WVR.wa){const A=mons.find(m=>m.ank&&m.hp>0);if(A){A.hp=0;WVR.wa=1;s='🐋 วาฬดาวงับหมุดด้ายขาดไปหนึ่งหมุด!'}}fx({k:'msg',s})},1500)}}
@@ -194,3 +194,11 @@ setTimeout(()=>{
     if(e9===2){const pu=.6+.4*Math.sin(T*1.5);g.strokeStyle='rgba(255,230,170,'+(.5*pu)+')';g.lineWidth=10;g.beginPath();g.moveTo(x,y-470);g.quadraticCurveTo(x+600,y-900,x+1400,y+200);g.stroke();for(let k=0;k<12;k++){const u=k/12,bx=(1-u)*(1-u)*x+2*u*(1-u)*(x+600)+u*u*(x+1400),by=(1-u)*(1-u)*(y-470)+2*u*(1-u)*(y-900)+u*u*(y+200);glowAt(bx,by,14,'255,240,190',.7)}}
     else glowAt(x,y-470,40,'230,235,255',.4);g.restore()}}catch(e){}
 },0);
+/* v560 กันหลุดขอบลาน (ดันภาค 8–9): สกิลพุ่ง/ถอยกระโดด (dash) ย้ายตัวทีเดียว ~110 โดยไม่เช็กชน → ข้ามแนวกันชนขอบลาน แล้วตัวกันชนดันออกนอกลาน = ติดนอกเรือ/นอกลานจนจบดัน
+   6 ดันนี้ไม่ใช้วงจำกัดรัศมี DR ของดันทั่วไป → ถ้าออกนอกลานเมื่อไหร่ ดึงกลับจุดในลานที่ใกล้สุด (ก่อนและหลังอัปเดตตัวละครทุกเฟรม: ทันทั้งกดเองและออโต้สกิล) */
+function p89Keep(){try{if(!me.cls||me.down>0||!isDg())return;const M=MAPS[curMap];if(!M)return;
+  if(M.gdl){if(gdlIn(me.x,me.y,0))return;const x=Math.max(GDX0+30,Math.min(GDX1-60,me.x)),h=gdHH(x)-16;me.x=x;me.y=CY+Math.max(-h,Math.min(h,me.y-CY));return}
+  if(M.wbl){if(wblIn(me.x,me.y,0))return;const x1=Math.max(WBX0+30,Math.min(WBXM+20,me.x)),h=wbHH(x1)-16,y1=CY+Math.max(-h,Math.min(h,me.y-CY)),dx=me.x-WBCX,dy=me.y-CY,q=Math.max(1,Math.hypot(dx/(WBRX-16),dy/(WBRY-16))),x2=WBCX+dx/q,y2=CY+dy/q;
+    if(WBQ.mb||Math.hypot(me.x-x1,me.y-y1)<=Math.hypot(me.x-x2,me.y-y2)){me.x=x1;me.y=y1}else{me.x=x2;me.y=y2}return}
+  const R=M.wsk?WSAR:M.ctw?CTR:M.cwn?CWR:M.wvr?WVRR:0;if(!R)return;const d=Math.hypot(me.x-CX,me.y-CY);if(d<R)return;const k=(R-16)/d;me.x=CX+(me.x-CX)*k;me.y=CY+(me.y-CY)*k}catch(e){}}
+{const _u=updateMe;updateMe=function(dt){p89Keep();const r=_u.apply(this,arguments);p89Keep();return r}}

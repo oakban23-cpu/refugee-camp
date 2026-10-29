@@ -1,6 +1,6 @@
 """v553 เล่นดันจริงด้วยบอท (วัดความยาก)
    python3 b10run.py DG CLS[,CLS..] PROF [K=3] [VAR=1] [LIMIT=1500]
-   DG = ptd | pnq | pfn | wvr · หลายอาชีพ = ปาร์ตี้ (คนแรกเป็นหัวหน้า/โฮสต์)
+   DG = ptd | pnq | pfn | wvr | gdl | wbl | wsk | ctw | cwn (v560) · หลายอาชีพ = ปาร์ตี้ (คนแรกเป็นหัวหน้า/โฮสต์)
    VAR: pfn 1=พันธมิตรแบบ 1 ทั้งหมด · 2=แบบ 2 ทั้งหมด · wvr 1=q9=1 e8=2 (ยาก) · 2=q9=2 e8=1 (ง่าย)
    env: BOTCFG='{"dodge":.7,...}' ปรับนโยบายบอท"""
 import asyncio, sys, json, time, os, random
@@ -13,14 +13,14 @@ VAR = int(sys.argv[5]) if len(sys.argv) > 5 else 1
 LIMIT = float(sys.argv[6]) if len(sys.argv) > 6 else 1500
 BOTJS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'b10bot.js'), encoding='utf-8').read()
 CFG = json.loads(os.environ.get('BOTCFG', '{}'))
-ENTER = {'ptd': 'ptdEnter', 'pnq': 'pnqEnter', 'pfn': 'pfnEnter', 'wvr': 'wvrEnter'}[DG]
-START = {'ptd': 'ptdStart', 'pnq': 'pnqStart', 'pfn': 'pfnStart', 'wvr': 'wvrStart'}[DG]
-INQ = {'ptd': 'PTDI', 'pnq': 'PNQI', 'pfn': 'PFNI', 'wvr': 'WVRI'}[DG]
+ENTER = {'ptd': 'ptdEnter', 'pnq': 'pnqEnter', 'pfn': 'pfnEnter', 'wvr': 'wvrEnter', 'gdl': 'gdlEnter', 'wbl': 'wblEnter', 'wsk': 'wskEnter', 'ctw': 'ctwEnter', 'cwn': 'cwnEnter'}[DG]
+START = {'ptd': 'ptdStart', 'pnq': 'pnqStart', 'pfn': 'pfnStart', 'wvr': 'wvrStart', 'gdl': 'gdlStart', 'wbl': 'wblStart', 'wsk': 'wskStart', 'ctw': 'ctwStart', 'cwn': 'cwnStart'}[DG]
+INQ = {'ptd': 'PTDI', 'pnq': 'PNQI', 'pfn': 'PFNI', 'wvr': 'WVRI', 'gdl': 'GDLI', 'wbl': 'WBLI', 'wsk': 'WSKI', 'ctw': 'CTWI', 'cwn': 'CWNI'}[DG]
 def story():
     v = VAR
     if DG == 'pfn':
         return {'e': v, 'e4': v, 'e6': v, 'e7': v, 'p7m': v, 'p8g': v, 'e8': v, 'e9': v, 'q9': 1, 'e10': 0}
-    if DG == 'wvr':
+    if DG in ('wvr', 'cwn'):
         return {'q9': 1 if v == 1 else 2, 'e8': 2 if v == 1 else 1, 'e': 1, 'e4': 1, 'e6': 1, 'e7': 1, 'p7m': 1, 'p8g': 1}
     return {'e': 1, 'e4': 1, 'e6': 1, 'e7': 1, 'p7m': 1, 'p8g': 1, 'e8': 1, 'e9': 1}
 async def main():
@@ -45,7 +45,7 @@ async def main():
             await H.ev(f"()=>{{{ENTER}()}}"); await H.wait(2500)
             rid = await H.ev("()=>curMap"); res['room'] = rid
             if os.environ.get('FIX66'):
-                k = {'wvr': 31, 'ctw': 29, 'cwn': 30}.get(DG)
+                k = {'wvr': 31, 'ctw': 29, 'cwn': 30, 'gdl': 26, 'wbl': 27, 'wsk': 28}.get(DG)
                 if k:
                     res['fix66'] = await H.ev(f"()=>{{DT[{k}].dm=Math.round(DT[{k}].dm*3*66);return DT[{k}].dm}}")
             for A in Cs[1:]:

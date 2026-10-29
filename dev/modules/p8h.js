@@ -35,23 +35,23 @@ function wskStart(){if(!WSKI()||dg.ph!=='lobby')return;const D=DT[28];stSay(WSK_
 function wskHit(u,d){if(u===uid){WSK.hk=(WSK.hk|0)+1;try{hurt(d)}catch(e){}}else dmgOut.push([u,d])}
 function wskSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=0){dgEnd(0,'หมดเวลา');return}
   const all=[me.down>0,...Object.values(others).map(o=>o.hp<=0)];if(all.every(x=>x)){dg.wt=(dg.wt||0)+dt;if(dg.wt>2.5){dgEnd(0,'ทั้งทีมล้มหมด');return}}else dg.wt=0;
-  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=DT[28].dm/66;if(!B)return;const f=B.hp/B.mh;
+  const B=mons.find(m=>m.t===3&&m.hp>0),pl=escPl(),dm=BS().dm*bossX();if(!B)return;const f=B.hp/B.mh;
   /* ครีบ */const fl=mons.filter(m=>(m.wsp==='fl'||m.wsp==='fr')&&m.hp>0).length;if(fl<WSK.fl){WSK.fl=fl;fx({k:'msg',s:fl?'✂️ ครีบข้างหนึ่งขาด! วาฬเสียหลัก':'✂️ ครีบทั้งสองข้างขาด! วาฬดำลงเมฆไม่ได้อีกแล้ว'});fx({k:'wsx',k2:'fin'})}
   /* ฝูงสัตว์เมฆ */if(f<.75&&!WSK.a75){WSK.a75=1;wskAdds(3+Math.min(3,pl.length-1));fx({k:'msg',s:'🦈 ฝูงสัตว์เมฆถูกพายุหอบมาเกาะเรือ!'})}
   if(f<.4&&!WSK.a40){WSK.a40=1;wskAdds(4+Math.min(3,pl.length-1));fx({k:'msg',s:'🦈 ฝูงสัตว์เมฆระลอกใหญ่! ปกป้องเรือไว้'})}
-  /* ดำลงเมฆ */if(WSK.dv){WSK.dt-=dt;if(WSK.dv===2){if(B.hp<B.dvH)B.hp=B.dvH;WSK.tk=(WSK.tk||0)-dt;if(WSK.tk<=0){WSK.tk=.5;pl.forEach(p=>{if(wskShip(p.x,p.y)<0)wskHit(p.u,Math.round(42*dm))})}}
+  /* ดำลงเมฆ */if(WSK.dv){WSK.dt-=dt;if(WSK.dv===2){if(B.hp<B.dvH)B.hp=B.dvH;WSK.tk=(WSK.tk||0)-dt;if(WSK.tk<=0){WSK.tk=.5;pl.forEach(p=>{if(wskShip(p.x,p.y)<0)wskHit(p.u,Math.round(8*dm))})}}
     if(WSK.dt<=0){if(WSK.dv===1){WSK.dv=2;WSK.dt=6;B.dvH=B.hp;fx({k:'msg',s:'🌊 วาฬดำลงเมฆ! ขึ้นเรือเดี๋ยวนี้'})}else{WSK.dv=0;WSK.nd=f<.4?15:19;fx({k:'msg',s:'🐋 วาฬโผล่กลับขึ้นมา!'})}}}
   else if(WSK.fl>0&&!WSK.sw){WSK.nd-=dt;if(WSK.nd<=0){WSK.dv=1;WSK.dt=2;fx({k:'msg',s:'⚠️ วาฬกำลังจะดำลงเมฆ… ไปยืนบนเรือ!'})}}
   /* กลืนฟ้า */if(!WSK.sw&&!WSK.dv&&((f<.66&&!WSK.a66)||(f<.33&&!WSK.a33))){if(f<.66)WSK.a66=1;if(f<.33)WSK.a33=1;WSK.sw=1;WSK.stw=3;const ks=[0,1,2,3,4,5].sort(()=>Math.random()-.5).slice(0,4);WSK.c=ks.map(k=>[Math.round(CX+Math.cos(WSSH[k])*450),Math.round(CY+Math.sin(WSSH[k])*450)]);fx({k:'wss',c:WSK.c,d:3});fx({k:'msg',s:'🌀 วาฬกลืนฟ้าสูดลมหายใจ… เข้าวงเพลงทองบนเรือ!'});try{sfx('boss')}catch(e){}}
-  if(WSK.sw){WSK.stw-=dt;if(WSK.sw===2){if(B.hp<B.swH)B.hp=B.swH;WSK.tk2=(WSK.tk2||0)-dt;if(WSK.tk2<=0){WSK.tk2=.5;pl.forEach(p=>{if(!WSK.c.some(([x,y])=>Math.hypot(p.x-x,p.y-y)<84))wskHit(p.u,Math.round(55*dm))})}}
+  if(WSK.sw){WSK.stw-=dt;if(WSK.sw===2){if(B.hp<B.swH)B.hp=B.swH;WSK.tk2=(WSK.tk2||0)-dt;if(WSK.tk2<=0){WSK.tk2=.5;pl.forEach(p=>{if(!WSK.c.some(([x,y])=>Math.hypot(p.x-x,p.y-y)<84))wskHit(p.u,Math.round(10*dm))})}}
     if(WSK.stw<=0){if(WSK.sw===1){WSK.sw=2;WSK.stw=4;B.swH=B.hp;fx({k:'msg',s:'🌀 วาฬกลืนฟ้า! อยู่ในวงเพลงไว้'})}else{WSK.sw=0;WSK.c=[];fx({k:'msg',s:'🎵 เพลงกล่อมต้านแรงดูดไว้ได้!'})}}}
   /* พายุ */if(f<.5){WSK.lt-=dt;if(WSK.lt<=0){WSK.lt=f<.25?5.5:7;const P=pl.map(p=>[Math.round(p.x),Math.round(p.y)]);WSK.lp={t:1.3,p:P};fx({k:'wsl',p:P,d:1.3})}
-    if(WSK.lp){WSK.lp.t-=dt;if(WSK.lp.t<=0){const P=WSK.lp.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<72))wskHit(p.u,Math.round(72*dm))});fx({k:'wslx',p:P});WSK.lp=null}}}
+    if(WSK.lp){WSK.lp.t-=dt;if(WSK.lp.t<=0){const P=WSK.lp.p;pl.forEach(p=>{if(P.some(([x,y])=>Math.hypot(p.x-x,(p.y-y)*1.4)<72))wskHit(p.u,Math.round(45*dm))});fx({k:'wslx',p:P});WSK.lp=null}}}
   WSK.bt-=dt;if(WSK.bt<=0){WSK.bt=.4;fx({k:'wsv',dv:WSK.dv,dt:Math.round(WSK.dt*10)/10,sw:WSK.sw,st:Math.round(WSK.stw*10)/10,c:WSK.c,fl:WSK.fl})}}
 /* ครีบ/หาง: อยู่กับที่ ฟาดตามจังหวะ (ข้ามการเดินปกติ) */
 function wskMon(m,dt,pl,spd){if(!WSKI())return false;
-  if(m.wsp){const[x,y]=WSPT[m.wsp];m.x=x;m.y=y;m.tx=x;m.ty=y;if(!isHost()||m.stun>0||!pl.length)return true;const dm=DT[28].dm/66,B=mons.find(q=>q.t===3&&q.hp>0);if(WSK.dv===2)return true;
-    if(m.sl0){m.sl0.t-=dt;if(m.sl0.t<=0){const A=m.sl0;pl.forEach(p=>{if(A.k==='tl'?(p.y>CY+110&&wskIn(p.x,p.y,0)):Math.hypot(p.x-A.x,(p.y-A.y)*1.2)<A.r)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round((A.k==='tl'?100:80)*dm)});fx({k:'wsfx',k2:A.k,x:A.x,y:A.y,r:A.r});m.sl0=null}}
+  if(m.wsp){const[x,y]=WSPT[m.wsp];m.x=x;m.y=y;m.tx=x;m.ty=y;if(!isHost()||m.stun>0||!pl.length)return true;const dm=BS().dm*bossX(),B=mons.find(q=>q.t===3&&q.hp>0);if(WSK.dv===2)return true;
+    if(m.sl0){m.sl0.t-=dt;if(m.sl0.t<=0){const A=m.sl0;pl.forEach(p=>{if(A.k==='tl'?(p.y>CY+110&&wskIn(p.x,p.y,0)):Math.hypot(p.x-A.x,(p.y-A.y)*1.2)<A.r)dmgQ[p.u]=(dmgQ[p.u]||0)+Math.round((A.k==='tl'?45:40)*dm)});fx({k:'wsfx',k2:A.k,x:A.x,y:A.y,r:A.r});m.sl0=null}}
     m.g1=(m.g1===undefined?(m.wsp==='tl'?9:m.wsp==='fl'?5:7):m.g1)-dt;if(m.g1<=0&&!m.sl0){if(m.wsp==='tl'){m.g1=13;m.sl0={k:'tl',t:1.8,x:CX,y:CY+300,r:0};fx({k:'wsf',k2:'tl',x:CX,y:CY+300,r:0,d:1.8});fx({k:'msg',s:'🐋 หางวาฬง้างขึ้น! ออกจากครึ่งล่างของวง'})}
       else{m.g1=8;const s=m.wsp==='fl'?-1:1,x=Math.round(CX+s*440),y=CY;m.sl0={k:m.wsp,t:1.5,x,y,r:190};fx({k:'wsf',k2:m.wsp,x,y,r:190,d:1.5})}}
     return true}

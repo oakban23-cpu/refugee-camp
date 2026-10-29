@@ -25,6 +25,12 @@ def titles(upto, cls, ast_n=0, extra=()):
 
 # ---------- โปรไฟล์ (เข้าภาค 10 = ฉายาถึงภาค 9) ----------
 def prof(name, cls, upto=9):
+    if name == 'P8':  # v560 เข้าภาค 8 ขั้นต่ำ: Ancient ชุดภาค 8–9 (เซ็ต 5) +18 · ดาว 40 · ฉายาถึงภาค 7 · ไม่มีสัตว์เลี้ยง
+        return dict(name=name, gear='anc5', u=18, ast_n=40, ast={'dm': 20, 'cdm': 15, 'hp': 5}, pet=0, rb=0, br=1,
+                    ttl=titles(7, cls, 40))
+    if name == 'P9':  # v560 เข้าภาค 9 ขั้นต่ำ: Ancient เซ็ต 5 +20 · ดาว 50 · ฉายาถึงภาค 8
+        return dict(name=name, gear='anc5', u=20, ast_n=50, ast={'dm': 25, 'cdm': 20, 'hp': 5}, pet=0, rb=0, br=1,
+                    ttl=titles(8, cls, 50))
     if name == 'L':   # ขั้นต่ำ: Ancient ชุดรากพิภพ +20 · ดาว 60 · ไม่มีสัตว์เลี้ยง
         return dict(name=name, gear='anc', u=20, ast_n=60, ast={'dm': 30, 'cdm': 20, 'hp': 10}, pet=0, rb=0, br=1,
                     ttl=titles(upto, cls, 60))
@@ -42,7 +48,7 @@ PROF_JS = r"""([P])=>{
   try{
     me.lv=99;me.xp=0;me.rb=P.rb?1:0;if(P.rb){me.rbC2={br:P.br||1,brU:{1:1,2:1}}}
     me.cls2=1;me.brU={1:1,2:1};me.br=P.br||1;try{applyBr()}catch(e){}
-    ['w','a','c','h','b'].forEach(sl=>{let it;if(P.gear==='cos')it=makeCosmicSet(6,sl,22);else if(P.gear==='anc')it=makeSetItem(6,sl);else it=genItem(22,sl,P.gr||4,P.gr||4);it.u=P.u|0;me.eq[sl]=it});
+    ['w','a','c','h','b'].forEach(sl=>{let it;if(P.gear==='cos')it=makeCosmicSet(6,sl,22);else if(P.gear==='anc')it=makeSetItem(6,sl);else if(P.gear==='anc5')it=makeSetItem(5,sl);else it=genItem(22,sl,P.gr||4,P.gr||4);it.u=P.u|0;me.eq[sl]=it});
   }finally{Math.random=R0}
   me.ab={str:0,vit:0,int:0,agi:0,luk:0};
   {const W=AB2W[me.cls],p=spts(),ks=Object.keys(W),tw=ks.reduce((a,k)=>a+W[k],0);let used=0;const add={};ks.forEach(k=>{add[k]=Math.floor(p*W[k]/tw);used+=add[k]});let i=0;while(used<p){add[ks[i%ks.length]]++;used++;i++}ks.forEach(k=>me.ab[k]=add[k])}
