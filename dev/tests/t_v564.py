@@ -24,8 +24,8 @@ async def main():
           const name=me.nm;return {lock,mid,all,ent,rows,k,dis,sel,name}}""")
         rep('ปลดตามเนื้อเรื่อง (ยังไม่ผ่าน = ล็อกหมด · ผ่านถึงเรือดำ = เปิดถึงเรือดำ · จบเรื่อง = 19 ดัน) · ทางเข้าแท็บสัปดาห์ · หน้า 19 ดัน · เลือกระดับได้ไม่เกินที่ปลด',
             u['lock'] == 0 and u['mid'][-1] == 'gdl' and u['all'] == 19 and u['ent'] and u['rows'] == 19 and u['k'] == 'nm' and u['dis'] and u['sel'] == 4, u)
-        pt = await A.ev("()=>{const o=window.PTY;window.PTY=PTY={mem:[{},{}],lead:uid};const w=nmWhy(NMD.find(e=>e[0]==='gdl'),1);window.PTY=PTY=o;return w}")
-        rep('อยู่ในปาร์ตี้ → เริ่มฝันร้ายไม่ได้ (เล่นเดี่ยว)', 'เดี่ยว' in pt, pt)
+        pt = await A.ev("()=>{const o=window.PTY;window.PTY=PTY={mem:[{},{}],lead:'someone'};const w=nmWhy(NMD.find(e=>e[0]==='gdl'),1);window.PTY=PTY=o;return w}")
+        rep('อยู่ในปาร์ตี้แต่ไม่ใช่หัวหน้า → เริ่มฝันร้ายเองไม่ได้ (v566: หัวหน้าเป็นคนเริ่มฝันร้ายทีม)', 'หัวหน้า' in pt, pt)
         # ② ในดัน (ฐานฟ้า ระดับ 2)
         await A.ev("()=>{ov.hidden=true;enterMap(45,{x:1600,y:1300})}"); await A.wait(800)
         await A.ev("()=>{nmArm('pfn',2);NFC.mods=['rush','heal','shade'];pfnEnter()}"); await A.wait(2500)

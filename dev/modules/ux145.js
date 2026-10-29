@@ -70,8 +70,8 @@ function nmHorse(f,x,y,fx,ph,t,sc){const S=sc||1;g.save();if(DYFOK)g.filter='hue
 setTimeout(()=>{
   try{const _ne=nmEnsure;window.nmEnsure=nmEnsure=function(){_ne.apply(this,arguments);const N=me.ngm;if(N){N.c=Math.max(0,N.c|0);if(!N.r||typeof N.r!=='object')N.r={}}}}catch(e){}
   try{const _nc=nmClean;window.nmClean=nmClean=function(o){const r=_nc(o);if(r&&o){r.c=Math.max(0,Math.min(99999,o.c|0));r.rt=o.rt?1:0;r.r={};if(o.r&&typeof o.r==='object')Object.keys(o.r).filter(k=>/^n\d{6}$/.test(k)).sort().slice(-4).forEach(k=>r.r[k]=1)}return r}}catch(e){}
-  try{const _cl=nmClear;window.nmClear=nmClear=function(){const k=NFC&&NFC.key,L=NFC&&NFC.L;let first=false;try{nmEnsure();first=!!k&&!me.ngm.f[k+':'+L]}catch(e){}const r=_cl.apply(this,arguments);
-    try{if(k&&L){const n=first?3*L:L;nmShardAdd(n,first?'ผ่านครั้งแรก ระดับ '+L:'ผ่านระดับ '+L);try{writeSave()}catch(e){}}}catch(e){}return r}}catch(e){}
+  try{const _cl=nmClear;window.nmClear=nmClear=function(){const r=_cl.apply(this,arguments);
+    try{if(r&&r.cr&&r.L){const n=r.first?3*r.L:r.L;nmShardAdd(n,(r.p?'ทีม · ':'')+(r.first?'ผ่านครั้งแรก ระดับ ':'ผ่านระดับ ')+r.L);try{writeSave()}catch(e){}}}catch(e){}return r}}catch(e){}
   try{const _as=applySave;window.applySave=applySave=function(c){const r=_as.apply(this,arguments);try{nmEnsure();const N=me.ngm;if(!N.rt){N.rt=1;let s=0;for(const k in N.f){const L=+k.split(':')[1]|0;if(L>0)s+=3*L}
       if(s>0){N.c=(N.c|0)+s;setTimeout(()=>{try{sysMsg('🌙 เปิดร้านฝันร้ายแล้ว! ได้เศษฝันร้ายย้อนหลัง +'+s+' จากด่านฝันร้ายที่เคยผ่าน · แลกของได้ที่หน้าโหมดฝันร้าย');banner={s:'🌙 ได้เศษฝันร้ายย้อนหลัง +'+s+' · เปิดร้านในหน้าโหมดฝันร้าย',t:6}}catch(e){}},2500)}}}catch(e){}return r}}catch(e){}
   try{const _nu=nmUI;window.nmUI=nmUI=function(){const r=_nu.apply(this,arguments);try{nmWeekClaim();const c=me.ngm.c|0,f=ov.querySelector('.pn .card');

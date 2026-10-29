@@ -101,7 +101,7 @@ function mkOwner(c,d){const v=d&&typeof d.mid==='string'&&/^[a-z0-9]{8,16}$/.tes
 const LBF=path.join(DATA_DIR,'leaderboard.json');let LB={},lbDirty=false;
 /* หนึ่งตัวละคร (ชื่อ+อาชีพ) = หนึ่งแถว เก็บเฉพาะสถิติที่ดีที่สุด */
 const lbId=r=>String(r.n||'').trim().toLowerCase()+'|'+String(r.c||'');
-const lbHi=key=>key==='wb'||key==='pv'||/^s\d{4}$/.test(key)||/^n\d{6}$/.test(key);
+const lbHi=key=>key==='wb'||key==='pv'||/^s\d{4}$/.test(key)||/^[nq]\d{6}$/.test(key);
 /* ผู้ดูแลคุมตารางอันดับ: แบนชื่อ · ตั้งเพดานสถิติต่อตาราง (ตารางคะแนน=ค่าสูงสุดที่ Lv75 ลดตามเลเวลแบบเส้นตรง · ตารางเวลา=เวลาเร็วสุดที่ยอมรับ) · เก็บสถิติที่ถูกปัดตก */
 const LBCF=path.join(DATA_DIR,'lbcfg.json');let LBC={caps:{},ban:{},rej:[]};
 try{const j=JSON.parse(fs.readFileSync(LBCF,'utf8'));if(j&&typeof j==='object')LBC={caps:j.caps||{},ban:j.ban||{},rej:Array.isArray(j.rej)?j.rej:[]}}catch(e){}
@@ -132,12 +132,12 @@ function onEmit(c,m){
   if(!c.p||!pl||typeof pl!=='object')return;
   const mp=c.p.mp,d=pl.d,host=hostByMap[mp];
   const wrap=x=>JSON.stringify({t:'emit',k,d:{mp,d:x},from:c.id});
-  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv|s\d{4}|n\d{6})$/.test(key))return;const ss=/^s\d{4}$/.test(key),nw=/^n\d{6}$/.test(key),hi=lbHi(key),t=+d.t;if(hi?!(t>=1&&t<(ss?100000:nw?191:1e12)):!(t>=5&&t<36000))return;
+  if(k==='lbs'){if(!d||typeof d!=='object')return;const key=String(d.k||'');if(!/^(m[1-4678]|m10|d[1-37]|tw|wb|pv|s\d{4}|[nq]\d{6})$/.test(key))return;const ss=/^s\d{4}$/.test(key),nw=/^[nq]\d{6}$/.test(key),hi=lbHi(key),t=+d.t;if(hi?!(t>=1&&t<(ss?100000:nw?191:1e12)):!(t>=5&&t<36000))return;
     const row={n:String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,12)||'ผู้เล่น',c:String(d.cls||'').slice(0,8),l:num(d.lv|0,1,99,1),t:hi?Math.round(t):Math.round(t*10)/10,p:num(d.pc|0,1,99,1),u:c.uid||'',at:Date.now()};
     {const why=lbBlock(key,row,hi);if(why){lbRej(key,row,why);return}}
     const arr=LB[key]||(LB[key]=[]),i=arr.findIndex(r=>lbId(r)===lbId(row));if(i>=0){if(hi?arr[i].t>=row.t:arr[i].t<=row.t)return;arr.splice(i,1)}
     arr.push(row);arr.sort((a,b)=>hi?b.t-a.t:a.t-b.t);if(arr.length>50)arr.length=50;lbDirty=true;
-    /* v564 ฝันร้ายรายสัปดาห์ nYYMMDD: เก็บ 3 สัปดาห์ล่าสุด */if(nw){const ks=Object.keys(LB).filter(x=>/^n\d{6}$/.test(x)).sort();while(ks.length>3)delete LB[ks.shift()]}/* ตารางคะแนนฤดูกาลรายเดือน sYYMM: เก็บไว้แค่ 3 ฤดูกาลล่าสุด */if(ss){const ks=Object.keys(LB).filter(x=>/^s\d{4}$/.test(x)).sort();while(ks.length>3)delete LB[ks.shift()]}return}
+    /* v564 ฝันร้ายรายสัปดาห์ nYYMMDD: เก็บ 3 สัปดาห์ล่าสุด */if(nw){const pf=key[0],ks=Object.keys(LB).filter(x=>x[0]===pf&&/^[nq]\d{6}$/.test(x)).sort();while(ks.length>3)delete LB[ks.shift()]}/* ตารางคะแนนฤดูกาลรายเดือน sYYMM: เก็บไว้แค่ 3 ฤดูกาลล่าสุด */if(ss){const ks=Object.keys(LB).filter(x=>/^s\d{4}$/.test(x)).sort();while(ks.length>3)delete LB[ks.shift()]}return}
   if(k==='ride'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;d.n=String(d.n||'').replace(/[\u0000-\u001f<>]/g,'').slice(0,24);if(typeof d.why==='string')d.why=d.why.slice(0,40);send(o,wrap(d))}return}
   if(k==='trade'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c&&o.p&&o.p.mp===mp){d.from=c.uid||d.from;send(o,wrap(d))}return}
   if(k==='pvc'||k==='pva'||k==='pvn'||k==='pvh'||k==='pvd'||k==='pvt'){if(!d||typeof d!=='object'||typeof d.to!=='string')return;const o=byUid.get(d.to);if(o&&o!==c){d.from=c.uid||'';send(o,wrap(d))}return}
@@ -194,7 +194,7 @@ function onEmit(c,m){
     const out={op,from:c.uid||'',n:c.p.n,c:c.p.cls,lv:c.p.lv};if(op==='w'){out.t=String(d.t||'').replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,80);if(!out.t)return}
     send(o,JSON.stringify({t:'emit',k:'frm',d:{mp:o.p.mp,d:out},from:c.id}));return}
   if(k==='gdo'){try{gdOp(c,d)}catch(e){console.error('guild',e.message)}return}
-  if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,(key==='wb'||/^[sn]\d{4,6}$/.test(key))?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
+  if(k==='lbq'){const out={};for(const key in LB)out[key]=LB[key].slice(0,(key==='wb'||/^[snq]\d{4,6}$/.test(key))?30:10).map(r=>[r.n,r.c,r.l,r.t,r.p]);send(c,JSON.stringify({t:'emit',k:'lbr',d:{mp,d:out},from:0}));return}
   if(k==='mvq'){send(c,JSON.stringify({t:'emit',k:'mvr',d:{mp,d:mvTable()},from:0}));return}
   if(k==='mva'||k==='mvd'||k==='mvk'||k==='mvlost'){const V=MV[mp];if(!V)return;const now=Date.now();
     if(k==='mva'){if(host!==c||V.alive)return;const id=+(d&&d.id)||0;if(!id)return;V.alive=1;V.id=id;V.dm={};V.ask=0;V.empty=0;mvDirty=true;mvAll({s:'sp',mp});return}
