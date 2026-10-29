@@ -117,7 +117,7 @@ function mxSharp(F,cv,X0,Y0,CS,sd,nz){const SP2=2,n2=Math.round(CS/SP2)+2,o2=new
 const mxKey=(cx,cy,r)=>'mx'+MX.v+'|'+curMap+'|'+cx+'|'+cy+'|'+r;
 /* ภาพพื้นฐานชั่วคราว (เร็ว): ลายพื้นของธีม */
 /* ภาพพื้นฐานระหว่างรอชังก์: เติมลายกระเบื้องตรงจอ (ไม่สร้างแคนวาสต่อชังก์ → ประหยัดหน่วยความจำ) */
-function mxPrevDraw(cx,cy,X,Y,D,s,ex,ey){const C=MXC[curMap],CS=GX.CS,p=mxTileOf(C.base);g.save();g.beginPath();g.rect(X,Y,D,D);g.clip();g.setTransform(s,0,0,s,ex,ey);g.fillStyle=p||'#444';g.fillRect(cx*CS-1,cy*CS-1,CS+2,CS+2);g.restore()}
+function mxPrevDraw(cx,cy,X,Y,D,s,ex,ey,DY){const C=MXC[curMap],CS=GX.CS,p=mxTileOf(C.base);g.save();g.beginPath();g.rect(X,Y,D,DY||D);g.clip();g.setTransform(s,0,0,s,ex,ey);g.fillStyle=p||'#444';g.fillRect(cx*CS-1,cy*CS-1,CS+2,CS+2);g.restore()}
 function mxPrev(cx,cy,r){const k=cx+'|'+cy+'|'+r+'|'+curMap;let c=MX.pv.get(k);if(c)return c;const C=MXC[curMap],CS=GX.CS,px=Math.ceil(CS*r);c=document.createElement('canvas');c.width=c.height=px;const x=c.getContext('2d');x.setTransform(r,0,0,r,-cx*CS*r,-cy*CS*r);
   x.fillStyle=mxTileOf(C.base)||'#444';x.fillRect(cx*CS,cy*CS,CS,CS);MX.pv.set(k,c);while(MX.pv.size>2)MX.pv.delete(MX.pv.keys().next().value);return c}
 function mxJob(cx,cy,r,vis){const k=mxKey(cx,cy,r);let J=MX.jobs.get(k);if(J){if(vis)J.vis=1;return J}J={k,cx,cy,r,vis:vis?1:0,st:0};MX.jobs.set(k,J);return J}
@@ -173,9 +173,9 @@ function mxGround(MP){const th=gxTheme();if(!th)return false;mxTrees();try{if(VM
   const x0=Math.floor((cam.x-24)/CS),x1=Math.floor((cam.x+W+24)/CS),y0=Math.floor((cam.y-24)/CS),y1=Math.floor((cam.y+H+24)/CS);
   const first=MX.fc===undefined?now-(MX.ft||0)>4:MX.fc!==MX.lf,cb=first?null:MX.cb;if(first){MX.ft=now;MX.lf=MX.fc;for(const J of MX.jobs.values())J.vis=0}
   g.save();g.setTransform(1,0,0,1,0,0);g.imageSmoothingEnabled=true;
-  for(let cy=Math.max(0,y0);cy<=y1;cy++)for(let cx=Math.max(0,x0);cx<=x1;cx++){if(cx*CS>=WW||cy*CS>=WH)continue;if(cb&&((cx+1)*CS<cb[0]||cx*CS>cb[2]||(cy+1)*CS<cb[1]||cy*CS>cb[3]))continue;const k=mxKey(cx,cy,r),X=ex+Math.round(cx*dw),Y=ey+Math.round(cy*dw),D=Math.round(dw);let c=GX.ch.get(k);
-    if(c){GX.ch.delete(k);GX.ch.set(k,c);const td=MX.done.get(k),a=td?Math.min(1,(now-td)/280):1;if(a<1){mxPrevDraw(cx,cy,X,Y,D,s,ex,ey);g.globalAlpha=a;g.drawImage(c,X,Y,D,D);g.globalAlpha=1}else{g.drawImage(c,X,Y,D,D);if(td)MX.done.delete(k)}}
-    else{mxJob(cx,cy,r,1);mxPrevDraw(cx,cy,X,Y,D,s,ex,ey)}}
+  for(let cy=Math.max(0,y0);cy<=y1;cy++)for(let cx=Math.max(0,x0);cx<=x1;cx++){if(cx*CS>=WW||cy*CS>=WH)continue;if(cb&&((cx+1)*CS<cb[0]||cx*CS>cb[2]||(cy+1)*CS<cb[1]||cy*CS>cb[3]))continue;const k=mxKey(cx,cy,r),X=ex+Math.round(cx*dw),Y=ey+Math.round(cy*dw),DX=ex+Math.round((cx+1)*dw)-X,DY=ey+Math.round((cy+1)*dw)-Y;let c=GX.ch.get(k);
+    if(c){GX.ch.delete(k);GX.ch.set(k,c);const td=MX.done.get(k),a=td?Math.min(1,(now-td)/280):1;if(a<1){mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY);g.globalAlpha=a;g.drawImage(c,X,Y,DX,DY);g.globalAlpha=1}else{g.drawImage(c,X,Y,DX,DY);if(td)MX.done.delete(k)}}
+    else{mxJob(cx,cy,r,1);mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY)}}
   g.restore();
   if(first){/* วงนอกตามทิศเดิน (สร้างล่วงหน้า) */const vx=cam.x-MX.lc.x,vy=cam.y-MX.lc.y;MX.lc.x=cam.x;MX.lc.y=cam.y;const dx=vx>.3?1:vx<-.3?-1:0,dy=vy>.3?1:vy<-.3?-1:0;
     if(dx||dy){for(let cy=y0-1;cy<=y1+1;cy++){const cx=dx>0?x1+1:dx<0?x0-1:null;if(cx!==null&&cx>=0&&cy>=0&&cx*CS<WW&&cy*CS<WH&&!GX.ch.has(mxKey(cx,cy,r)))mxJob(cx,cy,r,0)}for(let cx=x0-1;cx<=x1+1;cx++){const cy=dy>0?y1+1:dy<0?y0-1:null;if(cy!==null&&cx>=0&&cy>=0&&cx*CS<WW&&cy*CS<WH&&!GX.ch.has(mxKey(cx,cy,r)))mxJob(cx,cy,r,0)}}

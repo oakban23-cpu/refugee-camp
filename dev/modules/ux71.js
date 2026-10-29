@@ -72,8 +72,8 @@ const GHF={cv:null,k:''};
 function ghFieldBuild(t){const X0=-920,Y0=440,WD=1840,HT=920,cv=document.createElement('canvas');cv.width=WD;cv.height=HT;const c=cv.getContext('2d');c.translate(-X0,-Y0);
   let sd=4242+t*7;const rn=()=>(sd=(sd*16807)%2147483647)/2147483647,RR=(a,b)=>a+rn()*(b-a),OL='#1e2414';
   const blob=(x,y,r,rgb,a)=>{const gr=c.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,'rgba('+rgb+','+a+')');gr.addColorStop(1,'rgba('+rgb+',0)');c.fillStyle=gr;c.fillRect(x-r,y-r,r*2,r*2)};
-  c.fillStyle='#4b6a33';c.fillRect(X0,Y0,WD,HT);
-  for(let i=0;i<160;i++)blob(RR(X0,X0+WD),RR(Y0,Y0+HT),RR(40,140),rn()<.5?'120,150,70':'26,40,18',RR(.05,.12));
+  const MXF=typeof mxOn==='function'&&mxOn();if(!MXF){c.fillStyle='#4b6a33';c.fillRect(X0,Y0,WD,HT)}
+  for(let i=0;i<(MXF?40:160);i++)blob(RR(X0,X0+WD),RR(Y0,Y0+HT),RR(40,140),rn()<.5?'120,150,70':'26,40,18',RR(.05,.12)*(MXF?.6:1));
   /* ลานดินที่ถูกเหยียบหน้ากำแพง + รอยไหม้ */
   for(let i=0;i<70;i++){const x=RR(-640,640),y=RR(455,640);blob(x,y,RR(30,90),'110,88,58',RR(.18,.32))}
   for(let i=0;i<14;i++){const x=RR(-780,780),y=RR(500,1000);blob(x,y,RR(18,40),'20,14,10',RR(.25,.4))}
@@ -100,4 +100,4 @@ function ghFieldBuild(t){const X0=-920,Y0=440,WD=1840,HT=920,cv=document.createE
   return{cv,X0,Y0,WD,HT}}
 function ghFieldClear(){const inF=o=>o&&o.x>1600-960&&o.x<1600+960&&o.y>1600-520&&o.y<1600+1240;[typeof trees!=='undefined'?trees:null,typeof decor!=='undefined'?decor:null].forEach(A=>{if(!Array.isArray(A))return;let j=0;for(let i=0;i<A.length;i++){if(!inF(A[i]))A[j++]=A[i]}A.length=j})}
 ghEnter=(f=>function(){const r=f.apply(this,arguments);GHF.cl=0;return r})(ghEnter);
-ghDraw=(f=>function(){try{if(ghHere()){if(!GHF.cl){GHF.cl=1;try{ghFieldClear()}catch(e){}}const t=ghT(),k=t+'|'+((typeof GQI!=='undefined'&&GQI.ok===1)?1:0);if(GHF.k!==k||!GHF.cv){GHF.F=ghFieldBuild(t);GHF.cv=GHF.F.cv;GHF.k=k}const F=GHF.F,ox=1600+F.X0,oy=1600+F.Y0,sx=Math.max(0,cam.x-ox),sy=Math.max(0,cam.y-oy),sw=Math.min(F.WD-sx,W+2),sh=Math.min(F.HT-sy,H+2);if(sw>0&&sh>0)g.drawImage(GHF.cv,sx,sy,sw,sh,ox+sx,oy+sy,sw,sh)}}catch(e){}return f.apply(this,arguments)})(ghDraw);
+ghDraw=(f=>function(){try{if(ghHere()){if(!GHF.cl){GHF.cl=1;try{ghFieldClear()}catch(e){}}const t=ghT(),k=t+'|'+((typeof GQI!=='undefined'&&GQI.ok===1)?1:0)+'|'+((typeof mxOn==='function'&&mxOn())?1:0);if(GHF.k!==k||!GHF.cv){GHF.F=ghFieldBuild(t);GHF.cv=GHF.F.cv;GHF.k=k}const F=GHF.F,ox=1600+F.X0,oy=1600+F.Y0,sx=Math.max(0,cam.x-ox),sy=Math.max(0,cam.y-oy),sw=Math.min(F.WD-sx,W+2),sh=Math.min(F.HT-sy,H+2);if(sw>0&&sh>0)g.drawImage(GHF.cv,sx,sy,sw,sh,ox+sx,oy+sy,sw,sh)}}catch(e){}return f.apply(this,arguments)})(ghDraw);
