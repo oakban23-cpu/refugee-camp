@@ -13,9 +13,10 @@ VAR = int(sys.argv[5]) if len(sys.argv) > 5 else 1
 LIMIT = float(sys.argv[6]) if len(sys.argv) > 6 else 1500
 BOTJS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'b10bot.js'), encoding='utf-8').read()
 CFG = json.loads(os.environ.get('BOTCFG', '{}'))
-ENTER = {'ptd': 'ptdEnter', 'pnq': 'pnqEnter', 'pfn': 'pfnEnter', 'wvr': 'wvrEnter', 'gdl': 'gdlEnter', 'wbl': 'wblEnter', 'wsk': 'wskEnter', 'ctw': 'ctwEnter', 'cwn': 'cwnEnter'}[DG]
-START = {'ptd': 'ptdStart', 'pnq': 'pnqStart', 'pfn': 'pfnStart', 'wvr': 'wvrStart', 'gdl': 'gdlStart', 'wbl': 'wblStart', 'wsk': 'wskStart', 'ctw': 'ctwStart', 'cwn': 'cwnStart'}[DG]
-INQ = {'ptd': 'PTDI', 'pnq': 'PNQI', 'pfn': 'PFNI', 'wvr': 'WVRI', 'gdl': 'GDLI', 'wbl': 'WBLI', 'wsk': 'WSKI', 'ctw': 'CTWI', 'cwn': 'CWNI'}[DG]
+# v562: ดันอื่นใช้ชื่อตามแบบ XEnter / XStart / XI (เช่น clk → clkEnter clkStart CLKI)
+ENTER = DG + 'Enter'
+START = DG + 'Start'
+INQ = {'echo': 'ECHO', 'eye': 'EYE', 'queen': 'QUEEN'}.get(DG, DG.upper() + 'I')
 def story():
     v = VAR
     if DG == 'pfn':

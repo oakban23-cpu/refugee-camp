@@ -40,7 +40,7 @@ function q8Snipe(k,a,mul,L,boom,P){const x0=me.x,y0=me.y,T=L/1500,X=Math.round(x
 /* ---------- กลไกสกิลทางเลือกรอบ 2 ---------- */
 Object.assign(Q8F,{
  mj(k,P,cost,r){const t=pickTarget(240);let ex,ey;if(t){const a=Math.atan2(t.y-me.y,t.x-me.x),d=Math.max(0,Math.hypot(t.x-me.x,t.y-me.y)-18);ex=me.x+Math.cos(a)*d;ey=me.y+Math.sin(a)*d;me.face=a}
-   else{ex=me.x+Math.cos(me.face)*140;ey=me.y+Math.sin(me.face)*140}ex=cl(ex,12,WW-12);ey=cl(ey,12,WH-12);q8Use(k,cost);
+   else{ex=me.x+Math.cos(me.face)*140;ey=me.y+Math.sin(me.face)*140}ex=cl(ex,12,WW-12);ey=cl(ey,12,WH-12);try{if(typeof mvRay==='function')[ex,ey]=mvRay(me.x,me.y,ex,ey)}catch(e){}q8Use(k,cost);
    const sx=me.x,sy=me.y,T=.38,R=r==='b'?200:90,X=Math.round(ex),Y=Math.round(ey);fx({k:'q8leap',x:X,y:Y,sx:Math.round(sx),sy:Math.round(sy),r:R,dur:T+.6,u:r||''});me.inv3=Math.max(me.inv3||0,T+.05);
    Q8S.push({t:0,f(dt){this.t+=dt;const q=Math.min(1,this.t/T),e=q8io(q);if(me.down>0)return true;me.x=sx+(ex-sx)*e;me.y=sy+(ey-sy)*e;if(q<1)return false;
      if(r==='b')q8Near(X,Y,200).forEach(m=>q8Pull(m,X,Y,18));fx({k:'stun',x:X,y:Y,r:R,full:1,dur:.8});q8Area(X,Y,R,r==='b'?2.2:3,'melee',1,k,P);try{shk=Math.max(shk,.25)}catch(e){}

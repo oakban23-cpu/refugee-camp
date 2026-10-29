@@ -31,7 +31,7 @@ function q8WallF(m,cx,cy,a){const dx=m.x-cx,dy=m.y-cy;return[dx*Math.cos(a)+dy*M
 Object.assign(Q8F,{
  zm(k,P,cost,r){const {a}=q8Aim(240);q8Use(k,cost);const x0=me.x,y0=me.y;
    if(r==='a'){[-.42,0,.42].forEach(da=>{const aa=a+da,X1=Math.round(x0+Math.cos(aa)*200),Y1=Math.round(y0+Math.sin(aa)*200);fx({k:'q8rift',x:X1,y:Y1,sx:Math.round(x0),sy:Math.round(y0),r:44,dur:1,u:'a'});pend.push({t:.45,f:()=>q8LineHit(x0,y0,X1,Y1,44,2.2,'melee',1,k,P)})});return true}
-   const L=200,ex=cl(x0+Math.cos(a)*L,12,WW-12),ey=cl(y0+Math.sin(a)*L,12,WH-12),X=Math.round(ex),Y=Math.round(ey),X0=Math.round(x0),Y0=Math.round(y0);fx({k:'q8rift',x:X,y:Y,sx:X0,sy:Y0,r:44,dur:2.8,u:r||''});me.inv3=Math.max(me.inv3||0,.25);
+   const L=200,[ex,ey]=(typeof mvRay==='function'?mvRay:(a1,b1,c1,d1)=>[c1,d1])(x0,y0,cl(x0+Math.cos(a)*L,12,WW-12),cl(y0+Math.sin(a)*L,12,WH-12)),X=Math.round(ex),Y=Math.round(ey),X0=Math.round(x0),Y0=Math.round(y0);fx({k:'q8rift',x:X,y:Y,sx:X0,sy:Y0,r:44,dur:2.8,u:r||''});me.inv3=Math.max(me.inv3||0,.25);
    Q8S.push({t:0,f(dt){this.t+=dt;const q=Math.min(1,this.t/.18);if(me.down>0)return true;me.x=x0+(ex-x0)*q;me.y=y0+(ey-y0)*q;return q>=1}});
    pend.push({t:.6,f:()=>{const n=q8LineHit(X0,Y0,X,Y,44,3.2,'melee',1,k,P);try{if(Math.hypot(me.x-X,me.y-Y)<500)shk=Math.max(shk,.22)}catch(e){}if(r==='b'&&n&&me.down<=0)me.hp=Math.min(me.mh,me.hp+me.mh*Math.min(.09,.015*n))}});
    for(let i=1;i<=4;i++)pend.push({t:.6+i*.5,f:()=>q8LineHit(X0,Y0,X,Y,40,.45,'melee',3,k,P)});return true},

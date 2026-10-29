@@ -80,7 +80,7 @@ async def main():
           const dw=Math.round(h0-me.hp),wq=__dd.filter(x=>x[0]==='pfnDmg'&&x[1]===uid).map(x=>x[2]),ew=Math.round(45*BS().dm*bossX());gmGod=true;
           Bm.stun=0;Bm.hp=Bm.mh*.5;Bm.__u60h=Bm.hp;Bm.brkU=0;Bm.noT=0;Bm.x=Bm.hx;Bm.y=Bm.hy;me.x=CX;me.y=Bm.hy+480;me.cd=1e9;lockId=null;await w(2600);const a=Bm.hp/Bm.mh;await w(2600);const b=Bm.hp/Bm.mh;me.cd=0;
           return {wq,ew,dw,a:Math.round(a*1000)/1000,b:Math.round(b*1000)/1000}}""")
-        rep('ฐานฟ้า: น้ำหนักสามร้อยปีในวงยก = 45× (เดิม 55×) · บอสไม่มีเป้า (ซ่อนตัว/ยืนไกล) 2.6 วิ ยังไม่ฟื้นเลือด · เกิน 4 วิ จึงฟื้น',pf['wq']==[pf['ew']] and pf['dw']>0 and pf['a']==.5 and pf['b']>.5,pf)
+        rep('ฐานฟ้า: น้ำหนักสามร้อยปีในวงยก = 45× (เดิม 55×) · บอสไม่มีเป้า (ซ่อนตัว/ยืนไกล) ไม่ฟื้นเลือดในดันเจี้ยน (v562: เดิมฟื้นหลัง 4 วิ)',pf['wq']==[pf['ew']] and pf['dw']>0 and pf['a']==.5 and pf['b']==.5,pf)
         await C.ev("()=>{dgLeave()}");await C.wait(1200)
         E=[e for C in (A,B,C) for e in C.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม',not E,E[:4])

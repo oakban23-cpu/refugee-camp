@@ -28,7 +28,7 @@ async def main():
             await A.ev(f"()=>{{me.down=0;me.hp=me.mh;enterMap(45,{{x:1600,y:1300}})}}");await A.wait(900)
             await A.ev(f"()=>{{{E}()}}");await A.wait(1800)
             r=await A.ev("""async([dx,dy,a])=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const IN="""+IN+""";const o={map:curMap,dg:isDg()};
-              /* แบบกดเอง: พุ่งนอกเฟรม */me.x=CX+dx;me.y=CY+dy;await w(300);o.in0=IN();const p0=[me.x,me.y];dash(a,110,0);o.out=!IN();await w(350);o.in1=IN();o.mv1=Math.round(Math.hypot(me.x-p0[0],me.y-p0[1]));await w(700);o.in1b=IN();o.p1=[Math.round(me.x-CX),Math.round(me.y-CY)];
+              /* แบบกดเอง: พุ่งนอกเฟรม */me.x=CX+dx;me.y=CY+dy;await w(300);o.in0=IN();const p0=[me.x,me.y];/* v562: dash หยุดที่กำแพงแล้ว → จำลองการย้ายตัวทีเดียว 110 แบบเดิม (ตัวย้ายอื่นที่ไม่เช็กชน) เพื่อทดสอบตัวดึงกลับ */me.x+=Math.cos(a)*110;me.y+=Math.sin(a)*110;o.out=!IN();await w(350);o.in1=IN();o.mv1=Math.round(Math.hypot(me.x-p0[0],me.y-p0[1]));await w(700);o.in1b=IN();o.p1=[Math.round(me.x-CX),Math.round(me.y-CY)];
               /* แบบออโต้สกิล: พุ่งกลางเฟรม (หลังชนต้นไม้) */me.x=CX+dx;me.y=CY+dy;await w(300);const p2=[me.x,me.y];window.__dashA=a;await w(350);o.in2=IN();o.mv2=Math.round(Math.hypot(me.x-p2[0],me.y-p2[1]));await w(700);o.in2b=IN();
               /* เดินชิดขอบปกติ (ดันเข้าหาขอบ 1.2 วิ) → ไม่โดนย้ายไกล */me.x=CX+dx;me.y=CY+dy;await w(300);const p3=[me.x,me.y];joy={ox:JB.x,oy:JB.y,dx:Math.cos(a)*40,dy:Math.sin(a)*40,t0:performance.now(),mv:1};await w(1200);joy=null;o.in3=IN();o.mv3=Math.round(Math.hypot(me.x-p3[0],me.y-p3[1]));
               return o}""",[dx,dy,a])

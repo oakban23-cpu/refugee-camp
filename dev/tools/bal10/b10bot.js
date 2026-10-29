@@ -128,7 +128,12 @@ function objP89(){const B=boss();
   if(typeof CWNI==='function'&&CWNI()&&CWN.mr){const h=near(m=>m.mr&&m.hp>0);if(h)return standFor(h)}
   if(typeof WBLI==='function'&&WBLI()&&dg.ph==='run'){const m=near(q=>q.hp>0&&q.t!==3);if(m)return standFor(m);if(!WBQ.mb)return{x:WBCX-120,y:CY,r:40}}
   return objGeneric()}
-function objective(){try{if((typeof CTWI==='function'&&CTWI())||(typeof CWNI==='function'&&CWNI())||(typeof WBLI==='function'&&WBLI()))return objP89();if(typeof PFNI==='function'&&PFNI())return objPfn();if(typeof PTDI==='function'&&PTDI())return objPtd();if(typeof PNQI==='function'&&PNQI())return objPnq()}catch(e){BOT.err='obj:'+e}return objGeneric()}
+/* v562 เตาหลอม (hfg): ช่วงเพลงยืนบนหินเพลงที่ใกล้สุด (เติมเพลง) · ช่วงบอสถ้าเปลวไฟต่ำกลับไปยืนหิน */
+function objHfg(){const B=boss();const bt=near(m=>m.hfg&&m.hp>0&&m.t!==3&&Math.hypot(m.x-CX,m.y-CY)<230,CX,CY);
+  const st=()=>{let bi=0,bd=1e9;HFST.forEach(([x,y],i)=>{const d=Math.hypot(x-me.x,y-me.y);if(d<bd){bd=d;bi=i}});const[x,y]=HFST[bi];return{x,y,r:Math.max(10,HFSR*.4),tgt:near(m=>m.hp>0&&m.t!==4,x,y),hold:1}};
+  if(B&&B.hi)return st();if(B&&B.ht){const x=CX+(B.x-CX)*.45,y=CY-40+(B.y-50-(CY-40))*.45;return{x,y,r:14,tgt:B,hold:1}}
+  if(bt)return standFor(bt);if(dg.ph==='run')return st();return objGeneric()}
+function objective(){try{if(typeof HFGI==='function'&&HFGI())return objHfg();if((typeof CTWI==='function'&&CTWI())||(typeof CWNI==='function'&&CWNI())||(typeof WBLI==='function'&&WBLI()))return objP89();if(typeof PFNI==='function'&&PFNI())return objPfn();if(typeof PTDI==='function'&&PTDI())return objPtd();if(typeof PNQI==='function'&&PNQI())return objPnq()}catch(e){BOT.err='obj:'+e}return objGeneric()}
 /* ---------- สเต็ปบอท ---------- */
 function step(dt){const S=BOT.st,cf=BOT.cfg,t=now();BOT.t+=dt;S.t=BOT.t;
   if(dg.ph==='win'||dg.ph==='fail'){joy=null;return}
