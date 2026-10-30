@@ -11366,7 +11366,8 @@ const FVC={melee:'255,90,60',archer:'120,255,170',mage:'255,140,50',assn:'200,11
 const FVCK={melee:'melee',archer:'archer',mage:'mage',assn:'assn',sup:'holy'};
 let SLOWU=0;
 const fvCol=()=>FVC[me&&me.cls]||'255,200,120';
-function fvOff(){try{return!me.cls||sgOff()}catch(e){return false}}
+const FVDIS=1;
+function fvOff(){if(FVDIS)return true;try{return!me.cls||sgOff()}catch(e){return false}}
 function fvAdd(v){if(fvOff()||FV.on>0||me.down>0)return;if(performance.now()<(FV.cool||0))v*=.5;FV.g=Math.min(100,FV.g+v);FV.last=performance.now();if(FV.g>=100)fvStart()}
 function fvStart(){FV.on=9;FV.kc=0;FV.ext=0;FV.g=0;const c=fvCol();
 banner={s:'🔥 โหมดคลั่ง! โจมตีไว · คูลดาวน์ไว · ดาเมจ +20%',t:2.5};try{sfx('lg_get')}catch(e){}try{hitStop(120)}catch(e){}shk=Math.max(shk,.3);
@@ -11379,7 +11380,8 @@ try{burst(me.x,me.y-10,['rgb('+c+')','#ffffff'],30,260,.7,{glow:1,flat:.5})}catc
 banner={s:'💥 ระเบิดปิดฉาก! สังหารระหว่างคลั่ง '+FV.kc+' ตัว'+(n?' · โดน '+n+' ตัว':''),t:2.5}}
 fx({k:'fvoff',u:uid});fvHud()}
 function fvCall(t,big){const e=$('fvcall');if(!e)return;e.textContent=t;e.className='';void e.offsetWidth;e.className=big?'on big':'on'}
-function fvKill(x,y,t,bs){if(fvOff()||me.down>0||Math.hypot(me.x-x,me.y-y)>380)return;const n=performance.now();
+function fvKill(x,y,t,bs){if(FVDIS){let so=false;try{so=sgOff()}catch(e){}if(!me.cls||so||me.down>0||Math.hypot(me.x-x,me.y-y)>380)return;const n=performance.now();FV.mk=FV.mk.filter(q=>n-q<450);FV.mk.push(n);FV.mkT=n;return}
+if(fvOff()||me.down>0||Math.hypot(me.x-x,me.y-y)>380)return;const n=performance.now();
 if(FV.on>0){FV.kc++;if(FV.ext<5){const a=Math.min(.25,5-FV.ext);FV.ext+=a;FV.on+=a}}else fvAdd(bs||t===3?35:t===2?18:8);
 FV.mk=FV.mk.filter(q=>n-q<450);FV.mk.push(n);FV.mkT=n}
 function fvTick(dt){const n=performance.now();
@@ -12289,8 +12291,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v567';
+const WNV='v568';
 const WNL=[
+['⏸️','ปิดโหมดคลั่งชั่วคราว','เกจคลั่ง (🔥) และโหมดคลั่ง 9 วิ ถูกปิดไว้ก่อน · ฆ่ามอน/หลบ/คอมโบไม่เติมเกจแล้ว · ป้าย «สังหาร ×N» และภาพช้าตอนหลบสมบูรณ์ยังอยู่เหมือนเดิม'],
 ['⚡','ลื่นขึ้นบนมือถือ','แมพสนามที่มีมอนเยอะ (เช่น ทะเลทรายพีระมิด · ค่าย) คิดงานน้อยลงต่อเฟรม: มอนที่อยู่ไกลทุกคนไม่ต้องคิดการเดินเตร่ · ทหารยามค่ายหาเป้าเป็นช่วง · กับดักหนามตรวจเป็นช่วง · พีระมิด/สฟิงซ์ใช้ภาพที่วาดเก็บไว้ · ไฟล์เกมที่ดาวน์โหลดเล็กลงราว 12% (บีบอัดแน่นขึ้น) · ภาพในเกมเหมือนเดิม'],
 ['👥','ฝันร้ายทีม (ปาร์ตี้ 2–4 คน)','ตั้งปาร์ตี้แล้วหัวหน้าเลือกระดับในหน้าโหมดฝันร้าย กดเริ่ม → เพื่อนได้คำชวนเข้าดันพร้อมระดับและคำสาปเดียวกัน · ศัตรูทนขึ้นตามจำนวนคนเหมือนดันปาร์ตี้ปกติ · บันทึกระดับทีมแยกจากเดี่ยว (ปลดระดับทีมได้ถึงระดับที่ตัวเองผ่านเดี่ยวหรือทีม +1) · ได้ทอง + 🌙 เศษฝันร้าย (ครั้งแรก ×3) · กระดานอันดับทีมรายสัปดาห์ · คนนอกปาร์ตี้เข้าห้อง = รอบนั้นไม่นับ'],
 ['🛒','ร้านฝันร้าย','ผ่านโหมดฝันร้ายได้ 🌙 เศษฝันร้าย (ระดับ L ได้ L เศษ · ผ่านครั้งแรก ×3 · คนที่ผ่านไปแล้วได้ย้อนหลังอัตโนมัติ) · แลกได้ที่ปุ่ม «ร้าน» ในหน้าโหมดฝันร้าย: ชุดฝันร้าย + ออร่าหมอกฝันร้าย · สัตว์เลี้ยงบากุจอมกินฝัน · พาหนะอาชาฝันร้าย · สีย้อมหายาก · หินขั้นสูง · ด้าย · เศษดาว · อันดับ 1–10 ฝันร้ายประจำสัปดาห์ได้เศษเพิ่มตอนขึ้นสัปดาห์ใหม่'],
