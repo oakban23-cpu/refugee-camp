@@ -15,7 +15,7 @@ const server=http.createServer((req,res)=>{
   {const m=/^\/([a-z0-9_-]+\.(jpg|jpeg|png|webp))(\?.*)?$/i.exec(req.url);if(m){const f=path.join(__dirname,'public',m[1]);return fs.readFile(f,(e,b)=>{if(e){res.writeHead(404);return res.end()}res.writeHead(200,{'Content-Type':'image/'+(m[2].toLowerCase()==='jpg'?'jpeg':m[2].toLowerCase()),'Cache-Control':'public, max-age=604800','Content-Length':b.length});bytesOut+=b.length;res.end(b)})}}
   const P=getPage();if(!P){res.writeHead(500);return res.end('missing index.html')}
   if(req.headers['if-none-match']===P.etag){res.writeHead(304,{'ETag':P.etag,'Cache-Control':'no-cache'});return res.end()}
-  const ae=String(req.headers['accept-encoding']||''),h={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache','ETag':P.etag,'Vary':'Accept-Encoding'};
+  const ae=String(req.headers['accept-encoding']||''),h={'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-cache','ETag':P.etag,'Vary':'Accept-Encoding','Document-Policy':'js-profiling'};/* v569 เปิดให้หน้าเกมวัดละเอียด (JS Self-Profiling) บนเครื่องผู้เล่นได้ */
   let body=P.raw;if(P.br&&/\bbr\b/.test(ae)){body=P.br;h['Content-Encoding']='br'}else if(/\bgzip\b/.test(ae)){body=P.gz;h['Content-Encoding']='gzip'}
   h['Content-Length']=body.length;bytesOut+=body.length;res.writeHead(200,h);res.end(body);
 });

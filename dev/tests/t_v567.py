@@ -44,7 +44,9 @@ async def main():
         shots = []
         for off in (1, 0):
             await A.ev(f"()=>{{window.NGS_OFF={off};ov.hidden=true;mons=mons.filter(m=>Math.hypot(m.x-me.x,m.y-me.y)>900);fxs.length=0;banner=null}}"); await A.wait(700)
-            shots.append(Image.open(io.BytesIO(await A.pg.screenshot(clip={'x': 20, 'y': 120, 'width': 350, 'height': 380}))).convert('RGB'))
+            import base64
+            du = await A.ev("()=>{const c=document.createElement('canvas');c.width=350;c.height=380;const r=cv.getBoundingClientRect(),sx=cv.width/r.width,sy=cv.height/r.height;c.getContext('2d').drawImage(cv,(20-r.left)*sx,(120-r.top)*sy,350*sx,380*sy,0,0,350,380);return c.toDataURL('image/png')}")
+            shots.append(Image.open(io.BytesIO(base64.b64decode(du.split(',')[1]))).convert('RGB'))
         diff = ImageChops.difference(shots[0], shots[1]); st = ImageStat.Stat(diff); mean = sum(st.mean) / 3
         big = sum(1 for px in diff.getdata() if max(px) > 60) / (350 * 380)
         k = await A.ev("()=>[...NGS.keys()]")
