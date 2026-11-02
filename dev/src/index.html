@@ -513,7 +513,12 @@ const GSP={};function glowSpr(c){if(GSP[c])return GSP[c];const s=document.create
 /* แสงเรือง: ใช้ภาพขนาดพอดีพิกเซลจอ (แคชตามสี+ขนาด) วางแบบ 1:1 แทนการขยายภาพ 64px */
 const GSZ={m:new Map(),px:0};
 function mnSet(id,bd,lb){const e=document.getElementById(id);if(!e)return;const sp=e.querySelector('span'),b=e.querySelector('.bd');if(lb!=null&&sp&&sp.textContent!==lb)sp.textContent=lb;if(bd!=null&&b){const t=bd?(bd>99?'99+':String(bd)):'';if(b.textContent!==t)b.textContent=t}}
-function glowAt(x,y,r,c,a){if(r<=0||a<=0)return;const ga=g.globalAlpha;g.globalAlpha=ga*Math.min(1,a);const M=g.getTransform(),D=2*r*M.a;
+/* v570 GLW: แคนวาสหลัก + สเกลของเฟรม (ตั้งใน draw) → ไม่ต้องอ่าน/ตั้งเมทริกซ์ทุกครั้ง */const GLW={g:null,s:1,on:1,m:new Map()};
+function glowAt(x,y,r,c,a){if(r<=0||a<=0)return;const ga=g.globalAlpha;g.globalAlpha=ga*Math.min(1,a);
+  if(GLW.on&&g===GLW.g){const D=2*r*GLW.s;if(D<10||D>900){g.drawImage(glowSpr(c),x-r,y-r,r*2,r*2);g.globalAlpha=ga;return}const q=D<64?4:D<256?8:16,sz=Math.round(D/q)*q;let mc=GLW.m.get(c);if(!mc){mc=new Map();GLW.m.set(c,mc)}let sp=mc.get(sz);
+    if(!sp){const key=c+'|'+sz;sp=GSZ.m.get(key);if(!sp){if(GSZ.px>25e5){GSZ.m.clear();GSZ.px=0;GLW.m.clear();mc=new Map();GLW.m.set(c,mc)}sp=document.createElement('canvas');sp.width=sp.height=sz;const x2=sp.getContext('2d'),h=sz/2,gr=x2.createRadialGradient(h,h,0,h,h,h);gr.addColorStop(0,'rgba('+c+',1)');gr.addColorStop(1,'rgba('+c+',0)');x2.fillStyle=gr;x2.fillRect(0,0,sz,sz);GSZ.m.set(key,sp);GSZ.px+=sz*sz}mc.set(sz,sp)}
+    g.drawImage(sp,x-r,y-r,r*2,r*2);g.globalAlpha=ga;return}
+  const M=g.getTransform(),D=2*r*M.a;
   if(M.b||M.c||Math.abs(M.a-M.d)>1e-6||M.a<=0||D<10||D>900){g.drawImage(glowSpr(c),x-r,y-r,r*2,r*2);g.globalAlpha=ga;return}
   const q=D<64?4:D<256?8:16,sz=Math.round(D/q)*q,key=c+'|'+sz;let sp=GSZ.m.get(key);
   if(!sp){if(GSZ.px>25e5){GSZ.m.clear();GSZ.px=0}sp=document.createElement('canvas');sp.width=sp.height=sz;const x2=sp.getContext('2d'),h=sz/2,gr=x2.createRadialGradient(h,h,0,h,h,h);gr.addColorStop(0,'rgba('+c+',1)');gr.addColorStop(1,'rgba('+c+',0)');x2.fillStyle=gr;x2.fillRect(0,0,sz,sz);GSZ.m.set(key,sp);GSZ.px+=sz*sz}
@@ -13593,8 +13598,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v569';
+const WNV='v570';
 const WNL=[
+  ['⚡','ลื่นขึ้นอีก (จากผลวัดบนมือถือจริง)','แสงเรืองทั้งเกมวาดเร็วขึ้น (เดิมใช้เวลาราว 1 ใน 6 ของเครื่อง) · ไม่เทสีพื้นหลังเต็มจอซ้ำเมื่อพื้นแมพปูครบแล้ว · ภาพเหมือนเดิม · ขอบคุณผลวัด 🔬 ที่ส่งมา'],
   ['🔬','วัดความลื่นแบบละเอียด','เมนู › 📊 วัดความลื่น › «🔬 เริ่มวัดละเอียด 10 วิ» → เล่นต่อในฉากที่กระตุก → คัดลอกผลส่งให้ผู้พัฒนา (บอกได้ว่าส่วนไหนของเกมช้าบนเครื่องคุณ) · ผลแยกเวลาเป็น คำนวณ/ปุ่ม/วาด/อื่น · กราฟิก «สูง» ลดความละเอียดเองชั่วคราวเมื่อกระตุก · «อัตโนมัติ» ปรับเป็นประหยัดได้ทุกเครื่องเมื่อต่ำกว่า 30 FPS นาน ๆ'],
   ['⏸️','ปิดโหมดคลั่งชั่วคราว','เกจคลั่ง (🔥) และโหมดคลั่ง 9 วิ ถูกปิดไว้ก่อน · ฆ่ามอน/หลบ/คอมโบไม่เติมเกจแล้ว · ป้าย «สังหาร ×N» และภาพช้าตอนหลบสมบูรณ์ยังอยู่เหมือนเดิม'],
   ['⚡','ลื่นขึ้นบนมือถือ','แมพสนามที่มีมอนเยอะ (เช่น ทะเลทรายพีระมิด · ค่าย) คิดงานน้อยลงต่อเฟรม: มอนที่อยู่ไกลทุกคนไม่ต้องคิดการเดินเตร่ · ทหารยามค่ายหาเป้าเป็นช่วง · กับดักหนามตรวจเป็นช่วง · พีระมิด/สฟิงซ์ใช้ภาพที่วาดเก็บไว้ · ไฟล์เกมที่ดาวน์โหลดเล็กลงราว 12% (บีบอัดแน่นขึ้น) · ภาพในเกมเหมือนเดิม'],
@@ -32427,11 +32433,11 @@ function mxGround(MP){const th=gxTheme();if(!th)return false;mxTrees();try{if(VM
   GX.CS=384;const CS=GX.CS,M=g.getTransform(),s=M.a,r=mxRes(s),ex=Math.round(M.e),ey=Math.round(M.f),dw=CS*s,now=performance.now();MX.r=r;
   const x0=Math.floor((cam.x-24)/CS),x1=Math.floor((cam.x+W+24)/CS),y0=Math.floor((cam.y-24)/CS),y1=Math.floor((cam.y+H+24)/CS);
   const first=MX.fc===undefined?now-(MX.ft||0)>4:MX.fc!==MX.lf,cb=first?null:MX.cb;if(first){MX.ft=now;MX.lf=MX.fc;for(const J of MX.jobs.values())J.vis=0}
-  g.save();g.setTransform(1,0,0,1,0,0);g.imageSmoothingEnabled=true;
+  g.save();g.setTransform(1,0,0,1,0,0);g.imageSmoothingEnabled=true;let allOk=!cb&&!shk&&cam.x>=0&&cam.y>=0&&cam.x+W<=WW&&cam.y+H<=WH;const sk=!cb&&MX.skipBg,bgF=()=>{if(sk){g.fillStyle=MP.bg}};
   for(let cy=Math.max(0,y0);cy<=y1;cy++)for(let cx=Math.max(0,x0);cx<=x1;cx++){if(cx*CS>=WW||cy*CS>=WH)continue;if(cb&&((cx+1)*CS<cb[0]||cx*CS>cb[2]||(cy+1)*CS<cb[1]||cy*CS>cb[3]))continue;const k=mxKey(cx,cy,r),X=ex+Math.round(cx*dw),Y=ey+Math.round(cy*dw),DX=ex+Math.round((cx+1)*dw)-X,DY=ey+Math.round((cy+1)*dw)-Y;let c=GX.ch.get(k);
-    if(c){GX.ch.delete(k);GX.ch.set(k,c);const td=MX.done.get(k),a=td?Math.min(1,(now-td)/280):1;if(a<1){mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY);g.globalAlpha=a;g.drawImage(c,X,Y,DX,DY);g.globalAlpha=1}else{g.drawImage(c,X,Y,DX,DY);if(td)MX.done.delete(k)}}
-    else{mxJob(cx,cy,r,1);mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY)}}
-  g.restore();
+    if(c){GX.ch.delete(k);GX.ch.set(k,c);const td=MX.done.get(k),a=td?Math.min(1,(now-td)/280):1;if(a<1){allOk=false;if(sk){g.fillStyle=MP.bg;g.fillRect(X,Y,DX,DY)}mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY);g.globalAlpha=a;g.drawImage(c,X,Y,DX,DY);g.globalAlpha=1}else{g.drawImage(c,X,Y,DX,DY);if(td)MX.done.delete(k)}}
+    else{allOk=false;if(sk){g.fillStyle=MP.bg;g.fillRect(X,Y,DX,DY)}mxJob(cx,cy,r,1);mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY)}}
+  if(!cb)MX.cov=allOk?curMap:0;g.restore();
   if(first){/* วงนอกตามทิศเดิน (สร้างล่วงหน้า) */const vx=cam.x-MX.lc.x,vy=cam.y-MX.lc.y;MX.lc.x=cam.x;MX.lc.y=cam.y;const dx=vx>.3?1:vx<-.3?-1:0,dy=vy>.3?1:vy<-.3?-1:0;
     if(dx||dy){for(let cy=y0-1;cy<=y1+1;cy++){const cx=dx>0?x1+1:dx<0?x0-1:null;if(cx!==null&&cx>=0&&cy>=0&&cx*CS<WW&&cy*CS<WH&&!GX.ch.has(mxKey(cx,cy,r)))mxJob(cx,cy,r,0)}for(let cx=x0-1;cx<=x1+1;cx++){const cy=dy>0?y1+1:dy<0?y0-1:null;if(cy!==null&&cx>=0&&cy>=0&&cx*CS<WW&&cy*CS<WH&&!GX.ch.has(mxKey(cx,cy,r)))mxJob(cx,cy,r,0)}}
     for(const J of MX.jobs.values())if(!J.vis&&(J.r!==r||J.cx<x0-2||J.cx>x1+2||J.cy<y0-2||J.cy>y1+2))MX.jobs.delete(J.k);
@@ -43233,8 +43239,8 @@ function terStair(P,s,C){const x=s.x,y=s.y,h=P.h,w=19;g.save();
     g.fillStyle=C[1];g.fillRect(x-w-5,y0-2,5,y1-y0+4);g.fillRect(x+w,y0-2,5,y1-y0+4)}
   g.restore()}
 function draw(){
-  g.setTransform(DPR,0,0,DPR,0,0);const MP=MAPS[curMap];zmPre();
-  {let _fx=me.x,_fy=me.y;try{const _c=rt3Cam()||rt3Cam2();if(_c){_fx=_c[0];_fy=_c[1]}}catch(e){}cam.x=cl(_fx-W/2,0,WW-W);cam.y=cl(_fy-H/2,0,WH-H);CAMF.x=cam.x+W/2;CAMF.y=cam.y+H/2;try{fgUpd()}catch(e){}}if(!(curMap===9&&!flash&&!shk&&cityCovers())){g.fillStyle=flash>0?'#3a1a24':MP.bg;g.fillRect(0,0,SW0,ZM.on?ZM.h0:H)}
+  g.setTransform(DPR,0,0,DPR,0,0);const MP=MAPS[curMap];zmPre();GLW.g=g;GLW.s=DPR*(ZM.on&&ZM.z>0?ZM.z:1);MX.skipBg=MX.cov===curMap&&!flash&&!shk&&!(ZM.on&&ZM.z<1);
+  {let _fx=me.x,_fy=me.y;try{const _c=rt3Cam()||rt3Cam2();if(_c){_fx=_c[0];_fy=_c[1]}}catch(e){}cam.x=cl(_fx-W/2,0,WW-W);cam.y=cl(_fy-H/2,0,WH-H);CAMF.x=cam.x+W/2;CAMF.y=cam.y+H/2;try{fgUpd()}catch(e){}}if(!(curMap===9&&!flash&&!shk&&cityCovers())&&!MX.skipBg){g.fillStyle=flash>0?'#3a1a24':MP.bg;g.fillRect(0,0,SW0,ZM.on?ZM.h0:H)}
   updParts();if(me.cls){if(me.px!==undefined&&me.down<=0)walkTick(me,me.x-me.px,me.y-me.py);me.px=me.x;me.py=me.y}
   g.save();if(ZM.on)g.scale(ZM.z,ZM.z);g.translate(-cam.x+(shk>0?(Math.random()-.5)*shk*14*CFGV.shk:0),-cam.y+(shk>0?(Math.random()-.5)*shk*14*CFGV.shk:0));
   if(!gxGround(MP)){g.fillStyle=MP.tile;for(let i=0;i<170;i++){const px=(i*197)%WW,py=(i*311)%WH,pr=16+((i*53)%20);g.globalAlpha=.35+((i*37)%10)/22;g.beginPath();g.ellipse(px,py,pr,pr*.52,(i*29)%6,0,7);g.fill()}g.globalAlpha=1;}try{terDraw(MP)}catch(e){}
