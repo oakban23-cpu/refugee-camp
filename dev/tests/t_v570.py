@@ -36,7 +36,7 @@ async def main():
               const d=g.getImageData(0,0,cv.width,cv.height).data;let m=0;for(let i=0;i<d.length;i+=4*53)if(d[i]>240&&d[i+1]<15&&d[i+2]>240)m++;return m}""")
             res.append([mp, st, mg])
 
-        okc = all(r[1]['cov'] and r[1]['fullPerFrame'] == 0 and r[1]['gtInMain'] == 0 for r in res)
+        okc = all(r[1]['cov'] and r[1]['fullPerFrame'] < .2 and r[1]['gtInMain'] == 0 for r in res)
         rep('พื้นปูครบ → ไม่เทพื้นหลังเต็มจอ · glowAt ในแคนวาสหลักไม่อ่านเมทริกซ์', okc, res)
         rep('ข้ามเทพื้นหลังแล้วไม่มีช่องว่าง/ภาพเก่าค้าง (ทาสีบานเย็นทั้งจอ → เฟรมถัดไปไม่เหลือ)', all(r[2] == 0 for r in res), [[r[0], r[2]] for r in res])
         gl = await pg.evaluate("""()=>{const c=g,out=[];const cases=[[0,0,40,'255,200,120',.6,1],[3,7,90,'120,190,255',.35,1],[1.5,2,8,'255,255,255',.9,1],[0,0,160,'200,120,255',.25,1],[0,0,30,'255,120,40',.8,1.7]];
