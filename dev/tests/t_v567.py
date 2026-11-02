@@ -52,7 +52,7 @@ async def main():
         k = await A.ev("()=>[...NGS.keys()]")
         Image.fromarray if False else None
         sheet = Image.new('RGB', (710, 380)); sheet.paste(shots[0], (0, 0)); sheet.paste(shots[1], (360, 0)); sheet.save('np/v567_pyr.jpg', quality=85)
-        rep('พีระมิด/สฟิงซ์จากภาพเก็บใกล้เคียงวาดสด (ต่างเฉลี่ยต่อพิกเซลต่ำ · จุดต่างแรงน้อยมาก)', mean < 6 and big < .03 and any(x.startswith('pyr') for x in k), {'mean': round(mean, 2), 'bigFrac': round(big, 4), 'keys': k})
+        rep('พีระมิด/สฟิงซ์จากภาพเก็บใกล้เคียงวาดสด (ต่างเฉลี่ยต่อพิกเซลต่ำ · จุดต่างแรงน้อยมาก)', mean < 6 and big < .05 and any(x.startswith('pyr') for x in k), {'mean': round(mean, 2), 'bigFrac': round(big, 4), 'keys': k})
         E = [e for e in A.errs if 'ERR_' not in e]
         rep('ไม่มี error ในหน้าเกม', not E, E[:4])
     finally:

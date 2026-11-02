@@ -12297,8 +12297,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v570';
+const WNV='v571';
 const WNL=[
+['⚡','ลื่นขึ้นตอนสู้','ตาเรืองแสงของมอนและตัวละครเปลี่ยนจากเงาเบลอ (งานหนักที่สุดของการ์ดจอมือถือ · ตอนสู้มีถึง 25 ครั้งต่อเฟรม) เป็นแสงเรืองที่เตรียมไว้ หน้าตาใกล้เดิม · ตอนเครื่องตามไม่ทัน ตาตัวละครตัดประกายเม็ดเล็กที่เล็กกว่า 1 พิกเซล'],
 ['⚡','ลื่นขึ้นอีก (จากผลวัดบนมือถือจริง)','แสงเรืองทั้งเกมวาดเร็วขึ้น (เดิมใช้เวลาราว 1 ใน 6 ของเครื่อง) · ไม่เทสีพื้นหลังเต็มจอซ้ำเมื่อพื้นแมพปูครบแล้ว · ภาพเหมือนเดิม · ขอบคุณผลวัด 🔬 ที่ส่งมา'],
 ['🔬','วัดความลื่นแบบละเอียด','เมนู › 📊 วัดความลื่น › «🔬 เริ่มวัดละเอียด 10 วิ» → เล่นต่อในฉากที่กระตุก → คัดลอกผลส่งให้ผู้พัฒนา (บอกได้ว่าส่วนไหนของเกมช้าบนเครื่องคุณ) · ผลแยกเวลาเป็น คำนวณ/ปุ่ม/วาด/อื่น · กราฟิก «สูง» ลดความละเอียดเองชั่วคราวเมื่อกระตุก · «อัตโนมัติ» ปรับเป็นประหยัดได้ทุกเครื่องเมื่อต่ำกว่า 30 FPS นาน ๆ'],
 ['⏸️','ปิดโหมดคลั่งชั่วคราว','เกจคลั่ง (🔥) และโหมดคลั่ง 9 วิ ถูกปิดไว้ก่อน · ฆ่ามอน/หลบ/คอมโบไม่เติมเกจแล้ว · ป้าย «สังหาร ×N» และภาพช้าตอนหลบสมบูรณ์ยังอยู่เหมือนเดิม'],
@@ -19425,7 +19426,11 @@ const e=p.length,ex=p[e-2],ey=p[e-1],a=Math.atan2(ey-p[e-3],ex-p[e-4]);const tip
 const sx=p[0],sy=p[1],a0=Math.atan2(p[3]-sy,p[2]-sx);const base=['q',sx-Math.cos(a0)*w0*.5,sy-Math.sin(a0)*w0*.5,L[0][0],L[0][1]];
 vS(W,[...L,tip,...R.slice(1),base],c,st===0?0:1)}
 function vGlow(W,x,y,rr,col,a){if(W||LOWQ)return;g.save();g.globalCompositeOperation='lighter';glowAt(x,y,rr,col,a);g.restore()}
-function vEye(W,x,y,rx,ry,c,blur){g.save();if(!W&&blur){g.shadowColor=c;g.shadowBlur=blur}g.fillStyle=W?'#ffffff':c;g.beginPath();g.ellipse(x,y,rx,ry,0,0,7);g.fill();g.restore();if(!W&&rx>.9){g.fillStyle='rgba(255,255,255,.92)';g.beginPath();g.arc(x-rx*.3,y-ry*.35,Math.min(rx,ry)*.38,0,7);g.fill()}}
+const RGBC=new Map();function rgbOf(c){let v=RGBC.get(c);if(v)return v;let m;const s0=String(c).trim();
+if((m=/^#([0-9a-f]{3})$/i.exec(s0)))v=[...m[1]].map(h=>parseInt(h+h,16)).join(',');else if((m=/^#([0-9a-f]{6})/i.exec(s0)))v=[0,2,4].map(i=>parseInt(m[1].slice(i,i+2),16)).join(',');
+else if((m=/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)/i.exec(s0)))v=[m[1],m[2],m[3]].map(x=>Math.round(+x)).join(',');else v='255,255,255';if(RGBC.size<500)RGBC.set(c,v);return v}
+let EYEBLUR=0;
+function vEye(W,x,y,rx,ry,c,blur){g.save();if(!W&&blur){if(EYEBLUR){g.shadowColor=c;g.shadowBlur=blur}else glowAt(x,y,Math.max(rx,ry)+blur*.9,rgbOf(c),.85)}g.fillStyle=W?'#ffffff':c;g.beginPath();g.ellipse(x,y,rx,ry,0,0,7);g.fill();g.restore();if(!W&&rx>.9){g.fillStyle='rgba(255,255,255,.92)';g.beginPath();g.arc(x-rx*.3,y-ry*.35,Math.min(rx,ry)*.38,0,7);g.fill()}}
 function vFang(W,x,y,w,h,c){vD(W,[[x-w/2,y],['q',x-w*.1,y+h*.5,x,y+h],['q',x+w*.1,y+h*.5,x+w/2,y]],c||'#f2ead2')}
 const MV1D={};
 function drawMonV(th,t,r,T,E,Pg,Ln,eye,F,W,bob,sw,la,ra){const f=MV1D[th*10+t];if(!f)return false;if(th===38&&t===2&&typeof MON_CUR!=='undefined'&&MON_CUR&&MON_CUR.hdg>=0)return false;
@@ -22973,13 +22978,13 @@ if(!LOWQ)pcL([[-1.2,hy-9.6],['q',-3.4,hy-11,-5.4,hy-10]],'rgba(0,0,0,.3)',.6);
 return true}
 return false}catch(e){pcErr(e);return false}}
 function pcEye1(ex,hy,ec,bl,lx,ly,glow,O){g.fillStyle='#ffffff';g.beginPath();g.ellipse(ex,hy+.15,1.55,2.1*bl,0,0,7);g.fill();
-if(bl>.5){lx*=.6;ly*=.6;if(glow&&!LOWQ){g.shadowColor=glow;g.shadowBlur=5}
+const lt=LOWQ||(typeof FQ!=='undefined'&&FQ.avg>28);if(bl>.5){lx*=.6;ly*=.6;if(glow&&!LOWQ){if(EYEBLUR){g.shadowColor=glow;g.shadowBlur=5}else glowAt(ex+.22+lx,hy+.45+ly,5.5,rgbOf(glow),.8)}
 g.fillStyle=ec;g.beginPath();g.ellipse(ex+.22+lx,hy+.45+ly,1.2,1.62,0,0,7);g.fill();g.shadowBlur=0;
 if(!LOWQ){g.fillStyle=chAdj(ec,-.42);g.beginPath();g.ellipse(ex+.22+lx,hy+.45+ly,1.2,1.62,0,Math.PI,0);g.lineTo(ex+1.42+lx,hy-.15+ly);g.lineTo(ex-.98+lx,hy-.15+ly);g.fill();g.fillStyle=chAdj(ec,.45);g.globalAlpha=.75;g.beginPath();g.ellipse(ex+.3+lx,hy+1.45+ly,.8,.38,0,0,7);g.fill();g.globalAlpha=1}
 g.fillStyle=O;g.beginPath();g.ellipse(ex+.3+lx,hy+.55+ly,.58,.92,0,0,7);g.fill();
-g.fillStyle='#ffffff';g.beginPath();g.ellipse(ex-.3+lx,hy-.55+ly,.48,.55,0,0,7);g.fill();g.beginPath();g.arc(ex+.75+lx,hy+1.25+ly,.24,0,7);g.fill();
+g.fillStyle='#ffffff';g.beginPath();g.ellipse(ex-.3+lx,hy-.55+ly,.48,.55,0,0,7);g.fill();if(!lt){g.beginPath();g.arc(ex+.75+lx,hy+1.25+ly,.24,0,7);g.fill()}
 g.strokeStyle=O;g.lineWidth=1.05;g.beginPath();g.moveTo(ex-1.75,hy-.9);g.quadraticCurveTo(ex-.2,hy-2.35,ex+1.7,hy-1.35);g.stroke();
-g.lineWidth=.5;g.beginPath();g.moveTo(ex+1.55,hy-1.4);g.lineTo(ex+2.15,hy-1.9);g.stroke()}
+if(!lt){g.lineWidth=.5;g.beginPath();g.moveTo(ex+1.55,hy-1.4);g.lineTo(ex+2.15,hy-1.9);g.stroke()}}
 else{g.strokeStyle=O;g.lineWidth=.9;g.beginPath();g.moveTo(ex-1.5,hy+.3);g.quadraticCurveTo(ex,hy+1.1,ex+1.5,hy+.3);g.stroke()}}
 function pcMouth(k,hy,O){g.lineCap='round';
 if(k==='hurt'){g.fillStyle='#5a1a1a';g.beginPath();g.ellipse(4.7,hy+4.4,1.05,1.25,0,0,7);g.fill();return}
