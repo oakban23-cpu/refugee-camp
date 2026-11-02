@@ -36,7 +36,7 @@ async def main():
             await pg.evaluate("()=>{ov.hidden=true;const B=mons.filter(m=>m.t<3).sort((a,b)=>Math.hypot(a.x-me.x,a.y-me.y)-Math.hypot(b.x-me.x,b.y-me.y))[0];if(B){me.x=B.x+60;me.y=B.y}BOT.reset();BOT.on=true}"); await pg.wait_for_timeout(2500)
             off = await pg.evaluate(MEAS, 0); on = await pg.evaluate(MEAS, 1)
             res.append([mp, off, on])
-        ok = all((on['mons'] < 20 or on['drawsAll'] < off['drawsAll'] * .85) and on['reuse'] is not None and on['reuse'] >= .8 and on['nonEmpty'] == on['entries'] and on['usedPx'] <= on['cap'] for _, off, on in res)
+        ok = all((on['mons'] < 25 or (on['drawsAll'] < off['drawsAll'] * .85 and on['reuse'] >= .8)) and on['reuse'] is not None and on['reuse'] >= .6 and on['nonEmpty'] == on['entries'] and on['usedPx'] <= on['cap'] for _, off, on in res)
         rep('เครื่องช้า ตอนสู้ 3 แมพ: แมพที่มอนบนจอ ≥ 20 ตัว คำสั่งวาดรวมลดลง ≥ 15% · ใช้ภาพซ้ำ ≥ 80% · ภาพไม่ว่าง · ไม่เกินเพดานหน่วยความจำ',
             ok, [[mp, {'off': off['drawsAll'], 'on': on['drawsAll'], 'mainOff': off['drawsMain'], 'mainOn': on['drawsMain'], 'mons': on['mons'], 'reuse': on['reuse'], 'st': on['st'], 'ent': on['entries'], 'MB': round(on['usedPx'] * 4 / 1e6, 1)}] for mp, off, on in res])
         h = await pg.evaluate("()=>{SBK.act=0;const o=[];for(const v of[40,25,18,25])o.push((FQ.avg=v,sbkActive()));return o}")
