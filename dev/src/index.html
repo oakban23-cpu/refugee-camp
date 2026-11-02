@@ -13598,8 +13598,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v574';
+const WNV='v575';
 const WNL=[
+  ['📜','การ์ดเควสกางค้างได้','แตะการ์ดเควส/ภารกิจจุติ/คู่มือรูนมุมซ้ายบนที่ย่ออยู่ → กางค้างไว้ ไม่ย่อเองตอนสู้หรือหมดเวลาอีก (จำไว้ครั้งหน้า) · กดปุ่ม ‹ บนการ์ดเพื่อกลับเป็นแบบย่อ · สู้บอสยังซ่อนชั่วคราว'],
   ['🌅','จุติแล้วเดินเนื้อเรื่องต่อได้','ตัวละครที่จุติแล้วไม่ติดเงื่อนไขเลเวลของเควสเนื้อเรื่อง ประตูวาร์ป และดันเนื้อเรื่องอีก (เคยผ่าน Lv 99 มาแล้ว) · ออโต้เควสจะพาไปเก็บเลเวลก่อนถ้ามอนแมพเควสแรงกว่าเกิน 8 เลเวล — กดปุ่ม «🏃 ไปทำเควสเลย» ถ้าอยากลุยเลย · เข้าแมพที่มอนแรงมากจะมีคำเตือน'],
   ['🌀','วาร์ประหว่างโหลดแมพ','เปลี่ยนแมพแล้วจะมีวงวาร์ป (สีตามแมพปลายทาง) ระหว่างเกมเตรียมพื้นแมพ แล้วเปิดเมื่อพร้อม · ช่วงแรกที่เข้าแมพไม่กระตุกเหมือนก่อน · เครื่องเร็วเห็นแค่แวบเดียว · ระหว่างวาร์ปไม่โดนตี'],
   ['⚡','ลื่นขึ้นตอนสู้ฝูงมอน (เครื่องที่ตามไม่ทัน)','เมื่อเกมเห็นว่าเครื่องตามไม่ทัน มอนชนิดเดียวกันท่าเดียวกันจะใช้ภาพที่วาดไว้ร่วมกัน แทนการวาดใหม่ทีละตัวทุกเฟรม (ท่าทางวนเป็นรอบ อาจลื่นน้อยลงนิดหน่อย) · เครื่องแรงยังวาดสดเหมือนเดิม · ตาเรืองแสงของมอนแบบเก่าก็ไม่ใช้เงาเบลอแล้ว'],
@@ -34317,6 +34318,18 @@ function rbqBtn(){let b=document.getElementById('rbqb');const show=!!(me.cls&&me
   if(!b){if(!show)return;b=document.createElement('button');b.id='rbqb';b.style.cssText='position:absolute;left:50%;top:150px;transform:translateX(-50%);z-index:3;padding:6px 12px;font-size:12px;border-radius:14px;background:rgba(40,24,8,.88);border:1px solid #ffc860;color:#ffe9b0;white-space:nowrap';const a=$('tnb');(a&&a.parentNode||document.body).appendChild(b)}
   if(b.hidden!==!show)b.hidden=!show;if(!show)return;const tx=RBQ.risk?'🛡️ ให้เก็บเลเวลก่อน':'🏃 ไปทำเควสเลย (มอนแรง)';if(b.textContent!==tx)b.textContent=tx;b.dataset.rbq=RBQ.risk?'0':'1'}
 setInterval(()=>{try{rbqBtn()}catch(e){}},700);
+/* ---------- v575 การ์ดเควสมุมซ้ายบน: กางแล้วค้างไว้ ----------
+   ปัญหา (v468): การ์ดเควส/ภารกิจจุติ/คู่มือรูน ย่อเป็นบรรทัดเดียวเอง · แตะแล้วกางแค่ 8 วิ และถ้ามีมอนใกล้ (ออโต้เควสสู้ตลอด) ย่อกลับทันทีในเฟรมถัดไป → เปิดไม่ทันเห็น
+   ใหม่: แตะการ์ดที่ย่ออยู่ = กางค้าง (ไม่ย่อเองตอนสู้/หมดเวลา) จำไว้ข้ามการเข้าเกม · กดปุ่ม ‹ บนการ์ด = กลับเป็นแบบย่ออัตโนมัติ
+   · สู้บอสยังซ่อนการ์ดเหมือนเดิม (จอแน่น) แล้วกลับมากางเองเมื่อบอสจบ */
+const HPIN={on:0};try{HPIN.on=localStorage.getItem('refugee_hudpin')==='1'?1:0}catch(e){}
+function hpinSet(v){HPIN.on=v?1:0;try{localStorage.setItem('refugee_hudpin',v?'1':'0')}catch(e){}try{vz3HudTick()}catch(e){}}
+setTimeout(()=>{try{const _t=vz3HudTick;window.vz3HudTick=vz3HudTick=function(){const r=_t.apply(this,arguments);try{if(HPIN.on){const T=$('topb');if(T&&T.classList.contains('vzmin'))T.classList.remove('vzmin')}}catch(e){}return r}}catch(e){console.warn('hpin',e)}},1500);
+window.addEventListener('click',e=>{try{const T=$('topb');if(!T||!me.cls)return;const c=e.target.closest&&e.target.closest('#stq,#rnq,#rbq');if(!c||!T.contains(c))return;
+  if(HPIN.on){if(e.target.closest('[data-sqx],[data-rqx]')){e.stopPropagation();e.preventDefault();hpinSet(0);try{sfx('click')}catch(_){}}return}
+  if(T.classList.contains('vzmin')&&!(c.id==='stq'&&c.classList.contains('min'))){e.stopPropagation();e.preventDefault();hpinSet(1);T.classList.remove('vzmin');try{sfx('click')}catch(_){}return}
+  /* แตะไอคอนเควสแบบเม็ดกลม (ย่อสุด) → กางเต็ม + ค้างไว้ */
+  if(c.classList.contains('min'))hpinSet(1)}catch(_){}},true);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
