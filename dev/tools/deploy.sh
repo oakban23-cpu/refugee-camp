@@ -11,6 +11,7 @@ cp /home/claude/refugee-online/public/cover.jpg public/cover.jpg
 cp /home/claude/refugee-online/public/cover-wide.webp public/ 2>/dev/null || true
 cp /home/claude/refugee-online/public/icon-180.png /home/claude/refugee-online/public/icon-192.png /home/claude/refugee-online/public/icon-512.png /home/claude/refugee-online/public/icon-512m.png /home/claude/refugee-online/public/manifest.webmanifest /home/claude/refugee-online/public/sw.js public/
 cp /home/claude/refugee-online/public/shot-[0-9].webp public/ 2>/dev/null || true
+cp /home/claude/refugee-online/public/npc-*.webp /home/claude/refugee-online/public/npcf-*.webp public/ 2>/dev/null || true
 # สำรองต้นฉบับ + โมดูล + ชุดทดสอบไว้ใน dev/ ทุกครั้งที่ปล่อย (ไม่ถูกเสิร์ฟให้ผู้เล่น)
 S=/tmp/claude-0/-home-claude/552bdb98-0d0b-5b28-ae92-36a473137925/scratchpad
 mkdir -p dev/src dev/modules dev/tests
