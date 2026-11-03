@@ -4,7 +4,7 @@ T0,T1=7,20
 import sys
 KEEP=float(sys.argv[3]) if len(sys.argv)>3 else 1.01
 SRC=sys.argv[1] if len(sys.argv)>1 else 'raw';DST=sys.argv[2] if len(sys.argv)>2 else 'cut'
-GLOW=('thu.png','qn.png','hnt.png','kn.png','lum.png')
+GLOW=('thu.png','qn.png','hnt.png','kn.png','lum.png','aze.png','thr.png','tw.png')
 def cut(path,glow=False):
     im=cv2.imread(path)[:,:,::-1].astype(np.float32)
     H,W,_=im.shape
