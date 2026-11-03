@@ -1,6 +1,10 @@
 import numpy as np, cv2, glob, os
 from scipy import ndimage as nd
 T0,T1=7,20
+import sys
+KEEP=float(sys.argv[3]) if len(sys.argv)>3 else 1.01
+SRC=sys.argv[1] if len(sys.argv)>1 else 'raw';DST=sys.argv[2] if len(sys.argv)>2 else 'cut'
+GLOW=('thu.png','qn.png','hnt.png','kn.png','lum.png')
 def cut(path,glow=False):
     im=cv2.imread(path)[:,:,::-1].astype(np.float32)
     H,W,_=im.shape
@@ -12,6 +16,15 @@ def cut(path,glow=False):
     seeds=set(np.unique(lab[0]))|set(np.unique(lab[:int(H*.7),0]))|set(np.unique(lab[:int(H*.7),-1]))
     seeds.discard(0)
     bg=np.isin(lab,list(seeds))
+    # enclosed background pockets (between arm and body): same flat color, big enough
+    tight=d<T1*0.6
+    tl,tn=nd.label(tight)
+    if tn:
+        tsz=nd.sum(tight,tl,range(1,tn+1))
+        for i,z in enumerate(tsz):
+            if z>2500:
+                m=tl==(i+1)
+                if not (m&bg).any(): bg|=m
     fg=~bg
     # keep largest fg component (drop floating islands like scenery)
     fl,fn=nd.label(fg)
@@ -19,7 +32,8 @@ def cut(path,glow=False):
         sz=nd.sum(fg,fl,range(1,fn+1));keep=np.argmax(sz)+1
         small=(fl!=keep)&(fl>0)
         # keep islands that are tiny-and-close? drop all others
-        fg=fl==keep
+        big=np.array(sz)>=sz[keep-1]*KEEP
+        fg=np.isin(fl,np.where(big)[0]+1)
     if glow:
         soft=fg&(d<60)
         sl,sn=nd.label(soft)
@@ -44,14 +58,14 @@ def cut(path,glow=False):
     col=np.where(alpha[...,None]>0.98,im,col)
     out=np.dstack([col,alpha*255]).astype(np.uint8)
     return out
-for f in sorted(glob.glob('raw/*.png')):
-    k=os.path.basename(f);o=cut(f,k in('thu.png','qn.png'))
-    cv2.imwrite('cut/'+k,cv2.cvtColor(o,cv2.COLOR_RGBA2BGRA))
+for f in sorted(glob.glob(SRC+'/*.png')):
+    k=os.path.basename(f);o=cut(f,k in GLOW)
+    cv2.imwrite(DST+'/'+k,cv2.cvtColor(o,cv2.COLOR_RGBA2BGRA))
 # contact sheet on dark bg
 from PIL import Image
-fs=sorted(glob.glob('cut/*.png'));S=Image.new('RGB',(6*256,2*276),(18,22,40))
+fs=sorted(glob.glob(DST+'/*.png'));S=Image.new('RGB',(6*256,2*276),(18,22,40))
 from PIL import ImageDraw;dr=ImageDraw.Draw(S)
 for i,f in enumerate(fs):
     im=Image.open(f).resize((256,256));x=(i%6)*256;y=(i//6)*276
     S.paste(im,(x,y+20),im);dr.text((x+4,y+4),os.path.basename(f),fill=(255,220,120))
-S.save('cut_sheet.jpg',quality=88);print('ok')
+S.save(DST+'_sheet.jpg',quality=88);print('ok')

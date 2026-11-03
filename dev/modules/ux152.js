@@ -3,7 +3,7 @@
    · ภาพครึ่งตัว (npc-<key>.webp สูง 440px) ยืนเหนือกล่องบทพูดด้านซ้าย · เปลี่ยนคนพูด = ภาพเลื่อนเข้าใหม่ · คนเดิมพูดต่อ = ภาพนิ่ง
    · โหลดเฉพาะตอนใช้ (+ โหลดล่วงหน้าตอนว่างหลังเข้าเกม 20 วิ) · ภาพยังไม่มา → ไม่ขึ้นภาพครึ่งตัว ใช้อีโมจิไปก่อน
    · รหัสคนพูดที่มีตัวเลขต่อท้าย (til43 · thu45 · cel41) ใช้ภาพเดียวกับตัวหลัก · ปิด: NPCP.off=1 */
-const NPCP={off:0,ks:new Set(['qn','cmd','cel','til','sara','ast','eda','thu','navin','ves','lir','ked']),img:{},ok:{},cur:'',el:null,pre:0};
+const NPCP={off:0,ks:new Set(['qn','cmd','cel','til','sara','ast','eda','thu','navin','ves','lir','ked','hnt','kn','grif','nox','cas','lum','brom','mek','hed','orr','gem','leo']),img:{},ok:{},cur:'',el:null,pre:0};
 function npcpKey(k){if(!k)return'';const b=String(k).replace(/\d+$/,'');return NPCP.ks.has(b)?b:''}
 function npcpLoad(k){if(!k||NPCP.img[k])return NPCP.img[k];const o={f:new Image(),b:new Image()};NPCP.img[k]=o;
   o.f.decoding=o.b.decoding='async';o.f.onload=()=>{NPCP.ok[k]=(NPCP.ok[k]|0)|1;if(NPCP.cur===k)try{npcpShow(k,1)}catch(e){}};o.b.onload=()=>{NPCP.ok[k]=(NPCP.ok[k]|0)|2;if(NPCP.cur===k)try{npcpShow(k,1)}catch(e){}};
