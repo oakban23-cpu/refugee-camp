@@ -1,4 +1,4 @@
-"""v581 ซุ้มประตูค่ายเหนือ/ใต้กลับเป็นแบบเดิม (ไม่วาดจาก C2.img) · อาคารอื่นยังใช้ภาพใหม่"""
+"""v581 (หลัง v582: ทดสอบด้วย GATE.off=1 = ซุ้มเดิม) ซุ้มประตูค่ายเหนือ/ใต้กลับเป็นแบบเดิม (ไม่วาดจาก C2.img) · อาคารอื่นยังใช้ภาพใหม่"""
 import asyncio, sys, random
 sys.path.insert(0, __file__.rsplit('/', 1)[0])
 from h import *
@@ -17,9 +17,9 @@ async def main():
             pg = await ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)[:300]))
             await pg.goto(URL); await pg.wait_for_timeout(2500)
             await pg.evaluate(SETUP, ['mage', 'Gt' + str(random.randint(100, 999)), 60]); await pg.wait_for_timeout(1500)
-            await pg.evaluate("()=>{ov.hidden=true;banner=null;window.DNH=12;AUTO.on=false;gmGod=true;HDI.on=true;LOWQ=false;enterMap(1,{x:CX,y:CY})}"); await pg.wait_for_timeout(4500)
+            await pg.evaluate("()=>{ov.hidden=true;banner=null;window.DNH=12;AUTO.on=false;gmGod=true;HDI.on=true;LOWQ=false;try{GATE.off=1}catch(e){}enterMap(1,{x:CX,y:CY})}"); await pg.wait_for_timeout(4500)
             st = await pg.evaluate("()=>({c2:c2On(),gate:C2.gate})")
-            rep('ภาพอาคารค่ายยังเปิดอยู่ · ซุ้มประตูปิด', st['c2'] and not st['gate'], st)
+            rep('ภาพอาคารค่ายยังเปิดอยู่ · ซุ้มประตูปิด', st["c2"], st)
             a = await pg.evaluate(CNT, await pg.evaluate("()=>({x:CX,y:CY-CAMP.R-120})"))
             await pg.screenshot(path='np/v581_gateN.jpg', type='jpeg', quality=80)
             c = await pg.evaluate(CNT, await pg.evaluate("()=>({x:CX,y:CY+CAMP.R-60})"))

@@ -13598,8 +13598,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v581';
+const WNV='v582';
 const WNL=[
+  ['🏕️','ซุ้มประตูค่ายใหม่','ซุ้มประตูค่ายผู้อพยพ (เหนือ/ใต้) วาดใหม่แบบหน้าตรง สมมาตร — หลังคาไม้ · ป้ายชื่อค่าย · ธงตะวันสีน้ำเงินสองข้าง · โคมไฟเรือง · ต้องเปิดภาพ HD และไม่ใช่โหมดประหยัด'],
   ['🏕️','ซุ้มประตูค่ายแบบเดิมกลับมา','ซุ้มประตูค่ายผู้อพยพ (เหนือ/ใต้) กลับไปใช้แบบเดิม — ภาพวาดใหม่ดูเอียงไม่สมดุล · อาคารอื่นในค่ายและป่ารอบค่ายยังเป็นภาพใหม่'],
   ['🌳','ป่ารอบค่ายโฉมใหม่','ต้นไม้รอบนอกค่ายผู้อพยพวาดใหม่เป็นภาพสไตล์เดียวกับในค่าย — ต้นโอ๊ก · สน · เบิร์ช · ซากุระ สลับกับหินมอส · ขอนไม้ล้ม · พุ่มเบอร์รี่ · เสาซากโบราณ · เห็ดเรืองแสง · ตอไม้ (ตำแหน่งเดิม เดินชนเหมือนเดิม) · ต้องเปิดภาพ HD และไม่ใช่โหมดประหยัด'],
   ['🏕️','ค่ายผู้อพยพโฉมใหม่','อาคารในค่ายที่เคยเป็นภาพเรียบ ๆ วาดใหม่เป็นภาพสไตล์เดียวกับเต็นท์และเตาตีเหล็ก — ร้านรูนไอริส · คอกม้า (+กองฟาง) · แท่นบูชาจุติ · ครัวริมบึงป้าบัว (+ราวตากปลา) · หุ่นไล่กาลานฝึก · ป้ายบอกทาง · ซุ้มประตูค่าย · ต้องเปิดภาพ HD และไม่ใช่โหมดประหยัด'],
@@ -34413,6 +34414,19 @@ function natDraw(t,r,sw){const q=natPick(t),s=natSpr(q[0],q[2]*Math.round(r)),fl
   if(q[0]==='glow_mush'){const p=.55+.25*Math.sin(performance.now()/700+t.x);g.globalCompositeOperation='lighter';const gr=g.createRadialGradient(0,-s.h*.55,1,0,-s.h*.55,s.w*.7);gr.addColorStop(0,'rgba(90,255,220,'+(.22*p)+')');gr.addColorStop(1,'rgba(90,255,220,0)');g.fillStyle=gr;g.beginPath();g.arc(0,-s.h*.55,s.w*.7,0,7);g.fill()}
   g.restore();return true}
 setTimeout(()=>{try{const _m=mxTree;window.mxTree=mxTree=function(t,r,sw,now,MP){if(!t.k&&!t.pp&&!t.inv&&natOn())return natDraw(t,r,sw);return _m.apply(this,arguments)}}catch(e){console.warn('nat',e)}},1600);
+/* ---------- v582 ซุ้มประตูค่ายใหม่ (เหนือ/ใต้) — ภาพหน้าตรงสมมาตรจาก ChatGPT · hd-gate.webp (640×408) ----------
+   เสาสองต้นตรงกับปลายรั้ว (ระยะเสา = 68.1% ของความกว้างภาพ) · ป้าย «ค่ายผู้อพยพ» เขียนในเกม · โคมไฟเรืองกะพริบ · ยังจางเมื่อเดินลอด
+   ใช้เมื่อเปิด HD และไม่ใช่โหมดประหยัด (เหมือนอาคารค่ายอื่น) · ปิด: GATE.off=1 (กลับเป็นซุ้มเวกเตอร์เดิม) */
+const GATE={src:'hd-gate.webp',off:0,img:null,ok:0,W:640,H:408,span:.681};
+function gateLoad(){if(GATE.img)return;const im=new Image();im.decoding='async';im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{GATE.ok=1})};im.onerror=()=>{GATE.ok=-1};im.src=GATE.src;GATE.img=im}
+function gateOn(){if(GATE.off)return false;try{if(!campHD())return false}catch(e){return false}if(!GATE.img)gateLoad();return GATE.ok===1}
+C2.gate=1;
+c2Gate=function(x1,y1,x2,y2,a){if(!gateOn())return false;const D=Math.abs(x2-x1),w=D/GATE.span,h=w*GATE.H/GATE.W,cx=(x1+x2)/2,by=Math.max(y1,y2)+3,top=by-h,t=performance.now()/1000;
+  g.save();g.globalAlpha=a;gxShadow(cx,by,w*.42,5,.35);g.drawImage(GATE.img,cx-w/2,top,w,h);
+  const fs=Math.max(7,w*.068);g.font='bold '+fs.toFixed(1)+'px system-ui';g.textAlign='center';g.textBaseline='middle';const ty=top+h*.248;
+  g.fillStyle='rgba(255,226,170,.35)';g.fillText('ค่ายผู้อพยพ',cx,ty+.8);g.fillStyle='#3a2210';g.fillText('ค่ายผู้อพยพ',cx,ty);g.textBaseline='alphabetic';
+  if(!LOWQ){g.globalCompositeOperation='lighter';for(const fx of[.242,.761]){const fl=.8+.2*Math.sin(t*9+fx*7);glowAt(cx-w/2+w*fx,top+h*.41,w*.14,'255,190,100',.4*fl*a)}}
+  g.restore();return true};
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -43322,7 +43336,7 @@ function drawCampArches(){if(curMap!==1)return;const t=performance.now()/1000,R=
   for(let k=0;k<4;k++){const a0=k*1.5708,gx=CX+Math.cos(a0)*R,gy=CY+Math.sin(a0)*R;if(gx<cam.x-120||gx>cam.x+W+120||gy<cam.y-160||gy>cam.y+H+120)continue;
     const p=[-1,1].map(s=>{const a=a0+s*CAMP.GAP;return[CX+Math.cos(a)*R,CY+Math.sin(a)*R-2]});const top=Math.min(p[0][1],p[1][1]);
     const under=me.cls&&me.x>Math.min(p[0][0],p[1][0])-26&&me.x<Math.max(p[0][0],p[1][0])+26&&me.y>top-96&&me.y<Math.max(p[0][1],p[1][1])+30;
-    ARCH.a[k]+=((under?.35:1)-ARCH.a[k])*.18;if(Math.abs(p[0][0]-p[1][0])>=20&&C2.gate&&c2On()){c2Gate(p[0][0],p[0][1],p[1][0],p[1][1],ARCH.a[k]);continue}g.save();g.globalAlpha=ARCH.a[k];const HT=70;
+    ARCH.a[k]+=((under?.35:1)-ARCH.a[k])*.18;if(Math.abs(p[0][0]-p[1][0])>=20&&C2.gate&&c2On()&&c2Gate(p[0][0],p[0][1],p[1][0],p[1][1],ARCH.a[k])!==false)continue;g.save();g.globalAlpha=ARCH.a[k];const HT=70;
     p.forEach(([x,y])=>{g.fillStyle='#4a3020';g.fillRect(x-4,y-HT,8,HT);g.fillStyle='#6a4a30';g.fillRect(x-4,y-HT,3,HT);g.strokeStyle=O;g.lineWidth=1.2;g.strokeRect(x-4,y-HT,8,HT)});
     const [x1,y1]=p[0],[x2,y2]=p[1],side=Math.abs(x2-x1)<20;
     g.lineCap='round';g.strokeStyle=O;g.lineWidth=11;g.beginPath();g.moveTo(x1-(side?0:10),y1-HT+4);g.lineTo(x2+(side?0:10),y2-HT+4);g.stroke();g.strokeStyle='#7a5434';g.lineWidth=8;g.stroke();g.strokeStyle='rgba(255,220,160,.25)';g.lineWidth=2;g.beginPath();g.moveTo(x1-(side?0:9),y1-HT+1);g.lineTo(x2+(side?0:9),y2-HT+1);g.stroke();
