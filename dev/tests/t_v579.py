@@ -7,7 +7,7 @@ from h import *
 R = []
 def rep(name, ok, info=''):
     R.append((name, ok, info)); print(('PASS ' if ok else 'FAIL ') + name, str(info)[:900], flush=True)
-SPOTS = {'rune': 'MAPS[1].npc5', 'cook': 'MAPS[1].npc6', 'stable': '{x:CX-261,y:CY+101.5}', 'altar': 'RBA', 'dums': 'TG', 'sign': '{x:CX+58,y:CY+255}', 'gateN': '{x:CX,y:CY-CAMP.R}', 'gateS': '{x:CX,y:CY+CAMP.R}'}
+SPOTS = {'rune': 'MAPS[1].npc5', 'cook': 'MAPS[1].npc6', 'stable': '{x:CX-261,y:CY+101.5}', 'altar': 'RBA', 'dums': 'TG', 'sign': '{x:CX+58,y:CY+255}'}
 COUNT = """async(P)=>{const w=ms=>new Promise(r=>setTimeout(r,ms));me.x=P.x+10;me.y=P.y+70;ov.hidden=true;banner=null;await w(900);
   const C=CanvasRenderingContext2D.prototype,od=C.drawImage;let n=0;C.drawImage=function(im){if(im===C2.img)n++;return od.apply(this,arguments)};
   let fr=0;await new Promise(r=>{const f=()=>{fr++;if(fr<20)requestAnimationFrame(f);else r()};requestAnimationFrame(f)});C.drawImage=od;return {perFrame:+(n/fr).toFixed(1)}}"""

@@ -13598,8 +13598,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v580';
+const WNV='v581';
 const WNL=[
+  ['🏕️','ซุ้มประตูค่ายแบบเดิมกลับมา','ซุ้มประตูค่ายผู้อพยพ (เหนือ/ใต้) กลับไปใช้แบบเดิม — ภาพวาดใหม่ดูเอียงไม่สมดุล · อาคารอื่นในค่ายและป่ารอบค่ายยังเป็นภาพใหม่'],
   ['🌳','ป่ารอบค่ายโฉมใหม่','ต้นไม้รอบนอกค่ายผู้อพยพวาดใหม่เป็นภาพสไตล์เดียวกับในค่าย — ต้นโอ๊ก · สน · เบิร์ช · ซากุระ สลับกับหินมอส · ขอนไม้ล้ม · พุ่มเบอร์รี่ · เสาซากโบราณ · เห็ดเรืองแสง · ตอไม้ (ตำแหน่งเดิม เดินชนเหมือนเดิม) · ต้องเปิดภาพ HD และไม่ใช่โหมดประหยัด'],
   ['🏕️','ค่ายผู้อพยพโฉมใหม่','อาคารในค่ายที่เคยเป็นภาพเรียบ ๆ วาดใหม่เป็นภาพสไตล์เดียวกับเต็นท์และเตาตีเหล็ก — ร้านรูนไอริส · คอกม้า (+กองฟาง) · แท่นบูชาจุติ · ครัวริมบึงป้าบัว (+ราวตากปลา) · หุ่นไล่กาลานฝึก · ป้ายบอกทาง · ซุ้มประตูค่าย · ต้องเปิดภาพ HD และไม่ใช่โหมดประหยัด'],
   ['🖼️','ภาพหน้าตัวละครชุดที่ 3 + บอส','เพิ่มอีก 12 — ธรณิน · อาซาเอล · ทูตปีกทมิฬ · ผู้เฝ้าหอคอย · นิกซ์ · นักบวชน้ำแข็ง · ผู้พิทักษ์ศิลาจารึก · บอส ราชาหมอกพิษ · ราชากระดูกโบราณ · จอมมารเพลิงนรก · จักรพรรดิน้ำแข็งนิรันดร์ · ราชันย์ห้วงลึก · รวม 36 ตัว'],
@@ -34369,7 +34370,7 @@ setInterval(()=>{try{if(NPCP.pre||NPCP.off||!me.cls||!run||performance.now()<200
    · ร้านรูนไอริส (โครงร้าน → ภาพ · วงเวท/ผลึกลอย/ตัวไอริสคงเดิม) · คอกม้า + กองฟาง · แท่นบูชาจุติ (ฐาน+เสา → ภาพ · ลูกแสง/ประกายคงเดิม)
    · ซุ้มครัวป้าบัว + ราวตากปลา · หุ่นไล่กาลานฝึก (ยังโยกตอนโดนตี) · ป้ายบอกทาง · ซุ้มประตูค่ายเหนือ/ใต้ (ยังจางเมื่อเดินลอด)
    ปิด: C2.off=1 */
-const C2={src:'hd-camp2.webp',off:0,img:null,ok:0,f:{"camp_gate":[0,0,246,260],"rune_stall":[248,0,216,240],"cook_stall":[466,0,238,240],"rebirth_altar":[706,0,240,229],"stable":[0,262,240,207],"bounty_board":[242,262,168,200],"scarecrow_target":[412,262,113,170],"fish_rack":[527,262,138,150],"signpost":[667,262,80,150],"rank_podium":[749,262,113,150],"transfer_altar":[0,471,200,148],"hay_bales":[202,471,150,108]}};
+const C2={src:'hd-camp2.webp',off:0,gate:0,img:null,ok:0,f:{"camp_gate":[0,0,246,260],"rune_stall":[248,0,216,240],"cook_stall":[466,0,238,240],"rebirth_altar":[706,0,240,229],"stable":[0,262,240,207],"bounty_board":[242,262,168,200],"scarecrow_target":[412,262,113,170],"fish_rack":[527,262,138,150],"signpost":[667,262,80,150],"rank_podium":[749,262,113,150],"transfer_altar":[0,471,200,148],"hay_bales":[202,471,150,108]}};
 function c2Load(){if(C2.img)return;const im=new Image();im.decoding='async';im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{C2.ok=1;try{CAMP.cache=null}catch(e){}})};im.onerror=()=>{C2.ok=-1};im.src=C2.src;C2.img=im}
 function c2On(){if(C2.off)return false;try{if(!campHD())return false}catch(e){return false}if(!C2.img)c2Load();return C2.ok===1}
 /* วาดสไปรต์: (x,by) = กึ่งกลางล่าง · w = กว้างในโลกเกม · คืนความสูง */
@@ -43321,7 +43322,7 @@ function drawCampArches(){if(curMap!==1)return;const t=performance.now()/1000,R=
   for(let k=0;k<4;k++){const a0=k*1.5708,gx=CX+Math.cos(a0)*R,gy=CY+Math.sin(a0)*R;if(gx<cam.x-120||gx>cam.x+W+120||gy<cam.y-160||gy>cam.y+H+120)continue;
     const p=[-1,1].map(s=>{const a=a0+s*CAMP.GAP;return[CX+Math.cos(a)*R,CY+Math.sin(a)*R-2]});const top=Math.min(p[0][1],p[1][1]);
     const under=me.cls&&me.x>Math.min(p[0][0],p[1][0])-26&&me.x<Math.max(p[0][0],p[1][0])+26&&me.y>top-96&&me.y<Math.max(p[0][1],p[1][1])+30;
-    ARCH.a[k]+=((under?.35:1)-ARCH.a[k])*.18;if(Math.abs(p[0][0]-p[1][0])>=20&&c2On()){c2Gate(p[0][0],p[0][1],p[1][0],p[1][1],ARCH.a[k]);continue}g.save();g.globalAlpha=ARCH.a[k];const HT=70;
+    ARCH.a[k]+=((under?.35:1)-ARCH.a[k])*.18;if(Math.abs(p[0][0]-p[1][0])>=20&&C2.gate&&c2On()){c2Gate(p[0][0],p[0][1],p[1][0],p[1][1],ARCH.a[k]);continue}g.save();g.globalAlpha=ARCH.a[k];const HT=70;
     p.forEach(([x,y])=>{g.fillStyle='#4a3020';g.fillRect(x-4,y-HT,8,HT);g.fillStyle='#6a4a30';g.fillRect(x-4,y-HT,3,HT);g.strokeStyle=O;g.lineWidth=1.2;g.strokeRect(x-4,y-HT,8,HT)});
     const [x1,y1]=p[0],[x2,y2]=p[1],side=Math.abs(x2-x1)<20;
     g.lineCap='round';g.strokeStyle=O;g.lineWidth=11;g.beginPath();g.moveTo(x1-(side?0:10),y1-HT+4);g.lineTo(x2+(side?0:10),y2-HT+4);g.stroke();g.strokeStyle='#7a5434';g.lineWidth=8;g.stroke();g.strokeStyle='rgba(255,220,160,.25)';g.lineWidth=2;g.beginPath();g.moveTo(x1-(side?0:9),y1-HT+1);g.lineTo(x2+(side?0:9),y2-HT+1);g.stroke();
