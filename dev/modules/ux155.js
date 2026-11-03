@@ -1,7 +1,7 @@
 /* ---------- v582 ซุ้มประตูค่ายใหม่ (เหนือ/ใต้) — ภาพหน้าตรงสมมาตรจาก ChatGPT · hd-gate.webp (640×408) ----------
    เสาสองต้นตรงกับปลายรั้ว (ระยะเสา = 68.1% ของความกว้างภาพ) · ป้าย «ค่ายผู้อพยพ» เขียนในเกม · โคมไฟเรืองกะพริบ · ยังจางเมื่อเดินลอด
    ใช้เมื่อเปิด HD และไม่ใช่โหมดประหยัด (เหมือนอาคารค่ายอื่น) · ปิด: GATE.off=1 (กลับเป็นซุ้มเวกเตอร์เดิม) */
-const GATE={src:'hd-gate.webp',off:0,img:null,ok:0,W:640,H:408,span:.681};
+const GATE={src:'hd-campgate.webp',off:0,img:null,ok:0,W:640,H:408,span:.681};
 function gateLoad(){if(GATE.img)return;const im=new Image();im.decoding='async';im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{GATE.ok=1})};im.onerror=()=>{GATE.ok=-1};im.src=GATE.src;GATE.img=im}
 function gateOn(){if(GATE.off)return false;try{if(!campHD())return false}catch(e){return false}if(!GATE.img)gateLoad();return GATE.ok===1}
 C2.gate=1;

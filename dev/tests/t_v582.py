@@ -11,7 +11,7 @@ CNT = """async(P)=>{const w=ms=>new Promise(r=>setTimeout(r,ms));me.x=P.x;me.y=P
 async def main():
     p = start_server()
     try:
-        with urllib.request.urlopen(URL.rstrip('/') + '/hd-gate.webp') as r:
+        with urllib.request.urlopen(URL.rstrip('/') + '/hd-campgate.webp') as r:
             rep('hd-gate.webp เสิร์ฟได้', r.status == 200 and r.headers.get('Content-Type') == 'image/webp')
         async with async_playwright() as pw:
             b = await pw.chromium.launch(); errs = []
