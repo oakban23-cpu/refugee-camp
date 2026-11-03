@@ -8,7 +8,7 @@ async def main():
         A = await new_client(b, 'Ra'+str(random.randint(1000,9999)), 'archer', 99)
         B = await new_client(b, 'Rb'+str(random.randint(1000,9999)), 'mage', 40)
         print('A',await A.ev("()=>[me.lv,curMap,me.cls2,clsName()]"))
-        await A.ev("()=>{gmGod=true;me.cls2=1;me.brU={1:1,2:1};me.br=2;applyBr();applyBr();recalc();me.ast=me.ast||{n:0,p:{}};me.ptx={12:500};me.x=1790;me.y=1700}")
+        await A.ev("()=>{gmGod=true;me.cls2=1;me.brU={1:1,2:1};me.br=2;applyBr();applyBr();recalc();me.ast=me.ast||{n:0,p:{}};me.ptx={12:500};me.x=RBA.x;me.y=RBA.y+40}")
         for i in range(3): await A.ev("()=>rbShardDrop(true)")
         print('shards after 3 drops',await A.ev("()=>rbSt().sh"))
         await A.ev("()=>{rbShard(5,'test');me.gold=1500000}")

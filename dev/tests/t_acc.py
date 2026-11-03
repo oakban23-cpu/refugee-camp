@@ -39,7 +39,7 @@ async def main():
         print('B login:',await pg2.evaluate("()=>[ACC&&ACC.a,accRev,saveState,Object.values(saves.chars).map(c=>[c.cls,c.lv,c.gold])]"))
         await pg2.screenshot(path='acc2.png',full_page=True)
         # B plays and levels up -> push
-        await pg2.evaluate("()=>{const k=Object.keys(saves.chars)[0];pick(scls(k),k);window.PRO_ON=0;{const e=document.getElementById('procv');if(e)e.remove()}ov.hidden=true;try{let q=0;while(SD.on&&q<80){stNext();q++}stClose()}catch(e){};gmSetLv(45);me.gold=999}")
+        await pg2.evaluate("async()=>{const k=Object.keys(saves.chars)[0];pick(scls(k),k);{let q=0;while(!me.cls&&q<100){await new Promise(r=>setTimeout(r,100));q++}}window.PRO_ON=0;{const e=document.getElementById('procv');if(e)e.remove()}ov.hidden=true;try{let q=0;while(SD.on&&q<80){stNext();q++}stClose()}catch(e){};gmSetLv(45);me.gold=999}")
         await pg2.wait_for_timeout(300)
         await pg2.evaluate("()=>{accLast=0;return writeSave()}");await pg2.wait_for_timeout(1500)
         print('B pushed rev',await pg2.evaluate("()=>[accRev,accDirty,saveState]"))

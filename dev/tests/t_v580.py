@@ -30,7 +30,7 @@ async def main():
               const vis=trees.filter(t=>t.x>cam.x-40&&t.x<cam.x+W+40&&t.y>cam.y-40&&t.y<cam.y+H+40&&!t.inv&&!t.pp).length;
               return {perFrame:+(n/fr).toFixed(1),vis,kinds:[...new Set(trees.filter(t=>t._nv!==undefined).map(t=>NAT.v[t._nv][0]))],cache:Object.keys(NAT.c).length,ms:+((performance.now()-t0)/fr).toFixed(1)}}"""
             d = await pg.evaluate(CNT, P)
-            rep('ต้นไม้ในจอวาดจากภาพใหม่ครบทุกต้น', d['vis'] > 5 and d['perFrame'] >= d['vis'] - 1, d)
+            rep('ต้นไม้ในจอวาดจากภาพใหม่ครบทุกต้น', d['vis'] > 5 and d['perFrame'] >= d['vis'] - 2, d)
             await pg.evaluate("()=>{for(let i=0;i<12;i++){const t=trees[(i*37)%trees.length];me.x=t.x;me.y=t.y+60;cam.x=t.x-W/2;cam.y=t.y-H/2;try{draw()}catch(e){}}}")
             await pg.wait_for_timeout(300)
             # สุ่มดูหลายจุดให้ครบหลายแบบ

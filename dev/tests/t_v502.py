@@ -24,7 +24,7 @@ async def main():
         rep('เปิดเรดห้วงลึก: เลขห้อง 71000–71999 เสมอ → เป็นเรดจริง (เดิมสุ่มถึง 79999 แล้วโผล่ดันเนื้อเรื่อง)',all(71000<=x[0]<72000 and x[1] for x in rd),rd)
         j=await A.ev("""async()=>{const o=[];let msg='';const _u=dungeonUI;window.dungeonUI=dungeonUI=t=>{msg=t};try{dgJoin('86123');o.push([curMap,msg]);msg='';const L0=me.lv;me.lv=100;dgJoin('72123');o.push([curMap,msg]);me.lv=L0;msg=''}finally{window.dungeonUI=dungeonUI=_u}
           me.lv=140;dgJoin('72123');await new Promise(r=>setTimeout(r,1500));o.push([curMap,HDFI()]);dgLeave();await new Promise(r=>setTimeout(r,1200));return o}""")
-        rep('ใส่รหัสห้อง: ลานบอสโลก (ห้องเดี่ยว) เข้าไม่ได้ · ศึกท่าเรือต้อง Lv 130+ · ถึงเลเวลเข้าได้',j[0][0]<10000 and 'ไม่ถูกต้อง' in j[0][1] and '130' in j[1][1] and j[2][0]==72123 and j[2][1],j)
+        rep('ใส่รหัสห้อง: ลานบอสโลก (ห้องเดี่ยว) เข้าไม่ได้ · ศึกท่าเรือเข้าได้ทุกเลเวล (v553 ยกเลิก Lv 130)',j[0][0]<10000 and 'ไม่ถูกต้อง' in j[0][1] and j[1][0]==72123 and j[2][0]==72123 and j[2][1],j)
         iv=await A.ev("""async()=>{const o=[];for(const id of[72345,86123,71234,77222]){dInv={id,tr:Math.floor(id/10000),n:'เพื่อน',until:Date.now()+9e4};await new Promise(r=>setTimeout(r,300));o.push($('dinvb').textContent)}dInv=null;return o}""")
         rep('ป้ายชวนเข้าห้องบอกชื่อดันถูกตามเลขห้อง',('ศึกป้องกันท่าเรือเมฆ' in iv[0]) and ('ลานบอสโลก' in iv[1]) and ('เรด' in iv[2]) and ('ศาลาราชินี' in iv[3]),iv)
         E=[e for e in A.errs if 'ERR_' not in e]
