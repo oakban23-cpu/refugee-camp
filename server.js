@@ -564,8 +564,10 @@ function accRoute(req,res){const H={'Content-Type':'application/json','Cache-Con
       if(!ok){for(const k of[ip,fk]){const g=ACFAIL.get(k);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACFAIL.set(k,v)}if(ACFAIL.size>5000)ACFAIL.clear();if(A){const g=ACNF.get(a);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACNF.set(a,v);if(ACNF.size>5000)ACNF.clear()}return J(401,{err:A?'pin':'none'})}
       ACFAIL.delete(fk);ACNF.delete(a);if(A.lock)return J(403,{err:'lock'});A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(a);return J(200,{ok:1,a,t,rev:sv?sv.rev|0:0})}
     const A=accAuth(a,q.t);if(!A)return J(401,{err:'auth'});
+    if(act==='claim'){const sid=crypto.randomBytes(9).toString('hex');A.ss=sid;const sv=svRead(a);A.l=now;accDirty=true;return J(200,{ok:1,sid,rev:sv?sv.rev|0:0,data:sv?sv.data:null,at:sv?sv.at:0})}
     if(act==='load'){const sv=svRead(a);A.l=now;accDirty=true;return J(200,{ok:1,rev:sv?sv.rev|0:0,data:sv?sv.data:null,at:sv?sv.at:0})}
     if(act==='save'){const d=q.data;if(!d||typeof d!=='object'||!d.chars||typeof d.chars!=='object')return J(400,{err:'data'});
+      {const qs=typeof q.sid==='string'?q.sid.slice(0,40):'';if(qs){if(A.ss&&A.ss!==qs)return J(409,{err:'sess'});if(!A.ss){A.ss=qs;accDirty=true}}}
       const lt=ACLAST.get(a)||0;if(now-lt<1500)return J(429,{err:'fast'});
       const sv=svRead(a),cur=sv?sv.rev|0:0;if((q.r|0)!==cur)return J(409,{err:'rev',rev:cur,data:sv?sv.data:null});ACLAST.set(a,now);if(ACLAST.size>5000)ACLAST.clear();
       const o={rev:cur+1,at:now,data:d},js=JSON.stringify(o);if(js.length>SVMAX)return J(413,{err:'size'});
