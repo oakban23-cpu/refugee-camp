@@ -12302,8 +12302,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v591';
+const WNV='v592';
 const WNL=[
+['🌟','ประตูวาร์ปในค่ายเล็กลง','ประตูแสงดาว (ไปนครลอยฟ้า) และประตูบ้านกิลด์ย่อเหลือ 78% ให้เข้ากับอาคารอื่นในค่าย · จุดเหยียบวาร์ปเท่าเดิม'],
 ['🪵','พื้นท่าเรือเข้าชุดใหม่','ผาท่าเรือเมฆ: คราบไม้และรอยสึกใต้อาคาร · ฟางหน้าคลังเสบียง · ขดเชือกข้างปั้นจั่นและสมอ · ลานหินปูรอบประภาคาร · รอยไถล เศษไม้ และก้อนหินรอบซากเรือเหาะ'],
 ['⚓','ผาท่าเรือเมฆโฉมใหม่','ประภาคาร · สำนักงานท่าเรือ · เต็นท์พยาบาล · คลังเสบียง · ปั้นจั่น · อนุสรณ์สมอเรือ · ซากเรือเหาะ · กองลังไม้ วาดใหม่เป็นภาพ HD ชุดเดียวกับค่าย · ต้องเปิดภาพ HD และไม่ใช่โหมดประหยัด'],
 ['👥','เพื่อนเดินตรงขึ้น','เล่นออนไลน์: ตำแหน่งเพื่อนบนจอตามหลังของจริงน้อยลงมาก — ส่ง/ส่งต่อตำแหน่งถี่ขึ้น 2 เท่าตอนเดิน และเดาทางเดินล่วงหน้าสั้น ๆ ให้เพื่อนเดินลื่นไม่กระตุก'],
@@ -30529,6 +30530,9 @@ c.save();c.lineCap='round';for(const[w,col]of[[44,'rgba(70,52,30,.55)'],[30,'rgb
 for(let i=0;i<10;i++)hbgPlank(c,cx-380+r()*560,cy+20+(r()-.5)*70,(r()-.5)*1.6,14+r()*20,r);
 for(let i=0;i<16;i++)hbgPeb(c,cx-300+r()*560,cy+16+(r()-.5)*80,1.6+r()*3,r)}}
 setTimeout(()=>{try{const _pp=phPaint;window.phPaint=phPaint=function(c,ox,oy,S){const r=_pp.apply(this,arguments);if(hbgOn())try{hbgPaint(c,ox,oy,S)}catch(e){console.warn('hbg',e)}return r}}catch(e){console.warn('hbg',e)}},1600);
+const GTS={star:.78,guild:.78};
+setTimeout(()=>{try{const _s=cgStar;window.cgStar=cgStar=function(x,y){const k=GTS.star;if(k===1)return _s.apply(this,arguments);g.save();g.translate(x,y);g.scale(k,k);g.translate(-x,-y);try{return _s.apply(this,arguments)}finally{g.restore()}}}catch(e){console.warn('gts',e)}
+try{const _g=cgGuild;window.cgGuild=cgGuild=function(x,y,col,now){const k=GTS.guild;if(k===1)return _g.apply(this,arguments);g.save();g.translate(x,y+10);g.scale(k,k);g.translate(-x,-(y+10));try{return _g.apply(this,arguments)}finally{g.restore()}}}catch(e){console.warn('gts',e)}},1600);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();

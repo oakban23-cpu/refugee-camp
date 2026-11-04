@@ -13599,8 +13599,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v591';
+const WNV='v592';
 const WNL=[
+  ['🌟','ประตูวาร์ปในค่ายเล็กลง','ประตูแสงดาว (ไปนครลอยฟ้า) และประตูบ้านกิลด์ย่อเหลือ 78% ให้เข้ากับอาคารอื่นในค่าย · จุดเหยียบวาร์ปเท่าเดิม'],
   ['🪵','พื้นท่าเรือเข้าชุดใหม่','ผาท่าเรือเมฆ: คราบไม้และรอยสึกใต้อาคาร · ฟางหน้าคลังเสบียง · ขดเชือกข้างปั้นจั่นและสมอ · ลานหินปูรอบประภาคาร · รอยไถล เศษไม้ และก้อนหินรอบซากเรือเหาะ'],
   ['⚓','ผาท่าเรือเมฆโฉมใหม่','ประภาคาร · สำนักงานท่าเรือ · เต็นท์พยาบาล · คลังเสบียง · ปั้นจั่น · อนุสรณ์สมอเรือ · ซากเรือเหาะ · กองลังไม้ วาดใหม่เป็นภาพ HD ชุดเดียวกับค่าย · ต้องเปิดภาพ HD และไม่ใช่โหมดประหยัด'],
   ['👥','เพื่อนเดินตรงขึ้น','เล่นออนไลน์: ตำแหน่งเพื่อนบนจอตามหลังของจริงน้อยลงมาก — ส่ง/ส่งต่อตำแหน่งถี่ขึ้น 2 เท่าตอนเดิน และเดาทางเดินล่วงหน้าสั้น ๆ ให้เพื่อนเดินลื่นไม่กระตุก'],
@@ -34630,6 +34631,11 @@ function hbgPaint(c,ox,oy,S){const X1=ox+S,Y1=oy+S,inB=(x,y,m)=>x+m>ox&&x-m<X1&&
     for(let i=0;i<10;i++)hbgPlank(c,cx-380+r()*560,cy+20+(r()-.5)*70,(r()-.5)*1.6,14+r()*20,r);
     for(let i=0;i<16;i++)hbgPeb(c,cx-300+r()*560,cy+16+(r()-.5)*80,1.6+r()*3,r)}}
 setTimeout(()=>{try{const _pp=phPaint;window.phPaint=phPaint=function(c,ox,oy,S){const r=_pp.apply(this,arguments);if(hbgOn())try{hbgPaint(c,ox,oy,S)}catch(e){console.warn('hbg',e)}return r}}catch(e){console.warn('hbg',e)}},1600);
+/* ---------- v592 ย่อประตูแสงดาว (→ นครลอยฟ้า) และประตูบ้านกิลด์ ----------
+   ผู้ใช้: ดูใหญ่ไป → ย่อเหลือ 78% · ประตูแสงดาวย่อรอบจุดกลางวงวาร์ป (จุดเหยียบวาร์ปเดิม) · ประตูกิลด์ย่อรอบฐานประตู · ปรับได้: GTS.star / GTS.guild */
+const GTS={star:.78,guild:.78};
+setTimeout(()=>{try{const _s=cgStar;window.cgStar=cgStar=function(x,y){const k=GTS.star;if(k===1)return _s.apply(this,arguments);g.save();g.translate(x,y);g.scale(k,k);g.translate(-x,-y);try{return _s.apply(this,arguments)}finally{g.restore()}}}catch(e){console.warn('gts',e)}
+  try{const _g=cgGuild;window.cgGuild=cgGuild=function(x,y,col,now){const k=GTS.guild;if(k===1)return _g.apply(this,arguments);g.save();g.translate(x,y+10);g.scale(k,k);g.translate(-x,-(y+10));try{return _g.apply(this,arguments)}finally{g.restore()}}}catch(e){console.warn('gts',e)}},1600);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
