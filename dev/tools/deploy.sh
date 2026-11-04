@@ -2,6 +2,11 @@
 # ส่งเวอร์ชันล่าสุดขึ้น GitHub: bash /home/claude/deploy.sh "vNNN ข้อความ"
 set -e
 R=/home/claude/refugee-camp
+# v592 กันลืม build: build ทุกครั้ง แล้วเช็กว่าหน้าเกมที่จะส่งเป็นเวอร์ชันเดียวกับต้นฉบับ
+bash /home/claude/build.sh >/dev/null
+W1=$(grep -o "const WNV='v[0-9]*'" /home/claude/refugee-online/public/index.html | head -1)
+W2=$(grep -o "const WNV='v[0-9]*'" /mnt/user-data/outputs/refugee-online/public/index.html | head -1)
+if [ "$W1" != "$W2" ]; then echo "build ไม่ตรงต้นฉบับ: $W1 vs $W2"; exit 1; fi
 cd $R
 git fetch -q origin main && git reset -q --soft origin/main 2>/dev/null || true
 cp /mnt/user-data/outputs/refugee-online/public/index.html public/index.html
