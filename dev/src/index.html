@@ -13599,8 +13599,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v589';
+const WNV='v590';
 const WNL=[
+  ['⚓','ผาท่าเรือเมฆโฉมใหม่','ประภาคาร · สำนักงานท่าเรือ · เต็นท์พยาบาล · คลังเสบียง · ปั้นจั่น · อนุสรณ์สมอเรือ · ซากเรือเหาะ · กองลังไม้ วาดใหม่เป็นภาพ HD ชุดเดียวกับค่าย · ต้องเปิดภาพ HD และไม่ใช่โหมดประหยัด'],
   ['👥','เพื่อนเดินตรงขึ้น','เล่นออนไลน์: ตำแหน่งเพื่อนบนจอตามหลังของจริงน้อยลงมาก — ส่ง/ส่งต่อตำแหน่งถี่ขึ้น 2 เท่าตอนเดิน และเดาทางเดินล่วงหน้าสั้น ๆ ให้เพื่อนเดินลื่นไม่กระตุก'],
   ['⚡','ค่ายลื่นขึ้น','วัดความลื่นในค่ายแบบจำลองมือถือรุ่นกลางหลังเพิ่มภาพใหม่ — ลดงานวาดต่อเฟรมของต้นไม้ HD · ใบไม้ปลิว · กลีบซากุระ · คอกม้าไม่วาดตอนอยู่นอกจอ'],
   ['🛤️','พื้นค่ายมีมิติ','ลานดินใต้ร้านและอาคาร (ร้านรูน · คอกม้า · ช่างตีบวก · พ่อค้ายา · อนุสาวรีย์ · แท่นไซลัส · บ้านกิลด์ · ประตูวาร์ป) · ทางเดินดินแยกจากถนนหินเข้าหน้าร้านทุกร้าน · กรวด หญ้าแซม และดอกไม้ริมทาง'],
@@ -34580,6 +34581,18 @@ function netVel(o,prev){const now=performance.now();for(const k in o){const n=o[
 function netMove(o,dt){if(NETP.off||o._t===undefined){const dx=(o.tx-o.x)*.3,dy=(o.ty-o.y)*.3;o.x+=dx;o.y+=dy;walkTick(o,dx,dy);return}
   const age=Math.min(NETP.cap,(performance.now()-o._t)/1000)+NETP.lead;let px=o.vx*age,py=o.vy*age;const d=Math.hypot(px,py);if(d>NETP.maxd){px*=NETP.maxd/d;py*=NETP.maxd/d}
   const tx=o.tx+px,ty=o.ty+py,k=1-Math.exp(-Math.max(0,dt)/NETP.tau),dx=(tx-o.x)*k,dy=(ty-o.y)*k;o.x+=dx;o.y+=dy;walkTick(o,dx,dy)}
+/* ---------- v590 ผาท่าเรือเมฆ (แมพ 38): ของบนท่าเรือ 8 ชิ้นเป็นภาพ HD (ChatGPT · ชุดเดียวกับซุ้มประตูค่าย) ----------
+   แผ่นภาพ hd-harbor.webp · ประภาคาร · สำนักงานท่าเรือ · เต็นท์พยาบาล · คลังเสบียง · ปั้นจั่น · อนุสรณ์สมอ · ซากเรือเหาะ · กองลังไม้
+   ห่อ phSpr (ตัววาดของท่าเรือที่เตรียมภาพเวกเตอร์ไว้) → คีย์ที่มีภาพ HD วาดภาพแทน · ตำแหน่ง/ชน/เงา/ไฟประภาคารคงเดิม
+   ใช้เมื่อเปิด HD และไม่ใช่โหมดประหยัด · ปิด: HBA.off=1 */
+const HBA={src:'hd-harbor.webp',off:0,img:null,ok:0,
+  /* [sx,sy,sw,sh, กว้างในเกม, จุดยึดแนวนอน (สัดส่วนของความกว้างที่ตรงกับจุดวาง)] */
+  f:{lh:[0,0,292,552,206.3,.5],hs:[294,0,366,508,182.9,.5],wr:[662,0,621,408,621,.5],dp:[1285,0,358,315,179.2,.5],md:[1645,0,328,303,163.8,.5],cr:[0,554,336,292,168,.27],an:[338,554,169,292,84.4,.5],cx:[509,554,72,69,35.8,.5]}};
+function hbaLoad(){if(HBA.img)return;const im=new Image();im.decoding='async';im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{HBA.ok=1})};im.onerror=()=>{HBA.ok=-1};im.src=HBA.src;HBA.img=im}
+function hbaOn(){if(HBA.off||curMap!==38)return false;try{if(!HDI.on||lqHD())return false}catch(e){return false}if(!HBA.img)hbaLoad();return HBA.ok===1}
+setTimeout(()=>{try{const _p=phSpr;window.phSpr=phSpr=function(key,x,y,bb,fn){if(hbaOn()){const k=key.length>2&&key.slice(0,2)==='cx'?'cx':key,f=HBA.f[k];
+      if(f){const w=f[4],h=w*f[3]/f[2],cx=x+bb[0]+bb[2]*(k==='cr'?.2:.5),by=y+bb[1]+bb[3]-(k==='wr'?14:4);g.drawImage(HBA.img,f[0],f[1],f[2],f[3],cx-w*f[5],by-h,w,h);return}}
+    return _p.apply(this,arguments)}}catch(e){console.warn('hba',e)}},1600);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
