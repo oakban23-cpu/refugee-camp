@@ -13599,8 +13599,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v587';
+const WNV='v588';
 const WNL=[
+  ['⚡','ค่ายลื่นขึ้น','วัดความลื่นในค่ายแบบจำลองมือถือรุ่นกลางหลังเพิ่มภาพใหม่ — ลดงานวาดต่อเฟรมของต้นไม้ HD · ใบไม้ปลิว · กลีบซากุระ · คอกม้าไม่วาดตอนอยู่นอกจอ'],
   ['🛤️','พื้นค่ายมีมิติ','ลานดินใต้ร้านและอาคาร (ร้านรูน · คอกม้า · ช่างตีบวก · พ่อค้ายา · อนุสาวรีย์ · แท่นไซลัส · บ้านกิลด์ · ประตูวาร์ป) · ทางเดินดินแยกจากถนนหินเข้าหน้าร้านทุกร้าน · กรวด หญ้าแซม และดอกไม้ริมทาง'],
   ['📱','เล่นหลายเครื่องไม่เซฟทับกันแล้ว','กดเข้าตัวละครจะดึงเซฟล่าสุดจากเซิร์ฟเวอร์ก่อนทุกครั้ง · บัญชีเดียวเล่นได้ทีละเครื่อง — ถ้าเข้าเล่นจากเครื่องใหม่ เครื่องเก่าจะขึ้นแจ้งและหยุดบันทึกทันที เลเวล/ของจะไม่ถูกเซฟเก่าทับ · ตัวละครที่จุติแล้วนับว่าก้าวหน้ากว่าเสมอ'],
   ['🔧','แก้ภาพประตูเพี้ยน','ประตูแสงดาว (ไปนครลอยฟ้า) และประตูบ้านกิลด์ในค่ายกลับมาเป็นภาพที่ถูกต้อง — รอบก่อนไฟล์ภาพซุ้มประตูค่ายใหม่ไปทับไฟล์ภาพของสองประตูนี้'],
@@ -34377,7 +34378,7 @@ setInterval(()=>{try{if(NPCP.pre||NPCP.off||!me.cls||!run||performance.now()<200
    · ร้านรูนไอริส (โครงร้าน → ภาพ · วงเวท/ผลึกลอย/ตัวไอริสคงเดิม) · คอกม้า + กองฟาง · แท่นบูชาจุติ (ฐาน+เสา → ภาพ · ลูกแสง/ประกายคงเดิม)
    · ซุ้มครัวป้าบัว + ราวตากปลา · หุ่นไล่กาลานฝึก (ยังโยกตอนโดนตี) · ป้ายบอกทาง · ซุ้มประตูค่ายเหนือ/ใต้ (ยังจางเมื่อเดินลอด)
    ปิด: C2.off=1 */
-const C2={src:'hd-camp2.webp',off:0,gate:0,img:null,ok:0,f:{"camp_gate":[0,0,246,260],"rune_stall":[248,0,216,240],"cook_stall":[466,0,238,240],"rebirth_altar":[706,0,240,229],"stable":[0,262,240,207],"bounty_board":[242,262,168,200],"scarecrow_target":[412,262,113,170],"fish_rack":[527,262,138,150],"signpost":[667,262,80,150],"rank_podium":[749,262,113,150],"transfer_altar":[0,471,200,148],"hay_bales":[202,471,150,108]}};
+const C2={src:'hd-camp2.webp',off:0,img:null,ok:0,f:{"camp_gate":[0,0,246,260],"rune_stall":[248,0,216,240],"cook_stall":[466,0,238,240],"rebirth_altar":[706,0,240,229],"stable":[0,262,240,207],"bounty_board":[242,262,168,200],"scarecrow_target":[412,262,113,170],"fish_rack":[527,262,138,150],"signpost":[667,262,80,150],"rank_podium":[749,262,113,150],"transfer_altar":[0,471,200,148],"hay_bales":[202,471,150,108]}};
 function c2Load(){if(C2.img)return;const im=new Image();im.decoding='async';im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{C2.ok=1;try{CAMP.cache=null}catch(e){}})};im.onerror=()=>{C2.ok=-1};im.src=C2.src;C2.img=im}
 function c2On(){if(C2.off)return false;try{if(!campHD())return false}catch(e){return false}if(!C2.img)c2Load();return C2.ok===1}
 /* วาดสไปรต์: (x,by) = กึ่งกลางล่าง · w = กว้างในโลกเกม · คืนความสูง */
@@ -34394,7 +34395,7 @@ function c2Gate(x1,y1,x2,y2,a){const D=Math.abs(x2-x1),w=D/.6,cx=(x1+x2)/2,by=Ma
 setTimeout(()=>{
   /* คอกม้า: โครงคอก → ภาพ + กองฟาง · คนดูแลคอก/ชื่อ/บทพูดคงเดิม */
   try{const _s=drawStable;window.drawStable=drawStable=function(){if(!c2On())return _s.apply(this,arguments);
-      const x=CX-261,y=CY+101.5,t=performance.now()/1000;gxShadow(x+6,y+22,54,10,.4);c2Spr('stable',x+4,y+26,116);c2Spr('hay_bales',x+76,y+28,42);
+      const x=CX-261,y=CY+101.5,t=performance.now()/1000;if(x+90<cam.x||x-90>cam.x+W||y+60<cam.y||y-140>cam.y+H)return;gxShadow(x+6,y+22,54,10,.4);c2Spr('stable',x+4,y+26,116);c2Spr('hay_bales',x+76,y+28,42);
       const N=MAPS[1].npc2;drawRancher2(N.x,N.y,me.x<N.x?-1:1,t);g.font='11px system-ui';g.textAlign='center';g.fillStyle='#ffe0a0';g.fillText(N.n,N.x,N.y-36);npcSay('ranch',N.x,N.y,NPCSAY.ranch,200,48)}}catch(e){console.warn('c2 stable',e)}
   try{const _d=drawScarecrow;window.drawScarecrow=drawScarecrow=function(x,y,m,t){if(!c2On())return _d.apply(this,arguments);return c2Scarecrow(x,y,m,t)}}catch(e){}
 },1600);
@@ -34415,9 +34416,10 @@ function natPick(t){if(t._nv!==undefined)return NAT.v[t._nv];let h=Math.abs(((t.
 /* ภาพย่อตามขนาด (ความละเอียด 2 เท่า) */
 function natSpr(k,w){const key=k+':'+Math.round(w);let s=NAT.c[key];if(s)return s;const f=NAT.f[k],h=w*f[3]/f[2],S=2,c=document.createElement('canvas');
   c.width=Math.ceil(w*S);c.height=Math.ceil(h*S);const x=c.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(NAT.img,f[0],f[1],f[2],f[3],0,0,c.width,c.height);return NAT.c[key]={c,w,h}}
-function natDraw(t,r,sw){const q=natPick(t),s=natSpr(q[0],q[2]*Math.round(r)),fl=(t.x|0)%2===0;g.save();g.translate(t.x,t.y+r*q[3]);
-  if(q[4])g.transform(1,0,sw*.03,1,0,0);if(fl)g.scale(-1,1);g.drawImage(s.c,-s.w/2,-s.h,s.w,s.h);
-  if(q[0]==='glow_mush'){const p=.55+.25*Math.sin(performance.now()/700+t.x);g.globalCompositeOperation='lighter';const gr=g.createRadialGradient(0,-s.h*.55,1,0,-s.h*.55,s.w*.7);gr.addColorStop(0,'rgba(90,255,220,'+(.22*p)+')');gr.addColorStop(1,'rgba(90,255,220,0)');g.fillStyle=gr;g.beginPath();g.arc(0,-s.h*.55,s.w*.7,0,7);g.fill()}
+function natDraw(t,r,sw){const q=natPick(t),s=natSpr(q[0],q[2]*Math.round(r)),fl=(t.x|0)%2===0,bx=t.x,by=t.y+r*q[3],k=q[4]?sw*.03:0;
+  if(q[0]!=='glow_mush'){g.translate(bx,by);if(k)g.transform(1,0,k,1,0,0);if(fl)g.scale(-1,1);g.drawImage(s.c,-s.w/2,-s.h,s.w,s.h);if(fl)g.scale(-1,1);if(k)g.transform(1,0,-k,1,0,0);g.translate(-bx,-by);return true}
+  g.save();g.translate(bx,by);if(fl)g.scale(-1,1);g.drawImage(s.c,-s.w/2,-s.h,s.w,s.h);
+  {const p=.55+.25*Math.sin(performance.now()/700+t.x);g.globalCompositeOperation='lighter';const gr=g.createRadialGradient(0,-s.h*.55,1,0,-s.h*.55,s.w*.7);gr.addColorStop(0,'rgba(90,255,220,'+(.22*p)+')');gr.addColorStop(1,'rgba(90,255,220,0)');g.fillStyle=gr;g.beginPath();g.arc(0,-s.h*.55,s.w*.7,0,7);g.fill()}
   g.restore();return true}
 setTimeout(()=>{try{const _m=mxTree;window.mxTree=mxTree=function(t,r,sw,now,MP){if(!t.k&&!t.pp&&!t.inv&&natOn())return natDraw(t,r,sw);return _m.apply(this,arguments)}}catch(e){console.warn('nat',e)}},1600);
 /* ---------- v582 ซุ้มประตูค่ายใหม่ (เหนือ/ใต้) — ภาพหน้าตรงสมมาตรจาก ChatGPT · hd-gate.webp (640×408) ----------
@@ -34486,12 +34488,13 @@ function ambUnder(t,dt){const N=ambN(),dk=ambDark(),w=AMB.wind=ambWind(t),vx=cam
   g.globalAlpha=1;
   /* ใบไม้ปลิว */
   const want=Math.round(N.lv*(1-dk*.6));while(AMB.lv.length<want)AMB.lv.push(ambLeafNew(AMB.lv.length>0&&AMB.t0>0));if(AMB.lv.length>want)AMB.lv.length=want;
+  const B0=g.getTransform();g.globalAlpha=.95;
   for(let i=0;i<AMB.lv.length;i++){const L=AMB.lv[i];L.ph+=dt*2.2;L.x+=(w*L.k+Math.sin(L.ph)*L.sw)*dt;L.y+=(L.vy+Math.cos(L.ph*1.3)*6)*dt;L.r+=L.rs*dt*(1+w/40);
     if(L.x>vx+W+30||L.y>vy+H+30||L.x<vx-60||L.y<vy-60){AMB.lv[i]=ambLeafNew(true);continue}
-    const S=ambLeafSpr(L.c),fl=Math.cos(L.ph*1.6);g.save();g.translate(L.x,L.y);g.rotate(L.r);g.scale(L.s,L.s*Math.max(.25,Math.abs(fl)));g.globalAlpha=.95;g.drawImage(S,-9,-9,18,18);g.restore()}
+    const S=ambLeafSpr(L.c),fl=Math.max(.25,Math.abs(Math.cos(L.ph*1.6))),c=Math.cos(L.r),sn=Math.sin(L.r),sx=L.s,sy=L.s*fl;g.transform(c*sx,sn*sx,-sn*sy,c*sy,L.x,L.y);g.drawImage(S,-9,-9,18,18);g.setTransform(B0)}
   /* กลีบซากุระร่วงรอบต้น */
   const B=ambBlossom();if(B.length){const S=ambLeafSpr('p');for(const tr of B.slice(0,4))for(let i=0;i<(LOWQ?2:5);i++){const q=(t*.18+i/5+tr.x*.013)%1,x=tr.x+(i-2)*tr.r*.6+w*q*1.6+Math.sin(t*1.7+i)*5,y=tr.y-tr.r*2.6+q*tr.r*3.2;
-      g.save();g.globalAlpha=(1-q)*.95;g.translate(x,y);g.rotate(t*2+i);g.drawImage(S,-4,-4,8,8);g.restore()}}
+      const c=Math.cos(t*2+i),sn=Math.sin(t*2+i);g.globalAlpha=(1-q)*.95;g.transform(c,sn,-sn,c,x,y);g.drawImage(S,-4,-4,8,8);g.setTransform(B0)}}
   g.globalAlpha=1;AMB.t0=t}
 /* หิ่งห้อยในป่า (วาดหลังชั้นมืด · แสงบวก) */
 function ambFirefly(t,dt){const dk=ambDark();if(dk<=.05){AMB.ff.length=0;return}const N=ambN(),vx=cam.x,vy=cam.y;

@@ -15,8 +15,9 @@ function natPick(t){if(t._nv!==undefined)return NAT.v[t._nv];let h=Math.abs(((t.
 /* ภาพย่อตามขนาด (ความละเอียด 2 เท่า) */
 function natSpr(k,w){const key=k+':'+Math.round(w);let s=NAT.c[key];if(s)return s;const f=NAT.f[k],h=w*f[3]/f[2],S=2,c=document.createElement('canvas');
   c.width=Math.ceil(w*S);c.height=Math.ceil(h*S);const x=c.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(NAT.img,f[0],f[1],f[2],f[3],0,0,c.width,c.height);return NAT.c[key]={c,w,h}}
-function natDraw(t,r,sw){const q=natPick(t),s=natSpr(q[0],q[2]*Math.round(r)),fl=(t.x|0)%2===0;g.save();g.translate(t.x,t.y+r*q[3]);
-  if(q[4])g.transform(1,0,sw*.03,1,0,0);if(fl)g.scale(-1,1);g.drawImage(s.c,-s.w/2,-s.h,s.w,s.h);
-  if(q[0]==='glow_mush'){const p=.55+.25*Math.sin(performance.now()/700+t.x);g.globalCompositeOperation='lighter';const gr=g.createRadialGradient(0,-s.h*.55,1,0,-s.h*.55,s.w*.7);gr.addColorStop(0,'rgba(90,255,220,'+(.22*p)+')');gr.addColorStop(1,'rgba(90,255,220,0)');g.fillStyle=gr;g.beginPath();g.arc(0,-s.h*.55,s.w*.7,0,7);g.fill()}
+function natDraw(t,r,sw){const q=natPick(t),s=natSpr(q[0],q[2]*Math.round(r)),fl=(t.x|0)%2===0,bx=t.x,by=t.y+r*q[3],k=q[4]?sw*.03:0;
+  if(q[0]!=='glow_mush'){g.translate(bx,by);if(k)g.transform(1,0,k,1,0,0);if(fl)g.scale(-1,1);g.drawImage(s.c,-s.w/2,-s.h,s.w,s.h);if(fl)g.scale(-1,1);if(k)g.transform(1,0,-k,1,0,0);g.translate(-bx,-by);return true}
+  g.save();g.translate(bx,by);if(fl)g.scale(-1,1);g.drawImage(s.c,-s.w/2,-s.h,s.w,s.h);
+  {const p=.55+.25*Math.sin(performance.now()/700+t.x);g.globalCompositeOperation='lighter';const gr=g.createRadialGradient(0,-s.h*.55,1,0,-s.h*.55,s.w*.7);gr.addColorStop(0,'rgba(90,255,220,'+(.22*p)+')');gr.addColorStop(1,'rgba(90,255,220,0)');g.fillStyle=gr;g.beginPath();g.arc(0,-s.h*.55,s.w*.7,0,7);g.fill()}
   g.restore();return true}
 setTimeout(()=>{try{const _m=mxTree;window.mxTree=mxTree=function(t,r,sw,now,MP){if(!t.k&&!t.pp&&!t.inv&&natOn())return natDraw(t,r,sw);return _m.apply(this,arguments)}}catch(e){console.warn('nat',e)}},1600);

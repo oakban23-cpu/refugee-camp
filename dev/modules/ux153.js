@@ -20,7 +20,7 @@ function c2Gate(x1,y1,x2,y2,a){const D=Math.abs(x2-x1),w=D/.6,cx=(x1+x2)/2,by=Ma
 setTimeout(()=>{
   /* คอกม้า: โครงคอก → ภาพ + กองฟาง · คนดูแลคอก/ชื่อ/บทพูดคงเดิม */
   try{const _s=drawStable;window.drawStable=drawStable=function(){if(!c2On())return _s.apply(this,arguments);
-      const x=CX-261,y=CY+101.5,t=performance.now()/1000;gxShadow(x+6,y+22,54,10,.4);c2Spr('stable',x+4,y+26,116);c2Spr('hay_bales',x+76,y+28,42);
+      const x=CX-261,y=CY+101.5,t=performance.now()/1000;if(x+90<cam.x||x-90>cam.x+W||y+60<cam.y||y-140>cam.y+H)return;gxShadow(x+6,y+22,54,10,.4);c2Spr('stable',x+4,y+26,116);c2Spr('hay_bales',x+76,y+28,42);
       const N=MAPS[1].npc2;drawRancher2(N.x,N.y,me.x<N.x?-1:1,t);g.font='11px system-ui';g.textAlign='center';g.fillStyle='#ffe0a0';g.fillText(N.n,N.x,N.y-36);npcSay('ranch',N.x,N.y,NPCSAY.ranch,200,48)}}catch(e){console.warn('c2 stable',e)}
   try{const _d=drawScarecrow;window.drawScarecrow=drawScarecrow=function(x,y,m,t){if(!c2On())return _d.apply(this,arguments);return c2Scarecrow(x,y,m,t)}}catch(e){}
 },1600);

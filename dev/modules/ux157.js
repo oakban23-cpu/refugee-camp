@@ -27,12 +27,13 @@ function ambUnder(t,dt){const N=ambN(),dk=ambDark(),w=AMB.wind=ambWind(t),vx=cam
   g.globalAlpha=1;
   /* ใบไม้ปลิว */
   const want=Math.round(N.lv*(1-dk*.6));while(AMB.lv.length<want)AMB.lv.push(ambLeafNew(AMB.lv.length>0&&AMB.t0>0));if(AMB.lv.length>want)AMB.lv.length=want;
+  const B0=g.getTransform();g.globalAlpha=.95;
   for(let i=0;i<AMB.lv.length;i++){const L=AMB.lv[i];L.ph+=dt*2.2;L.x+=(w*L.k+Math.sin(L.ph)*L.sw)*dt;L.y+=(L.vy+Math.cos(L.ph*1.3)*6)*dt;L.r+=L.rs*dt*(1+w/40);
     if(L.x>vx+W+30||L.y>vy+H+30||L.x<vx-60||L.y<vy-60){AMB.lv[i]=ambLeafNew(true);continue}
-    const S=ambLeafSpr(L.c),fl=Math.cos(L.ph*1.6);g.save();g.translate(L.x,L.y);g.rotate(L.r);g.scale(L.s,L.s*Math.max(.25,Math.abs(fl)));g.globalAlpha=.95;g.drawImage(S,-9,-9,18,18);g.restore()}
+    const S=ambLeafSpr(L.c),fl=Math.max(.25,Math.abs(Math.cos(L.ph*1.6))),c=Math.cos(L.r),sn=Math.sin(L.r),sx=L.s,sy=L.s*fl;g.transform(c*sx,sn*sx,-sn*sy,c*sy,L.x,L.y);g.drawImage(S,-9,-9,18,18);g.setTransform(B0)}
   /* กลีบซากุระร่วงรอบต้น */
   const B=ambBlossom();if(B.length){const S=ambLeafSpr('p');for(const tr of B.slice(0,4))for(let i=0;i<(LOWQ?2:5);i++){const q=(t*.18+i/5+tr.x*.013)%1,x=tr.x+(i-2)*tr.r*.6+w*q*1.6+Math.sin(t*1.7+i)*5,y=tr.y-tr.r*2.6+q*tr.r*3.2;
-      g.save();g.globalAlpha=(1-q)*.95;g.translate(x,y);g.rotate(t*2+i);g.drawImage(S,-4,-4,8,8);g.restore()}}
+      const c=Math.cos(t*2+i),sn=Math.sin(t*2+i);g.globalAlpha=(1-q)*.95;g.transform(c,sn,-sn,c,x,y);g.drawImage(S,-4,-4,8,8);g.setTransform(B0)}}
   g.globalAlpha=1;AMB.t0=t}
 /* หิ่งห้อยในป่า (วาดหลังชั้นมืด · แสงบวก) */
 function ambFirefly(t,dt){const dk=ambDark();if(dk<=.05){AMB.ff.length=0;return}const N=ambN(),vx=cam.x,vy=cam.y;
