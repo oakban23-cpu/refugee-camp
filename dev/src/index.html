@@ -13599,8 +13599,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v588';
+const WNV='v589';
 const WNL=[
+  ['👥','เพื่อนเดินตรงขึ้น','เล่นออนไลน์: ตำแหน่งเพื่อนบนจอตามหลังของจริงน้อยลงมาก — ส่ง/ส่งต่อตำแหน่งถี่ขึ้น 2 เท่าตอนเดิน และเดาทางเดินล่วงหน้าสั้น ๆ ให้เพื่อนเดินลื่นไม่กระตุก'],
   ['⚡','ค่ายลื่นขึ้น','วัดความลื่นในค่ายแบบจำลองมือถือรุ่นกลางหลังเพิ่มภาพใหม่ — ลดงานวาดต่อเฟรมของต้นไม้ HD · ใบไม้ปลิว · กลีบซากุระ · คอกม้าไม่วาดตอนอยู่นอกจอ'],
   ['🛤️','พื้นค่ายมีมิติ','ลานดินใต้ร้านและอาคาร (ร้านรูน · คอกม้า · ช่างตีบวก · พ่อค้ายา · อนุสาวรีย์ · แท่นไซลัส · บ้านกิลด์ · ประตูวาร์ป) · ทางเดินดินแยกจากถนนหินเข้าหน้าร้านทุกร้าน · กรวด หญ้าแซม และดอกไม้ริมทาง'],
   ['📱','เล่นหลายเครื่องไม่เซฟทับกันแล้ว','กดเข้าตัวละครจะดึงเซฟล่าสุดจากเซิร์ฟเวอร์ก่อนทุกครั้ง · บัญชีเดียวเล่นได้ทีละเครื่อง — ถ้าเข้าเล่นจากเครื่องใหม่ เครื่องเก่าจะขึ้นแจ้งและหยุดบันทึกทันที เลเวล/ของจะไม่ถูกเซฟเก่าทับ · ตัวละครที่จุติแล้วนับว่าก้าวหน้ากว่าเสมอ'],
@@ -34566,6 +34567,19 @@ function campG2(){if(CG2.off){CG2.a=[];CG2.tr=[];return}const r=rng(hseed('campg
     ends.push([ex,ey]);if(best&&bd>16){const[sx,sy]=best,mx=(sx+ex)/2+(ey-sy)*.12,my=(sy+ey)/2-(ex-sx)*.12;CG2.tr.push([sx,sy,mx,my,ex,ey])}}
   for(const t of CG2.tr)cg2Trail(t,r);
   for(const a of CG2.a)if(a[2])cg2Blob(a[0],a[1],a[2],a[3],r)}
+/* ---------- v589 เพื่อนเดินตรงตำแหน่งจริงขึ้น (ลดความหน่วงที่เห็นบนจอ) ----------
+   เดิม: ส่งตำแหน่งทุก 0.2 วิ · เซิร์ฟเวอร์ส่งต่อทุก 0.2 วิ · จอเราไล่ตามแบบ 30%/เฟรม → เพื่อนบนจอตามหลังของจริง ~0.3 วิ (+ เน็ตจริง)
+   ใหม่: ส่งทุก 0.1 วิตอนเดิน (ยืนนิ่ง 0.3 วิ) · เซิร์ฟเวอร์ส่งต่อทุก 0.1 วิ · คำนวณความเร็วเพื่อนจากข้อมูลที่ได้แล้ว "เดาล่วงหน้า" สั้น ๆ
+   (ไม่เกิน 0.2 วิ · ระยะเดาไม่เกิน 60) · ไล่ตามแบบนุ่มตามเวลา (ไม่ขึ้นกับเฟรมเรต) · ห่างเกิน 250 = วาร์ป/เทเลพอร์ต → ย้ายทันที · ปิด: NETP.off=1 */
+const NETP={off:0,lead:.05,cap:.15,maxd:60,tau:.07};
+const PRS={k:0,x:0,y:0};
+function netVel(o,prev){const now=performance.now();for(const k in o){const n=o[k],p=prev[k];n._t=now;n.vx=0;n.vy=0;if(!p||p.tx===undefined||!p._t)continue;
+    const dt=(now-p._t)/1000,dx=n.tx-p.tx,dy=n.ty-p.ty;if(Math.hypot(dx,dy)>250){n.x=n.tx;n.y=n.ty;continue}
+    if(dt>.03&&dt<1){const vx=dx/dt,vy=dy/dt;n.vx=(p.vx||0)*.35+vx*.65;n.vy=(p.vy||0)*.35+vy*.65;if(!dx&&!dy){n.vx=0;n.vy=0}}
+    n.wk=p.wk;n.fx=p.fx;n.dt=p.dt}}
+function netMove(o,dt){if(NETP.off||o._t===undefined){const dx=(o.tx-o.x)*.3,dy=(o.ty-o.y)*.3;o.x+=dx;o.y+=dy;walkTick(o,dx,dy);return}
+  const age=Math.min(NETP.cap,(performance.now()-o._t)/1000)+NETP.lead;let px=o.vx*age,py=o.vy*age;const d=Math.hypot(px,py);if(d>NETP.maxd){px*=NETP.maxd/d;py*=NETP.maxd/d}
+  const tx=o.tx+px,ty=o.ty+py,k=1-Math.exp(-Math.max(0,dt)/NETP.tau),dx=(tx-o.x)*k,dy=(ty-o.y)*k;o.x+=dx;o.y+=dy;walkTick(o,dx,dy)}
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
@@ -39588,7 +39602,7 @@ setInterval(status,1500);
   room.onPeers(ch=>{const o={};ch.peers.forEach(p=>{const r=p.presence;if(!r||!r.uid||r.uid===uid||!r.cls||(r.mp||1)!==curMap)return;const old=others[r.uid];
     o[r.uid]={x:old?old.x:r.x,y:old?old.y:r.y,tx:r.x,ty:r.y,hp:r.hp,mh:r.mh,cls:r.cls,n:cleanName(r.n)||'ผู้เล่น',lv:r.lv||1,sl:r.sl||0,hd:r.hd|0,bt:r.bt|0,wp:r.wp|0,ar:r.ar|0,wu:Math.max(0,Math.min(30,r.wu|0)),tt:typeof r.tt==='string'&&ACHM[r.tt]?r.tt:'',c2:(r.c2|0)===2?2:r.c2?1:0,im:Math.max(0,Math.min(3,r.im|0)),sw:r.sw?1:0,rw:r.rw?1:0,sd:Math.max(0,Math.min(9,r.sd|0)),rb:Math.max(0,Math.min(2,r.rb|0)),as:Math.max(0,Math.min(AMAX,r.as|0)),mt:(r.mt|0)>=1&&(r.mt|0)<=MT_N?r.mt|0:0,pt:(r.pt|0)>=1&&(r.pt|0)<=PT_N?r.pt|0:0,_p:old?old._p:null,u:r.uid,at:r.at|0,zz:r.zz?1:0,fa:Math.max(0,Math.min(40,r.fa|0)),rp:typeof r.rp==='string'?r.rp.slice(0,24):'',sk:typeof r.sk==='string'?r.sk.replace(/[^a-z0-9]/gi,'').slice(0,32):'',dy:(r.dy|0)&65535,gt:typeof r.gt==='string'?r.gt.slice(0,40):'',atkT:old&&(old.at|0)!==(r.at|0)?performance.now():(old?old.atkT:0)}});
     Object.keys(o).forEach(k=>{if(!others[k]&&Date.now()>quietUntil)sysMsg(o[k].n+' เข้ามาในแมพนี้')});Object.keys(others).forEach(k=>{if(!o[k]){if(Date.now()>quietUntil)sysMsg(others[k].n+' ออกจากแมพนี้');delete says[k]}});
-    others=o;status();if(partyOpen)partyList()});
+    netVel(o,others);others=o;status();if(partyOpen)partyList()});
   room.on('chat',m=>{const d=m.data;if(m.sameTab||!d||typeof d.t!=='string')return;const t=d.t.replace(/[\u0000-\u001f\u007f]/g,'').slice(0,80);if(!t)return;
     const u=typeof d.u==='string'?d.u:'';const nm=cleanName(d.n)||(others[u]&&others[u].n)||'ผู้เล่น';addChat(nm,t,u)});
   room.on('nmr',m=>{const d=m.data&&m.data.d;if(!d||typeof d.t!=='string'||!nmCb[d.t])return;const f=nmCb[d.t];delete nmCb[d.t];try{f(d)}catch(e){}});
@@ -39610,7 +39624,7 @@ setInterval(status,1500);
   room.on('dgo',m=>{m=U(m);if(!m.sameTab&&isHost())dgStart()});
   room.on('dinv',m=>{m=U(m);if(m.sameTab||!m.data||isDg())return;const id=m.data.id|0,tr=Math.floor(id/10000);if(!DT[tr])return;dInv={id,tr,n:cleanName(m.data.n)||'ผู้เล่น',until:Date.now()+30000};sfx('quest')});
   room.on('xp',m=>{m=U(m);if(!m.sameTab&&Array.isArray(m.data))m.data.forEach(([x,y,v,gd,pz,gl,bs,tt,sh,el])=>{gainXP(x,y,v);qKill(x,y,tt|0,bs);if(bs)bossLoot(x,y,bs===2);else{dropLoot(x,y,gd||0,pz||0,gl||0);if(sh>0)shinyLoot(x,y,Math.min(99,sh|0));if(el>0&&el<1e4)ekLoot(x,y,Math.floor(el/10),el%10)}})});
-  setInterval(()=>{if(me.cls)room.presence(window.lastPres={uid,x:Math.round(me.x),y:Math.round(me.y),hp:Math.round(me.hp),mh:me.mh,cls:me.cls,n:myName,lv:me.lv,rb:me.rb?rbBr():0,sl:(me.stealth>0||me.rsp>0)?1:0,mp:curMap,hd:myLk('h'),bt:myLk('b'),wp:myLk('w'),pt:me.pet|0,im:summR()?IMPS.length:0,wu:(me.eq&&me.eq.w&&me.eq.w.u)|0,ar:myLk('a'),tt:me.title||'',c2:c2v(),at:me.atkN|0,mt:me.riding?me.mt|0:0,sw:setCount(5)>=5?1:0,rw:setCount(6)>=5?1:0,sd:(me.sty&&me.sty.p7sq)|0,as:me.lv>=LMAX&&me.ast?me.ast.n|0:0,aw:document.hidden?1:0,zz:tvZzz(),fa:wdrFa(),rp:rideRp(),sk:skP(),dy:wdrDy()})},200);
+  setInterval(()=>{if(!me.cls)return;PRS.k++;if(Math.abs(me.x-PRS.x)+Math.abs(me.y-PRS.y)<.5&&PRS.k%3)return;PRS.x=me.x;PRS.y=me.y;{room.presence(window.lastPres={uid,x:Math.round(me.x),y:Math.round(me.y),hp:Math.round(me.hp),mh:me.mh,cls:me.cls,n:myName,lv:me.lv,rb:me.rb?rbBr():0,sl:(me.stealth>0||me.rsp>0)?1:0,mp:curMap,hd:myLk('h'),bt:myLk('b'),wp:myLk('w'),pt:me.pet|0,im:summR()?IMPS.length:0,wu:(me.eq&&me.eq.w&&me.eq.w.u)|0,ar:myLk('a'),tt:me.title||'',c2:c2v(),at:me.atkN|0,mt:me.riding?me.mt|0:0,sw:setCount(5)>=5?1:0,rw:setCount(6)>=5?1:0,sd:(me.sty&&me.sty.p7sq)|0,as:me.lv>=LMAX&&me.ast?me.ast.n|0:0,aw:document.hidden?1:0,zz:tvZzz(),fa:wdrFa(),rp:rideRp(),sk:skP(),dy:wdrDy()})}},100);
   setInterval(()=>{
     if(hitBuf.length)emitM('hit',hitBuf.splice(0,60));
     if(isHost()&&run&&!document.hidden){
@@ -43889,7 +43903,7 @@ function step(dt){
     mons.forEach(m=>{if(m.tx!==undefined){const dx=m.tx-m.x;if(Math.abs(dx)>.5)m.fx=dx<0?-1:1;m.x+=dx*.3;m.y+=(m.ty-m.y)*.3}});
     guards.forEach(q=>{if(q.tx!==undefined){q.x+=(q.tx-q.x)*.3;q.y+=(q.ty-q.y)*.3}});
   }
-  Object.values(others).forEach(o=>{const dx=(o.tx-o.x)*.3,dy=(o.ty-o.y)*.3;o.x+=dx;o.y+=dy;walkTick(o,dx,dy)});
+  Object.values(others).forEach(o=>netMove(o,dt));
   fxs.forEach(f=>f.t-=dt);fxs=fxs.filter(f=>f.t>0);pickup(dt);
   tbStep(dt);try{qVisTick(dt)}catch(e){}teles.forEach(z=>z.t-=dt);teles=teles.filter(z=>z.t>0);if(banner)banner.t-=dt;try{fevClient(dt)}catch(e){}try{propsTick(dt)}catch(e){}try{fshTick(dt)}catch(e){}try{wpTick(dt)}catch(e){}try{rbTick(dt)}catch(e){}try{rbHud()}catch(e){}try{s6Tick(dt)}catch(e){}try{u3Tick(dt)}catch(e){}try{ivTick(dt)}catch(e){}try{tentTick(dt)}catch(e){}
   try{dnStack()}catch(e){}dn.forEach(d=>{d.t-=dt;if(d.vx!==undefined){d.x+=d.vx*dt;d.y+=d.vy*dt;d.vy=Math.min(d.vy+300*dt,60);d.vx*=1-dt*1.5}else d.y-=(d.s===2?20:28)*dt});dn=dn.filter(d=>d.t>0);if(ultSum.t>0){ultSum.t-=dt;ultSum.pk=Math.max(0,ultSum.pk-dt*5);ultSum.sv+=(ultSum.v-ultSum.sv)*Math.min(1,dt*14);if(ultSum.v-ultSum.sv<1)ultSum.sv=ultSum.v;if(ultSum.t<=0){ultSum.v=0;ultSum.sv=0;ultSum.n=0}}

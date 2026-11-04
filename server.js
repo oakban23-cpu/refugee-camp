@@ -2,7 +2,7 @@
 // รองรับผู้เล่นจำนวนมากด้วยการส่งเฉพาะข้อมูลที่อยู่ใกล้ผู้เล่นแต่ละคน ไม่ต้องติดตั้งไลบรารีเพิ่ม
 const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto'),zlib=require('zlib');
 const PORT=process.env.PORT||3000, MAX=Number(process.env.MAX_PLAYERS||120), MAXMSG=256*1024;
-const R_PEER=650, R_WORLD=480, R_XP=420, R_FX=520, MAXPEERS=40, BUFCAP=1<<20;
+const R_PEER=650, R_WORLD=480, R_XP=420, R_FX=520, MAXPEERS=40, BUFCAP=1<<17;
 const page=path.join(__dirname,'public','index.html');
 const server=http.createServer((req,res)=>{
   if(req.url==='/health'){res.writeHead(200);return res.end('ok')}
@@ -88,7 +88,7 @@ function tickPeers(){
     send(c,JSON.stringify(m),true);
   }
 }
-setInterval(tickPeers,200);
+setInterval(tickPeers,100);
 /* รายชื่อทุกคนในแมพเดียวกัน (ทุก 2 วิ · ใกล้สุด 80 คน) ให้แลกเปลี่ยน/เชิญปาร์ตี้ได้แม้อยู่ไกลกันในแมพใหญ่ */
 setInterval(()=>{const by={};for(const c of clients){if(!c.p||!c.uid)continue;(by[c.p.mp]=by[c.p.mp]||[]).push(c)}
   for(const mp in by){const L=by[mp];for(const c of L){let r=L.filter(o=>o!==c);if(!r.length&&!c.rosterN)continue;if(r.length>80){r.sort((a,b)=>d2(a.p.x,a.p.y,c.p.x,c.p.y)-d2(b.p.x,b.p.y,c.p.x,c.p.y));r=r.slice(0,80)}
