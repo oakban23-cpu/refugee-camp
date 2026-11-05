@@ -1,0 +1,3186 @@
+[
+ {
+  "sheet": "sheet_01",
+  "maps": [
+   "ยอดหอดูดาวโอเรียน"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "obpine",
+    "count_on_map": 48,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9030,
+    "code": "obpine(t,T){const x=t.x,y=t.y,s=t.sc||1,c=['#2a4a52','#22404c','#30525a'][t.v];PALSH(x+6,y+4,26*s,8*s,.4);g.fillStyle='#4a3424';g.fillRect(x-3*s,y-14*s,6*s,14*s);   for(let k=0;k<4;k++){const w=(30-k*6)*s,yb=y-12*s-k*20*s,h=30*s;g.fillStyle=c;g.beginPath();g.moveTo(x-w,yb);g.lineTo(x,yb-h);g.lineTo(x+w,yb);g.closePath();g.fill();g.fillStyle='rgba(10,24,40,.25)';g.beginPath();g.moveTo(x+w*.15,yb-h*.6);g.lineTo(x,yb-h)"
+   },
+   {
+    "cell": 2,
+    "key": "obrock",
+    "count_on_map": 34,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9033,
+    "code": "obrock(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x+3,y+4,26*s,7*s,.35);g.fillStyle=['#6a768a','#5e6a7e','#747f92'][t.v];g.beginPath();g.moveTo(x-24*s,y);g.lineTo(x-20*s,y-18*s);g.lineTo(x-4*s,y-28*s);g.lineTo(x+16*s,y-22*s);g.lineTo(x+24*s,y-4*s);g.lineTo(x+18*s,y+4*s);g.closePath();g.fill();   g.fillStyle='rgba(20,30,50,.25)';g.beginPath();g.moveTo(x+4*s,y-26*s);g.lineTo(x+16*s,y-22*s);g.lineTo(x+24*s,y-4*s);g.lineTo(x"
+   },
+   {
+    "cell": 3,
+    "key": "obbush",
+    "count_on_map": 26,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9890,
+    "code": "obbush(t,T){const x=t.x,y=t.y,sw=Math.sin(T*1.8+x)*1.5;g.fillStyle='rgba(90,110,150,.2)';g.beginPath();g.ellipse(x+2,y+1,14,4,0,0,7);g.fill();g.strokeStyle=t.v===1?'#6e5a44':'#5e6a80';g.lineWidth=1.6;g.lineCap='round';   for(let k=0;k<6;k++){const a=-1.57+(k-2.5)*.32,L=14+(k*7%5)*3;g.beginPath();g.moveTo(x,y);g.lineTo(x+Math.cos(a)*L+sw,y+Math.sin(a)*L);g.stroke();g.beginPath();g.moveTo(x+Math.cos(a)*L*.6+sw*.6,y+Mat"
+   },
+   {
+    "cell": 4,
+    "key": "obcry",
+    "count_on_map": 16,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9036,
+    "code": "obcry(t,T){const x=t.x,y=t.y,c=['#bfeaff','#d8e8ff','#aef2ee'][t.v];PALSH(x,y+2,12,3,.3);for(const[dx,h,w]of[[-6,18,4],[2,26,5],[9,14,3]]){g.fillStyle=c;g.beginPath();g.moveTo(x+dx-w,y);g.lineTo(x+dx,y-h);g.lineTo(x+dx+w,y);g.closePath();g.fill();g.fillStyle='rgba(255,255,255,.7)';g.beginPath();g.moveTo(x+dx,y-h);g.lineTo(x+dx+w*.4,y-2);g.lineTo(x+dx,y);g.closePath();g.fill()}   g.save();g.globalCompositeOperation='l"
+   },
+   {
+    "cell": 5,
+    "key": "obcairn",
+    "count_on_map": 9,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9880,
+    "code": "obcairn(t,T){const x=t.x,y=t.y;PALSH(x+2,y+4,26,7,.3);const S=[[0,0,22,9,'#6e7a90'],[2,-12,17,8,'#7c889c'],[-1,-22,13,7,'#6a768c'],[1,-31,9,6,'#8692a8']];if(t.v===2)S.push([0,-39,6,4,'#7c889c']);   for(const[dx,dy,rx,ry,c]of S){g.fillStyle=c;g.beginPath();g.ellipse(x+dx,y+dy,rx,ry,0,0,7);g.fill();g.fillStyle='rgba(244,248,252,.92)';g.beginPath();g.ellipse(x+dx-rx*.15,y+dy-ry*.45,rx*.75,ry*.4,0,0,7);g.fill()}   if(t.v"
+   },
+   {
+    "cell": 6,
+    "key": "oblamp",
+    "count_on_map": 6,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9038,
+    "code": "oblamp(t,T){const x=t.x,y=t.y;PALSH(x+2,y+2,7,2.4,.3);g.strokeStyle='#2a3040';g.lineWidth=3.4;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-80);g.stroke();g.fillStyle='#2a3040';g.fillRect(x-7,y-96,14,4);g.fillStyle='#ffe2a8';g.fillRect(x-5,y-92,10,12);g.strokeStyle='#2a3040';g.lineWidth=1.4;g.strokeRect(x-5,y-92,10,12);   g.fillStyle='#2a3040';g.beginPath();g.moveTo(x-8,y-96);g.lineTo(x,y-104);g.lineTo(x+8,y-96);g.closePa"
+   },
+   {
+    "cell": 7,
+    "key": "obinst",
+    "count_on_map": 6,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9884,
+    "code": "obinst(t,T){const x=t.x,y=t.y;PALSH(x,y+4,30,8,.3);g.strokeStyle='#5a4428';g.lineWidth=3;g.lineCap='round';g.beginPath();g.moveTo(x,y-46);g.lineTo(x-20,y);g.moveTo(x,y-46);g.lineTo(x+20,y);g.moveTo(x,y-46);g.lineTo(x+4,y+4);g.stroke();   if(t.v===0){/* กล้องดูดาวเก่า */g.save();g.translate(x,y-50);g.rotate(-.55);const gr=g.createLinearGradient(0,-7,0,7);gr.addColorStop(0,'#f0c868');gr.addColorStop(.5,'#c8963a');gr.ad"
+   },
+   {
+    "cell": 8,
+    "key": "obbox",
+    "count_on_map": 6,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9887,
+    "code": "obbox(t,T){const x=t.x,y=t.y;PALSH(x+2,y+4,34,8,.3);const crate=(cx,cy,s)=>{g.fillStyle='#7a5a3c';g.fillRect(cx-14*s,cy-24*s,28*s,24*s);g.strokeStyle='#4a3420';g.lineWidth=2*s;g.strokeRect(cx-14*s,cy-24*s,28*s,24*s);g.beginPath();g.moveTo(cx-12*s,cy-22*s);g.lineTo(cx+12*s,cy-2*s);g.stroke();g.fillStyle='#f4f8fc';g.beginPath();g.ellipse(cx,cy-24*s,16*s,4.5*s,0,0,7);g.fill()};   crate(x-12,y,1);crate(x+14,y+2,.85);if(t"
+   },
+   {
+    "cell": 9,
+    "key": "obmir",
+    "count_on_map": 5,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9015,
+    "code": "obmir(t,T){const x=t.x,y=t.y,i=t.v,C=obC(),lit=C.lit.includes(i),d=C.R[i],a=d*Math.PI/4,dx=Math.cos(a),dy=Math.sin(a),done=C.links>i;PALSH(x+3,y+5,26,8,.4);   g.fillStyle='#6e7a8e';g.beginPath();g.moveTo(x-16,y-26);g.lineTo(x-16,y);g.ellipse(x,y,16,6,0,Math.PI,0,true);g.lineTo(x+16,y-26);g.closePath();g.fill();g.fillStyle='#a4b0c2';g.beginPath();g.ellipse(x,y-26,16,6,0,0,7);g.fill();g.fillStyle='#f4f8fc';g.beginPath("
+   },
+   {
+    "cell": 10,
+    "key": "obdome",
+    "count_on_map": 1,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 8990,
+    "code": "obdome(t,T){const x=t.x,y=t.y;PALSH(x+12,y+14,240,62,.45);   const dg=g.createLinearGradient(x-190,0,x+190,0);dg.addColorStop(0,'#646e84');dg.addColorStop(.42,'#b2bac9');dg.addColorStop(1,'#56607a');g.fillStyle=dg;g.beginPath();g.moveTo(x-185,y-180);g.lineTo(x-185,y);g.ellipse(x,y,185,52,0,Math.PI,0,true);g.lineTo(x+185,y-180);g.closePath();g.fill();   g.strokeStyle='rgba(40,48,66,.35)';g.lineWidth=1.2;for(let k=1;k<"
+   },
+   {
+    "cell": 11,
+    "key": "obprism",
+    "count_on_map": 1,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9006,
+    "code": "obprism(t,T){const x=t.x,y=t.y;PALSH(x+3,y+4,22,7,.4);g.fillStyle='#7a8698';g.fillRect(x-12,y-44,24,44);g.fillStyle='#a4b0c2';g.beginPath();g.ellipse(x,y-44,14,5,0,0,7);g.fill();g.fillStyle='#f2f6fb';g.beginPath();g.ellipse(x,y-46,12,3.4,0,0,7);g.fill();   g.fillStyle='#d8f2ff';g.beginPath();g.moveTo(x,y-80);g.lineTo(x+11,y-56);g.lineTo(x,y-46);g.lineTo(x-11,y-56);g.closePath();g.fill();g.fillStyle='rgba(255,255,255,"
+   },
+   {
+    "cell": 12,
+    "key": "obloom",
+    "count_on_map": 1,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9008,
+    "code": "obloom(t,T){const x=t.x,y=t.y,C=obC(),sol=C.links>=5,sp=sol?1.3:.12;PALSH(x+4,y+6,64,16,.45);   g.fillStyle='#6a768e';g.beginPath();g.ellipse(x,y,62,22,0,0,7);g.fill();g.fillStyle='#8a96ac';g.beginPath();g.ellipse(x,y-8,54,18,0,0,7);g.fill();g.strokeStyle='#c8a050';g.lineWidth=2;g.beginPath();g.ellipse(x,y-8,46,15,0,0,7);g.stroke();   g.strokeStyle='#8a6024';g.lineWidth=5;g.beginPath();g.moveTo(x,y-10);g.lineTo(x,y-5"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_02",
+  "maps": [
+   "พระราชวังอัสตรา"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "pot",
+    "count_on_map": 4,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5609,
+    "code": "pot(t,T){const x=t.x,y=t.y,sw=Math.sin(T*1.1+x)*1.6;PALSH(x,y+2,22,6);g.fillStyle='#8a8e84';g.beginPath();g.moveTo(x-16,y);g.lineTo(x-20,y-22);g.lineTo(x+20,y-22);g.lineTo(x+16,y);g.closePath();g.fill();g.fillStyle='#a8ac9e';g.fillRect(x-22,y-26,44,6);g.fillStyle='rgba(0,0,0,.2)';g.fillRect(x+6,y-20,10,20);   for(let i=0;i<7;i++){const a=i*.9,bx=x+Math.cos(a)*14+sw*(i%2),by=y-38+Math.sin(a)*8-(i%3)*6;g.fillStyle=i%2?"
+   },
+   {
+    "cell": 2,
+    "key": "mirf",
+    "count_on_map": 4,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5636,
+    "code": "mirf(t,T){const x=t.x,y=t.y,cy=y-52;PALSH(x,y+2,22,6);g.strokeStyle='#8a6a2a';g.lineWidth=3;g.beginPath();g.moveTo(x-16,y);g.lineTo(x-12,cy+20);g.moveTo(x+16,y);g.lineTo(x+12,cy+20);g.stroke();   g.fillStyle='#c8a040';g.beginPath();g.ellipse(x,cy,21,34,0,0,7);g.fill();const lg=g.createLinearGradient(x-18,cy-30,x+18,cy+30);lg.addColorStop(0,'#dce6f6');lg.addColorStop(.5,'#7a8aac');lg.addColorStop(1,'#b8c4dc');g.fillSt"
+   },
+   {
+    "cell": 3,
+    "key": "cand",
+    "count_on_map": 4,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5616,
+    "code": "cand(t,T){const x=t.x,y=t.y;PALSH(x,y+2,14,4);g.fillStyle='#a07a20';g.beginPath();g.ellipse(x,y,10,3.5,0,0,7);g.fill();g.fillStyle='#c8a040';g.fillRect(x-1.6,y-54,3.2,54);g.strokeStyle='#c8a040';g.lineWidth=2.2;g.beginPath();g.moveTo(x-20,y-48);g.quadraticCurveTo(x,y-34,x+20,y-48);g.stroke();   const P=[[-20,-50],[-10,-46],[0,-58],[10,-46],[20,-50]];g.save();g.globalCompositeOperation='lighter';glowAt(x,y-60,46,'255,"
+   },
+   {
+    "cell": 4,
+    "key": "tban",
+    "count_on_map": 3,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5628,
+    "code": "tban(t,T){const x=t.x,y=t.y,sw=Math.sin(T*1.2+x)*3;PALSH(x,y+2,14,4);g.save();g.translate(x,y);g.rotate(-.08);g.fillStyle='#4a3828';g.fillRect(-2,-110,4,110);g.fillRect(-20,-104,40,4);g.fillStyle='#2a2018';g.beginPath();g.moveTo(-2,-110);g.lineTo(3,-118);g.lineTo(2,-110);g.fill();   g.fillStyle='#c8642a';g.beginPath();g.moveTo(-18,-100);g.lineTo(18,-100);g.lineTo(18+sw,-46);g.lineTo(10+sw,-54);g.lineTo(4+sw,-38);g.li"
+   },
+   {
+    "cell": 5,
+    "key": "braz",
+    "count_on_map": 2,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5618,
+    "code": "braz(t,T){const x=t.x,y=t.y;PALSH(x,y+2,20,6);g.strokeStyle='#8a6a2a';g.lineWidth=2.6;for(const s of[-1,0,1]){g.beginPath();g.moveTo(x+s*12,y);g.lineTo(x+s*5,y-26);g.stroke()}g.fillStyle='#a07a20';g.beginPath();g.moveTo(x-18,y-30);g.quadraticCurveTo(x,y-14,x+18,y-30);g.closePath();g.fill();g.fillStyle='#e0b850';g.beginPath();g.ellipse(x,y-30,18,5,0,0,7);g.fill();   g.save();g.globalCompositeOperation='lighter';glowAt"
+   },
+   {
+    "cell": 6,
+    "key": "tel",
+    "count_on_map": 2,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5606,
+    "code": "tel(t,T){const x=t.x,y=t.y,s=t.fl?-1:1;PALSH(x,y+2,20,6);g.strokeStyle='#5a3a1a';g.lineWidth=2.4;for(const a of[-.5,0,.5]){g.beginPath();g.moveTo(x,y-30);g.lineTo(x+Math.sin(a)*18,y);g.stroke()}   g.save();g.translate(x,y-34);g.rotate(s*-.75);const tg=g.createLinearGradient(0,-6,0,6);tg.addColorStop(0,'#f0d080');tg.addColorStop(.5,'#a07a30');tg.addColorStop(1,'#6a4a1a');g.fillStyle=tg;g.fillRect(-16,-5,52,10);g.fillR"
+   },
+   {
+    "cell": 7,
+    "key": "stump",
+    "count_on_map": 2,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5631,
+    "code": "stump(t,T){const x=t.x,y=t.y;PALSH(x,y+3,24,7,.4);const gr=g.createLinearGradient(x-14,0,x+14,0);gr.addColorStop(0,'#9a9486');gr.addColorStop(.4,'#e8e2d4');gr.addColorStop(1,'#7a7468');g.fillStyle='#b8b0a0';g.fillRect(x-20,y-10,40,12);g.fillStyle=gr;   g.beginPath();g.moveTo(x-14,y-10);g.lineTo(x-14,y-46);g.lineTo(x-6,y-54);g.lineTo(x,y-44);g.lineTo(x+6,y-58);g.lineTo(x+14,y-40);g.lineTo(x+14,y-10);g.closePath();g.fi"
+   },
+   {
+    "cell": 8,
+    "key": "rack",
+    "count_on_map": 2,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5634,
+    "code": "rack(t,T){const x=t.x,y=t.y;PALSH(x,y+2,30,6);g.strokeStyle='#6a4a2a';g.lineWidth=3;for(const s of[-1,1]){g.beginPath();g.moveTo(x+s*30,y);g.lineTo(x+s*24,y-56);g.stroke()}g.beginPath();g.moveTo(x-26,y-54);g.lineTo(x+26,y-54);g.stroke();   const C=['#f0ece0','#c8b8e8','#e8dcc0'];for(let i=0;i<3;i++){const cx=x-16+i*16,sw=Math.sin(T*1.5+i*1.7+x)*2.4;g.fillStyle=C[i];g.beginPath();g.moveTo(cx-7,y-54);g.lineTo(cx+7,y-54"
+   },
+   {
+    "cell": 9,
+    "key": "orr",
+    "count_on_map": 1,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5600,
+    "code": "orr(t,T){const x=t.x,y=t.y;PALSH(x,y+4,46,12,.4);g.fillStyle='#6a4a20';g.beginPath();g.ellipse(x,y,36,11,0,0,7);g.fill();g.fillStyle='#a07a30';g.beginPath();g.ellipse(x,y-4,30,9,0,0,7);g.fill();const cg=g.createLinearGradient(x-7,0,x+7,0);cg.addColorStop(0,'#8a6a2a');cg.addColorStop(.5,'#f0d080');cg.addColorStop(1,'#6a4a1a');g.fillStyle=cg;g.fillRect(x-6,y-80,12,76);   const cy=y-108,R=[[74,.38,.35,.25,'#8ab8ff',5],["
+   },
+   {
+    "cell": 10,
+    "key": "mirb",
+    "count_on_map": 1,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5640,
+    "code": "mirb(t,T){const x=t.x,y=t.y,h=88,w=24;PALSH(x,y+3,28,7,.4);g.fillStyle='#8a6a20';g.beginPath();g.moveTo(x-w-4,y);g.lineTo(x-w-4,y-h+w);g.arc(x,y-h+w,w+4,Math.PI,0);g.lineTo(x+w+4,y);g.closePath();g.fill();g.fillStyle='#120a1c';g.beginPath();g.moveTo(x-w,y-3);g.lineTo(x-w,y-h+w);g.arc(x,y-h+w,w,Math.PI,0);g.lineTo(x+w,y-3);g.closePath();g.fill();   const lg=g.createLinearGradient(x-w,y-h,x+w,y);lg.addColorStop(0,'#c8d"
+   },
+   {
+    "cell": 11,
+    "key": "globe",
+    "count_on_map": 1,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5612,
+    "code": "globe(t,T){const x=t.x,y=t.y;PALSH(x,y+2,20,6);g.strokeStyle='#5a3a1a';g.lineWidth=3;g.beginPath();g.moveTo(x-14,y);g.lineTo(x,y-18);g.lineTo(x+14,y);g.moveTo(x,y-18);g.lineTo(x,y-24);g.stroke();const cy=y-44;   const gg=g.createRadialGradient(x-6,cy-6,2,x,cy,20);gg.addColorStop(0,'#5a8ad8');gg.addColorStop(1,'#1a2a5a');g.fillStyle=gg;g.beginPath();g.arc(x,cy,19,0,7);g.fill();g.save();g.beginPath();g.arc(x,cy,19,0,7)"
+   },
+   {
+    "cell": 12,
+    "key": "dawn",
+    "count_on_map": 1,
+    "map": 27,
+    "map_name": "พระราชวังอัสตรา",
+    "code_line": 5621,
+    "code": "dawn(t,T){const x=t.x,y=t.y,pu=.5+.5*Math.sin(T*1.2);PALSH(x,y+4,44,10,.4);g.fillStyle='#6a625a';g.fillRect(x-34,y-26,68,28);g.fillStyle='#8a8278';g.fillRect(x-38,y-30,76,7);g.fillStyle='#4a443e';g.fillRect(x-34,y-4,68,6);   g.save();g.globalCompositeOperation='lighter';glowAt(x,y-14,26,'255,180,80',.25+.25*pu);g.restore();g.fillStyle='rgba(240,170,60,.9)';PST(g,x,y-14,10,5,8,T*.1);g.fill();   const C='#a8a296',D='#7"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_03",
+  "maps": [
+   "ยอดหอดูดาวโอเรียน",
+   "สะพานรุ่งอรุณ"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "obstat",
+    "count_on_map": 1,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9025,
+    "code": "obstat(t,T){const x=t.x,y=t.y;PALSH(x+5,y+6,36,11,.4);g.fillStyle='#6e7a8e';g.fillRect(x-26,y-30,52,30);g.fillStyle='#8e9ab0';g.fillRect(x-30,y-36,60,8);g.fillStyle='#f4f8fc';g.fillRect(x-30,y-38,60,4);   g.fillStyle='#a8b2c2';g.beginPath();g.moveTo(x-16,y-36);g.lineTo(x-12,y-96);g.lineTo(x+4,y-104);g.lineTo(x+10,y-92);g.lineTo(x+16,y-36);g.closePath();g.fill();g.strokeStyle='rgba(60,70,92,.45)';g.lineWidth=1.2;g.beg"
+   },
+   {
+    "cell": 2,
+    "key": "obskiff",
+    "count_on_map": 1,
+    "map": 36,
+    "map_name": "ยอดหอดูดาวโอเรียน",
+    "code_line": 9040,
+    "code": "obskiff(t,T){const x=t.x,y=t.y,b=Math.sin(T*1.3)*3;g.save();g.translate(0,b);PALSH(x,y+18-b,46,9,.3);   g.strokeStyle='rgba(90,70,50,.8)';g.lineWidth=1.2;for(const[a,c]of[[-34,-26],[34,26],[-12,-10],[12,10]]){g.beginPath();g.moveTo(x+a,y-12);g.lineTo(x+c,y-104);g.stroke()}   const bg=g.createLinearGradient(x-60,0,x+60,0);bg.addColorStop(0,'#2a4a8a');bg.addColorStop(.5,'#5a82c8');bg.addColorStop(1,'#243e78');g.fillSty"
+   },
+   {
+    "cell": 3,
+    "key": "blamp",
+    "count_on_map": 18,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6477,
+    "code": "blamp(t,T){const x=t.x,y=t.y,pu=.7+.3*Math.sin(T*2+x*.013+y*.007);PALSH(x,y+2,9,3);g.fillStyle='#c89a48';g.fillRect(x-6,y-5,12,7);g.fillStyle='#f6ead0';g.fillRect(x-2.5,y-60,5,56);g.fillStyle='#d8a848';g.fillRect(x-4.5,y-62,9,4);g.fillRect(x-4,y-30,8,3);   g.fillStyle='#fffaec';g.beginPath();g.moveTo(x,y-84);g.lineTo(x+7,y-71);g.lineTo(x,y-60);g.lineTo(x-7,y-71);g.closePath();g.fill();g.strokeStyle='#d8a848';g.lineWi"
+   },
+   {
+    "cell": 4,
+    "key": "bpyl",
+    "count_on_map": 8,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6483,
+    "code": "bpyl(t,T){const x=t.x,y=t.y,a=T*.8+x;PALSH(x,y+3,20,6);g.fillStyle='#c8a050';g.beginPath();g.moveTo(x-18,y+2);g.lineTo(x-12,y-10);g.lineTo(x+12,y-10);g.lineTo(x+18,y+2);g.closePath();g.fill();   const lg=g.createLinearGradient(x-12,0,x+12,0);lg.addColorStop(0,'#f0e0b8');lg.addColorStop(.5,'#fffaf0');lg.addColorStop(1,'#d8bc84');g.fillStyle=lg;g.beginPath();g.moveTo(x-11,y-10);g.lineTo(x-7,y-118);g.lineTo(x,y-140);g.l"
+   },
+   {
+    "cell": 5,
+    "key": "bban",
+    "count_on_map": 6,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6480,
+    "code": "bban(t,T){const x=t.x,y=t.y,sw=Math.sin(T*1.7+x)*3;PALSH(x,y+2,8,3);g.fillStyle='#8a6a3a';g.fillRect(x-2,y-92,4,92);g.fillStyle='#e0b050';g.beginPath();g.arc(x,y-95,4,0,7);g.fill();g.fillRect(x-16,y-88,32,3);   g.fillStyle='#2a4a9a';g.beginPath();g.moveTo(x-14,y-85);g.lineTo(x+14,y-85);g.lineTo(x+14+sw*.4,y-40);g.lineTo(x+sw*.6,y-48);g.lineTo(x-14+sw*.4,y-40);g.closePath();g.fill();g.strokeStyle='#e0b050';g.lineWidth"
+   },
+   {
+    "cell": 6,
+    "key": "bshd",
+    "count_on_map": 6,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6509,
+    "code": "bshd(t,T){const x=t.x,y=t.y,ok=BRGS.sh[t.si];if(ok){const k=Math.min(1,(performance.now()-ok)/1500);if(k<1){g.save();g.globalCompositeOperation='lighter';glowAt(x,y-20-k*60,14,'255,230,170',1-k);g.restore()}return}   const pu=Math.sin(T*2+t.si);g.fillStyle='rgba(16,6,24,.85)';g.beginPath();g.moveTo(x-20,y+4);g.quadraticCurveTo(x-26,y-30+pu*3,x-6,y-44);g.quadraticCurveTo(x+4,y-52,x+12,y-40);g.quadraticCurveTo(x+28,y-2"
+   },
+   {
+    "cell": 7,
+    "key": "barch",
+    "count_on_map": 2,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6502,
+    "code": "barch(t,T){const x=t.x,y=t.y,w=t.lo?150:200,h=t.lo?190:260,top=y-h;PALSH(x,y+6,w*.7,14,.4);   g.save();g.beginPath();g.moveTo(x-w/2+22,y);g.lineTo(x-w/2+22,top+w/2-10);g.arc(x,top+w/2-10,w/2-22,Math.PI,0);g.lineTo(x+w/2-22,y);g.closePath();g.clip();const sk=g.createLinearGradient(0,top,0,y);sk.addColorStop(0,t.lo?'#ffe8c0':'#fff8e8');sk.addColorStop(1,t.lo?'#f0b070':'#ffe0a0');g.fillStyle=sk;g.fillRect(x-w/2,top,w,h)"
+   },
+   {
+    "cell": 8,
+    "key": "btent",
+    "count_on_map": 2,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6487,
+    "code": "btent(t,T){const x=t.x,y=t.y,C=t.v?['#8a6a4a','#b08a5a','#5a7a9a']:['#7a5a6a','#a07a8a','#9a7a3a'];PALSH(x,y+3,36,8);g.fillStyle=C[0];g.beginPath();g.moveTo(x-38,y);g.lineTo(x,y-58);g.lineTo(x+38,y);g.closePath();g.fill();g.fillStyle=C[1];g.beginPath();g.moveTo(x,y-58);g.lineTo(x+38,y);g.lineTo(x+8,y);g.closePath();g.fill();   g.fillStyle='#2a1a14';g.beginPath();g.moveTo(x-10,y);g.lineTo(x,y-30);g.lineTo(x+8,y);g.clo"
+   },
+   {
+    "cell": 9,
+    "key": "bfire",
+    "count_on_map": 1,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6489,
+    "code": "bfire(t,T){const x=t.x,y=t.y;for(let i=0;i<9;i++){const a=i/9*6.283;g.fillStyle=i%2?'#8a8070':'#a89c88';g.beginPath();g.ellipse(x+Math.cos(a)*16,y+Math.sin(a)*7,5,3.5,0,0,7);g.fill()}g.fillStyle='#4a2a14';g.fillRect(x-10,y-3,20,4);   try{palFlame(x,y-2,1.4,T)}catch(e){}g.save();g.globalCompositeOperation='lighter';glowAt(x,y-10,60,'255,170,80',.3+.08*Math.sin(T*9));g.restore();   for(const[dx,dy,c,f]of[[-34,6,'#7a4a3"
+   },
+   {
+    "cell": 10,
+    "key": "bcart",
+    "count_on_map": 1,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6492,
+    "code": "bcart(t,T){const x=t.x,y=t.y;PALSH(x,y+4,30,7);g.fillStyle='#6a4a2a';g.fillRect(x-26,y-24,52,20);g.strokeStyle='#3a2414';g.lineWidth=1.4;g.strokeRect(x-26,y-24,52,20);for(let i=1;i<4;i++){g.beginPath();g.moveTo(x-26+i*13,y-24);g.lineTo(x-26+i*13,y-4);g.stroke()}   for(const s of[-1,1]){g.fillStyle='#4a3020';g.beginPath();g.arc(x+s*18,y,8,0,7);g.fill();g.strokeStyle='#8a6a3a';g.lineWidth=1.2;g.beginPath();g.arc(x+s*18"
+   },
+   {
+    "cell": 11,
+    "key": "bscope",
+    "count_on_map": 1,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6497,
+    "code": "bscope(t,T){const x=t.x,y=t.y;PALSH(x,y+2,14,4);g.strokeStyle='#6a4a24';g.lineWidth=2.4;for(const s of[-1,0,1]){g.beginPath();g.moveTo(x,y-34);g.lineTo(x+s*12,y);g.stroke()}g.save();g.translate(x,y-38);g.rotate(.5);g.fillStyle='#c8963c';g.fillRect(-22,-5,40,10);g.fillStyle='#e8c070';g.fillRect(-26,-6,6,12);g.fillStyle='#8a6a2a';g.fillRect(14,-4,8,8);g.restore()},  bbell(t,T){const x=t.x,y=t.y,sw=Math.sin(T*.9)*.05;PA"
+   },
+   {
+    "cell": 12,
+    "key": "bbell",
+    "count_on_map": 1,
+    "map": 30,
+    "map_name": "สะพานรุ่งอรุณ",
+    "code_line": 6498,
+    "code": "bbell(t,T){const x=t.x,y=t.y,sw=Math.sin(T*.9)*.05;PALSH(x,y+3,46,9);g.fillStyle='#5a3a20';g.fillRect(x-44,y-120,8,122);g.fillRect(x+36,y-120,8,122);g.fillRect(x-50,y-128,100,10);g.fillStyle='#3a2414';g.fillRect(x-50,y-120,100,2);   g.save();g.translate(x,y-116);g.rotate(sw);const bg=g.createLinearGradient(-32,0,32,0);bg.addColorStop(0,'#6a4020');bg.addColorStop(.45,'#d09048');bg.addColorStop(1,'#5a3418');g.fillStyle"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_04",
+  "maps": [
+   "ซากอารัณยา"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "alamp",
+    "count_on_map": 23,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7184,
+    "code": "alamp(t,T){const x=t.x,y=t.y,lit=t.v===9||p6Past('p6c3')||(t.v%2===0);PALSH(x,y+2,8,3);g.strokeStyle='#3a2a1a';g.lineWidth=3;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-80);g.quadraticCurveTo(x,y-92,x+14,y-90);g.stroke();   const lx=x+16,ly=y-80+Math.sin(T*1.4+x)*1.5;g.fillStyle='#8a5a28';g.fillRect(lx-6,ly-8,12,14);g.fillStyle=lit?'#ffd890':'#4a3a4a';g.fillRect(lx-4,ly-6,8,10);if(lit){g.save();g.globalCompositeOperatio"
+   },
+   {
+    "cell": 2,
+    "key": "ashr",
+    "count_on_map": 5,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7174,
+    "code": "ashr(t,T){const x=t.x,y=t.y,lit=me.sty&&(me.sty.p6s|0)>>t.si&1;PALSH(x,y+2,22,6);g.fillStyle='#5a4a3a';g.fillRect(x-16,y-14,32,14);g.fillStyle='#7a6448';g.fillRect(x-12,y-44,24,30);g.fillStyle='#b07a3a';g.fillRect(x-18,y-48,36,6);   g.strokeStyle=lit?'#ffd090':'#6a5030';g.lineWidth=1.8;g.beginPath();g.arc(x,y-30,8,0,7);g.stroke();for(let i=0;i<8;i++){const a=i*.785+(lit?T*.4:0);g.beginPath();g.moveTo(x+Math.cos(a)*8,"
+   },
+   {
+    "cell": 3,
+    "key": "ahouse",
+    "count_on_map": 4,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7155,
+    "code": "ahouse(t,T){const x=t.x,y=t.y,v=t.v|0,w=[110,96,124,104][v],h=[70,62,80,66][v];PALSH(x,y+4,w*.5,10,.4);   g.fillStyle='#3a3a5a';g.beginPath();g.moveTo(x-w/2-8,y-36);g.lineTo(x,y);g.lineTo(x+w/2+8,y-36);g.closePath();g.fill();g.strokeStyle='rgba(20,20,30,.5)';for(let k=1;k<4;k++){g.beginPath();g.moveTo(x-w/2-8+k*w/8,y-36+k*9);g.lineTo(x+w/2+8-k*w/8,y-36+k*9);g.stroke()}   const wg=g.createLinearGradient(x-w/2,0,x+w/2,"
+   },
+   {
+    "cell": 4,
+    "key": "abook",
+    "count_on_map": 4,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7161,
+    "code": "abook(t,T){const x=t.x,y=t.y,v=t.v|0;PALSH(x,y+3,30,8);g.fillStyle='#4a3020';g.fillRect(x-28,y-70,56,70);g.strokeStyle='#2a1a10';g.lineWidth=1.4;g.strokeRect(x-28,y-70,56,70);for(let r=0;r<3;r++)for(let i=0;i<6;i++){g.fillStyle=['#8a3a3a','#3a5a8a','#6a5a2a','#3a6a4a'][(i+r+v)%4];g.fillRect(x-25+i*8.5,y-66+r*22,7,18-(i%3)*2)}   for(let i=0;i<4;i++){const a=T*.5+i*1.57+v,bx=x+Math.cos(a)*40,by=y-90+Math.sin(a*1.3)*16;"
+   },
+   {
+    "cell": 5,
+    "key": "aroot",
+    "count_on_map": 4,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7163,
+    "code": "aroot(t,T){const x=t.x,y=t.y,v=t.v|0;PALSH(x,y+3,30,8);g.strokeStyle='#4a3020';g.lineCap='round';for(let i=0;i<5;i++){const a=-Math.PI/2+(i-2)*.5,L=50+((i*17+v*7)%30);g.lineWidth=7-i%3;g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+Math.cos(a+.6)*L*.6,y+Math.sin(a+.6)*L*.4,x+Math.cos(a)*L,y+Math.sin(a)*L);g.stroke()}   g.strokeStyle='#b07a3a';g.lineWidth=5;g.beginPath();g.moveTo(x-30,y-6);g.quadraticCurveTo(x,y-60,"
+   },
+   {
+    "cell": 6,
+    "key": "abell",
+    "count_on_map": 3,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7178,
+    "code": "abell(t,T){const x=t.x,y=t.y,rung=me.sty&&(me.sty.p6b|0)>>t.bi&1,bt=ARS.bt&&ARS.bt[t.bi],sw=bt?Math.sin((performance.now()-bt)/120)*Math.max(0,1-(performance.now()-bt)/3000)*.5:Math.sin(T*.7+t.bi)*.04;PALSH(x,y+3,40,9);   g.fillStyle='#4a3020';g.fillRect(x-40,y-112,7,112);g.fillRect(x+33,y-112,7,112);g.fillRect(x-46,y-120,92,9);   g.save();g.translate(x,y-112);g.rotate(sw);const bg=g.createLinearGradient(-26,0,26,0);"
+   },
+   {
+    "cell": 7,
+    "key": "agbell",
+    "count_on_map": 1,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7149,
+    "code": "agbell(t,T){const x=t.x,y=t.y,done=p6Past('p6c3');PALSH(x,y+20,130,30,.45);g.fillStyle='#2a1a10';g.beginPath();g.ellipse(x,y+10,124,40,0,0,7);g.fill();   const bg=g.createLinearGradient(x-120,0,x+120,0);bg.addColorStop(0,'#4a2c14');bg.addColorStop(.4,'#b07a3a');bg.addColorStop(.6,'#c88e48');bg.addColorStop(1,'#3a2210');g.fillStyle=bg;g.beginPath();g.moveTo(x-120,y-20);g.quadraticCurveTo(x-110,y+30,x-60,y+44);g.lineTo"
+   },
+   {
+    "cell": 8,
+    "key": "aclock",
+    "count_on_map": 1,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7166,
+    "code": "aclock(t,T){const x=t.x,y=t.y,rev=arRev(),done=p6Past('p6c3');PALSH(x,y+8,150,24,.5);const tg=g.createLinearGradient(x-110,0,x+110,0);tg.addColorStop(0,'#3a3048');tg.addColorStop(.5,'#6a5a78');tg.addColorStop(1,'#2a2236');g.fillStyle=tg;g.fillRect(x-110,y-300,220,300);g.strokeStyle='#1a1424';g.lineWidth=2;g.strokeRect(x-110,y-300,220,300);   g.fillStyle='#2a2236';g.beginPath();g.moveTo(x-130,y-300);g.lineTo(x,y-380);"
+   },
+   {
+    "cell": 9,
+    "key": "aves",
+    "count_on_map": 1,
+    "map": 32,
+    "map_name": "ซากอารัณยา",
+    "code_line": 7355,
+    "code": "aves(t,T){const N=MAPS[32].npc2;if(!N||N.x<0)return;const x=N.x,y=N.y,f=me.x<x?-1:1;PALSH(x,y+4,24,7);g.save();g.translate(x,y);g.scale(f,1);   g.fillStyle='#1e1428';g.beginPath();g.moveTo(-16,-50);g.lineTo(16,-50);g.lineTo(24+Math.sin(T*1.3)*3,6);g.lineTo(-24-Math.sin(T*1.3)*3,6);g.closePath();g.fill();   g.fillStyle='#6a4422';g.fillRect(-12,-52,24,40);g.strokeStyle='#d8a050';g.lineWidth=1.4;g.strokeRect(-12,-52,24,"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_05",
+  "maps": [
+   "หลุมหัวใจว่าง"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "hgear",
+    "count_on_map": 10,
+    "map": 33,
+    "map_name": "หลุมหัวใจว่าง",
+    "code_line": 7505,
+    "code": "hgear(t,T){const x=t.x,y=t.y,r=[44,58,36][t.v|0];PALSH(x,y+4,r,10);g.save();g.translate(x,y-r*.8);g.rotate(.3+t.v);g.scale(1,.9);g.fillStyle='#7a5228';g.beginPath();for(let i=0;i<24;i++){const a=i/24*6.283,R=i%2?r:r*1.14;g.lineTo(Math.cos(a)*R,Math.sin(a)*R)}g.closePath();g.fill();g.strokeStyle='#2a1408';g.lineWidth=1.4;g.stroke();g.fillStyle='#2a1a2a';g.beginPath();g.arc(0,0,r*.4,0,7);g.fill();g.strokeStyle='#b07a3a"
+   },
+   {
+    "cell": 2,
+    "key": "hanc",
+    "count_on_map": 4,
+    "map": 33,
+    "map_name": "หลุมหัวใจว่าง",
+    "code_line": 7499,
+    "code": "hanc(t,T){const x=t.x,y=t.y,br=hpAnBroken(t.ai);PALSH(x,y+4,40,10,.45);   if(br){g.save();g.translate(x,y);g.rotate(.9);const wg=g.createLinearGradient(-20,0,20,0);wg.addColorStop(0,'#3a2410');wg.addColorStop(.5,'#8a5a2c');wg.addColorStop(1,'#3a2410');g.fillStyle=wg;g.fillRect(-18,-120,36,120);g.restore();g.fillStyle='#4a3020';for(let i=0;i<5;i++){g.beginPath();g.ellipse(x-30+i*16,y+6+(i%2)*4,10,6,0,0,7);g.fill()}ret"
+   },
+   {
+    "cell": 3,
+    "key": "hbellf",
+    "count_on_map": 3,
+    "map": 33,
+    "map_name": "หลุมหัวใจว่าง",
+    "code_line": 7506,
+    "code": "hbellf(t,T){const x=t.x,y=t.y;PALSH(x,y+4,40,10);g.save();g.translate(x,y-16);g.rotate([.5,-.4,1.2][t.v|0]);const bg=g.createLinearGradient(-30,0,30,0);bg.addColorStop(0,'#4a2a12');bg.addColorStop(.45,'#9a6a34');bg.addColorStop(1,'#3a2010');g.fillStyle=bg;g.beginPath();g.moveTo(-10,-30);g.quadraticCurveTo(-14,-14,-18,0);g.quadraticCurveTo(-24,16,-34,24);g.lineTo(34,24);g.quadraticCurveTo(24,16,18,0);g.quadraticCurveT"
+   },
+   {
+    "cell": 4,
+    "key": "htb",
+    "count_on_map": 3,
+    "map": 33,
+    "map_name": "หลุมหัวใจว่าง",
+    "code_line": 9704,
+    "code": "htb(t,T){if(!gP7h())return;const x=t.x,y=t.y,q=me.sty,rung=p6Past('p7tb')||(((q&&q.p7tb)|0)>>t.v&1);PALSH(x,y+4,34,9,.4);       g.lineCap='round';g.strokeStyle='#3a2410';g.lineWidth=7;g.beginPath();g.moveTo(x-24,y);g.lineTo(x-20,y-98);g.moveTo(x+24,y);g.lineTo(x+20,y-98);g.moveTo(x-30,y-98);g.lineTo(x+30,y-98);g.stroke();g.strokeStyle='#b07a3a';g.lineWidth=2;g.stroke();       g.save();g.translate(x,y-94);g.rotate(run"
+   },
+   {
+    "cell": 5,
+    "key": "hves",
+    "count_on_map": 1,
+    "map": 33,
+    "map_name": "หลุมหัวใจว่าง",
+    "code_line": 7507,
+    "code": "hves(t,T){const N=MAPS[33].npc2;if(!N||N.x<0)return;const o=MAPS[32].npc2;MAPS[32].npc2=N;try{PALK.aves(t,T)}catch(e){}finally{MAPS[32].npc2=o}}}); /* ---------- ดันเจี้ยนก้นหลุม: เวสเปอร์ (ห้อง 81000–81999) ---------- */ const VSPI=()=>!!(MAPS[curMap]&&MAPS[curMap].vsp),vspBack=()=>({x:1600,y:HPC.y-HPS-140}); let VLN=[],VFZ=null,VHD={a:0,w:0,t0:0,on:0}; setTimeout(()=>{DT[21]={n:'ก้นหลุมหัวใจ',lv:1,L:118,bL:22,hp:44"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_06",
+  "maps": [
+   "ที่ราบดาวตก"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "sfgt",
+    "count_on_map": 34,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 8350,
+    "code": "sfgt(t,T){const x=t.x,y=t.y,s=t.sc||1,sw=Math.sin(T*.8+x*.01)*2;PALSH(x+3,y+3,16*s,5,.35);g.strokeStyle='#3a4870';g.lineWidth=5*s;g.lineCap='round';g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x-4*s,y-40*s,x+sw*.5,y-70*s);g.stroke();   g.lineWidth=2.4*s;for(const[dx,dy,l]of[[-1,-50,26],[1,-58,24],[-1,-30,18],[1,-38,20]]){g.beginPath();g.moveTo(x+sw*.3,y+dy*s);g.lineTo(x+dx*l*s+sw,y+(dy-16)*s);g.stroke()}   const co"
+   },
+   {
+    "cell": 2,
+    "key": "sfcry",
+    "count_on_map": 34,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 8354,
+    "code": "sfcry(t,T){const x=t.x,y=t.y,c=['#7ad8ff','#b8a0ff','#9af0e0'][t.v];PALSH(x,y+2,10,3,.3);for(const[dx,h,w]of[[-5,16,4],[3,22,5],[8,12,3]]){g.fillStyle=c;g.beginPath();g.moveTo(x+dx-w,y);g.lineTo(x+dx,y-h);g.lineTo(x+dx+w,y);g.closePath();g.fill();g.fillStyle='rgba(255,255,255,.55)';g.beginPath();g.moveTo(x+dx,y-h);g.lineTo(x+dx+w*.4,y-2);g.lineTo(x+dx,y);g.closePath();g.fill()}},  sftent(t,T){const x=t.x,y=t.y,c=['#2"
+   },
+   {
+    "cell": 3,
+    "key": "u22menh",
+    "count_on_map": 30,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 11934,
+    "code": "u22menh(t,T){const x=t.x,y=t.y,h=[84,64,96,58,76][t.v||0];U22S(x+3,y+3,15,5,.45);g.fillStyle='#4a5470';g.beginPath();g.moveTo(x-11,y);g.lineTo(x-9,y-h*.8);g.lineTo(x-2,y-h);g.lineTo(x+8,y-h*.88);g.lineTo(x+11,y);g.closePath();g.fill();g.strokeStyle='#141a28';g.lineWidth=1.1;g.stroke();    g.fillStyle='#5e6a8a';g.beginPath();g.moveTo(x-11,y);g.lineTo(x-9,y-h*.8);g.lineTo(x-2,y-h);g.lineTo(x-3,y);g.closePath();g.fill()"
+   },
+   {
+    "cell": 4,
+    "key": "u22lily",
+    "count_on_map": 30,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 11936,
+    "code": "u22lily(t,T){const x=t.x,y=t.y,sw=Math.sin(T*1.2+x*.02)*2,C=[['255,240,170','#fff2b0'],['170,220,255','#cdeeff'],['240,190,255','#f2d0ff']][t.v];g.strokeStyle='rgba(120,170,160,.9)';g.lineWidth=1.4;g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+sw,y-18,x+sw*1.5,y-34);g.stroke();    const pu=.6+.4*Math.sin(T*2+x);glowAt(x+sw*1.5,y-36,22,C[0],.25*pu+.1);g.fillStyle=C[1];g.beginPath();for(let k=0;k<10;k++){const a=k/1"
+   },
+   {
+    "cell": 5,
+    "key": "sfflw",
+    "count_on_map": 20,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 9917,
+    "code": "sfflw(t,T){const x=t.x,y=t.y,col=['170,200,255','220,180,255','160,240,255'][t.v],q=.5+.5*Math.sin(T*1.4+x*.01);g.strokeStyle='rgba(70,110,130,.8)';g.lineWidth=1.2;for(const[dx,h]of[[-4,12],[0,16],[5,10]]){g.beginPath();g.moveTo(x+dx,y);g.quadraticCurveTo(x+dx+2,y-h*.5,x+dx,y-h);g.stroke();g.fillStyle='rgb('+col+')';for(let p=0;p<5;p++){const a=p/5*6.283+T*.2;g.beginPath();g.ellipse(x+dx+Math.cos(a)*2.6,y-h+Math.sin("
+   },
+   {
+    "cell": 6,
+    "key": "sfdeb",
+    "count_on_map": 16,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 9913,
+    "code": "sfdeb(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x+2,y+3,22*s,6*s,.45);g.fillStyle=['#2a2a3e','#323046','#28283a'][t.v];g.beginPath();g.moveTo(x-20*s,y);g.lineTo(x-16*s,y-14*s);g.lineTo(x-4*s,y-22*s);g.lineTo(x+12*s,y-18*s);g.lineTo(x+20*s,y-4*s);g.lineTo(x+14*s,y+2*s);g.closePath();g.fill();   g.fillStyle='rgba(160,170,220,.25)';g.beginPath();g.moveTo(x-16*s,y-14*s);g.lineTo(x-4*s,y-22*s);g.lineTo(x+2*s,y-12*s);g.lineTo"
+   },
+   {
+    "cell": 7,
+    "key": "u22met",
+    "count_on_map": 10,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 11930,
+    "code": "u22met(t,T){const x=t.x,y=t.y,s=t.sc||1;U22S(x+5,y+4,38*s,11*s,.5);g.fillStyle='#2a2430';g.beginPath();g.moveTo(x-34*s,y);g.lineTo(x-26*s,y-30*s);g.lineTo(x-4*s,y-46*s);g.lineTo(x+22*s,y-38*s);g.lineTo(x+34*s,y-12*s);g.lineTo(x+28*s,y);g.closePath();g.fill();g.strokeStyle='#08060c';g.lineWidth=1.3;g.stroke();    g.fillStyle='#3e3646';g.beginPath();g.moveTo(x-26*s,y-30*s);g.lineTo(x-4*s,y-46*s);g.lineTo(x+4*s,y-30*s);"
+   },
+   {
+    "cell": 8,
+    "key": "sfmet",
+    "count_on_map": 5,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 8346,
+    "code": "sfmet(t,T){const x=t.x,y=t.y,r=SFMET[t.v][2];PALSH(x+4,y+6,r*1.1,r*.35,.5);g.fillStyle='#2a2e44';g.beginPath();g.moveTo(x-r,y);g.lineTo(x-r*.85,y-r*.9);g.lineTo(x-r*.2,y-r*1.4);g.lineTo(x+r*.6,y-r*1.15);g.lineTo(x+r*1.05,y-r*.3);g.lineTo(x+r*.8,y+r*.15);g.closePath();g.fill();   g.fillStyle='#3e4462';g.beginPath();g.moveTo(x-r*.85,y-r*.9);g.lineTo(x-r*.2,y-r*1.4);g.lineTo(x+r*.1,y-r*.8);g.lineTo(x-r*.5,y-r*.3);g.clos"
+   },
+   {
+    "cell": 9,
+    "key": "sftent",
+    "count_on_map": 3,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 8355,
+    "code": "sftent(t,T){const x=t.x,y=t.y,c=['#2a3a78','#e8ecf4','#33448a'][t.v];PALSH(x+4,y+6,52,12,.4);g.fillStyle=c;g.beginPath();g.moveTo(x-50,y+4);g.lineTo(x,y-74);g.lineTo(x+50,y+4);g.closePath();g.fill();g.strokeStyle='#10142a';g.lineWidth=1.4;g.stroke();   g.fillStyle='rgba(0,0,0,.25)';g.beginPath();g.moveTo(x,y-74);g.lineTo(x+50,y+4);g.lineTo(x+8,y+4);g.closePath();g.fill();g.fillStyle='#0c1024';g.beginPath();g.moveTo(x"
+   },
+   {
+    "cell": 10,
+    "key": "sfban",
+    "count_on_map": 3,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 8362,
+    "code": "sfban(t,T){const x=t.x,y=t.y,w=Math.sin(T*2.4+x)*2;PALSH(x,y+2,8,3,.3);g.strokeStyle='#8a8ea8';g.lineWidth=2.4;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-110);g.stroke();g.fillStyle='#c8d0e8';g.beginPath();g.moveTo(x,y-106);g.lineTo(x+26+w,y-100);g.lineTo(x+22+w,y-86);g.lineTo(x+26+w,y-72);g.lineTo(x,y-76);g.closePath();g.fill();g.fillStyle='#2a3a78';PST(g,x+11+w*.5,y-90,5,2,4,0);g.fill();g.fillStyle='#e8f0ff';g.beginP"
+   },
+   {
+    "cell": 11,
+    "key": "sftel",
+    "count_on_map": 1,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 8358,
+    "code": "sftel(t,T){const x=t.x,y=t.y;PALSH(x,y+4,26,7,.4);g.strokeStyle='#5a3a14';g.lineWidth=3;for(const dx of[-16,0,16]){g.beginPath();g.moveTo(x,y-40);g.lineTo(x+dx,y+2);g.stroke()}   g.save();g.translate(x,y-46);g.rotate(-.75);const tg=g.createLinearGradient(0,-8,0,8);tg.addColorStop(0,'#f0c870');tg.addColorStop(1,'#8a5a20');g.fillStyle=tg;g.fillRect(-26,-7,70,14);g.fillRect(40,-9,10,18);g.fillStyle='#3a2410';g.fillRect("
+   },
+   {
+    "cell": 12,
+    "key": "sftab",
+    "count_on_map": 1,
+    "map": 34,
+    "map_name": "ที่ราบดาวตก",
+    "code_line": 8361,
+    "code": "sftab(t,T){const x=t.x,y=t.y;PALSH(x,y+3,30,6,.35);g.fillStyle='#4a3218';g.fillRect(x-28,y-18,56,6);g.fillRect(x-24,y-12,4,14);g.fillRect(x+20,y-12,4,14);g.fillStyle='#e8dcc0';g.save();g.translate(x,y-20);g.rotate(-.05);g.fillRect(-22,-6,40,12);g.strokeStyle='rgba(40,60,120,.7)';g.lineWidth=.8;g.beginPath();g.arc(-4,0,5,0,7);g.moveTo(-14,-2);g.lineTo(-4,0);g.lineTo(8,-3);g.lineTo(14,2);g.stroke();g.restore()},  sfban"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_07",
+  "maps": [
+   "ปากเหวแผ่นดินทรุด"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "paoak",
+    "count_on_map": 30,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30040,
+    "code": "paoak(t,T){const x=t.x,y=t.y,s=t.sc||1,sw=Math.sin(T*.8+x*.013)*1.4;PALSH(x,y+4,40*s,11*s,.4);g.fillStyle='#4a3420';g.beginPath();g.moveTo(x-7*s,y);g.quadraticCurveTo(x-5*s,y-40*s,x-3*s,y-70*s);g.lineTo(x+3*s,y-70*s);g.quadraticCurveTo(x+5*s,y-40*s,x+7*s,y);g.closePath();g.fill();   const C=[['#5e8c42','#3e6a2e','#86b05a'],['#6a9448','#466e32','#92ba62'],['#58804a','#3a6034','#80a86a']][t.v|0];for(const[dx,dy,r,k]of["
+   },
+   {
+    "cell": 2,
+    "key": "pabush",
+    "count_on_map": 30,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30044,
+    "code": "pabush(t,T){const x=t.x,y=t.y,s=t.sc||1;g.fillStyle='rgba(0,0,0,.2)';g.beginPath();g.ellipse(x,y+3,20*s,5*s,0,0,7);g.fill();for(const[dx,dy,r,c]of[[-9,-6,10,'#4e7434'],[9,-6,10,'#4e7434'],[0,-12,12,'#5e8a40'],[-3,-15,6,'#7aa452']]){g.fillStyle=c;g.beginPath();g.arc(x+dx*s,y+dy*s,r*s,0,7);g.fill()}   if(t.v===1){g.fillStyle='#f2d880';for(const[dx,dy]of[[-6,-12],[5,-16],[8,-6]]){g.beginPath();g.arc(x+dx*s,y+dy*s,1.6,0,"
+   },
+   {
+    "cell": 3,
+    "key": "parock",
+    "count_on_map": 26,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30042,
+    "code": "parock(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x,y+3,26*s,7*s,.35);g.fillStyle=['#7a7468','#6e6a60','#827a6c'][t.v|0];g.beginPath();g.moveTo(x-24*s,y+2);g.lineTo(x-18*s,y-18*s);g.lineTo(x+2*s,y-26*s);g.lineTo(x+22*s,y-14*s);g.lineTo(x+24*s,y+2);g.closePath();g.fill();   g.fillStyle='rgba(255,255,255,.18)';g.beginPath();g.moveTo(x-16*s,y-16*s);g.lineTo(x+2*s,y-24*s);g.lineTo(x+8*s,y-12*s);g.lineTo(x-8*s,y-8*s);g.closeP"
+   },
+   {
+    "cell": 4,
+    "key": "paflag",
+    "count_on_map": 22,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30034,
+    "code": "paflag(t,T){const x=t.x,y=t.y,w=Math.sin(T*2.6+t.v);g.strokeStyle='#5a3e24';g.lineWidth=2.4;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-42);g.stroke();g.fillStyle='#d83a2e';g.beginPath();g.moveTo(x,y-42);g.quadraticCurveTo(x+9,y-40+w,x+18,y-38+w*2);g.lineTo(x+16,y-30+w*2);g.quadraticCurveTo(x+8,y-32+w,x,y-30);g.closePath();g.fill();g.strokeStyle='rgba(60,20,10,.6)';g.lineWidth=.8;g.stroke()},  paltree(t,T){const x=t.x,y"
+   },
+   {
+    "cell": 5,
+    "key": "paltree",
+    "count_on_map": 12,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30035,
+    "code": "paltree(t,T){const x=t.x,y=t.y,s=t.sc||1,ln=t.lean||0,sw=Math.sin(T*.9+x*.01)*.02;PALSH(x,y+4,36*s,10*s,.4);g.save();g.translate(x,y);g.rotate(ln+sw);   g.strokeStyle='#4a3420';g.lineWidth=9*s;g.beginPath();g.moveTo(0,0);g.quadraticCurveTo(4*s,-40*s,0,-80*s);g.stroke();g.strokeStyle='rgba(160,120,80,.4)';g.lineWidth=2.4*s;g.beginPath();g.moveTo(-2*s,-4*s);g.quadraticCurveTo(2*s,-40*s,-2*s,-76*s);g.stroke();   /* รากโ"
+   },
+   {
+    "cell": 6,
+    "key": "pafence",
+    "count_on_map": 10,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30028,
+    "code": "pafence(t,T){const x=t.x,y=t.y;g.fillStyle='#5a3e24';g.fillRect(x-2.5,y-34,5,34);g.fillStyle='#7a5a3a';g.fillRect(x-3.5,y-36,7,4);   if(t.rx){const sw=Math.sin(T*1.4+t.v)*2;g.strokeStyle='#c8a868';g.lineWidth=1.6;g.beginPath();g.moveTo(x,y-26);g.quadraticCurveTo((x+t.rx)/2,y-18+sw,t.rx,t.ry-26);g.stroke();     const mx=(x+t.rx)/2,my=(y+t.ry)/2-21+sw;g.fillStyle='#d8382e';g.beginPath();g.moveTo(mx-3,my);g.lineTo(mx+3,"
+   },
+   {
+    "cell": 7,
+    "key": "palamp",
+    "count_on_map": 8,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30031,
+    "code": "palamp(t,T){const x=t.x,y=t.y,f=.75+.25*Math.sin(T*5+x);g.strokeStyle='#4a3420';g.lineWidth=3;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-64);g.lineTo(x+12,y-64);g.stroke();   g.strokeStyle='#3a2a1a';g.lineWidth=1;g.beginPath();g.moveTo(x+12,y-64);g.lineTo(x+12,y-56);g.stroke();g.fillStyle='#2a2018';g.fillRect(x+7,y-57,10,3);g.fillStyle='rgba(255,210,140,'+(.75+.25*f)+')';g.fillRect(x+8,y-54,8,9);g.fillStyle='#2a2018';g"
+   },
+   {
+    "cell": 8,
+    "key": "patent",
+    "count_on_map": 5,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30008,
+    "code": "patent(t,T){const x=t.x,y=t.y,s=t.sc||1,v=t.v|0,tl=v===2?.16:0,C=[['#a88a5e','#7a6040','#5a4430'],['#5a7aa8','#3a5680','#2a3c5a'],['#b89a6a','#8a6a44','#5a4430']][v];PALSH(x,y+6*s,64*s,15*s,.4);   g.save();g.translate(x,y);g.rotate(tl);g.scale(s,s);   g.fillStyle=C[2];g.beginPath();g.moveTo(-56,6);g.lineTo(0,-62);g.lineTo(56,6);g.closePath();g.fill();   const gr=g.createLinearGradient(-50,0,50,0);gr.addColorStop(0,C["
+   },
+   {
+    "cell": 9,
+    "key": "pagfen",
+    "count_on_map": 5,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30046,
+    "code": "pagfen(t,T){const x=t.x,y=t.y;g.strokeStyle='#6a4a2a';g.lineWidth=3;for(let k=0;k<5;k++){const px=x-60+k*30,tilt=k===2?.6:k===3?-.4:0;g.save();g.translate(px,y);g.rotate(tilt);g.beginPath();g.moveTo(0,0);g.lineTo(0,-22);g.stroke();g.restore()}   g.strokeStyle='#8a6a44';g.lineWidth=2.4;g.beginPath();g.moveTo(x-60,y-16);g.lineTo(x-4,y-14);g.moveTo(x+30,y-10);g.lineTo(x+60,y-16);g.stroke();if(t.v){g.fillStyle='#c8b070';"
+   },
+   {
+    "cell": 10,
+    "key": "paroot",
+    "count_on_map": 5,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30054,
+    "code": "paroot(t,T){paRootArch(t.x,t.y,t.v|0,T)},  patil(t,T){const N=MAPS[43]&&MAPS[43].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;try{sfTil(N.x,N.y,f,T)}catch(e){campFolk(N.x,N.y,{c:'#c86a3a',s:1.2,f},T)}npvLbl(N.n,N.x,N.y-44,'#ffd8a8');try{npcSay('til43',N.x,N.y,PATILSAY,190,50)}catch(e){}}}); const PATILSAY=['อย่าข้ามเชือกเส้นแดงถ้าไม่จำเป็นนะท่านผู้นำ!','ข้าจะวาดรูปทุกอย่างที่เห็นไว้ให้ยายเอดาดู','ข้างล่างนั่นเรืองแ"
+   },
+   {
+    "cell": 11,
+    "key": "pacrate",
+    "count_on_map": 3,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30021,
+    "code": "pacrate(t,T){const x=t.x,y=t.y,v=t.v|0;PALSH(x,y+4,18,6,.3);g.fillStyle=v?'#8a6a44':'#7a5a3a';g.fillRect(x-14,y-22,28,24);g.strokeStyle='#3a2414';g.lineWidth=1.4;g.strokeRect(x-14,y-22,28,24);g.beginPath();g.moveTo(x-14,y-22);g.lineTo(x+14,y+2);g.moveTo(x+14,y-22);g.lineTo(x-14,y+2);g.stroke();g.fillStyle='rgba(255,240,200,.2)';g.fillRect(x-14,y-22,28,4)},  pasack(t,T){const x=t.x,y=t.y;PALSH(x,y+3,14,5,.3);g.fillSty"
+   },
+   {
+    "cell": 12,
+    "key": "pasack",
+    "count_on_map": 3,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30022,
+    "code": "pasack(t,T){const x=t.x,y=t.y;PALSH(x,y+3,14,5,.3);g.fillStyle=t.v?'#c8b088':'#b89a70';g.beginPath();g.moveTo(x-11,y+2);g.quadraticCurveTo(x-13,y-14,x-4,y-18);g.lineTo(x+4,y-18);g.quadraticCurveTo(x+13,y-14,x+11,y+2);g.closePath();g.fill();g.strokeStyle='#5a4428';g.lineWidth=1.2;g.stroke();g.strokeStyle='#6a4a2a';g.beginPath();g.moveTo(x-5,y-16);g.lineTo(x+5,y-16);g.stroke()},  papen(t,T){const x=t.x,y=t.y;g.strokeSt"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_08",
+  "maps": [
+   "สุสานเรือเมฆ"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "sgstone",
+    "count_on_map": 34,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 26997,
+    "code": "sgstone(t,T){const x=t.x,y=t.y,s=t.sc||1,v=t.v|0;PALSH(x+3,y+3,22*s,6*s,.35);const P=[[-20,0],[-14,-16-v*3],[-2,-24],[12,-20+v*2],[20,-6],[18,0]];g.fillStyle='#6a7590';g.beginPath();P.forEach(([a,b],i)=>i?g.lineTo(x+a*s,y+b*s):g.moveTo(x+a*s,y+b*s));g.closePath();g.fill();   g.fillStyle='#9aa6c0';g.beginPath();g.moveTo(x-14*s,y-16*s-v*3*s);g.lineTo(x-2*s,y-24*s);g.lineTo(x+4*s,y-12*s);g.lineTo(x-10*s,y-6*s);g.closePa"
+   },
+   {
+    "cell": 2,
+    "key": "sglamp",
+    "count_on_map": 9,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 27000,
+    "code": "sglamp(t,T){const x=t.x,y=t.y,sw=Math.sin(T*1.8+t.v)*2;PALSH(x+3,y+3,8,3,.35);g.strokeStyle='#2e2016';g.lineWidth=3;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-64);g.lineTo(x+8,y-66);g.stroke();   g.strokeStyle='#4a3a2a';g.lineWidth=1;g.beginPath();g.moveTo(x+8,y-66);g.lineTo(x+6+sw*.3,y-60);g.stroke();g.fillStyle='rgba(160,215,255,.85)';g.beginPath();g.ellipse(x+6+sw*.3,y-52,5.6,7.4,0,0,7);g.fill();g.strokeStyle='rgba("
+   },
+   {
+    "cell": 3,
+    "key": "sgmast",
+    "count_on_map": 7,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 26984,
+    "code": "sgmast(t,T){const x=t.x,y=t.y,v=t.v|0,sw=Math.sin(T*1.3+x*.01)*4;PALSH(x+6,y+4,22,7,.4);   try{phSpr('sgm'+v,x,y,[-90,-240,180,250],()=>{const H=[200,150,180][v];g.strokeStyle='#2e1e12';g.lineWidth=10;g.beginPath();g.moveTo(0,0);g.lineTo(3,-H);g.stroke();g.strokeStyle='#5a3e26';g.lineWidth=6;g.beginPath();g.moveTo(-1,0);g.lineTo(2,-H);g.stroke();     /* หักปลาย */g.fillStyle='#3a2616';g.beginPath();g.moveTo(-3,-H);g."
+   },
+   {
+    "cell": 4,
+    "key": "sgrib",
+    "count_on_map": 7,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 26992,
+    "code": "sgrib(t,T){const x=t.x,y=t.y,v=t.v|0;PALSH(x+8,y+4,46,10,.3);try{phSpr('sgr'+v,x,y,[-110,-270,220,290],()=>{const H=[230,190,250][v],c=[[-40,0],[40,0]];     for(const s of[-1,1]){const b0=s*28;g.strokeStyle='#5a5a66';g.lineWidth=26;g.lineCap='round';g.beginPath();g.moveTo(b0,0);g.bezierCurveTo(b0+s*16,-H*.5,s*(70+v*6),-H*.85,s*(20+v*4),-H);g.stroke();       const gr=g.createLinearGradient(-60,0,60,0);gr.addColorStop("
+   },
+   {
+    "cell": 5,
+    "key": "phbarrel",
+    "count_on_map": 4,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 21171,
+    "code": "phbarrel(t,T){const x=t.x,y=t.y;PALSH(x+3,y+3,12,4,.35);g.fillStyle='#7a5434';g.beginPath();g.ellipse(x,y-12,11,14,0,0,7);g.fill();g.fillStyle='#8a6440';g.beginPath();g.ellipse(x,y-25,10,3.6,0,0,7);g.fill();   g.strokeStyle='#3a3a40';g.lineWidth=2;for(const dy of[-21,-5]){g.beginPath();g.moveTo(x-10.6,y+dy);g.quadraticCurveTo(x,y+dy+3,x+10.6,y+dy);g.stroke()}},  phrope(t,T){const x=t.x,y=t.y;PALSH(x,y+2,14,4,.3);g.st"
+   },
+   {
+    "cell": 6,
+    "key": "phrope",
+    "count_on_map": 1,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 21173,
+    "code": "phrope(t,T){const x=t.x,y=t.y;PALSH(x,y+2,14,4,.3);g.strokeStyle='#b89a66';g.lineWidth=3;for(let k=0;k<3;k++){g.beginPath();g.ellipse(x,y-3-k*3,12-k*2,4.6-k*.6,0,0,7);g.stroke()}g.strokeStyle='#8a7048';g.lineWidth=1;g.beginPath();g.ellipse(x,y-3,12,4.6,0,0,7);g.stroke()},  phlamp(t,T){const x=t.x,y=t.y,nt=phNt(),sw=Math.sin(T*2+x*.03)*2;g.strokeStyle='#3a2a1c';g.lineWidth=2.4;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-"
+   },
+   {
+    "cell": 7,
+    "key": "sgboat",
+    "count_on_map": 1,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 27003,
+    "code": "sgboat(t,T){const x=t.x,y=t.y+Math.sin(T*1.3)*4;g.save();g.fillStyle='rgba(60,70,100,.3)';g.beginPath();g.ellipse(t.x,t.y+20,62,12,0,0,7);g.fill();g.translate(x,y);   g.fillStyle='#d8ccb0';g.beginPath();g.ellipse(0,-78,40,24,0,0,7);g.fill();g.strokeStyle='#7a6a4a';g.lineWidth=1.2;g.stroke();g.strokeStyle='#8a7a5a';g.lineWidth=1;for(const dx of[-30,30]){g.beginPath();g.moveTo(dx,-66);g.lineTo(dx*.9,-14);g.stroke()}   "
+   },
+   {
+    "cell": 8,
+    "key": "sgbk",
+    "count_on_map": 1,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 27007,
+    "code": "sgbk(t,T){const x=t.x,y=t.y,lit=gP8gd()&&(me.sty&&me.sty.p8g)===1;g.save();g.translate(x,y);g.scale(1.5,1.5);try{phShipD(0,0,T,{f:-1,dark:1,nm:'เรือดำ'})}catch(e){}g.restore();   if(lit){g.save();g.globalCompositeOperation='lighter';for(const k of[-100,0,100])glowAt(x+k,y-70,14,'255,210,140',.5+.2*Math.sin(T*2+k));g.restore()}   else{g.save();g.globalCompositeOperation='lighter';glowAt(x+60,y-40,24,'140,170,255',.2+."
+   },
+   {
+    "cell": 9,
+    "key": "sgtil",
+    "count_on_map": 1,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 27010,
+    "code": "sgtil(t,T){const N=MAPS[39]&&MAPS[39].npc;if(!N)return;try{sfTil(N.x+40,N.y+12,me.x<N.x+40?-1:1,T)}catch(e){}},  sggrif(t,T){const N=MAPS[39]&&MAPS[39].npc2;if(!N||N.x<0)return;grifD(N.x,N.y,me.x<N.x?-1:1,T);phLbl('กัปตันกริฟ · เรือดำ',N.x,N.y-50,'#d0c8e0');   for(const[dx,dy,k]of[[-36,16,0],[-56,6,1]]){try{campFolk(N.x+dx,N.y+dy,{c:'#4a4a5a',sh:'#c8c0b8',hair:k?'#2a1a10':'#c8a060',f:1,s:.72,k:20+k,arm:Math.sin(T*2+k"
+   },
+   {
+    "cell": 10,
+    "key": "sggrif",
+    "count_on_map": 1,
+    "map": 39,
+    "map_name": "สุสานเรือเมฆ",
+    "code_line": 27011,
+    "code": "sggrif(t,T){const N=MAPS[39]&&MAPS[39].npc2;if(!N||N.x<0)return;grifD(N.x,N.y,me.x<N.x?-1:1,T);phLbl('กัปตันกริฟ · เรือดำ',N.x,N.y-50,'#d0c8e0');   for(const[dx,dy,k]of[[-36,16,0],[-56,6,1]]){try{campFolk(N.x+dx,N.y+dy,{c:'#4a4a5a',sh:'#c8c0b8',hair:k?'#2a1a10':'#c8a060',f:1,s:.72,k:20+k,arm:Math.sin(T*2+k)*.3-.3},T)}catch(e){}}}}); /* กัปตันกริฟ (NPC) */ function grifD(x,y,f,T){const O='#100c14';g.save();g.translate"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_09",
+  "maps": [
+   "ปากเหวแผ่นดินทรุด"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "patarp",
+    "count_on_map": 3,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30048,
+    "code": "patarp(t,T){const x=t.x,y=t.y,v=t.v|0,C=v?['#6a8ab8','#3e5a86','#2a3c5a']:['#b89a6a','#8a6a44','#5a4430'];g.save();g.translate(x,y);g.fillStyle='rgba(0,0,0,.25)';g.beginPath();g.ellipse(0,8,46,11,0,0,7);g.fill();   /* ผ้าเต็นท์ยับกองกับพื้น + เสาหัก + เชือก */const P=[[-42,6],[-34,-6],[-20,-12],[-8,-6],[4,-16],[18,-10],[30,-14],[42,0],[34,10],[14,12],[-6,8],[-24,12]];g.beginPath();P.forEach(([px,py],k)=>k?g.lineTo(px"
+   },
+   {
+    "cell": 2,
+    "key": "pafire",
+    "count_on_map": 1,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30017,
+    "code": "pafire(t,T){const x=t.x,y=t.y,f=.75+.25*Math.sin(T*9)*Math.sin(T*5.3);PALSH(x,y+4,30,8,.35);g.fillStyle='#5a4a3a';for(let k=0;k<8;k++){const a=k/8*6.283;g.beginPath();g.ellipse(x+Math.cos(a)*22,y+Math.sin(a)*9,6,4,0,0,7);g.fill()}   g.strokeStyle='#4a2e18';g.lineWidth=5;g.beginPath();g.moveTo(x-16,y+4);g.lineTo(x+14,y-6);g.moveTo(x-14,y-6);g.lineTo(x+16,y+4);g.stroke();   g.save();g.globalCompositeOperation='lighter'"
+   },
+   {
+    "cell": 3,
+    "key": "papen",
+    "count_on_map": 1,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30023,
+    "code": "papen(t,T){const x=t.x,y=t.y;g.strokeStyle='#6a4a2a';g.lineWidth=3;for(let k=0;k<10;k++){if(k===3)continue;const a=k/10*6.283,px=x+Math.cos(a)*58,py=y+Math.sin(a)*24;g.beginPath();g.moveTo(px,py);g.lineTo(px,py-18);g.stroke()}   g.strokeStyle='#8a6a44';g.lineWidth=2;g.beginPath();g.ellipse(x,y-12,58,24,0,.3,6.0);g.stroke();   if(p6Past('pacr')||(me.sty&&((me.sty.pacr|0)>>4&1))){for(let k=0;k<3;k++){const a=T*.12+k*2."
+   },
+   {
+    "cell": 4,
+    "key": "pasign",
+    "count_on_map": 1,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30026,
+    "code": "pasign(t,T){const x=t.x,y=t.y;PALSH(x,y+3,20,5,.3);g.fillStyle='#5a3e24';g.fillRect(x-14,y-40,3,40);g.fillRect(x+11,y-40,3,40);g.fillStyle='#a8845a';g.fillRect(x-20,y-58,40,24);g.strokeStyle='#3a2414';g.lineWidth=1.4;g.strokeRect(x-20,y-58,40,24);   g.fillStyle='#c83a2a';g.fillRect(x-17,y-55,10,7);g.fillStyle='#2a1c10';g.font='bold 7px system-ui';g.textAlign='center';g.fillText('กู้ภัย',x+5,y-49);g.fillText('ห้ามข้าม"
+   },
+   {
+    "cell": 5,
+    "key": "patil",
+    "count_on_map": 1,
+    "map": 43,
+    "map_name": "ปากเหวแผ่นดินทรุด",
+    "code_line": 30055,
+    "code": "patil(t,T){const N=MAPS[43]&&MAPS[43].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;try{sfTil(N.x,N.y,f,T)}catch(e){campFolk(N.x,N.y,{c:'#c86a3a',s:1.2,f},T)}npvLbl(N.n,N.x,N.y-44,'#ffd8a8');try{npcSay('til43',N.x,N.y,PATILSAY,190,50)}catch(e){}}}); const PATILSAY=['อย่าข้ามเชือกเส้นแดงถ้าไม่จำเป็นนะท่านผู้นำ!','ข้าจะวาดรูปทุกอย่างที่เห็นไว้ให้ยายเอดาดู','ข้างล่างนั่นเรืองแสงทั้งคืนเลย… สวยแต่ก็น่ากลัว','ระวังรอยแตก"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_10",
+  "maps": [
+   "ฐานแผ่นดิน"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "pbshroom",
+    "count_on_map": 21,
+    "map": 45,
+    "map_name": "ฐานแผ่นดิน",
+    "code_line": 30559,
+    "code": "pbshroom(t,T){const x=t.x,y=t.y,s=t.sc||1,v=t.v|0,C=['120,255,220','255,190,110','190,255,130','255,150,200'][v];for(let k=0;k<3;k++){const dx=(k-1)*7*s,h=(8+k%2*5)*s;g.fillStyle='#e8e0d0';g.fillRect(x+dx-1,y-h,2,h);g.fillStyle='rgba('+C+',.9)';g.beginPath();g.ellipse(x+dx,y-h,5*s,2.6*s,0,Math.PI,0);g.fill()}g.save();g.globalCompositeOperation='lighter';glowAt(x,y-10*s,18*s,C,.3);g.restore()},  pbfolk(t,T){const f=me"
+   },
+   {
+    "cell": 2,
+    "key": "pzcry",
+    "count_on_map": 16,
+    "map": 45,
+    "map_name": "ฐานแผ่นดิน",
+    "code_line": 31378,
+    "code": "pzcry(t,T){const x=t.x,y=t.y,s=t.sc||1,v=t.v|0,C=[['190,150,255','#c8a8ff','#6a4ac0'],['140,170,255','#a8c0ff','#3a5ab0'],['230,170,255','#e8b8ff','#8a3ab0']][v],pu=.6+.4*Math.sin(T*1.6+x);PALSH(x,y+3,22*s,7*s,.45);   for(const[dx,h,w,a]of[[-10,34,7,-.35],[8,44,8,.25],[0,58,10,0],[16,26,6,.5],[-18,22,5,-.6]]){g.save();g.translate(x+dx*s,y);g.rotate(a);const gr=g.createLinearGradient(-w*s,0,w*s,0);gr.addColorStop(0,C["
+   },
+   {
+    "cell": 3,
+    "key": "pzrock",
+    "count_on_map": 12,
+    "map": 45,
+    "map_name": "ฐานแผ่นดิน",
+    "code_line": 31375,
+    "code": "pzrock(t,T){const x=t.x,y=t.y,s=t.sc||1,v=t.v|0;PALSH(x,y+4,30*s,9*s,.5);const R=gxRng(5400+((x*3+y)|0));g.fillStyle=['#5a5248','#4e463e','#625a50'][v];g.beginPath();for(let k=0;k<9;k++){const a=k/9*6.2832,rr=(22+R()*8)*s;g.lineTo(x+Math.cos(a)*rr*1.1,y-14*s+Math.sin(a)*rr*.75)}g.closePath();g.fill();g.strokeStyle='#1e1a16';g.lineWidth=1.4;g.stroke();   g.fillStyle='rgba(220,200,170,.2)';g.beginPath();g.ellipse(x-6*s"
+   },
+   {
+    "cell": 4,
+    "key": "pzpod",
+    "count_on_map": 12,
+    "map": 45,
+    "map_name": "ฐานแผ่นดิน",
+    "code_line": 31381,
+    "code": "pzpod(t,T){const x=t.x,y=t.y,s=t.sc||1,sw=Math.sin(T*1.2+t.v)*2,pu=.6+.4*Math.sin(T*2+t.v);g.strokeStyle='#3a2616';g.lineWidth=3*s;g.beginPath();g.moveTo(x-6*s,y);g.quadraticCurveTo(x-10*s,y-20*s,x+sw,y-34*s);g.stroke();   g.fillStyle='#8a5a28';g.beginPath();g.ellipse(x+sw,y-44*s,9*s,13*s,0,0,7);g.fill();g.fillStyle='rgba(255,196,96,'+(.55+.35*pu)+')';g.beginPath();g.ellipse(x+sw,y-44*s,6*s,9.5*s,0,0,7);g.fill();g.st"
+   },
+   {
+    "cell": 5,
+    "key": "pzjn",
+    "count_on_map": 5,
+    "map": 45,
+    "map_name": "ฐานแผ่นดิน",
+    "code_line": 31360,
+    "code": "pzjn(t,T){const i=t.v,x=t.x,y=t.y,st=stCur(),q=me.sty,act=!!(st&&st.pa4t&&q&&q.a===1),tied=pzTied(i);   if(!tied){if(!act)return;/* ม้วนเชือกรอผูก */const C=PZJC[i];g.save();g.strokeStyle=C[0];g.lineWidth=4;for(let k=0;k<4;k++){g.beginPath();g.ellipse(x+30,y+4-k*3,16-k*1.5,6-k*.5,0,0,7);g.stroke()}g.strokeStyle=C[1];g.lineWidth=1.2;g.setLineDash([3,4]);g.beginPath();g.ellipse(x+30,y-5,13,5,0,0,7);g.stroke();g.setLine"
+   },
+   {
+    "cell": 6,
+    "key": "pzthr",
+    "count_on_map": 1,
+    "map": 45,
+    "map_name": "ฐานแผ่นดิน",
+    "code_line": 31353,
+    "code": "pzthr(t,T){const n=pzTiedN(),tr=p6Past('pa4c')?1:p6Past('pa4t')?.3:Math.max(.35,1-n*.13);try{thrDraw(t.x,t.y,T,{tired:tr})}catch(e){}   /* เชือกคำมั่นที่ผูกแล้ว: แสงวิ่งขึ้นไปตามแขน */if(n>0&&!LOWQ){g.save();g.globalCompositeOperation='lighter';for(let k=0;k<n;k++){const u=(T*.18+k/n)%1,s=k%2?1:-1;glowAt(t.x+s*(240+u*100),t.y-590-u*300,14,'255,210,140',.35*Math.sin(u*Math.PI))}g.restore()}},  pzthu(t,T){const N=MAPS["
+   },
+   {
+    "cell": 7,
+    "key": "pzthu",
+    "count_on_map": 1,
+    "map": 45,
+    "map_name": "ฐานแผ่นดิน",
+    "code_line": 31355,
+    "code": "pzthu(t,T){const N=MAPS[45]&&MAPS[45].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;try{NPC3[43].d(N.x,N.y,f,T)}catch(e){try{thuD0(N.x,N.y,f,T)}catch(e2){}}npvLbl(N.n,N.x,N.y-44,'#c8f0a8');try{npcSay('thu45',N.x,N.y,(typeof pz5ThuL==='function'&&pz5ThuL())||(p6Past('pa4c')?PZTHU2:PZTHUSAY),190,50)}catch(e){}},  pzlift(t,T){const x=t.x,y=t.y,sw=Math.sin(T*.8)*3,rg=g.createLinearGradient(0,y-300,0,y-40);rg.addColorSto"
+   },
+   {
+    "cell": 8,
+    "key": "pzlift",
+    "count_on_map": 1,
+    "map": 45,
+    "map_name": "ฐานแผ่นดิน",
+    "code_line": 31356,
+    "code": "pzlift(t,T){const x=t.x,y=t.y,sw=Math.sin(T*.8)*3,rg=g.createLinearGradient(0,y-300,0,y-40);rg.addColorStop(0,'rgba(120,90,60,0)');rg.addColorStop(.55,'rgba(120,90,60,.85)');rg.addColorStop(1,'rgba(120,90,60,.95)');g.strokeStyle=rg;g.lineWidth=3;for(const s of[-26,26]){g.beginPath();g.moveTo(x+s*.4,y-300);g.lineTo(x+s+sw,y-30);g.stroke()}   g.fillStyle='#6a4c30';g.beginPath();g.moveTo(x-34+sw,y-32);g.lineTo(x+34+sw,y"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_11",
+  "maps": [
+   "สวนลอยแห่งราชินี"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "hedge",
+    "count_on_map": 89,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5864,
+    "code": "hedge(t,T){const x=t.x,y=t.y,cr=Math.max(0,1-Math.hypot(x-1600,y-720)/900);PALSH(x,y+3,26,7);g.fillStyle='#2a5a24';g.beginPath();g.roundRect(x-24,y-34,48,36,6);g.fill();g.fillStyle='#3e7a32';g.beginPath();g.roundRect(x-24,y-40,48,20,8);g.fill();   for(let i=0;i<9;i++){g.fillStyle=i%2?'#4e9040':'#346c2c';g.beginPath();g.arc(x-18+(i*9)%40,y-34+((i*7)%14),5,0,7);g.fill()}   const C=['#e83a5a','#ff8aa8','#fff0f4','#d8304"
+   },
+   {
+    "cell": 2,
+    "key": "thorn",
+    "count_on_map": 31,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5868,
+    "code": "thorn(t,T){const x=t.x,y=t.y,pu=.5+.5*Math.sin(T*2.4+x*.01);PALSH(x,y+2,24,7,.4);g.lineCap='round';for(let i=0;i<5;i++){const a=-Math.PI/2+(i-2)*.38,L=40+((i*13+t.v*7)%24);g.strokeStyle='#2a1838';g.lineWidth=5-i%2;g.beginPath();g.moveTo(x+(i-2)*5,y);g.bezierCurveTo(x+(i-2)*14,y-L*.4,x+Math.cos(a)*L*.9+Math.sin(T+i)*2,y-L*.7,x+Math.cos(a)*L,y+Math.sin(a)*L);g.stroke();     g.strokeStyle='#8a7aa8';g.lineWidth=1.2;g.str"
+   },
+   {
+    "cell": 3,
+    "key": "bal",
+    "count_on_map": 15,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5856,
+    "code": "bal(t,T){const x=t.x,y=t.y;PALSH(x,y+2,12,4);g.fillStyle='#e8e2d4';g.fillRect(x-12,y-30,24,5);g.fillRect(x-12,y-4,24,5);g.fillStyle='#d0c8b8';for(const dx of[-7,0,7]){g.beginPath();g.ellipse(x+dx,y-15,3,9,0,0,7);g.fill()}g.fillStyle='rgba(0,0,0,.12)';g.fillRect(x+4,y-26,8,22)},  lant(t,T){const x=t.x,y=t.y,on=performance.now()-GARG.lit[t.li]<60000;PALSH(x,y+2,14,4);g.fillStyle='#a8a090';g.fillRect(x-10,y-6,20,8);g.fi"
+   },
+   {
+    "cell": 4,
+    "key": "sft",
+    "count_on_map": 11,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5871,
+    "code": "sft(t,T){const x=t.x,y=t.y;PALSH(x,y+3,38,10,.35);const tg=g.createLinearGradient(x-8,0,x+8,0);tg.addColorStop(0,'#5a3a22');tg.addColorStop(1,'#3a2414');g.fillStyle=tg;g.beginPath();g.moveTo(x-9,y);g.quadraticCurveTo(x-5,y-30,x-6,y-60);g.lineTo(x+6,y-60);g.quadraticCurveTo(x+5,y-30,x+10,y);g.closePath();g.fill();   for(let i=0;i<9;i++){const a=i*.7,cx=x+Math.cos(a)*30+Math.sin(T*.6+i)*1.2,cy=y-86+Math.sin(a)*20;g.fil"
+   },
+   {
+    "cell": 5,
+    "key": "lant",
+    "count_on_map": 6,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5857,
+    "code": "lant(t,T){const x=t.x,y=t.y,on=performance.now()-GARG.lit[t.li]<60000;PALSH(x,y+2,14,4);g.fillStyle='#a8a090';g.fillRect(x-10,y-6,20,8);g.fillStyle='#c8c0ae';g.fillRect(x-5,y-34,10,30);g.fillStyle='#8a8272';g.fillRect(x-12,y-50,24,4);   g.fillStyle=on?'#ffe6a0':'#5a5448';g.fillRect(x-8,y-46,16,12);g.strokeStyle='#6a6050';g.lineWidth=1.4;g.strokeRect(x-8,y-46,16,12);g.beginPath();g.moveTo(x,y-46);g.lineTo(x,y-34);g.st"
+   },
+   {
+    "cell": 6,
+    "key": "gcol",
+    "count_on_map": 6,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5884,
+    "code": "gcol(t,T){const x=t.x,y=t.y;PALSH(x,y+2,14,4);const lg=g.createLinearGradient(x-7,0,x+7,0);lg.addColorStop(0,'#c8c2b4');lg.addColorStop(.4,'#fbf8f0');lg.addColorStop(1,'#a8a294');g.fillStyle=lg;g.fillRect(x-7,y-120,14,120);g.fillStyle='#c8a040';g.fillRect(x-11,y-128,22,8);g.fillRect(x-10,y-4,20,6);   const a2=(t.gi+1)*Math.PI/3,nx=1600+Math.cos(a2)*178,ny=720+Math.sin(a2)*120;if(t.gi!==1){g.strokeStyle='#3a7a30';g.li"
+   },
+   {
+    "cell": 7,
+    "key": "rarch",
+    "count_on_map": 3,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5860,
+    "code": "rarch(t,T){const x=t.x,y=t.y,w=74,h=108;for(const s of[-1,1]){g.fillStyle='#f0ece2';g.fillRect(x+s*w-3,y-h+20,6,h-20);g.fillStyle='rgba(0,0,0,.15)';g.fillRect(x+s*w+1,y-h+20,2,h-20)}   g.strokeStyle='#f0ece2';g.lineWidth=6;g.beginPath();g.ellipse(x,y-h+20,w,40,0,Math.PI,0);g.stroke();g.strokeStyle='#3a7a30';g.lineWidth=5;g.beginPath();g.ellipse(x,y-h+20,w,40,0,Math.PI,0);g.stroke();   for(let i=0;i<22;i++){const a=Ma"
+   },
+   {
+    "cell": 8,
+    "key": "swing",
+    "count_on_map": 1,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5893,
+    "code": "swing(t,T){const x=t.x,y=t.y,sw=Math.sin(T*1.1)*.18;PALSH(x,y+4,40,9);g.strokeStyle='#6a4a2a';g.lineWidth=5;g.beginPath();g.moveTo(x-34,y+4);g.lineTo(x-26,y-86);g.moveTo(x+34,y+4);g.lineTo(x+26,y-86);g.moveTo(x-30,y-84);g.lineTo(x+30,y-84);g.stroke();   g.save();g.translate(x,y-84);g.rotate(sw);g.strokeStyle='#d8c8a0';g.lineWidth=1.4;g.beginPath();g.moveTo(-14,0);g.lineTo(-14,62);g.moveTo(14,0);g.lineTo(14,62);g.stro"
+   },
+   {
+    "cell": 9,
+    "key": "btree",
+    "count_on_map": 1,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5875,
+    "code": "btree(t,T){const x=t.x,y=t.y;PALSH(x+10,y+6,120,30,.3);const tg=g.createLinearGradient(x-20,0,x+20,0);tg.addColorStop(0,'#5a3a2a');tg.addColorStop(1,'#2e1c12');g.fillStyle=tg;g.beginPath();g.moveTo(x-22,y);g.quadraticCurveTo(x-10,y-50,x-16,y-110);g.lineTo(x+14,y-110);g.quadraticCurveTo(x+8,y-50,x+24,y);g.closePath();g.fill();   g.strokeStyle='#3a2418';g.lineWidth=8;g.beginPath();g.moveTo(x-6,y-100);g.quadraticCurveTo"
+   },
+   {
+    "cell": 10,
+    "key": "gst",
+    "count_on_map": 1,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5880,
+    "code": "gst(t,T){const x=t.x,y=t.y;PALSH(x,y+3,26,7);g.fillStyle='#b8b0a0';g.fillRect(x-20,y-24,40,26);g.fillStyle='#d8d2c4';g.fillRect(x-24,y-28,48,6);const C='#e8e2d6',D='#bcb4a4';   g.fillStyle=D;g.beginPath();g.moveTo(x-14,y-28);g.quadraticCurveTo(x-10,y-60,x-6,y-74);g.lineTo(x+6,y-74);g.quadraticCurveTo(x+10,y-60,x+14,y-28);g.closePath();g.fill();g.fillStyle=C;g.beginPath();g.moveTo(x-10,y-28);g.quadraticCurveTo(x-6,y-6"
+   },
+   {
+    "cell": 11,
+    "key": "cocoon",
+    "count_on_map": 1,
+    "map": 28,
+    "map_name": "สวนลอยแห่งราชินี",
+    "code_line": 5886,
+    "code": "cocoon(t,T){const x=t.x,y=t.y,free=gP5done(),hb=palHB(T);PALSH(x,y+4,56,14,.45);   if(free){g.strokeStyle='#3a2448';g.lineWidth=4;for(let i=0;i<9;i++){const a=i*.7;g.beginPath();g.moveTo(x+Math.cos(a)*40,y);g.quadraticCurveTo(x+Math.cos(a)*56,y-30,x+Math.cos(a)*30,y-40-(i%3)*10);g.stroke()}g.save();g.globalCompositeOperation='lighter';glowAt(x,y-30,50,'255,220,150',.25);g.restore();return}   g.save();g.globalComposit"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_12",
+  "maps": [
+   "ห้องบัลลังก์ดาว",
+   "ลานดาวลอย",
+   "วงแหวนเฟือง",
+   "ทุ่งตาข่ายดาว"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "pthr",
+    "count_on_map": 10,
+    "map": 29,
+    "map_name": "ห้องบัลลังก์ดาว",
+    "code_line": 6126,
+    "code": "pthr(t,T){const x=t.x,y=t.y,near=me.cls&&Math.hypot(me.x-x,me.y-y)<110;PALSH(x,y+3,26,7);g.fillStyle='#2a2040';g.fillRect(x-20,y-14,40,16);g.fillStyle='#4a3a6a';g.beginPath();g.moveTo(x-18,y-14);g.lineTo(x-16,y-62);g.quadraticCurveTo(x,y-74,x+16,y-62);g.lineTo(x+18,y-14);g.closePath();g.fill();   g.strokeStyle='#a08040';g.lineWidth=1.6;g.stroke();g.fillStyle='#3a2a50';g.fillRect(x-22,y-22,44,8);g.fillStyle='#a08040';"
+   },
+   {
+    "cell": 2,
+    "key": "chn",
+    "count_on_map": 6,
+    "map": 29,
+    "map_name": "ห้องบัลลังก์ดาว",
+    "code_line": 6130,
+    "code": "chn(t,T){const x=t.x,y=t.y,fr=THG.ch[t.ci],pu=.5+.5*Math.sin(T*2+t.ci);PALSH(x,y+3,22,6);g.fillStyle='#3a3050';g.fillRect(x-12,y-50,24,52);g.fillStyle='#d8b050';g.fillRect(x-15,y-54,30,6);g.fillRect(x-14,y-4,28,5);   g.save();g.globalCompositeOperation='lighter';glowAt(x,y-72,fr?14:22,fr?'255,230,160':'190,170,255',fr?.3:.45+.2*pu);g.restore();   if(!fr){g.strokeStyle='#8a86a0';g.lineWidth=2.4;for(let k=0;k<8;k++){co"
+   },
+   {
+    "cell": 3,
+    "key": "sthr",
+    "count_on_map": 1,
+    "map": 29,
+    "map_name": "ห้องบัลลังก์ดาว",
+    "code_line": 6134,
+    "code": "sthr(t,T){const x=t.x,y=t.y,hb=palHB(T),end=gP5end();PALSH(x,y+6,110,22,.5);g.fillStyle='#2a1e44';g.fillRect(x-90,y-30,180,34);g.fillStyle='#d8b050';g.fillRect(x-94,y-34,188,6);   g.save();g.globalCompositeOperation='lighter';glowAt(x,y-120,170,end?'255,220,150':'170,110,255',end?.18:.22+.18*hb);g.restore();   g.fillStyle='#3a2a5a';g.beginPath();g.moveTo(x-70,y-30);g.lineTo(x-66,y-170);g.lineTo(x-40,y-200);g.lineTo(x"
+   },
+   {
+    "cell": 4,
+    "key": "q9cr",
+    "count_on_map": 40,
+    "map": 40,
+    "map_name": "ลานดาวลอย",
+    "code_line": 27981,
+    "code": "q9cr(t,T){const x=t.x,y=t.y,s=t.sc||1,v=t.v|0,C=[['150,230,255','#bfeaff','#5aa8d8'],['220,170,255','#e8d0ff','#9a6ad8'],['255,200,240','#ffd8f0','#d878b8']][v],pu=.6+.4*Math.sin(T*1.6+x*.01);PALSH(x,y+3,20*s,6*s,.35);   for(const[dx,h,w,r]of[[-9,30,8,-.3],[0,44,10,0],[10,26,7,.35],[-4,18,6,-.6]]){g.save();g.translate(x+dx*s,y);g.rotate(r);g.fillStyle=C[2];g.beginPath();g.moveTo(-w*s,0);g.lineTo(-w*.6*s,-h*s);g.lineT"
+   },
+   {
+    "cell": 5,
+    "key": "q9lamp",
+    "count_on_map": 9,
+    "map": 40,
+    "map_name": "ลานดาวลอย",
+    "code_line": 27990,
+    "code": "q9lamp(t,T){const x=t.x,y=t.y,f=.7+.3*Math.sin(T*2.4+t.v);g.strokeStyle='#6a5228';g.lineWidth=3;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-60);g.stroke();g.fillStyle='#c89a4a';g.fillRect(x-9,y-80,18,4);g.fillRect(x-9,y-62,18,4);   g.fillStyle='rgba(200,230,255,.3)';g.fillRect(x-7,y-76,14,14);g.save();g.translate(x,y-69);g.rotate(T*.8+t.v);g.fillStyle='#fff6d8';g.beginPath();for(let k=0;k<5;k++){const a=k/5*6.283-1.57,a"
+   },
+   {
+    "cell": 6,
+    "key": "q9gear",
+    "count_on_map": 4,
+    "map": 40,
+    "map_name": "ลานดาวลอย",
+    "code_line": 27985,
+    "code": "q9gear(t,T){const x=t.x,y=t.y,s=t.sc||1,v=t.v|0,a=T*(v%2?.25:-.18),fl=Math.sin(T*.8+v)*6*s,cy=y-70*s+fl;g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(x,y+4,46*s,12*s,0,0,7);g.fill();   g.save();g.translate(x,cy);g.rotate(a);g.fillStyle='#8a6a32';g.beginPath();for(let k=0;k<12;k++){const q=k/12*6.283;g.lineTo(Math.cos(q-.12)*58*s,Math.sin(q-.12)*58*s);g.lineTo(Math.cos(q-.08)*70*s,Math.sin(q-.08)*70*s);g.lineT"
+   },
+   {
+    "cell": 7,
+    "key": "q9lad",
+    "count_on_map": 1,
+    "map": 40,
+    "map_name": "ลานดาวลอย",
+    "code_line": 27993,
+    "code": "q9lad(t,T){const x=t.x,y=t.y;g.save();g.globalCompositeOperation='lighter';const gr=g.createLinearGradient(x-50,0,x+50,0);gr.addColorStop(0,'rgba(180,220,255,0)');gr.addColorStop(.5,'rgba(220,240,255,'+(.4+.1*Math.sin(T*2))+')');gr.addColorStop(1,'rgba(180,220,255,0)');g.fillStyle=gr;g.fillRect(x-50,y-20,100,400);   for(let k=0;k<10;k++){const q=(T*.4+k/10)%1;g.fillStyle='rgba(240,250,255,'+(.8*(1-q))+')';g.fillRect("
+   },
+   {
+    "cell": 8,
+    "key": "q9tel",
+    "count_on_map": 1,
+    "map": 40,
+    "map_name": "ลานดาวลอย",
+    "code_line": 27996,
+    "code": "q9tel(t,T){const x=t.x,y=t.y;PALSH(x,y+4,34,9,.4);g.fillStyle='#5a4a3a';for(const d of[-18,0,18]){g.save();g.translate(x+d*.4,y);g.rotate(d*.03);g.fillRect(-2,-40,4,40);g.restore()}   g.save();g.translate(x,y-42);g.rotate(-.7);g.fillStyle='#c89a4a';g.fillRect(-10,-50,20,90);g.fillStyle='#8a6a32';g.fillRect(-12,-56,24,10);g.fillStyle='#3a4a6a';g.beginPath();g.ellipse(0,-56,10,4,0,0,7);g.fill();g.restore();g.strokeStyl"
+   },
+   {
+    "cell": 9,
+    "key": "q9spire",
+    "count_on_map": 1,
+    "map": 40,
+    "map_name": "ลานดาวลอย",
+    "code_line": 27998,
+    "code": "q9spire(t,T){const x=t.x,y=t.y;g.save();g.globalAlpha=.85;g.fillStyle='#2a2440';g.beginPath();g.moveTo(x-50,y+80);g.lineTo(x-14,y-420);g.lineTo(x,y-470);g.lineTo(x+14,y-420);g.lineTo(x+50,y+80);g.closePath();g.fill();   g.strokeStyle='rgba(200,150,70,.7)';g.lineWidth=2;for(let k=0;k<8;k++){const yy=y+40-k*60,w=46-k*4.5;g.beginPath();g.moveTo(x-w,yy);g.lineTo(x+w,yy);g.stroke()}   g.globalCompositeOperation='lighter';"
+   },
+   {
+    "cell": 10,
+    "key": "q9tower",
+    "count_on_map": 1,
+    "map": 41,
+    "map_name": "วงแหวนเฟือง",
+    "code_line": 28195,
+    "code": "q9tower(t,T){const x=t.x,y=t.y;PALSH(x+10,y+8,90,22,.5);{const tg=g.createLinearGradient(x-80,0,x+80,0);tg.addColorStop(0,'#2a1e34');tg.addColorStop(.35,'#5a4868');tg.addColorStop(.6,'#46385a');tg.addColorStop(1,'#1e1628');g.fillStyle=tg}g.beginPath();g.moveTo(x-80,y);g.lineTo(x-60,y-300);g.lineTo(x+60,y-300);g.lineTo(x+80,y);g.closePath();g.fill();g.fillStyle='#4e3e58';g.fillRect(x-60,y-300,120,10);   g.strokeStyle="
+   },
+   {
+    "cell": 11,
+    "key": "q9gate2",
+    "count_on_map": 1,
+    "map": 41,
+    "map_name": "วงแหวนเฟือง",
+    "code_line": 28203,
+    "code": "q9gate2(t,T){const x=t.x,y=t.y;g.save();g.globalCompositeOperation='lighter';glowAt(x,y-40,50,'200,170,255',.4+.15*Math.sin(T*2));g.restore();g.strokeStyle='#c89a4a';g.lineWidth=6;g.beginPath();g.arc(x,y-40,34,0,7);g.stroke();g.save();g.translate(x,y-40);g.rotate(T*.6);g.strokeStyle='rgba(220,200,255,.7)';g.lineWidth=2;for(let k=0;k<8;k++){g.rotate(.785);g.beginPath();g.moveTo(10,0);g.lineTo(28,0);g.stroke()}g.restor"
+   },
+   {
+    "cell": 12,
+    "key": "wb9coc",
+    "count_on_map": 1,
+    "map": 42,
+    "map_name": "ทุ่งตาข่ายดาว",
+    "code_line": 28497,
+    "code": "wb9coc(t,T){const x=t.x,y=t.y,open=p6Past('p9kt'),pu=.6+.4*Math.sin(T*1.5);PALSH(x,y+6,70,18,.45);   /* ด้ายห้อย */g.strokeStyle='rgba(220,228,255,.8)';g.lineWidth=3;for(const d of[-30,0,30]){g.beginPath();g.moveTo(x+d,y-260);g.quadraticCurveTo(x+d*.6,y-220,x+d*.3,y-180);g.stroke()}   g.save();g.translate(x,y-110+Math.sin(T*.9)*4);   if(!open){g.save();g.globalCompositeOperation='lighter';glowAt(0,0,100,'200,215,255'"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_13",
+  "maps": [
+   "ย่านวงแหวนล่าง"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "mlant",
+    "count_on_map": 8,
+    "map": 31,
+    "map_name": "ย่านวงแหวนล่าง",
+    "code_line": 6932,
+    "code": "mlant(t,T){const x=t.x,y=t.y,i=t.li,act=MKF.on,lit=act?MKF.lit[i]:p6Past('p6fs'),pu=.75+.25*Math.sin(T*3+i);PALSH(x,y+2,10,3);g.fillStyle='#3a3028';g.fillRect(x-2.5,y-96,5,96);g.fillRect(x-8,y-4,16,5);g.beginPath();g.moveTo(x,y-96);g.quadraticCurveTo(x+14,y-104,x+18,y-92);g.lineWidth=2.5;g.strokeStyle='#3a3028';g.stroke();   const lx=x+18,ly=y-80+Math.sin(T*1.5+i)*1.2;g.fillStyle=lit?'#e85a3a':'#6a4a40';g.beginPath()"
+   },
+   {
+    "cell": 2,
+    "key": "meda",
+    "count_on_map": 1,
+    "map": 31,
+    "map_name": "ย่านวงแหวนล่าง",
+    "code_line": 6925,
+    "code": "meda(t,T){const x=t.x,y=t.y;PALSH(x,y+3,46,9);g.fillStyle='#5a3a20';g.fillRect(x-40,y-90,4,90);g.fillRect(x+36,y-90,4,90);g.fillRect(x-44,y-94,88,6);   for(let i=0;i<3;i++){const cx=x-26+i*26,sw=Math.sin(T*1.4+i)*2;g.fillStyle=['#8a2a2a','#2a3a6a','#6a4a1a'][i];g.beginPath();g.moveTo(cx-11,y-88);g.lineTo(cx+11,y-88);g.lineTo(cx+11+sw,y-34);g.lineTo(cx-11+sw,y-34);g.closePath();g.fill();     g.strokeStyle='#e0b050';g."
+   },
+   {
+    "cell": 3,
+    "key": "mhed",
+    "count_on_map": 1,
+    "map": 31,
+    "map_name": "ย่านวงแหวนล่าง",
+    "code_line": 6930,
+    "code": "mhed(t,T){const N=MAPS[31].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;campFolk(N.x,N.y,{c:'#22305a',sh:'#d8b050',hair:'#d8d8d8',hat:'#141826',f,s:1.25,k:7,arm:-.2},T);g.strokeStyle='#2a1a10';g.lineWidth=2;g.beginPath();g.moveTo(N.x-f*8,N.y-2);g.lineTo(N.x-f*11,N.y+14);g.stroke();g.fillStyle='#e0b050';g.beginPath();g.arc(N.x-f*8,N.y-3,2,0,7);g.fill();   g.font='11px system-ui';g.textAlign='center';g.fillStyle='#ff"
+   },
+   {
+    "cell": 4,
+    "key": "mfount",
+    "count_on_map": 1,
+    "map": 31,
+    "map_name": "ย่านวงแหวนล่าง",
+    "code_line": 6935,
+    "code": "mfount(t,T){const x=t.x,y=t.y;PALSH(x,y+10,80,22,.3);g.fillStyle='#a89c86';g.beginPath();g.ellipse(x,y,72,30,0,0,7);g.fill();g.fillStyle='#6a9ac8';g.beginPath();g.ellipse(x,y-4,62,24,0,0,7);g.fill();   g.strokeStyle='rgba(255,255,255,.5)';g.lineWidth=1.2;for(let k=0;k<3;k++){const q=(T*.5+k/3)%1;g.beginPath();g.ellipse(x,y-4,10+q*50,4+q*19,0,0,7);g.stroke()}   g.fillStyle='#d8ccb0';g.fillRect(x-8,y-60,16,56);g.fillSt"
+   },
+   {
+    "cell": 5,
+    "key": "mstage",
+    "count_on_map": 1,
+    "map": 31,
+    "map_name": "ย่านวงแหวนล่าง",
+    "code_line": 6939,
+    "code": "mstage(t,T){const x=t.x,y=t.y,fest=p6Past('p6fs');PALSH(x,y+6,110,14,.35);g.fillStyle='#6a4a2a';g.fillRect(x-110,y-26,220,26);g.strokeStyle='#3a2414';g.lineWidth=1.4;g.strokeRect(x-110,y-26,220,26);for(let i=1;i<8;i++){g.beginPath();g.moveTo(x-110+i*27.5,y-26);g.lineTo(x-110+i*27.5,y);g.stroke()}   g.fillStyle='#5a3a20';g.fillRect(x-112,y-110,6,84);g.fillRect(x+106,y-110,6,84);g.fillStyle='#8a2a3a';g.fillRect(x-116,y"
+   },
+   {
+    "cell": 6,
+    "key": "mgate",
+    "count_on_map": 1,
+    "map": 31,
+    "map_name": "ย่านวงแหวนล่าง",
+    "code_line": 6943,
+    "code": "mgate(t,T){const x=t.x,y=t.y;for(const s of[-1,1]){const tx=x+s*120,tg=g.createLinearGradient(tx-34,0,tx+34,0);tg.addColorStop(0,'#8a8070');tg.addColorStop(.5,'#d0c4ac');tg.addColorStop(1,'#7a7060');g.fillStyle=tg;g.fillRect(tx-34,y-170,68,170);g.strokeStyle='#4a4234';g.lineWidth=1.4;g.strokeRect(tx-34,y-170,68,170);g.fillStyle='#a89c86';for(let i=0;i<4;i++)g.fillRect(tx-38+i*20,y-184,14,16);g.fillStyle='#3a4a6a';g.f"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_14",
+  "maps": [
+   "เหมืองดาวคาร์น"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "kbld",
+    "count_on_map": 30,
+    "map": 35,
+    "map_name": "เหมืองดาวคาร์น",
+    "code_line": 8533,
+    "code": "kbld(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x+2,y+3,22*s,6*s,.35);g.fillStyle=['#6a4430','#5a3a28','#7a5038'][t.v];g.beginPath();g.ellipse(x,y-8*s,22*s,14*s,0,0,7);g.fill();g.fillStyle='rgba(255,220,180,.15)';g.beginPath();g.ellipse(x-6*s,y-14*s,10*s,5*s,-.3,0,7);g.fill();g.strokeStyle='#24140c';g.lineWidth=1;g.beginPath();g.ellipse(x,y-8*s,22*s,14*s,0,0,7);g.stroke()},  kcac(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x,"
+   },
+   {
+    "cell": 2,
+    "key": "kjunk",
+    "count_on_map": 22,
+    "map": 35,
+    "map_name": "เหมืองดาวคาร์น",
+    "code_line": 9845,
+    "code": "kjunk(t,T){const x=t.x,y=t.y;if(t.v===0){/* จอบปักดิน */g.fillStyle='rgba(20,10,4,.3)';g.beginPath();g.ellipse(x+3,y+1,12,4,0,0,7);g.fill();g.strokeStyle='#6e4a2a';g.lineWidth=3;g.beginPath();g.moveTo(x,y);g.lineTo(x+8,y-34);g.stroke();g.fillStyle='#8a8a92';g.beginPath();g.moveTo(x-8,y-36);g.quadraticCurveTo(x+8,y-44,x+22,y-30);g.lineTo(x+8,y-36);g.closePath();g.fill()}   else if(t.v===1){/* พลั่ว */g.fillStyle='rgba"
+   },
+   {
+    "cell": 3,
+    "key": "kcac",
+    "count_on_map": 12,
+    "map": 35,
+    "map_name": "เหมืองดาวคาร์น",
+    "code_line": 8534,
+    "code": "kcac(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x,y+2,12*s,4,.3);g.strokeStyle='#4a5a3a';g.lineWidth=7*s;g.lineCap='round';g.beginPath();g.moveTo(x,y);g.lineTo(x,y-46*s);g.stroke();g.lineWidth=5*s;g.beginPath();g.moveTo(x,y-20*s);g.lineTo(x-12*s,y-20*s);g.lineTo(x-12*s,y-34*s);g.moveTo(x,y-28*s);g.lineTo(x+11*s,y-28*s);g.lineTo(x+11*s,y-40*s);g.stroke();g.fillStyle='#ffb0d0';g.beginPath();g.arc(x,y-48*s,2.6*s,0,7);g.fill"
+   },
+   {
+    "cell": 4,
+    "key": "kwood",
+    "count_on_map": 10,
+    "map": 35,
+    "map_name": "เหมืองดาวคาร์น",
+    "code_line": 9831,
+    "code": "kwood(t,T){const x=t.x,y=t.y;PALSH(x+2,y+4,40,9,.4);const L=[[-30,0,64],[-28,-11,60],[-24,-22,52],[-14,-33,36]];   for(const[dx,dy,w]of L){const yy=y+dy;g.fillStyle='#5e3c22';g.fillRect(x+dx,yy-9,w,10);g.fillStyle='rgba(200,150,100,.3)';g.fillRect(x+dx,yy-9,w,2);g.fillStyle='#8a6440';g.beginPath();g.ellipse(x+dx+w,yy-4,4,5,0,0,7);g.fill();g.strokeStyle='#4a2e18';g.lineWidth=.8;g.beginPath();g.ellipse(x+dx+w,yy-4,2,2."
+   },
+   {
+    "cell": 5,
+    "key": "kspire",
+    "count_on_map": 9,
+    "map": 35,
+    "map_name": "เหมืองดาวคาร์น",
+    "code_line": 9823,
+    "code": "kspire(t,T){const x=t.x,y=t.y,s=t.sc||1,h=170*s,w=34*s;PALSH(x+6,y+5,w*1.5,w*.4,.42);   const C=[['#7a4a2e','#9a6440','#5a3420'],['#6e4230','#8e5c42','#4e2e1e'],['#845034','#a46e48','#603a24']][t.v];   g.fillStyle=C[2];g.beginPath();g.moveTo(x-w*1.2,y);g.lineTo(x-w*.9,y-h*.35);g.lineTo(x-w*.55,y-h*.62);g.lineTo(x-w*.75,y-h*.82);g.lineTo(x-w*.3,y-h);g.lineTo(x+w*.45,y-h*.96);g.lineTo(x+w*.7,y-h*.7);g.lineTo(x+w*.5,y-h"
+   },
+   {
+    "cell": 6,
+    "key": "kbox",
+    "count_on_map": 9,
+    "map": 35,
+    "map_name": "เหมืองดาวคาร์น",
+    "code_line": 9835,
+    "code": "kbox(t,T){const x=t.x,y=t.y;PALSH(x+2,y+4,34,8,.4);   const crate=(cx,cy,s)=>{g.fillStyle='#7a5432';g.fillRect(cx-14*s,cy-26*s,28*s,26*s);g.fillStyle='#5a3a20';g.fillRect(cx-14*s,cy-26*s,28*s,4*s);g.fillRect(cx-14*s,cy-4*s,28*s,4*s);g.strokeStyle='#4a2e18';g.lineWidth=2.4*s;g.beginPath();g.moveTo(cx-12*s,cy-22*s);g.lineTo(cx+12*s,cy-4*s);g.stroke();g.strokeStyle='rgba(220,170,120,.3)';g.lineWidth=1;g.strokeRect(cx-14"
+   },
+   {
+    "cell": 7,
+    "key": "kframe",
+    "count_on_map": 6,
+    "map": 35,
+    "map_name": "เหมืองดาวคาร์น",
+    "code_line": 9840,
+    "code": "kframe(t,T){const x=t.x,y=t.y,s=t.v?1:.9;PALSH(x,y+4,52*s,10,.4);g.lineCap='round';   for(const sx of[-1,1]){g.strokeStyle='#4a2e16';g.lineWidth=9*s;g.beginPath();g.moveTo(x+sx*40*s,y);g.lineTo(x+sx*34*s,y-120*s);g.stroke();g.strokeStyle='rgba(200,150,100,.3)';g.lineWidth=2;g.beginPath();g.moveTo(x+sx*40*s-3,y);g.lineTo(x+sx*34*s-3,y-120*s);g.stroke()}   g.strokeStyle='#5a3a1e';g.lineWidth=10*s;g.beginPath();g.moveTo"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_15",
+  "maps": [
+   "ผาท่าเรือเมฆ"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "phtree",
+    "count_on_map": 46,
+    "map": 38,
+    "map_name": "ผาท่าเรือเมฆ",
+    "code_line": 21178,
+    "code": "phtree(t,T){const x=t.x,y=t.y,s=t.sc||1,sw=Math.sin(T*1.2+x*.01)*2.4;PALSH(x-14*s,y+4,34*s,9*s,.38);   g.strokeStyle='#4a3424';g.lineWidth=7*s;g.lineCap='round';g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+6*s,y-50*s,x-22*s+sw*.3,y-96*s);g.stroke();g.lineWidth=3.4*s;g.beginPath();g.moveTo(x+2*s,y-50*s);g.lineTo(x-26*s+sw*.4,y-62*s);g.stroke();   const C=[['#4f7a3a','#6f9a4a','#8ab85a'],['#3f6a3a','#5a8a48','#7aa8"
+   },
+   {
+    "cell": 2,
+    "key": "phlamp",
+    "count_on_map": 35,
+    "map": 38,
+    "map_name": "ผาท่าเรือเมฆ",
+    "code_line": 21174,
+    "code": "phlamp(t,T){const x=t.x,y=t.y,nt=phNt(),sw=Math.sin(T*2+x*.03)*2;g.strokeStyle='#3a2a1c';g.lineWidth=2.4;g.beginPath();g.moveTo(x,y);g.lineTo(x,y-56);g.lineTo(x+8,y-60);g.stroke();   g.strokeStyle='#5a4a3a';g.lineWidth=1;g.beginPath();g.moveTo(x+8,y-60);g.lineTo(x+8+sw*.3,y-52);g.stroke();   g.fillStyle=nt>.15?'#ffcf7a':'#e8946a';g.beginPath();g.ellipse(x+8+sw*.3,y-46,5.6,7,0,0,7);g.fill();g.strokeStyle='rgba(90,40,2"
+   },
+   {
+    "cell": 3,
+    "key": "phbush",
+    "count_on_map": 30,
+    "map": 38,
+    "map_name": "ผาท่าเรือเมฆ",
+    "code_line": 21184,
+    "code": "phbush(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x,y+2,20*s,5*s,.3);const C=['#557a3c','#4a7040','#62863e'][t.v||0];for(const[dx,dy,r]of[[-10,-8,10],[6,-9,11],[-2,-15,9]]){g.fillStyle=C;g.beginPath();g.ellipse(x+dx*s,y+dy*s,r*s,r*.7*s,0,0,7);g.fill()}   g.fillStyle=t.v===1?'#f2a8c0':'#fff2c0';for(const[dx,dy]of[[-8,-12],[4,-16],[9,-8]]){g.beginPath();g.arc(x+dx*s,y+dy*s,1.8,0,7);g.fill()}},  navin(t,T){const N=MAPS[38]."
+   },
+   {
+    "cell": 4,
+    "key": "phrock",
+    "count_on_map": 24,
+    "map": 38,
+    "map_name": "ผาท่าเรือเมฆ",
+    "code_line": 21182,
+    "code": "phrock(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x+3,y+3,26*s,7*s,.38);g.fillStyle='#6e695e';g.beginPath();g.moveTo(x-24*s,y);g.lineTo(x-18*s,y-20*s);g.lineTo(x-2*s,y-30*s);g.lineTo(x+18*s,y-22*s);g.lineTo(x+24*s,y);g.closePath();g.fill();   g.fillStyle='#8a8476';g.beginPath();g.moveTo(x-18*s,y-20*s);g.lineTo(x-2*s,y-30*s);g.lineTo(x+4*s,y-16*s);g.lineTo(x-12*s,y-8*s);g.closePath();g.fill();g.fillStyle='rgba(110,150,70,"
+   },
+   {
+    "cell": 5,
+    "key": "phship",
+    "count_on_map": 4,
+    "map": 38,
+    "map_name": "ผาท่าเรือเมฆ",
+    "code_line": 21335,
+    "code": "phship(t,T){if(!gP8k())return;const i=t.v,B=PHBERTH[i],q=me.sty,fix=gP8rp()||(q&&((q.p8rp|0)>>i&1));phShipD(B.x,B.y,T,{f:B.f,dmg:!fix,nm:B.nm})},  phbk(t,T){const e=gP8g();if(e!==1)return;phShipD(t.x,t.y,T,{f:-1,dark:1,nm:'เรือดำ'})},  phdep(t,T){const x=t.x,y=t.y;PALSH(x+4,y+6,52,12,.4);g.fillStyle='#6a4a2c';g.fillRect(x-48,y-16,96,18);g.strokeStyle='#3a2414';g.lineWidth=1.4;g.strokeRect(x-48,y-16,96,18);   for(cons"
+   },
+   {
+    "cell": 6,
+    "key": "phring",
+    "count_on_map": 4,
+    "map": 38,
+    "map_name": "ผาท่าเรือเมฆ",
+    "code_line": 21344,
+    "code": "phring(t,T){const st=stCur(),q=me.sty;if(!st||!st.p8rp||!q||q.a!==1||((q.p8rp|0)>>t.v&1))return;const B=PHBERTH[t.v],x=B.r[0],y=B.r[1],pu=.6+.4*Math.sin(T*3+t.v);   g.strokeStyle='rgba(255,214,140,'+(.45+.35*pu)+')';g.lineWidth=2.4;g.setLineDash([8,6]);g.beginPath();g.ellipse(x,y,44,16,0,0,7);g.stroke();g.setLineDash([]);   g.font='16px system-ui';g.textAlign='center';g.fillText('🔨',x,y-24-pu*4)}}); /* ทับ: เรือเล็ก "
+   },
+   {
+    "cell": 7,
+    "key": "phskiff",
+    "count_on_map": 1,
+    "map": 38,
+    "map_name": "ผาท่าเรือเมฆ",
+    "code_line": 21164,
+    "code": "phskiff(t,T){const x=t.x,y=t.y+Math.sin(T*1.3)*4,a=Math.sin(T*.9)*.05;g.save();g.fillStyle='rgba(120,140,170,.22)';g.beginPath();g.ellipse(t.x,t.y+20,60,12,0,0,7);g.fill();g.translate(x,y);g.rotate(a);   g.fillStyle='#d8ccb0';g.beginPath();g.ellipse(0,-78,40,24,0,0,7);g.fill();g.strokeStyle='#7a6a4a';g.lineWidth=1.2;g.stroke();g.strokeStyle='rgba(120,100,70,.5)';for(const dx of[-20,0,20]){g.beginPath();g.moveTo(dx,-1"
+   },
+   {
+    "cell": 8,
+    "key": "phbk",
+    "count_on_map": 1,
+    "map": 38,
+    "map_name": "ผาท่าเรือเมฆ",
+    "code_line": 21336,
+    "code": "phbk(t,T){const e=gP8g();if(e!==1)return;phShipD(t.x,t.y,T,{f:-1,dark:1,nm:'เรือดำ'})},  phdep(t,T){const x=t.x,y=t.y;PALSH(x+4,y+6,52,12,.4);g.fillStyle='#6a4a2c';g.fillRect(x-48,y-16,96,18);g.strokeStyle='#3a2414';g.lineWidth=1.4;g.strokeRect(x-48,y-16,96,18);   for(const[dx,dy,w,h,c]of[[-38,-40,30,24,'#8a6440'],[-4,-44,34,28,'#946c46'],[30,-36,24,20,'#7a5636'],[-20,-62,26,20,'#8a6440'],[12,-64,22,18,'#a07a50']]){g"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_16",
+  "maps": [
+   "นครรากลึก",
+   "ลานหอคอยวิญญาณ",
+   "ดินแดนหลังรอยแยก"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "pbpil",
+    "count_on_map": 8,
+    "map": 44,
+    "map_name": "นครรากลึก",
+    "code_line": 30521,
+    "code": "pbpil(t,T){const S=pbPilSpr(t.v),x=t.x,y=t.y,r=t.r;PALSH(x,y+5,r*1.5,r*.42,.5);const a0=g.globalAlpha,bh=me.cls&&Math.abs(me.x-x)<r*1.35&&me.y<y-8&&me.y>y-S.H*.8;g.globalAlpha=Math.min(a0,bh?.45:1);g.drawImage(S.cv,x-S.bx,y-S.by);   if(t.v%3===1){g.save();g.globalCompositeOperation='lighter';const pu=.6+.4*Math.sin(T*1.7+t.v);for(const[dx,dy]of S.cr)glowAt(x+dx,y+dy,14,'140,220,255',.32*pu);g.restore()}g.globalAlpha="
+   },
+   {
+    "cell": 2,
+    "key": "pbtrunk",
+    "count_on_map": 5,
+    "map": 44,
+    "map_name": "นครรากลึก",
+    "code_line": 30518,
+    "code": "pbtrunk(t,T){const S=pbTrunkSpr(t.v),x=t.x,y=t.y,r=S.r;let fa=1;if(me.cls&&Math.abs(me.x-x)<r*1.15&&me.y<y-10&&me.y>y-S.H*.7)fa=.42;const a0=g.globalAlpha;fa=Math.min(a0,fa);g.globalAlpha=fa;g.drawImage(S.cv,x-S.bx,y-S.by);   /* เส้นยางทองวิ่งขึ้นลำต้นเมื่อรดแล้ว + หน้าต่างกะพริบ */const lit=pbFilled(t.v),pu=.6+.4*Math.sin(T*2+t.v);g.save();g.globalCompositeOperation='lighter';if(lit){g.globalAlpha=fa*(.55+.25*pu);g."
+   },
+   {
+    "cell": 3,
+    "key": "pbmouth",
+    "count_on_map": 5,
+    "map": 44,
+    "map_name": "นครรากลึก",
+    "code_line": 30532,
+    "code": "pbmouth(t,T){const i=t.v,x=t.x,y=t.y,lit=pbFilled(i),pu=.5+.5*Math.sin(T*2.4+i);g.fillStyle='#120a04';g.beginPath();g.ellipse(x,y,26,12,0,0,7);g.fill();g.strokeStyle='#6a4c30';g.lineWidth=5;g.beginPath();g.ellipse(x,y-2,28,13,0,3.3,6.1);g.stroke();   if(lit){g.fillStyle='rgba(255,190,80,.85)';g.beginPath();g.ellipse(x,y+1,18,7,0,0,7);g.fill();g.save();g.globalCompositeOperation='lighter';glowAt(x,y,46,'255,190,80',.3"
+   },
+   {
+    "cell": 4,
+    "key": "pblift",
+    "count_on_map": 1,
+    "map": 44,
+    "map_name": "นครรากลึก",
+    "code_line": 30561,
+    "code": "pblift(t,T){const x=t.x,y=t.y,sw=Math.sin(T*.8)*3;g.strokeStyle='rgba(120,90,60,.9)';g.lineWidth=3;for(const s of[-26,26]){g.beginPath();g.moveTo(x+s*.4,y-260);g.lineTo(x+s+sw,y-30);g.stroke()}   g.fillStyle='#6a4c30';g.beginPath();g.moveTo(x-34+sw,y-32);g.lineTo(x+34+sw,y-32);g.lineTo(x+28+sw,y+4);g.lineTo(x-28+sw,y+4);g.closePath();g.fill();g.strokeStyle='#3a2616';g.lineWidth=1.6;g.stroke();   g.strokeStyle='rgba(1"
+   },
+   {
+    "cell": 5,
+    "key": "pbthu",
+    "count_on_map": 1,
+    "map": 44,
+    "map_name": "นครรากลึก",
+    "code_line": 30565,
+    "code": "pbthu(t,T){const N=MAPS[44]&&MAPS[44].npc2;if(!N||N.x<0)return;const f=me.x<N.x?-1:1;try{NPC3[43].d(N.x,N.y,f,T)}catch(e){try{thuD0(N.x,N.y,f,T)}catch(e2){}}npvLbl(N.n,N.x,N.y-44,'#c8f0a8');try{npcSay('thu44',N.x,N.y,PBTHUSAY,190,50)}catch(e){}}}); const PBFW={},PBTHUSAY=['นี่บ้านข้าเอง! โพรงชั้นสามของแม่ไม้','ทิลกินขนมมอสไปห้าก้อนแล้ว…','เวลาพูดกับเฒ่าแก่นไม้ต้องพูดช้า ๆ นะ ท่านฟังทีละคำ','ข้าเล่าเรื่องฟ้าให้เด็ก ๆ "
+   },
+   {
+    "cell": 6,
+    "key": "u22slamp",
+    "count_on_map": 16,
+    "map": 5,
+    "map_name": "ลานหอคอยวิญญาณ",
+    "code_line": 11939,
+    "code": "u22slamp(t,T){const x=t.x,y=t.y,h=100;U22S(x+2,y+2,8,3,.4);g.fillStyle='#3a3248';g.fillRect(x-2.5,y-h,5,h);g.fillRect(x-8,y-5,16,5);g.strokeStyle='#3a3248';g.lineWidth=2.5;g.beginPath();g.moveTo(x,y-h);g.quadraticCurveTo(x+10,y-h-8,x+16,y-h+2);g.stroke();    const fy=y-h+16+Math.sin(T*2+x)*2.5,pu=.6+.4*Math.sin(T*3+x);glowAt(x+16,fy,46,'140,170,255',.28*pu+.12);g.fillStyle='rgba(20,16,40,.8)';g.beginPath();g.moveTo(x"
+   },
+   {
+    "cell": 7,
+    "key": "u22sobel",
+    "count_on_map": 10,
+    "map": 5,
+    "map_name": "ลานหอคอยวิญญาณ",
+    "code_line": 11942,
+    "code": "u22sobel(t,T){const x=t.x,y=t.y,h=80,w=13;U22S(x+4,y+3,w*1.8,6,.45);g.fillStyle='#4a4062';g.fillRect(x-w-4,y-10,w*2+8,10);g.fillStyle='#5a5076';g.beginPath();g.moveTo(x-w,y-10);g.lineTo(x-w*.6,y-h);g.lineTo(x+w*.6,y-h);g.lineTo(x+w,y-10);g.closePath();g.fill();g.strokeStyle='#160f24';g.lineWidth=1.1;g.stroke();    g.fillStyle='#6e6490';g.beginPath();g.moveTo(x-w,y-10);g.lineTo(x-w*.6,y-h);g.lineTo(x-w*.1,y-h);g.lineT"
+   },
+   {
+    "cell": 8,
+    "key": "u22bench",
+    "count_on_map": 10,
+    "map": 5,
+    "map_name": "ลานหอคอยวิญญาณ",
+    "code_line": 11945,
+    "code": "u22bench(t,T){const x=t.x,y=t.y;U22S(x+3,y+3,26,6,.45);g.fillStyle='#6e6688';g.fillRect(x-22,y-14,44,7);g.strokeStyle='#221c34';g.lineWidth=1;g.strokeRect(x-22,y-14,44,7);g.fillStyle='#5a5274';g.fillRect(x-18,y-7,7,7);g.fillRect(x+11,y-7,7,7);g.strokeRect(x-18,y-7,7,7);g.strokeRect(x+11,y-7,7,7);g.fillStyle='rgba(255,255,255,.12)';g.fillRect(x-22,y-14,44,2)},  /* wind */  u22mill(t,T){const x=t.x,y=t.y,h=90;U22S(x+5,"
+   },
+   {
+    "cell": 9,
+    "key": "u13vcry",
+    "count_on_map": 27,
+    "map": 11,
+    "map_name": "ดินแดนหลังรอยแยก",
+    "code_line": 10946,
+    "code": "u13vcry(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x+3,y+3,22*s,7*s,.4);const C=[['#7ae8ff','#3aa8d8'],['#ff8ae0','#c84aa8'],['#b89aff','#7a5ad8']][t.v];const pu=.6+.4*Math.sin(T*1.8+x*.01);glowAt(x,y-26*s,46*s,C[0]==='#7ae8ff'?'120,230,255':C[0]==='#ff8ae0'?'255,130,220':'180,150,255',.22+.14*pu);   [[-12,48,-.3],[0,70,0],[11,40,.35],[-4,30,-.1],[6,26,.2]].forEach(([dx,hh,a])=>{const bx=x+dx*s,h=hh*s,w=7*s;g.save();g.tr"
+   },
+   {
+    "cell": 10,
+    "key": "u13obel",
+    "count_on_map": 16,
+    "map": 11,
+    "map_name": "ดินแดนหลังรอยแยก",
+    "code_line": 10936,
+    "code": "u13obel(t,T){const x=t.x,y=t.y,s=t.sc||1,h=150*s,w=18*s;PALSH(x+5,y+4,w*1.8,w*.5,.45);   const P=[[x-w,y],[x-w*.8,y-h*.86],[x,y-h],[x+w*.8,y-h*.86],[x+w,y]];g.fillStyle='#241c3a';g.beginPath();P.forEach(([a,b],i)=>i?g.lineTo(a,b):g.moveTo(a,b));g.closePath();g.fill();g.strokeStyle='#0a0614';g.lineWidth=1.2;g.stroke();   g.fillStyle='#382c58';g.beginPath();g.moveTo(x-w,y);g.lineTo(x-w*.8,y-h*.86);g.lineTo(x,y-h);g.lin"
+   },
+   {
+    "cell": 11,
+    "key": "u13arch",
+    "count_on_map": 8,
+    "map": 11,
+    "map_name": "ดินแดนหลังรอยแยก",
+    "code_line": 10941,
+    "code": "u13arch(t,T){const x=t.x,y=t.y,w=60,h=150;[-1,1].forEach(sd=>{const px=x+sd*w;PALSH(px+4,y+3,18,6,.4);g.fillStyle='#2e2446';g.fillRect(px-11,y-h*(sd<0?1:.72),22,h*(sd<0?1:.72));g.fillStyle='#41345e';g.fillRect(px-11,y-h*(sd<0?1:.72),8,h*(sd<0?1:.72));g.strokeStyle='#0a0614';g.lineWidth=1;g.strokeRect(px-11,y-h*(sd<0?1:.72),22,h*(sd<0?1:.72));     for(let k=1;k<5;k++){g.strokeStyle='rgba(10,6,20,.6)';g.beginPath();g.m"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_17",
+  "maps": [
+   "สะพานลมตะวันตก",
+   "ป่าผลึกสายฟ้า",
+   "หุบเหวลมหวน",
+   "บึงหมอกม่วง"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "u22chime",
+    "count_on_map": 14,
+    "map": 12,
+    "map_name": "สะพานลมตะวันตก",
+    "code_line": 11950,
+    "code": "u22chime(t,T){const x=t.x,y=t.y,h=96;g.fillStyle='#5a4a3a';g.fillRect(x-2,y-h,4,h);g.fillRect(x-2,y-h,22,3);const sw=Math.sin(T*2.4+x)*5;g.strokeStyle='rgba(60,50,40,.9)';g.lineWidth=.8;    [4,9,14,19].forEach((dx,k)=>{const L=14+k*4,ex=x+dx+sw*(.6+k*.1),ey=y-h+L;g.beginPath();g.moveTo(x+dx,y-h+3);g.lineTo(ex,ey);g.stroke();g.fillStyle=['#c8d8e8','#b8c8d8','#d8e8f0','#a8b8c8'][k];g.fillRect(ex-1.5,ey,3,10)});    if(M"
+   },
+   {
+    "cell": 2,
+    "key": "u22rope",
+    "count_on_map": 14,
+    "map": 12,
+    "map_name": "สะพานลมตะวันตก",
+    "code_line": 11953,
+    "code": "u22rope(t,T){const x=t.x,y=t.y;U22S(x+2,y+2,26,4,.35);[-24,24].forEach(dx=>{g.fillStyle='#6a5038';g.fillRect(x+dx-2.5,y-52,5,52);g.fillStyle='#8a6a48';g.fillRect(x+dx-2.5,y-52,2,52)});g.strokeStyle='#c8b080';g.lineWidth=1.6;g.beginPath();g.moveTo(x-24,y-46);g.quadraticCurveTo(x,y-34,x+24,y-46);g.stroke();    const C=['#d84a3a','#e8b040','#4a8ad8','#5ab060','#d84a3a'];for(let k=0;k<5;k++){const u=(k+.5)/5,px=x-24+u*48"
+   },
+   {
+    "cell": 3,
+    "key": "u22mill",
+    "count_on_map": 8,
+    "map": 12,
+    "map_name": "สะพานลมตะวันตก",
+    "code_line": 11947,
+    "code": "u22mill(t,T){const x=t.x,y=t.y,h=90;U22S(x+5,y+4,30,8,.45);g.fillStyle='#8a7a66';g.beginPath();g.moveTo(x-22,y);g.lineTo(x-14,y-h);g.lineTo(x+14,y-h);g.lineTo(x+22,y);g.closePath();g.fill();g.strokeStyle='#3a3026';g.lineWidth=1.2;g.stroke();g.fillStyle='#a8977e';g.beginPath();g.moveTo(x-22,y);g.lineTo(x-14,y-h);g.lineTo(x-6,y-h);g.lineTo(x-10,y);g.closePath();g.fill();    g.fillStyle='#6a3a2a';g.beginPath();g.moveTo("
+   },
+   {
+    "cell": 4,
+    "key": "u22bcry",
+    "count_on_map": 20,
+    "map": 16,
+    "map_name": "ป่าผลึกสายฟ้า",
+    "code_line": 11925,
+    "code": "u22bcry(t,T){const x=t.x,y=t.y,s=t.sc||1;U22S(x+3,y+3,24*s,7*s,.4);const C=t.v?['#fff27a','#d8b030','255,240,120']:['#9af0ff','#3ab0e0','150,230,255'];const pu=.6+.4*Math.sin(T*2.2+x*.01),zap=((T*.9+x*.007)%1)<.08;glowAt(x,y-30*s,50*s,C[2],.2+.14*pu+(zap?.35:0));    [[-13,50,-.32],[0,78,0],[12,44,.36],[-5,32,-.12],[7,28,.2]].forEach(([dx,hh,a])=>{const bx=x+dx*s,h=hh*s,w=7.5*s;g.save();g.translate(bx,y);g.rotate(a);g"
+   },
+   {
+    "cell": 5,
+    "key": "u22rod",
+    "count_on_map": 12,
+    "map": 16,
+    "map_name": "ป่าผลึกสายฟ้า",
+    "code_line": 11922,
+    "code": "u22rod(t,T){const x=t.x,y=t.y,h=150;U22S(x+4,y+3,16,5,.45);g.fillStyle='#2a3044';g.beginPath();g.moveTo(x-14,y);g.lineTo(x-8,y-24);g.lineTo(x+8,y-24);g.lineTo(x+14,y);g.closePath();g.fill();g.strokeStyle='#0a0e18';g.lineWidth=1;g.stroke();    g.fillStyle='#8a94a8';g.fillRect(x-2.5,y-h,5,h-24);g.fillStyle='#c8d0e0';g.fillRect(x-2.5,y-h,1.6,h-24);for(let k=0;k<4;k++){g.fillStyle='#4a5470';g.fillRect(x-6,y-40-k*26,12,4)"
+   },
+   {
+    "cell": 6,
+    "key": "u22dbush",
+    "count_on_map": 20,
+    "map": 17,
+    "map_name": "หุบเหวลมหวน",
+    "code_line": 11965,
+    "code": "u22dbush(t,T){const x=t.x,y=t.y;g.strokeStyle='#d8ccb0';g.lineWidth=1.4;g.lineCap='round';[[-10,-14],[-4,-20],[3,-18],[9,-12],[0,-10]].forEach(([dx,dy])=>{g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+dx*.4,y+dy*.6,x+dx,y+dy);g.stroke();g.beginPath();g.moveTo(x+dx*.6,y+dy*.6);g.lineTo(x+dx*.6+(dx>0?4:-4),y+dy*.6-4);g.stroke()});g.lineCap='butt'} }); /* ---- บทนำ: ปุ่มข้ามไม่ทับแถบเลือดบอส · กล่องบทพูดช่วงต่อสู้/จบ"
+   },
+   {
+    "cell": 7,
+    "key": "u22hoodoo",
+    "count_on_map": 14,
+    "map": 17,
+    "map_name": "หุบเหวลมหวน",
+    "code_line": 11956,
+    "code": "u22hoodoo(t,T){const x=t.x,y=t.y,s=t.sc||1,h=[130,96,150][t.v]*s,w=16*s;U22S(x+6,y+5,w*2.2,8*s,.45);const C=['#b07448','#9a5e3a','#c88a5a'];g.fillStyle=C[1];g.beginPath();g.moveTo(x-w*1.3,y);g.quadraticCurveTo(x-w*.6,y-h*.4,x-w*.8,y-h*.7);g.quadraticCurveTo(x-w*.5,y-h*.88,x-w*.7,y-h);    g.lineTo(x+w*.7,y-h);g.quadraticCurveTo(x+w*.5,y-h*.85,x+w*.85,y-h*.65);g.quadraticCurveTo(x+w*.6,y-h*.35,x+w*1.3,y);g.closePath();"
+   },
+   {
+    "cell": 8,
+    "key": "u22tumb",
+    "count_on_map": 10,
+    "map": 17,
+    "map_name": "หุบเหวลมหวน",
+    "code_line": 11963,
+    "code": "u22tumb(t,T){const p=(T*.12+t.ph)%1,x=t.x-120+p*240,y=t.y-Math.abs(Math.sin(p*18))*10,a=p*30,al=Math.min(1,Math.sin(p*Math.PI)*3);g.save();g.globalAlpha*=al;U22S(x,t.y+2,9,3,.3);g.translate(x,y-10);g.rotate(a);g.strokeStyle='#8a6a40';g.lineWidth=1.1;g.beginPath();    for(let k=0;k<7;k++){g.moveTo(0,0);g.arc(0,0,8+(k%3)*1.5,k*.9,k*.9+2.2)}g.stroke();g.strokeStyle='#b0905a';g.beginPath();g.arc(0,0,6,0,7);g.stroke();g.r"
+   },
+   {
+    "cell": 9,
+    "key": "u22narch",
+    "count_on_map": 5,
+    "map": 17,
+    "map_name": "หุบเหวลมหวน",
+    "code_line": 11960,
+    "code": "u22narch(t,T){const x=t.x,y=t.y,w=84,h=150;[-1,1].forEach(sd=>{U22S(x+sd*w+4,y+3,22,7,.4)});g.fillStyle='#a46a44';g.beginPath();g.moveTo(x-w-24,y);g.quadraticCurveTo(x-w-30,y-h*.6,x-w*.6,y-h);g.quadraticCurveTo(x,y-h-26,x+w*.6,y-h);g.quadraticCurveTo(x+w+30,y-h*.6,x+w+24,y);    g.lineTo(x+w-8,y);g.quadraticCurveTo(x+w-4,y-h*.55,x+w*.4,y-h*.72);g.quadraticCurveTo(x,y-h*.84,x-w*.4,y-h*.72);g.quadraticCurveTo(x-w+4,y-h*"
+   },
+   {
+    "cell": 10,
+    "key": "u13shr",
+    "count_on_map": 36,
+    "map": 20,
+    "map_name": "บึงหมอกม่วง",
+    "code_line": 10973,
+    "code": "u13shr(t,T){const x=t.x,y=t.y,C=[['#c87aff','200,120,255'],['#7ad8ff','120,210,255'],['#ff8ac8','255,140,200']][t.v];const pu=.6+.4*Math.sin(T*1.7+x);glowAt(x,y-12,30,C[1],.2*pu+.08);   [[-8,14,.8],[0,22,1],[9,12,.7],[4,8,.55]].forEach(([dx,h,s])=>{g.fillStyle='#d8d0e0';g.fillRect(x+dx-1.4*s,y-h,2.8*s,h);g.fillStyle=C[0];g.beginPath();g.ellipse(x+dx,y-h,8*s,5*s,0,Math.PI,7);g.fill();g.fillStyle='rgba(255,255,255,.55)"
+   },
+   {
+    "cell": 11,
+    "key": "u13dtree",
+    "count_on_map": 21,
+    "map": 20,
+    "map_name": "บึงหมอกม่วง",
+    "code_line": 10963,
+    "code": "u13dtree(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x+6,y+5,40*s,10*s,.45);g.strokeStyle='#1e1622';g.lineCap='round';   const br=(x0,y0,a,L,w,d)=>{const x1=x0+Math.cos(a)*L,y1=y0+Math.sin(a)*L;g.lineWidth=w;g.beginPath();g.moveTo(x0,y0);g.quadraticCurveTo((x0+x1)/2+Math.sin(d+x)*6,(y0+y1)/2,x1,y1);g.stroke();     if(d<3){br(x1,y1,a-.5-((d*7+t.v)%3)*.1,L*.68,w*.62,d+1);br(x1,y1,a+.45,L*.62,w*.6,d+1)}else{/* มอสย้อย */cons"
+   },
+   {
+    "cell": 12,
+    "key": "u13lamp",
+    "count_on_map": 20,
+    "map": 20,
+    "map_name": "บึงหมอกม่วง",
+    "code_line": 10969,
+    "code": "u13lamp(t,T){const x=t.x,y=t.y,h=96;PALSH(x+2,y+2,8,3,.4);g.strokeStyle='#2a1e14';g.lineWidth=3;g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x-4,y-h*.5,x+2,y-h);g.lineTo(x+16,y-h+4);g.stroke();   const fy=y-h+16+Math.sin(T*2+x)*2,fl=.6+.3*Math.sin(T*3+x);g.strokeStyle='#2a1e14';g.lineWidth=.8;g.beginPath();g.moveTo(x+16,y-h+4);g.lineTo(x+16,fy-8);g.stroke();glowAt(x+16,fy,44,'140,255,200',.3*fl+.1);   g.fillStyle='"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_18",
+  "maps": [
+   "ซากนครใต้เมฆ",
+   "ห้วงบัลลังก์เงา"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "u22clamp",
+    "count_on_map": 16,
+    "map": 21,
+    "map_name": "ซากนครใต้เมฆ",
+    "code_line": 11906,
+    "code": "u22clamp(t,T){const x=t.x,y=t.y,h=96;U22S(x+2,y+2,8,3,.4);g.fillStyle='#5a5258';g.fillRect(x-2.5,y-h,5,h);g.fillRect(x-7,y-4,14,4);g.fillStyle='#7a7078';g.fillRect(x-2.5,y-h,2,h);    const pu=.6+.4*Math.sin(T*2+x);glowAt(x,y-h-8,46,'110,190,255',.28*pu+.1);g.fillStyle='#4a78b0';g.beginPath();g.moveTo(x,y-h-22);g.lineTo(x+6,y-h-8);g.lineTo(x,y-h);g.lineTo(x-6,y-h-8);g.closePath();g.fill();g.fillStyle='rgba(200,240,255"
+   },
+   {
+    "cell": 2,
+    "key": "u22tcol",
+    "count_on_map": 14,
+    "map": 21,
+    "map_name": "ซากนครใต้เมฆ",
+    "code_line": 11896,
+    "code": "u22tcol(t,T){const x=t.x,y=t.y,d=t.v?1:-1,L=96;U22S(x,y+4,L*.6,10,.4);for(let i=0;i<4;i++){const cx=x+d*(i-1.5)*24,cy=y-12+i*1.2;g.fillStyle=i%2?'#a89a84':'#b8aa92';g.beginPath();g.ellipse(cx,cy,12,14,0,0,7);g.fill();g.fillRect(cx-12*0,cy-14,0,28);    g.fillStyle=i%2?'#a89a84':'#b8aa92';g.fillRect(cx-11,cy-14,22,28);g.strokeStyle='rgba(60,50,40,.6)';g.lineWidth=1;for(let q=-2;q<=2;q++){g.beginPath();g.moveTo(cx-11,cy"
+   },
+   {
+    "cell": 3,
+    "key": "u22arch",
+    "count_on_map": 8,
+    "map": 21,
+    "map_name": "ซากนครใต้เมฆ",
+    "code_line": 11899,
+    "code": "u22arch(t,T){const x=t.x,y=t.y,w=58,h=150;[-1,1].forEach(sd=>{const px=x+sd*w,hh=h*(sd<0?1:.7);U22S(px+4,y+3,18,6,.4);g.fillStyle='#b4a68c';g.fillRect(px-11,y-hh,22,hh);g.fillStyle='#c8bca2';g.fillRect(px-11,y-hh,7,hh);g.strokeStyle='rgba(50,40,34,.7)';g.lineWidth=1;g.strokeRect(px-11,y-hh,22,hh);     for(let k=1;k<6;k++){g.beginPath();g.moveTo(px-11,y-k*hh/6);g.lineTo(px+11,y-k*hh/6);g.stroke()}});    g.fillStyle='#"
+   },
+   {
+    "cell": 4,
+    "key": "u22head",
+    "count_on_map": 8,
+    "map": 21,
+    "map_name": "ซากนครใต้เมฆ",
+    "code_line": 11903,
+    "code": "u22head(t,T){const x=t.x,y=t.y,d=t.v?1:-1;U22S(x+4,y+4,34,10,.45);g.fillStyle='#a49884';g.beginPath();g.ellipse(x,y-24,30,28,d*.3,0,7);g.fill();g.strokeStyle='rgba(50,42,36,.8)';g.lineWidth=1.2;g.stroke();    g.fillStyle='#bcb09a';g.beginPath();g.ellipse(x-d*6,y-30,20,18,d*.3,0,7);g.fill();g.fillStyle='rgba(40,34,30,.7)';g.beginPath();g.ellipse(x+d*4,y-32,4,2.4,0,0,7);g.ellipse(x+d*16,y-28,4,2.4,0,0,7);g.fill();g.str"
+   },
+   {
+    "cell": 5,
+    "key": "u13col",
+    "count_on_map": 26,
+    "map": 22,
+    "map_name": "ห้วงบัลลังก์เงา",
+    "code_line": 10949,
+    "code": "u13col(t,T){const x=t.x,y=t.y,h=[150,95,60][t.v],w=17;PALSH(x+5,y+4,w*1.7,w*.5,.45);g.fillStyle='#2a2438';g.fillRect(x-w-5,y-12,w*2+10,12);g.strokeStyle='#08060e';g.lineWidth=1;g.strokeRect(x-w-5,y-12,w*2+10,12);   const gr=g.createLinearGradient(x-w,0,x+w,0);gr.addColorStop(0,'#2e2840');gr.addColorStop(.35,'#4e4666');gr.addColorStop(1,'#221c30');g.fillStyle=gr;g.beginPath();g.moveTo(x-w,y-12);g.lineTo(x-w,y-h);for(l"
+   },
+   {
+    "cell": 6,
+    "key": "u13braz",
+    "count_on_map": 22,
+    "map": 22,
+    "map_name": "ห้วงบัลลังก์เงา",
+    "code_line": 10957,
+    "code": "u13braz(t,T){const x=t.x,y=t.y;PALSH(x+3,y+3,16,5,.45);g.fillStyle='#2a2230';g.fillRect(x-3,y-36,6,36);g.fillRect(x-10,y-4,20,4);g.fillStyle='#4a3a2a';g.beginPath();g.moveTo(x-16,y-38);g.lineTo(x+16,y-38);g.lineTo(x+10,y-28);g.lineTo(x-10,y-28);g.closePath();g.fill();g.strokeStyle='#c8a050';g.lineWidth=1.2;g.stroke();   const fl=.7+.2*Math.sin(T*7+x)+.1*Math.sin(T*17+x);glowAt(x,y-46,52,'190,110,255',.32*fl);[[0,1],["
+   },
+   {
+    "cell": 7,
+    "key": "u13ban",
+    "count_on_map": 14,
+    "map": 22,
+    "map_name": "ห้วงบัลลังก์เงา",
+    "code_line": 10960,
+    "code": "u13ban(t,T){const x=t.x,y=t.y,h=140;PALSH(x+2,y+2,8,3,.4);g.fillStyle='#2a1e14';g.fillRect(x-2,y-h,4,h);g.fillRect(x-14,y-h,28,3);g.fillStyle='#c8a050';g.beginPath();g.arc(x,y-h-3,3,0,7);g.fill();   const sw=Math.sin(T*1.4+x)*3,C=t.v?['#5a1428','#3a0c1a']:['#3a1a5a','#24103a'];g.fillStyle=C[0];g.beginPath();g.moveTo(x-12,y-h+3);g.lineTo(x+12,y-h+3);g.lineTo(x+12+sw,y-h+60);g.lineTo(x+6+sw,y-h+52);g.lineTo(x+2+sw,y-h+"
+   },
+   {
+    "cell": 8,
+    "key": "u13knt",
+    "count_on_map": 11,
+    "map": 22,
+    "map_name": "ห้วงบัลลังก์เงา",
+    "code_line": 10953,
+    "code": "u13knt(t,T){const x=t.x,y=t.y,d=t.v?-1:1;PALSH(x+4,y+4,26,8,.45);g.fillStyle='#2a2438';g.fillRect(x-22,y-10,44,10);g.strokeStyle='#08060e';g.lineWidth=1;g.strokeRect(x-22,y-10,44,10);const S='#4a4462',SD='#2e2a40';   g.fillStyle=SD;g.beginPath();g.ellipse(x+d*8,y-14,12,6,0,0,7);g.fill();g.fillStyle=S;g.beginPath();g.moveTo(x-12,y-14);g.lineTo(x-10,y-58);g.lineTo(x+10,y-58);g.lineTo(x+12,y-14);g.closePath();g.fill();g"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_19",
+  "maps": [
+   "สุสานอัศวินร้อยดวง",
+   "แกนพิภพ"
+  ],
+  "objects": [
+   {
+    "cell": 1,
+    "key": "u22swd",
+    "count_on_map": 26,
+    "map": 25,
+    "map_name": "สุสานอัศวินร้อยดวง",
+    "code_line": 11909,
+    "code": "u22swd(t,T){const x=t.x,y=t.y,a=[-.12,.08,.2][t.v];U22S(x+2,y+2,9,3,.4);g.save();g.translate(x,y);g.rotate(a);g.fillStyle='#9aa0a8';g.beginPath();g.moveTo(-2.6,0);g.lineTo(-2.6,-40);g.lineTo(0,-46);g.lineTo(2.6,-40);g.lineTo(2.6,0);g.closePath();g.fill();g.fillStyle='#c8ccd2';g.fillRect(-2.6,-40,1.2,40);    g.fillStyle='#4a3a2a';g.fillRect(-9,-50,18,4);g.fillRect(-1.8,-62,3.6,12);g.fillStyle='#c8a050';g.beginPath();g"
+   },
+   {
+    "cell": 2,
+    "key": "u22tomb",
+    "count_on_map": 16,
+    "map": 25,
+    "map_name": "สุสานอัศวินร้อยดวง",
+    "code_line": 11912,
+    "code": "u22tomb(t,T){const x=t.x,y=t.y;U22S(x+3,y+3,24,7,.45);g.fillStyle='#5a5a60';g.fillRect(x-22,y-8,44,8);g.fillStyle='#727078';g.fillRect(x-20,y-12,40,6);g.strokeStyle='#22222a';g.lineWidth=1;g.strokeRect(x-22,y-8,44,8);    if(t.v){g.fillStyle='#8a8890';g.fillRect(x-4,y-56,8,46);g.fillRect(x-16,y-46,32,8);g.strokeRect(x-4,y-56,8,46);g.strokeRect(x-16,y-46,32,8)}else{g.fillStyle='#8a8890';g.beginPath();g.moveTo(x-14,y-12"
+   },
+   {
+    "cell": 3,
+    "key": "u22cand",
+    "count_on_map": 16,
+    "map": 25,
+    "map_name": "สุสานอัศวินร้อยดวง",
+    "code_line": 11919,
+    "code": "u22cand(t,T){const x=t.x,y=t.y;const fl=.8+.2*Math.sin(T*9+x);glowAt(x,y-10,30,'255,190,110',.25*fl);[[-6,10],[0,15],[5,8],[9,12]].forEach(([dx,h],k)=>{g.fillStyle='#e8e0cc';g.fillRect(x+dx-1.6,y-h,3.2,h);g.fillStyle='rgba(255,'+(170+k*15)+',80,.95)';g.beginPath();g.ellipse(x+dx,y-h-3,1.6,3.2*fl,0,0,7);g.fill()})},  u22wisp(t,T){const p=T*.4+t.x*.01,x=t.x+Math.sin(p)*24,y=t.y-30+Math.sin(p*1.7)*10,pu=.5+.5*Math.sin(T"
+   },
+   {
+    "cell": 4,
+    "key": "u22wisp",
+    "count_on_map": 10,
+    "map": 25,
+    "map_name": "สุสานอัศวินร้อยดวง",
+    "code_line": 11920,
+    "code": "u22wisp(t,T){const p=T*.4+t.x*.01,x=t.x+Math.sin(p)*24,y=t.y-30+Math.sin(p*1.7)*10,pu=.5+.5*Math.sin(T*2.3+t.y);glowAt(x,y,30,'160,220,255',.25+.15*pu);g.fillStyle='rgba(210,240,255,'+(.55+.3*pu)+')';g.beginPath();g.moveTo(x-5,y);g.quadraticCurveTo(x,y-12,x+5,y);g.quadraticCurveTo(x+Math.sin(T*3)*4,y+14,x,y+18);g.quadraticCurveTo(x-2,y+10,x-5,y);g.fill()},  /* bolt */  u22rod(t,T){const x=t.x,y=t.y,h=150;U22S(x+4,y+3"
+   },
+   {
+    "cell": 5,
+    "key": "u22maus",
+    "count_on_map": 5,
+    "map": 25,
+    "map_name": "สุสานอัศวินร้อยดวง",
+    "code_line": 11915,
+    "code": "u22maus(t,T){const x=t.x,y=t.y,w=42,h=78;U22S(x+5,y+4,w*1.2,12,.5);g.fillStyle='#4e4c56';g.fillRect(x-w,y-h,w*2,h);g.fillStyle='#62606c';g.fillRect(x-w,y-h,w*.5,h);g.strokeStyle='#18181e';g.lineWidth=1.2;g.strokeRect(x-w,y-h,w*2,h);    g.fillStyle='#3a3842';g.beginPath();g.moveTo(x-w-8,y-h);g.lineTo(x,y-h-34);g.lineTo(x+w+8,y-h);g.closePath();g.fill();g.stroke();g.fillStyle='#22222a';g.beginPath();g.moveTo(x-13,y);g."
+   },
+   {
+    "cell": 6,
+    "key": "u13obs",
+    "count_on_map": 28,
+    "map": 26,
+    "map_name": "แกนพิภพ",
+    "code_line": 10983,
+    "code": "u13obs(t,T){const x=t.x,y=t.y;PALSH(x+3,y+3,18,6,.45);[[-8,30,-.25],[4,40,.1],[12,22,.4]].slice(0,2+t.v%2).forEach(([dx,h,a])=>{g.save();g.translate(x+dx,y);g.rotate(a);g.fillStyle='#120c14';g.beginPath();g.moveTo(-7,0);g.lineTo(-2,-h);g.lineTo(6,-h*.7);g.lineTo(7,0);g.closePath();g.fill();    g.fillStyle='rgba(180,160,220,.35)';g.beginPath();g.moveTo(-5,0);g.lineTo(-2,-h);g.lineTo(0,-h*.6);g.closePath();g.fill();g.s"
+   },
+   {
+    "cell": 7,
+    "key": "u13vent",
+    "count_on_map": 24,
+    "map": 26,
+    "map_name": "แกนพิภพ",
+    "code_line": 10981,
+    "code": "u13vent(t,T){const x=t.x,y=t.y,pu=.6+.4*Math.sin(T*2.5+x);g.fillStyle='#1a0e0a';g.beginPath();g.ellipse(x,y,18,8,0,0,7);g.fill();g.fillStyle='rgba(255,'+(110+40*pu|0)+',30,.95)';g.beginPath();g.ellipse(x,y,11,4.5,0,0,7);g.fill();glowAt(x,y-6,46,'255,120,40',.3*pu+.1);   for(let k=0;k<4;k++){const q=(T*.35+k/4+x*.001)%1;g.fillStyle='rgba(70,50,46,'+(.38*(1-q))+')';g.beginPath();g.arc(x+Math.sin(q*5+k)*8,y-8-q*70,5+q*1"
+   },
+   {
+    "cell": 8,
+    "key": "u13basc",
+    "count_on_map": 22,
+    "map": 26,
+    "map_name": "แกนพิภพ",
+    "code_line": 10975,
+    "code": "u13basc(t,T){const x=t.x,y=t.y,s=t.sc||1;PALSH(x+6,y+5,40*s,10*s,.5);const cols=[[-18,120,'#3a2620'],[0,160,'#46302a'],[18,100,'#34221c'],[-6,70,'#3e2a22'],[12,56,'#3a2620']];   cols.forEach(([dx,hh,c])=>{const cx=x+dx*s,h=hh*s,w=10*s;g.fillStyle=c;g.beginPath();g.moveTo(cx-w,y-h+5);g.lineTo(cx-w,y);g.lineTo(cx+w,y);g.lineTo(cx+w,y-h+5);g.lineTo(cx,y-h);g.closePath();g.fill();g.fillStyle='rgba(255,170,120,.12)';g.fil"
+   },
+   {
+    "cell": 9,
+    "key": "u13geo",
+    "count_on_map": 16,
+    "map": 26,
+    "map_name": "แกนพิภพ",
+    "code_line": 10979,
+    "code": "u13geo(t,T){const x=t.x,y=t.y;PALSH(x+4,y+4,30,9,.45);g.fillStyle='#2e2420';g.beginPath();g.ellipse(x,y-14,30,20,0,0,7);g.fill();g.strokeStyle='#0a0402';g.lineWidth=1.2;g.stroke();g.fillStyle='#140806';g.beginPath();g.ellipse(x,y-16,22,13,0,0,7);g.fill();   const C=t.v?['#ff7a3a','255,120,60']:['#ffb03a','255,180,80'],pu=.6+.4*Math.sin(T*2+x);glowAt(x,y-18,40,C[1],.3*pu+.1);for(let k=0;k<9;k++){const a=k/9*6.283,px=x"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_20_trees_map02",
+  "maps": [
+   "หุบเขากระดูก"
+  ],
+  "map": 2,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map02_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map02_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map02_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map02_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map02_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map02_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map02_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map02_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map02_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map02_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map02_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map02_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_21_trees_map03",
+  "maps": [
+   "ดินแดนเพลิงนรก"
+  ],
+  "map": 3,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map03_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map03_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map03_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map03_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map03_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map03_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map03_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map03_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map03_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map03_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map03_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map03_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_22_trees_map04",
+  "maps": [
+   "วิหารน้ำแข็งนิรันดร์"
+  ],
+  "map": 4,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map04_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map04_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map04_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map04_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map04_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map04_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map04_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map04_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map04_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map04_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map04_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map04_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_23_trees_map05",
+  "maps": [
+   "ลานหอคอยวิญญาณ"
+  ],
+  "map": 5,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map05_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map05_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map05_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map05_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map05_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map05_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map05_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map05_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map05_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map05_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map05_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map05_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_24_trees_map06",
+  "maps": [
+   "ซากนครจมบาดาล"
+  ],
+  "map": 6,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map06_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map06_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map06_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map06_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map06_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map06_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map06_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map06_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map06_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map06_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map06_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map06_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_25_trees_map07",
+  "maps": [
+   "เหมืองทองร้าง"
+  ],
+  "map": 7,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map07_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map07_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map07_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map07_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map07_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map07_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map07_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map07_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map07_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map07_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map07_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map07_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_26_trees_map08",
+  "maps": [
+   "ทะเลทรายสุสานฟาโรห์"
+  ],
+  "map": 8,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map08_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map08_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map08_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map08_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map08_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map08_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map08_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map08_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map08_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map08_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map08_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map08_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_27_trees_map10",
+  "maps": [
+   "ทุ่งรอยแยกนภา"
+  ],
+  "map": 10,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map10_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map10_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map10_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map10_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map10_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map10_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map10_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map10_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map10_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map10_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map10_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map10_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_28_trees_map11",
+  "maps": [
+   "ดินแดนหลังรอยแยก"
+  ],
+  "map": 11,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map11_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map11_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map11_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map11_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map11_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map11_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map11_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map11_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map11_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map11_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map11_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map11_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_29_trees_map12",
+  "maps": [
+   "สะพานลมตะวันตก"
+  ],
+  "map": 12,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map12_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map12_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map12_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map12_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map12_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map12_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map12_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map12_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map12_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map12_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map12_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map12_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_30_trees_map13",
+  "maps": [
+   "สวนลอยฟ้าร้าง"
+  ],
+  "map": 13,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map13_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map13_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map13_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map13_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map13_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map13_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map13_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map13_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map13_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map13_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map13_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map13_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_31_trees_map14",
+  "maps": [
+   "หอนาฬิกาเมฆ"
+  ],
+  "map": 14,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map14_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map14_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map14_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map14_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map14_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map14_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map14_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map14_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map14_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map14_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map14_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map14_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_32_trees_map15",
+  "maps": [
+   "ทะเลสาบดาวตก"
+  ],
+  "map": 15,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map15_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map15_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map15_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map15_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map15_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map15_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map15_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map15_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map15_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map15_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map15_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map15_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_33_trees_map16",
+  "maps": [
+   "ป่าผลึกสายฟ้า"
+  ],
+  "map": 16,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map16_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map16_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map16_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map16_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map16_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map16_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map16_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map16_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map16_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map16_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map16_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map16_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_34_trees_map17",
+  "maps": [
+   "หุบเหวลมหวน"
+  ],
+  "map": 17,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map17_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map17_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map17_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map17_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map17_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map17_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map17_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map17_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map17_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map17_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map17_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map17_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_35_trees_map18",
+  "maps": [
+   "ซากวิหารพายุ"
+  ],
+  "map": 18,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map18_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map18_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map18_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map18_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map18_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map18_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map18_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map18_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map18_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map18_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map18_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map18_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_36_trees_map19",
+  "maps": [
+   "ป่าเห็ดเรืองแสง"
+  ],
+  "map": 19,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map19_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map19_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map19_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map19_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map19_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map19_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map19_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map19_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map19_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map19_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map19_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map19_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_37_trees_map20",
+  "maps": [
+   "บึงหมอกม่วง"
+  ],
+  "map": 20,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map20_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map20_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map20_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map20_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map20_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map20_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map20_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map20_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map20_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map20_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map20_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map20_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_38_trees_map21",
+  "maps": [
+   "ซากนครใต้เมฆ"
+  ],
+  "map": 21,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map21_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map21_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map21_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map21_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map21_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map21_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map21_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map21_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map21_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map21_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map21_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map21_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_39_trees_map22",
+  "maps": [
+   "ห้วงบัลลังก์เงา"
+  ],
+  "map": 22,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map22_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map22_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map22_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map22_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map22_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map22_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map22_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map22_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map22_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map22_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map22_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map22_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_40_trees_map23",
+  "maps": [
+   "โพรงรากหิน"
+  ],
+  "map": 23,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map23_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map23_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map23_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map23_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map23_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map23_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map23_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map23_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map23_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map23_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map23_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map23_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_41_trees_map24",
+  "maps": [
+   "ทะเลสาบใต้ดินเรืองแสง"
+  ],
+  "map": 24,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map24_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map24_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map24_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map24_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map24_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map24_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map24_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map24_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map24_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map24_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map24_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map24_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_42_trees_map25",
+  "maps": [
+   "สุสานอัศวินร้อยดวง"
+  ],
+  "map": 25,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map25_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map25_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map25_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map25_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map25_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map25_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map25_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map25_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map25_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map25_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map25_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map25_prop6"
+   }
+  ]
+ },
+ {
+  "sheet": "sheet_43_trees_map26",
+  "maps": [
+   "แกนพิภพ"
+  ],
+  "map": 26,
+  "nature": true,
+  "objects": [
+   {
+    "cell": 1,
+    "key": "map26_tree1"
+   },
+   {
+    "cell": 2,
+    "key": "map26_tree2"
+   },
+   {
+    "cell": 3,
+    "key": "map26_tree3"
+   },
+   {
+    "cell": 4,
+    "key": "map26_tree4"
+   },
+   {
+    "cell": 5,
+    "key": "map26_tree5"
+   },
+   {
+    "cell": 6,
+    "key": "map26_tree6"
+   },
+   {
+    "cell": 7,
+    "key": "map26_prop1"
+   },
+   {
+    "cell": 8,
+    "key": "map26_prop2"
+   },
+   {
+    "cell": 9,
+    "key": "map26_prop3"
+   },
+   {
+    "cell": 10,
+    "key": "map26_prop4"
+   },
+   {
+    "cell": 11,
+    "key": "map26_prop5"
+   },
+   {
+    "cell": 12,
+    "key": "map26_prop6"
+   }
+  ]
+ }
+]
