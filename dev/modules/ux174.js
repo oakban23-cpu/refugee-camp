@@ -10,9 +10,10 @@ const GPA={off:0,c:{},sets:[{src:'hd-gpt1.webp',img:null,ok:0,f:{"bban":[0,0,161
 for(const k in GPA.k)GPA.k[k].push(0);
 function gpaLoad(S){if(S.img)return;const im=new Image();im.decoding='async';im.onload=()=>{const d=im.decode?im.decode():Promise.resolve();d.catch(()=>{}).then(()=>{S.ok=1})};im.onerror=()=>{S.ok=-1};im.src=S.src;S.img=im}
 function gpaOn(k){const q=GPA.k[k];if(GPA.off||!q||curMap!==q[0])return false;try{if(!HDI.on||lqHD())return false}catch(e){return false}const S=GPA.sets[q[4]];if(!S.img)gpaLoad(S);return S.ok===1}
-function gpaSpr(k){const q=GPA.k[k],key=k+':'+q[1];let s=GPA.c[key];if(s)return s;const S=GPA.sets[q[4]],f=S.f[k],w=q[1],h=w*f[3]/f[2],R=2,c=document.createElement('canvas');c.width=Math.ceil(w*R);c.height=Math.ceil(h*R);
+function gpaW(k,t){const q=GPA.k[k];if(!q[5])return q[1];return Math.max(8,Math.round(q[1]*(k==='sfmet'?SFMET[t.v][2]:(t.sc||1))/q[5]/2)*2)}
+function gpaSpr(k,W){const q=GPA.k[k],w0=W||q[1],key=k+':'+w0;let s=GPA.c[key];if(s)return s;const S=GPA.sets[q[4]],f=S.f[k],w=w0,h=w*f[3]/f[2],R=2,c=document.createElement('canvas');c.width=Math.ceil(w*R);c.height=Math.ceil(h*R);
   const x=c.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(S.img,f[0],f[1],f[2],f[3],0,0,c.width,c.height);return GPA.c[key]={c,w,h}}
-function gpaDraw(k,t,T){const q=GPA.k[k],s=gpaSpr(k),x=t.x;let y=t.y+q[2];if(k==='obskiff')y+=Math.sin(T*1.3)*3;
+function gpaDraw(k,t,T){const q=GPA.k[k],s=gpaSpr(k,gpaW(k,t)),x=t.x;let y=t.y+q[2];if(k==='obskiff')y+=Math.sin(T*1.3)*3;
   PALSH(x,y,Math.max(8,s.w*.42),Math.max(3,Math.min(14,s.w*.12)),.38);
   const fl=(t.v|0)%2===1&&k!=='orr'&&k!=='barch'&&k!=='obdome';if(fl){g.translate(x,y);g.scale(-1,1);g.drawImage(s.c,-s.w/2,-s.h,s.w,s.h);g.scale(-1,1);g.translate(-x,-y)}else g.drawImage(s.c,x-s.w/2,y-s.h,s.w,s.h);
   const L=q[3];if(!L)return true;let on=1,a=1;

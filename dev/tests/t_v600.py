@@ -8,7 +8,7 @@ def rep(name, ok, info=''):
 CNT = """async(ks)=>{const out={};for(const k of ks){const L=trees.filter(t=>t.k===k&&!t.inv);if(!L.length){out[k]=-1;continue}const t=L[0];me.x=t.x+30;me.y=t.y+150;ov.hidden=true;banner=null;await new Promise(r=>setTimeout(r,500));
   const C=CanvasRenderingContext2D.prototype,od=C.drawImage;let n=0;C.drawImage=function(im){if(im&&Object.values(GPA.c).some(s=>s.c===im))n++;return od.apply(this,arguments)};
   let fr=0;await new Promise(r=>{const q=()=>{fr++;if(fr<6)requestAnimationFrame(q);else r()};requestAnimationFrame(q)});C.drawImage=od;out[k]=+(n/fr).toFixed(1)}return out}"""
-OVL = """(mp)=>{const B=[];for(const t of trees){if(!t.k||t.inv)continue;const q=GPA.k[t.k];if(!q||q[0]!==mp)continue;const f=GPA.sets[0].f[t.k];B.push({t,x:t.x,y:t.y+q[2],w:q[1],h:q[1]*f[3]/f[2]})}const O=[];
+OVL = """(mp)=>{const B=[];for(const t of trees){if(!t.k||t.inv)continue;const q=GPA.k[t.k];if(!q||q[0]!==mp)continue;const f=GPA.sets[q[4]].f[t.k];B.push({t,x:t.x,y:t.y+q[2],w:q[1],h:q[1]*f[3]/f[2]})}const O=[];
   for(let i=0;i<B.length;i++)for(let j=i+1;j<B.length;j++){const h=ovfHit(B[i],B[j]);if(h)O.push([B[i].t.k,B[i].x|0,B[i].y|0,B[j].t.k,B[j].x|0,B[j].y|0,+h.toFixed(2)])}return O}"""
 SPOT = {36: ['obdome', 'obpine', 'obinst'], 27: ['orr', 'cand', 'mirf'], 30: ['barch', 'bfire', 'bpyl'], 32: ['ahouse', 'abell', 'abook']}
 SKIP = ['obmir', 'obloom', 'mirb', 'bshd', 'agbell', 'aclock']
