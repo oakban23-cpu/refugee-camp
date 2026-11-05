@@ -12304,8 +12304,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v597';
+const WNV='v598';
 const WNL=[
+['🙂','บทพูดของเราใช้หน้าตัวละครเรา','ตอนที่ตัวละครเราเป็นคนพูดในเนื้อเรื่อง วงกลมผู้พูดเป็นหน้าตัวละครเราเอง (ตามอาชีพ ชุด ทรงผม อาวุธที่ใส่อยู่) และมีภาพตัวละครเราเต็มตัวข้างกล่องบทพูดเหมือน NPC'],
 ['🧹','จัดของที่ซ้อนทับกัน','เห็ดยักษ์ หินงอก โคม ลังไม้ ที่ยืนเบียดหรือทับกันในนครรากลึก ฐานแผ่นดิน และย่านวงแหวนล่าง ถูกเลื่อนไปจุดว่างใกล้ ๆ · เห็ดจิ๋วที่โผล่ทะลุของใหญ่ถูกเก็บออก · ชาวบ้านไม่ยืนจมในบ้านแล้ว'],
 ['🍄','นครรากลึกโฉมใหม่','บ้านโดมราก บัลลังก์ราก แผงตลาด บ่อน้ำ โคมเห็ด เห็ดยักษ์เรืองแสง และหินงอกเป็นภาพวาดชุดใหม่ · ทางเดินเป็นสะพานไม้กระดาน ลานโถงฝังอำพัน ขอบถ้ำเป็นก้อนหินมีมอส (เปิดภาพ HD)'],
 ['🧱','พื้นและกำแพงย่านวงแหวนล่างเข้าชุดใหม่','ลานหินเป็นก้อนหินปูนวาดมือ ถนนเป็นแผ่นหินใหญ่มีขอบ กำแพงเมืองเก่าเป็นก้อนหินเรียงมีใบเสมาและไม้เลื้อย ขอบเกาะเป็นผาหิน (เปิดภาพ HD)'],
@@ -30730,6 +30731,24 @@ try{const D=mp===31?MKT.dec:PAL.dec;for(const m of MV){const i=D.findIndex(d=>d.
 setTimeout(()=>{try{for(const[fn,mp]of[['pbBuild',44],['pzBuild',45],['mktBuild',31]]){const o=window[fn];if(typeof o!=='function')continue;
 const w=function(M){const r=o.apply(this,arguments);try{ovfRun(mp,M)}catch(e){console.warn('ovf',e)}return r};
 if(fn==='pbBuild')window.pbBuild=pbBuild=w;else if(fn==='pzBuild')window.pzBuild=pzBuild=w;else window.mktBuild=mktBuild=w}}catch(e){console.warn('ovf',e)}},1900);
+const MEP={off:0,k:'',face:'',bust:''};
+function mepKey(){const sv={eq:me.eq,cls2:me.cls2,br:me.br},L=csLook(sv);return[me.cls+csC2(me.cls,sv)+L.w+'.'+L.a+'.'+L.h+'.'+L.b,sv,L]}
+function mepMake(){if(!me.cls)return false;const[k,sv,L]=mepKey();if(k===MEP.k&&MEP.face)return true;MEP.k=k;
+const CW=260,CH=360,cv=document.createElement('canvas');cv.width=CW;cv.height=CH;const g0=g;
+try{g=cv.getContext('2d');g.setTransform(4.4,0,0,4.4,CW/2,CH*.8);drawChar(0,0,me.cls,1,0,L.h,1.2,L.b,L.w,L.a,csC2(me.cls,sv))}catch(e){}finally{g=g0}
+try{const x=cv.getContext('2d'),d=x.getImageData(0,0,CW,CH).data;let x0=CW,y0=CH,x1=0,y1=0;for(let y=0;y<CH;y+=2)for(let i=0;i<CW;i+=2)if(d[(y*CW+i)*4+3]>20){if(i<x0)x0=i;if(i>x1)x1=i;if(y<y0)y0=y;if(y>y1)y1=y}
+if(x1>x0){const w=x1-x0+12,h=y1-y0+8,o=document.createElement('canvas');o.width=w;o.height=h;o.getContext('2d').drawImage(cv,x0-6,y0-4,w,h,0,0,w,h);MEP.bust=o.toDataURL()}}catch(e){MEP.bust=''}
+try{const im=document.querySelector('#hpor img');if(!im||!im.src||im.src.length<100){UIS.pk='';uisPortrait()}const im2=document.querySelector('#hpor img');MEP.face=im2&&im2.src&&im2.src.length>100?im2.src:''}catch(e){MEP.face=''}
+if(!MEP.face){const sz=92,o=document.createElement('canvas');o.width=o.height=128;const ox=o.getContext('2d'),hy=CH*.8-4.4*19.7;ox.drawImage(cv,CW/2-sz*.85,hy-sz*.8,sz*1.7,sz*1.7,0,0,128,128);MEP.face=o.toDataURL()}
+return true}
+function mepShow(){const d=$('sdlg');if(!d)return;const p=d.querySelector('.sdp');if(!mepMake())return;
+p.classList.add('npcp');p.textContent='';const i=document.createElement('img');i.alt='';i.src=MEP.face;p.appendChild(i);
+try{const c=CL[me.cls].c;p.style.borderColor=c;p.style.boxShadow='0 0 12px '+c+'66'}catch(e){}
+let b=document.getElementById('sdbust');if(!b){b=document.createElement('img');b.id='sdbust';b.alt='';d.appendChild(b)}
+if(MEP.bust){if(b.dataset.k!=='me:'+MEP.k){b.classList.remove('on');b.dataset.k='me:'+MEP.k;b.src=MEP.bust;void b.offsetWidth}b.classList.add('on');b.classList.add('mep')}}
+{const st=document.createElement('style');st.textContent='#sdbust.mep{height:min(24vh,220px);image-rendering:auto}@media (orientation:portrait){#sdbust.mep{height:min(19vh,180px)}}';document.head.appendChild(st)}
+setTimeout(()=>{try{const _l=stLine;window.stLine=stLine=function(){const r=_l.apply(this,arguments);try{const b=document.getElementById('sdbust');if(b)b.classList.remove('mep');
+if(!MEP.off&&SD.on){const L=SD.q[SD.i];if(L&&L[0]==='me')mepShow()}}catch(e){console.warn('mep',e)}return r}}catch(e){console.warn('mep',e)}},2100);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
