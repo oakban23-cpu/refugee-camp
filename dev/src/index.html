@@ -13602,8 +13602,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v606';
+const WNV='v607';
 const WNL=[
+  ['🌳','ต้นไม้ภาพวาดใหม่ 4 แมพ + ซี่โครงยักษ์','หุบเขากระดูก (ต้นไม้ตาย) · ลานหอคอยวิญญาณ (ต้นไม้วิญญาณน้ำเงิน/ม่วง) · สวนลอยฟ้าร้าง (ต้นไม้เขียว ซากุระ รูปปั้น) · สุสานอัศวินร้อยดวง (ป้ายหลุมศพ ดาบปัก) · สุสานเรือเมฆ: ซี่โครงยักษ์สีงาช้างโผล่จากเมฆ (เปิดภาพ HD)'],
   ['🎨','ภาพ HD ชุดใหม่อีก 73 ชิ้น','สวนลอยราชินี ห้องบัลลังก์ดาว ลานดาวลอย ปากเหว ฐานแผ่นดิน ย่านวงแหวนล่าง เหมืองดาวคาร์น ผาท่าเรือเมฆ นครรากลึก และแมพภาคต้นอีก 10 แมพ (สะพานลม ป่าผลึกสายฟ้า หุบเหวลมหวน บึงหมอกม่วง ซากนครใต้เมฆ ห้วงบัลลังก์เงา สุสานอัศวิน แกนพิภพ ฯลฯ): ต้นไม้ หิน ตะเกียง เสา รูปปั้น เวที ซุ้มประตู เป็นภาพวาดชุดเดียวกัน · ของที่มีเนื้อเรื่องหรือปริศนายังเป็นแบบเดิม (เปิดภาพ HD)'],
   ['🧹','จัดของที่ซ้อนทับกัน 6 แมพ','หอดูดาว สะพานรุ่งอรุณ อารัณยา ที่ราบดาวตก ปากเหว สุสานเรือเมฆ: ต้นไม้ที่โคนชนกัน ตะเกียงที่จมในบ้าน ธงที่ทะลุต้นไม้ ลังที่จมในเสา ถูกเลื่อนไปจุดว่างใกล้ ๆ · กองหิน/กระจุกคริสตัลคงไว้ตามธรรมชาติ'],
   ['🌿','พื้นเข้าชุดภาพใหม่ 8 แมพ','ผู้ลี้ภัยกลับมานั่งล้อมกองไฟบนสะพานรุ่งอรุณ · ระฆังอารัณยากลับมาแกว่งและมีป้ายบอกเหมือนเดิม · หอดูดาว พระราชวัง สะพานรุ่งอรุณ อารัณยา หลุมหัวใจว่าง ที่ราบดาวตก ปากเหว สุสานเรือเมฆ: ใบไม้ร่วงและรากใต้ต้นไม้ เศษหินรอบหิน หลุมไหม้รอบอุกกาบาต วงแสงใต้ตะเกียง ลานดินกับฟางรอบเต็นท์ เศษคริสตัลเรือง หินปูรอบสิ่งปลูกสร้าง (เปิดภาพ HD)'],
@@ -35127,6 +35128,26 @@ Object.assign(GPG.pal,{28:[['#c8c2b4','#d8d2c4','#b8b2a4'],'#3a3a2a',['#3e7a32',
   40:[['#8a80a8','#9a90b8','#766c96'],'#2a2240',['#6a5a9a','#7a6aaa'],'rgba(110,90,150,.3)'],41:[['#8a80a8','#9a90b8','#766c96'],'#2a2240',['#6a5a9a','#7a6aaa'],'rgba(110,90,150,.3)']});
 for(const[k,c]of Object.entries({sft:'tree',btree:'tree',hedge:'bush',gcol:'struct',rarch:'struct',swing:'struct',gst:'struct',pthr:'struct',q9cr:'cry',q9lamp:'light',q9gear:'struct',q9tel:'struct',q9gate2:'struct'}))GPG.k[k]=c;
 Object.assign(GPG.lc,{q9lamp:'200,230,255'});
+/* ---------- v607 ต้นไม้ภาพวาดจาก ChatGPT ชุดสุดท้าย (hd-gpt7.webp) — เฉพาะชิ้นที่เป็นภาพวาดจริง ----------
+   หุบเขากระดูก 2 (ต้นไม้ตาย) · ลานหอคอยวิญญาณ 5 (ต้นไม้วิญญาณน้ำเงิน/ม่วง + ดวงไฟลอย) · สวนลอยฟ้าร้าง 13 (ต้นไม้เขียว/ซากุระ/รูปปั้น) · สุสานอัศวิน 25 (ป้ายหลุมศพ/ดาบปัก + แสงฟ้า)
+   ซี่โครงยักษ์สุสานเรือเมฆ 39 (3 ความสูง) · แบบต้นไม้เลือกด้วยสูตรตำแหน่งเดิม · ขนาดตามรัศมีต้นไม้ (r/20)
+   แผ่นอื่นในชุดนี้ (T03–T05, T07–T11 และบางช่อง) ได้มาเป็นภาพแบนแบบเวกเตอร์ ไม่ดีกว่าของเดิม → ยังใช้แบบเดิม · ปิด: TRA.off=1 */
+const TRA={off:0,src:'hd-gpt7.webp',img:null,ok:0,c:{},f:{"sgrib2":[0,0,154,251],"tr02b":[156,0,243,232],"tr02a":[401,0,234,228],"tr13a":[637,0,228,228],"tr13b":[0,253,240,223],"sgrib1":[242,253,131,214],"tr13c":[375,253,240,210],"tr05a":[617,253,207,208],"tr05b":[0,478,207,208],"tr13d":[209,478,240,206],"tr13s":[451,478,100,200],"tr25s":[553,478,84,200],"sgrib0":[639,478,109,178],"tr25g":[750,478,160,157]}};
+function traOn(){if(TRA.off)return false;try{if(!HDI.on||lqHD())return false}catch(e){return false}if(!TRA.img){const im=new Image();im.decoding='async';im.onload=()=>{(im.decode?im.decode():Promise.resolve()).catch(()=>{}).then(()=>{TRA.ok=1})};im.onerror=()=>{TRA.ok=-1};im.src=TRA.src;TRA.img=im}return TRA.ok===1}
+function traSpr(k,w){w=Math.max(8,Math.round(w));const key=k+':'+w;let s=TRA.c[key];if(s)return s;const f=TRA.f[k],h=w*f[3]/f[2],c=document.createElement('canvas');c.width=Math.ceil(w*2);c.height=Math.ceil(h*2);const x=c.getContext('2d');x.imageSmoothingQuality='high';x.drawImage(TRA.img,f[0],f[1],f[2],f[3],0,0,c.width,c.height);return TRA.c[key]={c,w,h}}
+function traDraw(k,x,y,w,fl,sk,sh){const s=traSpr(k,w);if(sh)PALSH(x,y-2,s.w*.42,Math.max(3,s.w*.13),.34);g.save();g.translate(x,y);if(sk)g.transform(1,0,sk,1,0,0);if(fl)g.scale(-1,1);g.drawImage(s.c,-s.w/2,-s.h,s.w,s.h);g.restore();return s}
+TRA.m={
+  2:(t,r,sw)=>{const v=Math.abs((t.x*7+t.y*3)|0)%6,k=r/20;traDraw(v%2?'tr02b':'tr02a',t.x,t.y+14*k,56*k*(1+(v%3)*.06),v%3===1,sw*.012,t.ns)},
+  5:(t,r,sw,now)=>{const v=Math.abs((t.x*13+t.y*7)|0)%6,k=r/20;traDraw(v%2?'tr05b':'tr05a',t.x,t.y+15*k,54*k*(1+(v%3)*.05),v>=3,sw*.02,t.ns);
+    if(!LOWQ){const T=now/1000;g.save();g.globalCompositeOperation='lighter';for(let i=0;i<2;i++){const q=(T*.25+i*.5+t.x*.001)%1,px=t.x+Math.sin(T*.9+i*3+t.y)*r*.7,py=t.y-r*.9-q*r*1.4;glowAt(px,py,3.2,'210,170,255',.6*Math.sin(q*Math.PI))}g.restore()}},
+  13:(t,r,sw)=>{const v=mxWV(t),k=r/20;if(v===3){traDraw('tr13s',t.x,t.y+12*k,24*k,0,0,t.ns);return}const hs=((t.x+t.y)|0)&1;traDraw(v===0?'tr13a':v===1?'tr13b':(hs?'tr13c':'tr13d'),t.x,t.y+15*k,50*k,hs,sw*.02,t.ns)},
+  25:(t,r,sw,now)=>{const v=mxSV(t),k=r/20;if(v<2){traDraw('tr25g',t.x,t.y+12*k,30*k,v===1,0,t.ns);return}const s=traDraw('tr25s',t.x,t.y+12*k,21*k*(1+(v-2)*.15),0,0,t.ns);
+    if(!LOWQ){g.save();g.globalCompositeOperation='lighter';glowAt(t.x,t.y+12*k-s.h*.45,r*.6,'150,210,255',.18+.1*Math.sin(now/1000*2+t.x));g.restore()}}};
+TRA.rib=[['sgrib1',153],['sgrib0',129],['sgrib2',166]];
+setTimeout(()=>{try{
+  const _mt=mxTree;window.mxTree=mxTree=function(t,r,sw,now,MP){const f=TRA.m[curMap];if(f&&!t.k&&!t.pp&&!t.inv&&!(MP&&MP.dg)&&traOn()){try{f(t,r,sw,now);return true}catch(e){console.warn('tra',e)}}return _mt.apply(this,arguments)};
+  const _rb=PALK.sgrib;if(typeof _rb==='function')PALK.sgrib=function(t,T){if(curMap===39&&traOn()){try{const q=TRA.rib[(t.v|0)%3];traDraw(q[0],t.x,t.y+14,q[1],0,0,1);return}catch(e){}}return _rb.call(this,t,T)};
+}catch(e){console.warn('tra',e)}},2100);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
