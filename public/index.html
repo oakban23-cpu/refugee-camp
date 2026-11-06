@@ -12304,8 +12304,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v604';
+const WNV='v605';
 const WNL=[
+['🧹','จัดของที่ซ้อนทับกัน 6 แมพ','หอดูดาว สะพานรุ่งอรุณ อารัณยา ที่ราบดาวตก ปากเหว สุสานเรือเมฆ: ต้นไม้ที่โคนชนกัน ตะเกียงที่จมในบ้าน ธงที่ทะลุต้นไม้ ลังที่จมในเสา ถูกเลื่อนไปจุดว่างใกล้ ๆ · กองหิน/กระจุกคริสตัลคงไว้ตามธรรมชาติ'],
 ['🌿','พื้นเข้าชุดภาพใหม่ 8 แมพ','ผู้ลี้ภัยกลับมานั่งล้อมกองไฟบนสะพานรุ่งอรุณ · ระฆังอารัณยากลับมาแกว่งและมีป้ายบอกเหมือนเดิม · หอดูดาว พระราชวัง สะพานรุ่งอรุณ อารัณยา หลุมหัวใจว่าง ที่ราบดาวตก ปากเหว สุสานเรือเมฆ: ใบไม้ร่วงและรากใต้ต้นไม้ เศษหินรอบหิน หลุมไหม้รอบอุกกาบาต วงแสงใต้ตะเกียง ลานดินกับฟางรอบเต็นท์ เศษคริสตัลเรือง หินปูรอบสิ่งปลูกสร้าง (เปิดภาพ HD)'],
 ['🎨','ภาพใหม่: สุสานเรือเมฆ','หิน ตะเกียงไฟฟ้า เสากระโดงผ้าขาด ถังไม้ ขดเชือก เรือเหาะพัง เป็นภาพวาดชุดใหม่ (เปิดภาพ HD)'],
 ['🎨','ภาพใหม่: ปากเหวแผ่นดินทรุด','ต้นโอ๊ก พุ่มไม้ หินมอส ธง ต้นไม้เอน ตะเกียง เต็นท์ รั้วพัง ซุ้มรากอำพัน ลังไม้ กระสอบ เป็นภาพวาดชุดใหม่ (เปิดภาพ HD)'],
@@ -30730,7 +30731,7 @@ const x0=b.t.x,y0=b.t.y,yo=b.y-b.t.y;let done=0;
 for(let r=30;r<=190&&!done;r+=15)for(let i=0;i<14&&!done;i++){const a=i/14*6.2832+r*.07,x=x0+Math.cos(a)*r,y=y0+Math.sin(a)*r*.8;if(!ovfOk(mp,M,x,y))continue;
 const c={t:b.t,x,y:y+yo,w:b.w,h:b.h};if(B.some(o=>o!==b&&ovfHit(c,o)))continue;b.t.x=b.x=x;b.t.y=y;b.y=y+yo;done=1}
 if(done){MV.push([x0,y0,b.t.x,b.t.y]);b.t._nv=undefined;log.push(['ย้าย',k,x0|0,y0|0,'→',b.x|0,b.t.y|0]);ch++}
-else if(k!=='pblamp'&&(k!=='pbmush'||H.some(o=>ovfHit(b,o)>.45))){const i=trees.indexOf(b.t);if(i>=0)trees.splice(i,1);B.splice(B.indexOf(b),1);MV.push([x0,y0]);log.push(['ลบ (ไม่มีที่ว่าง)',k,x0|0,y0|0]);ch++}}
+else if(!(OVF.keep||{pblamp:1})[k]&&(k!=='pbmush'||H.some(o=>ovfHit(b,o)>.45))){const i=trees.indexOf(b.t);if(i>=0)trees.splice(i,1);B.splice(B.indexOf(b),1);MV.push([x0,y0]);log.push(['ลบ (ไม่มีที่ว่าง)',k,x0|0,y0|0]);ch++}}
 if(!ch)break}
 try{if(mp===44||mp===45){PBN.lamps=trees.filter(t=>t.k==='pblamp').map(t=>[t.x,t.y]);PBN.mush=trees.filter(t=>t.k==='pbmush').map(t=>[t.x,t.y,t.sc||1,t.v|0])}}catch(e){}
 try{const D=mp===31?MKT.dec:PAL.dec;for(const m of MV){const i=D.findIndex(d=>d.k==='ao'&&d.x===m[0]&&d.y===m[1]);if(i<0)continue;if(m.length<4){D.splice(i,1);continue}const d=D[i];d.x=m[2];d.y=m[3];d.b=[m[2]-70,m[3]-30,m[2]+70,m[3]+40]}}catch(e){}}
@@ -30870,6 +30871,24 @@ if(cat==='cry'||cat==='flora'){const col=cat==='cry'?'150,220,255':(t.k==='u22li
 for(let i=0;i<(cat==='cry'?5:4);i++){const a=r()*6.283,d=w*(.5+r()*.6);if(cat==='cry'&&typeof kmgShard==='function')kmgShard(c,x+Math.cos(a)*d,y+4+Math.sin(a)*d*.35,1.4+r()*1.4,r);else{c.fillStyle='rgba('+col+',.85)';c.beginPath();c.ellipse(x+Math.cos(a)*d,y+4+Math.sin(a)*d*.35,2.2,1.1,r()*3,0,7);c.fill()}}continue}
 if(cat==='struct'){gpgAO(c,x,y+3,w*.55,w*.16,.3);const n=Math.min(10,Math.round(3+w*.04));for(let i=0;i<n;i++){const a=Math.PI*(.05+r()*.9),d=w*(.48+r()*.25);gpgPeb(c,x+Math.cos(a)*d,y+4+Math.sin(a)*d*.3,1.6+r()*2.6,r,P)}if(r()<.7)gpgTuft(c,x+(r()<.5?-1:1)*w*.45,y+7,.9,r,P)}}}
 setTimeout(()=>{try{const _p=palPaint;window.palPaint=palPaint=function(c,ox,oy,S){const r=_p.apply(this,arguments);if(gpgOn())try{gpgPaint(c,ox,oy,S)}catch(e){console.warn('gpg',e)}return r}}catch(e){console.warn('gpg',e)}},1850);
+OVF.keep=Object.assign(OVF.keep||{},{pblamp:1,alamp:1,sglamp:1,oblamp:1,palamp:1,blamp:1});
+Object.assign(OVF.mv,{obpine:1,obrock:1,obcry:1,obbush:1,obbox:1,obcairn:1,bcrate:1,alamp:1,sfcry:1,sfflw:1,u22menh:1,sfgt:1,paoak:1,parock:1,paflag:1,paltree:1,pabush:1,sgstone:1,sglamp:1,aroot:1,phbarrel:1,phcrate:1});
+OVF.gm={36:'obBuild',30:'brgBuild',32:'arBuild',34:'sfBuild',43:'paBuild',39:'sgBuild'};
+OVF.nat={obrock:'r',parock:'r',sgstone:'r',u22menh:'r',sfdeb:'r',obbush:'b',pabush:'b',sfcry:'c',obcry:'c',sfflw:'f',u22lily:'f',sglamp:'L',sgmast:'M'};
+setTimeout(()=>{try{
+const _ob=ovfBox;window.ovfBox=ovfBox=function(t,mp){if(!OVF.gm[mp])return _ob(t,mp);const q=GPA.k[t.k];
+if(q&&q[0]===mp){const w=gpaW(t.k,t),f=GPA.sets[q[4]].f[t.k];return{t,x:t.x,y:t.y+q[2],w,h:w*f[3]/f[2]}}
+if(t.k&&t.r&&t.r<120&&!t.nc)return{t,x:t.x,y:t.y,w:t.r*1.6,h:t.r*2};return null};
+const _hit=ovfHit;window.ovfHit=ovfHit=function(a,b){const na=OVF.nat[a.t.k],nb=OVF.nat[b.t.k];if(OVF.gm[curMap]&&na&&nb&&(na===nb&&na!=='L'&&na!=='M'||/^(rb|br|rf|fr|bf|fb|cf|fc|LM|ML)$/.test(na+nb)))return 0;return _hit(a,b)};
+const _ok=ovfOk;window.ovfOk=ovfOk=function(mp,M,x,y){if(!OVF.gm[mp])return _ok(mp,M,x,y);try{
+const base=Math.hypot(x-M.sx,y-M.sy)>(M.sr||0)+70&&(M.gates||[]).every(G=>Math.hypot(x-G.x,y-G.y)>130)&&(M.nests||[]).every(([a,b])=>Math.hypot(x-a,y-b)>110);if(!base)return false;
+if(mp===36)return x>160&&y>160&&x<3040&&y<3040&&Math.hypot(x-OBDOME.x,y-OBDOME.y)>340&&Math.hypot(x-OBL.x,y-OBL.y)>390&&Math.hypot(x-OBS.x,y-OBS.y)>140;
+if(mp===34)return x>160&&y>160&&x<3040&&y<3040&&SFCR.every(([cx,cy,r])=>Math.hypot(x-cx,y-cy)>r*.95)&&SFMET.every(([mx,my,r])=>Math.hypot(x-mx,y-my)>r+50);
+if(mp===43)return paLand(x,y,70)&&!paSafe(x,y)&&paSegD(x,y)>48;
+if(mp===39)return sgIn(x,y,40);if(mp===32)return arIn(x,y,40);if(mp===30)return brgIn(x,y,40)}catch(e){}return false};
+const W=(o,mp)=>function(M){const r=o.apply(this,arguments);try{ovfRun(mp,M)}catch(e){console.warn('ovf'+mp,e)}return r};
+window.obBuild=obBuild=W(obBuild,36);window.brgBuild=brgBuild=W(brgBuild,30);window.arBuild=arBuild=W(arBuild,32);window.sfBuild=sfBuild=W(sfBuild,34);window.paBuild=paBuild=W(paBuild,43);window.sgBuild=sgBuild=W(sgBuild,39);
+}catch(e){console.warn('ovf605',e)}},2000);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
