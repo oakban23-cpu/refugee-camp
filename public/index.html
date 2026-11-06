@@ -12304,8 +12304,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v609';
+const WNV='v610';
 const WNL=[
+['🧹','จัดต้นไม้/หินภาพวาดให้เข้าที่','แมพภาคต้น 2–26: ต้นไม้ที่ซ้อนกันสนิทหรือทับตะเกียง ป้าย รูปปั้น ถูกเอาออก · ของประดับที่ทับกันถูกเลื่อนไปที่ว่าง · พื้นใต้โคนต้นไม้/หินมีลานสีและของตกแต่งรอบโคนเข้ากับภาพใหม่ (หิมะ ทราย มอส แสงลาวา แสงผลึก)'],
 ['🌲','ต้นไม้/หินภาพวาดครบทุกแมพแล้ว','อีก 14 แมพ: ดินแดนหลังรอยแยก สะพานลม หอนาฬิกาเมฆ ทะเลสาบดาวตก ป่าผลึกสายฟ้า หุบเหวลมหวน ซากวิหารพายุ ป่าเห็ดเรืองแสง บึงหมอกม่วง ซากนครใต้เมฆ ห้วงบัลลังก์เงา โพรงรากหิน ทะเลสาบใต้ดิน แกนพิภพ (เปิดภาพ HD)'],
 ['🪨','ต้นไม้/หินภาพวาดใหม่อีก 6 แมพ','ดินแดนเพลิงนรก (หินบะซอลต์รอยลาวา) · วิหารน้ำแข็ง (คริสตัลบนกองหิมะ) · ซากนครจมบาดาล (เสาหินมีสาหร่ายและไข่มุก) · เหมืองทองร้าง (หินแร่ทอง) · ทะเลทรายฟาโรห์ (แท่นหินสลัก/หินทรายเป็นชั้น) · ทุ่งรอยแยกนภา (หินครามรอยแยกม่วง) (เปิดภาพ HD)'],
 ['🌳','ต้นไม้ภาพวาดใหม่ 4 แมพ + ซี่โครงยักษ์','หุบเขากระดูก (ต้นไม้ตาย) · ลานหอคอยวิญญาณ (ต้นไม้วิญญาณน้ำเงิน/ม่วง) · สวนลอยฟ้าร้าง (ต้นไม้เขียว ซากุระ รูปปั้น) · สุสานอัศวินร้อยดวง (ป้ายหลุมศพ ดาบปัก) · สุสานเรือเมฆ: ซี่โครงยักษ์สีงาช้างโผล่จากเมฆ (เปิดภาพ HD)'],
@@ -30963,6 +30964,45 @@ TRC.b={11:14,12:14,14:11,15:11,16:15,17:14,18:13,19:15,20:15,21:15,22:13,23:15,2
 TRC.gl={11:[.55,'255,90,170',.12],16:[.5,'110,190,255',.14],19:[.75,'120,240,220',.12],22:[.5,'190,110,255',.13],23:[.35,'255,180,90',.2],24:[.5,'120,230,255',.15],26:[.3,'255,110,40',.14]};
 for(const m in TRC.n){TRA.m[m]=(t,r,sw,now)=>{const N=TRC.n[m],i=Math.abs((t.x*7+t.y*13)|0)%N,k='tr'+String(m).padStart(2,'0')+'_'+i,s=traDraw(k,t.x,t.y+TRC.b[m]*r/20,TRC.w[k]*r/20,((t.x*3+t.y)|0)&1,(m==15||m==17||m==20)?sw*.015:0,t.ns,TRC);
 const G=TRC.gl[m];if(G&&!LOWQ){g.save();g.globalCompositeOperation='lighter';glowAt(t.x,t.y+TRC.b[m]*r/20-s.h*G[0],r*.9,G[1],G[2]*(.75+.25*Math.sin(now/600+t.x)));g.restore()}};TRA.mb[m]=TRC}
+const OV2={off:0,log:[],dummy:null};
+function ov2TreeBox(t,mp){const f=TRA.m[mp];if(!f)return null;let box=null;const o=traDraw,g0=g;
+try{if(!OV2.dummy)OV2.dummy=document.createElement('canvas').getContext('2d');traDraw=(k,x,y,w,fl,sk,sh,B)=>{B=B||TRA;const q=B.f[k],h=w*q[3]/q[2];box={x,y,w,h};return{w,h,c:null}};g=OV2.dummy;f(t,t.r||20,0,0)}catch(e){}finally{traDraw=o;g=g0}return box}
+function ov2Box(t,mp){if(!t.k&&!t.pp){const b=ov2TreeBox(t,mp);if(b){b.t=t;b.tr=1}return b}
+const q=t.k&&GPA.k[t.k];if(q&&q[0]===mp){const w=gpaW(t.k,t),f=GPA.sets[q[4]].f[t.k];return{t,x:t.x,y:t.y+q[2],w,h:w*f[3]/f[2]}}
+if(t.k&&t.r>0&&t.r<120)return{t,x:t.x,y:t.y,w:t.r*1.6,h:t.r*2};return null}
+function ov2Hit(a,b){const ox=Math.min(a.x+a.w/2,b.x+b.w/2)-Math.max(a.x-a.w/2,b.x-b.w/2);if(ox<=0)return 0;const oy=Math.min(a.y,b.y)-Math.max(a.y-a.h,b.y-b.h);if(oy<=0)return 0;
+const ar=ox*oy/Math.min(a.w*a.h,b.w*b.h),dy=Math.abs(a.y-b.y);return(dy<40&&ox>Math.min(a.w,b.w)*.15)||(ar>.35&&dy<120)?ar:0}
+function ov2Ok(mp,F,x,y,m){try{if(U13M[mp])return u13Ok(F,x,y,m);if(U22M[mp])return u22Ok(F,x,y,m)}catch(e){}return false}
+function ov2Run(mp){if(OV2.off||mp<2||mp>26||!TRA.m[mp])return;try{if(isDg())return}catch(e){}
+const log=OV2.log=[];let B=[];for(const t of trees){if(t.inv)continue;const b=ov2Box(t,mp);if(b)B.push(b)}
+const del=b=>{const i=trees.indexOf(b.t);if(i>=0)trees.splice(i,1);B.splice(B.indexOf(b),1)};let F=null;
+for(let pass=0;pass<4;pass++){let ch=0;
+for(let i=0;i<B.length;i++){const a=B[i];for(let j=i+1;j<B.length;j++){const b=B[j],ar=ov2Hit(a,b);if(!ar)continue;
+if(a.tr&&b.tr){if(ar<.6)continue;const s=a.w*a.h<b.w*b.h?a:b;del(s);log.push(['ต้นไม้ซ้อนสนิท เอาออก',s.x|0,s.y|0]);ch++;break}
+if(a.tr||b.tr){const s=a.tr?a:b,o=a.tr?b:a;del(s);log.push(['ต้นไม้ทับ '+o.t.k+' เอาต้นไม้ออก',s.x|0,s.y|0]);ch++;break}
+const s=a.w*a.h<b.w*b.h?a:b;if(!F)try{F=depBuild()}catch(e){F={}}
+const x0=s.t.x,y0=s.t.y,yo=s.y-s.t.y;let done=0;
+for(let r=30;r<=190&&!done;r+=15)for(let q=0;q<14&&!done;q++){const an=q/14*6.2832+r*.07,x=x0+Math.cos(an)*r,y=y0+Math.sin(an)*r*.8;if(!ov2Ok(mp,F,x,y,(s.t.r||10)+10))continue;
+const c={t:s.t,x,y:y+yo,w:s.w,h:s.h};if(B.some(o=>o!==s&&ov2Hit(c,o)))continue;if(trees.some(o=>o!==s.t&&o.r>0&&!o.inv&&Math.hypot(o.x-x,o.y-y)<o.r+(s.t.r||0)+8))continue;
+s.t.x=s.x=x;s.t.y=y;s.y=y+yo;done=1}
+if(done){log.push(['ย้าย',s.t.k,x0|0,y0|0,'→',s.t.x|0,s.t.y|0]);ch++}else if((s.t.r||0)<=12){del(s);log.push(['เอาออก (ไม่มีที่ว่าง)',s.t.k,x0|0,y0|0]);ch++}
+break}}
+if(!ch)break}}
+setTimeout(()=>{try{const o=enterMap;window.enterMap=enterMap=function(){const r=o.apply(this,arguments);try{ov2Run(curMap)}catch(e){console.warn('ov2',e)}return r}}catch(e){console.warn('ov2',e)}},2200);
+const TRG={off:0,
+pat:{2:['120,100,80',.6],3:['255,110,40',.55,1],4:['235,245,255',.62],5:['150,110,220',.6,1],6:['60,140,120',.6],7:['150,110,60',.6],8:['230,200,140',.65],10:['130,100,220',.55,1],
+11:['220,80,170',.5,1],12:['240,245,250',.62],13:['120,170,80',.6],14:['170,130,70',.5],15:['70,120,70',.6],16:['110,180,255',.55,1],17:['200,160,110',.6],18:['170,160,180',.55],
+19:['110,240,210',.6,1],20:['90,110,70',.6],21:['150,150,160',.55],22:['170,90,255',.5,1],23:['255,170,80',.5,1],24:['110,220,255',.55,1],25:['90,110,80',.55],26:['255,100,30',.55,1]}};
+function trgOn(){try{return!TRG.off&&TRA.m[curMap]&&!TRA.off&&HDI.on&&!lqHD()&&!isDg()}catch(e){return false}}
+function trgPaint(x,X0,Y0,CS){const P=TRG.pat[curMap];if(!P)return;const C=MXC[curMap],U=C&&MXU[C.ug],T=MX.trs||[],m=90;
+for(const t of T){if(t.x<X0-m||t.x>X0+CS+m||t.y<Y0-m||t.y>Y0+CS+m)continue;const b=t._tb||(t._tb=ov2TreeBox(t,curMap)||{x:t.x,y:t.y+14,w:(t.r||20)*2.4,h:40});
+const w=b.w,bx=t.x,by=b.y-2,R=gxRng(((t.x*97)|0)^((t.y*131)|0));
+x.save();if(P[2])x.globalCompositeOperation='lighter';const rx=w*P[1]*1.7,ry=rx*.42,gr=x.createRadialGradient(bx,by,0,bx,by,rx);gr.addColorStop(0,'rgba('+P[0]+','+(P[2]?.3:.5)+')');gr.addColorStop(1,'rgba('+P[0]+',0)');
+x.fillStyle=gr;x.beginPath();x.ellipse(bx,by,rx,ry,0,0,7);x.fill();x.restore();
+x.save();const g2=x.createRadialGradient(bx,by,0,bx,by,w*.42);g2.addColorStop(0,'rgba(0,0,0,.28)');g2.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g2;x.beginPath();x.ellipse(bx,by,w*.42,w*.13,0,0,7);x.fill();x.restore();
+if(U&&U.length){const k=3+(R()*3|0);for(let i=0;i<k;i++){const a=(R()<.5?0:Math.PI)+(R()-.5)*1.4,dd=w*(.55+R()*.32),X=bx+Math.cos(a)*dd,Y=by+Math.abs(Math.sin(a))*dd*.22+R()*4,s=U[(R()*U.length)|0](),sc=.8+R()*.4;
+if(s&&s.c)x.drawImage(s.c,X-s.w*sc/2,Y-s.h*sc*.9,s.w*sc,s.h*sc)}}}}
+setTimeout(()=>{try{const o=mxBakeVM;window.mxBakeVM=mxBakeVM=function(x,X0,Y0,CS){if(trgOn())try{trgPaint(x,X0,Y0,CS)}catch(e){console.warn('trg',e)}return o.apply(this,arguments)}}catch(e){console.warn('trg',e)}},2200);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();
