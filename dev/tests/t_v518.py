@@ -44,7 +44,7 @@ async def main():
           return {n:bag.length,imgs:imgs.filter(Boolean).length,emo,eqB:eqB?eqB.innerHTML.slice(0,80):'',empty:h.indexOf('opacity:.6')>0,w:hw.indexOf('<img')===0,h:hh.indexOf(helmIcon(me.bag[4]))>0,err:ITI.err}}""")
         rep('หน้าอุปกรณ์: ทุกชิ้นในกระเป๋าเป็นภาพวาด ไม่มีอีโมจิ 🥾💍 · ช่องว่างเป็นเงาจาง · หมวกใช้ภาพเดิม',r['n']==6 and r['imgs']==6 and r['emo']==0 and r['empty'] and r['w'] and r['h'] and '<img' in r['eqB'] and not r['err'],json.dumps(r,ensure_ascii=False))
         # วัตถุดิบ
-        r=await A.ev("""async()=>{for(const o of GOODS)try{gdSet(o.k,o.k==='twc'?1234:5)}catch(e){}ov.hidden=false;gearUI();await new Promise(r=>setTimeout(r,60));const c=[...ov.querySelectorAll('.cell[data-gd]')];
+        r=await A.ev("""async()=>{for(const o of GOODS)try{gdSet(o.k,o.k==='twc'?1234:5)}catch(e){}ov.hidden=false;try{GWV.t='goods'}catch(e){};gearUI();await new Promise(r=>setTimeout(r,60));const c=[...ov.querySelectorAll('.cell[data-gd]')];
           const known=c.filter(e=>MATI[e.dataset.gd]);const miss=known.filter(e=>!e.querySelector('img[data-iti]')).map(e=>e.dataset.gd);
           const cnt=known.filter(e=>{const s=[...e.querySelectorAll('span')].find(x=>x.style.position==='absolute');return s&&/\\d/.test(s.textContent)}).length;
           const emo=known.filter(e=>/[🛡️🪙🐚💠🪶⚡🍯🕸️🌑🪨🔷☄️💎🌿🌸🪷🍄🔴🔵🟢⚫⚪🟡🌈🎯🔗🪣🍱🌅]/u.test(e.textContent)).map(e=>e.dataset.gd);

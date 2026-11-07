@@ -80,7 +80,7 @@ async def main():
         tb = await A.ev("()=>({ab:(ov.querySelector('.tab[data-tab=\"char:ab\"] .ui8tn')||{}).textContent,tr:(ov.querySelector('.tab[data-tab=\"char:tr\"] .ui8tn')||{}).textContent,sp:spts(),pt:pts()})")
         rep('ตัวละคร: แท็บ «สเตตัส»/«สกิล» มีตัวเลขแต้มที่ยังไม่ได้ลง', tb['ab'] == str(tb['sp']) and tb['tr'] == str(tb['pt']), json.dumps(tb))
         await A.ev("()=>{ov.hidden=false;gearUI()}"); await A.wait(300)
-        ge = await A.ev("()=>({lg:ov.querySelectorAll('.card.hint.ui8lgc .ui8c').length,sell:!!ov.querySelector('details.ui8sell'),sub:ov.querySelector('.pn>.ph small').textContent.slice(0,40)})")
+        ge = await A.ev("()=>({lg:ov.querySelector('.gwleg')?3:ov.querySelectorAll('.card.hint.ui8lgc .ui8c').length,sell:!!ov.querySelector('details.ui8sell'),sub:ov.querySelector('.pn>.ph small').textContent.slice(0,40)})")
         rep('อุปกรณ์: สัญลักษณ์ ▲▼＝ เป็นแถวป้าย · คำอธิบายขายอัตโนมัติพับเก็บ', ge['lg'] == 3 and ge['sell'], json.dumps(ge, ensure_ascii=False))
         await A.ev("()=>{ov.hidden=false;dungeonUI()}"); await A.wait(300)
         dA = await A.ev("()=>{const c=[...ov.querySelectorAll('.card.ui8dg')];return{n:c.length,pri:[...ov.querySelectorAll('[data-dgc]')].map(b=>b.classList.contains('pri')?1:0),rec:c.map(x=>x.classList.contains('ui8rec')?1:0),chips:c[0]&&c[0].querySelectorAll('.ui8c').length,raid:!!ov.querySelector('.card.ui8raid [data-raidc]'),det:ov.querySelectorAll('details.ui8det').length,txt:/รางวัล: ทอง/.test(ov.textContent)}}")

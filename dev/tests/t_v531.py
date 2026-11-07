@@ -3,7 +3,7 @@ import asyncio, sys, random, json
 sys.path.insert(0, __file__.rsplit('/', 1)[0])
 from h import *
 GEO="""()=>{const P=ov.firstElementChild,r=P.getBoundingClientRect(),x=document.getElementById('ovx').getBoundingClientRect();
- return {pn2:P.classList.contains('pn2'),c2:P.classList.contains('pn2c'),l:P.querySelectorAll('.pn2l').length,w:Math.round(r.width),l0:Math.round(r.left),sh:ov.scrollHeight,ch:ov.clientHeight,
+ return {pn2:P.classList.contains('pn2'),c2:P.classList.contains('pn2c')||[...P.querySelectorAll('.gwg,.swsg,.skwb')].some(e=>getComputedStyle(e).gridTemplateColumns.split(' ').length>=2),l:P.querySelectorAll('.pn2l').length,w:Math.round(r.width),l0:Math.round(r.left),sh:ov.scrollHeight,ch:ov.clientHeight,
   xr:Math.round(x.right),pr:Math.round(r.right),bg:getComputedStyle(P).backgroundImage.slice(0,40),n:PNV.n,err:PNV.err,
   nav:[...P.querySelectorAll('button:not(.cell):not(.tab):not(.pri):not(.rb)')].filter(b=>/60, 78, 120/.test(getComputedStyle(b).backgroundImage)).length}}"""
 async def main():

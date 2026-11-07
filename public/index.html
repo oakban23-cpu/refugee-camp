@@ -12304,8 +12304,10 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v611';
+const WNV='v612';
 const WNL=[
+['🎒','หน้าอุปกรณ์ · สเตตัส · สมุดเควส แบบใหม่','อุปกรณ์: ตัวละคร+ช่องสวมใส่ทางซ้าย กระเป๋าทางขวา · แตะของ → แผงล่างเทียบกับชิ้นที่ใส่อยู่ · แตะช่องว่างกรองกระเป๋าให้ · แท็บของใช้&วัตถุดิบแยกออกมา · สเตตัส: ลงแต้มแล้วค่าพลังที่เพิ่มเรืองเขียวบอก +เท่าไร · เควส: สมุดเควสรวม เนื้อเรื่อง/พ่อค้า/ค่าหัว/จุติ มีปุ่ม 🧭 นำทาง'],
+['🐉','แก้คอกสัตว์ + ป้อมใต้เมฆลื่นขึ้น','ดาวหางเงิน/ด้วงแบกฟ้า ขึ้นป้าย «จบภาค 9/10» แทนปุ่มซื้อที่กดไม่ได้ · แสงต้นเห็ดดาวกลางป้อม (แมพ 19) วาดเบาลง เครื่องรุ่นกลางลื่นขึ้น'],
 ['✨','หน้าต่างสกิลใหม่แบบ MMORPG','เมนู → ตัวละคร → สกิล: ผังสกิล · รูนหลัก · ลิงก์รูน · คลังสกิล อยู่หน้าเดียว · เลือกสกิลจากแถบข้าง เห็นพลัง/มานา/คูลดาวน์ที่รวมรูนแล้ว · แตะช่องลิงก์เลือกรูนจากแผง เห็นค่าก่อนใส่ บอกเหตุผลถ้าใส่ไม่ได้ · เปลี่ยนรูนได้ทุกที่ไม่ต้องกลับค่าย (ยกเว้นลานประลอง)'],
 ['🧹','จัดต้นไม้/หินภาพวาดให้เข้าที่','แมพภาคต้น 2–26: ต้นไม้ที่ซ้อนกันสนิทหรือทับตะเกียง ป้าย รูปปั้น ถูกเอาออก · ของประดับที่ทับกันถูกเลื่อนไปที่ว่าง · พื้นใต้โคนต้นไม้/หินมีลานสีและของตกแต่งรอบโคนเข้ากับภาพใหม่ (หิมะ ทราย มอส แสงลาวา แสงผลึก)'],
 ['🌲','ต้นไม้/หินภาพวาดครบทุกแมพแล้ว','อีก 14 แมพ: ดินแดนหลังรอยแยก สะพานลม หอนาฬิกาเมฆ ทะเลสาบดาวตก ป่าผลึกสายฟ้า หุบเหวลมหวน ซากวิหารพายุ ป่าเห็ดเรืองแสง บึงหมอกม่วง ซากนครใต้เมฆ ห้วงบัลลังก์เงา โพรงรากหิน ทะเลสาบใต้ดิน แกนพิภพ (เปิดภาพ HD)'],
@@ -31194,6 +31196,144 @@ hd.insertAdjacentHTML('afterend','<button class="card skwnew" data-skwnew="'+(SG
 const _ru=runeUI;window.runeUI=runeUI=function(){const r=_ru.apply(this,arguments);ins();return r};
 const _sg=sgUI;window.sgUI=sgUI=function(){const r=_sg.apply(this,arguments);ins();return r};
 }catch(e){console.warn('skw init',e)}},2300);
+function mtStCh(M){const m=/จบภาค\s*(\d+)/.exec(M&&M.d||'');return m?m[1]:''}
+setTimeout(()=>{try{
+const _mu=mountUI;window.mountUI=mountUI=function(){const r=_mu.apply(this,arguments);try{ov.querySelectorAll('button[data-mtb]').forEach(b=>{const id=+b.dataset.mtb,M=MOUNTS[id];if(!M||!M.st)return;const ch=mtStCh(M);if(!ch)return;b.disabled=true;b.removeAttribute('data-mtb');b.textContent='📜 จบภาค '+ch})}catch(e){}return r};
+const _mb=mountBuy;window.mountBuy=mountBuy=function(id){const M=MOUNTS[id],ch=mtStCh(M);if(M&&M.st&&ch)return mountUI('📜 '+M.n+' ได้จากการจบภาค '+ch);return _mb.apply(this,arguments)};
+}catch(e){console.warn('mtst',e)}},2300);
+const F19={off:0};
+setTimeout(()=>{try{const o=fhdBeacon;window.fhdBeacon=fhdBeacon=function(t){if(F19.off)return o.apply(this,arguments);
+const pu=.75+.25*Math.sin(t*1.6);g.save();g.globalCompositeOperation='lighter';glowAt(0,-100,92,'90,255,220',.26*pu);glowAt(0,-110,56,'200,255,245',.3*pu);g.restore();
+fSpr('star_mush',0,34,176);
+if(!LOWQ){g.save();g.globalCompositeOperation='lighter';glowAt(0,-196+Math.sin(t*1.3)*3,30,'160,255,250',.5*pu);
+let lq=false;try{lq=lqHD()}catch(e){}
+if(!lq){for(let i=0;i<8;i++){const j=i*2,a=t*(.35+(j%4)*.08)+j*1.7,rr=50+(j%5)*22,px=Math.cos(a)*rr,py=-70+Math.sin(a)*rr*.35-((t*14+j*13)%60);g.fillStyle=i%3?'rgba(150,255,235,.55)':'rgba(215,180,255,.55)';g.fillRect(px-2,py-2,4,4);g.fillStyle='rgba(255,255,255,.8)';g.fillRect(px-.8,py-.8,1.6,1.6)}}
+g.restore()}}}catch(e){console.warn('f19',e)}},2300);
+const GWV={off:0,t:'eq'};
+function gwCSS(){if(document.getElementById('gwcss'))return;const s=document.createElement('style');s.id='gwcss';s.textContent=
+'body #ov>.pn.gwp{display:block!important;column-count:auto!important}body #ov>.pn.gwp>*{column-span:none!important}'+
+'#ov .gwtb{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 8px}#ov .gwtb .gwts{display:flex;gap:4px;padding:3px;border-radius:12px;background:rgba(0,0,0,.28)}'+
+'#ov .gwtb .gwt{min-height:38px;padding:4px 14px;border-radius:9px;border:1px solid transparent;background:transparent;color:#cdbfa8;font-size:14px;font-weight:600}'+
+'#ov .gwtb .gwt.on{background:linear-gradient(180deg,#ffe7a6,#ebbd5c 52%,#c18a30);color:#24170a;border-color:#8a6420}'+
+'#ov .gwtb .gwch{display:flex;gap:6px;margin-left:auto;font-size:13px}#ov .gwtb .gwch span{padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.28);border:1px solid rgba(231,183,90,.22);white-space:nowrap}#ov .gwtb .gwch b{color:#ffd27a}#ov .gwtb .gwch .full b{color:#ff9d8a}'+
+'#ov .gwg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px;align-items:start}#ov .gwg>.card{margin:0!important}'+
+'#ov .gwg>.gwl{position:sticky;top:0;display:flex;flex-direction:column;gap:8px}#ov .gwl>.card{margin:0!important}'+
+'#ov .gwtot{font-size:12px;opacity:.85;line-height:1.5;padding:6px 10px;border-radius:10px;background:rgba(0,0,0,.25)}'+
+'#ov .gwleg{font-size:11px;opacity:.75;font-weight:400;margin-left:6px}'+
+'#ov details.gwas{margin:2px 0 8px;border-radius:10px;border:1px dashed rgba(255,216,140,.3);background:rgba(255,216,140,.05)}#ov details.gwas>summary{cursor:pointer;padding:7px 10px;font-size:12.5px;list-style:none}#ov details.gwas>summary::-webkit-details-marker{display:none}#ov details.gwas>div{margin:0 8px 8px!important;border:0!important;background:none!important;padding:0!important}'+
+'body:has(.gwsh) #ovx{display:none!important}'+
+'.gwsh{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;justify-content:flex-end}.gwsh .gwbk{position:absolute;inset:0;background:rgba(0,0,0,.55)}'+
+'.gwsh .gwbd{position:relative;max-height:88vh;overflow-y:auto;width:min(100%,760px);margin:0 auto;box-sizing:border-box;padding:10px 14px calc(12px + env(safe-area-inset-bottom));background:#1a120d;border-top:2px solid #e7b75a;border-radius:18px 18px 0 0;box-shadow:0 -12px 30px rgba(0,0,0,.6);color:#f3e6cf;text-align:left}'+
+'.gwsh .gwhd{display:flex;align-items:center;gap:8px;margin-bottom:6px}.gwsh .gwhd b{flex:1;font-size:14px;color:#ffe2a6}.gwsh .gwx{width:40px;height:40px;border-radius:50%!important;padding:0!important}'+
+'.gwsh .card.det{margin:0!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}'+
+'.gwsh .det .bt{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.gwsh .det .bt button{flex:1 1 120px;min-height:46px;border-radius:12px;font-size:14px}'+
+'.gwsh .gwcmp{display:flex;align-items:center;gap:10px;padding:8px 10px;margin:0 0 8px;border-radius:12px;background:rgba(0,0,0,.35);border:1px solid rgba(231,183,90,.2);font-size:12.5px}.gwsh .gwcmp .cell{width:42px;height:42px;flex:0 0 42px}.gwsh .gwcmp b{display:block}'+
+'.gwsh .gwvs{font-size:11px;font-weight:700;color:#e7b75a;letter-spacing:1px}'+
+'@media (min-aspect-ratio:1/1){#ov .gwl .grid.g5{grid-template-columns:repeat(5,minmax(0,1fr))}}'+
+'@media (max-aspect-ratio:1/1){#ov .gwg{grid-template-columns:minmax(0,1fr)}#ov .gwg>.gwl{position:static}}'+
+'@media (max-height:480px) and (min-aspect-ratio:1/1){#ov .gwg>.gwl{position:static}.gwsh .gwbd{max-height:96vh;padding-top:6px}}';
+document.head.appendChild(s)}
+function gwPost(){if(GWV.off)return;const P=ov.querySelector('.pn[data-pn="gear"]');if(!P||P.querySelector('.gwtb'))return;gwCSS();P.classList.add('gwp');
+const C=[...P.children].filter(c=>c.classList&&c.classList.contains('card'));
+const eqC=C.find(c=>c.querySelector('[data-gp^="eq:"]')),det=C.find(c=>c.classList.contains('det')),bagC=C.find(c=>c.querySelector('[data-gs]')),
+goods=C.find(c=>{const q=c.querySelector('.cap');return q&&/ของใช้/.test(q.textContent)}),hints=C.filter(c=>c.classList.contains('hint')&&!c.classList.contains('det'));
+if(!eqC||!bagC)return;
+const tb=document.createElement('div');tb.className='gwtb';const full=me.bag.length>=MAXBAG;
+tb.innerHTML='<div class="gwts"><button class="gwt'+(GWV.t==='eq'?' on':'')+'" data-gwt="eq">🎒 อุปกรณ์</button>'+(goods?'<button class="gwt'+(GWV.t==='goods'?' on':'')+'" data-gwt="goods">🧺 ของใช้ & วัตถุดิบ</button>':'')+'</div><div class="gwch"><span>🪙 <b>'+fmtG(me.gold)+'</b></span><span class="'+(full?'full':'')+'">กระเป๋า <b>'+me.bag.length+'/'+MAXBAG+'</b></span></div>';
+const ph=P.querySelector(':scope>.ph'),note=P.querySelector(':scope>.note');(note||ph).after(tb);
+let tot=null;hints.forEach(h=>{if(/โบนัสรวม/.test(h.textContent)){tot=h;tot.className='gwtot'}else h.remove()});
+const cap=bagC.querySelector('.cap>span');if(cap)cap.insertAdjacentHTML('beforeend','<span class="gwleg">'+UP+' ดีกว่า · '+DN+' แย่กว่า</span>');
+const asl=bagC.querySelector('[data-asl="on"]');if(asl){const box=asl.parentElement,A=aslGet(),d=document.createElement('details');d.className='gwas';if(GWV.aso)d.open=true;d.ontoggle=()=>{GWV.aso=d.open};
+d.innerHTML='<summary>⚙️ ขายอัตโนมัติตอนเก็บของ: <b style="color:'+(A.on?'#8ad08a':'#cdbfa8')+'">'+(A.on?'เปิด (ถึง '+ASLN[A.k]+')':'ปิด')+'</b> ▾</summary>';box.before(d);d.appendChild(box)}
+const gg=document.createElement('div');gg.className='gwg';const L=document.createElement('div');L.className='gwl';
+if(GWV.t==='goods'&&goods){tb.after(goods);[eqC,bagC,tot].forEach(e=>e&&e.remove())}
+else{tb.after(gg);gg.appendChild(L);L.appendChild(eqC);if(tot)L.appendChild(tot);gg.appendChild(bagC);if(goods)goods.remove();
+C.forEach(c=>{if(c!==eqC&&c!==bagC&&c!==det&&c!==goods&&c!==tot&&!hints.includes(c)&&c.parentElement===P)L.appendChild(c)})}
+if(det){const sh=document.createElement('div');sh.className='gwsh';let cmp='';
+try{const[w,k]=(gsel||'').split(':');if(w==='bag'){const it=me.bag[+k],cur=it&&me.eq[it.sl];cmp=cur?'<div class="gwcmp"><span class="gwvs">ใส่อยู่</span>'+cellH(cur,'disabled',0,cur.sl)+'<div style="min-width:0"><b style="color:'+RCL[cur.r]+'">'+itemName(cur)+'</b><small>'+Object.keys(cur.st).map(q=>stLabel(q,eff(cur,q))).join(' · ')+'</small></div></div>':'<div class="gwcmp"><span class="gwvs">ช่อง'+SLN[it.sl]+'ยังว่าง</span><small>ใส่แล้วได้ค่าทั้งหมดเพิ่มทันที</small></div>'}}catch(e){}
+sh.innerHTML='<div class="gwbk" data-gwx="1"></div><div class="gwbd"><div class="gwhd"><b>รายละเอียดไอเทม</b><button class="gwx" data-gwx="1" aria-label="ปิด">✕</button></div>'+cmp+'</div>';P.appendChild(sh);sh.querySelector('.gwbd').appendChild(det);
+if(GWV.t==='goods')sh.remove()}}
+{const ovE=document.getElementById('ov');if(ovE)ovE.addEventListener('click',e=>{if(GWV.off||!me.cls||ov.dataset.k!=='gear')return;const b=e.target.closest&&e.target.closest('[data-gwt],[data-gwx],[data-gp^="eq:"]');if(!b)return;
+if(b.dataset.gp){const sl=b.dataset.gp.slice(3);if(me.eq[sl])return;e.stopPropagation();e.preventDefault();gearSel=sl;gsel=null;GWV.t='eq';try{sfx('click')}catch(x){}gearUI();return}
+e.stopPropagation();e.preventDefault();try{sfx('click')}catch(x){}if(b.dataset.gwt){GWV.t=b.dataset.gwt;gsel=null}else gsel=null;const st=ov.scrollTop;gearUI();ov.scrollTop=st},true)}
+setTimeout(()=>{try{const _pl=pnLay;window.pnLay=pnLay=function(){const r=_pl.apply(this,arguments);try{const P=ov.firstElementChild;if(P&&P.classList&&(P.classList.contains('gwp')||P.classList.contains('swsp')||P.classList.contains('skwp'))&&!ov.hidden){P.classList.remove('pn2c');if(innerWidth>innerHeight*1.05){P.classList.add('pn2');if(ov.clientWidth<700)P.classList.remove('pn2')}else P.classList.remove('pn2')}}catch(e){}return r}}catch(e){console.warn('gw',e)}},2400);
+setTimeout(()=>{try{const o=gearUI;window.gearUI=gearUI=function(){const r=o.apply(this,arguments);try{gwPost()}catch(e){console.warn('gw',e)}return r}}catch(e){console.warn('gw',e)}},2400);
+const SWS={off:0,prev:null,row:-1};
+function swsCSS(){if(document.getElementById('swscss'))return;const s=document.createElement('style');s.id='swscss';s.textContent=
+'body #ov>.pn.swsp{display:block!important;column-count:auto!important}body #ov>.pn.swsp>*{column-span:none!important}'+
+'#ov .swsg{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:10px;align-items:start}#ov .swsg>div>*{margin-top:0!important}'+
+'#ov .swsl{position:sticky;top:0;display:flex;flex-direction:column;gap:8px}#ov .swsl>.card,#ov .swsl>.sk2top{margin:0!important}'+
+'#ov .swsr{display:flex;flex-direction:column;gap:6px}#ov .swsr>.ab2{margin:0!important}'+
+'#ov .swsl .sk2top .tot{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px!important}#ov .swsl .sk2top .tot .ch{justify-content:flex-start;position:relative;transition:background .3s}'+
+'#ov .sk2top .tot .ch.swup{background:rgba(111,224,160,.18)!important;border-color:rgba(111,224,160,.7)!important;box-shadow:0 0 10px rgba(111,224,160,.35);animation:swsP 1.2s ease-out}'+
+'#ov .sk2top .tot .ch.swdn{background:rgba(255,120,100,.14)!important;border-color:rgba(255,140,120,.6)!important}'+
+'#ov .sk2top .tot .ch em{font-style:normal;font-weight:800;margin-left:4px;font-size:11px}#ov .sk2top .tot .ch.swup em{color:#6fe0a0}#ov .sk2top .tot .ch.swdn em{color:#ff9d8a}'+
+'@keyframes swsP{0%{transform:scale(1.08)}100%{transform:scale(1)}}'+
+'#ov .swsr .ab2{display:grid!important;grid-template-columns:minmax(0,1fr) auto;column-gap:10px;row-gap:3px;align-items:center;padding:8px 10px!important}'+
+'#ov .swsr .ab2>.hd{grid-column:1;margin:0!important}#ov .swsr .ab2>.ef{grid-column:1;margin:0!important}#ov .swsr .ab2>.nx{grid-column:1;margin:0!important}'+
+'#ov .swsr .ab2>.bs{grid-column:2;grid-row:1/span 3;display:flex!important;gap:5px!important;margin:0!important}#ov .swsr .ab2>.bs button{min-width:52px;min-height:46px;padding:0 8px!important}'+
+'#ov .swsr .ab2>details{grid-column:1/-1}#ov .swsr .ab2.swhit{box-shadow:0 0 0 2px #e7b75a,0 0 16px rgba(231,183,90,.35);transition:box-shadow .4s}'+
+'@media (max-aspect-ratio:1/1){#ov .swsg{grid-template-columns:minmax(0,1fr)}#ov .swsl{position:static}#ov .swsr .ab2{grid-template-columns:minmax(0,1fr)}#ov .swsr .ab2>.bs{grid-column:1;grid-row:auto}#ov .swsr .ab2>.bs button{flex:1}}';
+document.head.appendChild(s)}
+function swsSnap(){const o={};ov.querySelectorAll('.sk2top .tot .ch').forEach(c=>{const t=c.textContent.trim(),m=/^(\D*?)(-?[\d,]+(?:\.\d+)?)/.exec(t);if(m)o[m[1].trim()]=parseFloat(m[2].replace(/,/g,''))});return o}
+function swsPost(){if(SWS.off||charTab!=='ab')return;const P=ov.querySelector('.pn[data-pn="char"]');if(!P||P.querySelector('.swsg'))return;const top=P.querySelector(':scope>.sk2top'),rows=[...P.querySelectorAll(':scope>.ab2')];if(!top||!rows.length)return;swsCSS();P.classList.add('swsp');
+const g=document.createElement('div');g.className='swsg';const L=document.createElement('div');L.className='swsl';const R=document.createElement('div');R.className='swsr';top.before(g);g.appendChild(L);g.appendChild(R);
+const xp=[...P.children].find(c=>c.classList&&c.classList.contains('card')&&c.querySelector('.xpb'));if(xp)L.appendChild(xp);L.appendChild(top);
+[...P.children].forEach(c=>{if(c!==g&&c.classList&&(c.classList.contains('ab2')||(c.classList.contains('card')&&!c.classList.contains('tabs'))))R.appendChild(c)});
+if(SWS.prev&&performance.now()-SWS.pt<600){const pv=SWS.prev;ov.querySelectorAll('.sk2top .tot .ch').forEach(c=>{const t=c.textContent.trim(),m=/^(\D*?)(-?[\d,]+(?:\.\d+)?)/.exec(t);if(!m)return;const k=m[1].trim(),v=parseFloat(m[2].replace(/,/g,''));if(!(k in pv))return;const d=Math.round((v-pv[k])*100)/100;if(!d)return;
+c.classList.add(d>0?'swup':'swdn');c.insertAdjacentHTML('beforeend','<em>'+(d>0?'+':'')+d+'</em>')})}
+if(SWS.row>=0&&performance.now()-SWS.pt<600&&R.querySelectorAll('.ab2')[SWS.row]){const r=R.querySelectorAll('.ab2')[SWS.row];r.classList.add('swhit');setTimeout(()=>{try{r.classList.remove('swhit')}catch(e){}},900)}}
+{const ovE=document.getElementById('ov');if(ovE)ovE.addEventListener('click',e=>{if(SWS.off||ov.dataset.k!=='char'||charTab!=='ab')return;const b=e.target.closest&&e.target.closest('.ab2 .bs button,.sk2top button');if(!b)return;SWS.prev=swsSnap();SWS.pt=performance.now();const r=b.closest('.ab2');SWS.row=r?[...ov.querySelectorAll('.ab2')].indexOf(r):-1},true)}
+setTimeout(()=>{try{const o=treeUI;window.treeUI=treeUI=function(){const r=o.apply(this,arguments);try{swsPost()}catch(e){console.warn('sws',e)}return r}}catch(e){console.warn('sws',e)}},2450);
+const QLV={off:0,t:'st'};
+function qlCSS(){if(document.getElementById('qlcss'))return;const s=document.createElement('style');s.id='qlcss';s.textContent=
+'#ov .qltb{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:4px;padding:3px;border-radius:12px;background:rgba(0,0,0,.28);margin:0 0 8px}'+
+'#ov .qltb button{position:relative;min-height:40px;padding:4px 6px;border-radius:9px;border:1px solid transparent;background:transparent;color:#cdbfa8;font-size:13.5px;font-weight:600;white-space:nowrap}'+
+'#ov .qltb button.on{background:linear-gradient(180deg,#ffe7a6,#ebbd5c 52%,#c18a30);color:#24170a;border-color:#8a6420}#ov .qltb button small{font-weight:400;opacity:.8}'+
+'#ov .qltb .qdot{position:absolute;top:4px;right:6px;width:9px;height:9px;border-radius:50%;background:#ff5a4a;box-shadow:0 0 6px #ff5a4a}'+
+'#ov .qlc{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:14px;background:rgba(0,0,0,.25);border:1px solid rgba(231,183,90,.25);text-align:left;margin-bottom:8px}'+
+'#ov .qlc .qlh{display:flex;align-items:center;gap:10px}#ov .qlc .qlh .qi{font-size:30px;line-height:1}#ov .qlc .qlh b{font-size:16px;color:#ffe2a6;display:block}#ov .qlc .qlh small{font-size:12px;opacity:.8}'+
+'#ov .qlc .qtx{font-size:14px;line-height:1.55;padding:8px 10px;border-radius:10px;background:rgba(255,236,205,.06);border-left:3px solid #e7b75a}'+
+'#ov .qlbar{height:8px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden}#ov .qlbar i{display:block;height:100%;background:linear-gradient(90deg,#c18a30,#ffe7a6)}'+
+'#ov .qlc .qbt{display:flex;gap:8px;flex-wrap:wrap}#ov .qlc .qbt button{flex:1 1 140px;min-height:48px;border-radius:12px;font-size:14.5px;font-weight:700}'+
+'#ov .qlc .qbt button.on{background:#5a2a20!important;color:#ffd2c6!important;border-color:#8a4a3a!important}'+
+'#ov .qlrow{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid rgba(231,183,90,.18);text-align:left}#ov .qlrow.ok{opacity:.65}'+
+'#ov .qlrow .nm{flex:1;min-width:0}#ov .qlrow .nm b{display:block;font-size:14px;color:#ffe2a6}#ov .qlrow .nm small{font-size:12px;opacity:.8}#ov .qlrow .st{color:#ffd84a;font-size:12px}#ov .qlrow .st i{font-style:normal;opacity:.3}'+
+'#ov .qlrow button{min-height:40px;padding:0 12px;border-radius:10px;font-size:13px;white-space:nowrap}#ov .qlrow .hot{color:#ffb070;font-weight:700}'+
+'#ov .qlem{text-align:center;padding:16px 12px;opacity:.9;font-size:13px;line-height:1.6}#ov .qlem .qi{font-size:34px}';
+document.head.appendChild(s)}
+function qlAq(src){return typeof AQ!=='undefined'&&AQ&&AQ.src===src}
+function qlRbOn(){try{return!!(me.cls2&&!me.rb&&me.lv>=95)}catch(e){return false}}
+function qlBtyOn(){try{return me.lv>=BTYLV}catch(e){return false}}
+function qlStoryAl(){try{const q=me.sty,st=STY[q.s];return!!(st&&st.k&&q.a===0&&(!st.lv||lvOk(st.lv)))}catch(e){return false}}
+function qlTabs(){const T=[['st','📖 เนื้อเรื่อง',qlStoryAl()],['bq','📋 พ่อค้า <small>'+me.qs.length+'/'+QMAX+'</small>',me.qs.some(q=>q.h>=q.n)]];
+if(qlBtyOn()){let dn=0,n=0;try{const B=btySt(),L=btyBoard();n=L.length;dn=L.filter(S=>B.cl[S.bid]).length}catch(e){}T.push(['bty','🎯 ค่าหัว <small>'+dn+'/'+n+'</small>',false])}
+if(qlRbOn())T.push(['rb','🌅 จุติ',false]);if(!T.some(t=>t[0]===QLV.t))QLV.t='st';
+return'<div class="qltb">'+T.map(([id,l,dot])=>'<button class="'+(QLV.t===id?'on':'')+'" data-qlt="'+id+'">'+l+(dot?'<i class="qdot"></i>':'')+'</button>').join('')+'</div>'}
+function qlNavBtn(src,lab){const on=qlAq(src);return'<button class="'+(on?'on':'pri')+'" data-qln="'+src+'">'+(on?'⏹ หยุดนำทาง':'🧭 '+(lab||'นำทาง (เดินไปทำอัตโนมัติ)'))+'</button>'}
+function qlStory(){let st=null,q=me.sty;try{stInit();q=me.sty;st=STY[q.s]}catch(e){}const tot=STY.length||1,pc=Math.round(Math.min(1,(q&&q.s||0)/tot)*100);let tx='';try{tx=stTxt()}catch(e){}
+if(!st)return'<div class="qlc"><div class="qlh"><span class="qi">🏆</span><div><b>จบเนื้อเรื่องที่มีตอนนี้แล้ว</b><small>ความคืบหน้า 100%</small></div></div><div class="qtx">'+tx+'</div><div class="qbt"><button data-qlo="story">📖 อ่านบันทึกเนื้อเรื่อง</button></div></div>';
+return'<div class="qlc"><div class="qlh"><span class="qi">📜</span><div><b>'+(STCH[st.c]||'เนื้อเรื่องหลัก')+'</b><small>ความคืบหน้าเนื้อเรื่องทั้งหมด '+pc+'%'+(st.lv&&!lvOk(st.lv)?' · ⚠️ ต้อง Lv '+st.lv:'')+'</small></div></div><div class="qlbar"><i style="width:'+pc+'%"></i></div>'+
+'<div class="qtx">'+tx+'</div><div class="qbt">'+qlNavBtn('st')+'<button data-qlo="story">📖 บันทึกเนื้อเรื่อง</button></div></div>'+
+'<div class="qlem" style="padding:4px;font-size:12px;opacity:.7">ทางลัด: แตะกล่องเนื้อเรื่องมุมจอก็เดินไปทำอัตโนมัติได้เหมือนกัน</div>'}
+function qlBq(){if(!me.qs.length)return'<div class="qlc qlem"><div class="qi">🗒️</div><b>ยังไม่มีเควสพ่อค้า</b><div>ไปคุยกับ <b>พ่อค้า</b> ในค่ายเพื่อรับเควส (รับได้สูงสุด '+QMAX+' เควส)<br>ได้ทอง · ค่าประสบการณ์ · บางเควสได้อุปกรณ์ 🎁</div></div>';
+return me.qs.map(q=>{const done=q.h>=q.n,pc=q.t==='reach'||q.t==='boss'?(done?'สำเร็จ':'ยังไม่สำเร็จ'):q.h+'/'+q.n,w=q.t==='reach'||q.t==='boss'?(done?100:0):Math.round(Math.min(1,q.h/Math.max(1,q.n))*100);
+return'<div class="qlc" style="gap:6px"><div class="qlh"><span class="qi" style="font-size:24px">'+QI[q.t]+'</span><div style="flex:1;min-width:0">'+qLine(q)+'<small>🪙'+q.g+' · ✨'+q.xp+' XP'+(q.gr?' · 🎁อุปกรณ์':'')+'</small></div><b style="font-size:14px;color:'+(done?'#6fe0a0':'#ffd27a')+'">'+pc+'</b></div><div class="qlbar"><i style="width:'+w+'%"></i></div>'+
+'<div class="qbt">'+(done?'<button class="pri" data-qc="'+q.id+'">🎁 รับรางวัล</button>':'<button class="pri" data-aq="'+q.id+'">🧭 นำทาง</button><button data-qx="'+q.id+'" style="flex:0 1 110px">ยกเลิก</button>')+'</div></div>'}).join('')}
+function qlBty(){let B,L=[];try{B=btySt();L=btyBoard()}catch(e){}if(!L.length)return'<div class="qlc qlem"><div class="qi">🎯</div>ยังไม่มีใบประกาศค่าหัว</div>';const dn=L.filter(S=>B.cl[S.bid]).length;
+return'<div class="qlc" style="gap:6px"><div class="qlh"><span class="qi">🎯</span><div style="flex:1"><b>ใบประกาศค่าหัววันนี้ · สำเร็จ '+dn+'/'+L.length+'</b><small>ล่าหัวหน้ามอนตามใบประกาศ ได้เหรียญค่าหัวไปแลกของ · ใบใหม่ทุกเที่ยงคืน</small></div></div><div class="qlbar"><i style="width:'+Math.round(dn/L.length*100)+'%"></i></div></div>'+
+L.map(S=>{const ok=!!B.cl[S.bid],here=curMap===S.mp;return'<div class="qlrow'+(ok?' ok':'')+'"><div class="nm"><b>«'+S.n+'» <span class="st">'+'★'.repeat(S.st)+'<i>'+'★'.repeat(3-S.st)+'</i></span></b><small>📍 '+btyMapName(S.mp)+' · Lv '+S.L+'</small>'+(ok?'<small style="color:#6fe0a0"> · ✅ สำเร็จแล้ว</small>':here?'<small class="hot"> · คุณอยู่แมพนี้ ตามรอยเท้าบนแผนที่เล็ก</small>':'')+'</div>'+(ok||here?'':'<button data-qlw="'+S.mp+'">🗺️ วาปไป</button>')+'</div>'}).join('')+
+'<div class="qlc" style="padding:8px"><div class="qbt"><button data-qlo="bty">📋 เปิดกระดานค่าหัว · ร้านแลก</button></div></div>'}
+function qlRb(){let t='';try{const e=$('rbq');t=e?e.querySelector('span')?e.querySelector('span').innerHTML:e.innerText:''}catch(x){}let S={sh:0};try{S=rbSt()}catch(x){}
+return'<div class="qlc"><div class="qlh"><span class="qi">🌅</span><div><b>ภารกิจจุติเป็นคลาส 3</b><small>Lv '+me.lv+'/99 · ผลึกวิญญาณ '+S.sh+'/'+RBN+' · ทอง '+fmtG(me.gold)+'/'+fmtG(RBG)+'</small></div></div><div class="qtx">'+(t||'เก็บเลเวลถึง 99 · ผลึกวิญญาณจุติ '+RBN+' ก้อน · ทอง '+RBG.toLocaleString())+'</div><div class="qbt">'+(me.lv>=99?qlNavBtn('rb'):'<button disabled>🔒 ต้อง Lv 99</button>')+'</div></div>'}
+function qlUI(msg){qlCSS();ov.dataset.k='quest';let b='';try{b=QLV.t==='bq'?qlBq():QLV.t==='bty'?qlBty():QLV.t==='rb'?qlRb():qlStory()}catch(e){console.warn('ql',e);b=questHtml(false)}
+ov.innerHTML='<div class="pn" data-pn="quest">'+hdr('📜','สมุดเควส','เควสทั้งหมดอยู่ที่นี่ · กด 🧭 นำทาง เพื่อเดินไปทำอัตโนมัติ')+(msg?'<div class="note">'+msg+'</div>':'')+qlTabs()+b+'</div>'}
+{const ovE=document.getElementById('ov');if(ovE)ovE.addEventListener('click',e=>{if(QLV.off||!me.cls||ov.dataset.k!=='quest')return;const b=e.target.closest&&e.target.closest('[data-qlt],[data-qln],[data-qlo],[data-qlw]');if(!b)return;e.stopPropagation();e.preventDefault();try{sfx('click')}catch(x){}const d=b.dataset;
+if(d.qlt){QLV.t=d.qlt;qlUI();return}
+if(d.qln){if(qlAq(d.qln)){aqStop('🧭 หยุดนำทางแล้ว');qlUI();return}aqStart(d.qln);return}
+if(d.qlo==='story'){try{storyUI()}catch(x){}return}if(d.qlo==='bty'){try{btyUI()}catch(x){}return}
+if(d.qlw){try{wmUI(+d.qlw)}catch(x){}return}},true)}
+setTimeout(()=>{try{const o=questUI;window.questUI=questUI=function(msg){if(QLV.off||!me.cls)return o.apply(this,arguments);try{if(msg)QLV.t='bq';return qlUI(msg)}catch(e){console.warn('ql',e);return o.apply(this,arguments)}}}catch(e){console.warn('ql',e)}},2450);
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
 g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
 const W2=54,H2=104;g.fillStyle='#6a6478';g.fillRect(x-W2-14,y-H2,14,H2+6);g.fillRect(x+W2,y-H2,14,H2+6);g.fillStyle='#c8a040';g.fillRect(x-W2-18,y-H2-6,W2*2+36,10);g.beginPath();g.arc(x,y-H2-1,W2+14,Math.PI,0);g.fillStyle='#5a5468';g.fill();g.strokeStyle='#e0b040';g.lineWidth=3;g.stroke();

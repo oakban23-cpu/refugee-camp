@@ -8,7 +8,7 @@ async def main():
         A = await new_client(b, 'Aq'+str(random.randint(1000,9999)), 'archer', 15)
         await A.ev("()=>{me.sty={s:4,n:0,a:1,e:0};gmGod=true;me.x=1600;me.y=1640;me.qs=[{id:'tq1',t:'kill',mp:1,n:4,h:0,g:100,e:100}];try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}")
         await A.wait(1000)
-        await A.ev("()=>{questUI();ov.hidden=false}"); await A.wait(500)
+        await A.ev("()=>{try{QLV.t='bq'}catch(e){};questUI();ov.hidden=false}"); await A.wait(500)
         await A.pg.screenshot(path='aq3_board.png')
         await A.pg.click('[data-aq="tq1"]'); await A.wait(800)
         print('start',await A.ev("()=>[AQ&&AQ.src,AQ&&AQ.msg,ov.hidden,banner&&banner.s]"))

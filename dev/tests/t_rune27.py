@@ -1,6 +1,11 @@
 import asyncio,json,sys
 from playwright.async_api import async_playwright
-SETUP=open('../fx/cap2.py').read().split('SETUP="""')[1].split('"""')[0].replace("setInterval(()=>{me.hp=me.mh;me.mp=me.mm;me.down=0;dn.length=0},30);","")
+import atexit,random
+sys.path.insert(0, __file__.rsplit('/', 1)[0])
+from h import *
+_P=start_server();atexit.register(_P.terminate)
+__SET=SETUP
+SETUP="(a)=>("+__SET+")([a[0],'T'+Math.floor(Math.random()*9000+1000),Math.max(2,a[1])])"
 CLS=sys.argv[1].split(',') if len(sys.argv)>1 else ['melee','archer','sup','assn','mage']
 async def main():
     async with async_playwright() as pw:
@@ -9,8 +14,9 @@ async def main():
             pg=await (await b.new_context(viewport={'width':400,'height':800})).new_page()
             pg.on('pageerror',lambda e:errs.append(c+':'+str(e)[:200]))
             pg.on('console',lambda m:(m.type=='warning' and ('r27' in m.text or 'r26' in m.text)) and errs.append(c+':W:'+m.text[:200]))
-            await pg.goto('file:///mnt/user-data/outputs/refugee-online/public/index.html');await pg.wait_for_timeout(2300)
-            await pg.evaluate(SETUP,[c,2]);await pg.wait_for_timeout(500)
+            await pg.goto(URL);await pg.wait_for_timeout(2300)
+            await pg.evaluate(SETUP,[c,2]);await pg.wait_for_timeout(2600)
+            await pg.evaluate("()=>{try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};gmGod=true;enterMap(4,{x:1500,y:1500})}");await pg.wait_for_timeout(1500)
             await pg.evaluate("""()=>{try{terMons=function(){};terGet=function(){return null}}catch(e){};AUTO.on=false;me.x=1500;me.y=1500;me.face=0;window.__H=[];const _a=addHit;window.addHit=addHit=function(m,d,cr,lv,ck){if(lv)__H.push([performance.now()|0,+d,m.id,ck]);return _a.apply(this,arguments)};
               setInterval(()=>{let i=0;for(const m of mons){if(m.t>=3||i>=8){m.x=-9999;m.y=-9999;continue}const P=[[60,-20],[80,20],[110,-10],[140,15],[170,-15],[200,10],[230,-5],[260,10]][i];m.x=1500+P[0];m.y=1500+P[1];m.tx=m.x;m.ty=m.y;m.mh=9e9;m.hp=9e9;m.sp=0;i++}},10)}""")
             plans=[('B2',4,'me.cls2=1;me.br=2;me.rb=0')] if c in('melee','archer') else []
@@ -32,10 +38,10 @@ async def main():
             await pg.context.close()
         # q6 refund
         pg=await (await b.new_context(viewport={'width':400,'height':800})).new_page();pg.on('pageerror',lambda e:errs.append('rf:'+str(e)[:200]))
-        await pg.goto('file:///mnt/user-data/outputs/refugee-online/public/index.html');await pg.wait_for_timeout(2300)
+        await pg.goto(URL);await pg.wait_for_timeout(2300)
         await pg.evaluate(SETUP,['mage',2]);await pg.wait_for_timeout(300)
         print('refund before',await pg.evaluate("()=>{const S=rnSt();S.sh=5;S.u.q6a=3;S.u.q6b=1;S.e[5]='a';return [S.sh,JSON.stringify(S.u)]}"))
         await pg.wait_for_timeout(2600)
         print('refund after',await pg.evaluate("()=>{const S=rnSt();return [S.sh,JSON.stringify(S.u),S.e[5],banner&&banner.s]}"))
-        print('errs',errs)
+        print('errs',errs);print('SUMMARY:',int(not errs),'/ 1 passed')
 asyncio.run(main())
