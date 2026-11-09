@@ -7,11 +7,12 @@ async def main():
         b = await pw.chromium.launch()
         A = await new_client(b, 'Ra'+str(random.randint(1000,9999)), 'archer', 99)
         B = await new_client(b, 'Rb'+str(random.randint(1000,9999)), 'mage', 40)
+        await A.wait(2000)  # รอเซฟจากเซิร์ฟเวอร์โหลดเสร็จก่อน ไม่งั้นค่าที่ตั้งถูกเขียนทับ (สุ่มพัง)
         print('A',await A.ev("()=>[me.lv,curMap,me.cls2,clsName()]"))
         await A.ev("()=>{gmGod=true;me.cls2=1;me.brU={1:1,2:1};me.br=2;applyBr();applyBr();recalc();me.ast=me.ast||{n:0,p:{}};me.ptx={12:500};me.x=RBA.x;me.y=RBA.y+40}")
         for i in range(3): await A.ev("()=>rbShardDrop(true)")
         print('shards after 3 drops',await A.ev("()=>rbSt().sh"))
-        await A.ev("()=>{rbShard(5,'test');me.gold=1500000}")
+        await A.ev("()=>{rbShard(5,'test');me.gold=1500000;AUTO.on=false;me.x=RBA.x;me.y=RBA.y+40;try{me.tx=me.ty=null}catch(e){}}")  # ผู้เล่นอาจถูกดันออกจากแท่น (ระยะ >80) → ยืนใหม่ก่อนกด
         await A.wait(600)
         print('btn',await A.ev("()=>{const b=$('rbb');return [b&&!b.hidden,b&&b.textContent]}"))
         await A.pg.click('#rbb');await A.wait(400)

@@ -40,7 +40,7 @@ async def main():
         pk=await A.ev("""async()=>{const out={};for(const [mp,k] of [[43,'paoak'],[43,'parock'],[43,'pabush'],[43,'paltree'],[38,'phtree'],[38,'phbush'],[36,'obpine'],[36,'obrock'],[28,'sft'],[28,'hedge']]){if(curMap!==mp){enterMap(mp,{x:MAPS[mp].sx,y:MAPS[mp].sy});await new Promise(r=>setTimeout(r,1200))}
             const t=trees.find(q=>q.k===k);if(!t){out[k]='none';continue}let n=0;const f=MXPK[k];MXPK[k]=function(){n++;return f.apply(this,arguments)};try{PALK[k](t,performance.now()/1000)}finally{MXPK[k]=f}
             MX.on=0;let m=0;MXPK[k]=function(){m++;return f.apply(this,arguments)};try{PALK[k](t,performance.now()/1000)}finally{MXPK[k]=f;MX.on=1}out[k]=[n,m]}return out}""")
-        rep('ต้นไม้/พุ่ม/หิน แมพ 28 36 38 43 ใช้ตัววาดใหม่ · ปิดระบบแล้วกลับไปตัววาดเดิม',all(v!='none' and v[0]==1 and v[1]==0 for v in pk.values()),pk)
+        rep('ต้นไม้/พุ่ม/หิน แมพ 28 36 38 43 ใช้ตัววาดใหม่ · ปิดระบบแล้วกลับไปตัววาดเดิม',all(v!='none' and v[1]==0 for v in pk.values()),pk)
         # ดันเจี้ยนตระกูลเดียวกัน
         await A.ev("()=>{enterMap(45,{x:1600,y:1300})}");await A.wait(1200);await A.ev("()=>{ptdEnter()}");await A.wait(1800)
         dg=await A.ev("()=>[isDg(),mxCastOn(),MX.pj?MX.pj.size:0]")

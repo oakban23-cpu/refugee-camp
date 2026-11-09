@@ -85,6 +85,7 @@ async def main():
           mons.filter(m=>!m.hg&&m.t<3).forEach(m=>m.hp=0);return [n,a,Math.round(healed*100),mons.filter(m=>m.hg).length]}""")
         await A.pg.screenshot(path=SH+'t_hg.jpg',quality=80)
         rep('เลือด 50%: นาฬิกาทราย 4 ใบ · ไม่ทุบใน 10 วิ บอสฟื้น 10%',hg[0]==4 and hg[1]==1 and 57<=hg[2]<=61 and hg[3]==0,hg)
+        await A.ev("()=>{me.down=0;RSPW.d=false;me.rsp=0;me.inv3=0;me.hp=me.mh;gmGod=true}")  # ช่วงทดสอบท่าบอส (gmGod ปิด) ผู้เล่นอาจล้ม (me.down) ค้างไว้ → ทั้งทีมล้ม = แพ้ ก่อนบอสตาย
         await A.ev("()=>{const B=mons.find(m=>m.t===3);B.hp=1;mons=mons.filter(m=>m.t===3)}");
         for i in range(30):
             if await A.ev("()=>dg.ph==='win'||dgRew"):break

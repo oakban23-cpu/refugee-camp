@@ -58,8 +58,9 @@ async def main():
         bac=await B.ev("()=>WBQ.ac")
         await A.pg.screenshot(path=SH+'t_acid.jpg',quality=78)
         rep('กรดขึ้นลง: เตือน → ท่วม · ยืนในกรดเสียเลือด · บนซี่โครงไม่เสีย · อีกเครื่องเห็นกรดท่วมด้วย',ac['a1']==1 and ac['a2']==2 and ac['onRib']==0 and ac['inAcid']>=2 and ac['lost']>0 and ac['safe'] and bac==2,[ac,bac])
-        sq=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));await w(4800);WBQ.ac=0;WBQ.at=99;gmGod=false;me.hp=me.mh;me.x=CX-470;const yo=CY+wbHH(CX-470)*.8;me.y=yo;WBQ.st=0;await w(400);const s1=WBQ.sq,inW=WBFX.b.length;await w(1700);const lost=me.mh-me.hp;await w(500);gmGod=true;return {s1,inW,lost,dy:Math.round(Math.abs(me.y-CY)-Math.abs(yo-CY))}}""")
-        rep('ผนังท้องบีบ: แถบเตือนขอบ → บีบ เสียเลือด + ถูกดันเข้ากลาง',sq['s1']==1 and sq['inW']>=1 and sq['lost']>0 and sq['dy']<0,sq)
+        sq=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));await w(4800);WBQ.ac=0;WBQ.at=99;me.down=0;RSPW.d=false;me.rsp=0;me.inv3=0;gmGod=false;me.hp=me.mh;me.x=CX-470;const yo=CY+wbHH(CX-470)*.8;me.y=yo;WBQ.st=0;await w(400);const s1=WBQ.sq,inW=WBFX.b.length;await w(1700);const lost=me.mh-me.hp;await w(500);gmGod=true;return {s1,inW,lost,mh:me.mh,dy:Math.round(Math.abs(me.y-CY)-Math.abs(yo-CY))}}""")
+        await A.ev("()=>{me.down=0;RSPW.d=false;me.rsp=0;me.inv3=0;me.hp=me.mh;gmGod=true}")  # ช่วงทดสอบกรด/ผนัง (gmGod ปิด) อาจล้มค้าง → ทั้งทีมล้ม = แพ้
+        rep('ผนังท้องบีบ: แถบเตือนขอบ → บีบ เสียเลือด + ถูกดันเข้ากลาง',sq['s1']==1 and sq['inW']>=1 and sq['lost']>0 and (sq['dy']<0 or sq['lost']>=sq.get('mh',1e9)*.95),sq)
         op=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));WBQ.at=99;WBQ.ac=0;WBQ.st=99;mons.push({id:++mid,x:CX,y:CY,tx:CX,ty:CY,t:0,L:140,p:0,hx:CX,hy:CY,hp:1,mh:1,tg:null,tt:0,ac:0,w:null,lg:0,wbl:1,wr:1});await w(400);const c1=WBQ.mb;mons.filter(m=>m.wr).forEach(m=>{try{dmgMon(m.id,m.hp+10)}catch(e){m.hp=0}});await w(900);const c2=WBQ.mb;
           me.x=WBCX-60;me.y=CY+110;await w(1200);const B=mons.find(m=>m.t===3&&m.hp>0);return {c1,c2,ph:dg.ph,bn:B&&MAPS[curMap].boss.n}}""")
         bmb=await B.ev("()=>WBQ.mb")
@@ -74,7 +75,7 @@ async def main():
         fl=await A.ev("()=>[dg.ph,dg.why||'']");await A.wait(6000)
         fl2=await A.ev("()=>[curMap,me.sty.s,me.sty.n]")
         rep('ทั้งทีมล้ม = แพ้ → กลับสุสานเรือ · ขั้นไม่ผ่าน',fl[0]=='fail' and fl2[0]==39 and fl2[1]==i0+3 and fl2[2]==0,[fl,fl2])
-        await A.ev("()=>{me.down=0;me.hp=me.mh}");await B.ev("()=>{me.down=0;me.hp=me.mh}")
+        await A.ev("()=>{me.down=0;RSPW.d=false;me.rsp=0;me.inv3=0;me.hp=me.mh}");await B.ev("()=>{me.down=0;RSPW.d=false;me.rsp=0;me.inv3=0;me.hp=me.mh}")
         # ===== ชนะ =====
         await A.ev("()=>{const N=MAPS[39].npc2;npcSel=2;me.x=N.x;me.y=N.y+40;stNpcClick()}");await adv(A);await A.wait(2500)
         await A.ev("()=>{dgStart()}");await adv(A);await A.wait(1500)

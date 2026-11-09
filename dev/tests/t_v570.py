@@ -28,6 +28,9 @@ async def main():
             await pg.evaluate(f"()=>{{const m={mp};enterMap(m,{{x:MAPS[m].sx||1600,y:MAPS[m].sy||1600}})}}"); await pg.wait_for_timeout(5000)
             await pg.evaluate("()=>{ov.hidden=true;banner=null;mons=mons.filter(m=>Math.hypot(m.x-me.x,m.y-me.y)>700);try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}")
             await pg.wait_for_timeout(800)
+            for _i in range(24):  # เครื่องทดสอบช้า/รันขนาน: รอปูพื้นครบก่อนวัด (เดิมรอตายตัว 5 วิ → สุ่มพัง)
+                if await pg.evaluate("()=>MX.cov===curMap"): break
+                await pg.wait_for_timeout(500)
             st = await pg.evaluate("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const C=CanvasRenderingContext2D.prototype,of=C.fillRect,ogt=C.getTransform;let full=0,gt=0,on=1;
               C.fillRect=function(x,y,w,h){if(on&&this===g&&w>=SW0*.9&&h>=H*.9){const st=(new Error().stack||'').split('\\n')[2]||'';if(/at draw /.test(st))full++}return of.apply(this,arguments)};
               const og=glowAt;window.glowAt=glowAt=function(){const a=C.getTransform;let n=0;C.getTransform=function(){n++;return ogt.apply(this,arguments)};try{return og.apply(this,arguments)}finally{C.getTransform=a;if(g===GLW.g)gt+=n}};

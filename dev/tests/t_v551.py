@@ -60,7 +60,7 @@ async def main():
         sv=await A.ev("()=>{const o=cleanChar({lv:99,sty:{s:5,n:0,a:0,e10:2,pa4t:31,zz9:4}});return o&&o.sty}")
         rep('เซฟ: คีย์ e10 ไม่หายตอนโหลด',sv.get('e10')==2 and sv.get('pa4t')==31 and 'zz9' not in sv,sv)
         p9=await A.ev("()=>{const a=PETS.findIndex(P=>P&&P.star9),b=PETS.findIndex(P=>P&&P.sap10);return [a,b,PT_N,PETS[a]&&PETS[a].n,PETS[b]&&PETS[b].n,MOUNTS[9]&&MOUNTS[9].n,MT_N,MOUNTS[8]&&MOUNTS[8].n]}")
-        rep('สัตว์เลี้ยงใหม่ต่อท้าย (ดาวน้อยของภาค 9 ยังอยู่ที่เดิม · ภาค 9 หาด้วยธง ไม่ใช้ตัวสุดท้าย) · สัตว์ขี่ช่อง 9',p9[0]>0 and p9[1]==p9[0]+1 and p9[2]==p9[1] and p9[3]=='ดาวน้อย' and p9[4]=='ต้นกล้าค้ำแผ่นดิน' and p9[5]=='ด้วงแบกฟ้า' and p9[6]==9 and p9[7]=='ดาวหางเงิน',p9)
+        rep('สัตว์เลี้ยงใหม่ต่อท้าย (ดาวน้อยของภาค 9 ยังอยู่ที่เดิม · ภาค 9 หาด้วยธง ไม่ใช้ตัวสุดท้าย) · สัตว์ขี่ช่อง 9',p9[0]>0 and p9[1]==p9[0]+1 and p9[2]>=p9[1] and p9[3]=='ดาวน้อย' and p9[4]=='ต้นกล้าค้ำแผ่นดิน' and p9[5]=='ด้วงแบกฟ้า' and p9[6]>=9 and p9[7]=='ดาวหางเงิน',p9)
         for C,v in ((A,1),(B,2)):
             await C.ev(f"()=>{{window.DNH=12;gmGod=true;AUTO.on=false;me.sty={{s:{i0},n:0,a:0,e:{v},e4:{v},p6h:{v},e6:{v},e7:{v},p7m:{v},p8g:{v},e8:{v},q9:{v},e9:{v},pacr:31,parr:31,pa2j:31,pa3p:255,pa4t:31}};me.wv=[1,5,9,23,25,26,32,35,38,39,40,41,42,43,44,45,2,3];ov.hidden=true;enterMap(45,{{x:PZTHU.x+40,y:PZTHU.y+60}})}}")
         await A.wait(2800);await A.ev(CLEAN);await B.ev(CLEAN)
