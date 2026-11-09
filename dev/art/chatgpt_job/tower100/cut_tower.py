@@ -1,6 +1,6 @@
 import sys,json
 from PIL import Image
-D,O=sys.argv[1],sys.argv[2]
+D,O=sys.argv[1],sys.argv[2];PD=sys.argv[3] if len(sys.argv)>3 else None
 sprites=[]
 def cells(path,pref,take):
     im=Image.open(path).convert('RGBA');W,H=im.size;cw,ch=W//4,H//3
@@ -13,6 +13,17 @@ def cells(path,pref,take):
         sprites.append((pref+'_'+str(n),sp))
 for t in range(1,11):cells(f'{D}/props_{t:02d}.png',f'p{t}',range(1,9))
 cells(f'{D}/shared_01.png','s',range(1,13))
+def cells2(path,themes):
+    im=Image.open(path).convert('RGBA');W,H=im.size;cw,ch=W//4,H//2
+    for r,t in enumerate(themes):
+        for c in range(4):
+            cell=im.crop((c*cw,r*ch,(c+1)*cw,(r+1)*ch));a=cell.getchannel('A').point(lambda v:255 if v>20 else 0);bb=a.getbbox()
+            if not bb:print('empty',t,c);continue
+            sp=cell.crop(bb);mh=300
+            if sp.height>mh:sp=sp.resize((max(1,round(sp.width*mh/sp.height)),mh),Image.LANCZOS)
+            sprites.append((f'q{t}_{c+1}',sp))
+if PD:
+    for k in range(5):cells2(f'{PD}/pillars_{k+1:02d}.png',[2*k+1,2*k+2])
 # shelf pack
 sprites.sort(key=lambda s:-s[1].height);AW=2048;x=y=sh=0;pos={}
 for k,sp in sprites:
