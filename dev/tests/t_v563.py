@@ -48,10 +48,10 @@ async def main():
         await A.ev("()=>{try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}")
         # ④ หอคอย
         await A.ev("()=>{me.lv=17;enterMap(5,{x:TWDOOR.x,y:TWDOOR.y+60})}"); await A.wait(1800)
-        tw = await A.ev("()=>{twEnterUI();const b=ov.querySelector('button[data-twc]');return b?[b.className,b.textContent.trim()]:null}")
+        tw = await A.ev("()=>{twEnterUI();const b=ov.querySelector('.twvw .card button[data-twc]')||ov.querySelector('button[data-twc]');return b?[b.className,b.textContent.trim()]:null}")
         await A.ev("()=>{ov.querySelector('button[data-twc]').click()}"); await A.wait(3000)
         tw2 = await A.ev("()=>({map:curMap,tw:typeof isTw==='function'&&isTw(),ov:!ov.hidden})")
-        rep('หน้าเข้าหอคอย: ปุ่ม «▶ เริ่มปีน» เป็นปุ่มหลัก · กดแล้วเข้าหอคอยได้', tw and 'pri' in tw[0] and tw[1].startswith('▶ เริ่มปีน') and tw2['tw'], [tw, tw2])
+        rep('หน้าเข้าหอคอย: ปุ่ม «▶ เริ่มปีน» เป็นปุ่มหลัก · กดแล้วเข้าหอคอยได้', tw and 'pri' in tw[0] and tw[1].startswith('▶ เริ่ม') and tw2['tw'], [tw, tw2])
         # ⑤ แตะกล่องเควสในห้องรอหอคอย → เริ่มปีน · กำลังสู้ → เปิดล่าอัตโนมัติ
         d0 = await A.ev("()=>({ph:dg.ph,tw:isTw(),dgb:!$('dgb').hidden})")
         await A.ev("()=>{HB.on=false;const e=$('stq');if(e&&!e.hidden)e.click();else aqStart('st')}"); await A.wait(3000)
