@@ -13602,8 +13602,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v612';
+const WNV='v613';
 const WNL=[
+  ['🛒','ร้านค้า · ช่างตีบวก · แผนที่โลก · ปาร์ตี้ แบบใหม่','ร้านค้า: ราคาใต้สินค้า แตะแล้วเทียบกับชิ้นที่ใส่อยู่ · แท็บใหม่ 💰 ขายของ เลือกหลายชิ้นขายทีเดียว (เลือกที่แย่กว่า/ตามระดับ) · ช่างตีบวก: แท่นตีบวกโชว์ +ขั้น ค่าที่ได้ หลอดโอกาสสำเร็จ ของที่ต้องใช้ ในที่เดียว · แผนที่โลก: จอนอนแผนที่ซ้ายข้อมูลขวา บอกเควส/ค่าหัว/เพื่อนในแมพ กด 🧭 นำทางได้ · ปาร์ตี้: ชวนเพื่อน/กิลด์ที่ออนไลน์เข้าทีมได้ในหน้าเดียว (เพื่อนชวนข้ามแมพได้)'],
   ['🎒','หน้าอุปกรณ์ · สเตตัส · สมุดเควส แบบใหม่','อุปกรณ์: ตัวละคร+ช่องสวมใส่ทางซ้าย กระเป๋าทางขวา · แตะของ → แผงล่างเทียบกับชิ้นที่ใส่อยู่ · แตะช่องว่างกรองกระเป๋าให้ · แท็บของใช้&วัตถุดิบแยกออกมา · สเตตัส: ลงแต้มแล้วค่าพลังที่เพิ่มเรืองเขียวบอก +เท่าไร · เควส: สมุดเควสรวม เนื้อเรื่อง/พ่อค้า/ค่าหัว/จุติ มีปุ่ม 🧭 นำทาง'],
   ['🐉','แก้คอกสัตว์ + ป้อมใต้เมฆลื่นขึ้น','ดาวหางเงิน/ด้วงแบกฟ้า ขึ้นป้าย «จบภาค 9/10» แทนปุ่มซื้อที่กดไม่ได้ · แสงต้นเห็ดดาวกลางป้อม (แมพ 19) วาดเบาลง เครื่องรุ่นกลางลื่นขึ้น'],
   ['✨','หน้าต่างสกิลใหม่แบบ MMORPG','เมนู → ตัวละคร → สกิล: ผังสกิล · รูนหลัก · ลิงก์รูน · คลังสกิล อยู่หน้าเดียว · เลือกสกิลจากแถบข้าง เห็นพลัง/มานา/คูลดาวน์ที่รวมรูนแล้ว · แตะช่องลิงก์เลือกรูนจากแผง เห็นค่าก่อนใส่ บอกเหตุผลถ้าใส่ไม่ได้ · เปลี่ยนรูนได้ทุกที่ไม่ต้องกลับค่าย (ยกเว้นลานประลอง)'],
@@ -35596,6 +35597,154 @@ function qlUI(msg){qlCSS();ov.dataset.k='quest';let b='';try{b=QLV.t==='bq'?qlBq
   if(d.qlo==='story'){try{storyUI()}catch(x){}return}if(d.qlo==='bty'){try{btyUI()}catch(x){}return}
   if(d.qlw){try{wmUI(+d.qlw)}catch(x){}return}},true)}
 setTimeout(()=>{try{const o=questUI;window.questUI=questUI=function(msg){if(QLV.off||!me.cls)return o.apply(this,arguments);try{if(msg)QLV.t='bq';return qlUI(msg)}catch(e){console.warn('ql',e);return o.apply(this,arguments)}}}catch(e){console.warn('ql',e)}},2450);
+/* ---------- v613 ร้านค้าแบบ MMORPG (SHV) ----------
+   · แท็บอุปกรณ์: ช่องสินค้าขนาดพอดี มีราคาใต้ช่อง · แตะสินค้า → แผงล่างเทียบกับชิ้นที่ใส่อยู่ + ปุ่มซื้อ
+   · แท็บใหม่ 💰 ขายของ: เลือกหลายชิ้นแล้วขายทีเดียว · ปุ่มลัด «เลือกที่แย่กว่าที่ใส่อยู่» / «เลือกถึงระดับ …»
+     ของล็อก 🔒 ไม่ถูกเลือก · ขายของระดับ Mystic ขึ้นไปหรือ 10 ชิ้นขึ้นไปต้องแตะยืนยันอีกครั้ง · ปิด: SHV.off=1 */
+const SHV={off:0,s:new Set(),cf:0};
+function shvCSS(){gwCSS();if(document.getElementById('shvcss'))return;const s=document.createElement('style');s.id='shvcss';s.textContent=
+'#ov .pn[data-pn="shop"] .shvg{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px}'+
+'#ov .shvc{display:flex;flex-direction:column;align-items:center;gap:3px}#ov .shvc .cell{width:100%!important;height:auto!important;aspect-ratio:1/1;max-width:86px}'+
+'#ov .shvc small{font-size:11.5px;font-weight:700;color:#ffd27a;white-space:nowrap}#ov .shvc small.no{color:#ff9d8a}'+
+'#ov .shvq{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 8px}#ov .shvq button{min-height:36px;padding:3px 10px;border-radius:9px;font-size:12.5px}'+
+'#ov .shvbar{position:sticky;bottom:-12px;z-index:2;display:flex;align-items:center;gap:10px;padding:10px 12px;margin-top:8px;border-radius:14px;background:#2a1d14;border:1px solid #e7b75a;box-shadow:0 -6px 18px rgba(0,0,0,.5)}'+
+'#ov .shvbar .tx{flex:1;font-size:13px;line-height:1.4}#ov .shvbar .tx b{color:#ffd27a;font-size:16px}#ov .shvbar button{min-height:48px;padding:0 20px;border-radius:12px;font-size:15px;font-weight:700}'+
+'#ov .shvbar button.cf{background:#8a2a20!important;color:#fff!important;border-color:#c04a3a!important}'+
+'#ov .shvc .cell.shon{box-shadow:0 0 0 3px #6fe0a0,0 0 12px rgba(111,224,160,.5)!important}#ov .shvc .tick{position:absolute;top:2px;left:4px;font-size:14px}';
+document.head.appendChild(s)}
+function shvArrow(it){const d=gCmp(it).dir;return d>0?UP:d<0?DN:'<span style="opacity:.6">＝</span>'}
+function shvGearPost(P){const g=P.querySelector('.grid.g5');if(!g)return;const stock=stk();g.className='shvg';
+  [...g.children].forEach(b=>{const i=b.dataset&&b.dataset.sp;if(i===undefined)return;const it=stock[+i];if(!it)return;const pr=sellPrice(it)*3,w=document.createElement('div');w.className='shvc';b.before(w);w.appendChild(b);w.insertAdjacentHTML('beforeend','<small class="'+(me.gold>=pr?'':'no')+'">🪙 '+fmtG(pr)+'</small>')});
+  const cap=P.querySelector('.cap');if(cap&&/ราคาแสดง/.test(cap.textContent))cap.innerHTML='<span>สินค้าวันนี้ <span class="gwleg">'+UP+' ดีกว่าที่ใส่อยู่ · '+DN+' แย่กว่า</span></span>';
+  const det=P.querySelector('.card.det');[...P.querySelectorAll(':scope>.card.hint')].forEach(h=>h.remove());
+  if(det){const it=stock[shopSel];let cmp='';if(it){const cur=me.eq[it.sl];cmp=cur?'<div class="gwcmp"><span class="gwvs">ใส่อยู่</span>'+cellH(cur,'disabled',0,cur.sl)+'<div style="min-width:0"><b style="color:'+RCL[cur.r]+'">'+itemName(cur)+'</b><small>'+Object.keys(cur.st).map(q=>stLabel(q,eff(cur,q))).join(' · ')+'</small></div></div>':'<div class="gwcmp"><span class="gwvs">ช่อง'+SLN[it.sl]+'ยังว่าง</span><small>ซื้อแล้วใส่ได้ค่าเพิ่มทันที</small></div>'}
+    const sh=document.createElement('div');sh.className='gwsh';sh.innerHTML='<div class="gwbk" data-shx="1"></div><div class="gwbd"><div class="gwhd"><b>รายละเอียดสินค้า</b><button class="gwx" data-shx="1" aria-label="ปิด">✕</button></div>'+cmp+'</div>';P.appendChild(sh);sh.querySelector('.gwbd').appendChild(det)}}
+function shvSellH(){const B=me.bag;for(const it of [...SHV.s])if(B.indexOf(it)<0||it.lk)SHV.s.delete(it);let n=0,g=0,hi=0;B.forEach(it=>{if(SHV.s.has(it)){n++;g+=sellPrice(it);if(it.r>=3)hi++}});
+  let h='<div class="card"><div class="cap"><span>ขายของจากกระเป๋า <span class="gwleg">แตะเพื่อเลือก · '+UP+' ดีกว่า '+DN+' แย่กว่าที่ใส่อยู่ · 🔒 ของล็อกขายไม่ได้</span></span></div>';
+  h+='<div class="shvq"><button data-shq="worse">⬇️ เลือกที่แย่กว่าที่ใส่อยู่</button>'+[0,1,2,3].map(r=>'<button data-shq="r'+r+'" style="border-color:'+RCL[r]+'">ถึงระดับ '+RN[r].split(' · ')[0]+'</button>').join('')+'<button data-shq="all">เลือกทั้งหมด</button><button data-shq="clr">ล้าง</button></div>';
+  h+=B.length?'<div class="shvg">'+B.map((it,i)=>{const on=SHV.s.has(it);return'<div class="shvc" style="position:relative">'+cellH(it,'data-shs="'+i+'"'+(it.lk?' disabled':''),0,it.sl,shvArrow(it)).replace('class="cell','class="cell'+(on?' shon':''))+(on?'<span class="tick">✅</span>':'')+'<small>🪙 '+fmtG(sellPrice(it))+'</small></div>'}).join('')+'</div>':'<small>กระเป๋าว่าง</small>';
+  h+='<div class="shvbar"><div class="tx">เลือก <b>'+n+'</b> ชิ้น · ได้ <b>🪙 '+fmtG(g)+'</b>'+(hi?'<br><small style="color:#ff9d8a">มีของระดับ Mystic ขึ้นไป '+hi+' ชิ้น</small>':'')+'</div><button class="pri'+(SHV.cf?' cf':'')+'" data-shsell="1"'+(n?'':' disabled')+'>'+(SHV.cf?'⚠️ แตะอีกครั้งเพื่อยืนยัน':'💰 ขาย '+n+' ชิ้น')+'</button></div></div>';return h}
+function shvSellUI(msg){const keep=shopTab;shopTab='pot';const o=SHV.o;o(msg);shopTab=keep;const P=ov.querySelector('.pn[data-pn="shop"]');if(!P)return;
+  const tb=P.querySelector('.tabs');[...P.children].forEach(c=>{if(c!==tb&&!c.classList.contains('ph')&&!c.classList.contains('note'))c.remove()});shvTab(P);
+  tb.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.tab==='shop:sell'));tb.insertAdjacentHTML('afterend',shvSellH())}
+function shvTab(P){const tb=P.querySelector('.tabs');if(!tb||tb.querySelector('[data-tab="shop:sell"]'))return;const q=tb.querySelector('[data-tab="shop:q"]');const b=document.createElement('button');b.className='tab';b.dataset.tab='shop:sell';b.textContent='💰 ขายของ';if(q)q.before(b);else tb.appendChild(b)}
+{const ovE=document.getElementById('ov');if(ovE)ovE.addEventListener('click',e=>{if(SHV.off||!me.cls)return;const P=ov.querySelector('.pn[data-pn="shop"]');if(!P)return;const b=e.target.closest&&e.target.closest('[data-shx],[data-shs],[data-shq],[data-shsell]');if(!b)return;e.stopPropagation();e.preventDefault();if(b.disabled)return;const d=b.dataset,st=ov.scrollTop;
+  if(d.shx){shopSel=-1;try{sfx('click')}catch(x){}shopUI();return}
+  if(d.shs!==undefined){const it=me.bag[+d.shs];if(!it||it.lk)return;SHV.s.has(it)?SHV.s.delete(it):SHV.s.add(it);SHV.cf=0;try{sfx('click')}catch(x){}shopUI();ov.scrollTop=st;return}
+  if(d.shq){const q=d.shq;SHV.cf=0;if(q==='clr')SHV.s.clear();else me.bag.forEach(it=>{if(it.lk)return;let ok=q==='all';if(q==='worse')ok=!!me.eq[it.sl]&&gCmp(it).dir<0&&it.r<4;if(q[0]==='r')ok=it.r<=+q.slice(1);if(ok)SHV.s.add(it)});try{sfx('click')}catch(x){}shopUI();ov.scrollTop=st;return}
+  if(d.shsell){const L=me.bag.filter(it=>SHV.s.has(it)&&!it.lk);if(!L.length)return;if(!SHV.cf&&(L.length>=10||L.some(it=>it.r>=3))){SHV.cf=1;shopUI();ov.scrollTop=st;return}
+    let g=0;for(const it of L){g+=sellPrice(it);const i=me.bag.indexOf(it);if(i>=0)me.bag.splice(i,1)}me.gold=Math.min(GMAX,me.gold+g);SHV.s.clear();SHV.cf=0;gsel=null;try{sfx('item')}catch(x){}shopUI('💰 ขาย '+L.length+' ชิ้น ได้ '+fmtG(g)+' ทอง');return}},true)}
+setTimeout(()=>{try{const o=shopUI;SHV.o=o;window.shopUI=shopUI=function(msg){if(SHV.off||!me.cls)return o.apply(this,arguments);if(shopTab==='sell'){try{shvCSS();return shvSellUI(msg)}catch(e){console.warn('shv',e);shopTab='pot'}}
+  if(shopTab!=='sell')SHV.cf=0;const r=o.apply(this,arguments);try{shvCSS();const P=ov.querySelector('.pn[data-pn="shop"]');if(P){shvTab(P);if(shopTab==='gear')shvGearPost(P)}}catch(e){console.warn('shv',e)}return r}}catch(e){console.warn('shv',e)}},2400);
+/* ---------- v613 ช่างตีบวกแบบ MMORPG (FGV) ----------
+   · จอนอน: ซ้าย = เลือกของ (สวมใส่อยู่/กระเป๋า) · ขวา = แท่นตีบวก (ค้างอยู่ตอนเลื่อน) · จอตั้ง: แท่นตีบวกอยู่บน
+   · แท่นตีบวก: +u ➜ +u+1 ตัวใหญ่ · ค่าที่จะได้ก่อน/หลัง · หลอดโอกาสสำเร็จสีตามความเสี่ยง (รวมไฟเตาแล้ว)
+     · ของที่ต้องใช้เป็นชิป มี/ต้องใช้ (แดงถ้าไม่พอ) · ถ้าล้มเหลวเป็นอย่างไร · ปุ่มหินกันแตก + ปุ่มตีบวกใหญ่
+   · ไฟเตา/ตีด่วน/สถิติ และซื้อหินอยู่ใต้แท่น · กติกาพับเก็บ · ปิด: FGV.off=1 */
+const FGV={off:0};
+function fgvCSS(){if(document.getElementById('fgvcss'))return;const s=document.createElement('style');s.id='fgvcss';s.textContent=
+'body #ov>.pn.fgvp{display:block!important;column-count:auto!important}body #ov>.pn.fgvp>*{column-span:none!important}'+
+'#ov .fgvg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px;align-items:start}#ov .fgvg .card{margin:0 0 8px!important}'+
+'#ov .fgvr{position:sticky;top:0;order:2}#ov .fgvl{order:1}'+
+'#ov .fgvl .grid.g5{grid-template-columns:repeat(auto-fill,minmax(54px,1fr))!important}'+
+'#ov .fgp{display:flex;flex-direction:column;gap:8px;padding:12px!important;border:1px solid rgba(231,183,90,.5)!important;background:radial-gradient(120% 140px at 50% 0,rgba(255,150,60,.16),transparent),rgba(0,0,0,.28)!important}'+
+'#ov .fgp .fgh{display:flex;align-items:center;gap:10px}#ov .fgp .fgh .cell{width:56px!important;height:56px!important;flex:0 0 56px}#ov .fgp .fgh b{display:block;font-size:15px}#ov .fgp .fgh small{font-size:12px;opacity:.8}'+
+'#ov .fgp .fgu{display:flex;align-items:center;justify-content:center;gap:14px;font-size:26px;font-weight:800;color:#ffe2a6;text-shadow:0 2px 0 rgba(0,0,0,.4)}#ov .fgp .fgu i{font-style:normal;font-size:18px;opacity:.7}#ov .fgp .fgu .nx{color:#6fe0a0}'+
+'#ov .fgp .fgs{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:13px}#ov .fgp .fgs span:nth-child(odd){opacity:.75}#ov .fgp .fgs b{color:#6fe0a0}'+
+'#ov .fgga{position:relative;height:26px;border-radius:13px;background:rgba(255,255,255,.08);overflow:hidden;border:1px solid rgba(255,255,255,.12)}#ov .fgga i{position:absolute;inset:0 auto 0 0;border-radius:13px}#ov .fgga b{position:relative;display:block;text-align:center;line-height:26px;font-size:14px;text-shadow:0 1px 2px rgba(0,0,0,.8)}'+
+'#ov .fgp .fgx{font-size:11.5px;opacity:.8;text-align:center}'+
+'#ov .fgp .fgr2{display:flex;gap:6px;flex-wrap:wrap}#ov .fgp .fgr2 span{padding:4px 10px;border-radius:999px;font-size:12.5px;background:rgba(0,0,0,.35);border:1px solid rgba(111,224,160,.5)}#ov .fgp .fgr2 span.no{border-color:rgba(255,120,100,.7);color:#ff9d8a}'+
+'#ov .fgp .fgf{font-size:12.5px}#ov .fgp .fgf.bad{color:#ff9d8a}'+
+'#ov .fgp [data-smu]{width:100%;min-height:54px;font-size:17px!important;font-weight:800;border-radius:14px!important}#ov .fgp .sr{margin:0!important}'+
+'#ov details.fgvd{margin:0 0 8px;border-radius:12px;border:1px dashed rgba(255,216,140,.3);background:rgba(255,216,140,.04)}#ov details.fgvd>summary{cursor:pointer;padding:9px 12px;font-size:13px;list-style:none}#ov details.fgvd>summary::-webkit-details-marker{display:none}#ov details.fgvd>.card{margin:0 6px 6px!important;border:0!important;background:none!important}'+
+'@media (max-aspect-ratio:1/1){#ov .fgvg{grid-template-columns:minmax(0,1fr)}#ov .fgvr{position:static;order:1}#ov .fgvl{order:2}}';
+document.head.appendChild(s)}
+function fgvPanel(it){const u=it.u|0,el=upElig(it),need=upNeed(u),cost=upCost(it),inv=me.inv,have=need?(inv['s'+need]|0):0;let rate=upRate(u),ex='';
+  try{if(u>=5&&!el){rate=fgRate(u,0);ex='กดจังหวะดีในเตาหลอม '+Math.round(fgRate(u,.1)*100)+'% · เป๊ะ '+Math.round(fgRate(u,.2)*100)+'%'}}catch(e){}
+  const pc=Math.round(rate*100),col=pc>=70?'linear-gradient(90deg,#2f9a4a,#6fe0a0)':pc>=35?'linear-gradient(90deg,#c18a30,#ffd27a)':'linear-gradient(90deg,#a02a20,#ff8a7a)';
+  let h='<div class="card fgp"><div class="fgh">'+cellH(it,'disabled',0,it.sl)+'<div style="min-width:0"><b'+(it.r===6?' class="tc6"':'')+' style="color:'+RC[it.r]+'">'+itemName(it)+'</b><small>'+RN[it.r]+(it.ss?' · 🔱 ชุดเซ็ต':'')+'</small></div></div>';
+  if(el)return h+'<div class="note" style="margin:0">'+el+'</div></div>';
+  h+='<div class="fgu"><span>+'+u+'</span><i>➜</i><span class="nx">+'+(u+1)+'</span></div>';
+  h+='<div class="fgs">'+Object.keys(it.st).map(k=>'<span>'+stLabel(k,it.st[k]*upMul(u))+'</span><b>➜ '+stLabel(k,it.st[k]*upMul(u+1))+'</b>').join('')+'</div>';
+  h+='<div class="fgga"><i style="width:'+pc+'%;background:'+col+'"></i><b>🎯 โอกาสสำเร็จ '+pc+'%</b></div>'+(ex?'<div class="fgx">'+ex+'</div>':'');
+  h+='<div class="fgr2"><span class="'+(me.gold>=cost?'':'no')+'">💰 '+fmtG(cost)+' <small>(มี '+fmtG(me.gold)+')</small></span>'+(need?'<span class="'+(have>=1?'':'no')+'">'+stoneIc(need)+' '+GDM['s'+need].n+' '+have+'/1</span>':'')+'</div>';
+  h+='<div class="fgf'+(u>=10?' bad':'')+'">❌ ถ้าล้มเหลว: '+upFail(u)+'</div><div class="fgslot"></div></div>';return h}
+function fgvPost(){if(FGV.off)return;const P=ov.querySelector('.pn[data-pn="smith"]');if(!P||P.querySelector('.fgvg'))return;fgvCSS();P.classList.add('fgvp');
+  const C=[...P.querySelectorAll(':scope>.card')],cap=c=>{const q=c.querySelector('.cap');return q?q.textContent:''};
+  const sel=C.find(c=>/ไอเทมที่เลือก/.test(cap(c))),hint=C.find(c=>c.classList.contains('hint')&&/เลือกอุปกรณ์/.test(c.textContent)),heat=C.find(c=>/เตาหลอม/.test(cap(c))),eq=C.find(c=>/สวมใส่อยู่/.test(cap(c))),bag=C.find(c=>/ในกระเป๋า/.test(cap(c))),buy=C.find(c=>/ซื้อหิน/.test(cap(c))),rule=C.find(c=>/กติกาการตีบวก/.test(c.textContent)&&c.classList.contains('hint'));
+  if(!eq&&!bag)return;const g=document.createElement('div');g.className='fgvg';const L=document.createElement('div');L.className='fgvl';const R=document.createElement('div');R.className='fgvr';
+  const first=sel||hint||heat||eq;first.before(g);g.appendChild(L);g.appendChild(R);
+  const it=smGet(smSel);
+  if(sel&&it){const tmp=document.createElement('div');tmp.innerHTML=fgvPanel(it);const pnl=tmp.firstElementChild,slot=pnl.querySelector('.fgslot');const pr=sel.querySelector('[data-smp]'),bt=sel.querySelector('[data-smu]');if(pr)slot.appendChild(pr.closest('.sr')||pr);if(bt)slot.appendChild(bt);R.appendChild(pnl);sel.remove()}
+  else if(hint){hint.innerHTML='🔨 <b>เลือกอุปกรณ์ที่จะตีบวก</b><br><small>แตะไอเทมจาก «สวมใส่อยู่» หรือ «ในกระเป๋า»</small>';R.appendChild(hint)}
+  if(heat){const d=document.createElement('details');d.className='fgvd';d.open=!!FGV.ho;d.ontoggle=()=>{FGV.ho=d.open};let q='';try{q=FG.quick?' · ⚡ ตีด่วนเปิด':''}catch(e){}d.innerHTML='<summary>🔥 ไฟเตา · ตีด่วน · สถิติ'+q+' ▾</summary>';d.appendChild(heat);R.appendChild(d)}
+  if(buy)R.appendChild(buy);if(eq)L.appendChild(eq);if(bag)L.appendChild(bag);
+  if(rule){const d=document.createElement('details');d.className='fgvd';d.innerHTML='<summary>📖 กติกาการตีบวก ▾</summary>';d.appendChild(rule);R.appendChild(d)}
+  [...P.querySelectorAll(':scope>.card')].forEach(c=>L.appendChild(c))}
+setTimeout(()=>{try{const o=smithUI;window.smithUI=smithUI=function(){const st=ov.scrollTop,r=o.apply(this,arguments);try{fgvPost()}catch(e){console.warn('fgv',e)}return r}}catch(e){console.warn('fgv',e)}},2400);
+/* ---------- v613 แผนที่โลกแบบ MMORPG (WMV) ----------
+   · จอนอน: แผนที่ซ้าย (สูงเต็มจอ) · ข้อมูลแมพที่เลือกเป็นแผงขวา · จอตั้งเหมือนเดิม (แผนที่บน ข้อมูลล่าง)
+   · แผงข้อมูลเพิ่ม «ในแมพนี้»: เนื้อเรื่องที่ต้องไปทำ · เควสพ่อค้า · ใบประกาศค่าหัว · เพื่อน/กิลด์ที่อยู่ในแมพ
+     แต่ละอย่างมีปุ่ม 🧭 นำทาง (เดินไปทำอัตโนมัติ) · ปิด: WMV.off=1 */
+const WMV={off:0};
+function wmvCSS(){if(document.getElementById('wmvcss'))return;const s=document.createElement('style');s.id='wmvcss';s.textContent=
+'@media (min-aspect-ratio:1/1){body #ov>.pn.wmpn.wmvp{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(250px,320px);grid-template-rows:auto auto minmax(0,1fr);column-gap:10px;row-gap:6px;column-count:auto!important;height:100%;max-height:100%;box-sizing:border-box}'+
+'body #ov>.pn.wmvp>.ph{grid-column:1/-1}body #ov>.pn.wmvp>.wmlg{grid-column:1/-1}body #ov>.pn.wmvp>.note{grid-column:1/-1}'+
+'body #ov>.pn.wmvp>.wmsc{grid-column:1;grid-row:3;max-height:none;height:auto;min-height:0;align-self:stretch}'+
+'body #ov>.pn.wmvp>.wmd{grid-column:2;grid-row:3;align-self:start;max-height:100%;overflow-y:auto;box-sizing:border-box}}'+
+'#ov .wmvq{display:flex;flex-direction:column;gap:5px;margin:8px 0 4px;padding-top:8px;border-top:1px solid rgba(231,183,90,.25)}#ov .wmvq>b{font-size:12.5px;color:#ffe2a6}'+
+'#ov .wmvr{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:5px 8px;border-radius:10px;background:rgba(0,0,0,.25)}#ov .wmvr span{flex:1;min-width:0;line-height:1.35}#ov .wmvr button{min-height:34px;padding:0 10px;border-radius:9px;font-size:12px;white-space:nowrap}'+
+'#ov .wmvr.ok{opacity:.6}#ov .wmve{font-size:12px;opacity:.65}';
+document.head.appendChild(s)}
+function wmvRows(mp){const R=[];let qm=0;try{qm=wmQuestMap()}catch(e){}
+  if(qm===mp){let t='';try{t=stTxt().replace(/<[^>]+>/g,' ')}catch(e){}const on=typeof AQ!=='undefined'&&AQ&&AQ.src==='st';R.push('<div class="wmvr"><span>📖 <b>เนื้อเรื่อง</b> · '+esc(t.slice(0,70))+'</span><button class="'+(on?'':'pri')+'" data-wmvn="st">'+(on?'⏹ หยุด':'🧭 นำทาง')+'</button></div>')}
+  (me.qs||[]).forEach(q=>{if((q.mp|0)!==mp)return;const done=q.h>=q.n;R.push('<div class="wmvr'+(done?' ok':'')+'"><span>'+QI[q.t]+' '+qLine(q).replace(/<\/?(b|small)[^>]*>/g,' ')+'</span>'+(done?'<small style="color:#6fe0a0">✅ รับรางวัลที่พ่อค้า</small>':'<button class="pri" data-aq="'+q.id+'">🧭 นำทาง</button>')+'</div>')});
+  try{if(me.lv>=BTYLV){const B=btySt();btyBoard().forEach(S=>{if(S.mp!==mp)return;const ok=!!B.cl[S.bid];R.push('<div class="wmvr'+(ok?' ok':'')+'"><span>🎯 ค่าหัว «'+esc(S.n)+'» '+'★'.repeat(S.st)+' · Lv '+S.L+'</span>'+(ok?'<small>✅</small>':'')+'</div>')})}}catch(e){}
+  try{const F=friSt().L.filter(f=>friOn(f.n)&&FRIS[f.n]&&(FRIS[f.n].mp|0)===mp).map(f=>f.n);if(F.length)R.push('<div class="wmvr"><span>👥 เพื่อนอยู่ที่นี่: '+F.slice(0,4).map(esc).join(', ')+(F.length>4?' +'+(F.length-4):'')+'</span></div>')}catch(e){}
+  try{const G=GDS.g;if(G){const M=G.mem.filter(m=>m[5]&&(m[6]|0)===mp&&m[0]!==G.me).map(m=>m[1]);if(M.length)R.push('<div class="wmvr"><span>🏰 กิลด์อยู่ที่นี่: '+M.slice(0,4).map(esc).join(', ')+(M.length>4?' +'+(M.length-4):'')+'</span></div>')}}catch(e){}
+  return'<div class="wmvq"><b>ในแมพนี้</b>'+(R.length?R.join(''):'<div class="wmve">ไม่มีเควสหรือเพื่อนในแมพนี้ตอนนี้</div>')+'</div>'}
+function wmvPost(){if(WMV.off||ov.dataset.k!=='wm')return;const P=ov.querySelector('.pn.wmpn');if(!P)return;wmvCSS();P.classList.add('wmvp');const D=P.querySelector('.wmd');if(!D||D.querySelector('.wmvq'))return;const mp=WMSEL|0;if(!mp)return;
+  const anchor=D.querySelector('.wmdb');const h=wmvRows(mp);if(anchor)anchor.insertAdjacentHTML('afterend',h);else D.insertAdjacentHTML('beforeend',h)}
+{const ovE=document.getElementById('ov');if(ovE)ovE.addEventListener('click',e=>{if(WMV.off||ov.dataset.k!=='wm')return;const b=e.target.closest&&e.target.closest('[data-wmvn]');if(!b)return;e.stopPropagation();e.preventDefault();try{sfx('click')}catch(x){}
+  if(typeof AQ!=='undefined'&&AQ&&AQ.src==='st'){aqStop('🧭 หยุดนำทางแล้ว');wmUI(WMSEL);return}aqStart('st')},true)}
+setTimeout(()=>{try{const o=wmUI;window.wmUI=wmUI=function(){const r=o.apply(this,arguments);try{wmvPost()}catch(e){console.warn('wmv',e)}return r}}catch(e){console.warn('wmv',e)}},2400);
+/* ---------- v613 ปาร์ตี้/กิลด์ ชวนเข้าทีมง่ายขึ้น (PVF) ----------
+   · หน้าปาร์ตี้มีการ์ด «ชวนเข้าทีม»: เพื่อนที่ออนไลน์ + สมาชิกกิลด์ที่ออนไลน์ เรียงคนที่อยู่แมพเดียวกันก่อน
+     แต่ละคนมี 🟢 สถานะ · คลาส Lv · อยู่แมพไหน · ปุ่ม 👥 ชวน (ข้ามแมพได้ถ้าเป็นเพื่อน) · 🌀 วาปไปหา (เพื่อน)
+   · หน้ากิลด์ › สมาชิก: คนที่ออนไลน์มีปุ่ม 👥 ชวนปาร์ตี้ ในแถวเลย ไม่ต้องแตะเปิดเมนูก่อน
+   · อัปเดตเองทุกครั้งที่รายชื่อปาร์ตี้รีเฟรช · ปิด: PVF.off=1 */
+const PVF={off:0};
+function pvfCSS(){if(document.getElementById('pvfcss'))return;const s=document.createElement('style');s.id='pvfcss';s.textContent=
+'#ov .pvfr{display:flex;align-items:center;gap:8px;padding:7px 4px;border-bottom:1px solid rgba(231,183,90,.15)}#ov .pvfr:last-child{border-bottom:0}'+
+'#ov .pvfr .nm{flex:1;min-width:0}#ov .pvfr .nm b{display:block;font-size:13.5px}#ov .pvfr .nm small{font-size:11.5px;opacity:.75}#ov .pvfr .tg{font-size:10.5px;padding:1px 6px;border-radius:999px;background:rgba(255,236,205,.1);margin-left:4px;font-weight:400}'+
+'#ov .pvfr button{min-height:38px;padding:0 10px;border-radius:10px;font-size:12.5px;white-space:nowrap}#ov .pvfr .here{color:#6fe0a0}'+
+'#ov .pvfe{font-size:12.5px;opacity:.75;line-height:1.6;padding:4px 2px}#ov [data-gds] .pvgi{margin-left:auto;min-height:32px;padding:0 9px;border-radius:9px;font-size:11.5px;white-space:nowrap}';
+document.head.appendChild(s)}
+function pvfList(){const R=new Map();
+  try{friSt().L.forEach(f=>{if(!friOn(f.n))return;const s=FRIS[f.n]||{};R.set(f.n,{n:f.n,c:s.c||f.c,lv:s.lv||f.lv,mp:s.mp|0,fr:1,u:friUid(f.n)})})}catch(e){}
+  try{const G=GDS.g;if(G)G.mem.forEach(m=>{const[mid,n,c,lv,r,on,mp]=m;if(!on||mid===G.me||n===myName)return;const o=R.get(n);if(o){o.gd=1;return}R.set(n,{n,c,lv,mp:mp|0,gd:1,u:friUid(n)})})}catch(e){}
+  return[...R.values()].filter(o=>o.n!==myName).sort((a,b)=>((b.mp===curMap)-(a.mp===curMap))||((b.lv|0)-(a.lv|0)))}
+function pvfH(){const L=pvfList();let h='<div class="cap">ชวนเข้าทีม · เพื่อนและกิลด์ที่ออนไลน์</div>';
+  if(!L.length)return h+'<div class="pvfe">ยังไม่มีเพื่อนหรือสมาชิกกิลด์ออนไลน์<br>เพิ่มเพื่อนได้ที่ เมนู › 👥 เพื่อน · คนที่เป็นเพื่อนชวนเข้าทีมข้ามแมพได้</div>';
+  const full=PTY&&PTY.mem&&PTY.mem.length>=PTMAX,lead=!PTY||!PTY.mem||PTY.mem.length<=1||PTY.lead===uid;
+  return h+L.slice(0,12).map(o=>{const C=CL[o.c]||{n:o.c||'-'},here=o.mp===curMap,inp=o.u&&inPty(o.u);let b='';
+    if(inp)b='<small style="color:#6fe0a0">✅ ในทีมแล้ว</small>';else if(o.u&&!full&&lead)b='<button class="pri" data-pvi="'+esc(o.n)+'">👥 ชวน</button>';
+    if(o.fr&&!here)b+='<button data-pvw="'+esc(o.n)+'">🌀 วาป</button>';
+    return'<div class="pvfr"><span>🟢</span><div class="nm"><b>'+esc(o.n)+(o.fr?'<span class="tg">เพื่อน</span>':'')+(o.gd?'<span class="tg">กิลด์</span>':'')+'</b><small>'+C.n+' Lv '+(o.lv|0)+' · '+(here?'<span class="here">📍 แมพเดียวกัน</span>':friMapN(o.mp))+(!o.u?(here?' · อยู่ไกล เข้าไปใกล้ ๆ เพื่อชวน':' · ชวนข้ามแมพได้เฉพาะเพื่อน'):'')+'</small></div>'+b+'</div>'}).join('')+(full?'<div class="pvfe">ทีมเต็มแล้ว ('+PTMAX+' คน)</div>':!lead?'<div class="pvfe">เฉพาะหัวหน้าทีมชวนได้</div>':'')}
+function pvfPost(){if(PVF.off||ov.dataset.k!=='party')return;const P=ov.querySelector('.pn[data-pn="party"]');if(!P)return;pvfCSS();let c=P.querySelector('#pvfc');
+  if(!c){c=document.createElement('div');c.className='card';c.id='pvfc';const pl=$('plist'),pc=pl&&pl.closest('.card');if(pc)pc.before(c);else P.appendChild(c)}c.innerHTML=pvfH()}
+function pvgPost(){if(PVF.off||ov.dataset.k!=='gd'||GDS.tab!=='mem')return;const G=GDS.g;if(!G)return;pvfCSS();
+  ov.querySelectorAll('[data-gds]').forEach(row=>{const mid=row.dataset.gds,m=G.mem.find(x=>String(x[0])===mid);if(!m||!m[5]||m[0]===G.me||row.querySelector('.pvgi'))return;const n=m[1],u=friUid(n);if(u&&inPty(u))return;
+    const top=row.firstElementChild;if(top)top.insertAdjacentHTML('beforeend',u?'<button class="pvgi pri" data-pvi="'+esc(n)+'">👥 ชวนปาร์ตี้</button>':((m[6]|0)===curMap?'<button class="pvgi" data-pvx="2">👥 อยู่ไกล</button>':'<button class="pvgi" data-pvx="1">👥 คนละแมพ</button>'))})}
+{const ovE=document.getElementById('ov');if(ovE)ovE.addEventListener('click',e=>{if(PVF.off||!me.cls)return;const b=e.target.closest&&e.target.closest('[data-pvi],[data-pvw],[data-pvx]');if(!b)return;e.stopPropagation();e.preventDefault();const k=ov.dataset.k;
+  if(b.dataset.pvx==='2'){sysMsg('👥 อยู่แมพเดียวกันแต่ไกล · เดินเข้าไปใกล้ ๆ แล้วชวนได้');return}if(b.dataset.pvx){sysMsg('👥 อยู่คนละแมพ · เพิ่มเป็นเพื่อนก่อนจึงจะชวนข้ามแมพได้ หรือไปแมพเดียวกัน');return}
+  if(b.dataset.pvi){friPtInv(b.dataset.pvi);b.disabled=true;b.textContent='✉️ ส่งแล้ว';return}
+  if(b.dataset.pvw){friWarp(b.dataset.pvw);return}},true)}
+setTimeout(()=>{try{
+  const o=partyUI;window.partyUI=partyUI=function(){const r=o.apply(this,arguments);try{pvfPost()}catch(e){console.warn('pvf',e)}return r};
+  const pl=partyList;window.partyList=partyList=function(){const r=pl.apply(this,arguments);try{if(ov.dataset.k==='party'&&!ov.hidden){const c=$('pvfc');if(c&&!c.contains(document.activeElement))c.innerHTML=pvfH()}}catch(e){}return r};
+  const g=gdUI;window.gdUI=gdUI=function(){const r=g.apply(this,arguments);try{pvgPost()}catch(e){console.warn('pvf',e)}return r};
+}catch(e){console.warn('pvf',e)}},2400);
 
 function drawPalGate(G){const t=performance.now()/1000,x=G.x,y=G.y,inP=curMap===27;g.save();
   g.fillStyle='rgba(0,0,0,.35)';g.beginPath();g.ellipse(x,y+8,62,16,0,0,7);g.fill();
