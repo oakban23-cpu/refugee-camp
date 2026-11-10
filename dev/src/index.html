@@ -7784,7 +7784,7 @@ function depRockSpr(v,col){return depSpr('rk'+v+col,260,160,(x,w,h)=>{const R=de
 function depScreen(){if(!depOn()||!me.cls)return;const th=DEPM[curMap],C=DEPS[th],t=performance.now()/1000,z=ZM.z,cx=CAMF.x-SW0/2,cy=CAMF.y-H/2,Hs=H,Q=LOWQ;let nt=0;try{nt=isNight()?1:0}catch(e){}
   const wrap=(v,s)=>((v%s)+s)%s;g.save();g.setTransform(DPR,0,0,DPR,0,0);
   /* หมอกตามระยะ: ขอบบนของจอ = ไกล (จางกว่า) */
-  g.drawImage(depFogOv(C.fog,C.fa*(nt?.6:1),.42,th==='snow'||th==='sand'?.1:.18,.78),0,0,SW0,Hs);
+  dfoDraw(depFogOv(C.fog,C.fa*(nt?.6:1),.42,th==='snow'||th==='sand'?.1:.18,.78),0,0,SW0,Hs);
   /* ชั้นไกล: กลุ่มหมอกเลื่อนช้า (×0.5) */
   {const F=plxFog(C.fog);for(let i=0;i<(Q?1:3);i++){const span=SW0+700,x=wrap(i*443+t*(4+i*2)-cx*.5,span)-350,y=wrap(i*317-cy*.5,Hs+400)-200;g.globalAlpha=(th==='lava'||th==='void'||th==='mine'?.1:.16)*(.7+.3*Math.sin(t*.3+i));g.drawImage(F,x-200,y-60,400,120)}g.globalAlpha=1}
   /* ชั้นหน้า: ใกล้กล้อง (×1.5) — อยู่ตามขอบจอ ไม่บังกลางจอ */
@@ -8067,7 +8067,7 @@ function d4ChainSpr(v){return depSpr('d4k'+v,90,300,(x,w,h)=>{const R=depRng(520
 function d4Screen(thO){const th=thO||DEPM[curMap],C=DEP4[th];if(!C||(!thO&&!depOn())||!me.cls)return;const t=performance.now()/1000,z=ZM.z,cx=CAMF.x-SW0/2,cy=CAMF.y-H/2,Hs=H,Q=LOWQ,wrap=(v,s)=>((v%s)+s)%s;let nt=0;try{nt=isNight()?1:0}catch(e){}
   g.save();g.setTransform(DPR,0,0,DPR,0,0);
   /* หมอกตามระยะ: ขอบบน = ไกล · ขอบล่างมืดลงเล็กน้อย */
-  g.drawImage(depFogOv(C.fog,C.fa*(nt?.6:1)*(DGON&&th==='dawn'?.35:1),.38,C.bd,.8),0,0,SW0,Hs);
+  dfoDraw(depFogOv(C.fog,C.fa*(nt?.6:1)*(DGON&&th==='dawn'?.35:1),.38,C.bd,.8),0,0,SW0,Hs);
   /* ฉากไกล ×0.5: หมอกลอยช้า */
   if(th!=='city'){const F=plxFog(C.fog);for(let i=0;i<(Q?1:2);i++){const span=SW0+700,x=wrap(i*443+t*(4+i*2)-cx*.5,span)-350,y=wrap(i*317-cy*.5,Hs+400)-200;g.globalAlpha=.12*(.7+.3*Math.sin(t*.3+i));g.drawImage(F,x-200,y-60,400,120)}g.globalAlpha=1}
   const motes=(n,col,sp,up,par)=>{g.globalCompositeOperation='lighter';for(let i=0;i<(Q?Math.ceil(n/3):n);i++){const x=wrap(i*89-cx*(par||1.35)+Math.sin(t*.5+i)*14,SW0+20)-10,y=wrap(i*131-cy*(par||1.35)+(up?-1:1)*t*(sp+i%3*4),Hs+20)-10;glowAt(x,y,2.2+i%2,col,.3+.3*Math.sin(t*2+i*1.3))}g.globalCompositeOperation='source-over'};
@@ -8115,7 +8115,7 @@ const DGTH={1:'knight',2:'knight',3:'core',5:'ruin',6:'throne',7:'glake',8:'gale
 function dgTheme(){const M=MAPS[curMap];if(!M)return null;if(M.pvp)return'pv';try{if(isTw())return 5}catch(e){}return M.dg||null}
 function dgdScreen(){if(!me.cls)return;let k=null;try{if(isDg()||isTw()||isArena())k=dgTheme()}catch(e){}if(k==null)return;const th=DGTH[k];if(!th)return;
   const C=DEP4[th]||DEPS[th];if(!C)return;const Hs=H,t=performance.now()/1000;g.save();g.setTransform(DPR,0,0,DPR,0,0);g.globalAlpha=1;
-  if(!DEP4[th]){g.drawImage(depFogOv(C.fog,C.fa*.85,.34,.14,.82),0,0,SW0,Hs);
+  if(!DEP4[th]){dfoDraw(depFogOv(C.fog,C.fa*.85,.34,.14,.82),0,0,SW0,Hs);
     {const F=plxFog(C.fog),z=ZM.z,cx=CAMF.x-SW0/2,cy=CAMF.y-H/2,wrap=(v,s)=>((v%s)+s)%s;for(let i=0;i<(LOWQ?1:2);i++){const span=SW0+700,x=wrap(i*443+t*(4+i*2)-cx*.5,span)-350,y=wrap(i*317-cy*.5,Hs+400)-200;g.globalAlpha=.1*(.7+.3*Math.sin(t*.3+i));g.drawImage(F,x-200,y-60,400,120)}g.globalAlpha=1}}
   g.restore();DGON=1;try{if(DEP4[th])d4Screen(th);else if(DEP3[th])d3Screen(th);else d2Screen(th)}catch(e){console.warn('dgd',e)}DGON=0}
 let DGON=0;
@@ -8203,7 +8203,7 @@ const DFOV={};
 function depFogOv(col,fa,tf,bd,bs){const w=Math.max(1,Math.round(SW0)),h=Math.max(1,Math.round(H)),k=col+'|'+fa.toFixed(3)+'|'+tf+'|'+bd+'|'+bs+'|'+w+'x'+h;let c=DFOV[k];if(c)return c;
   if(Object.keys(DFOV).length>24)for(const q in DFOV)delete DFOV[q];c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');
   const gr=x.createLinearGradient(0,0,0,h*tf);gr.addColorStop(0,'rgba('+col+','+fa+')');gr.addColorStop(1,'rgba('+col+',0)');x.fillStyle=gr;x.fillRect(0,0,w,h*tf);
-  const gb=x.createLinearGradient(0,h*bs,0,h);gb.addColorStop(0,'rgba(0,0,0,0)');gb.addColorStop(1,'rgba(0,0,0,'+bd+')');x.fillStyle=gb;x.fillRect(0,h*bs,w,h*(1-bs));return DFOV[k]=c}
+  const gb=x.createLinearGradient(0,h*bs,0,h);gb.addColorStop(0,'rgba(0,0,0,0)');gb.addColorStop(1,'rgba(0,0,0,'+bd+')');x.fillStyle=gb;x.fillRect(0,h*bs,w,h*(1-bs));c._tf=tf;c._bs=bs;c._bd=bd;return DFOV[k]=c}
 /* 6.5) โหมดประหยัด: ตัวละครไม่ได้แสงขอบ → ใส่แสงสะท้อนพื้นสีตามแมพใต้เท้าแทน (ใช้ภาพแสงที่แคชไว้ · ถูกมาก) */
 {const _s=gxShadow;gxShadow=function(x,y,rx,ry,a){if(LOWQ&&!MLSH&&rx>=10){try{const ga=g.globalAlpha,co=g.globalCompositeOperation;g.globalCompositeOperation='lighter';glowAt(x,y-2,rx*1.9,gxRimCol(),.16);g.globalCompositeOperation=co;g.globalAlpha=ga}catch(e){}}return _s(x,y,rx,ry,a)}}
 /* ---------- v356 ภาค 7 บทที่ 1 · เข็มทิศดาว (แมพ 34 · ที่ราบดาวตก) ---------- */
@@ -10867,7 +10867,7 @@ function lfDraw(dt){if(!LFD.length||!me.cls)return;g.save();g.setTransform(DPR,0
    ขอบแสงจันทร์จาง ๆ รอบมอนสเตอร์บนจอ (บอสเป็นแสงแดง) ให้เห็นรูปร่างชัดในความมืด · ร่วมกับลดความมืดสูงสุดและขยายแสงรอบตัวผู้เล่น (patch340) */
 {const o=nightFxLights;nightFxLights=function(L,k){o(L,k);let n=0;const nm=LOWQ?10:36;
   for(const m of mons){if(n>=nm)break;if(!(m.hp>0)||m.x<cam.x-60||m.x>cam.x+W+60||m.y<cam.y-80||m.y>cam.y+H+60)continue;let r=12;try{r=(MT[m.t]&&mR(m))||12}catch(e){}
-    if(m.t===3)L(m.x,m.y-r*.6,r*2.4+40,'255,120,100',.2*k);else L(m.x,m.y-r*.55,r*2.5+22,m.el?'255,190,150':'205,220,255',.22*k);n++}}}
+    if(m.t===3)L(m.x,m.y-r*.6,r*2.4+40,'255,120,100',.2*k);else if(NLD.off||m.el||m.__nl!==NLH.n)L(m.x,m.y-r*.55,r*2.5+22,m.el?'255,190,150':'205,220,255',.22*k);n++}}}
 /* ---------- v383 ยกระดับภาพ 4 แมพที่ยังโล่ง ----------
    11 ดินแดนหลังรอยแยก (void) · 20 บึงหมอกม่วง (bog) · 22 ห้วงบัลลังก์เงา (throne) · 26 แกนพิภพ (core)
    ปัญหาเดิม: สีเดียวทั้งจอ (ม่วง/ส้ม) ค่าความสว่างต่างกันน้อย หมอกหนาจนแบน ไม่มีจุดสังเกต
@@ -13602,8 +13602,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v617';
+const WNV='v618';
 const WNL=[
+  ['⚡','ลื่นขึ้นทั้งเกม (ลดการวาดซ้ำ) + ท้องวาฬบีบไม่ตายทันที','นับพิกเซลที่วาดต่อเฟรมทุกแมพ แล้วตัดชั้นที่วาดซ้ำ: แมพวัง/นคร (27–45 รวมนครรากลึก) ไม่เทพื้นหลังทับใต้พื้นแล้ว · ค่ายและแมพที่พื้นกำลังเติมรายละเอียดไม่เทพื้นหลังเต็มจอ · หมอกตามระยะวาดแค่แถบบน/ล่าง · แมพมืดรวมสีย้อมกับความมืดเป็นชั้นเดียว · มอนในที่มืดไม่ได้แสงซ้ำสองชั้น — หน้าตาเหมือนเดิม · ในท้องวาฬ: ผนังท้องบีบแรงสุด 35% ของเลือด (บอสใกล้ตาย 45%) ไม่ตายในทีเดียวอีก'],
   ['🔧','ไล่บัคทั้งเกม + แมพมืดลื่นขึ้น','วัดความลื่นทุกแมพ ดันเจี้ยน และหอคอย · แมพมืดถาวร (ห้วงบัลลังก์เงา ป้อมทมิฬ บึงหมอกม่วง ฯลฯ) ช้าสุด เพราะดวงแสงกลางคืนหลายสิบดวงระบายเต็มความละเอียดจอ → รวมแสงลงภาพเล็กแล้วบวกทับครั้งเดียว หน้าตาเหมือนเดิม เฟรมเร็วขึ้น · ฐานแผ่นดิน: เห็ดยักษ์ที่จมอยู่หลังก้อนหินเอาออกแล้ว'],
   ['🏛️','หอคอยวิญญาณ: เสาแบบใหม่ทุกธีม','เสารอบลานวาดใหม่ ทรงไม่ซ้ำกันทั้ง 10 ธีม: เสาแกรนิตสลักลายม่วง · ตู้หนังสือ · ผลึกน้ำแข็ง · บะซอลต์ลาวา · รากเห็ดยักษ์ · หอเฟืองทองเหลือง · เสาหินอ่อนหัวทอง · กระดูกสันหลังมังกร · เสาดาราจักร · เศษหินห้วงความว่างลอยได้ · คบไฟ/โคมเข้าธีม'],
   ['🗼','หอคอยวิญญาณ: ภาพใหม่ครบ 10 ธีม','พื้นลานวาดใหม่ทุกธีม (หิน ห้องสมุด น้ำแข็ง ลาวา เห็ด กลไก ลอยฟ้า กระดูกมังกร ดวงดาว ห้วงความว่าง) · เสาและคบไฟรอบลานเปลี่ยนตามธีม · ของประดับริมลาน · ประตูบันไดขึ้นชั้นแบบใหม่ (ชั้นบอสเป็นประตูทองแดง) · น้ำพุชั้นพัก · แท่นผนึกชั้นบอส · เสาเช็กพอยต์ · ไอคอนประเภทชั้น · ภาพหอคอยในหน้าเข้า'],
@@ -26706,7 +26707,7 @@ function nlLift(mode,fill){if(!NLH.on)return false;let sv=false;
     let p=0;for(const id in others){const o=others[id];if(!o||!(o.hp>0)||o.sl>0||o.stealth>0)continue;if(L(o.x,o.y-14,54,.7)&&++p>=(LOWQ?6:12))break}
     try{const M0=MAPS[curMap];if(M0&&M0.gates)for(const G0 of M0.gates){if(!gHid(G0))L(G0.x,G0.y-12,72,.6)}}catch(e){}
     let k=0;for(const m of mons){if(!m||!(m.hp>0)||m.hidden||m.dum)continue;let r=18;try{r=mR(m)||18}catch(e){}
-      if(L(m.x,m.y-r*.7,Math.max(40,r*2.3),r>40?.78:.72)&&++k>=(LOWQ?14:28))break}
+      if(L(m.x,m.y-r*.7,Math.max(40,r*2.3),r>40?.78:.72)){m.__nl=NLH.n+1;if(++k>=(LOWQ?14:28))break}}
     NLH.n++;NLH.h=n;return true}
   catch(e){NLH.err=String(e&&e.stack||e).slice(0,300);return false}
   finally{if(sv)g.restore()}}
@@ -27489,7 +27490,7 @@ function wblSim(dt){if(dg.ph!=='run'&&dg.ph!=='boss')return;dg.tl-=dt;if(dg.tl<=
   WBQ.at-=dt;if(WBQ.at<=0){if(WBQ.ac===0){WBQ.ac=1;WBQ.at=2;fx({k:'msg',s:'🫧 ฟองกรดผุดขึ้นมา… ขึ้นซี่โครง/แท่นกระดูกเร็ว!'})}else if(WBQ.ac===1){WBQ.ac=2;WBQ.at=4.5;WBQ.tk=0}else{WBQ.ac=0;WBQ.at=hard?7:dg.ph==='boss'?8.5:9.5}}
   if(WBQ.ac===2){WBQ.tk=(WBQ.tk||0)-dt;if(WBQ.tk<=0){WBQ.tk=.5;pl.forEach(p=>{if(wblIn(p.x,p.y,0)&&!wbSafe(p.x,p.y))wblHit(p.u,Math.round(8*dm))})}}
   /* ผนังท้องบีบ */
-  if(WBQ.sq){WBQ.sk-=dt;if(WBQ.sk<=0){if(WBQ.sq===1){WBQ.sq=2;WBQ.sk=.6;pl.forEach(p=>{if(wbOuter(p.x,p.y))wblHit(p.u,Math.round(45*dm))});fx({k:'wbqx'})}else{WBQ.sq=0;WBQ.st=hard?12:16}}}
+  if(WBQ.sq){WBQ.sk-=dt;if(WBQ.sk<=0){if(WBQ.sq===1){WBQ.sq=2;WBQ.sk=.6;pl.forEach(p=>{if(wbOuter(p.x,p.y))wblHit(p.u,wbSqD(p.u,45*dm))});fx({k:'wbqx'})}else{WBQ.sq=0;WBQ.st=hard?12:16}}}
   else{WBQ.st-=dt;if(WBQ.st<=0&&WBQ.ac!==2){WBQ.sq=1;WBQ.sk=1.6;fx({k:'wbq',d:1.6});fx({k:'msg',s:'💢 ผนังท้องวาฬกำลังบีบ! เข้าตรงกลาง'})}}
   WBQ.bt-=dt;if(WBQ.bt<=0){WBQ.bt=.4;fx({k:'wbv',ac:WBQ.ac,at:Math.round(WBQ.at*10)/10,mb:WBQ.mb,sq:WBQ.sq})}}
 function wblMon(m,dt,pl,spd){if(!WBLI())return false;if(WBQ.mb&&m.t!==3&&m.x>WBXM-30&&!wbInC(m.x,m.y,30))m.x=WBXM-30;if(!wblIn(m.x,m.y,20)){if(m.x>WBXM&&!wbInC(m.x,m.y,20)){const a=Math.atan2(m.y-CY,m.x-WBCX);m.x=WBCX+Math.cos(a)*(WBRX-40);m.y=CY+Math.sin(a)*(WBRY-40)}else{m.x=Math.max(WBX0+40,Math.min(WBXM,m.x));m.y=CY+Math.max(-wbHH(m.x)+30,Math.min(wbHH(m.x)-30,m.y-CY))}}return false}
@@ -32490,9 +32491,9 @@ function mxGround(MP){const th=gxTheme();if(!th)return false;mxTrees();try{if(VM
   const x0=Math.floor((cam.x-24)/CS),x1=Math.floor((cam.x+W+24)/CS),y0=Math.floor((cam.y-24)/CS),y1=Math.floor((cam.y+H+24)/CS);
   const first=MX.fc===undefined?now-(MX.ft||0)>4:MX.fc!==MX.lf,cb=first?null:MX.cb;if(first){MX.ft=now;MX.lf=MX.fc;for(const J of MX.jobs.values())J.vis=0}
   g.save();g.setTransform(1,0,0,1,0,0);g.imageSmoothingEnabled=true;let allOk=!cb&&!shk&&cam.x>=0&&cam.y>=0&&cam.x+W<=WW&&cam.y+H<=WH;const sk=!cb&&MX.skipBg,bgF=()=>{if(sk){g.fillStyle=MP.bg}};
-  for(let cy=Math.max(0,y0);cy<=y1;cy++)for(let cx=Math.max(0,x0);cx<=x1;cx++){if(cx*CS>=WW||cy*CS>=WH)continue;if(cb&&((cx+1)*CS<cb[0]||cx*CS>cb[2]||(cy+1)*CS<cb[1]||cy*CS>cb[3]))continue;const k=mxKey(cx,cy,r),X=ex+Math.round(cx*dw),Y=ey+Math.round(cy*dw),DX=ex+Math.round((cx+1)*dw)-X,DY=ey+Math.round((cy+1)*dw)-Y;let c=GX.ch.get(k);
-    if(c){GX.ch.delete(k);GX.ch.set(k,c);const td=MX.done.get(k),a=td?Math.min(1,(now-td)/280):1;if(a<1){allOk=false;if(sk){g.fillStyle=MP.bg;g.fillRect(X,Y,DX,DY)}mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY);g.globalAlpha=a;g.drawImage(c,X,Y,DX,DY);g.globalAlpha=1}else{g.drawImage(c,X,Y,DX,DY);if(td)MX.done.delete(k)}}
-    else{allOk=false;if(sk){g.fillStyle=MP.bg;g.fillRect(X,Y,DX,DY)}mxJob(cx,cy,r,1);mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY)}}
+  for(let cy=Math.max(0,y0);cy<=y1;cy++)for(let cx=Math.max(0,x0);cx<=x1;cx++){if(cx*CS>=WW||cy*CS>=WH)continue;if(cpoIn(cx,cy,CS))continue;if(cb&&((cx+1)*CS<cb[0]||cx*CS>cb[2]||(cy+1)*CS<cb[1]||cy*CS>cb[3]))continue;const k=mxKey(cx,cy,r),X=ex+Math.round(cx*dw),Y=ey+Math.round(cy*dw),DX=ex+Math.round((cx+1)*dw)-X,DY=ey+Math.round((cy+1)*dw)-Y;let c=GX.ch.get(k);
+    if(c){GX.ch.delete(k);GX.ch.set(k,c);const td=MX.done.get(k),a=td?Math.min(1,(now-td)/280):1;if(a<1){if(MXCV.off)allOk=false;if(sk){g.fillStyle=MP.bg;g.fillRect(X,Y,DX,DY)}mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY);g.globalAlpha=a;g.drawImage(c,X,Y,DX,DY);g.globalAlpha=1}else{g.drawImage(c,X,Y,DX,DY);if(td)MX.done.delete(k)}}
+    else{if(MXCV.off)allOk=false;if(sk){g.fillStyle=MP.bg;g.fillRect(X,Y,DX,DY)}mxJob(cx,cy,r,1);mxPrevDraw(cx,cy,X,Y,DX,s,ex,ey,DY)}}
   if(!cb)MX.cov=allOk?curMap:0;g.restore();
   if(first){/* วงนอกตามทิศเดิน (สร้างล่วงหน้า) */const vx=cam.x-MX.lc.x,vy=cam.y-MX.lc.y;MX.lc.x=cam.x;MX.lc.y=cam.y;const dx=vx>.3?1:vx<-.3?-1:0,dy=vy>.3?1:vy<-.3?-1:0;
     if(dx||dy){for(let cy=y0-1;cy<=y1+1;cy++){const cx=dx>0?x1+1:dx<0?x0-1:null;if(cx!==null&&cx>=0&&cy>=0&&cx*CS<WW&&cy*CS<WH&&!GX.ch.has(mxKey(cx,cy,r)))mxJob(cx,cy,r,0)}for(let cx=x0-1;cx<=x1+1;cx++){const cy=dy>0?y1+1:dy<0?y0-1:null;if(cy!==null&&cx>=0&&cy>=0&&cx*CS<WW&&cy*CS<WH&&!GX.ch.has(mxKey(cx,cy,r)))mxJob(cx,cy,r,0)}}
@@ -35856,6 +35857,37 @@ setTimeout(()=>{try{
   const vc=twvCard;window.twvCard=twvCard=function(f){const r=vc.apply(this,arguments);try{const ft=dg.tw&&dg.tw.ft,k={clear:'s_9',survive:'s_10',hunt:'s_11',rest:'s_12'}[ft],u=k&&HDI.on?twaIcon(k):'';const e=$('twcard');if(u&&e){const sp=e.querySelector('.k4 span');if(sp)sp.innerHTML='<img src="'+u+'" alt="" style="width:22px;height:22px;vertical-align:-6px;margin-right:4px">'+sp.textContent.replace(/^\S+\s/,'')}}catch(e){}return r};
   const ve=twvEnter;window.twvEnter=twvEnter=function(){const r=ve.apply(this,arguments);try{if(!TWAR.off&&HDI.on){const t=ov.querySelector('.twvt');if(t){t.style.backgroundImage='linear-gradient(180deg,rgba(8,6,16,.55),rgba(8,6,16,.78)),url(hd-twp.webp)';t.style.backgroundSize='cover';t.style.backgroundPosition='center'}}}catch(e){}return r};
 }catch(e){console.warn('twa',e)}},2500);
+/* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
+   ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
+      → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1
+   ② MXCV แมพปกติ: ชิ้นพื้นที่กำลังสร้าง/จางเข้า เดิมทำให้ "ไม่ครบ" → กลับไปเทพื้นหลังเต็มจอ · จริง ๆ ชิ้นนั้นถูกเทสีเฉพาะชิ้นอยู่แล้ว ⇒ ไม่ต้องเทเต็มจอ
+      (ค่าย/แมพที่ชิ้นพื้นอัปเกรดรายละเอียดบ่อยได้ผลมากสุด) · ปิด: MXCV.off=1
+   ③ DFO หมอกตามระยะ (ทุกแมพ): ภาพหมอกเต็มจอแต่ช่วงกลาง ~40% โปร่งใสล้วน ⇒ วาดเฉพาะแถบบน/ล่าง · ปิด: DFO.off=1
+   ④ NTM แมพมืด/ช่วงค่ำ: สีย้อม (tint) กับความมืดเป็นสองชั้นเต็มจอซ้อนกัน ⇒ รวมเป็นสีเดียวคำนวณล่วงหน้า (ผลเท่ากันทุกพื้นหลัง) · ปิด: NTM.off=1
+   ⑤ NLD มอนในที่มืดได้แสง 2 ชั้น (ขอบแสงจันทร์ v383 + ยกความสว่าง v527) ⇒ ตัวที่ยกความสว่างแล้วไม่ต้องได้ขอบแสงจันทร์ซ้ำ (บอส/ตัวพิเศษยังได้ครบ) · ปิด: NLD.off=1
+   ⑥ WBSQ ในท้องวาฬ: ผนังท้องบีบ (เตือน 1.6 วิ) แรงเกินเลือดเต็มของตัวละครส่วนใหญ่ ⇒ จำกัดไม่เกิน 35% เลือดสูงสุด (บอสเลือด < 40%: 45%) */
+const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
+function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
+  if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}
+function ntmRgba(s){const m=/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+))?\s*\)/.exec(s);return m?[+m[1],+m[2],+m[3],m[4]===undefined?1:+m[4]]:null}
+function ntmFs(fs0){const T=NTM.tg;NTM.tg=null;if(!T)return fs0;const d=ntmRgba(fs0),t=ntmRgba('rgba('+T[0]+','+T[1]+')');if(!d||!t)return fs0;
+  const A=d[3]+t[3]*(1-d[3]);if(!(A>0))return fs0;const C=[0,1,2].map(i=>Math.round((d[i]*d[3]+t[i]*t[3]*(1-d[3]))/A*10)/10);return'rgba('+C.join(',')+','+(Math.round(A*1000)/1000)+')'}
+function wbSqD(u,d){let mh=0;try{mh=u===uid?me.mh:((others[u]&&others[u].mh)||0)}catch(e){}if(!(mh>0))return Math.round(d);let hard=0;try{const B=mons.find(m=>m.t===3&&m.hp>0);hard=B&&B.hp<B.mh*.4}catch(e){}return Math.round(Math.min(d,mh*(hard?WBSQ.hard:WBSQ.cap)))}
+function plcvCov(){if(PLCV.off)return;try{if(!CASTM(curMap)||isDg()||!mxCastOn())return;const S=PALC.S;let ok=!shk&&!flash&&cam.x>=0&&cam.y>=0&&cam.x+W<=WW&&cam.y+H<=WH&&!(ZM.on&&ZM.z<1)&&PALC.mp===curMap;
+    if(ok){const x0=Math.floor((cam.x-24)/S),x1=Math.floor((cam.x+W+24)/S),y0=Math.floor((cam.y-24)/S),y1=Math.floor((cam.y+H+24)/S);
+      for(let cy=Math.max(0,y0);cy<=y1&&ok;cy++)for(let cx=Math.max(0,x0);cx<=x1;cx++){if(cx*S>=WW||cy*S>=WH)continue;if(!PALC.m.has(cx+','+cy)){ok=false;break}}}
+    MX.cov=ok?curMap:0}catch(e){}}
+setTimeout(()=>{try{const o=mxPalGround;window.mxPalGround=mxPalGround=function(){const r=o.apply(this,arguments);try{plcvCov()}catch(e){}return r}}catch(e){console.warn('plcv',e)}},2300);
+/* ⑦ CPO ค่าย: ภาพค่าย (แคช) ทึบเป็นวงกลมรัศมี ~560 ทับพื้นอยู่แล้ว ⇒ ชิ้นพื้นที่อยู่ในวงทึบทั้งชิ้นไม่ต้องวาด/สร้าง
+      วัดรัศมีทึบจริงจากภาพตอนสร้างแคช (32 ทิศ) · ใช้เฉพาะเมื่อภาพค่ายถูกวาดในเฟรมก่อนหน้า · ปิด: CPO.off=1 */
+const CPO={off:0,r:0,t:0,c:null,sk:0};
+function cpoMeasure(){CPO.r=0;try{const c=CAMP.cache;if(!c)return;const N=256,x=document.createElement('canvas');x.width=x.height=N;const X=x.getContext('2d');X.imageSmoothingEnabled=true;X.imageSmoothingQuality='high';X.drawImage(c,0,0,N,N);const d=X.getImageData(0,0,N,N).data;
+  let mn=N/2;for(let k=0;k<32;k++){const a=k/32*Math.PI*2,ca=Math.cos(a),sa=Math.sin(a);let r=0;for(;r<N/2;r++){const px=Math.round(N/2+ca*r),py=Math.round(N/2+sa*r);if(px<0||py<0||px>=N||py>=N||d[(py*N+px)*4+3]<250)break}mn=Math.min(mn,r)}
+  CPO.r=Math.max(0,mn*(CAMP.H*2/N)-14);CPO.c=c}catch(e){CPO.r=0}}
+function cpoIn(cx,cy,CS){if(CPO.off||curMap!==1||!(CPO.r>0)||CPO.c!==CAMP.cache||performance.now()-CPO.t>250)return false;const R2=CPO.r*CPO.r;
+  for(const[x,y]of[[cx*CS,cy*CS],[(cx+1)*CS,cy*CS],[cx*CS,(cy+1)*CS],[(cx+1)*CS,(cy+1)*CS]]){const dx=x-CX,dy=y-CY;if(dx*dx+dy*dy>R2)return false}CPO.sk++;return true}
+setTimeout(()=>{try{const ob=campBuild;window.campBuild=campBuild=function(){const r=ob.apply(this,arguments);try{cpoMeasure()}catch(e){}return r};
+  const od=drawCamp;window.drawCamp=drawCamp=function(){const r=od.apply(this,arguments);CPO.t=performance.now();if(CAMP.cache&&CPO.c!==CAMP.cache)try{cpoMeasure()}catch(e){}return r}}catch(e){console.warn('cpo',e)}},2300);
 /* ---------- v617 ไล่บัค: ฐานแผ่นดิน (45) เห็ดยักษ์จมในก้อนหิน ----------
    ภาพหินชุดใหม่ (v606) ใหญ่กว่าเดิม → เห็ดยักษ์บางต้นยืนซ้อนหลังหิน หาที่ว่างย้ายไม่ได้ แต่ทับไม่ถึงเกณฑ์ลบ (45%) เลยค้างอยู่
    แก้: หลังจัดของเสร็จ ในแมพที่ใช้ภาพชุดใหม่ (OVF.gx) เห็ดยักษ์ที่ยังทับของอื่นอยู่ → เอาออก (พร้อมเงาพื้น) */
@@ -36286,9 +36318,9 @@ function drawNtTag(m){const r=mR(m);g.save();g.font='bold 9px system-ui';g.textA
 const CST={c:null,key:''},NVL=CST;
 function nightLayer(mul,fill,col){const x=devCanvas(NVL),key=mul+fill+'|'+col+'|'+NVL.c.width+'|'+NVL.c.height;if(NVL.key!==key){x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,NVL.c.width,NVL.c.height);x.fillStyle=fill;x.fillRect(0,0,NVL.c.width,NVL.c.height);x.drawImage(vigBuild(col),0,0);NVL.key=key}return NVL.c}
 function worldLight(){if(isDg()||isArena()||curMap===1||curMap===40||curMap===41||curMap===42||curMap===44||curMap===45||(MAPS[curMap]&&MAPS[curMap].tent)){VIG.pend='';return}const S=dnState(),t=performance.now()/1000,vx=cam.x,vy=cam.y,w=wxNow();g.save();
-  if(S.tint){g.fillStyle='rgba('+S.tint[0]+','+S.tint[1]+')';g.fillRect(vx,vy,W,H)}
-  const dk=Math.min(.56,S.dk*.85+(w?.07:0));
-  if(dk>0){const vp=VIG.pend;VIG.pend='';if(curMap===9||curMap===35||curMap===36||curMap===38||curMap===39||curMap===43){/* นครยามค่ำ: ย้อมแสงจันทร์น้ำเงิน (multiply) คงคอนทราสต์ครีม-กรมท่า */const q=Math.min(1,dk/.42),f=LOWQ?1:1-.12*q,c=[Math.round((255-(255-78)*q)*f),Math.round((255-(255-96)*q)*f),Math.round((255-(255-176)*q)*f)];g.globalCompositeOperation='multiply';if(vp)devBlit(nightLayer('m','rgb('+c+')',vp),0,0,'multiply');else{g.fillStyle='rgb('+c+')';g.fillRect(vx,vy,W,H)}g.globalCompositeOperation='source-over';if(typeof nlLift==='function')nlLift('m','rgb('+c+')')}else{const fs='rgba(10,14,40,'+(Math.round(dk*100)/100)+')';if(vp)devBlit(nightLayer('s',fs,vp),0,0);else{g.fillStyle=fs;g.fillRect(vx,vy,W,H)}if(typeof nlLift==='function')nlLift('s',fs);}
+  const dk=Math.min(.56,S.dk*.85+(w?.07:0)),NTMG=!!(S.tint&&dk>0&&!NTM.off&&!(curMap===9||curMap===35||curMap===36||curMap===38||curMap===39||curMap===43)&&!(ZM.on&&ZM.z!==1));NTM.tg=NTMG?S.tint:null;
+  if(S.tint&&!NTMG){g.fillStyle='rgba('+S.tint[0]+','+S.tint[1]+')';g.fillRect(vx,vy,W,H)}
+  if(dk>0){const vp=VIG.pend;VIG.pend='';if(curMap===9||curMap===35||curMap===36||curMap===38||curMap===39||curMap===43){/* นครยามค่ำ: ย้อมแสงจันทร์น้ำเงิน (multiply) คงคอนทราสต์ครีม-กรมท่า */const q=Math.min(1,dk/.42),f=LOWQ?1:1-.12*q,c=[Math.round((255-(255-78)*q)*f),Math.round((255-(255-96)*q)*f),Math.round((255-(255-176)*q)*f)];g.globalCompositeOperation='multiply';if(vp)devBlit(nightLayer('m','rgb('+c+')',vp),0,0,'multiply');else{g.fillStyle='rgb('+c+')';g.fillRect(vx,vy,W,H)}g.globalCompositeOperation='source-over';if(typeof nlLift==='function')nlLift('m','rgb('+c+')')}else{const fs0='rgba(10,14,40,'+(Math.round(dk*100)/100)+')',fs=ntmFs(fs0);if(vp)devBlit(nightLayer('s',fs,vp),0,0);else{g.fillStyle=fs;g.fillRect(vx,vy,W,H)}if(typeof nlLift==='function')nlLift('s',fs0);}
     if(S.dk>0){g.globalCompositeOperation='lighter';const k=Math.min(1.3,S.dk/.42),L=(x,y,r,c,a)=>{if(x<vx-r||x>vx+W+r||y<vy-r||y>vy+H+r)return;a=ntBud(x,y,r,a);if(a>.004)glowAt(x,y,r,c,a)};NTB.length=0;
       if(me.cls){L(me.x,me.y-10,200,'255,230,190',.1*k);L(me.x,me.y-12,70,'255,220,170',.06*k)}try{nightFxLights(L,k)}catch(e){}Object.values(others).forEach(o=>{if(o)L(o.x,o.y-10,80,'255,230,190',.06*k)});
       (MAPS[curMap].gates||[]).forEach(G=>L(G.x,G.y-10,90,G.sky?'255,220,140':'140,190,255',.35*k));

@@ -38,7 +38,7 @@ async def main():
         await A.pg.screenshot(path=SH+'t_arrive.jpg',quality=78)
         rep('ขึ้นบันไดดาว → แมพ 40 ลานดาวลอย (เกาะบันได) · ขั้นเศษดาว · มอน Lv 144–148 บนเกาะ ไม่เกิดที่ลานบันได · แผนที่โลก',m[0]==40 and m[1]==1 and m[2]==0 and m[3]=='ลานดาวลอย' and m[4]=='ลานดาวลอย' and m[5]==[144,148] and 144<=lv[0] and lv[1]<=149 and lv[2],[m,lv])
         w=await A.ev("""async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));me.x=900;me.y=2600;Q9S.lx=me.x;Q9S.ly=me.y;await w(300);const a=[Math.round(me.x),Math.round(me.y)];me.x=200;me.y=1900;await w(300);const bk=[Math.round(me.x),Math.round(me.y)];
-          return {a,bk,br:q9In(940,2300,0),vo:q9In(1000,1600,0),aqS:aqWalkable(2300,1900),noon:worldLight.toString().includes('curMap===40')}}""")
+          return {a,bk,br:q9In(940,2300,0),vo:q9In(1000,1600,0),aqS:aqWalkable(2300,1900),noon:[...document.scripts].some(S=>{const t=S.textContent,k=t.indexOf('function worldLight(){');return k>=0&&t.slice(k,k+200).includes('curMap===40')})}}""")
         rep('ความว่างเดินไม่ได้ (ดึงกลับ) · สะพานแสงเดินได้ · ออโต้เควสไม่เดินผ่านธารดาว · ไม่มีกลางวันกลางคืน',w['bk']==w['a'] and w['br'] and not w['vo'] and not w['aqS'] and w['noon'],w)
         await A.ev("()=>{mons=[];const s=Q9W[0];me.x=s[0]+18;me.y=s[1]+12;Q9S.lx=me.x;Q9S.ly=me.y}");await A.wait(400)
         mid=await A.ev("()=>Q9S.w");await A.wait(2400)
