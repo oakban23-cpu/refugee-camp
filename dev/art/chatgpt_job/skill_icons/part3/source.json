@@ -1,0 +1,1606 @@
+{
+ "O": [
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 0,
+   "id": "m0a",
+   "e": "🌀",
+   "n": "พายุ",
+   "d": "หมุนดาบต่อเนื่อง 2 วิ เดินไปด้วยได้ (5 รอบ รอบละ 55%)",
+   "en": "a sword spinning in a continuous storm vortex"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 0,
+   "id": "m0b",
+   "e": "🧲",
+   "n": "ดูด",
+   "d": "ดึงมอนรอบตัวในวงกว้างเข้ามาก่อนหมุน วงตีกว้างขึ้น ดาเมจ 80%",
+   "en": "a magnet-like pull: spiral lines drawing inward to a sword"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 1,
+   "id": "m1a",
+   "e": "👥",
+   "n": "สองจังหวะ",
+   "d": "พุ่งได้ 2 ครั้งติดกันภายใน 1.3 วิ (ครั้งละ 145% ระยะสั้นลง)",
+   "en": "two quick dash streaks one after another (double dash)"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 1,
+   "id": "m1b",
+   "e": "🔥",
+   "n": "รอยไฟ",
+   "d": "ทิ้งแนวไฟเผา 3 วิ ตามทางที่พุ่ง (ธาตุไฟ) ดาเมจพุ่ง 68%",
+   "en": "a trail of fire left behind a dash streak"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 2,
+   "id": "m2a",
+   "e": "✴️",
+   "n": "กากบาท",
+   "d": "อัลติปล่อยรอยแยกอีกแนวตั้งฉากที่เป้า (300%) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "two ground cracks crossing in an X"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 2,
+   "id": "m2b",
+   "e": "🌋",
+   "n": "ลาวา",
+   "d": "อัลติทิ้งบ่อลาวาตามแนวฟัน เผา 4 วิ (ธาตุไฟ) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "a pool of glowing lava along a ground crack"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 3,
+   "id": "m3a",
+   "e": "🩸",
+   "n": "กระหายเลือด",
+   "d": "ระหว่างโทสะ ยิ่งเลือดน้อยยิ่งตีแรง สูงสุด +45% (แต่ไม่ดูดเลือด)",
+   "en": "a crimson droplet with a rising rage flame (bloodthirst)"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 3,
+   "id": "m3b",
+   "e": "🛡️",
+   "n": "หินผา",
+   "d": "ระหว่างโทสะ รับดาเมจลดลง 25% (แต่ไม่ดูดเลือด)",
+   "en": "a stone-skin shield like solid rock"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 4,
+   "id": "m4a",
+   "e": "💢",
+   "n": "สะท้อน",
+   "d": "5 วิหลังใช้ ถูกตีเมื่อไรจะสะท้อนดาเมจใส่มอนรอบตัว (80% ต่อครั้ง)",
+   "en": "a shield reflecting red sparks back outward"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 4,
+   "id": "m4b",
+   "e": "📣",
+   "n": "ปลุกขวัญ",
+   "d": "เพื่อนรอบตัวได้เกราะ 12% ของเลือดสูงสุดเราด้วย",
+   "en": "a rallying war horn with a protective aura"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 5,
+   "id": "p5ma",
+   "e": "🌀",
+   "n": "พายุยาว",
+   "d": "หมุนดาบนาน 3.5 วิ วงบาดกว้างขึ้น 20% แต่ตอนจบดาบพุ่งเหลือ 4 เล่ม",
+   "en": "a long-lasting whirl of six orbiting swords"
+  },
+  {
+   "c": "melee",
+   "src": "base",
+   "sk": 5,
+   "id": "p5mb",
+   "e": "🗡️",
+   "n": "ดาบรวมศูนย์",
+   "d": "ไม่หมุน — ดาบ 6 เล่มพุ่งแทงเป้าหมายเดียวทันที (เล่มละ 380%)",
+   "en": "six swords converging on a single point"
+  },
+  {
+   "c": "melee",
+   "src": "br4",
+   "sk": 4,
+   "id": "w4a",
+   "e": "🔨",
+   "n": "ทุบสนั่น",
+   "d": "ทุบโล่รอบตัว 360° (วงกว้างขึ้น) มอนมึน 2 วิ แต่ดาเมจ 75%",
+   "en": "a shield slam sending a full 360 ring shockwave"
+  },
+  {
+   "c": "melee",
+   "src": "br4",
+   "sk": 4,
+   "id": "w4b",
+   "e": "💢",
+   "n": "แค้นระเบิด",
+   "d": "แค้นแต่ละชั้นแรงขึ้น 30% (แทน 15%) และได้เกราะชั้นละ 3% ของเลือดสูงสุด 5 วิ",
+   "en": "stacked vengeance: a burning red rage sigil with three layered rings"
+  },
+  {
+   "c": "melee",
+   "src": "q8:mw",
+   "sk": 0,
+   "id": "qm0a",
+   "e": "🌙",
+   "n": "สามเสี้ยว",
+   "d": "ฟันคลื่น 3 ลูกเป็นรูปพัด ลูกละ 100% (มอนที่อยู่ใกล้โดนได้หลายลูก)",
+   "en": "three crescent waves fanning out"
+  },
+  {
+   "c": "melee",
+   "src": "q8:mw",
+   "sk": 0,
+   "id": "qm0b",
+   "e": "🌊",
+   "n": "คลื่นยักษ์",
+   "d": "คลื่นกว้างเกือบ 2 เท่า วิ่งช้าลง ระยะ 200 แรง 260%",
+   "en": "one giant wide crescent tidal wave"
+  },
+  {
+   "c": "melee",
+   "src": "q8:mb",
+   "sk": 1,
+   "id": "qm1a",
+   "e": "🌀",
+   "n": "ใบมีดวน",
+   "d": "ดาบลอยหมุนค้างที่ปลายทาง 1 วิ ฟันมอนรอบ ๆ ทุก 0.25 วิ (45%) · ขาไป/กลับ 130%",
+   "en": "a sword hovering and spinning in place at the end of its path"
+  },
+  {
+   "c": "melee",
+   "src": "q8:mb",
+   "sk": 1,
+   "id": "qm1b",
+   "e": "🧲",
+   "n": "ดึงกลับ",
+   "d": "ขากลับลากมอนที่โดนติดมาหาตัวเรา (ยกเว้นบอส) · ครั้งละ 140%",
+   "en": "a returning sword dragging a chain-like pull line back"
+  },
+  {
+   "c": "melee",
+   "src": "q8:xa",
+   "sk": 2,
+   "id": "qm2a",
+   "e": "🦶",
+   "n": "เหยียบแผ่นดิน",
+   "d": "ระหว่างแปลงร่าง กระทืบพื้นเองทุก 1 วิ วง 110 (45%)",
+   "en": "a huge stomping demon foot cracking the ground"
+  },
+  {
+   "c": "melee",
+   "src": "q8:xa",
+   "sk": 2,
+   "id": "qm2b",
+   "e": "🩸",
+   "n": "เลือดอสูร",
+   "d": "คลื่นกระแทกดูดเลือด 0.8% ต่อมอนที่โดน (สูงสุด 4% ต่อครั้ง) · จบร่างฟื้นเลือด 15%",
+   "en": "demonic crimson energy siphoning into a fist"
+  },
+  {
+   "c": "melee",
+   "src": "q8:mj",
+   "sk": 3,
+   "id": "qm3a",
+   "e": "💥",
+   "n": "แผ่นดินแยก",
+   "d": "ลงแล้วแผ่นดินสั่นต่ออีก 3 ระลอก (ทุก 0.35 วิ วง 110 ระลอกละ 55%)",
+   "en": "three rippling quake rings after an impact"
+  },
+  {
+   "c": "melee",
+   "src": "q8:mj",
+   "sk": 3,
+   "id": "qm3b",
+   "e": "🧲",
+   "n": "กระแทกดึง",
+   "d": "ลงแล้วดึงมอนในวง 200 มากองที่จุดลง กระแทกทั้งวง 220% + มึน",
+   "en": "monsters pulled into an impact crater (inward arrows)"
+  },
+  {
+   "c": "melee",
+   "src": "q8:mg",
+   "sk": 4,
+   "id": "qm4a",
+   "e": "⚔️",
+   "n": "สามดาบ",
+   "d": "ดาบ 3 เล่มตกเป็นสามเหลี่ยมรอบเป้า เล่มละ 220% มึน 0.8 วิ (ไม่ปักค้าง)",
+   "en": "three swords falling in a triangle formation"
+  },
+  {
+   "c": "melee",
+   "src": "q8:mg",
+   "sk": 4,
+   "id": "qm4b",
+   "e": "💣",
+   "n": "ดาบระเบิด",
+   "d": "ดาบปักค้างแล้วระเบิดตอนครบ 3 วิ วง 120: 260% (ระหว่างปักแรงลงเหลือ 25%)",
+   "en": "a planted sword glowing and about to explode"
+  },
+  {
+   "c": "melee",
+   "src": "q8:zm",
+   "sk": 5,
+   "id": "qm5a",
+   "e": "🔱",
+   "n": "สามรอยแยก",
+   "d": "ไม่พุ่งตัว · ฟันรอยแยก 3 แนวเป็นรูปพัด แนวละ 220% (ไม่มีหนามต่อ)",
+   "en": "three blood rifts fanning out from a point"
+  },
+  {
+   "c": "melee",
+   "src": "q8:zm",
+   "sk": 5,
+   "id": "qm5b",
+   "e": "🩸",
+   "n": "โลหิตดูด",
+   "d": "รอยแยกปะทุแล้วฟื้นเลือด 1.5% ต่อมอนที่โดน (สูงสุด 9%)",
+   "en": "a blood rift with healing crimson wisps rising"
+  },
+  {
+   "c": "melee",
+   "src": "q8b:yk",
+   "sk": 2,
+   "id": "rm2a",
+   "e": "⚔️",
+   "n": "ทัพใหญ่",
+   "d": "อัศวิน 5 ตน ตนละ 120%",
+   "en": "five spectral knight helmets in a ring"
+  },
+  {
+   "c": "melee",
+   "src": "q8b:yk",
+   "sk": 2,
+   "id": "rm2b",
+   "e": "🛡️",
+   "n": "ปราการวิญญาณ",
+   "d": "ทั้งทีมในวงรับดาเมจลดลง 40% · ฟาดแล้วมึน 0.8 วิ",
+   "en": "a spectral knight shield dome protecting a group"
+  },
+  {
+   "c": "melee",
+   "src": "q8b:mk",
+   "sk": 4,
+   "id": "rm4a",
+   "e": "🌵",
+   "n": "หนามเหล็ก",
+   "d": "ระหว่างตั้งโล่ โดนตีแล้วหนามสะท้อนใส่มอนรอบตัว (วง 90 · 60%)",
+   "en": "a tower shield bristling with iron thorns"
+  },
+  {
+   "c": "melee",
+   "src": "q8b:mk",
+   "sk": 4,
+   "id": "rm4b",
+   "e": "🚶",
+   "n": "ปราการเคลื่อนที่",
+   "d": "เดินได้ระหว่างตั้งโล่ · ลดดาเมจ 40%",
+   "en": "a shield with a walking footstep beneath it (mobile guard)"
+  },
+  {
+   "c": "melee",
+   "src": "q8b:zw",
+   "sk": 5,
+   "id": "rm5a",
+   "e": "🧱",
+   "n": "สองกำแพง",
+   "d": "กำแพงหน้าและหลังล้มเข้าหาเรา ด้านละ 260%",
+   "en": "two golden walls falling toward each other"
+  },
+  {
+   "c": "melee",
+   "src": "q8b:zw",
+   "sk": 5,
+   "id": "rm5b",
+   "e": "🏯",
+   "n": "กำแพงค้าง",
+   "d": "กำแพงไม่ล้ม ตั้งค้าง 4 วิ มอนที่ชิดกำแพงโดน 60% ทุก 0.5 วิ และถูกดันออก",
+   "en": "a standing golden wall with a pushing shockwave"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 0,
+   "id": "a0a",
+   "e": "🎯",
+   "n": "รวมจุด",
+   "d": "วงห่าธนูแคบลงครึ่งหนึ่ง แต่แรงขึ้น +55%",
+   "en": "a rain of arrows narrowed to a tight bullseye"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 0,
+   "id": "a0b",
+   "e": "❄️",
+   "n": "น้ำแข็ง",
+   "d": "ห่าธนูน้ำแข็ง ทำให้มอนช้า 3 วิ (ธาตุน้ำแข็ง) ดาเมจ 85%",
+   "en": "frost arrows raining down with ice crystals"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 1,
+   "id": "a1a",
+   "e": "🌬️",
+   "n": "ลมกรด",
+   "d": "กระโดดถอยแล้วยิงตอบอัตโนมัติ 3 ดอก (ดอกละ 100%)",
+   "en": "a backward leap with three arrows shot forward"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 1,
+   "id": "a1b",
+   "e": "💣",
+   "n": "ระเบิดทิ้ง",
+   "d": "ทิ้งระเบิดไว้ที่จุดเดิม ระเบิดหลัง 0.7 วิ (220%)",
+   "en": "a small bomb left behind with a lit fuse"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 2,
+   "id": "a2a",
+   "e": "☀️",
+   "n": "สุริยะ",
+   "d": "1 วิหลังอัลติ ลำแสงสุริยะระเบิดที่เป้า (350%) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "a sun beam bursting on a target"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 2,
+   "id": "a2b",
+   "e": "🌠",
+   "n": "กระจาย",
+   "d": "อัลติยิงลำแสงเพิ่ม 2 สายเป็นรูปพัด (สายละ 170%) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "three light beams spreading in a fan"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 3,
+   "id": "a3a",
+   "e": "⛓️",
+   "n": "โซ่",
+   "d": "ตรึงเด้งต่อไปอีก 2 ตัวใกล้ ๆ (ตัวละ 200%) เป้าหลัก 85%",
+   "en": "pinning chains jumping between three targets"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 3,
+   "id": "a3b",
+   "e": "💥",
+   "n": "เจาะเกราะ",
+   "d": "เป้าที่ถูกตรึงรับดาเมจจากเรา +25% นาน 4 วิ",
+   "en": "an arrow cracking an armour plate"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 4,
+   "id": "a4a",
+   "e": "⚡",
+   "n": "สายฟ้า",
+   "d": "หลังใช้ สายฟ้าช็อตรอบเป้า 4 ครั้งใน 2 วิ (ครั้งละ 60% ธาตุสายฟ้า)",
+   "en": "lightning sparks around a crescent trap"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 4,
+   "id": "a4b",
+   "e": "🌙",
+   "n": "จันทร์คู่",
+   "d": "วางกับดักจันทราเพิ่มอีกอันใต้เท้าเรา ตรึงมอนที่เข้าใกล้ (200%)",
+   "en": "two crescent-moon traps side by side"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 5,
+   "id": "p5aa",
+   "e": "🎯",
+   "n": "ล่าเดี่ยว",
+   "d": "ศรดาวทั้ง 5 ดอกพุ่งใส่เป้าหมายเดียว (ดอกละ 210%)",
+   "en": "five star arrows homing onto one target"
+  },
+  {
+   "c": "archer",
+   "src": "base",
+   "sk": 5,
+   "id": "p5ab",
+   "e": "🌠",
+   "n": "ฝนดาว",
+   "d": "ยิงศรดาว 9 ดอกกระจายหามอนรอบเป้า (ดอกละ 110%)",
+   "en": "a shower of nine star arrows scattering"
+  },
+  {
+   "c": "archer",
+   "src": "br4",
+   "sk": 4,
+   "id": "v4a",
+   "e": "🌪️",
+   "n": "พายุคู่",
+   "d": "ปล่อยทอร์นาโด 2 ลูกเป็นรูปตัว V (ลูกละ 65%)",
+   "en": "two tornadoes moving apart in a V"
+  },
+  {
+   "c": "archer",
+   "src": "br4",
+   "sk": 4,
+   "id": "v4b",
+   "e": "🌀",
+   "n": "พายุนิ่ง",
+   "d": "ทอร์นาโดหยุดอยู่กับที่ตรงเป้าหมาย ใหญ่ขึ้น 30% อยู่ 4 วิ ดูดมอนเข้าหาตลอด (แรงต่อครั้ง 50%)",
+   "en": "one large stationary tornado sucking things in"
+  },
+  {
+   "c": "archer",
+   "src": "q8:af",
+   "sk": 0,
+   "id": "qa0a",
+   "e": "🪭",
+   "n": "พัดกว้าง",
+   "d": "7 ดอก กางกว้างขึ้น ดอกละ 100% · กวาดได้หลายตัว",
+   "en": "seven arrows in a very wide fan"
+  },
+  {
+   "c": "archer",
+   "src": "q8:af",
+   "sk": 0,
+   "id": "qa0b",
+   "e": "💥",
+   "n": "หัวระเบิด",
+   "d": "ลูกธนูระเบิดตอนโดน กระเซ็นใส่มอนรอบ ๆ 60% · ดอกละ 100%",
+   "en": "an arrow with an exploding head"
+  },
+  {
+   "c": "archer",
+   "src": "q8:ag",
+   "sk": 1,
+   "id": "qa1a",
+   "e": "⚡",
+   "n": "ธงอัสนี",
+   "d": "ธงเรียกฟ้าผ่ามอนในเขตทุก 1 วิ (70% ธาตุสายฟ้า)",
+   "en": "a hunting flag struck by lightning"
+  },
+  {
+   "c": "archer",
+   "src": "q8:ag",
+   "sk": 1,
+   "id": "qa1b",
+   "e": "🍃",
+   "n": "ธงลมกรด",
+   "d": "เพื่อนที่ยืนอยู่ในเขตได้ความเร็วโจมตี +30%",
+   "en": "a flag in swirling green wind with speed leaves"
+  },
+  {
+   "c": "archer",
+   "src": "q8:xh",
+   "sk": 2,
+   "id": "qa2a",
+   "e": "💥",
+   "n": "ศรระเบิด",
+   "d": "ศรทุกดอกระเบิดวง 48 (50%) · ดอกละ 100%",
+   "en": "diving arrows each with a small explosion"
+  },
+  {
+   "c": "archer",
+   "src": "q8:xh",
+   "sk": 2,
+   "id": "qa2b",
+   "e": "🌟",
+   "n": "ศรเทวะ",
+   "d": "ก่อนลงพื้นยิงศรเทวะยักษ์ใส่เป้า วง 80: 350% + มึน 1.5 วิ",
+   "en": "one giant divine golden arrow plunging down"
+  },
+  {
+   "c": "archer",
+   "src": "q8:ad",
+   "sk": 3,
+   "id": "qa3a",
+   "e": "💥",
+   "n": "ศรระเบิด",
+   "d": "ศรระเบิดที่เป้า วง 85: 220% · ศร 300%",
+   "en": "a heavy arrow exploding on impact"
+  },
+  {
+   "c": "archer",
+   "src": "q8:ad",
+   "sk": 3,
+   "id": "qa3b",
+   "e": "🔱",
+   "n": "สามศร",
+   "d": "ไม่ต้องง้าง ยิง 3 ดอกเป็นรูปพัดแคบ ดอกละ 170%",
+   "en": "three arrows in a narrow fan"
+  },
+  {
+   "c": "archer",
+   "src": "q8:ah",
+   "sk": 4,
+   "id": "qa4a",
+   "e": "🦅",
+   "n": "เหยี่ยวคู่",
+   "d": "เรียก 2 ตัว ผลัดกันโฉบ ตัวละ 60%",
+   "en": "two hawks diving in turn"
+  },
+  {
+   "c": "archer",
+   "src": "q8:ah",
+   "sk": 4,
+   "id": "qa4b",
+   "e": "⚡",
+   "n": "เหยี่ยวอสนี",
+   "d": "ทุกครั้งที่โฉบ สายฟ้ากระโดดต่อ 2 ตัว (45%)",
+   "en": "a hawk crackling with lightning"
+  },
+  {
+   "c": "archer",
+   "src": "q8:zc",
+   "sk": 5,
+   "id": "qa5a",
+   "e": "✨",
+   "n": "ดาวคู่",
+   "d": "ดาวระเบิดซ้ำอีกครั้งหลัง 0.5 วิ (60%)",
+   "en": "stars bursting twice (double flash)"
+  },
+  {
+   "c": "archer",
+   "src": "q8:zc",
+   "sk": 5,
+   "id": "qa5b",
+   "e": "💫",
+   "n": "ดาวสลาย",
+   "d": "ดาวระเบิดกระเซ็นวง 60 (50%)",
+   "en": "a star shattering into fragments"
+  },
+  {
+   "c": "archer",
+   "src": "q8b:yw",
+   "sk": 2,
+   "id": "ra2a",
+   "e": "✂️",
+   "n": "ใบมีดแยก",
+   "d": "ใบมีดลมแยกไปโดนอีกตัว (120) 50%",
+   "en": "a wind blade splitting into two"
+  },
+  {
+   "c": "archer",
+   "src": "q8b:yw",
+   "sk": 2,
+   "id": "ra2b",
+   "e": "🌪️",
+   "n": "พายุปิดฉาก",
+   "d": "ไซโคลนท้ายใหญ่ขึ้น วง 200: 280% + ดูดมอนเข้ากลาง",
+   "en": "a large finishing cyclone pulling inward"
+  },
+  {
+   "c": "archer",
+   "src": "q8b:aw",
+   "sk": 4,
+   "id": "ra4a",
+   "e": "🍃",
+   "n": "ลมแปดทิศ",
+   "d": "เด้ง 8 ครั้ง ครั้งละ 180%",
+   "en": "a wind arrow bouncing in an eight-point star pattern"
+  },
+  {
+   "c": "archer",
+   "src": "q8b:aw",
+   "sk": 4,
+   "id": "ra4b",
+   "e": "🌀",
+   "n": "ลมดูด",
+   "d": "ทุกครั้งที่เด้ง ดูดมอนรอบตัวเป้า (70) เข้ามาหา",
+   "en": "a wind arrow with a small suction vortex"
+  },
+  {
+   "c": "archer",
+   "src": "q8b:zl",
+   "sk": 5,
+   "id": "ra5a",
+   "e": "🏹",
+   "n": "สามศร",
+   "d": "ปักศร 3 ตัว ฟ้าผ่าตัวละ 60% (ไม่กระโดด)",
+   "en": "three arrows stuck in the ground each struck by lightning"
+  },
+  {
+   "c": "archer",
+   "src": "q8b:zl",
+   "sk": 5,
+   "id": "ra5b",
+   "e": "⛈️",
+   "n": "อสนีระเบิด",
+   "d": "ครบเวลาฟ้าผ่ายักษ์ที่เป้า วง 120: 350%",
+   "en": "one huge lightning strike exploding"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 0,
+   "id": "s0a",
+   "e": "☀️",
+   "n": "แสงพิฆาต",
+   "d": "ฮีลเหลือครึ่งหนึ่ง แต่แสงทำดาเมจมอนรอบตัว 160% (ธาตุแสง)",
+   "en": "holy light burst that damages: a sun with sharp rays"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 0,
+   "id": "s0b",
+   "e": "🌿",
+   "n": "ฟื้นต่อเนื่อง",
+   "d": "ฮีลทันทีครึ่งหนึ่ง แล้วฟื้นต่ออีก 5 วิ รวมฮีล 130%",
+   "en": "a leafy green regeneration glow"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 1,
+   "id": "s1a",
+   "e": "🎯",
+   "n": "คม",
+   "d": "แทนพลังโจมตี: ทีมได้โอกาสคริ +15% นาน 10 วิ",
+   "en": "a sharp critical star on a team banner"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 1,
+   "id": "s1b",
+   "e": "⚡",
+   "n": "เร่ง",
+   "d": "แทนพลังโจมตี: ทีมได้ความเร็วโจมตี +30% นาน 10 วิ",
+   "en": "a golden speed rune with motion arrows"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 2,
+   "id": "s2a",
+   "e": "☀️",
+   "n": "พิพากษา",
+   "d": "อัลติระเบิดแสงทำดาเมจมอนรอบตัว (350%) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "a judgement explosion of light"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 2,
+   "id": "s2b",
+   "e": "🕊️",
+   "n": "พิทักษ์",
+   "d": "อัลติทำให้ทั้งทีมรอบตัวอมตะ 2 วิ · ใช้ได้กับอัลติทุกร่าง",
+   "en": "a dove of light spreading protective wings"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 3,
+   "id": "s3a",
+   "e": "⛪",
+   "n": "ศักดิ์สิทธิ์",
+   "d": "ดาเมจใส่หัวหน้ามอนและบอส +50% (มอนทั่วไป 90%)",
+   "en": "a holy chapel/sacred light pillar against a boss crown"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 3,
+   "id": "s3b",
+   "e": "🔆",
+   "n": "ลำแสงคู่",
+   "d": "ผ่าลงอีกจุดที่มอนตัวถัดไป (35%)",
+   "en": "two pillars of light striking"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 4,
+   "id": "s4a",
+   "e": "🔥",
+   "n": "วงเพลิง",
+   "d": "เปลี่ยนวงแสงเป็นวงไฟ ไม่ฮีล แต่เผามอนแรงมาก (ธาตุไฟ)",
+   "en": "a holy circle turned into a ring of fire"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 4,
+   "id": "s4b",
+   "e": "🏃",
+   "n": "เคลื่อนตาม",
+   "d": "วงแสงเล็กลง แต่เคลื่อนตามตัวเราตลอด 6 วิ",
+   "en": "a light circle following footsteps"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 5,
+   "id": "p5sa",
+   "e": "💚",
+   "n": "วงฟื้นฟู",
+   "d": "ฟื้นเลือด 4%/วิ (เท่าตัว) แต่ไม่ลดดาเมจที่ได้รับ",
+   "en": "a green healing ring with a heart glow"
+  },
+  {
+   "c": "sup",
+   "src": "base",
+   "sk": 5,
+   "id": "p5sb",
+   "e": "🔆",
+   "n": "วงแหวนกว้าง",
+   "d": "วงกว้างขึ้น 50% อยู่ 9 วิ แต่ฟื้นเลือดเหลือ 1%/วิ",
+   "en": "a very wide thin halo ring"
+  },
+  {
+   "c": "sup",
+   "src": "br4",
+   "sk": 4,
+   "id": "y4a",
+   "e": "🩸",
+   "n": "ตราดูดวิญญาณ",
+   "d": "ตรากว้างขึ้น 30% · ทุก 1 วิ แผดเผามอนในตรา (40%) และฮีลเพื่อนในตรา 3% ของเลือดสูงสุด",
+   "en": "a curse seal draining wisps that heal (violet with green)"
+  },
+  {
+   "c": "sup",
+   "src": "br4",
+   "sk": 4,
+   "id": "y4b",
+   "e": "💥",
+   "n": "ตราระเบิด",
+   "d": "ตราอยู่ 3 วิ แล้วระเบิดคำสาปใส่ทุกตัวในตรา (350% · มอนที่ติดคำสาปแรงขึ้นชั้นละ 20%)",
+   "en": "a curse seal cracking and exploding"
+  },
+  {
+   "c": "sup",
+   "src": "q8:sb",
+   "sk": 0,
+   "id": "qu0a",
+   "e": "🌵",
+   "n": "โล่หนาม",
+   "d": "โล่ 11% แต่ระหว่างมีโล่ โดนตีแล้วสะท้อนแสงใส่มอนรอบตัว (100%)",
+   "en": "a light shield with thorns of light"
+  },
+  {
+   "c": "sup",
+   "src": "q8:sb",
+   "sk": 0,
+   "id": "qu0b",
+   "e": "🌿",
+   "n": "โล่ฟื้นฟู",
+   "d": "โล่ 10% และระหว่างมีโล่ ฟื้นเลือด 2.5% ต่อวิ",
+   "en": "a light shield with leaves of regeneration"
+  },
+  {
+   "c": "sup",
+   "src": "q8:sh",
+   "sk": 1,
+   "id": "qu1a",
+   "e": "🔨",
+   "n": "สามค้อน",
+   "d": "ค้อน 3 อันตกใส่มอน 3 ตัวต่อกัน อันละ 150% มึน 0.6 วิ",
+   "en": "three holy hammers in a row"
+  },
+  {
+   "c": "sup",
+   "src": "q8:sh",
+   "sk": 1,
+   "id": "qu1b",
+   "e": "⛪",
+   "n": "ค้อนศักดิ์สิทธิ์",
+   "d": "ค้อนใหญ่ วง 120: 260% แล้วทิ้งเขตศักดิ์สิทธิ์ 3 วิ (เพื่อนฟื้นเลือด เผามอน)",
+   "en": "one big holy hammer with a sacred ground circle"
+  },
+  {
+   "c": "sup",
+   "src": "q8:xc",
+   "sk": 2,
+   "id": "qu2a",
+   "e": "💗",
+   "n": "โซ่ดูดชีวิต",
+   "d": "ทุก 1 วิ เพื่อนรอบตัว (300) ฟื้นเลือด 1.5% ต่อมอนที่ถูกล่าม (สูงสุด 6%/วิ)",
+   "en": "golden chains with pink life hearts flowing"
+  },
+  {
+   "c": "sup",
+   "src": "q8:xc",
+   "sk": 2,
+   "id": "qu2b",
+   "e": "💥",
+   "n": "โซ่ระเบิด",
+   "d": "โซ่ขาดตอนจบ ระเบิดรอบมอนแต่ละตัว (วง 40) 80%",
+   "en": "golden chains snapping and exploding"
+  },
+  {
+   "c": "sup",
+   "src": "q8:ub",
+   "sk": 3,
+   "id": "qu3a",
+   "e": "✨",
+   "n": "ลำแสงคู่",
+   "d": "แยกเป็น 2 ลำไปหา 2 เป้า ลำละ 30%",
+   "en": "a light beam splitting into two"
+  },
+  {
+   "c": "sup",
+   "src": "q8:ub",
+   "sk": 3,
+   "id": "qu3b",
+   "e": "💚",
+   "n": "ลำแสงเยียวยา",
+   "d": "ฮีลเพื่อนในแนว 3 เท่า (3.6%) · ดาเมจ 25%",
+   "en": "a green healing beam"
+  },
+  {
+   "c": "sup",
+   "src": "q8:uo",
+   "sk": 4,
+   "id": "qu4a",
+   "e": "💖",
+   "n": "ดวงแก้วเยียวยา",
+   "d": "ยิงแสงฮีลเพื่อนที่เลือดน้อยสุดแทน (ไกล 300 · ครั้งละ 2% ของเลือดคนรับ)",
+   "en": "divine orbs shooting pink healing light"
+  },
+  {
+   "c": "sup",
+   "src": "q8:uo",
+   "sk": 4,
+   "id": "qu4b",
+   "e": "💥",
+   "n": "ดวงแก้วระเบิด",
+   "d": "แสง 45% · ครบเวลาดวงแก้วระเบิดรอบตัว วง 90 ดวงละ 100%",
+   "en": "divine orbs exploding"
+  },
+  {
+   "c": "sup",
+   "src": "q8:zr",
+   "sk": 5,
+   "id": "qu5a",
+   "e": "🔆",
+   "n": "อรุณแรงกล้า",
+   "d": "พรดาเมจ +30% แต่อยู่ 4 วิ",
+   "en": "an intense blazing dawn sun"
+  },
+  {
+   "c": "sup",
+   "src": "q8:zr",
+   "sk": 5,
+   "id": "qu5b",
+   "e": "🌿",
+   "n": "อรุณยาวนาน",
+   "d": "ฟื้นเลือดต่อเนื่อง 3%/วิ นาน 6 วิ แทนฟื้นทันที",
+   "en": "a long gentle dawn with leaves"
+  },
+  {
+   "c": "sup",
+   "src": "q8b:yu",
+   "sk": 2,
+   "id": "ru2a",
+   "e": "💜",
+   "n": "พิธีดูดวิญญาณ",
+   "d": "ทุกครั้งที่สาป เพื่อนรอบวง (250) ฟื้นเลือด 1.5% ต่อมอนในวง (สูงสุด 6%)",
+   "en": "a violet ritual circle draining souls into healing"
+  },
+  {
+   "c": "sup",
+   "src": "q8b:yu",
+   "sk": 2,
+   "id": "ru2b",
+   "e": "⏩",
+   "n": "สาปเร่งชะตา",
+   "d": "พิธีสั้นลงเหลือ 4 วิ แต่สาปทุก 0.5 วิ",
+   "en": "a fast-forward cursed ritual sigil"
+  },
+  {
+   "c": "sup",
+   "src": "q8b:uc",
+   "sk": 4,
+   "id": "ru4a",
+   "e": "💥",
+   "n": "ตุ๊กตาระเบิด",
+   "d": "หมดเวลาตุ๊กตาระเบิดวง 120: 120%",
+   "en": "an exploding cursed doll"
+  },
+  {
+   "c": "sup",
+   "src": "q8b:uc",
+   "sk": 4,
+   "id": "ru4b",
+   "e": "🧷",
+   "n": "เข็มสาปลึก",
+   "d": "ผูก 3 ตัว แต่ส่งต่อ 45%",
+   "en": "cursed pins piercing deep"
+  },
+  {
+   "c": "sup",
+   "src": "q8b:zs",
+   "sk": 5,
+   "id": "ru5a",
+   "e": "🔗",
+   "n": "ดูดหนัก",
+   "d": "ล่าม 2 ตัว ดูด 90%",
+   "en": "two heavy soul chains"
+  },
+  {
+   "c": "sup",
+   "src": "q8b:zs",
+   "sk": 5,
+   "id": "ru5b",
+   "e": "👻",
+   "n": "ปลดปล่อยวิญญาณ",
+   "d": "จบแล้ววิญญาณระเบิดที่ตัวที่ถูกล่าม วง 90: 150%",
+   "en": "freed spirits bursting out"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 0,
+   "id": "s0x",
+   "e": "🗡️",
+   "n": "สามคม",
+   "d": "แทงเป้าหลักแล้วกระโดดแทงต่ออีก 2 ตัวใกล้ ๆ (85% + 45%×2)",
+   "en": "three dagger strikes in a chain"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 0,
+   "id": "s0y",
+   "e": "🔁",
+   "n": "สะท้อนเงา",
+   "d": "ถ้าแทงแล้วเป้าตาย ใช้ก้าวเงาซ้ำได้ทันที",
+   "en": "a shadow step repeating (circular arrow of shadow)"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 1,
+   "id": "s1x",
+   "e": "☠️",
+   "n": "พิษร้าย",
+   "d": "พิษแรง ×2 แต่ไม่ทำให้มอนช้า",
+   "en": "a skull in thick toxic poison cloud"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 1,
+   "id": "s1y",
+   "e": "🌫️",
+   "n": "ม่านควัน",
+   "d": "อยู่ในหมอกของตัวเอง หลบการโจมตีได้ 30%",
+   "en": "a smoke screen with an evasive silhouette"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 2,
+   "id": "s2x",
+   "e": "⚔️",
+   "n": "เพชฌฆาต",
+   "d": "จบอัลติด้วยแทงประหารมอนที่เลือดมากสุดรอบตัว (600%) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "an executioner blade striking downward"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 2,
+   "id": "s2y",
+   "e": "🌑",
+   "n": "คืนมืด",
+   "d": "อัลติแทงเพิ่มอีก 5 ครั้งกระจายรอบตัว (ครั้งละ 130%) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "five shadow strikes in a dark night ring"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 3,
+   "id": "s3x",
+   "e": "💀",
+   "n": "ประหาร",
+   "d": "ตราระเบิดแรง ×2 ถ้าเป้าเลือดเหลือต่ำกว่า 30%",
+   "en": "a death mark with a skull execution"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 3,
+   "id": "s3y",
+   "e": "🔗",
+   "n": "ลูกโซ่",
+   "d": "ตราระเบิดแล้วเด้งไปติดมอนตัวถัดไปอีก 3 วิ",
+   "en": "a death mark jumping in a chain"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 4,
+   "id": "s4x",
+   "e": "💣",
+   "n": "ร่างระเบิด",
+   "d": "ร่างแยกระเบิดตอนหมดเวลา (300% รอบตัว)",
+   "en": "a shadow clone exploding"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 4,
+   "id": "s4y",
+   "e": "👥",
+   "n": "สองร่าง",
+   "d": "เรียกร่างแยก 2 ร่าง แต่อยู่ได้ 4 วิ",
+   "en": "two shadow clones"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 5,
+   "id": "p5na",
+   "e": "🌙",
+   "n": "พัดกว้าง",
+   "d": "ร่างเงา 4 ร่างพุ่งเป็นพัดกว้างขึ้น (ร่างละ 400%)",
+   "en": "four shadow figures dashing in a wide fan"
+  },
+  {
+   "c": "assn",
+   "src": "base",
+   "sk": 5,
+   "id": "p5nb",
+   "e": "➖",
+   "n": "แทงทะลวง",
+   "d": "รวมเป็นแนวเดียว ยาวขึ้น 60% แรง 630% ตรึง 2 วิ",
+   "en": "one long piercing shadow line"
+  },
+  {
+   "c": "assn",
+   "src": "br4",
+   "sk": 4,
+   "id": "x4a",
+   "e": "🌪️",
+   "n": "พายุค้าง",
+   "d": "พายุใบมีดค้างนาน 4 วิ และวงกว้างขึ้น 30% (ดาเมจตอนพุ่ง 80%)",
+   "en": "a lingering blade storm"
+  },
+  {
+   "c": "assn",
+   "src": "br4",
+   "sk": 4,
+   "id": "x4b",
+   "e": "👣",
+   "n": "สองจังหวะ",
+   "d": "พุ่งได้ 2 ครั้งติดกันภายใน 1.5 วิ (ครั้งละ 85%) แต่ละครั้งทิ้งพายุใบมีด 2 วิ",
+   "en": "two dash footsteps with blade swirls"
+  },
+  {
+   "c": "assn",
+   "src": "q8:nf",
+   "sk": 0,
+   "id": "qn0a",
+   "e": "🔁",
+   "n": "ดาวคืนมือ",
+   "d": "ดาวบินกลับมาหาเรา โดนซ้ำขากลับ 75%",
+   "en": "a shuriken returning on a curved path"
+  },
+  {
+   "c": "assn",
+   "src": "q8:nf",
+   "sk": 0,
+   "id": "qn0b",
+   "e": "✴️",
+   "n": "ดาวมรณะ",
+   "d": "ปาดาวยักษ์ดอกเดียว ทะลุทุกตัวในแนว 260% + พิษ",
+   "en": "one giant poisoned shuriken"
+  },
+  {
+   "c": "assn",
+   "src": "q8:nh",
+   "sk": 1,
+   "id": "qn1a",
+   "e": "⛓️",
+   "n": "โซ่กวาด",
+   "d": "เกี่ยวได้ 3 ตัวในแนว ลากมาทั้งหมด ตัวละ 160%",
+   "en": "a chain sweeping three hooks"
+  },
+  {
+   "c": "assn",
+   "src": "q8:nh",
+   "sk": 1,
+   "id": "qn1b",
+   "e": "🪝",
+   "n": "พุ่งตามโซ่",
+   "d": "ดึงตัวเราไปหามอนแทน แทง 300% แล้วล่องหน 1.5 วิ (ตีครั้งถัดไปคริ)",
+   "en": "a hook pulling the assassin forward"
+  },
+  {
+   "c": "assn",
+   "src": "q8:xm",
+   "sk": 2,
+   "id": "qn2a",
+   "e": "🌕",
+   "n": "จันทร์เต็มดวง",
+   "d": "ประทับได้ 8 ตัว ตัวละ 330%",
+   "en": "a full moon stamped many times"
+  },
+  {
+   "c": "assn",
+   "src": "q8:xm",
+   "sk": 2,
+   "id": "qn2b",
+   "e": "🌑",
+   "n": "เงาจันทร์",
+   "d": "ฟันเสร็จวาร์ปไปหลังมอนเลือดมากสุด แล้วล่องหน 3 วิ (ตีถัดไปคริ)",
+   "en": "a dark moon with a vanishing silhouette"
+  },
+  {
+   "c": "assn",
+   "src": "q8:nd",
+   "sk": 3,
+   "id": "qn3a",
+   "e": "🗡️",
+   "n": "พันกริช",
+   "d": "8 เล่ม เล่มละ 75%",
+   "en": "many daggers (eight) in a ring"
+  },
+  {
+   "c": "assn",
+   "src": "q8:nd",
+   "sk": 3,
+   "id": "qn3b",
+   "e": "☠️",
+   "n": "กริชพิษ",
+   "d": "เล่มละ 90% + พิษ 3 วิ",
+   "en": "poisoned daggers dripping green"
+  },
+  {
+   "c": "assn",
+   "src": "q8:ns",
+   "sk": 4,
+   "id": "qn4a",
+   "e": "🌀",
+   "n": "สามรอบ",
+   "d": "เหวี่ยง 3 รอบ รอบละ 150%",
+   "en": "a scythe spinning three rounds"
+  },
+  {
+   "c": "assn",
+   "src": "q8:ns",
+   "sk": 4,
+   "id": "qn4b",
+   "e": "🩸",
+   "n": "เคียวดูดวิญญาณ",
+   "d": "รอบละ 180% · ทุกตัวที่ตายด้วยเคียว ฟื้นเลือด 6% และ MP 8",
+   "en": "a scythe draining crimson souls"
+  },
+  {
+   "c": "assn",
+   "src": "q8:zv",
+   "sk": 5,
+   "id": "qn5a",
+   "e": "🌑",
+   "n": "คืนมืดสนิท",
+   "d": "ม่านกว้างขึ้นเป็น 230",
+   "en": "a wider night veil dome"
+  },
+  {
+   "c": "assn",
+   "src": "q8:zv",
+   "sk": 5,
+   "id": "qn5b",
+   "e": "🕸️",
+   "n": "เงากลืน",
+   "d": "มอนในม่านช้าลง และเงาบาดแรงขึ้นเป็น 60%",
+   "en": "a shadow web entangling"
+  },
+  {
+   "c": "assn",
+   "src": "q8b:yb",
+   "sk": 2,
+   "id": "rn2a",
+   "e": "👥",
+   "n": "เงาพันร่าง",
+   "d": "ร่างเงา 6 ร่าง ฟันตาม 25%",
+   "en": "six shadow clones in a ring"
+  },
+  {
+   "c": "assn",
+   "src": "q8b:yb",
+   "sk": 2,
+   "id": "rn2b",
+   "e": "💥",
+   "n": "เงาระเบิด",
+   "d": "จบแล้วร่างเงาระเบิด วง 80 ร่างละ 140% (แทนการฟัน)",
+   "en": "shadow clones exploding"
+  },
+  {
+   "c": "assn",
+   "src": "q8b:nb",
+   "sk": 4,
+   "id": "rn4a",
+   "e": "⭕",
+   "n": "วงกว้าง",
+   "d": "วงใบมีดกว้างขึ้นเป็น 110 (ครั้งละ 30%)",
+   "en": "a wide ring of blades"
+  },
+  {
+   "c": "assn",
+   "src": "q8b:nb",
+   "sk": 4,
+   "id": "rn4b",
+   "e": "🗡️",
+   "n": "ปล่อยใบมีด",
+   "d": "หมดเวลาใบมีดพุ่งไล่มอนใกล้สุด เล่มละ 120%",
+   "en": "blades launching outward to chase"
+  },
+  {
+   "c": "assn",
+   "src": "q8b:zb",
+   "sk": 5,
+   "id": "rn5a",
+   "e": "⭕",
+   "n": "กรงแคบ",
+   "d": "กรงวง 100 แต่ฟัน 55%",
+   "en": "a tight narrow sword cage"
+  },
+  {
+   "c": "assn",
+   "src": "q8b:zb",
+   "sk": 5,
+   "id": "rn5b",
+   "e": "🗡️",
+   "n": "ดาบพุ่ง",
+   "d": "จบแล้วดาบพุ่งไล่มอนรอบ ๆ 8 เล่ม เล่มละ 120% (แทนรวมกลาง)",
+   "en": "swords flying outward from a cage"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 0,
+   "id": "g0a",
+   "e": "☄️",
+   "n": "ดาวหาง",
+   "d": "ลูกไฟใหญ่บินทะลุทุกตัวในแนว แล้วระเบิดที่เป้า (220% + 170%)",
+   "en": "a comet piercing and exploding"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 0,
+   "id": "g0b",
+   "e": "🔥",
+   "n": "แตกกระจาย",
+   "d": "แตกเป็น 3 ลูกไฟเล็ก กระจายไปหามอน 3 ตัว (ลูกละ 175%)",
+   "en": "a fireball splitting into three"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 1,
+   "id": "g1a",
+   "e": "🧊",
+   "n": "แช่แข็ง",
+   "d": "วงเล็กลง แต่แช่แข็งมอนนิ่งสนิท 1.5 วิ",
+   "en": "a monster frozen solid in an ice block"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 1,
+   "id": "g1b",
+   "e": "💎",
+   "n": "เกราะน้ำแข็ง",
+   "d": "ได้เกราะ 15% ของเลือดสูงสุด 5 วิ ดาเมจน้ำแข็ง 80%",
+   "en": "an ice crystal armor shell"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 2,
+   "id": "g2a",
+   "e": "🌑",
+   "n": "อุกกาบาตยักษ์",
+   "d": "ท้ายอัลติ อุกกาบาตยักษ์ตกที่เป้า (320%) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "a giant dark meteor falling"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 2,
+   "id": "g2b",
+   "e": "❄️",
+   "n": "พายุหิมะ",
+   "d": "อัลติทำให้ทั้งวงช้าลง 4 วิ และโดนความเย็น (50%) · ใช้ได้กับอัลติทุกร่าง",
+   "en": "a blizzard slowing everything"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 3,
+   "id": "g3a",
+   "e": "🎯",
+   "n": "รวมพลัง",
+   "d": "ไม่กระโดด แต่ฟ้าผ่าตัวเดียวแรง ×2.5",
+   "en": "one focused massive lightning strike"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 3,
+   "id": "g3b",
+   "e": "⚡",
+   "n": "พายุ",
+   "d": "กระโดดได้ 8 ตัว แต่แรงลดเร็วขึ้น",
+   "en": "lightning jumping across many points"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 4,
+   "id": "g4a",
+   "e": "🌀",
+   "n": "หลุมดำ",
+   "d": "รอยแยกใหญ่ขึ้น ดูดแรงขึ้น และระเบิดยุบตัวแรงขึ้น +35%",
+   "en": "a black hole vortex"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 4,
+   "id": "g4b",
+   "e": "⏳",
+   "n": "หยุดเวลา",
+   "d": "มอนในวงหยุดนิ่ง 3 วิ (บอสช้าลง) แต่ดาเมจน้อย",
+   "en": "a clock stopping time inside a circle"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 5,
+   "id": "p5ga",
+   "e": "⚡",
+   "n": "ลูกแก้วถี่",
+   "d": "ยิงสายฟ้าเร็วขึ้นเท่าตัว แต่อยู่ 5 วิ",
+   "en": "a lightning orb firing rapidly"
+  },
+  {
+   "c": "mage",
+   "src": "base",
+   "sk": 5,
+   "id": "p5gb",
+   "e": "🔗",
+   "n": "ลูกแก้วโซ่",
+   "d": "สายฟ้าทุกครั้งกระโดดต่ออีก 2 ตัวรอบเป้า (ตัวละ 30%)",
+   "en": "lightning from an orb chaining onward"
+  },
+  {
+   "c": "mage",
+   "src": "br4",
+   "sk": 4,
+   "id": "z4a",
+   "e": "🗿",
+   "n": "โกเลมยักษ์",
+   "d": "โกเลมตัวใหญ่ ทุบวงกว้างขึ้น 40% และแรงขึ้น +35% แต่คูลดาวน์นานขึ้น 4 วิ",
+   "en": "a giant lava golem fist"
+  },
+  {
+   "c": "mage",
+   "src": "br4",
+   "sk": 4,
+   "id": "z4b",
+   "e": "👥",
+   "n": "โกเลมคู่",
+   "d": "เรียกโกเลม 2 ตัวขนาบเป้าหมาย (ตัวละ 75%)",
+   "en": "two golems flanking"
+  },
+  {
+   "c": "mage",
+   "src": "q8:gl",
+   "sk": 0,
+   "id": "qg0a",
+   "e": "🔱",
+   "n": "หอกคู่",
+   "d": "ยิง 2 แท่งเป็นรูปตัว V แท่งละ 170% · ตัวที่โดนทั้งสองแท่งรับเต็ม",
+   "en": "two ice spears in a V"
+  },
+  {
+   "c": "mage",
+   "src": "q8:gl",
+   "sk": 0,
+   "id": "qg0b",
+   "e": "❄️",
+   "n": "ระเบิดเยือกแข็ง",
+   "d": "หอกระเบิดที่เป้า วง 85 (200% + ช้าลง 2.5 วิ) · หอก 200%",
+   "en": "an ice spear exploding into frost"
+  },
+  {
+   "c": "mage",
+   "src": "q8:gb",
+   "sk": 1,
+   "id": "qg1a",
+   "e": "✨",
+   "n": "วาร์ปสองจังหวะ",
+   "d": "วาร์ปได้อีกครั้งภายใน 1.5 วิ (ระเบิดครั้งละ 110%)",
+   "en": "a double blink teleport"
+  },
+  {
+   "c": "mage",
+   "src": "q8:gb",
+   "sk": 1,
+   "id": "qg1b",
+   "e": "🧊",
+   "n": "ทิ้งน้ำแข็ง",
+   "d": "จุดเดิมระเบิดแรงขึ้น 200% และทิ้งไอเย็นให้มอนช้าลง 3 วิ (จุดใหม่ไม่ระเบิด)",
+   "en": "an icy patch left behind at a warp point"
+  },
+  {
+   "c": "mage",
+   "src": "q8:xd",
+   "sk": 2,
+   "id": "qg2a",
+   "e": "🧊",
+   "n": "มังกรน้ำแข็ง",
+   "d": "เป็นมังกรน้ำแข็ง ผ่านตัวไหนแช่แข็ง 1.2 วิ (ครั้งละ 260%)",
+   "en": "an ice dragon"
+  },
+  {
+   "c": "mage",
+   "src": "q8:xd",
+   "sk": 2,
+   "id": "qg2b",
+   "e": "🐉",
+   "n": "มังกรคู่",
+   "d": "มังกร 2 ตัวเลื้อยไขว้กัน ตัวละ 120% ต่อรอบ",
+   "en": "two fire dragons intertwined"
+  },
+  {
+   "c": "mage",
+   "src": "q8:go",
+   "sk": 3,
+   "id": "qg3a",
+   "e": "💫",
+   "n": "แตกกระจาย",
+   "d": "ปลายทางระเบิด วง 100: 180%",
+   "en": "an arcane orb bursting at the end"
+  },
+  {
+   "c": "mage",
+   "src": "q8:go",
+   "sk": 3,
+   "id": "qg3b",
+   "e": "🪐",
+   "n": "วงโคจร",
+   "d": "ลูกแก้ววนรอบตัวเรา 5 วิ ตีมอนที่เข้าใกล้ 45% ทุก 0.3 วิ",
+   "en": "an arcane orb orbiting in a circle"
+  },
+  {
+   "c": "mage",
+   "src": "q8:gz",
+   "sk": 4,
+   "id": "qg4a",
+   "e": "🌨️",
+   "n": "พายุเดิน",
+   "d": "พายุเดินตามตัวเรา (วง 115 · 45% · ไม่ทำให้ช้า)",
+   "en": "a blizzard following footsteps"
+  },
+  {
+   "c": "mage",
+   "src": "q8:gz",
+   "sk": 4,
+   "id": "qg4b",
+   "e": "🧊",
+   "n": "แช่แข็งท้าย",
+   "d": "ครบ 4 วิ แช่แข็งทุกตัวในวง 1.5 วิ + ระเบิด 200% (ระหว่างพายุ 35%)",
+   "en": "a blizzard ending in a deep freeze"
+  },
+  {
+   "c": "mage",
+   "src": "q8:zt",
+   "sk": 5,
+   "id": "qg5a",
+   "e": "⏩",
+   "n": "นาฬิกาเร่ง",
+   "d": "หยุดแค่ 2 วิ แต่ปล่อยดาเมจที่สะสม 80%",
+   "en": "a fast-forward clock"
+  },
+  {
+   "c": "mage",
+   "src": "q8:zt",
+   "sk": 5,
+   "id": "qg5b",
+   "e": "⏪",
+   "n": "ย้อนเวลา",
+   "d": "จบแล้วฟื้นเลือด 15% และสกิลอื่นคูลดาวน์ลด 2 วิ",
+   "en": "a rewinding clock with a healing glow"
+  },
+  {
+   "c": "mage",
+   "src": "q8b:yg",
+   "sk": 2,
+   "id": "rg2a",
+   "e": "🙌",
+   "n": "สองหัตถ์",
+   "d": "หัตถ์ที่สองโผล่ที่กลุ่มมอนอีกกลุ่ม (แรง 45%)",
+   "en": "two demonic hands rising"
+  },
+  {
+   "c": "mage",
+   "src": "q8b:yg",
+   "sk": 2,
+   "id": "rg2b",
+   "e": "🩸",
+   "n": "หัตถ์ดูดกลืน",
+   "d": "ดูดมอนในวง 260 เข้าหาหัตถ์ก่อน · ฟาดแล้วฟื้นเลือด 10%",
+   "en": "a demonic hand pulling and draining"
+  },
+  {
+   "c": "mage",
+   "src": "q8b:gd",
+   "sk": 4,
+   "id": "rg4a",
+   "e": "💣",
+   "n": "อิมป์พลีชีพ",
+   "d": "หมดเวลาอิมป์พุ่งใส่มอนระเบิดวง 70 ตัวละ 250%",
+   "en": "a fire imp diving as a bomb"
+  },
+  {
+   "c": "mage",
+   "src": "q8b:gd",
+   "sk": 4,
+   "id": "rg4b",
+   "e": "👿",
+   "n": "อิมป์สามตัว",
+   "d": "เรียก 3 ตัว ตัวละ 70%",
+   "en": "three fire imps"
+  },
+  {
+   "c": "mage",
+   "src": "q8b:zh",
+   "sk": 5,
+   "id": "rg5a",
+   "e": "🐕",
+   "n": "สามหัว",
+   "d": "สุนัข 3 ตัว ตัวละ 55%",
+   "en": "three hellhound heads"
+  },
+  {
+   "c": "mage",
+   "src": "q8b:zh",
+   "sk": 5,
+   "id": "rg5b",
+   "e": "💥",
+   "n": "สุนัขระเบิด",
+   "d": "หมดเวลาสุนัขระเบิดวง 80 ตัวละ 120%",
+   "en": "an exploding hellhound"
+  }
+ ],
+ "dupIds": [],
+ "emojis": 76
+}
