@@ -1,0 +1,647 @@
+{
+ "Q": [
+  {
+   "c": "melee",
+   "k": 0,
+   "br": 0,
+   "id": "mw",
+   "n": "ฟันเสี้ยวจันทร์",
+   "d": "ฟันคลื่นพลังรูปเสี้ยวพุ่งไปข้างหน้าไกล 260 ทะลุทุกตัวในแนว (220%) · ตีจากระยะไกลได้ แลกกับวงรอบตัว",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22q%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ff6a30%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff4d0%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M11%203Q31%2016%2011%2029Q23%2016%2011%203Z%22%20fill%3D%22url(%23q)%22%20stroke%3D%22%23a83a10%22%20stroke-width%3D%221%22%2F%3E%3Cg%20stroke%3D%22%23ffb070%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M3%2011h6%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M2%2016h8%22%20stroke-width%3D%222.2%22%2F%3E%3Cpath%20d%3D%22M3%2021h6%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%229%22%20r%3D%221.4%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a crescent-moon shaped energy wave flying forward from a sword swing, crimson-white"
+  },
+  {
+   "c": "melee",
+   "k": 1,
+   "br": 0,
+   "id": "mb",
+   "n": "ขว้างดาบบูมเมอแรง",
+   "d": "ขว้างดาบหมุนออกไป 230 แล้ววนกลับมาหาตัว โดนทั้งขาไปและขากลับ (ครั้งละ 150%) · แลกการพุ่งตัวกับการกวาดกลุ่มจากระยะกลาง",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%239ad8ff%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M5%2011a12%2012%200%200%201%2015-7%22%20stroke-width%3D%222.2%22%2F%3E%3Cpath%20d%3D%22M27%2021a12%2012%200%200%201-15%207%22%20stroke-width%3D%222.2%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22rotate(-40%2016%2016)%22%3E%3Cpath%20d%3D%22M15%203.5h2.2l.9%2014.5h-4z%22%20fill%3D%22%23eef3f8%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%2211.4%22%20y%3D%2218%22%20width%3D%229.2%22%20height%3D%222.3%22%20rx%3D%221%22%20fill%3D%22%23c8a040%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.7%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2220.3%22%20width%3D%222%22%20height%3D%225%22%20fill%3D%22%236a3a1a%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2226%22%20r%3D%221.3%22%20fill%3D%22%23c8a040%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M25%205l1.6%202.6M28%209l-2.8.4%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a spinning sword thrown like a boomerang, curved return arc trail"
+  },
+  {
+   "c": "melee",
+   "k": 2,
+   "br": 0,
+   "id": "xa",
+   "n": "ร่างอสูรสงคราม",
+   "d": "คำรามแปลงร่างเป็นอสูรสงคราม 8 วิ (ตัวใหญ่ขึ้น) · คำรามแรก วง 130: 200% + มึน · ระหว่างแปลงร่าง ตีเร็วขึ้น 30% รับดาเมจลดลง 25% และทุกการโจมตีปล่อยคลื่นกระแทกรูปพัด (60%) · จบร่างระเบิดวง 110: 150%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22q%22%20cx%3D%22.5%22%20cy%3D%22.6%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffd27a%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23a01808%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M6%2028Q4%2016%209%209Q9%2015%2012%2017Q12%208%2016%203Q20%208%2020%2017Q23%2015%2023%209Q28%2016%2026%2028Z%22%20fill%3D%22url(%23q)%22%20opacity%3D%22.9%22%2F%3E%3Cpath%20d%3D%22M10%2015L6%206L13%2012M22%2015L26%206L19%2012%22%20fill%3D%22%233a1408%22%20stroke%3D%22%231a0804%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M10%2015Q16%2011%2022%2015L21%2024Q16%2027%2011%2024Z%22%20fill%3D%22%235a2a14%22%20stroke%3D%22%231a0804%22%20stroke-width%3D%221%22%2F%3E%3Cpath%20d%3D%22M12.5%2018.5l3%201.2M19.5%2018.5l-3%201.2%22%20stroke%3D%22%23ffde40%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%2023q3%201.6%206%200%22%20stroke%3D%22%23ffde40%22%20stroke-width%3D%221%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a roaring war-demon transformation: a horned demonic armored silhouette swelling with red power"
+  },
+  {
+   "c": "melee",
+   "k": 3,
+   "br": 0,
+   "id": "mj",
+   "n": "กระโดดทุบพสุธา",
+   "d": "กระโดดลงใส่เป้า (ไกล 240 · ไม่มีเป้า = ข้างหน้า) กระแทกวง 90: 300% + มึน 0.8 วิ · อมตะระหว่างลอยตัว · แลกบัฟโทสะกับการเข้าตีกลุ่ม",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M4%2020Q9%204%2021%2013%22%20fill%3D%22none%22%20stroke%3D%22%23ffc890%22%20stroke-width%3D%221.6%22%20stroke-dasharray%3D%222.2%201.8%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M19.5%209.5l3%204-4.6.6z%22%20fill%3D%22%23ffc890%22%2F%3E%3Cellipse%20cx%3D%2222%22%20cy%3D%2225%22%20rx%3D%229%22%20ry%3D%223.2%22%20fill%3D%22none%22%20stroke%3D%22%23ff8a40%22%20stroke-width%3D%221.8%22%2F%3E%3Cg%20stroke%3D%22%233a2010%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M22%2025l-6%202.6M22%2025l5.6%202.4M22%2025l1-3.4M22%2025l-7-1.6%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23a08060%22%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2220%22%20r%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%2229%22%20cy%3D%2219%22%20r%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%2218%22%20r%3D%221%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M22%2014l1.4%204%204-1.6-2.4%203.4%22%20fill%3D%22none%22%20stroke%3D%22%23fff2c0%22%20stroke-width%3D%221.2%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a warrior leaping high and smashing down; impact crater shockwave with a sword at the centre"
+  },
+  {
+   "c": "melee",
+   "k": 4,
+   "br": 0,
+   "id": "mg",
+   "n": "ดาบเทพตกฟ้า",
+   "d": "ดาบยักษ์ตกใส่เป้า (หรือข้างหน้า) หลัง 0.5 วิ วง 95: 420% + มึน 1.2 วิ · ดาบปักค้าง 3 วิ ปล่อยพลังรอบตัวทุก 0.5 วิ (30%)",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20x%3D%2213.4%22%20y%3D%220%22%20width%3D%225.2%22%20height%3D%2218%22%20fill%3D%22%23cfe4ff%22%20opacity%3D%22.35%22%2F%3E%3Cpath%20d%3D%22M16%2029l-3-5V8h6v16z%22%20fill%3D%22%23e8f0fa%22%20stroke%3D%22%23141018%22%20stroke-width%3D%22.9%22%2F%3E%3Cpath%20d%3D%22M16%2026V9%22%20stroke%3D%22%23fff%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M9%208.4Q16%205%2023%208.4L21.6%2010H10.4z%22%20fill%3D%22%23e8c060%22%20stroke%3D%22%23141018%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%2214.6%22%20y%3D%221.6%22%20width%3D%222.8%22%20height%3D%225.6%22%20fill%3D%22%234a2c14%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%221.6%22%20r%3D%221.6%22%20fill%3D%22%23e8c060%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2228.6%22%20rx%3D%2211%22%20ry%3D%222.6%22%20fill%3D%22none%22%20stroke%3D%22%239ad0ff%22%20stroke-width%3D%221.5%22%2F%3E%3Cg%20stroke%3D%22%239ad0ff%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M5%2025l-2-2M27%2025l2-2M8%2022l-1.4-2.4M24%2022l1.4-2.4%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a giant god-sword plunging down from the sky into the ground, red-gold energy pulses"
+  },
+  {
+   "c": "melee",
+   "k": 5,
+   "br": 0,
+   "id": "zm",
+   "n": "รอยแยกโลหิต",
+   "d": "พุ่งไปข้างหน้า 200 ทิ้งรอยแยกโลหิตตามทาง · 0.6 วิ ต่อมารอยแยกปะทุ 320% แล้วหนามเลือดแทงขึ้นอีก 4 ครั้ง (ทุก 0.5 วิ 45%)",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M3%2026L12%2021L17%2023L29%207%22%20fill%3D%22none%22%20stroke%3D%22%232a0204%22%20stroke-width%3D%225%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M3%2026L12%2021L17%2023L29%207%22%20fill%3D%22none%22%20stroke%3D%22%23ff4040%22%20stroke-width%3D%222%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cg%20fill%3D%22%238a0a10%22%20stroke%3D%22%232a0204%22%20stroke-width%3D%22.6%22%3E%3Cpath%20d%3D%22M8%2025l2-8%202%207z%22%2F%3E%3Cpath%20d%3D%22M15%2023l2-9%202%208z%22%2F%3E%3Cpath%20d%3D%22M21%2017l2-8%201.6%207z%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2229%22%20cy%3D%227%22%20r%3D%222.4%22%20fill%3D%22%23ffb0a0%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a blood-red rift torn along the ground with crimson spikes erupting up from it"
+  },
+  {
+   "c": "melee",
+   "k": 2,
+   "br": 1,
+   "id": "yk",
+   "n": "กองทัพวิญญาณเหล็ก",
+   "d": "เรียกอัศวินวิญญาณ 3 ตนล้อมตัว 8 วิ ตนละฟาดมอนใกล้สุด (120) ทุก 1.2 วิ: 160% + มึน 0.5 วิ · ตัวเราและเพื่อนในวง 150 รับดาเมจลดลง 25%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20opacity%3D%22.9%22%3E%3Cpath%20d%3D%22M8%2029L9%2017L4%2015V7L8%205L12%207V15L13%2029Z%22%20fill%3D%22%2396c3ff%22%20fill-opacity%3D%22.55%22%20stroke%3D%22%23dff0ff%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M20%2029L21%2015L16%2013V5L20%203L24%205V13L25%2029Z%22%20fill%3D%22%2396c3ff%22%20fill-opacity%3D%22.75%22%20stroke%3D%22%23dff0ff%22%20stroke-width%3D%22.9%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M18%208h4M8%2010h4%22%20stroke%3D%22%23283e70%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M27%202L23%2020%22%20stroke%3D%22%23e8f4ff%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M20%204q3-4%206%200%22%20stroke%3D%22%23ff7a7a%22%20stroke-width%3D%221.4%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E",
+   "en": "three ghostly iron knight helmets/shields standing in a ring, spectral blue-steel glow"
+  },
+  {
+   "c": "melee",
+   "k": 4,
+   "br": 1,
+   "id": "mk",
+   "n": "ปราการสะท้อนแค้น",
+   "d": "ตั้งโล่อยู่กับที่ 2.5 วิ รับดาเมจลดลง 60% · โดนตีแต่ละครั้งได้แค้นเพิ่ม · จบด้วยกระแทกโล่วง 150: 250% + แค้นชั้นละ 30% (ใช้แค้นหมด) + มึน 1 วิ",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M16%203L27%207V16Q27%2025%2016%2030Q5%2025%205%2016V7Z%22%20fill%3D%22%237a828e%22%20stroke%3D%22%2322262e%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M16%206L24%209V16Q24%2023%2016%2027Q8%2023%208%2016V9Z%22%20fill%3D%22%23a8b0bc%22%2F%3E%3Cg%20fill%3D%22%23d8dde6%22%20stroke%3D%22%2322262e%22%20stroke-width%3D%22.7%22%3E%3Cpath%20d%3D%22M3%2012l-2-2%203%20.4z%22%2F%3E%3Cpath%20d%3D%22M29%2012l2-2-3%20.4z%22%2F%3E%3Cpath%20d%3D%22M16%201.4l1.4%202.6h-2.8z%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M12%2013l4%204%204-4M16%2017v6%22%20stroke%3D%22%23ff6a4a%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a planted tower shield covered in iron thorns, red vengeance sparks bouncing off it"
+  },
+  {
+   "c": "melee",
+   "k": 5,
+   "br": 1,
+   "id": "zw",
+   "n": "กำแพงสวรรค์ถล่ม",
+   "d": "เสกกำแพงทองยาว 200 ขึ้นตรงหน้า แล้วล้มทับไปข้างหน้า กระแทกทุกตัวใต้กำแพง 380% + มึน 1.5 วิ",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M3%2027L29%2027L29%2011L3%2011Z%22%20fill%3D%22%23e0b848%22%20stroke%3D%22%234a3008%22%20stroke-width%3D%221.2%22%2F%3E%3Cg%20stroke%3D%22%238a6010%22%20stroke-width%3D%22.9%22%3E%3Cpath%20d%3D%22M3%2016h26M3%2021h26M10%2011v5M20%2011v5M15%2016v5M25%2016v5M8%2021v6M18%2021v6%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M3%2011Q16%202%2029%2011%22%20fill%3D%22none%22%20stroke%3D%22%23fff2b0%22%20stroke-width%3D%221.4%22%2F%3E%3Cg%20fill%3D%22%23a08060%22%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2230%22%20r%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%2230%22%20r%3D%221.4%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a towering golden wall toppling forward and crashing down, dust and shock"
+  },
+  {
+   "c": "archer",
+   "k": 0,
+   "br": 0,
+   "id": "af",
+   "n": "ยิงกระจาย",
+   "d": "ยิงธนู 5 ดอกเป็นรูปพัด ดอกละ 140% · ยิ่งใกล้เป้ายิ่งโดนหลายดอก เหมาะยิงเป้าเดียว (ห่าธนูเหมาะกับกลุ่ม)",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke-linecap%3D%22round%22%3E%3Cg%20stroke%3D%22%239cff7a%22%20stroke-width%3D%221.4%22%20opacity%3D%22.55%22%3E%3Cpath%20d%3D%22M4%2028L26%206%22%2F%3E%3Cpath%20d%3D%22M4%2028L29%2014%22%2F%3E%3Cpath%20d%3D%22M4%2028L18%203%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%236a4a2a%22%20stroke-width%3D%221.6%22%3E%3Cpath%20d%3D%22M6%2026l16-16%22%2F%3E%3Cpath%20d%3D%22M6%2026l19-9%22%2F%3E%3Cpath%20d%3D%22M6%2026l9-19%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23e8eef4%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.6%22%3E%3Cpath%20d%3D%22M26%206l-5%201.2%203.8%203.8z%22%2F%3E%3Cpath%20d%3D%22M29%2014.4l-5-1.6%201%205.2z%22%2F%3E%3Cpath%20d%3D%22M18%203l-3.8%203.4%204.8%201.4z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23f4f0e0%22%3E%3Cpath%20d%3D%22M4%2028l3-1-1-2z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "five arrows fanning out in a spread shot from a bow"
+  },
+  {
+   "c": "archer",
+   "k": 1,
+   "br": 0,
+   "id": "ag",
+   "n": "ธงล่าเหยื่อ",
+   "d": "ปักธงที่เป้า (ไม่มีเป้า = ข้างหน้า) แรงกระแทก 120% · เขตรอบธง 7 วิ มอนในเขตโดนดาเมจจากทุกคนในทีม +20%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2215%22%20cy%3D%2227%22%20rx%3D%2211%22%20ry%3D%223.2%22%20fill%3D%22none%22%20stroke%3D%22%239cff7a%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%223%202.4%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%224%22%20width%3D%222.4%22%20height%3D%2223%22%20rx%3D%221%22%20fill%3D%22%237a5030%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.7%22%2F%3E%3Ccircle%20cx%3D%2210.2%22%20cy%3D%223.6%22%20r%3D%221.8%22%20fill%3D%22%23e0c060%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.6%22%2F%3E%3Cpath%20d%3D%22M11.4%205.5Q19%203.5%2026%207L23%2011.5L26%2016Q19%2013%2011.4%2015Z%22%20fill%3D%22%232e7a3a%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.8%22%2F%3E%3Cellipse%20cx%3D%2218.4%22%20cy%3D%2210.2%22%20rx%3D%223.2%22%20ry%3D%222%22%20fill%3D%22%23ffe27a%22%2F%3E%3Ccircle%20cx%3D%2218.4%22%20cy%3D%2210.2%22%20r%3D%221%22%20fill%3D%22%231a1a1a%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a hunting flag planted in the ground with a red target zone circle around it"
+  },
+  {
+   "c": "archer",
+   "k": 2,
+   "br": 0,
+   "id": "xh",
+   "n": "เทพธนูเหินฟ้า",
+   "d": "เหินขึ้นฟ้า 2.8 วิ (อมตะ · อยู่กับที่) ยิงศรดิ่งลงใส่มอนรอบตัว (ไกล 360) 14 ดอก ดอกละ 120% สลับเป้าสูงสุด 4 ตัว · ลงพื้นกระแทกวง 90: 200%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22%23fff6dc%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%22.8%22%3E%3Cpath%20d%3D%22M15%209Q8%202%201%204Q5%206%204%209Q7%209%207%2012Q11%2011%2015%2013Z%22%2F%3E%3Cpath%20d%3D%22M17%209Q24%202%2031%204Q27%206%2028%209Q25%209%2025%2012Q21%2011%2017%2013Z%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2210%22%20r%3D%222.4%22%20fill%3D%22%232e7a3a%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.6%22%2F%3E%3Cg%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M10%2015L7%2029M16%2015V30M22%2015L25%2029%22%20stroke%3D%22%238ae6ff%22%20stroke-width%3D%221.3%22%20opacity%3D%22.6%22%2F%3E%3Cpath%20d%3D%22M10.5%2017L8.4%2026M16%2017V27M21.5%2017L23.6%2026%22%20stroke%3D%22%236a4a2a%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23e8eef4%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.5%22%3E%3Cpath%20d%3D%22M7.8%2029.5l-1.6-3.6%203.4.7z%22%2F%3E%3Cpath%20d%3D%22M16%2030.6l-1.8-3.4h3.6z%22%2F%3E%3Cpath%20d%3D%22M24.2%2029.5l-1.8-3%203.4-.6z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "an archer silhouette soaring in the sky shooting a rain of arrows straight down, sky-gold light"
+  },
+  {
+   "c": "archer",
+   "k": 3,
+   "br": 0,
+   "id": "ad",
+   "n": "ศรสังหาร",
+   "d": "ง้าง 0.3 วิ แล้วยิงศรทะลวงแนวยาว 380 ทะลุทุกตัว 400% · แลกการตรึงกับดาเมจระเบิด",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238ae6ff%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M3%2029L27%205%22%20stroke-width%3D%223%22%20opacity%3D%22.45%22%2F%3E%3Cellipse%20cx%3D%2210%22%20cy%3D%2222%22%20rx%3D%222%22%20ry%3D%225%22%20transform%3D%22rotate(45%2010%2022)%22%20stroke-width%3D%221.2%22%2F%3E%3Cellipse%20cx%3D%2215%22%20cy%3D%2217%22%20rx%3D%222%22%20ry%3D%224%22%20transform%3D%22rotate(45%2015%2017)%22%20stroke-width%3D%221.2%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M5%2027L24%208%22%20stroke%3D%22%235a3a1a%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M28.5%203.5l-7.4%202.2%205.2%205.2z%22%20fill%3D%22%23e8eef4%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M5%2027l-3%20.4%201.6-2.6M5%2027l-.4%203%202.6-1.6%22%20stroke%3D%22%23f4f0e0%22%20stroke-width%3D%221.2%22%20fill%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%227%22%20r%3D%225.6%22%20fill%3D%22none%22%20stroke%3D%22%23ff7060%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a single heavy assassination arrow piercing in a long straight line, drawn bow tension"
+  },
+  {
+   "c": "archer",
+   "k": 4,
+   "br": 0,
+   "id": "ah",
+   "n": "เหยี่ยวล่าเหยื่อ",
+   "d": "เรียกเหยี่ยวบินวนเหนือหัว 8 วิ โฉบลงจิกมอนที่ใกล้ที่สุดทุก 0.8 วิ (90%) · ช่วยตีขณะเราเดินยิง",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20transform%3D%22translate(16%2015)%20rotate(-90)%22%3E%3Cpath%20d%3D%22M3%20-1.5Q3%20-10%20-4%20-14Q-4%20-8%20-5%20-2Z%22%20fill%3D%22%237a4a22%22%20stroke%3D%22%231a1008%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M3%201.5Q3%2010%20-4%2014Q-4%208%20-5%202Z%22%20fill%3D%22%237a4a22%22%20stroke%3D%22%231a1008%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M-5%20-2L-12%20-4L-10.6%200L-12%204L-5%202Z%22%20fill%3D%22%235e3818%22%20stroke%3D%22%231a1008%22%20stroke-width%3D%22.7%22%2F%3E%3Cellipse%20cx%3D%220%22%20cy%3D%220%22%20rx%3D%226.6%22%20ry%3D%223.2%22%20fill%3D%22%238c5c2c%22%20stroke%3D%22%231a1008%22%20stroke-width%3D%22.7%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%220%22%20r%3D%222.8%22%20fill%3D%22%23f4efe4%22%20stroke%3D%22%231a1008%22%20stroke-width%3D%22.6%22%2F%3E%3Cpath%20d%3D%22M8.4%20-1L11%200L8.4%201Z%22%20fill%3D%22%23ffc830%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%23ffe8b0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.8%22%3E%3Cpath%20d%3D%22M4%2027l3-3M10%2029l2-3.4M24%2028l-2.4-3%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a hunting hawk diving with talons out, green-gold wind trails"
+  },
+  {
+   "c": "archer",
+   "k": 5,
+   "br": 0,
+   "id": "zc",
+   "n": "ธนูกลุ่มดาว",
+   "d": "ผูกมอนรอบตัว (320) สูงสุด 6 ตัวเป็นกลุ่มดาว · 0.8 วิ ต่อมาดาวทุกดวงระเบิด 220% และเส้นดาวที่เชื่อมกันบาดมอนที่อยู่บนเส้น 100%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M5%2022L12%209L20%2016L27%206%22%20fill%3D%22none%22%20stroke%3D%22%23c8dcff%22%20stroke-width%3D%221.2%22%20stroke-dasharray%3D%222%201.6%22%2F%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22M5%2018l1%203%203%201-3%201-1%203-1-3-3-1%203-1z%22%2F%3E%3Cpath%20d%3D%22M12%205l1%203%203%201-3%201-1%203-1-3-3-1%203-1z%22%2F%3E%3Cpath%20d%3D%22M20%2012l1%203%203%201-3%201-1%203-1-3-3-1%203-1z%22%2F%3E%3Cpath%20d%3D%22M27%202l1%203%203%201-3%201-1%203-1-3-3-1%203-1z%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M4%2030L12%2024%22%20stroke%3D%22%236a4a2a%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M12%2024l-1-3%203.4%201z%22%20fill%3D%22%23e8eef4%22%2F%3E%3C%2Fsvg%3E",
+   "en": "several glowing stars connected by constellation lines, each star about to burst"
+  },
+  {
+   "c": "archer",
+   "k": 2,
+   "br": 1,
+   "id": "yw",
+   "n": "นักล่าลมกรด",
+   "d": "กลายเป็นลมกรด 5 วิ เดินเร็ว +60% และยิงใบมีดลมใส่มอนรอบตัว (320) เองทุก 0.25 วิ (100%) ทั้งตอนเดิน · จบด้วยพายุไซโคลนวง 140: 250%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23bfffc8%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%2016m-12%200a12%206%200%201%200%2024%200%22%20stroke-width%3D%221.8%22%20opacity%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M16%2014m-9%200a9%204.5%200%201%201%2018%200%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M16%2012m-6%200a6%203%200%201%200%2012%200%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23c8ffd0%22%3E%3Cpath%20d%3D%22M4%206q8-2%2012%204q-6-2-12-4z%22%2F%3E%3Cpath%20d%3D%22M28%2026q-8%202-12-4q6%202%2012%204z%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M9%2026L25%206%22%20stroke%3D%22%236a4a2a%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M25%206l-4.4.6%203.4%203z%22%20fill%3D%22%23e8eef4%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a whirlwind hunter: swirling wind with flying wind-blades orbiting, teal-green"
+  },
+  {
+   "c": "archer",
+   "k": 4,
+   "br": 1,
+   "id": "aw",
+   "n": "ศรลมกรดสะท้อน",
+   "d": "ยิงศรลมที่เด้งต่อไปหามอนตัวถัดไป (ไกล 220) 6 ครั้ง ครั้งละ 240% · มอนน้อยก็เด้งกลับไปมา",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22%23b05a8a%22%3E%3Ccircle%20cx%3D%229%22%20cy%3D%2224%22%20r%3D%222.8%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%229%22%20r%3D%222.8%22%2F%3E%3Ccircle%20cx%3D%2227%22%20cy%3D%2221%22%20r%3D%222.8%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M3%2030L9%2024L17%209L27%2021L30%2012%22%20fill%3D%22none%22%20stroke%3D%22%23aaffaa%22%20stroke-width%3D%221.8%22%20stroke-linejoin%3D%22round%22%20stroke-dasharray%3D%223%201.4%22%2F%3E%3Cpath%20d%3D%22M30%2012l-1-3.6-2.4%203z%22%20fill%3D%22%23e8eef4%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.5%22%2F%3E%3Cg%20stroke%3D%22%23ccffd8%22%20stroke-width%3D%221%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M6%2026a4%202%200%201%200%206-2M14%2011a4%202%200%201%200%206-2M24%2023a4%202%200%201%200%206-2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a wind arrow ricocheting in a zigzag between targets, teal streaks"
+  },
+  {
+   "c": "archer",
+   "k": 5,
+   "br": 1,
+   "id": "zl",
+   "n": "ศรเรียกอสนี",
+   "d": "ยิงศรอสนีปักเป้า 4 วิ ฟ้าผ่าเป้าทุก 0.5 วิ (110%) และกระโดดไปอีกตัว (45%) · เป้าตายแล้วศรย้ายไปตัวใกล้สุด",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M4%2028L22%2010%22%20stroke%3D%22%236a4a2a%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M22%2010l-4%20.6%203.4%203.4z%22%20fill%3D%22%23e8eef4%22%2F%3E%3Cpath%20d%3D%22M24%202L19%2012h5L18%2024%22%20fill%3D%22none%22%20stroke%3D%22%23ffe680%22%20stroke-width%3D%222.2%22%20stroke-linejoin%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2222%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%238ac8ff%22%20opacity%3D%22.35%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a lightning-calling arrow stuck in the ground with lightning striking down onto it"
+  },
+  {
+   "c": "sup",
+   "k": 0,
+   "br": 0,
+   "id": "sb",
+   "n": "โล่แสง",
+   "d": "ให้โล่ตัวเองและเพื่อนรอบตัว (วง 170) ดูดซับ 14% ของเลือดสูงสุดของคนรับ +40 นาน 6 วิ (เล่นคนเดียว ×1.4) · กันก่อนโดนแทนฮีลทีหลัง",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M16%203L27%208V16Q27%2024%2016%2029Q5%2024%205%2016V8Z%22%20fill%3D%22%23fff0b0%22%20fill-opacity%3D%22.35%22%20stroke%3D%22%23ffd66a%22%20stroke-width%3D%221.8%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ffe8a0%22%20stroke-width%3D%221%22%3E%3Cpath%20d%3D%22M16%209l4%202.3v4.6L16%2018.2%2012%2015.9v-4.6z%22%2F%3E%3Cpath%20d%3D%22M16%2018.2v4.4M20%2015.9l3.6%202.1M12%2015.9l-3.6%202.1M20%2011.3l3.4-2M12%2011.3l-3.4-2%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2213.6%22%20r%3D%221.6%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a radiant golden light shield bubble with a soft halo"
+  },
+  {
+   "c": "sup",
+   "k": 1,
+   "br": 0,
+   "id": "sh",
+   "n": "ค้อนพิพากษา",
+   "d": "ค้อนแสงตกใส่เป้า (ไม่มีเป้า = ข้างหน้า) วง 80: 300% ธาตุแสง + มึน 1 วิ · สายตีของนักสวด แลกกับบัฟทีม",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%23fff2b0%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.8%22%3E%3Cpath%20d%3D%22M16%202v4%22%2F%3E%3Cpath%20d%3D%22M6%206l2.6%202.6%22%2F%3E%3Cpath%20d%3D%22M26%206l-2.6%202.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22rotate(-25%2016%2018)%22%3E%3Crect%20x%3D%2214.6%22%20y%3D%2212%22%20width%3D%222.8%22%20height%3D%2217%22%20rx%3D%221%22%20fill%3D%22%236a4520%22%20stroke%3D%22%231a1008%22%20stroke-width%3D%22.7%22%2F%3E%3Crect%20x%3D%228%22%20y%3D%227%22%20width%3D%2216%22%20height%3D%229%22%20rx%3D%222%22%20fill%3D%22%23f0c860%22%20stroke%3D%22%231a1008%22%20stroke-width%3D%22.9%22%2F%3E%3Crect%20x%3D%229.5%22%20y%3D%228%22%20width%3D%2213%22%20height%3D%221.6%22%20fill%3D%22%23fff8d0%22%2F%3E%3Cpath%20d%3D%22M16%209.6v4.6M13.6%2011.9h4.8%22%20stroke%3D%22%23a87010%22%20stroke-width%3D%221%22%2F%3E%3C%2Fg%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2228.4%22%20rx%3D%229%22%20ry%3D%222%22%20fill%3D%22none%22%20stroke%3D%22%23ffe08a%22%20stroke-width%3D%221.2%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a hammer of holy light smashing down with a golden impact burst"
+  },
+  {
+   "c": "sup",
+   "k": 2,
+   "br": 0,
+   "id": "xc",
+   "n": "โซ่ตรวนสวรรค์",
+   "d": "โซ่ทองจากฟ้าล่ามมอนรอบตัวสูงสุด 6 ตัว (ไกล 260) มึน 3 วิ + 250% ธาตุแสง · มอนที่ถูกล่ามรับดาเมจจากทุกคน +25% นาน 5 วิ",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M9%202v14M23%202v14%22%20stroke%3D%22%237a5408%22%20stroke-width%3D%223.4%22%20stroke-dasharray%3D%223%201.6%22%2F%3E%3Cpath%20d%3D%22M9%202v14M23%202v14%22%20stroke%3D%22%23ffd968%22%20stroke-width%3D%221.6%22%20stroke-dasharray%3D%223%201.6%22%2F%3E%3C%2Fg%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2225%22%20rx%3D%2211%22%20ry%3D%224%22%20fill%3D%22none%22%20stroke%3D%22%23ffe08a%22%20stroke-width%3D%221.3%22%20stroke-dasharray%3D%223%202%22%2F%3E%3Cpath%20d%3D%22M9%2016Q9%2022%2016%2022Q23%2022%2023%2016%22%20fill%3D%22none%22%20stroke%3D%22%23ffd968%22%20stroke-width%3D%222.4%22%2F%3E%3Crect%20x%3D%2212%22%20y%3D%2217.6%22%20width%3D%228%22%20height%3D%227%22%20rx%3D%222%22%20fill%3D%22%23e0b040%22%20stroke%3D%22%235a3a08%22%20stroke-width%3D%22.9%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2220.6%22%20r%3D%221.2%22%20fill%3D%22%235a3a08%22%2F%3E%3Cg%20stroke%3D%22%23fff2b0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M3%209h3M26%209h3%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "golden heavenly chains descending from the sky, binding"
+  },
+  {
+   "c": "sup",
+   "k": 3,
+   "br": 0,
+   "id": "ub",
+   "n": "ลำแสงศักดิ์สิทธิ์",
+   "d": "ยิงลำแสงต่อเนื่อง 2.2 วิ ใส่เป้า (ยาว 280 · เดินไปด้วยได้) ทุกตัวในแนวโดน 45% ทุก 0.25 วิ · เพื่อนที่อยู่ในแนวลำแสงฟื้นเลือด 1.2% ทุกครั้ง",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M5%2027L28%205%22%20stroke%3D%22%23ffd66a%22%20stroke-width%3D%226%22%20opacity%3D%22.35%22%2F%3E%3Cpath%20d%3D%22M5%2027L28%205%22%20stroke%3D%22%23ffe8a0%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M5%2027L28%205%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.2%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%225%22%20cy%3D%2227%22%20r%3D%223.4%22%20fill%3D%22%23fff6c8%22%20stroke%3D%22%23e0a830%22%20stroke-width%3D%22.8%22%2F%3E%3Cg%20fill%3D%22%23fff2b0%22%3E%3Cpath%20d%3D%22M18%209l.8%202%202%20.8-2%20.8-.8%202-.8-2-2-.8%202-.8z%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2215%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2217%22%20r%3D%22.9%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a continuous holy light beam firing in a straight line, gold-white"
+  },
+  {
+   "c": "sup",
+   "k": 4,
+   "br": 0,
+   "id": "uo",
+   "n": "ดวงแก้วเทวา",
+   "d": "ดวงแก้ว 3 ดวงลอยวนรอบตัว 8 วิ ยิงแสงใส่มอนรอบ ๆ (ไกล 220) ดวงละครั้งทุก 0.7 วิ (55%) · เพื่อนที่อยู่ใกล้เรา (90) ฟื้นเลือด 1%/วิ",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2217%22%20rx%3D%2212%22%20ry%3D%225%22%20fill%3D%22none%22%20stroke%3D%22%23ffe08a%22%20stroke-width%3D%221.1%22%20stroke-dasharray%3D%222.4%202%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223.4%22%20fill%3D%22%23fff6d0%22%20opacity%3D%22.9%22%2F%3E%3Cg%20fill%3D%22%23fff8e0%22%20stroke%3D%22%23e0a830%22%20stroke-width%3D%22.9%22%3E%3Ccircle%20cx%3D%225.4%22%20cy%3D%2215%22%20r%3D%223.2%22%2F%3E%3Ccircle%20cx%3D%2224.6%22%20cy%3D%2212%22%20r%3D%223.2%22%2F%3E%3Ccircle%20cx%3D%2219%22%20cy%3D%2222.6%22%20r%3D%223.2%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%23fff2b0%22%20stroke-width%3D%221%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M24.6%204.6v3M16%204v3M7%207.6l1.4%202%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "three divine glowing orbs orbiting around a centre, gold"
+  },
+  {
+   "c": "sup",
+   "k": 5,
+   "br": 0,
+   "id": "zr",
+   "n": "อรุณฟื้นคืน",
+   "d": "แสงอรุณระเบิดรอบตัว วง 240: ชุบเพื่อนที่ล้ม (เลือด 40%) · คนที่ยืนอยู่ฟื้นเลือด 20% · ทั้งทีมได้พรดาเมจ +20% นาน 6 วิ · มอนในวง 200 โดน 200% ธาตุแสง",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2217%22%20r%3D%227%22%20fill%3D%22%23ffe08a%22%20stroke%3D%22%23e0a830%22%2F%3E%3Cg%20stroke%3D%22%23fff2b0%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M26.0%2017.0L30.0%2017.0%22%2F%3E%3Cpath%20d%3D%22M23.1%2024.1L25.9%2026.9%22%2F%3E%3Cpath%20d%3D%22M16.0%2027.0L16.0%2031.0%22%2F%3E%3Cpath%20d%3D%22M8.9%2024.1L6.1%2026.9%22%2F%3E%3Cpath%20d%3D%22M6.0%2017.0L2.0%2017.0%22%2F%3E%3Cpath%20d%3D%22M8.9%209.9L6.1%207.1%22%2F%3E%3Cpath%20d%3D%22M16.0%207.0L16.0%203.0%22%2F%3E%3Cpath%20d%3D%22M23.1%209.9L25.9%207.1%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M13%2017h6M16%2014v6%22%20stroke%3D%22%23b07818%22%20stroke-width%3D%221.8%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a dawn sun bursting with rays, a rising soul spark lifted upward"
+  },
+  {
+   "c": "sup",
+   "k": 2,
+   "br": 1,
+   "id": "yu",
+   "n": "พิธีสาปแช่ง",
+   "d": "วาดวงพิธีสาปที่เป้า วง 160 นาน 6 วิ: ทุก 1 วิ สาป 45% และมอนในวงรับดาเมจจากทุกคน +25% · จบพิธีระเบิดวิญญาณ 200%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2218%22%20rx%3D%2214%22%20ry%3D%229%22%20fill%3D%22%232a1240%22%20stroke%3D%22%23b48aff%22%20stroke-width%3D%221.4%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2218%22%20rx%3D%2210.6%22%20ry%3D%226.6%22%20fill%3D%22none%22%20stroke%3D%22%23d8b8ff%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M16%2010.6L19.6%2023.6L8.4%2015.4H23.6L12.4%2023.6Z%22%20fill%3D%22none%22%20stroke%3D%22%23e0c8ff%22%20stroke-width%3D%221%22%2F%3E%3Cg%20fill%3D%22%23d8b8ff%22%3E%3Cellipse%20cx%3D%229%22%20cy%3D%226%22%20rx%3D%221.6%22%20ry%3D%222.6%22%2F%3E%3Cellipse%20cx%3D%2223%22%20cy%3D%224%22%20rx%3D%221.6%22%20ry%3D%222.6%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%223%22%20rx%3D%221.2%22%20ry%3D%222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a violet cursed ritual circle with candles and a cursed sigil, ghostly smoke"
+  },
+  {
+   "c": "sup",
+   "k": 4,
+   "br": 1,
+   "id": "uc",
+   "n": "ตุ๊กตาคำสาป",
+   "d": "วางตุ๊กตาคำสาปที่เป้า 6 วิ ผูกมอนรอบตุ๊กตาสูงสุด 4 ตัว (160) · ดาเมจที่ใครก็ตามตีใส่มอนที่ถูกผูก ส่งต่อให้ตัวอื่นที่ผูกไว้ 30% · ตุ๊กตาสาปทุก 1 วิ 30%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M11%2016L4%2013V17L11%2019L10%2029L14%2029L16%2023L18%2029L22%2029L21%2019L28%2017V13L21%2016Z%22%20fill%3D%22%238a6a44%22%20stroke%3D%22%232a1a0c%22%20stroke-width%3D%22.9%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%229%22%20r%3D%226.4%22%20fill%3D%22%238a6a44%22%20stroke%3D%22%232a1a0c%22%20stroke-width%3D%22.9%22%2F%3E%3Cpath%20d%3D%22M12.4%207l2.2%202.2M14.6%207l-2.2%202.2M17.4%207l2.2%202.2M19.6%207l-2.2%202.2M13%2012.4h6%22%20stroke%3D%22%232a1a0c%22%20stroke-width%3D%22.9%22%2F%3E%3Cg%20stroke%3D%22%23c8c8d0%22%20stroke-width%3D%221%22%3E%3Cpath%20d%3D%22M8%2016L2%2012M23%2022l6%202M16%203L19%200%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23b040ff%22%3E%3Ccircle%20cx%3D%222%22%20cy%3D%2212%22%20r%3D%221.6%22%2F%3E%3Ccircle%20cx%3D%2229%22%20cy%3D%2224%22%20r%3D%221.6%22%2F%3E%3Ccircle%20cx%3D%2219%22%20cy%3D%221%22%20r%3D%221.4%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a stitched voodoo-style cursed doll with violet glowing threads tied to it (cute-creepy, not gory)"
+  },
+  {
+   "c": "sup",
+   "k": 5,
+   "br": 1,
+   "id": "zs",
+   "n": "ดูดวิญญาณ",
+   "d": "ล่ามวิญญาณมอนรอบตัว (260) 3 ตัว 4 วิ ดูด 60% ทุก 0.5 วิ · เพื่อนรอบตัวเรา (250) ฟื้นเลือด 0.5% ต่อสายต่อครั้ง",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%2210%22%20r%3D%224%22%20fill%3D%22%232a1a3a%22%20stroke%3D%22%239affc0%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%229%22%20r%3D%224%22%20fill%3D%22%232a1a3a%22%20stroke%3D%22%239affc0%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2226%22%20r%3D%224.6%22%20fill%3D%22%23ffe8c0%22%20stroke%3D%22%23b07818%22%2F%3E%3Cpath%20d%3D%22M8%2014Q10%2022%2014%2024M24%2013Q22%2021%2018%2024%22%20fill%3D%22none%22%20stroke%3D%22%239affc0%22%20stroke-width%3D%221.6%22%20stroke-dasharray%3D%222%201.4%22%2F%3E%3Cg%20fill%3D%22%23d0ffe0%22%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%2218%22%20r%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%2221%22%20cy%3D%2218%22%20r%3D%221.2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "violet soul tethers draining glowing wisps from dark orbs toward the centre"
+  },
+  {
+   "c": "assn",
+   "k": 0,
+   "br": 0,
+   "id": "nf",
+   "n": "ดาวกระจาย",
+   "d": "ปาดาวกระจาย 3 ดอกเป็นรูปพัด ดอกละ 115% + พิษ 3 วิ (รวม 60%) · ตีจากระยะไกลได้ แลกการวาร์ปกับล่องหน",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%23b48aff%22%20stroke-width%3D%221.2%22%20opacity%3D%22.6%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M3%2022l7-3%22%2F%3E%3Cpath%20d%3D%22M3%2016h7%22%2F%3E%3Cpath%20d%3D%22M4%209l6%203%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%233a3448%22%20stroke%3D%22%230e0a14%22%20stroke-width%3D%22.6%22%3E%3Cpath%20d%3D%22M16%203.5l1.3%203.6%203.7%201.3-3.7%201.3-1.3%203.7-1.3-3.7-3.7-1.3%203.7-1.3z%22%2F%3E%3Cpath%20d%3D%22M24%2012.5l1.3%203.6%203.7%201.3-3.7%201.3-1.3%203.7-1.3-3.7-3.7-1.3%203.7-1.3z%22%2F%3E%3Cpath%20d%3D%22M16%2019.5l1.3%203.6%203.7%201.3-3.7%201.3-1.3%203.7-1.3-3.7-3.7-1.3%203.7-1.3z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23cfc8e0%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%228.4%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2217.4%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2224.4%22%20r%3D%221%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "three shuriken stars fanning out, with dripping green poison sheen"
+  },
+  {
+   "c": "assn",
+   "k": 1,
+   "br": 0,
+   "id": "nh",
+   "n": "ตะขอเงา",
+   "d": "เหวี่ยงตะขอโซ่ไปข้างหน้า 250 เกี่ยวมอนตัวแรก ลากมาหาตัว + มึน 0.8 วิ (250%) · บอสไม่ถูกลาก",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M4%2027Q10%2018%2018%2013%22%20stroke%3D%22%236a6278%22%20stroke-width%3D%223.4%22%20stroke-dasharray%3D%222.4%201.2%22%2F%3E%3Cpath%20d%3D%22M4%2027Q10%2018%2018%2013%22%20stroke%3D%22%23b48aff%22%20stroke-width%3D%221%22%20opacity%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M18%2013l6-4%22%20stroke%3D%22%231a1420%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M24%209a4%204%200%201%201%203.6%205.6%22%20stroke%3D%22%231a1420%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M24%209a4%204%200%201%200-5.4%202.6%22%20stroke%3D%22%231a1420%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M24%209a4%204%200%201%201%203.6%205.6M24%209a4%204%200%201%200-5.4%202.6%22%20stroke%3D%22%23d0c8e0%22%20stroke-width%3D%221.2%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a shadow hook on a chain flung forward, violet smoke"
+  },
+  {
+   "c": "assn",
+   "k": 2,
+   "br": 0,
+   "id": "xm",
+   "n": "จันทราประหาร",
+   "d": "หายตัว (อมตะ 1 วิ) ประทับจันทร์เสี้ยวบนมอนใกล้สุด 5 ตัว (ไกล 280) แล้วฟันจันทร์เสี้ยวพร้อมกันทุกตัว 450% · มอนที่เหลือเลือดไม่ถึง 25% ถูกประหาร (ยกเว้นบอส)",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2213%22%20fill%3D%22%231a0e2a%22%2F%3E%3Cpath%20d%3D%22M21%205A11%2011%200%201%200%2025%2023A9%209%200%201%201%2021%205Z%22%20fill%3D%22%23ece4ff%22%2F%3E%3Cpath%20d%3D%22M4%2027L28%206%22%20stroke%3D%22%23c8a8ff%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M4%2027L28%206%22%20stroke%3D%22%23fff%22%20stroke-width%3D%22.9%22%20stroke-linecap%3D%22round%22%2F%3E%3Cg%20fill%3D%22%23d8c8ff%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%22.9%22%2F%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%2227%22%20r%3D%221%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "crescent moons stamped over several targets, a big crescent slash, violet-silver"
+  },
+  {
+   "c": "assn",
+   "k": 3,
+   "br": 0,
+   "id": "nd",
+   "n": "กริชเงาไล่ล่า",
+   "d": "ซัดกริชเงา 5 เล่มโค้งไล่ไปหามอนรอบตัว (ไกล 300) เล่มละ 110% · ไม่พลาดเป้า · แลกตราประทับกับดาเมจกระจาย",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b48aff%22%20stroke-width%3D%221.3%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.75%22%3E%3Cpath%20d%3D%22M4%2026Q6%2010%2022%206%22%2F%3E%3Cpath%20d%3D%22M4%2026Q14%2020%2026%2016%22%2F%3E%3Cpath%20d%3D%22M4%2026Q12%2028%2025%2025%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%234a3e5c%22%20stroke%3D%22%230c0812%22%20stroke-width%3D%22.6%22%3E%3Cpath%20d%3D%22M26%205l-6%20.4%201.6%203.4z%22%2F%3E%3Cpath%20d%3D%22M29%2016l-5.6-2.2-.2%203.8z%22%2F%3E%3Cpath%20d%3D%22M28.4%2025.4l-5.4-2.6.2%203.8z%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%224%22%20cy%3D%2226%22%20r%3D%222.4%22%20fill%3D%22%232a2036%22%20stroke%3D%22%23b48aff%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fsvg%3E",
+   "en": "five shadow daggers curving and homing in arcs"
+  },
+  {
+   "c": "assn",
+   "k": 4,
+   "br": 0,
+   "id": "ns",
+   "n": "เคียวเงาพิฆาต",
+   "d": "เหวี่ยงเคียวเงายักษ์รอบตัว 2 รอบ (วง 140) รอบละ 200% · มอนที่เลือดเหลือไม่ถึง 15% ตายทันที (ยกเว้นบอส)",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2217%22%20rx%3D%2213%22%20ry%3D%227%22%20fill%3D%22none%22%20stroke%3D%22%239a5aff%22%20stroke-width%3D%222.2%22%20stroke-dasharray%3D%2214%205%22%20opacity%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M8%2029L22%204%22%20stroke%3D%22%234a3a2a%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M21%204.6Q31%206%2030%2016Q27%209%2019.4%208.2z%22%20fill%3D%22%232a2036%22%20stroke%3D%22%23e0d0ff%22%20stroke-width%3D%221%22%2F%3E%3Cpath%20d%3D%22M22%206.4Q27%208%2028%2012%22%20stroke%3D%22%23fff%22%20stroke-width%3D%22.7%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a huge shadow scythe sweeping in a full circle"
+  },
+  {
+   "c": "assn",
+   "k": 5,
+   "br": 0,
+   "id": "zv",
+   "n": "ม่านราตรี",
+   "d": "กางม่านราตรีวง 170 รอบตัว 5 วิ · อยู่ในม่านแล้วล่องหนตลอด (ตีปกติคริทุกครั้ง) · มอนในม่านโดนเงาบาด 35% ทุก 1 วิ",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2219%22%20rx%3D%2214%22%20ry%3D%2210%22%20fill%3D%22%23160a2a%22%20stroke%3D%22%239a5aff%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%224%202%22%2F%3E%3Cpath%20d%3D%22M22%208A6%206%200%201%200%2025%2016A5%205%200%201%201%2022%208Z%22%20fill%3D%22%23ece4ff%22%2F%3E%3Cg%20fill%3D%22%23d8c8ff%22%3E%3Cpath%20d%3D%22M8%2014l.8%202%202%20.8-2%20.8-.8%202-.8-2-2-.8%202-.8z%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2224%22%20r%3D%22.9%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2225%22%20r%3D%221%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M9%2026L15%2018%22%20stroke%3D%22%23e0d0ff%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a dark night veil/curtain dome with stars, shadow inside, violet"
+  },
+  {
+   "c": "assn",
+   "k": 2,
+   "br": 1,
+   "id": "yb",
+   "n": "ระบำเงาสะท้อน",
+   "d": "แยกร่างเงา 4 ร่างล้อมตัว 6 วิ ตอนเรียกและตอนจบร่างเงาฟันมอนใกล้ ๆ ร่างละ 200% · ระหว่างนั้นทุกครั้งที่เราโจมตี ร่างเงาทุกร่างฟันตามอีก 35% ของดาเมจ",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22%231e0e30%22%20stroke%3D%22%23b48aff%22%20stroke-width%3D%22.8%22%3E%3Cpath%20d%3D%22M4%2028Q3%2018%206%2013Q9%208%2012%2013Q15%2018%2014%2028Z%22%20opacity%3D%22.55%22%2F%3E%3Cpath%20d%3D%22M18%2028Q17%2018%2020%2013Q23%208%2026%2013Q29%2018%2028%2028Z%22%20opacity%3D%22.55%22%2F%3E%3Cpath%20d%3D%22M10%2030Q9%2017%2013%2011Q16%205%2019%2011Q23%2017%2022%2030Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23e0b8ff%22%3E%3Ccircle%20cx%3D%2214.8%22%20cy%3D%2213%22%20r%3D%22.9%22%2F%3E%3Ccircle%20cx%3D%2217.2%22%20cy%3D%2213%22%20r%3D%22.9%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M22%2018l7-6%22%20stroke%3D%22%23f0e6ff%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+   "en": "four shadow clone silhouettes in a ring around a central figure, mirror-like"
+  },
+  {
+   "c": "assn",
+   "k": 4,
+   "br": 1,
+   "id": "nb",
+   "n": "วงใบมีดระบำ",
+   "d": "ใบมีด 6 เล่มหมุนวนรอบตัว 6 วิ (วง 70) ฟันมอนที่โดน 40% (ตัวเดียวกันห่างกัน 0.3 วิ) · เดินไปด้วยได้",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2216%22%20rx%3D%2212%22%20ry%3D%227%22%20fill%3D%22none%22%20stroke%3D%22%23c8a0ff%22%20stroke-width%3D%221.2%22%20opacity%3D%22.6%22%2F%3E%3Cg%20fill%3D%22%23e8e0f8%22%20stroke%3D%22%232a1a3a%22%20stroke-width%3D%22.6%22%3E%3Cpath%20d%3D%22M4%2016q2-5%207-5q-4%202-5%206z%22%2F%3E%3Cpath%20d%3D%22M28%2016q-2%205-7%205q4-2%205-6z%22%2F%3E%3Cpath%20d%3D%22M16%209q5%201%206%205q-3-3-7-3z%22%2F%3E%3Cpath%20d%3D%22M16%2023q-5-1-6-5q3%203%207%203z%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223.4%22%20fill%3D%22%233a2a4a%22%20stroke%3D%22%23b48aff%22%2F%3E%3C%2Fsvg%3E",
+   "en": "six spinning blades orbiting in a tight ring"
+  },
+  {
+   "c": "assn",
+   "k": 5,
+   "br": 1,
+   "id": "zb",
+   "n": "กรงดาบ",
+   "d": "ดาบ 12 เล่มปักเป็นกรงวง 140 รอบเป้า 4 วิ ดาบในกรงฟันเข้าด้านในทุก 0.5 วิ (40%) · จบแล้วดาบพุ่งรวมกลางกรง 160%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2222%22%20rx%3D%2213%22%20ry%3D%226%22%20fill%3D%22none%22%20stroke%3D%22%239a5aff%22%20stroke-width%3D%221.2%22%2F%3E%3Cg%20fill%3D%22%23e8f0fa%22%20stroke%3D%22%23141018%22%20stroke-width%3D%22.6%22%3E%3Cpath%20d%3D%22M28.0%2022.0l-1.4-2v-10h2.8v10z%22%2F%3E%3Cpath%20d%3D%22M22.0%2026.3l-1.4-2v-10h2.8v10z%22%2F%3E%3Cpath%20d%3D%22M10.0%2026.3l-1.4-2v-10h2.8v10z%22%2F%3E%3Cpath%20d%3D%22M4.0%2022.0l-1.4-2v-10h2.8v10z%22%2F%3E%3Cpath%20d%3D%22M10.0%2017.7l-1.4-2v-10h2.8v10z%22%2F%3E%3Cpath%20d%3D%22M22.0%2017.7l-1.4-2v-10h2.8v10z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "twelve swords planted in a circle forming a cage, blades pointing inward"
+  },
+  {
+   "c": "mage",
+   "k": 0,
+   "br": 0,
+   "id": "gl",
+   "n": "หอกน้ำแข็ง",
+   "d": "ยิงหอกน้ำแข็งทะลุทุกตัวในแนวยาว 340 (260% ธาตุน้ำแข็ง) · ตัวสุดท้ายที่โดนถูกแช่แข็ง 1.2 วิ (บอสช้าลง)",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22q%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%235ab0ff%22%20stop-opacity%3D%220%22%2F%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%239ad8ff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M28%204L19%209.5L5%2027L21.5%2012.5Z%22%20fill%3D%22url(%23q)%22%20stroke%3D%22%231d4a7a%22%20stroke-width%3D%22.9%22%2F%3E%3Cpath%20d%3D%22M27%205l-6%204.6-2%203.4%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221%22%20fill%3D%22none%22%2F%3E%3Cg%20fill%3D%22%23cfefff%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%2219%22%20r%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2225%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%225%22%20cy%3D%2222%22%20r%3D%22.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a long ice spear/lance piercing forward, frost shards"
+  },
+  {
+   "c": "mage",
+   "k": 1,
+   "br": 0,
+   "id": "gb",
+   "n": "วาร์ปพริบตา",
+   "d": "วาร์ปไป 170 ตามทิศที่เดิน (ไม่ได้เดิน = หนีจากมอนที่ใกล้สุด) ระเบิดเวททั้งจุดเดิมและจุดใหม่ (150%) · อมตะชั่วครู่ตอนวาร์ป",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%228.5%22%20cy%3D%2224%22%20rx%3D%225.5%22%20ry%3D%222.2%22%20fill%3D%22none%22%20stroke%3D%22%23b48aff%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%222%201.6%22%2F%3E%3Cellipse%20cx%3D%2223.5%22%20cy%3D%2212%22%20rx%3D%226%22%20ry%3D%222.4%22%20fill%3D%22none%22%20stroke%3D%22%239ad8ff%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M10%2021Q14%2013%2020%2012.5%22%20fill%3D%22none%22%20stroke%3D%22%23e0d0ff%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%221.6%202%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M18%2010.5l3%202-3.4%201.4z%22%20fill%3D%22%23e0d0ff%22%2F%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22M23.5%204l.8%202.2%202.2.8-2.2.8-.8%202.2-.8-2.2-2.2-.8%202.2-.8z%22%2F%3E%3Ccircle%20cx%3D%2229%22%20cy%3D%228%22%20r%3D%22.9%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%227.6%22%20y%3D%2214%22%20width%3D%221.8%22%20height%3D%229%22%20fill%3D%22%23cdb8ff%22%20opacity%3D%22.6%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a blink teleport: arcane flash at two points with a sparkle trail between"
+  },
+  {
+   "c": "mage",
+   "k": 2,
+   "br": 0,
+   "id": "xd",
+   "n": "มังกรอัคคี",
+   "d": "เรียกมังกรไฟเลื้อยพุ่งไปข้างหน้า 420 แล้ววนกลับหาตัว เผาทุกตัวที่มังกรผ่าน ขาไป 340% ขากลับ 340% · เป้าอยู่ไกลแค่ไหนก็พุ่งไปทางนั้น",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M4%2026Q10%2030%2014%2024Q18%2018%2013%2014Q9%2010%2014%206Q18%203%2024%206%22%20fill%3D%22none%22%20stroke%3D%22%237a1a08%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M4%2026Q10%2030%2014%2024Q18%2018%2013%2014Q9%2010%2014%206Q18%203%2024%206%22%20fill%3D%22none%22%20stroke%3D%22%23ff7a2a%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M21%203.5Q27%202.4%2030%206L27.6%207.4L30%209Q25%2011%2021%209Z%22%20fill%3D%22%23ff7a2a%22%20stroke%3D%22%234a0c04%22%20stroke-width%3D%22.9%22%2F%3E%3Cpath%20d%3D%22M21%204L17%201.4L22.4%203.8%22%20fill%3D%22%234a0c04%22%2F%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%225.4%22%20r%3D%22.9%22%20fill%3D%22%23fff6b0%22%2F%3E%3Cg%20fill%3D%22%23ffd060%22%3E%3Ccircle%20cx%3D%2231%22%20cy%3D%2211%22%20r%3D%221.1%22%2F%3E%3Ccircle%20cx%3D%2229%22%20cy%3D%2213.4%22%20r%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%228%22%20cy%3D%2220%22%20r%3D%22.9%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a coiling fire dragon surging forward and looping back"
+  },
+  {
+   "c": "mage",
+   "k": 3,
+   "br": 0,
+   "id": "go",
+   "n": "ลูกแก้วพลังเวท",
+   "d": "ปล่อยลูกแก้วลอยช้า ๆ ไปข้างหน้า 2.2 วิ ทุกตัวที่อยู่ใกล้ลูกแก้วโดน 55% ทุก 0.3 วิ · ยิ่งมอนเกาะกลุ่มตามทางยิ่งแรง",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2225%22%20rx%3D%2211%22%20ry%3D%223.6%22%20fill%3D%22none%22%20stroke%3D%22%23b48aff%22%20stroke-width%3D%221.3%22%20stroke-dasharray%3D%223%202.4%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2214%22%20r%3D%228%22%20fill%3D%22%237a46d8%22%20stroke%3D%22%232a0e5a%22%20stroke-width%3D%221%22%2F%3E%3Ccircle%20cx%3D%2213.6%22%20cy%3D%2211.4%22%20r%3D%223.6%22%20fill%3D%22%23e8dcff%22%20opacity%3D%22.85%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2214%22%20rx%3D%2212%22%20ry%3D%223.6%22%20fill%3D%22none%22%20stroke%3D%22%23ead8ff%22%20stroke-width%3D%221.2%22%20transform%3D%22rotate(-18%2016%2014)%22%2F%3E%3Cg%20fill%3D%22%23d8c0ff%22%3E%3Ccircle%20cx%3D%224%22%20cy%3D%228%22%20r%3D%221.1%22%2F%3E%3Ccircle%20cx%3D%2228%22%20cy%3D%2220%22%20r%3D%221%22%2F%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%225%22%20r%3D%22.9%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a slow-floating arcane orb crackling with violet-blue energy"
+  },
+  {
+   "c": "mage",
+   "k": 4,
+   "br": 0,
+   "id": "gz",
+   "n": "พายุหิมะ",
+   "d": "เรียกพายุหิมะที่เป้า (หรือข้างหน้า) วง 140 นาน 4 วิ ตี 55% ทุก 0.5 วิ ธาตุน้ำแข็ง และทำให้มอนช้าลง · แลกการดูดกลุ่มกับการคุมพื้นที่นาน",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2225%22%20rx%3D%2213%22%20ry%3D%224%22%20fill%3D%22%23bfe6ff%22%20fill-opacity%3D%22.25%22%20stroke%3D%22%23d8f2ff%22%20stroke-width%3D%221.2%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23e8f8ff%22%20stroke-width%3D%221.3%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M5%2012Q16%204%2027%2012%22%2F%3E%3Cpath%20d%3D%22M8%2017Q16%2012%2024%2017%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%23fff%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%204v10M11.7%206.5l8.6%205M11.7%2011.5l8.6-5%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23fff%22%3E%3Ccircle%20cx%3D%227%22%20cy%3D%2221%22%20r%3D%221.1%22%2F%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2221%22%20r%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2224%22%20r%3D%22.9%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%229%22%20r%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2227%22%20cy%3D%2216%22%20r%3D%22.9%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "a blizzard storm circle with swirling snow and ice shards"
+  },
+  {
+   "c": "mage",
+   "k": 5,
+   "br": 0,
+   "id": "zt",
+   "n": "หยุดกาลเวลา",
+   "d": "หยุดเวลามอนในวง 160 ที่เป้า 3 วิ (แช่แข็ง) · ดาเมจที่เราตีใส่มอนที่ถูกหยุดสะสมไว้ จบแล้วระเบิด 200% + ปล่อยดาเมจที่สะสม 50%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2213%22%20fill%3D%22%239ab0d0%22%20fill-opacity%3D%22.35%22%20stroke%3D%22%23e0ecff%22%20stroke-width%3D%221.6%22%2F%3E%3Cg%20stroke%3D%22%23e0ecff%22%20stroke-width%3D%221.4%22%3E%3Cpath%20d%3D%22M16%204v3M16%2025v3M4%2016h3M25%2016h3%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M16%2016V8M16%2016l6%203%22%20stroke%3D%22%23fff4c8%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%222%22%20fill%3D%22%23fff4c8%22%2F%3E%3Cpath%20d%3D%22M26%2025l3%203M28%2023l2%201%22%20stroke%3D%22%23bfe0ff%22%20stroke-width%3D%221.2%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a frozen hourglass/clock dial stopping time, blue-white crystal freeze (no numbers)"
+  },
+  {
+   "c": "mage",
+   "k": 2,
+   "br": 1,
+   "id": "yg",
+   "n": "หัตถ์ปีศาจ",
+   "d": "หัตถ์ปีศาจยักษ์โผล่จากพื้นที่เป้า วง 150 คว้ามอนไว้ (มึน 2 วิ) บีบ 80% ทุก 0.45 วิ แล้วฟาดลงพื้น 500%",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2228%22%20rx%3D%2213%22%20ry%3D%223.4%22%20fill%3D%22%23ff5a14%22%20fill-opacity%3D%22.5%22%2F%3E%3Cpath%20d%3D%22M8%2028V14Q8%2010%2010%2010Q12%2010%2012%2013V6Q12%203%2014%203Q16%203%2016%206V4Q16%201.4%2018%201.4Q20%201.4%2020%204V7Q20%204.6%2022%204.6Q24%204.6%2024%207V16L27%2013Q29%2012%2029.4%2014L24%2024V28Z%22%20fill%3D%22%233a0c0c%22%20stroke%3D%22%23ff7a2a%22%20stroke-width%3D%221.1%22%2F%3E%3Cg%20fill%3D%22%23e8dcc8%22%3E%3Cpath%20d%3D%22M12%206l1-4%201%204z%22%2F%3E%3Cpath%20d%3D%22M16%204l1-4%201%204z%22%2F%3E%3Cpath%20d%3D%22M20%204.4l1-4%201%204z%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M12%2022q3-6%200-10M17%2024q2-8%200-14%22%20stroke%3D%22%23ff7a2a%22%20stroke-width%3D%22.9%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E",
+   "en": "a giant demonic hand rising from the ground grasping, hellfire"
+  },
+  {
+   "c": "mage",
+   "k": 4,
+   "br": 1,
+   "id": "gd",
+   "n": "ทูตอสูรเพลิง",
+   "d": "เรียกอิมป์ไฟ 2 ตัวบินวนรอบตัว 10 วิ ตัวละยิงลูกไฟใส่มอน (ไกล 260) ทุก 0.8 วิ (90%)",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20fill%3D%22%235a1408%22%20stroke%3D%22%231a0402%22%20stroke-width%3D%22.8%22%3E%3Cpath%20d%3D%22M13%2014L2%206L5%2013L1%2017L12%2018Z%22%2F%3E%3Cpath%20d%3D%22M19%2014L30%206L27%2013L31%2017L20%2018Z%22%2F%3E%3C%2Fg%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2219%22%20rx%3D%226%22%20ry%3D%227%22%20fill%3D%22%23d8401a%22%20stroke%3D%22%231a0402%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2211%22%20r%3D%225.6%22%20fill%3D%22%23d8401a%22%20stroke%3D%22%231a0402%22%2F%3E%3Cpath%20d%3D%22M12%208L9.4%202L14%207M20%208L22.6%202L18%207%22%20fill%3D%22%232a0804%22%2F%3E%3Cg%20fill%3D%22%23ffe060%22%3E%3Ccircle%20cx%3D%2213.8%22%20cy%3D%2211%22%20r%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%2218.2%22%20cy%3D%2211%22%20r%3D%221.2%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M16%2026q6%204%209%200%22%20stroke%3D%22%235a1408%22%20stroke-width%3D%221.4%22%20fill%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%2227%22%20r%3D%222.4%22%20fill%3D%22%23ff9a30%22%2F%3E%3C%2Fsvg%3E",
+   "en": "two small fire imps flying around shooting fireballs (stylized, cute-menacing)"
+  },
+  {
+   "c": "mage",
+   "k": 5,
+   "br": 1,
+   "id": "zh",
+   "n": "สุนัขนรก",
+   "d": "ปล่อยสุนัขนรก 2 ตัว 8 วิ วิ่งไล่กัดมอนใกล้สุด ทุก 0.7 วิ 75% + ไฟลวก",
+   "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20transform%3D%22translate(16%2020)%22%3E%3Cellipse%20cx%3D%22-2%22%20cy%3D%22-2%22%20rx%3D%2210%22%20ry%3D%225%22%20fill%3D%22%232a0806%22%20stroke%3D%22%230c0202%22%2F%3E%3Cpath%20d%3D%22M6-5L14-8L17-4L13-1L7%200Z%22%20fill%3D%22%232a0806%22%20stroke%3D%22%230c0202%22%2F%3E%3Cpath%20d%3D%22M9-8l1-5%202%204z%22%20fill%3D%22%23120404%22%2F%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%22-5%22%20r%3D%221.1%22%20fill%3D%22%23ffd040%22%2F%3E%3Cg%20stroke%3D%22%23120404%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M-8%202l-1%206M-4%202l1%206M3%202l-1%206M6%201l2%206%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23ff8a30%22%3E%3Ccircle%20cx%3D%229%22%20cy%3D%229%22%20r%3D%222.6%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%226%22%20r%3D%222%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%221.6%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+   "en": "two hellhound silhouettes running with flaming manes"
+  }
+ ],
+ "L": [
+  {
+   "id": "echo",
+   "e": "🔁",
+   "n": "ร่ายซ้ำ",
+   "d": "ร่ายสกิลซ้ำเองอีกครั้งหลัง 0.4 วิ (ครั้งที่สองพลัง 60%)",
+   "t": "cast",
+   "en": "the same rune symbol repeated twice like an echo ring, a second faded copy"
+  },
+  {
+   "id": "split",
+   "e": "👥",
+   "n": "แยกร่าง",
+   "d": "สกิลแยกไปเกิดซ้ำที่มอน 2 ตัวถัดไป (จุดละ 35%) · สกิลฮีล/บัฟจะแยกไปเกิดที่เพื่อนปาร์ตี้แทน",
+   "t": "cast",
+   "en": "one energy bolt splitting into three branches"
+  },
+  {
+   "id": "party",
+   "e": "🤝",
+   "n": "สายใยทีม",
+   "d": "ทุกครั้งที่ร่าย สกิลเกิดซ้ำที่ตัวเพื่อนปาร์ตี้ทุกคนในแมพ (คนละ 60%)",
+   "t": "cast",
+   "en": "two hands/links joined by a glowing thread, team bond"
+  },
+  {
+   "id": "totem",
+   "e": "🗿",
+   "n": "ทอเท็ม",
+   "d": "ปักทอเท็มที่ร่ายสกิลนี้แทนเรา นาน 9 วิ (ครั้งละ 45% · ร่ายถี่สุดทุก 1.8 วิ สกิลคูลดาวน์ยาวจะร่ายห่างขึ้น) · ตัวเราไม่ได้ร่ายเอง",
+   "t": "cast",
+   "en": "a carved stone totem pole with a glowing rune eye"
+  },
+  {
+   "id": "trap",
+   "e": "🪤",
+   "n": "กับดัก",
+   "d": "โยนกับดักใส่เป้า มอนเหยียบแล้วระเบิดเป็นสกิลนี้ (พลัง 130%) · วางค้างได้ 3 อัน",
+   "t": "cast",
+   "en": "a spiked jaw trap with a glowing rune core"
+  },
+  {
+   "id": "coc",
+   "e": "🎯",
+   "n": "คริแล้วร่าย",
+   "d": "ตีปกติติดคริเมื่อไร ร่ายสกิลนี้ใส่เป้าเองฟรี (พลัง 50%)",
+   "t": "trig",
+   "en": "a critical-strike star burst on a target reticle"
+  },
+  {
+   "id": "cwdt",
+   "e": "🛡️",
+   "n": "เจ็บแล้วร่าย",
+   "d": "โดนตีสะสมครบ 10% ของเลือด ร่ายสกิลนี้ที่ตัวเราเองฟรี (พลัง 80%)",
+   "t": "trig",
+   "en": "a cracked shield with a spark of counter-magic bursting from the crack"
+  },
+  {
+   "id": "cok",
+   "e": "💀",
+   "n": "ฆ่าแล้วร่าย",
+   "d": "ฆ่ามอนเมื่อไร ร่ายสกิลนี้ที่ซากมอนเองฟรี (พลัง 60%)",
+   "t": "trig",
+   "en": "a small skull with a soul wisp rising from it (stylized, not scary)"
+  },
+  {
+   "id": "fire",
+   "e": "🔥",
+   "n": "ธาตุไฟ",
+   "d": "ดาเมจกลายเป็นธาตุไฟ ติดไฟเผาต่อเนื่อง 4 วิ · จุดปฏิกิริยาธาตุกับเพื่อนได้",
+   "t": "elem",
+   "en": "a fire element rune: flame symbol, orange-red gem"
+  },
+  {
+   "id": "ice",
+   "e": "❄️",
+   "n": "ธาตุน้ำแข็ง",
+   "d": "ดาเมจกลายเป็นน้ำแข็ง โอกาส 20% แช่แข็ง 1.2 วิ (บอสโดนช้าลงแทน)",
+   "t": "elem",
+   "en": "an ice element rune: snowflake crystal, pale blue gem"
+  },
+  {
+   "id": "zap",
+   "e": "⚡",
+   "n": "ธาตุสายฟ้า",
+   "d": "ดาเมจกลายเป็นสายฟ้า เป้าช็อตรับดาเมจเรา +25% 3 วิ และไฟฟ้ากระโดดต่ออีก 1 ตัว (30%)",
+   "t": "elem",
+   "en": "a lightning element rune: bolt symbol, electric yellow-blue gem"
+  },
+  {
+   "id": "chain",
+   "e": "⛓️",
+   "n": "โซ่",
+   "d": "ทุกครั้งที่โดน เด้งต่อไปมอนอีก 2 ตัว (60% → 40%)",
+   "t": "hit",
+   "en": "chain links arcing between three dots"
+  },
+  {
+   "id": "wide",
+   "e": "🌐",
+   "n": "กระจายวง",
+   "d": "ทุกครั้งที่โดน กระเซ็นใส่มอนรอบเป้า (40% · สูงสุด 5 ตัว)",
+   "t": "hit",
+   "en": "an expanding ring splash radiating outward"
+  },
+  {
+   "id": "burst",
+   "e": "💥",
+   "n": "ระเบิดซาก",
+   "d": "มอนที่ตายจากสกิลนี้ระเบิดใส่รอบ ๆ (15% ของเลือดสูงสุดของมอนตัวนั้น)",
+   "t": "hit",
+   "en": "a corpse-explosion burst: a cracked orb exploding outward"
+  },
+  {
+   "id": "leech",
+   "e": "🩸",
+   "n": "ดูดชีวิต",
+   "d": "ดาเมจจากสกิลนี้ดูดเลือด 3% และมานา 0.5%",
+   "t": "hit",
+   "en": "a crimson droplet with a swirling drain spiral (life steal)"
+  },
+  {
+   "id": "prec",
+   "e": "🔍",
+   "n": "แม่นยำ",
+   "d": "สกิลนี้โอกาสคริ +25% และดาเมจคริ +30%",
+   "t": "stat",
+   "en": "a precise crosshair with a sharp gleaming point"
+  },
+  {
+   "id": "brut",
+   "e": "💢",
+   "n": "ทุ่มสุดตัว",
+   "d": "พลังสกิล +45% แต่คูลดาวน์นานขึ้น 35% · โบนัสพลังจากรูนเสริมหลายอันบวกกัน ไม่คูณทบ",
+   "t": "stat",
+   "en": "a heavy fist/hammer impact, raw power, angry red"
+  },
+  {
+   "id": "haste",
+   "e": "⏩",
+   "n": "เร่งร่าย",
+   "d": "คูลดาวน์ −35% แต่พลังเหลือ 80%",
+   "t": "stat",
+   "en": "a winged hourglass / speed arrows, quick-cast"
+  },
+  {
+   "id": "blood",
+   "e": "🫀",
+   "n": "สังเวยโลหิต",
+   "d": "ใช้เลือดแทนมานา (4% ของเลือดสูงสุด × ตัวคูณมานา) พลัง +15% (บวกกับโบนัสพลังรูนเสริมอื่น)",
+   "t": "stat",
+   "en": "a glowing crimson heart gem (blood sacrifice), stylized not anatomical"
+  },
+  {
+   "id": "pierce",
+   "e": "🏹",
+   "n": "ทะลุทวีคูณ",
+   "d": "ยิงเพิ่มอีก 2 ลูกใส่มอนตัวถัดไป (ลูกละ 60%) และทุกลูกทะลุโดนมอนในแนวทาง (40%)",
+   "t": "rare",
+   "en": "an arrow piercing through multiple rings"
+  },
+  {
+   "id": "minion",
+   "e": "👻",
+   "n": "วิญญาณรับใช้",
+   "d": "ร่ายแล้วเรียกวิญญาณลอยตามตัว 12 วิ คอยร่ายสกิลนี้ใส่มอนใกล้ ๆ เอง (ครั้งละ 35%)",
+   "t": "rare",
+   "en": "a small friendly ghost spirit wisp floating"
+  },
+  {
+   "id": "charge",
+   "e": "⏳",
+   "n": "สะสมพลัง",
+   "d": "ร่าย 2 ครั้งแรกพลังเหลือ 75% ครั้งที่ 3 ปลดพลังทั้งหมด ×2.6",
+   "t": "rare",
+   "en": "a battery-like rune filling up in three segments, the third blazing"
+  },
+  {
+   "id": "nova",
+   "e": "🌟",
+   "n": "วงแหวนระเบิด",
+   "d": "0.5 วิหลังร่าย วงแหวนพลังระเบิดรอบตัวเรา (160% ของพลังโจมตี) ทุกตัวในวง",
+   "t": "rare",
+   "en": "a ring nova explosion radiating from a central point, star-white"
+  }
+ ],
+ "col": {
+  "melee": "#c2352b",
+  "archer": "#5b8a72",
+  "sup": "#c99a3b",
+  "assn": "#8a5fd0",
+  "mage": "#49b8d8"
+ }
+}
