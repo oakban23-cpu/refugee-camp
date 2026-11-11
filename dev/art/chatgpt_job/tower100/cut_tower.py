@@ -1,4 +1,4 @@
-import sys,json
+import sys,json,os
 from PIL import Image
 D,O=sys.argv[1],sys.argv[2];PD=sys.argv[3] if len(sys.argv)>3 else None;DD=sys.argv[4] if len(sys.argv)>4 else None;AN=sys.argv[5] if len(sys.argv)>5 else 'hd-gpt10.webp'
 sprites=[]
@@ -11,6 +11,7 @@ def cells(path,pref,take):
         sp=cell.crop(bb);mh=(144 if n>=9 else 120 if n in(5,6) else 300) if pref=='s' else 300
         if sp.height>mh:sp=sp.resize((max(1,round(sp.width*mh/sp.height)),mh),Image.LANCZOS)
         sprites.append((pref+'_'+str(n),sp))
+CL=os.environ.get('CLUT')
 for t in range(1,11):cells(f'{D}/props_{t:02d}.png',f'p{t}',range(1,5) if DD else range(1,9))
 cells(f'{D}/shared_01.png','s',range(1,13))
 def cells2(path,themes):
@@ -36,6 +37,17 @@ def cells3(path,themes):
             sprites.append((f'p{t}_{c+5}',sp))
 if DD:
     for k in range(5):cells3(f'{DD}/decor_{k+1:02d}.png',[2*k+1,2*k+2])
+def cells4(path,themes):
+    im=Image.open(path).convert('RGBA');W,H=im.size;cw,ch=W//4,H//2
+    for r,t in enumerate(themes):
+        for c in range(4):
+            cell=im.crop((c*cw,r*ch,(c+1)*cw,(r+1)*ch));a=cell.getchannel('A').point(lambda v:255 if v>20 else 0);bb=a.getbbox()
+            if not bb:print('empty',t,c);continue
+            sp=cell.crop(bb);k=min(112/sp.width,90/sp.height,1)
+            if k<1:sp=sp.resize((max(1,round(sp.width*k)),max(1,round(sp.height*k))),Image.LANCZOS)
+            sprites.append((f'p{t}_{c+9}',sp))
+if CL:
+    for k in range(5):cells4(f'{CL}/clutter_{k+1:02d}.png',[2*k+1,2*k+2])
 # shelf pack
 sprites.sort(key=lambda s:-s[1].height);AW=2048;x=y=sh=0;pos={}
 for k,sp in sprites:

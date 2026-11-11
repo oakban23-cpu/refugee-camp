@@ -15,7 +15,7 @@ async def main():
             await pg.goto(URL);await pg.wait_for_timeout(2500)
             await pg.evaluate(SETUP,['mage','Ta'+str(random.randint(100,999)),90]);await pg.wait_for_timeout(2600)
             await pg.evaluate("()=>{try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};banner=null;gmGod=true;AUTO.on=false;me.twCp=91;twCreate(1)}");await pg.wait_for_timeout(3000)
-            ck('atlas loaded + 132 sprites (40 new pillars)',await pg.evaluate("()=>TWAR.ok===1&&Object.keys(TWAR.f).length===132&&Object.keys(TWAR.f).filter(k=>k[0]==='q').length===40"))
+            ck('atlas loaded + 172 sprites (40 new pillars)',await pg.evaluate("()=>TWAR.ok===1&&Object.keys(TWAR.f).length===172&&Object.keys(TWAR.f).filter(k=>k[0]==='q').length===40"))
             for f,ti in [(5,0),(33,3),(63,6),(95,9)]:
                 await pg.evaluate(f"()=>{{dg.ph='lobby';TWCL=null;twBegin({f})}}");await pg.wait_for_timeout(1200)
                 r=await pg.evaluate(f"()=>{{const o=TWAR.fl[{ti}];window.__c=0;const dI=g.drawImage;g.drawImage=function(){{if(arguments[0]===(o&&o.img))__c++;return dI.apply(this,arguments)}};twaGround();g.drawImage=dI;return [o&&o.ok,__c]}}")

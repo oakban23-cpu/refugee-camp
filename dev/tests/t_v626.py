@@ -17,7 +17,7 @@ async def main():
                 await pg.evaluate(f"()=>{{ov.hidden=true;dg.ph='lobby';TWCL=null;twBegin({f});me.x=CX-40;me.y=CY-330;banner=null}}");await pg.wait_for_timeout(1800)
                 r=await pg.evaluate("""()=>new Promise(res=>{const o=twaPut,got={};twaPut=function(k,x,y,w,a){if(/^p\\d+_[5-8]$/.test(k))got[k]=Math.round(w);return o.apply(this,arguments)};setTimeout(()=>{twaPut=o;res(got)},700)})""")
                 seen[f]=r
-            rep('atlas ใหม่ hd-gpt10c.webp โหลดครบ 132 ชิ้น',await pg.evaluate("()=>TWAR.src==='hd-gpt10c.webp'&&TWAR.ok===1&&Object.keys(TWAR.f).length===132"))
+            rep('atlas ใหม่ hd-gpt10c.webp โหลดครบ',await pg.evaluate("()=>TWAR.src==='hd-gpt10d.webp'&&TWAR.ok===1&&Object.keys(TWAR.f).length===172"))
             rep('ของแต่งขอบในชีทใหม่มีความละเอียด (ใหญ่ ≥200px · กลาง ≥140px)',await pg.evaluate("()=>{for(let t=1;t<=10;t++)for(let c=5;c<=8;c++){const F=TWAR.f['p'+t+'_'+c];if(!F||F[3]<(c<7?200:140))return 'p'+t+'_'+c}return true}")==True)
             ok=all(len(v)>=3 for v in seen.values()) and all(k.startswith('p%d_'%((f-1)//10+1)) for f,v in seen.items() for k in v)
             rep('ทุกธีมวาดของแต่งขอบด้วยคีย์ธีมตัวเอง',ok,seen)
