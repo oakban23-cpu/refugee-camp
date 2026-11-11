@@ -14,7 +14,7 @@ async def main():
       async with async_playwright() as pw:
         b=await pw.chromium.launch()
         A=await new_client(b,'Ic'+str(random.randint(100,999)),'melee',99)
-        await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}");await A.wait(1500)
+        await A.ev("()=>{try{ITIC.off=1}catch(e){}ov.hidden=true;AUTO.on=false;gmGod=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}");await A.wait(1500)
         await A.ev("()=>{ov.hidden=false;gearUI();ov.hidden=true}");await A.wait(300)
         r=await A.ev("""()=>[typeof itIcoH,String(cellH).indexOf('itIcoH(it,slot)')>=0,String(introRaw.toString().indexOf('itIcoURL')>=0||String(window.introRaw).indexOf('itIcoURL')>=0),
           String(vz3Next).indexOf('itIcoImg(')>=0,Object.keys(MATI).length,GOODS.filter(o=>MATI[o.k]).length,GOODS.filter(o=>MATI[o.k]&&o.itw).length]""")

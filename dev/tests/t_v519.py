@@ -14,7 +14,7 @@ async def main():
       async with async_playwright() as pw:
         b=await pw.chromium.launch()
         A=await new_client(b,'Wp'+str(random.randint(100,999)),'melee',99)
-        await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}");await A.wait(1500)
+        await A.ev("()=>{try{ITIC.off=1}catch(e){}ov.hidden=true;AUTO.on=false;gmGod=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}");await A.wait(1500)
         r=await A.ev("""()=>{const it=genItem(60,'w',3,3);const u=itIcoURL(it,'w');return [typeof itWeapon,typeof wpStyle,!!u&&u.indexOf('data:image/png')===0,u!==weaponIcon(it),itIcoH(it,'w').indexOf(u)>0]}""")
         rep('ติดตั้ง: ช่องอาวุธใช้ไอคอนวาดใหม่ (ไม่ใช่ภาพย่อจากอาวุธในมือแบบเดิม)',r[0]=='function' and r[1]=='function' and all(r[2:]),json.dumps(r))
         r=await A.ev("""async()=>{const PX="""+PX+""";const o={dup:[],thin:[],n:0,min:1e9};const seen={};for(const cls of['melee','archer','mage','sup','assn'])for(let s=0;s<3;s++)for(let t=0;t<7;t++){const u=itEquipURL('w',t,cls+':'+s,0,0,0);o.n++;if(seen[u])o.dup.push([cls,s,t,seen[u]]);seen[u]=[cls,s,t];const n=await PX(u);o.min=Math.min(o.min,n);if(n<900)o.thin.push([cls,s,t,n])}return o}""")
