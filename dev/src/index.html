@@ -594,7 +594,7 @@ const POTSVG={hp:'<defs><radialGradient id="r" cx=".38" cy=".38" r=".7"><stop of
  ps:'<defs><linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8d0e8"/><stop offset=".5" stop-color="#8a80a0"/><stop offset="1" stop-color="#3a344a"/></linearGradient></defs><path d="M6 12l7-8 11 2 4 10-6 11-12 1-5-8z" fill="url(#r)" stroke="#1a1624" stroke-width="1.2" stroke-linejoin="round"/><path d="M11 13l5-4 6 3-1 7-6 2-4-4z" fill="none" stroke="#c8a8ff" stroke-width="1.4"/><circle cx="16" cy="15" r="2.2" fill="#e0c8ff"/><path d="M8 11l3-3" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>'};
 const POTI={};Object.keys(POTSVG).forEach(k=>{POTI[k]='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">'+POTSVG[k]+'</svg>')});
 const potImg=(k,sz,cl)=>'<img class="'+(cl||'poti')+'" src="'+POTI[k]+'" width="'+sz+'" height="'+sz+'" alt="" style="vertical-align:middle">';
-const skImg=(c,k,sz)=>'<img class="ski" src="'+(k===2&&me.cls===c&&typeof u3Open!=='undefined'&&u3Open()&&SKI3U[c]?SKI3U[c][s6B()]:k===2&&me.cls2&&me.cls===c&&typeof SKI2!=='undefined'?(BR2()&&SKI2B[c]?SKI2B[c]:SKI2[c]):k===4&&me.cls===c&&BR2()&&SKI4B[c]?SKI4B[c]:SKI[c][k])+'" width="'+(sz||26)+'" height="'+(sz||26)+'" alt="">';
+let skImg=(c,k,sz)=>'<img class="ski" src="'+(k===2&&me.cls===c&&typeof u3Open!=='undefined'&&u3Open()&&SKI3U[c]?SKI3U[c][s6B()]:k===2&&me.cls2&&me.cls===c&&typeof SKI2!=='undefined'?(BR2()&&SKI2B[c]?SKI2B[c]:SKI2[c]):k===4&&me.cls===c&&BR2()&&SKI4B[c]?SKI4B[c]:SKI[c][k])+'" width="'+(sz||26)+'" height="'+(sz||26)+'" alt="">';
 /* ---------- สกิลที่ 4 (อาชีพขั้นที่ 2) ---------- */
 const SK4={melee:['คำรามโลหิต','คำรามให้มอนรอบตัวหันมาหา ดาเมจรอบตัว และได้เกราะ 20% ของเลือดสูงสุด 5 วิ',14,35],
  archer:['กับดักจันทรา','วางกับดักแสงจันทร์ที่เป้าหมาย ระเบิดตรึงมอนในวง 2.5 วิ (บอสโดนชะลอแทน)',12,30],
@@ -13602,8 +13602,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v618';
+const WNV='v619';
 const WNL=[
+  ['🎨','ไอคอนสกิลแบบภาพวาด 60 ไอคอน','ไอคอนสกิลทุกอาชีพ ทุกขั้น (สกิลหลัก สกิลสายแยก ไม้ตายอาชีพขั้น 2 และไม้ตายตื่นรู้) เปลี่ยนเป็นภาพวาดเต็มสี · ปุ่มสกิลในจอเป็นภาพเต็มวง ตัวเลข MP/คูลดาวน์อยู่แถบล่าง · ในหน้าต่างสกิล/ผังสกิลเป็นช่องมีขอบสีอาชีพ'],
   ['⚡','ลื่นขึ้นทั้งเกม (ลดการวาดซ้ำ) + ท้องวาฬบีบไม่ตายทันที','นับพิกเซลที่วาดต่อเฟรมทุกแมพ แล้วตัดชั้นที่วาดซ้ำ: แมพวัง/นคร (27–45 รวมนครรากลึก) ไม่เทพื้นหลังทับใต้พื้นแล้ว · ค่ายและแมพที่พื้นกำลังเติมรายละเอียดไม่เทพื้นหลังเต็มจอ · หมอกตามระยะวาดแค่แถบบน/ล่าง · แมพมืดรวมสีย้อมกับความมืดเป็นชั้นเดียว · มอนในที่มืดไม่ได้แสงซ้ำสองชั้น — หน้าตาเหมือนเดิม · ในท้องวาฬ: ผนังท้องบีบแรงสุด 35% ของเลือด (บอสใกล้ตาย 45%) ไม่ตายในทีเดียวอีก'],
   ['🔧','ไล่บัคทั้งเกม + แมพมืดลื่นขึ้น','วัดความลื่นทุกแมพ ดันเจี้ยน และหอคอย · แมพมืดถาวร (ห้วงบัลลังก์เงา ป้อมทมิฬ บึงหมอกม่วง ฯลฯ) ช้าสุด เพราะดวงแสงกลางคืนหลายสิบดวงระบายเต็มความละเอียดจอ → รวมแสงลงภาพเล็กแล้วบวกทับครั้งเดียว หน้าตาเหมือนเดิม เฟรมเร็วขึ้น · ฐานแผ่นดิน: เห็ดยักษ์ที่จมอยู่หลังก้อนหินเอาออกแล้ว'],
   ['🏛️','หอคอยวิญญาณ: เสาแบบใหม่ทุกธีม','เสารอบลานวาดใหม่ ทรงไม่ซ้ำกันทั้ง 10 ธีม: เสาแกรนิตสลักลายม่วง · ตู้หนังสือ · ผลึกน้ำแข็ง · บะซอลต์ลาวา · รากเห็ดยักษ์ · หอเฟืองทองเหลือง · เสาหินอ่อนหัวทอง · กระดูกสันหลังมังกร · เสาดาราจักร · เศษหินห้วงความว่างลอยได้ · คบไฟ/โคมเข้าธีม'],
@@ -35857,6 +35858,30 @@ setTimeout(()=>{try{
   const vc=twvCard;window.twvCard=twvCard=function(f){const r=vc.apply(this,arguments);try{const ft=dg.tw&&dg.tw.ft,k={clear:'s_9',survive:'s_10',hunt:'s_11',rest:'s_12'}[ft],u=k&&HDI.on?twaIcon(k):'';const e=$('twcard');if(u&&e){const sp=e.querySelector('.k4 span');if(sp)sp.innerHTML='<img src="'+u+'" alt="" style="width:22px;height:22px;vertical-align:-6px;margin-right:4px">'+sp.textContent.replace(/^\S+\s/,'')}}catch(e){}return r};
   const ve=twvEnter;window.twvEnter=twvEnter=function(){const r=ve.apply(this,arguments);try{if(!TWAR.off&&HDI.on){const t=ov.querySelector('.twvt');if(t){t.style.backgroundImage='linear-gradient(180deg,rgba(8,6,16,.55),rgba(8,6,16,.78)),url(hd-twp.webp)';t.style.backgroundSize='cover';t.style.backgroundPosition='center'}}}catch(e){}return r};
 }catch(e){console.warn('twa',e)}},2500);
+/* ---------- v619 ไอคอนสกิลแบบภาพวาด (SKIC) ----------
+   · 60 ไอคอน (5 อาชีพ × 12) วาดโดย ChatGPT → hd-skic.webp (12×5 ช่อง ช่องละ 160px · แถว=อาชีพ · คอลัมน์=ช่อง)
+     ช่อง 1–5 SKI[c][0..4] · 6–7 SKI6 · 8 SKI2 (ไม้ตายอาชีพขั้น 2) · 9 SKI2B (ไม้ตายสายแยก) · 10 SKI4B · 11–12 SKI3U (ไม้ตายตื่นรู้)
+   · ไม่แก้ตารางเดิม: จับคู่ "ไอคอน SVG เดิม → ภาพวาด" แล้วสลับ src ตอน skImg สร้าง <img> (ไอคอนของสกิลแบบอื่น/ที่เปลี่ยนเองยังเป็นแบบเดิม)
+   · ปุ่มสกิลในจอ (วงกลม): ภาพเต็มวง ตัวเลข MP/คูลดาวน์อยู่บนแถบเข้มด้านล่าง · ที่อื่น: ช่องมุมโค้ง ขอบสีอาชีพ
+   · ภาพยังโหลดไม่เสร็จ/โหลดไม่ได้ → ใช้ SVG เดิม · ปิด: SKIC.on=0 (แล้วเปิดหน้าสกิลใหม่) */
+const SKIC={on:1,ok:0,err:'',C:160,map:new Map(),col:new Map(),ORD:['melee','archer','sup','assn','mage']};
+function skicCSS(){if(document.getElementById('skiccss'))return;const s=document.createElement('style');s.id='skiccss';s.textContent=
+'img.ski.skp{border-radius:22%;box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 0 2.5px var(--skc,#e7b75a),0 3px 6px rgba(0,0,0,.55);filter:none;object-fit:cover}'+
+'#sk button img.ski.skp{position:absolute;left:3px;top:3px;width:calc(100% - 6px)!important;height:calc(100% - 6px)!important;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.5)}'+
+'#sk button:has(img.skp){justify-content:flex-end;overflow:hidden}'+
+'#sk button:has(img.skp) small{position:relative;z-index:2;margin:0 0 5px;padding:1px 6px;border-radius:8px;background:rgba(8,6,10,.72);font-size:10px;line-height:1.15}'+
+'#sk button:disabled img.skp,#sk button.lk img.skp{filter:grayscale(1) brightness(.6)}';
+document.head.appendChild(s)}
+function skicLoad(){const ORD=SKIC.ORD,C=SKIC.C;const im=new Image();im.decoding='async';
+  im.onload=()=>{try{const cv2=document.createElement('canvas');cv2.width=cv2.height=C;const x=cv2.getContext('2d');let n=0;
+    ORD.forEach((c,r)=>{if(!CL[c])return;const S=[SKI[c]&&SKI[c][0],SKI[c]&&SKI[c][1],SKI[c]&&SKI[c][2],SKI[c]&&SKI[c][3],SKI[c]&&SKI[c][4],SKI6[c]&&SKI6[c][0],SKI6[c]&&SKI6[c][1],SKI2[c],SKI2B[c],SKI4B[c],SKI3U[c]&&SKI3U[c][0],SKI3U[c]&&SKI3U[c][1]];
+      S.forEach((u,i)=>{if(!u||SKIC.map.has(u))return;x.clearRect(0,0,C,C);x.drawImage(im,i*C,r*C,C,C,0,0,C,C);const d=cv2.toDataURL('image/webp',.9);SKIC.map.set(u,d.startsWith('data:image/webp')?d:cv2.toDataURL('image/png'));SKIC.col.set(u,CL[c].c);n++})});
+    SKIC.ok=n;skicCSS();skicRefresh()}catch(e){SKIC.err=String(e).slice(0,200)}};
+  im.onerror=()=>{SKIC.err='load'};im.src='hd-skic.webp'}
+function skicRefresh(){try{if(!ov.hidden&&typeof charTab!=='undefined'&&charTab==='tr'&&typeof treeUI==='function')treeUI()}catch(e){}}
+setTimeout(()=>{try{const o=skImg;skImg=function(c,k,sz){const h=o.apply(this,arguments);if(!SKIC.on||!SKIC.ok)return h;
+    return h.replace(/^<img class="ski" src="([^"]+)"/,(m,u)=>{const n=SKIC.map.get(u);return n?'<img class="ski skp" style="--skc:'+(SKIC.col.get(u)||'#e7b75a')+'" src="'+n+'"':m})};
+  if(SKIC.on)skicLoad()}catch(e){SKIC.err=String(e).slice(0,200);console.warn('skic',e)}},2400);
 /* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
    ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
       → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1
