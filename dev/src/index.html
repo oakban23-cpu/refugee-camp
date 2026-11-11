@@ -3310,7 +3310,7 @@ function runeUI(msg){if(!me.cls)return;ov.dataset.k='rune';const S=rnSt(),R=RUNE
   [0,1,3,4,5,2].forEach(k=>{if(k===5&&!me.rb)return;const cur=rnOf(k),lockN=k===5&&!s6Open()?'ปลดเมื่อจุติถึง Lv '+RBL5:k===3&&me.lv<SK3LV?'ปลดสกิลนี้ที่ Lv '+SK3LV:k===4&&!me.cls2?'ปลดสกิลนี้เมื่อตื่นพลัง (Lv '+AWLV+')':k===4&&BR2()&&me.cls!=='melee'&&me.cls!=='archer'&&!(typeof RUNESB!=='undefined'&&RUNESB[me.cls])?'รูนช่องนี้ทำให้ «'+SK4[me.cls][0]+'» ของสายแสง · สายทมิฬใส่ได้แต่ไม่มีผลกับ «'+sk4Of()[0]+'»':k===2&&me.lv<ULV?'ปลดอัลติที่ Lv '+ULV:'';h+='<div class="br">'+(k===2?'💥 อัลติ':k===5?'🌅 สกิลคลาส 3':'สกิล '+(k===3?3:k===4?4:k+1))+' · '+skName(k)+(lockN?' <small style="opacity:.7">('+lockN+')</small>':'')+'</div>';
     h+='<div class="card rnrow'+(!cur?' on':'')+'"><div class="qr"><div class="ico">⚪</div><div class="nm"><b>ไม่ใส่รูน</b><small>สกิลทำงานแบบปกติ</small></div>'+(cur?'<button data-rne="'+k+':"'+(inCamp?'':' disabled')+'>ใช้แบบปกติ</button>':'<span class="rnon">✓ ใช้อยู่</span>')+'</div></div>';
     ['a','b'].forEach(e=>{const [id,ic,n,d]=R[k][e],own=!!S.u[id],on=cur===e,col=e==='a'?'#ff7a5a':'#5ab0ff',lv=rnLv(id),stars=own?' <span style="color:#ffd84a;letter-spacing:1px">'+'★'.repeat(lv)+'<span style="opacity:.3">'+'★'.repeat(3-lv)+'</span></span>':'',upB=own&&lv<3?'<button class="rnup" data-rnu="'+id+'"'+((S.sh|0)>=RNU[lv]?'':' disabled')+'>⬆️ '+RNRM[lv+1]+'<br><small>💠'+RNU[lv]+'</small></button>':own?'<span class="rnmax">MAX</span>':'';
-      h+='<div class="card rnrow'+(on?' on':'')+(own?'':' lk')+'" style="border-left:4px solid '+col+'"><div class="qr"><div class="ico" style="font-size:24px">'+ic+'</div><div class="nm"><b>'+(e==='a'?'🔺':'🔷')+' '+n+stars+'</b><small>'+d+(lv>1?' · <span style="color:#ffd84a">พลัง +'+(lv-1)*15+'%</span>':'')+'</small></div><div class="rnbt">'+
+      h+='<div class="card rnrow'+(on?' on':'')+(own?'':' lk')+'" style="border-left:4px solid '+col+'"><div class="qr"><div class="ico" style="font-size:24px">'+rniH(id,ic)+'</div><div class="nm"><b>'+(e==='a'?'🔺':'🔷')+' '+n+stars+'</b><small>'+d+(lv>1?' · <span style="color:#ffd84a">พลัง +'+(lv-1)*15+'%</span>':'')+'</small></div><div class="rnbt">'+
         (on?'<span class="rnon">✓ ใส่อยู่</span>':own?'<button class="pri" data-rne="'+k+':'+e+'"'+(inCamp?'':' disabled')+'>ใส่</button>':'<button data-rnc="'+id+'"'+((S.sh|0)>=RNC?'':' disabled')+'>สร้าง<br><small>💠'+RNC+'</small></button>')+upB+'</div></div></div>'})});
   h+='<div class="card hint" style="font-size:11.5px;opacity:.85">รูนอัลติเป็นพลังเสริมที่ใช้ได้กับอัลติทุกร่าง (ก่อนและหลังตื่นพลัง)</div></div>';ov.innerHTML=h;ov.hidden=false;
   ov.querySelectorAll('[data-rnc]').forEach(b=>b.onclick=()=>{const id=b.dataset.rnc;if((S.sh|0)<RNC)return;S.sh-=RNC;S.u[id]=1;try{sfx('lg_get')}catch(e){}try{achCheck()}catch(e){}runeUI('💠 สร้างรูนสำเร็จ! กด "ใส่" เพื่อใช้งาน')});
@@ -13602,8 +13602,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v620';
+const WNV='v621';
 const WNL=[
+  ['🎨','ไอคอนภาพวาดชุด 3: รูนเสริมของสกิล 160 แบบ','รูนเสริม A/B ของทุกสกิล ทุกอาชีพ (รวมสกิลสายแยกและสกิลทางเลือกในคลังสกิล) เปลี่ยนจากอีโมจิเป็นแผ่นหินรูนขอบสีอาชีพ ในหน้าต่างสกิล › รูนหลัก และหน้าช่างรูนไอริส'],
   ['🎨','ไอคอนภาพวาดชุด 2: สกิลทางเลือก + รูนลิงก์','สกิลทางเลือกในคลังสกิลทั้ง 45 แบบ (ทุกอาชีพ รวมสายแยก) เปลี่ยนเป็นภาพวาดเข้าชุดกับสกิลหลัก · รูนลิงก์ 23 แบบเปลี่ยนจากอีโมจิเป็นเม็ดรูนเรืองแสง ทั้งช่องรูน รายการเลือก และรายละเอียด'],
   ['🎨','ไอคอนสกิลแบบภาพวาด 60 ไอคอน','ไอคอนสกิลทุกอาชีพ ทุกขั้น (สกิลหลัก สกิลสายแยก ไม้ตายอาชีพขั้น 2 และไม้ตายตื่นรู้) เปลี่ยนเป็นภาพวาดเต็มสี · ปุ่มสกิลในจอเป็นภาพเต็มวง ตัวเลข MP/คูลดาวน์อยู่แถบล่าง · ในหน้าต่างสกิล/ผังสกิลเป็นช่องมีขอบสีอาชีพ'],
   ['⚡','ลื่นขึ้นทั้งเกม (ลดการวาดซ้ำ) + ท้องวาฬบีบไม่ตายทันที','นับพิกเซลที่วาดต่อเฟรมทุกแมพ แล้วตัดชั้นที่วาดซ้ำ: แมพวัง/นคร (27–45 รวมนครรากลึก) ไม่เทพื้นหลังทับใต้พื้นแล้ว · ค่ายและแมพที่พื้นกำลังเติมรายละเอียดไม่เทพื้นหลังเต็มจอ · หมอกตามระยะวาดแค่แถบบน/ล่าง · แมพมืดรวมสีย้อมกับความมืดเป็นชั้นเดียว · มอนในที่มืดไม่ได้แสงซ้ำสองชั้น — หน้าตาเหมือนเดิม · ในท้องวาฬ: ผนังท้องบีบแรงสุด 35% ของเลือด (บอสใกล้ตาย 45%) ไม่ตายในทีเดียวอีก'],
@@ -35286,7 +35287,7 @@ function skwRune(k){const R=RUNES[me.cls]&&RUNES[me.cls][k],S=rnSt();if(!R)retur
   let h=(note?'<div class="skwnt">'+note+'</div>':'')+'<div class="skwrg">';
   
   ['a','b'].forEach(e=>{const[id,ic,n,d]=R[e],own=!!S.u[id],lv=rnLv(id),on=cur===e;
-    h+='<div class="skwrc'+(on?' on':'')+(own?'':' no')+'" style="--c:'+(e==='a'?'#ff7a5a':'#5ab0ff')+'"><div class="khd"><span class="kri">'+ic+'</span><b>รูน '+e.toUpperCase()+' · '+n+'</b>'+(own?'<span class="kst">'+'★'.repeat(lv)+'<i>'+'★'.repeat(3-lv)+'</i></span>':'')+(on?'<span class="kbd">ใช้อยู่</span>':own?'':'<span class="kbd kn">ยังไม่มี</span>')+'</div><small>'+d+(lv>1?' · <b style="color:#ffd84a">พลัง +'+(lv-1)*15+'%</b>':'')+'</small><div class="kbt">'+
+    h+='<div class="skwrc'+(on?' on':'')+(own?'':' no')+'" style="--c:'+(e==='a'?'#ff7a5a':'#5ab0ff')+'"><div class="khd"><span class="kri">'+rniH(id,ic)+'</span><b>รูน '+e.toUpperCase()+' · '+n+'</b>'+(own?'<span class="kst">'+'★'.repeat(lv)+'<i>'+'★'.repeat(3-lv)+'</i></span>':'')+(on?'<span class="kbd">ใช้อยู่</span>':own?'':'<span class="kbd kn">ยังไม่มี</span>')+'</div><small>'+d+(lv>1?' · <b style="color:#ffd84a">พลัง +'+(lv-1)*15+'%</b>':'')+'</small><div class="kbt">'+
       (on?'':own?'<button class="pri" data-skwre="'+k+':'+e+'"'+(ed?'':' disabled')+'>ใช้รูนนี้</button>':'<button class="pri" data-skwrc="'+id+'"'+((S.sh|0)>=RNC?'':' disabled')+'>สร้าง · 💠'+RNC+'</button>')+
       (own&&lv<3?'<button data-skwru="'+id+'"'+((S.sh|0)>=RNU[lv]?'':' disabled')+'>⬆️ ขั้น '+RNRM[lv+1]+' · 💠'+RNU[lv]+'</button>':own?'<span class="kmx">MAX</span>':'')+'</div></div>'});
   h+='</div><div class="skwnone'+(!cur?' on':'')+'"><span>⚪ <b>ไม่ใส่รูน</b> · สกิลทำงานแบบปกติ</span>'+(cur?'<button data-skwre="'+k+':"'+(ed?'':' disabled')+'>ถอดรูน ใช้แบบปกติ</button>':'<span class="kbd">ใช้อยู่</span>')+'</div><div class="skwft"><small>💠 ผงรูนได้จาก หัวหน้ามอน · เหตุการณ์สุ่ม · ดันเจี้ยน · บอส'+(ed?'':' · ⚔️ เปลี่ยนรูนไม่ได้ในลานประลอง')+'</small><button data-skwiris="main">📖 สมุดรูน</button></div>';return h}
@@ -35907,6 +35908,22 @@ function skic2Load(){const C=SKIC.C,im=new Image();im.decoding='async';
     SKIC2.ok=n;lriCSS();skicCSS();if(!SKIC.ok)SKIC.ok=-1;try{lriPost(ov)}catch(e){}skicRefresh()}catch(e){SKIC2.err=String(e).slice(0,200)}};
   im.onerror=()=>{SKIC2.err='load'};im.src='hd-skic2.webp'}
 setTimeout(()=>{try{skic2Load();const ovE=document.getElementById('ov');if(ovE&&window.MutationObserver){let q=0;new MutationObserver(()=>{if(q)return;q=1;requestAnimationFrame(()=>{q=0;try{lriPost(ovE)}catch(e){}})}).observe(ovE,{childList:true,subtree:true})}}catch(e){SKIC2.err=String(e).slice(0,200);console.warn('skic2',e)}},2500);
+/* ---------- v621 ไอคอนภาพวาดชุด 3: รูนเสริมของสกิล (RNI) ----------
+   · 160 รูน (RUNES a/b 60 · RUNESB 10 · รูนสกิลทางเลือก Q8D 60 · Q8DB 30) เดิมเป็นอีโมจิ → แผ่นหินรูนขอบสีอาชีพ
+   · อีโมจิรูนซ้ำกันมาก (76 แบบ/160 รูน) → จับคู่ด้วย "รหัสรูน" · atlas hd-skic3.webp 16 คอลัมน์ ช่องละ 96 ตามลำดับ RNI.ids
+   · ใช้ในหน้าต่างสกิล › รูนหลัก (การ์ดรูน A/B) และหน้าช่างรูนไอริส (แบบเดิม) · ข้อความ/แชทยังเป็นอีโมจิ
+   · ภาพยังโหลดไม่เสร็จ → อีโมจิเดิม · ปิด: RNI.off=1 */
+const RNI={off:0,ok:0,err:'',C:96,m:new Map(),ids:'m0a,m0b,m1a,m1b,m2a,m2b,m3a,m3b,m4a,m4b,p5ma,p5mb,w4a,w4b,qm0a,qm0b,qm1a,qm1b,qm2a,qm2b,qm3a,qm3b,qm4a,qm4b,qm5a,qm5b,rm2a,rm2b,rm4a,rm4b,rm5a,rm5b,a0a,a0b,a1a,a1b,a2a,a2b,a3a,a3b,a4a,a4b,p5aa,p5ab,v4a,v4b,qa0a,qa0b,qa1a,qa1b,qa2a,qa2b,qa3a,qa3b,qa4a,qa4b,qa5a,qa5b,ra2a,ra2b,ra4a,ra4b,ra5a,ra5b,s0a,s0b,s1a,s1b,s2a,s2b,s3a,s3b,s4a,s4b,p5sa,p5sb,y4a,y4b,qu0a,qu0b,qu1a,qu1b,qu2a,qu2b,qu3a,qu3b,qu4a,qu4b,qu5a,qu5b,ru2a,ru2b,ru4a,ru4b,ru5a,ru5b,s0x,s0y,s1x,s1y,s2x,s2y,s3x,s3y,s4x,s4y,p5na,p5nb,x4a,x4b,qn0a,qn0b,qn1a,qn1b,qn2a,qn2b,qn3a,qn3b,qn4a,qn4b,qn5a,qn5b,rn2a,rn2b,rn4a,rn4b,rn5a,rn5b,g0a,g0b,g1a,g1b,g2a,g2b,g3a,g3b,g4a,g4b,p5ga,p5gb,z4a,z4b,qg0a,qg0b,qg1a,qg1b,qg2a,qg2b,qg3a,qg3b,qg4a,qg4b,qg5a,qg5b,rg2a,rg2b,rg4a,rg4b,rg5a,rg5b'.split(',')};
+function rniH(id,ic){if(RNI.off||!id)return ic;const u=RNI.m.get(id);return u?'<img class="rni" src="'+u+'" alt="">':ic}
+function rniCSS(){if(document.getElementById('rnicss'))return;const s=document.createElement('style');s.id='rnicss';s.textContent=
+'img.rni{width:1.55em;height:1.55em;border-radius:50%;vertical-align:middle;object-fit:cover;display:inline-block;box-shadow:0 1px 3px rgba(0,0,0,.6)}'+
+'#ov .ico:has(img.rni){display:flex;align-items:center;justify-content:center}';document.head.appendChild(s)}
+function rniLoad(){const C=RNI.C,im=new Image();im.decoding='async';
+  im.onload=()=>{try{const c2=document.createElement('canvas');c2.width=c2.height=C;const x=c2.getContext('2d');
+    RNI.ids.forEach((id,j)=>{x.clearRect(0,0,C,C);x.drawImage(im,(j%16)*C,Math.floor(j/16)*C,C,C,0,0,C,C);const d=c2.toDataURL('image/webp',.9);RNI.m.set(id,d.startsWith('data:image/webp')?d:c2.toDataURL('image/png'))});
+    RNI.ok=RNI.m.size;rniCSS();try{if(!ov.hidden){if(ov.dataset.k==='rune'&&typeof runeUI==='function')runeUI();else if(typeof charTab!=='undefined'&&charTab==='tr'&&typeof treeUI==='function')treeUI()}}catch(e){}}catch(e){RNI.err=String(e).slice(0,200)}};
+  im.onerror=()=>{RNI.err='load'};im.src='hd-skic3.webp'}
+setTimeout(()=>{try{rniLoad()}catch(e){RNI.err=String(e).slice(0,200)}},2600);
 /* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
    ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
       → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1
