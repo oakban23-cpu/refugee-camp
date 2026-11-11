@@ -13602,8 +13602,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v621';
+const WNV='v622';
 const WNL=[
+  ['🎨','ไอคอนปุ่มบนจอ + เมนูแบบภาพวาด','ปุ่มเมนู เป้า บอทล่า AUTO หลบ ยาเลือด ยามานา เป็นภาพวาดเต็มวงเข้าชุดกับปุ่มสกิล (บอท/AUTO ตอนปิดภาพจะหม่น) · ไอคอนในเมนูทุกช่อง หัวหน้าต่างทุกบาน และปุ่มปฏิทิน/แชท/อีโมต/เสียง/เพลง เป็นภาพวาดโทนทอง'],
   ['🎨','ไอคอนภาพวาดชุด 3: รูนเสริมของสกิล 160 แบบ','รูนเสริม A/B ของทุกสกิล ทุกอาชีพ (รวมสกิลสายแยกและสกิลทางเลือกในคลังสกิล) เปลี่ยนจากอีโมจิเป็นแผ่นหินรูนขอบสีอาชีพ ในหน้าต่างสกิล › รูนหลัก และหน้าช่างรูนไอริส'],
   ['🎨','ไอคอนภาพวาดชุด 2: สกิลทางเลือก + รูนลิงก์','สกิลทางเลือกในคลังสกิลทั้ง 45 แบบ (ทุกอาชีพ รวมสายแยก) เปลี่ยนเป็นภาพวาดเข้าชุดกับสกิลหลัก · รูนลิงก์ 23 แบบเปลี่ยนจากอีโมจิเป็นเม็ดรูนเรืองแสง ทั้งช่องรูน รายการเลือก และรายละเอียด'],
   ['🎨','ไอคอนสกิลแบบภาพวาด 60 ไอคอน','ไอคอนสกิลทุกอาชีพ ทุกขั้น (สกิลหลัก สกิลสายแยก ไม้ตายอาชีพขั้น 2 และไม้ตายตื่นรู้) เปลี่ยนเป็นภาพวาดเต็มสี · ปุ่มสกิลในจอเป็นภาพเต็มวง ตัวเลข MP/คูลดาวน์อยู่แถบล่าง · ในหน้าต่างสกิล/ผังสกิลเป็นช่องมีขอบสีอาชีพ'],
@@ -35924,6 +35925,39 @@ function rniLoad(){const C=RNI.C,im=new Image();im.decoding='async';
     RNI.ok=RNI.m.size;rniCSS();try{if(!ov.hidden){if(ov.dataset.k==='rune'&&typeof runeUI==='function')runeUI();else if(typeof charTab!=='undefined'&&charTab==='tr'&&typeof treeUI==='function')treeUI()}}catch(e){}}catch(e){RNI.err=String(e).slice(0,200)}};
   im.onerror=()=>{RNI.err='load'};im.src='hd-skic3.webp'}
 setTimeout(()=>{try{rniLoad()}catch(e){RNI.err=String(e).slice(0,200)}},2600);
+/* ---------- v622 ไอคอน UI ภาพวาด (UIIC) ----------
+   · 54 ไอคอนจาก ChatGPT (hd-uiic.webp 9 คอลัมน์ ช่องละ 128 · ลำดับตาม UIIC.keys)
+   · ปุ่มกลมบนจอ: เมนู #mn · เป้า #tg · บอทล่า #ahb · AUTO #atb · หลบ #dgx → ภาพเต็มวง ป้ายข้อความบนแถบเข้มด้านล่าง (ปิดอยู่ = ภาพหม่น)
+   · ยาเลือด/ยามานา: แทน POTI.hp / POTI.mp (ใช้ทุกที่ที่แสดงยา 2 ชนิดนี้) · บนจอเป็นภาพเต็มวง
+   · ระบบไอคอนทอง U58 (เมนู · หัวหน้าต่างทุกบาน · ปุ่มปฏิทิน/แชท/อีโมต/เสียง/เพลง): u58Svg คืนภาพวาดแทน SVG + เพิ่ม 🌙
+   · ภาพยังโหลดไม่เสร็จ → แบบเดิม · ปิด: UIIC.off=1 แล้วรีโหลดหน้า */
+const UIIC={off:0,ok:0,err:'',C:128,m:new Map(),keys:["mn", "tg", "ahb", "atb", "dgx", "ph", "pm", "📅", "💬", "😊", "🔊", "🔇", "🎵", "🆕", "✨", "🎒", "📋", "🏰", "👥", "🔗", "🎉", "🐎", "🐾", "🃏", "⚗️", "🎣", "🏠", "🤖", "⚙️", "🖼️", "📊", "🛠", "👤", "📜", "🪶", "💜", "🏪", "⚔️", "💠", "🌅", "🗺️", "👫", "⛏️", "📬", "👗", "🏗️", "🤝", "🗼", "🪙", "✏️", "🛒", "🔨", "⚒️", "🌙"],hud:['mn','tg','ahb','atb','dgx']};
+function uiicCSS(){if(document.getElementById('uiiccss'))return;const s=document.createElement('style');s.id='uiiccss';s.textContent=
+'img.u58p{display:inline-block;vertical-align:-.2em;border-radius:22%;object-fit:cover;box-shadow:0 1px 3px rgba(0,0,0,.55)}'+
+'.u58w>img.u58p{width:1.15em;height:1.15em}#mnp i img.u58p,.ph .ic img.u58p{-webkit-mask-image:radial-gradient(circle,#000 58%,transparent 72%);mask-image:radial-gradient(circle,#000 58%,transparent 72%);box-shadow:none;border-radius:0}'+'#mnp i img.u58p{width:34px;height:34px;display:block}#mnp.ui8m button>i:has(img.u58p){height:32px!important}.ph .ic img.u58p{width:34px;height:34px}'+
+'#evt img.u58p,#cht img.u58p,#emb img.u58p{width:calc(100% - 4px);height:calc(100% - 4px);border-radius:50%;box-shadow:none;position:absolute;left:2px;top:2px}#evt,#cht,#emb{position:relative;overflow:hidden}'+
+'#aud img.u58p{width:22px;height:22px;border-radius:6px}'+
+'.uip{overflow:hidden!important;display:flex!important;flex-direction:column;align-items:center;justify-content:flex-end!important}'+
+'.uip>img.uih,#ph>img.poti.uih,#pm>img.poti.uih{position:absolute;left:2px;top:2px;width:calc(100% - 4px)!important;height:calc(100% - 4px)!important;border-radius:50%;object-fit:cover;pointer-events:none;z-index:0;filter:none}'+
+'.uip>small,#ph.uip>small,#pm.uip>small{position:relative;z-index:1;margin:0 0 3px;padding:0 5px;border-radius:7px;background:rgba(8,6,10,.72);font-size:9.5px;line-height:1.25;color:#fff}'+
+'#ahb.uip:not(.on)>img.uih,#atb.uip:not(.on)>img.uih{filter:grayscale(.5) brightness(.72)}#ahb.uip.on,#atb.uip.on{animation:none}'+
+'#mn.uip::before{display:none}#mn.uip i{z-index:2}';document.head.appendChild(s)}
+function uihApply(b){if(UIIC.off||!UIIC.ok||!b)return;const k=b.id,u=UIIC.m.get(k);if(!u)return;
+  if(k==='ph'||k==='pm'){const im=b.querySelector('img.poti');if(im&&!im.classList.contains('uih')){im.classList.add('uih');b.classList.add('uip')}return}
+  let im=b.querySelector(':scope>img.uih');if(!im){for(const n of [...b.childNodes]){if(n.nodeType===3&&n.textContent.trim()){if(k==='mn'){const sm=document.createElement('small');sm.textContent=n.textContent.trim();n.replaceWith(sm)}else n.remove();break}}
+    im=document.createElement('img');im.className='uih';im.alt='';im.draggable=false;im.src=u;b.prepend(im);b.classList.add('uip')}}
+function uiicLoad(){const C=UIIC.C,im=new Image();im.decoding='async';
+  im.onload=()=>{try{const c2=document.createElement('canvas');c2.width=c2.height=C;const x=c2.getContext('2d');
+    UIIC.keys.forEach((k,j)=>{x.clearRect(0,0,C,C);x.drawImage(im,(j%9)*C,Math.floor(j/9)*C,C,C,0,0,C,C);const d=c2.toDataURL('image/webp',.9);UIIC.m.set(k,d.startsWith('data:image/webp')?d:c2.toDataURL('image/png'))});
+    UIIC.ok=UIIC.m.size;UIIC.m.set('🎯',UIIC.m.get('tg'));uiicCSS();
+    try{POTI.hp=UIIC.m.get('ph');POTI.mp=UIIC.m.get('pm')}catch(e){}
+    try{if(!U58I['🌙'])U58I['🌙']='<path d="M15 3a9 9 0 1 0 6 15A7 7 0 0 1 15 3z" fill="url(#u58g)"/>';if(!U58I['🎯'])U58I['🎯']='<circle cx="12" cy="12" r="8" fill="url(#u58g)"/>'}catch(e){}
+    document.querySelectorAll('span.u58w').forEach(sp=>{const t=sp.dataset.e||'',k=U58I[t]?t:U58I[t.replace(/️/g,'')]?t.replace(/️/g,''):(U58I[t+'️']?t+'️':null);if(k)sp.innerHTML=u58Svg(k)});
+    try{u58Scan(document)}catch(e){}
+    try{const mt=menuToggle;window.menuToggle=menuToggle=function(){const r=mt.apply(this,arguments);setTimeout(()=>{try{const M=document.getElementById('mnp');if(M){M.querySelectorAll('button>i').forEach(e=>{e.__u58=null;u58Swap(e)})}}catch(e){}},30);return r}}catch(e){}
+    UIIC.hud.concat(['ph','pm']).forEach(id=>{const b=document.getElementById(id);if(!b)return;if(id==='ph'||id==='pm')b.dataset.h='';uihApply(b);new MutationObserver(()=>uihApply(b)).observe(b,{childList:true})})}catch(e){UIIC.err=String(e).slice(0,200)}};
+  im.onerror=()=>{UIIC.err='load'};im.src='hd-uiic.webp'}
+setTimeout(()=>{try{if(UIIC.off)return;const o=u58Svg;window.u58Svg=u58Svg=function(e){if(!UIIC.off&&UIIC.ok){const u=UIIC.m.get(e)||UIIC.m.get(String(e).replace(/️/g,''))||UIIC.m.get(e+'️');if(u)return'<img class="u58p" src="'+u+'" alt="" draggable="false">'}return o.apply(this,arguments)};uiicLoad()}catch(e){UIIC.err=String(e).slice(0,200);console.warn('uiic',e)}},2600);
 /* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
    ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
       → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1
