@@ -14,7 +14,7 @@ async def main():
             await pg.goto(URL); await pg.wait_for_timeout(3800)
             a=await pg.evaluate("()=>[ITIC.ok,ITIC.err,!!ITIC.im,ITIC.ix.size]")
             rep('โหลด hd-itic.webp · 176 คีย์',a==[176,'',True,176],a)
-            a=await pg.evaluate("""()=>{const bad=[];const isP=u=>typeof u==='string'&&u.startsWith('data:image/webp')&&Object.values(ITIC.c).includes(u);
+            a=await pg.evaluate("""()=>{const bad=[];const isP=u=>typeof u==='string'&&u.startsWith('data:image/webp')&&(Object.values(ITIC.c).includes(u)||(typeof FSIC!=='undefined'&&Object.values(FSIC.c).includes(u)));
               for(const c of ['melee','archer','mage','sup','assn'])for(const st of [0,1,2])for(let T=0;T<7;T++)if(!isP(itEquipURL('w',T,c+':'+st,0,0,0)))bad.push('w'+c+st+T);
               for(const f of ['h','l','r'])for(let T=0;T<7;T++)if(!isP(itEquipURL('a',T,f,0,0,0)))bad.push('a'+f+T);
               for(const f of ['h0','h1','h2'])for(let T=0;T<7;T++)if(!isP(itEquipURL('h',T,f,0,0,0)))bad.push('h'+f+T);
