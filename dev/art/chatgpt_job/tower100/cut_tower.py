@@ -8,7 +8,7 @@ def cells(path,pref,take):
         r,c=(n-1)//4,(n-1)%4;cell=im.crop((c*cw,r*ch,(c+1)*cw,(r+1)*ch))
         a=cell.getchannel('A').point(lambda v:255 if v>20 else 0);bb=a.getbbox()
         if not bb:print('empty',pref,n);continue
-        sp=cell.crop(bb);mh=300
+        sp=cell.crop(bb);mh=(144 if n>=9 else 120 if n in(5,6) else 300) if pref=='s' else 300
         if sp.height>mh:sp=sp.resize((max(1,round(sp.width*mh/sp.height)),mh),Image.LANCZOS)
         sprites.append((pref+'_'+str(n),sp))
 for t in range(1,11):cells(f'{D}/props_{t:02d}.png',f'p{t}',range(1,5) if DD else range(1,9))

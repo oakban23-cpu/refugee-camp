@@ -17,7 +17,7 @@ async def main():
                 await pg.evaluate(f"()=>{{ov.hidden=true;dg.ph='lobby';TWCL=null;twBegin({f});me.x=CX-40;me.y=CY-330;banner=null}}");await pg.wait_for_timeout(1800)
                 r=await pg.evaluate("""()=>new Promise(res=>{const o=twaPut,got={};twaPut=function(k,x,y,w,a){if(/^p\\d+_[5-8]$/.test(k))got[k]=Math.round(w);return o.apply(this,arguments)};setTimeout(()=>{twaPut=o;res(got)},700)})""")
                 seen[f]=r
-            rep('atlas ใหม่ hd-gpt10b.webp โหลดครบ 132 ชิ้น',await pg.evaluate("()=>TWAR.src==='hd-gpt10b.webp'&&TWAR.ok===1&&Object.keys(TWAR.f).length===132"))
+            rep('atlas ใหม่ hd-gpt10c.webp โหลดครบ 132 ชิ้น',await pg.evaluate("()=>TWAR.src==='hd-gpt10c.webp'&&TWAR.ok===1&&Object.keys(TWAR.f).length===132"))
             rep('ของแต่งขอบในชีทใหม่มีความละเอียด (ใหญ่ ≥200px · กลาง ≥140px)',await pg.evaluate("()=>{for(let t=1;t<=10;t++)for(let c=5;c<=8;c++){const F=TWAR.f['p'+t+'_'+c];if(!F||F[3]<(c<7?200:140))return 'p'+t+'_'+c}return true}")==True)
             ok=all(len(v)>=3 for v in seen.values()) and all(k.startswith('p%d_'%((f-1)//10+1)) for f,v in seen.items() for k in v)
             rep('ทุกธีมวาดของแต่งขอบด้วยคีย์ธีมตัวเอง',ok,seen)
@@ -25,6 +25,7 @@ async def main():
             await pg.evaluate("()=>{TWAR.v2=0}");await pg.wait_for_timeout(300)
             r=await pg.evaluate("""()=>new Promise(res=>{const o=twaPut,got={};twaPut=function(k,x,y,w,a){if(/^p\\d+_[5-8]$/.test(k))got[k]=w;return o.apply(this,arguments)};setTimeout(()=>{twaPut=o;res(got)},600)})""")
             rep('ปิด v2 → กลับไปใช้ความกว้างเดิมใน ED',all(v in (112,66,104,62) for v in r.values()) and len(r)>0,r)
+            rep('v627 ชิ้นส่วนกลางภาพใหม่ (ป้าย ≤144 · หีบ ≤120 · ประตู ≥250) และป้ายประเภทชั้นแปลงเป็นรูปได้',await pg.evaluate("()=>{const f=TWAR.f;return f.s_9[3]<=144&&f.s_12[3]<=144&&f.s_5[3]<=120&&f.s_1[3]>=250&&f.s_2[3]>=250&&['s_9','s_10','s_11','s_12'].every(k=>twaIcon(k).startsWith('data:image'))}"))
             rep('ไม่มี error หน้าเว็บ',errs==[],errs)
     finally:p.terminate()
     print('SUMMARY',sum(R),'/',len(R))
