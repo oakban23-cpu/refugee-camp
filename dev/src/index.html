@@ -13602,8 +13602,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v619';
+const WNV='v620';
 const WNL=[
+  ['🎨','ไอคอนภาพวาดชุด 2: สกิลทางเลือก + รูนลิงก์','สกิลทางเลือกในคลังสกิลทั้ง 45 แบบ (ทุกอาชีพ รวมสายแยก) เปลี่ยนเป็นภาพวาดเข้าชุดกับสกิลหลัก · รูนลิงก์ 23 แบบเปลี่ยนจากอีโมจิเป็นเม็ดรูนเรืองแสง ทั้งช่องรูน รายการเลือก และรายละเอียด'],
   ['🎨','ไอคอนสกิลแบบภาพวาด 60 ไอคอน','ไอคอนสกิลทุกอาชีพ ทุกขั้น (สกิลหลัก สกิลสายแยก ไม้ตายอาชีพขั้น 2 และไม้ตายตื่นรู้) เปลี่ยนเป็นภาพวาดเต็มสี · ปุ่มสกิลในจอเป็นภาพเต็มวง ตัวเลข MP/คูลดาวน์อยู่แถบล่าง · ในหน้าต่างสกิล/ผังสกิลเป็นช่องมีขอบสีอาชีพ'],
   ['⚡','ลื่นขึ้นทั้งเกม (ลดการวาดซ้ำ) + ท้องวาฬบีบไม่ตายทันที','นับพิกเซลที่วาดต่อเฟรมทุกแมพ แล้วตัดชั้นที่วาดซ้ำ: แมพวัง/นคร (27–45 รวมนครรากลึก) ไม่เทพื้นหลังทับใต้พื้นแล้ว · ค่ายและแมพที่พื้นกำลังเติมรายละเอียดไม่เทพื้นหลังเต็มจอ · หมอกตามระยะวาดแค่แถบบน/ล่าง · แมพมืดรวมสีย้อมกับความมืดเป็นชั้นเดียว · มอนในที่มืดไม่ได้แสงซ้ำสองชั้น — หน้าตาเหมือนเดิม · ในท้องวาฬ: ผนังท้องบีบแรงสุด 35% ของเลือด (บอสใกล้ตาย 45%) ไม่ตายในทีเดียวอีก'],
   ['🔧','ไล่บัคทั้งเกม + แมพมืดลื่นขึ้น','วัดความลื่นทุกแมพ ดันเจี้ยน และหอคอย · แมพมืดถาวร (ห้วงบัลลังก์เงา ป้อมทมิฬ บึงหมอกม่วง ฯลฯ) ช้าสุด เพราะดวงแสงกลางคืนหลายสิบดวงระบายเต็มความละเอียดจอ → รวมแสงลงภาพเล็กแล้วบวกทับครั้งเดียว หน้าตาเหมือนเดิม เฟรมเร็วขึ้น · ฐานแผ่นดิน: เห็ดยักษ์ที่จมอยู่หลังก้อนหินเอาออกแล้ว'],
@@ -35882,6 +35883,30 @@ function skicRefresh(){try{if(!ov.hidden&&typeof charTab!=='undefined'&&charTab=
 setTimeout(()=>{try{const o=skImg;skImg=function(c,k,sz){const h=o.apply(this,arguments);if(!SKIC.on||!SKIC.ok)return h;
     return h.replace(/^<img class="ski" src="([^"]+)"/,(m,u)=>{const n=SKIC.map.get(u);return n?'<img class="ski skp" style="--skc:'+(SKIC.col.get(u)||'#e7b75a')+'" src="'+n+'"':m})};
   if(SKIC.on)skicLoad()}catch(e){SKIC.err=String(e).slice(0,200);console.warn('skic',e)}},2400);
+/* ---------- v620 ไอคอนภาพวาดชุด 2 (SKIC2) ----------
+   · สกิลทางเลือกในคลังสกิล 45 ไอคอน (Q8D 6 + Q8DB สายแยก 3 ต่ออาชีพ) → จับคู่ Q8IMG[id] เข้าแผนที่ SKIC เดิม (ปุ่มสกิล/หน้าต่างสกิลใช้ทันที)
+   · รูนลิงก์ 23 แบบ (SGD) เดิมเป็นอีโมจิ → เม็ดรูนภาพวาดในหน้ารูนลิงก์ (ช่องรูน · รายการเลือก · รายละเอียด · หน้ารูนแบบเดิม)
+     ข้อความแจ้งเตือน/แชทยังใช้อีโมจิเหมือนเดิม
+   · atlas hd-skic2.webp 12 คอลัมน์ ช่องละ 160: ลำดับ 0–44 สกิลทางเลือก แล้ว 45–67 รูนลิงก์ (ตาม Object.keys(SGD))
+   · ปิด: SKIC.on=0 (สกิล) · LRI.off=1 (รูนลิงก์) */
+const SKIC2={ok:0,err:'',Q:['melee','archer','sup','assn','mage']},LRI={off:0,m:new Map(),n:0};
+function lriKey(s){return String(s||'').replace(/️/g,'').trim()}
+function lriCSS(){if(document.getElementById('lricss'))return;const s=document.createElement('style');s.id='lricss';s.textContent=
+'img.lri{width:1.3em;height:1.3em;border-radius:50%;vertical-align:middle;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.6),0 2px 4px rgba(0,0,0,.5);display:inline-block}'+
+'#ov .kgi:has(img.lri){font-size:26px;padding:0;overflow:hidden}#ov .kgi img.lri{width:100%;height:100%;border-radius:inherit;box-shadow:none}'+
+'#ov [data-skws] img.lri{width:92%;height:92%;font-size:inherit}#ov .gi img.lri{width:26px;height:26px}';
+document.head.appendChild(s)}
+function lriPost(root){if(LRI.off||!LRI.n||!root)return;root.querySelectorAll((ov.dataset.k==='rune'?'.gi,':'')+'.kgi,[data-skws]').forEach(el=>{if(el.querySelector('img.lri'))return;
+  if(el.children.length&&!el.matches('[data-skws]'))return;let t=null;for(const nd of el.childNodes){if(nd.nodeType===3&&lriKey(nd.nodeValue)){t=nd;break}}if(!t)return;
+  const k=lriKey(t.nodeValue),u=LRI.m.get(k);if(!u)return;const im=document.createElement('img');im.className='lri';im.src=u;im.alt=k;im.draggable=false;t.replaceWith(im)})}
+function skic2Load(){const C=SKIC.C,im=new Image();im.decoding='async';
+  im.onload=()=>{try{const cv2=document.createElement('canvas');cv2.width=cv2.height=C;const x=cv2.getContext('2d');let i=0,n=0;const cut=j=>{x.clearRect(0,0,C,C);x.drawImage(im,(j%12)*C,Math.floor(j/12)*C,C,C,0,0,C,C);const d=cv2.toDataURL('image/webp',.9);return d.startsWith('data:image/webp')?d:cv2.toDataURL('image/png')};
+    for(const c of SKIC2.Q){const L=[0,1,2,3,4,5].map(k=>Q8D[c]&&Q8D[c][k]).concat([2,4,5].map(k=>Q8DB[c]&&Q8DB[c][k]));
+      for(const D of L){const j=i++;if(!D||!Q8IMG[D.id])continue;const u=Q8IMG[D.id];if(!SKIC.map.has(u)){SKIC.map.set(u,cut(j));SKIC.col.set(u,CL[c].c);n++}}}
+    i=45;Object.keys(SGD).forEach(id=>{const j=i++;if(j>67)return;LRI.m.set(lriKey(SGD[id][0]),cut(j));LRI.n++});
+    SKIC2.ok=n;lriCSS();skicCSS();if(!SKIC.ok)SKIC.ok=-1;try{lriPost(ov)}catch(e){}skicRefresh()}catch(e){SKIC2.err=String(e).slice(0,200)}};
+  im.onerror=()=>{SKIC2.err='load'};im.src='hd-skic2.webp'}
+setTimeout(()=>{try{skic2Load();const ovE=document.getElementById('ov');if(ovE&&window.MutationObserver){let q=0;new MutationObserver(()=>{if(q)return;q=1;requestAnimationFrame(()=>{q=0;try{lriPost(ovE)}catch(e){}})}).observe(ovE,{childList:true,subtree:true})}}catch(e){SKIC2.err=String(e).slice(0,200);console.warn('skic2',e)}},2500);
 /* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
    ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
       → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1

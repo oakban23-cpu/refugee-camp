@@ -13,7 +13,7 @@ async def main():
             errs=[];pg.on('pageerror',lambda e:errs.append(str(e)[:200]))
             await pg.goto(URL); await pg.wait_for_timeout(3500)
             a=await pg.evaluate("()=>[SKIC.ok,SKIC.err,new Set([...SKIC.map.values()]).size,[...SKIC.map.values()].every(v=>/^data:image\\/(webp|png)/.test(v))]")
-            rep('โหลด hd-skic.webp แล้วจับคู่ไอคอนเดิม → ภาพวาด ครบ 60 ไม่ซ้ำ',a[0]==60 and a[1]=='' and a[2]==60 and a[3],a)
+            rep('โหลด hd-skic.webp แล้วจับคู่ไอคอนเดิม → ภาพวาด ครบ 60 ไม่ซ้ำ',a[0]==60 and a[1]=='' and a[2]>=60 and a[3],a)
             a=await pg.evaluate("""()=>{const C=['melee','archer','sup','assn','mage'];const bad=[];
               for(const c of C){const T=[SKI[c][0],SKI[c][1],SKI[c][2],SKI[c][3],SKI[c][4],SKI6[c][0],SKI6[c][1],SKI2[c],SKI2B[c],SKI4B[c],SKI3U[c][0],SKI3U[c][1]];T.forEach((u,i)=>{if(!SKIC.map.has(u))bad.push(c+(i+1))})}return bad}""")
             rep('ทุกอาชีพ ทุกช่อง 1–12 (สกิลหลัก สกิล6 ไม้ตายขั้น2/สายแยก สกิล4สายแยก ไม้ตายตื่นรู้) มีภาพวาด',a==[],a)
