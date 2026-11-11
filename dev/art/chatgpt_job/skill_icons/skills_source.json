@@ -1,0 +1,467 @@
+{
+ "melee": {
+  "n": "ดาบอสูรคลั่ง",
+  "col": "#c2352b",
+  "n2": "ราชันอสูรโลหิต",
+  "n2b": "ขุนศึกปราการเหล็ก",
+  "d": "ตีประชิดดุดัน หมุนดาบรอบตัว และพุ่งฟันเป็นเส้นตรง",
+  "L": [
+   {
+    "n": "วังวนดาบ",
+    "d": "หมุนดาบฟันมอนรอบตัวในวงใกล้ (250%)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22b%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%239aa6b4%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%204a12%2012%200%200%201%2011%2016%22%20stroke%3D%22%23ff8a50%22%20stroke-width%3D%222.6%22%2F%3E%3Cpath%20d%3D%22M16%2028A12%2012%200%200%201%205%2012%22%20stroke%3D%22%23ff8a50%22%20stroke-width%3D%222.6%22%2F%3E%3Cpath%20d%3D%22M8%207a12%2012%200%200%201%205-2.5%22%20stroke%3D%22%23ffd0a0%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M24%2025a12%2012%200%200%201-5%202.5%22%20stroke%3D%22%23ffd0a0%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22rotate(35%2016%2016)%22%3E%3Cpath%20d%3D%22M15%205h2l.6%2015h-3.2z%22%20fill%3D%22url(%23b)%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%2211.5%22%20y%3D%2220%22%20width%3D%229%22%20height%3D%222.2%22%20rx%3D%221%22%20fill%3D%22%23c8a040%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.7%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2222.2%22%20width%3D%222%22%20height%3D%224.5%22%20fill%3D%22%236a3a1a%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2227.4%22%20r%3D%221.4%22%20fill%3D%22%23c8a040%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    "tag": "skill 1",
+    "en": "a sword sweeping in a full red circle around itself, spinning slash trail"
+   },
+   {
+    "n": "พุ่งฟัน",
+    "d": "พุ่งไปข้างหน้า ฟันทุกตัวที่พุ่งผ่าน (200%)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22b%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%239aa6b4%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23fff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cg%20stroke%3D%22%23ff9a60%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M3%2020h8%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M2%2025h10%22%20stroke-width%3D%221.6%22%20opacity%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M5%2015h6%22%20stroke-width%3D%221.4%22%20opacity%3D%22.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22rotate(-40%2018%2018)%22%3E%3Cpath%20d%3D%22M17%203h2.4l.8%2017h-4z%22%20fill%3D%22url(%23b)%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%2213%22%20y%3D%2220%22%20width%3D%2210.4%22%20height%3D%222.4%22%20rx%3D%221%22%20fill%3D%22%23c8a040%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.7%22%2F%3E%3Crect%20x%3D%2217.2%22%20y%3D%2222.4%22%20width%3D%222%22%20height%3D%225%22%20fill%3D%22%236a3a1a%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2227%22%20cy%3D%226%22%20r%3D%222.2%22%20fill%3D%22%23fff4c0%22%20opacity%3D%22.9%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 2",
+    "en": "a forward dash: one sword thrust with speed lines and a straight slash streak"
+   },
+   {
+    "n": "ฟันแยกปฐพี",
+    "d": "ฟาดดาบลงพื้นจนแผ่นดินแยกเป็นแนวยาวข้างหน้า ดาเมจมหาศาลทุกตัวในแนว",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.85%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffd070%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff5020%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2226%22%20rx%3D%2215%22%20ry%3D%226%22%20fill%3D%22url(%23g)%22%2F%3E%3Cpath%20d%3D%22M2%2027l6-1%203%203%204-3%203%202%204-2%205%201%203-1%22%20fill%3D%22none%22%20stroke%3D%22%232a1008%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M16%2026l-3%205M16%2026l4%205M16%2026l-8%202M16%2026l9%201%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M14.6%202h2.8l.7%2018h-4.2z%22%20fill%3D%22%23e8eef4%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%2210.5%22%20y%3D%2219.5%22%20width%3D%2211%22%20height%3D%222.6%22%20rx%3D%221%22%20fill%3D%22%23e0b030%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.7%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2222%22%20width%3D%222%22%20height%3D%224%22%20fill%3D%22%236a3a1a%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate",
+    "en": "a greatsword slammed into the ground, the earth splitting in a long glowing crack ahead (ULTIMATE)"
+   },
+   {
+    "n": "โทสะอสูร",
+    "d": "ปลุกโทสะ 6 วิ ความเร็วโจมตี +40% และดูดเลือด +10% ของดาเมจ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22f%22%20cx%3D%22.5%22%20cy%3D%22.7%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff0a0%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%23ff7020%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23a01808%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M16%201c2%205%207%206%207%2012%203-2%203-5%203-7%203%204%204%209%202%2014-2%206-7%2010-12%2010S6%2026%204%2020C2%2015%203%2010%206%206c0%202%200%205%203%207%200-6%205-7%207-12z%22%20fill%3D%22url(%23f)%22%20stroke%3D%22%233a0804%22%20stroke-width%3D%22.9%22%2F%3E%3Cpath%20d%3D%22M9%2017l5%202-1%203zM23%2017l-5%202%201%203z%22%20fill%3D%22%232a0404%22%2F%3E%3Cpath%20d%3D%22M10.5%2018.6l2%20.8M21.5%2018.6l-2%20.8%22%20stroke%3D%22%23ffff80%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M11%2025q5%203%2010%200%22%20fill%3D%22none%22%20stroke%3D%22%232a0404%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 3",
+    "en": "a demonic red rage aura: a burning horned helm or clenched fist wreathed in crimson flame"
+   },
+   {
+    "n": "คำรามโลหิต",
+    "d": "คำรามให้มอนรอบตัวหันมาหา ดาเมจรอบตัว และได้เกราะ 20% ของเลือดสูงสุด 5 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffb070%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23a01808%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23ff6a40%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M22%208a11%2011%200%200%201%200%2016%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M26%204a16%2016%200%200%201%200%2024%22%20stroke-width%3D%221.6%22%20opacity%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M10%208a11%2011%200%200%200%200%2016%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M6%204a16%2016%200%200%200%200%2024%22%20stroke-width%3D%221.6%22%20opacity%3D%22.7%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%228%22%20fill%3D%22url(%23r)%22%20stroke%3D%22%232a0404%22%20stroke-width%3D%221%22%2F%3E%3Cpath%20d%3D%22M11%2013l3%201.4M21%2013l-3%201.4%22%20stroke%3D%22%23fff080%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M11.5%2018q4.5%205%209%200q-4.5%202-9%200z%22%20fill%3D%22%232a0404%22%2F%3E%3Cpath%20d%3D%22M13%2018.6l.8%201.6M16%2019.4v1.8M19%2018.6l-.8%201.6%22%20stroke%3D%22%23fff%22%20stroke-width%3D%22.9%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4",
+    "en": "a roaring war cry: shock rings bursting outward from a shield-and-sword emblem, blood-red"
+   },
+   {
+    "n": "พายุดาบพันเงา",
+    "d": "ดาบวิญญาณโลหิต 6 เล่มหมุนรอบตัว 2 วิ บาดมอนรอบ ๆ แล้วพุ่งแทงมอนใกล้สุดทีละเล่ม",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2214%22%20fill%3D%22%232a0608%22%20stroke%3D%22%23ff5a4a%22%2F%3E%3Cg%20transform%3D%22translate(16%2016)%20rotate(0)%20translate(0%20-8)%22%3E%3Cpath%20d%3D%22M0-11l2%203v9h-4v-9z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20d%3D%22M-4%201h8M0%201v5%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(16%2016)%20rotate(60)%20translate(0%20-8)%22%3E%3Cpath%20d%3D%22M0-11l2%203v9h-4v-9z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20d%3D%22M-4%201h8M0%201v5%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(16%2016)%20rotate(120)%20translate(0%20-8)%22%3E%3Cpath%20d%3D%22M0-11l2%203v9h-4v-9z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20d%3D%22M-4%201h8M0%201v5%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(16%2016)%20rotate(180)%20translate(0%20-8)%22%3E%3Cpath%20d%3D%22M0-11l2%203v9h-4v-9z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20d%3D%22M-4%201h8M0%201v5%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(16%2016)%20rotate(240)%20translate(0%20-8)%22%3E%3Cpath%20d%3D%22M0-11l2%203v9h-4v-9z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20d%3D%22M-4%201h8M0%201v5%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(16%2016)%20rotate(300)%20translate(0%20-8)%22%3E%3Cpath%20d%3D%22M0-11l2%203v9h-4v-9z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20d%3D%22M-4%201h8M0%201v5%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23ff8a6a%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path A)",
+    "en": "six spectral blood-red swords orbiting in a ring, points outward"
+   },
+   {
+    "n": "โล่สวรรค์สะท้อน",
+    "d": "โล่ทองครอบตัวเองและเพื่อนรอบ ๆ 5 วิ ดูดซับดาเมจ 25% ของเลือดสูงสุด และสะท้อนดาเมจกลับใส่มอนที่ตี",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M16%202l12%205v8c0%208-6%2013-12%2015C10%2028%204%2023%204%2015V7z%22%20fill%3D%22%23e0b040%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M16%207l8%203v5c0%205-4%209-8%2010c-4-1-8-5-8-10v-5z%22%20fill%3D%22%233a4a8a%22%2F%3E%3Cpath%20d%3D%22M9%2026l-5%204M23%2026l5%204M16%2030v-4%22%20stroke%3D%22%23ffe08a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path B)",
+    "en": "a golden dome shield with light reflecting off it, deflecting strikes"
+   },
+   {
+    "n": "ปฐพีโลหิต",
+    "d": "ฟาดดาบจนแผ่นดินแยก รอยแยกลุกเป็นไฟโลหิตค้าง 3 วิ เผามอนในแนวต่อเนื่อง",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22aw%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff4c0%22%20stop-opacity%3D%22.55%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffb020%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2216%22%20fill%3D%22url(%23aw)%22%2F%3E%3Cg%20transform%3D%22translate(3.5%203.5)%20scale(.78)%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.85%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffd070%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ff5020%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2226%22%20rx%3D%2215%22%20ry%3D%226%22%20fill%3D%22url(%23g)%22%2F%3E%3Cpath%20d%3D%22M2%2027l6-1%203%203%204-3%203%202%204-2%205%201%203-1%22%20fill%3D%22none%22%20stroke%3D%22%232a1008%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M16%2026l-3%205M16%2026l4%205M16%2026l-8%202M16%2026l9%201%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M14.6%202h2.8l.7%2018h-4.2z%22%20fill%3D%22%23e8eef4%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%2210.5%22%20y%3D%2219.5%22%20width%3D%2211%22%20height%3D%222.6%22%20rx%3D%221%22%20fill%3D%22%23e0b030%22%20stroke%3D%22%231a1010%22%20stroke-width%3D%22.7%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2222%22%20width%3D%222%22%20height%3D%224%22%20fill%3D%22%236a3a1a%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2214.6%22%20fill%3D%22none%22%20stroke%3D%22%23ffd84a%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%225%202.2%22%2F%3E%3Cpath%20d%3D%22M27%201.5l1%202.6%202.6%201-2.6%201-1%202.6-1-2.6-2.6-1%202.6-1z%22%20fill%3D%22%23fff8d0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate after 2nd class",
+    "en": "a split in the earth burning with blood-red fire, a sword stabbed at its head (ULTIMATE, 2nd class \"Blood Demon King\")"
+   },
+   {
+    "n": "ป้อมปราการนิรันดร์",
+    "d": "ปักธงศึก 6 วิ ทั้งทีมในวงรับดาเมจ −40% ธงปล่อยคลื่นกระแทกทุก 1 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M9%2030V3%22%20stroke%3D%22%23c8a060%22%20stroke-width%3D%222.4%22%2F%3E%3Cpath%20d%3D%22M10%204h16l-4%205%204%205H10z%22%20fill%3D%22%231a2a6a%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%229%22%20r%3D%222.4%22%20fill%3D%22%23e0b040%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2228%22%20rx%3D%2213%22%20ry%3D%223.2%22%20fill%3D%22none%22%20stroke%3D%22%239ac8ff%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%223%202%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate, branch class",
+    "en": "a war banner planted in the ground with a golden protective circle and shock rings (ULTIMATE, branch class \"Iron Bastion Warlord\")"
+   },
+   {
+    "n": "ทุบโล่สะท้าน",
+    "d": "กระแทกโล่เป็นรูปพัดข้างหน้า มอนมึน 1.5 วิ หันมาหาเรา และเปลี่ยนแค้นทั้งหมดเป็นดาเมจ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M16%203l10%204v8c0%207-5%2012-10%2014C11%2027%206%2022%206%2015V7z%22%20fill%3D%22%233a4250%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M16%209l2.4%204.8%205.2.6-3.8%203.6%201%205.2-4.8-2.6-4.8%202.6%201-5.2-3.8-3.6%205.2-.6z%22%20fill%3D%22%23e0b040%22%2F%3E%3Cpath%20d%3D%22M2%2012q-2%204%200%208M30%2012q2%204%200%208%22%20stroke%3D%22%23ffd870%22%20stroke-width%3D%221.6%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4, branch class",
+    "en": "a tower shield bashing forward with a fan-shaped stun shockwave and dizzy stars"
+   },
+   {
+    "n": "ดาบพิพากษาสวรรค์",
+    "d": "ดาบยักษ์ตกจากฟ้าปักลงเป้าหมาย แผ่นดินแยกเป็นกากบาท แล้วคลื่นกระแทก 3 ระลอก",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Cpath%20d%3D%22M14%201h4v18l-2%204-2-4z%22%20fill%3D%22%23fff%22%20stroke%3D%22%23c0182a%22%2F%3E%3Cpath%20d%3D%22M9%2019h14M16%2019v6%22%20stroke%3D%22%23e0b040%22%20stroke-width%3D%222.4%22%2F%3E%3Cpath%20d%3D%22M2%2029l12-4M30%2029l-12-4M16%2025v6%22%20stroke%3D%22%23ff6a30%22%20stroke-width%3D%222%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate A (after rebirth)",
+    "en": "AWAKENED: a colossal holy sword falling from the sky, a cross-shaped crack and three shock rings below; more gold and radiance"
+   },
+   {
+    "n": "ป้อมปราการเทวะ",
+    "d": "โล่ทองยักษ์กระแทกพื้น ทั้งทีมรอบตัวอมตะ 3 วิ ได้เกราะ 30% และมอนรอบ ๆ หันมาหาเรา",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Cpath%20d%3D%22M16%202l12%205v8c0%208-6%2013-12%2015C10%2028%204%2023%204%2015V7z%22%20fill%3D%22%23ffd870%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M16%208l2.4%205%205.2.6-3.8%203.6%201%205.2-4.8-2.6-4.8%202.6%201-5.2-3.8-3.6%205.2-.6z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate B (after rebirth)",
+    "en": "AWAKENED: a giant golden divine shield slamming the ground, radiant wings of light behind it"
+   }
+  ]
+ },
+ "archer": {
+  "n": "พรานเงาราตรี",
+  "col": "#5b8a72",
+  "n2": "พรานพิฆาตจันทรา",
+  "n2b": "พรานพายุคลั่ง",
+  "d": "ยิงธนูระยะไกล ห่าธนูเป็นพื้นที่ และถอยกระโดดหนี",
+  "L": [
+   {
+    "n": "ห่าธนู",
+    "d": "ห่าธนูตกใส่วงรอบเป้าหมาย (360%)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke-linecap%3D%22round%22%3E%3Cg%20transform%3D%22translate(6%203)%22%3E%3Cpath%20d%3D%22M0%200l3%2016%22%20stroke%3D%22%23e8e0c8%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M3%2016l-2.6-.4%203.6%204%20.8-4.6z%22%20fill%3D%22%23dff%22%2F%3E%3Cpath%20d%3D%22M-.3-1l-1.5-2.2M.3-1l1.8-2%22%20stroke%3D%22%239cff7a%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(14%201)%22%3E%3Cpath%20d%3D%22M0%200l2.4%2019%22%20stroke%3D%22%23e8e0c8%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M2.4%2019l-2.6-.2%203.4%204%201-4.6z%22%20fill%3D%22%23dff%22%2F%3E%3Cpath%20d%3D%22M-.2-1l-1.5-2.2M.4-1l1.8-2%22%20stroke%3D%22%239cff7a%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(22%204)%22%3E%3Cpath%20d%3D%22M0%200l1.8%2015%22%20stroke%3D%22%23e8e0c8%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M1.8%2015l-2.6-.2%203.4%204%201-4.6z%22%20fill%3D%22%23dff%22%2F%3E%3Cpath%20d%3D%22M-.2-1l-1.5-2.2M.4-1l1.8-2%22%20stroke%3D%22%239cff7a%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2228%22%20rx%3D%2213%22%20ry%3D%223%22%20fill%3D%22%239cff7a%22%20opacity%3D%22.35%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 1",
+    "en": "a rain of arrows falling into a circle from above"
+   },
+   {
+    "n": "ถอยกระโดด",
+    "d": "กระโดดถอยหนีจากมอนที่ใกล้ที่สุด ใช้เปิดระยะ (ไม่มีดาเมจ)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M26%2026C22%208%2010%206%205%2014%22%20fill%3D%22none%22%20stroke%3D%22%239cff7a%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%223%203%22%2F%3E%3Cpath%20d%3D%22M2%2010l4.8%205.8%201.8-7z%22%20fill%3D%22%23dfffc8%22%20stroke%3D%22%231a2a10%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M22%2027h7l-1-3h-3l-1-5h-2z%22%20fill%3D%22%236a4a2a%22%20stroke%3D%22%231a1008%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M14%2029h6%22%20stroke%3D%22%239cff7a%22%20stroke-width%3D%221.2%22%20opacity%3D%22.6%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 2",
+    "en": "a backflip leap away: curved jump arc with a small bow and wind trail, no damage"
+   },
+   {
+    "n": "ธนูทะลวงสวรรค์",
+    "d": "ยิงลำแสงธนูทะลุทุกตัวในแนวยาวไปยังเป้าหมาย",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22l%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%239cff7a%22%20stop-opacity%3D%220%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffffff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M9%203q-8%2013%200%2026%22%20fill%3D%22none%22%20stroke%3D%22%238a5a2a%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9%203L9%2029%22%20stroke%3D%22%23e8e0c8%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%2214%22%20width%3D%2222%22%20height%3D%224%22%20fill%3D%22url(%23l)%22%2F%3E%3Cpath%20d%3D%22M8%2016h18%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M26%2013l5%203-5%203z%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2229%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23e0ffc8%22%20opacity%3D%22.7%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate",
+    "en": "one blazing arrow piercing in a straight beam of light (ULTIMATE)"
+   },
+   {
+    "n": "ธนูตรึงเงา",
+    "d": "ยิงธนูตรึงเป้าหมายไว้กับที่ 2 วิ (บอสไม่โดนตรึง) และทำให้มอนรอบ ๆ ช้าลง",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2225%22%20rx%3D%2212%22%20ry%3D%224.5%22%20fill%3D%22none%22%20stroke%3D%22%23c8ff70%22%20stroke-width%3D%221.6%22%2F%3E%3Cg%20stroke%3D%22%238ac050%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%222%201.6%22%3E%3Cpath%20d%3D%22M5%2025L15%2014M27%2025L17%2014M9%2029l6-14M23%2029l-6-14%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M16%202v21%22%20stroke%3D%22%23e8e0c8%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M16%2026l-3-5h6z%22%20fill%3D%22%23dff%22%20stroke%3D%22%231a2a10%22%20stroke-width%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M15.4%202l-2-3M16.6%202l2-3%22%20stroke%3D%22%239cff7a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2213%22%20r%3D%222.6%22%20fill%3D%22%23c8ff70%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 3",
+    "en": "an arrow pinning a dark shadow to the ground, shadow chains around it"
+   },
+   {
+    "n": "กับดักจันทรา",
+    "d": "วางกับดักแสงจันทร์ที่เป้าหมาย ระเบิดตรึงมอนในวง 2.5 วิ (บอสโดนชะลอแทน)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2225%22%20rx%3D%2213%22%20ry%3D%224.5%22%20fill%3D%22none%22%20stroke%3D%22%23b8d0ff%22%20stroke-width%3D%221.6%22%20stroke-dasharray%3D%223%202%22%2F%3E%3Cpath%20d%3D%22M5%2025l3-2M27%2025l-3-2M16%2029.5v-2%22%20stroke%3D%22%23e8f0ff%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M20%203a10%2010%200%201%200%206%2015a8%208%200%201%201-6-15z%22%20fill%3D%22%23e8f0ff%22%20stroke%3D%22%233a4a6a%22%20stroke-width%3D%221%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2210%22%20r%3D%221.2%22%20fill%3D%22%23b8c8e8%22%2F%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2215%22%20r%3D%22.9%22%20fill%3D%22%23b8c8e8%22%2F%3E%3Cpath%20d%3D%22M27%204l.7%201.8%201.8.7-1.8.7-.7%201.8-.7-1.8-1.8-.7%201.8-.7z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4",
+    "en": "a crescent-moon trap glowing on the ground, silver-blue"
+   },
+   {
+    "n": "ธนูดาวไล่ล่า",
+    "d": "ยิงศรดาว 5 ดอก วิ่งโค้งหาเป้าเองคนละตัว แรงมากใส่เป้าเดี่ยว",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23141a3a%22%2F%3E%3Cpath%20d%3D%22M6%2024Q10%208%2026%206%22%20fill%3D%22none%22%20stroke%3D%22%23ffe8a0%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M4%2016Q8%2012%2024%2010%22%20fill%3D%22none%22%20stroke%3D%22%23ffe8a0%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M10%2028Q14%2016%2028%2014%22%20fill%3D%22none%22%20stroke%3D%22%23ffe8a0%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M26%203l1.2%203%203%201.2-3%201.2-1.2%203-1.2-3-3-1.2%203-1.2z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path A)",
+    "en": "five star-tipped arrows curving in homing arcs toward a target"
+   },
+   {
+    "n": "ศรอัสนีโซ่",
+    "d": "ศรสายฟ้ากระโดดต่อ 6 ตัว ทุกตัวที่โดนช็อตชะงัก 0.6 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23141c2a%22%2F%3E%3Cpath%20d%3D%22M4%2026L12%2018l-2-3%208-6-2-3%2010-4-6%208%203%202-8%207%202%203z%22%20fill%3D%22%23fff36a%22%20stroke%3D%22%239ad8ff%22%20stroke-width%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2218%22%20r%3D%222%22%20fill%3D%22%239ad8ff%22%2F%3E%3Ccircle%20cx%3D%2218%22%20cy%3D%229%22%20r%3D%222%22%20fill%3D%22%239ad8ff%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path B)",
+    "en": "a lightning arrow whose bolt jumps in a zigzag chain"
+   },
+   {
+    "n": "ศรจันทราแตก",
+    "d": "ยิงลำแสงจันทรา 3 สายเป็นรูปพัด ทะลุทุกตัวในแนว",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22aw%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff4c0%22%20stop-opacity%3D%22.55%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffb020%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2216%22%20fill%3D%22url(%23aw)%22%2F%3E%3Cg%20transform%3D%22translate(3.5%203.5)%20scale(.78)%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22l%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%239cff7a%22%20stop-opacity%3D%220%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffffff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M9%203q-8%2013%200%2026%22%20fill%3D%22none%22%20stroke%3D%22%238a5a2a%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9%203L9%2029%22%20stroke%3D%22%23e8e0c8%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%229%22%20y%3D%2214%22%20width%3D%2222%22%20height%3D%224%22%20fill%3D%22url(%23l)%22%2F%3E%3Cpath%20d%3D%22M8%2016h18%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20d%3D%22M26%2013l5%203-5%203z%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2229%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23e0ffc8%22%20opacity%3D%22.7%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2214.6%22%20fill%3D%22none%22%20stroke%3D%22%23ffd84a%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%225%202.2%22%2F%3E%3Cpath%20d%3D%22M27%201.5l1%202.6%202.6%201-2.6%201-1%202.6-1-2.6-2.6-1%202.6-1z%22%20fill%3D%22%23fff8d0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate after 2nd class",
+    "en": "three moonlight beams fanning outward from a bow, shattered moon fragments (ULTIMATE, 2nd class \"Moonslayer Hunter\")"
+   },
+   {
+    "n": "พายุอสนี",
+    "d": "เมฆพายุลอยตามตัว 5 วิ ฟ้าผ่ามอนรอบตัววินาทีละ 4 ครั้ง",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M7%2014a6%206%200%200%201%206-6a7%207%200%200%201%2013%202a5%205%200%200%201%200%2010H8a4%204%200%200%201-1-6z%22%20fill%3D%22%234a5a6a%22%20stroke%3D%22%23c8ffe8%22%20stroke-width%3D%221.2%22%2F%3E%3Cpath%20d%3D%22M17%2018l-4%206h4l-3%206%208-8h-4l3-4z%22%20fill%3D%22%23fff36a%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate, branch class",
+    "en": "a dark storm cloud raining lightning bolts (ULTIMATE, branch class \"Storm Hunter\")"
+   },
+   {
+    "n": "พายุหมุน",
+    "d": "ปล่อยทอร์นาโดเคลื่อนไปข้างหน้า 3 วิ ดูดมอนเข้าหาและบาดต่อเนื่อง",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M6%206q12-3%2020%202q-14%200-16%204q10-2%2014%203q-10%200-11%203q7%200%208%204q-6%200-6%204%22%20fill%3D%22none%22%20stroke%3D%22%238fffd0%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2228%22%20r%3D%222%22%20fill%3D%22%23c8ffe8%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4, branch class",
+    "en": "a green tornado moving forward with leaves and blades swirling inside"
+   },
+   {
+    "n": "ห่าดาวล้างนภา",
+    "d": "กลุ่มดาวก่อตัวบนฟ้า ฝนศรดาวถล่มพื้นที่ แล้วปิดด้วยศรดาวยักษ์",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Cpath%20d%3D%22M6%206l4%203%206-4%205%205%206-2%22%20fill%3D%22none%22%20stroke%3D%22%23fff6c0%22%20stroke-width%3D%221%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%226%22%20r%3D%221.6%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2210%22%20cy%3D%229%22%20r%3D%221.6%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%225%22%20r%3D%221.6%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2221%22%20cy%3D%2210%22%20r%3D%221.6%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2227%22%20cy%3D%228%22%20r%3D%221.6%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20d%3D%22M16%2012v18M12%2026l4%204%204-4%22%20stroke%3D%22%23fff36a%22%20stroke-width%3D%222.4%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate A (after rebirth)",
+    "en": "AWAKENED: a constellation forming in the night sky raining star arrows, one giant star arrow in the center"
+   },
+   {
+    "n": "พายุเทวะอสนีบาต",
+    "d": "เรียกพายุหมุนยักษ์และเมฆอสนี 4 วิ ฟ้าผ่าถล่มมอนในพื้นที่ไม่หยุด",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Cpath%20d%3D%22M8%2010a6%206%200%200%201%206-6a7%207%200%200%201%2013%202a5%205%200%200%201%200%2010H9a4%204%200%200%201-1-6z%22%20fill%3D%22%233a4a5a%22%2F%3E%3Cpath%20d%3D%22M12%2030q8-6%202-12q10%204%204%2012%22%20fill%3D%22none%22%20stroke%3D%22%23c8ffe8%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M21%2015l-3%206h3l-2%206%206-8h-3l2-4z%22%20fill%3D%22%23fff36a%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate B (after rebirth)",
+    "en": "AWAKENED: a giant divine cyclone crowned with thunderclouds and many lightning strikes"
+   }
+  ]
+ },
+ "sup": {
+  "n": "นักสวดปลอบวิญญาณ",
+  "col": "#c99a3b",
+  "n2": "สังฆราชแห่งรุ่งอรุณ",
+  "n2b": "ผู้ทำนายวิญญาณคำสาป",
+  "d": "ฮีลเพื่อนรอบตัว และเพิ่มพลังโจมตีให้ทั้งทีม",
+  "L": [
+   {
+    "n": "แสงเยียวยา",
+    "d": "ฮีลตัวเองและเพื่อนรอบตัว 12% ของเลือดสูงสุดผู้รับ +45 (เล่นเดี่ยว ×1.6)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22h%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fffbe0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd84a%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23h)%22%2F%3E%3Cpath%20d%3D%22M13%205h6v8h8v6h-8v8h-6v-8H5v-6h8z%22%20fill%3D%22%237dff8a%22%20stroke%3D%22%231a4a20%22%20stroke-width%3D%221%22%2F%3E%3Cpath%20d%3D%22M14.5%206.5h3v8h8v3%22%20fill%3D%22none%22%20stroke%3D%22%23e8ffe8%22%20stroke-width%3D%221%22%20opacity%3D%22.8%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 1",
+    "en": "soft golden healing light: a glowing open hand or chalice with a rising sparkle and a plus-like glow (no letters)"
+   },
+   {
+    "n": "บทสวดพลัง",
+    "d": "สวดเพิ่มพลังทีมรอบตัว ดาเมจ +40% แล้วค่อย ๆ ลดลงจนหมดใน 8 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M6%208q5-2%2010%201q5-3%2010-1v17q-5-2-10%201q-5-3-10-1z%22%20fill%3D%22%23f4e4c0%22%20stroke%3D%22%234a3010%22%20stroke-width%3D%221%22%2F%3E%3Cpath%20d%3D%22M16%209v17%22%20stroke%3D%22%238a6a3a%22%20stroke-width%3D%221%22%2F%3E%3Cpath%20d%3D%22M8.5%2012h5M8.5%2015h5M18.5%2012h5M18.5%2015h5%22%20stroke%3D%22%23a08050%22%20stroke-width%3D%22.9%22%2F%3E%3Cpath%20d%3D%22M16%201l5%206h-3v4h-4V7h-3z%22%20fill%3D%22%23ffb050%22%20stroke%3D%22%234a2008%22%20stroke-width%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%224%22%20r%3D%221.2%22%20fill%3D%22%23ffe0a0%22%2F%3E%3Ccircle%20cx%3D%2227%22%20cy%3D%223%22%20r%3D%221%22%20fill%3D%22%23ffe0a0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 2",
+    "en": "a chant buff: an open prayer book or bell radiating golden power rings and an upward arrow-like flame"
+   },
+   {
+    "n": "ปาฏิหาริย์",
+    "d": "ชุบชีวิตเพื่อนที่ล้มรอบตัว (ฟื้นมาพร้อมเลือด 60%) คนที่ยืนอยู่ฟื้นเลือดครึ่งหลอด และให้เกราะ 25% กับทั้งทีม",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%226%22%20rx%3D%227%22%20ry%3D%222.4%22%20fill%3D%22none%22%20stroke%3D%22%23ffe680%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M15%2012C9%208%203%209%201%2014c4-1%205%201%203%203%204-1%205%201%204%203%204-2%207-4%207-8z%22%20fill%3D%22%23fff%22%20stroke%3D%22%238a7a50%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M17%2012c6-4%2012-3%2014%202-4-1-5%201-3%203-4-1-5%201-4%203-4-2-7-4-7-8z%22%20fill%3D%22%23fff%22%20stroke%3D%22%238a7a50%22%20stroke-width%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2215%22%20r%3D%223.4%22%20fill%3D%22%23ffe680%22%20stroke%3D%22%238a6a10%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M16%2019v11%22%20stroke%3D%22%23ffe680%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.6%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate",
+    "en": "a miracle: an angelic feather wing and a radiant sunburst lifting a fallen soul upward (ULTIMATE)"
+   },
+   {
+    "n": "ทัณฑ์แห่งแสง",
+    "d": "ลำแสงศักดิ์สิทธิ์ผ่าลงเป้าหมายและมอนรอบ ๆ ดาเมจ 30% แปลงเป็นฮีลให้เพื่อนที่เลือดน้อยที่สุด (รวมตัวเอง)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22s%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffe070%22%20stop-opacity%3D%220%22%2F%3E%3Cstop%20offset%3D%22.5%22%20stop-color%3D%22%23fffbe0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffe070%22%20stop-opacity%3D%220%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20x%3D%2210%22%20y%3D%220%22%20width%3D%2212%22%20height%3D%2225%22%20fill%3D%22url(%23s)%22%2F%3E%3Cpath%20d%3D%22M16%200v25%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2226%22%20rx%3D%2213%22%20ry%3D%224%22%20fill%3D%22none%22%20stroke%3D%22%23ffd84a%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M4%2021l4%202M28%2021l-4%202M8%2030l3-2M24%2030l-3-2%22%20stroke%3D%22%23fff4b0%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M16%206v10M12%209.5h8%22%20stroke%3D%22%23c89010%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 3",
+    "en": "a holy pillar of light striking down from above onto a target"
+   },
+   {
+    "n": "วงอรุณศักดิ์สิทธิ์",
+    "d": "สร้างวงแสง 6 วิ เพื่อนในวงฟื้นเลือด 4%/วิ และรับดาเมจลดลง 30% มอนในวงโดนแผดเผา",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%22.5%22%20cy%3D%22.7%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fffbe0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffd84a%22%20stop-opacity%3D%22.2%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M3%2024a13%2013%200%200%201%2026%200z%22%20fill%3D%22url(%23r)%22%20stroke%3D%22%23e0b030%22%20stroke-width%3D%221.4%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2224%22%20rx%3D%2214%22%20ry%3D%224%22%20fill%3D%22none%22%20stroke%3D%22%23ffd84a%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M16%2011v9M11.5%2015.5h9%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%228%22%20r%3D%221.2%22%20fill%3D%22%23fff4b0%22%2F%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%227%22%20r%3D%221%22%20fill%3D%22%23fff4b0%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%224%22%20r%3D%221.3%22%20fill%3D%22%23fff4b0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4",
+    "en": "a sacred sun circle on the ground with rays, golden-orange"
+   },
+   {
+    "n": "วงแหวนพิทักษ์",
+    "d": "วงแสงอรุณตามตัว 6 วิ เพื่อนในวงรับดาเมจ −25% และฟื้นเลือด 2%/วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2214%22%20fill%3D%22%233a2a08%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2220%22%20rx%3D%2213%22%20ry%3D%226%22%20fill%3D%22none%22%20stroke%3D%22%23ffe08a%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20transform%3D%22rotate(0%2016%2012)%22%20d%3D%22M16%202v4%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20transform%3D%22rotate(45%2016%2012)%22%20d%3D%22M16%202v4%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20transform%3D%22rotate(90%2016%2012)%22%20d%3D%22M16%202v4%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20transform%3D%22rotate(135%2016%2012)%22%20d%3D%22M16%202v4%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20transform%3D%22rotate(180%2016%2012)%22%20d%3D%22M16%202v4%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20transform%3D%22rotate(225%2016%2012)%22%20d%3D%22M16%202v4%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20transform%3D%22rotate(270%2016%2012)%22%20d%3D%22M16%202v4%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.6%22%2F%3E%3Cpath%20transform%3D%22rotate(315%2016%2012)%22%20d%3D%22M16%202v4%22%20stroke%3D%22%23fff4c0%22%20stroke-width%3D%221.6%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2212%22%20r%3D%225%22%20fill%3D%22%23fff4c0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path A)",
+    "en": "a protective halo ring with small shield runes around it, dawn light"
+   },
+   {
+    "n": "โซ่วิญญาณสาป",
+    "d": "ล่ามมอนสูงสุด 5 ตัวด้วยโซ่วิญญาณ 5 วิ ดาเมจที่ตัวหนึ่งโดน 40% กระจายไปทุกตัวในโซ่",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%231a0a24%22%2F%3E%3Cpath%20d%3D%22M5%208q11%206%2022%200M5%2016q11%206%2022%200M5%2024q11%206%2022%200%22%20fill%3D%22none%22%20stroke%3D%22%23c080ff%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%223%202%22%2F%3E%3Ccircle%20cx%3D%225%22%20cy%3D%228%22%20r%3D%222.4%22%20fill%3D%22%23ff80d0%22%2F%3E%3Ccircle%20cx%3D%2227%22%20cy%3D%2216%22%20r%3D%222.4%22%20fill%3D%22%23ff80d0%22%2F%3E%3Ccircle%20cx%3D%225%22%20cy%3D%2224%22%20r%3D%222.4%22%20fill%3D%22%23ff80d0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path B)",
+    "en": "ghostly purple soul chains binding several dark orbs together"
+   },
+   {
+    "n": "อรุณรุ่งนิรันดร์",
+    "d": "ชุบชีวิตและฟื้นเลือดทั้งทีม ให้เกราะ และทำให้ทั้งทีมเป็นอมตะ 3 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22aw%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff4c0%22%20stop-opacity%3D%22.55%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffb020%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2216%22%20fill%3D%22url(%23aw)%22%2F%3E%3Cg%20transform%3D%22translate(3.5%203.5)%20scale(.78)%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%226%22%20rx%3D%227%22%20ry%3D%222.4%22%20fill%3D%22none%22%20stroke%3D%22%23ffe680%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M15%2012C9%208%203%209%201%2014c4-1%205%201%203%203%204-1%205%201%204%203%204-2%207-4%207-8z%22%20fill%3D%22%23fff%22%20stroke%3D%22%238a7a50%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M17%2012c6-4%2012-3%2014%202-4-1-5%201-3%203-4-1-5%201-4%203-4-2-7-4-7-8z%22%20fill%3D%22%23fff%22%20stroke%3D%22%238a7a50%22%20stroke-width%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2215%22%20r%3D%223.4%22%20fill%3D%22%23ffe680%22%20stroke%3D%22%238a6a10%22%20stroke-width%3D%22.8%22%2F%3E%3Cpath%20d%3D%22M16%2019v11%22%20stroke%3D%22%23ffe680%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.6%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2214.6%22%20fill%3D%22none%22%20stroke%3D%22%23ffd84a%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%225%202.2%22%2F%3E%3Cpath%20d%3D%22M27%201.5l1%202.6%202.6%201-2.6%201-1%202.6-1-2.6-2.6-1%202.6-1z%22%20fill%3D%22%23fff8d0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate after 2nd class",
+    "en": "eternal dawn: a rising sun with angel wings, everything bathed in gold (ULTIMATE, 2nd class \"Patriarch of Dawn\")"
+   },
+   {
+    "n": "ระฆังวิญญาณ",
+    "d": "เรียกระฆังสาปลอยกลางวง 6 วิ ดูดเลือดมอนรอบ ๆ แล้วนำไปฮีลทั้งทีม",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M10%2022c0-9%202-14%206-14s6%205%206%2014z%22%20fill%3D%22%232a1438%22%20stroke%3D%22%23c080ff%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M8%2022h16%22%20stroke%3D%22%23c080ff%22%20stroke-width%3D%222%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2225%22%20r%3D%222.4%22%20fill%3D%22%23e0b0ff%22%2F%3E%3Cpath%20d%3D%22M4%2014q-2%204%200%208M28%2014q2%204%200%208%22%20stroke%3D%22%23e0b0ff%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate, branch class",
+    "en": "a cursed spirit bell floating in violet mist, draining wisps toward it (ULTIMATE, branch class \"Soul-Curse Seer\")"
+   },
+   {
+    "n": "ตราประทับวิญญาณ",
+    "d": "วางตราคำสาปบนพื้น 6 วิ มอนในตราติดคำสาป มอนที่ตายในตราระเบิดวิญญาณใส่มอนรอบ ๆ และฮีลเพื่อน",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2218%22%20r%3D%2212%22%20fill%3D%22%231a0a24%22%20stroke%3D%22%23c080ff%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M16%208l3%208h-6zM9%2022l7-4%207%204%22%20fill%3D%22none%22%20stroke%3D%22%23e0b0ff%22%20stroke-width%3D%221.6%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2218%22%20r%3D%223%22%20fill%3D%22%23c080ff%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4, branch class",
+    "en": "a cursed seal sigil glowing violet on the ground with spirit flames rising"
+   },
+   {
+    "n": "สวรรค์ลงมาโปรด",
+    "d": "ปีกเทวดาและแสงสวรรค์ ฟื้นเลือดเต็มและชุบชีวิตทั้งทีม อมตะ 5 วิ แผดเผามอนรอบ ๆ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Cpath%20d%3D%22M16%2014C10%206%204%206%202%2010c4%200%207%202%2010%206M16%2014c6-8%2012-8%2014-4-4%200-7%202-10%206%22%20fill%3D%22%23fff%22%20stroke%3D%22%23e0b040%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%226%22%20rx%3D%225%22%20ry%3D%221.8%22%20fill%3D%22none%22%20stroke%3D%22%23ffd84a%22%20stroke-width%3D%221.6%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2217%22%20r%3D%224%22%20fill%3D%22%23fff6c0%22%2F%3E%3Cpath%20d%3D%22M16%2021v9%22%20stroke%3D%22%23fff6c0%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate A (after rebirth)",
+    "en": "AWAKENED: heaven descending: great angel wings and a column of heavenly light, gold and white, very radiant"
+   },
+   {
+    "n": "พิพากษายมโลก",
+    "d": "มือวิญญาณนับสิบโผล่จากพื้น ดูดชีวิตมอนมาฮีลทีม 3 วิ แล้วระเบิดคำสาป",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Crect%20x%3D%222%22%20y%3D%2224%22%20width%3D%2228%22%20height%3D%224%22%20rx%3D%222%22%20fill%3D%22%232a0a3a%22%2F%3E%3Cpath%20d%3D%22M6%2025v-8l-2-3M6%2017l2-3%22%20stroke%3D%22%23c080ff%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M13%2025v-14l-2-3M13%2011l2-3%22%20stroke%3D%22%23c080ff%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M20%2025v-8l-2-3M20%2017l2-3%22%20stroke%3D%22%23c080ff%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M26%2025v-14l-2-3M26%2011l2-3%22%20stroke%3D%22%23c080ff%22%20stroke-width%3D%222%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%229%22%20r%3D%224%22%20fill%3D%22%23ff80d0%22%20opacity%3D%22.8%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate B (after rebirth)",
+    "en": "AWAKENED: underworld judgment: many spectral hands reaching up from a dark violet portal"
+   }
+  ]
+ },
+ "assn": {
+  "n": "เงาลอบสังหาร",
+  "col": "#8a5fd0",
+  "n2": "เจ้าแห่งเงามรณะ",
+  "n2b": "นักระบำใบมีด",
+  "d": "ลอบสังหารความเร็วสูง คริติคอลสูง ก้าวเงาพุ่งแทงเป้าหมายแล้วหายตัว หมอกพิษวางบนพื้น ทำดาเมจเล็กน้อยและทำให้มอนสเตอร์ช้าลง",
+  "L": [
+   {
+    "n": "ก้าวเงา",
+    "d": "วาร์ปไปแทงเป้าหมาย (400%) แล้วล่องหน 2.5 วิ — ตีครั้งถัดไปคริแน่นอน",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M5%2025q4-3%205-10q1%208%205%2011z%22%20fill%3D%22%233a2458%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M3%2029q5-4%206-11q1%209%205%2012z%22%20fill%3D%22%232a1840%22%20opacity%3D%22.6%22%2F%3E%3Cg%20transform%3D%22rotate(40%2020%2014)%22%3E%3Cpath%20d%3D%22M19%201l2.4%203v13h-4.8V4z%22%20fill%3D%22%23dcd4ec%22%20stroke%3D%22%23140c1c%22%20stroke-width%3D%22.8%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2217%22%20width%3D%228.8%22%20height%3D%222%22%20rx%3D%22.8%22%20fill%3D%22%23a46ae0%22%20stroke%3D%22%23140c1c%22%20stroke-width%3D%22.6%22%2F%3E%3Crect%20x%3D%2218.4%22%20y%3D%2219%22%20width%3D%222%22%20height%3D%225%22%20fill%3D%22%232a1a3a%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%225%22%20r%3D%221.8%22%20fill%3D%22%23e0b0ff%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 1",
+    "en": "a dagger striking out of a shadow portal, purple afterimage"
+   },
+   {
+    "n": "หมอกพิษ",
+    "d": "ปล่อยหมอกพิษรอบตัว 5 วิ พิษกัดทุก 0.5 วิ (35%) มอนในหมอกช้าลง",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2211%22%20cy%3D%2217%22%20r%3D%228%22%20fill%3D%22%236aa040%22%20opacity%3D%22.85%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2214%22%20r%3D%229%22%20fill%3D%22%238fd65f%22%20opacity%3D%22.85%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2221%22%20r%3D%228%22%20fill%3D%22%235a9a38%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M13%2013a3.2%203.2%200%201%201%206%200v2.4h-6z%22%20fill%3D%22%23e8ffd8%22%2F%3E%3Ccircle%20cx%3D%2214.8%22%20cy%3D%2213%22%20r%3D%22.9%22%20fill%3D%22%231a2a10%22%2F%3E%3Ccircle%20cx%3D%2217.2%22%20cy%3D%2213%22%20r%3D%22.9%22%20fill%3D%22%231a2a10%22%2F%3E%3Cpath%20d%3D%22M14%2016.5h4%22%20stroke%3D%22%23e8ffd8%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%227%22%20cy%3D%2227%22%20r%3D%221.4%22%20fill%3D%22%23a8e070%22%2F%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%2226%22%20r%3D%221%22%20fill%3D%22%23a8e070%22%2F%3E%3Ccircle%20cx%3D%2227%22%20cy%3D%227%22%20r%3D%221.2%22%20fill%3D%22%23a8e070%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 2",
+    "en": "a cloud of green-purple poison mist with a small skull shape in the fumes (stylized, not gory)"
+   },
+   {
+    "n": "ร่างเงาพันคม",
+    "d": "แยกร่างเงาพุ่งแทงศัตรูรอบตัวสูงสุด 6 ตัวต่อเนื่อง แล้วหายตัว",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%225%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%20stroke-width%3D%221.2%22%2F%3E%3Cg%20fill%3D%22%23e8dcf8%22%20stroke%3D%22%23140c1c%22%20stroke-width%3D%22.6%22%3E%3Cpath%20d%3D%22M16%201l1.6%209h-3.2z%22%2F%3E%3Cpath%20d%3D%22M16%2031l-1.6-9h3.2z%22%2F%3E%3Cpath%20d%3D%22M1%2016l9-1.6v3.2z%22%2F%3E%3Cpath%20d%3D%22M31%2016l-9%201.6v-3.2z%22%2F%3E%3Cpath%20d%3D%22M5.4%205.4l7%205.8-2.2%202.2z%22%2F%3E%3Cpath%20d%3D%22M26.6%2026.6l-7-5.8%202.2-2.2z%22%2F%3E%3Cpath%20d%3D%22M26.6%205.4l-5.8%207-2.2-2.2z%22%2F%3E%3Cpath%20d%3D%22M5.4%2026.6l5.8-7%202.2%202.2z%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%222%22%20fill%3D%22%23d49aff%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate",
+    "en": "many shadow afterimage daggers striking from several directions (ULTIMATE)"
+   },
+   {
+    "n": "ตราประทับมรณะ",
+    "d": "ประทับตราบนเป้าหมาย 5 วิ แล้วระเบิด 120% + 16% ของดาเมจทั้งหมดที่ใส่เป้านั้นระหว่างติดตรา (มอนรอบ ๆ โดน 40%)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2213%22%20fill%3D%22none%22%20stroke%3D%22%23ff5ad0%22%20stroke-width%3D%221.6%22%20stroke-dasharray%3D%224%202.4%22%2F%3E%3Cpath%20d%3D%22M16%204l11%2019H5z%22%20fill%3D%22none%22%20stroke%3D%22%23ff8ae0%22%20stroke-width%3D%222%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M9%2016q7-7%2014%200q-7%207-14%200z%22%20fill%3D%22%232a0620%22%20stroke%3D%22%23ff5ad0%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%222.6%22%20fill%3D%22%23ff5ad0%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%221%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 3",
+    "en": "a glowing violet death mark sigil (geometric target seal) on a dark orb"
+   },
+   {
+    "n": "ร่างแยกเงา",
+    "d": "เรียกร่างเงาออกมาสู้ข้างกาย 6 วิ โจมตีศัตรูใกล้ที่สุดต่อเนื่อง",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M19%206a3.4%203.4%200%201%201%200%20.1zM15%2012h8l2%209-3%201-1%207h-4l-1-7-3-1z%22%20fill%3D%22%23d49aff%22%20opacity%3D%22.45%22%2F%3E%3Cpath%20d%3D%22M11%205a3.6%203.6%200%201%201%200%20.1zM7%2011.5h8.4l2%209.4-3%201-1%207.6h-4.4l-1-7.6-3-1z%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%20stroke-width%3D%221%22%2F%3E%3Ccircle%20cx%3D%229.6%22%20cy%3D%225%22%20r%3D%22.8%22%20fill%3D%22%23ff5ad0%22%2F%3E%3Ccircle%20cx%3D%2212.4%22%20cy%3D%225%22%20r%3D%22.8%22%20fill%3D%22%23ff5ad0%22%2F%3E%3Cpath%20d%3D%22M17%2015l9-7%22%20stroke%3D%22%23e8dcf8%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4",
+    "en": "a shadow clone silhouette standing beside a dagger, purple smoke"
+   },
+   {
+    "n": "เงาแยกร่าง",
+    "d": "ร่างเงา 3 ร่างพุ่งแทงเป็นรูปพัด มอนที่โดนถูกตรึง 1.5 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23140a22%22%2F%3E%3Cg%20transform%3D%22translate(8%2021)%22%20opacity%3D%220.6%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%223%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%2F%3E%3Cpath%20d%3D%22M-4-4h8l2%209h-12z%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(16%2018)%22%20opacity%3D%221%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%223%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%2F%3E%3Cpath%20d%3D%22M-4-4h8l2%209h-12z%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(24%2021)%22%20opacity%3D%220.6%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%22-8%22%20r%3D%223%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%2F%3E%3Cpath%20d%3D%22M-4-4h8l2%209h-12z%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2215%22%20cy%3D%2210%22%20r%3D%22.7%22%20fill%3D%22%23ff5ad0%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2210%22%20r%3D%22.7%22%20fill%3D%22%23ff5ad0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path A)",
+    "en": "three shadow blades fanning out forward, chains of shadow pinning"
+   },
+   {
+    "n": "วงล้อพันดาบ",
+    "d": "ดาบลอยหมุนรอบตัว 6 วิ จำนวนดาบเพิ่มตามคอมโบ (สูงสุด 8 เล่ม)",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2214%22%20fill%3D%22%2324060c%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%229%22%20fill%3D%22none%22%20stroke%3D%22%23ff5a7a%22%20stroke-dasharray%3D%222%203%22%2F%3E%3Cpath%20transform%3D%22rotate(0%2016%2016)%22%20d%3D%22M16%202l1.6%205-1.6%202-1.6-2z%22%20fill%3D%22%23f0f0ff%22%2F%3E%3Cpath%20transform%3D%22rotate(45%2016%2016)%22%20d%3D%22M16%202l1.6%205-1.6%202-1.6-2z%22%20fill%3D%22%23f0f0ff%22%2F%3E%3Cpath%20transform%3D%22rotate(90%2016%2016)%22%20d%3D%22M16%202l1.6%205-1.6%202-1.6-2z%22%20fill%3D%22%23f0f0ff%22%2F%3E%3Cpath%20transform%3D%22rotate(135%2016%2016)%22%20d%3D%22M16%202l1.6%205-1.6%202-1.6-2z%22%20fill%3D%22%23f0f0ff%22%2F%3E%3Cpath%20transform%3D%22rotate(180%2016%2016)%22%20d%3D%22M16%202l1.6%205-1.6%202-1.6-2z%22%20fill%3D%22%23f0f0ff%22%2F%3E%3Cpath%20transform%3D%22rotate(225%2016%2016)%22%20d%3D%22M16%202l1.6%205-1.6%202-1.6-2z%22%20fill%3D%22%23f0f0ff%22%2F%3E%3Cpath%20transform%3D%22rotate(270%2016%2016)%22%20d%3D%22M16%202l1.6%205-1.6%202-1.6-2z%22%20fill%3D%22%23f0f0ff%22%2F%3E%3Cpath%20transform%3D%22rotate(315%2016%2016)%22%20d%3D%22M16%202l1.6%205-1.6%202-1.6-2z%22%20fill%3D%22%23f0f0ff%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23ff5a7a%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path B)",
+    "en": "a whirling wheel of floating swords spinning in a circle"
+   },
+   {
+    "n": "สุริยคราสพันเงา",
+    "d": "ร่างเงาพุ่งแทงต่อเนื่อง 10 ครั้งวนไปยังศัตรูรอบตัว ครั้งสุดท้ายคริติคอลเสมอ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22aw%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff4c0%22%20stop-opacity%3D%22.55%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffb020%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2216%22%20fill%3D%22url(%23aw)%22%2F%3E%3Cg%20transform%3D%22translate(3.5%203.5)%20scale(.78)%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%225%22%20fill%3D%22%232a1840%22%20stroke%3D%22%23d49aff%22%20stroke-width%3D%221.2%22%2F%3E%3Cg%20fill%3D%22%23e8dcf8%22%20stroke%3D%22%23140c1c%22%20stroke-width%3D%22.6%22%3E%3Cpath%20d%3D%22M16%201l1.6%209h-3.2z%22%2F%3E%3Cpath%20d%3D%22M16%2031l-1.6-9h3.2z%22%2F%3E%3Cpath%20d%3D%22M1%2016l9-1.6v3.2z%22%2F%3E%3Cpath%20d%3D%22M31%2016l-9%201.6v-3.2z%22%2F%3E%3Cpath%20d%3D%22M5.4%205.4l7%205.8-2.2%202.2z%22%2F%3E%3Cpath%20d%3D%22M26.6%2026.6l-7-5.8%202.2-2.2z%22%2F%3E%3Cpath%20d%3D%22M26.6%205.4l-5.8%207-2.2-2.2z%22%2F%3E%3Cpath%20d%3D%22M5.4%2026.6l5.8-7%202.2%202.2z%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%222%22%20fill%3D%22%23d49aff%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2214.6%22%20fill%3D%22none%22%20stroke%3D%22%23ffd84a%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%225%202.2%22%2F%3E%3Cpath%20d%3D%22M27%201.5l1%202.6%202.6%201-2.6%201-1%202.6-1-2.6-2.6-1%202.6-1z%22%20fill%3D%22%23fff8d0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate after 2nd class",
+    "en": "a solar eclipse: a black sun with a violet corona and shadow blade streaks around it (ULTIMATE, 2nd class \"Lord of Death Shadows\")"
+   },
+   {
+    "n": "พายุใบมีดราตรี",
+    "d": "ร่างกลายเป็นพายุใบมีด 4 วิ เดินได้อิสระ ฟันมอนรอบตัวต่อเนื่อง คอมโบไม่หลุด",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2212%22%20fill%3D%22none%22%20stroke%3D%22%23a03040%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%224%203%22%2F%3E%3Cpath%20d%3D%22M16%204l3%2010-3%202-3-2zM28%2016l-10%203-2-3%202-3zM16%2028l-3-10%203-2%203%202zM4%2016l10-3%202%203-2%203z%22%20fill%3D%22%23ffe0e0%22%20stroke%3D%22%237a1020%22%20stroke-width%3D%22.6%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate, branch class",
+    "en": "a night storm of spinning blades, dark vortex with crescent blades (ULTIMATE, branch class \"Blade Dancer\")"
+   },
+   {
+    "n": "ระบำพันใบมีด",
+    "d": "หมุนตัวพุ่งทะลุมอน ทิ้งพายุใบมีดค้างตามทาง 3 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M4%2026q12-22%2024-22%22%20fill%3D%22none%22%20stroke%3D%22%23ffcf6a%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M8%2026l5-11%202%202zM16%2022l7-9%201%203zM20%2010l8-6-2%205z%22%20fill%3D%22%23ffe8e8%22%20stroke%3D%22%23a03040%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4, branch class",
+    "en": "a spinning blade dance: two curved blades in a twirling trail of steel petals"
+   },
+   {
+    "n": "คืนไร้จันทร์",
+    "d": "ความมืดกลืนพื้นที่ วาร์ปแทง 20 ครั้ง ปิดด้วยเสี้ยวจันทร์ยักษ์",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%230a0612%22%2F%3E%3Cpath%20d%3D%22M22%204a12%2012%200%201%200%206%2018a10%2010%200%201%201-6-18z%22%20fill%3D%22%232a1840%22%20stroke%3D%22%235a3a7a%22%2F%3E%3Cpath%20d%3D%22M8%2010L24%2020%22%20stroke%3D%22%23e0c8ff%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M24%208L8%2024%22%20stroke%3D%22%23e0c8ff%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M6%2020L26%2014%22%20stroke%3D%22%23e0c8ff%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate A (after rebirth)",
+    "en": "AWAKENED: moonless night: total darkness with a giant crescent-moon slash, many tiny warp sparks"
+   },
+   {
+    "n": "ระบำสุดท้ายพันดาบ",
+    "d": "ดาบนับพันร่วงรอบตัว 3 วิ คอมโบล็อกไว้ที่ 20 แล้วรวมดาบระเบิดใส่ทุกตัว",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2213%22%20fill%3D%22%2324060c%22%2F%3E%3Cpath%20transform%3D%22rotate(0%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(30%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(60%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(90%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(120%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(150%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(180%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(210%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(240%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(270%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(300%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Cpath%20transform%3D%22rotate(330%2016%2016)%22%20d%3D%22M16%201l1.4%205-1.4%201.5-1.4-1.5z%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%225%22%20fill%3D%22%23ff3a5a%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2219%22%20font-size%3D%227%22%20text-anchor%3D%22middle%22%20fill%3D%22%23fff%22%20font-weight%3D%22bold%22%3E20%3C%2Ftext%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate B (after rebirth)",
+    "en": "AWAKENED: a thousand swords falling in a ring and gathering into one huge burst of steel light"
+   }
+  ]
+ },
+ "mage": {
+  "n": "จอมเวทอาคม",
+  "col": "#49b8d8",
+  "n2": "อัครมหาเวทกาลเวลา",
+  "n2b": "จอมเวทอสูรอัญเชิญ",
+  "d": "นักเวทระยะไกล เลือดน้อยแต่มานาเยอะ ลูกไฟระเบิดเป็นวงใส่กลุ่มมอนสเตอร์ ผนึกน้ำแข็งทำให้ศัตรูรอบตัวช้าลงและโดนดาเมจ",
+  "L": [
+   {
+    "n": "ลูกไฟระเบิด",
+    "d": "ลูกไฟระเบิดที่เป้าหมาย (340%) มอนรอบ ๆ โดน 75%",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22f%22%20cx%3D%22.42%22%20cy%3D%22.42%22%20r%3D%22.6%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fffbe0%22%2F%3E%3Cstop%20offset%3D%22.4%22%20stop-color%3D%22%23ffb030%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23d02808%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M22%206c-3-2-7%200-10%202%202-3%201-5-1-6-1%204-6%205-7%2011-1%205%202%2011%208%2013%207%202%2014-3%2014-10%200-4-2-7-4-10z%22%20fill%3D%22%23ff5a1a%22%20opacity%3D%22.6%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2218%22%20r%3D%229%22%20fill%3D%22url(%23f)%22%20stroke%3D%22%235a1004%22%20stroke-width%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%2215%22%20r%3D%222.4%22%20fill%3D%22%23fff%22%20opacity%3D%22.7%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 1",
+    "en": "a blazing fireball exploding, orange-red"
+   },
+   {
+    "n": "ผนึกน้ำแข็ง",
+    "d": "ปล่อยไอเย็นรอบตัว (160%) มอนในวงช้าลง 3.5 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%23bfefff%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%202v28M4%209l24%2014M4%2023L28%209%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%23ffffff%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M13%205l3%203%203-3M13%2027l3-3%203%203M5.5%2013.5l4-1-1-4M26.5%2018.5l-4%201%201%204M5.5%2018.5l4%201-1%204M26.5%2013.5l-4-1%201-4%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223.4%22%20fill%3D%22%238fe0ff%22%20stroke%3D%22%232a6a8a%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 2",
+    "en": "a frost burst: ice crystals and a cold snowflake-like ring, icy blue"
+   },
+   {
+    "n": "พายุอุกกาบาต",
+    "d": "วงเวทเรียกอุกกาบาต 7 ลูกถล่มพื้นที่รอบเป้าหมาย",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%3E%3Cpath%20d%3D%22M30%201L18%2013%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.55%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2214%22%20r%3D%224.4%22%20fill%3D%22%23ff7020%22%20stroke%3D%22%234a1004%22%20stroke-width%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2213%22%20r%3D%221.6%22%20fill%3D%22%23ffe0a0%22%2F%3E%3C%2Fg%3E%3Cg%3E%3Cpath%20d%3D%22M14%201L7%208%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.5%22%2F%3E%3Ccircle%20cx%3D%226.5%22%20cy%3D%229%22%20r%3D%223%22%20fill%3D%22%23ff7020%22%20stroke%3D%22%234a1004%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3Cg%3E%3Cpath%20d%3D%22M31%2014l-7%207%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.5%22%2F%3E%3Ccircle%20cx%3D%2223.5%22%20cy%3D%2222%22%20r%3D%223%22%20fill%3D%22%23ff7020%22%20stroke%3D%22%234a1004%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M1%2030l5-3%204%202%205-3%204%202%205-2%207%202%22%20fill%3D%22none%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate",
+    "en": "meteors falling into a glowing magic circle (ULTIMATE)"
+   },
+   {
+    "n": "โซ่สายฟ้า",
+    "d": "สายฟ้ากระโดดต่อได้สูงสุด 5 ตัว แรงลดลง 15% ทุกครั้งที่กระโดด",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22z%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236ac8ff%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M19%201L7%2018h7l-4%2013%2015-19h-8l5-11z%22%20fill%3D%22url(%23z)%22%20stroke%3D%22%231a3a5a%22%20stroke-width%3D%221%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M3%208l3%201M27%2022l3%201M26%205l2-2M4%2026l-2%202%22%20stroke%3D%22%23b8ecff%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 3",
+    "en": "chain lightning zigzagging between orbs, electric blue-white"
+   },
+   {
+    "n": "รอยแยกกาลเวลา",
+    "d": "เปิดรอยแยกดูดมอนเข้าหากลาง 3 วิ แผดเผาต่อเนื่อง แล้วระเบิดยุบตัว",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22r%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23000%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%231a0830%22%2F%3E%3Cstop%20offset%3D%22.75%22%20stop-color%3D%22%237a40d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c8a0ff%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23r)%22%2F%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d8b8ff%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M16%204a12%2012%200%200%201%2011%209%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M27%2019a12%2012%200%200%201-9%209%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M12%2028a12%2012%200%200%201-8-10%22%20stroke-width%3D%221.8%22%2F%3E%3Cpath%20d%3D%22M5%2012a12%2012%200%200%201%205-6%22%20stroke-width%3D%221.8%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%224%22%20fill%3D%22%23000%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4",
+    "en": "a rift in time: a glowing purple crack in space with a clock-like geometric dial (no numbers)"
+   },
+   {
+    "n": "ลูกแก้วอัสนี",
+    "d": "ลูกแก้วสายฟ้า 3 ลูกโคจรรอบตัว 8 วิ ยิงสายฟ้าใส่มอนรอบ ๆ ต่อเนื่อง",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%230e1a30%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2217%22%20rx%3D%2212%22%20ry%3D%225%22%20fill%3D%22none%22%20stroke%3D%22%236ab0ff%22%20stroke-dasharray%3D%223%202%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2215%22%20r%3D%223.6%22%20fill%3D%22%23e8f4ff%22%20stroke%3D%22%236ab0ff%22%20stroke-width%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%2215%22%20r%3D%223.6%22%20fill%3D%22%23e8f4ff%22%20stroke%3D%22%236ab0ff%22%20stroke-width%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2222%22%20r%3D%223.6%22%20fill%3D%22%23e8f4ff%22%20stroke%3D%22%236ab0ff%22%20stroke-width%3D%221.4%22%2F%3E%3Cpath%20d%3D%22M16%203l-3%206h3l-2%205%205-7h-3l2-4z%22%20fill%3D%22%23fff36a%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path A)",
+    "en": "three lightning orbs orbiting a center"
+   },
+   {
+    "n": "ฝูงอิมป์คลั่ง",
+    "d": "ปล่อยอิมป์ 5 ตัวพุ่งใส่กลุ่มมอนแล้วระเบิดเป็นวงไฟ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%232a0806%22%2F%3E%3Cg%20transform%3D%22translate(9%2012)%22%3E%3Ccircle%20r%3D%224.2%22%20fill%3D%22%23c0281a%22%2F%3E%3Cpath%20d%3D%22M-3-3l-1.6-3M3-3l1.6-3%22%20stroke%3D%22%23ffd080%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%22-1.4%22%20cy%3D%22-.6%22%20r%3D%22.8%22%20fill%3D%22%23ffe060%22%2F%3E%3Ccircle%20cx%3D%221.4%22%20cy%3D%22-.6%22%20r%3D%22.8%22%20fill%3D%22%23ffe060%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(22%2010)%22%3E%3Ccircle%20r%3D%224.2%22%20fill%3D%22%23c0281a%22%2F%3E%3Cpath%20d%3D%22M-3-3l-1.6-3M3-3l1.6-3%22%20stroke%3D%22%23ffd080%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%22-1.4%22%20cy%3D%22-.6%22%20r%3D%22.8%22%20fill%3D%22%23ffe060%22%2F%3E%3Ccircle%20cx%3D%221.4%22%20cy%3D%22-.6%22%20r%3D%22.8%22%20fill%3D%22%23ffe060%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate(15%2022)%22%3E%3Ccircle%20r%3D%224.2%22%20fill%3D%22%23c0281a%22%2F%3E%3Cpath%20d%3D%22M-3-3l-1.6-3M3-3l1.6-3%22%20stroke%3D%22%23ffd080%22%20stroke-width%3D%221.2%22%2F%3E%3Ccircle%20cx%3D%22-1.4%22%20cy%3D%22-.6%22%20r%3D%22.8%22%20fill%3D%22%23ffe060%22%2F%3E%3Ccircle%20cx%3D%221.4%22%20cy%3D%22-.6%22%20r%3D%22.8%22%20fill%3D%22%23ffe060%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2224%22%20cy%3D%2224%22%20r%3D%225%22%20fill%3D%22%23ff8a20%22%20opacity%3D%22.7%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 6 (path B)",
+    "en": "small fiery imp silhouettes diving forward, flame trails (stylized, not scary)"
+   },
+   {
+    "n": "อุกกาบาตหยุดกาล",
+    "d": "หยุดเวลามอนในวง 2 วิ แล้วถล่มด้วยอุกกาบาต 9 ลูก",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22aw%22%20cx%3D%22.5%22%20cy%3D%22.5%22%20r%3D%22.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff4c0%22%20stop-opacity%3D%22.55%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23ffb020%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2216%22%20fill%3D%22url(%23aw)%22%2F%3E%3Cg%20transform%3D%22translate(3.5%203.5)%20scale(.78)%22%3E%3Cg%3E%3Cpath%20d%3D%22M30%201L18%2013%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.55%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2214%22%20r%3D%224.4%22%20fill%3D%22%23ff7020%22%20stroke%3D%22%234a1004%22%20stroke-width%3D%22.8%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2213%22%20r%3D%221.6%22%20fill%3D%22%23ffe0a0%22%2F%3E%3C%2Fg%3E%3Cg%3E%3Cpath%20d%3D%22M14%201L7%208%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.5%22%2F%3E%3Ccircle%20cx%3D%226.5%22%20cy%3D%229%22%20r%3D%223%22%20fill%3D%22%23ff7020%22%20stroke%3D%22%234a1004%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3Cg%3E%3Cpath%20d%3D%22M31%2014l-7%207%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.5%22%2F%3E%3Ccircle%20cx%3D%2223.5%22%20cy%3D%2222%22%20r%3D%223%22%20fill%3D%22%23ff7020%22%20stroke%3D%22%234a1004%22%20stroke-width%3D%22.7%22%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%22M1%2030l5-3%204%202%205-3%204%202%205-2%207%202%22%20fill%3D%22none%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%221.6%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2214.6%22%20fill%3D%22none%22%20stroke%3D%22%23ffd84a%22%20stroke-width%3D%221.4%22%20stroke-dasharray%3D%225%202.2%22%2F%3E%3Cpath%20d%3D%22M27%201.5l1%202.6%202.6%201-2.6%201-1%202.6-1-2.6-2.6-1%202.6-1z%22%20fill%3D%22%23fff8d0%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate after 2nd class",
+    "en": "a frozen-time clock dial with meteors suspended above it (ULTIMATE, 2nd class \"Archmage of Time\")"
+   },
+   {
+    "n": "ประตูนรก",
+    "d": "เปิดประตูนรก เจ้าอสูรออกมา 6 วิ กระทืบพื้นและพ่นไฟใส่มอนรอบประตู",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2217%22%20rx%3D%2210%22%20ry%3D%2213%22%20fill%3D%22%231a0404%22%20stroke%3D%22%23ff7a2a%22%20stroke-width%3D%221.6%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2217%22%20rx%3D%226%22%20ry%3D%229%22%20fill%3D%22%23ff5a1a%22%20opacity%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M11%209l-3-5M21%209l3-5%22%20stroke%3D%22%23d8c8a0%22%20stroke-width%3D%221.8%22%2F%3E%3Ccircle%20cx%3D%2213.5%22%20cy%3D%2215%22%20r%3D%221.2%22%20fill%3D%22%23fff36a%22%2F%3E%3Ccircle%20cx%3D%2218.5%22%20cy%3D%2215%22%20r%3D%221.2%22%20fill%3D%22%23fff36a%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "ultimate, branch class",
+    "en": "a hell gate: a stone portal with infernal fire and burning eyes inside (ULTIMATE, branch class \"Demon Summoner\")"
+   },
+   {
+    "n": "อัญเชิญโกเลมลาวา",
+    "d": "เรียกโกเลมลาวา 8 วิ ทุบพื้นทุก 1.5 วิ ดาเมจรอบตัวและทำให้มอนชะงัก 0.7 วิ",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20d%3D%22M8%2028l2-10-3-6%205-6h8l5%206-3%206%202%2010z%22%20fill%3D%22%233a1a14%22%20stroke%3D%22%23ff7a2a%22%20stroke-width%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%2213%22%20cy%3D%2212%22%20r%3D%221.6%22%20fill%3D%22%23ffd060%22%2F%3E%3Ccircle%20cx%3D%2219%22%20cy%3D%2212%22%20r%3D%221.6%22%20fill%3D%22%23ffd060%22%2F%3E%3Cpath%20d%3D%22M12%2018h8M11%2022h10%22%20stroke%3D%22%23ff7a2a%22%20stroke-width%3D%221.4%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "skill 4, branch class",
+    "en": "a lava golem fist smashing the ground, molten cracks"
+   },
+   {
+    "n": "สิ้นสุดกาลอวกาศ",
+    "d": "เปิดหลุมดำตรึงมอนไว้ 2 วิ ดูดกลืนต่อเนื่อง แล้วระเบิดซูเปอร์โนวา",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2213%22%20fill%3D%22%23000%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2216%22%20rx%3D%2214%22%20ry%3D%225%22%20fill%3D%22none%22%20stroke%3D%22%23ff9a40%22%20stroke-width%3D%222%22%2F%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2216%22%20rx%3D%2210%22%20ry%3D%223.4%22%20fill%3D%22none%22%20stroke%3D%22%23c8a0ff%22%20stroke-width%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%225%22%20fill%3D%22%23000%22%20stroke%3D%22%23fff%22%20stroke-width%3D%22.8%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate A (after rebirth)",
+    "en": "AWAKENED: a black hole with an accretion ring and a supernova flare, cosmic blue and white"
+   },
+   {
+    "n": "ราชาปีศาจจุติ",
+    "d": "ราชาปีศาจยักษ์โผล่จากพื้น ฟาดกรงเล็บ พ่นไฟนรกกวาด แล้วคำรามระเบิด",
+    "i": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22g%22%20cx%3D%22.5%22%20cy%3D%22.4%22%20r%3D%22.7%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff6d0%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c06010%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2215%22%20fill%3D%22url(%23g)%22%20opacity%3D%22.35%22%2F%3E%3Cpath%20d%3D%22M6%2030V18q0-10%2010-12q10%202%2010%2012v12z%22%20fill%3D%22%235a0e0a%22%20stroke%3D%22%231a0402%22%2F%3E%3Cpath%20d%3D%22M8%2010q-4-6%200-9M24%2010q4-6%200-9%22%20stroke%3D%22%23e8dcc0%22%20stroke-width%3D%222.4%22%20fill%3D%22none%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2214%22%20width%3D%224%22%20height%3D%222%22%20fill%3D%22%23ffe060%22%2F%3E%3Crect%20x%3D%2218%22%20y%3D%2214%22%20width%3D%224%22%20height%3D%222%22%20fill%3D%22%23ffe060%22%2F%3E%3Cpath%20d%3D%22M11%2022q5%204%2010%200%22%20stroke%3D%22%23ffb040%22%20stroke-width%3D%222%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E",
+    "tag": "awakened ultimate B (after rebirth)",
+    "en": "AWAKENED: a giant demon king silhouette with horns and claws rising from hellfire"
+   }
+  ]
+ }
+}
