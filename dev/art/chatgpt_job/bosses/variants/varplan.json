@@ -1,0 +1,194 @@
+[
+{
+"sheet": "var_01",
+"cell": 1,
+"key": "cas_dmg",
+"base": 11,
+"base_sheet": "boss_02",
+"base_cell": 3
+},
+{
+"sheet": "var_01",
+"cell": 2,
+"key": "orien_p3",
+"base": 12,
+"base_sheet": "boss_02",
+"base_cell": 4
+},
+{
+"sheet": "var_01",
+"cell": 3,
+"key": "refl_c1",
+"base": 30,
+"base_sheet": "boss_04",
+"base_cell": 1
+},
+{
+"sheet": "var_01",
+"cell": 4,
+"key": "refl_c2",
+"base": 30,
+"base_sheet": "boss_04",
+"base_cell": 1
+},
+{
+"sheet": "var_01",
+"cell": 5,
+"key": "queen_listen",
+"base": 22,
+"base_sheet": "boss_03",
+"base_cell": 4
+},
+{
+"sheet": "var_01",
+"cell": 6,
+"key": "queen_eye",
+"base": 22,
+"base_sheet": "boss_03",
+"base_cell": 4
+},
+{
+"sheet": "var_01",
+"cell": 7,
+"key": "queen_inhale",
+"base": 22,
+"base_sheet": "boss_03",
+"base_cell": 4
+},
+{
+"sheet": "var_01",
+"cell": 8,
+"key": "hunger_tendril",
+"base": 24,
+"base_sheet": "boss_03",
+"base_cell": 5
+},
+{
+"sheet": "var_02",
+"cell": 1,
+"key": "hunger_inhale",
+"base": 24,
+"base_sheet": "boss_03",
+"base_cell": 5
+},
+{
+"sheet": "var_03",
+"cell": 1,
+"key": "wolf_dmg",
+"base": 21,
+"base_sheet": "boss_06",
+"base_cell": 2
+},
+{
+"sheet": "var_03",
+"cell": 2,
+"key": "kraken_dmg",
+"base": 25,
+"base_sheet": "boss_06",
+"base_cell": 3
+},
+{
+"sheet": "var_03",
+"cell": 3,
+"key": "weaver_f2",
+"base": 31,
+"base_sheet": "boss_07",
+"base_cell": 1
+},
+{
+"sheet": "var_03",
+"cell": 4,
+"key": "weaver_f3",
+"base": 31,
+"base_sheet": "boss_07",
+"base_cell": 1
+},
+{
+"sheet": "var_03",
+"cell": 5,
+"key": "dev_cast",
+"base": 37,
+"base_sheet": "boss_07",
+"base_cell": 4
+},
+{
+"sheet": "var_03",
+"cell": 6,
+"key": "dev_crack",
+"base": 37,
+"base_sheet": "boss_07",
+"base_cell": 4
+},
+{
+"sheet": "var_04",
+"cell": 1,
+"key": "dev_peel",
+"base": 37,
+"base_sheet": "boss_07",
+"base_cell": 4
+},
+{
+"sheet": "var_04",
+"cell": 2,
+"key": "dev_core",
+"base": 37,
+"base_sheet": "boss_07",
+"base_cell": 4
+},
+{
+"sheet": "var_04",
+"cell": 3,
+"key": "wb_slamL",
+"base": 48,
+"base_sheet": "boss_07",
+"base_cell": 5
+},
+{
+"sheet": "var_04",
+"cell": 4,
+"key": "wb_slamR",
+"base": 48,
+"base_sheet": "boss_07",
+"base_cell": 5
+},
+{
+"sheet": "var_04",
+"cell": 5,
+"key": "wb_breath",
+"base": 48,
+"base_sheet": "boss_07",
+"base_cell": 5
+},
+{
+"sheet": "var_04",
+"cell": 6,
+"key": "wb_nova",
+"base": 48,
+"base_sheet": "boss_07",
+"base_cell": 5
+},
+{
+"sheet": "var_05",
+"cell": 1,
+"key": "gb_shield",
+"base": 49,
+"base_sheet": "boss_07",
+"base_cell": 6
+},
+{
+"sheet": "var_05",
+"cell": 2,
+"key": "gb_hammer",
+"base": 49,
+"base_sheet": "boss_07",
+"base_cell": 6
+},
+{
+"sheet": "var_05",
+"cell": 3,
+"key": "gb_nova",
+"base": 49,
+"base_sheet": "boss_07",
+"base_cell": 6
+}
+]
