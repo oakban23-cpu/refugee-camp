@@ -13602,9 +13602,10 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v634';
+const WNV='v635';
 const WNL=[
-  ['🗿','บอสมีมิติขึ้น','บอสลงแสงเงาแบบปริมาตร: ขอบด้านล่างขวาค่อยๆ มืดลงนุ่มๆ ด้านบนซ้ายรับแสง ตัวดูกลมเป็นสามมิติ · มีแสงขอบหลังสีตามธีมแมพ ตัดตัวบอสออกจากพื้น · เงาทอดลงพื้นตามรูปทรงจริงของบอส (ปีก แขน อาวุธ) ขยับตามท่า · ปิดเองในโหมดประหยัดและตอนเครื่องหน่วง'],
+  ['🫁','บอสขยับเป็นธรรมชาติ','ตัวบอสไม่แข็งเป็นแผ่นเดียวแล้ว: หายใจ อก-ไหล่ยกขึ้นลง (ตอนคลั่งหอบถี่) · ถ่ายน้ำหนักช้าๆ ผ้า ปีก ผมพลิ้วตามหลังลำตัว · เดินแล้วสะโพกกับไหล่ส่ายสวนกัน · วิ่งแล้วตัวบนเอนตามแรงเฉื่อย หยุดแล้วดีดกลับ · โดนตี ทุบพื้น ลงสนาม ตัวสั่นสะเทือนแล้วค่อยนิ่ง · ปิดเองในโหมดประหยัดและตอนเครื่องหน่วง'],
+  ['🗿','บอสมีมิติขึ้น','บอสลงแสงเงาแบบปริมาตร: ขอบด้านล่างขวาค่อยๆ มืดลงนุ่มๆ ด้านบนซ้ายรับแสง ตัวดูกลมเป็นสามมิติ · เงาทอดลงพื้นตามรูปทรงจริงของบอส (ปีก แขน อาวุธ) ขยับตามท่า · ปิดเองในโหมดประหยัดและตอนเครื่องหน่วง'],
   ['💥','บอสมีท่าทางดุดันขึ้น','บอสร่ายหรือโจมตีเป็น 3 จังหวะ: ง้างตัว → พุ่งฟาด → กระแทกพื้น (จอสั่น ฝุ่นกระจาย วงแรงกระแทก) · ปรากฏตัวทิ้งดิ่งลงจากฟ้า · ยืนนิ่งจะยืดตัวคำรามข่มขู่เป็นระยะ · เลือดต่ำเข้าโหมดคลั่งคำรามใหญ่ วงแดงกระจาย แล้วหายใจถี่ตัวสั่น · โดนตีจะถอยหนี · ก้าวเดินมีฝุ่น · ช่วงอมตะเปลี่ยนเฟสลอยขึ้นสะสมพลัง'],
   ['👑','บอสกลับมาเป็นแบบเดิม','ปิดภาพวาดบอสของ v631 แล้ว บอสทุกตัวกลับมาใช้แบบเดิมที่มีลูกเล่นครบ: ร่างเปลี่ยนตามเลือด เกราะร้าว ท่าเตือนก่อนโจมตี และวาฬดำน้ำ'],
   ['👑','บอสทั้งเกมเป็นภาพวาดมือ 49 ตัว','บอสแมพ บอสเนื้อเรื่อง บอสดันเจี้ยน บอสหอคอย 10 ชั้น บอสโลก และบอสกิลด์ เปลี่ยนเป็นภาพวาดมือละเอียดทั้งหมด · หน้าตาตรงกับภาพหน้าในบทพูด · ยังมีออร่าตอนคลั่ง แสงตอนร่าย และกะพริบตอนโดนตีเหมือนเดิม · โหลดภาพเฉพาะบอสที่เจอ ไม่เพิ่มเวลาเข้าเกม'],
@@ -36125,6 +36126,60 @@ function bx3Pass(c,M){const s=Math.hypot(M.a,M.b);BX3.fr=(BX3.fr|0)+1;
   BX3.bx=[]}
 gxLayerEnd=(f=>function(o){if(!o||!BX3.on||!BX3.bx.length||(typeof FQ!=='undefined'&&FQ.avg>BX3.fq)){BX3.bx=[];BX3.pend=null;return f.apply(this,arguments)}
   try{bx3Pass(GX.lay,GX.lM)}catch(e){BX3.err=String(e)}BX3.pend=null;return f.apply(this,arguments)})(gxLayerEnd);
+/* ---------- v635 บอสขยับเป็นธรรมชาติ (BXM): ตัวบอสไม่แข็งเป็นแผ่นเดียวอีกต่อไป ----------
+   วาดบอสลงผืนผ้าใบสำรองก่อน แล้ววางกลับทีละแถบแนวนอน แต่ละแถบเลื่อน/ยืดตาม "ความสูงจากเท้า":
+   · หายใจ: อก-ไหล่ยกขึ้นและอกขยายข้าง (เท้าอยู่กับที่) · คลั่ง = หอบเร็วขึ้น
+   · ถ่ายน้ำหนักช้า ๆ + คลื่นไล่จากเอวขึ้นยอด (ผ้า/ปีก/ผมตามหลังลำตัว)
+   · เดิน: สะโพกส่าย ไหล่-หัวส่ายสวนทาง
+   · แรงเฉื่อย (สปริง): เคลื่อนที่ = ตัวบนเอนตามหลัง · หยุด = ดีดเลยแล้วกลับ · โดนตี/ทุบ/ลงพื้น = สั่นสะเทือนแล้วนิ่ง
+   ปิด: BXM.on=0 · ข้ามอัตโนมัติเมื่อเครื่องช้า (FQ.avg > BXM.fq) และโหมดประหยัด */
+const BXM={on:1,fq:27,s:{},n:0,cv:null,cx:null,amp:1};
+function bxmK(){try{if(isTw())return 1;if(RTEI())return 3;if(curMap===18||QUEEN())return 1.9;for(const f of['HFGI','HDFI','GDLI','WBLI','WSKI','CTWI','CWNI','WVRI','PTDI','PNQI','PFNI'])if(typeof window[f]==='function'&&window[f]())return 1.9}catch(e){}return 1}
+function bxmSt(m,now){let s=BXM.s[m.id];if(!s)s=BXM.s[m.id]={x:0,v:0,y:0,vy:0,t:now,px:m.x,hf:0,ck:0,ld:0,ph:Math.random()*6.28};return s}
+drawBossAnim=(f=>function(m,T,hf,cf,er){
+  if(!BXM.on||!m||LOWQ||(typeof FQ!=='undefined'&&FQ.avg>BXM.fq))return f.apply(this,arguments);
+  const X0=BXA.s&&BXA.s[m.id];if(X0&&X0.drop&&!X0.land&&BXA.on)return f.apply(this,arguments);
+  const G0=g,W=G0.canvas.width,H=G0.canvas.height;if(!W||!H)return f.apply(this,arguments);
+  let c=BXM.cv;if(!c||c.width!==W||c.height!==H){c=BXM.cv=document.createElement('canvas');c.width=W;c.height=H;BXM.cx=c.getContext('2d')}
+  const x=BXM.cx;x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';x.filter='none';x.shadowBlur=0;x.clearRect(0,0,W,H);
+  const M=G0.getTransform();x.setTransform(M);x.globalAlpha=G0.globalAlpha;
+  let r;g=x;try{r=f.apply(this,arguments)}finally{g=G0}
+  try{bxmBlit(m,T,hf||0,cf||0,er,c,M)}catch(e){BXM.err=String(e);G0.save();G0.setTransform(1,0,0,1,0,0);G0.globalAlpha=1;G0.drawImage(c,0,0);G0.restore()}
+  try{if(typeof BX3!=='undefined'&&BX3.on&&GX.lb&&G0===GX.lc){const S=isTw()?2:1;BX3.pend={fx:m.x,fy:m.y+30*S,hf:hf||0}}}catch(e){}
+  return r})(drawBossAnim);
+function bxmBlit(m,T,hf,cf,er,c,M){
+  const now=performance.now()/1000,tw=isTw(),S=tw?2:1,k=bxmK(),gy=m.y+30*S,s=Math.hypot(M.a,M.b),st=BMS[m.id],sg=st&&st.dir<0?-1:1,mv=st?st.mv:0,ph=st?st.ph:0;
+  const Q=bxmSt(m,now),dt=Math.min(.05,Math.max(.001,now-Q.t));Q.t=now;
+  /* สปริงแรงเฉื่อย: ตัวบนตามหลังทิศที่เคลื่อน */
+  const vx=(m.x-Q.px)/Math.max(dt,.001);Q.px=m.x;const A=(tw?270:150*k)/150,tx=Math.max(-16,Math.min(16,-vx*.055))*A;
+  if(hf>Q.hf+.25){const dp=m.x>=me.x?1:-1;Q.v+=dp*95*A;Q.vy-=40*A}Q.hf=hf;
+  const X=BXA.s&&BXA.s[m.id];if(X){if(X.ck&&!Q.ck){Q.v+=sg*150*A;Q.vy+=70*A}Q.ck=X.ck;if(X.land&&X.land!==Q.ld){Q.ld=X.land;Q.vy+=160*A;Q.v+=(Math.random()-.5)*60*A}}
+  for(let i=0,n=dt>.02?2:1,h=dt/n;i<n;i++){Q.v+=(-58*(Q.x-tx)-6.5*Q.v)*h;Q.x+=Q.v*h;Q.vy+=(-90*Q.y-8*Q.vy)*h;Q.y+=Q.vy*h}
+  Q.x=Math.max(-30*A,Math.min(30*A,Q.x));Q.y=Math.max(-12*A,Math.min(12*A,Q.y));
+  /* พารามิเตอร์การขยับ (หน่วยโลก) */
+  const am=BXM.amp,bf=er?3.4:2.1,br=Math.sin(T*bf+Q.ph),Hs=(tw?270:150*k),
+    sway=(2.4*Math.sin(T*1.05+Q.ph)+1.2*Math.sin(T*.47+Q.ph*2))*A*am,wv=1.7*A*am*(er?1.5:1),walk=mv*3*A*am,
+    lift=(2.2+(er?1.4:0))*A*am*(br*.5+.5)-Q.y,chest=.03*am*br*(er?1.4:1);
+  const fp=M.transformPoint(new DOMPoint(m.x,gy)),hw=240*k*s,up=340*k*s,dn=90*k*s;
+  let L=Math.floor(fp.x-hw),R=Math.ceil(fp.x+hw),Tp=Math.floor(fp.y-up),Bt=Math.ceil(fp.y+dn);const W=c.width,Hh=c.height;
+  L=Math.max(0,L);R=Math.min(W,R);Tp=Math.max(0,Tp);Bt=Math.min(Hh,Bt);const o=g;o.save();o.setTransform(1,0,0,1,0,0);o.globalAlpha=1;o.globalCompositeOperation='source-over';o.filter='none';o.shadowBlur=0;
+  /* นอกกล่อง: วางตรง ๆ (ไม่มีอะไรถูกตัด) */
+  if(Tp>0)o.drawImage(c,0,0,W,Tp,0,0,W,Tp);if(Bt<Hh)o.drawImage(c,0,Bt,W,Hh-Bt,0,Bt,W,Hh-Bt);
+  if(Bt>Tp){if(L>0)o.drawImage(c,0,Tp,L,Bt-Tp,0,Tp,L,Bt-Tp);if(R<W)o.drawImage(c,R,Tp,W-R,Bt-Tp,R,Tp,W-R,Bt-Tp)}
+  if(R-L<4||Bt-Tp<4){o.restore();return}
+  const fy=Math.min(Bt,Math.max(Tp,Math.round(fp.y)));
+  if(Bt>fy)o.drawImage(c,L,fy,R-L,Bt-fy,L,fy,R-L,Bt-fy);/* ใต้เท้า: ไม่ขยับ */
+  const Hp=Hs*s,cw=R-L;
+  const dY=y=>{const u=(fp.y-y)/Hp;if(u<=0)return 0;const sm=u<.12?0:u>.75?1:((u-.12)/.63)*((u-.12)/.63)*(3-2*(u-.12)/.63);return-lift*s*sm};
+  const dX=u=>{if(u<=0)return 0;const w=Math.min(1.9,Math.pow(u,1.5));
+    return s*(w*(sway+Q.x)+wv*u*Math.sin(T*2.4-u*2.6+Q.ph)+walk*(Math.sin(ph)*Math.min(1,u*2)*(u<.55?1:Math.max(-.6,1-(u-.55)*3.2))))};
+  const sX=u=>u<=0?1:1+chest*Math.exp(-((u-.55)*(u-.55))/.05);
+  const N=Math.max(18,Math.min(56,Math.round((fy-Tp)/9))),hh=(fy-Tp)/N;
+  let yb=fy,db=fy;/* ไล่จากเท้าขึ้นบน */
+  for(let i=0;i<N;i++){const ya=fy-(i+1)*hh,ua=(fp.y-ya)/Hp,um=(fp.y-(ya+hh/2))/Hp,da=Math.round(ya+dY(ya));
+    if(db-da>=1||i===N-1&&db>da){const sx=sX(um),dx=dX(um),w2=cw*sx,x0=fp.x+(L-fp.x)*sx+dx;o.drawImage(c,L,ya,cw,yb-ya,x0,da,w2,db-da);yb=ya;db=da}}
+  o.restore();BXM.n++}
+setInterval(()=>{try{const ids=new Set(mons.filter(q=>q.t===3).map(q=>String(q.id)));for(const k in BXM.s)if(!ids.has(k))delete BXM.s[k]}catch(e){}},5000);
 /* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
    ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
       → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1

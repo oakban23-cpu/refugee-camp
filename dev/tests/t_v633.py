@@ -28,7 +28,7 @@ async def main():
             r=await pg.evaluate("()=>{const m=__mk();BXA.on=0;const a=__bx(m,.5);BXA.on=1;return a.n>1000}")
             rep('BXA.on=0 ปิดได้ (วาดแบบเดิม)',r)
             r=await pg.evaluate("""()=>{const pre={born:0,drop:false,land:1,er:false,ert:0,ck:0,ct:0,tz:1e15,tt:0,ss:0};const og=g;const C=document.createElement('canvas');C.width=600;C.height=500;g=C.getContext('2d');const ms=[];for(let i=0;i<20;i++){const m=__mk();BXA.s[m.id]=Object.assign({},pre);m.castT=1;ms.push(m)}
-               const run=on=>{BXA.on=on;const t0=performance.now();for(let r=0;r<15;r++)ms.forEach((m,i)=>drawBossAnim(m,r*.05,0,(i%10)/10,false));return performance.now()-t0};run(1);run(0);const a=run(0),b=run(1),c=run(0),d=run(1);BXA.on=1;g=og;return [(b+d)/(a+c),a,b]}""")
+               const run=on=>{BXA.on=on;try{BXM.on=0}catch(e){};const t0=performance.now();for(let r=0;r<15;r++)ms.forEach((m,i)=>drawBossAnim(m,r*.05,0,(i%10)/10,false));return performance.now()-t0};run(1);run(0);const a=run(0),b=run(1),c=run(0),d=run(1);BXA.on=1;try{BXM.on=1}catch(e){};g=og;return [(b+d)/(a+c),a,b]}""")
             rep('ความเร็ว: ไม่ช้ากว่าเดิมเกิน 1.25 เท่า',r[0]<1.25,r)
             # in game tower
             await pg.evaluate("()=>{try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};banner=null;gmGod=true;AUTO.on=false;ov.hidden=true;twCreate(1)}");await pg.wait_for_timeout(2500)
