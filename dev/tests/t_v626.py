@@ -15,7 +15,7 @@ async def main():
             seen={}
             for f in [3,13,23,33,43,53,63,73,83,93]:
                 await pg.evaluate(f"()=>{{ov.hidden=true;dg.ph='lobby';TWCL=null;twBegin({f});me.x=CX-40;me.y=CY-330;banner=null}}");await pg.wait_for_timeout(1800)
-                r=await pg.evaluate("""()=>new Promise(res=>{const o=twaPut,got={};twaPut=function(k,x,y,w,a){if(/^p\\d+_[5-8]$/.test(k))got[k]=Math.round(w);return o.apply(this,arguments)};setTimeout(()=>{twaPut=o;res(got)},700)})""")
+                r=await pg.evaluate("""()=>new Promise(res=>{const o=twaPutT,got={};twaPutT=function(k,x,y,w,a){if(/^p\\d+_[5-8]$/.test(k))got[k]=Math.round(w);return o.apply(this,arguments)};setTimeout(()=>{twaPutT=o;res(got)},700)})""")
                 seen[f]=r
             rep('atlas ใหม่ hd-gpt10c.webp โหลดครบ',await pg.evaluate("()=>TWAR.src==='hd-gpt10d.webp'&&TWAR.ok===1&&Object.keys(TWAR.f).length===172"))
             rep('ของแต่งขอบในชีทใหม่มีความละเอียด (ใหญ่ ≥200px · กลาง ≥140px)',await pg.evaluate("()=>{for(let t=1;t<=10;t++)for(let c=5;c<=8;c++){const F=TWAR.f['p'+t+'_'+c];if(!F||F[3]<(c<7?200:140))return 'p'+t+'_'+c}return true}")==True)
@@ -23,7 +23,7 @@ async def main():
             rep('ทุกธีมวาดของแต่งขอบด้วยคีย์ธีมตัวเอง',ok,seen)
             rep('ขนาดตามความสูง (ใหญ่สูง 96 · กลาง 60)',await pg.evaluate("()=>{const F=TWAR.f.p8_5,G=TWAR.f.p8_7;return [Math.round(96*F[2]/F[3]),Math.round(60*G[2]/G[3])]}")==[seen[73].get('p8_5'),seen[73].get('p8_7')] if 'p8_5' in seen[73] and 'p8_7' in seen[73] else True,seen[73])
             await pg.evaluate("()=>{TWAR.v2=0}");await pg.wait_for_timeout(300)
-            r=await pg.evaluate("""()=>new Promise(res=>{const o=twaPut,got={};twaPut=function(k,x,y,w,a){if(/^p\\d+_[5-8]$/.test(k))got[k]=w;return o.apply(this,arguments)};setTimeout(()=>{twaPut=o;res(got)},600)})""")
+            r=await pg.evaluate("""()=>new Promise(res=>{const o=twaPutT,got={};twaPutT=function(k,x,y,w,a){if(/^p\\d+_[5-8]$/.test(k))got[k]=w;return o.apply(this,arguments)};setTimeout(()=>{twaPutT=o;res(got)},600)})""")
             rep('ปิด v2 → กลับไปใช้ความกว้างเดิมใน ED',all(v in (112,66,104,62) for v in r.values()) and len(r)>0,r)
             rep('v627 ชิ้นส่วนกลางภาพใหม่ (ป้าย ≤144 · หีบ ≤120 · ประตู ≥250) และป้ายประเภทชั้นแปลงเป็นรูปได้',await pg.evaluate("()=>{const f=TWAR.f;return f.s_9[3]<=144&&f.s_12[3]<=144&&f.s_5[3]<=120&&f.s_1[3]>=250&&f.s_2[3]>=250&&['s_9','s_10','s_11','s_12'].every(k=>twaIcon(k).startsWith('data:image'))}"))
             rep('ไม่มี error หน้าเว็บ',errs==[],errs)

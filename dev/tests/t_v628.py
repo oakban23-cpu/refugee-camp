@@ -20,11 +20,12 @@ async def main():
             seen={}
             for f in [3,23,43,63,93]:
                 await pg.evaluate(f"()=>{{ov.hidden=true;dg.ph='lobby';TWCL=null;twBegin({f});me.x=CX-180;me.y=CY+40;banner=null}}");await pg.wait_for_timeout(1800)
-                seen[f]=await pg.evaluate("""()=>new Promise(res=>{const o=twaPut,got=new Set();twaPut=function(k){if(/^p\\d+_(9|1[0-2])$/.test(k))got.add(k);return o.apply(this,arguments)};setTimeout(()=>{twaPut=o;res([...got])},600)})""")
+                seen[f]=await pg.evaluate("""()=>new Promise(res=>{const o=twaPutT,got=new Set();twaPutT=function(k){if(/^p\\d+_(9|1[0-2])$/.test(k))got.add(k);return o.apply(this,arguments)};setTimeout(()=>{twaPutT=o;res([...got])},600)})""")
             ok=all(len(v)>0 and all(k.startswith('p%d_'%((f-1)//10+1)) for k in v) for f,v in seen.items())
             rep('ในเกมวาดของเล็กด้วยคีย์ธีมของชั้นนั้น',ok,seen)
-            n=await pg.evaluate("""()=>new Promise(res=>{TWAR.clOff=1;const o=twaPut;let n=0;twaPut=function(k){if(/^p\\d+_(9|1[0-2])$/.test(k))n++;return o.apply(this,arguments)};setTimeout(()=>{twaPut=o;TWAR.clOff=0;res(n)},500)})""")
+            n=await pg.evaluate("""()=>new Promise(res=>{TWAR.clOff=1;const o=twaPutT;let n=0;twaPutT=function(k){if(/^p\\d+_(9|1[0-2])$/.test(k))n++;return o.apply(this,arguments)};setTimeout(()=>{twaPutT=o;TWAR.clOff=0;res(n)},500)})""")
             rep('TWAR.clOff=1 ปิดของเล็กได้',n==0,n)
+            rep('v629 ของเล็กมีเงาสัมผัสพื้นและปรับโทน (ลานลอยฟ้าเข้มกว่าธีมปกติ)',await pg.evaluate("()=>{const s1=twaSprT('p1_9',40,.12),s7=twaSprT('p7_9',40,.33),b=twaSpr('p7_9',40);const px=(c)=>{const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let r=0,n=0;for(let i=0;i<d.length;i+=4)if(d[i+3]>200){r+=d[i]+d[i+1]+d[i+2];n++}return r/n};return !!s1&&px(s7.c)<px(b.c)*0.8&&/PALSH\(x\+w\*\.06/.test(twaClut.toString())}"))
             rep('ไม่มี error หน้าเว็บ',errs==[],errs)
     finally:p.terminate()
     print('SUMMARY',sum(R),'/',len(R))
