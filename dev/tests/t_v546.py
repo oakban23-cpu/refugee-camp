@@ -18,6 +18,7 @@ async def main():
       async with async_playwright() as pw:
         b=await pw.chromium.launch()
         A=await new_client(b,'Bx'+str(random.randint(100,999)),'mage',99)   # จอแนวตั้ง 390x844
+        await A.ev("()=>{try{BSA.off=1}catch(e){}}")  # v631: ทดสอบบอสแบบเวกเตอร์เดิม
         await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}");await A.wait(1500)
         r=await A.ev(f"()=>{json.dumps(BOSS,ensure_ascii=False)}.map(k=>[k,!!(BV1[k]&&BV1[k].bv9),typeof BV9.old[k]])")
         rep('ติดตั้งบอสใหม่ 5 ตัว (ห่อแบบเดิมไว้สำรอง)',all(x[1] and x[2]=='function' for x in r),json.dumps(r,ensure_ascii=False))

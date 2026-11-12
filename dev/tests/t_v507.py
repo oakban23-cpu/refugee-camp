@@ -16,6 +16,7 @@ async def main():
       async with async_playwright() as pw:
         b=await pw.chromium.launch()
         A=await new_client(b,'Tw'+str(random.randint(100,999)),'melee',99)
+        await A.ev("()=>{try{BSA.off=1}catch(e){}}")  # v631: ทดสอบบอสแบบเวกเตอร์เดิม
         await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true;try{setGQ('high')}catch(e){}}");await A.wait(600)
         fails=[]
         for bi in range(10):

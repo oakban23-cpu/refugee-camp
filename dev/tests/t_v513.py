@@ -27,6 +27,7 @@ async def main():
       async with async_playwright() as pw:
         b=await pw.chromium.launch()
         A=await new_client(b,'Bw'+str(random.randint(100,999)),'mage',99)
+        await A.ev("()=>{try{BSA.off=1}catch(e){}}")  # v631: ทดสอบบอสแบบเวกเตอร์เดิม
         await A.ev("()=>{try{setGQ('high')}catch(e){}}")
         await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}");await A.wait(800)
         S=lambda on,k='',gb=0,fn='':A.ev(SHOT,[on,k,gb,fn])

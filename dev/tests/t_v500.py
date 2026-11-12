@@ -14,6 +14,7 @@ async def main():
       async with async_playwright() as pw:
         b=await pw.chromium.launch()
         A=await new_client(b,'Mv'+str(random.randint(100,999)),'mage',99)
+        await A.ev("()=>{try{BSA.off=1}catch(e){}}")  # v631: ทดสอบบอสแบบเวกเตอร์เดิม
         await A.ev("()=>{try{setGQ('high')}catch(e){}LOWQ=false;ov.hidden=true;AUTO.on=false;window.DNH=12;gmGod=true;window.__fq=setInterval(()=>{FQ.avg=14},100);try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){}}")
         maps=await A.ev("()=>Object.keys(MAPS).map(Number).filter(k=>k>=1&&k<100&&!(MAPS[k].hub||MAPS[k].city||MAPS[k].pvp||MAPS[k].dg||MAPS[k].tent||MAPS[k].ghq))")
         tot={'err':[],'empty':[],'n':0}
