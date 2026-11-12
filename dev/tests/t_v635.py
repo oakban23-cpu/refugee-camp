@@ -27,7 +27,7 @@ async def main():
             r2=await pg.evaluate(ISO,[3,0,10.9,1])
             rep('BXM.on=0 → ภาพเหมือนเดิมทุกพิกเซล',r2[3]==0 and r2[4]==0,r2)
             # สปริง: โดนตี → ตัวบนเหวี่ยง แล้วกลับมานิ่ง
-            await pg.evaluate("()=>{const now=performance.now()/1000;BXM.s[777301]={x:0,v:-95,y:0,vy:-40,t:now,px:200,hf:0,ck:0,ld:0,ph:0}}")
+            await pg.evaluate("()=>{const now=performance.now()/1000;Object.defineProperty(BXM.s,777301,{value:{x:0,v:-95,y:0,vy:-40,t:now,px:200,hf:0,ck:0,ld:0,ph:0},enumerable:true,configurable:false,writable:false})}")
             xs=[]
             for i in range(40):
                 await pg.evaluate(ISO,[3,1,11+i*.05,1]);xs.append(await pg.evaluate("()=>BXM.s[777301].x"));await pg.wait_for_timeout(40)
