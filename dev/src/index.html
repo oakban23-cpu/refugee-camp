@@ -13602,8 +13602,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v633';
+const WNV='v634';
 const WNL=[
+  ['🗿','บอสมีมิติขึ้น','บอสลงแสงเงาแบบปริมาตร: ขอบด้านล่างขวาค่อยๆ มืดลงนุ่มๆ ด้านบนซ้ายรับแสง ตัวดูกลมเป็นสามมิติ · มีแสงขอบหลังสีตามธีมแมพ ตัดตัวบอสออกจากพื้น · เงาทอดลงพื้นตามรูปทรงจริงของบอส (ปีก แขน อาวุธ) ขยับตามท่า · ปิดเองในโหมดประหยัดและตอนเครื่องหน่วง'],
   ['💥','บอสมีท่าทางดุดันขึ้น','บอสร่ายหรือโจมตีเป็น 3 จังหวะ: ง้างตัว → พุ่งฟาด → กระแทกพื้น (จอสั่น ฝุ่นกระจาย วงแรงกระแทก) · ปรากฏตัวทิ้งดิ่งลงจากฟ้า · ยืนนิ่งจะยืดตัวคำรามข่มขู่เป็นระยะ · เลือดต่ำเข้าโหมดคลั่งคำรามใหญ่ วงแดงกระจาย แล้วหายใจถี่ตัวสั่น · โดนตีจะถอยหนี · ก้าวเดินมีฝุ่น · ช่วงอมตะเปลี่ยนเฟสลอยขึ้นสะสมพลัง'],
   ['👑','บอสกลับมาเป็นแบบเดิม','ปิดภาพวาดบอสของ v631 แล้ว บอสทุกตัวกลับมาใช้แบบเดิมที่มีลูกเล่นครบ: ร่างเปลี่ยนตามเลือด เกราะร้าว ท่าเตือนก่อนโจมตี และวาฬดำน้ำ'],
   ['👑','บอสทั้งเกมเป็นภาพวาดมือ 49 ตัว','บอสแมพ บอสเนื้อเรื่อง บอสดันเจี้ยน บอสหอคอย 10 ชั้น บอสโลก และบอสกิลด์ เปลี่ยนเป็นภาพวาดมือละเอียดทั้งหมด · หน้าตาตรงกับภาพหน้าในบทพูด · ยังมีออร่าตอนคลั่ง แสงตอนร่าย และกะพริบตอนโดนตีเหมือนเดิม · โหลดภาพเฉพาะบอสที่เจอ ไม่เพิ่มเวลาเข้าเกม'],
@@ -36087,9 +36088,43 @@ drawBossAnim=(f=>function(m,T,hf,cf,er){
   /* 7) อมตะเปลี่ยนเฟส: ลอยขึ้น สะสมพลัง */
   if(m.inv){dy-=(10+Math.sin(T*3)*3)*S;if(!X.iv||now-X.iv>650){X.iv=now;bxaRing(m.x,gy,70*S,20*S,'rgba(190,140,255,1)',650,3)}}
   if(X.drop&&!X.land){}else bxaDrawRings();
+  if(GX.lb&&(Math.abs(dx)>1||Math.abs(dy)>1||sx!==1||sy!==1||rot))try{gxLayerBox(m.x+dx,gy+dy-170*S,(300*S+Math.abs(dx)*2)*1.3,(380*S+Math.abs(dy))*1.3)}catch(e){}
   g.save();try{g.translate(m.x+dx,gy+dy);if(rot)g.rotate(rot);g.scale(sx,sy);g.translate(-m.x,-gy);return f.apply(this,arguments)}finally{g.restore()}
 })(drawBossAnim);
 setInterval(()=>{try{const ids=new Set(mons.filter(q=>q.t===3).map(q=>q.id));for(const k in BXA.s)if(!ids.has(+k)&&!ids.has(k))delete BXA.s[k]}catch(e){}},5000);
+/* ---------- v634 บอสมีมิติ: แรเงาปริมาตร (ขอบล่างขวามืด/บนซ้ายสว่างแบบนุ่ม) · แสงขอบหลังสีธีม · เงาทอดบนพื้นจากรูปทรงจริง ---------- */
+const BX3={on:1,fq:26,sh:.42,hl:.3,cast:.36,ao:.5,ex:1.3,pend:null,bx:[],c:{},n:0};
+function bx3Cv(k,w,h){let c=BX3.c[k];if(!c){c=BX3.c[k]=document.createElement('canvas');c.width=c.height=8}if(c.width<w||c.height<h){c.width=Math.max(c.width,w);c.height=Math.max(c.height,h)}const x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='source-over';x.globalAlpha=1;x.clearRect(0,0,c.width,c.height);return[c,x]}
+drawBossAnim=(f=>function(m,T,hf,cf,er){const r=f.apply(this,arguments);try{if(BX3.on&&GX.lb&&g===GX.lc){const S=isTw()?2:1;BX3.pend={fx:m.x,fy:m.y+30*S,hf:hf||0}}}catch(e){}return r})(drawBossAnim);
+gxLayerBox=(f=>function(cx,cy,w,h){if(BX3.pend&&GX.lb){BX3.bx.push([cx,cy,w/2,h/2,BX3.pend.fx,BX3.pend.fy,BX3.pend.hf]);BX3.pend=null}return f.apply(this,arguments)})(gxLayerBox);
+function bx3Pass(c,M){const s=Math.hypot(M.a,M.b);BX3.fr=(BX3.fr|0)+1;
+  for(const[cx,cy,hw,hh,fx,fy,hf]of BX3.bx){
+    const p=M.transformPoint(new DOMPoint(cx,cy));let w=Math.ceil(hw*2*s*BX3.ex),h=Math.ceil(hh*2*s*BX3.ex),X=Math.round(p.x-w/2),Y=Math.round(p.y-h/2);
+    if(X<0){w+=X;X=0}if(Y<0){h+=Y;Y=0}w=Math.min(w,c.width-X);h=Math.min(h,c.height-Y);if(w<24||h<24)continue;
+    const rs=w*h>250000?.3:.42,w2=Math.ceil(w*rs),h2=Math.ceil(h*rs),q=4,sw=Math.max(2,Math.ceil(w2/q)),sh=Math.max(2,Math.ceil(h2/q)),fp=M.transformPoint(new DOMPoint(fx,fy));
+    const ck=w2+'x'+h2+'|'+Math.round((fp.y-Y)*rs),re=!(BX3.ck===ck&&(BX3.fr&1));BX3.ck=ck;
+    if(re){
+      /* หน้ากากเนื้อทึบ (ความละเอียดต่ำ): alpha^3 ตัดแสงฟุ้ง */
+      const[P,pp]=bx3Cv('p',w2,h2),[Q,qq]=bx3Cv('q',w2,h2);pp.drawImage(c,X,Y,w,h,0,0,w2,h2);qq.drawImage(P,0,0);pp.globalCompositeOperation='destination-in';pp.drawImage(Q,0,0);pp.drawImage(Q,0,0);
+      /* หน้ากากเบลอ */
+      const[A,a]=bx3Cv('a',sw,sh);a.drawImage(P,0,0,w2,h2,0,0,sw,sh);const hw2=Math.ceil(sw/2),hh2=Math.ceil(sh/2),[B,b]=bx3Cv('b',hw2,hh2);b.drawImage(A,0,0,sw,sh,0,0,hw2,hh2);a.clearRect(0,0,sw,sh);a.drawImage(B,0,0,hw2,hh2,0,0,sw,sh);
+      const o=Math.max(2,Math.min(w2,h2)*.04);
+      /* เงาปริมาตร + เงาบดบังใกล้พื้น */
+      const[D,d]=bx3Cv('d',w2,h2);d.fillStyle='rgb(24,16,40)';d.fillRect(0,0,w2,h2);d.globalCompositeOperation='destination-out';d.drawImage(A,0,0,sw,sh,-o,-o*1.2,w2,h2);
+      d.globalCompositeOperation='source-over';{const gy=(fp.y-Y)*rs,gr=d.createLinearGradient(0,gy-h2*.42,0,gy);gr.addColorStop(0,'rgba(24,16,40,0)');gr.addColorStop(1,'rgba(24,16,40,'+BX3.ao+')');d.fillStyle=gr;d.fillRect(0,0,w2,h2)}
+      d.globalCompositeOperation='destination-in';d.drawImage(A,0,0,sw,sh,0,0,w2,h2);d.drawImage(P,0,0);
+      /* ไฮไลต์ขอบบนซ้าย */
+      const[E,e]=bx3Cv('e',w2,h2);e.fillStyle='#fff6e6';e.fillRect(0,0,w2,h2);e.globalCompositeOperation='destination-out';e.drawImage(A,0,0,sw,sh,o*.8,o,w2,h2);e.globalCompositeOperation='destination-in';e.drawImage(P,0,0);e.drawImage(A,0,0,sw,sh,0,0,w2,h2);e.drawImage(A,0,0,sw,sh,0,0,w2,h2);
+      /* เงาทอด (มาสก์ดำ) */
+      const[K,k]=bx3Cv('k',sw,sh);k.drawImage(A,0,0);k.globalCompositeOperation='source-in';k.fillStyle='#000';k.fillRect(0,0,sw,sh)}
+    const D=BX3.c.d,E=BX3.c.e,K=BX3.c.k;
+    if(!(hf>.3)){const x=GX.lc;x.save();x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='source-atop';x.globalAlpha=BX3.sh;x.drawImage(D,0,0,w2,h2,X,Y,w,h);
+      x.globalCompositeOperation='source-atop';x.globalAlpha=BX3.hl;x.drawImage(E,0,0,w2,h2,X,Y,w,h);x.restore()}
+    if(BX3.cast>0){g.save();g.setTransform(1,0,0,1,0,0);g.globalAlpha=BX3.cast;const by=fp.y-Y;g.translate(fp.x,fp.y);g.transform(1,0,-1.1,-.42,0,0);g.drawImage(K,0,0,sw,sh,X-fp.x,-by,w,h);g.restore()}
+    BX3.n++;if(BX3.bx.length>1)BX3.ck=''}
+  BX3.bx=[]}
+gxLayerEnd=(f=>function(o){if(!o||!BX3.on||!BX3.bx.length||(typeof FQ!=='undefined'&&FQ.avg>BX3.fq)){BX3.bx=[];BX3.pend=null;return f.apply(this,arguments)}
+  try{bx3Pass(GX.lay,GX.lM)}catch(e){BX3.err=String(e)}BX3.pend=null;return f.apply(this,arguments)})(gxLayerEnd);
 /* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
    ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
       → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1
