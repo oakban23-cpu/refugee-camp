@@ -12304,8 +12304,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v632';
+const WNV='v633';
 const WNL=[
+['💥','บอสมีท่าทางดุดันขึ้น','บอสร่ายหรือโจมตีเป็น 3 จังหวะ: ง้างตัว → พุ่งฟาด → กระแทกพื้น (จอสั่น ฝุ่นกระจาย วงแรงกระแทก) · ปรากฏตัวทิ้งดิ่งลงจากฟ้า · ยืนนิ่งจะยืดตัวคำรามข่มขู่เป็นระยะ · เลือดต่ำเข้าโหมดคลั่งคำรามใหญ่ วงแดงกระจาย แล้วหายใจถี่ตัวสั่น · โดนตีจะถอยหนี · ก้าวเดินมีฝุ่น · ช่วงอมตะเปลี่ยนเฟสลอยขึ้นสะสมพลัง'],
 ['👑','บอสกลับมาเป็นแบบเดิม','ปิดภาพวาดบอสของ v631 แล้ว บอสทุกตัวกลับมาใช้แบบเดิมที่มีลูกเล่นครบ: ร่างเปลี่ยนตามเลือด เกราะร้าว ท่าเตือนก่อนโจมตี และวาฬดำน้ำ'],
 ['👑','บอสทั้งเกมเป็นภาพวาดมือ 49 ตัว','บอสแมพ บอสเนื้อเรื่อง บอสดันเจี้ยน บอสหอคอย 10 ชั้น บอสโลก และบอสกิลด์ เปลี่ยนเป็นภาพวาดมือละเอียดทั้งหมด · หน้าตาตรงกับภาพหน้าในบทพูด · ยังมีออร่าตอนคลั่ง แสงตอนร่าย และกะพริบตอนโดนตีเหมือนเดิม · โหลดภาพเฉพาะบอสที่เจอ ไม่เพิ่มเวลาเข้าเกม'],
 ['✨','ตัวละครสวยขึ้นทุกอาชีพ','หัวใหญ่ขึ้นแบบจิบิ เห็นหน้าและสีหน้าชัด · ตาโตขึ้น · เส้นด้านในบางลง ตัวดูนุ่มขึ้น · ลำตัวและเกราะลงแสงเงาเป็นสามมิติ · ผมนักรบมีแถบเงา · ดาบนักรบและคทานักสวด/จอมเวทไม่บังหน้าแล้ว · หมวก ฮู้ด เขา และของบนหัวขยายตามหัวพอดี'],
@@ -31714,6 +31715,40 @@ const _db=drawBoss;drawBoss=function(x,y,T,B,hf,cf,er){if(bsaOn()){const id=bsaI
 const _dt=drawTowerBoss;drawTowerBoss=function(x,y,T,f,hf,cf,er){if(bsaOn()){if(bsaDraw(38+twBI(f),x,y,T,hf,cf,er))return}return _dt.apply(this,arguments)};
 const _dw=drawWorldBoss;drawWorldBoss=function(m,T,hf){if(bsaOn()&&m){const gd=typeof GBS!=='undefined'&&GBS.go&&isWB(),r=bsaDraw(gd?49:48,m.x,m.y,T,hf,0,0);if(r){try{let nm;if(gd){const TI=gbTier();nm='⚔️ อสูรเกราะศึก · ขั้น '+((GBS.go&&GBS.go.s)|0)+' ('+TI.n+')'}else nm='🐉 '+WBN+' · HP ∞';g.font='bold 13px system-ui';g.textAlign='center';g.lineWidth=4;g.strokeStyle='#000';g.strokeText(nm,r.cx,r.top-10);g.fillStyle=gd?'#ffe0a0':'#ffb070';g.fillText(nm,r.cx,r.top-10);g.lineWidth=1}catch(e){}return}}return _dw.apply(this,arguments)};
 BSA.ok=1}catch(e){BSA.err=String(e)}},2600);
+const BXA={on:1,s:{},rg:[],n:0};
+function bxaRing(x,y,r0,r1,c,d,w){if(BXA.rg.length>(LOWQ?6:16))BXA.rg.shift();BXA.rg.push({x,y,r0,r1,c,t0:performance.now(),d,w:w||3})}
+function bxaDrawRings(){const n=performance.now();BXA.rg=BXA.rg.filter(R=>n-R.t0<R.d);for(const R of BXA.rg){const u=(n-R.t0)/R.d,r=R.r0+(R.r1-R.r0)*(1-Math.pow(1-u,2.2));g.save();g.globalAlpha=(1-u)*.8;g.strokeStyle=R.c;g.lineWidth=R.w*(1-u*.6);g.beginPath();g.ellipse(R.x,R.y,r,r*.36,0,0,7);g.stroke();g.restore()}}
+function bxaDust(x,y,n,sp){if(LOWQ)n=Math.ceil(n/2);try{burst(x,y,['#cdbb9c','#a99478','#ece2cf'],n,sp,.55,{g:-30})}catch(e){}}
+const BXK=[[0,0,0,1,1],[.26,-.17,-7,1.07,.9],[.4,.24,28,.88,1.14],[.48,.15,22,1.13,.87],[.72,.04,6,.98,1.03],[1,0,0,1,1]];
+function bxaKey(k){for(let i=1;i<BXK.length;i++){const a=BXK[i-1],b=BXK[i];if(k<=b[0]){let u=(k-a[0])/(b[0]-a[0]);u=u*u*(3-2*u);return[a[1]+(b[1]-a[1])*u,a[2]+(b[2]-a[2])*u,a[3]+(b[3]-a[3])*u,a[4]+(b[4]-a[4])*u]}}return[0,0,1,1]}
+drawBossAnim=(f=>function(m,T,hf,cf,er){
+if(!BXA.on||!m)return f.apply(this,arguments);
+try{if(typeof u60Brk==='function'&&u60Brk(m))return f.apply(this,arguments)}catch(e){}
+const now=performance.now(),S=isTw()?2:1,gy=m.y+30*S,st=BMS[m.id],sg=st&&st.dir<0?-1:1;cf=cf||0;
+let X=BXA.s[m.id];if(!X){X=BXA.s[m.id]={born:now,drop:m.hp>=m.mh*.98,land:0,er:!!er,ert:0,ck:0,ct:m.castT||0,tz:now+3500+Math.random()*3000,tt:0,ss:0};BXA.n++}
+let dx=0,dy=0,rot=0,sx=1,sy=1;
+if(X.drop&&!X.land){const e=Math.min(1,(now-X.born)/480);g.save();g.fillStyle='rgba(0,0,0,'+(.12+.3*e)+')';g.beginPath();g.ellipse(m.x,gy,(16+38*e)*S,(6+12*e)*S,0,0,7);g.fill();g.strokeStyle='rgba(255,90,60,'+(.5*(1-e)+.2)+')';g.lineWidth=2;g.beginPath();g.ellipse(m.x,gy,(70-30*e)*S,(24-10*e)*S,0,0,7);g.stroke();g.restore();dy-=(1-e*e)*260*S;sy*=1+.14*(1-e);sx*=1-.08*(1-e);
+if(e>=1){X.land=now;shk=Math.max(shk,.55);bxaRing(m.x,gy,12*S,110*S,'rgba(255,236,200,1)',650,5);bxaRing(m.x,gy,8*S,70*S,'rgba(255,255,255,1)',420,3);bxaDust(m.x,gy,22,170*S)}}
+if(X.land&&now-X.land<380){const u=(now-X.land)/380,q=Math.sin(u*Math.PI)*(1-u*.4);sy*=1-.16*q;sx*=1+.12*q}
+if(m.castT&&m.castT!==X.ct){X.ct=m.castT;X.ck=0}
+if(cf>0){const k=1-cf,K=bxaKey(k);rot+=K[0]*sg;dx+=K[1]*sg*S;sx*=K[2];sy*=K[3];
+if(k>=.42&&!X.ck){X.ck=1;shk=Math.max(shk,S>1?.42:.3);const fx0=m.x+sg*26*S;bxaRing(fx0,gy,10*S,80*S,er?'rgba(255,110,80,1)':'rgba(255,230,180,1)',520,4);bxaDust(fx0,gy,12,140*S)}}
+const idle=cf<=0&&(!st||st.mv<.25)&&!m.inv;
+if(!X.tt&&idle&&now>X.tz){X.tt=now;X.tr=0}
+if(X.tt){const u=(now-X.tt)/950;if(u>=1||!idle&&u<.2){X.tt=0;X.tz=now+(er?4500:7000)+Math.random()*4500}else{const up=u<.35?Math.sin(u/.35*Math.PI/2):u<.75?1:1-(u-.75)/.25;
+sy*=1+.11*up;sx*=1-.05*up;rot-=sg*.07*up;if(u>.35&&u<.75){dx+=Math.sin(now*.09)*1.4*S}
+if(u>=.35&&!X.tr){X.tr=1;shk=Math.max(shk,.18);const c=er?'rgba(255,80,60,1)':'rgba(220,200,255,1)';bxaRing(m.x,gy-40*S,20*S,120*S,c,700,3);bxaRing(m.x,gy-40*S,10*S,80*S,c,500,2)}}}
+if(er&&!X.er){X.er=true;X.ert=now;shk=Math.max(shk,.75);for(let i=0;i<3;i++)setTimeout(()=>bxaRing(m.x,gy-30*S,16*S,(150+i*40)*S,'rgba(255,60,40,1)',800,5-i),i*160);try{burst(m.x,gy-50*S,['#ff5a3a','#ffb050','#ffffff'],30,220*S,.7,{glow:1,g:-20})}catch(e){}}
+if(!er&&X.er&&m.hp>m.mh*.4)X.er=false;
+if(X.ert&&now-X.ert<1100){const u=(now-X.ert)/1100,p=Math.sin(Math.min(1,u*3)*Math.PI/2)*(1-u);sx*=1+.16*p;sy*=1+.16*p;dx+=Math.sin(now*.11)*3*p*S}
+if(er){sy*=1+.022*Math.sin(T*7);dx+=Math.sin(T*43)*.5*S}
+if(hf>0){const dp=m.x>=me.x?1:-1;dx+=dp*5*hf*S;rot+=dp*.05*hf;sy*=1-.04*hf}
+if(st&&st.mv>.5){const sgn=Math.sin(st.ph)>=0?1:-1;if(sgn!==X.ss){X.ss=sgn;if(!LOWQ)bxaDust(m.x+(sgn>0?-10:10)*S,gy,S>1?6:4,60*S);if(S>1)shk=Math.max(shk,.07)}}
+if(m.inv){dy-=(10+Math.sin(T*3)*3)*S;if(!X.iv||now-X.iv>650){X.iv=now;bxaRing(m.x,gy,70*S,20*S,'rgba(190,140,255,1)',650,3)}}
+if(X.drop&&!X.land){}else bxaDrawRings();
+g.save();try{g.translate(m.x+dx,gy+dy);if(rot)g.rotate(rot);g.scale(sx,sy);g.translate(-m.x,-gy);return f.apply(this,arguments)}finally{g.restore()}
+})(drawBossAnim);
+setInterval(()=>{try{const ids=new Set(mons.filter(q=>q.t===3).map(q=>q.id));for(const k in BXA.s)if(!ids.has(+k)&&!ids.has(k))delete BXA.s[k]}catch(e){}},5000);
 const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
 function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
 if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}
