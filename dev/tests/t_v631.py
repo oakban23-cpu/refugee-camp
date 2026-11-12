@@ -21,6 +21,8 @@ async def main():
             errs=[];pg.on('pageerror',lambda e:errs.append(str(e)[:200]))
             await pg.goto(URL);await pg.wait_for_timeout(2500)
             await pg.evaluate(SETUP,['melee','Tb'+str(random.randint(100,999)),90]);await pg.wait_for_timeout(3000)
+            rep('v632: ค่าเริ่มต้นปิดภาพวาดบอส (ใช้บอสแบบเดิม)',await pg.evaluate("()=>BSA.off===1"))
+            await pg.evaluate("()=>{BSA.off=0}")
             rep('ติดตั้งตัวห่อบอสครบ (หลัง 2.6 วิ)',await pg.evaluate("()=>BSA.ok===1&&!BSA.err&&Object.keys(BSA.d).length===49"))
             miss=await pg.evaluate("async()=>{const bad=[];for(const id of Object.keys(BSA.d)){const r=await fetch('hd-bs'+String(id).padStart(2,'0')+'.webp');if(!r.ok)bad.push(id)}return bad}")
             rep('ไฟล์ภาพบอส 49 ไฟล์เสิร์ฟได้',miss==[],miss)
