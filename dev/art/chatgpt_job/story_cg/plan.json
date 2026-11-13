@@ -1,0 +1,176 @@
+[
+ {
+  "n": 1,
+  "scene": "p1o",
+  "trigger": "สามร้อยปีก่อน",
+  "desc": "legend"
+ },
+ {
+  "n": 2,
+  "scene": "p1o",
+  "trigger": "ฟื้นแล้วรึ",
+  "desc": "wake"
+ },
+ {
+  "n": 3,
+  "scene": "p1e",
+  "trigger": "ในที่สุดเราก็พบกัน",
+  "desc": "tower top god"
+ },
+ {
+  "n": 4,
+  "scene": "p1e1",
+  "trigger": "แสงจากตราไหลเข้าสู่หอคอย",
+  "desc": "seal ending"
+ },
+ {
+  "n": 5,
+  "scene": "p1e2",
+  "trigger": "โซ่ทั้งร้อยแตกสลาย",
+  "desc": "release ending"
+ },
+ {
+  "n": 6,
+  "scene": "p2o",
+  "trigger": "รอยร้าวสีดำ",
+  "desc": "sky crack"
+ },
+ {
+  "n": 7,
+  "scene": "p2e",
+  "trigger": "ทั้งนครกำลังฉลองอยู่ข้างล่าง",
+  "desc": "queen thanks"
+ },
+ {
+  "n": 8,
+  "scene": "p3o",
+  "trigger": "ทุกคืนจะมีเงาดำลอยขึ้นมา",
+  "desc": "shadows"
+ },
+ {
+  "n": 9,
+  "scene": "p3e",
+  "trigger": "อัสตราจะเปิดประตูเมฆไว้ตลอดไป",
+  "desc": "cloud gate open"
+ },
+ {
+  "n": 10,
+  "scene": "p4o",
+  "trigger": "รากสีดำโผล่ขึ้นมา",
+  "desc": "roots"
+ },
+ {
+  "n": 11,
+  "scene": "p4e",
+  "trigger": "ร่างของผู้กลืนรากแตกสลาย",
+  "desc": "half heart"
+ },
+ {
+  "n": 12,
+  "scene": "p5o",
+  "trigger": "ประตูทุกบานในวังปิดลงพร้อมกัน",
+  "desc": "ambush"
+ },
+ {
+  "n": 13,
+  "scene": "p5e",
+  "trigger": "ประตูทุกบานของนครลอยฟ้าอัสตราเปิดออกพร้อมกัน",
+  "desc": "gates open"
+ },
+ {
+  "n": 14,
+  "scene": "p6o",
+  "trigger": "วันนี้ขบวนผู้อพยพขบวนแรก",
+  "desc": "caravan"
+ },
+ {
+  "n": 15,
+  "scene": "p6e",
+  "trigger": "ขอบหลุมหัวใจ",
+  "desc": "heart pit"
+ },
+ {
+  "n": 16,
+  "scene": "p7o",
+  "trigger": "ดาวตกนับร้อยดวง",
+  "desc": "falling stars"
+ },
+ {
+  "n": 17,
+  "scene": "p7e",
+  "trigger": "ยายร้องเพลงนี้มาทั้งชีวิต",
+  "desc": "lullaby"
+ },
+ {
+  "n": 18,
+  "scene": "p8o",
+  "trigger": "แสงโคมนับร้อยดวง",
+  "desc": "lanterns ship"
+ },
+ {
+  "n": 19,
+  "scene": null,
+  "trigger": "ทะเลเมฆแยกออกเป็นสองซีก",
+  "desc": "whale"
+ },
+ {
+  "n": 20,
+  "scene": null,
+  "trigger": "ผาท่าเรือเมฆมีชื่อใหม่",
+  "desc": "harbor home"
+ },
+ {
+  "n": 21,
+  "scene": null,
+  "trigger": "ดาวดับ จากบนลงล่าง",
+  "desc": "stair to stars"
+ },
+ {
+  "n": 22,
+  "scene": null,
+  "trigger": "ทุ่งตาข่ายดาวอยู่ถัดจากท่าตะวันออก",
+  "desc": "star web"
+ },
+ {
+  "n": 23,
+  "scene": null,
+  "trigger": "นับดาวครบทุกดวง",
+  "desc": "stars returned"
+ },
+ {
+  "n": 24,
+  "scene": "pao",
+  "trigger": "ทั้งค่ายทรุดลงไปหนึ่งคืบ",
+  "desc": "land sinks"
+ },
+ {
+  "n": 25,
+  "scene": "pa4m",
+  "trigger": "ยักษ์หินคุกเข่าอยู่บนก้อนหินก้อนสุดท้าย",
+  "desc": "thoranin"
+ },
+ {
+  "n": 26,
+  "scene": "pa5s",
+  "trigger": "เชือกทั้งห้าก็ตึงขึ้นพร้อมกัน",
+  "desc": "everyone came down"
+ },
+ {
+  "n": 27,
+  "scene": "pa5x1",
+  "trigger": "ต้นค้ำต้นใหม่เก้าต้น",
+  "desc": "ending A"
+ },
+ {
+  "n": 28,
+  "scene": "pa5x2",
+  "trigger": "รากทองค่อย ๆ พันรอบไหล่ของธรณิน",
+  "desc": "ending B"
+ },
+ {
+  "n": 29,
+  "scene": "pa5h",
+  "trigger": "จำวันแรกที่เจ้ามาถึงได้ไหม",
+  "desc": "welcome home"
+ }
+]
