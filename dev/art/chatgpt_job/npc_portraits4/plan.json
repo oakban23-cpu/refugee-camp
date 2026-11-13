@@ -1,0 +1,3 @@
+{"npc_01":["god","orn","orn7","qnx","qsh","eye","rte","b7"],"npc_02":["wk","bkc",null,null,null,null,null,null],
+ "alias":{"lirg":"lir","qnt":"qn"},
+ "out":"npc-<k>.webp สูง 440 (ตัดขอบโปร่งใส) + npcf-<k>.webp 128×128 วงกลมหน้า · เพิ่ม key ลง NPCP.ks · npcpKey ใส่ alias"}
