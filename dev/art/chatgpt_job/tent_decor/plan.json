@@ -1,0 +1,6 @@
+{"tent_01":{"grid":[4,2],"cells":["bed1","bed2","bed3","wardrobe","tab1","tab2","fir1","fir2"]},
+ "tent_02":{"grid":[4,2],"cells":["lit1","lit2","lit3","pla1","pla2","pla3","cei1","cei2"]},
+ "tent_03":{"grid":[4,2],"cells":["wal1","wal2","wal3","pedestal","guestbook","fishcase","trophyshelf",null]},
+ "tent_04":{"grid":[3,2],"cells":["rug1","rug2","rug3",null,null,null],"topdown":true},
+ "tent_05":{"grid":[4,2],"cells":["fab0","fab1","fab2","fab3","flr0","flr1","flr2","flr3"],"texture":true,"themes":{"":["fab0","flr0"],"thm1":["fab1","flr1"],"thm2":["fab2","flr2"],"thm3":["fab3","flr3"]}},
+ "slots":{"bed":"TBED (CX-118,CY+74)","rug":"CX,CY+30","lit":"TRX0+26 / TRX1-26, TRY0+14 (คู่)","pla":"TRX1-34,TRY1-36","wal":"CX,CY-282","tab":"CX+128,CY+64","cei":"CX,CY-112","fir":"TRX0+44,CY-70","pedestal":"CX-87+i*58,TRY0+30 ×4","guestbook":"CX+76,TRY1-22","fishcase":"CX-191..CX-89,CY-330..CY-228","trophyshelf":"CX+76..CX+190,CY-282 สองชั้น"}}
