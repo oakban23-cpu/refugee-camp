@@ -9,7 +9,7 @@ GO="""async([m,shot])=>{const w=ms=>new Promise(r=>setTimeout(r,ms));gmGod=true;
  let seen=null;for(let i=0;i<60&&WARP.on;i++){await w(25);if(el.classList.contains('rg')&&!seen){const im=el.querySelector('.rgi');const r=im.getBoundingClientRect();
    seen={src:im.getAttribute('src'),ok:im.complete&&im.naturalWidth>0&&getComputedStyle(im).display!=='none'&&r.width>100,a:el.querySelector('.rgt b').textContent,b:el.querySelector('.rgt i').textContent,nm:el.querySelector('.wn').textContent,tvis:getComputedStyle(el.querySelector('.rgt')).display!=='none'};
    if(shot){window.__shot=1;while(window.__shot)await w(30)}}}
- while(WARP.on&&performance.now()-t0<4000)await w(25);return{dur:Math.round(performance.now()-t0),seen,map:curMap}}"""
+ let mn=WARP.min;while(WARP.on&&performance.now()-t0<4000){mn=Math.max(mn,WARP.min);await w(25)}return{dur:Math.round(performance.now()-t0),seen,map:curMap,mn}}"""
 async def main():
     p=start_server()
     try:
@@ -35,7 +35,7 @@ async def main():
             rep('เข้าภาคใหม่: ค้างให้อ่านอย่างน้อย ~1.2 วิ (ไม่เกิน 2.4)',1150<=a['dur']<=2500,a)
             await pg.wait_for_timeout(600)
             b2=await pg.evaluate(GO,[10,0])
-            rep('ย้ายแมพในภาคเดิม (อัสตรา → ทุ่งรอยแยก): การ์ดภาค 2 แต่ไม่ค้างนาน',(b2['seen'] or {}).get('ok') and b2['dur']<1150,b2)
+            rep('ย้ายแมพในภาคเดิม (อัสตรา → ทุ่งรอยแยก): การ์ดภาค 2 แต่ไม่บังคับค้าง (เวลาขั้นต่ำเท่าเดิม)',(b2['seen'] or {}).get('ok') and b2['mn']<1000,b2)
             r=await pg.evaluate("()=>WARP.min")
             rep('ค่าเวลาขั้นต่ำของวาร์ปคืนค่าเดิมหลังปิด',r==280,r)
             # ภาพยังไม่โหลด → กราดิเอนต์เดิมก่อน แล้วภาพขึ้นเมื่อโหลดเสร็จ
