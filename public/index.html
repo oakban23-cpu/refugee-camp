@@ -12305,8 +12305,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v639';
+const WNV='v640';
 const WNL=[
+['🖼','ภาพหน้าครบทุกคนในบทพูด','เพิ่มภาพหน้าอีก 10 ตัว: เสียงใต้ผนึก · ราชาโอเรียน · ภาพสะท้อนของโอเรียน · ราชินีผู้กลืนดาว (และร่างเปลือก) · เนรา ดวงตาแห่งราชินี · ผู้กลืนราก · ราชาก็อบลินถุงทอง · คนงานเหมือง · ลูกเรือเรือดำ · ลิเรียกับราชินีเอลิราขึ้นภาพหน้าครบทุกฉากแล้ว'],
 ['🛏','นอนบนเตียงถูกทิศแล้ว','ตอนนอนพักในเต็นท์ ตัวละครนอนหนุนหมอนตามเตียงภาพวาดใหม่ ห่มผ้าห่มของเตียงนั้นจริง ๆ (ฟาง / ขนนก / ราชา) ผ้าห่มขยับตามจังหวะหายใจ ไม่นอนขวางเตียงแล้ว'],
 ['🛋','เต็นท์ส่วนตัวโฉมใหม่ ภาพวาดทั้งหลัง','ของแต่งเต็นท์ทุกชิ้นเป็นภาพวาดแล้ว: เตียง โต๊ะ เตาผิง ไฟ ต้นไม้ พรม ของติดผนัง ไฟเพดาน รวมถึงตู้เสื้อผ้า แท่นโชว์อุปกรณ์ ตู้ปลา ชั้นถ้วยรางวัล · ผ้าผนังและพื้นเปลี่ยนตามธีมผ้าใบเต็นท์ · ไฟ เปลวเตา และประกายคริสตัลยังขยับอยู่'],
 ['🏞','การ์ดภูมิภาคตอนวาร์ป','ย้ายแมพแล้วหน้าโหลดเป็นภาพทิวทัศน์ของภาคนั้นเต็มจอ พร้อมชื่อภาคและชื่อแมพ (ภาค 1–10 ภาพไม่ซ้ำกัน) · เข้าภาคใหม่จะค้างให้อ่านชื่อภาคครู่หนึ่ง ย้ายแมพในภาคเดิมเร็วเท่าเดิม'],
@@ -30377,8 +30378,8 @@ window.addEventListener('click',e=>{try{const T=$('topb');if(!T||!me.cls)return;
 if(HPIN.on){if(e.target.closest('[data-sqx],[data-rqx]')){e.stopPropagation();e.preventDefault();hpinSet(0);try{sfx('click')}catch(_){}}return}
 if(T.classList.contains('vzmin')&&!(c.id==='stq'&&c.classList.contains('min'))){e.stopPropagation();e.preventDefault();hpinSet(1);T.classList.remove('vzmin');try{sfx('click')}catch(_){}return}
 if(c.classList.contains('min'))hpinSet(1)}catch(_){}},true);
-const NPCP={off:0,ks:new Set(['qn','cmd','cel','til','sara','ast','eda','thu','navin','ves','lir','ked','hnt','kn','grif','nox','cas','lum','brom','mek','hed','orr','gem','leo','thr','aze','hd','tw','nyx','ice','stl','b1','b2','b3','b4','b6']),img:{},ok:{},cur:'',el:null,pre:0};
-function npcpKey(k){if(!k)return'';k=String(k);if(NPCP.ks.has(k))return k;const b=k.replace(/\d+$/,'');return NPCP.ks.has(b)?b:''}
+const NPCP={off:0,ks:new Set(['qn','cmd','cel','til','sara','ast','eda','thu','navin','ves','lir','ked','hnt','kn','grif','nox','cas','lum','brom','mek','hed','orr','gem','leo','thr','aze','hd','tw','nyx','ice','stl','b1','b2','b3','b4','b6','god','orn','orn7','wk','bkc','qsh','qnx','rte','b7','eye']),al:{lirg:'lir',qnt:'qn'},img:{},ok:{},cur:'',el:null,pre:0};
+function npcpKey(k){if(!k)return'';k=String(k);if(NPCP.ks.has(k))return k;if(NPCP.al[k])return NPCP.al[k];const b=k.replace(/\d+$/,'');return NPCP.ks.has(b)?b:''}
 function npcpLoad(k){if(!k||NPCP.img[k])return NPCP.img[k];const o={f:new Image(),b:new Image()};NPCP.img[k]=o;
 o.f.decoding=o.b.decoding='async';o.f.onload=()=>{NPCP.ok[k]=(NPCP.ok[k]|0)|1;if(NPCP.cur===k)try{npcpShow(k,1)}catch(e){}};o.b.onload=()=>{NPCP.ok[k]=(NPCP.ok[k]|0)|2;if(NPCP.cur===k)try{npcpShow(k,1)}catch(e){}};
 o.f.src='npcf-'+k+'.webp';o.b.src='npc-'+k+'.webp';return o}
