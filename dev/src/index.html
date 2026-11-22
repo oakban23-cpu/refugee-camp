@@ -13509,7 +13509,7 @@ function phDrag(){const c=$('c');if(!c||c.__ph)return;c.__ph=1;const P=e=>{const
 /* เอฟเฟกต์ท่าคู่ (ชั้นบน) */
 function peDrawFx(){const now=performance.now();for(const u in PE){const P=PE[u];if(P.r!==0)continue;const V=peView(u),Q=peView(P.p);if(!V||!Q){if(peAge(P)>PEL[P.e][2]+.5){delete PE[u];delete PE[P.p]}continue}
     const mx=(V.x+Q.x)/2,my=(V.y+Q.y)/2,a=V.a,t=now/1000;g.save();
-    /* ฟองอีโมจิช่วงแรก */if(a<1.1){g.globalAlpha=Math.min(1,a*4)*(a>.85?(1.1-a)/.25:1);g.font='16px system-ui';g.textAlign='center';g.fillText(PEL[P.e][0],mx,my-58-a*6)}
+    /* ฟองอีโมจิช่วงแรก */if(a<1.1){g.globalAlpha=Math.min(1,a*4)*(a>.85?(1.1-a)/.25:1);g.font='16px system-ui';g.textAlign='center';if(!emsDraw(P.e,mx,my-62-a*6,32))g.fillText(PEL[P.e][0],mx,my-58-a*6)}
     if(P.e==='hf'){if(a>.5&&!P.clap){P.clap=1;try{if(Math.hypot(me.x-mx,me.y-my)<500)sfx('combo')}catch(_){}try{burst(mx,my-24,['#ffe08a','#ffffff','#ffb060'],LOWQ?8:16,130,.45,{glow:1})}catch(_){}try{if(Math.hypot(me.x-mx,me.y-my)<300)shk=Math.max(shk,.06)}catch(_){}}
       if(a>.5&&a<1.3){const q=(a-.5)/.8;g.globalAlpha=1-q;g.strokeStyle='#ffe08a';g.lineWidth=2.5;for(let i=0;i<8;i++){const an=i*.785;g.beginPath();g.moveTo(mx+Math.cos(an)*(6+q*10),my-24+Math.sin(an)*(6+q*10));g.lineTo(mx+Math.cos(an)*(10+q*20),my-24+Math.sin(an)*(10+q*20));g.stroke()}
         g.globalAlpha=1-q;g.font='bold 15px system-ui';g.textAlign='center';g.fillStyle='#fff';g.strokeStyle='rgba(60,30,0,.8)';g.lineWidth=3;g.strokeText('👏 เย้!',mx,my-44-q*12);g.fillText('👏 เย้!',mx,my-44-q*12)}}
@@ -13603,8 +13603,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v651';
+const WNV='v652';
 const WNL=[
+  ['😊','สติกเกอร์อีโมตชุดใหม่','ท่าทางทั้ง 14 อัน (โบกมือ เต้น นั่งพัก โค้ง หัวเราะ ส่งใจ เฮ! เยี่ยม ร้องไห้ โกรธ · ไฮไฟว์ กอด โพสคู่ · ถ่ายรูป) เป็นสติกเกอร์ภาพวาดชุดเดียวกัน หน้าตาเหมือนกันทุกเครื่อง · ฟองเหนือหัวตอนทำท่าเป็นสติกเกอร์ใหญ่ขึ้น เพื่อนเห็นชัด'],
   ['🗺️','แผนที่โลกภาพวาด','แผนที่โลกเป็นภาพวาดแนวตั้งทั้งโลก ไล่จากห้วงดาวและเกาะลอยฟ้า ลงมาทะเลเมฆ ดินแดนใต้เมฆ พื้นดิน จนถึงใต้ดินลึกสุด · สะพานแสงทองจากนครอัสตราลงมาถึงค่าย · หมุดแมพเป็นเหรียญภาพวาดประจำแมพครบ 44 แมพ · ผังแมพจัดใหม่ให้ตรงกับเรื่องราว (เส้นทางเดินเหมือนเดิม)'],
   ['🔥','ตัวละครรอบกองไฟกลับเป็นแบบเดิม','หน้าเลือกอาชีพ: ฉากลานกองไฟกลางป่ายังเป็นภาพวาดสวย ๆ · ตัวละครกลับเป็นจิบิน่ารักนั่งผิงไฟแบบเดิม (ลุกขึ้นยืน โชว์ท่าเมื่อเลือก)'],
   ['🔥','หน้าเลือกอาชีพโฉมใหม่','ลานกองไฟกลางป่าเป็นภาพวาด ไฟวูบวาบ · ฮีโร่ 5 อาชีพภาพวาดเต็มตัวยืนล้อมกองไฟ แตะเลือกได้เหมือนเดิม ตัวที่เลือกเด่นขึ้นและหายใจ · การ์ดอาชีพด้านล่างเป็นภาพฮีโร่'],
@@ -36815,6 +36816,21 @@ setTimeout(()=>{try{const o=wmUI;window.wmUI=wmUI=function(sel,msg){
     try{wmpPost();const sc=ov.querySelector('.wmsc'),s=WMSEL|0;if(sc&&!keep&&WMP.P[s]){const k=sc.clientWidth/360;sc.scrollTop=Math.max(0,WMP.P[s][1]*k-sc.clientHeight/2)}}catch(e){console.warn('wmp',e)}
     return r}}catch(e){console.warn('wmp',e)}
   /* โหลดล่วงหน้าตอนเครื่องว่าง ให้เปิดแผนที่ครั้งแรกเห็นภาพเลย */const iv=setInterval(()=>{try{if(WMP.ld||WMP.off){clearInterval(iv);return}if(me&&me.cls&&run)setTimeout(wmpLoad,4000),clearInterval(iv)}catch(e){}},3000)},3000);
+/* ---------- v652 สติกเกอร์อีโมตภาพวาด (EMS) ----------
+   · ท่าทาง 14 อัน (10 ท่าเดี่ยว · ไฮไฟว์ กอด โพสคู่ · โหมดถ่ายรูป) เปลี่ยนจากอีโมจิของมือถือเป็นสติกเกอร์ชุดเดียวกัน
+     มาสคอตหัวกลมจิบิตัวเดียวกันทุกอัน ขอบขาวแบบสติกเกอร์ · atlas hd-emo.webp 7×2 ช่องละ 128
+   · แผงเลือกท่า: ไอคอนในปุ่มเป็นสติกเกอร์ · ฟองเหนือหัวตอนทำท่า: สติกเกอร์ใหญ่ขึ้นแทนฟองขาว+อีโมจิ · ท่าคู่: สติกเกอร์ลอยเหนือคู่
+   · โหลดภาพไม่ได้ → อีโมจิเดิม · ปิด: EMS.off=1 */
+const EMS={off:0,ok:0,err:'',im:null,dr:0,
+  K:{wave:0,dance:1,sit:2,bow:3,laugh:4,love:5,cheer:6,thumb:7,cry:8,angry:9,hf:10,hg:11,ps:12,photo:13}};
+(function(){const im=new Image();im.decoding='async';im.onload=()=>{EMS.ok=1;try{emsPanel()}catch(e){}};im.onerror=()=>{EMS.err='hd-emo.webp'};im.src='hd-emo.webp';EMS.im=im})();
+/* วาดสติกเกอร์ลง canvas เกม (ศูนย์กลาง x,y ขนาด s) · คืน false ถ้ายังใช้ไม่ได้ ให้ผู้เรียกวาดอีโมจิเดิม */
+function emsDraw(k,x,y,s){if(EMS.off||!EMS.ok)return false;const i=EMS.K[k];if(i==null)return false;EMS.dr++;g.drawImage(EMS.im,(i%7)*128,(i/7|0)*128,128,128,x-s/2,y-s/2,s,s);return true}
+function emsIcon(k,sz){const i=EMS.K[k];sz=sz||30;return'<i class="emsi" style="width:'+sz+'px;height:'+sz+'px;background-size:'+(sz*7)+'px '+(sz*2)+'px;background-position:-'+((i%7)*sz)+'px -'+((i/7|0)*sz)+'px"></i>'}
+function emsPanel(){if(EMS.off||!EMS.ok)return;const p=document.getElementById('emp');if(!p||p.hidden)return;
+  if(!document.getElementById('emscss')){const s=document.createElement('style');s.id='emscss';s.textContent='#emp i.emsi{display:block;background-image:url(hd-emo.webp);background-repeat:no-repeat;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.45))}#emp button.emsb{gap:2px;padding-top:4px}#emp button.emsb:active i.emsi{transform:scale(.9)}';document.head.appendChild(s)}
+  p.querySelectorAll('button[data-emo],button[data-pe]').forEach(b=>{if(b.classList.contains('emsb'))return;const k=b.dataset.pe||(EMO_L[+b.dataset.emo]||[])[0];if(EMS.K[k]==null)return;const sp=b.querySelector('span');if(!sp)return;sp.outerHTML=emsIcon(k);b.classList.add('emsb')})}
+setTimeout(()=>{try{const o=emoToggle;window.emoToggle=emoToggle=function(){const r=o.apply(this,arguments);try{emsPanel()}catch(e){console.warn('ems',e)}return r}}catch(e){console.warn('ems',e)}},3000);
 /* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
    ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
       → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1
@@ -39726,8 +39742,8 @@ function emoPost(E,x,y,fx,lift){const a=E.age,t=performance.now()/1000;g.save();
   if(E.k==='angry'){g.globalAlpha=.55+.3*Math.sin(a*10);g.fillStyle='#ff4a3a';g.beginPath();g.arc(x+6,y-30,5,0,7);g.fill();g.globalAlpha=1}
   /* ฟองอีโมจิ */
   const dur=E.dur||0,inq=Math.min(1,a/.18),out=dur?Math.max(0,Math.min(1,(dur-a)/.35)):1,sc=(inq<1?.4+inq*.8+Math.sin(inq*Math.PI)*.25:1)*(dur?1:.85),al=Math.min(inq*2,out);
-  if(al>0){const by=y-58-(lift||0)-Math.sin(t*3)*1.5;g.globalAlpha=al;g.translate(x,by);g.scale(sc,sc);g.fillStyle='rgba(255,250,240,.95)';g.strokeStyle='rgba(60,40,20,.5)';g.lineWidth=1;g.beginPath();g.roundRect(-12,-12,24,22,9);g.fill();g.stroke();
-    g.beginPath();g.moveTo(-3,10);g.lineTo(0,14);g.lineTo(3,10);g.closePath();g.fill();g.font='14px system-ui';g.textAlign='center';g.textBaseline='middle';g.fillText(E.em,0,-.5);g.textBaseline='alphabetic'}
+  if(al>0){const by=y-58-(lift||0)-Math.sin(t*3)*1.5;g.globalAlpha=al;g.translate(x,by);g.scale(sc,sc);if(!emsDraw(E.k,0,-15,34)){g.fillStyle='rgba(255,250,240,.95)';g.strokeStyle='rgba(60,40,20,.5)';g.lineWidth=1;g.beginPath();g.roundRect(-12,-12,24,22,9);g.fill();g.stroke();
+    g.beginPath();g.moveTo(-3,10);g.lineTo(0,14);g.lineTo(3,10);g.closePath();g.fill();g.font='14px system-ui';g.textAlign='center';g.textBaseline='middle';g.fillText(E.em,0,-.5);g.textBaseline='alphabetic'}}
   g.restore()}
 /* ปุ่ม + แผงเลือกท่า */
 function emoClose(){const p=document.getElementById('emp');if(p)p.hidden=true}
