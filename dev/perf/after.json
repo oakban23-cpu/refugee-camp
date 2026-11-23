@@ -1,0 +1,3777 @@
+{
+ "meta": {
+  "time": "2026-11-23 13:32",
+  "settle": 2.5,
+  "win": 5.0,
+  "profiles": [
+   "P2",
+   "P1",
+   "P3"
+  ],
+  "modes": [
+   "full",
+   "low"
+  ],
+  "note": "headless Chromium, software raster (no GPU); CPU throttling via CDP for P1/P2"
+ },
+ "P2/full/S1 title": {
+  "n": 30,
+  "fps": 6.0,
+  "p50": 183.3,
+  "p95": 266.7,
+  "p99": 266.7,
+  "max": 266.7,
+  "sd": 49.99,
+  "j17": 343.7,
+  "j33": 343.7,
+  "upd": 0,
+  "ui": 0,
+  "draw": 0,
+  "cpu_ms_s": 978.5,
+  "script_ms_s": 63.4,
+  "layout_ms_s": 3.7,
+  "style_ms_s": 14.7,
+  "heapMB": 8.3,
+  "nodes": 898,
+  "listeners": 275,
+  "longtasks": 33,
+  "lt_max": 214
+ },
+ "P2/full/S2 camp idle": {
+  "n": 15,
+  "fps": 2.9,
+  "p50": 333.3,
+  "p95": 449.9,
+  "p99": 449.9,
+  "max": 449.9,
+  "sd": 47.46,
+  "j17": 157.1,
+  "j33": 157.1,
+  "upd": 19.05,
+  "ui": 1.5,
+  "draw": 192.35,
+  "cpu_ms_s": 1006.5,
+  "script_ms_s": 677.6,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 14.4,
+  "heapMB": 21.6,
+  "nodes": 1238,
+  "listeners": 318,
+  "longtasks": 15,
+  "lt_max": 472
+ },
+ "P2/full/S2 camp walk": {
+  "n": 13,
+  "fps": 2.4,
+  "p50": 416.7,
+  "p95": 533.2,
+  "p99": 533.2,
+  "max": 533.2,
+  "sd": 49.7,
+  "j17": 133.8,
+  "j33": 133.8,
+  "upd": 21.05,
+  "ui": 1.45,
+  "draw": 249.15,
+  "cpu_ms_s": 1009.7,
+  "script_ms_s": 676.9,
+  "layout_ms_s": 4.5,
+  "style_ms_s": 20.8,
+  "heapMB": 24.1,
+  "nodes": 1407,
+  "listeners": 328,
+  "longtasks": 14,
+  "lt_max": 511
+ },
+ "P2/full/S3 astra plaza": {
+  "n": 25,
+  "fps": 4.9,
+  "p50": 200,
+  "p95": 299.9,
+  "p99": 316.7,
+  "max": 316.7,
+  "sd": 40.52,
+  "j17": 275.7,
+  "j33": 275.7,
+  "upd": 3.6,
+  "ui": 1.75,
+  "draw": 162.85,
+  "cpu_ms_s": 1002.3,
+  "script_ms_s": 832.6,
+  "layout_ms_s": 0.4,
+  "style_ms_s": 27.4,
+  "heapMB": 24.8,
+  "nodes": 1255,
+  "listeners": 342,
+  "longtasks": 27,
+  "lt_max": 294
+ },
+ "P2/full/S3 astra south": {
+  "n": 25,
+  "fps": 4.9,
+  "p50": 200,
+  "p95": 233.3,
+  "p99": 250,
+  "max": 250,
+  "sd": 17.32,
+  "j17": 275.5,
+  "j33": 275.5,
+  "upd": 0.6,
+  "ui": 0.4,
+  "draw": 160.85,
+  "cpu_ms_s": 1002.4,
+  "script_ms_s": 813.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 20.8,
+  "heapMB": 23.9,
+  "nodes": 1429,
+  "listeners": 350,
+  "longtasks": 25,
+  "lt_max": 240
+ },
+ "P2/full/S3 astra gate": {
+  "n": 21,
+  "fps": 4.1,
+  "p50": 233.3,
+  "p95": 300,
+  "p99": 366.6,
+  "max": 366.6,
+  "sd": 41.33,
+  "j17": 231.4,
+  "j33": 231.4,
+  "upd": 2.35,
+  "ui": 1.4,
+  "draw": 193.1,
+  "cpu_ms_s": 1000.4,
+  "script_ms_s": 840.4,
+  "layout_ms_s": 4.1,
+  "style_ms_s": 39.1,
+  "heapMB": 21.8,
+  "nodes": 1412,
+  "listeners": 360,
+  "longtasks": 22,
+  "lt_max": 357
+ },
+ "P2/full/S3 astra west": {
+  "n": 30,
+  "fps": 5.9,
+  "p50": 166.7,
+  "p95": 200,
+  "p99": 200,
+  "max": 200,
+  "sd": 16.52,
+  "j17": 333.3,
+  "j33": 333.3,
+  "upd": 0.5,
+  "ui": 1,
+  "draw": 126,
+  "cpu_ms_s": 1000.9,
+  "script_ms_s": 780.0,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 23.6,
+  "heapMB": 22.8,
+  "nodes": 1577,
+  "listeners": 370,
+  "longtasks": 31,
+  "lt_max": 206
+ },
+ "P2/full/S3 astra east": {
+  "n": 25,
+  "fps": 5.0,
+  "p50": 200,
+  "p95": 266.7,
+  "p99": 283.3,
+  "max": 283.3,
+  "sd": 32.3,
+  "j17": 278.5,
+  "j33": 278.5,
+  "upd": 0.7,
+  "ui": 1.3,
+  "draw": 151.95,
+  "cpu_ms_s": 1002.0,
+  "script_ms_s": 802.1,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 24.4,
+  "heapMB": 23.4,
+  "nodes": 1346,
+  "listeners": 378,
+  "longtasks": 26,
+  "lt_max": 264
+ },
+ "P2/full/S3 astra palace": {
+  "n": 29,
+  "fps": 5.7,
+  "p50": 166.7,
+  "p95": 249.9,
+  "p99": 249.9,
+  "max": 249.9,
+  "sd": 34.08,
+  "j17": 334.3,
+  "j33": 334.3,
+  "upd": 0.55,
+  "ui": 0.9,
+  "draw": 132.0,
+  "cpu_ms_s": 995.3,
+  "script_ms_s": 823.4,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 29.0,
+  "heapMB": 25.9,
+  "nodes": 1514,
+  "listeners": 388,
+  "longtasks": 29,
+  "lt_max": 245
+ },
+ "P2/full/S4 combat auto": {
+  "n": 12,
+  "fps": 2.3,
+  "p50": 433.3,
+  "p95": 516.7,
+  "p99": 516.7,
+  "max": 516.7,
+  "sd": 48.65,
+  "j17": 124.8,
+  "j33": 124.8,
+  "upd": 26.8,
+  "ui": 3.9,
+  "draw": 113.2,
+  "cpu_ms_s": 1020.2,
+  "script_ms_s": 372.3,
+  "layout_ms_s": 5.6,
+  "style_ms_s": 38.8,
+  "heapMB": 27.3,
+  "nodes": 1751,
+  "listeners": 398,
+  "longtasks": 13,
+  "lt_max": 503
+ },
+ "P2/full/S5 tower boss": {
+  "n": 24,
+  "fps": 4.7,
+  "p50": 216.6,
+  "p95": 266.6,
+  "p99": 383.4,
+  "max": 383.4,
+  "sd": 45.91,
+  "j17": 270.5,
+  "j33": 270.5,
+  "upd": 4,
+  "ui": 0.8,
+  "draw": 148.7,
+  "cpu_ms_s": 1000.0,
+  "script_ms_s": 732.5,
+  "layout_ms_s": 7.5,
+  "style_ms_s": 46.2,
+  "heapMB": 29.3,
+  "nodes": 2104,
+  "listeners": 406,
+  "longtasks": 25,
+  "lt_max": 310,
+  "boss": true
+ },
+ "P2/full/S6 map40": {
+  "n": 44,
+  "fps": 8.7,
+  "p50": 116.7,
+  "p95": 133.4,
+  "p99": 166.7,
+  "max": 166.7,
+  "sd": 19.07,
+  "j17": 505.2,
+  "j33": 505.2,
+  "upd": 1,
+  "ui": 0.4,
+  "draw": 33.6,
+  "cpu_ms_s": 1003.0,
+  "script_ms_s": 320.1,
+  "layout_ms_s": 1.2,
+  "style_ms_s": 29.1,
+  "heapMB": 29.0,
+  "nodes": 1727,
+  "listeners": 408,
+  "longtasks": 44,
+  "lt_max": 138
+ },
+ "P2/full/S6 map38": {
+  "n": 29,
+  "fps": 5.6,
+  "p50": 183.3,
+  "p95": 200.1,
+  "p99": 216.7,
+  "max": 216.7,
+  "sd": 14.71,
+  "j17": 325.6,
+  "j33": 325.6,
+  "upd": 3.4,
+  "ui": 0.4,
+  "draw": 30.95,
+  "cpu_ms_s": 1018.0,
+  "script_ms_s": 213.4,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 23.8,
+  "heapMB": 30.2,
+  "nodes": 1768,
+  "listeners": 413,
+  "longtasks": 29,
+  "lt_max": 204
+ },
+ "P2/full/S6 map44": {
+  "n": 19,
+  "fps": 3.6,
+  "p50": 250,
+  "p95": 366.7,
+  "p99": 366.7,
+  "max": 366.7,
+  "sd": 47.56,
+  "j17": 204.9,
+  "j33": 204.9,
+  "upd": 4.55,
+  "ui": 0.5,
+  "draw": 181.75,
+  "cpu_ms_s": 1003.3,
+  "script_ms_s": 717.2,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 20.7,
+  "heapMB": 33.1,
+  "nodes": 1781,
+  "listeners": 415,
+  "longtasks": 20,
+  "lt_max": 356
+ },
+ "P2/full/S7 menus open ms [median,max]": {
+  "menu": [
+   779,
+   1044
+  ],
+  "gear": [
+   907,
+   1315
+  ],
+  "worldmap": [
+   914,
+   1273
+  ],
+  "skills": [
+   726,
+   776
+  ],
+  "shop": [
+   740,
+   911
+  ],
+  "quest": [
+   728,
+   931
+  ]
+ },
+ "P2/full/S7 gear window open (idle)": {
+  "n": 15,
+  "fps": 3.0,
+  "p50": 333.3,
+  "p95": 483.4,
+  "p99": 483.4,
+  "max": 483.4,
+  "sd": 48.49,
+  "j17": 153.8,
+  "j33": 153.8,
+  "upd": 13.25,
+  "ui": 1.5,
+  "draw": 282.2,
+  "cpu_ms_s": 1000.6,
+  "script_ms_s": 926.1,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 2.7,
+  "heapMB": 46.4,
+  "nodes": 2415,
+  "listeners": 415,
+  "longtasks": 15,
+  "lt_max": 478
+ },
+ "P2/full/census": {
+  "canvas_live": 606,
+  "canvas_MB": 166,
+  "canvas_big": [
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    2340,
+    2340,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 557,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 180,
+  "img_unique": 169,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 818,
+   "ob": 298617,
+   "i": 2537,
+   "ib": 164420
+  }
+ },
+ "P2/full/errors": [],
+ "P2/low/S1 title": {
+  "n": 28,
+  "fps": 5.5,
+  "p50": 183.3,
+  "p95": 233.3,
+  "p99": 233.4,
+  "max": 233.4,
+  "sd": 27.27,
+  "j17": 326.0,
+  "j33": 326.0,
+  "upd": 0,
+  "ui": 0,
+  "draw": 0,
+  "cpu_ms_s": 1003.5,
+  "script_ms_s": 70.5,
+  "layout_ms_s": 3.9,
+  "style_ms_s": 14.7,
+  "heapMB": 8.2,
+  "nodes": 893,
+  "listeners": 275,
+  "longtasks": 30,
+  "lt_max": 221
+ },
+ "P2/low/S2 camp idle": {
+  "n": 25,
+  "fps": 4.9,
+  "p50": 199.9,
+  "p95": 299.9,
+  "p99": 300,
+  "max": 300,
+  "sd": 45.66,
+  "j17": 274.6,
+  "j33": 274.6,
+  "upd": 12.95,
+  "ui": 0.7,
+  "draw": 147.5,
+  "cpu_ms_s": 989.9,
+  "script_ms_s": 862.3,
+  "layout_ms_s": 0.9,
+  "style_ms_s": 29.0,
+  "heapMB": 23.6,
+  "nodes": 1238,
+  "listeners": 316,
+  "longtasks": 26,
+  "lt_max": 291
+ },
+ "P2/low/S2 camp walk": {
+  "n": 22,
+  "fps": 4.3,
+  "p50": 216.7,
+  "p95": 349.9,
+  "p99": 366.7,
+  "max": 366.7,
+  "sd": 55.25,
+  "j17": 232.3,
+  "j33": 232.3,
+  "upd": 18.1,
+  "ui": 3.7,
+  "draw": 137.5,
+  "cpu_ms_s": 986.2,
+  "script_ms_s": 779.7,
+  "layout_ms_s": 12.4,
+  "style_ms_s": 53.3,
+  "heapMB": 22.0,
+  "nodes": 1726,
+  "listeners": 326,
+  "longtasks": 23,
+  "lt_max": 311
+ },
+ "P2/low/S3 astra plaza": {
+  "n": 46,
+  "fps": 9.1,
+  "p50": 116.6,
+  "p95": 150,
+  "p99": 166.6,
+  "max": 166.6,
+  "sd": 17.19,
+  "j17": 530.1,
+  "j33": 530.1,
+  "upd": 0.8,
+  "ui": 0.9,
+  "draw": 20.5,
+  "cpu_ms_s": 1008.1,
+  "script_ms_s": 232.6,
+  "layout_ms_s": 1.5,
+  "style_ms_s": 50.7,
+  "heapMB": 22.9,
+  "nodes": 1301,
+  "listeners": 340,
+  "longtasks": 48,
+  "lt_max": 143
+ },
+ "P2/low/S3 astra south": {
+  "n": 45,
+  "fps": 8.9,
+  "p50": 116.6,
+  "p95": 150,
+  "p99": 166.6,
+  "max": 166.6,
+  "sd": 18.55,
+  "j17": 511.0,
+  "j33": 511.0,
+  "upd": 0.7,
+  "ui": 0.8,
+  "draw": 66.5,
+  "cpu_ms_s": 1002.8,
+  "script_ms_s": 619.6,
+  "layout_ms_s": 0.4,
+  "style_ms_s": 43.4,
+  "heapMB": 22.8,
+  "nodes": 1372,
+  "listeners": 350,
+  "longtasks": 46,
+  "lt_max": 158
+ },
+ "P2/low/S3 astra gate": {
+  "n": 42,
+  "fps": 8.3,
+  "p50": 116.7,
+  "p95": 150.1,
+  "p99": 166.7,
+  "max": 166.7,
+  "sd": 21.84,
+  "j17": 476.8,
+  "j33": 476.8,
+  "upd": 1.6,
+  "ui": 0.7,
+  "draw": 67.6,
+  "cpu_ms_s": 1001.1,
+  "script_ms_s": 588.6,
+  "layout_ms_s": 9.3,
+  "style_ms_s": 69.1,
+  "heapMB": 25.6,
+  "nodes": 1464,
+  "listeners": 358,
+  "longtasks": 42,
+  "lt_max": 167
+ },
+ "P2/low/S3 astra west": {
+  "n": 55,
+  "fps": 10.8,
+  "p50": 83.4,
+  "p95": 149.9,
+  "p99": 150,
+  "max": 150,
+  "sd": 21.73,
+  "j17": 629.1,
+  "j33": 629.1,
+  "upd": 0.45,
+  "ui": 0.5,
+  "draw": 39.55,
+  "cpu_ms_s": 1004.5,
+  "script_ms_s": 472.8,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 43.0,
+  "heapMB": 29.4,
+  "nodes": 1366,
+  "listeners": 368,
+  "longtasks": 56,
+  "lt_max": 129
+ },
+ "P2/low/S3 astra east": {
+  "n": 56,
+  "fps": 10.9,
+  "p50": 83.4,
+  "p95": 133.3,
+  "p99": 150,
+  "max": 150,
+  "sd": 20.4,
+  "j17": 636.1,
+  "j33": 636.1,
+  "upd": 0.4,
+  "ui": 0.5,
+  "draw": 35.4,
+  "cpu_ms_s": 1006.3,
+  "script_ms_s": 423.8,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 46.6,
+  "heapMB": 25.3,
+  "nodes": 1353,
+  "listeners": 378,
+  "longtasks": 57,
+  "lt_max": 132
+ },
+ "P2/low/S3 astra palace": {
+  "n": 46,
+  "fps": 9.1,
+  "p50": 100.1,
+  "p95": 149.9,
+  "p99": 166.6,
+  "max": 166.6,
+  "sd": 22.95,
+  "j17": 535.9,
+  "j33": 535.9,
+  "upd": 0.5,
+  "ui": 0.6,
+  "draw": 17.3,
+  "cpu_ms_s": 1009.7,
+  "script_ms_s": 198.8,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 35.4,
+  "heapMB": 27.0,
+  "nodes": 1337,
+  "listeners": 388,
+  "longtasks": 47,
+  "lt_max": 168
+ },
+ "P2/low/S4 combat auto": {
+  "n": 30,
+  "fps": 5.8,
+  "p50": 166.6,
+  "p95": 233.4,
+  "p99": 266.7,
+  "max": 266.7,
+  "sd": 31.6,
+  "j17": 335.3,
+  "j33": 335.3,
+  "upd": 10,
+  "ui": 2.9,
+  "draw": 36.6,
+  "cpu_ms_s": 1001.6,
+  "script_ms_s": 304.7,
+  "layout_ms_s": 12.8,
+  "style_ms_s": 75.7,
+  "heapMB": 25.5,
+  "nodes": 1609,
+  "listeners": 396,
+  "longtasks": 30,
+  "lt_max": 250
+ },
+ "P2/low/S5 tower boss": {
+  "n": 44,
+  "fps": 8.6,
+  "p50": 116.7,
+  "p95": 150,
+  "p99": 166.7,
+  "max": 166.7,
+  "sd": 21.46,
+  "j17": 502.6,
+  "j33": 502.6,
+  "upd": 2.3,
+  "ui": 1,
+  "draw": 15,
+  "cpu_ms_s": 1007.6,
+  "script_ms_s": 172.1,
+  "layout_ms_s": 11.3,
+  "style_ms_s": 80.6,
+  "heapMB": 33.0,
+  "nodes": 1922,
+  "listeners": 412,
+  "longtasks": 45,
+  "lt_max": 158,
+  "boss": true
+ },
+ "P2/low/S6 map40": {
+  "n": 76,
+  "fps": 15.1,
+  "p50": 66.7,
+  "p95": 99.9,
+  "p99": 100,
+  "max": 100,
+  "sd": 15.41,
+  "j17": 884.5,
+  "j33": 849.6,
+  "upd": 0.8,
+  "ui": 0.4,
+  "draw": 10.2,
+  "cpu_ms_s": 998.3,
+  "script_ms_s": 188.6,
+  "layout_ms_s": 1.6,
+  "style_ms_s": 46.0,
+  "heapMB": 29.0,
+  "nodes": 1848,
+  "listeners": 406,
+  "longtasks": 67,
+  "lt_max": 92
+ },
+ "P2/low/S6 map38": {
+  "n": 67,
+  "fps": 13.3,
+  "p50": 66.8,
+  "p95": 100,
+  "p99": 116.7,
+  "max": 116.7,
+  "sd": 15.33,
+  "j17": 782.9,
+  "j33": 782.9,
+  "upd": 1.0,
+  "ui": 0.4,
+  "draw": 11.0,
+  "cpu_ms_s": 995.7,
+  "script_ms_s": 182.0,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 42.0,
+  "heapMB": 33.9,
+  "nodes": 1777,
+  "listeners": 411,
+  "longtasks": 67,
+  "lt_max": 110
+ },
+ "P2/low/S6 map44": {
+  "n": 47,
+  "fps": 9.3,
+  "p50": 100.1,
+  "p95": 133.4,
+  "p99": 150,
+  "max": 150,
+  "sd": 17.81,
+  "j17": 540.3,
+  "j33": 540.3,
+  "upd": 1.6,
+  "ui": 0.4,
+  "draw": 20.3,
+  "cpu_ms_s": 1008.1,
+  "script_ms_s": 242.2,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 41.7,
+  "heapMB": 30.4,
+  "nodes": 1474,
+  "listeners": 413,
+  "longtasks": 48,
+  "lt_max": 153
+ },
+ "P2/low/S7 menus open ms [median,max]": {
+  "menu": [
+   396,
+   675
+  ],
+  "gear": [
+   407,
+   1090
+  ],
+  "worldmap": [
+   458,
+   562
+  ],
+  "skills": [
+   327,
+   581
+  ],
+  "shop": [
+   290,
+   350
+  ],
+  "quest": [
+   219,
+   290
+  ]
+ },
+ "P2/low/S7 gear window open (idle)": {
+  "n": 35,
+  "fps": 6.8,
+  "p50": 150,
+  "p95": 183.3,
+  "p99": 199.9,
+  "max": 199.9,
+  "sd": 21.83,
+  "j17": 392.6,
+  "j33": 392.6,
+  "upd": 6.4,
+  "ui": 0.4,
+  "draw": 42.25,
+  "cpu_ms_s": 1013.5,
+  "script_ms_s": 360.5,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 5.7,
+  "heapMB": 39.5,
+  "nodes": 2018,
+  "listeners": 413,
+  "longtasks": 36,
+  "lt_max": 191
+ },
+ "P2/low/census": {
+  "canvas_live": 673,
+  "canvas_MB": 125,
+  "canvas_big": [
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1560,
+    1560,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 570,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 179,
+  "img_unique": 168,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1107,
+   "ob": 333622,
+   "i": 1948,
+   "ib": 126262
+  }
+ },
+ "P2/low/errors": [],
+ "P1/full/S1 title": {
+  "n": 21,
+  "fps": 4.0,
+  "p50": 233.4,
+  "p95": 383.3,
+  "p99": 400,
+  "max": 400,
+  "sd": 78.31,
+  "j17": 222.1,
+  "j33": 222.1,
+  "upd": 0.0,
+  "ui": 0.0,
+  "draw": 0.0,
+  "cpu_ms_s": 803.9,
+  "script_ms_s": 62.8,
+  "layout_ms_s": 3.4,
+  "style_ms_s": 11.3,
+  "heapMB": 10.3,
+  "nodes": 1395,
+  "listeners": 284,
+  "longtasks": 28,
+  "lt_max": 308
+ },
+ "P1/full/S2 camp idle": {
+  "n": 19,
+  "fps": 3.6,
+  "p50": 266.7,
+  "p95": 400,
+  "p99": 400,
+  "max": 400,
+  "sd": 39.22,
+  "j17": 200.5,
+  "j33": 200.5,
+  "upd": 16.3,
+  "ui": 2.0,
+  "draw": 169.4,
+  "cpu_ms_s": 997.7,
+  "script_ms_s": 734.7,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 18.6,
+  "heapMB": 22.0,
+  "nodes": 1358,
+  "listeners": 324,
+  "longtasks": 19,
+  "lt_max": 349
+ },
+ "P1/full/S2 camp walk": {
+  "n": 16,
+  "fps": 3.1,
+  "p50": 300,
+  "p95": 533.3,
+  "p99": 533.3,
+  "max": 533.3,
+  "sd": 70.93,
+  "j17": 171.3,
+  "j33": 171.3,
+  "upd": 19.2,
+  "ui": 4.6,
+  "draw": 169.8,
+  "cpu_ms_s": 992.0,
+  "script_ms_s": 631.6,
+  "layout_ms_s": 7.8,
+  "style_ms_s": 38.6,
+  "heapMB": 22.3,
+  "nodes": 1624,
+  "listeners": 324,
+  "longtasks": 16,
+  "lt_max": 420
+ },
+ "P1/full/S3 astra plaza": {
+  "n": 43,
+  "fps": 8.6,
+  "p50": 116.7,
+  "p95": 149.9,
+  "p99": 183.3,
+  "max": 183.3,
+  "sd": 16.85,
+  "j17": 502.0,
+  "j33": 502.0,
+  "upd": 0.65,
+  "ui": 0.7,
+  "draw": 91.6,
+  "cpu_ms_s": 999.4,
+  "script_ms_s": 792.8,
+  "layout_ms_s": 2.2,
+  "style_ms_s": 33.3,
+  "heapMB": 23.8,
+  "nodes": 1389,
+  "listeners": 338,
+  "longtasks": 44,
+  "lt_max": 167
+ },
+ "P1/full/S3 astra south": {
+  "n": 31,
+  "fps": 6.1,
+  "p50": 166.6,
+  "p95": 200.1,
+  "p99": 216.6,
+  "max": 216.6,
+  "sd": 22.96,
+  "j17": 346.0,
+  "j33": 346.0,
+  "upd": 0.7,
+  "ui": 0.5,
+  "draw": 127.1,
+  "cpu_ms_s": 999.7,
+  "script_ms_s": 819.4,
+  "layout_ms_s": 0.7,
+  "style_ms_s": 29.5,
+  "heapMB": 25.6,
+  "nodes": 1597,
+  "listeners": 348,
+  "longtasks": 32,
+  "lt_max": 205
+ },
+ "P1/full/S3 astra gate": {
+  "n": 28,
+  "fps": 5.5,
+  "p50": 183.4,
+  "p95": 233.4,
+  "p99": 266.6,
+  "max": 266.6,
+  "sd": 41.14,
+  "j17": 321.0,
+  "j33": 321.0,
+  "upd": 2.8,
+  "ui": 1.3,
+  "draw": 121.8,
+  "cpu_ms_s": 1004.0,
+  "script_ms_s": 710.5,
+  "layout_ms_s": 7.2,
+  "style_ms_s": 47.4,
+  "heapMB": 23.0,
+  "nodes": 1425,
+  "listeners": 356,
+  "longtasks": 29,
+  "lt_max": 248
+ },
+ "P1/full/S3 astra west": {
+  "n": 37,
+  "fps": 7.3,
+  "p50": 133.3,
+  "p95": 183.3,
+  "p99": 199.9,
+  "max": 199.9,
+  "sd": 21.45,
+  "j17": 422.9,
+  "j33": 422.9,
+  "upd": 0.4,
+  "ui": 0.5,
+  "draw": 80.5,
+  "cpu_ms_s": 1004.1,
+  "script_ms_s": 610.0,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 26.3,
+  "heapMB": 23.5,
+  "nodes": 1593,
+  "listeners": 366,
+  "longtasks": 38,
+  "lt_max": 205
+ },
+ "P1/full/S3 astra east": {
+  "n": 32,
+  "fps": 6.3,
+  "p50": 150.1,
+  "p95": 183.4,
+  "p99": 183.4,
+  "max": 183.4,
+  "sd": 13.82,
+  "j17": 364.3,
+  "j33": 364.3,
+  "upd": 0.5,
+  "ui": 0.4,
+  "draw": 92,
+  "cpu_ms_s": 1006.6,
+  "script_ms_s": 591.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 30.5,
+  "heapMB": 22.4,
+  "nodes": 1446,
+  "listeners": 376,
+  "longtasks": 33,
+  "lt_max": 186
+ },
+ "P1/full/S3 astra palace": {
+  "n": 41,
+  "fps": 8.2,
+  "p50": 116.7,
+  "p95": 150,
+  "p99": 150,
+  "max": 150,
+  "sd": 17.88,
+  "j17": 475.6,
+  "j33": 475.6,
+  "upd": 0.45,
+  "ui": 0.4,
+  "draw": 24.05,
+  "cpu_ms_s": 1012.8,
+  "script_ms_s": 216.4,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 29.7,
+  "heapMB": 23.3,
+  "nodes": 1408,
+  "listeners": 384,
+  "longtasks": 40,
+  "lt_max": 155
+ },
+ "P1/full/S4 combat auto": {
+  "n": 10,
+  "fps": 2.0,
+  "p50": 500,
+  "p95": 766.6,
+  "p99": 766.6,
+  "max": 766.6,
+  "sd": 101.94,
+  "j17": 106.5,
+  "j33": 106.5,
+  "upd": 31.3,
+  "ui": 4.4,
+  "draw": 151.2,
+  "cpu_ms_s": 1025.5,
+  "script_ms_s": 415.7,
+  "layout_ms_s": 3.8,
+  "style_ms_s": 35.9,
+  "heapMB": 29.2,
+  "nodes": 1724,
+  "listeners": 396,
+  "longtasks": 11,
+  "lt_max": 649
+ },
+ "P1/full/S5 tower boss": {
+  "n": 24,
+  "fps": 4.7,
+  "p50": 216.7,
+  "p95": 266.6,
+  "p99": 283.3,
+  "max": 283.3,
+  "sd": 40.04,
+  "j17": 269.3,
+  "j33": 269.3,
+  "upd": 5.6,
+  "ui": 2.2,
+  "draw": 153,
+  "cpu_ms_s": 996.1,
+  "script_ms_s": 748.6,
+  "layout_ms_s": 8.9,
+  "style_ms_s": 48.3,
+  "heapMB": 31.5,
+  "nodes": 2002,
+  "listeners": 408,
+  "longtasks": 24,
+  "lt_max": 249,
+  "boss": true
+ },
+ "P1/full/S6 map40": {
+  "n": 46,
+  "fps": 9.2,
+  "p50": 100.1,
+  "p95": 133.4,
+  "p99": 150,
+  "max": 150,
+  "sd": 17.6,
+  "j17": 534.0,
+  "j33": 534.0,
+  "upd": 1.1,
+  "ui": 0.5,
+  "draw": 35,
+  "cpu_ms_s": 1002.5,
+  "script_ms_s": 333.2,
+  "layout_ms_s": 1.4,
+  "style_ms_s": 44.0,
+  "heapMB": 34.9,
+  "nodes": 1767,
+  "listeners": 408,
+  "longtasks": 47,
+  "lt_max": 152
+ },
+ "P1/full/S6 map38": {
+  "n": 27,
+  "fps": 5.2,
+  "p50": 183.4,
+  "p95": 266.6,
+  "p99": 266.7,
+  "max": 266.7,
+  "sd": 42.87,
+  "j17": 297.0,
+  "j33": 297.0,
+  "upd": 4.65,
+  "ui": 1.2,
+  "draw": 39.1,
+  "cpu_ms_s": 1010.4,
+  "script_ms_s": 250.4,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 28.4,
+  "heapMB": 29.9,
+  "nodes": 1673,
+  "listeners": 409,
+  "longtasks": 28,
+  "lt_max": 252
+ },
+ "P1/full/S6 map44": {
+  "n": 38,
+  "fps": 7.4,
+  "p50": 133.3,
+  "p95": 216.6,
+  "p99": 216.7,
+  "max": 216.7,
+  "sd": 28.7,
+  "j17": 428.3,
+  "j33": 428.3,
+  "upd": 3.8,
+  "ui": 0.5,
+  "draw": 35.3,
+  "cpu_ms_s": 1014.7,
+  "script_ms_s": 331.1,
+  "layout_ms_s": 0.5,
+  "style_ms_s": 33.3,
+  "heapMB": 37.2,
+  "nodes": 1766,
+  "listeners": 411,
+  "longtasks": 37,
+  "lt_max": 210
+ },
+ "P1/full/S7 menus open ms [median,max]": {
+  "menu": [
+   601,
+   989
+  ],
+  "gear": [
+   512,
+   1088
+  ],
+  "worldmap": [
+   663,
+   839
+  ],
+  "skills": [
+   386,
+   450
+  ],
+  "shop": [
+   350,
+   396
+  ],
+  "quest": [
+   400,
+   474
+  ]
+ },
+ "P1/full/S7 gear window open (idle)": {
+  "n": 27,
+  "fps": 5.3,
+  "p50": 183.4,
+  "p95": 233.3,
+  "p99": 250,
+  "max": 250,
+  "sd": 33.73,
+  "j17": 309.6,
+  "j33": 309.6,
+  "upd": 8.85,
+  "ui": 0.95,
+  "draw": 102.3,
+  "cpu_ms_s": 1005.4,
+  "script_ms_s": 609.2,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 4.6,
+  "heapMB": 43.3,
+  "nodes": 16295,
+  "listeners": 411,
+  "longtasks": 27,
+  "lt_max": 247
+ },
+ "P1/full/census": {
+  "canvas_live": 462,
+  "canvas_MB": 167,
+  "canvas_big": [
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    2340,
+    2340,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 559,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 179,
+  "img_unique": 168,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 927,
+   "ob": 273336,
+   "i": 2122,
+   "ib": 137528
+  }
+ },
+ "P1/full/errors": [],
+ "P1/low/S1 title": {
+  "n": 24,
+  "fps": 4.8,
+  "p50": 200,
+  "p95": 300.1,
+  "p99": 333.3,
+  "max": 333.3,
+  "sd": 49.3,
+  "j17": 269.6,
+  "j33": 269.6,
+  "upd": 0,
+  "ui": 0,
+  "draw": 0,
+  "cpu_ms_s": 942.1,
+  "script_ms_s": 66.7,
+  "layout_ms_s": 5.4,
+  "style_ms_s": 17.1,
+  "heapMB": 9.4,
+  "nodes": 1386,
+  "listeners": 284,
+  "longtasks": 24,
+  "lt_max": 267
+ },
+ "P1/low/S2 camp idle": {
+  "n": 38,
+  "fps": 7.5,
+  "p50": 116.7,
+  "p95": 216.6,
+  "p99": 233.3,
+  "max": 233.3,
+  "sd": 31.06,
+  "j17": 442.2,
+  "j33": 442.2,
+  "upd": 7.8,
+  "ui": 1.4,
+  "draw": 89.9,
+  "cpu_ms_s": 991.9,
+  "script_ms_s": 844.4,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 34.0,
+  "heapMB": 21.9,
+  "nodes": 1296,
+  "listeners": 322,
+  "longtasks": 39,
+  "lt_max": 217
+ },
+ "P1/low/S2 camp walk": {
+  "n": 29,
+  "fps": 5.6,
+  "p50": 166.7,
+  "p95": 233.3,
+  "p99": 283.3,
+  "max": 283.3,
+  "sd": 35.32,
+  "j17": 325.7,
+  "j33": 325.7,
+  "upd": 11.55,
+  "ui": 1.05,
+  "draw": 110.65,
+  "cpu_ms_s": 976.3,
+  "script_ms_s": 770.8,
+  "layout_ms_s": 12.9,
+  "style_ms_s": 54.2,
+  "heapMB": 24.8,
+  "nodes": 1375,
+  "listeners": 322,
+  "longtasks": 30,
+  "lt_max": 259
+ },
+ "P1/low/S3 astra plaza": {
+  "n": 73,
+  "fps": 14.5,
+  "p50": 66.7,
+  "p95": 100,
+  "p99": 133.4,
+  "max": 133.4,
+  "sd": 17.53,
+  "j17": 853.4,
+  "j33": 841.7,
+  "upd": 0.5,
+  "ui": 0.5,
+  "draw": 14.1,
+  "cpu_ms_s": 997.7,
+  "script_ms_s": 237.9,
+  "layout_ms_s": 1.9,
+  "style_ms_s": 50.0,
+  "heapMB": 24.5,
+  "nodes": 1336,
+  "listeners": 336,
+  "longtasks": 69,
+  "lt_max": 99
+ },
+ "P1/low/S3 astra south": {
+  "n": 69,
+  "fps": 13.7,
+  "p50": 66.7,
+  "p95": 116.6,
+  "p99": 133.3,
+  "max": 133.3,
+  "sd": 18.0,
+  "j17": 798.7,
+  "j33": 787.2,
+  "upd": 0.45,
+  "ui": 0.4,
+  "draw": 47.1,
+  "cpu_ms_s": 994.6,
+  "script_ms_s": 667.1,
+  "layout_ms_s": 0.6,
+  "style_ms_s": 42.1,
+  "heapMB": 23.9,
+  "nodes": 1306,
+  "listeners": 346,
+  "longtasks": 68,
+  "lt_max": 118
+ },
+ "P1/low/S3 astra gate": {
+  "n": 61,
+  "fps": 12.2,
+  "p50": 83.3,
+  "p95": 116.6,
+  "p99": 166.6,
+  "max": 166.6,
+  "sd": 18.82,
+  "j17": 712.4,
+  "j33": 712.4,
+  "upd": 0.55,
+  "ui": 0.55,
+  "draw": 50.55,
+  "cpu_ms_s": 993.9,
+  "script_ms_s": 655.8,
+  "layout_ms_s": 11.2,
+  "style_ms_s": 82.4,
+  "heapMB": 24.4,
+  "nodes": 1424,
+  "listeners": 356,
+  "longtasks": 61,
+  "lt_max": 130
+ },
+ "P1/low/S3 astra west": {
+  "n": 83,
+  "fps": 16.4,
+  "p50": 66.6,
+  "p95": 83.4,
+  "p99": 100.1,
+  "max": 100.1,
+  "sd": 14.05,
+  "j17": 967.6,
+  "j33": 909.3,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 28.7,
+  "cpu_ms_s": 994.1,
+  "script_ms_s": 485.6,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 50.0,
+  "heapMB": 23.7,
+  "nodes": 1267,
+  "listeners": 366,
+  "longtasks": 64,
+  "lt_max": 91
+ },
+ "P1/low/S3 astra east": {
+  "n": 75,
+  "fps": 14.8,
+  "p50": 66.7,
+  "p95": 100,
+  "p99": 150,
+  "max": 150,
+  "sd": 20.16,
+  "j17": 875.5,
+  "j33": 840.5,
+  "upd": 0.4,
+  "ui": 0.5,
+  "draw": 29.35,
+  "cpu_ms_s": 995.3,
+  "script_ms_s": 467.1,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 47.6,
+  "heapMB": 26.4,
+  "nodes": 1273,
+  "listeners": 376,
+  "longtasks": 64,
+  "lt_max": 134
+ },
+ "P1/low/S3 astra palace": {
+  "n": 71,
+  "fps": 14.0,
+  "p50": 66.7,
+  "p95": 100,
+  "p99": 116.6,
+  "max": 116.6,
+  "sd": 17.28,
+  "j17": 824.2,
+  "j33": 812.6,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 12.65,
+  "cpu_ms_s": 1001.0,
+  "script_ms_s": 195.5,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 41.2,
+  "heapMB": 28.0,
+  "nodes": 1281,
+  "listeners": 384,
+  "longtasks": 65,
+  "lt_max": 99
+ },
+ "P1/low/S4 combat auto": {
+  "n": 45,
+  "fps": 8.7,
+  "p50": 100,
+  "p95": 200,
+  "p99": 233.2,
+  "max": 233.2,
+  "sd": 35.55,
+  "j17": 500.8,
+  "j33": 500.8,
+  "upd": 6.5,
+  "ui": 1.05,
+  "draw": 27.3,
+  "cpu_ms_s": 979.4,
+  "script_ms_s": 344.0,
+  "layout_ms_s": 8.5,
+  "style_ms_s": 87.9,
+  "heapMB": 27.1,
+  "nodes": 1755,
+  "listeners": 394,
+  "longtasks": 46,
+  "lt_max": 220
+ },
+ "P1/low/S5 tower boss": {
+  "n": 54,
+  "fps": 10.7,
+  "p50": 99.9,
+  "p95": 133.4,
+  "p99": 166.8,
+  "max": 166.8,
+  "sd": 22.07,
+  "j17": 621.9,
+  "j33": 621.9,
+  "upd": 1.2,
+  "ui": 0.8,
+  "draw": 12.7,
+  "cpu_ms_s": 994.2,
+  "script_ms_s": 180.3,
+  "layout_ms_s": 8.3,
+  "style_ms_s": 89.6,
+  "heapMB": 29.1,
+  "nodes": 1725,
+  "listeners": 406,
+  "longtasks": 55,
+  "lt_max": 156,
+  "boss": true
+ },
+ "P1/low/S6 map40": {
+  "n": 105,
+  "fps": 20.5,
+  "p50": 50,
+  "p95": 66.7,
+  "p99": 83.3,
+  "max": 133.3,
+  "sd": 15.47,
+  "j17": 1195.1,
+  "j33": 896.3,
+  "upd": 0.7,
+  "ui": 0.4,
+  "draw": 9.2,
+  "cpu_ms_s": 987.3,
+  "script_ms_s": 239.1,
+  "layout_ms_s": 1.4,
+  "style_ms_s": 57.0,
+  "heapMB": 27.6,
+  "nodes": 1572,
+  "listeners": 406,
+  "longtasks": 36,
+  "lt_max": 141
+ },
+ "P1/low/S6 map38": {
+  "n": 89,
+  "fps": 17.6,
+  "p50": 50,
+  "p95": 83.3,
+  "p99": 100,
+  "max": 100,
+  "sd": 14.95,
+  "j17": 1027.9,
+  "j33": 934.4,
+  "upd": 0.8,
+  "ui": 0.4,
+  "draw": 9.9,
+  "cpu_ms_s": 998.0,
+  "script_ms_s": 222.0,
+  "layout_ms_s": 0.9,
+  "style_ms_s": 44.3,
+  "heapMB": 32.9,
+  "nodes": 1583,
+  "listeners": 407,
+  "longtasks": 61,
+  "lt_max": 94
+ },
+ "P1/low/S6 map44": {
+  "n": 92,
+  "fps": 18.3,
+  "p50": 50,
+  "p95": 83.3,
+  "p99": 100,
+  "max": 100,
+  "sd": 14.61,
+  "j17": 1080.3,
+  "j33": 880.6,
+  "upd": 1,
+  "ui": 0.4,
+  "draw": 9.8,
+  "cpu_ms_s": 984.9,
+  "script_ms_s": 223.5,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 41.9,
+  "heapMB": 36.8,
+  "nodes": 1905,
+  "listeners": 409,
+  "longtasks": 49,
+  "lt_max": 90
+ },
+ "P1/low/S7 menus open ms [median,max]": {
+  "menu": [
+   342,
+   509
+  ],
+  "gear": [
+   333,
+   818
+  ],
+  "worldmap": [
+   360,
+   407
+  ],
+  "skills": [
+   273,
+   326
+  ],
+  "shop": [
+   250,
+   289
+  ],
+  "quest": [
+   230,
+   278
+  ]
+ },
+ "P1/low/S7 gear window open (idle)": {
+  "n": 54,
+  "fps": 10.8,
+  "p50": 83.4,
+  "p95": 150,
+  "p99": 150.1,
+  "max": 150.1,
+  "sd": 24.77,
+  "j17": 631.8,
+  "j33": 631.8,
+  "upd": 1.8,
+  "ui": 0.4,
+  "draw": 65.9,
+  "cpu_ms_s": 990.6,
+  "script_ms_s": 795.6,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 5.0,
+  "heapMB": 37.0,
+  "nodes": 12243,
+  "listeners": 409,
+  "longtasks": 53,
+  "lt_max": 145
+ },
+ "P1/low/census": {
+  "canvas_live": 356,
+  "canvas_MB": 111,
+  "canvas_big": [
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1560,
+    1560,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 578,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 177,
+  "img_unique": 166,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1305,
+   "ob": 341019,
+   "i": 1804,
+   "ib": 116992
+  }
+ },
+ "P1/low/errors": [],
+ "P3/full/S1 title": {
+  "n": 134,
+  "fps": 26.6,
+  "p50": 33.4,
+  "p95": 50.1,
+  "p99": 66.7,
+  "max": 66.7,
+  "sd": 11.64,
+  "j17": 1518.1,
+  "j33": 557.4,
+  "upd": 0,
+  "ui": 0,
+  "draw": 0,
+  "cpu_ms_s": 945.3,
+  "script_ms_s": 74.6,
+  "layout_ms_s": 3.3,
+  "style_ms_s": 21.9,
+  "heapMB": 9.7,
+  "nodes": 896,
+  "listeners": 275,
+  "longtasks": 9,
+  "lt_max": 67
+ },
+ "P3/full/S2 camp idle": {
+  "n": 67,
+  "fps": 13.2,
+  "p50": 83.3,
+  "p95": 100,
+  "p99": 116.7,
+  "max": 116.7,
+  "sd": 13.62,
+  "j17": 775.9,
+  "j33": 775.9,
+  "upd": 1.8,
+  "ui": 0.4,
+  "draw": 46.8,
+  "cpu_ms_s": 1000.1,
+  "script_ms_s": 693.8,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 15.4,
+  "heapMB": 28.7,
+  "nodes": 1769,
+  "listeners": 310,
+  "longtasks": 67,
+  "lt_max": 101
+ },
+ "P3/full/S2 camp walk": {
+  "n": 61,
+  "fps": 12.1,
+  "p50": 83.3,
+  "p95": 116.8,
+  "p99": 149.9,
+  "max": 149.9,
+  "sd": 19.78,
+  "j17": 703.8,
+  "j33": 703.8,
+  "upd": 1.95,
+  "ui": 0.55,
+  "draw": 46.85,
+  "cpu_ms_s": 974.4,
+  "script_ms_s": 669.4,
+  "layout_ms_s": 5.4,
+  "style_ms_s": 31.1,
+  "heapMB": 25.0,
+  "nodes": 2137,
+  "listeners": 320,
+  "longtasks": 62,
+  "lt_max": 148
+ },
+ "P3/full/S3 astra plaza": {
+  "n": 131,
+  "fps": 26.1,
+  "p50": 33.4,
+  "p95": 50.1,
+  "p99": 66.7,
+  "max": 83.3,
+  "sd": 9.81,
+  "j17": 1512.4,
+  "j33": 744.4,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 11.0,
+  "cpu_ms_s": 994.3,
+  "script_ms_s": 340.7,
+  "layout_ms_s": 0.4,
+  "style_ms_s": 20.2,
+  "heapMB": 28.0,
+  "nodes": 1319,
+  "listeners": 334,
+  "longtasks": 4,
+  "lt_max": 63
+ },
+ "P3/full/S3 astra south": {
+  "n": 121,
+  "fps": 23.9,
+  "p50": 33.4,
+  "p95": 50.1,
+  "p99": 66.7,
+  "max": 83.3,
+  "sd": 10.31,
+  "j17": 1410.9,
+  "j33": 839.5,
+  "upd": 0.3,
+  "ui": 0.4,
+  "draw": 32.7,
+  "cpu_ms_s": 997.8,
+  "script_ms_s": 839.8,
+  "layout_ms_s": 0.3,
+  "style_ms_s": 19.0,
+  "heapMB": 28.3,
+  "nodes": 1425,
+  "listeners": 342,
+  "longtasks": 9,
+  "lt_max": 70
+ },
+ "P3/full/S3 astra gate": {
+  "n": 114,
+  "fps": 22.7,
+  "p50": 49.9,
+  "p95": 66.7,
+  "p99": 66.8,
+  "max": 83.3,
+  "sd": 11.51,
+  "j17": 1340.9,
+  "j33": 870.4,
+  "upd": 0.3,
+  "ui": 0.4,
+  "draw": 35,
+  "cpu_ms_s": 999.8,
+  "script_ms_s": 869.9,
+  "layout_ms_s": 7.8,
+  "style_ms_s": 42.9,
+  "heapMB": 33.2,
+  "nodes": 1457,
+  "listeners": 352,
+  "longtasks": 21,
+  "lt_max": 71
+ },
+ "P3/full/S3 astra west": {
+  "n": 123,
+  "fps": 24.4,
+  "p50": 33.4,
+  "p95": 50.1,
+  "p99": 66.7,
+  "max": 116.6,
+  "sd": 12.26,
+  "j17": 1419.7,
+  "j33": 786.1,
+  "upd": 0.3,
+  "ui": 0.4,
+  "draw": 31.85,
+  "cpu_ms_s": 996.7,
+  "script_ms_s": 836.8,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 18.9,
+  "heapMB": 26.7,
+  "nodes": 1333,
+  "listeners": 362,
+  "longtasks": 13,
+  "lt_max": 94
+ },
+ "P3/full/S3 astra east": {
+  "n": 127,
+  "fps": 25.3,
+  "p50": 33.4,
+  "p95": 50.1,
+  "p99": 66.6,
+  "max": 83.3,
+  "sd": 9.54,
+  "j17": 1482.9,
+  "j33": 676.2,
+  "upd": 0.3,
+  "ui": 0.4,
+  "draw": 30.1,
+  "cpu_ms_s": 993.9,
+  "script_ms_s": 839.0,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 18.5,
+  "heapMB": 33.3,
+  "nodes": 1401,
+  "listeners": 372,
+  "longtasks": 7,
+  "lt_max": 58
+ },
+ "P3/full/S3 astra palace": {
+  "n": 146,
+  "fps": 29.0,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 50.1,
+  "max": 66.8,
+  "sd": 9.08,
+  "j17": 1564.3,
+  "j33": 529.3,
+  "upd": 0.3,
+  "ui": 0.4,
+  "draw": 19.2,
+  "cpu_ms_s": 998.1,
+  "script_ms_s": 630.6,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 19.4,
+  "heapMB": 37.5,
+  "nodes": 1453,
+  "listeners": 382,
+  "longtasks": 1,
+  "lt_max": 63
+ },
+ "P3/full/S4 combat auto": {
+  "n": 109,
+  "fps": 21.6,
+  "p50": 50,
+  "p95": 66.7,
+  "p99": 66.7,
+  "max": 83.3,
+  "sd": 10.19,
+  "j17": 1282.1,
+  "j33": 929.2,
+  "upd": 1.1,
+  "ui": 0.4,
+  "draw": 8.5,
+  "cpu_ms_s": 994.9,
+  "script_ms_s": 242.7,
+  "layout_ms_s": 4.5,
+  "style_ms_s": 38.1,
+  "heapMB": 38.5,
+  "nodes": 1720,
+  "listeners": 398,
+  "longtasks": 18,
+  "lt_max": 72
+ },
+ "P3/full/S5 tower boss": {
+  "n": 80,
+  "fps": 15.8,
+  "p50": 66.6,
+  "p95": 83.4,
+  "p99": 100,
+  "max": 100,
+  "sd": 13.1,
+  "j17": 925.0,
+  "j33": 913.5,
+  "upd": 0.6,
+  "ui": 0.5,
+  "draw": 50,
+  "cpu_ms_s": 987.4,
+  "script_ms_s": 841.6,
+  "layout_ms_s": 4.7,
+  "style_ms_s": 45.5,
+  "heapMB": 47.7,
+  "nodes": 2578,
+  "listeners": 414,
+  "longtasks": 65,
+  "lt_max": 91,
+  "boss": true
+ },
+ "P3/full/S6 map40": {
+  "n": 189,
+  "fps": 37.7,
+  "p50": 33.3,
+  "p95": 33.4,
+  "p99": 33.5,
+  "max": 33.5,
+  "sd": 8.19,
+  "j17": 1473.3,
+  "j33": 225.8,
+  "upd": 0.6,
+  "ui": 0.4,
+  "draw": 7.85,
+  "cpu_ms_s": 999.7,
+  "script_ms_s": 335.9,
+  "layout_ms_s": 2.0,
+  "style_ms_s": 35.0,
+  "heapMB": 33.6,
+  "nodes": 1973,
+  "listeners": 410,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/full/S6 map38": {
+  "n": 153,
+  "fps": 30.3,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 66.6,
+  "max": 66.7,
+  "sd": 9.42,
+  "j17": 1583.6,
+  "j33": 434.0,
+  "upd": 0.5,
+  "ui": 0.3,
+  "draw": 6.8,
+  "cpu_ms_s": 997.0,
+  "script_ms_s": 255.5,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 20.2,
+  "heapMB": 46.6,
+  "nodes": 1960,
+  "listeners": 411,
+  "longtasks": 4,
+  "lt_max": 62
+ },
+ "P3/full/S6 map44": {
+  "n": 112,
+  "fps": 22.3,
+  "p50": 50,
+  "p95": 66.6,
+  "p99": 66.7,
+  "max": 100,
+  "sd": 11.1,
+  "j17": 1319.0,
+  "j33": 859.7,
+  "upd": 0.5,
+  "ui": 0.3,
+  "draw": 23.3,
+  "cpu_ms_s": 999.1,
+  "script_ms_s": 568.1,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 17.6,
+  "heapMB": 46.5,
+  "nodes": 2034,
+  "listeners": 413,
+  "longtasks": 12,
+  "lt_max": 74
+ },
+ "P3/full/S7 menus open ms [median,max]": {
+  "menu": [
+   182,
+   237
+  ],
+  "gear": [
+   144,
+   417
+  ],
+  "worldmap": [
+   170,
+   214
+  ],
+  "skills": [
+   126,
+   149
+  ],
+  "shop": [
+   113,
+   134
+  ],
+  "quest": [
+   120,
+   150
+  ]
+ },
+ "P3/full/S7 gear window open (idle)": {
+  "n": 63,
+  "fps": 12.5,
+  "p50": 83.3,
+  "p95": 100,
+  "p99": 133.4,
+  "max": 133.4,
+  "sd": 12.65,
+  "j17": 732.5,
+  "j33": 732.5,
+  "upd": 1.6,
+  "ui": 0.3,
+  "draw": 48.85,
+  "cpu_ms_s": 991.3,
+  "script_ms_s": 666.5,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 3.6,
+  "heapMB": 38.4,
+  "nodes": 7392,
+  "listeners": 413,
+  "longtasks": 63,
+  "lt_max": 116
+ },
+ "P3/full/census": {
+  "canvas_live": 1000,
+  "canvas_MB": 146,
+  "canvas_big": [
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    2340,
+    2340,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 574,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 179,
+  "img_unique": 168,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1561,
+   "ob": 545926,
+   "i": 1611,
+   "ib": 104473
+  }
+ },
+ "P3/full/errors": [],
+ "P3/low/S1 title": {
+  "n": 160,
+  "fps": 31.8,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 66.6,
+  "max": 66.6,
+  "sd": 11.48,
+  "j17": 1602.1,
+  "j33": 329.8,
+  "upd": 0,
+  "ui": 0,
+  "draw": 0,
+  "cpu_ms_s": 952.4,
+  "script_ms_s": 67.4,
+  "layout_ms_s": 3.9,
+  "style_ms_s": 20.4,
+  "heapMB": 10.8,
+  "nodes": 895,
+  "listeners": 275,
+  "longtasks": 6,
+  "lt_max": 60
+ },
+ "P3/low/S2 camp idle": {
+  "n": 127,
+  "fps": 25.1,
+  "p50": 33.4,
+  "p95": 50.1,
+  "p99": 66.7,
+  "max": 66.7,
+  "sd": 10.26,
+  "j17": 1453.8,
+  "j33": 773.8,
+  "upd": 1.05,
+  "ui": 0.4,
+  "draw": 26.9,
+  "cpu_ms_s": 995.1,
+  "script_ms_s": 791.2,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 17.0,
+  "heapMB": 28.0,
+  "nodes": 1511,
+  "listeners": 308,
+  "longtasks": 7,
+  "lt_max": 74
+ },
+ "P3/low/S2 camp walk": {
+  "n": 107,
+  "fps": 21.3,
+  "p50": 33.4,
+  "p95": 100.1,
+  "p99": 133.2,
+  "max": 149.9,
+  "sd": 24.44,
+  "j17": 1250.8,
+  "j33": 660.8,
+  "upd": 1.15,
+  "ui": 0.4,
+  "draw": 28.25,
+  "cpu_ms_s": 958.1,
+  "script_ms_s": 790.1,
+  "layout_ms_s": 3.7,
+  "style_ms_s": 26.0,
+  "heapMB": 26.6,
+  "nodes": 1812,
+  "listeners": 318,
+  "longtasks": 18,
+  "lt_max": 125
+ },
+ "P3/low/S3 astra plaza": {
+  "n": 184,
+  "fps": 36.7,
+  "p50": 33.3,
+  "p95": 33.4,
+  "p99": 50,
+  "max": 66.8,
+  "sd": 9.41,
+  "j17": 1583.6,
+  "j33": 378.2,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 5.3,
+  "cpu_ms_s": 992.3,
+  "script_ms_s": 258.3,
+  "layout_ms_s": 0.5,
+  "style_ms_s": 26.3,
+  "heapMB": 30.1,
+  "nodes": 1341,
+  "listeners": 332,
+  "longtasks": 1,
+  "lt_max": 78
+ },
+ "P3/low/S3 astra south": {
+  "n": 186,
+  "fps": 37.1,
+  "p50": 33.3,
+  "p95": 33.4,
+  "p99": 50.1,
+  "max": 66.7,
+  "sd": 9.61,
+  "j17": 1522.9,
+  "j33": 425.0,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 19.9,
+  "cpu_ms_s": 990.8,
+  "script_ms_s": 813.2,
+  "layout_ms_s": 0.3,
+  "style_ms_s": 22.0,
+  "heapMB": 29.7,
+  "nodes": 1277,
+  "listeners": 342,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S3 astra gate": {
+  "n": 214,
+  "fps": 42.5,
+  "p50": 16.7,
+  "p95": 33.4,
+  "p99": 33.4,
+  "max": 50,
+  "sd": 8.36,
+  "j17": 1479.3,
+  "j33": 307.7,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 13.7,
+  "cpu_ms_s": 995.7,
+  "script_ms_s": 592.2,
+  "layout_ms_s": 12.4,
+  "style_ms_s": 57.0,
+  "heapMB": 28.6,
+  "nodes": 1492,
+  "listeners": 352,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S3 astra west": {
+  "n": 259,
+  "fps": 51.3,
+  "p50": 16.7,
+  "p95": 33.4,
+  "p99": 33.4,
+  "max": 50,
+  "sd": 6.59,
+  "j17": 1064.8,
+  "j33": 153.8,
+  "upd": 0.2,
+  "ui": 0.3,
+  "draw": 7.1,
+  "cpu_ms_s": 990.5,
+  "script_ms_s": 432.5,
+  "layout_ms_s": 0.2,
+  "style_ms_s": 25.8,
+  "heapMB": 33.0,
+  "nodes": 1297,
+  "listeners": 362,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S3 astra east": {
+  "n": 271,
+  "fps": 54.0,
+  "p50": 16.7,
+  "p95": 33.3,
+  "p99": 33.4,
+  "max": 33.4,
+  "sd": 5.23,
+  "j17": 772.5,
+  "j33": 59.4,
+  "upd": 0.2,
+  "ui": 0.3,
+  "draw": 7.3,
+  "cpu_ms_s": 987.6,
+  "script_ms_s": 436.2,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 22.6,
+  "heapMB": 26.3,
+  "nodes": 1419,
+  "listeners": 372,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S3 astra palace": {
+  "n": 225,
+  "fps": 44.9,
+  "p50": 16.7,
+  "p95": 33.4,
+  "p99": 33.4,
+  "max": 50,
+  "sd": 8.04,
+  "j17": 1099.7,
+  "j33": 189.2,
+  "upd": 0.2,
+  "ui": 0.3,
+  "draw": 16.6,
+  "cpu_ms_s": 992.6,
+  "script_ms_s": 799.5,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 21.5,
+  "heapMB": 36.3,
+  "nodes": 1455,
+  "listeners": 382,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S4 combat auto": {
+  "n": 164,
+  "fps": 32.7,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 66.7,
+  "max": 66.7,
+  "sd": 11.39,
+  "j17": 1413.9,
+  "j33": 392.1,
+  "upd": 1.1,
+  "ui": 0.4,
+  "draw": 5.3,
+  "cpu_ms_s": 986.0,
+  "script_ms_s": 264.1,
+  "layout_ms_s": 6.2,
+  "style_ms_s": 53.6,
+  "heapMB": 44.7,
+  "nodes": 2224,
+  "listeners": 396,
+  "longtasks": 2,
+  "lt_max": 70
+ },
+ "P3/low/S5 tower boss": {
+  "n": 159,
+  "fps": 31.6,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 50,
+  "max": 50,
+  "sd": 9.57,
+  "j17": 1526.1,
+  "j33": 425.9,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 4.1,
+  "cpu_ms_s": 984.7,
+  "script_ms_s": 173.3,
+  "layout_ms_s": 5.8,
+  "style_ms_s": 49.5,
+  "heapMB": 32.3,
+  "nodes": 1736,
+  "listeners": 404,
+  "longtasks": 0,
+  "lt_max": 0,
+  "boss": true
+ },
+ "P3/low/S6 map40": {
+  "n": 295,
+  "fps": 58.8,
+  "p50": 16.7,
+  "p95": 16.8,
+  "p99": 33.3,
+  "max": 33.4,
+  "sd": 2.35,
+  "j17": 652.3,
+  "j33": 0.0,
+  "upd": 0.5,
+  "ui": 0.3,
+  "draw": 2.3,
+  "cpu_ms_s": 918.1,
+  "script_ms_s": 208.2,
+  "layout_ms_s": 3.4,
+  "style_ms_s": 41.0,
+  "heapMB": 31.7,
+  "nodes": 1725,
+  "listeners": 406,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S6 map38": {
+  "n": 290,
+  "fps": 57.8,
+  "p50": 16.7,
+  "p95": 16.8,
+  "p99": 33.4,
+  "max": 50,
+  "sd": 3.73,
+  "j17": 772.7,
+  "j33": 23.8,
+  "upd": 0.5,
+  "ui": 0.3,
+  "draw": 2.3,
+  "cpu_ms_s": 972.4,
+  "script_ms_s": 204.0,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 23.9,
+  "heapMB": 39.1,
+  "nodes": 1647,
+  "listeners": 411,
+  "longtasks": 1,
+  "lt_max": 50
+ },
+ "P3/low/S6 map44": {
+  "n": 187,
+  "fps": 37.3,
+  "p50": 33.3,
+  "p95": 33.4,
+  "p99": 50,
+  "max": 66.8,
+  "sd": 9.33,
+  "j17": 1629.6,
+  "j33": 178.4,
+  "upd": 0.5,
+  "ui": 0.3,
+  "draw": 4.7,
+  "cpu_ms_s": 995.4,
+  "script_ms_s": 223.0,
+  "layout_ms_s": 0.2,
+  "style_ms_s": 22.5,
+  "heapMB": 42.9,
+  "nodes": 2008,
+  "listeners": 413,
+  "longtasks": 1,
+  "lt_max": 63
+ },
+ "P3/low/S7 menus open ms [median,max]": {
+  "menu": [
+   128,
+   232
+  ],
+  "gear": [
+   81,
+   291
+  ],
+  "worldmap": [
+   89,
+   244
+  ],
+  "skills": [
+   63,
+   129
+  ],
+  "shop": [
+   114,
+   127
+  ],
+  "quest": [
+   68,
+   111
+  ]
+ },
+ "P3/low/S7 gear window open (idle)": {
+  "n": 91,
+  "fps": 18.1,
+  "p50": 50,
+  "p95": 66.7,
+  "p99": 83.3,
+  "max": 83.3,
+  "sd": 9.52,
+  "j17": 1067.6,
+  "j33": 1032.4,
+  "upd": 1.5,
+  "ui": 0.4,
+  "draw": 35.35,
+  "cpu_ms_s": 900.6,
+  "script_ms_s": 693.0,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 6.5,
+  "heapMB": 42.9,
+  "nodes": 11866,
+  "listeners": 413,
+  "longtasks": 43,
+  "lt_max": 77
+ },
+ "P3/low/census": {
+  "canvas_live": 792,
+  "canvas_MB": 119,
+  "canvas_big": [
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    1560,
+    1560,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 581,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 179,
+  "img_unique": 168,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1620,
+   "ob": 474281,
+   "i": 1546,
+   "ib": 100309
+  }
+ },
+ "P3/low/errors": [],
+ "S8 soak warps": [
+  {
+   "warps": 0,
+   "heapMB": 18.0,
+   "nodes": 1126,
+   "listeners": 286,
+   "canvas": 175,
+   "canvasMB": 73,
+   "intervals": 102,
+   "img_src": 53
+  },
+  {
+   "warps": 5,
+   "heapMB": 22.5,
+   "nodes": 1296,
+   "listeners": 321,
+   "canvas": 296,
+   "canvasMB": 95,
+   "intervals": 102,
+   "img_src": 89
+  },
+  {
+   "warps": 10,
+   "heapMB": 25.4,
+   "nodes": 1403,
+   "listeners": 351,
+   "canvas": 373,
+   "canvasMB": 106,
+   "intervals": 102,
+   "img_src": 123
+  },
+  {
+   "warps": 15,
+   "heapMB": 26.9,
+   "nodes": 1833,
+   "listeners": 377,
+   "canvas": 779,
+   "canvasMB": 124,
+   "intervals": 102,
+   "img_src": 154
+  },
+  {
+   "warps": 20,
+   "heapMB": 26.8,
+   "nodes": 1471,
+   "listeners": 403,
+   "canvas": 390,
+   "canvasMB": 106,
+   "intervals": 102,
+   "img_src": 185
+  },
+  {
+   "warps": 25,
+   "heapMB": 27.8,
+   "nodes": 1511,
+   "listeners": 405,
+   "canvas": 428,
+   "canvasMB": 121,
+   "intervals": 102,
+   "img_src": 192
+  },
+  {
+   "warps": 30,
+   "heapMB": 28.2,
+   "nodes": 1882,
+   "listeners": 405,
+   "canvas": 807,
+   "canvasMB": 120,
+   "intervals": 102,
+   "img_src": 197
+  }
+ ],
+ "S8 soak idle": [
+  {
+   "min": 1,
+   "heapMB": 28.3,
+   "nodes": 1466,
+   "canvas": 383,
+   "canvasMB": 99
+  },
+  {
+   "min": 2,
+   "heapMB": 28.1,
+   "nodes": 1466,
+   "canvas": 383,
+   "canvasMB": 99
+  },
+  {
+   "min": 3,
+   "heapMB": 28.3,
+   "nodes": 1466,
+   "canvas": 383,
+   "canvasMB": 99
+  },
+  {
+   "min": 4,
+   "heapMB": 28.6,
+   "nodes": 1466,
+   "canvas": 383,
+   "canvasMB": 99
+  },
+  {
+   "min": 5,
+   "heapMB": 28.5,
+   "nodes": 1466,
+   "canvas": 383,
+   "canvasMB": 99
+  }
+ ]
+}

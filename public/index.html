@@ -9616,7 +9616,7 @@ K.dk=a.createGain();K.dk.gain.value=.95;snd(K.dk,0,.02);K.dr=a.createGain();K.dr
 K.g=1;return K}
 const RKD={a:null,f:null,d:null};
 function rkWarm(a,all){if(RKD.a!==a){RKD.a=a;RKD.f=rkSmpF(a);RKD.d={}}for(const k in RKD.f){if(!RKD.d[k]){RKD.d[k]=RKD.f[k]();if(!all)return}}}
-setInterval(()=>{try{if(typeof AC!=='undefined'&&AC&&AC.state==='running'&&!musOff())rkWarm(AC,0)}catch(e){}},700);
+setInterval(()=>{try{if(typeof AC!=='undefined'&&AC&&AC.state==='running'&&!musOff()){if(typeof PERF!=='undefined'&&PERF.rk&&window.requestIdleCallback){if(!PERF.rkq){PERF.rkq=1;requestIdleCallback(dl=>{PERF.rkq=0;try{if(dl.didTimeout||dl.timeRemaining()>=9){PERF.st.rkIdle++;rkWarm(AC,0)}}catch(e){}},{timeout:4000})}}else rkWarm(AC,0)}}catch(e){}},700);
 function musOff(){try{return muted||!musOn}catch(e){return false}}
 function rkStop(){const K=RKB;if(!K.g)return;try{K.all.forEach(o=>{try{o.stop()}catch(e){}});K.mix.disconnect()}catch(e){}K.g=null;K.all=[]}
 function rkHit(K,b,t,v,pan,bus,rate){const a=K.a,s=a.createBufferSource();s.buffer=b;if(rate)s.playbackRate.value=rate;const g=a.createGain();g.gain.value=v;s.connect(g);(pan?mzPan(MZ.bus,g,pan):g).connect(bus);s.start(t)}
@@ -12305,8 +12305,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v653';
+const WNV='v654';
 const WNL=[
+['⚡','เกมลื่นและเบาเครื่องขึ้น','หน้าเริ่มเกมไม่วาดฉากที่มองไม่เห็นแล้ว (เปิดเกมเย็นเครื่องขึ้น) · ตอนเปิดหน้าต่างเมนู ฉากข้างหลังวาดช้าลงเพื่อประหยัดแบต (หน้าต่างยังลื่นเท่าเดิม) · คืนหน่วยความจำของแมพที่ออกมาแล้ว ราว 50–90 MB · เตรียมเสียงเพลงตอนเครื่องว่าง ไม่ทำให้เฟรมสะดุด'],
 ['🏰','นครอัสตราโฉมใหม่','เมืองหลวงลอยฟ้าเป็นภาพวาดทั้งเมือง · พื้นหินปูถนน ถนนหลวงแผ่นหินอ่อน สนามหญ้า และรายละเอียดบนพื้น (ตะไคร่ กลีบซากุระ ดาวโมเสก) · บ้าน 7 หลังคนละแบบ · กำแพงเมือง หอคอย ประตูเมืองใหม่ · สวนดอกไม้ สระบัว ศาลา · ท้องฟ้า หน้าผาใต้เกาะมีน้ำตกและคริสตัล · เกาะลอยรอบเมือง'],
 ['😊','สติกเกอร์อีโมตชุดใหม่','ท่าทางทั้ง 14 อัน (โบกมือ เต้น นั่งพัก โค้ง หัวเราะ ส่งใจ เฮ! เยี่ยม ร้องไห้ โกรธ · ไฮไฟว์ กอด โพสคู่ · ถ่ายรูป) เป็นสติกเกอร์ภาพวาดชุดเดียวกัน หน้าตาเหมือนกันทุกเครื่อง · ฟองเหนือหัวตอนทำท่าเป็นสติกเกอร์ใหญ่ขึ้น เพื่อนเห็นชัด'],
 ['🗺️','แผนที่โลกภาพวาด','แผนที่โลกเป็นภาพวาดแนวตั้งทั้งโลก ไล่จากห้วงดาวและเกาะลอยฟ้า ลงมาทะเลเมฆ ดินแดนใต้เมฆ พื้นดิน จนถึงใต้ดินลึกสุด · สะพานแสงทองจากนครอัสตราลงมาถึงค่าย · หมุดแมพเป็นเหรียญภาพวาดประจำแมพครบ 44 แมพ · ผังแมพจัดใหม่ให้ตรงกับเรื่องราว (เส้นทางเดินเหมือนเดิม)'],
@@ -32356,7 +32357,7 @@ GP:[[1395,1440,'garch',70],[1340,1500,'glong',74],[1450,1500,'glav',74],[1745,15
 ISL:['i0','i3','i5','i1','i0','i5','i3','i1']};
 function astOn(){return!AST.off&&AST.ok===1&&HDI.on}
 function astLoad(){if(AST.ld||AST.off)return;AST.ld=1;const ks=Object.keys(AST.SRC);let n=0;
-ks.forEach(k=>{const im=new Image();im.decoding='async';im.onload=()=>{AST.im[k]=k[0]==='a'?astCv(im):im;if(++n===ks.length){AST.ok=1;try{if(curMap===9){CSPR=null}}catch(e){}}};im.onerror=()=>{AST.err=AST.SRC[k];AST.ok=-1};im.src=AST.SRC[k]})}
+ks.forEach(k=>{const im=new Image();im.decoding='async';im.onload=()=>{AST.im[k]=im;if(++n===ks.length){AST.ok=1;try{if(curMap===9){CSPR=null}}catch(e){}}};im.onerror=()=>{AST.err=AST.SRC[k];AST.ok=-1};im.src=AST.SRC[k]})}
 function astCv(im){try{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;c.getContext('2d').drawImage(im,0,0);c.src=im.src;return c}catch(e){return im}}
 function astPat(x,k,sc,rot,ox,oy){const p=x.createPattern(AST.im[k],'repeat');let m=new DOMMatrix();if(ox||oy)m=m.translate(ox||0,oy||0);if(rot)m=m.rotate(rot);m=m.scale(sc);p.setTransform(m);return p}
 function astGround(x){if(!astOn())return false;AST.gu=1;const R0=CITY.R;x.fillStyle=astPat(x,'tc',.38);x.fillRect(CX-R0,CY-R0,R0*2,R0*2);
@@ -32427,6 +32428,26 @@ if(CSPR&&!!CSPR.ast!==on)CSPR=null}
 return oD.apply(this,arguments)};
 }catch(e){console.warn('ast',e)}
 const iv=setInterval(()=>{try{if(AST.ld||AST.off){clearInterval(iv);return}if(me&&me.cls&&run&&HDI.on)setTimeout(astLoad,7000),clearInterval(iv)}catch(e){}},3000)},3300);
+const PERF={ttl:1,rel:1,tt3:1,rk:1,menu:1,menuFps:20,relMs:60000,
+st:{ttlSkip:0,menuSkip:0,rel:{},rkIdle:0},ttlEl:null,lastDraw:0,mapT:{},lastMap:-1,lastChk:0};
+function perfTtlCover(){if(!PERF.ttl)return false;let T=PERF.ttlEl;if(!T||!T.isConnected){T=PERF.ttlEl=document.getElementById('ttl');if(!T)return false}
+return T.isConnected&&!T.classList.contains('out')&&!T.hidden}
+function perfMenuOpen(){try{return PERF.menu&&run&&me.cls&&ov&&!ov.hidden}catch(e){return false}}
+function perfRelease(now){
+PERF.mapT[curMap]=now;
+if(curMap!==PERF.lastMap){PERF.lastMap=curMap;try{for(const k in DFOV)delete DFOV[k]}catch(e){}}
+if(now-PERF.lastChk<2000)return;PERF.lastChk=now;
+if(PERF.tt3)try{if(TT3.cv&&!TT3.cv.isConnected&&TT3.cv.width){TT3.cv.width=TT3.cv.height=0;TT3.I={};PERF.st.rel.tt3=(PERF.st.rel.tt3|0)+1}}catch(e){}
+if(!PERF.rel)return;
+const away=k=>now-(PERF.mapT[k]||0)>PERF.relMs;
+try{if(curMap!==9&&away(9)&&!(typeof cpwNb==='function'&&cpwNb().has(curMap))&&(CG.c||CW.c||CST.c)){
+CG.c=null;try{CGT.m.clear();CGT.src=null}catch(e){}CW.c=null;CW.rows=null;if(CST.c){CST.c.width=CST.c.height=0;CST.c=null;CST.key=''}
+try{if(typeof AST!=='undefined'&&AST.re)AST.re=null}catch(e){}PERF.st.rel.astra=(PERF.st.rel.astra|0)+1}}catch(e){}
+try{if(curMap!==44&&curMap!==45&&away(44)&&away(45)&&PBTC&&Object.keys(PBTC).length){for(const k in PBTC){const c=PBTC[k];try{if(c&&c.c){c.c.width=c.c.height=0}else if(c&&c.width){c.width=c.height=0}}catch(e){}delete PBTC[k]}PERF.st.rel.pb=(PERF.st.rel.pb|0)+1}}catch(e){}}
+function perfSkip(){const now=performance.now();try{perfRelease(now)}catch(e){}
+if(perfTtlCover()){PERF.st.ttlSkip++;return true}
+if(perfMenuOpen()&&PERF.lastDraw&&now-PERF.lastDraw<1000/PERF.menuFps-2){PERF.st.menuSkip++;return true}
+PERF.lastDraw=now;return false}
 const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
 function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
 if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}
@@ -33096,8 +33117,8 @@ say(INTRO,()=>{P.ph='fight';P.tip=1;try{sfx('boss')}catch(e){}});
 function startEnd(){if(P.ph==='end')return;P.ph='end';P.endT=0;FX.length=0;P.dlg=null;say(OUTRO,()=>{P.end=1;P.endT=0;try{sfx('lvl')}catch(e){}})}
 let last=performance.now(),raf=0,closed=false;
 function finish(){if(closed)return;closed=true;cancelAnimationFrame(raf);cv.removeEventListener('pointerdown',onDown);removeEventListener('keydown',onKey);removeEventListener('keyup',onKU);removeEventListener('resize',rs);
-cv.style.transition='opacity .8s';cv.style.opacity='0';window.PRO_ON=0;setTimeout(()=>{cv.remove();try{done&&done()}catch(e){}},820)}
-function loop(now){if(!cv.isConnected){window.PRO_ON=0;return}const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;P.t+=dt;const t=P.t;
+cv.style.transition='opacity .8s';cv.style.opacity='0';window.PRO_ON=0;setTimeout(()=>{try{if(PERF.tt3)cv.width=cv.height=0}catch(e){}cv.remove();try{done&&done()}catch(e){}},820)}
+function loop(now){if(!cv.isConnected){window.PRO_ON=0;try{if(PERF.tt3)cv.width=cv.height=0}catch(e){}return}const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;P.t+=dt;const t=P.t;
 if(P.ph==='fight'&&!P.dlg){let mx=JOY.dx,my=JOY.dy;if(KEYS.a||KEYS.arrowleft)mx=-1;if(KEYS.d||KEYS.arrowright)mx=1;if(KEYS.w||KEYS.arrowup)my=-1;if(KEYS.s||KEYS.arrowdown)my=1;const sp=300*S;P.mvx+=(mx-P.mvx)*Math.min(1,dt*8);P.mvy+=(my-P.mvy)*Math.min(1,dt*8);
 P.hx=Math.max(50*S,Math.min(W-50*S,P.hx+P.mvx*sp*dt));P.hy=Math.max(H*.4,Math.min(H*.68,P.hy+P.mvy*sp*dt));if(Math.hypot(P.mvx,P.mvy)>.3&&R()<.7)part(P.hx-P.mvx*30*S+(R()-.5)*40*S,P.hy-20*S,1,['#fff4c0','#ffe08a'],30,.6,{r:2.5});
 P.ft+=dt;for(let i=0;i<8;i++)cds[i]=Math.max(0,cds[i]-dt);if(P.ft>=60||P.hp<=HPM*.0001)startEnd();
@@ -40935,7 +40956,7 @@ const iv=$('dinvb'),io=!!(dInv&&Date.now()<dInv.until&&!isDg()&&me.cls&&run&&ov.
 {const q=$('ptq'),on=!!(ptReq&&me.cls&&run&&ov.hidden);if(q.hidden===on)q.hidden=!on;if(on){const tx='👥 '+ptReq.n+' ชวนเข้าปาร์ตี้';if($('ptqt').textContent!==tx)$('ptqt').textContent=tx}}ptHud();plPopPos();
 tradeTick();{const q=$('trq'),on=!!(trReq&&me.cls&&run&&ov.hidden);if(q.hidden===on)q.hidden=!on;if(on){const tx='🤝 '+trReq.n+' ขอแลกเปลี่ยนของ';if($('trqt').textContent!==tx)$('trqt').textContent=tx}}
 tutTick();qTick();{const rc=me.cls&&me.down>0&&ov.hidden,rvb=$('rv');if(rvb.hidden===!!rc){rvb.hidden=!rc}if(rc){const t='ฟื้นตรงนี้ ('+rvCost()+' ทอง)',af=me.gold>=rvCost();if(rvb.textContent!==t)rvb.textContent=t;if(rvb.disabled===af)rvb.disabled=!af}
-const on=!ov.hidden&&run&&!!me.cls;if($('ovx').hidden===on)$('ovx').hidden=!on}const _pf0=performance.now();PF.ui=PF.uiT?Math.max(0,_pf0-PF.uiT):0;PF.uiT=0;try{if(drawErr&&g.reset)g.reset();drawErr=0;draw();drawBlRow();drawTwClimb();drawGearPreview()}catch(e){drawErr=1;if(!loop.warned){loop.warned=1;console.error(e)}}PF.draw=performance.now()-_pf0;requestAnimationFrame(loop);
+const on=!ov.hidden&&run&&!!me.cls;if($('ovx').hidden===on)$('ovx').hidden=!on}const _pf0=performance.now();PF.ui=PF.uiT?Math.max(0,_pf0-PF.uiT):0;PF.uiT=0;try{if(drawErr&&g.reset)g.reset();drawErr=0;if(!perfSkip()){draw();drawBlRow();drawTwClimb()}drawGearPreview()}catch(e){drawErr=1;if(!loop.warned){loop.warned=1;console.error(e)}}PF.draw=performance.now()-_pf0;requestAnimationFrame(loop);
 }
 setInterval(()=>{if(document.hidden&&run&&me.cls)advance(performance.now())},250);
 function pt(e){const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}}

@@ -1,0 +1,468 @@
+{
+ "meta": {
+  "time": "2026-11-23 14:14",
+  "settle": 2.5,
+  "win": 5.0,
+  "profiles": [
+   "P2"
+  ],
+  "modes": [
+   "low"
+  ],
+  "note": "headless Chromium, software raster (no GPU); CPU throttling via CDP for P1/P2"
+ },
+ "P2/low/S2 camp idle": {
+  "n": 27,
+  "fps": 5.3,
+  "p50": 166.7,
+  "p95": 300,
+  "p99": 350,
+  "max": 350,
+  "sd": 50.06,
+  "j17": 308.4,
+  "j33": 308.4,
+  "upd": 10.0,
+  "ui": 0.6,
+  "draw": 131.2,
+  "cpu_ms_s": 981.9,
+  "script_ms_s": 853.6,
+  "layout_ms_s": 0.3,
+  "style_ms_s": 32.2,
+  "heapMB": 21.7,
+  "nodes": 1300,
+  "listeners": 338,
+  "longtasks": 29,
+  "lt_max": 273
+ },
+ "P2/low/S2 camp walk": {
+  "n": 19,
+  "fps": 3.6,
+  "p50": 250,
+  "p95": 516.6,
+  "p99": 516.6,
+  "max": 516.6,
+  "sd": 85.41,
+  "j17": 198.5,
+  "j33": 198.5,
+  "upd": 28.05,
+  "ui": 4.5,
+  "draw": 183.55,
+  "cpu_ms_s": 1001.1,
+  "script_ms_s": 816.8,
+  "layout_ms_s": 7.5,
+  "style_ms_s": 41.1,
+  "heapMB": 24.5,
+  "nodes": 1349,
+  "listeners": 342,
+  "longtasks": 20,
+  "lt_max": 492
+ },
+ "P2/low/S3 astra plaza": {
+  "n": 47,
+  "fps": 9.2,
+  "p50": 100,
+  "p95": 150,
+  "p99": 166.7,
+  "max": 166.7,
+  "sd": 20.59,
+  "j17": 540.8,
+  "j33": 540.8,
+  "upd": 0.7,
+  "ui": 0.95,
+  "draw": 20.6,
+  "cpu_ms_s": 1012.3,
+  "script_ms_s": 224.9,
+  "layout_ms_s": 1.7,
+  "style_ms_s": 46.7,
+  "heapMB": 23.6,
+  "nodes": 1400,
+  "listeners": 354,
+  "longtasks": 46,
+  "lt_max": 151
+ },
+ "P2/low/S3 astra south": {
+  "n": 38,
+  "fps": 7.6,
+  "p50": 133.3,
+  "p95": 200,
+  "p99": 216.6,
+  "max": 216.6,
+  "sd": 27.13,
+  "j17": 435.9,
+  "j33": 435.9,
+  "upd": 0.6,
+  "ui": 0.6,
+  "draw": 75.5,
+  "cpu_ms_s": 999.4,
+  "script_ms_s": 632.4,
+  "layout_ms_s": 1.6,
+  "style_ms_s": 41.8,
+  "heapMB": 23.0,
+  "nodes": 1350,
+  "listeners": 364,
+  "longtasks": 39,
+  "lt_max": 207
+ },
+ "P2/low/S3 astra gate": {
+  "n": 42,
+  "fps": 8.3,
+  "p50": 116.7,
+  "p95": 166.7,
+  "p99": 200,
+  "max": 200,
+  "sd": 23.63,
+  "j17": 484.9,
+  "j33": 484.9,
+  "upd": 0.6,
+  "ui": 0.4,
+  "draw": 66.2,
+  "cpu_ms_s": 1002.0,
+  "script_ms_s": 582.8,
+  "layout_ms_s": 7.8,
+  "style_ms_s": 75.5,
+  "heapMB": 26.6,
+  "nodes": 1700,
+  "listeners": 374,
+  "longtasks": 43,
+  "lt_max": 205
+ },
+ "P2/low/S3 astra west": {
+  "n": 63,
+  "fps": 12.5,
+  "p50": 83.3,
+  "p95": 116.6,
+  "p99": 133.3,
+  "max": 133.3,
+  "sd": 15.47,
+  "j17": 733.2,
+  "j33": 733.2,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 34.05,
+  "cpu_ms_s": 1006.6,
+  "script_ms_s": 459.3,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 29.5,
+  "heapMB": 27.4,
+  "nodes": 1406,
+  "listeners": 384,
+  "longtasks": 63,
+  "lt_max": 131
+ },
+ "P2/low/S3 astra east": {
+  "n": 57,
+  "fps": 11.3,
+  "p50": 83.4,
+  "p95": 116.7,
+  "p99": 133.3,
+  "max": 133.3,
+  "sd": 16.21,
+  "j17": 663.3,
+  "j33": 663.3,
+  "upd": 0.5,
+  "ui": 0.4,
+  "draw": 35.75,
+  "cpu_ms_s": 997.0,
+  "script_ms_s": 431.3,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 40.8,
+  "heapMB": 31.5,
+  "nodes": 1579,
+  "listeners": 392,
+  "longtasks": 58,
+  "lt_max": 121
+ },
+ "P2/low/S3 astra palace": {
+  "n": 48,
+  "fps": 9.5,
+  "p50": 100,
+  "p95": 149.9,
+  "p99": 150,
+  "max": 150,
+  "sd": 21.24,
+  "j17": 558.6,
+  "j33": 558.6,
+  "upd": 0.4,
+  "ui": 0.5,
+  "draw": 17.7,
+  "cpu_ms_s": 1011.2,
+  "script_ms_s": 192.2,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 35.8,
+  "heapMB": 27.8,
+  "nodes": 1437,
+  "listeners": 402,
+  "longtasks": 49,
+  "lt_max": 140
+ },
+ "P2/low/S4 combat auto": {
+  "n": 26,
+  "fps": 5.0,
+  "p50": 183.3,
+  "p95": 316.6,
+  "p99": 333.3,
+  "max": 333.3,
+  "sd": 48.01,
+  "j17": 288.1,
+  "j33": 288.1,
+  "upd": 10.1,
+  "ui": 3.3,
+  "draw": 38.5,
+  "cpu_ms_s": 997.4,
+  "script_ms_s": 329.3,
+  "layout_ms_s": 9.1,
+  "style_ms_s": 68.3,
+  "heapMB": 28.2,
+  "nodes": 1960,
+  "listeners": 412,
+  "longtasks": 27,
+  "lt_max": 295
+ },
+ "P2/low/census": {
+  "canvas_live": 519,
+  "canvas_MB": 118,
+  "canvas_big": [
+   [
+    1830,
+    824,
+    "off"
+   ],
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    1830,
+    824,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    1560,
+    1560,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 113,
+  "timeouts_created": 392,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8782/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8782/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8782/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8782/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8782/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8782/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8782/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8782/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8782/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8782/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8782/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8782/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8782/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8782/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8782/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8782/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8782/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8782/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8782/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8782/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8782/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8782/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8782/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8782/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8782/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8782/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8782/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8782/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8782/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8782/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8782/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8782/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 165,
+  "img_unique": 159,
+  "img_dup": [
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "hd-rg01.webp",
+    2
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 518,
+   "ob": 105514,
+   "i": 866,
+   "ib": 56287
+  }
+ },
+ "P2/low/errors": []
+}

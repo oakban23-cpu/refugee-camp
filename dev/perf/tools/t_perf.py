@@ -12,6 +12,7 @@ PROFS = ARG.get('profiles', 'P2,P1,P3').split(',')
 MODES = ARG.get('modes', 'full,low').split(',')
 SCEN = ARG.get('scen', 'S1,S2,S3,S4,S5,S6,S7').split(',')
 SOAK = ARG.get('soak', '0') == '1'
+FLAGS = json.loads(ARG.get('flags', '{}'))
 SETTLE, WIN = float(ARG.get('settle', '2.5')), float(ARG.get('win', '5'))
 PROF = {'P1': dict(w=412, h=915, d=2, m=True, thr=4), 'P2': dict(w=915, h=412, d=2, m=True, thr=4), 'P3': dict(w=1280, h=720, d=1, m=False, thr=1)}
 
@@ -95,6 +96,7 @@ async def run_profile(b, prof, mode, results):
     tag = prof + '/' + mode
     await pg.goto(URL)
     await pg.wait_for_timeout(3500)
+    await pg.evaluate("(f)=>{try{if(typeof PERF!=='undefined')Object.assign(PERF,f)}catch(e){}}", FLAGS)
     await pg.evaluate("(m)=>{try{setGQ(m==='low'?'low':'high')}catch(e){}}", mode)
     if 'S1' in SCEN:
         await measure(pg, cdp, tag + '/S1 title', mode, R)
@@ -137,13 +139,13 @@ async def run_profile(b, prof, mode, results):
             await measure(pg, cdp, tag + '/S6 map%d' % m, mode, R)
     if 'S7' in SCEN:
         await pg.evaluate(GO, [1, 1600, 1700]); await pg.evaluate(CL)
-        t = await pg.evaluate("""async()=>{const out={};const one=async(n,open)=>{const ts=[];for(let i=0;i<10;i++){const a=performance.now();try{open()}catch(e){out[n]='ERR '+e;return}await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));ts.push(performance.now()-a);ov.hidden=true;await new Promise(r=>setTimeout(r,80))}ts.sort((a,b)=>a-b);out[n]=[Math.round(ts[5]),Math.round(ts[9])]};
+        t = await pg.evaluate("""async()=>{const out={};const one=async(n,open0)=>{const open=()=>{ov.hidden=false;open0()};const ts=[];for(let i=0;i<10;i++){const a=performance.now();try{open()}catch(e){out[n]='ERR '+e;return}await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));ts.push(performance.now()-a);ov.hidden=true;await new Promise(r=>setTimeout(r,80))}ts.sort((a,b)=>a-b);out[n]=[Math.round(ts[5]),Math.round(ts[9])]};
            await one('menu',()=>menuToggle());await one('gear',()=>gearUI());await one('worldmap',()=>wmUI());await one('skills',()=>treeUI());await one('shop',()=>shopUI(0));await one('quest',()=>questUI());return out}""")
         R[tag + '/S7 menus open ms [median,max]'] = t
         print(tag, 'S7', t, flush=True)
         await pg.evaluate("()=>{try{ov.hidden=true}catch(e){}}")
         # ค่าใช้จ่ายตอนเปิดหน้าต่างทึบเต็มจอค้างไว้ (เกมยังวาดอยู่ข้างหลังไหม)
-        await pg.evaluate("()=>{try{gearUI()}catch(e){}}")
+        await pg.evaluate("()=>{try{ov.hidden=false;gearUI()}catch(e){}}")
         await measure(pg, cdp, tag + '/S7 gear window open (idle)', mode, R)
         await pg.evaluate("()=>{try{ov.hidden=true}catch(e){}}")
     await gc(cdp)

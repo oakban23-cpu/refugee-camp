@@ -1,0 +1,272 @@
+{
+ "meta": {
+  "time": "2026-11-23 13:26",
+  "settle": 2.5,
+  "win": 5.0,
+  "profiles": [
+   "P3"
+  ],
+  "modes": [
+   "low"
+  ],
+  "note": "headless Chromium, software raster (no GPU); CPU throttling via CDP for P1/P2"
+ },
+ "P3/low/S7 menus open ms [median,max]": {
+  "menu": [
+   104,
+   147
+  ],
+  "gear": [
+   99,
+   243
+  ],
+  "worldmap": [
+   54,
+   172
+  ],
+  "skills": [
+   94,
+   127
+  ],
+  "shop": [
+   16,
+   121
+  ],
+  "quest": [
+   22,
+   46
+  ]
+ },
+ "P3/low/S7 gear window open (idle)": {
+  "n": 101,
+  "fps": 20.3,
+  "p50": 50,
+  "p95": 66.7,
+  "p99": 83.4,
+  "max": 100,
+  "sd": 14.44,
+  "j17": 1188.3,
+  "j33": 974.4,
+  "upd": 1.2,
+  "ui": 0.4,
+  "draw": 1.05,
+  "cpu_ms_s": 555.7,
+  "script_ms_s": 397.4,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 9.0,
+  "heapMB": 31.2,
+  "nodes": 3884,
+  "listeners": 394,
+  "longtasks": 25,
+  "lt_max": 77
+ },
+ "P3/low/census": {
+  "canvas_live": 678,
+  "canvas_MB": 96,
+  "canvas_big": [
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1560,
+    1560,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 111,
+  "timeouts_created": 425,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8781/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8781/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8781/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8781/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8781/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8781/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8781/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8781/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8781/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8781/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8781/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8781/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8781/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8781/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8781/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8781/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8781/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8781/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8781/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8781/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8781/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 157,
+  "img_unique": 154,
+  "img_dup": [
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 250,
+   "ob": 160305,
+   "i": 252,
+   "ib": 16315
+  }
+ },
+ "P3/low/errors": []
+}

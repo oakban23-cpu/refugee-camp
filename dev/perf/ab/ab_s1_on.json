@@ -1,0 +1,261 @@
+{
+ "meta": {
+  "time": "2026-11-23 13:24",
+  "settle": 2.5,
+  "win": 5.0,
+  "profiles": [
+   "P2"
+  ],
+  "modes": [
+   "full"
+  ],
+  "note": "headless Chromium, software raster (no GPU); CPU throttling via CDP for P1/P2"
+ },
+ "P2/full/S1 title": {
+  "n": 23,
+  "fps": 4.6,
+  "p50": 200,
+  "p95": 333.3,
+  "p99": 383.3,
+  "max": 383.3,
+  "sd": 76.6,
+  "j17": 265.0,
+  "j33": 265.0,
+  "upd": 0.0,
+  "ui": 0.0,
+  "draw": 0.0,
+  "cpu_ms_s": 943.9,
+  "script_ms_s": 81.5,
+  "layout_ms_s": 4.2,
+  "style_ms_s": 13.5,
+  "heapMB": 8.5,
+  "nodes": 892,
+  "listeners": 275,
+  "longtasks": 24,
+  "lt_max": 304
+ },
+ "P2/full/census": {
+  "canvas_live": 126,
+  "canvas_MB": 90,
+  "canvas_big": [
+   [
+    1830,
+    824,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    2340,
+    2340,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 111,
+  "timeouts_created": 307,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8781/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8781/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8781/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8781/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8781/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8781/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8781/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:14770:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:14814:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:14835:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:14841:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:14843:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8781/:15037:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:15294:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8781/:15365:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8781/:15441:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8781/:15443:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8781/:15520:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8781/:15612:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8781/:15646:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:16094:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8781/:16189:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8781/:16727:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8781/:16730:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8781/:17067:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8781/:17363:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8781/:17507:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8781/:17991:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8781/:18164:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8781/:18175:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8781/:18336:1",
+    1
+   ]
+  ],
+  "img_src_sets": 63,
+  "img_unique": 60,
+  "img_dup": [
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 13,
+   "ob": 3605,
+   "i": 39,
+   "ib": 2519
+  }
+ },
+ "P2/full/errors": []
+}
