@@ -12305,8 +12305,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v654';
+const WNV='v655';
 const WNL=[
+['🏰','นครอัสตราครบชุด','กำแพงเมืองมีป้อมเหลี่ยมธงฟ้า 4 มุม · หอสังเกตการณ์คู่ขนาบประตูตะวันตก · ซุ้มประตูโค้งหลังคาฟ้าคร่อมถนนใต้ · น้ำพุดาวเล็ก 2 แห่งในลานหิน (ภาพวาดชุดเดียวกับเมือง)'],
 ['⚡','เกมลื่นและเบาเครื่องขึ้น','หน้าเริ่มเกมไม่วาดฉากที่มองไม่เห็นแล้ว (เปิดเกมเย็นเครื่องขึ้น) · ตอนเปิดหน้าต่างเมนู ฉากข้างหลังวาดช้าลงเพื่อประหยัดแบต (หน้าต่างยังลื่นเท่าเดิม) · คืนหน่วยความจำของแมพที่ออกมาแล้ว ราว 50–90 MB · เตรียมเสียงเพลงตอนเครื่องว่าง ไม่ทำให้เฟรมสะดุด'],
 ['🏰','นครอัสตราโฉมใหม่','เมืองหลวงลอยฟ้าเป็นภาพวาดทั้งเมือง · พื้นหินปูถนน ถนนหลวงแผ่นหินอ่อน สนามหญ้า และรายละเอียดบนพื้น (ตะไคร่ กลีบซากุระ ดาวโมเสก) · บ้าน 7 หลังคนละแบบ · กำแพงเมือง หอคอย ประตูเมืองใหม่ · สวนดอกไม้ สระบัว ศาลา · ท้องฟ้า หน้าผาใต้เกาะมีน้ำตกและคริสตัล · เกาะลอยรอบเมือง'],
 ['😊','สติกเกอร์อีโมตชุดใหม่','ท่าทางทั้ง 14 อัน (โบกมือ เต้น นั่งพัก โค้ง หัวเราะ ส่งใจ เฮ! เยี่ยม ร้องไห้ โกรธ · ไฮไฟว์ กอด โพสคู่ · ถ่ายรูป) เป็นสติกเกอร์ภาพวาดชุดเดียวกัน หน้าตาเหมือนกันทุกเครื่อง · ฟองเหนือหัวตอนทำท่าเป็นสติกเกอร์ใหญ่ขึ้น เพื่อนเห็นชัด'],
@@ -32448,6 +32449,30 @@ function perfSkip(){const now=performance.now();try{perfRelease(now)}catch(e){}
 if(perfTtlCover()){PERF.st.ttlSkip++;return true}
 if(perfMenuOpen()&&PERF.lastDraw&&now-PERF.lastDraw<1000/PERF.menuFps-2){PERF.st.menuSkip++;return true}
 PERF.lastDraw=now;return false}
+const AX={on:0,
+BAST:[1,3,5,7].map(k=>{const a=k*Math.PI/4;return[CX+Math.cos(a)*(CITY.R+8),CY+Math.sin(a)*(CITY.R+8)]}),
+TURR:[-1,1].map(s=>{const a=Math.PI+s*.15;return[CX+Math.cos(a)*(CITY.R+8),CY+Math.sin(a)*(CITY.R+8)]}),
+GATE:[[1600,1955]],
+FOUNT:[[1300,2150],[1785,2032]],
+rects:[],circ:[]};
+AX.GATE.forEach(([x,y])=>{AX.rects.push([x-64,y-16,x-27,y+4],[x+27,y-16,x+64,y+4])});
+AX.FOUNT.forEach(([x,y])=>AX.circ.push([x,y-6,40]));
+function axSync(){const on=astOn()?1:0;if(on===AX.on)return;AX.on=on;
+if(on){AX.rects.forEach(r=>CITY.rects.push(r));AX.circ.forEach(c=>CITY.circ.push(c))}
+else{CITY.rects=CITY.rects.filter(r=>!AX.rects.includes(r));CITY.circ=CITY.circ.filter(c=>!AX.circ.includes(c))}}
+function axFount(x,y,t){hdSh(x+3,y+2,44,11,.26);const h=astSpr(1,'fount',x,y+4,96);
+if(!LOWQ){g.save();g.globalCompositeOperation='lighter';for(let i=0;i<4;i++){const q=(t*1.4+i/4)%1,a=i*1.7+t*.4;g.fillStyle='rgba(200,235,255,'+(.55*(1-q))+')';g.beginPath();g.arc(x+Math.cos(a)*24*q,y-h*.62+q*q*26,1.6,0,7);g.fill()}g.restore()}}
+setTimeout(()=>{try{
+const oC=citySprites;window.citySprites=citySprites=function(){const L=oC.apply(this,arguments);if(!astOn())return L;
+const P=(y,x,w,k,d)=>{const f=AST.f1[k];if(!f)return;const h=w*f[3]/f[2];L.push({y,x0:x-w/2,y0:y-h,x1:x+w/2,y1:y+16,d,big:1})};
+AX.BAST.forEach(([x,y])=>P(y,x,104,'bast',()=>{if(!astOn())return;hdSh(x+6,y+7,48,12,.3);astSpr(1,'bast',x,y+16,104)}));
+AX.TURR.forEach(([x,y])=>P(y,x,60,'turr',()=>{if(!astOn())return;hdSh(x+4,y+6,26,8,.28);astSpr(1,'turr',x,y+14,60)}));
+AX.GATE.forEach(([x,y])=>P(y,x,150,'bgate',()=>{if(!astOn())return;hdSh(x+4,y+3,70,10,.26);astSpr(1,'bgate',x,y+6,150)}));
+AX.FOUNT.forEach(([x,y])=>P(y,x,96,'fount',t=>{if(!astOn())return;axFount(x,y,t==null?performance.now()/1000:t)}));
+return L};
+const oD=drawCity;window.drawCity=drawCity=function(){if(curMap===9)try{axSync()}catch(e){}return oD.apply(this,arguments)};
+try{if(curMap===9)CSPR=null}catch(e){}
+}catch(e){console.warn("v655",e)}},3500);
 const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
 function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
 if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}
