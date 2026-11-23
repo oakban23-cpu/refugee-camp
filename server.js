@@ -9,6 +9,7 @@ const server=http.createServer((req,res)=>{
   if(req.url==='/version'){res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'});return res.end(JSON.stringify({v:SRV_V,up:Math.round(process.uptime())}))}
   if(req.url==='/admin'||req.url.startsWith('/admin/'))return adminRoute(req,res);
   if(req.url.startsWith('/api/acc/'))return accRoute(req,res);
+  if(req.url.split('?')[0]==='/privacy'){return fs.readFile(path.join(__dirname,'public','privacy.html'),(e,b)=>{if(e){res.writeHead(404);return res.end()}res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'public, max-age=3600'});res.end(b)})}
   if(req.url==='/stats'){res.writeHead(200,{'Content-Type':'application/json'});return res.end(JSON.stringify(stats()))}
   /* v492 ติดตั้งเป็นแอป: ไฟล์รายละเอียดแอป + service worker (ไม่แคช ให้ได้รุ่นล่าสุดเสมอ) */
   {const u=req.url.split('?')[0];if(u==='/manifest.webmanifest'||u==='/sw.js'){const sw=u==='/sw.js';return fs.readFile(path.join(__dirname,'public',u.slice(1)),(e,b)=>{if(e){res.writeHead(404);return res.end()}res.writeHead(200,{'Content-Type':sw?'application/javascript; charset=utf-8':'application/manifest+json; charset=utf-8','Cache-Control':'no-cache','Content-Length':b.length});bytesOut+=b.length;res.end(b)})}}
