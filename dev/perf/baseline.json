@@ -1,0 +1,3947 @@
+{
+ "meta": {
+  "time": "2026-11-23 12:07",
+  "settle": 2.5,
+  "win": 5.0,
+  "profiles": [
+   "P2",
+   "P1",
+   "P3"
+  ],
+  "modes": [
+   "full",
+   "low"
+  ],
+  "note": "headless Chromium, software raster (no GPU); CPU throttling via CDP for P1/P2"
+ },
+ "P2/full/S1 title": {
+  "n": 7,
+  "fps": 1.3,
+  "p50": 766.6,
+  "p95": 933.2,
+  "p99": 933.2,
+  "max": 933.2,
+  "sd": 108.7,
+  "j17": 68.0,
+  "j33": 68.0,
+  "upd": 0.0,
+  "ui": 0.0,
+  "draw": 283.2,
+  "cpu_ms_s": 957.0,
+  "script_ms_s": 433.4,
+  "layout_ms_s": 1.9,
+  "style_ms_s": 4.7,
+  "heapMB": 17.7,
+  "nodes": 1033,
+  "listeners": 285,
+  "longtasks": 10,
+  "lt_max": 849
+ },
+ "P2/full/S2 camp idle": {
+  "n": 13,
+  "fps": 2.5,
+  "p50": 350,
+  "p95": 550,
+  "p99": 550,
+  "max": 550,
+  "sd": 86.58,
+  "j17": 143.1,
+  "j33": 143.1,
+  "upd": 26.6,
+  "ui": 0.5,
+  "draw": 237.85,
+  "cpu_ms_s": 901.0,
+  "script_ms_s": 726.7,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 16.1,
+  "heapMB": 21.1,
+  "nodes": 1261,
+  "listeners": 330,
+  "longtasks": 16,
+  "lt_max": 397
+ },
+ "P2/full/S2 camp walk": {
+  "n": 14,
+  "fps": 2.7,
+  "p50": 366.6,
+  "p95": 500,
+  "p99": 500,
+  "max": 500,
+  "sd": 54.09,
+  "j17": 141.8,
+  "j33": 141.8,
+  "upd": 26.7,
+  "ui": 1.8,
+  "draw": 199.8,
+  "cpu_ms_s": 1006.6,
+  "script_ms_s": 698.0,
+  "layout_ms_s": 3.5,
+  "style_ms_s": 25.5,
+  "heapMB": 23.4,
+  "nodes": 1371,
+  "listeners": 332,
+  "longtasks": 15,
+  "lt_max": 466
+ },
+ "P2/full/S3 astra plaza": {
+  "n": 31,
+  "fps": 6.0,
+  "p50": 166.7,
+  "p95": 200,
+  "p99": 200,
+  "max": 200,
+  "sd": 16.39,
+  "j17": 341.8,
+  "j33": 341.8,
+  "upd": 1.05,
+  "ui": 1.35,
+  "draw": 129.7,
+  "cpu_ms_s": 999.8,
+  "script_ms_s": 821.7,
+  "layout_ms_s": 0.2,
+  "style_ms_s": 26.9,
+  "heapMB": 28.6,
+  "nodes": 1302,
+  "listeners": 346,
+  "longtasks": 31,
+  "lt_max": 206
+ },
+ "P2/full/S3 astra south": {
+  "n": 26,
+  "fps": 5.0,
+  "p50": 199.9,
+  "p95": 233.3,
+  "p99": 266.7,
+  "max": 266.7,
+  "sd": 21.14,
+  "j17": 289.6,
+  "j33": 289.6,
+  "upd": 1.7,
+  "ui": 0.4,
+  "draw": 156.7,
+  "cpu_ms_s": 1002.1,
+  "script_ms_s": 807.2,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 24.9,
+  "heapMB": 22.2,
+  "nodes": 1471,
+  "listeners": 354,
+  "longtasks": 27,
+  "lt_max": 255
+ },
+ "P2/full/S3 astra gate": {
+  "n": 24,
+  "fps": 4.7,
+  "p50": 200.1,
+  "p95": 266.7,
+  "p99": 299.9,
+  "max": 299.9,
+  "sd": 33.32,
+  "j17": 265.7,
+  "j33": 265.7,
+  "upd": 0.6,
+  "ui": 0.5,
+  "draw": 167.7,
+  "cpu_ms_s": 1002.0,
+  "script_ms_s": 831.8,
+  "layout_ms_s": 4.7,
+  "style_ms_s": 43.6,
+  "heapMB": 22.2,
+  "nodes": 1696,
+  "listeners": 364,
+  "longtasks": 25,
+  "lt_max": 271
+ },
+ "P2/full/S3 astra west": {
+  "n": 29,
+  "fps": 5.6,
+  "p50": 166.7,
+  "p95": 216.7,
+  "p99": 266.7,
+  "max": 266.7,
+  "sd": 28.07,
+  "j17": 316.4,
+  "j33": 316.4,
+  "upd": 0.55,
+  "ui": 0.3,
+  "draw": 138.7,
+  "cpu_ms_s": 1005.2,
+  "script_ms_s": 835.8,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 23.5,
+  "heapMB": 28.3,
+  "nodes": 1451,
+  "listeners": 372,
+  "longtasks": 30,
+  "lt_max": 249
+ },
+ "P2/full/S3 astra east": {
+  "n": 31,
+  "fps": 6.2,
+  "p50": 166.6,
+  "p95": 183.4,
+  "p99": 200,
+  "max": 200,
+  "sd": 15.82,
+  "j17": 353.7,
+  "j33": 353.7,
+  "upd": 0.45,
+  "ui": 0.4,
+  "draw": 129.5,
+  "cpu_ms_s": 1000.1,
+  "script_ms_s": 821.2,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 25.8,
+  "heapMB": 27.4,
+  "nodes": 1609,
+  "listeners": 382,
+  "longtasks": 31,
+  "lt_max": 194
+ },
+ "P2/full/S3 astra palace": {
+  "n": 31,
+  "fps": 6.2,
+  "p50": 166.6,
+  "p95": 200.1,
+  "p99": 216.7,
+  "max": 216.7,
+  "sd": 25.47,
+  "j17": 350.9,
+  "j33": 350.9,
+  "upd": 0.5,
+  "ui": 0.5,
+  "draw": 126.0,
+  "cpu_ms_s": 999.9,
+  "script_ms_s": 822.8,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 23.8,
+  "heapMB": 24.5,
+  "nodes": 1368,
+  "listeners": 392,
+  "longtasks": 31,
+  "lt_max": 197
+ },
+ "P2/full/S4 combat auto": {
+  "n": 12,
+  "fps": 2.2,
+  "p50": 433.4,
+  "p95": 516.7,
+  "p99": 516.7,
+  "max": 516.7,
+  "sd": 39.93,
+  "j17": 120.5,
+  "j33": 120.5,
+  "upd": 25.2,
+  "ui": 4.2,
+  "draw": 135.4,
+  "cpu_ms_s": 1029.5,
+  "script_ms_s": 377.3,
+  "layout_ms_s": 8.2,
+  "style_ms_s": 39.0,
+  "heapMB": 30.9,
+  "nodes": 2484,
+  "listeners": 404,
+  "longtasks": 12,
+  "lt_max": 502
+ },
+ "P2/full/S5 tower boss": {
+  "n": 23,
+  "fps": 4.5,
+  "p50": 233.2,
+  "p95": 300,
+  "p99": 333.4,
+  "max": 333.4,
+  "sd": 40.79,
+  "j17": 253.4,
+  "j33": 253.4,
+  "upd": 4.05,
+  "ui": 2.9,
+  "draw": 151.05,
+  "cpu_ms_s": 996.6,
+  "script_ms_s": 735.9,
+  "layout_ms_s": 6.3,
+  "style_ms_s": 43.8,
+  "heapMB": 32.8,
+  "nodes": 2062,
+  "listeners": 420,
+  "longtasks": 24,
+  "lt_max": 303,
+  "boss": true
+ },
+ "P2/full/S6 map40": {
+  "n": 47,
+  "fps": 9.2,
+  "p50": 100.1,
+  "p95": 133.4,
+  "p99": 166.7,
+  "max": 166.7,
+  "sd": 15.32,
+  "j17": 537.8,
+  "j33": 537.8,
+  "upd": 0.95,
+  "ui": 0.4,
+  "draw": 28.85,
+  "cpu_ms_s": 1008.4,
+  "script_ms_s": 307.4,
+  "layout_ms_s": 0.5,
+  "style_ms_s": 26.7,
+  "heapMB": 35.8,
+  "nodes": 1948,
+  "listeners": 414,
+  "longtasks": 48,
+  "lt_max": 157
+ },
+ "P2/full/S6 map38": {
+  "n": 27,
+  "fps": 5.3,
+  "p50": 183.3,
+  "p95": 233.3,
+  "p99": 250,
+  "max": 250,
+  "sd": 27.15,
+  "j17": 305.0,
+  "j33": 305.0,
+  "upd": 3.7,
+  "ui": 0.4,
+  "draw": 32.55,
+  "cpu_ms_s": 1015.3,
+  "script_ms_s": 218.1,
+  "layout_ms_s": 0.6,
+  "style_ms_s": 27.0,
+  "heapMB": 35.2,
+  "nodes": 1909,
+  "listeners": 419,
+  "longtasks": 28,
+  "lt_max": 247
+ },
+ "P2/full/S6 map44": {
+  "n": 19,
+  "fps": 3.8,
+  "p50": 266.5,
+  "p95": 350.1,
+  "p99": 350.1,
+  "max": 350.1,
+  "sd": 36.86,
+  "j17": 206.8,
+  "j33": 206.8,
+  "upd": 2.8,
+  "ui": 1.35,
+  "draw": 175.95,
+  "cpu_ms_s": 1003.6,
+  "script_ms_s": 725.1,
+  "layout_ms_s": 0.4,
+  "style_ms_s": 23.8,
+  "heapMB": 32.8,
+  "nodes": 2015,
+  "listeners": 421,
+  "longtasks": 20,
+  "lt_max": 352
+ },
+ "P2/full/S7 menus open ms [median,max]": {
+  "menu": [
+   715,
+   1043
+  ],
+  "gear": [
+   907,
+   1162
+  ],
+  "worldmap": [
+   1081,
+   1365
+  ],
+  "skills": [
+   701,
+   921
+  ],
+  "shop": [
+   604,
+   796
+  ],
+  "quest": [
+   689,
+   802
+  ]
+ },
+ "P2/full/S7 gear window open (idle)": {
+  "n": 19,
+  "fps": 3.7,
+  "p50": 283.3,
+  "p95": 316.7,
+  "p99": 316.7,
+  "max": 316.7,
+  "sd": 26.67,
+  "j17": 208.7,
+  "j33": 208.7,
+  "upd": 8.3,
+  "ui": 0.45,
+  "draw": 245.7,
+  "cpu_ms_s": 998.1,
+  "script_ms_s": 943.1,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 2.2,
+  "heapMB": 41.6,
+  "nodes": 2501,
+  "listeners": 421,
+  "longtasks": 20,
+  "lt_max": 318
+ },
+ "P2/full/census": {
+  "canvas_live": 527,
+  "canvas_MB": 223,
+  "canvas_big": [
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    1830,
+    824,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    1830,
+    824,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    1600,
+    712,
+    "off"
+   ],
+   [
+    1600,
+    994,
+    "off"
+   ],
+   [
+    1536,
+    1011,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ],
+   [
+    2340,
+    2340,
+    "off"
+   ],
+   [
+    1820,
+    819,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 549,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14769:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14813:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14834:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14840:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14842:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15036:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15293:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15364:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15440:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15442:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15519:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15611:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15645:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16093:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16188:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16726:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16729:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17066:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17362:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17506:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17990:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18163:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18174:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18335:1",
+    1
+   ]
+  ],
+  "img_src_sets": 180,
+  "img_unique": 169,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 851,
+   "ob": 252459,
+   "i": 2455,
+   "ib": 159356
+  }
+ },
+ "P2/full/errors": [],
+ "P2/low/S1 title": {
+  "n": 17,
+  "fps": 3.2,
+  "p50": 283.3,
+  "p95": 449.9,
+  "p99": 449.9,
+  "max": 449.9,
+  "sd": 57.99,
+  "j17": 175.9,
+  "j33": 175.9,
+  "upd": 0.0,
+  "ui": 0.0,
+  "draw": 97.8,
+  "cpu_ms_s": 871.9,
+  "script_ms_s": 347.3,
+  "layout_ms_s": 1.9,
+  "style_ms_s": 7.2,
+  "heapMB": 18.9,
+  "nodes": 1046,
+  "listeners": 285,
+  "longtasks": 19,
+  "lt_max": 361
+ },
+ "P2/low/S2 camp idle": {
+  "n": 28,
+  "fps": 5.5,
+  "p50": 183.3,
+  "p95": 216.7,
+  "p99": 233.4,
+  "max": 233.4,
+  "sd": 20.29,
+  "j17": 266.1,
+  "j33": 266.1,
+  "upd": 11.1,
+  "ui": 1.4,
+  "draw": 121.5,
+  "cpu_ms_s": 937.9,
+  "script_ms_s": 761.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 29.5,
+  "heapMB": 24.3,
+  "nodes": 1292,
+  "listeners": 328,
+  "longtasks": 29,
+  "lt_max": 235
+ },
+ "P2/low/S2 camp walk": {
+  "n": 23,
+  "fps": 4.4,
+  "p50": 216.6,
+  "p95": 316.7,
+  "p99": 316.7,
+  "max": 316.7,
+  "sd": 43.37,
+  "j17": 256.2,
+  "j33": 256.2,
+  "upd": 12.6,
+  "ui": 3.55,
+  "draw": 145.15,
+  "cpu_ms_s": 985.9,
+  "script_ms_s": 767.6,
+  "layout_ms_s": 10.6,
+  "style_ms_s": 45.1,
+  "heapMB": 24.9,
+  "nodes": 1503,
+  "listeners": 336,
+  "longtasks": 23,
+  "lt_max": 314
+ },
+ "P2/low/S3 astra plaza": {
+  "n": 43,
+  "fps": 8.5,
+  "p50": 116.6,
+  "p95": 166.6,
+  "p99": 200.1,
+  "max": 200.1,
+  "sd": 26.5,
+  "j17": 492.0,
+  "j33": 492.0,
+  "upd": 0.9,
+  "ui": 0.6,
+  "draw": 20.85,
+  "cpu_ms_s": 1009.4,
+  "script_ms_s": 228.1,
+  "layout_ms_s": 1.6,
+  "style_ms_s": 47.7,
+  "heapMB": 24.7,
+  "nodes": 1325,
+  "listeners": 348,
+  "longtasks": 44,
+  "lt_max": 180
+ },
+ "P2/low/S3 astra south": {
+  "n": 47,
+  "fps": 9.3,
+  "p50": 100,
+  "p95": 133.3,
+  "p99": 150.1,
+  "max": 150.1,
+  "sd": 13.26,
+  "j17": 538.4,
+  "j33": 538.4,
+  "upd": 0.6,
+  "ui": 0.5,
+  "draw": 64.35,
+  "cpu_ms_s": 1001.9,
+  "script_ms_s": 637.3,
+  "layout_ms_s": 2.0,
+  "style_ms_s": 37.0,
+  "heapMB": 28.3,
+  "nodes": 1559,
+  "listeners": 358,
+  "longtasks": 47,
+  "lt_max": 145
+ },
+ "P2/low/S3 astra gate": {
+  "n": 40,
+  "fps": 7.9,
+  "p50": 116.7,
+  "p95": 183.3,
+  "p99": 183.4,
+  "max": 183.4,
+  "sd": 20.71,
+  "j17": 463.3,
+  "j33": 463.3,
+  "upd": 1.8,
+  "ui": 1.3,
+  "draw": 68.8,
+  "cpu_ms_s": 1002.9,
+  "script_ms_s": 579.9,
+  "layout_ms_s": 11.1,
+  "style_ms_s": 76.6,
+  "heapMB": 30.2,
+  "nodes": 1564,
+  "listeners": 366,
+  "longtasks": 41,
+  "lt_max": 171
+ },
+ "P2/low/S3 astra west": {
+  "n": 66,
+  "fps": 13.1,
+  "p50": 66.7,
+  "p95": 133.3,
+  "p99": 133.4,
+  "max": 133.4,
+  "sd": 20.52,
+  "j17": 763.2,
+  "j33": 751.6,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 32.4,
+  "cpu_ms_s": 1004.3,
+  "script_ms_s": 459.1,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 30.9,
+  "heapMB": 27.2,
+  "nodes": 1318,
+  "listeners": 376,
+  "longtasks": 64,
+  "lt_max": 137
+ },
+ "P2/low/S3 astra east": {
+  "n": 55,
+  "fps": 11.0,
+  "p50": 83.4,
+  "p95": 133.3,
+  "p99": 133.3,
+  "max": 133.3,
+  "sd": 17.63,
+  "j17": 644.3,
+  "j33": 644.3,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 35.4,
+  "cpu_ms_s": 1002.4,
+  "script_ms_s": 426.3,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 40.2,
+  "heapMB": 27.8,
+  "nodes": 1491,
+  "listeners": 386,
+  "longtasks": 56,
+  "lt_max": 136
+ },
+ "P2/low/S3 astra palace": {
+  "n": 54,
+  "fps": 10.7,
+  "p50": 99.9,
+  "p95": 133.4,
+  "p99": 150,
+  "max": 150,
+  "sd": 22.08,
+  "j17": 626.8,
+  "j33": 626.8,
+  "upd": 0.5,
+  "ui": 0.4,
+  "draw": 15.9,
+  "cpu_ms_s": 1011.1,
+  "script_ms_s": 189.0,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 36.1,
+  "heapMB": 31.2,
+  "nodes": 1675,
+  "listeners": 396,
+  "longtasks": 54,
+  "lt_max": 133
+ },
+ "P2/low/S4 combat auto": {
+  "n": 26,
+  "fps": 5.1,
+  "p50": 200,
+  "p95": 233.4,
+  "p99": 266.7,
+  "max": 266.7,
+  "sd": 29.79,
+  "j17": 290.4,
+  "j33": 290.4,
+  "upd": 12.8,
+  "ui": 2.4,
+  "draw": 41.6,
+  "cpu_ms_s": 1011.0,
+  "script_ms_s": 310.5,
+  "layout_ms_s": 7.3,
+  "style_ms_s": 73.6,
+  "heapMB": 27.3,
+  "nodes": 2198,
+  "listeners": 404,
+  "longtasks": 28,
+  "lt_max": 220
+ },
+ "P2/low/S5 tower boss": {
+  "n": 45,
+  "fps": 8.9,
+  "p50": 100.1,
+  "p95": 150.1,
+  "p99": 166.7,
+  "max": 166.7,
+  "sd": 20.6,
+  "j17": 523.8,
+  "j33": 523.8,
+  "upd": 2.25,
+  "ui": 1.0,
+  "draw": 11.7,
+  "cpu_ms_s": 1006.9,
+  "script_ms_s": 163.9,
+  "layout_ms_s": 8.2,
+  "style_ms_s": 74.2,
+  "heapMB": 30.0,
+  "nodes": 1721,
+  "listeners": 416,
+  "longtasks": 46,
+  "lt_max": 143,
+  "boss": true
+ },
+ "P2/low/S6 map40": {
+  "n": 83,
+  "fps": 16.4,
+  "p50": 66.6,
+  "p95": 83.3,
+  "p99": 100.1,
+  "max": 100.1,
+  "sd": 13.75,
+  "j17": 966.0,
+  "j33": 907.8,
+  "upd": 0.7,
+  "ui": 0.4,
+  "draw": 10.3,
+  "cpu_ms_s": 1001.4,
+  "script_ms_s": 188.3,
+  "layout_ms_s": 2.0,
+  "style_ms_s": 43.4,
+  "heapMB": 31.2,
+  "nodes": 1737,
+  "listeners": 414,
+  "longtasks": 66,
+  "lt_max": 85
+ },
+ "P2/low/S6 map38": {
+  "n": 69,
+  "fps": 13.8,
+  "p50": 66.7,
+  "p95": 100,
+  "p99": 116.6,
+  "max": 116.6,
+  "sd": 15.0,
+  "j17": 804.7,
+  "j33": 804.7,
+  "upd": 0.8,
+  "ui": 0.3,
+  "draw": 10.45,
+  "cpu_ms_s": 1005.1,
+  "script_ms_s": 170.3,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 39.0,
+  "heapMB": 41.5,
+  "nodes": 1704,
+  "listeners": 419,
+  "longtasks": 66,
+  "lt_max": 107
+ },
+ "P2/low/S6 map44": {
+  "n": 48,
+  "fps": 9.4,
+  "p50": 100,
+  "p95": 133.4,
+  "p99": 166.7,
+  "max": 166.7,
+  "sd": 18.2,
+  "j17": 553.2,
+  "j33": 553.2,
+  "upd": 0.9,
+  "ui": 0.4,
+  "draw": 19.5,
+  "cpu_ms_s": 1008.0,
+  "script_ms_s": 207.7,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 32.9,
+  "heapMB": 46.3,
+  "nodes": 1678,
+  "listeners": 421,
+  "longtasks": 48,
+  "lt_max": 149
+ },
+ "P2/low/S7 menus open ms [median,max]": {
+  "menu": [
+   351,
+   469
+  ],
+  "gear": [
+   284,
+   919
+  ],
+  "worldmap": [
+   467,
+   627
+  ],
+  "skills": [
+   230,
+   289
+  ],
+  "shop": [
+   171,
+   198
+  ],
+  "quest": [
+   168,
+   181
+  ]
+ },
+ "P2/low/S7 gear window open (idle)": {
+  "n": 44,
+  "fps": 8.8,
+  "p50": 116.6,
+  "p95": 166.6,
+  "p99": 183.2,
+  "max": 183.2,
+  "sd": 23.81,
+  "j17": 512.4,
+  "j33": 512.4,
+  "upd": 2.9,
+  "ui": 0.4,
+  "draw": 31.7,
+  "cpu_ms_s": 1003.2,
+  "script_ms_s": 355.8,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 7.0,
+  "heapMB": 51.0,
+  "nodes": 16000,
+  "listeners": 421,
+  "longtasks": 45,
+  "lt_max": 168
+ },
+ "P2/low/census": {
+  "canvas_live": 819,
+  "canvas_MB": 182,
+  "canvas_big": [
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    1830,
+    824,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1830,
+    824,
+    "off"
+   ],
+   [
+    1600,
+    712,
+    "off"
+   ],
+   [
+    1600,
+    994,
+    "off"
+   ],
+   [
+    1536,
+    1011,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    1560,
+    702,
+    "off"
+   ],
+   [
+    1560,
+    1560,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 566,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14769:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14813:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14834:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14840:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14842:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15036:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15293:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15364:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15440:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15442:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15519:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15611:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15645:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16093:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16188:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16726:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16729:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17066:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17362:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17506:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17990:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18163:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18174:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18335:1",
+    1
+   ]
+  ],
+  "img_src_sets": 179,
+  "img_unique": 168,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1155,
+   "ob": 371746,
+   "i": 1859,
+   "ib": 120530
+  }
+ },
+ "P2/low/errors": [],
+ "P1/full/S1 title": {
+  "n": 10,
+  "fps": 1.8,
+  "p50": 566.6,
+  "p95": 616.6,
+  "p99": 616.6,
+  "max": 616.6,
+  "sd": 35.33,
+  "j17": 95.7,
+  "j33": 95.7,
+  "upd": 0,
+  "ui": 0,
+  "draw": 192.4,
+  "cpu_ms_s": 943.4,
+  "script_ms_s": 410.7,
+  "layout_ms_s": 1.4,
+  "style_ms_s": 4.5,
+  "heapMB": 19.2,
+  "nodes": 1191,
+  "listeners": 288,
+  "longtasks": 14,
+  "lt_max": 532
+ },
+ "P1/full/S2 camp idle": {
+  "n": 20,
+  "fps": 3.9,
+  "p50": 250.1,
+  "p95": 333.3,
+  "p99": 333.3,
+  "max": 333.3,
+  "sd": 39.8,
+  "j17": 211.9,
+  "j33": 211.9,
+  "upd": 12.3,
+  "ui": 0.5,
+  "draw": 147.3,
+  "cpu_ms_s": 1001.2,
+  "script_ms_s": 690.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 20.9,
+  "heapMB": 23.1,
+  "nodes": 1208,
+  "listeners": 320,
+  "longtasks": 21,
+  "lt_max": 346
+ },
+ "P1/full/S2 camp walk": {
+  "n": 16,
+  "fps": 3.0,
+  "p50": 350,
+  "p95": 466.6,
+  "p99": 466.6,
+  "max": 466.6,
+  "sd": 55.73,
+  "j17": 171.4,
+  "j33": 171.4,
+  "upd": 26.5,
+  "ui": 2.8,
+  "draw": 175.1,
+  "cpu_ms_s": 1009.3,
+  "script_ms_s": 663.3,
+  "layout_ms_s": 9.2,
+  "style_ms_s": 27.7,
+  "heapMB": 24.2,
+  "nodes": 1364,
+  "listeners": 330,
+  "longtasks": 17,
+  "lt_max": 438
+ },
+ "P1/full/S3 astra plaza": {
+  "n": 43,
+  "fps": 8.5,
+  "p50": 116.7,
+  "p95": 133.4,
+  "p99": 150,
+  "max": 150,
+  "sd": 16.05,
+  "j17": 491.8,
+  "j33": 491.8,
+  "upd": 0.6,
+  "ui": 0.6,
+  "draw": 92.95,
+  "cpu_ms_s": 1000.7,
+  "script_ms_s": 814.2,
+  "layout_ms_s": 1.4,
+  "style_ms_s": 42.8,
+  "heapMB": 25.8,
+  "nodes": 1507,
+  "listeners": 342,
+  "longtasks": 44,
+  "lt_max": 141
+ },
+ "P1/full/S3 astra south": {
+  "n": 32,
+  "fps": 6.3,
+  "p50": 150.1,
+  "p95": 200,
+  "p99": 216.7,
+  "max": 216.7,
+  "sd": 20.42,
+  "j17": 363.7,
+  "j33": 363.7,
+  "upd": 0.8,
+  "ui": 0.5,
+  "draw": 125.4,
+  "cpu_ms_s": 1003.6,
+  "script_ms_s": 812.0,
+  "layout_ms_s": 1.6,
+  "style_ms_s": 31.1,
+  "heapMB": 23.3,
+  "nodes": 1709,
+  "listeners": 352,
+  "longtasks": 33,
+  "lt_max": 199
+ },
+ "P1/full/S3 astra gate": {
+  "n": 32,
+  "fps": 6.3,
+  "p50": 166.6,
+  "p95": 183.3,
+  "p99": 183.3,
+  "max": 183.3,
+  "sd": 15.56,
+  "j17": 362.0,
+  "j33": 362.0,
+  "upd": 1.1,
+  "ui": 0.7,
+  "draw": 110.7,
+  "cpu_ms_s": 1004.4,
+  "script_ms_s": 710.6,
+  "layout_ms_s": 8.0,
+  "style_ms_s": 48.6,
+  "heapMB": 29.5,
+  "nodes": 1497,
+  "listeners": 362,
+  "longtasks": 33,
+  "lt_max": 184
+ },
+ "P1/full/S3 astra west": {
+  "n": 39,
+  "fps": 7.7,
+  "p50": 116.7,
+  "p95": 216.6,
+  "p99": 216.6,
+  "max": 216.6,
+  "sd": 26.26,
+  "j17": 450.0,
+  "j33": 450.0,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 76.35,
+  "cpu_ms_s": 1000.4,
+  "script_ms_s": 623.3,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 30.9,
+  "heapMB": 27.4,
+  "nodes": 1668,
+  "listeners": 370,
+  "longtasks": 40,
+  "lt_max": 207
+ },
+ "P1/full/S3 astra east": {
+  "n": 35,
+  "fps": 6.8,
+  "p50": 150,
+  "p95": 166.7,
+  "p99": 183.3,
+  "max": 183.3,
+  "sd": 12.27,
+  "j17": 390.8,
+  "j33": 390.8,
+  "upd": 0.4,
+  "ui": 0.35,
+  "draw": 85.2,
+  "cpu_ms_s": 1007.0,
+  "script_ms_s": 599.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 31.1,
+  "heapMB": 24.6,
+  "nodes": 1381,
+  "listeners": 380,
+  "longtasks": 36,
+  "lt_max": 182
+ },
+ "P1/full/S3 astra palace": {
+  "n": 44,
+  "fps": 8.5,
+  "p50": 116.7,
+  "p95": 166.6,
+  "p99": 166.7,
+  "max": 166.7,
+  "sd": 23.16,
+  "j17": 497.5,
+  "j33": 497.5,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 23.7,
+  "cpu_ms_s": 1012.7,
+  "script_ms_s": 217.7,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 21.7,
+  "heapMB": 30.5,
+  "nodes": 1557,
+  "listeners": 390,
+  "longtasks": 44,
+  "lt_max": 169
+ },
+ "P1/full/S4 combat auto": {
+  "n": 12,
+  "fps": 2.3,
+  "p50": 450,
+  "p95": 533.3,
+  "p99": 533.3,
+  "max": 533.3,
+  "sd": 66.49,
+  "j17": 124.8,
+  "j33": 124.8,
+  "upd": 20.4,
+  "ui": 4,
+  "draw": 130.7,
+  "cpu_ms_s": 1017.1,
+  "script_ms_s": 377.7,
+  "layout_ms_s": 5.2,
+  "style_ms_s": 31.5,
+  "heapMB": 29.0,
+  "nodes": 1900,
+  "listeners": 402,
+  "longtasks": 14,
+  "lt_max": 483
+ },
+ "P1/full/S5 tower boss": {
+  "n": 25,
+  "fps": 4.8,
+  "p50": 200,
+  "p95": 250,
+  "p99": 266.7,
+  "max": 266.7,
+  "sd": 30.54,
+  "j17": 275.1,
+  "j33": 275.1,
+  "upd": 4.75,
+  "ui": 1.2,
+  "draw": 149.4,
+  "cpu_ms_s": 994.6,
+  "script_ms_s": 750.1,
+  "layout_ms_s": 8.3,
+  "style_ms_s": 49.3,
+  "heapMB": 27.3,
+  "nodes": 2385,
+  "listeners": 418,
+  "longtasks": 26,
+  "lt_max": 269,
+  "boss": true
+ },
+ "P1/full/S6 map40": {
+  "n": 53,
+  "fps": 10.4,
+  "p50": 100,
+  "p95": 133.3,
+  "p99": 150,
+  "max": 150,
+  "sd": 17.7,
+  "j17": 609.2,
+  "j33": 609.2,
+  "upd": 0.8,
+  "ui": 0.4,
+  "draw": 27.85,
+  "cpu_ms_s": 1003.9,
+  "script_ms_s": 308.7,
+  "layout_ms_s": 1.7,
+  "style_ms_s": 33.1,
+  "heapMB": 31.6,
+  "nodes": 1863,
+  "listeners": 414,
+  "longtasks": 54,
+  "lt_max": 171
+ },
+ "P1/full/S6 map38": {
+  "n": 33,
+  "fps": 6.4,
+  "p50": 150,
+  "p95": 183.3,
+  "p99": 250,
+  "max": 250,
+  "sd": 20.79,
+  "j17": 372.1,
+  "j33": 372.1,
+  "upd": 4.2,
+  "ui": 0.55,
+  "draw": 30.25,
+  "cpu_ms_s": 1014.3,
+  "script_ms_s": 227.7,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 29.0,
+  "heapMB": 30.2,
+  "nodes": 1774,
+  "listeners": 415,
+  "longtasks": 34,
+  "lt_max": 234
+ },
+ "P1/full/S6 map44": {
+  "n": 44,
+  "fps": 8.7,
+  "p50": 116.7,
+  "p95": 150,
+  "p99": 150,
+  "max": 150,
+  "sd": 17.91,
+  "j17": 501.0,
+  "j33": 501.0,
+  "upd": 0.9,
+  "ui": 0.4,
+  "draw": 31.2,
+  "cpu_ms_s": 1008.8,
+  "script_ms_s": 286.4,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 29.8,
+  "heapMB": 34.0,
+  "nodes": 1767,
+  "listeners": 417,
+  "longtasks": 45,
+  "lt_max": 150
+ },
+ "P1/full/S7 menus open ms [median,max]": {
+  "menu": [
+   519,
+   766
+  ],
+  "gear": [
+   420,
+   944
+  ],
+  "worldmap": [
+   520,
+   662
+  ],
+  "skills": [
+   369,
+   422
+  ],
+  "shop": [
+   294,
+   380
+  ],
+  "quest": [
+   280,
+   314
+  ]
+ },
+ "P1/full/S7 gear window open (idle)": {
+  "n": 29,
+  "fps": 5.6,
+  "p50": 166.7,
+  "p95": 233.3,
+  "p99": 266.6,
+  "max": 266.6,
+  "sd": 30.72,
+  "j17": 326.3,
+  "j33": 326.3,
+  "upd": 8.1,
+  "ui": 0.65,
+  "draw": 100.55,
+  "cpu_ms_s": 1024.0,
+  "script_ms_s": 629.2,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 3.9,
+  "heapMB": 33.2,
+  "nodes": 12086,
+  "listeners": 417,
+  "longtasks": 30,
+  "lt_max": 257
+ },
+ "P1/full/census": {
+  "canvas_live": 550,
+  "canvas_MB": 221,
+  "canvas_big": [
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    824,
+    1830,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    824,
+    1830,
+    "off"
+   ],
+   [
+    1600,
+    994,
+    "off"
+   ],
+   [
+    1536,
+    1011,
+    "off"
+   ],
+   [
+    1600,
+    712,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    2340,
+    2340,
+    "off"
+   ],
+   [
+    720,
+    1640,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 545,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14769:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14813:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14834:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14840:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14842:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15036:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15293:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15364:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15440:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15442:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15519:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15611:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15645:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16093:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16188:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16726:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16729:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17066:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17362:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17506:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17990:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18163:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18174:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18335:1",
+    1
+   ]
+  ],
+  "img_src_sets": 179,
+  "img_unique": 168,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1007,
+   "ob": 276106,
+   "i": 2045,
+   "ib": 132595
+  }
+ },
+ "P1/full/errors": [],
+ "P1/low/S1 title": {
+  "n": 16,
+  "fps": 3.0,
+  "p50": 333.3,
+  "p95": 499.9,
+  "p99": 499.9,
+  "max": 499.9,
+  "sd": 62.22,
+  "j17": 166.8,
+  "j33": 166.8,
+  "upd": 0,
+  "ui": 0,
+  "draw": 30.4,
+  "cpu_ms_s": 844.3,
+  "script_ms_s": 136.1,
+  "layout_ms_s": 2.7,
+  "style_ms_s": 8.5,
+  "heapMB": 18.5,
+  "nodes": 1199,
+  "listeners": 287,
+  "longtasks": 19,
+  "lt_max": 407
+ },
+ "P1/low/S2 camp idle": {
+  "n": 33,
+  "fps": 6.4,
+  "p50": 150,
+  "p95": 233.4,
+  "p99": 250.1,
+  "max": 250.1,
+  "sd": 34.2,
+  "j17": 336.9,
+  "j33": 336.9,
+  "upd": 10.15,
+  "ui": 1.4,
+  "draw": 108.0,
+  "cpu_ms_s": 956.4,
+  "script_ms_s": 811.5,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 28.4,
+  "heapMB": 23.6,
+  "nodes": 1163,
+  "listeners": 324,
+  "longtasks": 32,
+  "lt_max": 181
+ },
+ "P1/low/S2 camp walk": {
+  "n": 30,
+  "fps": 5.9,
+  "p50": 166.7,
+  "p95": 233.3,
+  "p99": 333.3,
+  "max": 333.3,
+  "sd": 45.95,
+  "j17": 332.8,
+  "j33": 332.8,
+  "upd": 10.9,
+  "ui": 1.9,
+  "draw": 96.3,
+  "cpu_ms_s": 989.5,
+  "script_ms_s": 723.2,
+  "layout_ms_s": 10.8,
+  "style_ms_s": 56.9,
+  "heapMB": 28.6,
+  "nodes": 1589,
+  "listeners": 332,
+  "longtasks": 31,
+  "lt_max": 308
+ },
+ "P1/low/S3 astra plaza": {
+  "n": 74,
+  "fps": 14.7,
+  "p50": 66.7,
+  "p95": 100,
+  "p99": 100.1,
+  "max": 100.1,
+  "sd": 15.05,
+  "j17": 859.4,
+  "j33": 859.4,
+  "upd": 0.5,
+  "ui": 0.6,
+  "draw": 14,
+  "cpu_ms_s": 1001.8,
+  "script_ms_s": 241.1,
+  "layout_ms_s": 0.9,
+  "style_ms_s": 41.3,
+  "heapMB": 27.8,
+  "nodes": 1164,
+  "listeners": 346,
+  "longtasks": 66,
+  "lt_max": 92
+ },
+ "P1/low/S3 astra south": {
+  "n": 73,
+  "fps": 14.5,
+  "p50": 66.7,
+  "p95": 83.4,
+  "p99": 116.6,
+  "max": 116.6,
+  "sd": 11.79,
+  "j17": 844.0,
+  "j33": 844.0,
+  "upd": 0.45,
+  "ui": 0.4,
+  "draw": 45.5,
+  "cpu_ms_s": 995.8,
+  "script_ms_s": 679.7,
+  "layout_ms_s": 1.1,
+  "style_ms_s": 42.1,
+  "heapMB": 28.8,
+  "nodes": 1393,
+  "listeners": 356,
+  "longtasks": 72,
+  "lt_max": 112
+ },
+ "P1/low/S3 astra gate": {
+  "n": 59,
+  "fps": 11.6,
+  "p50": 83.3,
+  "p95": 150,
+  "p99": 266.7,
+  "max": 266.7,
+  "sd": 38.43,
+  "j17": 674.1,
+  "j33": 674.1,
+  "upd": 0.4,
+  "ui": 0.5,
+  "draw": 50.35,
+  "cpu_ms_s": 995.9,
+  "script_ms_s": 668.8,
+  "layout_ms_s": 12.1,
+  "style_ms_s": 78.4,
+  "heapMB": 24.8,
+  "nodes": 1477,
+  "listeners": 366,
+  "longtasks": 57,
+  "lt_max": 260
+ },
+ "P1/low/S3 astra west": {
+  "n": 83,
+  "fps": 16.5,
+  "p50": 50.1,
+  "p95": 99.9,
+  "p99": 133.4,
+  "max": 133.4,
+  "sd": 18.78,
+  "j17": 955.6,
+  "j33": 897.3,
+  "upd": 0.3,
+  "ui": 0.4,
+  "draw": 27.1,
+  "cpu_ms_s": 999.6,
+  "script_ms_s": 469.0,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 59.9,
+  "heapMB": 26.7,
+  "nodes": 1215,
+  "listeners": 376,
+  "longtasks": 55,
+  "lt_max": 111
+ },
+ "P1/low/S3 astra east": {
+  "n": 86,
+  "fps": 17.1,
+  "p50": 50.1,
+  "p95": 83.4,
+  "p99": 100,
+  "max": 100,
+  "sd": 13.39,
+  "j17": 1003.9,
+  "j33": 957.2,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 27.5,
+  "cpu_ms_s": 994.9,
+  "script_ms_s": 465.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 44.8,
+  "heapMB": 24.3,
+  "nodes": 1406,
+  "listeners": 386,
+  "longtasks": 66,
+  "lt_max": 95
+ },
+ "P1/low/S3 astra palace": {
+  "n": 84,
+  "fps": 16.7,
+  "p50": 66.6,
+  "p95": 83.4,
+  "p99": 100,
+  "max": 100,
+  "sd": 12.36,
+  "j17": 980.9,
+  "j33": 957.6,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 10.2,
+  "cpu_ms_s": 1007.0,
+  "script_ms_s": 186.4,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 26.2,
+  "heapMB": 28.3,
+  "nodes": 1358,
+  "listeners": 394,
+  "longtasks": 72,
+  "lt_max": 92
+ },
+ "P1/low/S4 combat auto": {
+  "n": 38,
+  "fps": 7.5,
+  "p50": 133.3,
+  "p95": 183.2,
+  "p99": 233.3,
+  "max": 233.3,
+  "sd": 27.82,
+  "j17": 436.1,
+  "j33": 436.1,
+  "upd": 9,
+  "ui": 0.8,
+  "draw": 36,
+  "cpu_ms_s": 977.3,
+  "script_ms_s": 368.6,
+  "layout_ms_s": 10.5,
+  "style_ms_s": 74.4,
+  "heapMB": 27.9,
+  "nodes": 1938,
+  "listeners": 402,
+  "longtasks": 39,
+  "lt_max": 255
+ },
+ "P1/low/S5 tower boss": {
+  "n": 51,
+  "fps": 10.1,
+  "p50": 99.9,
+  "p95": 133.4,
+  "p99": 150,
+  "max": 150,
+  "sd": 21.61,
+  "j17": 592.0,
+  "j33": 592.0,
+  "upd": 1.1,
+  "ui": 1.65,
+  "draw": 13.5,
+  "cpu_ms_s": 1000.4,
+  "script_ms_s": 192.0,
+  "layout_ms_s": 9.6,
+  "style_ms_s": 86.0,
+  "heapMB": 28.3,
+  "nodes": 1809,
+  "listeners": 414,
+  "longtasks": 51,
+  "lt_max": 141,
+  "boss": true
+ },
+ "P1/low/S6 map40": {
+  "n": 103,
+  "fps": 20.5,
+  "p50": 50,
+  "p95": 66.7,
+  "p99": 83.4,
+  "max": 100,
+  "sd": 15.28,
+  "j17": 1169.0,
+  "j33": 838.4,
+  "upd": 0.7,
+  "ui": 0.4,
+  "draw": 9.55,
+  "cpu_ms_s": 990.0,
+  "script_ms_s": 214.7,
+  "layout_ms_s": 1.0,
+  "style_ms_s": 60.2,
+  "heapMB": 31.2,
+  "nodes": 1877,
+  "listeners": 414,
+  "longtasks": 33,
+  "lt_max": 89
+ },
+ "P1/low/S6 map38": {
+  "n": 93,
+  "fps": 18.4,
+  "p50": 50,
+  "p95": 83.2,
+  "p99": 100,
+  "max": 100,
+  "sd": 13.86,
+  "j17": 1077.7,
+  "j33": 948.8,
+  "upd": 1.05,
+  "ui": 0.4,
+  "draw": 10.2,
+  "cpu_ms_s": 986.4,
+  "script_ms_s": 219.8,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 41.6,
+  "heapMB": 34.4,
+  "nodes": 1664,
+  "listeners": 415,
+  "longtasks": 50,
+  "lt_max": 89
+ },
+ "P1/low/S6 map44": {
+  "n": 91,
+  "fps": 18.1,
+  "p50": 50,
+  "p95": 83.4,
+  "p99": 100.1,
+  "max": 100.1,
+  "sd": 14.97,
+  "j17": 1053.3,
+  "j33": 912.8,
+  "upd": 1.05,
+  "ui": 0.5,
+  "draw": 9.7,
+  "cpu_ms_s": 981.0,
+  "script_ms_s": 214.0,
+  "layout_ms_s": 0.3,
+  "style_ms_s": 46.3,
+  "heapMB": 35.0,
+  "nodes": 1776,
+  "listeners": 417,
+  "longtasks": 45,
+  "lt_max": 104
+ },
+ "P1/low/S7 menus open ms [median,max]": {
+  "menu": [
+   246,
+   673
+  ],
+  "gear": [
+   230,
+   695
+  ],
+  "worldmap": [
+   393,
+   430
+  ],
+  "skills": [
+   233,
+   261
+  ],
+  "shop": [
+   171,
+   206
+  ],
+  "quest": [
+   169,
+   252
+  ]
+ },
+ "P1/low/S7 gear window open (idle)": {
+  "n": 60,
+  "fps": 11.8,
+  "p50": 83.3,
+  "p95": 116.6,
+  "p99": 116.7,
+  "max": 116.7,
+  "sd": 12.85,
+  "j17": 698.3,
+  "j33": 698.3,
+  "upd": 2.2,
+  "ui": 0.4,
+  "draw": 64.6,
+  "cpu_ms_s": 989.1,
+  "script_ms_s": 842.7,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 7.6,
+  "heapMB": 40.4,
+  "nodes": 10312,
+  "listeners": 417,
+  "longtasks": 61,
+  "lt_max": 114
+ },
+ "P1/low/census": {
+  "canvas_live": 478,
+  "canvas_MB": 166,
+  "canvas_big": [
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    720,
+    1640,
+    "off"
+   ],
+   [
+    824,
+    1830,
+    "off"
+   ],
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    824,
+    1830,
+    "off"
+   ],
+   [
+    1600,
+    712,
+    "off"
+   ],
+   [
+    1600,
+    994,
+    "off"
+   ],
+   [
+    1536,
+    1011,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    1560,
+    1560,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 572,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14769:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14813:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14834:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14840:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14842:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15036:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15293:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15364:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15440:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15442:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15519:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15611:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15645:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16093:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16188:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16726:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16729:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17066:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17362:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17506:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17990:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18163:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18174:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18335:1",
+    1
+   ]
+  ],
+  "img_src_sets": 178,
+  "img_unique": 167,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1375,
+   "ob": 478268,
+   "i": 1762,
+   "ib": 114292
+  }
+ },
+ "P1/low/errors": [],
+ "P3/full/S1 title": {
+  "n": 40,
+  "fps": 7.9,
+  "p50": 116.8,
+  "p95": 166.7,
+  "p99": 183.3,
+  "max": 183.3,
+  "sd": 20.7,
+  "j17": 463.8,
+  "j33": 463.8,
+  "upd": 0,
+  "ui": 0,
+  "draw": 50.8,
+  "cpu_ms_s": 945.9,
+  "script_ms_s": 458.5,
+  "layout_ms_s": 0.8,
+  "style_ms_s": 5.2,
+  "heapMB": 18.9,
+  "nodes": 1064,
+  "listeners": 285,
+  "longtasks": 41,
+  "lt_max": 158
+ },
+ "P3/full/S2 camp idle": {
+  "n": 64,
+  "fps": 12.7,
+  "p50": 83.2,
+  "p95": 100.1,
+  "p99": 133.4,
+  "max": 133.4,
+  "sd": 16.78,
+  "j17": 747.3,
+  "j33": 747.3,
+  "upd": 1.8,
+  "ui": 0.5,
+  "draw": 47.8,
+  "cpu_ms_s": 1000.1,
+  "script_ms_s": 704.5,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 14.7,
+  "heapMB": 31.9,
+  "nodes": 1794,
+  "listeners": 326,
+  "longtasks": 64,
+  "lt_max": 109
+ },
+ "P3/full/S2 camp walk": {
+  "n": 59,
+  "fps": 11.6,
+  "p50": 83.3,
+  "p95": 116.7,
+  "p99": 183.3,
+  "max": 183.3,
+  "sd": 22.37,
+  "j17": 684.8,
+  "j33": 684.8,
+  "upd": 2.55,
+  "ui": 0.65,
+  "draw": 47.85,
+  "cpu_ms_s": 970.3,
+  "script_ms_s": 668.2,
+  "layout_ms_s": 4.5,
+  "style_ms_s": 36.7,
+  "heapMB": 28.9,
+  "nodes": 2118,
+  "listeners": 328,
+  "longtasks": 59,
+  "lt_max": 170
+ },
+ "P3/full/S3 astra plaza": {
+  "n": 147,
+  "fps": 29.1,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 50.1,
+  "max": 50.1,
+  "sd": 8.3,
+  "j17": 1619.3,
+  "j33": 657.1,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 9.95,
+  "cpu_ms_s": 1000.8,
+  "script_ms_s": 329.5,
+  "layout_ms_s": 0.5,
+  "style_ms_s": 19.9,
+  "heapMB": 32.4,
+  "nodes": 1416,
+  "listeners": 342,
+  "longtasks": 1,
+  "lt_max": 50
+ },
+ "P3/full/S3 astra south": {
+  "n": 117,
+  "fps": 23.3,
+  "p50": 33.5,
+  "p95": 66.7,
+  "p99": 66.7,
+  "max": 66.7,
+  "sd": 10.75,
+  "j17": 1383.3,
+  "j33": 851.2,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 31.8,
+  "cpu_ms_s": 994.0,
+  "script_ms_s": 835.8,
+  "layout_ms_s": 0.4,
+  "style_ms_s": 20.6,
+  "heapMB": 28.9,
+  "nodes": 1637,
+  "listeners": 352,
+  "longtasks": 26,
+  "lt_max": 57
+ },
+ "P3/full/S3 astra gate": {
+  "n": 107,
+  "fps": 21.2,
+  "p50": 50,
+  "p95": 66.7,
+  "p99": 66.7,
+  "max": 83.4,
+  "sd": 11.51,
+  "j17": 1247.8,
+  "j33": 921.3,
+  "upd": 0.3,
+  "ui": 0.4,
+  "draw": 37.1,
+  "cpu_ms_s": 1000.9,
+  "script_ms_s": 874.8,
+  "layout_ms_s": 7.2,
+  "style_ms_s": 42.5,
+  "heapMB": 27.5,
+  "nodes": 1804,
+  "listeners": 362,
+  "longtasks": 31,
+  "lt_max": 68
+ },
+ "P3/full/S3 astra west": {
+  "n": 154,
+  "fps": 30.6,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 50.1,
+  "max": 66.6,
+  "sd": 8.25,
+  "j17": 1625.9,
+  "j33": 412.4,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 25.8,
+  "cpu_ms_s": 994.9,
+  "script_ms_s": 843.7,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 18.5,
+  "heapMB": 26.9,
+  "nodes": 1419,
+  "listeners": 372,
+  "longtasks": 1,
+  "lt_max": 57
+ },
+ "P3/full/S3 astra east": {
+  "n": 146,
+  "fps": 28.9,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 50.1,
+  "max": 50.1,
+  "sd": 6.2,
+  "j17": 1650.8,
+  "j33": 374.7,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 27.5,
+  "cpu_ms_s": 1000.8,
+  "script_ms_s": 849.0,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 19.1,
+  "heapMB": 26.0,
+  "nodes": 1449,
+  "listeners": 382,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/full/S3 astra palace": {
+  "n": 155,
+  "fps": 30.8,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 50.1,
+  "max": 66.7,
+  "sd": 8.63,
+  "j17": 1620.2,
+  "j33": 402.1,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 18.4,
+  "cpu_ms_s": 995.7,
+  "script_ms_s": 621.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 21.4,
+  "heapMB": 26.9,
+  "nodes": 1402,
+  "listeners": 390,
+  "longtasks": 2,
+  "lt_max": 57
+ },
+ "P3/full/S4 combat auto": {
+  "n": 68,
+  "fps": 13.6,
+  "p50": 66.7,
+  "p95": 100,
+  "p99": 100.1,
+  "max": 100.1,
+  "sd": 12.23,
+  "j17": 798.1,
+  "j33": 798.1,
+  "upd": 1.7,
+  "ui": 0.5,
+  "draw": 27,
+  "cpu_ms_s": 996.8,
+  "script_ms_s": 455.2,
+  "layout_ms_s": 3.9,
+  "style_ms_s": 36.1,
+  "heapMB": 40.0,
+  "nodes": 2000,
+  "listeners": 404,
+  "longtasks": 69,
+  "lt_max": 104
+ },
+ "P3/full/S5 tower boss": {
+  "n": 87,
+  "fps": 17.3,
+  "p50": 50.1,
+  "p95": 83.4,
+  "p99": 100,
+  "max": 100,
+  "sd": 14.03,
+  "j17": 1023.1,
+  "j33": 929.1,
+  "upd": 0.6,
+  "ui": 0.4,
+  "draw": 46.6,
+  "cpu_ms_s": 983.4,
+  "script_ms_s": 843.0,
+  "layout_ms_s": 5.8,
+  "style_ms_s": 43.8,
+  "heapMB": 40.9,
+  "nodes": 2174,
+  "listeners": 416,
+  "longtasks": 55,
+  "lt_max": 92,
+  "boss": true
+ },
+ "P3/full/S6 map40": {
+  "n": 217,
+  "fps": 43.1,
+  "p50": 16.7,
+  "p95": 33.4,
+  "p99": 33.4,
+  "max": 50,
+  "sd": 8.29,
+  "j17": 1293.9,
+  "j33": 154.3,
+  "upd": 0.5,
+  "ui": 0.3,
+  "draw": 6.7,
+  "cpu_ms_s": 992.7,
+  "script_ms_s": 343.0,
+  "layout_ms_s": 2.3,
+  "style_ms_s": 34.7,
+  "heapMB": 34.4,
+  "nodes": 2085,
+  "listeners": 416,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/full/S6 map38": {
+  "n": 156,
+  "fps": 31.1,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 66.6,
+  "max": 66.7,
+  "sd": 8.87,
+  "j17": 1681.1,
+  "j33": 296.0,
+  "upd": 0.5,
+  "ui": 0.3,
+  "draw": 7,
+  "cpu_ms_s": 996.6,
+  "script_ms_s": 264.0,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 23.7,
+  "heapMB": 42.0,
+  "nodes": 1689,
+  "listeners": 417,
+  "longtasks": 3,
+  "lt_max": 60
+ },
+ "P3/full/S6 map44": {
+  "n": 118,
+  "fps": 23.4,
+  "p50": 49.9,
+  "p95": 66.6,
+  "p99": 66.7,
+  "max": 83.3,
+  "sd": 10.52,
+  "j17": 1386.0,
+  "j33": 704.7,
+  "upd": 0.5,
+  "ui": 0.3,
+  "draw": 21.7,
+  "cpu_ms_s": 994.6,
+  "script_ms_s": 552.9,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 17.2,
+  "heapMB": 41.3,
+  "nodes": 2117,
+  "listeners": 419,
+  "longtasks": 11,
+  "lt_max": 89
+ },
+ "P3/full/S7 menus open ms [median,max]": {
+  "menu": [
+   124,
+   161
+  ],
+  "gear": [
+   94,
+   295
+  ],
+  "worldmap": [
+   148,
+   162
+  ],
+  "skills": [
+   94,
+   135
+  ],
+  "shop": [
+   91,
+   121
+  ],
+  "quest": [
+   89,
+   98
+  ]
+ },
+ "P3/full/S7 gear window open (idle)": {
+  "n": 80,
+  "fps": 15.9,
+  "p50": 66.6,
+  "p95": 83.3,
+  "p99": 83.4,
+  "max": 83.4,
+  "sd": 9.12,
+  "j17": 938.6,
+  "j33": 938.6,
+  "upd": 1.2,
+  "ui": 0.3,
+  "draw": 39.9,
+  "cpu_ms_s": 998.0,
+  "script_ms_s": 685.3,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 4.0,
+  "heapMB": 51.4,
+  "nodes": 2565,
+  "listeners": 419,
+  "longtasks": 78,
+  "lt_max": 84
+ },
+ "P3/full/census": {
+  "canvas_live": 1230,
+  "canvas_MB": 195,
+  "canvas_big": [
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1600,
+    712,
+    "off"
+   ],
+   [
+    1600,
+    994,
+    "off"
+   ],
+   [
+    1536,
+    1011,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    2340,
+    2340,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 582,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14769:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14813:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14834:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14840:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14842:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15036:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15293:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15364:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15440:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15442:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15519:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15611:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15645:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16093:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16188:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16726:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16729:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17066:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17362:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17506:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17990:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18163:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18174:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18335:1",
+    1
+   ]
+  ],
+  "img_src_sets": 179,
+  "img_unique": 168,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1612,
+   "ob": 544830,
+   "i": 1580,
+   "ib": 102479
+  }
+ },
+ "P3/full/errors": [],
+ "P3/low/S1 title": {
+  "n": 74,
+  "fps": 14.7,
+  "p50": 66.7,
+  "p95": 83.4,
+  "p99": 133.3,
+  "max": 133.3,
+  "sd": 15.29,
+  "j17": 870.5,
+  "j33": 870.5,
+  "upd": 0,
+  "ui": 0,
+  "draw": 26.1,
+  "cpu_ms_s": 896.1,
+  "script_ms_s": 443.7,
+  "layout_ms_s": 1.5,
+  "style_ms_s": 11.5,
+  "heapMB": 18.5,
+  "nodes": 1104,
+  "listeners": 285,
+  "longtasks": 60,
+  "lt_max": 94
+ },
+ "P3/low/S2 camp idle": {
+  "n": 129,
+  "fps": 25.7,
+  "p50": 33.4,
+  "p95": 50.1,
+  "p99": 83.3,
+  "max": 200,
+  "sd": 17.03,
+  "j17": 1496.2,
+  "j33": 636.2,
+  "upd": 1.0,
+  "ui": 0.4,
+  "draw": 26.0,
+  "cpu_ms_s": 968.1,
+  "script_ms_s": 768.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 18.7,
+  "heapMB": 25.6,
+  "nodes": 1519,
+  "listeners": 326,
+  "longtasks": 4,
+  "lt_max": 57
+ },
+ "P3/low/S2 camp walk": {
+  "n": 133,
+  "fps": 26.5,
+  "p50": 33.4,
+  "p95": 50.1,
+  "p99": 66.7,
+  "max": 83.3,
+  "sd": 8.89,
+  "j17": 1558.2,
+  "j33": 708.3,
+  "upd": 1.0,
+  "ui": 0.4,
+  "draw": 28.2,
+  "cpu_ms_s": 969.0,
+  "script_ms_s": 828.2,
+  "layout_ms_s": 1.0,
+  "style_ms_s": 18.8,
+  "heapMB": 29.3,
+  "nodes": 1770,
+  "listeners": 328,
+  "longtasks": 2,
+  "lt_max": 52
+ },
+ "P3/low/S3 astra plaza": {
+  "n": 220,
+  "fps": 43.7,
+  "p50": 16.7,
+  "p95": 33.4,
+  "p99": 33.4,
+  "max": 50,
+  "sd": 8.37,
+  "j17": 1443.7,
+  "j33": 331.3,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 4.3,
+  "cpu_ms_s": 992.7,
+  "script_ms_s": 236.0,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 19.3,
+  "heapMB": 27.3,
+  "nodes": 1290,
+  "listeners": 342,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S3 astra south": {
+  "n": 181,
+  "fps": 36.1,
+  "p50": 33.3,
+  "p95": 33.4,
+  "p99": 50,
+  "max": 66.8,
+  "sd": 9.47,
+  "j17": 1457.8,
+  "j33": 343.7,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 20.2,
+  "cpu_ms_s": 994.3,
+  "script_ms_s": 824.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 19.2,
+  "heapMB": 25.1,
+  "nodes": 1283,
+  "listeners": 352,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S3 astra gate": {
+  "n": 197,
+  "fps": 39.3,
+  "p50": 33.2,
+  "p95": 33.4,
+  "p99": 33.4,
+  "max": 100,
+  "sd": 9.88,
+  "j17": 1410.2,
+  "j33": 379.2,
+  "upd": 0.3,
+  "ui": 0.3,
+  "draw": 14.0,
+  "cpu_ms_s": 998.5,
+  "script_ms_s": 602.5,
+  "layout_ms_s": 12.1,
+  "style_ms_s": 53.5,
+  "heapMB": 30.7,
+  "nodes": 1396,
+  "listeners": 362,
+  "longtasks": 1,
+  "lt_max": 83
+ },
+ "P3/low/S3 astra west": {
+  "n": 266,
+  "fps": 52.9,
+  "p50": 16.7,
+  "p95": 33.3,
+  "p99": 33.4,
+  "max": 50,
+  "sd": 6.06,
+  "j17": 997.2,
+  "j33": 83.1,
+  "upd": 0.2,
+  "ui": 0.3,
+  "draw": 6.9,
+  "cpu_ms_s": 989.6,
+  "script_ms_s": 433.9,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 23.2,
+  "heapMB": 32.3,
+  "nodes": 1307,
+  "listeners": 372,
+  "longtasks": 1,
+  "lt_max": 52
+ },
+ "P3/low/S3 astra east": {
+  "n": 271,
+  "fps": 54.0,
+  "p50": 16.7,
+  "p95": 33.4,
+  "p99": 33.4,
+  "max": 50,
+  "sd": 5.43,
+  "j17": 816.0,
+  "j33": 94.6,
+  "upd": 0.2,
+  "ui": 0.3,
+  "draw": 7.2,
+  "cpu_ms_s": 987.8,
+  "script_ms_s": 443.5,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 21.3,
+  "heapMB": 29.4,
+  "nodes": 1354,
+  "listeners": 382,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S3 astra palace": {
+  "n": 234,
+  "fps": 46.6,
+  "p50": 16.7,
+  "p95": 33.4,
+  "p99": 33.4,
+  "max": 33.4,
+  "sd": 7.54,
+  "j17": 1101.4,
+  "j33": 213.2,
+  "upd": 0.2,
+  "ui": 0.3,
+  "draw": 16.1,
+  "cpu_ms_s": 991.9,
+  "script_ms_s": 801.3,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 19.5,
+  "heapMB": 34.3,
+  "nodes": 1385,
+  "listeners": 392,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S4 combat auto": {
+  "n": 156,
+  "fps": 31.0,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 66.6,
+  "max": 66.7,
+  "sd": 9.74,
+  "j17": 1581.9,
+  "j33": 366.0,
+  "upd": 1.2,
+  "ui": 0.5,
+  "draw": 6.8,
+  "cpu_ms_s": 984.7,
+  "script_ms_s": 297.3,
+  "layout_ms_s": 6.0,
+  "style_ms_s": 51.9,
+  "heapMB": 41.5,
+  "nodes": 1959,
+  "listeners": 404,
+  "longtasks": 2,
+  "lt_max": 64
+ },
+ "P3/low/S5 tower boss": {
+  "n": 145,
+  "fps": 28.9,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 66.7,
+  "max": 66.7,
+  "sd": 10.0,
+  "j17": 1547.4,
+  "j33": 448.9,
+  "upd": 0.4,
+  "ui": 0.4,
+  "draw": 4.2,
+  "cpu_ms_s": 991.3,
+  "script_ms_s": 171.4,
+  "layout_ms_s": 5.7,
+  "style_ms_s": 47.3,
+  "heapMB": 29.8,
+  "nodes": 2012,
+  "listeners": 420,
+  "longtasks": 5,
+  "lt_max": 74,
+  "boss": true
+ },
+ "P3/low/S6 map40": {
+  "n": 286,
+  "fps": 56.8,
+  "p50": 16.7,
+  "p95": 33.3,
+  "p99": 33.4,
+  "max": 33.4,
+  "sd": 3.83,
+  "j17": 724.0,
+  "j33": 11.9,
+  "upd": 0.4,
+  "ui": 0.3,
+  "draw": 2.3,
+  "cpu_ms_s": 913.7,
+  "script_ms_s": 190.2,
+  "layout_ms_s": 2.6,
+  "style_ms_s": 43.3,
+  "heapMB": 41.0,
+  "nodes": 1508,
+  "listeners": 414,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S6 map38": {
+  "n": 300,
+  "fps": 59.8,
+  "p50": 16.7,
+  "p95": 16.7,
+  "p99": 16.8,
+  "max": 33.4,
+  "sd": 0.97,
+  "j17": 867.7,
+  "j33": 11.9,
+  "upd": 0.4,
+  "ui": 0.2,
+  "draw": 1.9,
+  "cpu_ms_s": 941.7,
+  "script_ms_s": 169.7,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 25.3,
+  "heapMB": 35.2,
+  "nodes": 1774,
+  "listeners": 419,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/S6 map44": {
+  "n": 208,
+  "fps": 41.5,
+  "p50": 16.7,
+  "p95": 33.4,
+  "p99": 50,
+  "max": 50,
+  "sd": 8.9,
+  "j17": 1640.1,
+  "j33": 107.0,
+  "upd": 0.4,
+  "ui": 0.3,
+  "draw": 4.2,
+  "cpu_ms_s": 996.1,
+  "script_ms_s": 225.0,
+  "layout_ms_s": 0.1,
+  "style_ms_s": 20.1,
+  "heapMB": 45.1,
+  "nodes": 1682,
+  "listeners": 421,
+  "longtasks": 1,
+  "lt_max": 64
+ },
+ "P3/low/S7 menus open ms [median,max]": {
+  "menu": [
+   97,
+   126
+  ],
+  "gear": [
+   65,
+   245
+  ],
+  "worldmap": [
+   134,
+   176
+  ],
+  "skills": [
+   63,
+   81
+  ],
+  "shop": [
+   60,
+   72
+  ],
+  "quest": [
+   64,
+   88
+  ]
+ },
+ "P3/low/S7 gear window open (idle)": {
+  "n": 151,
+  "fps": 30.1,
+  "p50": 33.3,
+  "p95": 50,
+  "p99": 50.1,
+  "max": 50.1,
+  "sd": 8.47,
+  "j17": 1620.4,
+  "j33": 293.5,
+  "upd": 0.9,
+  "ui": 0.3,
+  "draw": 22.0,
+  "cpu_ms_s": 996.0,
+  "script_ms_s": 760.3,
+  "layout_ms_s": 0.0,
+  "style_ms_s": 7.5,
+  "heapMB": 50.7,
+  "nodes": 2335,
+  "listeners": 421,
+  "longtasks": 0,
+  "lt_max": 0
+ },
+ "P3/low/census": {
+  "canvas_live": 778,
+  "canvas_MB": 167,
+  "canvas_big": [
+   [
+    2040,
+    2040,
+    "off"
+   ],
+   [
+    1600,
+    994,
+    "off"
+   ],
+   [
+    1600,
+    712,
+    "off"
+   ],
+   [
+    1536,
+    1011,
+    "off"
+   ],
+   [
+    1704,
+    1762,
+    "off"
+   ],
+   [
+    1560,
+    1560,
+    "off"
+   ]
+  ],
+  "intervals_live": 102,
+  "intervals_created": 114,
+  "timeouts_created": 583,
+  "interval_sites": [
+   [
+    "400|at http://localhost:8771/:1492:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1783:1",
+    1
+   ],
+   [
+    "20000|at http://localhost:8771/:1784:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:1793:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:2048:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:9424:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:9954:1",
+    1
+   ],
+   [
+    "5000|at http://localhost:8771/:10291:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:10475:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:11104:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11458:17",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11607:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:11742:17",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:11782:14",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:11790:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:11805:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14769:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14813:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:14834:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14840:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:14842:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15036:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:15293:1",
+    1
+   ],
+   [
+    "2500|at http://localhost:8771/:15364:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15440:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:15442:1",
+    1
+   ],
+   [
+    "100|at http://localhost:8771/:15519:1",
+    1
+   ],
+   [
+    "3000|at http://localhost:8771/:15611:1",
+    1
+   ],
+   [
+    "400|at http://localhost:8771/:15645:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16093:1",
+    1
+   ],
+   [
+    "1000|at http://localhost:8771/:16188:1",
+    1
+   ],
+   [
+    "2000|at http://localhost:8771/:16726:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:16729:1",
+    1
+   ],
+   [
+    "4000|at http://localhost:8771/:17066:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:17362:1",
+    1
+   ],
+   [
+    "500|at http://localhost:8771/:17506:1",
+    1
+   ],
+   [
+    "45000|at http://localhost:8771/:17990:1",
+    1
+   ],
+   [
+    "300|at http://localhost:8771/:18163:1",
+    1
+   ],
+   [
+    "700|at http://localhost:8771/:18174:1",
+    1
+   ],
+   [
+    "250|at http://localhost:8771/:18335:1",
+    1
+   ]
+  ],
+  "img_src_sets": 180,
+  "img_unique": 169,
+  "img_dup": [
+   [
+    "hd-rg01.webp",
+    4
+   ],
+   [
+    "Iw0VVUO8c+1JJEhBngAA==",
+    3
+   ],
+   [
+    "NtxqKdvzns7C5a8U9jAp+81Bd1kIG2NI4fzjh6Q+lU4pnqCxdrE5Tqk+Dmke",
+    2
+   ],
+   [
+    "IuyRQaVv3jADZ8wB+O5M3AyhD9IfcI6pfVXYAAA=",
+    2
+   ],
+   [
+    "hd-rg02.webp",
+    2
+   ],
+   [
+    "hd-rg09.webp",
+    2
+   ],
+   [
+    "hd-rg10.webp",
+    2
+   ],
+   [
+    "hd-rg08.webp",
+    2
+   ]
+  ],
+  "ws": {
+   "o": 1649,
+   "ob": 492207,
+   "i": 1529,
+   "ib": 99247
+  }
+ },
+ "P3/low/errors": [],
+ "S8 soak warps": [
+  {
+   "warps": 0,
+   "heapMB": 17.9,
+   "nodes": 1165,
+   "listeners": 300,
+   "canvas": 207,
+   "canvasMB": 88,
+   "intervals": 102,
+   "img_src": 53
+  },
+  {
+   "warps": 5,
+   "heapMB": 22.9,
+   "nodes": 1324,
+   "listeners": 327,
+   "canvas": 319,
+   "canvasMB": 133,
+   "intervals": 102,
+   "img_src": 91
+  },
+  {
+   "warps": 10,
+   "heapMB": 25.6,
+   "nodes": 1488,
+   "listeners": 357,
+   "canvas": 455,
+   "canvasMB": 145,
+   "intervals": 102,
+   "img_src": 123
+  },
+  {
+   "warps": 15,
+   "heapMB": 26.9,
+   "nodes": 1713,
+   "listeners": 385,
+   "canvas": 655,
+   "canvasMB": 158,
+   "intervals": 102,
+   "img_src": 156
+  },
+  {
+   "warps": 20,
+   "heapMB": 27.1,
+   "nodes": 1503,
+   "listeners": 411,
+   "canvas": 415,
+   "canvasMB": 144,
+   "intervals": 102,
+   "img_src": 187
+  },
+  {
+   "warps": 25,
+   "heapMB": 28.6,
+   "nodes": 1737,
+   "listeners": 411,
+   "canvas": 651,
+   "canvasMB": 163,
+   "intervals": 102,
+   "img_src": 192
+  },
+  {
+   "warps": 30,
+   "heapMB": 28.6,
+   "nodes": 1821,
+   "listeners": 411,
+   "canvas": 736,
+   "canvasMB": 156,
+   "intervals": 102,
+   "img_src": 197
+  }
+ ],
+ "S8 soak idle": [
+  {
+   "min": 1,
+   "heapMB": 28.0,
+   "nodes": 1511,
+   "canvas": 423,
+   "canvasMB": 144
+  },
+  {
+   "min": 2,
+   "heapMB": 28.3,
+   "nodes": 1511,
+   "canvas": 423,
+   "canvasMB": 144
+  },
+  {
+   "min": 3,
+   "heapMB": 28.5,
+   "nodes": 1511,
+   "canvas": 423,
+   "canvasMB": 144
+  },
+  {
+   "min": 4,
+   "heapMB": 28.3,
+   "nodes": 1511,
+   "canvas": 423,
+   "canvasMB": 144
+  },
+  {
+   "min": 5,
+   "heapMB": 28.2,
+   "nodes": 1511,
+   "canvas": 423,
+   "canvasMB": 144
+  }
+ ]
+}
