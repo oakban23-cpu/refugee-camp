@@ -545,10 +545,12 @@ const svPath=a=>path.join(SVD,a+'.json');
 function svRead(a){try{return JSON.parse(fs.readFileSync(svPath(a),'utf8'))}catch(e){return null}}
 function svSum(d){let n=0,l=0;try{for(const k in d.chars){n++;l=Math.max(l,d.chars[k].lv|0)}}catch(e){}return{n,l}}
 function accRoute(req,res){const H={'Content-Type':'application/json','Cache-Control':'no-store'};const J=(c,o)=>{res.writeHead(c,H);res.end(JSON.stringify(o))};
-  if(req.method!=='POST')return J(405,{err:'post'});
   const act=req.url.slice(9).split('?')[0],ip=String(req.headers['x-forwarded-for']||req.socket.remoteAddress||'').split(',')[0].trim(),now=Date.now();
+  if(act==='gcfg')return J(200,{cid:GCID});
+  if(req.method!=='POST')return J(405,{err:'post'});
   let body='',big=false;req.on('data',d=>{body+=d;if(body.length>SVMAX+4096){big=true;req.destroy()}});
   req.on('end',()=>{if(big)return;let q={};try{q=JSON.parse(body)||{}}catch(e){return J(400,{err:'json'})}
+    if(act==='google'||act==='glink')return gRoute(act,q,ip,now,J).catch(e=>{console.error('google',e.message);J(500,{err:'g'})});
     const a=accName(String(q.a||'').toLowerCase().trim());if(!a)return J(400,{err:'name'});
     if(act==='register'||act==='login'){
       const fk=ip+'|'+a,f=ACFAIL.get(ip),f2=ACFAIL.get(fk);
@@ -562,10 +564,10 @@ function accRoute(req,res){const H={'Content-Type':'application/json','Cache-Con
         const salt=crypto.randomBytes(12).toString('hex');const A=ACCS[a]={s:salt,h:accHash(q.pin,salt),c:now,l:now,tk:[]};const t=accNewToken(A);accDirty=true;console.log('สร้างบัญชี: '+a);return J(200,{ok:1,a,t,rev:0})}
       const A=ACCS[a];let ok=false;if(A){const h=accHash(q.pin,A.s);ok=h.length===A.h.length&&crypto.timingSafeEqual(Buffer.from(h),Buffer.from(A.h))}
       if(!ok){for(const k of[ip,fk]){const g=ACFAIL.get(k);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACFAIL.set(k,v)}if(ACFAIL.size>5000)ACFAIL.clear();if(A){const g=ACNF.get(a);const v=g&&now-g.t<15*60e3?g:{n:0,t:now};v.n++;v.t=now;ACNF.set(a,v);if(ACNF.size>5000)ACNF.clear()}return J(401,{err:A?'pin':'none'})}
-      ACFAIL.delete(fk);ACNF.delete(a);if(A.lock)return J(403,{err:'lock'});A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(a);return J(200,{ok:1,a,t,rev:sv?sv.rev|0:0})}
+      ACFAIL.delete(fk);ACNF.delete(a);if(A.lock)return J(403,{err:'lock'});A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(a);return J(200,{ok:1,a,t,rev:sv?sv.rev|0:0,g:A.g?1:0})}
     const A=accAuth(a,q.t);if(!A)return J(401,{err:'auth'});
     if(act==='claim'){const sid=crypto.randomBytes(9).toString('hex');A.ss=sid;const sv=svRead(a);A.l=now;accDirty=true;return J(200,{ok:1,sid,rev:sv?sv.rev|0:0,data:sv?sv.data:null,at:sv?sv.at:0})}
-    if(act==='load'){const sv=svRead(a);A.l=now;accDirty=true;return J(200,{ok:1,rev:sv?sv.rev|0:0,data:sv?sv.data:null,at:sv?sv.at:0})}
+    if(act==='load'){const sv=svRead(a);A.l=now;accDirty=true;return J(200,{ok:1,rev:sv?sv.rev|0:0,data:sv?sv.data:null,at:sv?sv.at:0,g:A.g?1:0,np:A.np?1:0})}
     if(act==='save'){const d=q.data;if(!d||typeof d!=='object'||!d.chars||typeof d.chars!=='object')return J(400,{err:'data'});
       {const qs=typeof q.sid==='string'?q.sid.slice(0,40):'';if(qs){if(A.ss&&A.ss!==qs)return J(409,{err:'sess'});if(!A.ss){A.ss=qs;accDirty=true}}}
       const lt=ACLAST.get(a)||0;if(now-lt<1500)return J(429,{err:'fast'});
@@ -574,9 +576,41 @@ function accRoute(req,res){const H={'Content-Type':'application/json','Cache-Con
       try{accInspect(a,A,sv,d,now)}catch(e){console.error('inspect',e.message)}
       const f=svPath(a);try{if(sv&&(!fs.existsSync(f+'.bak')||now-fs.statSync(f+'.bak').mtimeMs>30*60e3))fs.copyFileSync(f,f+'.bak')}catch(e){}
       const tmp=f+'.tmp';fs.writeFile(tmp,js,e=>{if(e)return J(500,{err:'disk'});fs.rename(tmp,f,e2=>{if(e2)return J(500,{err:'disk'});A.l=now;A.sz=js.length;const s=svSum(d);A.n=s.n;A.lv=s.l;accDirty=true;J(200,{ok:1,rev:o.rev})})});return}
+    if(act==='setpin'){if(!A.np)return J(403,{err:'haspin'});if(!accPinOk(q.pin))return J(400,{err:'pin'});if(!accHashSlot())return J(429,{err:'busy',wait:2});A.s=crypto.randomBytes(12).toString('hex');A.h=accHash(q.pin,A.s);delete A.np;accDirty=true;return J(200,{ok:1})}
     if(act==='logout'){const h=tkHash(q.t);A.tk=(A.tk||[]).filter(x=>x!==h);accDirty=true;return J(200,{ok:1})}
     J(404,{err:'act'})})}
 
+/* ===== v656 ล็อกอินด้วย Google (Gmail) · ตรวจ ID token (JWT RS256) ด้วยกุญแจสาธารณะของ Google ในเซิร์ฟเวอร์เอง
+   เก็บแค่รหัสผู้ใช้ Google (sub) ไว้ผูกบัญชี · ไม่เก็บอีเมล/ชื่อ/รูป · เปิดใช้เมื่อตั้ง env GOOGLE_CLIENT_ID ===== */
+const GCID=String(process.env.GOOGLE_CLIENT_ID||'').trim();
+const GSUB=new Map();for(const a in ACCS){const s=ACCS[a]&&ACCS[a].g;if(s)GSUB.set(s,a)}
+let GKEYS={},GKT=0,GKF=null;const GRL=new Map();
+async function gKeys(force){const now=Date.now();if(!force&&now-GKT<6*3600e3&&Object.keys(GKEYS).length)return GKEYS;if(force&&now-GKT<60e3)return GKEYS;
+  if(GKF)return GKF;GKF=(async()=>{try{const jf=process.env.GOOGLE_JWKS_FILE;/* ใช้เฉพาะชุดทดสอบ (กุญแจปลอม) */const j=jf?JSON.parse(fs.readFileSync(jf,'utf8')):await (await fetch('https://www.googleapis.com/oauth2/v3/certs')).json();const o={};for(const k of j.keys||[]){try{o[k.kid]=crypto.createPublicKey({key:k,format:'jwk'})}catch(e){}}if(Object.keys(o).length){GKEYS=o;GKT=Date.now()}}catch(e){console.error('google certs',e.message)}GKF=null;return GKEYS})();return GKF}
+const b64u=s=>Buffer.from(String(s).replace(/-/g,'+').replace(/_/g,'/'),'base64');
+async function gVerify(cred){if(!GCID||typeof cred!=='string'||cred.length>4096)return null;const p=cred.split('.');if(p.length!==3)return null;
+  let h,c;try{h=JSON.parse(b64u(p[0]).toString('utf8'));c=JSON.parse(b64u(p[1]).toString('utf8'))}catch(e){return null}
+  if(h.alg!=='RS256'||typeof h.kid!=='string')return null;let K=(await gKeys())[h.kid];if(!K)K=(await gKeys(true))[h.kid];if(!K)return null;
+  let ok=false;try{ok=crypto.verify('RSA-SHA256',Buffer.from(p[0]+'.'+p[1]),K,b64u(p[2]))}catch(e){}if(!ok)return null;
+  const now=Date.now()/1000;if(c.aud!==GCID||(c.iss!=='accounts.google.com'&&c.iss!=='https://accounts.google.com')||!(c.exp>now-30)||(c.iat&&c.iat>now+300)||typeof c.sub!=='string'||!/^[0-9]{5,40}$/.test(c.sub))return null;
+  return c.sub}
+function gRate(ip){const now=Date.now(),g=GRL.get(ip);const v=g&&now-g.t<60e3?g:{n:0,t:now};v.n++;GRL.set(ip,v);if(GRL.size>5000)GRL.clear();return v.n<=20}
+async function gRoute(act,q,ip,now,J){
+  if(!GCID)return J(503,{err:'off'});if(!gRate(ip))return J(429,{err:'busy',wait:60});
+  const sub=await gVerify(q.cred);if(!sub)return J(401,{err:'gtoken'});
+  if(act==='glink'){const a=accName(String(q.a||'').toLowerCase().trim()),A=a&&accAuth(a,q.t);if(!A)return J(401,{err:'auth'});
+    const o=GSUB.get(sub);if(o&&o!==a)return J(409,{err:'glinked'});if(A.g&&A.g!==sub)GSUB.delete(A.g);A.g=sub;GSUB.set(sub,a);accDirty=true;console.log('ผูก Google: '+a);return J(200,{ok:1,g:1})}
+  /* google: มีบัญชีผูกแล้ว → ล็อกอิน · ยังไม่มี + ส่งชื่อมา → สร้างบัญชีใหม่ผูก Google (ไม่มี PIN) · ไม่ส่งชื่อ → บอกให้ตั้งชื่อ */
+  const ex=GSUB.get(sub);
+  if(ex&&ACCS[ex]){const A=ACCS[ex];if(A.lock)return J(403,{err:'lock'});A.l=now;const t=accNewToken(A);accDirty=true;const sv=svRead(ex);return J(200,{ok:1,a:ex,t,rev:sv?sv.rev|0:0,g:1,np:A.np?1:0})}
+  if(ex)GSUB.delete(sub);
+  if(!q.a)return J(200,{ok:0,err:'new'});
+  const a=accName(String(q.a).toLowerCase().trim());if(!a)return J(400,{err:'name'});if(ACCS[a])return J(409,{err:'taken'});
+  const r=ACREG.get(ip);if(r&&r.n>=8&&now-r.t<3600e3)return J(429,{err:'many'});ACREG.set(ip,{n:(r&&now-r.t<3600e3?r.n:0)+1,t:r&&now-r.t<3600e3?r.t:now});if(ACREG.size>2000)ACREG.clear();
+  if(now-ACREGG.t>3600e3)ACREGG={t:now,n:0};if(++ACREGG.n>150)return J(429,{err:'many'});
+  /* ไม่มี PIN: ใส่แฮชสุ่มที่ไม่มีใครรู้ (ล็อกอินด้วย PIN ไม่ได้จนกว่าผู้ดูแลตั้ง PIN ให้) */
+  const salt=crypto.randomBytes(12).toString('hex');const A=ACCS[a]={s:salt,h:crypto.randomBytes(32).toString('hex'),c:now,l:now,tk:[],g:sub,np:1};GSUB.set(sub,a);
+  const t=accNewToken(A);accDirty=true;console.log('สร้างบัญชี (Google): '+a);return J(200,{ok:1,a,t,rev:0,g:1,np:1})}
 /* ===== ตรวจเซฟหาความผิดปกติ (ติดธงให้ผู้ดูแลตรวจ · บัญชีที่มีธงค้างซื้อของในตลาดไม่ได้) ===== */
 const FL_GOLD0=1e6,FL_GOLDM=2e5,FL_NEWG=3e8,FL_WIN=30*60e3;
 function accFlag(a,A,f){A.fl=A.fl||[];f.at=Date.now();A.fl.unshift(f);if(A.fl.length>30)A.fl.length=30;A.fo=(A.fo|0)+1;accDirty=true;console.log('⚑ ธงบัญชี '+a+': '+f.k+' '+(f.n||f.s)+' '+f.v)}
@@ -596,7 +630,7 @@ function mkGate(c,d,k){if(!d||typeof d!=='object'||!d.acc||typeof d.acc!=='objec
   c.accA=a;if((k==='mkl'||k==='mkb')&&A.mkban)return'ban';if(k==='mkb'&&(A.fo|0)>0)return'flag';return''}
 function svChar(a,mid){const sv=svRead(a);if(!sv||!sv.data||!sv.data.chars)return null;for(const k in sv.data.chars){const ch=sv.data.chars[k];if(ch&&ch.mkid===mid)return{k,ch}}return null}
 function accAdmin(act,q){const a=accName(String(q.a||'').toLowerCase().trim());if(!a||!ACCS[a])return{err:'ไม่พบบัญชี'};const A=ACCS[a];
-  if(act==='accpin'){if(!accPinOk(String(q.pin||'')))return{err:'PIN ต้อง 4-32 ตัว'};A.s=crypto.randomBytes(12).toString('hex');A.h=accHash(String(q.pin),A.s);A.tk=[];accDirty=true;console.log('รีเซ็ต PIN: '+a);return{ok:1}}
+  if(act==='accpin'){if(!accPinOk(String(q.pin||'')))return{err:'PIN ต้อง 4-32 ตัว'};A.s=crypto.randomBytes(12).toString('hex');A.h=accHash(String(q.pin),A.s);delete A.np;A.tk=[];accDirty=true;console.log('รีเซ็ต PIN: '+a);return{ok:1}}
   if(act==='accbak'){const f=svPath(a);try{const b=JSON.parse(fs.readFileSync(f+'.bak','utf8'));const sv=svRead(a);b.rev=(sv?sv.rev|0:0)+1;b.at=Date.now();fs.writeFileSync(f,JSON.stringify(b));const s=svSum(b.data);A.n=s.n;A.lv=s.l;accDirty=true;return{ok:1,n:s.n}}catch(e){return{err:'ไม่มีไฟล์สำรอง'}}}
   if(act==='accmod'){const op=String(q.op||'');
     if(op==='clear'){A.fo=0;(A.fl||[]).forEach(f=>f.ok=1)}
