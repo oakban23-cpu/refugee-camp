@@ -12305,8 +12305,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v656';
+const WNV='v657';
 const WNL=[
+['🗑️','ลบบัญชีได้เอง','กล่องบัญชี (หน้าเลือกตัวละคร) มีปุ่ม "ลบบัญชีนี้" · ยืนยันด้วยชื่อบัญชี + PIN หรือกด Google · ลบตัวละคร ของในตลาด จดหมาย ชื่อ และอันดับ ออกจากเซิร์ฟเวอร์ถาวร'],
 ['🔑','ล็อกอินด้วย Google','กล่องบัญชีมีปุ่ม "ลงชื่อเข้าใช้ด้วย Google" · ครั้งแรกตั้งชื่อบัญชีเกมแล้วสร้างได้เลย ไม่ต้องจำ PIN · มีบัญชีเดิม ล็อกอินชื่อ+PIN ครั้งเดียวแล้วผูก Google ให้ · เกมเก็บแค่รหัสผู้ใช้ Google ไม่เก็บอีเมล'],
 ['🏰','นครอัสตราครบชุด','กำแพงเมืองมีป้อมเหลี่ยมธงฟ้า 4 มุม · หอสังเกตการณ์คู่ขนาบประตูตะวันตก · ซุ้มประตูโค้งหลังคาฟ้าคร่อมถนนใต้ · น้ำพุดาวเล็ก 2 แห่งในลานหิน (ภาพวาดชุดเดียวกับเมือง)'],
 ['⚡','เกมลื่นและเบาเครื่องขึ้น','หน้าเริ่มเกมไม่วาดฉากที่มองไม่เห็นแล้ว (เปิดเกมเย็นเครื่องขึ้น) · ตอนเปิดหน้าต่างเมนู ฉากข้างหลังวาดช้าลงเพื่อประหยัดแบต (หน้าต่างยังลื่นเท่าเดิม) · คืนหน่วยความจำของแมพที่ออกมาแล้ว ราว 50–90 MB · เตรียมเสียงเพลงตอนเครื่องว่าง ไม่ทำให้เฟรมสะดุด'],
@@ -32481,7 +32482,7 @@ function ggLoad(){if(GSIN.sc)return;GSIN.sc=1;const s=document.createElement('sc
 let ggInit=0;
 function ggMount(){const el=document.getElementById('ggb');if(!el||!GSIN.cid)return;if(!GSIN.ok){ggLoad();return}
 try{const G=window.google&&google.accounts&&google.accounts.id;if(!G)return;
-if(ggInit!==GSIN.cid){G.initialize({client_id:GSIN.cid,callback:ggCb,auto_select:false,cancel_on_tap_outside:true,itp_support:true});ggInit=GSIN.cid}
+if(ggInit!==GSIN.cid){G.initialize({client_id:GSIN.cid,callback:r=>ggCb(r),auto_select:false,cancel_on_tap_outside:true,itp_support:true});ggInit=GSIN.cid}
 el.innerHTML='';G.renderButton(el,{type:'standard',theme:'filled_blue',size:'large',shape:'pill',text:ACC?'continue_with':'signin_with',logo_alignment:'left',locale:'th',width:Math.max(200,Math.min(320,(el.clientWidth|0)||280))})}catch(e){}}
 function ggHtml(){if(!GSIN.cid)return'';const m='<p id="ggm" style="font-size:12.5px;margin:4px 0;color:#ffd98a">'+ggEsc(GSIN.msg)+'</p>';
 const S='style="width:100%;box-sizing:border-box;padding:8px;margin-top:6px"';
@@ -32516,11 +32517,38 @@ GSIN.busy=1;let r;try{r=await withTimeout(accApi('setpin',{a:ACC.a,t:ACC.t,pin:p
 if(r.ok){ACC.np=0;accStore();GSIN.msg='ตั้ง PIN แล้ว · ล็อกอินด้วยชื่อ '+ACC.a+' + PIN นี้ได้ด้วย';ggRefresh()}else ggSay(r.err==='haspin'?'บัญชีนี้มี PIN อยู่แล้ว':ggErr(r))}
 document.addEventListener('click',e=>{const t=e.target;if(!t||!t.id)return;if(t.id==='ggc')ggCreate();else if(t.id==='ggx'){GSIN.pend=null;GSIN.msg='';ggRefresh()}else if(t.id==='ggs')ggSetPin()});
 setTimeout(()=>{try{
-const oB=accBox;window.accBox=accBox=function(){const h=oB.apply(this,arguments);if(!h||!GSIN.cid)return h;const i=h.indexOf('</p>');if(i<0)return h;setTimeout(ggMount,0);const H=ACC&&ACC.np?h.replace('ให้ล็อกอินชื่อบัญชีนี้กับ PIN เดิม','ให้กด "ลงชื่อเข้าใช้ด้วย Google" ด้วยบัญชี Google เดิม'):h;return H.slice(0,i+4)+ggHtml()+H.slice(i+4)};
+const oB=accBox;window.accBox=accBox=function(){const h=oB.apply(this,arguments);if(!h||!GSIN.cid)return h;const j=h.indexOf('</p>');if(j<0)return h;setTimeout(ggMount,0);const H=ACC&&ACC.np?h.replace('ให้ล็อกอินชื่อบัญชีนี้กับ PIN เดิม','ให้กด "ลงชื่อเข้าใช้ด้วย Google" ด้วยบัญชี Google เดิม'):h;const i=H.indexOf('</p>');return H.slice(0,i+4)+ggHtml()+H.slice(i+4)};
 const oL=accLogin;window.accLogin=accLogin=async function(){const P=GSIN.pend;const r=await oL.apply(this,arguments);
 if(P&&ACC&&!ACC.g&&Date.now()-P.at<50*60e3){try{const q=await withTimeout(accApi('glink',{a:ACC.a,t:ACC.t,cred:P.cred}),12000);if(q.ok){ACC.g=1;accStore();GSIN.msg='✓ ผูก Google กับบัญชี '+ACC.a+' แล้ว'}else GSIN.msg=ggErr(q)}catch(e){}GSIN.pend=null;ggRefresh()}return r};
 const oA=accApi;window.accApi=accApi=async function(p,o){const r=await oA.apply(this,arguments);try{if(p==='load'&&r&&r.ok&&ACC){const g=r.g?1:0,np=r.np?1:0;if(ACC.g!==g||ACC.np!==np){ACC.g=g;ACC.np=np;accStore();if(document.getElementById('ggw'))ggRefresh()}}}catch(e){}return r};
 ggCfg()}catch(e){console.warn('v656',e)}},60);
+const ADEL={open:0,busy:0,msg:''};
+function adelHtml(){if(!ACC)return'';if(!ADEL.open)return'<div id="adw" style="margin-top:10px;text-align:right"><button id="adop" style="font-size:12px;padding:4px 10px;background:transparent;border:1px solid #8a4a44;color:#f0a49b">🗑️ ลบบัญชีนี้</button></div>';
+const S='style="width:100%;box-sizing:border-box;padding:8px;margin-top:6px"',G=ACC.g&&GSIN.cid;
+return'<div id="adw" style="margin-top:10px;padding:10px;border:1px solid #b3261e;border-radius:8px;background:#2a1412">'+
+'<b style="color:#ffb4a9">ลบบัญชี "'+ggEsc(ACC.a)+'" ถาวร</b><div style="font-size:12.5px;color:#f3d6d0;margin-top:4px">ตัวละครทุกตัว ของที่วางขายในตลาด ยอดขายที่ยังไม่รับ กล่องจดหมาย ชื่อตัวละคร และอันดับ จะถูกลบจากเซิร์ฟเวอร์ <b>กู้คืนไม่ได้</b> · ตัวละครในเครื่องนี้จะหายด้วย</div>'+
+'<input id="adn" maxlength="20" autocapitalize="off" spellcheck="false" placeholder="พิมพ์ชื่อบัญชี '+ggEsc(ACC.a)+' เพื่อยืนยัน" '+S+'>'+
+(ACC.np?'':'<input id="adp" type="password" maxlength="32" autocomplete="current-password" placeholder="รหัส PIN ของบัญชี" '+S+'>')+
+'<div class="row" style="margin-top:8px;gap:6px">'+(ACC.np?'':'<button id="adgo" style="background:#8c1d18;color:#fff">ลบบัญชีถาวร</button>')+'<button id="adx">ยกเลิก</button></div>'+
+(G?'<div style="font-size:12px;color:#f3d6d0;margin-top:8px">'+(ACC.np?'ยืนยันด้วยบัญชี Google ที่ผูกไว้:':'หรือยืนยันด้วย Google แทน PIN:')+'</div><div id="adgb" style="min-height:44px;margin-top:4px"></div>':'')+
+'<p id="adm" style="font-size:12.5px;margin:6px 0 0;color:#ffd98a">'+ggEsc(ADEL.msg)+'</p></div>'}
+function adelRefresh(){const w=document.getElementById('adw');if(w)w.outerHTML=adelHtml();adelMount()}
+function adelMount(){const el=document.getElementById('adgb');if(!el)return;if(!GSIN.ok){ggLoad();return}try{const G=google.accounts.id;if(ggInit!==GSIN.cid){G.initialize({client_id:GSIN.cid,callback:r=>ggCb(r),auto_select:false,cancel_on_tap_outside:true,itp_support:true});ggInit=GSIN.cid}
+el.innerHTML='';G.renderButton(el,{type:'standard',theme:'outline',size:'medium',shape:'pill',text:'continue_with',locale:'th',width:Math.max(200,Math.min(300,(el.clientWidth|0)||260))})}catch(e){}}
+function adelSay(t){ADEL.msg=t;const m=document.getElementById('adm');if(m)m.textContent=t}
+const adelErr=r=>r.err==='badpin'?'รหัส PIN ไม่ถูกต้อง':r.err==='confirm'?'ชื่อบัญชีที่พิมพ์ไม่ตรง':r.err==='gtoken'?'บัญชี Google นี้ไม่ใช่บัญชีที่ผูกไว้':r.err==='needg'?'บัญชีนี้ไม่มี PIN ให้ยืนยันด้วยปุ่ม Google':r.err==='pin'?'ใส่รหัส PIN':r.status===401?'บัญชีหลุด ล็อกอินใหม่แล้วลองอีกครั้ง':r.status===429?'ทำรายการถี่เกินไป รอสักครู่':'ลบไม่สำเร็จ ('+(r.err||r.status)+')';
+async function adelGo(cred){if(!ACC||ADEL.busy||me.cls)return;const n=String((document.getElementById('adn')||{}).value||'').toLowerCase().trim();
+if(n!==ACC.a)return adelSay('พิมพ์ชื่อบัญชี "'+ACC.a+'" ให้ตรงก่อน');const o={a:ACC.a,t:ACC.t,confirm:n};
+if(cred)o.cred=cred;else{const p=String((document.getElementById('adp')||{}).value||'');if(p.length<4)return adelSay('ใส่รหัส PIN ของบัญชี');o.pin=p}
+ADEL.busy=1;adelSay('กำลังลบบัญชี...');let r;try{r=await withTimeout(accApi('delete',o),15000)}catch(e){ADEL.busy=0;return adelSay('ต่อเซิร์ฟเวอร์ไม่ได้ ลองใหม่อีกครั้ง')}ADEL.busy=0;
+if(!r.ok)return adelSay(adelErr(r));
+const a=ACC.a;ACC=null;accStore();accRev=0;saves={v:1,chars:{},last:null};lsWrite(saves);csSel='';delArm=null;ADEL.open=0;ADEL.msg='';GSIN.pend=null;GSIN.msg='';
+try{google.accounts.id.disableAutoSelect()}catch(e){}setSaveState('บันทึกในเบราว์เซอร์นี้');accMsg='🗑️ ลบบัญชี "'+a+'" และข้อมูลทั้งหมดบนเซิร์ฟเวอร์แล้ว ('+(r.n|0)+' ตัวละคร)';intro()}
+document.addEventListener('click',e=>{const t=e.target;if(!t||!t.id)return;if(t.id==='adop'){ADEL.open=1;ADEL.msg='';adelRefresh();setTimeout(()=>{const i=document.getElementById('adn');if(i)try{i.focus({preventScroll:true})}catch(e){}},30)}else if(t.id==='adx'){ADEL.open=0;ADEL.msg='';adelRefresh()}else if(t.id==='adgo')adelGo()});
+setTimeout(()=>{try{
+const oB=accBox;window.accBox=accBox=function(){const h=oB.apply(this,arguments);if(!h||!ACC||me.cls)return h;const i=h.lastIndexOf('</div>');if(i<0)return h;setTimeout(adelMount,0);return h.slice(0,i)+adelHtml()+h.slice(i)};
+const oC=ggCb;window.ggCb=ggCb=function(resp){if(ADEL.open&&ACC&&document.getElementById('adw')){const c=resp&&resp.credential;if(c)adelGo(c);return}return oC.apply(this,arguments)};
+}catch(e){console.warn('v657',e)}},80);
 const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
 function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
 if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}

@@ -578,6 +578,11 @@ function accRoute(req,res){const H={'Content-Type':'application/json','Cache-Con
       const f=svPath(a);try{if(sv&&(!fs.existsSync(f+'.bak')||now-fs.statSync(f+'.bak').mtimeMs>30*60e3))fs.copyFileSync(f,f+'.bak')}catch(e){}
       const tmp=f+'.tmp';fs.writeFile(tmp,js,e=>{if(e)return J(500,{err:'disk'});fs.rename(tmp,f,e2=>{if(e2)return J(500,{err:'disk'});A.l=now;A.sz=js.length;const s=svSum(d);A.n=s.n;A.lv=s.l;accDirty=true;J(200,{ok:1,rev:o.rev})})});return}
     if(act==='setpin'){if(!A.np)return J(403,{err:'haspin'});if(!accPinOk(q.pin))return J(400,{err:'pin'});if(!accHashSlot())return J(429,{err:'busy',wait:2});A.s=crypto.randomBytes(12).toString('hex');A.h=accHash(q.pin,A.s);delete A.np;accDirty=true;return J(200,{ok:1})}
+    if(act==='delete'){if(String(q.confirm||'').toLowerCase().trim()!==a)return J(400,{err:'confirm'});if(!gRate(ip))return J(429,{err:'busy',wait:60});
+      const done=()=>{if(!ACCS[a])return J(404,{err:'gone'});J(200,accWipe(a,'เจ้าของบัญชี'))};
+      if(q.cred&&A.g)return gVerify(q.cred).then(s=>{if(s!==A.g)return J(401,{err:'gtoken'});done()}).catch(e=>J(500,{err:'g'}));
+      if(A.np)return J(400,{err:'needg'});if(!accPinOk(q.pin))return J(400,{err:'pin'});if(!accHashSlot())return J(429,{err:'busy',wait:2});
+      const h=Buffer.from(accHash(q.pin,A.s)),H2=Buffer.from(String(A.h||''));if(h.length!==H2.length||!crypto.timingSafeEqual(h,H2))return J(401,{err:'badpin'});return done()}
     if(act==='logout'){const h=tkHash(q.t);A.tk=(A.tk||[]).filter(x=>x!==h);accDirty=true;return J(200,{ok:1})}
     J(404,{err:'act'})})}
 
@@ -630,6 +635,16 @@ function mkGate(c,d,k){if(!d||typeof d!=='object'||!d.acc||typeof d.acc!=='objec
   if(MK.own[mid]&&MK.own[mid]!==a)return'own';if(!MK.own[mid]){MK.own[mid]=a;mkDirty=true}
   c.accA=a;if((k==='mkl'||k==='mkb')&&A.mkban)return'ban';if(k==='mkb'&&(A.fo|0)>0)return'flag';return''}
 function svChar(a,mid){const sv=svRead(a);if(!sv||!sv.data||!sv.data.chars)return null;for(const k in sv.data.chars){const ch=sv.data.chars[k];if(ch&&ch.mkid===mid)return{k,ch}}return null}
+/* ===== v657 ลบบัญชี (เจ้าของลบเอง / ผู้ดูแลลบ): เซฟ + สำรอง · ของในตลาด/ยอดขายค้าง · กล่องจดหมาย · ชื่อที่จอง · แถวอันดับ · การผูก Google ===== */
+function accWipe(a,why){const A=ACCS[a];if(!A)return{err:'ไม่พบบัญชี'};const sv=svRead(a),mids=new Set(),ids=new Set();let n=0;
+  try{for(const k in sv.data.chars){const ch=sv.data.chars[k];if(!ch)continue;n++;if(typeof ch.mkid==='string'&&ch.mkid)mids.add(ch.mkid);if(ch.nm)ids.add(lbId({n:ch.nm,c:ch.cls}))}}catch(e){}
+  try{for(const m in (MK.own||{}))if(MK.own[m]===a)mids.add(m)}catch(e){}
+  let mk=0;try{const us=new Set([...mids].map(m=>'m:'+m)),b=MK.L.length;MK.L=MK.L.filter(x=>!us.has(x.u));mk=b-MK.L.length;us.forEach(u=>{delete MK.sales[u];delete MK.ret[u]});if(MK.own)mids.forEach(m=>delete MK.own[m]);mkDirty=true}catch(e){}
+  try{mids.forEach(m=>{delete ML.b[m];if(ML.tk)delete ML.tk[m]});mlDirty=true}catch(e){}
+  try{for(const k in NM)if(mids.has(NM[k].mid))delete NM[k];nmDirty=true}catch(e){}
+  try{if(ids.size){for(const k in LB)LB[k]=LB[k].filter(r=>!ids.has(lbId(r)));lbDirty=true}}catch(e){}
+  const f=svPath(a);for(const x of[f,f+'.bak',f+'.tmp'])try{fs.unlinkSync(x)}catch(e){}
+  try{if(A.g)GSUB.delete(A.g)}catch(e){}delete ACCS[a];accDirty=true;console.log('🗑️ ลบบัญชี ('+why+'): '+a+' · ตัวละคร '+n+' · ของในตลาด '+mk);return{ok:1,n,mk}}
 function accAdmin(act,q){const a=accName(String(q.a||'').toLowerCase().trim());if(!a||!ACCS[a])return{err:'ไม่พบบัญชี'};const A=ACCS[a];
   if(act==='accpin'){if(!accPinOk(String(q.pin||'')))return{err:'PIN ต้อง 4-32 ตัว'};A.s=crypto.randomBytes(12).toString('hex');A.h=accHash(String(q.pin),A.s);delete A.np;A.tk=[];accDirty=true;console.log('รีเซ็ต PIN: '+a);return{ok:1}}
   if(act==='accbak'){const f=svPath(a);try{const b=JSON.parse(fs.readFileSync(f+'.bak','utf8'));const sv=svRead(a);b.rev=(sv?sv.rev|0:0)+1;b.at=Date.now();fs.writeFileSync(f,JSON.stringify(b));const s=svSum(b.data);A.n=s.n;A.lv=s.l;accDirty=true;return{ok:1,n:s.n}}catch(e){return{err:'ไม่มีไฟล์สำรอง'}}}
@@ -638,9 +653,11 @@ function accAdmin(act,q){const a=accName(String(q.a||'').toLowerCase().trim());i
     else if(op==='mkban')A.mkban=1;else if(op==='mkunban')delete A.mkban;
     else if(op==='lock'){A.lock=1;A.tk=[]}else if(op==='unlock')delete A.lock;
     else if(op==='lban'){const sv=svRead(a);let n=0;if(sv&&sv.data&&sv.data.chars)for(const k in sv.data.chars){const ch=sv.data.chars[k];if(ch&&ch.nm){lbAdmin('lbban',{n:ch.nm,c:ch.cls,on:1});n++}}A.lban=1;accDirty=true;console.log('แบนอันดับจากบัญชี',a,n);return{ok:1,n}}
+    else if(op==='gunlink'){if(!A.g)return{err:'บัญชีนี้ไม่ได้ผูก Google'};if(A.np)return{err:'บัญชีนี้ไม่มี PIN · ตั้ง PIN ใหม่ให้ก่อน ไม่งั้นจะเข้าบัญชีไม่ได้'};try{GSUB.delete(A.g)}catch(e){}delete A.g}
+    else if(op==='del'){if(String(q.confirm||'')!==a)return{err:'พิมพ์ชื่อบัญชียืนยันไม่ตรง'};return accWipe(a,'ผู้ดูแล')}
     else return{err:'op'};accDirty=true;console.log('จัดการบัญชี',a,op);return{ok:1}}
   return{err:'act'}}
-function accTable(){const L=Object.keys(ACCS).map(a=>{const A=ACCS[a];return{a,c:A.c,l:A.l,n:A.n|0,lv:A.lv|0,sz:A.sz|0,fo:A.fo|0,fl:(A.fl||[]).slice(0,8),mb:A.mkban?1:0,lk:A.lock?1:0,lb:A.lban?1:0}}).sort((x,y)=>(y.fo>0)-(x.fo>0)||y.l-x.l);return{n:L.length,fo:L.filter(r=>r.fo>0).length,rows:L.slice(0,400)}}
+function accTable(){const L=Object.keys(ACCS).map(a=>{const A=ACCS[a];return{a,c:A.c,l:A.l,n:A.n|0,lv:A.lv|0,sz:A.sz|0,fo:A.fo|0,fl:(A.fl||[]).slice(0,8),mb:A.mkban?1:0,lk:A.lock?1:0,lb:A.lban?1:0,g:A.g?1:0,np:A.np?1:0}}).sort((x,y)=>(y.fo>0)-(x.fo>0)||y.l-x.l);return{n:L.length,fo:L.filter(r=>r.fo>0).length,g:L.filter(r=>r.g).length,np:L.filter(r=>r.np).length,rows:L.slice(0,400)}}
 const AFAIL=new Map();let AFALL={t:0,n:0};
 function adminWho(req){const k=String(req.headers['x-admin-key']||''),a=crypto.createHash('sha256').update(k).digest();let who=0;ADMIN_KEYS.forEach((K,i)=>{const b=crypto.createHash('sha256').update(K).digest();if(crypto.timingSafeEqual(a,b))who=i+1});return who}
 function adminOk(req){return ADMIN_KEYS.length>0&&adminWho(req)>0}
