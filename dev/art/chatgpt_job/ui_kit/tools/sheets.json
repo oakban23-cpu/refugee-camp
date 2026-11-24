@@ -1,0 +1,824 @@
+{
+ "ui_01_windows": {
+  "W": 1536,
+  "H": 1024,
+  "items": [
+   {
+    "n": 1,
+    "name": "WINDOW_FRAME",
+    "kind": "9slice",
+    "cell": [
+     0,
+     0,
+     384,
+     341
+    ],
+    "box": [
+     19,
+     25,
+     366,
+     335
+    ],
+    "slice": [
+     93,
+     93,
+     93,
+     93
+    ],
+    "desc": "main window border, thick band, ornate corners, centre empty"
+   },
+   {
+    "n": 2,
+    "name": "WINDOW_BG",
+    "kind": "tile",
+    "cell": [
+     384,
+     0,
+     768,
+     341
+    ],
+    "box": [
+     384,
+     0,
+     768,
+     341
+    ],
+    "slice": null,
+    "desc": "seamless dark texture, fills the whole cell"
+   },
+   {
+    "n": 3,
+    "name": "PANEL_FRAME",
+    "kind": "9slice",
+    "cell": [
+     768,
+     0,
+     1152,
+     341
+    ],
+    "box": [
+     793,
+     35,
+     1128,
+     326
+    ],
+    "slice": [
+     53,
+     53,
+     53,
+     53
+    ],
+    "desc": "thin sub-panel border, thin band, centre empty"
+   },
+   {
+    "n": 4,
+    "name": "HEADER_ORNAMENT",
+    "kind": "fixed",
+    "cell": [
+     1152,
+     0,
+     1536,
+     341
+    ],
+    "box": [
+     1164,
+     144,
+     1524,
+     216
+    ],
+    "slice": null,
+    "desc": "flourish under window title, gem in middle"
+   },
+   {
+    "n": 5,
+    "name": "CLOSE_BUTTON",
+    "kind": "fixed",
+    "cell": [
+     0,
+     341,
+     384,
+     683
+    ],
+    "box": [
+     138,
+     468,
+     247,
+     577
+    ],
+    "slice": null,
+    "desc": "round close button with engraved X shape"
+   },
+   {
+    "n": 6,
+    "name": "ICON_SOCKET",
+    "kind": "fixed",
+    "cell": [
+     384,
+     341,
+     768,
+     683
+    ],
+    "box": [
+     507,
+     453,
+     646,
+     592
+    ],
+    "slice": null,
+    "desc": "round socket ring for a window emblem, centre empty"
+   },
+   {
+    "n": 7,
+    "name": "TAB_ACTIVE",
+    "kind": "9slice_h",
+    "cell": [
+     768,
+     341,
+     1152,
+     683
+    ],
+    "box": [
+     793,
+     476,
+     1128,
+     569
+    ],
+    "slice": [
+     53,
+     0,
+     53,
+     0
+    ],
+    "desc": "selected tab plaque, glowing gold"
+   },
+   {
+    "n": 8,
+    "name": "TAB_IDLE",
+    "kind": "9slice_h",
+    "cell": [
+     1152,
+     341,
+     1536,
+     683
+    ],
+    "box": [
+     1177,
+     476,
+     1512,
+     569
+    ],
+    "slice": [
+     53,
+     0,
+     53,
+     0
+    ],
+    "desc": "unselected tab, dark with faint gold rim"
+   },
+   {
+    "n": 9,
+    "name": "DIVIDER_LINE",
+    "kind": "9slice_h",
+    "cell": [
+     0,
+     683,
+     384,
+     1024
+    ],
+    "box": [
+     12,
+     851,
+     372,
+     876
+    ],
+    "slice": [
+     72,
+     0,
+     72,
+     0
+    ],
+    "desc": "thin line, fades at both ends, tiny diamond in middle"
+   },
+   {
+    "n": 10,
+    "name": "CORNER_ORNAMENT",
+    "kind": "fixed",
+    "cell": [
+     384,
+     683,
+     768,
+     1024
+    ],
+    "box": [
+     507,
+     794,
+     646,
+     933
+    ],
+    "slice": null,
+    "desc": "one TOP-LEFT corner flourish only"
+   },
+   {
+    "n": 11,
+    "name": "CHIP_FRAME",
+    "kind": "9slice_h",
+    "cell": [
+     768,
+     683,
+     1152,
+     1024
+    ],
+    "box": [
+     793,
+     826,
+     1128,
+     900
+    ],
+    "slice": [
+     43,
+     0,
+     43,
+     0
+    ],
+    "desc": "small pill label frame, dark glass, thin gold edge"
+   },
+   {
+    "n": 12,
+    "name": "ITEM_SLOT",
+    "kind": "fixed",
+    "cell": [
+     1152,
+     683,
+     1536,
+     1024
+    ],
+    "box": [
+     1280,
+     799,
+     1409,
+     928
+    ],
+    "slice": null,
+    "desc": "square inventory slot, bronze rim, dark inset"
+   }
+  ]
+ },
+ "ui_02_buttons": {
+  "W": 1536,
+  "H": 1024,
+  "items": [
+   {
+    "n": 1,
+    "name": "BTN_PRIMARY",
+    "kind": "9slice_h",
+    "cell": [
+     0,
+     0,
+     768,
+     256
+    ],
+    "box": [
+     54,
+     63,
+     714,
+     213
+    ],
+    "slice": [
+     112,
+     0,
+     112,
+     0
+    ],
+    "desc": "gold button, normal"
+   },
+   {
+    "n": 2,
+    "name": "BTN_PRIMARY_DOWN",
+    "kind": "9slice_h",
+    "cell": [
+     768,
+     0,
+     1536,
+     256
+    ],
+    "box": [
+     822,
+     63,
+     1482,
+     213
+    ],
+    "slice": [
+     112,
+     0,
+     112,
+     0
+    ],
+    "desc": "gold button, pressed (darker, no outer glow)"
+   },
+   {
+    "n": 3,
+    "name": "BTN_SECONDARY",
+    "kind": "9slice_h",
+    "cell": [
+     0,
+     256,
+     768,
+     512
+    ],
+    "box": [
+     54,
+     319,
+     714,
+     469
+    ],
+    "slice": [
+     112,
+     0,
+     112,
+     0
+    ],
+    "desc": "dark bronze/leather button with gold rim"
+   },
+   {
+    "n": 4,
+    "name": "BTN_SECONDARY_DOWN",
+    "kind": "9slice_h",
+    "cell": [
+     768,
+     256,
+     1536,
+     512
+    ],
+    "box": [
+     822,
+     319,
+     1482,
+     469
+    ],
+    "slice": [
+     112,
+     0,
+     112,
+     0
+    ],
+    "desc": "dark button pressed"
+   },
+   {
+    "n": 5,
+    "name": "BTN_DANGER",
+    "kind": "9slice_h",
+    "cell": [
+     0,
+     512,
+     768,
+     768
+    ],
+    "box": [
+     54,
+     575,
+     714,
+     725
+    ],
+    "slice": [
+     112,
+     0,
+     112,
+     0
+    ],
+    "desc": "crimson button with gold rim"
+   },
+   {
+    "n": 6,
+    "name": "BTN_CONFIRM",
+    "kind": "9slice_h",
+    "cell": [
+     768,
+     512,
+     1536,
+     768
+    ],
+    "box": [
+     822,
+     575,
+     1482,
+     725
+    ],
+    "slice": [
+     112,
+     0,
+     112,
+     0
+    ],
+    "desc": "emerald button with gold rim"
+   },
+   {
+    "n": 7,
+    "name": "BTN_SPECIAL",
+    "kind": "9slice_h",
+    "cell": [
+     0,
+     768,
+     768,
+     1024
+    ],
+    "box": [
+     54,
+     831,
+     714,
+     981
+    ],
+    "slice": [
+     112,
+     0,
+     112,
+     0
+    ],
+    "desc": "violet arcane button with silver-gold rim"
+   },
+   {
+    "n": 8,
+    "name": "BTN_DISABLED",
+    "kind": "9slice_h",
+    "cell": [
+     768,
+     768,
+     1536,
+     1024
+    ],
+    "box": [
+     822,
+     831,
+     1482,
+     981
+    ],
+    "slice": [
+     112,
+     0,
+     112,
+     0
+    ],
+    "desc": "grey weathered stone, no glow"
+   }
+  ]
+ },
+ "ui_03_hud": {
+  "W": 1536,
+  "H": 1024,
+  "items": [
+   {
+    "n": 1,
+    "name": "AVATAR_RING",
+    "kind": "fixed",
+    "cell": [
+     0,
+     0,
+     384,
+     341
+    ],
+    "box": [
+     53,
+     41,
+     331,
+     319
+    ],
+    "slice": null,
+    "desc": "portrait ring, big round hole, small empty plate at bottom"
+   },
+   {
+    "n": 2,
+    "name": "BAR_FRAME",
+    "kind": "9slice_h",
+    "cell": [
+     384,
+     0,
+     768,
+     341
+    ],
+    "box": [
+     396,
+     150,
+     756,
+     210
+    ],
+    "slice": [
+     36,
+     0,
+     36,
+     0
+    ],
+    "desc": "HP/MP bar holder, hollow inside"
+   },
+   {
+    "n": 3,
+    "name": "BAR_FILL_HP",
+    "kind": "tile_h",
+    "cell": [
+     768,
+     0,
+     1152,
+     341
+    ],
+    "box": [
+     780,
+     165,
+     1140,
+     195
+    ],
+    "slice": null,
+    "desc": "glossy crimson strip, seamless left-right"
+   },
+   {
+    "n": 4,
+    "name": "BAR_FILL_MP",
+    "kind": "tile_h",
+    "cell": [
+     1152,
+     0,
+     1536,
+     341
+    ],
+    "box": [
+     1164,
+     165,
+     1524,
+     195
+    ],
+    "slice": null,
+    "desc": "glossy sapphire strip, seamless left-right"
+   },
+   {
+    "n": 5,
+    "name": "BAR_FILL_EXP",
+    "kind": "tile_h",
+    "cell": [
+     0,
+     341,
+     384,
+     683
+    ],
+    "box": [
+     12,
+     507,
+     372,
+     537
+    ],
+    "slice": null,
+    "desc": "glossy gold strip, seamless left-right"
+   },
+   {
+    "n": 6,
+    "name": "SKILL_RING",
+    "kind": "fixed",
+    "cell": [
+     384,
+     341,
+     768,
+     683
+    ],
+    "box": [
+     452,
+     398,
+     700,
+     646
+    ],
+    "slice": null,
+    "desc": "skill button ring, round hole"
+   },
+   {
+    "n": 7,
+    "name": "SKILL_RING_ULT",
+    "kind": "fixed",
+    "cell": [
+     768,
+     341,
+     1152,
+     683
+    ],
+    "box": [
+     821,
+     383,
+     1099,
+     661
+    ],
+    "slice": null,
+    "desc": "ultimate skill ring, more ornate, fiery gold, round hole"
+   },
+   {
+    "n": 8,
+    "name": "ROUND_BUTTON",
+    "kind": "fixed",
+    "cell": [
+     1152,
+     341,
+     1536,
+     683
+    ],
+    "box": [
+     1251,
+     429,
+     1437,
+     615
+    ],
+    "slice": null,
+    "desc": "round menu button disc, dark centre, gold rim"
+   },
+   {
+    "n": 9,
+    "name": "MINIMAP_RING",
+    "kind": "fixed",
+    "cell": [
+     0,
+     683,
+     384,
+     1024
+    ],
+    "box": [
+     48,
+     719,
+     336,
+     1007
+    ],
+    "slice": null,
+    "desc": "minimap ring, round hole, compass ticks, north diamond"
+   },
+   {
+    "n": 10,
+    "name": "JOY_BASE",
+    "kind": "fixed",
+    "cell": [
+     384,
+     683,
+     768,
+     1024
+    ],
+    "box": [
+     445,
+     732,
+     708,
+     995
+    ],
+    "slice": null,
+    "desc": "joystick base ring, translucent dark, 4 notches"
+   },
+   {
+    "n": 11,
+    "name": "JOY_KNOB",
+    "kind": "fixed",
+    "cell": [
+     768,
+     683,
+     1152,
+     1024
+    ],
+    "box": [
+     903,
+     806,
+     1017,
+     920
+    ],
+    "slice": null,
+    "desc": "joystick knob, polished bronze-gold sphere"
+   },
+   {
+    "n": 12,
+    "name": "TRACKER_FRAME",
+    "kind": "9slice",
+    "cell": [
+     1152,
+     683,
+     1536,
+     1024
+    ],
+    "box": [
+     1171,
+     745,
+     1518,
+     981
+    ],
+    "slice": [
+     53,
+     53,
+     53,
+     53
+    ],
+    "desc": "small quest tracker panel border, centre empty"
+   }
+  ]
+ },
+ "ui_04_dialog": {
+  "W": 1536,
+  "H": 1024,
+  "items": [
+   {
+    "n": 1,
+    "name": "DIALOG_FRAME",
+    "kind": "9slice",
+    "cell": [
+     0,
+     0,
+     1536,
+     480
+    ],
+    "box": [
+     24,
+     36,
+     1512,
+     456
+    ],
+    "slice": [
+     132,
+     132,
+     132,
+     132
+    ],
+    "desc": "wide dialogue box border, thick band, centre empty"
+   },
+   {
+    "n": 2,
+    "name": "NAME_PLATE",
+    "kind": "9slice_h",
+    "cell": [
+     0,
+     480,
+     512,
+     1024
+    ],
+    "box": [
+     36,
+     700,
+     476,
+     804
+    ],
+    "slice": [
+     72,
+     0,
+     72,
+     0
+    ],
+    "desc": "speaker name plaque"
+   },
+   {
+    "n": 3,
+    "name": "PORTRAIT_FRAME",
+    "kind": "fixed",
+    "cell": [
+     512,
+     480,
+     1024,
+     1024
+    ],
+    "box": [
+     588,
+     572,
+     948,
+     932
+    ],
+    "slice": null,
+    "desc": "square portrait frame, hole in middle"
+   },
+   {
+    "n": 4,
+    "name": "NEXT_ARROW",
+    "kind": "fixed",
+    "cell": [
+     1024,
+     480,
+     1536,
+     740
+    ],
+    "box": [
+     1220,
+     530,
+     1340,
+     650
+    ],
+    "slice": null,
+    "desc": "small glowing gem arrow pointing DOWN"
+   },
+   {
+    "n": 5,
+    "name": "TOAST_FRAME",
+    "kind": "9slice",
+    "cell": [
+     1024,
+     740,
+     1536,
+     1024
+    ],
+    "box": [
+     1064,
+     800,
+     1496,
+     964
+    ],
+    "slice": [
+     56,
+     44,
+     56,
+     44
+    ],
+    "desc": "small notification frame, centre empty"
+   }
+  ]
+ }
+}
