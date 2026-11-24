@@ -12305,8 +12305,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v660';
+const WNV='v661';
 const WNL=[
+['🎵','เพลงใหม่หน้าเข้าเกมและหน้าเลือกตัวละคร','หน้าปกมีเพลงธีมหลัก «Embers of Home» (ฮาร์ป ฟลุต เครื่องสาย คอรัส) · หน้าเลือกตัวละครมีเพลงรอบกองไฟ «Campfire Gathering» (กีตาร์ โอคาริน่า ซอ เสียงไฟปะทุ) · ปิดได้ที่ปุ่ม 🎵'],
 ['✨','เอฟเฟกต์สกิลแบบภาพวาด','สกิลตอนสู้ทั้ง 5 อาชีพใช้เอฟเฟกต์ภาพวาดเรืองแสง 48 แบบ: แสงฟันดาบ วงเวท ระเบิด ลำแสง สะเก็ดพลัง หมุน ขยาย และจางตามจังหวะสกิล (ปิดได้ที่ตั้งค่าเอฟเฟกต์)'],
 ['🖼️','หน้าต่างและปุ่มภาพวาดทั้งเกม','หน้าต่างทุกหน้ามีกรอบทองฉลุลายดวงอาทิตย์บนพื้นหนัง · ปุ่ม แท็บ ปุ่มปิด การ์ดย่อย · กรอบรูปผู้เล่น หลอดเลือด/มานา วงปุ่มสกิล มินิแมพ จอยสติ๊ก · กล่องบทพูด ป้ายชื่อ กรอบรูปหน้า (ภาพวาดชุดเดียวกันทั้งหมด)'],
 ['🎬','ภาพเนื้อเรื่องมีชีวิต','ภาพประกอบเนื้อเรื่องทั้ง 29 ฉากขยับได้: กล้องลอยช้า ๆ ฉากหน้า-ฉากหลังเลื่อนคนละจังหวะ แสงไฟวูบ ลำแสง หมอก ประกายไฟ ฝุ่นทอง หิ่งห้อย โคมลอย ดาวตก พลุ ฟ้าแลบ ใบไม้-กลีบดอกปลิว · ดูซ้ำได้ในแกลเลอรี 📜 เนื้อเรื่อง'],
@@ -32886,6 +32887,30 @@ vfK('q8snipe',C=>{const{f,t,D,x,y}=C,T=Math.max(.05,D-.3),a=f.a,L=f.len||380,d=L
 vfK('q8cyc',C=>{const{x,y,r}=C;if(C.E('v',0))vfs('WIND_TORNADO',x,y+6,{ay:.95,w:r*.9,w1:r*1.3,l:.8,fo:.6,a:.85})});
 setTimeout(()=>{try{p9Wrap()}catch(e){}},0);
 setTimeout(()=>{try{if(vfsOn())for(let i=0;i<4;i++)vfsI(i)}catch(e){}},2500);
+const BGM={on:1,hold:1,T:{title:{u:'bgm-title.mp3',L:4456421/44100,v:.9},camp:{u:'bgm-camp.mp3',L:2761043/44100,v:.85}},B:{},P:{},F:{},cur:'',n:null,g:null,tapped:0,err:''};
+function bgmLoad(k){if(BGM.B[k]||BGM.P[k]||(BGM.F[k]|0)>=2)return;let a;try{a=acx()}catch(e){return}if(!a)return;
+BGM.P[k]=fetch(BGM.T[k].u).then(r=>{if(!r.ok)throw new Error('http '+r.status);return r.arrayBuffer()})
+.then(b=>new Promise((ok,no)=>{const p=a.decodeAudioData(b,ok,no);if(p&&p.then)p.then(ok,no)}))
+.then(buf=>{BGM.B[k]=buf;BGM.P[k]=null}).catch(e=>{BGM.err=k+': '+(e&&e.message||e);BGM.F[k]=(BGM.F[k]|0)+1;setTimeout(()=>{BGM.P[k]=null},4000)})}
+function bgmTtl(){const T=document.getElementById('ttl');return!!(T&&!T.classList.contains('out'))}
+function bgmWant(){try{if(!BGM.on||muted||!musOn||document.hidden||window.PRO_ON)return'';if(me.cls&&run)return'';return bgmTtl()?'title':'camp'}catch(e){return''}}
+function bgmStart(k){const a=AC,T=BGM.T[k],buf=BGM.B[k];if(!a||!buf)return;const s=a.createBufferSource(),g=a.createGain();s.buffer=buf;s.loop=true;
+const L=Math.min(T.L,buf.duration-.52);s.loopStart=.5;s.loopEnd=.5+L;const t=a.currentTime;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(T.v,t+(k==='title'?1.2:2));
+s.connect(g);g.connect(a.destination);s.start(t+.02,.5);BGM.cur=k;BGM.n=s;BGM.g=g;BGM.t0=t}
+function bgmStop(f){const a=AC,s=BGM.n,g=BGM.g;BGM.n=null;BGM.g=null;BGM.cur='';if(!a||!s)return;
+try{const t=a.currentTime;g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(Math.max(.0001,g.gain.value),t);g.gain.exponentialRampToValueAtTime(.0001,t+f);s.stop(t+f+.05)}catch(e){try{s.stop()}catch(_){}}}
+function bgmTick(){const w=bgmWant();if(w&&AC!==false){bgmLoad(w);if(BGM.B.title)bgmLoad('camp')}
+const a=AC;if(!a||a.state!=='running'||w===BGM.cur)return;if(w&&!BGM.B[w])return;
+bgmStop(w?1.4:(me.cls&&run?2.2:.6));if(w)bgmStart(w)}
+setInterval(()=>{try{bgmTick()}catch(e){BGM.err=String(e)}},250);
+setTimeout(()=>{try{if(bgmWant()){bgmLoad(bgmWant());const a=acx();if(a&&a.state==='suspended')a.resume().catch(()=>{})}}catch(e){}},300);
+function bgmHoldTap(e){if(!BGM.hold||BGM.tapped||!bgmTtl()||!bgmWant())return;let a=null;try{a=AC}catch(_){}
+if(a&&a.state==='running'&&BGM.cur==='title')return;BGM.tapped=1;e.stopImmediatePropagation();e.preventDefault();
+try{unlockAudio()}catch(_){}try{bgmLoad('title')}catch(_){}
+const G=document.querySelector('#ttl .go');if(G){G.textContent='🎵 แตะอีกครั้งเพื่อเข้าเกม';G.classList.add('bgmon')}}
+(function(){const T=document.getElementById('ttl');if(!T)return;T.addEventListener('click',bgmHoldTap,true);
+addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')bgmHoldTap(e)},true);
+const st=document.createElement('style');st.textContent='#ttl .go.bgmon{animation:bgmPulse 1.6s ease-in-out infinite}@keyframes bgmPulse{0%,100%{opacity:.75}50%{opacity:1}}';document.head.appendChild(st)})();
 const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
 function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
 if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}

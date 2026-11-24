@@ -24,7 +24,7 @@ async def main():
                 rep(nm+': เลื่อนนิ้ว/เมาส์ → ชั้นภาพเลื่อนตาม (parallax)',r[1]>r[0]+.3,r)
                 r=await pg.evaluate(OVL)
                 rep(nm+': โลโก้ไม่ทับปุ่มเริ่ม และอยู่ในจอ',r['logo'] and r['logo'][0]>150 and not r['ov'] and r['inView'],r)
-                r=await pg.evaluate("async()=>{document.getElementById('ttl').click();await new Promise(r=>setTimeout(r,1300));const f=TT3.f;await new Promise(r=>setTimeout(r,400));return[!!document.getElementById('ttl'),TT3.ok,TT3.f-f]}")
+                r=await pg.evaluate("async()=>{document.getElementById('ttl').click();await new Promise(r=>setTimeout(r,150));if(document.getElementById('ttl')&&!document.getElementById('ttl').classList.contains('out'))document.getElementById('ttl').click();/* v661: แตะแรกเปิดเพลง */await new Promise(r=>setTimeout(r,1300));const f=TT3.f;await new Promise(r=>setTimeout(r,400));return[!!document.getElementById('ttl'),TT3.ok,TT3.f-f]}")
                 rep(nm+': แตะเริ่มเกมได้ตามเดิม และหยุดวาดหน้าปก',r==[False,0,0],r)
                 rep(nm+': ไม่มี error',errs==[],errs)
                 await pg.close()

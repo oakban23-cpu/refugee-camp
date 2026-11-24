@@ -54,8 +54,8 @@ async def main():
             rep('นครรากลึก: ออกไปแมพไกลคืนสไปรต์ลำต้น · กลับมาสร้างใหม่',r[0]>0 and r[1]==0 and r[2]>0,r)
             await pg.screenshot(path='/tmp/claude-0/-home-claude/552bdb98-0d0b-5b28-ae92-36a473137925/scratchpad/probe/v654_44.jpg',type='jpeg',quality=70)
             # PERF-05: ฟังก์ชันตั้งคิวตอนเครื่องว่าง (จำลอง AC กำลังเล่น)
-            r=await pg.evaluate("""async()=>{const o=window.rkWarm;let n=0;window.rkWarm=rkWarm=function(){n++};let fake=false;try{if(typeof AC==='undefined'||!AC){window.AC={state:'running'};fake=true}}catch(e){}const ms=musOff;window.musOff=musOff=()=>false;const st0=AC.state;try{AC.state='running'}catch(e){}
-               await new Promise(r=>setTimeout(r,5000));window.rkWarm=rkWarm=o;window.musOff=musOff=ms;return[n,PERF.st.rkIdle]}""")
+            r=await pg.evaluate("""async()=>{const o=window.rkWarm;let n=0;window.rkWarm=rkWarm=function(){n++};let fake=false;try{if(typeof AC==='undefined'||!AC){window.AC={state:'running'};fake=true}}catch(e){}const ms=musOff;window.musOff=musOff=()=>false;const st0=AC.state;let dp=false;try{if(AC.state!=='running'){Object.defineProperty(AC,'state',{get:()=>'running',configurable:true});dp=true}}catch(e){}
+               await new Promise(r=>setTimeout(r,5000));window.rkWarm=rkWarm=o;window.musOff=musOff=ms;if(dp)try{delete AC.state}catch(e){}return[n,PERF.st.rkIdle]}""")
             rep('เตรียมเสียง: ทำผ่านคิวตอนเครื่องว่าง',r[1]>=1,r)
             rep('ไม่มี error',errs==[],errs)
     finally:p.terminate()
