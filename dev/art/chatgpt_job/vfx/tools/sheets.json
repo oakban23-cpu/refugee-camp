@@ -1,0 +1,586 @@
+{
+ "vfx_01_steel": [
+  {
+   "n": 1,
+   "name": "SLASH_ARC",
+   "desc": "crescent sword slash, white-hot core, orange-red edges",
+   "shape": "h",
+   "cell": [
+    0,
+    0,
+    384,
+    341
+   ]
+  },
+  {
+   "n": 2,
+   "name": "SLASH_SPIN",
+   "desc": "almost full 300\u00b0 spinning blade ring, gold-white",
+   "shape": "c",
+   "cell": [
+    384,
+    0,
+    768,
+    341
+   ]
+  },
+  {
+   "n": 3,
+   "name": "CROSS_SLASH",
+   "desc": "X-shaped double slash, crimson with white core",
+   "shape": "c",
+   "cell": [
+    768,
+    0,
+    1152,
+    341
+   ]
+  },
+  {
+   "n": 4,
+   "name": "THRUST_STREAK",
+   "desc": "long horizontal piercing streak, sharp tip at the right",
+   "shape": "h",
+   "cell": [
+    1152,
+    0,
+    1536,
+    341
+   ]
+  },
+  {
+   "n": 5,
+   "name": "IMPACT_BURST",
+   "desc": "star-shaped impact flash with long spikes, white centre, orange",
+   "shape": "c",
+   "cell": [
+    0,
+    341,
+    384,
+    683
+   ]
+  },
+  {
+   "n": 6,
+   "name": "SHOCKWAVE_RING",
+   "desc": "thin glowing shockwave ring with dust sparks, flat circle",
+   "shape": "c",
+   "cell": [
+    384,
+    341,
+    768,
+    683
+   ]
+  },
+  {
+   "n": 7,
+   "name": "GROUND_CRACKS",
+   "desc": "glowing lava-red cracks radiating from the centre",
+   "shape": "c",
+   "cell": [
+    768,
+    341,
+    1152,
+    683
+   ]
+  },
+  {
+   "n": 8,
+   "name": "DEMON_FLAME",
+   "desc": "upward crimson demonic flame tongues (aura behind a hero)",
+   "shape": "v",
+   "cell": [
+    1152,
+    341,
+    1536,
+    683
+   ]
+  },
+  {
+   "n": 9,
+   "name": "SPARK_BURST",
+   "desc": "many small hot sparks flying outward",
+   "shape": "c",
+   "cell": [
+    0,
+    683,
+    384,
+    1024
+   ]
+  },
+  {
+   "n": 10,
+   "name": "SHIELD_DOME",
+   "desc": "glowing hexagon energy shield bubble, gold-blue, mostly hollow",
+   "shape": "c",
+   "cell": [
+    384,
+    683,
+    768,
+    1024
+   ]
+  },
+  {
+   "n": 11,
+   "name": "DASH_TRAIL",
+   "desc": "speed streak lines, horizontal, fading to the left",
+   "shape": "h",
+   "cell": [
+    768,
+    683,
+    1152,
+    1024
+   ]
+  },
+  {
+   "n": 12,
+   "name": "CLAW_MARKS",
+   "desc": "three parallel glowing red claw scratches, diagonal",
+   "shape": "c",
+   "cell": [
+    1152,
+    683,
+    1536,
+    1024
+   ]
+  }
+ ],
+ "vfx_02_arcane": [
+  {
+   "n": 1,
+   "name": "FIRE_EXPLOSION",
+   "desc": "big fiery explosion burst, orange-yellow core",
+   "shape": "c",
+   "cell": [
+    0,
+    0,
+    384,
+    341
+   ]
+  },
+  {
+   "n": 2,
+   "name": "FIREBALL",
+   "desc": "fireball flying right with a flame tail to the left",
+   "shape": "h",
+   "cell": [
+    384,
+    0,
+    768,
+    341
+   ]
+  },
+  {
+   "n": 3,
+   "name": "FLAME_PILLAR",
+   "desc": "tall vertical pillar of fire",
+   "shape": "v",
+   "cell": [
+    768,
+    0,
+    1152,
+    341
+   ]
+  },
+  {
+   "n": 4,
+   "name": "ICE_SHATTER",
+   "desc": "burst of sharp ice crystals flying outward, cyan-white",
+   "shape": "c",
+   "cell": [
+    1152,
+    0,
+    1536,
+    341
+   ]
+  },
+  {
+   "n": 5,
+   "name": "FROST_NOVA",
+   "desc": "ring of frost and snowflake sparkles, flat circle",
+   "shape": "c",
+   "cell": [
+    0,
+    341,
+    384,
+    683
+   ]
+  },
+  {
+   "n": 6,
+   "name": "ICE_SPEAR",
+   "desc": "long ice spear pointing right, glowing cyan",
+   "shape": "h",
+   "cell": [
+    384,
+    341,
+    768,
+    683
+   ]
+  },
+  {
+   "n": 7,
+   "name": "LIGHTNING_BOLT",
+   "desc": "vertical jagged lightning bolt from top to bottom, blue-white",
+   "shape": "v",
+   "cell": [
+    768,
+    341,
+    1152,
+    683
+   ]
+  },
+  {
+   "n": 8,
+   "name": "LIGHTNING_ORB",
+   "desc": "crackling ball of electricity",
+   "shape": "c",
+   "cell": [
+    1152,
+    341,
+    1536,
+    683
+   ]
+  },
+  {
+   "n": 9,
+   "name": "METEOR",
+   "desc": "meteor falling diagonally down-left with a long fire trail",
+   "shape": "c",
+   "cell": [
+    0,
+    683,
+    384,
+    1024
+   ]
+  },
+  {
+   "n": 10,
+   "name": "FIRE_CIRCLE",
+   "desc": "orange runic magic circle, flat, seen from the front",
+   "shape": "c",
+   "cell": [
+    384,
+    683,
+    768,
+    1024
+   ]
+  },
+  {
+   "n": 11,
+   "name": "ARCANE_CIRCLE",
+   "desc": "violet runic magic circle with star pattern, flat",
+   "shape": "c",
+   "cell": [
+    768,
+    683,
+    1152,
+    1024
+   ]
+  },
+  {
+   "n": 12,
+   "name": "VOID_VORTEX",
+   "desc": "purple swirling vortex with bright rim and dark core",
+   "shape": "c",
+   "cell": [
+    1152,
+    683,
+    1536,
+    1024
+   ]
+  }
+ ],
+ "vfx_03_light_shadow": [
+  {
+   "n": 1,
+   "name": "HOLY_CIRCLE",
+   "desc": "golden holy rune circle with cross and sun motifs, flat",
+   "shape": "c",
+   "cell": [
+    0,
+    0,
+    384,
+    341
+   ]
+  },
+  {
+   "n": 2,
+   "name": "LIGHT_PILLAR",
+   "desc": "vertical beam of holy light from the sky",
+   "shape": "v",
+   "cell": [
+    384,
+    0,
+    768,
+    341
+   ]
+  },
+  {
+   "n": 3,
+   "name": "HEAL_SPARKLES",
+   "desc": "rising green-gold sparkles and small light crosses",
+   "shape": "v",
+   "cell": [
+    768,
+    0,
+    1152,
+    341
+   ]
+  },
+  {
+   "n": 4,
+   "name": "HALO_RAYS",
+   "desc": "golden halo ring with radiant rays",
+   "shape": "c",
+   "cell": [
+    1152,
+    0,
+    1536,
+    341
+   ]
+  },
+  {
+   "n": 5,
+   "name": "ANGEL_WINGS",
+   "desc": "pair of radiant golden angel wings made of light, spread",
+   "shape": "w",
+   "cell": [
+    0,
+    341,
+    384,
+    683
+   ]
+  },
+  {
+   "n": 6,
+   "name": "LIGHT_SWORD",
+   "desc": "giant sword made of light pointing down",
+   "shape": "v",
+   "cell": [
+    384,
+    341,
+    768,
+    683
+   ]
+  },
+  {
+   "n": 7,
+   "name": "SHADOW_SLASH",
+   "desc": "violet-black crescent slash with purple glow edges",
+   "shape": "h",
+   "cell": [
+    768,
+    341,
+    1152,
+    683
+   ]
+  },
+  {
+   "n": 8,
+   "name": "SHADOW_WISPS",
+   "desc": "smoky purple shadow wisps with glowing edges",
+   "shape": "c",
+   "cell": [
+    1152,
+    341,
+    1536,
+    683
+   ]
+  },
+  {
+   "n": 9,
+   "name": "POISON_SPLASH",
+   "desc": "toxic green splash burst with droplets",
+   "shape": "c",
+   "cell": [
+    0,
+    683,
+    384,
+    1024
+   ]
+  },
+  {
+   "n": 10,
+   "name": "CURSE_SIGIL",
+   "desc": "purple curse rune circle with a skull motif, flat",
+   "shape": "c",
+   "cell": [
+    384,
+    683,
+    768,
+    1024
+   ]
+  },
+  {
+   "n": 11,
+   "name": "MOON_CRESCENT",
+   "desc": "huge silver-violet crescent moon blade",
+   "shape": "c",
+   "cell": [
+    768,
+    683,
+    1152,
+    1024
+   ]
+  },
+  {
+   "n": 12,
+   "name": "SOUL_WISP",
+   "desc": "ghostly blue spirit flame wisp with tail",
+   "shape": "v",
+   "cell": [
+    1152,
+    683,
+    1536,
+    1024
+   ]
+  }
+ ],
+ "vfx_04_wind_ult": [
+  {
+   "n": 1,
+   "name": "WIND_ARROW",
+   "desc": "arrow of green-white wind flying right with a swirl trail",
+   "shape": "h",
+   "cell": [
+    0,
+    0,
+    384,
+    341
+   ]
+  },
+  {
+   "n": 2,
+   "name": "ARROW_RAIN",
+   "desc": "many glowing arrow streaks falling down",
+   "shape": "v",
+   "cell": [
+    384,
+    0,
+    768,
+    341
+   ]
+  },
+  {
+   "n": 3,
+   "name": "WIND_TORNADO",
+   "desc": "small tornado of green-white wind with leaves",
+   "shape": "v",
+   "cell": [
+    768,
+    0,
+    1152,
+    341
+   ]
+  },
+  {
+   "n": 4,
+   "name": "STAR_ARROW",
+   "desc": "blue star-comet arrow flying right",
+   "shape": "h",
+   "cell": [
+    1152,
+    0,
+    1536,
+    341
+   ]
+  },
+  {
+   "n": 5,
+   "name": "PIERCE_BEAM",
+   "desc": "long straight horizontal energy beam, white core, blue-green edges",
+   "shape": "h",
+   "cell": [
+    0,
+    341,
+    384,
+    683
+   ]
+  },
+  {
+   "n": 6,
+   "name": "LEAF_STORM",
+   "desc": "ring of glowing leaves spinning",
+   "shape": "c",
+   "cell": [
+    384,
+    341,
+    768,
+    683
+   ]
+  },
+  {
+   "n": 7,
+   "name": "ULT_SIGIL",
+   "desc": "large complex gold-white ultimate magic sigil, flat",
+   "shape": "c",
+   "cell": [
+    768,
+    341,
+    1152,
+    683
+   ]
+  },
+  {
+   "n": 8,
+   "name": "MEGA_BLAST",
+   "desc": "huge white-gold energy explosion",
+   "shape": "c",
+   "cell": [
+    1152,
+    341,
+    1536,
+    683
+   ]
+  },
+  {
+   "n": 9,
+   "name": "GOD_RAYS",
+   "desc": "fan of light rays shining downward",
+   "shape": "w",
+   "cell": [
+    0,
+    683,
+    384,
+    1024
+   ]
+  },
+  {
+   "n": 10,
+   "name": "STAR_FLARE",
+   "desc": "4-point star flare sparkle with lens glints",
+   "shape": "c",
+   "cell": [
+    384,
+    683,
+    768,
+    1024
+   ]
+  },
+  {
+   "n": 11,
+   "name": "GLOW_ORB",
+   "desc": "soft round glowing energy orb, white-gold",
+   "shape": "c",
+   "cell": [
+    768,
+    683,
+    1152,
+    1024
+   ]
+  },
+  {
+   "n": 12,
+   "name": "ENERGY_SPIRAL",
+   "desc": "spiral of energy ribbons, cyan-violet",
+   "shape": "c",
+   "cell": [
+    1152,
+    683,
+    1536,
+    1024
+   ]
+  }
+ ]
+}
