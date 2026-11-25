@@ -73,6 +73,12 @@ def pluck(m, vel=0.8, dur=None, kind='harp'):
         T60 = float(np.clip(5.0 * (220 / f) ** 0.5, 1.4, 7)); K = 18; pw = 1.1; pos = 0.2; B = 0.00012; nz = 0.012
     elif kind == 'guitar':
         T60 = float(np.clip(3.4 * (196 / f) ** 0.45, 1.0, 5)); K = 18; pw = 1.45; pos = 0.13; B = 0.00008; nz = 0.02
+    elif kind == 'pizz':
+        T60 = float(np.clip(0.9 * (196 / f) ** 0.3, 0.35, 1.2)); K = 14; pw = 1.5; pos = 0.18; B = 0.00005; nz = 0.015
+    elif kind == 'oud':
+        T60 = float(np.clip(2.2 * (196 / f) ** 0.4, 0.8, 3.5)); K = 22; pw = 1.0; pos = 0.08; B = 0.00012; nz = 0.03
+    elif kind == 'banjo':
+        T60 = float(np.clip(1.3 * (196 / f) ** 0.4, 0.5, 2.0)); K = 22; pw = 0.95; pos = 0.06; B = 0.0001; nz = 0.035
     elif kind == 'piano':
         T60 = float(np.clip(7.0 * (262 / f) ** 0.6, 1.5, 12)); K = 22; pw = 1.1; pos = 0.12; B = 0.0004; nz = 0.008
     L = T60 if dur is None else min(T60, dur + 0.35)
@@ -123,6 +129,8 @@ def tab_for(kind, f):
         amps = [(1 / k) * np.exp(-k * f / 5200) for k in range(1, min(40, kmax) + 1)]
     elif kind == 'string_soft':
         amps = [(1 / k ** 1.15) * np.exp(-k * f / 3000) for k in range(1, min(30, kmax) + 1)]
+    elif kind == 'brass':
+        amps = [(1 / k ** 0.7) * np.exp(-k * f / 2300) for k in range(1, min(30, kmax) + 1)]
     elif kind == 'horn':
         amps = [(1 / k ** 0.9) * np.exp(-k * f / 1400) for k in range(1, min(24, kmax) + 1)]
     elif kind == 'choir':

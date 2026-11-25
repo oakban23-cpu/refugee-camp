@@ -44,7 +44,7 @@ async def main():
             await pg.evaluate("()=>setMute(true)");ok1=await wait(pg,"()=>BGM.cur===''",3000);await pg.evaluate("()=>setMute(false)")
             rep('ปุ่มเสียงรวม (ปิดเสียง) หยุดเพลงด้วย',ok1)
             # เข้าเกม → เพลงนี้เบาลง เพลงแมพเดิมรับต่อ
-            await pg.evaluate(SETUP,['melee','Bgm',10]);ok=await wait(pg,"()=>BGM.cur===''&&!!(typeof MZ!=='undefined'&&MZ.key)",10000);s=await pg.evaluate(ST)
+            await pg.evaluate(SETUP,['melee','Bgm',10]);ok=await wait(pg,"()=>BGM.cur.indexOf('m_')===0||(BGM.cur===''&&!!(typeof MZ!=='undefined'&&MZ.key))",15000)  # v663: เพลงแมพไฟล์ใหม่รับต่อ;s=await pg.evaluate(ST)
             rep('เข้าเกมแล้ว ส่งต่อให้เพลงแมพ',ok,s)
             # เบราว์เซอร์ที่อนุญาตเสียงอยู่แล้ว: เล่นตั้งแต่หน้าปกโดยไม่ต้องแตะ และแตะครั้งเดียวเข้าเกม
             b2=await pw.chromium.launch(args=['--autoplay-policy=no-user-gesture-required'])
