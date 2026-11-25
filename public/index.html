@@ -1566,7 +1566,7 @@ ub:()=>{sChord([65,78,98,104],1.8,.06,'sawtooth',0,.3,600);sN(1.6,.3,{ft:'lowpas
 let SKK=0;
 function skSfx(k){if(muted)return;k=k===undefined?SKK:k;const c=SKS[me.cls];if(!c)return sfx('skill');let id=k;
 if(k===2)id=me.cls2?(BR2()?'ub':'u2'):'u';else if(k===4)id=BR2()?'s4b':'s4';
-const f=c[id]||c[k];if(!f)return sfx(k===2?'ult':'skill');SVOL=.6*(SKB[me.cls+'.'+(c[id]?id:k)]||1);try{abus();f()}catch(e){}SVOL=1}
+const f=c[id]||c[k];if(!f)return sfx(k===2?'ult':'skill');SVOL=.6*(VSB&&VSB.ok&&VSB.on?VSB.cast:1)*(SKB[me.cls+'.'+(c[id]?id:k)]||1);try{abus();f()}catch(e){}SVOL=1}
 let DES=[],DESK=-1;
 function buildDes(){if(curMap!==8){DES=[];DESK=-1;return}if(DESK===8)return;DESK=8;DES=[];const M=MAPS[8],R=rng(1717);
 const ok=(x,y,pad)=>Math.hypot(x-M.sx,y-M.sy)>M.sr+(pad||40)&&M.gates.every(G=>Math.hypot(x-G.x,y-G.y)>110)&&Math.hypot(x-M.boss.x,y-M.boss.y)>(pad||40)+230;
@@ -12305,8 +12305,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v661';
+const WNV='v662';
 const WNL=[
+['🔊','เสียงสกิลชุดใหม่','เสียงฟัน ระเบิดไฟ น้ำแข็งแตก ฟ้าผ่า วงเวท แสงศักดิ์สิทธิ์ เงา ลูกธนู พายุ และท่าไม้ตาย ทำใหม่ 46 เสียง ดังพร้อมภาพเอฟเฟกต์ ซ้าย-ขวาตามตำแหน่ง · เสียงโจมตีปกติก็ใหม่หมด'],
 ['🎵','เพลงใหม่หน้าเข้าเกมและหน้าเลือกตัวละคร','หน้าปกมีเพลงธีมหลัก «Embers of Home» (ฮาร์ป ฟลุต เครื่องสาย คอรัส) · หน้าเลือกตัวละครมีเพลงรอบกองไฟ «Campfire Gathering» (กีตาร์ โอคาริน่า ซอ เสียงไฟปะทุ) · ปิดได้ที่ปุ่ม 🎵'],
 ['✨','เอฟเฟกต์สกิลแบบภาพวาด','สกิลตอนสู้ทั้ง 5 อาชีพใช้เอฟเฟกต์ภาพวาดเรืองแสง 48 แบบ: แสงฟันดาบ วงเวท ระเบิด ลำแสง สะเก็ดพลัง หมุน ขยาย และจางตามจังหวะสกิล (ปิดได้ที่ตั้งค่าเอฟเฟกต์)'],
 ['🖼️','หน้าต่างและปุ่มภาพวาดทั้งเกม','หน้าต่างทุกหน้ามีกรอบทองฉลุลายดวงอาทิตย์บนพื้นหนัง · ปุ่ม แท็บ ปุ่มปิด การ์ดย่อย · กรอบรูปผู้เล่น หลอดเลือด/มานา วงปุ่มสกิล มินิแมพ จอยสติ๊ก · กล่องบทพูด ป้ายชื่อ กรอบรูปหน้า (ภาพวาดชุดเดียวกันทั้งหมด)'],
@@ -32896,7 +32897,7 @@ function bgmTtl(){const T=document.getElementById('ttl');return!!(T&&!T.classLis
 function bgmWant(){try{if(!BGM.on||muted||!musOn||document.hidden||window.PRO_ON)return'';if(me.cls&&run)return'';return bgmTtl()?'title':'camp'}catch(e){return''}}
 function bgmStart(k){const a=AC,T=BGM.T[k],buf=BGM.B[k];if(!a||!buf)return;const s=a.createBufferSource(),g=a.createGain();s.buffer=buf;s.loop=true;
 const L=Math.min(T.L,buf.duration-.52);s.loopStart=.5;s.loopEnd=.5+L;const t=a.currentTime;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(T.v,t+(k==='title'?1.2:2));
-s.connect(g);g.connect(a.destination);s.start(t+.02,.5);BGM.cur=k;BGM.n=s;BGM.g=g;BGM.t0=t}
+s.connect(g);let bo=a.destination;try{const cb=cfgBus(a);if(cb&&cb.m)bo=cb.m}catch(e){}g.connect(bo);s.start(t+.02,.5);BGM.cur=k;BGM.n=s;BGM.g=g;BGM.t0=t}
 function bgmStop(f){const a=AC,s=BGM.n,g=BGM.g;BGM.n=null;BGM.g=null;BGM.cur='';if(!a||!s)return;
 try{const t=a.currentTime;g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(Math.max(.0001,g.gain.value),t);g.gain.exponentialRampToValueAtTime(.0001,t+f);s.stop(t+f+.05)}catch(e){try{s.stop()}catch(_){}}}
 function bgmTick(){const w=bgmWant();if(w&&AC!==false){bgmLoad(w);if(BGM.B.title)bgmLoad('camp')}
@@ -32911,6 +32912,37 @@ const G=document.querySelector('#ttl .go');if(G){G.textContent='🎵 แตะ�
 (function(){const T=document.getElementById('ttl');if(!T)return;T.addEventListener('click',bgmHoldTap,true);
 addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')bgmHoldTap(e)},true);
 const st=document.createElement('style');st.textContent='#ttl .go.bgmon{animation:bgmPulse 1.6s ease-in-out infinite}@keyframes bgmPulse{0%,100%{opacity:.75}50%{opacity:1}}';document.head.appendChild(st)})();
+var VSB={on:1,ok:0,ld:0,buf:null,T:{"swing0":[0.12,0.5463,1.12],"swing1":[0.7863,0.5643,0.93],"swing2":[1.4706,0.5721,0.94],"hit0":[2.1627,0.498,1.4],"hit1":[2.7807,0.5,1.32],"hit2":[3.4007,0.5,1.38],"crit0":[4.0207,1.0,0.85],"crit1":[5.1407,1.0,0.83],"spin":[6.2607,0.9856,0.91],"impact":[7.3663,1.5545,1.14],"cracks":[9.0408,1.3739,0.69],"shock":[10.5347,1.3229,0.52],"roar":[11.9777,1.9,0.47],"dome":[13.9977,2.7543,0.65],"claw":[16.872,0.6,0.72],"fire_boom":[17.592,2.0973,1.19],"fire_fly":[19.8093,1.1,0.61],"flame":[21.0293,2.0802,0.82],"ice":[23.2295,1.0088,1.4],"frost":[24.3583,2.182,1.4],"zap0":[26.6603,2.3388,1.33],"zap1":[29.1191,2.3729,1.23],"orb":[31.6121,0.4108,1.4],"arcane":[32.1429,2.5992,0.66],"void":[34.862,2.6,0.72],"meteor":[37.582,1.1,1.07],"mshot0":[38.802,0.6351,0.5],"mshot1":[39.5571,0.6264,0.52],"holy":[40.3035,3.1476,0.55],"heal":[43.5711,2.4,0.68],"smite":[46.0911,2.6,0.84],"godray":[48.8111,3.3444,0.81],"wings":[52.2755,2.9279,0.76],"shadow0":[55.3234,0.85,0.63],"shadow1":[56.2934,0.85,0.6],"curse":[57.2634,2.0,0.99],"moon":[59.3834,2.6751,0.68],"arrow0":[62.1785,0.6326,0.52],"arrow1":[62.9312,0.6173,0.52],"arrows":[63.6684,1.5,1.4],"wind":[65.2884,2.4,0.85],"leaf":[67.8084,1.0905,0.54],"star":[69.0189,1.2501,0.65],"beam":[70.389,1.6041,0.86],"mega":[72.1132,3.0119,1.14],"ultsig":[75.2451,2.0,1.23]},cast:.55,vol:.9,max:12,act:0,last:{},q:[],qt:0,n:0,err:'',
+P:{mega:10,godray:9,wings:9,ultsig:8,void:7,impact:7,fire_boom:7,zap:7,smite:7,beam:7,holy:6,dome:6,roar:6,frost:6,heal:6,arrows:6,flame:5,ice:5,arcane:5,wind:5,moon:5,shadow:5,claw:5,
+spin:5,meteor:5,fire_fly:4,cracks:4,curse:4,swing:4,leaf:4,arrow:4,crit:4,shock:3,orb:3,star:3,hit:2,mshot:3},
+GAP:{hit:.045,swing:.05,shadow:.05,arrow:.05,mshot:.05,star:.06,orb:.06,claw:.06,crit:.08,zap:.12,mega:.3,godray:.3,wings:.3,ultsig:.3,holy:.2,dome:.2}};
+function vsbLoad(){if(VSB.ld||!VSB.on)return;let a;try{a=acx()}catch(e){return}if(!a||a.state!=='running')return;VSB.ld=1;
+fetch('sfx-skill.mp3').then(r=>{if(!r.ok)throw new Error('http '+r.status);return r.arrayBuffer()})
+.then(b=>new Promise((ok,no)=>{const p=a.decodeAudioData(b,ok,no);if(p&&p.then)p.then(ok,no)}))
+.then(buf=>{VSB.buf=buf;VSB.ok=1}).catch(e=>{VSB.err=String(e&&e.message||e);setTimeout(()=>{VSB.ld=0},15000)})}
+function vsbKey(n){if(VSB.T[n])return n;const v=[];for(let i=0;i<4;i++)if(VSB.T[n+i])v.push(n+i);return v.length?v[Math.floor(Math.random()*v.length)]:null}
+function vsbPlay(n,x,y,v,dl){if(!VSB.on||!VSB.ok||muted)return false;const a=AC;if(!a||a.state!=='running')return false;const k=vsbKey(n);if(!k)return false;
+const now=a.currentTime,g0=VSB.GAP[n]||.1;if(now-(VSB.last[n]||-9)<g0)return false;if(VSB.act>=VSB.max)return false;
+let att=1,pan=0;if(x!=null&&me&&isFinite(x)){const d=Math.hypot(x-me.x,(y-me.y)*1.3);att=Math.max(0,Math.min(1,1-(d-220)/620));if(att<.04)return false;pan=Math.max(-.85,Math.min(.85,(x-me.x)/460))}
+VSB.last[n]=now;const T=VSB.T[k];try{const s=a.createBufferSource(),gn=a.createGain();s.buffer=VSB.buf;gn.gain.value=VSB.vol*T[2]*(v==null?1:v)*att;
+let out=gn;if(pan&&a.createStereoPanner){const p=a.createStereoPanner();p.pan.value=pan;gn.connect(p);out=p}out.connect(sfxDest(a));s.connect(gn);
+const t=now+(dl>0?dl:0);s.start(t,Math.max(0,T[0]-.02),T[1]+.04);VSB.act++;VSB.n++;s.onended=()=>{VSB.act=Math.max(0,VSB.act-1)}}catch(e){VSB.err=String(e);return false}return true}
+function vsbQ(n,x,y,v,dl){if(!VSB.on||!VSB.ok)return;VSB.q.push({n,x,y,v,dl:dl||0,p:VSB.P[n]||3});if(!VSB.qt){VSB.qt=1;Promise.resolve().then(vsbFlush)}}
+function vsbFlush(){VSB.qt=0;const L=VSB.q.splice(0).sort((a,b)=>b.p-a.p),done=[];
+for(const r of L){const near=done.filter(d=>Math.abs(d.dl-r.dl)<.05&&Math.hypot(d.x-r.x,d.y-r.y)<130);if(near.length>=2||near.some(d=>d.n===r.n))continue;
+if(vsbPlay(r.n,r.x,r.y,r.v*(near.length?.7:1),r.dl))done.push(r)}}
+const VSBS={SLASH_ARC:'swing',CROSS_SLASH:'shadow',IMPACT_BURST:w=>w>=100?['impact',1]:['crit',.9],SHOCKWAVE_RING:w=>['shock',w>=150?1:.6],GROUND_CRACKS:'cracks',DEMON_FLAME:'roar',
+SHIELD_DOME:'dome',DASH_TRAIL:'swing',CLAW_MARKS:'claw',FIRE_EXPLOSION:w=>['fire_boom',w>=110?1:.6],FLAME_PILLAR:'flame',FIRE_CIRCLE:['flame',.55],ICE_SHATTER:'ice',FROST_NOVA:'frost',
+LIGHTNING_BOLT:'zap',LIGHTNING_ORB:'orb',ARCANE_CIRCLE:'arcane',VOID_VORTEX:'void',HOLY_CIRCLE:['holy',.75],HEAL_SPARKLES:'heal',HALO_RAYS:['star',.7],ANGEL_WINGS:'wings',LIGHT_SWORD:'smite',
+SHADOW_SLASH:'shadow',SHADOW_WISPS:['curse',.6],CURSE_SIGIL:w=>['curse',w>=80?.9:.4],MOON_CRESCENT:'moon',ARROW_RAIN:'arrows',WIND_TORNADO:'wind',STAR_ARROW:['arrow',.8],LEAF_STORM:'leaf',
+ULT_SIGIL:'ultsig',MEGA_BLAST:'mega',GOD_RAYS:'godray',STAR_FLARE:w=>['star',w>=80?.9:.45]};
+try{const o=vfs;vfs=function(n,x,y,op){const s=o.apply(this,arguments);try{if(s&&VSB.ok){let m=VSBS[n];if(typeof m==='function')m=m(s.w1||s.w);if(typeof m==='string')m=[m,1];
+if(m)vsbQ(m[0],s.x,s.y,m[1],s.dl||0)}}catch(e){}return s}}catch(e){}
+[['whirl','spin',0],['beam','beam',0],['torn','wind',0],['rncomet','fire_fly',0],['fire','meteor',0],['q8lance','arrow',0],['q8snipe','arrow',0],['s6sw','spin',0],['s6bw','spin',0],['q8orb','orb',0]]
+.forEach(([k,n,at])=>{try{vfK(k,C=>{if(VSB.ok&&C.E('vsb',at))vsbQ(n,C.x,C.y,1,0)})}catch(e){}});
+setTimeout(()=>{try{[['slash','swing',.9],['bow','arrow',.9],['magic','mshot',.85],['hit','hit',.8],['crit','crit',1]].forEach(([s,n,v])=>{const o=SFXD[s];if(!o)return;
+SFXD[s]=function(){if(VSB.on&&VSB.ok){vsbPlay(n,null,null,v);return}return o.apply(this,arguments)}})}catch(e){}},400);
+setInterval(()=>{try{if(!VSB.ld&&me.cls&&run)vsbLoad()}catch(e){}},1000);
 const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
 function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
 if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}

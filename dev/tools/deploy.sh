@@ -12,7 +12,7 @@ git fetch -q origin main && git reset -q --soft origin/main 2>/dev/null || true
 cp /mnt/user-data/outputs/refugee-online/public/index.html public/index.html
 cp /mnt/user-data/outputs/refugee-online/public/index.html.br public/index.html.br
 cp /home/claude/refugee-online/public/hd-*.webp public/
-cp /home/claude/refugee-online/public/bgm-*.mp3 public/ 2>/dev/null || true
+cp /home/claude/refugee-online/public/bgm-*.mp3 /home/claude/refugee-online/public/sfx-*.mp3 public/ 2>/dev/null || true
 cp /home/claude/refugee-online/public/cover.jpg public/cover.jpg
 cp /home/claude/refugee-online/public/cover-wide.webp public/ 2>/dev/null || true
 cp /home/claude/refugee-online/public/icon-180.png /home/claude/refugee-online/public/icon-192.png /home/claude/refugee-online/public/icon-512.png /home/claude/refugee-online/public/icon-512m.png /home/claude/refugee-online/public/manifest.webmanifest /home/claude/refugee-online/public/sw.js public/
