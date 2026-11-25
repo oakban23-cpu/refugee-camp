@@ -12305,8 +12305,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v663';
+const WNV='v664';
 const WNL=[
+['🎶','ทุกแมพมีเพลงของตัวเอง','44 แมพในโลกมีเพลงไม่ซ้ำกันแล้ว: แมพใหม่อีก 34 แมพ ตั้งแต่สะพานลมตะวันตก ป่าเห็ดเรืองแสง พระราชวังอัสตรา จนถึงฐานแผ่นดิน มีทำนอง สเกล จังหวะ และเครื่องดนตรีของตัวเอง'],
 ['🎼','เพลงประจำแมพแบบใหม่ 10 เพลง','ค่าย สุสาน แดนไฟ ทุ่งน้ำแข็ง หอคอย เมืองจม เหมือง ทะเลทราย ปราสาทฟ้า และรอยแยก มีเพลงวงดนตรีของตัวเอง ใช้ทำนองหลักเดียวกับเพลงหน้าปก · กลางคืนเพลงนุ่มลง'],
 ['🔊','เสียงสกิลชุดใหม่','เสียงฟัน ระเบิดไฟ น้ำแข็งแตก ฟ้าผ่า วงเวท แสงศักดิ์สิทธิ์ เงา ลูกธนู พายุ และท่าไม้ตาย ทำใหม่ 46 เสียง ดังพร้อมภาพเอฟเฟกต์ ซ้าย-ขวาตามตำแหน่ง · เสียงโจมตีปกติก็ใหม่หมด'],
 ['🎵','เพลงใหม่หน้าเข้าเกมและหน้าเลือกตัวละคร','หน้าปกมีเพลงธีมหลัก «Embers of Home» (ฮาร์ป ฟลุต เครื่องสาย คอรัส) · หน้าเลือกตัวละครมีเพลงรอบกองไฟ «Campfire Gathering» (กีตาร์ โอคาริน่า ซอ เสียงไฟปะทุ) · ปิดได้ที่ปุ่ม 🎵'],
@@ -32964,6 +32965,13 @@ if(BGM.f){const n=bgmNightOn()?1:0;if(n!==BGMM.nf){BGMM.nf=n;BGM.f.frequency.set
 if(w===BGM.cur)return;
 if(w&&!BGM.B[w]){if(BGM.cur)bgmStop(1.2);return}
 bgmStop(w?1.4:(me.cls&&run?2.2:.6));if(w)bgmStart(w)};
+const BGMP={on:1,M:{"11":82.10526077097505,"12":52.5,"13":82.10526077097505,"14":62.22222222222222,"15":91.76471655328798,"16":60.0,"17":60.0,"18":73.0434693877551,"19":76.36362811791383,"20":66.85714285714286,"21":78.0,"22":86.66666666666667,"23":73.0434693877551,"24":73.12498866213151,"25":82.10526077097505,"26":56.0,"27":57.272721088435375,"28":65.0,"29":82.10526077097505,"30":73.0434693877551,"31":64.61537414965986,"32":86.66666666666667,"33":78.0,"34":67.2,"35":64.61537414965986,"36":89.14285714285714,"38":52.5,"39":70.90909297052154,"40":80.0,"41":57.93104308390023,"42":73.0434693877551,"43":80.0,"44":57.272721088435375,"45":97.5},v:.85,cm:()=>curMap,dg:()=>isDg()||isTw()};
+for(const id in BGMP.M)BGM.T['p'+id]={u:'bgm-p'+id+'.mp3',L:BGMP.M[id],v:BGMP.v};
+function bgmpKey(){try{if(!BGMP.on||BGMP.dg())return'';const id=BGMP.cm();return BGMP.M[id]?'p'+id:''}catch(e){return''}}
+{const o=mzTheme;mzTheme=function(){const t=BGMM.th(),k=bgmpKey();
+if(k&&BGMM.K.indexOf(t)>=0){try{if(BGMM.on&&BGM.on&&BGM.B[k]&&!document.hidden)return''}catch(e){}return t}return o.apply(this,arguments)}}
+{const ow=bgmWant;bgmWant=function(){const w=ow();if(w&&w.indexOf('m_')===0){const k=bgmpKey();if(k)return k}return w}}
+bgmNightOn=function(){try{const c=BGM.cur||'';return!!((c.indexOf('m_')===0||/^p\d/.test(c))&&!window.PRO_ON&&isNight()&&!isDg()&&FIELDM[curMap])}catch(e){return false}};
 const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
 function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
 if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}

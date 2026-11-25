@@ -84,7 +84,7 @@ def pluck(m, vel=0.8, dur=None, kind='harp'):
     L = T60 if dur is None else min(T60, dur + 0.35)
     n = int((L + 0.05) * SR); t = np.arange(n) / SR
     y = np.zeros(n)
-    bright = 0.55 + 0.45 * vel
+    bright = 0.55 + 0.45 * min(vel, 1.0)
     for k in range(1, K + 1):
         fk = k * f * np.sqrt(1 + B * k * k)
         if fk > 15000: break

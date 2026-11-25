@@ -98,6 +98,8 @@ def lead_fn(kind):
                     if s < len(y): y[s:s + len(yy)] += yy[:len(y) - s]
             return y
         return f
+    if kind == 'piano': return lambda m, d, v: pluck(m, v * 1.6, d + 0.5, 'piano')
+    if kind == 'guitar_lead': return lambda m, d, v: pluck(m, v * 1.7, d + 0.2, 'guitar')
     if kind == 'banjo': return lambda m, d, v: pluck(m, v * 2.0, d + 0.1, 'banjo')
     raise ValueError(kind)
 
@@ -118,6 +120,8 @@ def render(key, out):
         if a in ('guitar', 'harp'):
             patt = [0, 2, 3, 4, 3, 2, 3, 4][:beats * 2] if M == 4 else [0, 2, 3, 4, 3, 2]
             arp(song, acc, bar, beats, r0, '_', patt, 0.5, 0.5 if a == 'guitar' else 0.45, kind='guitar' if a == 'guitar' else 'harp')
+        elif a == 'piano':
+            arp(song, acc, bar, beats, r0, '_', [0, 2, 3, 2, 4, 2, 3, 2][:beats * 2], 0.5, 0.42, kind='piano')
         elif a == 'harp_sparse':
             arp(song, acc, bar, beats, r0, '_', [0, 3, 4], 1.0, 0.35, kind='harp')
         elif a == 'ostinato':
@@ -181,6 +185,7 @@ def render(key, out):
     i0 = T['intro']
     def mel(tr, start, notes, kind, vel, off=0):
         fn = lead_fn(kind)
+        if T.get('lead_comp'): vel *= {'celesta': 2.8, 'glock': 2.6, 'musicbox': 2.8, 'glass': 2.6, 'oud': 2.6, 'piano': 1.9, 'banjo': 1.9, 'guitar_lead': 1.9}.get(kind, 1.0)
         melody(song, tr, start, [(deg2m(T, d, base) + off if d else None, b) for d, b in notes], lambda m, d, v: fn(m, d, v), gap=0.97, vel=vel)
     mel(lead, i0, T['A'], T['leadA'], 0.62)
     mel(lead, i0 + 8, T['B'], T['leadB'], 0.6)
@@ -207,6 +212,9 @@ def render(key, out):
         amb.add(0, y * 0.1 + lp(RNG.standard_normal(n), 150) * 0.08)
     elif am == 'void':
         amb.add(0, lp(RNG.standard_normal(n), 120) * 0.12 * (0.6 + 0.4 * np.sin(2 * np.pi * t / 9)))
+    elif am == 'crickets':
+        from syn import crickets as _cr
+        amb.add(0, _cr(L, 0.02), 0.4)
     elif am == 'birds':
         y = np.zeros(n)
         for _ in range(int(L * 0.25)):
