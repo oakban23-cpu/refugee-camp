@@ -1,0 +1,1 @@
+cp_01_water: REEDS_A/REEDS_B drawn swapped (cell 4 = cattails = REEDS_B, cell 5 = reeds = REEDS_A); cut mapping handles it
