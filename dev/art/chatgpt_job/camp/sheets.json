@@ -1,0 +1,1448 @@
+{
+ "cp_01_water": {
+  "grid": [
+   4,
+   3
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "BRIDGE_WOOD",
+    "desc": "Wooden footbridge crossing a stream left-to-right, railings, no water drawn",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     384,
+     341
+    ],
+    "box": [
+     14,
+     32,
+     370,
+     313
+    ]
+   },
+   {
+    "n": 2,
+    "name": "BRIDGE_STONE",
+    "desc": "Small arched stone bridge crossing left-to-right, mossy, no water drawn",
+    "kind": "b",
+    "cell": [
+     384,
+     0,
+     768,
+     341
+    ],
+    "box": [
+     398,
+     32,
+     754,
+     313
+    ]
+   },
+   {
+    "n": 3,
+    "name": "FISHING_DOCK",
+    "desc": "Short wooden fishing pier on posts, a bucket and a rod",
+    "kind": "b",
+    "cell": [
+     768,
+     0,
+     1152,
+     341
+    ],
+    "box": [
+     782,
+     32,
+     1138,
+     313
+    ]
+   },
+   {
+    "n": 4,
+    "name": "REEDS_A",
+    "desc": "Clump of green reeds for a stream bank",
+    "kind": "b",
+    "cell": [
+     1152,
+     0,
+     1536,
+     341
+    ],
+    "box": [
+     1166,
+     32,
+     1522,
+     313
+    ]
+   },
+   {
+    "n": 5,
+    "name": "REEDS_B",
+    "desc": "Clump of cattails / bulrushes",
+    "kind": "b",
+    "cell": [
+     0,
+     341,
+     384,
+     683
+    ],
+    "box": [
+     14,
+     373,
+     370,
+     655
+    ]
+   },
+   {
+    "n": 6,
+    "name": "BANK_ROCKS",
+    "desc": "Cluster of mossy bank rocks with grass",
+    "kind": "b",
+    "cell": [
+     384,
+     341,
+     768,
+     683
+    ],
+    "box": [
+     398,
+     373,
+     754,
+     655
+    ]
+   },
+   {
+    "n": 7,
+    "name": "LOG_IN_WATER",
+    "desc": "Fallen mossy log half in water (draw only the log)",
+    "kind": "b",
+    "cell": [
+     768,
+     341,
+     1152,
+     683
+    ],
+    "box": [
+     782,
+     373,
+     1138,
+     655
+    ]
+   },
+   {
+    "n": 8,
+    "name": "WATER_ROCKS",
+    "desc": "2-3 wet rocks sticking out of water (draw only the rocks)",
+    "kind": "b",
+    "cell": [
+     1152,
+     341,
+     1536,
+     683
+    ],
+    "box": [
+     1166,
+     373,
+     1522,
+     655
+    ]
+   },
+   {
+    "n": 9,
+    "name": "LILY_PADS",
+    "desc": "Lily pads with 2 pink flowers SEEN FROM ABOVE (flat)",
+    "kind": "f",
+    "cell": [
+     0,
+     683,
+     384,
+     1024
+    ],
+    "box": [
+     14,
+     715,
+     370,
+     996
+    ]
+   },
+   {
+    "n": 10,
+    "name": "STEPPING_STONES",
+    "desc": "Row of 4 flat stepping stones SEEN FROM ABOVE (flat)",
+    "kind": "f",
+    "cell": [
+     384,
+     683,
+     768,
+     1024
+    ],
+    "box": [
+     398,
+     715,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 11,
+    "name": "WATER_FLOWERS",
+    "desc": "Small yellow/white water flowers floating, SEEN FROM ABOVE (flat)",
+    "kind": "f",
+    "cell": [
+     768,
+     683,
+     1152,
+     1024
+    ],
+    "box": [
+     782,
+     715,
+     1138,
+     996
+    ]
+   },
+   {
+    "n": 12,
+    "name": "DUCK_FAMILY",
+    "desc": "A mother duck and 3 ducklings swimming (top-down 3/4)",
+    "kind": "b",
+    "cell": [
+     1152,
+     683,
+     1536,
+     1024
+    ],
+    "box": [
+     1166,
+     715,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "cp_02_ponds": {
+  "grid": [
+   2,
+   1
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "POND_LARGE",
+    "desc": "Large natural pond SEEN FROM ABOVE: clear water, muddy/sandy bank, reeds, stones, lily pads. Fill the box.",
+    "kind": "f",
+    "cell": [
+     0,
+     0,
+     768,
+     1024
+    ],
+    "box": [
+     14,
+     32,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 2,
+    "name": "POND_SMALL",
+    "desc": "Small round pond / puddle SEEN FROM ABOVE with stones around and some reeds",
+    "kind": "f",
+    "cell": [
+     768,
+     0,
+     1536,
+     1024
+    ],
+    "box": [
+     782,
+     32,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "cp_03_nests": {
+  "grid": [
+   4,
+   2
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "NEST_WOLF",
+    "desc": "Wolf den: dark rocky cave mouth in a mound, claw marks, bones",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     384,
+     512
+    ],
+    "box": [
+     14,
+     32,
+     370,
+     484
+    ]
+   },
+   {
+    "n": 2,
+    "name": "NEST_SPIDER",
+    "desc": "Spider nest: thick webs between dead stumps, egg sacs",
+    "kind": "b",
+    "cell": [
+     384,
+     0,
+     768,
+     512
+    ],
+    "box": [
+     398,
+     32,
+     754,
+     484
+    ]
+   },
+   {
+    "n": 3,
+    "name": "NEST_BONES",
+    "desc": "Bone pile nest: skulls, ribs, a broken shield, purple wisps",
+    "kind": "b",
+    "cell": [
+     768,
+     0,
+     1152,
+     512
+    ],
+    "box": [
+     782,
+     32,
+     1138,
+     484
+    ]
+   },
+   {
+    "n": 4,
+    "name": "NEST_SLIME",
+    "desc": "Slime pool: bubbling green goo puddle in a ring of rocks",
+    "kind": "b",
+    "cell": [
+     1152,
+     0,
+     1536,
+     512
+    ],
+    "box": [
+     1166,
+     32,
+     1522,
+     484
+    ]
+   },
+   {
+    "n": 5,
+    "name": "NEST_BOAR",
+    "desc": "Boar burrow: dug dirt mound, roots, tusk marks, muddy hole",
+    "kind": "b",
+    "cell": [
+     0,
+     512,
+     384,
+     1024
+    ],
+    "box": [
+     14,
+     544,
+     370,
+     996
+    ]
+   },
+   {
+    "n": 6,
+    "name": "NEST_GOBLIN",
+    "desc": "Goblin camp: small crude hide tent, totem with a skull, spears",
+    "kind": "b",
+    "cell": [
+     384,
+     512,
+     768,
+     1024
+    ],
+    "box": [
+     398,
+     544,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 7,
+    "name": "NEST_MUSHROOM",
+    "desc": "Glowing mushroom ring with a dark hole in the middle",
+    "kind": "b",
+    "cell": [
+     768,
+     512,
+     1152,
+     1024
+    ],
+    "box": [
+     782,
+     544,
+     1138,
+     996
+    ]
+   },
+   {
+    "n": 8,
+    "name": "NEST_RUIN",
+    "desc": "Cursed ruin: broken stone arch with dark red glow inside",
+    "kind": "b",
+    "cell": [
+     1152,
+     512,
+     1536,
+     1024
+    ],
+    "box": [
+     1166,
+     544,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "cp_04_forest": {
+  "grid": [
+   6,
+   5
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "OAK_BIG",
+    "desc": "Big round oak tree",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     256,
+     205
+    ],
+    "box": [
+     14,
+     32,
+     242,
+     177
+    ]
+   },
+   {
+    "n": 2,
+    "name": "OAK",
+    "desc": "Oak tree",
+    "kind": "b",
+    "cell": [
+     256,
+     0,
+     512,
+     205
+    ],
+    "box": [
+     270,
+     32,
+     498,
+     177
+    ]
+   },
+   {
+    "n": 3,
+    "name": "PINE",
+    "desc": "Tall pine tree",
+    "kind": "b",
+    "cell": [
+     512,
+     0,
+     768,
+     205
+    ],
+    "box": [
+     526,
+     32,
+     754,
+     177
+    ]
+   },
+   {
+    "n": 4,
+    "name": "PINE_SMALL",
+    "desc": "Small pine tree",
+    "kind": "b",
+    "cell": [
+     768,
+     0,
+     1024,
+     205
+    ],
+    "box": [
+     782,
+     32,
+     1010,
+     177
+    ]
+   },
+   {
+    "n": 5,
+    "name": "BIRCH",
+    "desc": "Birch tree",
+    "kind": "b",
+    "cell": [
+     1024,
+     0,
+     1280,
+     205
+    ],
+    "box": [
+     1038,
+     32,
+     1266,
+     177
+    ]
+   },
+   {
+    "n": 6,
+    "name": "BLOSSOM",
+    "desc": "Pink blossom tree",
+    "kind": "b",
+    "cell": [
+     1280,
+     0,
+     1536,
+     205
+    ],
+    "box": [
+     1294,
+     32,
+     1522,
+     177
+    ]
+   },
+   {
+    "n": 7,
+    "name": "MAPLE",
+    "desc": "Orange-red maple tree",
+    "kind": "b",
+    "cell": [
+     0,
+     205,
+     256,
+     410
+    ],
+    "box": [
+     14,
+     237,
+     242,
+     382
+    ]
+   },
+   {
+    "n": 8,
+    "name": "WILLOW",
+    "desc": "Weeping willow (for the stream)",
+    "kind": "b",
+    "cell": [
+     256,
+     205,
+     512,
+     410
+    ],
+    "box": [
+     270,
+     237,
+     498,
+     382
+    ]
+   },
+   {
+    "n": 9,
+    "name": "DEAD_TREE",
+    "desc": "Bare dead tree",
+    "kind": "b",
+    "cell": [
+     512,
+     205,
+     768,
+     410
+    ],
+    "box": [
+     526,
+     237,
+     754,
+     382
+    ]
+   },
+   {
+    "n": 10,
+    "name": "SAPLING",
+    "desc": "Young sapling",
+    "kind": "b",
+    "cell": [
+     768,
+     205,
+     1024,
+     410
+    ],
+    "box": [
+     782,
+     237,
+     1010,
+     382
+    ]
+   },
+   {
+    "n": 11,
+    "name": "FRUIT_TREE",
+    "desc": "Apple tree with red apples",
+    "kind": "b",
+    "cell": [
+     1024,
+     205,
+     1280,
+     410
+    ],
+    "box": [
+     1038,
+     237,
+     1266,
+     382
+    ]
+   },
+   {
+    "n": 12,
+    "name": "TREE_STUMP",
+    "desc": "Big tree stump with moss",
+    "kind": "b",
+    "cell": [
+     1280,
+     205,
+     1536,
+     410
+    ],
+    "box": [
+     1294,
+     237,
+     1522,
+     382
+    ]
+   },
+   {
+    "n": 13,
+    "name": "BUSH_ROUND",
+    "desc": "Round green bush",
+    "kind": "b",
+    "cell": [
+     0,
+     410,
+     256,
+     614
+    ],
+    "box": [
+     14,
+     442,
+     242,
+     586
+    ]
+   },
+   {
+    "n": 14,
+    "name": "BUSH_BERRY",
+    "desc": "Bush with red berries",
+    "kind": "b",
+    "cell": [
+     256,
+     410,
+     512,
+     614
+    ],
+    "box": [
+     270,
+     442,
+     498,
+     586
+    ]
+   },
+   {
+    "n": 15,
+    "name": "BUSH_FLOWER",
+    "desc": "Bush with white flowers",
+    "kind": "b",
+    "cell": [
+     512,
+     410,
+     768,
+     614
+    ],
+    "box": [
+     526,
+     442,
+     754,
+     586
+    ]
+   },
+   {
+    "n": 16,
+    "name": "FERN",
+    "desc": "Fern clump",
+    "kind": "b",
+    "cell": [
+     768,
+     410,
+     1024,
+     614
+    ],
+    "box": [
+     782,
+     442,
+     1010,
+     586
+    ]
+   },
+   {
+    "n": 17,
+    "name": "TALL_GRASS",
+    "desc": "Tall grass clump",
+    "kind": "b",
+    "cell": [
+     1024,
+     410,
+     1280,
+     614
+    ],
+    "box": [
+     1038,
+     442,
+     1266,
+     586
+    ]
+   },
+   {
+    "n": 18,
+    "name": "THORNS",
+    "desc": "Thorny bramble",
+    "kind": "b",
+    "cell": [
+     1280,
+     410,
+     1536,
+     614
+    ],
+    "box": [
+     1294,
+     442,
+     1522,
+     586
+    ]
+   },
+   {
+    "n": 19,
+    "name": "ROCK_BIG",
+    "desc": "Big grey boulder with moss",
+    "kind": "b",
+    "cell": [
+     0,
+     614,
+     256,
+     819
+    ],
+    "box": [
+     14,
+     646,
+     242,
+     791
+    ]
+   },
+   {
+    "n": 20,
+    "name": "ROCK_MED",
+    "desc": "Medium rock",
+    "kind": "b",
+    "cell": [
+     256,
+     614,
+     512,
+     819
+    ],
+    "box": [
+     270,
+     646,
+     498,
+     791
+    ]
+   },
+   {
+    "n": 21,
+    "name": "ROCKS_SMALL",
+    "desc": "3 small rocks",
+    "kind": "b",
+    "cell": [
+     512,
+     614,
+     768,
+     819
+    ],
+    "box": [
+     526,
+     646,
+     754,
+     791
+    ]
+   },
+   {
+    "n": 22,
+    "name": "ROCK_FLAT",
+    "desc": "Flat rock slab",
+    "kind": "b",
+    "cell": [
+     768,
+     614,
+     1024,
+     819
+    ],
+    "box": [
+     782,
+     646,
+     1010,
+     791
+    ]
+   },
+   {
+    "n": 23,
+    "name": "LOG",
+    "desc": "Fallen log with moss",
+    "kind": "b",
+    "cell": [
+     1024,
+     614,
+     1280,
+     819
+    ],
+    "box": [
+     1038,
+     646,
+     1266,
+     791
+    ]
+   },
+   {
+    "n": 24,
+    "name": "ROOTS",
+    "desc": "Gnarled roots coming out of the ground",
+    "kind": "b",
+    "cell": [
+     1280,
+     614,
+     1536,
+     819
+    ],
+    "box": [
+     1294,
+     646,
+     1522,
+     791
+    ]
+   },
+   {
+    "n": 25,
+    "name": "FLOWERS_RED",
+    "desc": "Clump of red poppies",
+    "kind": "b",
+    "cell": [
+     0,
+     819,
+     256,
+     1024
+    ],
+    "box": [
+     14,
+     851,
+     242,
+     996
+    ]
+   },
+   {
+    "n": 26,
+    "name": "FLOWERS_BLUE",
+    "desc": "Clump of bluebells",
+    "kind": "b",
+    "cell": [
+     256,
+     819,
+     512,
+     1024
+    ],
+    "box": [
+     270,
+     851,
+     498,
+     996
+    ]
+   },
+   {
+    "n": 27,
+    "name": "FLOWERS_YELLOW",
+    "desc": "Clump of yellow daisies",
+    "kind": "b",
+    "cell": [
+     512,
+     819,
+     768,
+     1024
+    ],
+    "box": [
+     526,
+     851,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 28,
+    "name": "MUSHROOMS_RED",
+    "desc": "Red spotted mushrooms",
+    "kind": "b",
+    "cell": [
+     768,
+     819,
+     1024,
+     1024
+    ],
+    "box": [
+     782,
+     851,
+     1010,
+     996
+    ]
+   },
+   {
+    "n": 29,
+    "name": "MUSHROOMS_BROWN",
+    "desc": "Brown mushrooms on moss",
+    "kind": "b",
+    "cell": [
+     1024,
+     819,
+     1280,
+     1024
+    ],
+    "box": [
+     1038,
+     851,
+     1266,
+     996
+    ]
+   },
+   {
+    "n": 30,
+    "name": "STANDING_STONE",
+    "desc": "Old carved standing stone with moss",
+    "kind": "b",
+    "cell": [
+     1280,
+     819,
+     1536,
+     1024
+    ],
+    "box": [
+     1294,
+     851,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "cp_05_props": {
+  "grid": [
+   6,
+   4
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "SIGNPOST",
+    "desc": "Wooden signpost with 3 BLANK arrow boards (no text)",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     256,
+     256
+    ],
+    "box": [
+     14,
+     32,
+     242,
+     228
+    ]
+   },
+   {
+    "n": 2,
+    "name": "LANTERN_POST",
+    "desc": "Wooden post with hanging lantern",
+    "kind": "b",
+    "cell": [
+     256,
+     0,
+     512,
+     256
+    ],
+    "box": [
+     270,
+     32,
+     498,
+     228
+    ]
+   },
+   {
+    "n": 3,
+    "name": "CAMPFIRE_SMALL",
+    "desc": "Small campfire with a cooking spit",
+    "kind": "b",
+    "cell": [
+     512,
+     0,
+     768,
+     256
+    ],
+    "box": [
+     526,
+     32,
+     754,
+     228
+    ]
+   },
+   {
+    "n": 4,
+    "name": "CAULDRON",
+    "desc": "Cooking cauldron on a tripod over fire",
+    "kind": "b",
+    "cell": [
+     768,
+     0,
+     1024,
+     256
+    ],
+    "box": [
+     782,
+     32,
+     1010,
+     228
+    ]
+   },
+   {
+    "n": 5,
+    "name": "WATER_BARREL",
+    "desc": "Rain barrel with a ladle",
+    "kind": "b",
+    "cell": [
+     1024,
+     0,
+     1280,
+     256
+    ],
+    "box": [
+     1038,
+     32,
+     1266,
+     228
+    ]
+   },
+   {
+    "n": 6,
+    "name": "WOODPILE",
+    "desc": "Stacked firewood under a small roof",
+    "kind": "b",
+    "cell": [
+     1280,
+     0,
+     1536,
+     256
+    ],
+    "box": [
+     1294,
+     32,
+     1522,
+     228
+    ]
+   },
+   {
+    "n": 7,
+    "name": "CHICKEN",
+    "desc": "A chicken (white)",
+    "kind": "b",
+    "cell": [
+     0,
+     256,
+     256,
+     512
+    ],
+    "box": [
+     14,
+     288,
+     242,
+     484
+    ]
+   },
+   {
+    "n": 8,
+    "name": "CHICKEN_BROWN",
+    "desc": "A brown hen",
+    "kind": "b",
+    "cell": [
+     256,
+     256,
+     512,
+     512
+    ],
+    "box": [
+     270,
+     288,
+     498,
+     484
+    ]
+   },
+   {
+    "n": 9,
+    "name": "CHICKEN_COOP",
+    "desc": "Small chicken coop",
+    "kind": "b",
+    "cell": [
+     512,
+     256,
+     768,
+     512
+    ],
+    "box": [
+     526,
+     288,
+     754,
+     484
+    ]
+   },
+   {
+    "n": 10,
+    "name": "GOAT",
+    "desc": "A goat",
+    "kind": "b",
+    "cell": [
+     768,
+     256,
+     1024,
+     512
+    ],
+    "box": [
+     782,
+     288,
+     1010,
+     484
+    ]
+   },
+   {
+    "n": 11,
+    "name": "DOG",
+    "desc": "A friendly camp dog lying down",
+    "kind": "b",
+    "cell": [
+     1024,
+     256,
+     1280,
+     512
+    ],
+    "box": [
+     1038,
+     288,
+     1266,
+     484
+    ]
+   },
+   {
+    "n": 12,
+    "name": "CAT",
+    "desc": "A cat sitting",
+    "kind": "b",
+    "cell": [
+     1280,
+     256,
+     1536,
+     512
+    ],
+    "box": [
+     1294,
+     288,
+     1522,
+     484
+    ]
+   },
+   {
+    "n": 13,
+    "name": "LAUNDRY_LINE",
+    "desc": "Laundry line between two poles with clothes",
+    "kind": "b",
+    "cell": [
+     0,
+     512,
+     256,
+     768
+    ],
+    "box": [
+     14,
+     544,
+     242,
+     740
+    ]
+   },
+   {
+    "n": 14,
+    "name": "BEDROLLS",
+    "desc": "2 bedrolls and a backpack",
+    "kind": "b",
+    "cell": [
+     256,
+     512,
+     512,
+     768
+    ],
+    "box": [
+     270,
+     544,
+     498,
+     740
+    ]
+   },
+   {
+    "n": 15,
+    "name": "TOOL_RACK",
+    "desc": "Rack with shovel, pick, saw",
+    "kind": "b",
+    "cell": [
+     512,
+     512,
+     768,
+     768
+    ],
+    "box": [
+     526,
+     544,
+     754,
+     740
+    ]
+   },
+   {
+    "n": 16,
+    "name": "WHEELBARROW",
+    "desc": "Wheelbarrow with dirt",
+    "kind": "b",
+    "cell": [
+     768,
+     512,
+     1024,
+     768
+    ],
+    "box": [
+     782,
+     544,
+     1010,
+     740
+    ]
+   },
+   {
+    "n": 17,
+    "name": "SACKS",
+    "desc": "Pile of grain sacks",
+    "kind": "b",
+    "cell": [
+     1024,
+     512,
+     1280,
+     768
+    ],
+    "box": [
+     1038,
+     544,
+     1266,
+     740
+    ]
+   },
+   {
+    "n": 18,
+    "name": "CRATES_OPEN",
+    "desc": "Open crates with apples and carrots",
+    "kind": "b",
+    "cell": [
+     1280,
+     512,
+     1536,
+     768
+    ],
+    "box": [
+     1294,
+     544,
+     1522,
+     740
+    ]
+   },
+   {
+    "n": 19,
+    "name": "FLOWER_POTS",
+    "desc": "3 clay flower pots",
+    "kind": "b",
+    "cell": [
+     0,
+     768,
+     256,
+     1024
+    ],
+    "box": [
+     14,
+     800,
+     242,
+     996
+    ]
+   },
+   {
+    "n": 20,
+    "name": "BENCH_LOG",
+    "desc": "Log bench",
+    "kind": "b",
+    "cell": [
+     256,
+     768,
+     512,
+     1024
+    ],
+    "box": [
+     270,
+     800,
+     498,
+     996
+    ]
+   },
+   {
+    "n": 21,
+    "name": "TABLE_STOOLS",
+    "desc": "Small wooden table with 2 stools and mugs",
+    "kind": "b",
+    "cell": [
+     512,
+     768,
+     768,
+     1024
+    ],
+    "box": [
+     526,
+     800,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 22,
+    "name": "WELL_SMALL",
+    "desc": "Small stone well with a bucket",
+    "kind": "b",
+    "cell": [
+     768,
+     768,
+     1024,
+     1024
+    ],
+    "box": [
+     782,
+     800,
+     1010,
+     996
+    ]
+   },
+   {
+    "n": 23,
+    "name": "BANNER_CAMP",
+    "desc": "Tall pole with a long WHITE banner",
+    "kind": "b",
+    "cell": [
+     1024,
+     768,
+     1280,
+     1024
+    ],
+    "box": [
+     1038,
+     800,
+     1266,
+     996
+    ]
+   },
+   {
+    "n": 24,
+    "name": "TORCH_STAND",
+    "desc": "Standing wooden torch, burning",
+    "kind": "b",
+    "cell": [
+     1280,
+     768,
+     1536,
+     1024
+    ],
+    "box": [
+     1294,
+     800,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "cp_06_fence_h": {
+  "rows": [
+   {
+    "name": "FENCE_RAIL_H",
+    "row": [
+     0,
+     256
+    ],
+    "base": 220
+   },
+   {
+    "name": "FENCE_STONE_H",
+    "row": [
+     256,
+     512
+    ],
+    "base": 476
+   }
+  ]
+ },
+ "cp_07_fence_v": {
+  "cols": [
+   {
+    "name": "FENCE_RAIL_V",
+    "col": [
+     0,
+     512
+    ]
+   },
+   {
+    "name": "FENCE_STONE_V",
+    "col": [
+     512,
+     1024
+    ]
+   }
+  ]
+ }
+}
