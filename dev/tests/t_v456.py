@@ -1,4 +1,5 @@
 """v456 บ้านกิลด์ HD"""
+# v666: ทดสอบภาพบ้านกิลด์ชุดเดิม (สำรอง) — ปิดชุดใหม่ด้วย G6.on=0
 import asyncio, sys, json
 sys.path.insert(0, __file__.rsplit('/', 1)[0])
 from h import *
@@ -11,7 +12,7 @@ async def main():
       async with async_playwright() as pw:
         b=await pw.chromium.launch()
         A=await new_client(b,'Ann','melee',60)
-        await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true}");await A.wait(1500)
+        await A.ev("()=>{ov.hidden=true;AUTO.on=false;gmGod=true;G6.on=0}");await A.wait(1500)
         await A.ev("()=>{gdEmit('mk',{nm:'ภาพสวย',tag:'HD',e:2,col:5})}");await A.wait(1300)
         await A.ev("()=>{ghEnter()}");await A.wait(1000)
         ok=await A.ev("()=>new Promise(r=>{const t0=Date.now();const iv=setInterval(()=>{if(ghHDok()||Date.now()-t0>15000){clearInterval(iv);r(ghHDok())}},200)})")

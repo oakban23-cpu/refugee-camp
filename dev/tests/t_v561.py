@@ -1,4 +1,5 @@
 """v561 บ้านกิลด์: พื้นทั้งบ้านวาดใหม่ด้วยลายพื้นของแผนที่โฉมใหม่
+# v666: ทดสอบภาพบ้านกิลด์ชุดเดิม (สำรอง) — ปิดชุดใหม่ด้วย G6.on=0
    ① แมพบ้านกิลด์ใช้ตัววาดแผนที่ใหม่ (ทุ่งหญ้าแบบแมพ 1) · ไม่ทาวงเขตปลอดภัยสีเขียวทึบ (เขตปลอดภัยยังทำงาน)
    ② ลานในกำแพงทุกขั้นใช้ลายพื้น (ดินอัด/หญ้า/หินปู/หินชนวน) · วงลานกลางใหม่ · แคชสร้างได้ทุกขั้น ไม่มี error
    ③ ปิดตัววาดใหม่ → กลับเป็นพื้น/วงเขตแบบเดิม · ทุ่งหน้าบ้านสร้างแคชใหม่ตามสถานะ
@@ -34,7 +35,7 @@ async def main():
         pg.on('console',lambda m:errs.append('console.'+m.type+': '+m.text[:300]) if m.type=='error' else None)
         await pg.goto(URL);await pg.wait_for_timeout(2500)
         await pg.evaluate(SETUP,['melee','Gv'+str(random.randint(100,999)),60]);await pg.wait_for_timeout(1500)
-        await A.ev("()=>{ov.hidden=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};AUTO.on=false;gmGod=true;window.DNH=12}")
+        await A.ev("()=>{ov.hidden=true;try{let k=0;while(SD.on&&k<80){stNext();k++}stClose()}catch(e){};AUTO.on=false;gmGod=true;window.DNH=12;G6.on=0}")
         await A.ev("()=>{gdEmit('mk',{nm:'ป้อมลายพื้น',tag:'GTX',e:5,col:1})}");await A.wait(1500)
         res={}
         for t in (1,3,4,5):
