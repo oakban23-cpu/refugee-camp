@@ -12305,8 +12305,9 @@ return r}}catch(e){}
 try{const _h=handleFx;handleFx=function(o){if(o&&o.k==='mai'){try{maiFx(o)}catch(e){}return}return _h.apply(this,arguments)}}catch(e){}
 try{const _mp=drawMProj;drawMProj=function(){try{maiDraw()}catch(e){}return _mp.apply(this,arguments)}}catch(e){}
 },880);
-const WNV='v664';
+const WNV='v665';
 const WNL=[
+['⚔️','เพลงสู้บอสและเพลงดันเจี้ยนใหม่','บอสมีเพลงศึกใหม่ 6 แบบตามภูมิภาค (ออร์เคสตรา+ร็อก: เครื่องสายรัว กีตาร์แตก ทองเหลือง กลองไทโกะ คอรัส) บอส MVP ได้เพลงใหญ่สุด · ดันเจี้ยน หอคอยไต่ชั้น และดันเจี้ยนเรดมีเพลงของตัวเอง'],
 ['🎶','ทุกแมพมีเพลงของตัวเอง','44 แมพในโลกมีเพลงไม่ซ้ำกันแล้ว: แมพใหม่อีก 34 แมพ ตั้งแต่สะพานลมตะวันตก ป่าเห็ดเรืองแสง พระราชวังอัสตรา จนถึงฐานแผ่นดิน มีทำนอง สเกล จังหวะ และเครื่องดนตรีของตัวเอง'],
 ['🎼','เพลงประจำแมพแบบใหม่ 10 เพลง','ค่าย สุสาน แดนไฟ ทุ่งน้ำแข็ง หอคอย เมืองจม เหมือง ทะเลทราย ปราสาทฟ้า และรอยแยก มีเพลงวงดนตรีของตัวเอง ใช้ทำนองหลักเดียวกับเพลงหน้าปก · กลางคืนเพลงนุ่มลง'],
 ['🔊','เสียงสกิลชุดใหม่','เสียงฟัน ระเบิดไฟ น้ำแข็งแตก ฟ้าผ่า วงเวท แสงศักดิ์สิทธิ์ เงา ลูกธนู พายุ และท่าไม้ตาย ทำใหม่ 46 เสียง ดังพร้อมภาพเอฟเฟกต์ ซ้าย-ขวาตามตำแหน่ง · เสียงโจมตีปกติก็ใหม่หมด'],
@@ -32972,6 +32973,26 @@ function bgmpKey(){try{if(!BGMP.on||BGMP.dg())return'';const id=BGMP.cm();return
 if(k&&BGMM.K.indexOf(t)>=0){try{if(BGMM.on&&BGM.on&&BGM.B[k]&&!document.hidden)return''}catch(e){}return t}return o.apply(this,arguments)}}
 {const ow=bgmWant;bgmWant=function(){const w=ow();if(w&&w.indexOf('m_')===0){const k=bgmpKey();if(k)return k}return w}}
 bgmNightOn=function(){try{const c=BGM.cur||'';return!!((c.indexOf('m_')===0||/^p\d/.test(c))&&!window.PRO_ON&&isNight()&&!isDg()&&FIELDM[curMap])}catch(e){return false}};
+const BGMB={on:1,L:{"b_wild":48.0,"b_dark":50.90909297052154,"b_fire":44.210521541950115,"b_frost":49.41176870748299,"b_astra":46.666666666666664,"b_mvp":43.07691609977324,"d_dg":76.36362811791383,"d_tw":64.61537414965986,"d_raid":70.0},v:{b:.9,d:.85},home:'',
+F:{b_wild:[1,6,7,8,23,24,44,45],b_dark:[2,5,20,21,22,25,39,43],b_fire:[3,16,17,18,26],b_frost:[4,10,11,19,36,40,42],b_astra:[9,12,13,14,15,27,28,29,30,31,32,33,34,35,38,41]},
+raid:()=>{try{return!!(ECHO()||SIEGE()||EYE()||QUEEN())}catch(e){return false}},dg:()=>{try{return!!isDg()}catch(e){return false}},tw:()=>{try{return!!isTw()}catch(e){return false}},cm:()=>curMap};
+for(const k in BGMB.L)BGM.T[k]={u:'bgm-'+k.replace('_','-')+'.mp3',L:BGMB.L[k],v:k[0]==='b'?BGMB.v.b:BGMB.v.d};
+function bgmbFam(){const m=BGMB.cm();for(const k in BGMB.F)if(BGMB.F[k].indexOf(m)>=0)return k;return'b_wild'}
+function bgmbKey(){if(!BGMB.on)return'';let t='';try{t=BGMM.th()}catch(e){return''}if(typeof t!=='string'||!t)return'';
+if(t.indexOf('rk:')===0){if(t.indexOf('rk:MVP:')===0||BGMB.raid())return'b_mvp';if(BGMB.tw()||BGMB.dg())return'b_dark';return bgmbFam()}
+if(t==='tower'||t==='rift'){if(BGMB.tw())return'd_tw';if(BGMB.dg())return(t==='rift'||BGMB.raid())?'d_raid':'d_dg'}return''}
+{const o=mzTheme;mzTheme=function(){const k=bgmbKey();if(k){try{if(BGM.on&&BGM.B[k]&&!document.hidden&&!muted&&musOn)return''}catch(e){}return BGMM.th()}return o.apply(this,arguments)}}
+{const ow=bgmWant;bgmWant=function(){const w=ow();try{if(!BGM.on||muted||!musOn||document.hidden||window.PRO_ON||!(me.cls&&run))return w;const k=bgmbKey();if(k)return k}catch(e){}return w}}
+bgmTick=function(){const w=bgmWant();let pf='';
+try{if(w&&(w.indexOf('m_')===0||/^p\d/.test(w))){BGMB.home=w;if(BGMB.on&&!BGMB.dg()&&!BGMB.tw())pf=bgmbFam()}else if(!w||w==='title'||w==='camp')BGMB.home=''}catch(e){}
+if(w&&AC!==false){bgmLoad(w);if(w==='title'&&BGM.B.title)bgmLoad('camp');if(pf&&BGM.B[w])bgmLoad(pf)}
+const home=w&&w[0]==='b'?BGMB.home:'';
+for(const k in BGM.B){if(BGM.B[k]&&k!==w&&k!==BGM.cur&&k!==pf&&k!==home&&!(w==='title'&&k==='camp')){BGM.B[k]=null;BGM.P[k]=null}}
+const a=AC;if(!a||a.state!=='running')return;
+if(BGM.f){const n=bgmNightOn()?1:0;if(n!==BGMM.nf){BGMM.nf=n;BGM.f.frequency.setTargetAtTime(n?2200:20000,a.currentTime,1.2)}}
+if(w===BGM.cur)return;
+if(w&&!BGM.B[w]){if(BGM.cur)bgmStop(1.2);return}
+bgmStop(w?(w[0]==='b'?.9:1.4):(me.cls&&run?2.2:.6));if(w)bgmStart(w)};
 const PLCV={off:0},MXCV={off:0},DFO={off:0},NTM={off:0,tg:null},NLD={off:0},WBSQ={cap:.35,hard:.45};
 function dfoDraw(c,x,y,w,h){if(DFO.off||!(c._tf>0)){g.drawImage(c,x,y,w,h);return}const cw=c.width,ch=c.height,sy=h/ch,a=Math.min(ch,Math.ceil(ch*c._tf)+1),b=Math.max(0,Math.floor(ch*c._bs)-1);
 if(b<=a){g.drawImage(c,x,y,w,h);return}g.drawImage(c,0,0,cw,a,x,y,w,a*sy);if(c._bd>0)g.drawImage(c,0,b,cw,ch-b,x,y+b*sy,w,(ch-b)*sy)}

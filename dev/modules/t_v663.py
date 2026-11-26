@@ -39,13 +39,13 @@ async def main():
                 ok=await wait(pg,f"()=>BGM.cur==='m_{k}'",15000)
                 res[k]=ok;mem.append(await pg.evaluate("()=>Object.keys(BGM.B).filter(k=>BGM.B[k]).length"))
             rep('เล่นได้ครบทั้ง 10 ธีม (ค่าย สุสาน ไฟ น้ำแข็ง หอคอย เมืองจม เหมือง ทะเลทราย ฟ้า รอยแยก)',all(res.values()),res)
-            rep('เก็บเพลงที่ถอดรหัสแล้วในแรมไม่เกิน 2 เพลง',max(mem)<=2,mem)
+            rep('เก็บเพลงที่ถอดรหัสแล้วในแรมไม่เกิน 3 เพลง (v665: +เพลงบอสภูมิภาคที่โหลดรอ)',max(mem)<=3,mem)
             # กลางคืน → กรองเสียง
             r=await pg.evaluate("async()=>{const o=bgmNightOn;window.bgmNightOn=bgmNightOn=()=>true;await new Promise(r=>setTimeout(r,2600));const v=BGM.f.frequency.value;window.bgmNightOn=bgmNightOn=o;await new Promise(r=>setTimeout(r,300));return v}")
             rep('กลางคืน: เพลงนุ่มลง (กรองเสียงสูง)',r<9000,r)
             # บอส/ธีมพิเศษ → ไฟล์หยุด ให้ระบบเดิม
             r=await pg.evaluate("async()=>{window.__forceT='rk:test';await new Promise(r=>setTimeout(r,1500));return [BGM.cur,mzTheme()]}")
-            rep('ธีมบอส (rk) → หยุดเพลงไฟล์ ใช้ระบบเดิม',r[0]=='' and r[1]=='rk:test',r)
+            rep('ธีมบอส (rk) → ออกจากเพลงแมพ: เพลงบอสไฟล์ใหม่ (v665) หรือร็อกเดิมระหว่างโหลด',(r[0].startswith('b_') and r[1]=='') or (r[0]=='' and r[1]=='rk:test'),r)
             await pg.evaluate("()=>{window.__forceT='hell'}");await wait(pg,"()=>BGM.cur==='m_hell'")
             await pg.evaluate("()=>setMusic(false)");ok1=await wait(pg,"()=>BGM.cur===''",3000);await pg.evaluate("()=>setMusic(true)");ok2=await wait(pg,"()=>BGM.cur==='m_hell'",5000)
             rep('ปุ่มเพลง ปิด/เปิด ได้',ok1 and ok2)

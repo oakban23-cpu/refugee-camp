@@ -35,7 +35,7 @@ async def main():
                 ok=await wait(pg,f"()=>BGM.cur==='p{i}'&&mzTheme()===''",15000);res[i]=ok
                 mem.append(await pg.evaluate("()=>Object.keys(BGM.B).filter(k=>BGM.B[k]).length"))
             rep('เข้าแมพไหน ได้เพลงของแมพนั้น (ทดสอบ 8 แมพ) และเพลงสังเคราะห์เดิมเงียบ',all(res.values()),res)
-            rep('เก็บเพลงในแรมไม่เกิน 2 เพลง',max(mem)<=2,mem)
+            rep('เก็บเพลงในแรมไม่เกิน 3 เพลง (v665: +เพลงบอสภูมิภาคที่โหลดรอ)',max(mem)<=3,mem)
             r=await pg.evaluate("()=>{const n=BGM.n;return[n.loopStart,Math.round(n.loopEnd*100)/100,Math.round((BGM.T[BGM.cur].L+.5)*100)/100,Math.round(n.buffer.duration*100)/100]}")
             rep('จุดวนเพลงแมพถูกต้อง',r[0]==.5 and abs(r[1]-r[2])<.02 and r[3]>=r[1],r)
             # แมพ 1-10 ยังใช้เพลงธีม
