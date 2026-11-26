@@ -1,0 +1,1027 @@
+{
+ "gh_01_halls": {
+  "grid": [
+   3,
+   2
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "HALL_T1",
+    "desc": "War-camp command pavilion: huge canvas tent on a wooden frame, open front with a map table, 2 WHITE flags",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     512,
+     512
+    ],
+    "box": [
+     14,
+     32,
+     498,
+     484
+    ]
+   },
+   {
+    "n": 2,
+    "name": "HALL_T2",
+    "desc": "Timber longhouse hall: log walls, carved roof beams, wooden steps, 2 WHITE hanging banners",
+    "kind": "b",
+    "cell": [
+     512,
+     0,
+     1024,
+     512
+    ],
+    "box": [
+     526,
+     32,
+     1010,
+     484
+    ]
+   },
+   {
+    "n": 3,
+    "name": "HALL_T3",
+    "desc": "Stone guild hall: grey stone, teal slate roof, arched double door, buttresses, 2 WHITE banners",
+    "kind": "b",
+    "cell": [
+     1024,
+     0,
+     1536,
+     512
+    ],
+    "box": [
+     1038,
+     32,
+     1522,
+     484
+    ]
+   },
+   {
+    "n": 4,
+    "name": "HALL_T4",
+    "desc": "Fortress keep: tall square keep, corner turrets, crenellations, iron-banded door, WHITE banners",
+    "kind": "b",
+    "cell": [
+     0,
+     512,
+     512,
+     1024
+    ],
+    "box": [
+     14,
+     544,
+     498,
+     996
+    ]
+   },
+   {
+    "n": 5,
+    "name": "HALL_T5",
+    "desc": "Castle palace: grand castle, many spires, wide staircase, gold trim, rose window, tall WHITE banners",
+    "kind": "b",
+    "cell": [
+     512,
+     512,
+     1024,
+     1024
+    ],
+    "box": [
+     526,
+     544,
+     1010,
+     996
+    ]
+   },
+   {
+    "n": 6,
+    "name": "GUILD_MONUMENT",
+    "desc": "Guild monument: tall carved stone plinth, 2 braziers, a PLAIN WHITE round medallion on the front",
+    "kind": "b",
+    "cell": [
+     1024,
+     512,
+     1536,
+     1024
+    ],
+    "box": [
+     1038,
+     544,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "gh_02_gates": {
+  "grid": [
+   4,
+   2
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "GATE_T1",
+    "desc": "Log palisade gate with two small lookout posts, gate OPEN",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     384,
+     512
+    ],
+    "box": [
+     14,
+     32,
+     370,
+     484
+    ]
+   },
+   {
+    "n": 2,
+    "name": "GATE_T2",
+    "desc": "Timber gatehouse with a roofed walkway on top, gate OPEN",
+    "kind": "b",
+    "cell": [
+     384,
+     0,
+     768,
+     512
+    ],
+    "box": [
+     398,
+     32,
+     754,
+     484
+    ]
+   },
+   {
+    "n": 3,
+    "name": "GATE_T3",
+    "desc": "Stone gatehouse, raised portcullis, gate OPEN",
+    "kind": "b",
+    "cell": [
+     768,
+     0,
+     1152,
+     512
+    ],
+    "box": [
+     782,
+     32,
+     1138,
+     484
+    ]
+   },
+   {
+    "n": 4,
+    "name": "GATE_T4",
+    "desc": "Iron gate between two round stone towers, gate OPEN",
+    "kind": "b",
+    "cell": [
+     1152,
+     0,
+     1536,
+     512
+    ],
+    "box": [
+     1166,
+     32,
+     1522,
+     484
+    ]
+   },
+   {
+    "n": 5,
+    "name": "GATE_T5",
+    "desc": "Grand castle gate: tall towers with spires, open golden doors",
+    "kind": "b",
+    "cell": [
+     0,
+     512,
+     384,
+     1024
+    ],
+    "box": [
+     14,
+     544,
+     370,
+     996
+    ]
+   },
+   {
+    "n": 6,
+    "name": "TOWER_T12",
+    "desc": "Wooden corner watchtower (tiers 1-2)",
+    "kind": "b",
+    "cell": [
+     384,
+     512,
+     768,
+     1024
+    ],
+    "box": [
+     398,
+     544,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 7,
+    "name": "TOWER_T34",
+    "desc": "Round stone corner tower with crenellations (tiers 3-4)",
+    "kind": "b",
+    "cell": [
+     768,
+     512,
+     1152,
+     1024
+    ],
+    "box": [
+     782,
+     544,
+     1138,
+     996
+    ]
+   },
+   {
+    "n": 8,
+    "name": "TOWER_T5",
+    "desc": "Tall castle corner tower with a spire and a WHITE banner",
+    "kind": "b",
+    "cell": [
+     1152,
+     512,
+     1536,
+     1024
+    ],
+    "box": [
+     1166,
+     544,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "gh_05_facilities": {
+  "grid": [
+   4,
+   3
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "TREASURY_LO",
+    "desc": "Treasury (early): supply wagon + iron strongbox under a canvas awning",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     384,
+     341
+    ],
+    "box": [
+     14,
+     32,
+     370,
+     313
+    ]
+   },
+   {
+    "n": 2,
+    "name": "TREASURY_HI",
+    "desc": "Treasury (late): small stone vault, round golden vault door",
+    "kind": "b",
+    "cell": [
+     384,
+     0,
+     768,
+     341
+    ],
+    "box": [
+     398,
+     32,
+     754,
+     313
+    ]
+   },
+   {
+    "n": 3,
+    "name": "WAREHOUSE_LO",
+    "desc": "Warehouse (early): open timber shed with sacks and crates",
+    "kind": "b",
+    "cell": [
+     768,
+     0,
+     1152,
+     341
+    ],
+    "box": [
+     782,
+     32,
+     1138,
+     313
+    ]
+   },
+   {
+    "n": 4,
+    "name": "WAREHOUSE_HI",
+    "desc": "Warehouse (late): stone storehouse with big wooden doors",
+    "kind": "b",
+    "cell": [
+     1152,
+     0,
+     1536,
+     341
+    ],
+    "box": [
+     1166,
+     32,
+     1522,
+     313
+    ]
+   },
+   {
+    "n": 5,
+    "name": "KITCHEN_LO",
+    "desc": "Kitchen (early): cauldron over a fire, log benches, hanging pots",
+    "kind": "b",
+    "cell": [
+     0,
+     341,
+     384,
+     683
+    ],
+    "box": [
+     14,
+     373,
+     370,
+     655
+    ]
+   },
+   {
+    "n": 6,
+    "name": "KITCHEN_HI",
+    "desc": "Kitchen (late): stone kitchen house, chimney, bread oven",
+    "kind": "b",
+    "cell": [
+     384,
+     341,
+     768,
+     683
+    ],
+    "box": [
+     398,
+     373,
+     754,
+     655
+    ]
+   },
+   {
+    "n": 7,
+    "name": "BARRACKS_LO",
+    "desc": "Barracks (early): two soldier tents + weapon rack",
+    "kind": "b",
+    "cell": [
+     768,
+     341,
+     1152,
+     683
+    ],
+    "box": [
+     782,
+     373,
+     1138,
+     655
+    ]
+   },
+   {
+    "n": 8,
+    "name": "BARRACKS_HI",
+    "desc": "Barracks (late): stone barracks with armour racks by the door",
+    "kind": "b",
+    "cell": [
+     1152,
+     341,
+     1536,
+     683
+    ],
+    "box": [
+     1166,
+     373,
+     1522,
+     655
+    ]
+   },
+   {
+    "n": 9,
+    "name": "GUILD_BOARD",
+    "desc": "Guild notice board on posts with pinned papers and a small WHITE pennant",
+    "kind": "b",
+    "cell": [
+     0,
+     683,
+     384,
+     1024
+    ],
+    "box": [
+     14,
+     715,
+     370,
+     996
+    ]
+   },
+   {
+    "n": 10,
+    "name": "FARM_PLOT",
+    "desc": "Empty farm plot SEEN FROM ABOVE: dark tilled soil, 4 furrows, low wooden border",
+    "kind": "f",
+    "cell": [
+     384,
+     683,
+     768,
+     1024
+    ],
+    "box": [
+     398,
+     715,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 11,
+    "name": "STABLE",
+    "desc": "Small horse stable with two horses, hay, water trough",
+    "kind": "b",
+    "cell": [
+     768,
+     683,
+     1152,
+     1024
+    ],
+    "box": [
+     782,
+     715,
+     1138,
+     996
+    ]
+   },
+   {
+    "n": 12,
+    "name": "WELL",
+    "desc": "Stone water well with a wooden roof and bucket",
+    "kind": "b",
+    "cell": [
+     1152,
+     683,
+     1536,
+     1024
+    ],
+    "box": [
+     1166,
+     715,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "gh_06_decor": {
+  "grid": [
+   6,
+   4
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "CAMPFIRE_RING",
+    "desc": "Campfire in a stone ring with log seats",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     256,
+     256
+    ],
+    "box": [
+     14,
+     32,
+     242,
+     228
+    ]
+   },
+   {
+    "n": 2,
+    "name": "BONFIRE_BIG",
+    "desc": "Big festival bonfire",
+    "kind": "b",
+    "cell": [
+     256,
+     0,
+     512,
+     256
+    ],
+    "box": [
+     270,
+     32,
+     498,
+     228
+    ]
+   },
+   {
+    "n": 3,
+    "name": "STATUE_FOUNTAIN",
+    "desc": "Round fountain with a knight statue",
+    "kind": "b",
+    "cell": [
+     512,
+     0,
+     768,
+     256
+    ],
+    "box": [
+     526,
+     32,
+     754,
+     228
+    ]
+   },
+   {
+    "n": 4,
+    "name": "CRYSTAL_FOUNTAIN",
+    "desc": "Fountain with a floating glowing crystal",
+    "kind": "b",
+    "cell": [
+     768,
+     0,
+     1024,
+     256
+    ],
+    "box": [
+     782,
+     32,
+     1010,
+     228
+    ]
+   },
+   {
+    "n": 5,
+    "name": "FLOWER_PLANTER",
+    "desc": "Long stone planter with flowers",
+    "kind": "b",
+    "cell": [
+     1024,
+     0,
+     1280,
+     256
+    ],
+    "box": [
+     1038,
+     32,
+     1266,
+     228
+    ]
+   },
+   {
+    "n": 6,
+    "name": "POTTED_TREE",
+    "desc": "Small tree in a big stone pot",
+    "kind": "b",
+    "cell": [
+     1280,
+     0,
+     1536,
+     256
+    ],
+    "box": [
+     1294,
+     32,
+     1522,
+     228
+    ]
+   },
+   {
+    "n": 7,
+    "name": "BENCH",
+    "desc": "Wooden bench with iron legs",
+    "kind": "b",
+    "cell": [
+     0,
+     256,
+     256,
+     512
+    ],
+    "box": [
+     14,
+     288,
+     242,
+     484
+    ]
+   },
+   {
+    "n": 8,
+    "name": "LANTERN_WOOD",
+    "desc": "Wooden post with a hanging lantern",
+    "kind": "b",
+    "cell": [
+     256,
+     256,
+     512,
+     512
+    ],
+    "box": [
+     270,
+     288,
+     498,
+     484
+    ]
+   },
+   {
+    "n": 9,
+    "name": "LANTERN_GOLD",
+    "desc": "Ornate gold street lamp",
+    "kind": "b",
+    "cell": [
+     512,
+     256,
+     768,
+     512
+    ],
+    "box": [
+     526,
+     288,
+     754,
+     484
+    ]
+   },
+   {
+    "n": 10,
+    "name": "BANNER_POLE",
+    "desc": "Tall pole with a WHITE flag",
+    "kind": "b",
+    "cell": [
+     768,
+     256,
+     1024,
+     512
+    ],
+    "box": [
+     782,
+     288,
+     1010,
+     484
+    ]
+   },
+   {
+    "n": 11,
+    "name": "WEAPON_RACK",
+    "desc": "Weapon rack: swords, spears, shields",
+    "kind": "b",
+    "cell": [
+     1024,
+     256,
+     1280,
+     512
+    ],
+    "box": [
+     1038,
+     288,
+     1266,
+     484
+    ]
+   },
+   {
+    "n": 12,
+    "name": "ARMOR_STAND",
+    "desc": "Armour stand with plate armour",
+    "kind": "b",
+    "cell": [
+     1280,
+     256,
+     1536,
+     512
+    ],
+    "box": [
+     1294,
+     288,
+     1522,
+     484
+    ]
+   },
+   {
+    "n": 13,
+    "name": "BARREL_STACK",
+    "desc": "Stack of barrels",
+    "kind": "b",
+    "cell": [
+     0,
+     512,
+     256,
+     768
+    ],
+    "box": [
+     14,
+     544,
+     242,
+     740
+    ]
+   },
+   {
+    "n": 14,
+    "name": "CRATE_STACK",
+    "desc": "Stack of wooden crates",
+    "kind": "b",
+    "cell": [
+     256,
+     512,
+     512,
+     768
+    ],
+    "box": [
+     270,
+     544,
+     498,
+     740
+    ]
+   },
+   {
+    "n": 15,
+    "name": "HAY_BALES",
+    "desc": "Hay bales",
+    "kind": "b",
+    "cell": [
+     512,
+     512,
+     768,
+     768
+    ],
+    "box": [
+     526,
+     544,
+     754,
+     740
+    ]
+   },
+   {
+    "n": 16,
+    "name": "FIREWOOD_PILE",
+    "desc": "Firewood pile with an axe",
+    "kind": "b",
+    "cell": [
+     768,
+     512,
+     1024,
+     768
+    ],
+    "box": [
+     782,
+     544,
+     1010,
+     740
+    ]
+   },
+   {
+    "n": 17,
+    "name": "SUPPLY_CART",
+    "desc": "Supply cart with sacks",
+    "kind": "b",
+    "cell": [
+     1024,
+     512,
+     1280,
+     768
+    ],
+    "box": [
+     1038,
+     544,
+     1266,
+     740
+    ]
+   },
+   {
+    "n": 18,
+    "name": "ANVIL_FORGE",
+    "desc": "Anvil next to a small glowing forge",
+    "kind": "b",
+    "cell": [
+     1280,
+     512,
+     1536,
+     768
+    ],
+    "box": [
+     1294,
+     544,
+     1522,
+     740
+    ]
+   },
+   {
+    "n": 19,
+    "name": "ARCHERY_TARGET",
+    "desc": "Archery target on a stand",
+    "kind": "b",
+    "cell": [
+     0,
+     768,
+     256,
+     1024
+    ],
+    "box": [
+     14,
+     800,
+     242,
+     996
+    ]
+   },
+   {
+    "n": 20,
+    "name": "TRAINING_DUMMY",
+    "desc": "Straw training dummy",
+    "kind": "b",
+    "cell": [
+     256,
+     768,
+     512,
+     1024
+    ],
+    "box": [
+     270,
+     800,
+     498,
+     996
+    ]
+   },
+   {
+    "n": 21,
+    "name": "STANDING_TORCH",
+    "desc": "Standing iron torch, burning",
+    "kind": "b",
+    "cell": [
+     512,
+     768,
+     768,
+     1024
+    ],
+    "box": [
+     526,
+     800,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 22,
+    "name": "WAR_DRUM",
+    "desc": "Big war drum on a stand",
+    "kind": "b",
+    "cell": [
+     768,
+     768,
+     1024,
+     1024
+    ],
+    "box": [
+     782,
+     800,
+     1010,
+     996
+    ]
+   },
+   {
+    "n": 23,
+    "name": "FLOWER_BUSH",
+    "desc": "Round flowering bush",
+    "kind": "b",
+    "cell": [
+     1024,
+     768,
+     1280,
+     1024
+    ],
+    "box": [
+     1038,
+     800,
+     1266,
+     996
+    ]
+   },
+   {
+    "n": 24,
+    "name": "ROSE_ARCH",
+    "desc": "Rose arch for a garden path",
+    "kind": "b",
+    "cell": [
+     1280,
+     768,
+     1536,
+     1024
+    ],
+    "box": [
+     1294,
+     800,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "gh_03_walls_horizontal": {
+  "rows": [
+   {
+    "n": 1,
+    "name": "WALL_H_T1",
+    "row": [
+     0,
+     204
+    ],
+    "base": 180
+   },
+   {
+    "n": 2,
+    "name": "WALL_H_T2",
+    "row": [
+     204,
+     408
+    ],
+    "base": 384
+   },
+   {
+    "n": 3,
+    "name": "WALL_H_T3",
+    "row": [
+     408,
+     612
+    ],
+    "base": 588
+   },
+   {
+    "n": 4,
+    "name": "WALL_H_T4",
+    "row": [
+     612,
+     816
+    ],
+    "base": 792
+   },
+   {
+    "n": 5,
+    "name": "WALL_H_T5",
+    "row": [
+     816,
+     1020
+    ],
+    "base": 996
+   }
+  ]
+ },
+ "gh_04_walls_vertical": {
+  "cols": [
+   {
+    "n": 1,
+    "name": "WALL_V_T1",
+    "col": [
+     0,
+     306
+    ]
+   },
+   {
+    "n": 2,
+    "name": "WALL_V_T2",
+    "col": [
+     306,
+     612
+    ]
+   },
+   {
+    "n": 3,
+    "name": "WALL_V_T3",
+    "col": [
+     612,
+     918
+    ]
+   },
+   {
+    "n": 4,
+    "name": "WALL_V_T4",
+    "col": [
+     918,
+     1224
+    ]
+   },
+   {
+    "n": 5,
+    "name": "WALL_V_T5",
+    "col": [
+     1224,
+     1530
+    ]
+   }
+  ]
+ }
+}
