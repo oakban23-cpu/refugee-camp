@@ -1,4 +1,5 @@
 """v580 ป่ารอบค่าย: ต้นไม้แมพ 1 → ภาพ HD (hd-nat.webp)
+# v667: ทดสอบชุดต้นไม้เดิม (สำรอง) — ปิดชุดใหม่ด้วย CPG.on=0
    ① แผ่นภาพเสิร์ฟได้  ② เปิด HD บนแมพ 1 → ต้นไม้ทุกต้นที่อยู่ในจอวาดจากภาพ (นับ drawImage จากแคช NAT) · มีครบหลายแบบ
    ③ จำนวน/ตำแหน่งต้นไม้ไม่เปลี่ยน (ชนเหมือนเดิม)  ④ ปิด HD / แมพอื่น → ไม่ใช้  ⑤ fps ไม่ตก  ⑥ ภาพก่อน/หลัง · ไม่มี error"""
 import asyncio, sys, random, urllib.request
@@ -19,7 +20,7 @@ async def main():
             pg = await ctx.new_page(); pg.on('pageerror', lambda e: errs.append(str(e)[:300]))
             await pg.goto(URL); await pg.wait_for_timeout(2500)
             await pg.evaluate(SETUP, ['mage', 'Nt' + str(random.randint(100, 999)), 99]); await pg.wait_for_timeout(1500)
-            await pg.evaluate("()=>{ov.hidden=true;banner=null;window.DNH=12;AUTO.on=false;gmGod=true;HDI.on=true;LOWQ=false;enterMap(1,{x:CX,y:CY})}"); await pg.wait_for_timeout(4500)
+            await pg.evaluate("()=>{ov.hidden=true;banner=null;window.DNH=12;AUTO.on=false;gmGod=true;CPG.on=0;HDI.on=true;LOWQ=false;enterMap(1,{x:CX,y:CY})}"); await pg.wait_for_timeout(4500)
             # จุดที่มีต้นไม้หนาแน่น
             P = await pg.evaluate("()=>{let best=null,bn=0;for(const t of trees){const n=trees.filter(q=>Math.abs(q.x-t.x)<500&&Math.abs(q.y-t.y)<300).length;if(n>bn){bn=n;best=t}}return {x:best.x,y:best.y+80,n:bn,tot:trees.length,sig:trees.reduce((a,t)=>a+t.x+t.y*3,0)}}")
             st = await pg.evaluate("()=>({ok:NAT.ok,on:natOn()})")
