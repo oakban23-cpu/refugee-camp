@@ -419,10 +419,10 @@
    }
   ]
  },
- "cp_04_forest": {
+ "cp_04_trees": {
   "grid": [
    6,
-   5
+   2
   ],
   "items": [
    {
@@ -434,13 +434,13 @@
      0,
      0,
      256,
-     205
+     512
     ],
     "box": [
      14,
      32,
      242,
-     177
+     484
     ]
    },
    {
@@ -452,13 +452,13 @@
      256,
      0,
      512,
-     205
+     512
     ],
     "box": [
      270,
      32,
      498,
-     177
+     484
     ]
    },
    {
@@ -470,13 +470,13 @@
      512,
      0,
      768,
-     205
+     512
     ],
     "box": [
      526,
      32,
      754,
-     177
+     484
     ]
    },
    {
@@ -488,13 +488,13 @@
      768,
      0,
      1024,
-     205
+     512
     ],
     "box": [
      782,
      32,
      1010,
-     177
+     484
     ]
    },
    {
@@ -506,13 +506,13 @@
      1024,
      0,
      1280,
-     205
+     512
     ],
     "box": [
      1038,
      32,
      1266,
-     177
+     484
     ]
    },
    {
@@ -524,13 +524,13 @@
      1280,
      0,
      1536,
-     205
+     512
     ],
     "box": [
      1294,
      32,
      1522,
-     177
+     484
     ]
    },
    {
@@ -540,15 +540,15 @@
     "kind": "b",
     "cell": [
      0,
-     205,
+     512,
      256,
-     410
+     1024
     ],
     "box": [
      14,
-     237,
+     544,
      242,
-     382
+     996
     ]
    },
    {
@@ -558,15 +558,15 @@
     "kind": "b",
     "cell": [
      256,
-     205,
      512,
-     410
+     512,
+     1024
     ],
     "box": [
      270,
-     237,
+     544,
      498,
-     382
+     996
     ]
    },
    {
@@ -576,15 +576,15 @@
     "kind": "b",
     "cell": [
      512,
-     205,
+     512,
      768,
-     410
+     1024
     ],
     "box": [
      526,
-     237,
+     544,
      754,
-     382
+     996
     ]
    },
    {
@@ -594,15 +594,15 @@
     "kind": "b",
     "cell": [
      768,
-     205,
+     512,
      1024,
-     410
+     1024
     ],
     "box": [
      782,
-     237,
+     544,
      1010,
-     382
+     996
     ]
    },
    {
@@ -612,362 +612,370 @@
     "kind": "b",
     "cell": [
      1024,
-     205,
+     512,
      1280,
-     410
+     1024
     ],
     "box": [
      1038,
-     237,
+     544,
      1266,
-     382
+     996
     ]
    },
    {
     "n": 12,
-    "name": "TREE_STUMP",
-    "desc": "Big tree stump with moss",
+    "name": "POPLAR",
+    "desc": "Tall slim poplar tree",
     "kind": "b",
     "cell": [
      1280,
-     205,
-     1536,
-     410
-    ],
-    "box": [
-     1294,
-     237,
-     1522,
-     382
-    ]
-   },
-   {
-    "n": 13,
-    "name": "BUSH_ROUND",
-    "desc": "Round green bush",
-    "kind": "b",
-    "cell": [
-     0,
-     410,
-     256,
-     614
-    ],
-    "box": [
-     14,
-     442,
-     242,
-     586
-    ]
-   },
-   {
-    "n": 14,
-    "name": "BUSH_BERRY",
-    "desc": "Bush with red berries",
-    "kind": "b",
-    "cell": [
-     256,
-     410,
      512,
-     614
-    ],
-    "box": [
-     270,
-     442,
-     498,
-     586
-    ]
-   },
-   {
-    "n": 15,
-    "name": "BUSH_FLOWER",
-    "desc": "Bush with white flowers",
-    "kind": "b",
-    "cell": [
-     512,
-     410,
-     768,
-     614
-    ],
-    "box": [
-     526,
-     442,
-     754,
-     586
-    ]
-   },
-   {
-    "n": 16,
-    "name": "FERN",
-    "desc": "Fern clump",
-    "kind": "b",
-    "cell": [
-     768,
-     410,
-     1024,
-     614
-    ],
-    "box": [
-     782,
-     442,
-     1010,
-     586
-    ]
-   },
-   {
-    "n": 17,
-    "name": "TALL_GRASS",
-    "desc": "Tall grass clump",
-    "kind": "b",
-    "cell": [
-     1024,
-     410,
-     1280,
-     614
-    ],
-    "box": [
-     1038,
-     442,
-     1266,
-     586
-    ]
-   },
-   {
-    "n": 18,
-    "name": "THORNS",
-    "desc": "Thorny bramble",
-    "kind": "b",
-    "cell": [
-     1280,
-     410,
-     1536,
-     614
-    ],
-    "box": [
-     1294,
-     442,
-     1522,
-     586
-    ]
-   },
-   {
-    "n": 19,
-    "name": "ROCK_BIG",
-    "desc": "Big grey boulder with moss",
-    "kind": "b",
-    "cell": [
-     0,
-     614,
-     256,
-     819
-    ],
-    "box": [
-     14,
-     646,
-     242,
-     791
-    ]
-   },
-   {
-    "n": 20,
-    "name": "ROCK_MED",
-    "desc": "Medium rock",
-    "kind": "b",
-    "cell": [
-     256,
-     614,
-     512,
-     819
-    ],
-    "box": [
-     270,
-     646,
-     498,
-     791
-    ]
-   },
-   {
-    "n": 21,
-    "name": "ROCKS_SMALL",
-    "desc": "3 small rocks",
-    "kind": "b",
-    "cell": [
-     512,
-     614,
-     768,
-     819
-    ],
-    "box": [
-     526,
-     646,
-     754,
-     791
-    ]
-   },
-   {
-    "n": 22,
-    "name": "ROCK_FLAT",
-    "desc": "Flat rock slab",
-    "kind": "b",
-    "cell": [
-     768,
-     614,
-     1024,
-     819
-    ],
-    "box": [
-     782,
-     646,
-     1010,
-     791
-    ]
-   },
-   {
-    "n": 23,
-    "name": "LOG",
-    "desc": "Fallen log with moss",
-    "kind": "b",
-    "cell": [
-     1024,
-     614,
-     1280,
-     819
-    ],
-    "box": [
-     1038,
-     646,
-     1266,
-     791
-    ]
-   },
-   {
-    "n": 24,
-    "name": "ROOTS",
-    "desc": "Gnarled roots coming out of the ground",
-    "kind": "b",
-    "cell": [
-     1280,
-     614,
-     1536,
-     819
-    ],
-    "box": [
-     1294,
-     646,
-     1522,
-     791
-    ]
-   },
-   {
-    "n": 25,
-    "name": "FLOWERS_RED",
-    "desc": "Clump of red poppies",
-    "kind": "b",
-    "cell": [
-     0,
-     819,
-     256,
-     1024
-    ],
-    "box": [
-     14,
-     851,
-     242,
-     996
-    ]
-   },
-   {
-    "n": 26,
-    "name": "FLOWERS_BLUE",
-    "desc": "Clump of bluebells",
-    "kind": "b",
-    "cell": [
-     256,
-     819,
-     512,
-     1024
-    ],
-    "box": [
-     270,
-     851,
-     498,
-     996
-    ]
-   },
-   {
-    "n": 27,
-    "name": "FLOWERS_YELLOW",
-    "desc": "Clump of yellow daisies",
-    "kind": "b",
-    "cell": [
-     512,
-     819,
-     768,
-     1024
-    ],
-    "box": [
-     526,
-     851,
-     754,
-     996
-    ]
-   },
-   {
-    "n": 28,
-    "name": "MUSHROOMS_RED",
-    "desc": "Red spotted mushrooms",
-    "kind": "b",
-    "cell": [
-     768,
-     819,
-     1024,
-     1024
-    ],
-    "box": [
-     782,
-     851,
-     1010,
-     996
-    ]
-   },
-   {
-    "n": 29,
-    "name": "MUSHROOMS_BROWN",
-    "desc": "Brown mushrooms on moss",
-    "kind": "b",
-    "cell": [
-     1024,
-     819,
-     1280,
-     1024
-    ],
-    "box": [
-     1038,
-     851,
-     1266,
-     996
-    ]
-   },
-   {
-    "n": 30,
-    "name": "STANDING_STONE",
-    "desc": "Old carved standing stone with moss",
-    "kind": "b",
-    "cell": [
-     1280,
-     819,
      1536,
      1024
     ],
     "box": [
      1294,
-     851,
+     544,
      1522,
      996
     ]
    }
   ]
  },
- "cp_05_props": {
+ "cp_05_nature": {
+  "grid": [
+   6,
+   3
+  ],
+  "items": [
+   {
+    "n": 1,
+    "name": "TREE_STUMP",
+    "desc": "Big tree stump with moss",
+    "kind": "b",
+    "cell": [
+     0,
+     0,
+     256,
+     341
+    ],
+    "box": [
+     14,
+     32,
+     242,
+     313
+    ]
+   },
+   {
+    "n": 2,
+    "name": "BUSH_ROUND",
+    "desc": "Round green bush",
+    "kind": "b",
+    "cell": [
+     256,
+     0,
+     512,
+     341
+    ],
+    "box": [
+     270,
+     32,
+     498,
+     313
+    ]
+   },
+   {
+    "n": 3,
+    "name": "BUSH_BERRY",
+    "desc": "Bush with red berries",
+    "kind": "b",
+    "cell": [
+     512,
+     0,
+     768,
+     341
+    ],
+    "box": [
+     526,
+     32,
+     754,
+     313
+    ]
+   },
+   {
+    "n": 4,
+    "name": "BUSH_FLOWER",
+    "desc": "Bush with white flowers",
+    "kind": "b",
+    "cell": [
+     768,
+     0,
+     1024,
+     341
+    ],
+    "box": [
+     782,
+     32,
+     1010,
+     313
+    ]
+   },
+   {
+    "n": 5,
+    "name": "FERN",
+    "desc": "Fern clump",
+    "kind": "b",
+    "cell": [
+     1024,
+     0,
+     1280,
+     341
+    ],
+    "box": [
+     1038,
+     32,
+     1266,
+     313
+    ]
+   },
+   {
+    "n": 6,
+    "name": "THORNS",
+    "desc": "Thorny bramble",
+    "kind": "b",
+    "cell": [
+     1280,
+     0,
+     1536,
+     341
+    ],
+    "box": [
+     1294,
+     32,
+     1522,
+     313
+    ]
+   },
+   {
+    "n": 7,
+    "name": "ROCK_BIG",
+    "desc": "Big grey boulder with moss",
+    "kind": "b",
+    "cell": [
+     0,
+     341,
+     256,
+     683
+    ],
+    "box": [
+     14,
+     373,
+     242,
+     655
+    ]
+   },
+   {
+    "n": 8,
+    "name": "ROCK_MED",
+    "desc": "Medium rock",
+    "kind": "b",
+    "cell": [
+     256,
+     341,
+     512,
+     683
+    ],
+    "box": [
+     270,
+     373,
+     498,
+     655
+    ]
+   },
+   {
+    "n": 9,
+    "name": "ROCKS_SMALL",
+    "desc": "3 small rocks",
+    "kind": "b",
+    "cell": [
+     512,
+     341,
+     768,
+     683
+    ],
+    "box": [
+     526,
+     373,
+     754,
+     655
+    ]
+   },
+   {
+    "n": 10,
+    "name": "LOG",
+    "desc": "Fallen log with moss",
+    "kind": "b",
+    "cell": [
+     768,
+     341,
+     1024,
+     683
+    ],
+    "box": [
+     782,
+     373,
+     1010,
+     655
+    ]
+   },
+   {
+    "n": 11,
+    "name": "ROOTS",
+    "desc": "Gnarled roots coming out of the ground",
+    "kind": "b",
+    "cell": [
+     1024,
+     341,
+     1280,
+     683
+    ],
+    "box": [
+     1038,
+     373,
+     1266,
+     655
+    ]
+   },
+   {
+    "n": 12,
+    "name": "STANDING_STONE",
+    "desc": "Old carved standing stone with moss",
+    "kind": "b",
+    "cell": [
+     1280,
+     341,
+     1536,
+     683
+    ],
+    "box": [
+     1294,
+     373,
+     1522,
+     655
+    ]
+   },
+   {
+    "n": 13,
+    "name": "FLOWERS_RED",
+    "desc": "Clump of red poppies",
+    "kind": "b",
+    "cell": [
+     0,
+     683,
+     256,
+     1024
+    ],
+    "box": [
+     14,
+     715,
+     242,
+     996
+    ]
+   },
+   {
+    "n": 14,
+    "name": "FLOWERS_BLUE",
+    "desc": "Clump of bluebells",
+    "kind": "b",
+    "cell": [
+     256,
+     683,
+     512,
+     1024
+    ],
+    "box": [
+     270,
+     715,
+     498,
+     996
+    ]
+   },
+   {
+    "n": 15,
+    "name": "FLOWERS_YELLOW",
+    "desc": "Clump of yellow daisies",
+    "kind": "b",
+    "cell": [
+     512,
+     683,
+     768,
+     1024
+    ],
+    "box": [
+     526,
+     715,
+     754,
+     996
+    ]
+   },
+   {
+    "n": 16,
+    "name": "MUSHROOMS_RED",
+    "desc": "Red spotted mushrooms",
+    "kind": "b",
+    "cell": [
+     768,
+     683,
+     1024,
+     1024
+    ],
+    "box": [
+     782,
+     715,
+     1010,
+     996
+    ]
+   },
+   {
+    "n": 17,
+    "name": "MUSHROOMS_BROWN",
+    "desc": "Brown mushrooms on moss",
+    "kind": "b",
+    "cell": [
+     1024,
+     683,
+     1280,
+     1024
+    ],
+    "box": [
+     1038,
+     715,
+     1266,
+     996
+    ]
+   },
+   {
+    "n": 18,
+    "name": "TALL_GRASS",
+    "desc": "Tall grass clump",
+    "kind": "b",
+    "cell": [
+     1280,
+     683,
+     1536,
+     1024
+    ],
+    "box": [
+     1294,
+     715,
+     1522,
+     996
+    ]
+   }
+  ]
+ },
+ "cp_06_props": {
   "grid": [
    6,
    4
@@ -1407,7 +1415,7 @@
    }
   ]
  },
- "cp_06_fence_h": {
+ "cp_07_fence_h": {
   "rows": [
    {
     "name": "FENCE_RAIL_H",
@@ -1427,7 +1435,7 @@
    }
   ]
  },
- "cp_07_fence_v": {
+ "cp_08_fence_v": {
   "cols": [
    {
     "name": "FENCE_RAIL_V",

@@ -1,4 +1,4 @@
-# REFUGEE — Refugee Camp makeover (14 images)
+# REFUGEE — Refugee Camp makeover (15 images)
 
 You are painting new art for the **Refugee Camp (ค่ายผู้อพยพ)**, the home town of **REFUGEE**, a fantasy MMORPG for phones and PC seen from a **top-down 3/4 view** (camera about 45° above). Another assistant (Claude) will cut your sheets and rebuild the camp with them.
 
@@ -11,7 +11,7 @@ The camp buildings, shops and gates are already painted and approved (`refs/curr
 
 The mood: a warm, hopeful frontier camp in a green valley, surrounded by forest. Cosy and alive, not grim.
 
-## Deliver exactly 14 PNG files
+## Deliver exactly 15 PNG files
 | file | size | what |
 |---|---|---|
 | `tex_camp_grass.png` | 1024×1024 | short green grass (main ground) |
@@ -24,12 +24,13 @@ The mood: a warm, hopeful frontier camp in a green valley, surrounded by forest.
 | `cp_01_water.png` | 1536×1024 | 12 water pieces (4×3 grid): bridges, dock, reeds, rocks, lily pads, ducks |
 | `cp_02_ponds.png` | 1536×1024 | 2 whole ponds seen from above (2×1 grid) |
 | `cp_03_nests.png` | 1536×1024 | 8 monster nests (4×2 grid) |
-| `cp_04_forest.png` | 1536×1024 | 30 nature pieces (6×5 grid): trees, bushes, rocks, logs, flowers, mushrooms |
-| `cp_05_props.png` | 1536×1024 | 24 camp-life props (6×4 grid) |
-| `cp_06_fence_h.png` | 1536×512 | 2 horizontal fence strips, one per row |
-| `cp_07_fence_v.png` | 1024×1024 | the same 2 fences running north–south, one per column |
+| `cp_04_trees.png` | 1536×1024 | 12 trees (6×2 grid, tall cells) |
+| `cp_05_nature.png` | 1536×1024 | 18 small nature pieces (6×3 grid): stump, bushes, rocks, log, roots, flowers, mushrooms |
+| `cp_06_props.png` | 1536×1024 | 24 camp-life props (6×4 grid) |
+| `cp_07_fence_h.png` | 1536×512 | 2 horizontal fence strips, one per row |
+| `cp_08_fence_v.png` | 1024×1024 | the same 2 fences running north–south, one per column |
 
-### Rules for the sheets (cp_01 … cp_05)
+### Rules for the sheets (cp_01 … cp_06)
 - Follow `templates/<file>_template.png` exactly: one piece per **blue box**, centred, filling the box well. Never draw the guide lines or labels.
 - **Red line = ground line**: the bottom of the piece (where it touches the ground) sits on the red line. A soft small contact shadow is fine.
 - Pieces marked **flat** (no red line: LILY_PADS, STEPPING_STONES, WATER_FLOWERS, the two ponds) are seen **from straight above**.
@@ -39,9 +40,9 @@ The mood: a warm, hopeful frontier camp in a green valley, surrounded by forest.
 - Bridges and the dock: draw **only the structure**, no water around it (the game draws the water).
 - Ponds: water + bank only, the outside of the bank fades to transparent.
 
-### Rules for the fences (cp_06, cp_07)
-- `cp_06`: 2 rows of 256 px. Each row is **one fence strip that tiles seamlessly left↔right**, seen in the same 3/4 view, base on the red line. Plain repeating pattern, no gate.
-- `cp_07`: 2 columns of 512 px. The same fences running **north–south seen from above**, staying between the blue lines (~90 px band), **seamless top↕bottom**.
+### Rules for the fences (cp_07, cp_08)
+- `cp_07`: 2 rows of 256 px. Each row is **one fence strip that tiles seamlessly left↔right**, seen in the same 3/4 view, base on the red line. Plain repeating pattern, no gate.
+- `cp_08`: 2 columns of 512 px. The same fences running **north–south seen from above**, staying between the blue lines (~90 px band), **seamless top↕bottom**.
 
 ### Rules for the textures
 - Full square, **no transparency**, **seamless in all directions** (left edge continues into right, top into bottom).
@@ -71,6 +72,6 @@ The mood: a warm, hopeful frontier camp in a green valley, surrounded by forest.
 | player character | ~48 px tall |
 
 ## Order of priority (if you must send fewer at a time)
-1 the 7 textures → 2 `cp_04_forest` → 3 `cp_01_water` → 4 `cp_02_ponds` → 5 `cp_03_nests` → 6 `cp_05_props` → 7 `cp_06_fence_h` → 8 `cp_07_fence_v`.
+1 the 7 textures → 2 `cp_04_trees` → 3 `cp_05_nature` → 4 `cp_01_water` → 5 `cp_02_ponds` → 6 `cp_03_nests` → 7 `cp_06_props` → 8 `cp_07_fence_h` → 9 `cp_08_fence_v`.
 
 Thank you! Please send the PNGs with the exact file names above.

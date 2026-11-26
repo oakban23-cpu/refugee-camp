@@ -28,13 +28,14 @@ SH={
   ('NEST_GOBLIN','Goblin camp: small crude hide tent, totem with a skull, spears','b'),
   ('NEST_MUSHROOM','Glowing mushroom ring with a dark hole in the middle','b'),
   ('NEST_RUIN','Cursed ruin: broken stone arch with dark red glow inside','b')]),
- 'cp_04_forest':(6,5,[
+ 'cp_04_trees':(6,2,[
   ('OAK_BIG','Big round oak tree','b'),('OAK','Oak tree','b'),('PINE','Tall pine tree','b'),('PINE_SMALL','Small pine tree','b'),('BIRCH','Birch tree','b'),('BLOSSOM','Pink blossom tree','b'),
-  ('MAPLE','Orange-red maple tree','b'),('WILLOW','Weeping willow (for the stream)','b'),('DEAD_TREE','Bare dead tree','b'),('SAPLING','Young sapling','b'),('FRUIT_TREE','Apple tree with red apples','b'),('TREE_STUMP','Big tree stump with moss','b'),
-  ('BUSH_ROUND','Round green bush','b'),('BUSH_BERRY','Bush with red berries','b'),('BUSH_FLOWER','Bush with white flowers','b'),('FERN','Fern clump','b'),('TALL_GRASS','Tall grass clump','b'),('THORNS','Thorny bramble','b'),
-  ('ROCK_BIG','Big grey boulder with moss','b'),('ROCK_MED','Medium rock','b'),('ROCKS_SMALL','3 small rocks','b'),('ROCK_FLAT','Flat rock slab','b'),('LOG','Fallen log with moss','b'),('ROOTS','Gnarled roots coming out of the ground','b'),
-  ('FLOWERS_RED','Clump of red poppies','b'),('FLOWERS_BLUE','Clump of bluebells','b'),('FLOWERS_YELLOW','Clump of yellow daisies','b'),('MUSHROOMS_RED','Red spotted mushrooms','b'),('MUSHROOMS_BROWN','Brown mushrooms on moss','b'),('STANDING_STONE','Old carved standing stone with moss','b')]),
- 'cp_05_props':(6,4,[
+  ('MAPLE','Orange-red maple tree','b'),('WILLOW','Weeping willow (for the stream)','b'),('DEAD_TREE','Bare dead tree','b'),('SAPLING','Young sapling','b'),('FRUIT_TREE','Apple tree with red apples','b'),('POPLAR','Tall slim poplar tree','b')]),
+ 'cp_05_nature':(6,3,[
+  ('TREE_STUMP','Big tree stump with moss','b'),('BUSH_ROUND','Round green bush','b'),('BUSH_BERRY','Bush with red berries','b'),('BUSH_FLOWER','Bush with white flowers','b'),('FERN','Fern clump','b'),('THORNS','Thorny bramble','b'),
+  ('ROCK_BIG','Big grey boulder with moss','b'),('ROCK_MED','Medium rock','b'),('ROCKS_SMALL','3 small rocks','b'),('LOG','Fallen log with moss','b'),('ROOTS','Gnarled roots coming out of the ground','b'),('STANDING_STONE','Old carved standing stone with moss','b'),
+  ('FLOWERS_RED','Clump of red poppies','b'),('FLOWERS_BLUE','Clump of bluebells','b'),('FLOWERS_YELLOW','Clump of yellow daisies','b'),('MUSHROOMS_RED','Red spotted mushrooms','b'),('MUSHROOMS_BROWN','Brown mushrooms on moss','b'),('TALL_GRASS','Tall grass clump','b')]),
+ 'cp_06_props':(6,4,[
   ('SIGNPOST','Wooden signpost with 3 BLANK arrow boards (no text)','b'),('LANTERN_POST','Wooden post with hanging lantern','b'),('CAMPFIRE_SMALL','Small campfire with a cooking spit','b'),('CAULDRON','Cooking cauldron on a tripod over fire','b'),('WATER_BARREL','Rain barrel with a ladle','b'),('WOODPILE','Stacked firewood under a small roof','b'),
   ('CHICKEN','A chicken (white)','b'),('CHICKEN_BROWN','A brown hen','b'),('CHICKEN_COOP','Small chicken coop','b'),('GOAT','A goat','b'),('DOG','A friendly camp dog lying down','b'),('CAT','A cat sitting','b'),
   ('LAUNDRY_LINE','Laundry line between two poles with clothes','b'),('BEDROLLS','2 bedrolls and a backpack','b'),('TOOL_RACK','Rack with shovel, pick, saw','b'),('WHEELBARROW','Wheelbarrow with dirt','b'),('SACKS','Pile of grain sacks','b'),('CRATES_OPEN','Open crates with apples and carrots','b'),
@@ -55,10 +56,10 @@ im=Image.new('RGB',(1536,512),(255,0,255));d=ImageDraw.Draw(im);rows=[]
 for i,t in enumerate(['FENCE_RAIL_H  wooden rail fence (2 rails on posts)','FENCE_STONE_H  low dry-stone wall with grass']):
     y0=i*256;d.rectangle([0,y0,1535,y0+255],outline=(110,110,110),width=2);by=y0+round(256*.86);d.line([0,by,1535,by],fill=(230,30,30),width=2)
     d.text((8,y0+4),'%d %s · SEAMLESS LEFT<->RIGHT · base on red line'%(i+1,t),fill=(20,20,20),font=F);rows.append(dict(name=t.split()[0],row=[y0,y0+256],base=by))
-im.save(P+'pack/templates/cp_06_fence_h_template.png');J['cp_06_fence_h']=dict(rows=rows)
+im.save(P+'pack/templates/cp_07_fence_h_template.png');J['cp_07_fence_h']=dict(rows=rows)
 im=Image.new('RGB',(1024,1024),(255,0,255));d=ImageDraw.Draw(im);cols=[]
 for i,t in enumerate(['FENCE_RAIL_V','FENCE_STONE_V']):
     x0=i*512;d.rectangle([x0,0,x0+511,1023],outline=(110,110,110),width=2);cx=x0+256;d.line([cx-45,0,cx-45,1023],fill=(40,110,220),width=2);d.line([cx+45,0,cx+45,1023],fill=(40,110,220),width=2)
     d.text((x0+6,6),t+'  same fence running north-south, seen from above',fill=(20,20,20),font=F);d.text((x0+6,28),'SEAMLESS TOP<->BOTTOM · stay between the blue lines',fill=(40,40,40),font=F2);cols.append(dict(name=t,col=[x0,x0+512]))
-im.save(P+'pack/templates/cp_07_fence_v_template.png');J['cp_07_fence_v']=dict(cols=cols)
+im.save(P+'pack/templates/cp_08_fence_v_template.png');J['cp_08_fence_v']=dict(cols=cols)
 json.dump(J,open(P+'tools/sheets.json','w'),indent=1,ensure_ascii=False);print('ok',list(J))
