@@ -3,7 +3,8 @@ from PIL import Image
 from scipy import ndimage
 f,cols,rows,names,out=sys.argv[1],int(sys.argv[2]),int(sys.argv[3]),sys.argv[4].split(','),sys.argv[5]
 a=np.asarray(Image.open(f).convert('RGBA')).copy();al=a[...,3].astype(int)
-al=np.where(al<48,0,np.clip((al-48)*255//(255-48),0,255));a[...,3]=al
+import os;T=int(os.environ.get("TH","48"))
+al=np.where(al<T,0,np.clip((al-T)*255//(255-T),0,255));a[...,3]=al
 H,W=al.shape;m=al>0;lab,n=ndimage.label(m);sz=ndimage.sum(m,lab,range(1,n+1));cm=ndimage.center_of_mass(m,lab,range(1,n+1))
 cell={}
 for i in range(n):
