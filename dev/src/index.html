@@ -13603,8 +13603,9 @@ setTimeout(()=>{
 /* ---------- v425 หน้า «มีอะไรใหม่» + คำแนะนำตอนเจอระบบครั้งแรก ----------
    มีอะไรใหม่: เด้งครั้งเดียวต่อรุ่น (จำในเครื่อง refugee_wn) เฉพาะผู้เล่นที่เลเวล ≥ 5 (มือใหม่มีบทสอนของตัวเองอยู่แล้ว) · เปิดดูซ้ำได้ที่เมนู › 🆕 มีอะไรใหม่
    คำแนะนำครั้งแรก: การ์ดเล็กด้านบนจอ ทีละอัน ห่างกันอย่างน้อย 25 วิ · หายเองใน 9 วิ · จำในเครื่องว่าเห็นแล้ว (refugee_tips) */
-const WNV='v670';
+const WNV='v671';
 const WNL=[
+  ['🌼','ยอดที่ราบสูงมีชีวิตชีวาขึ้น','ยอดที่ราบสูงรอบค่ายมีดอกไม้ หญ้าสูง เฟิร์น พุ่มไม้ หินเล็ก และเห็ดภาพวาด กระจายอยู่กลางลาน (ไม่ชิดขอบผา ไม่ขวางบันได)'],
   ['🌿','จัดธรรมชาติรอบค่ายใหม่','ลำธารไม่ไหลทะลุที่ราบสูงแล้ว (อ้อมขอบแทน) · ต้นไม้/หิน/พุ่มที่ขึ้นในน้ำ ขวางทาง ขวางบันได หรือชิดหน้าผา ถูกจัดออก · หิน ตอไม้ ขอนไม้ พุ่ม เห็ด ดอกไม้ข้างทางเป็นภาพวาด'],
   ['🎣','บ่อใหญ่ใหม่ + ของรอบค่าย','บ่อน้ำใหญ่ปลายลำธาร (ตกปลาได้) · ท่าตกปลาที่บ่อริมบึง · สะพานหินถนนฝั่งตะวันตก · หินเหยียบข้ามลำธาร · ป้ายทาง/เสาโคมริมทาง · จุดพักนักเดินทางกลางป่า · กำแพงหินเตี้ยขอบทุ่งดอกไม้'],
   ['🪵','รั้วไม้รอบค่ายภาพวาด','รั้วรอบค่ายผู้อพยพเป็นรั้วไม้ราวภาพวาด เรียงตามแนวโค้งรอบค่าย เสาตั้งตรงทุกต้น · ด้านซ้าย/ขวาเห็นหัวเสาจากด้านบน'],
@@ -37917,6 +37918,19 @@ function cp10Trees(){if(curMap!==1)return;try{if(TERD[1]&&!trees.some(t=>t.pp))p
 function cp10VM(){if(curMap!==1||VM.k!==1||!VM.P)return;for(let i=VM.P.length-1;i>=0;i--){const o=VM.P[i];if(cpBad(o.x,o.y,10*(o.s||1),'p'))VM.P.splice(i,1)}if(VM.D)for(let i=VM.D.length-1;i>=0;i--){const o=VM.D[i];if(cpBad(o.x,o.y,20*(o.s||1),'p'))VM.D.splice(i,1)}MX.vmK=null}
 vmBuild=(f0=>function(){try{if(curMap===1){depBuild();cp10Trees();cp9Prune()}}catch(e){}const r=f0.apply(this,arguments);try{cp10VM()}catch(e){}return r})(vmBuild);
 setTimeout(()=>{try{const _b=buildTrees;window.buildTrees=buildTrees=function(){const r=_b.apply(this,arguments);try{cp10Trees()}catch(e){}return r}}catch(e){}},90);
+/* ===== v671 · แต่งยอดที่ราบสูงให้ไม่โล่ง (แมพ 1) =====
+   ของเตี้ยภาพวาด (ดอกไม้ หญ้าสูง เฟิร์น เห็ด หินเล็ก พุ่ม) อบลงพื้นในฟีเจอร์ 'cpx' · วางเฉพาะกลางยอดที่ราบ ห่างขอบผา บันได และหินตั้ง · ปิด: CPG.on=0 */
+const CP11={K:[['FLOWERS_YELLOW',30,3],['FLOWERS_RED',28,3],['FLOWERS_BLUE',28,3],['TALL_GRASS',30,3],['FERN',30,2],['BUSH_ROUND',36,2],['BUSH_FLOWER',34,2],['BUSH_BERRY',32,1],['ROCKS_SMALL',26,2],['MUSHROOMS_BROWN',20,1],['MUSHROOMS_RED',18,1]]};
+function cp11Items(){const L=[],T=TERD[1];if(!T||typeof terLv!=='function')return L;const tot=CP11.K.reduce((a,k)=>a+k[2],0);
+  T.forEach(([cx,cy,R0],pi)=>{const R=depRng(6711+pi*13),pk=()=>{let v=R()*tot;for(const k of CP11.K){v-=k[2];if(v<=0)return k}return CP11.K[0]};
+    const mx=cx,my=cy-R0*.13,got=[];let n=0;
+    for(let a=0;a<140&&n<14;a++){const ang=R()*6.283,d=R0*Math.sqrt(R())*.62,x=cx+Math.cos(ang)*d,y=cy+Math.sin(ang)*d*.72;const k=pk(),w=k[1]*(.85+R()*.3);
+      if(terLv(x,y)!==1||terLv(x-w*.7,y)!==1||terLv(x+w*.7,y)!==1||terLv(x,y+22)!==1||terLv(x,y-w)!==1)continue;
+      if(cpBad(x,y,w*.5,'p'))continue;if(Math.hypot(x-mx,(y-my)*1.3)<78)continue;if(got.some(([gx,gy])=>Math.hypot(gx-x,gy-y)<34))continue;
+      got.push([x,y]);L.push([k[0],x,y,w,R()<.5]);n++;
+      if(k[0].indexOf('FLOWERS')===0||k[0]==='TALL_GRASS'){for(let j=0;j<2;j++){const x2=x+(R()-.5)*44,y2=y+(R()-.5)*22;if(terLv(x2,y2)===1&&terLv(x2,y2+22)===1&&!cpBad(x2,y2,12,'p'))L.push([j?'TALL_GRASS':k[0],x2,y2,w*.7,R()<.5])}}}});
+  return L}
+depBuild=(f0=>function(){const F=f0.apply(this,arguments);try{if(curMap===1&&F&&F.L){const q=F.L.find(f=>f.k==='cpx');if(q&&!q._cp11&&terGet()){q._cp11=1;const A=cp11Items();if(A.length){q.L=q.L.concat(A).sort((a,b)=>a[2]-b[2]);let[x0,y0,x1,y1]=q.bb;for(const[k,x,y,w]of A){x0=Math.min(x0,x-w);x1=Math.max(x1,x+w);y0=Math.min(y0,y-w*2);y1=Math.max(y1,y+20)}q.bb=[x0,y0,x1,y1];CP11.n=A.length;try{MX.sig=null}catch(e){}}}}}catch(e){console.warn('cp11',e)}return F})(depBuild);
 /* ---------- v618 ลดการระบายพิกเซลซ้ำ (วัดเป็น "จอ/เฟรม") ----------
    ① PLCV แมพวัง/นคร 27–45 (พื้นแบบชิ้นพาเลต): ชิ้นพื้นทึบเต็มจออยู่แล้ว (ตรวจทุกแมพ alpha 255) แต่ยังเทสีพื้นหลังเต็มจอก่อนทุกเฟรม
       → ชิ้นที่เห็นครบ + กล้องอยู่ในแมพ + ไม่สั่น ⇒ ตั้ง MX.cov ให้ข้ามการเทพื้นหลัง (เหมือนแมพปกติ) · ปิด: PLCV.off=1
