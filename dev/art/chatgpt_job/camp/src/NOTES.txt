@@ -1,2 +1,3 @@
 cp_01_water: REEDS_A/REEDS_B drawn swapped (cell 4 = cattails = REEDS_B, cell 5 = reeds = REEDS_A); cut mapping handles it
 cp_06_props: background haze alpha 40-90, cut with TH=110
+cp_07_fence_h: 2172x724 (not template size). rail period 305 px -> FENCE_RAIL_H.png; stone wall not periodic -> loop x 226..1248 with 24px crossfade -> FENCE_STONE_H.png (fence.py)
