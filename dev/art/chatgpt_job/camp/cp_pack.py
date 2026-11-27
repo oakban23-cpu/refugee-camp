@@ -17,6 +17,8 @@ for k,c in CAP.items():
         tint=np.array([70,110,190]);a[m,:3]=a[m,:3]*tint/255;im=Image.fromarray(a.clip(0,255).astype('uint8'))
     s=min(1,c/max(im.width,im.height*0.8));im=im.resize((max(1,round(im.width*s)),max(1,round(im.height*s))),Image.LANCZOS) if s<1 else im
     items.append((k,im))
+for k in ('FENCE_RAIL_H','FENCE_RAIL_V','FENCE_STONE_H','FENCE_STONE_V'):
+    im=Image.open(S+'/cpfence/'+k+'.png').convert('RGBA');im=im.resize((round(im.width*.5),round(im.height*.5)),Image.LANCZOS);items.append((k,im))
 items.sort(key=lambda t:-t[1].height);W=2048;x=y=sh=0;R={}
 for k,im in items:
     if x+im.width+2>W:x=0;y+=sh+2;sh=0
